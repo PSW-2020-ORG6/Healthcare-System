@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border BorderBrush="Black" BorderThickness="1">
-        <Grid>
+        <Grid Background="AliceBlue">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
             Login Screen
             </TextBlock>

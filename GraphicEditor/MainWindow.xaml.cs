@@ -13,15 +13,15 @@ namespace GraphicEditor
     {
         private const double SCREEN_FACTOR = 0.93;
 
-        public static double MainScreenWidth = System.Windows.SystemParameters.PrimaryScreenWidth * SCREEN_FACTOR;
-        public static double MainScreenHeight = System.Windows.SystemParameters.PrimaryScreenHeight * SCREEN_FACTOR;
+        public static double MainScreenWidth = SystemParameters.PrimaryScreenWidth * SCREEN_FACTOR;
+        public static double MainScreenHeight = SystemParameters.PrimaryScreenHeight * SCREEN_FACTOR;
 
         public MainWindow()
         {
             Application.Current.MainWindow.Width = MainScreenWidth;
             Application.Current.MainWindow.Height = MainScreenHeight;
             InitializeComponent();
-            TimerManaged();
+            TimeManaged();
         }
 
         private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -42,7 +42,7 @@ namespace GraphicEditor
 
         }
 
-        private void TimerManaged()
+        private void TimeManaged()
         {
             DispatcherTimer LiveTime = new DispatcherTimer();
             LiveTime.Interval = TimeSpan.FromSeconds(1);
