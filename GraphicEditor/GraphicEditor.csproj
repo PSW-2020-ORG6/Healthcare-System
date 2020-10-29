@@ -141,6 +141,7 @@
   <ItemGroup>
     <Content Include="HtmlHelpPages\Error.html" />
     <Content Include="HtmlHelpPages\MainWindow.html" />
+    <Resource Include="Resources\Icons\statusbarDecor.png" />
     <Resource Include="Resources\Icons\helpBack.png" />
     <Resource Include="Resources\Icons\helpForward.png" />
   </ItemGroup>
