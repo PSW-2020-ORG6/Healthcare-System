@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HelpClasses\HelpProvider.cs" />
+    <Compile Include="HelpClasses\JavaScriptControlHelper.cs" />
     <Compile Include="HelpClasses\MyICommand.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="ViewModel\BuildingMapUserControlViewModel.cs" />
@@ -68,6 +70,9 @@
     </Compile>
     <Compile Include="View\UserControls\LoginUserControl.xaml.cs">
       <DependentUpon>LoginUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\HelpViewer.xaml.cs">
+      <DependentUpon>HelpViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="VML\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
@@ -92,6 +97,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\LoginUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\HelpViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,7 +132,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <Resource Include="Resources\Icons\help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\syringe.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="HtmlHelpPages\Error.html" />
+    <Content Include="HtmlHelpPages\MainWindow.html" />
+    <Resource Include="Resources\Icons\helpBack.png" />
+    <Resource Include="Resources\Icons\helpForward.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
