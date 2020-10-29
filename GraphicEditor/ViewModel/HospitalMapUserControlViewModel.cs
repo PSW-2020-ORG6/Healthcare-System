@@ -1,15 +1,11 @@
 ﻿using GraphicEditor.HelpClasses;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GraphicEditor.ViewModel
 {
     public class HospitalMapUserControlViewModel : BindableBase
     {
-        private string _text = "AutoHook WORKS!!!!";
+        private string _text = "AutoHook WORKS!!!!Changed colour :))";
 
         public String RandomText
         {

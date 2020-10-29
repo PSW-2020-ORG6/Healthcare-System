@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:GraphicEditor"
         xmlns:l="clr-namespace:GraphicEditor.HelpClasses"
         l:HelpProvider.HelpKey="MainWindow"
@@ -41,15 +42,15 @@
         </Grid.RowDefinitions>
 
         <!-- MenuBar -->
-        <DockPanel Grid.Row="0" Background="LightGray">
-            <Menu >
-                <MenuItem HorizontalAlignment="Left" Header="Map" Command="{Binding NavCommand}"
-                          CommandParameter="map"/>
+        <DockPanel Grid.Row="0" Background="#FF5F88A0" Height="30">
+            <Menu Height="30" >
+                <MenuItem HorizontalAlignment="Left" Header="Map" BorderBrush="Black" Background="#FF0E698B" Command="{Binding NavCommand}"
+                          CommandParameter="map" Height="30"/>
             </Menu>
             <TextBlock ></TextBlock>
-            <Menu HorizontalAlignment="Right">
-                <MenuItem  HorizontalAlignment="Right" Header="Login" Command="{Binding NavCommand}"
-                          CommandParameter="login"/>
+            <Menu HorizontalAlignment="Right" >
+                <MenuItem  HorizontalAlignment="Right" Header="Login" BorderBrush="Black" Background="#FF0E698B" Command="{Binding NavCommand}"
+                          CommandParameter="login" Height="30"/>
             </Menu>
         </DockPanel>
 
@@ -60,7 +61,7 @@
 
         <!-- StatusBar -->
         <DockPanel Grid.Row="2" >
-            <StatusBar DockPanel.Dock="Bottom">
+            <StatusBar DockPanel.Dock="Bottom" Background="CadetBlue">
                 <StatusBar.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Grid>
@@ -68,17 +69,21 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="90"/>
                             </Grid.ColumnDefinitions>
                         </Grid>
                     </ItemsPanelTemplate>
                 </StatusBar.ItemsPanel>
-                <StatusBarItem>
-                    <TextBlock>Status bar</TextBlock>
+                <StatusBarItem Background="#FF5F88A0" Height="30">
+                    <Image Source="/GraphicEditor;component/Resources/Icons/statusbarDecor.png" Width="54"/>
                 </StatusBarItem>
-                <StatusBarItem Grid.Column="2">
-                    <Label x:Name="LiveTimeLabel" Content="%TIME%" FontWeight="Bold" Foreground="Black" Height="25" Width="82"/>
+                <StatusBarItem Grid.Column="1" Background="#FF5F88A0">
+                    <Label x:Name="LiveTimeLabel" Content="%TIME%" FontWeight="Bold" Foreground="Black" Height="23" Width="82" Background="#FF5F88A0"/>
+                </StatusBarItem>
+                <StatusBarItem Grid.Column="2" Background="#FF5F88A0">
+                    <TextBlock x:Name="ModifiedDate" FontWeight="Bold" Foreground="Black"  Height="14" Width="82" Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat=dd/MMM/yyyy}"/>
                 </StatusBarItem>
             </StatusBar>
         </DockPanel>
