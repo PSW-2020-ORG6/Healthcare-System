@@ -4,16 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GraphicEditor"
+        xmlns:l="clr-namespace:GraphicEditor.HelpClasses"
+        l:HelpProvider.HelpKey="MainWindow"
         xmlns:viewUserControl="clr-namespace:GraphicEditor.View.UserControls"
         xmlns:viewModel="clr-namespace:GraphicEditor.ViewModel"
         mc:Ignorable="d"
         Title="GraphicEditor"
+        Icon="Resources/Icons/syringe.png"
         WindowStartupLocation="CenterScreen">
     
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
-    
+
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </Window.CommandBindings>
+
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:HospitalMapUserControlViewModel}">
             <viewUserControl:HospitalMapUserControl/>
@@ -25,29 +32,26 @@
             <viewUserControl:LoginUserControl/>
         </DataTemplate>
     </Window.Resources>
-    
-    <Grid>
+
+    <Grid l:HelpProvider.HelpKey="Home">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         
         <!-- MenuBar -->
-        <DockPanel Grid.Row="0">
-            <DockPanel DockPanel.Dock="Left">
-                <Menu >
-                    <MenuItem HorizontalAlignment="Left" Header="Map" Command="{Binding NavCommand}"
+        <DockPanel Grid.Row="0" Background="LightGray">
+            <Menu >
+                <MenuItem HorizontalAlignment="Left" Header="Map" Command="{Binding NavCommand}"
                           CommandParameter="map"/>
-                </Menu>
-            </DockPanel>
-            <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
-                <Menu>
+            </Menu>
+            <TextBlock ></TextBlock>
+            <Menu HorizontalAlignment="Right">
                     <MenuItem  HorizontalAlignment="Right" Header="Login" Command="{Binding NavCommand}"
                           CommandParameter="login"/>
                 </Menu>
             </DockPanel>
-        </DockPanel>
         
 
         <!-- Mapa -->
