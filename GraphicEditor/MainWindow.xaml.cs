@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GraphicEditor.HelpClasses;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -30,8 +31,25 @@ namespace GraphicEditor
         {
             Application.Current.MainWindow.Width = MainScreenWidth;
             Application.Current.MainWindow.Height = MainScreenHeight;
-            //this.DataContext = MainWindowViewModel;
             InitializeComponent();
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            /*IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+
+            if (focusedControl is Control)
+            {
+                string str = HelpProvider.GetHelpKey((Control)focusedControl);
+                HelpProvider.ShowHelp(str, this);
+            } 
+            else*/
+            if (this.IsActive && this.IsEnabled)
+            {
+                string str = HelpProvider.GetHelpKey(this);
+                HelpProvider.ShowHelp(str, this);
+            }
+
         }
     }
 }
