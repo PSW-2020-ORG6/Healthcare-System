@@ -19,20 +19,8 @@ namespace GraphicEditor
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window
     {
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// Raises this object's PropertyChanged event.
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
         private const double SCREEN_FACTOR = 0.93;
 
         public static double MainScreenWidth = System.Windows.SystemParameters.PrimaryScreenWidth * SCREEN_FACTOR;
@@ -40,18 +28,10 @@ namespace GraphicEditor
 
         public MainWindow()
         {
-            this.DataContext = this;
+            Application.Current.MainWindow.Width = MainScreenWidth;
+            Application.Current.MainWindow.Height = MainScreenHeight;
+            //this.DataContext = MainWindowViewModel;
             InitializeComponent();
-        }
-
-        public Double MainScreenWidthProperty
-        {
-            get { return MainScreenWidth; }
-        }
-
-        public Double MainScreenHeightProperty
-        {
-            get { return MainScreenHeight; }
         }
     }
 }
