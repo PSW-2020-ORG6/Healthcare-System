@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "health_clinic_class_diagram
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "..\Test\Test.csproj", "{119858C3-D69E-4203-8B35-351C8D935B37}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WEB application", "..\WEB application\WEB application.fsproj", "{5122DA74-327C-4D04-9FAD-81AEF1BB6C2F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{119858C3-D69E-4203-8B35-351C8D935B37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{119858C3-D69E-4203-8B35-351C8D935B37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{119858C3-D69E-4203-8B35-351C8D935B37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5122DA74-327C-4D04-9FAD-81AEF1BB6C2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5122DA74-327C-4D04-9FAD-81AEF1BB6C2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5122DA74-327C-4D04-9FAD-81AEF1BB6C2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5122DA74-327C-4D04-9FAD-81AEF1BB6C2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
