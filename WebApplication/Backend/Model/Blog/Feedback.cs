@@ -8,11 +8,12 @@ using System;
 
 namespace Model.Blog
 {
-    public class Comment
+    public class Feedback
     {
         private String text;
         private DateTime date;
         private Account account;
+        private Boolean approved;
 
         public Account Account
         {
@@ -28,5 +29,7 @@ namespace Model.Blog
 
         public string Text { get => text; set => text = value; }
         public DateTime Date { get => date; set => date = value; }
+        public Boolean Approved { get => approved; set => approved = value; }
+
     }
 }
