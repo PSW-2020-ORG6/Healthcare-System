@@ -13,50 +13,50 @@ namespace Model.Blog
    {
       private String name;
       
-      private List<Comment> comment;
+      private List<Feedback> feedbacks;
       
-      public List<Comment> Comment
+      public List<Feedback> Feedbacks
       {
          get
          {
-            if (comment == null)
-               comment = new List<Comment>();
-            return comment;
+            if (feedbacks == null)
+                    feedbacks = new List<Feedback>();
+            return feedbacks;
          }
          set
          {
-            RemoveAllComment();
+            RemoveAllFeedbacks();
             if (value != null)
             {
-               foreach (Comment oComment in value)
-                  AddComment(oComment);
+               foreach (Feedback oFeedback in value)
+                  AddFeedback(oFeedback);
             }
          }
       }
       
-      public void AddComment(Comment newComment)
+      public void AddFeedback(Feedback newFeedback)
       {
-         if (newComment == null)
+         if (newFeedback == null)
             return;
-         if (this.comment == null)
-            this.comment = new System.Collections.Generic.List<Comment>();
-         if (!this.comment.Contains(newComment))
-            this.comment.Add(newComment);
+         if (this.feedbacks == null)
+            this.feedbacks = new System.Collections.Generic.List<Feedback>();
+         if (!this.feedbacks.Contains(newFeedback))
+            this.feedbacks.Add(newFeedback);
       }
       
-      public void RemoveComment(Comment oldComment)
+      public void RemoveFeedback(Feedback oldFeedback)
       {
-         if (oldComment == null)
+         if (oldFeedback == null)
             return;
-         if (this.comment != null)
-            if (this.comment.Contains(oldComment))
-               this.comment.Remove(oldComment);
+         if (this.feedbacks != null)
+            if (this.feedbacks.Contains(oldFeedback))
+               this.feedbacks.Remove(oldFeedback);
       }
       
-      public void RemoveAllComment()
+      public void RemoveAllFeedbacks()
       {
-         if (comment != null)
-            comment.Clear();
+         if (feedbacks != null)
+                feedbacks.Clear();
       }
 
       private Model.Accounts.Physitian physitian;
