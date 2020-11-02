@@ -8,8 +8,8 @@ using WebApplication.Backend.Model;
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201102190110_SixthMigration")]
-    partial class SixthMigration
+    [Migration("20201102230123_mijg95554448")]
+    partial class mijg95554448
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,7 +34,7 @@ namespace WebApplication.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Feedbakcs");
+                    b.ToTable("Feedbacks");
 
                     b.HasData(
                         new
@@ -78,6 +78,55 @@ namespace WebApplication.Migrations
                             Approved = true,
                             Name = "Ime6",
                             Text = "tekst komentara6"
+                        },
+                        new
+                        {
+                            Id = "7",
+                            Approved = false,
+                            Name = "Ime5",
+                            Text = "tekst komentara5"
+                        },
+                        new
+                        {
+                            Id = "8",
+                            Approved = false,
+                            Name = "Ime5",
+                            Text = "tekst komentara5"
+                        },
+                        new
+                        {
+                            Id = "9",
+                            Approved = false,
+                            Name = "Ime5",
+                            Text = "tekst komentara5"
+                        },
+                        new
+                        {
+                            Id = "10",
+                            Approved = false,
+                            Name = "Ime5",
+                            Text = "tekst komentara5"
+                        },
+                        new
+                        {
+                            Id = "11",
+                            Approved = false,
+                            Name = "Ime5",
+                            Text = "tekst komentara5"
+                        },
+                        new
+                        {
+                            Id = "15",
+                            Approved = false,
+                            Name = "Ime5",
+                            Text = "tekst komentara5"
+                        },
+                        new
+                        {
+                            Id = "17",
+                            Approved = false,
+                            Name = "Ime5",
+                            Text = "tekst komentara5"
                         });
                 });
 #pragma warning restore 612, 618
