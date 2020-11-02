@@ -46,6 +46,8 @@
     <Compile Include="Backend\Controller\PhysitianControllers\PhysitianMedicineController.cs" />
     <Compile Include="Backend\Controller\SuperintendentControllers\SuperintendentMedicineController.cs" />
     <Compile Include="Backend\Dto\SuggestedAppointmentDTO.cs" />
+    <Compile Include="Backend\Model\Blog\BlogPost.cs" />
+    <Compile Include="Backend\Model\Blog\Feedback.cs" />
     <Compile Include="Backend\Model\Hospital\Hospital.cs" />
     <Compile Include="Backend\Model\Hospital\Renovation.cs" />
     <Compile Include="Backend\Model\Hospital\Room.cs" />
@@ -81,7 +83,6 @@
     <Compile Include="Backend\Model\MedicalExam\MedicineDosage.cs" />
     <Compile Include="Backend\Model\MedicalExam\InpatientCare.cs" />
     <Compile Include="Backend\Model\MedicalExam\DiagnosticType.cs" />
-    <Compile Include="Backend\Model\Blog\BlogPost.cs" />
     <Compile Include="Backend\Model\Blog\Comment.cs" />
     <Compile Include="Backend\Repository\AddressFileSystem.cs" />
     <Compile Include="Backend\Repository\AddressRepository.cs" />
@@ -202,6 +203,7 @@
     <Content Include="data\waiting_medicine.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".editorconfig" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
