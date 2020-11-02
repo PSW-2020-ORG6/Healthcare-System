@@ -5,7 +5,7 @@ namespace WebApplication.Backend.Model
 {
     public class MyDbContext : DbContext
     {
-        public DbSet<Feedback> Feedbakcs { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -19,7 +19,22 @@ namespace WebApplication.Backend.Model
                 new Feedback { Id = "3", Name = "Ime3", Text = "tekst komentara3", Approved = true } ,         
                 new Feedback { Id = "4", Name = "Ime4", Text = "tekst komentara4", Approved = false },
                 new Feedback { Id = "5", Name = "Ime5", Text = "tekst komentara5", Approved = false },
-                new Feedback { Id = "6", Name = "Ime6", Text = "tekst komentara6", Approved = true }
+                new Feedback { Id = "6", Name = "Ime6", Text = "tekst komentara6", Approved = true } ,
+                new Feedback { Id = "7", Name = "Ime5", Text = "tekst komentara5", Approved = false },
+                new Feedback { Id = "8", Name = "Ime5", Text = "tekst komentara5", Approved = false },
+                new Feedback { Id = "9", Name = "Ime5", Text = "tekst komentara5", Approved = false },
+                new Feedback { Id = "10", Name = "Ime5", Text = "tekst komentara5", Approved = false },
+                new Feedback { Id = "11", Name = "Ime5", Text = "tekst komentara5", Approved = false },
+                new Feedback { Id = "15", Name = "Ime5", Text = "tekst komentara5", Approved = false },
+                new Feedback { Id = "17", Name = "Ime5", Text = "tekst komentara5", Approved = false },
+                new Feedback { Id = "174", Name = "Ime5", Text = "tekst komentara5", Approved = false }
+
+
+
+
+
+
+
 
             );
         }

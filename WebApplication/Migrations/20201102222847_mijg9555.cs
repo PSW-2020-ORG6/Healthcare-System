@@ -2,14 +2,14 @@
 
 namespace WebApplication.Migrations
 {
-    public partial class ThirdMigration : Migration
+    public partial class mijg9555 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.InsertData(
                 table: "Feedbakcs",
                 columns: new[] { "Id", "Approved", "Name", "Text" },
-                values: new object[] { "4", false, "Ime4", "tekst komentara4" });
+                values: new object[] { "10", false, "Ime5", "tekst komentara5" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -17,7 +17,7 @@ namespace WebApplication.Migrations
             migrationBuilder.DeleteData(
                 table: "Feedbakcs",
                 keyColumn: "Id",
-                keyValue: "4");
+                keyValue: "10");
         }
     }
 }

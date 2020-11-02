@@ -8,8 +8,8 @@ using WebApplication.Backend.Model;
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201102190021_FifthMigration")]
-    partial class FifthMigration
+    [Migration("20201102224245_mijg95554")]
+    partial class mijg95554
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,7 +34,7 @@ namespace WebApplication.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Feedbakcs");
+                    b.ToTable("Feedbacks");
 
                     b.HasData(
                         new
@@ -68,6 +68,48 @@ namespace WebApplication.Migrations
                         new
                         {
                             Id = "5",
+                            Approved = false,
+                            Name = "Ime5",
+                            Text = "tekst komentara5"
+                        },
+                        new
+                        {
+                            Id = "6",
+                            Approved = true,
+                            Name = "Ime6",
+                            Text = "tekst komentara6"
+                        },
+                        new
+                        {
+                            Id = "7",
+                            Approved = false,
+                            Name = "Ime5",
+                            Text = "tekst komentara5"
+                        },
+                        new
+                        {
+                            Id = "8",
+                            Approved = false,
+                            Name = "Ime5",
+                            Text = "tekst komentara5"
+                        },
+                        new
+                        {
+                            Id = "9",
+                            Approved = false,
+                            Name = "Ime5",
+                            Text = "tekst komentara5"
+                        },
+                        new
+                        {
+                            Id = "10",
+                            Approved = false,
+                            Name = "Ime5",
+                            Text = "tekst komentara5"
+                        },
+                        new
+                        {
+                            Id = "11",
                             Approved = false,
                             Name = "Ime5",
                             Text = "tekst komentara5"

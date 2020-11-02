@@ -2,22 +2,22 @@
 
 namespace WebApplication.Migrations
 {
-    public partial class SixthMigration : Migration
+    public partial class mijg955544 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.InsertData(
-                table: "Feedbakcs",
+                table: "Feedbacks",
                 columns: new[] { "Id", "Approved", "Name", "Text" },
-                values: new object[] { "6", true, "Ime6", "tekst komentara6" });
+                values: new object[] { "15", false, "Ime5", "tekst komentara5" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DeleteData(
-                table: "Feedbakcs",
+                table: "Feedbacks",
                 keyColumn: "Id",
-                keyValue: "6");
+                keyValue: "15");
         }
     }
 }
