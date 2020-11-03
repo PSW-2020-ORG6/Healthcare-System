@@ -3,12 +3,13 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class Comment
 
+using Backend.Model.Util;
 using Model.Accounts;
 using System;
 
 namespace Model.Blog
 {
-    public class Feedback
+    public class Feedback : Entity
     {
         private String id;//treba nam zbog identifikacija feedbeck-a
         private String text;
