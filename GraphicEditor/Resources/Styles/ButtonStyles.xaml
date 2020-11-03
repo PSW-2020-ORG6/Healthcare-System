@@ -2,6 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:local="clr-namespace:GraphicEditor.Resources.Styles">
+
+    <Style x:Key="DefaultBuildingButtonStyle"
+           BasedOn="{StaticResource {x:Type Button}}"
+           TargetType="Button">
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="materialDesign:RippleAssist.Feedback" Value="Transparent"/>
+        <Setter Property="Command" Value="{Binding NavCommand}"/>
+    </Style>
+    
     
     <Style x:Key="TriangleButton"
            TargetType="Button">
@@ -20,7 +30,10 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Command" Value="{Binding NavCommand}"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
     <Style x:Key="UButton" 
@@ -41,7 +54,10 @@
 
             </Setter.Value>
         </Setter>
+        <Setter Property="Command" Value="{Binding NavCommand}"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
     <Style x:Key="OctagonButton"
@@ -62,6 +78,7 @@
 
             </Setter.Value>
         </Setter>
+        <Setter Property="Command" Value="{Binding NavCommand}"/>
         <Setter Property="Cursor" Value="Hand"/>
     </Style>
 
@@ -84,7 +101,10 @@
 
             </Setter.Value>
         </Setter>
+        <Setter Property="Command" Value="{Binding NavCommand}"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
 </ResourceDictionary>
