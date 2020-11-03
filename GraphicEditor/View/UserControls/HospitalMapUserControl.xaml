@@ -3,29 +3,204 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:GraphicEditor.View.UserControls"
              xmlns:vml="clr-namespace:GraphicEditor.VML"
              vml:ViewModelLocator.AutoHookedUpViewModel="True"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Border BorderBrush="Black" BorderThickness="1">
-        <Grid Background="AliceBlue">
+             d:DesignHeight="650" d:DesignWidth="1200">
 
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock><Run Text="Hospital map"/></TextBlock>
-                <TextBlock Text="{Binding RandomText}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </StackPanel>
-            
-            <ComboBox ItemsSource="{Binding Path=FloorEntries}"
-                SelectedValue="{Binding Path=FloorEntry}" Foreground="#FF5F88A0" ScrollViewer.CanContentScroll="True" MaxHeight="30" MaxWidth="75"  SelectedIndex="0" HorizontalAlignment="Left" Width="71" Margin="10,-190,0,208" >
-                <ComboBox.Background>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                        <GradientStop Color="#FF0E698B" Offset="0"/>
-                        <GradientStop Color="#FF0A6181" Offset="1"/>
-                    </LinearGradientBrush>
-                </ComboBox.Background>
-            </ComboBox>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/ButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
 
-        </Grid>
+    <!--<UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>-->
+
+    <Border BorderBrush="Black" 
+            BorderThickness="1">
+        <ScrollViewer>
+            <Grid>
+                <!--MapPattern-->
+                <Image Source="/GraphicEditor;component/Resources/Images/mapPattern_withoutBuildings.png" 
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Height="600" />
+
+                <!--LegendPattern-->
+                <Image Source="/GraphicEditor;component/Resources/Images/legendPattern.png"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Height="500"/>
+
+
+
+                <Image Source="/GraphicEditor;component/Resources/Images/parkingLogo.png" 
+                       Height="30"
+                       Width="30"
+                       Margin="231,541,-231,74"/>
+                <Image Source="/GraphicEditor;component/Resources/Images/parkingLogo.png" 
+                       Height="30" 
+                       Width="30" 
+                       Margin="-265,296,265,322"/>
+
+
+                <!--Emergency Ambulance button-->
+                <Button 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Background="DarkRed" 
+                            BorderBrush="Black"
+                            BorderThickness="3"
+                            Width="210"
+                            Height="123"
+                            Cursor="Hand" Margin="288,63,683,462"
+                            Command="{Binding Path=NavCommand}"
+                            CommandParameter="emergency">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                                       TextWrapping="Wrap">
+                                Emergency Ambulance
+                        </TextBlock>
+                        <Image Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png" 
+                                   Height="30" Margin="0,3,0,0"/>
+                    </StackPanel>
+                </Button>
+
+                <!--Cardiology button-->
+                <Button 
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="Orange" 
+                        BorderBrush="Black"
+                        BorderThickness="3"
+                        Width="188"
+                        Height="122"
+                        Cursor="Hand" Margin="509,64,484,462"
+                        Command="{Binding Path=NavCommand}"
+                        CommandParameter="cardiology">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                                       TextWrapping="Wrap">
+                                Cardiology
+                        </TextBlock>
+                        <Image Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png" 
+                                   Height="30" Margin="0,3,0,0"/>
+                    </StackPanel>
+                </Button>
+
+                <!--Orthopedy button-->
+                <Button 
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="OrangeRed" 
+                        BorderBrush="Black"
+                        BorderThickness="3"
+                        Width="146"
+                        Height="205"
+                        Cursor="Hand" 
+                        Margin="517,393,518,50"
+                        Command="{Binding Path=NavCommand}"
+                        CommandParameter="orthopedy">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
+                                   TextWrapping="Wrap">
+                                Orthopedy
+                        </TextBlock>
+                        <Image Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png" 
+                                   Height="30" Margin="0,3,0,0"/>
+                    </StackPanel>
+                </Button>
+
+                <!--Pediatry button-->
+                <Button HorizontalAlignment="Center"
+                        VerticalAlignment="Center" 
+                        BorderBrush="Black"
+                        Command="{Binding Path=NavCommand}"
+                        CommandParameter="pediatry"
+                        Style="{StaticResource ResourceKey=TriangleButton}" Margin="702,64,286,404">
+                    <StackPanel Margin="17,-20,-46,40">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                            Pediatry
+                        </TextBlock>
+                        <Image Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"
+                               Height="30"/>
+                    </StackPanel>
+                </Button>
+
+                <!--Dermatology button-->
+                <Button HorizontalAlignment="Center"
+                        VerticalAlignment="Center" 
+                        BorderBrush="Black"
+                        Command="{Binding Path=NavCommand}"
+                        CommandParameter="dermatology"
+                        Style="{StaticResource ResourceKey=DermatologyButton}" 
+                        Margin="739,267,286,162" 
+                        Height="253"
+                        Width="156" >
+                    <StackPanel Width="154" >
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                                   HorizontalAlignment="Center"
+                                   Foreground="White">
+                            Dermatology
+                        </TextBlock>
+                        <TextBlock Height="90"/>
+                        <Image Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"
+                               Height="30"
+                               Width="30"
+                               HorizontalAlignment="Left" 
+                               Margin="7,0,0,0"/>
+                        <TextBlock Height="90"/>
+                    </StackPanel>
+                </Button>
+
+                <Image Source="pack://application:,,,/Resources/Images/parkDermatology.png" 
+                               Height="170" Width="75" Margin="780,304,326,199"/>
+
+                <!--Neurology button-->
+                <Button HorizontalAlignment="Center"
+                        VerticalAlignment="Center" 
+                        Command="{Binding Path=NavCommand}"
+                        CommandParameter="neurology"
+                        
+                        Style="{StaticResource ResourceKey=UButton}" Margin="374,254,638,277" Height="150" Width="169">
+                    <StackPanel Width="154" Margin="0,80,0,0" >
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                                   Margin="0,-8,0,0" 
+                                   HorizontalAlignment="Center"
+                                   Foreground="White">
+                            Neurology
+                        </TextBlock>
+                        <Image Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"
+                               Height="30" />
+                    </StackPanel>
+                </Button>
+
+
+                <!--Oncology button-->
+                <Button 
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="OrangeRed" 
+                        BorderBrush="Black"
+                        Command="{Binding Path=NavCommand}"
+                        CommandParameter="oncology"
+                        Style="{StaticResource ResourceKey=OctagonButton}" Margin="543,259,503,297" Width="135">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
+                                   TextWrapping="Wrap">
+                                Oncology
+                        </TextBlock>
+                        <Image Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png" 
+                                   Height="30" Margin="0,3,0,0"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </ScrollViewer>
     </Border>
 </UserControl>
