@@ -1,42 +1,36 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Backend.Dto;
+using Microsoft.EntityFrameworkCore;
+using Model.Accounts;
 using Model.Blog;
+using Model.Util;
+using MySql.Data.MySqlClient;
+using System;
+using System.Data;
+using System.Diagnostics;
 
 namespace WebApplication.Backend.Model
 {
     public class MyDbContext : DbContext
     {
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
         // only for testing purposes
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //  Account account=new Account()
+
             modelBuilder.Entity<Feedback>().HasData(
-                new Feedback { Id = "1", Name = "Ime1", Text = "tekst komentara1",Approved=true },
-                new Feedback { Id = "2", Name = "Ime2", Text = "tekst komentara2", Approved = false },
-                new Feedback { Id = "3", Name = "Ime3", Text = "tekst komentara3", Approved = true } ,         
-                new Feedback { Id = "4", Name = "Ime4", Text = "tekst komentara4", Approved = false },
-                new Feedback { Id = "5", Name = "Ime5", Text = "tekst komentara5", Approved = false },
-                new Feedback { Id = "6", Name = "Ime6", Text = "tekst komentara6", Approved = true } ,
-                new Feedback { Id = "7", Name = "Ime5", Text = "tekst komentara5", Approved = false },
-                new Feedback { Id = "8", Name = "Ime5", Text = "tekst komentara5", Approved = false },
-                new Feedback { Id = "9", Name = "Ime5", Text = "tekst komentara5", Approved = false },
-                new Feedback { Id = "10", Name = "Ime5", Text = "tekst komentara5", Approved = false },
-                new Feedback { Id = "11", Name = "Ime5", Text = "tekst komentara5", Approved = false },
-                new Feedback { Id = "15", Name = "Ime5", Text = "tekst komentara5", Approved = false },
-                new Feedback { Id = "17", Name = "Ime5", Text = "tekst komentara5", Approved = false },
-                new Feedback { Id = "174", Name = "Ime5", Text = "tekst komentara5", Approved = false }
-
-
-
-
-
-
-
+                new Feedback { Id = "1", PatientId = "Ime1", Text = "tekst komentara1", Date = new DateTime(2017, 1, 18), Approved = true }
 
             );
+            modelBuilder.Entity<Patient>().HasAlternateKey(o=>o.Id);
+            modelBuilder.Ignore<Address>();
+            modelBuilder.Entity<Patient>().HasData(
+                 new Patient { Name = "Tanja", Surname = "Tanjic", Id = "0001", DateOfBirth = new DateTime(2017, 1, 18), Contact = "kontakt", Password = "sifra", Address = new Address("neka adresa"), ParentName = "otac", Gender = "Zensko", Email = "email", Guest = true }
+                );
         }
     }
 }
