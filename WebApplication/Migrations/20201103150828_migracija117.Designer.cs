@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication.Backend.Model;
 
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201103150828_migracija117")]
+    partial class migracija117
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +64,7 @@ namespace WebApplication.Migrations
                     b.HasData(
                         new
                         {
-                            SerialNumber = "b2c09339-c304-4c2c-addf-826574519faf",
+                            SerialNumber = "3a99838f-25dd-436e-a1c1-7e4d14f41fb8",
                             Contact = "kontakt",
                             DateOfBirth = new DateTime(2017, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "email",

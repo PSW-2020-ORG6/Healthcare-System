@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication.Backend.Model;
 
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201103143521_migracija11")]
+    partial class migracija11
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,6 +22,9 @@ namespace WebApplication.Migrations
             modelBuilder.Entity("Model.Accounts.Patient", b =>
                 {
                     b.Property<string>("SerialNumber")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
+                    b.Property<string>("AddressSerialNumber")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<string>("Contact")
@@ -38,8 +43,7 @@ namespace WebApplication.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -55,23 +59,18 @@ namespace WebApplication.Migrations
 
                     b.HasKey("SerialNumber");
 
-                    b.HasAlternateKey("Id");
+                    b.HasIndex("AddressSerialNumber");
 
                     b.ToTable("Patients");
 
                     b.HasData(
                         new
                         {
-                            SerialNumber = "b2c09339-c304-4c2c-addf-826574519faf",
-                            Contact = "kontakt",
-                            DateOfBirth = new DateTime(2017, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "email",
-                            Gender = "Zensko",
-                            Guest = true,
-                            Id = "0001",
+                            SerialNumber = "460ac1fb-418e-4591-8da8-1ee0ea94525c",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Guest = false,
+                            Id = "Ime1",
                             Name = "Tanja",
-                            ParentName = "otac",
-                            Password = "sifra",
                             Surname = "Tanjic"
                         });
                 });
@@ -106,6 +105,26 @@ namespace WebApplication.Migrations
                             PatientId = "Ime1",
                             Text = "tekst komentara1"
                         });
+                });
+
+            modelBuilder.Entity("Model.Util.Address", b =>
+                {
+                    b.Property<string>("SerialNumber")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("SerialNumber");
+
+                    b.ToTable("Address");
+                });
+
+            modelBuilder.Entity("Model.Accounts.Patient", b =>
+                {
+                    b.HasOne("Model.Util.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressSerialNumber");
                 });
 #pragma warning restore 612, 618
         }
