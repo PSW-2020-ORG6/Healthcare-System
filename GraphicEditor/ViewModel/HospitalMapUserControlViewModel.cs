@@ -7,47 +7,35 @@ namespace GraphicEditor.ViewModel
 {
     public class HospitalMapUserControlViewModel : BindableBase
     {
-        private string _text = "AutoHook WORKS!!!!Changed colour :))";
+        public MyICommand<string> NavCommand { get; private set; }
 
-        private List<string> _floorEntries = new List<string>();
-        private string _floorEntry;
-
-        public String RandomText
+        public HospitalMapUserControlViewModel()
         {
-            get => _text;
-            set
-            {
-                OnPropertyChanged(RandomText);
-            }
+            NavCommand = new MyICommand<string>(ChooseHospital);
         }
 
-        public List<string> FloorEntries
+        private void ChooseHospital(string destination)
         {
-            get => AddingFloors();
-            set
+            switch (destination)
             {
-                OnPropertyChanged("FloorEntries");
-            }
-        }
+                case "emergency":
+                    
+                    break;
+                case "cardiology":
+                    
+                    break;
+                case "orthopedy":
 
-        private List<string> AddingFloors()
-        {
-            _floorEntries.Add("Floor 1");
-            _floorEntries.Add("Floor 2");
-            _floorEntries.Add("Floor 3");
-            _floorEntries.Add("Floor 4");
-            _floorEntries.Add("Floor 5");
-            return _floorEntries;
-        }
+                    break;
+                case "pediatry":
 
-        public string FloorEntry
-        {
-            get { return _floorEntry; }
-            set
-            {
-                if (_floorEntry == value) return;
-                _floorEntry = value;
-                OnPropertyChanged("FloorEntry");
+                    break;
+                case "dermatology":
+
+                    break;
+                case "oncology":
+
+                    break;
             }
         }
     }
