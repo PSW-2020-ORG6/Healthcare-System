@@ -5,8 +5,11 @@ using System.Windows.Data;
 
 namespace GraphicEditor.ViewModel
 {
+    
+
     public class HospitalMapUserControlViewModel : BindableBase
     {
+        
         public MyICommand<string> NavCommand { get; private set; }
 
         public HospitalMapUserControlViewModel()
@@ -18,22 +21,22 @@ namespace GraphicEditor.ViewModel
         {
             switch (destination)
             {
-                case "emergency":
+                case Constants.EMERGENCY:
                     
                     break;
-                case "cardiology":
-                    
-                    break;
-                case "orthopedy":
+                case Constants.CARDIOLOGY:
 
                     break;
-                case "pediatry":
+                case Constants.ORTHOPEDICS:
 
                     break;
-                case "dermatology":
+                case Constants.PEDIATRICS:
 
                     break;
-                case "oncology":
+                case Constants.DERMATOLOGY:
+
+                    break;
+                case Constants.ONCOLOGY:
 
                     break;
             }

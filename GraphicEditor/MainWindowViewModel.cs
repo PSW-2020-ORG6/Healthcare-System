@@ -30,10 +30,10 @@ namespace GraphicEditor
         {
             switch (destination)
             {
-                case "map":
+                case Constants.MAP:
                     CurrentViewModel = _hospitalMap;
                     break;
-                case "login":
+                case Constants.LOGIN:
                     CurrentViewModel = _loginPage;
                     break;
             }
