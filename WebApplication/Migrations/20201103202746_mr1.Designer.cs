@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication.Backend.Model;
 
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201103202746_mr1")]
+    partial class mr1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,30 +61,30 @@ namespace WebApplication.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0002",
+                            Id = "0001",
                             Contact = "kontakt",
                             DateOfBirth = new DateTime(2017, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "email",
                             Gender = "Zensko",
                             Guest = true,
-                            Name = "Jelena",
+                            Name = "Tanja",
                             ParentName = "otac",
                             Password = "sifra",
-                            SerialNumber = "fd558114-33a3-4dde-89af-9c92699145a0",
+                            SerialNumber = "e3e512aa-6ea3-423f-8be1-eff4e934c939",
                             Surname = "Tanjic"
                         },
                         new
                         {
-                            Id = "0003",
+                            Id = "0004",
                             Contact = "kontaktMica",
                             DateOfBirth = new DateTime(2018, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "emailMica",
                             Gender = "Zensko",
                             Guest = true,
-                            Name = "Sara",
+                            Name = "Milica",
                             ParentName = "mama",
                             Password = "sifraMica",
-                            SerialNumber = "8b306d26-512a-4aa2-9f50-8353ae11d738",
+                            SerialNumber = "5398f5f8-618c-4cd7-a1c3-f41fce243721",
                             Surname = "Milic"
                         });
                 });
@@ -114,12 +116,12 @@ namespace WebApplication.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2",
+                            Id = "1",
                             Approved = true,
                             Date = new DateTime(2017, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PatientId = "Ime2",
-                            SerialNumber = "2",
-                            Text = "tekst komentara2"
+                            PatientId = "Ime1",
+                            SerialNumber = "0205ed43-db9d-44af-a1ba-3ad2cab37e66",
+                            Text = "tekst komentara1"
                         });
                 });
 #pragma warning restore 612, 618
