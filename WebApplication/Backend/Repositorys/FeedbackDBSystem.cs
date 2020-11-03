@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace health_clinic_class_diagram.Backend.Repository
+namespace WebApplication.Backend.Repositorys
 {
-    public class FeedbackDBRepository : GenericDBSystem<Feedback>, FeedbackRepository
+    public class FeedbackDBSystem : GenericDBSystem<Feedback>, FeedbackRepository
     {
 
         public List<Feedback> GetApprovedFeedbacks(Boolean approved)
