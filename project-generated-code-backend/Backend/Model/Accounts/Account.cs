@@ -19,14 +19,15 @@ namespace Model.Accounts
         protected String email;
         protected Address address;
 
-        public string Name { get => name; }
-        public string Surname { get => surname; }
+        public string Name { get => name; set => name = value; }
+        public string Surname { get => surname; set => surname = value; }
         public string FullName { get => name + " " + surname; }
-        public string Id { get => id; }
-        public DateTime DateOfBirth { get => dateOfBirth; }
-        public string Contact { get => contact; }
-        public string Email { get => email; }
-        public Address Address { get => address; }
+
+        public string Id { get => id; set => id = value; }
+        public DateTime DateOfBirth { get => dateOfBirth; set => dateOfBirth = value; }
+        public string Contact { get => contact; set => contact = value; }
+        public string Email { get => email; set => email = value; }
+        public virtual Address Address { get => address; set => address = value; }
 
         public Account(String serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address) : base(serialNumber)
         {
@@ -38,6 +39,23 @@ namespace Model.Accounts
             this.email = email;
             this.address = address;
         }
+        public Account(String serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email) : base(serialNumber)
+        {
+            this.name = name;
+            this.surname = surname;
+            this.id = id;
+            this.dateOfBirth = dateOfBirth;
+            this.contact = contact;
+            this.email = email;
+
+        }
+        public Account(String serialNumber, string name, string surname, string id) : base(serialNumber)
+        {
+            this.name = name;
+            this.surname = surname;
+            this.id = id;
+        }
+        public Account() { }
 
         public override int GetHashCode()
         {
