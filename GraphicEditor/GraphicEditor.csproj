@@ -63,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HelpClasses\Constants.cs" />
     <Compile Include="HelpClasses\HelpProvider.cs" />
     <Compile Include="HelpClasses\JavaScriptControlHelper.cs" />
     <Compile Include="HelpClasses\MyICommand.cs" />
