@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication.Backend.Model;
 
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201103193629_migration4")]
+    partial class migration4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,22 +70,8 @@ namespace WebApplication.Migrations
                             Name = "Tanja",
                             ParentName = "otac",
                             Password = "sifra",
-                            SerialNumber = "d93f589e-587a-47ac-812a-8dcc0db32112",
+                            SerialNumber = "53c4e467-3b34-4238-a27e-edcd40a2fc86",
                             Surname = "Tanjic"
-                        },
-                        new
-                        {
-                            Id = "0004",
-                            Contact = "kontaktMica",
-                            DateOfBirth = new DateTime(2018, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "emailMica",
-                            Gender = "Zensko",
-                            Guest = true,
-                            Name = "Milica",
-                            ParentName = "mama",
-                            Password = "sifraMica",
-                            SerialNumber = "77d5badd-628b-4d0c-ad1e-bf6a10fa1604",
-                            Surname = "Milic"
                         });
                 });
 
@@ -118,7 +106,7 @@ namespace WebApplication.Migrations
                             Approved = true,
                             Date = new DateTime(2017, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = "Ime1",
-                            SerialNumber = "482ef216-5586-42f9-8425-3a9be1501fd6",
+                            SerialNumber = "f0204215-de41-451d-ae79-f1eb18f720a8",
                             Text = "tekst komentara1"
                         });
                 });

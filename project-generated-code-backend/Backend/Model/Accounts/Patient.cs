@@ -27,6 +27,11 @@ namespace Model.Accounts
             this.password = password;
         }
 
+        public Patient(string name, string surname, string id) : base(Guid.NewGuid().ToString(), name, surname, id)
+        {
+
+        }
+
         [JsonConstructor]
         public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string parentName, string gender, string password, bool isGuest = false)
             : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address)
@@ -45,11 +50,12 @@ namespace Model.Accounts
             this.password = patientDTO.Password;
             Console.WriteLine(Guest);
         }
+        public Patient() : base() { }
 
-        public string ParentName { get => parentName; }
-        public string Gender { get => gender; }
+        public string ParentName { get => parentName; set => parentName = value; }
+        public string Gender { get => gender; set => gender = value; }
         public bool Guest { get => guest; set => guest = value; }
-        public string Password { get => password; }
+        public string Password { get => password; set => password = value; }
 
         public override string ToString()
         {

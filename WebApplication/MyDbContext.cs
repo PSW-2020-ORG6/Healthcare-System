@@ -29,8 +29,9 @@ namespace WebApplication.Backend.Model
             modelBuilder.Entity<Patient>().HasAlternateKey(o=>o.Id);
             modelBuilder.Ignore<Address>();
             modelBuilder.Entity<Patient>().HasData(
-                 new Patient { Name = "Tanja", Surname = "Tanjic", Id = "0001", DateOfBirth = new DateTime(2017, 1, 18), Contact = "kontakt", Password = "sifra", Address = new Address("neka adresa"), ParentName = "otac", Gender = "Zensko", Email = "email", Guest = true }
-                );
+                 new Patient { Name = "Tanja", Surname = "Tanjic", Id = "0001", DateOfBirth = new DateTime(2017, 1, 18), Contact = "kontakt", Password = "sifra", Address = new Address("neka adresa"), ParentName = "otac", Gender = "Zensko", Email = "email", Guest = true },
+               new Patient { Name = "Milica", Surname = "Milic", Id = "0004", DateOfBirth = new DateTime(2018, 1, 18), Contact = "kontaktMica", Password = "sifraMica", Address = new Address("neka adresaMica"), ParentName = "mama", Gender = "Zensko", Email = "emailMica", Guest = true }
+                 );
         }
     }
 }

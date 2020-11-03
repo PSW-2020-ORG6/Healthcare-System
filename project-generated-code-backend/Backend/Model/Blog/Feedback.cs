@@ -13,27 +13,22 @@ namespace Model.Blog
     {
         private String id;//treba nam zbog identifikacija feedbeck-a
         private String text;
-     // private DateTime date;
-        // private Account account;
-        private String name;//samo pokazno jer nisam znala da preuzmem cijeli objekat u bazu
+        private DateTime date;
+        private String patientId;
         private Boolean approved;
-
-        //public Account Account
-        //{
-        //    get
-        //    {
-        //        return account;
-        //    }
-        //    set
-        //    {
-        //        this.account = value;
-        //    }
-        //}
-        public string Name { get => name; set => name = value; }
+        public string PatientId { get => patientId; set => patientId = value; }
         public string Id { get => id; set => id = value; }
         public string Text { get => text; set => text = value; }
-       // public DateTime Date { get => date; set => date = value; }
+        public DateTime Date { get => date; set => date = value; }
         public Boolean Approved { get => approved; set => approved = value; }
-
+        public Feedback(String id, String text, String patientId, DateTime date, Boolean app)
+        {
+            this.Id = id;
+            this.PatientId = patientId;
+            this.Text = text;
+            this.Date = date;
+            this.Approved = app;
+        }
+        public Feedback() { }
     }
 }
