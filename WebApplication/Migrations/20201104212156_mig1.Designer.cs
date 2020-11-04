@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication.Backend.Model;
 
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201104212156_mig1")]
+    partial class mig1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,7 +70,7 @@ namespace WebApplication.Migrations
                             Name = "Jelena",
                             ParentName = "otac",
                             Password = "sifra",
-                            SerialNumber = "39ada87d-2b95-4d69-9e03-a8420bbbf5fe",
+                            SerialNumber = "2eb30a4d-9fac-4c4f-b29b-cc2c11a39a41",
                             Surname = "Tanjic"
                         },
                         new
@@ -82,7 +84,7 @@ namespace WebApplication.Migrations
                             Name = "Sara",
                             ParentName = "mama",
                             Password = "sifraMica",
-                            SerialNumber = "e8aaec05-aa10-493d-8578-482b19e62928",
+                            SerialNumber = "fb991288-29be-4b06-a062-4bab45fd0ec8",
                             Surname = "Milic"
                         });
                 });
@@ -111,7 +113,7 @@ namespace WebApplication.Migrations
                     b.HasData(
                         new
                         {
-                            SerialNumber = "dfc185a6-33ed-446b-b020-a4c514031c48",
+                            SerialNumber = "1279749f-3344-4d73-afc3-25d06431492e",
                             Approved = true,
                             Date = new DateTime(2017, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = "0002",
@@ -119,7 +121,7 @@ namespace WebApplication.Migrations
                         },
                         new
                         {
-                            SerialNumber = "0cb6ae43-5e76-45de-a80b-54433873b23c",
+                            SerialNumber = "3edfdd60-2df9-4b1f-a5a7-e343f105daa1",
                             Approved = true,
                             Date = new DateTime(2017, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = "0003",

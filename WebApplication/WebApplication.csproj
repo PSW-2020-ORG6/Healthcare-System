@@ -26,9 +26,5 @@
     <ProjectReference Include="..\project-generated-code-backend\health_clinic_class_diagram.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Backend\Controllers\" />
-  </ItemGroup>
-
 
 </Project>

@@ -16,13 +16,11 @@ namespace Model.Blog
         private String patientId;
         private Boolean approved;
         public string PatientId { get => patientId; set => patientId = value; }
-        public string Id { get => SerialNumber; set => SerialNumber = value; }
         public string Text { get => text; set => text = value; }
         public DateTime Date { get => date; set => date = value; }
         public Boolean Approved { get => approved; set => approved = value; }
-        public Feedback(String id, String text, String patientId, DateTime date, Boolean app)
+        public Feedback(String text, String patientId, DateTime date, Boolean app)
         {
-            this.Id = id;
             this.PatientId = patientId;
             this.Text = text;
             this.Date = date;
