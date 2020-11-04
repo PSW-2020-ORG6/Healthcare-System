@@ -1,34 +1,35 @@
 
+.navbar-custom {
+    background-color: Cyan;
+}
 
-ul li{
-	display: inline-block;
-	margin: 0 60px 0 0;
+.navbar-custom .navbar-brand{
+    color: white;
+    font-size :30px;
+    font-weight :100;
+    font-family : 'Impact';
+}
+
+#navbarDropdown {
+    background-color: Cyan;
+}
+
+#clinicLogoTxt {
+   padding-left : 260px;
+   font-size : 36px;
+   font-weight : 100;
+   font-family : Impact;
+}
+
+#clinicLogoPic {
+    padding-bottom: 10px;
 }
 
 
-.container {
-  padding: 2rem 0rem;
-}
-
-h4 {
-  margin: 2rem 0rem 1rem;
-}
-
-.table-image {
-  td, th {
-    vertical-align: middle;
-  }
-}
-
-.apartmentTable img {
-    width:300px;
-    height: 150px;
-}
-
-tr.selected {
-	background-color: #aaaaaa;
-}
-
-tr.selectedApartment {
-	background-color: #aaaaaa;
+.btn {
+    background-color: Cyan;
+    color: white;
+    border: thick;
+    font-family: 'Impact';
+    font-weight : 100;
 }
