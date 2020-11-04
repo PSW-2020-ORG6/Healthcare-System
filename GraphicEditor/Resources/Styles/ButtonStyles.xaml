@@ -5,22 +5,23 @@
     <Style x:Key="DefaultBuildingButtonStyle"
            BasedOn="{StaticResource {x:Type Button}}"
            TargetType="Button">
+        <Setter Property="Command" Value="{Binding NavCommand}"/>
         <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="BorderThickness" Value="3"/>
         <Setter Property="materialDesign:RippleAssist.Feedback" Value="Transparent"/>
-        <Setter Property="Command" Value="{Binding NavCommand}"/>
     </Style>
 
-    <Style x:Key="RoomButtonStyle"
+    <Style x:Key="DefaultRectangleBuildingButtonStyle"
            BasedOn="{StaticResource {x:Type Button}}"
            TargetType="Button">
+        <Setter Property="Command" Value="{Binding NavCommand}"/>
         <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="Foreground" Value="White" />
         <Setter Property="materialDesign:RippleAssist.Feedback" Value="Transparent"/>
-        <Setter Property="Background" Value="#FF237793"/>
-        <Setter Property="Height" Value="Auto"/>
-        <Setter Property="Command" Value="{Binding NavCommand}"/>
     </Style>
+
+    
 
     <Style x:Key="TriangleButton"
            TargetType="Button">
@@ -32,6 +33,60 @@
                                  Points="-1,-2 193,0 193,180"
                                  Stroke="Black"
                                  StrokeThickness="2"/>
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center">
+                        </ContentPresenter>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Command" Value="{Binding NavCommand}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="TriangleButton2"
+           TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Path Height="184"
+                              Fill="Coral"
+                              Stroke="Black" 
+                              StrokeThickness="3"
+                              Width="200">
+                            <Path.Data>
+                                <GeometryGroup>
+                                    <PathGeometry>
+                                        <PathGeometry.Figures>
+                                            <PathFigureCollection>
+                                                <PathFigure IsClosed="True" IsFilled="True" StartPoint="3,2" >
+                                                    <PathFigure.Segments>
+                                                        <PolyLineSegment>
+                                                            <PolyLineSegment.Points>
+                                                                <Point X="198" Y="2" />
+                                                                <Point X="198" Y="182"/>
+                                                            </PolyLineSegment.Points>
+                                                        </PolyLineSegment>
+                                                    </PathFigure.Segments>
+                                                </PathFigure>
+                                            </PathFigureCollection>
+                                        </PathGeometry.Figures>
+                                    </PathGeometry>
+                                </GeometryGroup>
+                            </Path.Data>
+                        </Path>
+                        <StackPanel HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Margin="0,10,10,0">
+                            <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                            Pediatrics
+                            </TextBlock>
+                            <Image Height="30"
+                               Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
+                        </StackPanel>
                         <ContentPresenter HorizontalAlignment="Center" 
                                           VerticalAlignment="Center">
                         </ContentPresenter>
@@ -69,6 +124,53 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
+    <Style x:Key="UButton2" 
+           TargetType="Button" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Path Height="148"
+                              Fill="Purple"
+                              Stroke="Black" 
+                              StrokeThickness="3"
+                              Width="163">
+                            <Path.Data>
+                                <CombinedGeometry GeometryCombineMode="Xor">
+                                    <CombinedGeometry.Geometry1>
+                                        <RectangleGeometry Rect="0, 0, 160, 145" />
+                                    </CombinedGeometry.Geometry1>
+                                    <CombinedGeometry.Geometry2>
+                                        <RectangleGeometry Rect="60, 0, 40, 80" />
+                                    </CombinedGeometry.Geometry2>
+                                </CombinedGeometry>
+
+                            </Path.Data>
+                        </Path>
+                        <StackPanel Margin="0,85,0,0"
+                                Width="154"  >
+                            <TextBlock Foreground="White"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,-8,0,0" 
+                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                            Neurology
+                            </TextBlock>
+                            <Image Height="30"
+                               Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Width" Value="163"/>
+        <Setter Property="Height" Value="148"/>
+        <Setter Property="Command" Value="{Binding NavCommand}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
     <Style x:Key="OctagonButton"
            TargetType="Button" >
         <Setter Property="Template">
@@ -89,7 +191,78 @@
         </Setter>
         <Setter Property="Command" Value="{Binding NavCommand}"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Height" Value="130" />
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="130" />
+        
     </Style>
+
+    <Style x:Key="OctagonButton2"
+           TargetType="Button" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Path Height="252"
+                              Fill="Yellow"
+                              Stroke="Black" 
+                              StrokeThickness="3"
+                              Width="153">
+                            <Path.Data>
+                                <GeometryGroup>
+                                    <PathGeometry>
+                                        <PathGeometry.Figures>
+                                            <PathFigureCollection>
+                                                <PathFigure IsClosed="True" IsFilled="True" StartPoint="30,2" >
+                                                    <PathFigure.Segments>
+                                                        <PolyLineSegment>
+                                                            <PolyLineSegment.Points>
+                                                                <Point X="97" Y="2" />
+                                                                <Point X="125" Y="64"/>
+                                                                <Point X="96" Y="124" />
+                                                                <Point X="30" Y="124" />
+                                                                <Point X="3" Y="64" />
+                                                            </PolyLineSegment.Points>
+                                                        </PolyLineSegment>
+                                                    </PathFigure.Segments>
+                                                </PathFigure>
+                                            </PathFigureCollection>
+                                        </PathGeometry.Figures>
+                                    </PathGeometry>
+                                </GeometryGroup>
+                            </Path.Data>
+                        </Path>
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <TextBlock 
+                                   Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
+                                   TextWrapping="Wrap">
+                                Oncology
+                            </TextBlock>
+                            <Image  Height="30"
+                                Margin="0,3,0,0"
+                                Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
+                        </StackPanel>
+                        
+                        
+                        <!--<ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center">
+                        </ContentPresenter>-->
+                    </Grid>
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Command" Value="{Binding NavCommand}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Height" Value="130" />
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="133" />
+
+    </Style>
+
 
     <Style x:Key="DermatologyButton" 
            TargetType="Button">
@@ -116,4 +289,66 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
+
+    <Style x:Key="DermatologyButton2" 
+           BasedOn="{StaticResource {x:Type Button}}"
+           TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Height="252"
+                          Width="153">
+                        <Path Height="252"
+                              Fill="Chocolate"
+                              Stroke="Black" 
+                              StrokeThickness="3"
+                              Width="153">
+                            <Path.Data>
+                                <CombinedGeometry GeometryCombineMode="Xor">
+                                    <CombinedGeometry.Geometry1>
+                                        <RectangleGeometry Rect="0, 0, 150, 250" />
+                                    </CombinedGeometry.Geometry1>
+                                    <CombinedGeometry.Geometry2>
+                                        <RectangleGeometry Rect="50, 50, 50, 150" />
+                                    </CombinedGeometry.Geometry2>
+                                </CombinedGeometry>
+
+                            </Path.Data>
+                        </Path>
+                        <TextBlock Foreground="White"
+                                   HorizontalAlignment="Center"
+                                   Margin="5"
+                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                   VerticalAlignment="Top">
+                            Dermatology
+                        </TextBlock>
+                        <Image  Height="30"
+                                HorizontalAlignment="Left" 
+                                Margin="10"
+                                Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"
+                                VerticalAlignment="Center"
+                                Width="30"/>
+                    </Grid>
+                    
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Command" Value="{Binding NavCommand}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="RoomButtonStyle"
+           BasedOn="{StaticResource {x:Type Button}}"
+           TargetType="Button">
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="materialDesign:RippleAssist.Feedback" Value="Transparent"/>
+        <Setter Property="Background" Value="#FF237793"/>
+        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="Command" Value="{Binding NavCommand}"/>
+    </Style>
+    
 </ResourceDictionary>
