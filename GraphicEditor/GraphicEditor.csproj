@@ -69,13 +69,14 @@
     <Compile Include="HelpClasses\MyICommand.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="ViewModel\BuildingMapUserControlViewModel.cs" />
+    <Compile Include="ViewModel\CardiologyFirstFloorMapUserControlViewModel.cs" />
     <Compile Include="ViewModel\HospitalMapUserControlViewModel.cs" />
     <Compile Include="ViewModel\LoginUserControlViewModel.cs" />
     <Compile Include="View\UserControls\BuildingMapUserControl.xaml.cs">
       <DependentUpon>BuildingMapUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\CardiologyMapUserControl.xaml.cs">
-      <DependentUpon>CardiologyMapUserControl.xaml</DependentUpon>
+    <Compile Include="View\UserControls\CardiologyFirstFloorMapUserControl.xaml.cs">
+      <DependentUpon>CardiologyFirstFloorMapUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\HospitalMapUserControl.xaml.cs">
       <DependentUpon>HospitalMapUserControl.xaml</DependentUpon>
@@ -104,13 +105,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\Styles\RectangleStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\TextBoxStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserControls\BuildingMapUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\CardiologyMapUserControl.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="View\UserControls\CardiologyFirstFloorMapUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\UserControls\HospitalMapUserControl.xaml">
       <SubType>Designer</SubType>
