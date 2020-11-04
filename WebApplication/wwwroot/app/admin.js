@@ -1,7 +1,7 @@
-Vue.component("home", {
+﻿Vue.component("admin", {
     data: function () {
         return {
-            test: "AKO SE OVO PRIKAZE RUTER JE USPEO HOME"
+            test : "AKO SE OVO PRIKAZE RUTER JE USPEO ADMIN"  
         }
     },
     template: `
@@ -10,5 +10,3 @@ Vue.component("home", {
     </div>
 	`
 });
-
-
