@@ -13,6 +13,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <!-- #Styles -->
                 <ResourceDictionary Source="pack://application:,,,/Resources/Styles/ButtonStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/RectangleStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/TextBoxStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -29,13 +31,10 @@
                        VerticalAlignment="Center"/>
 
                 <!--Room1 button-->
-                <Button x:Name="Room1Button"
-                        Background="#FF237793" 
-                        BorderBrush="Black"
+                <Button x:Name="Room1Button" 
                         CommandParameter="room1"
-                        Height="Auto"
                         Margin="254,122,763,453"
-                        Style="{StaticResource ResourceKey=DefaultBuildingButtonStyle}">
+                        Style="{StaticResource ResourceKey=RoomButtonStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
@@ -46,12 +45,9 @@
 
                 <!--Room2 button-->
                 <Button x:Name="Room2Button"
-                        Background="#FF237793" 
-                        BorderBrush="Black"
                         CommandParameter="room2"
-                        Height="Auto"
                         Margin="418,122,637,471"
-                        Style="{StaticResource ResourceKey=DefaultBuildingButtonStyle}">
+                        Style="{StaticResource ResourceKey=RoomButtonStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
@@ -62,12 +58,9 @@
 
                 <!--Room3 button-->
                 <Button x:Name="Room3Button"
-                        Background="#FF237793" 
-                        BorderBrush="Black"
                         CommandParameter="room3"
-                        Height="Auto"
                         Margin="616,122,423,471"
-                        Style="{StaticResource ResourceKey=DefaultBuildingButtonStyle}">
+                        Style="{StaticResource ResourceKey=RoomButtonStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
@@ -78,12 +71,9 @@
 
                 <!--Room4 button-->
                 <Button x:Name="Room4Button"
-                        Background="#FF237793" 
-                        BorderBrush="Black"
                         CommandParameter="room4"
-                        Height="Auto"
                         Margin="758,122,255,453"
-                        Style="{StaticResource ResourceKey=DefaultBuildingButtonStyle}">
+                        Style="{StaticResource ResourceKey=RoomButtonStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
@@ -94,12 +84,9 @@
 
                 <!--Room5 button-->
                 <Button x:Name="Room5Button"
-                        Background="#FF237793" 
-                        BorderBrush="Black"
                         CommandParameter="room5"
-                        Height="Auto"
                         Margin="602,484,439,126"
-                        Style="{StaticResource ResourceKey=DefaultBuildingButtonStyle}">
+                        Style="{StaticResource ResourceKey=RoomButtonStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
@@ -124,13 +111,65 @@
                 <Border BorderBrush="Black"
                         BorderThickness="3"
                         Margin="806,495,255,126">
-                    <TextBox x:Name="elevator" 
-                             Background="#FF2F3B46"
-                             Text="Elevator"
-                             TextAlignment="Center"
-                             FontSize="24" 
-                             FontWeight="Bold"/>
+                    <TextBox Style="{StaticResource ElevatorTextBox}"/>
                 </Border>
+
+                <!--Decoration-->
+                <Image x:Name="image" 
+                       HorizontalAlignment="Left" 
+                       Height="44" 
+                       Margin="560,149,0,0" 
+                       VerticalAlignment="Top"
+                       Width="51"
+                       Source="/GraphicEditor;component/Resources/Icons/plant.png"/>
+
+                <!--Doors-->
+                <Rectangle Width="110"
+                           Margin="202,366,0,0" 
+                           Style="{StaticResource DoorRectangle}">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Margin="308,247,0,0"
+                           Style="{StaticResource DoorRectangle}"/>
+                <Rectangle Margin="456,229,0,0" 
+                           Style="{StaticResource DoorRectangle}"/>
+                <Rectangle Margin="664,229,0,0" 
+                    Style="{StaticResource DoorRectangle}"/>
+                <Rectangle Margin="823,247,0,0" 
+                           Style="{StaticResource DoorRectangle}"/>
+                <Rectangle Margin="647,474,0,0" 
+                           Style="{StaticResource DoorRectangle}"/>
+                <Rectangle Margin="721,527,0,0" 
+                           Style="{StaticResource DoorRectangle}">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Margin="368,474,0,0" 
+                           Style="{StaticResource DoorRectangle}"/>
+                <Rectangle Margin="476,474,0,0" 
+                           Style="{StaticResource DoorRectangle}"/>
+                <Rectangle Margin="844,485,0,0" 
+                           Style="{StaticResource DoorRectangle}"/>
+                <Image x:Name="image_Copy" 
+                    HorizontalAlignment="Left" 
+                    Height="44" 
+                    Margin="272,511,0,0" 
+                    VerticalAlignment="Top"
+                    Width="51"
+                    Source="/GraphicEditor;component/Resources/Icons/plant.png" RenderTransformOrigin="-1.059,3.273"/>
 
                 <!--Waiting room-->
                 <Grid Background="#FFC1E2EA"
@@ -263,186 +302,6 @@
                     <Image Source="/GraphicEditor;component/Resources/Icons/table.png" 
                            Margin="82,48,54,43" />
                 </Border>
-
-                <!--Decoration-->
-                <Image x:Name="image" 
-                       HorizontalAlignment="Left" 
-                       Height="44" 
-                       Margin="560,149,0,0" 
-                       VerticalAlignment="Top"
-                       Width="51"
-                       Source="/GraphicEditor;component/Resources/Icons/plant.png"/>
-
-                <!--Doors-->
-                <Rectangle Fill="#FF61CCF0"
-                           HorizontalAlignment="Left"
-                           Height="109"
-                           Margin="254,320,0,0" 
-                           Stroke="Black" 
-                           StrokeThickness="3" 
-                           VerticalAlignment="Top"
-                           Width="10"/>
-                <Rectangle Fill="#FF61CCF0"
-                            HorizontalAlignment="Left"
-                            Height="70"
-                            Margin="330,214,0,0" 
-                            Stroke="Black" 
-                            StrokeThickness="3" 
-                            VerticalAlignment="Top"
-                            Width="10" 
-                            RenderTransformOrigin="0.5,0.5">
-                    <Rectangle.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="90"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Rectangle.RenderTransform>
-                </Rectangle>
-                <Rectangle Fill="#FF61CCF0"
-                    HorizontalAlignment="Left"
-                    Height="60"
-                    Margin="478,202,0,0" 
-                    Stroke="Black" 
-                    StrokeThickness="3" 
-                    VerticalAlignment="Top"
-                    Width="10" 
-                    RenderTransformOrigin="0.5,0.5">
-                    <Rectangle.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="90"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Rectangle.RenderTransform>
-                </Rectangle>
-                <Rectangle Fill="#FF61CCF0"
-                    HorizontalAlignment="Left"
-                    Height="60"
-                    Margin="682,201,0,0" 
-                    Stroke="Black" 
-                    StrokeThickness="3" 
-                    VerticalAlignment="Top"
-                    Width="10" 
-                    RenderTransformOrigin="0.5,0.5">
-                    <Rectangle.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="90"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Rectangle.RenderTransform>
-                </Rectangle>
-                <Rectangle Fill="#FF61CCF0"
-                    HorizontalAlignment="Left"
-                    Height="70"
-                    Margin="839,214,0,0" 
-                    Stroke="Black" 
-                    StrokeThickness="3" 
-                    VerticalAlignment="Top"
-                    Width="10" 
-                    RenderTransformOrigin="0.5,0.5">
-                    <Rectangle.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="90"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Rectangle.RenderTransform>
-                </Rectangle>
-                <Rectangle Fill="#FF61CCF0"
-                    HorizontalAlignment="Left"
-                    Height="50"
-                    Margin="664,454,0,0" 
-                    Stroke="Black" 
-                    StrokeThickness="3" 
-                    VerticalAlignment="Top"
-                    Width="10" 
-                    RenderTransformOrigin="0.5,0.5">
-                    <Rectangle.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="90"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Rectangle.RenderTransform>
-                </Rectangle>
-                <Rectangle Fill="#FF61CCF0"
-                    HorizontalAlignment="Left"
-                    Height="50"
-                    Margin="390,454,0,0" 
-                    Stroke="Black" 
-                    StrokeThickness="3" 
-                    VerticalAlignment="Top"
-                    Width="10" 
-                    RenderTransformOrigin="0.5,0.5">
-                    <Rectangle.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="90"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Rectangle.RenderTransform>
-                </Rectangle>
-                <Rectangle Fill="#FF61CCF0"
-                    HorizontalAlignment="Left"
-                    Height="50"
-                    Margin="502,454,0,0" 
-                    Stroke="Black" 
-                    StrokeThickness="3" 
-                    VerticalAlignment="Top"
-                    Width="10" 
-                    RenderTransformOrigin="0.5,0.5">
-                    <Rectangle.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="90"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Rectangle.RenderTransform>
-                </Rectangle>
-                <Rectangle Fill="#FF61CCF0"
-                    HorizontalAlignment="Left"
-                    Height="50"
-                    Margin="862,466,0,0" 
-                    Stroke="Black" 
-                    StrokeThickness="3" 
-                    VerticalAlignment="Top"
-                    Width="10" 
-                    RenderTransformOrigin="0.5,0.5">
-                    <Rectangle.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="90"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Rectangle.RenderTransform>
-                </Rectangle>
-                <Image x:Name="image_Copy" 
-                    HorizontalAlignment="Left" 
-                    Height="44" 
-                    Margin="272,511,0,0" 
-                    VerticalAlignment="Top"
-                    Width="51"
-                    Source="/GraphicEditor;component/Resources/Icons/plant.png" RenderTransformOrigin="-1.059,3.273"/>
-                <Rectangle Fill="#FF61CCF0"
-                    HorizontalAlignment="Left"
-                    Height="50"
-                    Margin="742,505,0,0" 
-                    Stroke="Black" 
-                    StrokeThickness="3" 
-                    VerticalAlignment="Top"
-                    Width="10" 
-                    RenderTransformOrigin="0.5,0.5"/>
-
 
             </Grid>
         </ScrollViewer>
