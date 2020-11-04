@@ -1,6 +1,4 @@
-﻿using GraphicEditor.HelpClasses;
-using System.Windows.Controls;
-using System.Windows.Input;
+﻿using System.Windows.Controls;
 
 namespace GraphicEditor.View.UserControls
 {

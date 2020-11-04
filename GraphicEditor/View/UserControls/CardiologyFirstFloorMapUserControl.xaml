@@ -1,0 +1,450 @@
+﻿<UserControl x:Class="GraphicEditor.View.UserControls.CardiologyFirstFloorMapUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             xmlns:vml="clr-namespace:GraphicEditor.VML"
+             vml:ViewModelLocator.AutoHookedUpViewModel="True"
+             d:DesignHeight="650" d:DesignWidth="1200">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- #Styles -->
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/ButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border BorderBrush="Black" 
+            BorderThickness="1">
+        <ScrollViewer>
+            <Grid>
+                <!--FloorPattern-->
+                <Image Height="600" 
+                       Width="672"
+                       HorizontalAlignment="Center"
+                       Source="/GraphicEditor;component/Resources/Images/floor.jpg" 
+                       VerticalAlignment="Center"/>
+
+                <!--Room1 button-->
+                <Button x:Name="Room1Button"
+                        Background="#FF237793" 
+                        BorderBrush="Black"
+                        CommandParameter="room1"
+                        Height="Auto"
+                        Margin="254,122,763,453"
+                        Style="{StaticResource ResourceKey=DefaultBuildingButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                                   TextWrapping="Wrap">
+                                Room1
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+
+                <!--Room2 button-->
+                <Button x:Name="Room2Button"
+                        Background="#FF237793" 
+                        BorderBrush="Black"
+                        CommandParameter="room2"
+                        Height="Auto"
+                        Margin="418,122,637,471"
+                        Style="{StaticResource ResourceKey=DefaultBuildingButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                                   TextWrapping="Wrap">
+                                Room2
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+
+                <!--Room3 button-->
+                <Button x:Name="Room3Button"
+                        Background="#FF237793" 
+                        BorderBrush="Black"
+                        CommandParameter="room3"
+                        Height="Auto"
+                        Margin="616,122,423,471"
+                        Style="{StaticResource ResourceKey=DefaultBuildingButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                                   TextWrapping="Wrap">
+                                Room3
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+
+                <!--Room4 button-->
+                <Button x:Name="Room4Button"
+                        Background="#FF237793" 
+                        BorderBrush="Black"
+                        CommandParameter="room4"
+                        Height="Auto"
+                        Margin="758,122,255,453"
+                        Style="{StaticResource ResourceKey=DefaultBuildingButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                                   TextWrapping="Wrap">
+                                Room4
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+
+                <!--Room5 button-->
+                <Button x:Name="Room5Button"
+                        Background="#FF237793" 
+                        BorderBrush="Black"
+                        CommandParameter="room5"
+                        Height="Auto"
+                        Margin="602,484,439,126"
+                        Style="{StaticResource ResourceKey=DefaultBuildingButtonStyle}">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                                   TextWrapping="Wrap">
+                                Room5
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+
+                <!--Toilet-->
+                <Border BorderBrush="Black"
+                        BorderThickness="3"
+                        Margin="344,484,621,126">
+                    <Rectangle 
+                           Fill="#FF6DAEC1">
+                    </Rectangle>
+                </Border>
+                <Image Source="pack://application:,,,/Resources/Icons/toilet.png"
+                       Height="60"
+                       Margin="376,495,657,145"/>
+
+                <!--Elevator-->
+                <Border BorderBrush="Black"
+                        BorderThickness="3"
+                        Margin="806,495,255,126">
+                    <TextBox x:Name="elevator" 
+                             Background="#FF2F3B46"
+                             Text="Elevator"
+                             TextAlignment="Center"
+                             FontSize="24" 
+                             FontWeight="Bold"/>
+                </Border>
+
+                <!--Waiting room-->
+                <Grid Background="#FFC1E2EA"
+                      DockPanel.Dock="Top"  
+                      Margin="376,306,255,257">
+                    <Border Background="Transparent" />
+                </Grid>
+                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png"
+                       Margin="392,320,747,328"/>
+                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png"
+                       Margin="482,320,657,328"
+                       RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" 
+                                            ScaleX="-1"/>
+                            <SkewTransform AngleY="0"
+                                           AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png"
+                       Margin="587,320,553,328"/>
+                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png"
+                       Margin="678,320,463,328" 
+                       RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" 
+                                            ScaleX="-1"/>
+                            <SkewTransform AngleY="0"
+                                           AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png"
+                       Margin="782,320,358,328"/>
+                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png"
+                       Margin="870,320,271,328" 
+                       RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" 
+                                            ScaleX="-1"/>
+                            <SkewTransform AngleY="0"
+                                           AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png" 
+                       Margin="393,372,747,276"/>
+                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png"
+                       Margin="483,377,657,271" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1"
+                                            ScaleX="-1"/>
+                            <SkewTransform AngleY="0" 
+                                           AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png"
+                       Margin="587,377,553,271"/>
+                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png" 
+                       Margin="677,377,463,271"
+                       RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" 
+                                            ScaleX="-1"/>
+                            <SkewTransform AngleY="0" 
+                                           AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png" 
+                       Margin="782,377,358,271"/>
+                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png" 
+                       Margin="870,377,270,271" 
+                       RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" 
+                                            ScaleX="-1"/>
+                            <SkewTransform AngleY="0" 
+                                           AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Border BorderBrush="Black" 
+                        BorderThickness="2"
+                        HorizontalAlignment="Left" 
+                        Height="137"
+                        Margin="376,306,0,0" 
+                        VerticalAlignment="Top" 
+                        Width="184">
+                    <Image Source="/GraphicEditor;component/Resources/Icons/table.png" 
+                           Margin="58,48,78,43" />
+                </Border>
+                <Border BorderBrush="Black" 
+                        BorderThickness="2" 
+                        HorizontalAlignment="Left" 
+                        Height="137"
+                        Margin="560,306,0,0" 
+                        VerticalAlignment="Top"
+                        Width="182">
+                    <Image Source="/GraphicEditor;component/Resources/Icons/table.png"
+                           Margin="68,44,68,37"/>
+                </Border>
+                <Border BorderBrush="Black" 
+                        BorderThickness="2" 
+                        HorizontalAlignment="Left" 
+                        Height="137" 
+                        Margin="742,306,0,0" 
+                        VerticalAlignment="Top"
+                        Width="184">
+                    <Image Source="/GraphicEditor;component/Resources/Icons/table.png" 
+                           Margin="82,48,54,43" />
+                </Border>
+
+                <!--Decoration-->
+                <Image x:Name="image" 
+                       HorizontalAlignment="Left" 
+                       Height="44" 
+                       Margin="560,149,0,0" 
+                       VerticalAlignment="Top"
+                       Width="51"
+                       Source="/GraphicEditor;component/Resources/Icons/plant.png"/>
+
+                <!--Doors-->
+                <Rectangle Fill="#FF61CCF0"
+                           HorizontalAlignment="Left"
+                           Height="109"
+                           Margin="254,320,0,0" 
+                           Stroke="Black" 
+                           StrokeThickness="3" 
+                           VerticalAlignment="Top"
+                           Width="10"/>
+                <Rectangle Fill="#FF61CCF0"
+                            HorizontalAlignment="Left"
+                            Height="70"
+                            Margin="330,214,0,0" 
+                            Stroke="Black" 
+                            StrokeThickness="3" 
+                            VerticalAlignment="Top"
+                            Width="10" 
+                            RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="#FF61CCF0"
+                    HorizontalAlignment="Left"
+                    Height="60"
+                    Margin="478,202,0,0" 
+                    Stroke="Black" 
+                    StrokeThickness="3" 
+                    VerticalAlignment="Top"
+                    Width="10" 
+                    RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="#FF61CCF0"
+                    HorizontalAlignment="Left"
+                    Height="60"
+                    Margin="682,201,0,0" 
+                    Stroke="Black" 
+                    StrokeThickness="3" 
+                    VerticalAlignment="Top"
+                    Width="10" 
+                    RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="#FF61CCF0"
+                    HorizontalAlignment="Left"
+                    Height="70"
+                    Margin="839,214,0,0" 
+                    Stroke="Black" 
+                    StrokeThickness="3" 
+                    VerticalAlignment="Top"
+                    Width="10" 
+                    RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="#FF61CCF0"
+                    HorizontalAlignment="Left"
+                    Height="50"
+                    Margin="664,454,0,0" 
+                    Stroke="Black" 
+                    StrokeThickness="3" 
+                    VerticalAlignment="Top"
+                    Width="10" 
+                    RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="#FF61CCF0"
+                    HorizontalAlignment="Left"
+                    Height="50"
+                    Margin="390,454,0,0" 
+                    Stroke="Black" 
+                    StrokeThickness="3" 
+                    VerticalAlignment="Top"
+                    Width="10" 
+                    RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="#FF61CCF0"
+                    HorizontalAlignment="Left"
+                    Height="50"
+                    Margin="502,454,0,0" 
+                    Stroke="Black" 
+                    StrokeThickness="3" 
+                    VerticalAlignment="Top"
+                    Width="10" 
+                    RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle Fill="#FF61CCF0"
+                    HorizontalAlignment="Left"
+                    Height="50"
+                    Margin="862,466,0,0" 
+                    Stroke="Black" 
+                    StrokeThickness="3" 
+                    VerticalAlignment="Top"
+                    Width="10" 
+                    RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Image x:Name="image_Copy" 
+                    HorizontalAlignment="Left" 
+                    Height="44" 
+                    Margin="272,511,0,0" 
+                    VerticalAlignment="Top"
+                    Width="51"
+                    Source="/GraphicEditor;component/Resources/Icons/plant.png" RenderTransformOrigin="-1.059,3.273"/>
+                <Rectangle Fill="#FF61CCF0"
+                    HorizontalAlignment="Left"
+                    Height="50"
+                    Margin="742,505,0,0" 
+                    Stroke="Black" 
+                    StrokeThickness="3" 
+                    VerticalAlignment="Top"
+                    Width="10" 
+                    RenderTransformOrigin="0.5,0.5"/>
+
+
+            </Grid>
+        </ScrollViewer>
+    </Border>
+</UserControl>
