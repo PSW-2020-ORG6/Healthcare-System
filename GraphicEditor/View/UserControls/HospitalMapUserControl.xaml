@@ -107,28 +107,28 @@
                     <Button x:Name="PediatryButton"
                         CommandParameter="pediatrics"
                         Margin="502,64,86,404"
-                        Style="{StaticResource ResourceKey=TriangleButton2}">
+                        Style="{StaticResource ResourceKey=TriangleBuildingButtonStyle}">
                     </Button>
 
                     <!--Dermatology button-->
                     <Button x:Name="DermatologyButton"
                         CommandParameter="dermatology"
                         Margin="544,267,85,154"
-                        Style="{StaticResource ResourceKey=DermatologyButton2}" Height="261">
+                        Style="{StaticResource ResourceKey=DermatologyBuildingButtonStyle}">
                     </Button>
 
                     <!--Neurology button-->
                     <Button x:Name="NeurologyButton"
                         CommandParameter="neurology"
                         Margin="372,254,646,278"
-                        Style="{StaticResource ResourceKey=UButton2}" >
+                        Style="{StaticResource ResourceKey=UBuildingButtonStyle}" >
                     </Button>
 
                     <!--Oncology button-->
                     <Button x:Name="OncologyButton"
                         CommandParameter="oncology"
                         Margin="540,256,507,296"
-                        Style="{StaticResource ResourceKey=OctagonButton2}" Width="134" >
+                        Style="{StaticResource ResourceKey=OctagonBuildingButtonStyle}" >
                     </Button>
                 </Grid>
             </Grid>
