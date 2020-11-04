@@ -1,12 +1,8 @@
-﻿using Backend.Dto;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Model.Accounts;
 using Model.Blog;
 using Model.Util;
-using MySql.Data.MySqlClient;
 using System;
-using System.Data;
-using System.Diagnostics;
 
 namespace WebApplication.Backend.Model
 {
@@ -21,9 +17,10 @@ namespace WebApplication.Backend.Model
         // only for testing purposes
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<Feedback>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Feedback>().HasData(
-                new Feedback { Id = "2", PatientId = "Ime2", Text = "tekst komentara2", Date = new DateTime(2017, 1, 18), Approved = true }
+                    new Feedback { PatientId = "0002", Text = "komentara3", Date = new DateTime(2017, 1, 18), Approved = true },
+                    new Feedback { PatientId = "0003", Text = "komentara3", Date = new DateTime(2017, 1, 18), Approved = true }
 
             );
             modelBuilder.Entity<Patient>().HasAlternateKey(o=>o.Id);
