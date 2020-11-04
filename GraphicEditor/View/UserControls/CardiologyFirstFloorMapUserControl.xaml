@@ -115,61 +115,43 @@
                 </Border>
 
                 <!--Decoration-->
-                <Image x:Name="image" 
-                       HorizontalAlignment="Left" 
+                <Image x:Name="image"
                        Height="44" 
+                       HorizontalAlignment="Left" 
                        Margin="560,149,0,0" 
+                       Source="/GraphicEditor;component/Resources/Icons/plant.png"
                        VerticalAlignment="Top"
-                       Width="51"
-                       Source="/GraphicEditor;component/Resources/Icons/plant.png"/>
+                       Width="51"/>
 
                 <!--Doors-->
-                <Rectangle Width="110"
-                           Margin="202,366,0,0" 
-                           Style="{StaticResource DoorRectangle}">
-                    <Rectangle.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="90"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Rectangle.RenderTransform>
-                </Rectangle>
+                <Rectangle Height="100"
+                           Margin="254,320,0,0" 
+                           Style="{StaticResource DoorVerticalRectangle}"/>
                 <Rectangle Margin="308,247,0,0"
-                           Style="{StaticResource DoorRectangle}"/>
+                           Style="{StaticResource DoorHorizontalRectangle}"/>
                 <Rectangle Margin="456,229,0,0" 
-                           Style="{StaticResource DoorRectangle}"/>
+                           Style="{StaticResource DoorHorizontalRectangle}"/>
                 <Rectangle Margin="664,229,0,0" 
-                    Style="{StaticResource DoorRectangle}"/>
+                    Style="{StaticResource DoorHorizontalRectangle}"/>
                 <Rectangle Margin="823,247,0,0" 
-                           Style="{StaticResource DoorRectangle}"/>
+                           Style="{StaticResource DoorHorizontalRectangle}"/>
                 <Rectangle Margin="647,474,0,0" 
-                           Style="{StaticResource DoorRectangle}"/>
-                <Rectangle Margin="721,527,0,0" 
-                           Style="{StaticResource DoorRectangle}">
-                    <Rectangle.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="90"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Rectangle.RenderTransform>
-                </Rectangle>
+                           Style="{StaticResource DoorHorizontalRectangle}"/>
+                <Rectangle Margin="742,505,0,0" 
+                           Style="{StaticResource DoorVerticalRectangle}"/>
                 <Rectangle Margin="368,474,0,0" 
-                           Style="{StaticResource DoorRectangle}"/>
+                           Style="{StaticResource DoorHorizontalRectangle}"/>
                 <Rectangle Margin="476,474,0,0" 
-                           Style="{StaticResource DoorRectangle}"/>
+                           Style="{StaticResource DoorHorizontalRectangle}"/>
                 <Rectangle Margin="844,485,0,0" 
-                           Style="{StaticResource DoorRectangle}"/>
+                           Style="{StaticResource DoorHorizontalRectangle}"/>
                 <Image x:Name="image_Copy" 
-                    HorizontalAlignment="Left" 
-                    Height="44" 
-                    Margin="272,511,0,0" 
-                    VerticalAlignment="Top"
-                    Width="51"
-                    Source="/GraphicEditor;component/Resources/Icons/plant.png" RenderTransformOrigin="-1.059,3.273"/>
+                        Height="44" 
+                        HorizontalAlignment="Left" 
+                        Margin="272,511,0,0" 
+                        Source="/GraphicEditor;component/Resources/Icons/plant.png" RenderTransformOrigin="-1.059,3.273"
+                        VerticalAlignment="Top"
+                        Width="51"/>
 
                 <!--Waiting room-->
                 <Grid Background="#FFC1E2EA"
