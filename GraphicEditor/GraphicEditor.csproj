@@ -74,6 +74,9 @@
     <Compile Include="View\UserControls\BuildingMapUserControl.xaml.cs">
       <DependentUpon>BuildingMapUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\CardiologyMapUserControl.xaml.cs">
+      <DependentUpon>CardiologyMapUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\HospitalMapUserControl.xaml.cs">
       <DependentUpon>HospitalMapUserControl.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\BuildingMapUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\CardiologyMapUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,6 +162,11 @@
   <ItemGroup>
     <Content Include="HtmlHelpPages\Error.html" />
     <Content Include="HtmlHelpPages\MainWindow.html" />
+    <Resource Include="Resources\Icons\plant.png" />
+    <Resource Include="Resources\Icons\table.png" />
+    <Resource Include="Resources\Icons\chair.png" />
+    <Resource Include="Resources\Icons\toilet.png" />
+    <Resource Include="Resources\Images\floor.jpg" />
     <Resource Include="Resources\Images\mapPattern_withoutBuildings.png" />
     <Resource Include="Resources\Images\parkDermatology.png" />
     <Resource Include="Resources\Images\legendPattern.png" />
