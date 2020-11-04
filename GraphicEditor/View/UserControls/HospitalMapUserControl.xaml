@@ -22,156 +22,115 @@
     <!--<UserControl.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
     </UserControl.CommandBindings>-->
-    
+
     <Border BorderBrush="Black" 
             BorderThickness="1">
         <ScrollViewer>
             <Grid>
-                <!--MapPattern-->
-                <Image Height="600" 
+                <!--Legend Pattern-->
+                <Grid HorizontalAlignment="Left"
+                      VerticalAlignment="Center">
+                    <!--Legend image-->
+                    <Image Height="500"
+                       HorizontalAlignment="Center"
+                       Source="/GraphicEditor;component/Resources/Images/legendPattern.png"
+                       VerticalAlignment="Center"/>
+                </Grid>
+
+                <!--Map Pattern-->
+                <Grid HorizontalAlignment="Center"
+                      VerticalAlignment="Center">
+                    <!--Map Image-->
+                    <Image Height="600" 
                        HorizontalAlignment="Center"
                        Source="/GraphicEditor;component/Resources/Images/mapPattern_withoutBuildings.png" 
                        VerticalAlignment="Center"/>
-                       
-                <!--LegendPattern-->
-                <Image Height="500"
-                       HorizontalAlignment="Left"
-                       Source="/GraphicEditor;component/Resources/Images/legendPattern.png"
-                       VerticalAlignment="Center"/>
 
-                <!--Emergency Ambulance button-->
-                <Button x:Name="EmergencyAmbulanceButton"
+                    <!--Emergency Ambulance button-->
+                    <Button x:Name="EmergencyAmbulanceButton"
                         Background="DarkRed"
                         CommandParameter="emergency"
                         Height="123"
                         Margin="288,63,683,462"
-                        Style="{StaticResource ResourceKey=DefaultBuildingButtonStyle}"
+                        Style="{StaticResource ResourceKey=DefaultRectangleBuildingButtonStyle}"
                         Width="210">
-                    <StackPanel>
-                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
                                 Emergency Ambulance
-                        </TextBlock>
-                        <Image Height="30" 
+                            </TextBlock>
+                            <Image Height="30" 
                                Margin="0,3,0,0"
                                Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
-                    </StackPanel>
-                </Button>
+                        </StackPanel>
+                    </Button>
 
-                <!--Cardiology button-->
-                <Button x:Name="CardiologyButton"
+                    <!--Cardiology button-->
+                    <Button x:Name="CardiologyButton"
                         Background="Orange" 
-                        BorderBrush="Black"
                         CommandParameter="cardiology"
                         Height="122"
                         Margin="509,64,484,462"
-                        Style="{StaticResource ResourceKey=DefaultBuildingButtonStyle}"
+                        Style="{StaticResource ResourceKey=DefaultRectangleBuildingButtonStyle}"
                         Width="188">
-                    <StackPanel>
-                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
                                 Cardiology
-                        </TextBlock>
-                        <Image Height="30" 
+                            </TextBlock>
+                            <Image Height="30" 
                                Margin="0,3,0,0"
                                Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
-                    </StackPanel>
-                </Button>
+                        </StackPanel>
+                    </Button>
 
-                <!--Orthopedics button-->
-                <Button x:Name="OrthopedyButton"
+                    <!--Orthopedics button-->
+                    <Button x:Name="OrthopedyButton"
                         Background="OrangeRed" 
                         CommandParameter="orthopedics"
                         Height="205"
                         Margin="517,393,518,50"
-                        Style="{StaticResource ResourceKey=DefaultBuildingButtonStyle}"
+                        Style="{StaticResource ResourceKey=DefaultRectangleBuildingButtonStyle}"
                         Width="146">
-                    <StackPanel>
-                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
                                    TextWrapping="Wrap">
                                 Orthopedics
-                        </TextBlock>
-                        <Image Height="30"
+                            </TextBlock>
+                            <Image Height="30"
                                Margin="0,3,0,0"
                                Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png" />
-                    </StackPanel>
-                </Button>
+                        </StackPanel>
+                    </Button>
 
-                <!--Pediatrics button-->
-                <Button x:Name="PediatryButton"
+                    <!--Pediatrics button-->
+                    <Button x:Name="PediatryButton"
                         CommandParameter="pediatrics"
                         Margin="502,64,86,404"
-                        Style="{StaticResource ResourceKey=TriangleButton}" >
-                    <StackPanel Margin="17,-20,-46,40">
-                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}">
-                            Pediatrics
-                        </TextBlock>
-                        <Image Height="30"
-                               Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
-                    </StackPanel>
-                </Button>
+                        Style="{StaticResource ResourceKey=TriangleButton2}">
+                    </Button>
 
-                <!--Dermatology button-->
-                <Button x:Name="DermatologyButton"
+                    <!--Dermatology button-->
+                    <Button x:Name="DermatologyButton"
                         CommandParameter="dermatology"
-                        Margin="539,267,86,162"
-                        Style="{StaticResource ResourceKey=DermatologyButton}">
-                    <StackPanel Width="154" >
-                        <TextBlock Foreground="White"
-                                   HorizontalAlignment="Center"
-                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}">
-                            Dermatology
-                        </TextBlock>
-                        <TextBlock Height="90"/>
-                        <Image Height="30"
-                               HorizontalAlignment="Left" 
-                               Margin="7,0,0,0"
-                               Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"
-                               Width="30"/>
-                        <TextBlock Height="90"/>
-                    </StackPanel>
-                </Button>
+                        Margin="544,267,85,154"
+                        Style="{StaticResource ResourceKey=DermatologyButton2}" Height="261">
+                    </Button>
 
-                <!--Dermatology button - garden part-->
-                <Image Height="170"
-                       Margin="780,304,326,199"
-                       Source="pack://application:,,,/Resources/Images/parkDermatology.png" 
-                       Width="75" />
-
-                <!--Neurology button-->
-                <Button x:Name="NeurologyButton"
+                    <!--Neurology button-->
+                    <Button x:Name="NeurologyButton"
                         CommandParameter="neurology"
-                        Margin="374,254,638,277"
-                        Style="{StaticResource ResourceKey=UButton}"  >
-                    <StackPanel Margin="0,80,0,0"
-                                Width="154"  >
-                        <TextBlock Foreground="White"
-                                   HorizontalAlignment="Center"
-                                   Margin="0,-8,0,0" 
-                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}">
-                            Neurology
-                        </TextBlock>
-                        <Image Height="30"
-                               Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
-                    </StackPanel>
-                </Button>
+                        Margin="372,254,646,278"
+                        Style="{StaticResource ResourceKey=UButton2}" >
+                    </Button>
 
-                <!--Oncology button-->
-                <Button x:Name="OncologyButton"
+                    <!--Oncology button-->
+                    <Button x:Name="OncologyButton"
                         CommandParameter="oncology"
-                        Margin="543,259,507,297"
-                        Style="{StaticResource ResourceKey=OctagonButton}"  
-                        Width="129">
-                    <StackPanel>
-                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
-                                   TextWrapping="Wrap">
-                                Oncology
-                        </TextBlock>
-                        <Image Height="30"
-                               Margin="0,3,0,0"
-                               Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
-                    </StackPanel>
-                </Button>
+                        Margin="540,256,507,296"
+                        Style="{StaticResource ResourceKey=OctagonButton2}" Width="134" >
+                    </Button>
+                </Grid>
             </Grid>
         </ScrollViewer>
     </Border>
