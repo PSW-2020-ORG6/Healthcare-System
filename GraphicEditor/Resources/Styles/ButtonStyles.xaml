@@ -2,15 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
-    <Style x:Key="DefaultBuildingButtonStyle"
-           BasedOn="{StaticResource {x:Type Button}}"
-           TargetType="Button">
-        <Setter Property="Command" Value="{Binding NavCommand}"/>
-        <Setter Property="BorderBrush" Value="Black"/>
-        <Setter Property="BorderThickness" Value="3"/>
-        <Setter Property="materialDesign:RippleAssist.Feedback" Value="Transparent"/>
-    </Style>
-
     <Style x:Key="DefaultRectangleBuildingButtonStyle"
            BasedOn="{StaticResource {x:Type Button}}"
            TargetType="Button">
@@ -21,32 +12,7 @@
         <Setter Property="materialDesign:RippleAssist.Feedback" Value="Transparent"/>
     </Style>
 
-    
-
-    <Style x:Key="TriangleButton"
-           TargetType="Button">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <Polygon Fill="Coral"
-                                 Points="-1,-2 193,0 193,180"
-                                 Stroke="Black"
-                                 StrokeThickness="2"/>
-                        <ContentPresenter HorizontalAlignment="Center" 
-                                          VerticalAlignment="Center">
-                        </ContentPresenter>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Command" Value="{Binding NavCommand}"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-    </Style>
-
-    <Style x:Key="TriangleButton2"
+    <Style x:Key="TriangleBuildingButtonStyle"
            TargetType="Button">
         <Setter Property="Template">
             <Setter.Value>
@@ -87,9 +53,6 @@
                             <Image Height="30"
                                Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
                         </StackPanel>
-                        <ContentPresenter HorizontalAlignment="Center" 
-                                          VerticalAlignment="Center">
-                        </ContentPresenter>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -100,31 +63,7 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
-    <Style x:Key="UButton" 
-           TargetType="Button" >
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <Polygon Fill="Purple"
-                                 Points="0,0 60,0 60,80 100,80 100,0 160,0 160,145 0,145 "
-                                 Stroke="Black"
-                                 StrokeThickness="3"/>
-                        <ContentPresenter HorizontalAlignment="Center" 
-                                          VerticalAlignment="Center">
-                        </ContentPresenter>
-                    </Grid>
-                </ControlTemplate>
-
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Command" Value="{Binding NavCommand}"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-    </Style>
-
-    <Style x:Key="UButton2" 
+    <Style x:Key="UBuildingButtonStyle" 
            TargetType="Button" >
         <Setter Property="Template">
             <Setter.Value>
@@ -171,34 +110,7 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
-    <Style x:Key="OctagonButton"
-           TargetType="Button" >
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <Polygon Fill="Yellow"
-                                 Points="30,2 97,2 127,64 96,124 30,124 -2,63"
-                                 Stroke="Black"
-                                 StrokeThickness="3"/>
-                        <ContentPresenter HorizontalAlignment="Center" 
-                                          VerticalAlignment="Center">
-                        </ContentPresenter>
-                    </Grid>
-                </ControlTemplate>
-
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Command" Value="{Binding NavCommand}"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Height" Value="130" />
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Width" Value="130" />
-        
-    </Style>
-
-    <Style x:Key="OctagonButton2"
+    <Style x:Key="OctagonBuildingButtonStyle"
            TargetType="Button" >
         <Setter Property="Template">
             <Setter.Value>
@@ -244,14 +156,8 @@
                                 Margin="0,3,0,0"
                                 Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
                         </StackPanel>
-                        
-                        
-                        <!--<ContentPresenter HorizontalAlignment="Center" 
-                                          VerticalAlignment="Center">
-                        </ContentPresenter>-->
                     </Grid>
                 </ControlTemplate>
-
             </Setter.Value>
         </Setter>
         <Setter Property="Command" Value="{Binding NavCommand}"/>
@@ -259,38 +165,10 @@
         <Setter Property="Height" Value="130" />
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Width" Value="133" />
-
+        <Setter Property="Width" Value="130" />
     </Style>
 
-
-    <Style x:Key="DermatologyButton" 
-           TargetType="Button">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <Rectangle Fill="Chocolate"
-                                   Width="150"
-                                   Height="250"
-                                   Stroke="Black"
-                                   StrokeThickness="3"/>
-                        <ContentPresenter HorizontalAlignment="Center" 
-                                          VerticalAlignment="Center">
-                        </ContentPresenter>
-                    </Grid>
-                </ControlTemplate>
-
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Command" Value="{Binding NavCommand}"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-    </Style>
-
-
-    <Style x:Key="DermatologyButton2" 
+    <Style x:Key="DermatologyBuildingButtonStyle" 
            BasedOn="{StaticResource {x:Type Button}}"
            TargetType="Button">
         <Setter Property="Template">
@@ -312,7 +190,6 @@
                                         <RectangleGeometry Rect="50, 50, 50, 150" />
                                     </CombinedGeometry.Geometry2>
                                 </CombinedGeometry>
-
                             </Path.Data>
                         </Path>
                         <TextBlock Foreground="White"
@@ -329,13 +206,12 @@
                                 VerticalAlignment="Center"
                                 Width="30"/>
                     </Grid>
-                    
                 </ControlTemplate>
-
             </Setter.Value>
         </Setter>
         <Setter Property="Command" Value="{Binding NavCommand}"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Height" Value="252"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
