@@ -1,0 +1,50 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="ChairImage" TargetType="Image">
+        <Setter Property="Height" Value="40" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Source" Value="/GraphicEditor;component/Resources/Icons/chair.png" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="40" />
+    </Style>
+
+    <Style x:Key="FlippedChairImage" TargetType="Image">
+        <Setter Property="Height" Value="40" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Source" Value="/GraphicEditor;component/Resources/Icons/chair.png" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Image.RenderTransform">
+            <Setter.Value>
+                <TransformGroup>
+                    <ScaleTransform  ScaleX="-1"/>
+                </TransformGroup>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TableImage" TargetType="Image">
+        <Setter Property="Height" Value="40" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Source" Value="/GraphicEditor;component/Resources/Icons/table.png" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="40" />
+    </Style>
+
+    <Style x:Key="PlantImage" TargetType="Image">
+        <Setter Property="Height" Value="50" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Source" Value="/GraphicEditor;component/Resources/Icons/plant.png" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="50" />
+    </Style>
+
+    <Style x:Key="FloorImage" TargetType="Image">
+        <Setter Property="Height" Value="600" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="672" />
+    </Style>
+
+</ResourceDictionary>
