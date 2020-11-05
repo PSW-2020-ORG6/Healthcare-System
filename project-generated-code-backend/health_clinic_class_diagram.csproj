@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backend\Controller\HospitalLogInController.cs" />
     <Compile Include="Backend\Controller\PhysitianControllers\PhysitianHospitalController.cs" />
     <Compile Include="Backend\Controller\SuperintendentControllers\MedicineAddingController.cs" />
     <Compile Include="Backend\Controller\PhysitianControllers\PhysitianMedicineController.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Backend\Model\MedicalExam\InpatientCare.cs" />
     <Compile Include="Backend\Model\MedicalExam\DiagnosticType.cs" />
     <Compile Include="Backend\Model\Blog\Comment.cs" />
+    <Compile Include="Backend\Model\Util\TypeOfUser.cs" />
     <Compile Include="Backend\Repository\AddressFileSystem.cs" />
     <Compile Include="Backend\Repository\AddressRepository.cs" />
     <Compile Include="Backend\Repository\BedReservationFileSystem.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="Backend\Repository\RoomTypeRepository.cs" />
     <Compile Include="Backend\Repository\SpecializationFileSystem.cs" />
     <Compile Include="Backend\Repository\SpecializationRepository.cs" />
+    <Compile Include="Backend\Service\HospitalAccountsService\HospitalLogInService.cs" />
     <Compile Include="Backend\Service\HospitalAccountsService\PatientAccountsService.cs" />
     <Compile Include="Backend\Service\HospitalAccountsService\PhysicianAccountService.cs" />
     <Compile Include="Backend\Service\MedicineService\MedicineAddingService.cs" />

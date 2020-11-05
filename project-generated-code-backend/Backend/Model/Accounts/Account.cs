@@ -18,6 +18,7 @@ namespace Model.Accounts
         protected String contact;
         protected String email;
         protected Address address;
+        protected String password;
 
         public string Name { get => name; set => name = value; }
         public string Surname { get => surname; set => surname = value; }
@@ -29,7 +30,9 @@ namespace Model.Accounts
         public string Email { get => email; set => email = value; }
         public virtual Address Address { get => address; set => address = value; }
 
-        public Account(String serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address) : base(serialNumber)
+        public String Password { get => password; }
+
+        public Account(String serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, String password) : base(serialNumber)
         {
             this.name = name;
             this.surname = surname;
@@ -38,6 +41,7 @@ namespace Model.Accounts
             this.contact = contact;
             this.email = email;
             this.address = address;
+            this.password = password;
         }
         public Account(String serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email) : base(serialNumber)
         {
