@@ -12,15 +12,15 @@ namespace Model.Accounts
     public class Secretary : Account
     {
         
-        public Secretary(string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address)
-            : base(Guid.NewGuid().ToString(), name, surname, id, dateOfBirth, contact, email, address)
+        public Secretary(string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address,string password)
+            : base(Guid.NewGuid().ToString(), name, surname, id, dateOfBirth, contact, email, address,password)
         {
 
         }
 
         [JsonConstructor]
-        public Secretary(String serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address)
-            : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address)
+        public Secretary(String serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address,string password)
+            : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address, password)
         {
 
         }

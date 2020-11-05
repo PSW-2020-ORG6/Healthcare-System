@@ -181,7 +181,12 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\syringe.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\project-generated-code-backend\health_clinic_class_diagram.csproj">
+      <Project>{68bf1c57-c1a8-4eb8-9fa1-e91bf72f6a72}</Project>
+      <Name>health_clinic_class_diagram</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="HtmlHelpPages\Error.html" />
     <Content Include="HtmlHelpPages\MainWindow.html" />
