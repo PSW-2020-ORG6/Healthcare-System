@@ -8,7 +8,7 @@ namespace health_clinic_class_diagram.Backend.Model.Util
     public enum TypeOfUser
     {
         PATIENT,
-        PHYSITIAN,
+        PHYSICIAN,
         SECRETARY,
         SUPERINTENDENT,
         NO_USER
