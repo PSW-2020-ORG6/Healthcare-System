@@ -43,7 +43,7 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
             {
                 if (CheckJmbg(jmbg, physitian) && CheckPassword(password, physitian))
                 {
-                    return TypeOfUser.PHYSITIAN;
+                    return TypeOfUser.PHYSICIAN;
                 }
             }
             return TypeOfUser.NO_USER;
@@ -56,7 +56,7 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
             {
                 if (CheckJmbg(jmbg, secretary) && CheckPassword(password, secretary))
                 {
-                    return TypeOfUser.PHYSITIAN;
+                    return TypeOfUser.PHYSICIAN;
                 }
             }
             return TypeOfUser.NO_USER;
