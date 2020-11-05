@@ -56,9 +56,15 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\WindowsBase.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\PresentationCore.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\PresentationFramework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -182,12 +188,6 @@
     <Resource Include="Resources\Icons\syringe.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\project-generated-code-backend\health_clinic_class_diagram.csproj">
-      <Project>{68bf1c57-c1a8-4eb8-9fa1-e91bf72f6a72}</Project>
-      <Name>health_clinic_class_diagram</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="HtmlHelpPages\Error.html" />
     <Content Include="HtmlHelpPages\MainWindow.html" />
     <Resource Include="Resources\Icons\plant.png" />
@@ -204,6 +204,12 @@
     <Resource Include="Resources\Icons\statusbarDecor.png" />
     <Resource Include="Resources\Icons\helpBack.png" />
     <Resource Include="Resources\Icons\helpForward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\project-generated-code-backend\health_clinic_class_diagram.csproj">
+      <Project>{68bf1c57-c1a8-4eb8-9fa1-e91bf72f6a72}</Project>
+      <Name>health_clinic_class_diagram</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\project-generated-code-backend\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets" Condition="Exists('..\project-generated-code-backend\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets')" />
