@@ -18,6 +18,7 @@ namespace Model.Accounts
         protected String contact;
         protected String email;
         protected Address address;
+        protected String password;
 
         public string Name { get => name; }
         public string Surname { get => surname; }
@@ -28,7 +29,9 @@ namespace Model.Accounts
         public string Email { get => email; }
         public Address Address { get => address; }
 
-        public Account(String serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address) : base(serialNumber)
+        public String Password { get => password; }
+
+        public Account(String serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, String password) : base(serialNumber)
         {
             this.name = name;
             this.surname = surname;
@@ -37,6 +40,7 @@ namespace Model.Accounts
             this.contact = contact;
             this.email = email;
             this.address = address;
+            this.password = password;
         }
 
         public override int GetHashCode()
