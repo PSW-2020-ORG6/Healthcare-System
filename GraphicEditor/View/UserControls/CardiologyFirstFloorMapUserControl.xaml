@@ -15,6 +15,7 @@
                 <ResourceDictionary Source="pack://application:,,,/Resources/Styles/ButtonStyles.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Resources/Styles/RectangleStyles.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Resources/Styles/TextBoxStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/ImageStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -24,15 +25,11 @@
         <ScrollViewer>
             <Grid>
                 <!--FloorPattern-->
-                <Image Height="600" 
-                       Width="672"
-                       HorizontalAlignment="Center"
-                       Source="/GraphicEditor;component/Resources/Images/floor.jpg" 
-                       VerticalAlignment="Center"/>
+                <Image Style="{StaticResource FloorImage}"
+                       Source="/GraphicEditor;component/Resources/Images/floor.jpg"  />
 
                 <!--Room1 button-->
-                <Button x:Name="Room1Button" 
-                        CommandParameter="room1"
+                <Button CommandParameter="room1"
                         Margin="254,122,763,453"
                         Style="{StaticResource ResourceKey=RoomButtonStyle}">
                     <StackPanel>
@@ -44,9 +41,8 @@
                 </Button>
 
                 <!--Room2 button-->
-                <Button x:Name="Room2Button"
-                        CommandParameter="room2"
-                        Margin="418,122,637,471"
+                <Button CommandParameter="room2"
+                        Margin="418,122,655,471"
                         Style="{StaticResource ResourceKey=RoomButtonStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
@@ -57,8 +53,7 @@
                 </Button>
 
                 <!--Room3 button-->
-                <Button x:Name="Room3Button"
-                        CommandParameter="room3"
+                <Button CommandParameter="room3"
                         Margin="616,122,423,471"
                         Style="{StaticResource ResourceKey=RoomButtonStyle}">
                     <StackPanel>
@@ -70,8 +65,7 @@
                 </Button>
 
                 <!--Room4 button-->
-                <Button x:Name="Room4Button"
-                        CommandParameter="room4"
+                <Button CommandParameter="room4"
                         Margin="758,122,255,453"
                         Style="{StaticResource ResourceKey=RoomButtonStyle}">
                     <StackPanel>
@@ -83,8 +77,7 @@
                 </Button>
 
                 <!--Room5 button-->
-                <Button x:Name="Room5Button"
-                        CommandParameter="room5"
+                <Button CommandParameter="room5"
                         Margin="602,484,439,126"
                         Style="{StaticResource ResourceKey=RoomButtonStyle}">
                     <StackPanel>
@@ -115,13 +108,8 @@
                 </Border>
 
                 <!--Decoration-->
-                <Image x:Name="image"
-                       Height="44" 
-                       HorizontalAlignment="Left" 
-                       Margin="560,149,0,0" 
-                       Source="/GraphicEditor;component/Resources/Icons/plant.png"
-                       VerticalAlignment="Top"
-                       Width="51"/>
+                <Image Margin="545,156,586,500" 
+                       Style="{StaticResource PlantImage}" />
 
                 <!--Doors-->
                 <Rectangle Height="100"
@@ -129,7 +117,7 @@
                            Style="{StaticResource DoorVerticalRectangle}"/>
                 <Rectangle Margin="308,247,0,0"
                            Style="{StaticResource DoorHorizontalRectangle}"/>
-                <Rectangle Margin="456,229,0,0" 
+                <Rectangle Margin="447,229,0,0" 
                            Style="{StaticResource DoorHorizontalRectangle}"/>
                 <Rectangle Margin="664,229,0,0" 
                     Style="{StaticResource DoorHorizontalRectangle}"/>
@@ -145,145 +133,73 @@
                            Style="{StaticResource DoorHorizontalRectangle}"/>
                 <Rectangle Margin="844,485,0,0" 
                            Style="{StaticResource DoorHorizontalRectangle}"/>
-                <Image x:Name="image_Copy" 
-                        Height="44" 
-                        HorizontalAlignment="Left" 
-                        Margin="272,511,0,0" 
-                        Source="/GraphicEditor;component/Resources/Icons/plant.png" RenderTransformOrigin="-1.059,3.273"
-                        VerticalAlignment="Top"
-                        Width="51"/>
+                <Image Margin="273,505,858,151" 
+                       Style="{StaticResource PlantImage}"/>
 
                 <!--Waiting room-->
                 <Grid Background="#FFC1E2EA"
                       DockPanel.Dock="Top"  
                       Margin="376,306,255,257">
-                    <Border Background="Transparent" />
-                </Grid>
-                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png"
-                       Margin="392,320,747,328"/>
-                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png"
-                       Margin="482,320,657,328"
-                       RenderTransformOrigin="0.5,0.5">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="1" 
-                                            ScaleX="-1"/>
-                            <SkewTransform AngleY="0"
-                                           AngleX="0"/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
-                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png"
-                       Margin="587,320,553,328"/>
-                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png"
-                       Margin="678,320,463,328" 
-                       RenderTransformOrigin="0.5,0.5">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="1" 
-                                            ScaleX="-1"/>
-                            <SkewTransform AngleY="0"
-                                           AngleX="0"/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
-                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png"
-                       Margin="782,320,358,328"/>
-                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png"
-                       Margin="870,320,271,328" 
-                       RenderTransformOrigin="0.5,0.5">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="1" 
-                                            ScaleX="-1"/>
-                            <SkewTransform AngleY="0"
-                                           AngleX="0"/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
-                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png" 
-                       Margin="393,372,747,276"/>
-                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png"
-                       Margin="483,377,657,271" RenderTransformOrigin="0.5,0.5">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="1"
-                                            ScaleX="-1"/>
-                            <SkewTransform AngleY="0" 
-                                           AngleX="0"/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
-                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png"
-                       Margin="587,377,553,271"/>
-                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png" 
-                       Margin="677,377,463,271"
-                       RenderTransformOrigin="0.5,0.5">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="1" 
-                                            ScaleX="-1"/>
-                            <SkewTransform AngleY="0" 
-                                           AngleX="0"/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
-                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png" 
-                       Margin="782,377,358,271"/>
-                <Image Source="/GraphicEditor;component/Resources/Icons/chair.png" 
-                       Margin="870,377,270,271" 
-                       RenderTransformOrigin="0.5,0.5">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="1" 
-                                            ScaleX="-1"/>
-                            <SkewTransform AngleY="0" 
-                                           AngleX="0"/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
-                <Border BorderBrush="Black" 
+                    <Border BorderBrush="Black" 
                         BorderThickness="2"
                         HorizontalAlignment="Left" 
-                        Height="137"
-                        Margin="376,306,0,0" 
+                        Height="137" 
                         VerticalAlignment="Top" 
                         Width="184">
-                    <Image Source="/GraphicEditor;component/Resources/Icons/table.png" 
-                           Margin="58,48,78,43" />
-                </Border>
-                <Border BorderBrush="Black" 
+                        <Grid>
+                            <Image Style="{StaticResource TableImage}" 
+                                   Margin="66,45,74,48"/>
+                            <Image Style="{StaticResource ChairImage}" 
+                                   Margin="10,10,109,83" />
+                            <Image Style="{StaticResource ChairImage}" 
+                                   Margin="10,69,109,24" />
+                            <Image Style="{StaticResource FlippedChairImage}" 
+                                   Margin="153,8,-13,85" />
+                            <Image Style="{StaticResource FlippedChairImage}" 
+                                   Margin="154,70,-14,23" />
+                        </Grid>
+                    </Border>
+                    <Border BorderBrush="Black" 
                         BorderThickness="2" 
                         HorizontalAlignment="Left" 
                         Height="137"
-                        Margin="560,306,0,0" 
+                        Margin="184,0,0,0" 
                         VerticalAlignment="Top"
                         Width="182">
-                    <Image Source="/GraphicEditor;component/Resources/Icons/table.png"
-                           Margin="68,44,68,37"/>
-                </Border>
-                <Border BorderBrush="Black" 
+                        <Grid>
+                            <Image Style="{StaticResource TableImage}" 
+                                   Margin="69,44,69,49"/>
+                            <Image Style="{StaticResource ChairImage}" 
+                                   Margin="24,10,114,83"/>
+                            <Image Style="{StaticResource ChairImage}" 
+                                   Margin="24,69,114,24"/>
+                            <Image Style="{StaticResource FlippedChairImage}" 
+                                   Margin="161,10,-23,83"/>
+                            <Image Style="{StaticResource FlippedChairImage}" 
+                                Margin="159,72,-21,21"/>
+                        </Grid>
+                    </Border>
+                    <Border BorderBrush="Black" 
                         BorderThickness="2" 
                         HorizontalAlignment="Left" 
                         Height="137" 
-                        Margin="742,306,0,0" 
+                        Margin="366,0,0,0" 
                         VerticalAlignment="Top"
                         Width="184">
-                    <Image Source="/GraphicEditor;component/Resources/Icons/table.png" 
-                           Margin="82,48,54,43" />
-                </Border>
+                        <Grid>
+                            <Image Style="{StaticResource TableImage}" 
+                                   Margin="70,42,70,51" />
+                            <Image Style="{StaticResource ChairImage}" 
+                                   Margin="25,10,115,83"/>
+                            <Image Style="{StaticResource ChairImage}" 
+                                   Margin="25,69,115,24"/>
+                            <Image Style="{StaticResource FlippedChairImage}" 
+                                    Margin="159,10,-19,83"/>
+                            <Image Style="{StaticResource FlippedChairImage}" 
+                                Margin="159,68,-19,25"/>
+                        </Grid>
+                    </Border>
+                </Grid>
 
             </Grid>
         </ScrollViewer>
