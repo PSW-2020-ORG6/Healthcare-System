@@ -1,0 +1,22 @@
+﻿
+#feedbackModalHeader {
+    background-color: lightblue;
+    color: white;
+}
+
+#feedbackModalBody {
+    padding-top: 120px;
+    background-color: lightblue;
+    color: white;
+    font-family: Impact;
+    background-image: url("../pictures/ocenjivanje.jpg");
+    padding-bottom: 140px;
+}
+
+#feedbackModalFooter {
+    background-color: lightblue;
+    color: white;
+}
+
+
+

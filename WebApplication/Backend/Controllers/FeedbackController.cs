@@ -28,10 +28,24 @@ namespace WebApplication.Backend.Controllers
             return feedbackService.GetAllFeedbacks();
         }
 
+
+
+        ///Repovic Aleksa RA-52-2017
+        /// <summary>
+        ///calls method for adding new feedback in feedback table
+        ///</summary>
+        ///<returns>
+        ///information about sucess in string format
+        ///</returns>
         [HttpPost("add")]
         public string AddNewFeedbacк(Feedback feedback)
         {
-            return feedbackService.AddNewFeedback(feedback);
+            if (feedbackService.AddNewFeedback(feedback))
+            {
+                return "200 OK";
+            }
+            else
+                return "400 BAD REQUEST";
 
         }
 

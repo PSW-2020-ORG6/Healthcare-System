@@ -95,8 +95,16 @@ namespace WebApplication.Backend.Services
         {
              feedbackRepository.SetFeedbackApprovedValue(feedback);
         }
-
-        public string AddNewFeedback(Feedback feedback)
+        ///Repovic Aleksa RA-52-2017
+        /// <summary>
+        ///calls method for adding new row in feedbacks table
+        ///</summary>
+        ///<returns>
+        ///true or false depending on sucess
+        ///</returns>
+        ///<param name="feedback"> Feedback type object
+        ///</param>>
+        public bool AddNewFeedback(Feedback feedback)
         {
             return feedbackRepository.AddNewFeedback(feedback);
         }
