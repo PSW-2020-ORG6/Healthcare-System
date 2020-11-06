@@ -65,7 +65,7 @@ namespace WebApplication.Backend.Controllers
 
         ///Tanja Drcelic RA124/2017
         /// <summary>
-        ///calls method for get not approved feedbacks from feedback table
+        ///calls method for get disapproved feedbacks from feedback table
         ///</summary>
         ///<returns>
         ///list of not approved feedbacks
