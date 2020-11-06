@@ -26,6 +26,7 @@
 			.get('http://localhost:49900/patient/all')
 			.then(response => {
 				this.patients = response.data
+				alert(this.patients);
 			})
 			.catch(error => {
 				alert(error)
@@ -82,7 +83,7 @@
                                   <tr v-for="f in approvedFeedbacks">
                                     <td>{{f.text}}</td>
                                     <td>{{DateSplit(f.date)}}</td>
-                                     <td v-for="p in patients" v-if="p.id==f.patientId">{{p.name}} {{p.surname}}</td>
+                                     <td v-for="p in patients" v-if="p.id==f.patientId">{{p.name}} {{Pacijent(p)}} {{p.surname}}</td>
                                   </tr>
                                 </tbody>
                              </table>
@@ -128,6 +129,9 @@
 		DateSplit: function (date) {
 			var dates = (date.split("T")[0]).split("-")
 			return dates[2] + "." + dates[1] + "." + dates[0]
+		},
+		Pacijent: function (p) {
+			alert(p.id);
 		}
 	}
 
