@@ -22,7 +22,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;database=novaBaza1;user=root;password=root");
+                MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;database=novaBaza1;user=root;password=neynamneynam12 ");
 
                 string sql1 = "Select * from feedbacks";
                 conn.Open();
@@ -69,7 +69,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;database=najnovijaBaza;user=root;password=root");
+                MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;database=novaBaza1;user=root;password=neynamneynam12");
                 string[] dateString = feedback.Date.ToString().Split(" ");
                 string[] partsOfDate = dateString[0].Split(".");
                 if (feedback.Approved)

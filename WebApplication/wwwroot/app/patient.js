@@ -8,9 +8,7 @@
 				text: "",
 				approved: false,
 				date: new Date().now,
-				user: "TODO",
-				patientId: "TODO",
-				serialNumber: "TODO"
+				patientId: "TODO"
 			}
 		}
 	},
