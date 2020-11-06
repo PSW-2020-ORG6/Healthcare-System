@@ -39,15 +39,15 @@
     <br/><h3 class="text">Comments</h3><br/>
 	<ul class="nav nav-tabs" role="tablist">
     	<li class="nav-item">
-    		<a class="nav-link active" data-toggle="tab" href="#profil">Approved</a>
+    		<a class="nav-link active" data-toggle="tab" href="#approved">Approved</a>
     	</li>
     	<li class="nav-item">
-    		<a class="nav-link" data-toggle="tab" href="#lozinka">Disaproved</a>
+    		<a class="nav-link" data-toggle="tab" href="#disaproved">Disaproved</a>
     	</li>
     </ul>
     <div>
 	    <div class="tab-content">
-    	    <div id="profil" class="container tab-pane active"><br>
+    	    <div id="approved" class="container tab-pane active"><br>
     		    <div class="container">
 	                    <div class="row">
                             <table class="table table-bordered">
@@ -55,7 +55,7 @@
                                   <tr>
                                     <th>Comment</th>
                                     <th>Date</th>
-                                    <th colspan="2">Pacient</th>
+                                    <th colspan="2">Patient</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -70,7 +70,7 @@
 	                    </div>
                   </div>			     
 		     </div>
-		 <div id="lozinka" class="container tab-pane fade"><br>
+		 <div id="disaproved" class="container tab-pane fade"><br>
 		      <div class="container">
 	                    <div class="row">
                             <table class="table table-bordered">
