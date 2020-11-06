@@ -35,6 +35,14 @@ namespace WebApplication.Backend.Controllers
 
         }
 
+        ///Aleksandra Milijevic RA 22/2017
+        /// <summary>
+        ///calls method for get approved feedbacks from feedback table
+        ///</summary>
+        ///<returns>
+        ///list of approved feedbacks
+        ///</returns>
+
         [HttpGet("approved")]
         public List<Feedback> GetApprovedFeedbacks()
         {

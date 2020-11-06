@@ -33,6 +33,14 @@ namespace WebApplication.Backend.Services
             return feedbackRepository.GetAllFeedbacks();
         }
 
+        ///Aleksandra Milijevic RA 22/2017
+        /// <summary>
+        ///calls method for get approved feedbacks from feedback table
+        ///</summary>
+        ///<returns>
+        ///list of approved feedbacks
+        ///</returns>
+
         internal List<Feedback> GetApprovedFeedbacks()
         {
 
