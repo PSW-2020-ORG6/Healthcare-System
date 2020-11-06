@@ -18,11 +18,11 @@ namespace WebApplication.Backend.Model
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Feedback>().HasKey(o => o.SerialNumber);
-            modelBuilder.Entity<Feedback>().HasData(
-                    new Feedback { PatientId = "0002", Text = "komentara3", Date = new DateTime(2017, 1, 18), Approved = true },
-                    new Feedback { PatientId = "0003", Text = "komentara3", Date = new DateTime(2017, 1, 18), Approved = true }
+           // modelBuilder.Entity<Feedback>().HasData(
+                    //new Feedback { PatientId = "0002", Text = "komentara3", Date = new DateTime(2017, 1, 18), Approved = true },
+                    //new Feedback { PatientId = "0003", Text = "komentara3", Date = new DateTime(2017, 1, 18), Approved = true }
 
-            );
+            //);
             modelBuilder.Entity<Patient>().HasAlternateKey(o=>o.Id);
             modelBuilder.Ignore<Address>();
             modelBuilder.Entity<Patient>().HasData(

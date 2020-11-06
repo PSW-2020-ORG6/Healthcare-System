@@ -22,7 +22,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;database=novaBaza1;user=root;password=neynamneynam12 ");
+                MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root ");
 
                 string sql1 = "Select * from feedbacks";
                 conn.Open();
@@ -69,9 +69,9 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;database=novaBaza1;user=root;password=neynamneynam12");
+                MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
                 string[] dateString = feedback.Date.ToString().Split(" ");
-                string[] partsOfDate = dateString[0].Split(".");
+                string[] partsOfDate = dateString[0].Split("/");
                 if (feedback.Approved)
                 {
 
@@ -80,7 +80,8 @@ namespace WebApplication.Backend.Repositorys
                     MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
                     conn.Open();
                     cmd1.ExecuteNonQuery();
-                }
+             
+            }
                 else
                 {
                     string sql1 = "REPLACE  into feedbacks(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 1
@@ -89,8 +90,9 @@ namespace WebApplication.Backend.Repositorys
                     MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
                     conn.Open();
                     cmd1.ExecuteNonQuery();
-                }
-                conn.Close();
+              
+            }
+               conn.Close();
             }
             catch (Exception e)
             {
@@ -116,7 +118,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;database=novaBaza1;user=root;password=neynamneynam12");
+                MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
 
 
                 string[] dateString = DateTime.Now.ToString().Split(" ");
@@ -125,7 +127,7 @@ namespace WebApplication.Backend.Repositorys
 
 
                 string sqlQueryAdd = "INSERT INTO feedbacks (text,approved,date,patientid,serialnumber)  VALUES('" + feedback.Text + "','" + 0 + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + "T" + dateString[1]
-                       + "','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
+                       + "','" + /*feedback.PatientId*/ "0003" + " ','" + feedback.SerialNumber + "')";
 
                 MySqlCommand sqlCommand = new MySqlCommand(sqlQueryAdd, connection);
 

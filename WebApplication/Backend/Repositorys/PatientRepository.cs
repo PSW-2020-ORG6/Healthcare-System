@@ -23,7 +23,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;database=najnovijaBaza;user=root;password=root");
+                MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
 
                 string sql1 = "Select * from patients";
                 conn.Open();
