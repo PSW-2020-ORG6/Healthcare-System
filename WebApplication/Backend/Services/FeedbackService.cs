@@ -41,9 +41,9 @@ namespace WebApplication.Backend.Services
             throw new NotImplementedException();
         }
 
-        public void NewFeedback(Feedback feedback)
+        public string AddNewFeedback(Feedback feedback)
         {
-            throw new NotImplementedException();
+            return feedbackRepository.AddNewFeedback(feedback);
         }
 
     }

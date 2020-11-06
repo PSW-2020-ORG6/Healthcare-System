@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Model.Blog;
 using WebApplication.Backend.Services;
 
 namespace WebApplication.Backend.Controllers
@@ -11,6 +12,13 @@ namespace WebApplication.Backend.Controllers
         public FeedbackController()
         {
             this.feedbackService = new FeedbackService();
+        }
+
+        [HttpPost("add")]
+        public string AddNewFeedbacк(Feedback feedback)
+        {
+            return feedbackService.AddNewFeedback(feedback);
+
         }
 
     }
