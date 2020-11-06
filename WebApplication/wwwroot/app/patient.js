@@ -7,8 +7,7 @@
 			feedback: {
 				text: "",
 				approved: false,
-				date: new Date().now,
-				patientId: "TODO"
+				date: new Date().now
 			}
 		}
 	},
@@ -26,7 +25,6 @@
 			.get('http://localhost:49900/patient/all')
 			.then(response => {
 				this.patients = response.data
-				alert(this.patients);
 			})
 			.catch(error => {
 				alert(error)
@@ -53,8 +51,8 @@
 
 					</div>
 					<div class="modal-footer" id="feedbackModalFooter">
-						<button type="button" class="btn btn-info btn-lg " v-on:click="addNewFeedback(feedback)">Pošalji</button>
-						<button type="button" class="btn btn-info btn-lg " data-dismiss="modal">Odustani</button>
+						<button type="button" class="btn btn-info btn-lg " v-on:click="addNewFeedback(feedback)">Send</button>
+						<button type="button" class="btn btn-info btn-lg " data-dismiss="modal">Cancel</button>
 					</div>
 				</div>
 			</div>
@@ -62,8 +60,8 @@
     </div>
 	
     <div class="container">
-    <br/><h3 class="text">KOMENTARI
-	<button type="button" class="btn btn-info btn-lg margin" data-toggle="modal" data-target="#feedbackModal">Open Modal</button>
+    <br/><h3 class="text">Comments
+	<button type="button" class="btn btn-info btn-lg margin" data-toggle="modal" data-target="#feedbackModal">Add comment</button>
 	</h3>
 	<br/>    
 <div>
@@ -74,16 +72,16 @@
                             <table class="table table-bordered">
                                 <thead>
                                   <tr>
-                                    <th>Komentar</th>
-                                    <th>Datum</th>
-                                    <th colspan="2">Pacijent</th>
+                                    <th>Comment</th>
+                                    <th>Date</th>
+                                    <th colspan="2">Patient</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <tr v-for="f in approvedFeedbacks">
                                     <td>{{f.text}}</td>
                                     <td>{{DateSplit(f.date)}}</td>
-                                     <td v-for="p in patients" v-if="p.id==f.patientId">{{p.name}} {{Pacijent(p)}} {{p.surname}}</td>
+                                     <td v-for="p in patients" v-if="parseInt(p.id)== parseInt(f.patientId)">{{p.name}} {{p.surname}}</td>
                                   </tr>
                                 </tbody>
                              </table>
@@ -96,9 +94,9 @@
                             <table class="table table-bordered">
                                 <thead>
                                   <tr>
-                                    <th>Komentar</th>
-                                    <th>Datum</th>
-                                    <th colspan="2">Pacijent</th>
+                                    <th>Comment</th>
+                                    <th>Date</th>
+                                    <th colspan="2">Patient</th>
 
                                   </tr>
                                 </thead>
@@ -129,9 +127,6 @@
 		DateSplit: function (date) {
 			var dates = (date.split("T")[0]).split("-")
 			return dates[2] + "." + dates[1] + "." + dates[0]
-		},
-		Pacijent: function (p) {
-			alert(p.id);
 		}
 	}
 

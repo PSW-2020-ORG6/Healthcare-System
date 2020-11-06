@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication.Backend.Model;
 
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201106210739_migra")]
+    partial class migra
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,7 +70,7 @@ namespace WebApplication.Migrations
                             Name = "Jelena",
                             ParentName = "otac",
                             Password = "sifra",
-                            SerialNumber = "4cb7e70b-5522-4a6a-b495-bd4fe406a6e2",
+                            SerialNumber = "f0666049-04da-49bf-a1c4-45d1bf8d346b",
                             Surname = "Tanjic"
                         },
                         new
@@ -82,7 +84,7 @@ namespace WebApplication.Migrations
                             Name = "Sara",
                             ParentName = "mama",
                             Password = "sifraMica",
-                            SerialNumber = "654cdb5a-3e16-41f3-b073-043556f9f460",
+                            SerialNumber = "7bbf7b17-8010-4d2f-9f58-fa1f1eef34cf",
                             Surname = "Milic"
                         });
                 });

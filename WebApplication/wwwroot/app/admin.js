@@ -36,13 +36,13 @@
     },
     template: `
 <div class="container">
-    <br/><h3 class="text">KOMENTARI</h3><br/>
+    <br/><h3 class="text">Comments</h3><br/>
 	<ul class="nav nav-tabs" role="tablist">
     	<li class="nav-item">
-    		<a class="nav-link active" data-toggle="tab" href="#profil">Odobreni</a>
+    		<a class="nav-link active" data-toggle="tab" href="#profil">Approved</a>
     	</li>
     	<li class="nav-item">
-    		<a class="nav-link" data-toggle="tab" href="#lozinka">Neodobreni</a>
+    		<a class="nav-link" data-toggle="tab" href="#lozinka">Disaproved</a>
     	</li>
     </ul>
     <div>
@@ -53,17 +53,17 @@
                             <table class="table table-bordered">
                                 <thead>
                                   <tr>
-                                    <th>Komentar</th>
-                                    <th>Datum</th>
-                                    <th colspan="2">Pacijent</th>
+                                    <th>Comment</th>
+                                    <th>Date</th>
+                                    <th colspan="2">Pacient</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <tr v-for="f in approvedFeedbacks">
                                     <td>{{f.text}}</td>
                                     <td>{{DateSplit(f.date)}}</td>
-                                    <td v-for="p in patients" v-if="p.id==f.patientId">{{p.name}} {{p.surname}}</td>
-                                    <td style="text-align:center"><button class="btnban form-control" v-on:click="Zabrani(f)">Z A B R A N I</button></td>  
+                                    <td v-for="p in patients" v-if="parseInt(p.id)== parseInt(f.patientId)">{{p.name}} {{p.surname}}</td>
+                                    <td style="text-align:center"><button class="btnban form-control" v-on:click="Disapprove(f)">D I S A P P R O V E</button></td>  
                                   </tr>
                                 </tbody>
                              </table>
@@ -76,18 +76,18 @@
                             <table class="table table-bordered">
                                 <thead>
                                   <tr>
-                                    <th>Komentar</th>
-                                    <th>Datum</th>
-                                    <th colspan="2">Pacijent</th>
+                                    <th>Comment</th>
+                                    <th>Date</th>
+                                    <th colspan="2">Patient</th>
 
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <tr v-for="f in noapprovedFeedbacks">
                                     <td>{{f.text}}</td>
-                                     <td>{{DateSplit(f.date)}}</td>
-                                    <td v-for="p in patients" v-if="p.id==f.patientId">{{p.name}} {{p.surname}}</td>
-                                    <td style="text-align:center"><button class="btnapprove form-control" v-on:click="Odobri(f)">O D O B R I</button></td>
+                                    <td>{{DateSplit(f.date)}}</td>
+                                    <td v-for="p in patients" v-if="parseInt(p.id)== parseInt(f.patientId)">{{p.name}} {{p.surname}}</td>
+                                    <td style="text-align:center"><button class="btnapprove form-control" v-on:click="Approve(f)">A P P R O V E</button></td>
                                   </tr>
                                 </tbody>
                              </table>
@@ -103,22 +103,22 @@
             var dates = (date.split("T")[0]).split("-")
             return dates[2] + "." + dates[1] + "." + dates[0]
         },
-        Odobri: function (feedback) {
+        Approve: function (feedback) {
             axios
                 .put('http://localhost:49900/feedback/approve', feedback)
                 .then(response => {
-                    this.refresh();
+                    this.Refresh();
                 })
                 .catch(error => {
                     alert(error.response.data)
                 })
 
         },
-        Zabrani: function (feedback) {
+        Disapprove: function (feedback) {
             axios
                 .put('http://localhost:49900/feedback/approve', feedback)
                 .then(response => {
-                    this.refresh();
+                    this.Refresh();
 
                 })
                 .catch(error => {
@@ -126,7 +126,7 @@
                 })
 
         },
-        refresh: function () {
+        Refresh: function () {
             axios
                 .get('http://localhost:49900/feedback/approved')
                 .then(response => {

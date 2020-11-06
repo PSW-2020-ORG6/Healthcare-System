@@ -22,7 +22,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root ");
+                MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
 
                 string sql1 = "Select * from feedbacks";
                 conn.Open();
@@ -127,7 +127,7 @@ namespace WebApplication.Backend.Repositorys
 
 
                 string sqlQueryAdd = "INSERT INTO feedbacks (text,approved,date,patientid,serialnumber)  VALUES('" + feedback.Text + "','" + 0 + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + "T" + dateString[1]
-                       + "','" + /*feedback.PatientId*/ "0003" + " ','" + feedback.SerialNumber + "')";
+                       + "','" + "0003" + " ','" + feedback.SerialNumber + "')";
 
                 MySqlCommand sqlCommand = new MySqlCommand(sqlQueryAdd, connection);
 
