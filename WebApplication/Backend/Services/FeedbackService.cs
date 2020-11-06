@@ -1,4 +1,5 @@
 ﻿using Model.Blog;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using WebApplication.Backend.Repositorys;
@@ -58,25 +59,33 @@ namespace WebApplication.Backend.Services
         {
 
             List<Feedback> allFeedbacks = feedbackRepository.GetAllFeedbacks();
-            List<Feedback> approvedFeedbacks = new List<Feedback>();
+            List<Feedback> notApprovedFeedbacks = new List<Feedback>();
             foreach (Feedback feedback in allFeedbacks)
             {
                 if (!feedback.Approved)
                 {
-                    approvedFeedbacks.Add(feedback);
+                    notApprovedFeedbacks.Add(feedback);
                 }
             }
-            return approvedFeedbacks;
+            return notApprovedFeedbacks;
         }
 
         public void DeleteFeedback(Feedback feedback)
         {
             throw new NotImplementedException();
         }
-
+        ///Marija Vucetic 
+        /// <summary>
+        ///calls method for set na value of attribute Approved
+        ///</summary>
+        ///<returns>
+        ///list of not approved feedbacks
+        ///</returns>
+        ///<param name="feedback"> Feedback type object
+        ///</param>>
         public void EditFeedback(Feedback feedback)
         {
-            throw new NotImplementedException();
+             feedbackRepository.SetFeedbackApprovedValue(feedback);
         }
 
         public string AddNewFeedback(Feedback feedback)
