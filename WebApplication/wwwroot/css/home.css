@@ -1,24 +1,24 @@
 
 .navbar-custom {
-    background-color: Cyan;
+    background-color: lightblue;
 }
 
-.navbar-custom .navbar-brand{
-    color: white;
-    font-size :30px;
-    font-weight :100;
-    font-family : 'Impact';
-}
+    .navbar-custom .navbar-brand {
+        color: white;
+        font-size: 30px;
+        font-weight: 100;
+        font-family: 'Impact';
+    }
 
 #navbarDropdown {
-    background-color: Cyan;
+    background-color: lightblue;
 }
 
 #clinicLogoTxt {
-   padding-left : 260px;
-   font-size : 36px;
-   font-weight : 100;
-   font-family : Impact;
+    padding-left: 260px;
+    font-size: 36px;
+    font-weight: 100;
+    font-family: Impact;
 }
 
 #clinicLogoPic {
@@ -27,9 +27,40 @@
 
 
 .btn {
-    background-color: Cyan;
+    background-color: lightblue;
     color: white;
     border: thick;
     font-family: 'Impact';
-    font-weight : 100;
+    font-weight: 100;
+}
+
+.text {
+    color: black;
+    font-size: 30px;
+    font-weight: 100;
+    font-family: 'Impact';
+}
+
+th {
+    background-color: lightblue;
+}
+
+.noborder {
+    border: none;
+}
+
+.btnban {
+    background-color: lightcoral;
+    color: white;
+    border: thick;
+    font-family: 'Impact';
+    font-weight: 100;
+}
+
+.btnapprove {
+    background-color: lightgreen;
+    color: white;
+    border: thick;
+    font-family: 'Impact';
+    font-weight: 100;
 }

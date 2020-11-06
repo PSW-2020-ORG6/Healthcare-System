@@ -63,7 +63,7 @@
                                     <td>{{f.text}}</td>
                                     <td>{{DateSplit(f.date)}}</td>
                                     <td v-for="p in patients" v-if="p.id==f.patientId">{{p.name}} {{p.surname}}</td>
-                                      
+                                    <td style="text-align:center"><button class="btnban form-control" v-on:click="Zabrani(f)">Z A B R A N I</button></td>  
                                   </tr>
                                 </tbody>
                              </table>
@@ -85,8 +85,9 @@
                                 <tbody>
                                   <tr v-for="f in noapprovedFeedbacks">
                                     <td>{{f.text}}</td>
-                                    <td>{{f.date.getDate()}}</td>
+                                     <td>{{DateSplit(f.date)}}</td>
                                     <td v-for="p in patients" v-if="p.id==f.patientId">{{p.name}} {{p.surname}}</td>
+                                    <td style="text-align:center"><button class="btnapprove form-control" v-on:click="Odobri(f)">O D O B R I</button></td>
                                   </tr>
                                 </tbody>
                              </table>
@@ -101,6 +102,48 @@
         DateSplit: function (date) {
             var dates = (date.split("T")[0]).split("-")
             return dates[2] + "." + dates[1] + "." + dates[0]
+        },
+        Odobri: function (feedback) {
+            axios
+                .put('http://localhost:49900/feedback/approve', feedback)
+                .then(response => {
+                    this.refresh();
+                })
+                .catch(error => {
+                    alert(error.response.data)
+                })
+
+        },
+        Zabrani: function (feedback) {
+            axios
+                .put('http://localhost:49900/feedback/approve', feedback)
+                .then(response => {
+                    this.refresh();
+
+                })
+                .catch(error => {
+                    alert(error.response.data)
+                })
+
+        },
+        refresh: function () {
+            axios
+                .get('http://localhost:49900/feedback/approved')
+                .then(response => {
+                    this.approvedFeedbacks = response.data
+                })
+                .catch(error => {
+                    alert(error)
+                })
+
+            axios
+                .get('http://localhost:49900/feedback/noapproved')
+                .then(response => {
+                    this.noapprovedFeedbacks = response.data
+                })
+                .catch(error => {
+                    alert(error)
+                })
         }
-    },
+    }
 });

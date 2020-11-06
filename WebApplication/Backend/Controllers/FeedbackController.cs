@@ -53,6 +53,18 @@ namespace WebApplication.Backend.Controllers
         {
             return feedbackService.GetNoApprovedFeedbacks();
         }
+        ///Marija Vucetic 
+        /// <summary>
+        ///calls method for set na value of attribute Approved
+        ///</summary>
+        ///<returns>
+        ///list of not approved feedbacks
+        ///</returns>
+        [HttpPut("approve")]
+        public void ApproveFeedback(Feedback feedback)
+        {
+            feedbackService.EditFeedback(feedback);
+        }
 
     }
 }
