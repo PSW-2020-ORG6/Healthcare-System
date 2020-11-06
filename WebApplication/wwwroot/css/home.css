@@ -33,6 +33,9 @@
     font-family: 'Impact';
     font-weight: 100;
 }
+.margin{
+    margin-left: 70%;
+}
 
 .text {
     color: black;
