@@ -88,22 +88,6 @@
 	                    </div>
                   </div>			     
 		     </div>
-		 <div id="lozinka" class="container tab-pane fade"><br>
-		      <div class="container">
-	                    <div class="row">
-                            <table class="table table-bordered">
-                                <thead>
-                                  <tr>
-                                    <th>Comment</th>
-                                    <th>Date</th>
-                                    <th colspan="2">Patient</th>
-
-                                  </tr>
-                                </thead>
-                             </table>
-	                    </div>
-                  </div>			
-	    </div>
     </div>
    </div>
 </div>
