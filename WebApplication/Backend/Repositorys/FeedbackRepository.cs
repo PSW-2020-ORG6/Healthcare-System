@@ -1,5 +1,4 @@
-﻿using Backend.Repository;
-using Model.Blog;
+﻿using Model.Blog;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -8,9 +7,45 @@ namespace WebApplication.Backend.Repositorys
 {
     public class FeedbackRepository
     {
+
+        ///Tanja Drcelic RA124/2017
+        /// <summary>
+        ///Get all feedbacks from feedbacks table
+        ///</summary>
+        ///<returns>
+        ///true if sucessful,else false
+        ///</returns>
+        ///<exception>
+        ///if any exception occurs method will return null
+        ///</exception>
         internal List<Feedback> GetAllFeedbacks()
         {
-            throw new NotImplementedException();
+            try
+            {
+                MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;database=novabazaa;user=Tanjaa;password=TanjaaD");
+
+                string sql1 = "Select * from feedbacks";
+                conn.Open();
+                MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
+                MySqlDataReader rdr = cmd1.ExecuteReader();
+                List<Feedback> resultList = new List<Feedback>();
+                while (rdr.Read())
+                {
+                    Feedback entity = new Feedback();
+                    entity.SerialNumber = (string)rdr[4];
+                    entity.PatientId = (String)rdr[3];
+                    entity.Text = (String)rdr[0];
+                    entity.Date = Convert.ToDateTime(rdr[2]);
+                    entity.Approved = (Boolean)rdr[1];
+                    resultList.Add(entity);
+
+                }
+                conn.Close();
+                return resultList;
+            }catch(Exception e)
+            {
+                return null;
+            }
         }
 
         internal Feedback GetFeedbackById(string feedbackId)
