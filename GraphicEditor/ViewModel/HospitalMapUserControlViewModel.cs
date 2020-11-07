@@ -6,11 +6,12 @@ namespace GraphicEditor.ViewModel
 
     public class HospitalMapUserControlViewModel : BindableBase
     {
-
+        private MapContentUserControlViewModel _parent;
         public MyICommand<string> NavCommand { get; private set; }
 
-        public HospitalMapUserControlViewModel()
+        public HospitalMapUserControlViewModel(MapContentUserControlViewModel parent)
         {
+            _parent = parent;
             NavCommand = new MyICommand<string>(ChooseHospital);
         }
 
@@ -22,7 +23,7 @@ namespace GraphicEditor.ViewModel
 
                     break;
                 case Constants.CARDIOLOGY:
-
+                    _parent.ContentViewModel = MapContentUserControlViewModel.CardiologyBuilding;
                     break;
                 case Constants.ORTHOPEDICS:
 

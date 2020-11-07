@@ -76,13 +76,14 @@
     <Compile Include="HelpClasses\JavaScriptControlHelper.cs" />
     <Compile Include="HelpClasses\MyICommand.cs" />
     <Compile Include="MainWindowViewModel.cs" />
-    <Compile Include="ViewModel\BuildingMapUserControlViewModel.cs" />
+    <Compile Include="ViewModel\CardiologyBuildingUserControlViewModel.cs" />
     <Compile Include="ViewModel\CardiologyFirstFloorMapUserControlViewModel.cs" />
     <Compile Include="ViewModel\CardiologySecondFloorMapUserControlViewModel.cs" />
     <Compile Include="ViewModel\HospitalMapUserControlViewModel.cs" />
     <Compile Include="ViewModel\LoginUserControlViewModel.cs" />
-    <Compile Include="View\UserControls\BuildingMapUserControl.xaml.cs">
-      <DependentUpon>BuildingMapUserControl.xaml</DependentUpon>
+    <Compile Include="ViewModel\MapContentUserControlViewModel.cs" />
+    <Compile Include="View\UserControls\CardiologyBuildingUserControl.xaml.cs">
+      <DependentUpon>CardiologyBuildingUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\CardiologyFirstFloorMapUserControl.xaml.cs">
       <DependentUpon>CardiologyFirstFloorMapUserControl.xaml</DependentUpon>
@@ -95,6 +96,9 @@
     </Compile>
     <Compile Include="View\UserControls\LoginUserControl.xaml.cs">
       <DependentUpon>LoginUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\MapContentUserControl.xaml.cs">
+      <DependentUpon>MapContentUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\HelpViewer.xaml.cs">
       <DependentUpon>HelpViewer.xaml</DependentUpon>
@@ -129,7 +133,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\BuildingMapUserControl.xaml">
+    <Page Include="View\UserControls\CardiologyBuildingUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\LoginUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\MapContentUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
