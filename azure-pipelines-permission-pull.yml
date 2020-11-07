@@ -1,0 +1,15 @@
+pr: none
+
+trigger: none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: CmdLine@2
+  inputs:
+    script: |
+      curl -X PUT -H "Accept: application/vnd.github.v3+json" -H "Authorization: token $(token)" https://api.github.com/orgs/PSW-2020-ORG6/teams/developers/repos/PSW-2020-ORG6/Healthcare-System-Dummy -D '{"permission":"pull"}' -i
