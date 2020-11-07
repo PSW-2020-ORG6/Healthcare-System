@@ -5,7 +5,6 @@ const Patient = { template: '<patient></patient>' }
 var temp = new Vue({
 	el: '#temp',
 	data: {
-		proba: 'PROBNI TEKST',
 	},
 	methods: {
 		admin : function () {
