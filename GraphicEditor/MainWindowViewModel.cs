@@ -6,15 +6,14 @@ namespace GraphicEditor
     public class MainWindowViewModel : BindableBase
     {
         public MyICommand<string> NavCommand { get; private set; }
-        private BuildingMapUserControlViewModel _buildingMap = new BuildingMapUserControlViewModel();
-        private HospitalMapUserControlViewModel _hospitalMap = new HospitalMapUserControlViewModel();
+        private MapContentUserControlViewModel _mapContent = new MapContentUserControlViewModel();
         private LoginUserControlViewModel _loginPage = new LoginUserControlViewModel();
         private BindableBase currentViewModel;
 
         public MainWindowViewModel()
         {
             NavCommand = new MyICommand<string>(OnNav);
-            CurrentViewModel = _hospitalMap;
+            CurrentViewModel = _mapContent;
         }
 
         public BindableBase CurrentViewModel
@@ -31,7 +30,7 @@ namespace GraphicEditor
             switch (destination)
             {
                 case Constants.MAP:
-                    CurrentViewModel = _hospitalMap;
+                    CurrentViewModel = _mapContent;
                     break;
                 case Constants.LOGIN:
                     CurrentViewModel = _loginPage;
