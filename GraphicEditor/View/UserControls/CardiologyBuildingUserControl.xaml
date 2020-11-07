@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="GraphicEditor.View.UserControls.CardiologyBuildingUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GraphicEditor.View.UserControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             xmlns:viewModel="clr-namespace:GraphicEditor.ViewModel"
+             xmlns:viewUserControl="clr-namespace:GraphicEditor.View.UserControls"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <!--<UserControl.DataContext>
+        <viewModel:CardiologyBuildingUserControlViewModel>
+            <
+        </viewModel:CardiologyBuildingUserControlViewModel>
+    </UserControl.DataContext>-->
+
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewModel:CardiologyFirstFloorMapUserControlViewModel}">
+            <viewUserControl:CardiologyFirstFloorMapUserControl/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:CardiologySecondFloorMapUserControlViewModel}">
+            <viewUserControl:CardiologySecondFloorMapUserControl/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <ScrollViewer>
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Left"
+                       Width="150">
+                <Button DockPanel.Dock="Top" Command="{Binding Path=NavCommand}"
+                        CommandParameter="back">
+                    <DockPanel>
+                        <materialDesign:PackIcon Kind="ArrowBack" Height="25" Width="25"/>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+                        BACK TO MAP
+                        </TextBlock>
+                    </DockPanel>
+                    
+                </Button>
+                <ComboBox BorderBrush="Black"
+                          BorderThickness="1" 
+                          Style="{StaticResource MaterialDesignComboBox}">
+                    <ComboBoxItem>
+                        <TextBlock Text="Basement"
+                                   VerticalAlignment="Center"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem >
+                        <TextBlock Text="Ground Floor" 
+                                   VerticalAlignment="Center"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem IsSelected="True">
+                        <TextBlock Text="First Floor" 
+                                   VerticalAlignment="Center"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="Second Floor"
+                                   VerticalAlignment="Center"/>
+                    </ComboBoxItem>
+                    <ComboBoxItem >
+                        <TextBlock Text="Third Floor" 
+                                   VerticalAlignment="Center"/>
+                    </ComboBoxItem>
+                </ComboBox>
+            </DockPanel>
+
+            <ContentControl Content="{Binding Path=FloorViewModel}" />
+        </DockPanel>
+
+    </ScrollViewer>
+</UserControl>

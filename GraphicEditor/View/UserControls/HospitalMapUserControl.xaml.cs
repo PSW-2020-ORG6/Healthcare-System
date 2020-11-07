@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using GraphicEditor.ViewModel;
+using System.Windows.Controls;
 
 namespace GraphicEditor.View.UserControls
 {
@@ -9,8 +10,10 @@ namespace GraphicEditor.View.UserControls
     {
         public HospitalMapUserControl()
         {
+            this.DataContext = MapContentUserControlViewModel.HospitalMap;
             InitializeComponent();
         }
+
 
         //private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         //{

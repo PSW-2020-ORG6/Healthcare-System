@@ -27,8 +27,8 @@
         <DataTemplate DataType="{x:Type viewModel:HospitalMapUserControlViewModel}">
             <viewUserControl:HospitalMapUserControl/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModel:BuildingMapUserControlViewModel}">
-            <viewUserControl:BuildingMapUserControl/>
+        <DataTemplate DataType="{x:Type viewModel:MapContentUserControlViewModel}">
+            <viewUserControl:MapContentUserControl/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:LoginUserControlViewModel}">
             <viewUserControl:LoginUserControl/>
