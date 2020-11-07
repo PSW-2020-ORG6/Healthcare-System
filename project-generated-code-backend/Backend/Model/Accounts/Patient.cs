@@ -6,6 +6,8 @@
 using Backend.Dto;
 using Model.Util;
 using System;
+using Newtonsoft.Json;
+
 
 namespace Model.Accounts
 {
@@ -25,6 +27,7 @@ namespace Model.Accounts
             this.Guest = isGuest;
             this.password = password;
         }
+        [JsonConstructor]
         public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string parentName, string gender, string password, bool isGuest = false)
             : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address)
         {
@@ -33,7 +36,7 @@ namespace Model.Accounts
             this.Guest = isGuest;
             this.password = password;
         }
-
+        [JsonConstructor]
         public Patient(PatientDTO patientDTO) : base(Guid.NewGuid().ToString(), patientDTO.Name, patientDTO.Surname, patientDTO.Id, patientDTO.DateOfBirth, patientDTO.Contact, patientDTO.Email, patientDTO.Address)
         {
             this.parentName = patientDTO.ParentName;
