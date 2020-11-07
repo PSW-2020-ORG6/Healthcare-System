@@ -137,7 +137,7 @@ namespace WebApplication.Backend.Repositorys
                 string[] dateString = DateTime.Now.ToString().Split(" ");
                 string[] partsOfDate = dateString[0].Split("/");
                 string sqlQueryAdd = "INSERT INTO feedbacks (text,approved,date,patientid,serialnumber)  VALUES('" + feedback.Text + "','" + 0 + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + "T" + dateString[1]
-                       + "','" + "0003" + " ','" + feedback.SerialNumber + "')";
+                       + "','" +feedback.PatientId + " ','" + feedback.SerialNumber + "')";
 
                 MySqlCommand sqlCommand = new MySqlCommand(sqlQueryAdd, connection);
                 sqlCommand.ExecuteNonQuery();
