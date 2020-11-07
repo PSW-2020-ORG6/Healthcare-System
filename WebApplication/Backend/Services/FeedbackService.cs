@@ -43,17 +43,7 @@ namespace WebApplication.Backend.Services
 
         internal List<Feedback> GetApprovedFeedbacks()
         {
-
-            List<Feedback> allFeedbacks = feedbackRepository.GetAllFeedbacks();
-            List<Feedback> approvedFeedbacks = new List<Feedback>();
-            foreach (Feedback feedback in allFeedbacks)
-            {
-                if (feedback.Approved)
-                {
-                    approvedFeedbacks.Add(feedback);
-                }
-            }
-            return approvedFeedbacks;
+            return feedbackRepository.GetFeedbacks(true);
         }
 
         ///Tanja Drcelic RA124/2017
@@ -66,16 +56,7 @@ namespace WebApplication.Backend.Services
         internal List<Feedback> GetNoApprovedFeedbacks()
         {
 
-            List<Feedback> allFeedbacks = feedbackRepository.GetAllFeedbacks();
-            List<Feedback> notApprovedFeedbacks = new List<Feedback>();
-            foreach (Feedback feedback in allFeedbacks)
-            {
-                if (!feedback.Approved)
-                {
-                    notApprovedFeedbacks.Add(feedback);
-                }
-            }
-            return notApprovedFeedbacks;
+            return feedbackRepository.GetFeedbacks(false);
         }
 
         public void DeleteFeedback(Feedback feedback)
