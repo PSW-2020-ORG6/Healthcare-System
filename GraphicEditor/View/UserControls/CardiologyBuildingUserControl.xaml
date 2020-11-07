@@ -37,7 +37,10 @@
                     </DockPanel>
                     
                 </Button>
-                <ComboBox BorderBrush="Black"
+
+                <ListBox ItemsSource="{Binding Path=Floors}" SelectedItem="{Binding Path=SelectedFloor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+                <!--<ComboBox BorderBrush="Black"
                           BorderThickness="1" 
                           Style="{StaticResource MaterialDesignComboBox}">
                     <ComboBoxItem>
@@ -60,10 +63,10 @@
                         <TextBlock Text="Third Floor" 
                                    VerticalAlignment="Center"/>
                     </ComboBoxItem>
-                </ComboBox>
+                </ComboBox>-->
             </DockPanel>
 
-            <ContentControl Content="{Binding Path=FloorViewModel}" />
+            <ContentControl Content="{Binding Path=FloorViewModel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
         </DockPanel>
 
     </ScrollViewer>
