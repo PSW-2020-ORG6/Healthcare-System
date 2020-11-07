@@ -7,7 +7,8 @@
 			feedback: {
 				text: "",
 				approved: false,
-				date: new Date().now
+				date: new Date().now,
+				patientId: "Anonimous"
 			}
 		}
 	},
@@ -48,8 +49,11 @@
 
 						<label>Enter your comment here:</label>
 						<input type="text" class="form-control" v-model="feedback.text">
-
+						<br/><br/>
+						<input type="checkbox"  id="anonimous">	
+						<label> Anonimous</label><br>
 					</div>
+
 					<div class="modal-footer" id="feedbackModalFooter">
 						<button type="button" class="btn btn-info btn-lg " v-on:click="addNewFeedback(feedback)">Send</button>
 						<button type="button" class="btn btn-info btn-lg " data-dismiss="modal">Cancel</button>
@@ -81,8 +85,8 @@
                                   <tr v-for="f in approvedFeedbacks">
                                     <td>{{f.text}}</td>
                                     <td>{{DateSplit(f.date)}}</td>
-                                    <td v-for="p in patients" v-if="parseInt(p.id)== parseInt(f.patientId)">{{p.name}} {{p.surname}}</td>
-								    <td v-for="p in patients" v-if="f.patientId==undefined">Anonimous</td>
+                                    <td v-for="p in patients" v-if="parseInt(p.id) == parseInt(f.patientId)">{{p.name}} {{p.surname}}</td>
+								    <td v-if="f.patientId == 'Anonimous'">{{f.patientId}}</td>
                                   </tr>
                                 </tbody>
                              </table>
@@ -97,10 +101,13 @@
 	`,
 	methods: {
 		addNewFeedback: function (feedback) {
+			if (!document.getElementById("anonimous").checked)
+				this.feedback.patientId="0003"
+			
 			if (feedback.text != null) {
 				axios
 					.post("http://localhost:49900/feedback/add", feedback)
-					.then(response => {``
+					.then(response => {
 						this.feedback.text = null;
 						$('#feedbackModal').modal('hide')
 					})
