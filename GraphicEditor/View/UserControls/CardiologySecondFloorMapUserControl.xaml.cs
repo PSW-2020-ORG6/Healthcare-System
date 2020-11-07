@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using GraphicEditor.ViewModel;
+using System.Windows.Controls;
 
 namespace GraphicEditor.View.UserControls
 {
@@ -9,6 +10,7 @@ namespace GraphicEditor.View.UserControls
     {
         public CardiologySecondFloorMapUserControl()
         {
+            this.DataContext = CardiologyBuildingUserControlViewModel.SecondFloor;
             InitializeComponent();
         }
     }

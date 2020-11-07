@@ -5,8 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:GraphicEditor.View.UserControls"
-             xmlns:vml="clr-namespace:GraphicEditor.VML"
-             vml:ViewModelLocator.AutoHookedUpViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1200">
 
@@ -25,7 +23,7 @@
 
     <Border BorderBrush="Black" 
             BorderThickness="1">
-        <ScrollViewer>
+        <ScrollViewer >
             <Grid>
                 <!--Legend Pattern-->
                 <Grid HorizontalAlignment="Left"
