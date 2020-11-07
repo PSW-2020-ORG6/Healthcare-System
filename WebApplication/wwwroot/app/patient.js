@@ -81,7 +81,8 @@
                                   <tr v-for="f in approvedFeedbacks">
                                     <td>{{f.text}}</td>
                                     <td>{{DateSplit(f.date)}}</td>
-                                     <td v-for="p in patients" v-if="parseInt(p.id)== parseInt(f.patientId)">{{p.name}} {{p.surname}}</td>
+                                    <td v-for="p in patients" v-if="parseInt(p.id)== parseInt(f.patientId)">{{p.name}} {{p.surname}}</td>
+								    <td v-for="p in patients" v-if="f.patientId==undefined">Anonimous</td>
                                   </tr>
                                 </tbody>
                              </table>
