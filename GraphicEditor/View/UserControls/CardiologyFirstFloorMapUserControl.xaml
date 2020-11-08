@@ -28,6 +28,7 @@
 
                 <!--Room1 button-->
                 <Button CommandParameter="room1"
+                        Command="{Binding Path=ShowRoomCommand}"
                         Margin="254,122,763,453"
                         Style="{StaticResource ResourceKey=RoomButtonStyle}">
                     <StackPanel>
