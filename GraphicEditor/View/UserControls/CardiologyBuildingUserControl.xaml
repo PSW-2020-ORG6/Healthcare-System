@@ -9,11 +9,6 @@
              xmlns:viewModel="clr-namespace:GraphicEditor.ViewModel"
              xmlns:viewUserControl="clr-namespace:GraphicEditor.View.UserControls"
              d:DesignHeight="450" d:DesignWidth="800">
-    <!--<UserControl.DataContext>
-        <viewModel:CardiologyBuildingUserControlViewModel>
-            <
-        </viewModel:CardiologyBuildingUserControlViewModel>
-    </UserControl.DataContext>-->
 
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type viewModel:CardiologyFirstFloorMapUserControlViewModel}">
@@ -23,51 +18,37 @@
             <viewUserControl:CardiologySecondFloorMapUserControl/>
         </DataTemplate>
     </UserControl.Resources>
-    <ScrollViewer>
+    
         <DockPanel>
             <DockPanel DockPanel.Dock="Left"
-                       Width="150">
-                <Button DockPanel.Dock="Top" Command="{Binding Path=NavCommand}"
-                        CommandParameter="back">
-                    <DockPanel>
-                        <materialDesign:PackIcon Kind="ArrowBack" Height="25" Width="25"/>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+                       Width="200">
+                <Button DockPanel.Dock="Top" 
+                        Command="{Binding Path=NavCommand}"
+                        CommandParameter="back" Margin="5,5,5,0"
+                        >
+                    <DockPanel Width="auto">
+                        <materialDesign:PackIcon Kind="ArrowBack" 
+                                                 Height="25" 
+                                                 Width="25"/>
+                        <TextBlock HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center">
                         BACK TO MAP
                         </TextBlock>
                     </DockPanel>
-                    
                 </Button>
-
-                <ListBox ItemsSource="{Binding Path=Floors}" SelectedItem="{Binding Path=SelectedFloor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-
-                <!--<ComboBox BorderBrush="Black"
-                          BorderThickness="1" 
-                          Style="{StaticResource MaterialDesignComboBox}">
-                    <ComboBoxItem>
-                        <TextBlock Text="Basement"
-                                   VerticalAlignment="Center"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem >
-                        <TextBlock Text="Ground Floor" 
-                                   VerticalAlignment="Center"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem IsSelected="True">
-                        <TextBlock Text="First Floor" 
-                                   VerticalAlignment="Center"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="Second Floor"
-                                   VerticalAlignment="Center"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem >
-                        <TextBlock Text="Third Floor" 
-                                   VerticalAlignment="Center"/>
-                    </ComboBoxItem>
-                </ComboBox>-->
+                <ListBox Cursor="Hand" 
+                         ItemsSource="{Binding Path=Floors}" 
+                         SelectedItem="{Binding Path=SelectedFloor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                         Style="{StaticResource MaterialDesignToolVerticalToggleListBox}"
+                         Margin="5,5,5,5"/>
             </DockPanel>
-
-            <ContentControl Content="{Binding Path=FloorViewModel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            <TextBlock DockPanel.Dock="Top" 
+                       Text="{Binding Path=SelectedFloor, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                       Style="{StaticResource MaterialDesignHeadline2TextBlock}" 
+                       Margin="0,5,0,0"
+                       HorizontalAlignment="Center"/>
+            <ContentControl BorderBrush="Black"
+                            BorderThickness="1"
+                            Content="{Binding Path=FloorViewModel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
         </DockPanel>
-
-    </ScrollViewer>
 </UserControl>
