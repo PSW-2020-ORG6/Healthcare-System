@@ -43,14 +43,14 @@
         </Grid.RowDefinitions>
 
         <!-- MenuBar -->
-        <DockPanel Grid.Row="0" Background="#FF5F88A0" Height="30">
+        <DockPanel Grid.Row="0" Height="30" Background="#FFDEEFFF">
             <Menu Height="30" >
-                <MenuItem HorizontalAlignment="Left" Header="Map" BorderBrush="Black" Background="#FF0E698B" Command="{Binding NavCommand}"
+                <MenuItem Cursor="Hand" HorizontalAlignment="Left" Header="Map" BorderBrush="Black" Background="#FFA6D1F5" Command="{Binding NavCommand}"
                           CommandParameter="map" Height="30"/>
             </Menu>
-            <TextBlock ></TextBlock>
+            <TextBlock />
             <Menu HorizontalAlignment="Right" >
-                <MenuItem  HorizontalAlignment="Right" Header="Login" BorderBrush="Black" Background="#FF0E698B" Command="{Binding NavCommand}"
+                <MenuItem   Cursor="Hand" HorizontalAlignment="Right" Header="Login" BorderBrush="Black" Background="#FFA6D1F5" Command="{Binding NavCommand}"
                           CommandParameter="login" Height="30"/>
             </Menu>
         </DockPanel>
@@ -58,7 +58,10 @@
 
         <!-- Mapa -->
 
-        <ContentControl Grid.Row="1" Content="{Binding Path=CurrentViewModel}" />
+        <ContentControl Grid.Row="1" 
+                        Content="{Binding Path=CurrentViewModel}"
+                        BorderBrush="Black"
+                        BorderThickness="1"/>
 
         <!-- StatusBar -->
         <DockPanel Grid.Row="2" >
@@ -77,13 +80,13 @@
                         </Grid>
                     </ItemsPanelTemplate>
                 </StatusBar.ItemsPanel>
-                <StatusBarItem Background="#FF5F88A0" Height="30">
+                <StatusBarItem Background="#FFDEEFFF" Height="30">
                     <Image Source="/GraphicEditor;component/Resources/Icons/statusbarDecor.png" Width="54"/>
                 </StatusBarItem>
-                <StatusBarItem Grid.Column="1" Background="#FF5F88A0">
-                    <Label x:Name="LiveTimeLabel" Content="%TIME%" FontWeight="Bold" Foreground="Black" Height="23" Width="82" Background="#FF5F88A0"/>
+                <StatusBarItem Grid.Column="1" Background="#FFDEEFFF">
+                    <Label x:Name="LiveTimeLabel" Content="%TIME%" FontWeight="Bold" Foreground="Black" Height="23" Width="82" Background="#FFDEEFFF"/>
                 </StatusBarItem>
-                <StatusBarItem Grid.Column="2" Background="#FF5F88A0">
+                <StatusBarItem Grid.Column="2" Background="#FFDEEFFF">
                     <TextBlock x:Name="ModifiedDate" FontWeight="Bold" Foreground="Black"  Height="14" Width="82" Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat=dd/MMM/yyyy}"/>
                 </StatusBarItem>
             </StatusBar>
