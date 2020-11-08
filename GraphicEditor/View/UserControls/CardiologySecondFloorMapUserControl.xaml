@@ -12,7 +12,7 @@
                 <!-- #Styles -->
                 <ResourceDictionary Source="pack://application:,,,/Resources/Styles/ButtonStyles.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Resources/Styles/RectangleStyles.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/TextBoxStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/TextBlockStyles.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Resources/Styles/ImageStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -79,7 +79,7 @@
                 <Border BorderBrush="Black"
                         BorderThickness="3"
                         Margin="806,495,255,126">
-                    <TextBox Style="{StaticResource ElevatorTextBox}"/>
+                    <TextBlock Style="{StaticResource ElevatorTextBlock}"/>
                 </Border>
 
                 <!--Decoration-->
