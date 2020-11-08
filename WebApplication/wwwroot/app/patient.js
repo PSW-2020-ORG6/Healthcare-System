@@ -51,7 +51,7 @@
 							<label> Anonimous</label><br>
 						</div>
 						<div class="modal-footer" id="feedbackModalFooter">
-							<button type="button" class="btn btn-info btn-lg " v-on:click="addNewFeedback(feedback)">Send</button>
+							<button type="button" class="btn btn-info btn-lg " v-on:click="AddNewFeedback(feedback)">Send</button>
 							<button type="button" class="btn btn-info btn-lg " data-dismiss="modal">Cancel</button>
 						</div>
 					</div>
@@ -93,7 +93,7 @@
 	</div>
 	`,
 	methods: {
-		addNewFeedback: function (feedback) {
+		AddNewFeedback: function (feedback) {
 			if (!document.getElementById("anonimous").checked)
 				this.feedback.patientId="0003"
 			if (feedback.text != null || feedback.text!="") {
