@@ -82,6 +82,7 @@
     <Compile Include="ViewModel\HospitalMapUserControlViewModel.cs" />
     <Compile Include="ViewModel\LoginUserControlViewModel.cs" />
     <Compile Include="ViewModel\MapContentUserControlViewModel.cs" />
+    <Compile Include="ViewModel\RoomInformationViewModel.cs" />
     <Compile Include="View\UserControls\CardiologyBuildingUserControl.xaml.cs">
       <DependentUpon>CardiologyBuildingUserControl.xaml</DependentUpon>
     </Compile>
@@ -99,6 +100,9 @@
     </Compile>
     <Compile Include="View\UserControls\MapContentUserControl.xaml.cs">
       <DependentUpon>MapContentUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\RoomInformation.xaml.cs">
+      <DependentUpon>RoomInformation.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\HelpViewer.xaml.cs">
       <DependentUpon>HelpViewer.xaml</DependentUpon>
@@ -154,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\MapContentUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\RoomInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

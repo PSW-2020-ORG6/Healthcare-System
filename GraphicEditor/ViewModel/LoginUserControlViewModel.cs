@@ -11,7 +11,7 @@ namespace GraphicEditor.ViewModel
 {
     public class LoginUserControlViewModel : BindableBase
     {
-        public MyICommand<PasswordBox> PasCommand { get; private set; }
+        public MyICommand<PasswordBox> PasCommand { get; private set; } 
         private string _userName = "asd";
         private string _pass = "asdasdad";
         private HospitalLogInController hospitalLogInController;
@@ -29,7 +29,7 @@ namespace GraphicEditor.ViewModel
             get => _pass;
             set
             {
-                OnPropertyChanged(_pass);
+                SetProperty(ref _pass,value);
             }
         }
         public LoginUserControlViewModel()
