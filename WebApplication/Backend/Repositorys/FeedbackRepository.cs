@@ -70,7 +70,7 @@ namespace WebApplication.Backend.Repositorys
                 string[] partsOfDate = dateString[0].Split("/");
                 if (feedback.Approved)
                 {
-                    string inquiry = "REPLACE  into feedbacks(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 0
+                    String inquiry = "REPLACE  into feedbacks(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 0
                         + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + " ','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
                     MySqlCommand sqlCommand = new MySqlCommand(inquiry, connection);
                 sqlCommand.ExecuteNonQuery();      

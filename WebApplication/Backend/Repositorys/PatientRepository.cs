@@ -2,8 +2,6 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebApplication.Backend.Repositorys
 {
@@ -30,9 +28,8 @@ namespace WebApplication.Backend.Repositorys
         ///<exception>
         ///if any exception occurs method will return null
         ///</exception>
-        internal List<Patient> GetAllPatients()
+        internal List<Patient> GetPatients(String sqlQuery)
         {
-                string sqlQuery = "Select * from patients";
                 MySqlCommand sqlCommand = new MySqlCommand(sqlQuery, connection);
                 MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
                 List<Patient> resultList = new List<Patient>();
