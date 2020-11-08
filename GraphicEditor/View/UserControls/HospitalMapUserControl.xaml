@@ -23,113 +23,111 @@
 
     <Border BorderBrush="Black" 
             BorderThickness="1">
-        <ScrollViewer >
-            <Grid>
-                <!--Legend Pattern-->
-                <Grid HorizontalAlignment="Left"
+        <Grid>
+            <!--Legend Pattern-->
+            <Grid HorizontalAlignment="Left"
                       VerticalAlignment="Center">
-                    <!--Legend image-->
-                    <Image Height="500"
+                <!--Legend image-->
+                <Image Height="500"
                        HorizontalAlignment="Center"
                        Source="/GraphicEditor;component/Resources/Images/legendPattern.png"
                        VerticalAlignment="Center"/>
-                </Grid>
+            </Grid>
 
-                <!--Map Pattern-->
-                <Grid HorizontalAlignment="Center"
+            <!--Map Pattern-->
+            <Grid HorizontalAlignment="Center"
                       VerticalAlignment="Center">
-                    <!--Map Image-->
-                    <Image Height="600" 
+                <!--Map Image-->
+                <Image Height="600" 
                        HorizontalAlignment="Center"
                        Source="/GraphicEditor;component/Resources/Images/mapPattern_withoutBuildings.png" 
                        VerticalAlignment="Center"/>
 
-                    <!--Emergency Ambulance button-->
-                    <Button x:Name="EmergencyAmbulanceButton"
+                <!--Emergency Ambulance button-->
+                <Button x:Name="EmergencyAmbulanceButton"
                         Background="DarkRed"
                         CommandParameter="emergency"
                         Height="123"
                         Margin="288,63,683,462"
                         Style="{StaticResource ResourceKey=DefaultRectangleBuildingButtonStyle}"
                         Width="210">
-                        <StackPanel>
-                            <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
                                 Emergency Ambulance
-                            </TextBlock>
-                            <Image Height="30" 
+                        </TextBlock>
+                        <Image Height="30" 
                                Margin="0,3,0,0"
                                Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
-                        </StackPanel>
-                    </Button>
+                    </StackPanel>
+                </Button>
 
-                    <!--Cardiology button-->
-                    <Button x:Name="CardiologyButton"
+                <!--Cardiology button-->
+                <Button x:Name="CardiologyButton"
                         Background="Orange" 
                         CommandParameter="cardiology"
                         Height="122"
                         Margin="509,64,484,462"
                         Style="{StaticResource ResourceKey=DefaultRectangleBuildingButtonStyle}"
                         Width="188">
-                        <StackPanel>
-                            <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
                                 Cardiology
-                            </TextBlock>
-                            <Image Height="30" 
+                        </TextBlock>
+                        <Image Height="30" 
                                Margin="0,3,0,0"
                                Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
-                        </StackPanel>
-                    </Button>
+                    </StackPanel>
+                </Button>
 
-                    <!--Orthopedics button-->
-                    <Button x:Name="OrthopedyButton"
+                <!--Orthopedics button-->
+                <Button x:Name="OrthopedyButton"
                         Background="OrangeRed" 
                         CommandParameter="orthopedics"
                         Height="205"
                         Margin="517,393,518,50"
                         Style="{StaticResource ResourceKey=DefaultRectangleBuildingButtonStyle}"
                         Width="146">
-                        <StackPanel>
-                            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
                                    TextWrapping="Wrap">
                                 Orthopedics
-                            </TextBlock>
-                            <Image Height="30"
+                        </TextBlock>
+                        <Image Height="30"
                                Margin="0,3,0,0"
                                Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png" />
-                        </StackPanel>
-                    </Button>
+                    </StackPanel>
+                </Button>
 
-                    <!--Pediatrics button-->
-                    <Button x:Name="PediatryButton"
+                <!--Pediatrics button-->
+                <Button x:Name="PediatryButton"
                         CommandParameter="pediatrics"
                         Margin="502,64,86,404"
                         Style="{StaticResource ResourceKey=TriangleBuildingButtonStyle}">
-                    </Button>
+                </Button>
 
-                    <!--Dermatology button-->
-                    <Button x:Name="DermatologyButton"
+                <!--Dermatology button-->
+                <Button x:Name="DermatologyButton"
                         CommandParameter="dermatology"
                         Margin="544,267,85,154"
                         Style="{StaticResource ResourceKey=DermatologyBuildingButtonStyle}">
-                    </Button>
+                </Button>
 
-                    <!--Neurology button-->
-                    <Button x:Name="NeurologyButton"
+                <!--Neurology button-->
+                <Button x:Name="NeurologyButton"
                         CommandParameter="neurology"
                         Margin="372,254,646,278"
                         Style="{StaticResource ResourceKey=UBuildingButtonStyle}" >
-                    </Button>
+                </Button>
 
-                    <!--Oncology button-->
-                    <Button x:Name="OncologyButton"
+                <!--Oncology button-->
+                <Button x:Name="OncologyButton"
                         CommandParameter="oncology"
                         Margin="540,256,507,296"
                         Style="{StaticResource ResourceKey=OctagonBuildingButtonStyle}" >
-                    </Button>
-                </Grid>
+                </Button>
             </Grid>
-        </ScrollViewer>
+        </Grid>
     </Border>
 </UserControl>

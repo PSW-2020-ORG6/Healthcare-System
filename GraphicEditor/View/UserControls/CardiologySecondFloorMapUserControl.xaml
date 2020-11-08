@@ -21,7 +21,7 @@
     <Border BorderBrush="Black" 
             BorderThickness="1">
         <ScrollViewer>
-            <Grid>
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                 <!--FloorPattern-->
                 <Image Style="{StaticResource FloorImage}"
                        Source="/GraphicEditor;component/Resources/Images/floor.jpg"  />
@@ -78,7 +78,8 @@
                 <!--Elevator-->
                 <Border BorderBrush="Black"
                         BorderThickness="3"
-                        Margin="806,495,255,126">
+                        Margin="806,495,255,126"
+                        Background="#FF2F3B46">
                     <TextBlock Style="{StaticResource ElevatorTextBlock}"/>
                 </Border>
 
