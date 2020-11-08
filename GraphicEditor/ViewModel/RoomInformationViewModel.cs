@@ -1,17 +1,14 @@
 ﻿using GraphicEditor.HelpClasses;
-using System;
 using System.Collections.Generic;
-using System.Windows.Controls;
 
 namespace GraphicEditor.ViewModel
 {
-    public class RoomInformationViewModel:BindableBase
+    public class RoomInformationViewModel : BindableBase
     {
-        public MyICommand<ComboBox> ComboCommand { get; private set; }
 
         private static RoomInformationViewModel _instance;
 
-        private List<string> beds=new List<string>();
+        private List<string> beds = new List<string>();
 
         private string selectedBed;
 
@@ -35,7 +32,8 @@ namespace GraphicEditor.ViewModel
                 if (value.Equals("Bed1"))
                 {
                     BedInfo = "Pacijent: \n ime :Petar \nPrezime: Petrovic \n Lezao: 2 dana \n Bolest: prehlada";
-                }else if (value.Equals("Bed2"))
+                }
+                else if (value.Equals("Bed2"))
                 {
                     BedInfo = "Pacijent: \n ime :Dusan \nPrezime: Lazarevic \n Lezao: 3 dana \n Bolest: prehlada";
                 }
@@ -52,10 +50,9 @@ namespace GraphicEditor.ViewModel
             set
             {
                 SetProperty(ref beds, value);
-                
+
             }
         }
-
 
         public static RoomInformationViewModel GetInstance()
         {
@@ -66,13 +63,8 @@ namespace GraphicEditor.ViewModel
             return _instance;
         }
 
-        public void changedSelection(ComboBox comboBox)
-        {
-            Console.WriteLine("promenaaaa :"+comboBox.Text);
-        }
         private RoomInformationViewModel()
         {
-            ComboCommand = new MyICommand<ComboBox>(changedSelection);
             beds.Add("Bed1");
             beds.Add("Bed2");
             beds.Add("Bed3");
