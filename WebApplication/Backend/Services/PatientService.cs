@@ -16,7 +16,6 @@ namespace WebApplication.Backend.Services
         public PatientService()
         {
             this.patientRepository = new PatientRepository();
-
         }
 
         ///Tanja Drcelic RA124/2017

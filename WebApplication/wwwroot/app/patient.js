@@ -105,11 +105,11 @@
 					})
 
 					.catch(error => {
-						alert("Textarea is empty.");
+						alert("Tou need to enter a comment first.");
 					})
 			}
 			else
-				alert("Textarea is empty.");
+				alert("Tou need to enter a comment first.");
 
 		},
 		DateSplit: function (date) {

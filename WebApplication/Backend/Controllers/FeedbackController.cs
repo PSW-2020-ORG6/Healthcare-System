@@ -72,10 +72,10 @@ namespace WebApplication.Backend.Controllers
         ///<returns>
         ///list of not approved feedbacks
         ///</returns>
-        [HttpGet("notApproved")]
-        public List<Feedback> GetNotApprovedFeedbacks()
+        [HttpGet("disapproved")]
+        public List<Feedback> GetDisapprovedFeedbacks()
         {
-            return feedbackService.GetNotApprovedFeedbacks();
+            return feedbackService.GetDisapprovedFeedbacks();
         }
         ///Marija Vucetic 
         /// <summary>
@@ -89,7 +89,7 @@ namespace WebApplication.Backend.Controllers
         {
             if (feedbackDTO.IsApprovalValid() && feedbackDTO.IsCorrectText())
             {
-                feedbackService.EditFeedback(feedbackDTO);
+                feedbackService.ApproveFeedback(feedbackDTO);
                 return Ok();
             }
             return BadRequest();
