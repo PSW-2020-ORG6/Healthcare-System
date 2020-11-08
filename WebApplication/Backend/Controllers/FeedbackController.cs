@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using health_clinic_class_diagram.Backend.Dto;
+using Microsoft.AspNetCore.Mvc;
 using Model.Blog;
 using System.Collections.Generic;
 using WebApplication.Backend.Services;
 
 namespace WebApplication.Backend.Controllers
 {
+    /// <summary>
+    /// This class does connection with service
+    /// </summary>
     [Route("feedback")]
     [ApiController]
     public class FeedbackController : ControllerBase
@@ -28,8 +32,6 @@ namespace WebApplication.Backend.Controllers
             return feedbackService.GetAllFeedbacks();
         }
 
-
-
         ///Repovic Aleksa RA-52-2017
         /// <summary>
         ///calls method for adding new feedback in feedback table
@@ -38,14 +40,14 @@ namespace WebApplication.Backend.Controllers
         ///information about sucess in string format
         ///</returns>
         [HttpPost("add")]
-        public string AddNewFeedbacк(Feedback feedback)
+        public IActionResult AddNewFeedbacк(FeedbackDTO feedbackDTO)
         {
-            if (feedbackService.AddNewFeedback(feedback))
+            if (feedbackDTO.IsNotapproved() && feedbackDTO.CorrectText())
             {
-                return "200 OK";
+                feedbackService.AddNewFeedback(new Feedback(feedbackDTO));
+                return Ok();
             }
-            else
-                return "400 BAD REQUEST";
+                return BadRequest();
 
         }
 
@@ -71,9 +73,9 @@ namespace WebApplication.Backend.Controllers
         ///list of not approved feedbacks
         ///</returns>
         [HttpGet("noapproved")]
-        public List<Feedback> GetNoApprovedFeedbacks()
+        public List<Feedback> GetNotApprovedFeedbacks()
         {
-            return feedbackService.GetNoApprovedFeedbacks();
+            return feedbackService.GetNotApprovedFeedbacks();
         }
         ///Marija Vucetic 
         /// <summary>
@@ -83,10 +85,14 @@ namespace WebApplication.Backend.Controllers
         ///list of not approved feedbacks
         ///</returns>
         [HttpPut("approve")]
-        public void ApproveFeedback(Feedback feedback)
+        public IActionResult ApproveFeedback(FeedbackDTO feedbackDTO)
         {
-            feedbackService.EditFeedback(feedback);
+            if (feedbackDTO.IsNotapproved() && feedbackDTO.CorrectText())
+            {
+                feedbackService.EditFeedback(feedbackDTO);
+                return Ok();
+            }
+            return BadRequest();
         }
-
     }
 }

@@ -7,6 +7,9 @@ using WebApplication.Backend.Repositorys;
 
 namespace WebApplication.Backend.Services
 {
+    /// <summary>
+    /// This class does connection with repository
+    /// </summary>
     public class PatientService
     {
         private PatientRepository patientRepository;

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Backend.Repositorys
 {
+    /// <summary>
+    /// This class does connection with MySQL database patient table
+    /// </summary>
     public class PatientRepository
     {
         private MySqlConnection connection;

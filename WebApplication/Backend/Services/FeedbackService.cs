@@ -1,4 +1,5 @@
-﻿using Model.Blog;
+﻿using health_clinic_class_diagram.Backend.Dto;
+using Model.Blog;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,9 @@ using WebApplication.Backend.Repositorys;
 
 namespace WebApplication.Backend.Services
 {
+    /// <summary>
+    /// This class does connection with repository
+    /// </summary>
     public class FeedbackService
     {
 
@@ -53,7 +57,7 @@ namespace WebApplication.Backend.Services
         ///<returns>
         ///list of not approved feedbacks
         ///</returns>
-        internal List<Feedback> GetNoApprovedFeedbacks()
+        internal List<Feedback> GetNotApprovedFeedbacks()
         {
 
             return feedbackRepository.GetFeedbacks(false);
@@ -72,7 +76,7 @@ namespace WebApplication.Backend.Services
         ///</returns>
         ///<param name="feedback"> Feedback type object
         ///</param>>
-        public void EditFeedback(Feedback feedback)
+        public void EditFeedback(FeedbackDTO feedback)
         {
              feedbackRepository.SetFeedbackApprovedValue(feedback);
         }

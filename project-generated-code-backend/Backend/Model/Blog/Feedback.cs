@@ -4,6 +4,7 @@
 // Purpose: Definition of Class Comment
 
 using Backend.Model.Util;
+using health_clinic_class_diagram.Backend.Dto;
 using Model.Accounts;
 using System;
 
@@ -27,5 +28,12 @@ namespace Model.Blog
             this.Approved = app;
         }
         public Feedback() { }
+        public Feedback(FeedbackDTO feedbackDTO)
+        {
+            this.text = feedbackDTO.Text;
+            this.patientId = feedbackDTO.PatientId;
+            this.date = feedbackDTO.Date;
+            this.Approved = feedbackDTO.Approved;
+        }
     }
 }

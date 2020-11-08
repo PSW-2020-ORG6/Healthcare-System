@@ -9,6 +9,9 @@ using WebApplication.Backend.Services;
 
 namespace WebApplication.Backend.Controllers
 {
+    /// <summary>
+    /// This class does connection with service
+    /// </summary>
     [Route("patient")]
     [ApiController]
     public class PatientController : ControllerBase
