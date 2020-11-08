@@ -8,7 +8,7 @@
 				text: "",
 				approved: false,
 				date: new Date().now,
-				patientId: "Anonimous"
+				patientId: "-1"
 			}
 		}
 	},
@@ -48,7 +48,7 @@
 					<div class="modal-body" id="feedbackModalBody">
 
 						<label>Enter your comment here:</label>
-						<input type="text" class="form-control" v-model="feedback.text">
+						<textarea class="form-control" v-model="feedback.text" rows="4" cols="50"></textarea>
 						<br/><br/>
 						<input type="checkbox"  id="anonimous">	
 						<label> Anonimous</label><br>
@@ -86,7 +86,7 @@
                                     <td>{{f.text}}</td>
                                     <td>{{DateSplit(f.date)}}</td>
                                     <td v-for="p in patients" v-if="parseInt(p.id) == parseInt(f.patientId)">{{p.name}} {{p.surname}}</td>
-								    <td v-if="f.patientId == 'Anonimous'">{{f.patientId}}</td>
+								    <td v-if="parseInt(f.patientId) == -1">Anonimous</td>
                                   </tr>
                                 </tbody>
                              </table>
