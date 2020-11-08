@@ -63,7 +63,7 @@
                                     <td>{{f.text}}</td>
                                     <td>{{DateSplit(f.date)}}</td>
                                     <td v-for="p in patients" v-if="parseInt(p.id) == parseInt(f.patientId)">{{p.name}} {{p.surname}}</td>
-                                    <td v-if="f.patientId == 'Anonimous' ">{{f.patientId}}</td>
+                                    <td v-if="parseInt(f.patientId) == -1">Anonimous</td>
                                     <td style="text-align:center"><button class="btnban form-control" v-on:click="Disapprove(f)">D I S A P P R O V E</button></td>  
                                   </tr>
                                 </tbody>
@@ -88,7 +88,7 @@
                                     <td>{{f.text}}</td>
                                     <td>{{DateSplit(f.date)}}</td>
                                     <td v-for="p in patients" v-if="parseInt(p.id)== parseInt(f.patientId)">{{p.name}} {{p.surname}}</td>
-                                    <td v-if="f.patientId == 'Anonimous'">{{f.patientId}}</td>
+                                    <td v-if="parseInt(f.patientId) == -1">Anonimous</td>
                                     <td style="text-align:center"><button class="btnapprove form-control" v-on:click="Approve(f)">A P P R O V E</button></td>
                                   </tr>
                                 </tbody>

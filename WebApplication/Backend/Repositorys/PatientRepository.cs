@@ -9,6 +9,14 @@ namespace WebApplication.Backend.Repositorys
 {
     public class PatientRepository
     {
+        private MySqlConnection connection;
+        public PatientRepository()
+        {
+
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
+            connection.Open();
+
+        }
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///Get all patients from patients table
@@ -21,13 +29,8 @@ namespace WebApplication.Backend.Repositorys
         ///</exception>
         internal List<Patient> GetAllPatients()
         {
-            try
-            {
-                MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
-
                 string sql1 = "Select * from patients";
-                conn.Open();
-                MySqlCommand cmd1 = new MySqlCommand(sql1, conn);
+                MySqlCommand cmd1 = new MySqlCommand(sql1, connection);
                 MySqlDataReader rdr = cmd1.ExecuteReader();
                 List<Patient> resultList = new List<Patient>();
                 while (rdr.Read())
@@ -47,12 +50,8 @@ namespace WebApplication.Backend.Repositorys
                     resultList.Add(entity);
 
                 }
-                conn.Close();
+                connection.Close();
                 return resultList;
-            }catch(Exception e)
-            {
-                return null;
-            }
         }
     }
 }
