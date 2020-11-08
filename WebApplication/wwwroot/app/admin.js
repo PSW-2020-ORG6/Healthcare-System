@@ -18,7 +18,7 @@
             })
 
         axios
-            .get('http://localhost:49900/feedback/noapproved')
+            .get('http://localhost:49900/feedback/notApproved')
             .then(response => {
                 this.noapprovedFeedbacks = response.data
             })
@@ -138,7 +138,7 @@
                 })
 
             axios
-                .get('http://localhost:49900/feedback/noapproved')
+                .get('http://localhost:49900/feedback/notApproved')
                 .then(response => {
                     this.noapprovedFeedbacks = response.data
                 })

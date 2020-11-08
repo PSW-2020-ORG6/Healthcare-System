@@ -42,7 +42,7 @@ namespace WebApplication.Backend.Controllers
         [HttpPost("add")]
         public IActionResult AddNewFeedbacк(FeedbackDTO feedbackDTO)
         {
-            if (feedbackDTO.IsNotapproved() && feedbackDTO.CorrectText())
+            if (feedbackDTO.IsApprovalValid() && feedbackDTO.IsCorrectText())
             {
                 feedbackService.AddNewFeedback(new Feedback(feedbackDTO));
                 return Ok();
@@ -72,7 +72,7 @@ namespace WebApplication.Backend.Controllers
         ///<returns>
         ///list of not approved feedbacks
         ///</returns>
-        [HttpGet("noapproved")]
+        [HttpGet("notApproved")]
         public List<Feedback> GetNotApprovedFeedbacks()
         {
             return feedbackService.GetNotApprovedFeedbacks();
@@ -87,7 +87,7 @@ namespace WebApplication.Backend.Controllers
         [HttpPut("approve")]
         public IActionResult ApproveFeedback(FeedbackDTO feedbackDTO)
         {
-            if (feedbackDTO.IsNotapproved() && feedbackDTO.CorrectText())
+            if (feedbackDTO.IsApprovalValid() && feedbackDTO.IsCorrectText())
             {
                 feedbackService.EditFeedback(feedbackDTO);
                 return Ok();

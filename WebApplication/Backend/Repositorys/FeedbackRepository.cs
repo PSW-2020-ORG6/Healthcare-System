@@ -23,7 +23,7 @@ namespace WebApplication.Backend.Repositorys
             {
             }
         }
-        ///Tanja Drcelic RA124/2017
+        ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017
         /// <summary>
         ///Get all feedbacks from feedbacks table
         ///</summary>
@@ -33,10 +33,10 @@ namespace WebApplication.Backend.Repositorys
         ///<exception>
         ///if any exception occurs method will return null
         ///</exception>
-        internal List<Feedback> GetAllFeedbacks()
+        internal List<Feedback> GetFeedbacks(String sqlQuery)
         {
-                string sqlQuery = "Select * from feedbacks";
-                MySqlCommand cmd1 = new MySqlCommand(sqlQuery, connection);
+            // sqlQuery = "Select * from feedbacks";
+            MySqlCommand cmd1 = new MySqlCommand(sqlQuery, connection);
                 MySqlDataReader sqlReader = cmd1.ExecuteReader();
                 List<Feedback> resultList = new List<Feedback>();
                 while (sqlReader.Read())
@@ -48,44 +48,10 @@ namespace WebApplication.Backend.Repositorys
                     entity.Date = Convert.ToDateTime(sqlReader[2]);
                     entity.Approved = (Boolean)sqlReader[1];
                     resultList.Add(entity);
-
                 }
                 connection.Close();
                 return resultList;
         }
-
-        internal List<Feedback> GetFeedbacks(Boolean approvedF)
-        {
-                string sqlQuery;
-                if(approvedF)
-                    sqlQuery = "Select * from feedbacks where approved is true";
-                else
-                    sqlQuery = "Select * from feedbacks where approved is false";
-
-                MySqlCommand sqlCommand = new MySqlCommand(sqlQuery, connection);
-                MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-                List<Feedback> resultList = new List<Feedback>();
-                while (sqlReader.Read())
-                {
-                    Feedback entity = new Feedback();
-                    entity.SerialNumber = (string)sqlReader[4];
-                    entity.PatientId = (String)sqlReader[3];
-                    entity.Text = (String)sqlReader[0];
-                    entity.Date = Convert.ToDateTime(sqlReader[2]);
-                    entity.Approved = (Boolean)sqlReader[1];
-                    resultList.Add(entity);
-
-                }
-                connection.Close();
-                return resultList;
-
-        }
-
-        internal Feedback GetFeedbackById(string feedbackId)
-        {
-            throw new NotImplementedException();
-        }
-
         ////Vucetic Marija RA157/2017
         /// <summary>
         ///set value of atrribute Approved
@@ -104,12 +70,10 @@ namespace WebApplication.Backend.Repositorys
                 string[] partsOfDate = dateString[0].Split("/");
                 if (feedback.Approved)
                 {
-
                     string inquiry = "REPLACE  into feedbacks(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 0
                         + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + " ','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
                     MySqlCommand sqlCommand = new MySqlCommand(inquiry, connection);
-                sqlCommand.ExecuteNonQuery();
-             
+                sqlCommand.ExecuteNonQuery();      
             }
                 else
                 {
@@ -117,13 +81,10 @@ namespace WebApplication.Backend.Repositorys
                         + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + " ','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
 
                     MySqlCommand sqlCommand = new MySqlCommand(inquiry, connection);
-                    sqlCommand.ExecuteNonQuery();
-              
+                    sqlCommand.ExecuteNonQuery();             
             }
                connection.Close();
         }
-
-
         ////Repovic Aleksa RA52-2017
         /// <summary>
         ///Adds new row into feedbacks table
@@ -149,6 +110,5 @@ namespace WebApplication.Backend.Repositorys
 
                 return true;
         }
-
     }
 }
