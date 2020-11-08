@@ -53,11 +53,14 @@ namespace GraphicEditor.ViewModel
             get { return _selectedFloor; }
             set
             {
-                _selectedFloor = value;
-                String cpy = String.Copy(_selectedFloor);
-                var paramArray = cpy.Split(' ');
-                var param = paramArray[0].ToLower();
-                ChooseFloor(param);
+                if (value != null)
+                {
+                    SetProperty(ref _selectedFloor, value);
+                    String cpy = String.Copy(_selectedFloor);
+                    var paramArray = cpy.Split(' ');
+                    var param = paramArray[0].ToLower();
+                    ChooseFloor(param);
+                }               
             }
         }
 

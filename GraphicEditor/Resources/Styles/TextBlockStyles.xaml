@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style x:Key="ElevatorTextBox" TargetType="TextBox">
+    <Style x:Key="ElevatorTextBlock" TargetType="TextBlock">
         <Setter Property="Background" Value="#FF2F3B46" />
         <Setter Property="Text" Value="Elevator" />
         <Setter Property="TextAlignment" Value="Center" />

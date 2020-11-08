@@ -37,6 +37,9 @@ namespace GraphicEditor.VML
 
             var viewModelTypeName = viewTypeName + "ViewModel";
             var viewModelType = Type.GetType(viewModelTypeName);
+
+
+            
             var viewModel = Activator.CreateInstance(viewModelType);
 
             ((FrameworkElement)d).DataContext = viewModel;
