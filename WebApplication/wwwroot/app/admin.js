@@ -42,7 +42,7 @@
     		    <a class="nav-link active" data-toggle="tab" href="#approved">Approved</a>
     	    </li>
     	    <li class="nav-item">
-    		    <a class="nav-link" data-toggle="tab" href="#disaproved">Disapproved</a>
+    		    <a class="nav-link" data-toggle="tab" href="#disapproved">Disapproved</a>
     	    </li>
         </ul>
         <div>
@@ -71,7 +71,7 @@
 	                        </div>
                       </div>			     
 		         </div>
-		        <div id="disaproved" class="container tab-pane fade"><br>
+		        <div id="disapproved" class="container tab-pane fade"><br>
                     <div class="container">
                         <div class="row">
                             <table class="table table-bordered">
