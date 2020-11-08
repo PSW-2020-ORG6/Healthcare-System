@@ -32,24 +32,24 @@ namespace WebApplication.Backend.Repositorys
         ///</exception>
         internal List<Patient> GetAllPatients()
         {
-                string sql1 = "Select * from patients";
-                MySqlCommand cmd1 = new MySqlCommand(sql1, connection);
-                MySqlDataReader rdr = cmd1.ExecuteReader();
+                string sqlQuery = "Select * from patients";
+                MySqlCommand sqlCommand = new MySqlCommand(sqlQuery, connection);
+                MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
                 List<Patient> resultList = new List<Patient>();
-                while (rdr.Read())
+                while (sqlReader.Read())
                 {
                     Patient entity = new Patient();
-                    entity.Id = (string)rdr[3];
-                    entity.Name = (string)rdr[1];
-                    entity.Surname = (string)rdr[2];
-                    entity.ParentName = (string)rdr[7];
-                    entity.SerialNumber = (string)rdr[0];
-                    entity.DateOfBirth = (DateTime)rdr[4];
-                    entity.Contact = (string)rdr[5];
-                    entity.Email = (string)rdr[6];
-                    entity.Gender = (string)rdr[8];
-                    entity.Guest = (Boolean)rdr[9];
-                    entity.Password = (string)rdr[10];
+                    entity.Id = (string)sqlReader[3];
+                    entity.Name = (string)sqlReader[1];
+                    entity.Surname = (string)sqlReader[2];
+                    entity.ParentName = (string)sqlReader[7];
+                    entity.SerialNumber = (string)sqlReader[0];
+                    entity.DateOfBirth = (DateTime)sqlReader[4];
+                    entity.Contact = (string)sqlReader[5];
+                    entity.Email = (string)sqlReader[6];
+                    entity.Gender = (string)sqlReader[8];
+                    entity.Guest = (Boolean)sqlReader[9];
+                    entity.Password = (string)sqlReader[10];
                     resultList.Add(entity);
 
                 }

@@ -42,7 +42,7 @@
     		    <a class="nav-link active" data-toggle="tab" href="#approved">Approved</a>
     	    </li>
     	    <li class="nav-item">
-    		    <a class="nav-link" data-toggle="tab" href="#disaproved">Disaproved</a>
+    		    <a class="nav-link" data-toggle="tab" href="#disaproved">Disapproved</a>
     	    </li>
         </ul>
         <div>
