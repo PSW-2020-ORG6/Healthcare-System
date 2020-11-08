@@ -10,10 +10,10 @@ namespace GraphicEditor.ViewModel
 
         public CardiologyFirstFloorMapUserControlViewModel()
         {
-            ShowRoomCommand = new MyICommand<string>(showRoom);
+            ShowRoomCommand = new MyICommand<string>(ShowRoom);
         }
 
-        private void showRoom(string a)
+        private void ShowRoom(string a)
         {
             (new RoomInformation()).Show();
         }
