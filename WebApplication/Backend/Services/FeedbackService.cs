@@ -12,19 +12,16 @@ namespace WebApplication.Backend.Services
     /// </summary>
     public class FeedbackService
     {
-
         private FeedbackRepository feedbackRepository;
         public FeedbackService()
         {
             this.feedbackRepository = new FeedbackRepository();
 
         }
-
         internal Feedback GetFeedbackById(string id)
         {
             throw new NotImplementedException();
         }
-
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///calls method for get all feedback in feedback table
@@ -34,9 +31,8 @@ namespace WebApplication.Backend.Services
         ///</returns>
         internal List<Feedback> GetAllFeedbacks()
         {
-            return feedbackRepository.GetAllFeedbacks();
+            return feedbackRepository.GetFeedbacks("Select * from feedbacks");
         }
-
         ///Aleksandra Milijevic RA 22/2017
         /// <summary>
         ///calls method for get approved feedbacks from feedback table
@@ -44,12 +40,10 @@ namespace WebApplication.Backend.Services
         ///<returns>
         ///list of approved feedbacks
         ///</returns>
-
         internal List<Feedback> GetApprovedFeedbacks()
         {
-            return feedbackRepository.GetFeedbacks(true);
+            return feedbackRepository.GetFeedbacks("Select * from feedbacks where approved is true");
         }
-
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///calls method for get disapproved feedback from feedback table
@@ -60,9 +54,8 @@ namespace WebApplication.Backend.Services
         internal List<Feedback> GetNotApprovedFeedbacks()
         {
 
-            return feedbackRepository.GetFeedbacks(false);
+            return feedbackRepository.GetFeedbacks("Select * from feedbacks where approved is false");
         }
-
         public void DeleteFeedback(Feedback feedback)
         {
             throw new NotImplementedException();
@@ -93,6 +86,5 @@ namespace WebApplication.Backend.Services
         {
             return feedbackRepository.AddNewFeedback(feedback);
         }
-
     }
 }
