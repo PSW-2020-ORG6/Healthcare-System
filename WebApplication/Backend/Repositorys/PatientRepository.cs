@@ -14,7 +14,7 @@ namespace WebApplication.Backend.Repositorys
         public PatientRepository()
         {
 
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
             connection.Open();
 
         }
@@ -28,9 +28,9 @@ namespace WebApplication.Backend.Repositorys
         ///<exception>
         ///if any exception occurs method will return null
         ///</exception>
-        internal List<Patient> GetPatients(String sqlQuery)
+        internal List<Patient> GetPatients(String sqlDml)
         {
-                MySqlCommand sqlCommand = new MySqlCommand(sqlQuery, connection);
+                MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
                 MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
                 List<Patient> resultList = new List<Patient>();
                 while (sqlReader.Read())

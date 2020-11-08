@@ -2,7 +2,7 @@
     data: function () {
         return {
             approvedFeedbacks: null,
-            noapprovedFeedbacks: null,
+            disapprovedFeedbacks: null,
             feedback: null,
             patients: null
         }
@@ -18,9 +18,9 @@
             })
 
         axios
-            .get('http://localhost:49900/feedback/notApproved')
+            .get('http://localhost:49900/feedback/disapproved')
             .then(response => {
-                this.noapprovedFeedbacks = response.data
+                this.disapprovedFeedbacks = response.data
             })
             .catch(error => {
                 alert(error)
@@ -83,7 +83,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="f in noapprovedFeedbacks">
+                                    <tr v-for="f in disapprovedFeedbacks">
                                         <td>{{f.text}}</td>
                                         <td>{{DateSplit(f.date)}}</td>
                                         <td v-for="p in patients" v-if="parseInt(p.id)== parseInt(f.patientId)">{{p.name}} {{p.surname}}</td>
@@ -120,12 +120,10 @@
                 .put('http://localhost:49900/feedback/approve', feedback)
                 .then(response => {
                     this.Refresh();
-
                 })
                 .catch(error => {
                     alert(error.response.data)
                 })
-
         },
         Refresh: function () {
             axios
@@ -138,9 +136,9 @@
                 })
 
             axios
-                .get('http://localhost:49900/feedback/notApproved')
+                .get('http://localhost:49900/feedback/disapproved')
                 .then(response => {
-                    this.noapprovedFeedbacks = response.data
+                    this.disapprovedFeedbacks = response.data
                 })
                 .catch(error => {
                     alert(error)

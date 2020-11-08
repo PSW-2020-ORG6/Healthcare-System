@@ -1,6 +1,5 @@
 ﻿using health_clinic_class_diagram.Backend.Dto;
 using Model.Blog;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using WebApplication.Backend.Repositorys;
@@ -16,12 +15,8 @@ namespace WebApplication.Backend.Services
         public FeedbackService()
         {
             this.feedbackRepository = new FeedbackRepository();
-
         }
-        internal Feedback GetFeedbackById(string id)
-        {
-            throw new NotImplementedException();
-        }
+       
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///calls method for get all feedback in feedback table
@@ -51,15 +46,12 @@ namespace WebApplication.Backend.Services
         ///<returns>
         ///list of not approved feedbacks
         ///</returns>
-        internal List<Feedback> GetNotApprovedFeedbacks()
+        internal List<Feedback> GetDisapprovedFeedbacks()
         {
 
             return feedbackRepository.GetFeedbacks("Select * from feedbacks where approved is false");
         }
-        public void DeleteFeedback(Feedback feedback)
-        {
-            throw new NotImplementedException();
-        }
+       
         ///Marija Vucetic 
         /// <summary>
         ///calls method for set na value of attribute Approved
@@ -69,10 +61,11 @@ namespace WebApplication.Backend.Services
         ///</returns>
         ///<param name="feedback"> Feedback type object
         ///</param>>
-        public void EditFeedback(FeedbackDTO feedback)
+        public void ApproveFeedback(FeedbackDTO feedback)
         {
-             feedbackRepository.SetFeedbackApprovedValue(feedback);
+             feedbackRepository.ApproveFeedback(feedback);
         }
+
         ///Repovic Aleksa RA-52-2017
         /// <summary>
         ///calls method for adding new row in feedbacks table

@@ -16,7 +16,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
+                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
                 connection.Open();
             }
             catch (Exception e)
@@ -33,11 +33,10 @@ namespace WebApplication.Backend.Repositorys
         ///<exception>
         ///if any exception occurs method will return null
         ///</exception>
-        internal List<Feedback> GetFeedbacks(String sqlQuery)
+        internal List<Feedback> GetFeedbacks(String sqlDml)
         {
-            // sqlQuery = "Select * from feedbacks";
-            MySqlCommand cmd1 = new MySqlCommand(sqlQuery, connection);
-                MySqlDataReader sqlReader = cmd1.ExecuteReader();
+                MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+                MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
                 List<Feedback> resultList = new List<Feedback>();
                 while (sqlReader.Read())
                 {
@@ -64,23 +63,23 @@ namespace WebApplication.Backend.Repositorys
         ///</exception>
         ///<param name="feedback"> Feedback type object
         ///</param>
-        internal void SetFeedbackApprovedValue(FeedbackDTO feedback)
+        internal void ApproveFeedback(FeedbackDTO feedback)
         {
                 string[] dateString = feedback.Date.ToString().Split(" ");
                 string[] partsOfDate = dateString[0].Split("/");
                 if (feedback.Approved)
                 {
-                    String inquiry = "REPLACE  into feedbacks(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 0
+                    String sqlDml = "REPLACE  into feedbacks(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 0
                         + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + " ','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
-                    MySqlCommand sqlCommand = new MySqlCommand(inquiry, connection);
+                    MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
                 sqlCommand.ExecuteNonQuery();      
             }
                 else
                 {
-                    string inquiry = "REPLACE  into feedbacks(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 1
+                    string sqlDml = "REPLACE  into feedbacks(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 1
                         + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + " ','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
 
-                    MySqlCommand sqlCommand = new MySqlCommand(inquiry, connection);
+                    MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
                     sqlCommand.ExecuteNonQuery();             
             }
                connection.Close();
@@ -101,10 +100,10 @@ namespace WebApplication.Backend.Repositorys
         {
                 string[] dateString = DateTime.Now.ToString().Split(" ");
                 string[] partsOfDate = dateString[0].Split("/");
-                string sqlQuery = "INSERT INTO feedbacks (text,approved,date,patientid,serialnumber)  VALUES('" + feedback.Text + "','" + 0 + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + "T" + dateString[1]
+                string sqlDml = "INSERT INTO feedbacks (text,approved,date,patientid,serialnumber)  VALUES('" + feedback.Text + "','" + 0 + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + "T" + dateString[1]
                        + "','" +feedback.PatientId + " ','" + feedback.SerialNumber + "')";
 
-                MySqlCommand sqlCommand = new MySqlCommand(sqlQuery, connection);
+                MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
                 sqlCommand.ExecuteNonQuery();
                 connection.Close();
 
