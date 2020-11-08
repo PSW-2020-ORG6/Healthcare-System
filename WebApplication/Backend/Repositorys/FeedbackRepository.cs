@@ -1,10 +1,14 @@
-﻿using Model.Blog;
+﻿using health_clinic_class_diagram.Backend.Dto;
+using Model.Blog;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 
 namespace WebApplication.Backend.Repositorys
 {
+    /// <summary>
+    /// This class does connection with MySQL database feedback table
+    /// </summary>
     public class FeedbackRepository
     {
         private MySqlConnection connection;
@@ -94,7 +98,7 @@ namespace WebApplication.Backend.Repositorys
         ///</exception>
         ///<param name="feedback"> Feedback type object
         ///</param>
-        internal void SetFeedbackApprovedValue(Feedback feedback)
+        internal void SetFeedbackApprovedValue(FeedbackDTO feedback)
         {
                 string[] dateString = feedback.Date.ToString().Split(" ");
                 string[] partsOfDate = dateString[0].Split("/");

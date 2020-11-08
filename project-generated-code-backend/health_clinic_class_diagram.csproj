@@ -45,6 +45,7 @@
     <Compile Include="Backend\Controller\SuperintendentControllers\MedicineAddingController.cs" />
     <Compile Include="Backend\Controller\PhysitianControllers\PhysitianMedicineController.cs" />
     <Compile Include="Backend\Controller\SuperintendentControllers\SuperintendentMedicineController.cs" />
+    <Compile Include="Backend\Dto\FeedbackDTO.cs" />
     <Compile Include="Backend\Dto\SuggestedAppointmentDTO.cs" />
     <Compile Include="Backend\Model\Blog\BlogPost.cs" />
     <Compile Include="Backend\Model\Blog\Feedback.cs" />
