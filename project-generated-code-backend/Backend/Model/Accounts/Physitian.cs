@@ -14,8 +14,8 @@ namespace Model.Accounts
     {
         
         private List<Specialization> specialization;
-        public Physitian(string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address,string password)
-            : base(Guid.NewGuid().ToString(), name, surname, id, dateOfBirth, contact, email, address,password)
+        public Physitian(string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string password)
+            : base(Guid.NewGuid().ToString(), name, surname, id, dateOfBirth, contact, email, address, password)
         {
             this.specialization = new List<Specialization>();
         }

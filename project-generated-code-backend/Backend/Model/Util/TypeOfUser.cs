@@ -12,6 +12,5 @@ namespace health_clinic_class_diagram.Backend.Model.Util
         SECRETARY,
         SUPERINTENDENT,
         NO_USER
-
     }
 }
