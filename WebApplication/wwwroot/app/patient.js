@@ -105,11 +105,11 @@
 					})
 
 					.catch(error => {
-						alert("Tou need to enter a comment first.");
+						alert("You need to enter a comment first.");
 					})
 			}
 			else
-				alert("Tou need to enter a comment first.");
+				alert("You need to enter a comment first.");
 
 		},
 		DateSplit: function (date) {
