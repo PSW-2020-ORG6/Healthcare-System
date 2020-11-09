@@ -11,8 +11,6 @@ namespace GraphicEditor.View.Windows
     /// </summary>
     public partial class HelpViewer : Window
     {
-
-
         private JavaScriptControlHelper ch;
         public HelpViewer(string key, Window originator)
         {
@@ -53,10 +51,12 @@ namespace GraphicEditor.View.Windows
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            //TODO
         }
 
         private void wbHelp_Navigating(object sender, System.Windows.Navigation.NavigatingCancelEventArgs e)
         {
+            //TODO
         }
     }
 }

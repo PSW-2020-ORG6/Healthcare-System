@@ -43,7 +43,5 @@ namespace GraphicEditor.ViewModel
             //repository is not implemented yet
             //Console.WriteLine(hospitalLogInController.GetUserType(UserName,pass.Password));
         }
-
-
     }
 }
