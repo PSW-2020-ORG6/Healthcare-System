@@ -8,10 +8,10 @@ namespace GraphicEditor.HelpClasses
     [ComVisible(true)]
     public class JavaScriptControlHelper
     {
-        Window prozor;
+        Window window;
         public JavaScriptControlHelper(Window w)
         {
-            prozor = w;
+            window = w;
         }
 
         public void RunFromJavascript(string param)

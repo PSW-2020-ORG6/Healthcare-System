@@ -28,7 +28,7 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
             List<Patient> patients = patientRepository.GetAll();
             foreach (Patient patient in patients)
             {
-                if (CheckJmbg(jmbg, patient) && CheckPassword(password, patient))
+                if (CheckJmbg(jmbg, patient) && IsValidPassword(password, patient))
                 {
                     return TypeOfUser.PATIENT;
                 }
@@ -41,7 +41,7 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
             List<Physitian> physitians = physitianRepository.GetAll();
             foreach (Physitian physitian in physitians)
             {
-                if (CheckJmbg(jmbg, physitian) && CheckPassword(password, physitian))
+                if (CheckJmbg(jmbg, physitian) && IsValidPassword(password, physitian))
                 {
                     return TypeOfUser.PHYSICIAN;
                 }
@@ -54,7 +54,7 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
             List<Secretary> secretaries = secretaryRepository.GetAll();
             foreach (Secretary secretary in secretaries)
             {
-                if (CheckJmbg(jmbg, secretary) && CheckPassword(password, secretary))
+                if (CheckJmbg(jmbg, secretary) && IsValidPassword(password, secretary))
                 {
                     return TypeOfUser.PHYSICIAN;
                 }
@@ -96,9 +96,9 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
             return account.Id.Equals(jmbg);
         }
 
-        private static bool CheckPassword(string password,  Account account)
+        private static bool IsValidPassword(string password,  Account account)
         {
-            return account.Password == password;
+            return account.Password.Equals(password);
         }
     }
 }

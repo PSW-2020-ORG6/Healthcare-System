@@ -20,7 +20,7 @@ namespace Model.Accounts
         private string password;
 
         public Patient(string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string parentName, string gender, string password, bool isGuest = false)
-            : base(Guid.NewGuid().ToString(), name, surname, id, dateOfBirth, contact, email, address)
+            : base(Guid.NewGuid().ToString(), name, surname, id, dateOfBirth, contact, email, address, password)
         {
             this.parentName = parentName;
             this.gender = gender;
@@ -29,7 +29,7 @@ namespace Model.Accounts
         }
         [JsonConstructor]
         public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string parentName, string gender, string password, bool isGuest = false)
-            : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address)
+            : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address, password)
         {
             this.parentName = parentName;
             this.gender = gender;
@@ -37,7 +37,7 @@ namespace Model.Accounts
             this.password = password;
         }
         [JsonConstructor]
-        public Patient(PatientDTO patientDTO) : base(Guid.NewGuid().ToString(), patientDTO.Name, patientDTO.Surname, patientDTO.Id, patientDTO.DateOfBirth, patientDTO.Contact, patientDTO.Email, patientDTO.Address)
+        public Patient(PatientDTO patientDTO) : base(Guid.NewGuid().ToString(), patientDTO.Name, patientDTO.Surname, patientDTO.Id, patientDTO.DateOfBirth, patientDTO.Contact, patientDTO.Email, patientDTO.Address, patientDTO.Password)
         {
             this.parentName = patientDTO.ParentName;
             this.gender = patientDTO.Gender;

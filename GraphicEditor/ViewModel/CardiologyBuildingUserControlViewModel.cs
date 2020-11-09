@@ -18,8 +18,6 @@ namespace GraphicEditor.ViewModel
         public static CardiologySecondFloorMapUserControlViewModel SecondFloor;
         public BindableBase _floorViewModel;
 
-
-
         public CardiologyBuildingUserControlViewModel(MapContentUserControlViewModel parent)
         {
             _parent = parent;
@@ -72,10 +70,8 @@ namespace GraphicEditor.ViewModel
                     _parent.ContentViewModel = MapContentUserControlViewModel.HospitalMap;
                     break;
                 case Constants.BASEMENT:
-
                     break;
                 case Constants.GROUND:
-
                     break;
                 case Constants.FIRST:
                     FloorViewModel = FirstFloor;
@@ -84,10 +80,8 @@ namespace GraphicEditor.ViewModel
                     FloorViewModel = SecondFloor;
                     break;
                 case Constants.THIRD:
-
                     break;
                 case Constants.FOURTH:
-
                     break;
             }
         }
