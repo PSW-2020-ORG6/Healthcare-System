@@ -55,9 +55,7 @@
             </Menu>
         </DockPanel>
 
-
-        <!-- Mapa -->
-
+        <!-- Map -->
         <ContentControl Grid.Row="1" 
                         Content="{Binding Path=CurrentViewModel}"
                         BorderBrush="Black"
@@ -91,6 +89,5 @@
                 </StatusBarItem>
             </StatusBar>
         </DockPanel>
-
     </Grid>
 </Window>

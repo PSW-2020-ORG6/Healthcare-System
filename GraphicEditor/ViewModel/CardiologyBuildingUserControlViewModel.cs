@@ -10,9 +10,8 @@ namespace GraphicEditor.ViewModel
     public class CardiologyBuildingUserControlViewModel : BindableBase
     {
         private MapContentUserControlViewModel _parent;
-        string[] array = { "Basement", "Ground Floor", "First Floor", "Second Floor", "Third Floor" };
-        private List<string> _floors;
-        private string _selectedFloor;
+        private List<string> _floors = new List<string>(Constants.FLOOR_MAP.Values);
+        private string _selectedFloor = Constants.FLOOR_MAP[Constants.FIRST];
         public MyICommand<string> NavCommand { get; private set; }
         public static CardiologyFirstFloorMapUserControlViewModel FirstFloor;
         public static CardiologySecondFloorMapUserControlViewModel SecondFloor;
@@ -21,8 +20,6 @@ namespace GraphicEditor.ViewModel
         public CardiologyBuildingUserControlViewModel(MapContentUserControlViewModel parent)
         {
             _parent = parent;
-            _floors = new List<string>(array);
-            _selectedFloor = _floors[2];
             NavCommand = new MyICommand<string>(ChooseFloor);
             FirstFloor = new CardiologyFirstFloorMapUserControlViewModel();
             SecondFloor = new CardiologySecondFloorMapUserControlViewModel();

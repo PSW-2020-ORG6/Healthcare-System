@@ -1,4 +1,6 @@
-﻿namespace GraphicEditor.HelpClasses
+﻿using System.Collections.Generic;
+
+namespace GraphicEditor.HelpClasses
 {
     /// <summary>
     /// Class with static Constants
@@ -22,6 +24,16 @@
         public const string ONCOLOGY = "oncology";
 
         // Constants used for building floors
+        public static readonly Dictionary<string, string> FLOOR_MAP = new Dictionary<string, string>()
+        {
+            {BASEMENT , "Basement"},
+            {GROUND , "Ground floor"},
+            {FIRST, "First floor"},
+            {SECOND, "Second floor" },
+            {THIRD, "Third floor" },
+            {FOURTH, "Fourth floor" },
+        };
+
         public const string BASEMENT = "basement";
         public const string GROUND = "ground";
         public const string FIRST = "first";
