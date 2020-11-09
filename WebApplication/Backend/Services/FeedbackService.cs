@@ -26,7 +26,7 @@ namespace WebApplication.Backend.Services
         ///</returns>
         internal List<Feedback> GetAllFeedbacks()
         {
-            return feedbackRepository.GetFeedbacks("Select * from feedbacks");
+            return feedbackRepository.GetAllFeedbacks();
         }
         ///Aleksandra Milijevic RA 22/2017
         /// <summary>
@@ -37,7 +37,7 @@ namespace WebApplication.Backend.Services
         ///</returns>
         internal List<Feedback> GetApprovedFeedbacks()
         {
-            return feedbackRepository.GetFeedbacks("Select * from feedbacks where approved is true");
+            return feedbackRepository.GetApprovedFeedbacks();
         }
         ///Tanja Drcelic RA124/2017
         /// <summary>
@@ -49,7 +49,7 @@ namespace WebApplication.Backend.Services
         internal List<Feedback> GetDisapprovedFeedbacks()
         {
 
-            return feedbackRepository.GetFeedbacks("Select * from feedbacks where approved is false");
+            return feedbackRepository.GetDisapprovedFeedbacks();
         }
        
         ///Marija Vucetic 
