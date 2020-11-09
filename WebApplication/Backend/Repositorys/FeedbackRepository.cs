@@ -16,7 +16,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
                 connection.Open();
             }
             catch (Exception e)
@@ -25,14 +25,13 @@ namespace WebApplication.Backend.Repositorys
         }
         ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017
         /// <summary>
-        ///Get all feedbacks from feedbacks table
+        ///Get feedbacks from feedbacks table
         ///</summary>
+        ///<param name="sqlDml"> data manipulation language
+        ///</param>
         ///<returns>
-        ///true if sucessful,else false
+        ///list of feedbacks
         ///</returns>
-        ///<exception>
-        ///if any exception occurs method will return null
-        ///</exception>
         internal List<Feedback> GetFeedbacks(String sqlDml)
         {
                 MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
@@ -50,6 +49,45 @@ namespace WebApplication.Backend.Repositorys
                 }
                 connection.Close();
                 return resultList;
+        }
+        ///Tanja Drcelic RA124/2017
+        /// <summary>
+        ///Get feedbacks from feedbacks table
+        ///</summary>
+        ///<param name="sqlDml"> data manipulation language
+        ///</param>
+        ///<returns>
+        ///list of all feedbacks
+        ///</returns>
+        public List<Feedback> GetAllFeedbacks()
+        {
+            return GetFeedbacks("Select * from feedbacks");
+        }
+        ///Aleksandra Milijevic RA 22/2017
+        /// <summary>
+        ///Get feedbacks from feedbacks table
+        ///</summary>
+        ///<param name="sqlDml"> data manipulation language
+        ///</param>
+        ///<returns>
+        ///list of approved feedbacks
+        ///</returns>
+        public List<Feedback> GetApprovedFeedbacks()
+        {
+            return GetFeedbacks("Select * from feedbacks where approved is true");
+        }
+        ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017
+        /// <summary>
+        ///Get feedbacks from feedbacks table
+        ///</summary>
+        ///<param name="sqlDml"> data manipulation language
+        ///</param>
+        ///<returns>
+        ///list of disapproved feedbacks
+        ///</returns>
+        public List<Feedback> GetDisapprovedFeedbacks()
+        {
+            return GetFeedbacks("Select * from feedbacks where approved is false");
         }
         ////Vucetic Marija RA157/2017
         /// <summary>

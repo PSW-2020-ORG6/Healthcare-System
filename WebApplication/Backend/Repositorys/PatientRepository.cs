@@ -13,21 +13,19 @@ namespace WebApplication.Backend.Repositorys
         private MySqlConnection connection;
         public PatientRepository()
         {
-
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
             connection.Open();
 
         }
-        ///Tanja Drcelic RA124/2017
+        ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017
         /// <summary>
-        ///Get all patients from patients table
+        ///Get patients from patients table
         ///</summary>
+        ///<param name="sqlDml"> data manipulation language
+        ///</param>
         ///<returns>
-        ///true if sucessful,else false
+        ///list of patients
         ///</returns>
-        ///<exception>
-        ///if any exception occurs method will return null
-        ///</exception>
         internal List<Patient> GetPatients(String sqlDml)
         {
                 MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
@@ -52,6 +50,16 @@ namespace WebApplication.Backend.Repositorys
                 }
                 connection.Close();
                 return resultList;
+        }
+        ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017
+        /// <summary>
+        ///Get patients from patients table
+        ///</summary>
+        ///<returns>
+        ///list of all patients
+        ///</returns>
+        public List<Patient> GetAllPatients() {
+            return GetPatients("Select * from patients");
         }
     }
 }

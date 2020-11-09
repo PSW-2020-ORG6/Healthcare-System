@@ -111,7 +111,7 @@
                     this.Refresh();
                 })
                 .catch(error => {
-                    alert(error.response.data)
+                    alert(error)
                 })
 
         },
@@ -122,7 +122,7 @@
                     this.Refresh();
                 })
                 .catch(error => {
-                    alert(error.response.data)
+                    alert(error)
                 })
         },
         Refresh: function () {

@@ -27,7 +27,7 @@ namespace WebApplication.Backend.Services
         ///</returns>
         internal List<Patient> GetAllPatients()
         {
-            return patientRepository.GetPatients("Select * from patients");
+            return patientRepository.GetAllPatients();
         }
     }
 }
