@@ -13,7 +13,9 @@
         mc:Ignorable="d"
         Title="GraphicEditor"
         Icon="Resources/Icons/syringe.png"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        MinWidth="1300"
+        MinHeight="700">
 
     <Window.DataContext>
         <local:MainWindowViewModel/>

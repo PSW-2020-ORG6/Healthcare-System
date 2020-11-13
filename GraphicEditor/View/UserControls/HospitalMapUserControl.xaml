@@ -6,7 +6,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:GraphicEditor.View.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="650" d:DesignWidth="1200">
+             d:DesignHeight="1250" d:DesignWidth="1500">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -24,9 +24,14 @@
     <Border BorderBrush="Black" 
             BorderThickness="1">
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
             <!--Legend Pattern-->
-            <Grid HorizontalAlignment="Left"
-                      VerticalAlignment="Center">
+            <Grid Grid.Column="0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center">
                 <!--Legend image-->
                 <Image Height="500"
                        HorizontalAlignment="Center"
@@ -35,24 +40,52 @@
             </Grid>
 
             <!--Map Pattern-->
-            <Grid HorizontalAlignment="Center"
-                      VerticalAlignment="Center">
+            <Grid Grid.Column="2"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Width="1000"
+                  Height="1000">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="43"/>
+                    <ColumnDefinition Width="198"/>
+                    <ColumnDefinition Width="43"/>
+                    <ColumnDefinition Width="198"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="198"/>
+                    <ColumnDefinition Width="42"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="43"/>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="44"/>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
                 <!--Map Image-->
-                <Image Height="600" 
+                <Image Grid.Column="0"
+                       Grid.Row="0"
+                       Grid.ColumnSpan="9"
+                       Grid.RowSpan="9"
                        HorizontalAlignment="Center"
-                       Source="/GraphicEditor;component/Resources/Images/mapPattern_withoutBuildings.png" 
-                       VerticalAlignment="Center"/>
+                       Source="/GraphicEditor;component/Resources/Images/MapPattern2-2.png" 
+                       VerticalAlignment="Center" />
 
                 <!--Emergency Ambulance button-->
                 <Button x:Name="EmergencyAmbulanceButton"
+                        Grid.Column="1"
+                        Grid.Row="1"
                         Background="DarkRed"
                         CommandParameter="emergency"
-                        Height="123"
-                        Margin="288,63,683,462"
-                        Style="{StaticResource ResourceKey=DefaultRectangleBuildingButtonStyle}"
-                        Width="210">
+                        Style="{StaticResource ResourceKey=DefaultRectangleBuildingButtonStyle}">
                     <StackPanel>
-                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
                                    TextWrapping="Wrap">
                                 Emergency Ambulance
                         </TextBlock>
@@ -64,12 +97,11 @@
 
                 <!--Cardiology button-->
                 <Button x:Name="CardiologyButton"
+                        Grid.Column="3"
+                        Grid.Row="1"
                         Background="Orange" 
                         CommandParameter="cardiology"
-                        Height="122"
-                        Margin="509,64,484,462"
-                        Style="{StaticResource ResourceKey=DefaultRectangleBuildingButtonStyle}"
-                        Width="188">
+                        Style="{StaticResource ResourceKey=DefaultRectangleBuildingButtonStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
@@ -83,12 +115,11 @@
 
                 <!--Orthopedics button-->
                 <Button x:Name="OrthopedyButton"
+                        Grid.Column="5"
+                        Grid.Row="1"
                         Background="OrangeRed" 
                         CommandParameter="orthopedics"
-                        Height="205"
-                        Margin="517,393,518,50"
-                        Style="{StaticResource ResourceKey=DefaultRectangleBuildingButtonStyle}"
-                        Width="146">
+                        Style="{StaticResource ResourceKey=DefaultRectangleBuildingButtonStyle}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
                                    TextWrapping="Wrap">
@@ -102,29 +133,33 @@
 
                 <!--Pediatrics button-->
                 <Button x:Name="PediatryButton"
+                        Grid.Column="7"
+                        Grid.Row="1"
                         CommandParameter="pediatrics"
-                        Margin="502,64,86,404"
                         Style="{StaticResource ResourceKey=TriangleBuildingButtonStyle}">
                 </Button>
 
                 <!--Dermatology button-->
                 <Button x:Name="DermatologyButton"
+                        Grid.Column="1"
+                        Grid.Row="3"
                         CommandParameter="dermatology"
-                        Margin="544,267,85,154"
                         Style="{StaticResource ResourceKey=DermatologyBuildingButtonStyle}">
                 </Button>
 
                 <!--Neurology button-->
                 <Button x:Name="NeurologyButton"
+                        Grid.Column="3"
+                        Grid.Row="3"
                         CommandParameter="neurology"
-                        Margin="372,254,646,278"
                         Style="{StaticResource ResourceKey=UBuildingButtonStyle}" >
                 </Button>
 
                 <!--Oncology button-->
                 <Button x:Name="OncologyButton"
+                        Grid.Column="5"
+                        Grid.Row="3"
                         CommandParameter="oncology"
-                        Margin="540,256,507,296"
                         Style="{StaticResource ResourceKey=OctagonBuildingButtonStyle}" >
                 </Button>
             </Grid>

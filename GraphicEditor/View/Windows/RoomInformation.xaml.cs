@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace GraphicEditor.View.UserControls
+namespace GraphicEditor.View.Windows
 {
     /// <summary>
     /// Interaction logic for RoomInformation.xaml
