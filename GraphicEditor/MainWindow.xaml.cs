@@ -23,9 +23,6 @@ namespace GraphicEditor
             Application.Current.MainWindow.Width = MainScreenWidth;
             Application.Current.MainWindow.Height = MainScreenHeight;
 
-            //Application.Current.MainWindow.MinWidth = 800;
-            //Application.Current.MainWindow.MinHeight = 500;
-
             InitializeComponent();
             TimeManaged();
         }
