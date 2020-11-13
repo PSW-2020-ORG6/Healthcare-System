@@ -101,11 +101,11 @@
     <Compile Include="View\UserControls\MapContentUserControl.xaml.cs">
       <DependentUpon>MapContentUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\RoomInformation.xaml.cs">
-      <DependentUpon>RoomInformation.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Windows\HelpViewer.xaml.cs">
       <DependentUpon>HelpViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\RoomInformation.xaml.cs">
+      <DependentUpon>RoomInformation.xaml</DependentUpon>
     </Compile>
     <Compile Include="VML\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
@@ -161,13 +161,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\RoomInformation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Windows\HelpViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\RoomInformation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +206,10 @@
   <ItemGroup>
     <Content Include="HtmlHelpPages\Error.html" />
     <Content Include="HtmlHelpPages\MainWindow.html" />
+    <Resource Include="Resources\Icons\bed.png" />
+    <Resource Include="Resources\Images\MapPattern2-2.png" />
+    <Resource Include="Resources\Images\MapPattern2-1.png" />
+    <Resource Include="Resources\Images\MapPattern2.png" />
     <Resource Include="Resources\Icons\plant.png" />
     <Resource Include="Resources\Icons\table.png" />
     <Resource Include="Resources\Icons\chair.png" />

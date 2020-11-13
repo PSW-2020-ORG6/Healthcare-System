@@ -9,6 +9,9 @@
         <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="BorderThickness" Value="3"/>
         <Setter Property="Foreground" Value="White" />
+        <Setter Property="Margin" Value="20" />
+        <Setter Property="Width" Value="150" />
+        <Setter Property="Height" Value="150" />
         <Setter Property="materialDesign:RippleAssist.Feedback" Value="Transparent"/>
     </Style>
 
@@ -18,22 +21,20 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Path Height="184"
-                              Fill="Coral"
+                        <Path Fill="Coral"
                               Stroke="Black" 
-                              StrokeThickness="3"
-                              Width="200">
+                              StrokeThickness="3">
                             <Path.Data>
                                 <GeometryGroup>
                                     <PathGeometry>
                                         <PathGeometry.Figures>
                                             <PathFigureCollection>
-                                                <PathFigure IsClosed="True" IsFilled="True" StartPoint="3,2" >
+                                                <PathFigure IsClosed="True" IsFilled="True" StartPoint="5,2" >
                                                     <PathFigure.Segments>
                                                         <PolyLineSegment>
                                                             <PolyLineSegment.Points>
-                                                                <Point X="198" Y="2" />
-                                                                <Point X="198" Y="182"/>
+                                                                <Point X="150" Y="2" />
+                                                                <Point X="150" Y="150"/>
                                                             </PolyLineSegment.Points>
                                                         </PolyLineSegment>
                                                     </PathFigure.Segments>
@@ -47,7 +48,8 @@
                         <StackPanel HorizontalAlignment="Right"
                                     VerticalAlignment="Top"
                                     Margin="0,10,10,0">
-                            <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                            <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                       Foreground="White">
                             Pediatrics
                             </TextBlock>
                             <Image Height="30"
@@ -61,6 +63,7 @@
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="20" />
     </Style>
 
     <Style x:Key="UBuildingButtonStyle" 
@@ -69,18 +72,16 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Path Height="148"
-                              Fill="Purple"
+                        <Path Fill="Purple"
                               Stroke="Black" 
-                              StrokeThickness="3"
-                              Width="163">
+                              StrokeThickness="3">
                             <Path.Data>
                                 <CombinedGeometry GeometryCombineMode="Xor">
                                     <CombinedGeometry.Geometry1>
-                                        <RectangleGeometry Rect="0, 0, 160, 145" />
+                                        <RectangleGeometry Rect="5, 0, 146, 147" />
                                     </CombinedGeometry.Geometry1>
                                     <CombinedGeometry.Geometry2>
-                                        <RectangleGeometry Rect="60, 0, 40, 80" />
+                                        <RectangleGeometry Rect="58, 0, 40, 80" />
                                     </CombinedGeometry.Geometry2>
                                 </CombinedGeometry>
 
@@ -99,15 +100,13 @@
                         </StackPanel>
                     </Grid>
                 </ControlTemplate>
-
             </Setter.Value>
         </Setter>
-        <Setter Property="Width" Value="163"/>
-        <Setter Property="Height" Value="148"/>
         <Setter Property="Command" Value="{Binding NavCommand}"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="20" />
     </Style>
 
     <Style x:Key="OctagonBuildingButtonStyle"
@@ -160,12 +159,21 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1.25" ScaleY="1.25"/>
+                    <TranslateTransform X="-15" Y="-15" />
+                </TransformGroup>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Command" Value="{Binding NavCommand}"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Height" Value="130" />
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Width" Value="130" />
+        <Setter Property="Margin" Value="20" />
     </Style>
 
     <Style x:Key="DermatologyBuildingButtonStyle" 
@@ -174,20 +182,17 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Grid Height="252"
-                          Width="153">
-                        <Path Height="252"
-                              Fill="Chocolate"
+                    <Grid>
+                        <Path Fill="Chocolate"
                               Stroke="Black" 
-                              StrokeThickness="3"
-                              Width="153">
+                              StrokeThickness="3">
                             <Path.Data>
                                 <CombinedGeometry GeometryCombineMode="Xor">
                                     <CombinedGeometry.Geometry1>
-                                        <RectangleGeometry Rect="0, 0, 150, 250" />
+                                        <RectangleGeometry Rect="3, 3, 150, 150" />
                                     </CombinedGeometry.Geometry1>
                                     <CombinedGeometry.Geometry2>
-                                        <RectangleGeometry Rect="50, 50, 50, 150" />
+                                        <RectangleGeometry Rect="52, 52, 50, 50" />
                                     </CombinedGeometry.Geometry2>
                                 </CombinedGeometry>
                             </Path.Data>
@@ -211,9 +216,11 @@
         </Setter>
         <Setter Property="Command" Value="{Binding NavCommand}"/>
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Height" Value="252"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="156"/>
+        <Setter Property="Height" Value="156"/>
+        <Setter Property="Margin" Value="20" />
     </Style>
 
     <Style x:Key="RoomButtonStyle"
