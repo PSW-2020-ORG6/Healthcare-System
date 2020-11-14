@@ -2,19 +2,19 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="ChairImage" TargetType="Image">
-        <Setter Property="Height" Value="40" />
+        <Setter Property="Height" Value="Auto"/>
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Source" Value="/GraphicEditor;component/Resources/Icons/chair.png" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Width" Value="40" />
+        <Setter Property="Width" Value="Auto"/>
     </Style>
 
     <Style x:Key="FlippedChairImage" TargetType="Image">
-        <Setter Property="Height" Value="40" />
+        <Setter Property="Height" Value="Auto" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Source" Value="/GraphicEditor;component/Resources/Icons/chair.png" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Width" Value="40" />
+        <Setter Property="Width" Value="Auto" />
         <Setter Property="Image.RenderTransform">
             <Setter.Value>
                 <TransformGroup>
@@ -25,11 +25,11 @@
     </Style>
 
     <Style x:Key="TableImage" TargetType="Image">
-        <Setter Property="Height" Value="40" />
+        <Setter Property="Height" Value="Auto" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Source" Value="/GraphicEditor;component/Resources/Icons/table.png" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Width" Value="40" />
+        <Setter Property="Width" Value="Auto" />
     </Style>
 
     <Style x:Key="PlantImage" TargetType="Image">
@@ -44,7 +44,7 @@
         <Setter Property="Height" Value="600" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Width" Value="672" />
+        <Setter Property="Width" Value="900" />
     </Style>
 
 </ResourceDictionary>

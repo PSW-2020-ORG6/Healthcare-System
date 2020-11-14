@@ -226,12 +226,13 @@
     <Style x:Key="RoomButtonStyle"
            BasedOn="{StaticResource {x:Type Button}}"
            TargetType="Button">
+        <Setter Property="Background" Value="#FF237793"/>
         <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="BorderThickness" Value="3"/>
-        <Setter Property="materialDesign:RippleAssist.Feedback" Value="Transparent"/>
-        <Setter Property="Background" Value="#FF237793"/>
-        <Setter Property="Height" Value="Auto"/>
         <Setter Property="Command" Value="{Binding NavCommand}"/>
+        <Setter Property="materialDesign:RippleAssist.Feedback" Value="Transparent"/>
+        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="Width" Value="Auto"/>
     </Style>
-    
+
 </ResourceDictionary>

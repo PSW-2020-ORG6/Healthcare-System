@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="650" d:DesignWidth="1200">
+            d:DesignHeight="1250" d:DesignWidth="1500">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -20,107 +20,212 @@
 
     <Border BorderBrush="Black" 
             BorderThickness="1">
-        <ScrollViewer>
-            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                <!--FloorPattern-->
-                <Image Style="{StaticResource FloorImage}"
-                       Source="/GraphicEditor;component/Resources/Images/floor.jpg"  />
+        <Grid Height="600"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Width="900">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
 
-                <!--Operation room1 button-->
-                <Button CommandParameter="room1"
-                        Margin="254,130,635,426"
-                        Style="{StaticResource ResourceKey=RoomButtonStyle}">
-                    <StackPanel>
-                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+            <!--FloorPattern-->
+            <Image Grid.Column="0"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="18"
+                   Grid.RowSpan="12"
+                   Style="{StaticResource FloorImage}"
+                   Source="/GraphicEditor;component/Resources/Images/floor.jpg"  />
+
+            <!--Operation room1 button-->
+            <Button CommandParameter="operationRoom1"
+                    Command="{Binding Path=ShowRoomCommand}"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="7"
+                    Grid.Row="0"
+                    Grid.RowSpan="4"
+                    Style="{StaticResource ResourceKey=RoomButtonStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                                   TextWrapping="Wrap"><Run Text="Operation room1"/></TextBlock>
+                </StackPanel>
+            </Button>
+
+            <!--Store room button-->
+            <Button CommandParameter="storeRoom1"
+                    Grid.Column="10"
+                    Grid.ColumnSpan="3"
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Style="{StaticResource ResourceKey=RoomButtonStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
-                                Operation room1
-                        </TextBlock>
-                    </StackPanel>
-                </Button>
+                                Store room
+                    </TextBlock>
+                </StackPanel>
+            </Button>
 
-                <!--Operation room2 button-->
-                <Button CommandParameter="room2"
-                        Margin="254,430,636,126"
-                        Style="{StaticResource ResourceKey=RoomButtonStyle}">
-                    <StackPanel>
-                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+
+            <!--Operation room2 button-->
+            <Button CommandParameter="operationRoom2"
+                    Command="{Binding Path=ShowRoomCommand}"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="7"
+                    Grid.Row="8"
+                    Grid.RowSpan="4"
+                    Style="{StaticResource ResourceKey=RoomButtonStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
                                 Operation room2
-                        </TextBlock>
-                    </StackPanel>
-                </Button>
+                    </TextBlock>
+                </StackPanel>
+            </Button>
 
-                <!--Waiting room-->
+            <!--Toilet-->
+            <Border BorderBrush="Black"
+                    BorderThickness="3"
+                    Grid.Column="13"
+                    Grid.ColumnSpan="5"
+                    Grid.Row="0"
+                    Grid.RowSpan="3">
+                <Rectangle 
+                           Fill="#FF6DAEC1"/>
+            </Border>
+            <Image Grid.Column="14"
+                   Grid.ColumnSpan="3"
+                   Grid.Row="1"
+                   Source="pack://application:,,,/Resources/Icons/toilet.png"/>
+
+            <!--Elevator-->
+            <Border BorderBrush="Black"
+                    BorderThickness="3"
+                    Background="#FF2F3B46"
+                    Grid.Column="16"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="9"
+                    Grid.RowSpan="3">
+                <TextBlock Style="{StaticResource ElevatorTextBlock}"/>
+            </Border>
+
+            <!--Decoration-->
+            <Image Grid.Column="8"
+                   Grid.ColumnSpan="2"
+                   Grid.Row="0"
+                   Grid.RowSpan="2"
+                   Style="{StaticResource PlantImage}" />
+            <Image Grid.Column="16"
+                   Grid.ColumnSpan="2"
+                   Grid.Row="4"
+                   Grid.RowSpan="5"
+                   Style="{StaticResource PlantImage}"/>
+            <Image Grid.Column="10"
+                   Grid.ColumnSpan="3"
+                   Grid.Row="10"
+                   Grid.RowSpan="2"
+                   Style="{StaticResource PlantImage}" />
+
+            <!--Doors-->
+            <Rectangle Grid.Column="1"
+                       Grid.Row="4"
+                       Style="{StaticResource DoorHorizontalRectangle}"/>
+            <Rectangle Grid.Column="5"
+                       Grid.Row="4"
+                       Style="{StaticResource DoorHorizontalRectangle}"/>
+            <Rectangle Grid.Column="7"
+                       Grid.Row="1"
+                       HorizontalAlignment="Left"
+                       Style="{StaticResource DoorVerticalRectangle}"/>
+            <Rectangle Grid.Column="11"
+                       Grid.Row="2"
+                       Style="{StaticResource DoorHorizontalRectangle}"/>
+            <Rectangle Grid.Column="14"
+                       Grid.Row="3"
+                       Style="{StaticResource DoorHorizontalRectangle}"/>
+            <Rectangle Grid.Column="16"
+                       Grid.Row="3"
+                       Style="{StaticResource DoorHorizontalRectangle}"/>
+            <Rectangle Grid.Column="7"
+                       Grid.Row="10"
+                       HorizontalAlignment="Left"
+                       Style="{StaticResource DoorVerticalRectangle}"/>
+            <Rectangle Grid.Column="1"
+                       Grid.Row="7"
+                       VerticalAlignment="Bottom"
+                       Style="{StaticResource DoorHorizontalRectangle}"/>
+            <Rectangle Grid.Column="5"
+                       Grid.Row="7"
+                       VerticalAlignment="Bottom"
+                       Style="{StaticResource DoorHorizontalRectangle}"/>
+            <Rectangle Grid.Column="15"
+                       Grid.Row="10"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Bottom"
+                       Style="{StaticResource DoorVerticalRectangle}"/>
+
+            <!--Waiting room-->
+            <Border BorderBrush="Black"
+                    BorderThickness="1"
+                    Grid.Column="9"
+                    Grid.ColumnSpan="5"
+                    Grid.Row="5"
+                    Grid.RowSpan="3">
                 <Grid Background="#FFC1E2EA"
-                      DockPanel.Dock="Top"  
-                      Margin="642,282,357,280">
-                    <Border BorderBrush="Black" 
-                        BorderThickness="2" 
-                        HorizontalAlignment="Left" 
-                        Height="148" 
-                        VerticalAlignment="Top"
-                        Width="182">
-                        <Grid>
-                            <Image Style="{StaticResource TableImage}" 
-                                   Margin="69,44,69,49"/>
-                            <Image Style="{StaticResource ChairImage}" 
-                                   Margin="24,10,114,83"/>
-                            <Image Style="{StaticResource ChairImage}" 
-                                   Margin="24,69,114,24"/>
-                            <Image Style="{StaticResource FlippedChairImage}" 
-                                   Margin="161,10,-23,83"/>
-                            <Image Style="{StaticResource FlippedChairImage}" 
-                                Margin="159,72,-21,21"/>
-                        </Grid>
-                    </Border>
-                </Grid>
-
-                <!--Elevator-->
-                <Border BorderBrush="Black"
-                        BorderThickness="3"
-                        Margin="806,495,255,126"
-                        Background="#FF2F3B46">
-                    <TextBlock Style="{StaticResource ElevatorTextBlock}"/>
-                </Border>
-
-                <!--Decoration-->
-                <Image Margin="596,495,535,161" 
-                    Style="{StaticResource PlantImage}" />
-                <Image Margin="863,330,268,330" 
-                    Style="{StaticResource PlantImage}" />
-                <Image Margin="596,167,535,493" 
-                    Style="{StaticResource PlantImage}" />
-
-                <!--Toilet-->
-                <Border BorderBrush="Black"
-                        BorderThickness="3"
-                        Margin="710,130,255,480">
-                    <Rectangle 
-                           Fill="#FF6DAEC1">
-                    </Rectangle>
-                </Border>
-                <Image Source="pack://application:,,,/Resources/Icons/toilet.png"
-                       Height="65"
-                       Margin="748,152,285,493"/>
-
-                <!--Doors-->
-                <Rectangle Margin="748,230,0,0"
-                           Style="{StaticResource DoorHorizontalRectangle}"/>
-                <Rectangle Margin="846,230,0,0"
-                    Style="{StaticResource DoorHorizontalRectangle}"/>
-                <Rectangle Margin="301,420,0,0"
-                    Style="{StaticResource DoorHorizontalRectangle}"/>
-                <Rectangle Margin="438,420,0,0"
-                    Style="{StaticResource DoorHorizontalRectangle}"/>
-                <Rectangle Margin="438,284,0,0"
-                    Style="{StaticResource DoorHorizontalRectangle}"/>
-                <Rectangle Margin="301,284,0,0"
-                    Style="{StaticResource DoorHorizontalRectangle}"/>
-                <Rectangle Margin="796,514,0,0" 
-                           Style="{StaticResource DoorVerticalRectangle}"/>
-
-
-            </Grid>
-        </ScrollViewer>
+                   Grid.Column="9"
+                   Grid.ColumnSpan="5"
+                   Grid.Row="5"
+                   Grid.RowSpan="3"/>
+            </Border>
+            <Image Style="{StaticResource TableImage}"
+                   Grid.Column="11"
+                   Grid.Row="6"/>
+            <Image Style="{StaticResource ChairImage}"
+                   Grid.Column="9"
+                   Grid.ColumnSpan="2"
+                   Grid.Row="5"/>
+            <Image Style="{StaticResource ChairImage}"
+                   Grid.Column="9"
+                   Grid.ColumnSpan="2"
+                   Grid.Row="7"/>
+            <Image Style="{StaticResource FlippedChairImage}"
+                   Grid.Column="13"
+                   Grid.ColumnSpan="2"
+                   Grid.Row="5"/>
+            <Image Style="{StaticResource FlippedChairImage}"
+                   Grid.Column="13"
+                   Grid.ColumnSpan="2"
+                   Grid.Row="7"/>
+        </Grid>
     </Border>
 </UserControl>
