@@ -43,6 +43,13 @@
     font-weight: 100;
     font-family: 'Impact';
 }
+.textSurvey {
+    color: black;
+    font-size: 30px;
+    font-weight: 100;
+    font-family: 'Impact';
+    position: inherit;
+}
 
 th {
     background-color: lightblue;
