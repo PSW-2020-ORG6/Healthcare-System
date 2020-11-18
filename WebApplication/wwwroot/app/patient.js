@@ -61,7 +61,10 @@
 		<div class="container"><br/>
 			<h3 class="text">Comments
 				<button type="button" class="btn btn-info btn-lg margin" data-toggle="modal" data-target="#feedbackModal">Add comment</button>
-			</h3><br/>    
+			</h3><br/>
+			<h3 class="textSurvey">Survey
+				<button type="button" class="btn btn-info btn-lg margin" data-toggle="modal" v-on:click="SurveyPage">Take survey</button>
+			</h3><br/> 
 			<div>
 				<div class="tab-content">
     				<div id="profil" class="container tab-pane active"><br>
