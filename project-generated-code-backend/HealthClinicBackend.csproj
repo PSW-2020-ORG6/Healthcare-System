@@ -74,6 +74,9 @@
     <Compile Include="Backend\Model\Accounts\Superintendent.cs" />
     <Compile Include="Backend\Model\Accounts\Patient.cs" />
     <Compile Include="Backend\Model\Accounts\Specialization.cs" />
+    <Compile Include="Backend\Model\Survey\Answer.cs" />
+    <Compile Include="Backend\Model\Survey\Question.cs" />
+    <Compile Include="Backend\Model\Survey\Survey.cs" />
     <Compile Include="Backend\Model\Util\Country.cs" />
     <Compile Include="Backend\Model\Util\City.cs" />
     <Compile Include="Backend\Model\Util\Address.cs" />
