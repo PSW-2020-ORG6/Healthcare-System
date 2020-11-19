@@ -66,7 +66,7 @@ namespace Model.Util
             return base.GetHashCode();
         }
 
-        internal string ToStringHours()
+        public string ToStringHours()
         {
             return "start: " + start.ToString("HH:mm") + "\nend: " + end.ToString("HH:mm");
         }

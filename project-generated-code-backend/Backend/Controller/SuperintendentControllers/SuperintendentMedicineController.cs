@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Backend.Controller.SuperintendentControllers
 {
-    class SuperintendentMedicineController
+    public class SuperintendentMedicineController
     {
         private SuperintendentMedicineService superintendentMedicineService;
         public SuperintendentMedicineController()

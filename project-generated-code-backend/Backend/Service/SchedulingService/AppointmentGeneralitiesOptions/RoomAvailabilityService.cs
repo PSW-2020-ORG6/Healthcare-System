@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 {
-    class RoomAvailabilityService
+    public class RoomAvailabilityService
     {
         private AppointmentRepository appointmentRepository;
         private RenovationRepository renovationRepository;

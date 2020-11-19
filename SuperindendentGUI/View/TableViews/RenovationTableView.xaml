@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="HealthClinic.View.TableViews.RenovationTableView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HealthClinic.View.TableViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label FontSize="25" Grid.Column="0">Renoviranja</Label>
+
+        </Grid>
+        <DataGrid Grid.Row="1" Grid.RowSpan="8" x:Name="dataGridRenovations" ItemsSource="{Binding Renovations}" IsReadOnly="True"  SelectionMode="Single" 
+                  AutoGenerateColumns="False" KeyDown="shiftPressed" SelectionChanged="selectionChanged_Event">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Soba" Binding="{Binding Room}" Width="*"/>
+                <DataGridTextColumn Header="Početak renoviranja" Binding="{Binding StartMoment}" Width="*" />
+                <DataGridTextColumn Header="Kraj renoviranja" Binding="{Binding EndMoment}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Menu x:Name="menu" HorizontalAlignment="Right" Height="134" Margin="700,35,0,0" Grid.Row="3" Grid.RowSpan="4" VerticalAlignment="Top" Width="100" IsEnabled="False" Visibility="Collapsed">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel VerticalAlignment="Stretch"></StackPanel>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="Nazad" x:Name="backOption" Click="back" KeyDown="back" />
+            <MenuItem Header="Dodaj renoviranje" x:Name="addOption" Click="addRowOption" />
+            <MenuItem Header="Izmeni renoviranje" x:Name="editOption" Click="editRowOption"  />
+            <MenuItem Header="Izbriši renoviranje" x:Name="deleteOption" Click="deleteRowOtpion" />
+        </Menu>
+        <StackPanel Grid.Row="9" Margin="0,25,0,0">
+            <StatusBarItem>
+                <TextBlock Name="statusBar">
+
+                </TextBlock>
+            </StatusBarItem>
+        </StackPanel>
+    </Grid>
+</UserControl>
