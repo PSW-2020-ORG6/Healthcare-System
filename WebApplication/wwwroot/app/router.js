@@ -6,6 +6,7 @@ const EmailConfirmation = { template: '<emailConfirmation></emailConfirmation>' 
 const SuccessfulRegistration = { template: '<successfulRegistration></successfulRegistration>' }
 const Survey = { template: '<survey></survey>' }
 const Statistics = { template: '<statistics></statistics>' }
+const Search = { template: '<search></search>' }
 
 
 var temp = new Vue({
@@ -38,6 +39,10 @@ var temp = new Vue({
 		statistics: function () {
 			router.push("statistics")
 		},
+		},
+		search: function () {
+			router.push("search")
+		}
 	}
 
 });
@@ -86,6 +91,11 @@ const router = new VueRouter({
 			name: 'statistics',
 			component: Statistics,
 		},	
+		{
+			path: '/search',
+			name: 'search',
+			component: Search,
+		}
 	]
 });
 
