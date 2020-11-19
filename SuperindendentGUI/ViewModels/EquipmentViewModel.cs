@@ -1,5 +1,4 @@
-﻿
-using Model.Hospital;
+﻿using Model.Hospital;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

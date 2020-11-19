@@ -119,6 +119,7 @@
     <Compile Include="Backend\Service\HospitalAccountsService\HospitalLogInService.cs" />
     <Compile Include="Backend\Service\HospitalAccountsService\PatientAccountsService.cs" />
     <Compile Include="Backend\Service\HospitalAccountsService\PhysicianAccountService.cs" />
+    <Compile Include="Backend\Service\HospitalAccountsService\SecretaryAccountService.cs" />
     <Compile Include="Backend\Service\MedicineService\MedicineAddingService.cs" />
     <Compile Include="Backend\Service\MedicineService\MedicineApprovalService.cs" />
     <Compile Include="Backend\Service\MedicineService\PhysitianMedicineService.cs" />
