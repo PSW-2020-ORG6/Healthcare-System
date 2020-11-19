@@ -1,0 +1,172 @@
+﻿<UserControl x:Class="HealthClinic.View.SpecialistReferralView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:local="clr-namespace:HealthClinic.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Border Style="{StaticResource SegmentOutline}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+
+            <!-- First Section -->
+            <Border Style="{StaticResource SmallerSegmentOutline}" Grid.Row="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.75*"/>
+                        <RowDefinition Height="0.75*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Heading Section -->
+                    <Border Style="{StaticResource SegmentOutline}">
+                        <Label Content="Uput za specijalistu"/>
+                    </Border>
+
+                    <!-- Procedure Type Section -->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Content="Tip uputa:" Margin="10,0,0,0" Grid.Column="0"/>
+                        <ComboBox Name="procedureTypeCB" ItemsSource="{Binding ProcedureTypeItems}" SelectedItem="{Binding SelectedProcedureTypeItem}" IsEnabled="{Binding IsNewDocument}" Grid.Column="1" Margin="3,3,3,3" Style="{StaticResource ComboBoxFlatStyle}"/>
+                    </Grid>
+
+                    <!-- Urgency CheckBox Section -->
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Content="Hitna intervencija:" Visibility="{Binding AppointmentSchedulingMode}" Margin="10,0,0,0" Grid.Column="0"/>
+                        <CheckBox IsChecked="{Binding Urgency}" Visibility="{Binding AppointmentSchedulingMode}" Grid.Column="1"  Margin="3,3,3,3" VerticalAlignment="Center" />
+                    </Grid>
+
+                </Grid>
+            </Border>
+
+            <!-- Second Section -->
+            <Border Style="{StaticResource SmallerSegmentOutline}" Grid.Row="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="1.5*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Notes Label -->
+                    <Border Style="{StaticResource SegmentOutline}" Grid.Row="0">
+                        <Label Content="Napomene:"/>
+                    </Border>
+
+                    <!-- Actual Notes -->
+                    <Border Style="{StaticResource SegmentOutline}" Grid.Row="1">
+                        <ScrollViewer x:Name="notesScrollViewer" VerticalScrollBarVisibility="Hidden">
+                            <xctk:RichTextBox x:Name="notesRichTextBox" IsEnabled="{Binding IsNewDocument}" Text="{Binding Notes, UpdateSourceTrigger=LostFocus}" Background="FloralWhite" PreviewMouseWheel="specialistRefferalNotes_PreviewMouseWheel">
+                                <xctk:RichTextBox.TextFormatter>
+                                    <xctk:PlainTextFormatter />
+                                </xctk:RichTextBox.TextFormatter>
+                            </xctk:RichTextBox>
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- Third Section -->
+            <Border Style="{StaticResource SmallerSegmentOutline}" Grid.Row="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!-- Section Heading -->
+                    <Border Style="{StaticResource SegmentOutline}" Grid.Row="0">
+                        <Label Content="Zakazivanje pregleda:" Style="{StaticResource HeadingLabel}"/>
+                    </Border>
+
+                    <!-- Physitian Section -->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Lekar:" Grid.Column="1" Visibility="{Binding AppointmentSchedulingMode}" Style="{StaticResource HeadingLabel}" HorizontalAlignment="Right"/>
+                        <ComboBox Name="physitianCB" Visibility="{Binding AppointmentSchedulingMode}" ItemsSource="{Binding PhysitianItems}" SelectedItem="{Binding SelectedPhysitianItem}" Grid.Column="2" Style="{StaticResource ComboBoxFlatStyle}" Margin="7,7,7,7">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+
+                    <!-- DateTime Comboboxes Button -->
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Visibility="{Binding AppointmentSchedulingMode}" Content="Datum:" Grid.Column="1" Style="{StaticResource HeadingLabel}" HorizontalAlignment="Right"/>
+                        <ComboBox Visibility="{Binding AppointmentSchedulingMode}" Name="dateCB" ItemsSource="{Binding DateItems}" SelectedItem="{Binding SelectedDateItem}" Grid.Column="2" Style="{StaticResource ComboBoxFlatStyle}" Margin="7,7,7,7">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Label Visibility="{Binding AppointmentSchedulingMode}" Content="Vreme:" Grid.Column="3" Style="{StaticResource HeadingLabel}" HorizontalAlignment="Right"/>
+                        <ComboBox Visibility="{Binding AppointmentSchedulingMode}" Name="timeCB" Grid.Column="4" ItemsSource="{Binding TimeItems, NotifyOnSourceUpdated=True}" SelectedItem="{Binding SelectedTimeItem}" Style="{StaticResource ComboBoxFlatStyle}" Margin="7,7,7,7">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+
+                    <!-- Quick Schedule Button -->
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Visibility="{Binding AppointmentSchedulingMode}" x:Name="quickScheduleButton" Content="Brzo zakazivanje" Grid.Column="1" Style="{StaticResource QuickAppointmentButtonStyle}"/>
+                    </Grid>
+                    <!-- Submit/Cancel Buttons-->
+                    <Grid Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2.375*"/>
+                            <ColumnDefinition Width="0.25*"/>
+                            <ColumnDefinition Width="2.375*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="cancelSpecialistReferralButton" Content="Odustanak" Style="{StaticResource CancelButtonStyle}" Grid.Column="1" Command="{Binding CancelCommand}"/>
+                        <Button x:Name="submitSpecialistReferralButton" Content="Potvrda" IsEnabled="{Binding IsNewDocument}" Style="{StaticResource SubmitButtonStyle}" Grid.Column="3" Command="{Binding SubmitCommand}"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</UserControl>

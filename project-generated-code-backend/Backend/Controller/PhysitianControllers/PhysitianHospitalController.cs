@@ -8,7 +8,7 @@ using System.Text;
 
 namespace health_clinic_class_diagram.Backend.Controller.PhysitianControllers
 {
-    class PhysitianHospitalController
+    public class PhysitianHospitalController
     {
         private HospitalService hospitalService;
 
