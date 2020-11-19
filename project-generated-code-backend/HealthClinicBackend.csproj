@@ -52,6 +52,8 @@
     <Compile Include="Backend\Dto\SuggestedAppointmentDTO.cs" />
     <Compile Include="Backend\Model\Blog\BlogPost.cs" />
     <Compile Include="Backend\Model\Blog\Feedback.cs" />
+    <Compile Include="Backend\Model\Hospital\Building.cs" />
+    <Compile Include="Backend\Model\Hospital\Floor.cs" />
     <Compile Include="Backend\Model\Hospital\Hospital.cs" />
     <Compile Include="Backend\Model\Hospital\Renovation.cs" />
     <Compile Include="Backend\Model\Hospital\Room.cs" />
@@ -93,12 +95,16 @@
     <Compile Include="Backend\Repository\AddressRepository.cs" />
     <Compile Include="Backend\Repository\BedReservationFileSystem.cs" />
     <Compile Include="Backend\Repository\BedReservationRepository.cs" />
+    <Compile Include="Backend\Repository\BuildingFileSystem.cs" />
+    <Compile Include="Backend\Repository\BuildingRepository.cs" />
     <Compile Include="Backend\Repository\CityFileSystem.cs" />
     <Compile Include="Backend\Repository\CityRepository.cs" />
     <Compile Include="Backend\Repository\CountryFileSystem.cs" />
     <Compile Include="Backend\Repository\CountryRepository.cs" />
     <Compile Include="Backend\Repository\DiagnosticTypeFileSystem.cs" />
     <Compile Include="Backend\Repository\DiagnosticTypeRepository.cs" />
+    <Compile Include="Backend\Repository\FloorFileSystem.cs" />
+    <Compile Include="Backend\Repository\FloorRepository.cs" />
     <Compile Include="Backend\Repository\GenericFileSystem.cs" />
     <Compile Include="Backend\Repository\ProcedureTypeFileSystem.cs" />
     <Compile Include="Backend\Repository\ProcedureTypeRepository.cs" />
@@ -113,7 +119,6 @@
     <Compile Include="Backend\Service\HospitalAccountsService\HospitalLogInService.cs" />
     <Compile Include="Backend\Service\HospitalAccountsService\PatientAccountsService.cs" />
     <Compile Include="Backend\Service\HospitalAccountsService\PhysicianAccountService.cs" />
-    <Compile Include="Backend\Service\HospitalAccountsService\SecretaryAccountService.cs" />
     <Compile Include="Backend\Service\MedicineService\MedicineAddingService.cs" />
     <Compile Include="Backend\Service\MedicineService\MedicineApprovalService.cs" />
     <Compile Include="Backend\Service\MedicineService\PhysitianMedicineService.cs" />
