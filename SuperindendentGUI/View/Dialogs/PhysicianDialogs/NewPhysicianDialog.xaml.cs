@@ -1,5 +1,4 @@
-﻿using Backend.Controller.SuperintendentControllers;
-using HealthClinic.Backend.Controller.SuperintendentControllers;
+﻿using HealthClinic.Backend.Controller.SuperintendentControllers;
 using HealthClinic.View.ErrorCheck;
 using Model.Accounts;
 using Model.Util;
