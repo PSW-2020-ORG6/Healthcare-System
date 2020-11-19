@@ -40,7 +40,7 @@ namespace HCI_SIMS_PROJEKAT.Views
                     break;
             }
 
-            switch(currLanguage.Name)
+            switch (currLanguage.Name)
             {
                 case "en-US":
                     LanguageComboBox.SelectedIndex = 1;
@@ -68,23 +68,24 @@ namespace HCI_SIMS_PROJEKAT.Views
 
         private void StyleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(!(StyleComboBox.SelectedValue == null))
+            if (!(StyleComboBox.SelectedValue == null))
             {
                 if (StyleComboBox.SelectedValue.ToString().Equals("DarkPurple"))
                 {
                     Resources["panelStyle"] = Application.Current.Resources["DarkPanel"];
                     Resources["textStyle"] = Application.Current.Resources["DarkLabelForText"];
                     PersonalizationViewModel.StyleName = "DarkPurple";
-                    
-                } else if(StyleComboBox.SelectedValue.ToString().Equals("SkyBlue"))
+
+                }
+                else if (StyleComboBox.SelectedValue.ToString().Equals("SkyBlue"))
                 {
                     Resources["panelStyle"] = Application.Current.Resources["WhitePanel"];
                     Resources["textStyle"] = Application.Current.Resources["WhiteLabelForText"];
                     PersonalizationViewModel.StyleName = "SkyBlue";
                 }
             }
-            
-            
+
+
         }
     }
 }
