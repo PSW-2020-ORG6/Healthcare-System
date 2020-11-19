@@ -1,4 +1,5 @@
-﻿using health_clinic_class_diagram.Backend.Model.Hospital;
+﻿using health_clinic_class_diagram.Backend.Model.Survey;
+using health_clinic_class_diagram.Backend.Model.Hospital;
 using Microsoft.EntityFrameworkCore;
 using Model.Accounts;
 using Model.Blog;
@@ -21,11 +22,17 @@ namespace WebApplication.Backend.Model
         public DbSet<Medicine> Medicine { get; set; }
         public DbSet<MedicineGEA> MedicineGEA { get; set; }
 
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Survey> Surveys { get; set; }
+
+
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
         // only for testing purposes
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Survey>().HasKey(o => o.ID );
+
             modelBuilder.Entity<Feedback>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Building>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Equipment>().HasKey(o => o.Id);
@@ -41,6 +48,40 @@ namespace WebApplication.Backend.Model
                  new Patient { Name = "Jelena", Surname = "Tanjic", Id = "0002", DateOfBirth = new DateTime(2017, 1, 18), Contact = "kontakt", Password = "sifra", Address = new Address("neka adresa"), ParentName = "otac", Gender = "Zensko", Email = "email", Guest = true },
                  new Patient { Name = "Sara", Surname = "Milic", Id = "0003", DateOfBirth = new DateTime(2018, 1, 18), Contact = "kontaktMica", Password = "sifraMica", Address = new Address("neka adresaMica"), ParentName = "mama", Gender = "Zensko", Email = "emailMica", Guest = true }
             );
+            modelBuilder.Entity<Question>().HasKey(o => o.Id);
+            modelBuilder.Entity<Question>().HasData(
+                new Question { id = 1,QuestionText= "The doctor is welcoming and gentle?"},
+                new Question { id = 2, QuestionText = "The doctor answered all of your questions in an understandable manner?" },
+                new Question { id = 3, QuestionText = "The doctor takes care of you in a professional manner?" },
+                new Question { id = 4, QuestionText = "Would you have the procedure done again by this doctor?" },
+                new Question { id = 5, QuestionText = "The personal manner(courtosy,respect,sensitivity,friendliness) of the nurses and other support staff?" },
+                new Question { id = 6, QuestionText = "The nursees answered all of your questions in an understandable manner?" },
+                new Question { id = 7, QuestionText = "Orientation given to warn setup" },
+                new Question { id = 8, QuestionText = "The nurse gave you good discharge instructions" },
+                new Question { id = 9, QuestionText = "The nurse was concern for you?" },
+                new Question { id = 10, QuestionText = "The comfort and cleanliness of the facility" },
+                new Question { id = 11, QuestionText = "Comfort level within the procedure room?" },
+                new Question { id = 12, QuestionText = "Conditions of the rooms(temperature,comfort,silence)" },
+                new Question { id = 13, QuestionText = "General impression of the ambient atmosphere" },
+                new Question { id = 14, QuestionText = "Do you think the clinic has the necessary equipment" },
+                new Question { id = 15, QuestionText = "Do you think the clinic's farmacy has the necessary drugs?" },
+                new Question { id = 16, QuestionText = "Do you think that the hospital should have more modern equipment than the current one" },
+                new Question { id = 17, QuestionText = "Did you noticed broken or damaged equipment in the hospital" },
+                new Question { id = 18, QuestionText = "The doctor prescribed medications that I could buy at the clinic's pharmacy" },
+                new Question { id = 19, QuestionText = "Did you found it easy to use our website?" },
+                new Question { id = 20, QuestionText = "Did you have found all the necessary information on our website?" },
+                new Question { id = 21, QuestionText = "Overall, are you satisfied with the care you received in this facility?" },
+                new Question { id = 22, QuestionText = "Would you come to this institution again" },
+                new Question { id = 23, QuestionText = ">Would you recommend this facility to your friends and family" }
+           );
+            
+            modelBuilder.Entity<Survey>().HasData(
+                new Survey {ID="001",Question1="5", Question2 = "5",Question3 = "5",
+                    Question4 = "5",Question5 = "4",Question6 = "3",Question7 = "5",Question8 = "5",
+                    Question9 = "1",Question10 = "5",Question11 = "2",Question12 = "5",Question13 = "5",
+                    Question14 = "5",Question15 = "5",Question16 = "5",Question17 = "5",Question18 = "5",
+                    Question19 = "5",Question20 = "5" ,Question21="3",Question22="2",Question23="4"}
+           );
             modelBuilder.Entity<Building>().HasData(
               new Building { SerialNumber = "10001", Name = "Cardiology", Color = "Orange", Shape = "Square" },
               new Building { SerialNumber = "10002", Name = "Orthopedy", Color = "Dark Orange", Shape = "Square" }
