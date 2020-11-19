@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="HCI_SIMS_PROJEKAT.Views.PersonalizationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HCI_SIMS_PROJEKAT.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="570" d:DesignWidth="400">
+
+
+
+    <Border BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8" Style="{DynamicResource panelStyle}">
+        <Grid Margin="5,5,5,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Content="{Binding Path=ThemeLabelText, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource textStyle}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" VerticalContentAlignment="Center"/>
+            <Label Content="{Binding Path=LanguageLabelText, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource textStyle}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalContentAlignment="Center"/>
+
+            <ComboBox x:Name="StyleComboBox" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="3" Margin="5,15,5,15" SelectionChanged="StyleComboBox_SelectionChanged" SelectedValuePath="Content">
+                <ComboBoxItem Content="SkyBlue"></ComboBoxItem>
+                <ComboBoxItem Content="DarkPurple"></ComboBoxItem>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding Path=DataContext.ChangeStyleCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+            <ComboBox x:Name="LanguageComboBox" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="3" Margin="5,15,5,15" SelectionChanged="LanguageComboBox_SelectionChanged" SelectedValuePath="Content">
+                <ComboBoxItem>Serbian</ComboBoxItem>
+                <ComboBoxItem>English</ComboBoxItem>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding Path=DataContext.ChangeLanguageCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+        </Grid>
+    </Border>
+</UserControl>

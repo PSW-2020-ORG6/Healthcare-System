@@ -1,0 +1,229 @@
+﻿<Window x:Class="HCI_SIMS_PROJEKAT.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:HCI_SIMS_PROJEKAT"
+        xmlns:viewmodels="clr-namespace:HCI_SIMS_PROJEKAT.ViewModels"
+        xmlns:views="clr-namespace:HCI_SIMS_PROJEKAT.Views"
+        mc:Ignorable="d"
+        Title="Klinika-Zdravo" Height="750" Width="430">
+
+    <Window.DataContext>
+        <viewmodels:MainWindowViewModel></viewmodels:MainWindowViewModel>
+    </Window.DataContext>
+
+    <!--Storyboard - deo koji sluzi za animaciju ActionBar-a-->
+    <Window.Resources>
+        <Storyboard x:Key="MenuOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)"
+                                           Storyboard.TargetName="SideBar">
+                <EasingDoubleKeyFrame KeyTime="0" Value = "0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="250"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="MenuClose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)"
+                                           Storyboard.TargetName="SideBar">
+                <EasingDoubleKeyFrame KeyTime="0" Value = "250"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <!--DataTemplate- deo koji sluzi za menjanje contenta u aplikaciji-a
+         <DataTemplate x:Name="scheduleViewTemplate" DataType="{x:Type viewmodels:ScheduleViewModel}">
+           <views:ScheduleView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="RegisterPatientViewTemplate" DataType="{x:Type viewmodels:RegisterPatientViewModel}">
+            <views:RegisterPatientView DataContext="{Binding}"/>
+        </DataTemplate>-->
+
+
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent = "ButtonBase.Click"
+                      SourceName = "ActionBarOpen">
+
+            <BeginStoryboard Storyboard="{StaticResource MenuOpen}"/>
+        </EventTrigger>
+
+        <EventTrigger x:Name="BarClose" RoutedEvent = "ButtonBase.Click"
+                      SourceName = "ActionBarClose">
+
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+
+        <EventTrigger x:Name="BarCloseAppointment" RoutedEvent = "ButtonBase.Click"
+                      SourceName = "AppointmentButtonFromMenu">
+
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+
+        <EventTrigger x:Name="BarCloseSchedule" RoutedEvent = "ButtonBase.Click"
+                      SourceName = "ScheduleButtonFromMenu">
+
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+
+        <EventTrigger x:Name="BarCloseRegisterPattient" RoutedEvent = "ButtonBase.Click"
+                      SourceName = "RegisterPatientButtonFromMenu">
+
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+
+        <EventTrigger x:Name="BarClosePersonalization" RoutedEvent = "ButtonBase.Click"
+                      SourceName = "PersonalizationButtonFromMenu">
+
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+
+        <EventTrigger x:Name="BarClosePatientList" RoutedEvent = "ButtonBase.Click"
+                      SourceName = "PatientListButton">
+
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+
+        <EventTrigger x:Name="BarClosePhysitianList" RoutedEvent = "ButtonBase.Click"
+                      SourceName = "PhysitianListButton">
+
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+
+        <EventTrigger x:Name="BarCloseStatistics" RoutedEvent = "ButtonBase.Click"
+                      SourceName = "StatisticsButton">
+
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+
+    </Window.Triggers>
+
+    <Grid x:Name="MainPanel" Visibility="Visible" x:FieldModifier="public" Style="{DynamicResource mainStyle}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
+        <Grid x:Name="SideBar" Margin="0,5,5,5" Style="{DynamicResource sideBarStyle}" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="3" Grid.RowSpan="10" Grid.ColumnSpan="7" Width="0" Panel.ZIndex="1" >
+            <Grid Margin="0,0,0,650" Background="#FFD1CCCC" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="ActionBarClose" Background="#FFD1CCCC" BorderBrush="#FFCFC5C5">
+                    <Image Source="slike/arrow.png"/>
+                </Button>
+            </Grid>
+
+            <!--ActionBar je izdeljen u StackPanele koji sadrze buttone-->
+            <StackPanel Margin="0,80,0,0">
+                <Button x:Name="ScheduleButtonFromMenu" Style ="{DynamicResource menuButtonStyle}" Command="{Binding ChangeToScheduleViewCommand}" Click="ScheduleButtonFromMenu_Click">
+                    <Grid Width="230">
+                        <Image Source="slike/calendar.png" HorizontalAlignment="left"/>
+                        <Label Style="{StaticResource WhiteLabel}" Content="{Binding ScheduleSideBar}" HorizontalContentAlignment="Left" Margin="28,0,0,0" />
+                    </Grid>
+                </Button>
+                <Button x:Name="RegisterPatientButtonFromMenu" Style ="{DynamicResource menuButtonStyle}" Command="{Binding ChangeToRegisterPatientViewCommand}">
+                    <Grid Width="230">
+                        <Image Source="slike/addUser.png" HorizontalAlignment="left"/>
+                        <Label Style="{StaticResource WhiteLabel}"  Content="{Binding RegisterSideBar}" HorizontalContentAlignment="Left" Margin="28,0,0,0" />
+                    </Grid>
+                </Button>
+                <Button x:Name="AppointmentButtonFromMenu" Style ="{DynamicResource menuButtonStyle}" Command="{Binding ChangeToAppointmentViewCommand}">
+                    <Grid Width="230">
+                        <Image Source="slike/plus.png" HorizontalAlignment="left"/>
+                        <Label Style="{StaticResource WhiteLabel}"  Content="{Binding AppointmentSideBar}" HorizontalContentAlignment="Left" Margin="28,0,0,0" />
+                    </Grid>
+                </Button>
+            </StackPanel>
+            <StackPanel Margin="0,200,0,-200" Height="701" VerticalAlignment="Top">
+                <Button x:Name="PhysitianListButton" Style ="{DynamicResource menuButtonStyle}" Command="{Binding ChangeToPhysitianListViewCommand}">
+                    <Grid Width="230">
+                        <Image Source="slike/doctor.png" HorizontalAlignment="left"/>
+                        <Label Style="{StaticResource WhiteLabel}"  Content="{Binding PhysitianListSideBar}" HorizontalContentAlignment="Left" Margin="28,0,0,0" />
+                    </Grid>
+                </Button>
+                <Button x:Name="PatientListButton" Style ="{DynamicResource menuButtonStyle}" Command="{Binding ChangeToPatientListViewCommand}">
+                    <Grid Width="230">
+                        <Image Source="slike/patient.png" HorizontalAlignment="left" />
+                        <Label Style="{StaticResource WhiteLabel}"  Content="{Binding PatientListSideBar}" HorizontalContentAlignment="Left" Margin="28,0,0,0" />
+                    </Grid>
+                </Button>
+                <Button x:Name="StatisticsButton" Style ="{DynamicResource menuButtonStyle}" Command="{Binding ChangeToPStatisticsViewCommand}">
+                    <Grid Width="230">
+                        <Image Source="slike/statistika.png" HorizontalAlignment="left"/>
+                        <Label Style="{StaticResource WhiteLabel}"  Content="{Binding StatisticsSideBar}" HorizontalContentAlignment="Left" Margin="28,0,0,0" />
+                    </Grid>
+                </Button>
+            </StackPanel>
+            <StackPanel Margin="0,320,0,-328">
+                <Button x:Name="PersonalizationButtonFromMenu" Style ="{DynamicResource menuButtonStyle}" Command="{Binding ChangeToPersonalizationViewCommand}">
+                    <Grid Width="230">
+                        <Image Source="slike/personalizacija.png" HorizontalAlignment="left"/>
+                        <Label Style="{StaticResource WhiteLabel}"  Content="{Binding PersonalizationSideBar}" HorizontalContentAlignment="Left" Margin="28,0,0,0" />
+                    </Grid>
+                </Button>
+                <Button Style ="{DynamicResource menuButtonStyle}">
+                    <Grid Width="230">
+                        <Image Source="slike/logout.png" HorizontalAlignment="left"/>
+                        <Label Style="{StaticResource WhiteLabel}" Content="LogOut" HorizontalContentAlignment="Left" Margin="28,0,0,0" />
+                    </Grid>
+                </Button>
+            </StackPanel>
+
+
+            <!--Header koji je stacionaran i uvek prisutan u aplikaciji-->
+        </Grid>
+
+        <Grid x:Name="HeaderGrid" Grid.ColumnSpan="10" Margin="10" Style="{DynamicResource headerStyle}" >
+            <Label x:Name="HeaderLabel" Margin="5,5,5,5" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource WhiteLabel}" Content="{Binding TitleHeader}"></Label>
+            <Button x:Name="ActionBarOpen" Style="{DynamicResource menuButtonStyle}" Margin="10,10,10,10" Width="40" HorizontalAlignment="Right">
+                <Image Source="slike/menu.png"></Image>
+            </Button>
+        </Grid>
+
+        <!--Dugmici koji se nalaze na dnu aplikacije (3 komada) -->
+        <StackPanel Orientation="Horizontal" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="10" HorizontalAlignment="Center">
+            <Button x:Name="HomeButton" Style="{DynamicResource menuButtonStyle}" Width="133" Height="50" Command="{Binding ChangeToMainViewCommand}" Click="HomeButton_Click">
+                <Image Source="slike/home.png"></Image>
+            </Button>
+            <Button x:Name="ScheduleButton" Style="{DynamicResource menuButtonStyle}" Width="133" Height="50" Command="{Binding ChangeToScheduleViewCommand}" Click="ScheduleButton_Click">
+                <Image Source="slike/calendar.png" Margin="5,5,5,5"></Image>
+            </Button>
+            <Button x:Name="AppointmentButton" Style="{DynamicResource menuButtonStyle}" Width="133" Height="50" Command="{Binding ChangeToAppointmentViewCommand}" Click="AppointmentButton_Click">
+                <Image Source="slike/plus.png" Margin="5,5,5,5"></Image>
+            </Button>
+        </StackPanel>
+
+
+        <!--<Frame x:Name="Main" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="8"  > </Frame>-->
+        <ContentControl x:Name="MainContent" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="8" Margin="5,0,5,0" Content="{Binding ContentControlView}"/>
+    </Grid>
+</Window>

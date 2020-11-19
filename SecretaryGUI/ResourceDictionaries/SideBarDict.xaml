@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:HCI_SIMS_PROJEKAT.ResourceDictionaries">
+
+    <Style TargetType="Grid" x:Key="WhiteSideBar">
+        <Setter Property="Background" Value="#FFD1CCCC"/>
+    </Style>
+
+    <Style TargetType="Grid" x:Key="DarkSideBar">
+        <Setter Property="Background" Value="#FF615C5C"/>
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,23 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:HCI_SIMS_PROJEKAT.ResourceDictionaries">
+
+    <Style TargetType="Label" x:Key="WhiteLabel">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="WhiteLabelForText">
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="DarkLabelForText">
+        <Setter Property="Foreground" Value="white"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+    </Style>
+
+
+</ResourceDictionary>

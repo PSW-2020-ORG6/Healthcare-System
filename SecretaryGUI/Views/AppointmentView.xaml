@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="HCI_SIMS_PROJEKAT.Views.AppointmentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:local="clr-namespace:HCI_SIMS_PROJEKAT.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="570" d:DesignWidth="400">
+    <Border x:Name="AppointmentPanel" Grid.Column="0" Margin="0,0,0,170" Style="{DynamicResource panelStyle}">
+        <Grid Margin="5,5,5,5">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Button Style="{DynamicResource buttonStyle}" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="4" Margin="5,5,5,5" Height="Auto" Content="{Binding Path=GenerateAppointmentText, UpdateSourceTrigger=PropertyChanged}">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Label Style="{DynamicResource textStyle}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" Content="{Binding Path=DateText, UpdateSourceTrigger=PropertyChanged}" ></Label>
+            <Label Style="{DynamicResource textStyle}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" Content="{Binding Path=TimeText, UpdateSourceTrigger=PropertyChanged}" ></Label>
+            <Label Style="{DynamicResource textStyle}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Center" Content="{Binding Path=ProcedureTypeText, UpdateSourceTrigger=PropertyChanged}"></Label>
+            <Label Style="{DynamicResource textStyle}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" Content="{Binding Path=PhysitianText, UpdateSourceTrigger=PropertyChanged}"></Label>
+            <Label Style="{DynamicResource textStyle}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" Content="{Binding Path=RoomText, UpdateSourceTrigger=PropertyChanged}"></Label>
+            <Label Style="{DynamicResource textStyle}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" Content="{Binding Path=EmergencyText, UpdateSourceTrigger=PropertyChanged}"></Label>
+            <Label Style="{DynamicResource textStyle}" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Center" Content="{Binding Path=PatientText, UpdateSourceTrigger=PropertyChanged}"></Label>
+
+
+            <ComboBox x:Name="DateComboBox" SelectionChanged="SelectionChanged" SelectedItem="{Binding SelectedDateItem}" ItemsSource="{Binding DateItems}" Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="4" VerticalAlignment="Center" Margin="5,0,5,0"/>
+            <ComboBox x:Name="TimeComboBox" SelectionChanged="SelectionChanged" SelectedItem="{Binding SelectedTimeItem}" ItemsSource="{Binding TimeItems}" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="4" VerticalAlignment="Center" Margin="5,0,5,0"/>
+            <ComboBox x:Name="ProcedureTypeComboBox" SelectionChanged="SelectionChanged" SelectedItem="{Binding SelectedProcedureTypeItem}" ItemsSource="{Binding ProcedureTypeItems}" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="4" VerticalAlignment="Center" Margin="5,0,5,0"/>
+            <ComboBox x:Name="PhysitianComboBox" SelectionChanged="SelectionChanged" SelectedItem="{Binding SelectedPhysitianItem}" ItemsSource="{Binding PhysitianItems}" Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="4" VerticalAlignment="Center" Margin="5,0,5,0"/>
+            <ComboBox x:Name="RoomComboBox" SelectionChanged="SelectionChanged" SelectedItem="{Binding SelectedRoomItem}" Grid.Row="4" ItemsSource="{Binding RoomItems}" Grid.Column="4" Grid.ColumnSpan="4" VerticalAlignment="Center" Margin="5,0,5,0"/>
+
+            <CheckBox x:Name="EmergencyCheckBox" IsChecked="{Binding Emergency}" Grid.Row="5" Grid.Column="4" Margin="5,5,5,5" VerticalAlignment="Center"></CheckBox>
+
+            <Button x:Name="ChoosePatientButton" Style="{DynamicResource buttonStyle}" Content="{Binding Path=ChoosePatientText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" Margin="5,5,5,5" Height="Auto" Command="{Binding InstantiateDialog}">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <TextBlock x:Name="PatientText" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="6" Margin="5,5,5,5" Style="{DynamicResource textBlockStyle}" Text="{Binding Patient}"/>
+
+            <Button x:Name="Submit" Style="{DynamicResource buttonStyle}" Content="{Binding Path=SubmitButtonText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="9" Grid.Column="8" Grid.ColumnSpan="2" Margin="0,0,5,5" Height="29" Command="{Binding CreateAppointmentCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="68">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button x:Name="BackButton" Style="{DynamicResource buttonStyle}" Content="{Binding Path=DeclineButtonText, UpdateSourceTrigger=PropertyChanged}" Grid.Row="9" Grid.Column="6" Grid.ColumnSpan="2" Margin="5,5,5,5" Height="Auto" Command="{Binding GoBackCommand}" Click="BackButton_Click" >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>

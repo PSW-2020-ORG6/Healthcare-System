@@ -1,0 +1,2 @@
+{"Name":"Dell monitor","Id":"222","SerialNumber":"77fc0447-5b73-4f76-88ff-4eb274abdc34"}
+{"Name":"Operacioni sto","Id":"223","SerialNumber":"8c57b737-5d93-4a31-b5bb-c2552f7394ef"}
