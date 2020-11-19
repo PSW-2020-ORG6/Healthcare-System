@@ -47,12 +47,12 @@ namespace Backend.Controller.SecretaryControllers
             return roomService.GetAll();
         }
 
-        internal List<Country> GetAllCountries()
+        public List<Country> GetAllCountries()
         {
             return hospitalService.getAllCountries();
         }
 
-        internal List<ProcedureType> GetAllProcedureTypes()
+        public List<ProcedureType> GetAllProcedureTypes()
         {
             return hospitalService.GetAllProcedureTypes();
         }

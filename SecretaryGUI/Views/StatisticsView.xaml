@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="HCI_SIMS_PROJEKAT.Views.StatisticsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HCI_SIMS_PROJEKAT.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="570" d:DesignWidth="400">
+
+    <Border BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8" Style="{DynamicResource panelStyle}" Margin="0,0,0,0" Height="300" VerticalAlignment="Top">
+        <Grid Margin="5,5,5,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Style="{DynamicResource textStyle}" Grid.Row="1" Grid.ColumnSpan="6" Margin="0,0,0,-10" Content="{Binding Path=StatisticsLabelText, UpdateSourceTrigger=PropertyChanged}">
+            </Label>
+
+            <ComboBox Name="Sala" Grid.Row="1" Grid.Column="6" Grid.ColumnSpan="3">
+                <ComboBoxItem IsSelected="True">Soba za pregled</ComboBoxItem>
+                <ComboBoxItem>Operaciona sala</ComboBoxItem>
+                <ComboBoxItem>Postoperaciona</ComboBoxItem>
+                <ComboBoxItem>Intezivna nega</ComboBoxItem>
+            </ComboBox>
+
+            <Label Style="{DynamicResource textStyle}" Grid.Row="3" Grid.ColumnSpan="5" Content="{Binding Path=FromLabelText, UpdateSourceTrigger=PropertyChanged}">
+            </Label>
+            <Label Style="{DynamicResource textStyle}" Grid.Row="5" Grid.ColumnSpan="5" Content="{Binding Path=ToLabelText, UpdateSourceTrigger=PropertyChanged}">
+            </Label>
+
+            <DatePicker x:Name="OD" SelectedDateChanged="OD_SelectedDateChanged" Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="3"></DatePicker>
+            <DatePicker x:Name="DO" SelectedDateChanged="OD_SelectedDateChanged" Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="3"></DatePicker>
+
+
+            <Button x:Name="GeneratePDFButton" Content="{Binding Path=GeneratePDFText, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource buttonStyle}" Grid.Row="8" Grid.Column="7" Grid.ColumnSpan="3" Margin="0,1,5,24" Click="GeneratePDFButton_Click" HorizontalAlignment="Right" Grid.RowSpan="2" Width="110">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>
