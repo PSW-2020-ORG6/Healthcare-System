@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 {
-    class PhysitianAvailabilityService
+    public class PhysitianAvailabilityService
     {
         private AppointmentRepository appointmentRepository;
 

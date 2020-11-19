@@ -45,7 +45,9 @@
     <Compile Include="Backend\Controller\PhysitianControllers\PhysitianHospitalController.cs" />
     <Compile Include="Backend\Controller\SuperintendentControllers\MedicineAddingController.cs" />
     <Compile Include="Backend\Controller\PhysitianControllers\PhysitianMedicineController.cs" />
+    <Compile Include="Backend\Controller\SuperintendentControllers\SuperiIntendentPhysiciansController.cs" />
     <Compile Include="Backend\Controller\SuperintendentControllers\SuperintendentMedicineController.cs" />
+    <Compile Include="Backend\Controller\SuperintendentControllers\SuperIntendentSecretariesController.cs" />
     <Compile Include="Backend\Dto\FeedbackDTO.cs" />
     <Compile Include="Backend\Dto\SuggestedAppointmentDTO.cs" />
     <Compile Include="Backend\Model\Blog\BlogPost.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="Backend\Service\HospitalAccountsService\HospitalLogInService.cs" />
     <Compile Include="Backend\Service\HospitalAccountsService\PatientAccountsService.cs" />
     <Compile Include="Backend\Service\HospitalAccountsService\PhysicianAccountService.cs" />
+    <Compile Include="Backend\Service\HospitalAccountsService\SecretaryAccountService.cs" />
     <Compile Include="Backend\Service\MedicineService\MedicineAddingService.cs" />
     <Compile Include="Backend\Service\MedicineService\MedicineApprovalService.cs" />
     <Compile Include="Backend\Service\MedicineService\PhysitianMedicineService.cs" />

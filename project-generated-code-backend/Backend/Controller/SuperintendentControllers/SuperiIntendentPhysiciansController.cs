@@ -37,17 +37,17 @@ namespace HealthClinic.Backend.Controller.SuperintendentControllers
             physiciansService.DeletePhysician(physitian);
         }
 
-        internal List<TimeInterval> GetAllVacations(Physitian physitianDTO)
+        public List<TimeInterval> GetAllVacations(Physitian physitianDTO)
         {
             return physiciansService.GetAllVacations(physitianDTO);
         }
 
-        internal void AddVacation(TimeInterval timeInterval, Physitian physitianDTO)
+        public void AddVacation(TimeInterval timeInterval, Physitian physitianDTO)
         {
             physiciansService.AddVacation(timeInterval, physitianDTO);
         }
 
-        internal void RemoveVacation(TimeInterval timeInterval, Physitian physitianDTO)
+        public void RemoveVacation(TimeInterval timeInterval, Physitian physitianDTO)
         {
             physiciansService.RemoveVacation(timeInterval, physitianDTO);
         }
