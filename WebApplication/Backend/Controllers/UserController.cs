@@ -6,7 +6,7 @@ namespace WebApplication.Backend.Controllers
     /// <summary>
     /// This class does connection with service
     /// </summary>
-    [Microsoft.AspNetCore.Components.Route("patient")]
+    [Route("user")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -15,8 +15,8 @@ namespace WebApplication.Backend.Controllers
         {
             //this.patientService = new PatientService();
         }
-        [HttpGet("advancedSearch")]
-        public void GetAllFeedbacks()
+        [HttpPost("advancedSearch")]
+        public void GetAllFeedbacks(string advancedSearch,bool approximate, string date)
         {
         }
     }

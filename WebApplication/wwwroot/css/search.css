@@ -32,7 +32,7 @@ input[type=text]:focus {
 }
 select {
     text-align-last: center;
-    height:75%;
+    height:95%;
 }
 .btnSearch {
     background-color: #014779;

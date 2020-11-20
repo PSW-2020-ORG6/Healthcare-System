@@ -39,33 +39,33 @@ Vue.component("search", {
                                         <tbody>
                                             <tr>
                                                 <td align="center"><label>Search</label></td>                                    
-                                                <td><input type="text" class="col"/></td>
+                                                <td><input id="text1" type="text" class="col"/></td>
                                                 <td><label>in &nbsp</label>
-                                                    <select class="col">
-                                                    <option disabled>Please select one</option>
-                                                    <option>All</option>
-                                                    <option>Medicine name</option>
-                                                    <option>Medicine type</option>
-                                                    <option>Procedure type</option>
-                                                    <option>Patient reports</option>
-                                                    <option>Specialist reports</option>
-                                                    <option>Doctor reports</option>
+                                                    <select class="col" id="select1">
+                                                        <option disabled>Please select one</option>
+                                                        <option>All</option>
+                                                        <option>Medicine name</option>
+                                                        <option>Medicine type</option>
+                                                        <option>Procedure type</option>
+                                                        <option>Patient reports</option>
+                                                        <option>Specialist reports</option>
+                                                        <option>Doctor reports</option>
                                                     </select>
                                                  </td>
                                                  <td></td>
                                              </tr>
                                         <tr v-if="second">
                                             <td>
-                                                <select class="col">
+                                                <select class="col" id="select21">
                                                     <option disabled>Please select one</option>
                                                     <option>AND</option>
                                                     <option>OR</option>
                                                     <option>AND NOT</option>
                                                  </select>
                                             </td>                                    
-                                            <td><input type="text" class="col"/></td>
+                                            <td><input id="text2" type="text" class="col"/></td>
                                             <td><label>in &nbsp</label>
-                                                <select class="col">
+                                                <select class="col" id="select22">
                                                     <option disabled>Please select one</option>
                                                     <option>All</option>
                                                     <option>Medicine name</option>
@@ -82,16 +82,16 @@ Vue.component("search", {
                                         </tr>
                                         <tr v-if="third">
                                             <td>
-                                                <select class="col">
+                                                <select class="col" id="select31">
                                                     <option disabled>Please select one</option>
                                                     <option>AND</option>
                                                     <option>OR</option>
                                                     <option>AND NOT</option>
                                                 </select>
                                             </td>                                    
-                                            <td><input type="text" class="col"/></td>
+                                            <td><input id="text3" type="text" class="col"/></td>
                                             <td><label>in &nbsp</label>
-                                                <select class="col">
+                                                <select class="col" id="select32">
                                                     <option disabled>Please select one</option>
                                                     <option>All</option>
                                                     <option>Medicine name</option>
@@ -108,16 +108,16 @@ Vue.component("search", {
                                         </tr>
                                         <tr v-if="fourth">
                                             <td>
-                                                <select class="col">
+                                                <select class="col" id="select41">
                                                     <option disabled>Please select one</option>
                                                     <option>AND</option>
                                                     <option>OR</option>
                                                     <option>AND NOT</option>
                                                 </select>
                                              </td>                                    
-                                             <td><input type="text" class="col"/></td>
+                                             <td><input id="text4" type="text" class="col"/></td>
                                              <td><label>in &nbsp</label>
-                                                <select class="col">
+                                                <select class="col" id="select42">
                                                     <option disabled>Please select one</option>
                                                     <option>All</option>
                                                     <option>Medicine name</option>
@@ -137,25 +137,25 @@ Vue.component("search", {
                             </div>
                             <button v-if="row<3" class="circleadd" v-on:click="AddRow()"><i class="fa fa-plus"></i></button><br/><br/>                            
                         
-                        <input type="checkbox"/>
+                        <input id="check" type="checkbox"/>
                         <label>Approximate search</label>
                         </div><br/><br/>
                         <div class="row">
-                            <label>&nbsp&nbsp Datum od &nbsp&nbsp</label><input type="date"></input>
-                            <label>&nbsp&nbsp do &nbsp&nbsp</label><input type="date"></input>
+                            <label>&nbsp&nbsp Date from &nbsp&nbsp</label><input id="dateFrom" type="date"></input>
+                            <label>&nbsp&nbsp to &nbsp&nbsp</label><input id="dateTo" type="date"></input>
                         </div><br/><br/>
-                        <button class="btnSearch btn-info btn-lg">Search</button>
+                        <button class="btnSearch btn-info btn-lg" v-on:click="AdvancedSearch()">Search</button>
                         <div class="container"><br/><hr/><br/>
                          <div class="row">
-                            <h4>Rezultat pretrage:</h4>    
+                            <h4>Search result:</h4>    
                          </div><br/>
                          <table style="width: 100%">
-                         <th>Recept DATUM</th>
+                         <th>Prescription datum</th>
                          <tr>lek-cena-tip-opis</tr>
                          <tr>opis</tr>
                          </table><br/>
                          <table style="width: 100%">
-                         <th>pregeld DATUM -tip</th>
+                         <th>Report datum -tip</th>
                          <tr>pacijent</tr>
                          <tr>lekar</tr>
                          <tr>opis</tr>
@@ -183,6 +183,24 @@ Vue.component("search", {
         },
         DeleteRow: function () {
             this.row -= 1
+        },
+        AdvancedSearch: function () {
+            var advanced = document.getElementById("text1").value + "," + document.getElementById("select1").value
+            if (this.second)
+                advanced +=";" + document.getElementById("select21").value +","+ document.getElementById("text2").value + "," +  document.getElementById("select22").value
+            if (this.third) 
+                advanced += ";" + document.getElementById("select31").value + "," + document.getElementById("text3").value+","+ document.getElementById("select32").value
+            if (this.fourth) 
+                advanced += ";" + document.getElementById("select41").value + "," + document.getElementById("text4").value + "," + document.getElementById("select42").value
+            var date = document.getElementById("dateFrom").value + ";" + document.getElementById("dateTo").value
+            axios
+                .post('http://localhost:49900/user/advancedSearch', advanced, document.getElementById("check").checked,date)
+                .then(response => {
+                    alert("ok");
+                })
+                .catch(error => {
+                    alert(error)
+                })
         }
     }
 });
