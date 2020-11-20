@@ -17,335 +17,266 @@
             </p>
             <div class="question" id="q">
               <b id="topic">Toping 1 Doctor</b>
-                <p>The doctor is welcoming and gentle?</p>
-                <input type="radio" name="behavior" id="a1" value="1">
-                <label for="a1"></label>
-                <input type="radio" name="behavior" id="a2" value="2">
-                <label for="a2"></label>
-                <input type="radio" name="behavior" id="a3" value="3">
-                <label for="a3"></label>
-                <input type="radio" name="behavior" id="a4" value="4">
-                <label for="a4"></label>
-                <input type="radio" name="behavior" id="a5" value="5">
-                <label for="a5"></label>
+                <p>1.The doctor is welcoming and gentle?</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingOne" name="ratingOne" value="5" /><label for="star1RatingOne" title="5 star"></label>
+                        <input type="radio" id="star2RatingOne" name="ratingOne" value="4" /><label for="star2RatingOne" title="4 star"></label>
+                        <input type="radio" id="star3RatingOne" name="ratingOne" value="3" /><label for="star3RatingOne" title="3 star"></label>
+                        <input type="radio" id="star4RatingOne" name="ratingOne" value="2" /><label for="star4RatingOne" title="2 star"></label>
+                        <input type="radio" id="star5RatingOne" name="ratingOne" value="1" /><label for="star5RatingOne" title="1 star"></label>
+                    </div>
               </div>
 
               <div class="question" id="q">
-                <p>The doctor answered all of your questions in an understandable manner?</p>
-                <input type="radio" name="manner" id="c1" value="1">
-                <label for="c1"></label>
-                <input type="radio" name="manner" id="c2" value="2">
-                <label for="c2"></label>
-                <input type="radio" name="manner" id="c3" value="3">
-                <label for="c3"></label>
-                <input type="radio" name="manner" id="c4" value="4">
-                <label for="c4"></label>
-                <input type="radio" name="manner" id="c5" value="5">
-                <label for="c5"></label>
+                <p>2.The doctor answered all of your questions in an understandable manner?</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingTwo" name="ratingTwo" value="5" /><label for="star1RatingTwo" title="5 star"></label>
+                        <input type="radio" id="star2RatingTwo" name="ratingTwo" value="4" /><label for="star2RatingTwo" title="4 star"></label>
+                        <input type="radio" id="star3RatingTwo" name="ratingTwo" value="3" /><label for="star3RatingTwo" title="3 star"></label>
+                        <input type="radio" id="star4RatingTwo" name="ratingTwo" value="2" /><label for="star4RatingTwo" title="2 star"></label>
+                        <input type="radio" id="star5RatingTwo" name="ratingTwo" value="1" /><label for="star5RatingTwo" title="1 star"></label>
+                    </div>
               </div>
 
 
              <div class="question" id="q">
-                <p>The doctor takes care of you in a professional manner?</p>
-                <input type="radio" name="professionalism" id="d1" value="1">
-                <label for="d1"></label>
-                <input type="radio" name="professionalism" id="d2" value="2">
-                <label for="d2"></label>
-                <input type="radio" name="professionalism" id="d3" value="3">
-                <label for="d3"></label>
-                <input type="radio" name="professionalism" id="d4" value="4">
-                <label for="d4"></label>
-                <input type="radio" name="professionalism" id="d5" value="5">
-                <label for="d5"></label>
+                <p>3.The doctor takes care of you in a professional manner?</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingThree" name="ratingThree" value="5" /><label for="star1RatingThree" title="5 star"></label>
+                        <input type="radio" id="star2RatingThree" name="ratingThree" value="4" /><label for="star2RatingThree" title="4 star"></label>
+                        <input type="radio" id="star3RatingThree" name="ratingThree" value="3" /><label for="star3RatingThree" title="3 star"></label>
+                        <input type="radio" id="star4RatingThree" name="ratingThree" value="2" /><label for="star4RatingThree" title="2 star"></label>
+                        <input type="radio" id="star5RatingThree" name="ratingThree" value="1" /><label for="star5RatingThree" title="1 star"></label>
+                    </div>
               </div>
 
             <div class="question" id="q">
-                <p>Would you have the procedure done again by this doctor?</p>
-                <input type="radio" name="again" id="e1" value="1">
-                <label for="e1"></label>
-                <input type="radio" name="again" id="e2" value="2">
-                <label for="e2"></label>
-                <input type="radio" name="again" id="e3" value="3">
-                <label for="e3"></label>
-                <input type="radio" name="again" id="e4" value="4">
-                <label for="e4"></label>
-                <input type="radio" name="again" id="e5" value="5">
-                <label for="e5"></label>
+                <p>4.Would you have the procedure done again by this doctor?</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingFour" name="ratingFour" value="5" /><label for="star1RatingFour" title="5 star"></label>
+                        <input type="radio" id="star2RatingFour" name="ratingFour" value="4" /><label for="star2RatingFour" title="4 star"></label>
+                        <input type="radio" id="star3RatingFour" name="ratingFour" value="3" /><label for="star3RatingFour" title="3 star"></label>
+                        <input type="radio" id="star4RatingFour" name="ratingFour" value="2" /><label for="star4RatingFour" title="2 star"></label>
+                        <input type="radio" id="star5RatingFour" name="ratingFour" value="1" /><label for="star5RatingFour" title="1 star"></label>
+                    </div>
               </div>
 
             <div class="question" id="q">
               <b id="topic">Toping 2 Nurse's care</b>
-                <p>The personal manner(courtosy,respect,sensitivity,friendliness) of the nurses and other support staff</p>
-                <input type="radio" name="nurses" id="f1" value="1">
-                <label for="f1"></label>
-                <input type="radio" name="nurses" id="f2" value="2">
-                <label for="f2"></label>
-                <input type="radio" name="nurses" id="f3" value="3">
-                <label for="f3"></label>
-                <input type="radio" name="nurses" id="f4" value="4">
-                <label for="f4"></label>
-                <input type="radio" name="nurses" id="f5" value="5">
-                <label for="f5"></label>
+                <p>5.The personal manner(courtosy,respect,sensitivity,friendliness) of the nurses and other support staff</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingFive" name="ratingFive" value="5" /><label for="star1RatingFive" title="5 star"></label>
+                        <input type="radio" id="star2RatingFive" name="ratingFive" value="4" /><label for="star2RatingFive" title="4 star"></label>
+                        <input type="radio" id="star3RatingFive" name="ratingFive" value="3" /><label for="star3RatingFive" title="3 star"></label>
+                        <input type="radio" id="star4RatingFive" name="ratingFive" value="2" /><label for="star4RatingFive" title="2 star"></label>
+                        <input type="radio" id="star5RatingFive" name="ratingFive" value="1" /><label for="star5RatingFive" title="1 star"></label>
+                    </div>
               </div>
 
               <div class="question" id="q">
-                <p>The nursees answered all of your questions in an understandable manner?</p>
-                <input type="radio" name="nursesAnswer" id="g1" value="1">
-                <label for="g1"></label>
-                <input type="radio" name="nursesAnswer" id="g2" value="2">
-                <label for="g2"></label>
-                <input type="radio" name="nursesAnswer" id="g3" value="3">
-                <label for="g3"></label>
-                <input type="radio" name="nursesAnswer" id="g4" value="4">
-                <label for="g4"></label>
-                <input type="radio" name="nursesAnswer" id="g5" value="5">
-                <label for="g5"></label>
+                <p>6.The nursees answered all of your questions in an understandable manner?</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingSix" name="ratingSix" value="5" /><label for="star1RatingSix" title="5 star"></label>
+                        <input type="radio" id="star2RatingSix" name="ratingSix" value="4" /><label for="star2RatingSix" title="4 star"></label>
+                        <input type="radio" id="star3RatingSix" name="ratingSix" value="3" /><label for="star3RatingSix" title="3 star"></label>
+                        <input type="radio" id="star4RatingSix" name="ratingSix" value="2" /><label for="star4RatingSix" title="2 star"></label>
+                        <input type="radio" id="star5RatingSix" name="ratingSix" value="1" /><label for="star5RatingSix" title="1 star"></label>
+                    </div>
               </div>
 
               <div class="question" id="q">
-                <p>Orientation given to warn setup</p>
-                <input type="radio" name="setup" id="h1" value="1">
-                <label for="h1"></label>
-                <input type="radio" name="setup" id="h2" value="2">
-                <label for="h2"></label>
-                <input type="radio" name="setup" id="h3" value="3">
-                <label for="h3"></label>
-                <input type="radio" name="setup" id="h4" value="4">
-                <label for="h4"></label>
-                <input type="radio" name="setup" id="h5" value="5">
-                <label for="h5"></label>
+                <p>7.Orientation given to warn setup</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingSeven" name="ratingSeven" value="5" /><label for="star1RatingSeven" title="5 star"></label>
+                        <input type="radio" id="star2RatingSeven" name="ratingSeven" value="4" /><label for="star2RatingSeven" title="4 star"></label>
+                        <input type="radio" id="star3RatingSeven" name="ratingSeven" value="3" /><label for="star3RatingSeven" title="3 star"></label>
+                        <input type="radio" id="star4RatingSeven" name="ratingSeven" value="2" /><label for="star4RatingSeven" title="2 star"></label>
+                        <input type="radio" id="star5RatingSeven" name="ratingSeven" value="1" /><label for="star5RatingSeven" title="1 star"></label>
+                    </div>
               </div>
 
 
              <div class="question" id="q">
-                <p>The nurse gave you good discharge instructions</p>
-                <input type="radio" name="instructions" id="i1" value="1">
-                <label for="i1"></label>
-                <input type="radio" name="instructions" id="i2" value="2">
-                <label for="i2"></label>
-                <input type="radio" name="instructions" id="i3" value="3">
-                <label for="i3"></label>
-                <input type="radio" name="instructions" id="i4" value="4">
-                <label for="i4"></label>
-                <input type="radio" name="instructions" id="i5" value="5">
-                <label for="i5"></label>
+                <p>8.The nurse gave you good discharge instructions</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingEight" name="ratingEight" value="5" /><label for="star1RatingEight" title="5 star"></label>
+                        <input type="radio" id="star2RatingEight" name="ratingEight" value="4" /><label for="star2RatingEight" title="4 star"></label>
+                        <input type="radio" id="star3RatingEight" name="ratingEight" value="3" /><label for="star3RatingEight" title="3 star"></label>
+                        <input type="radio" id="star4RatingEight" name="ratingEight" value="2" /><label for="star4RatingEight" title="2 star"></label>
+                        <input type="radio" id="star5RatingEight" name="ratingEight" value="1" /><label for="star5RatingEight" title="1 star"></label>
+                    </div>
               </div>
 
             <div class="question" id="q">
-                <p>The nurse was concern for you?</p>
-                <input type="radio" name="concern" id="j1" value="1">
-                <label for="j1"></label>
-                <input type="radio" name="concern" id="j2" value="2">
-                <label for="j2"></label>
-                <input type="radio" name="concern" id="j3" value="3">
-                <label for="j3"></label>
-                <input type="radio" name="concern" id="j4" value="4">
-                <label for="j4"></label>
-                <input type="radio" name="concern" id="j5" value="5">
-                <label for="j5"></label>
+                <p>9.The nurse was concerned for you?</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingNine" name="ratingNine" value="5" /><label for="star1RatingNine" title="5 star"></label>
+                        <input type="radio" id="star2RatingNine" name="ratingNine" value="4" /><label for="star2RatingNine" title="4 star"></label>
+                        <input type="radio" id="star3RatingNine" name="ratingNine" value="3" /><label for="star3RatingNine" title="3 star"></label>
+                        <input type="radio" id="star4RatingNine" name="ratingNine" value="2" /><label for="star4RatingNine" title="2 star"></label>
+                        <input type="radio" id="star5RatingNine" name="ratingNine" value="1" /><label for="star5RatingNine" title="1 star"></label>
+                    </div>
               </div>
 
             <div class="question" id="q">
               <b id="topic">Toping 3 Clinic's hygiene and ambience</b>
-                <p>The comfort and cleanliness of the facility </p>
-                <input type="radio" name="hygiene" id="k1" value="1">
-                <label for="k1"></label>
-                <input type="radio" name="hygiene" id="k2" value="2">
-                <label for="k2"></label>
-                <input type="radio" name="hygiene" id="k3" value="3">
-                <label for="k3"></label>
-                <input type="radio" name="hygiene" id="k4" value="4">
-                <label for="k4"></label>
-                <input type="radio" name="hygiene" id="k5" value="5">
-                <label for="k5"></label>
+                <p>10.The comfort and cleanliness of the facility </p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingTen" name="ratingTen" value="5" /><label for="star1RatingTen" title="5 star"></label>
+                        <input type="radio" id="star2RatingTen" name="ratingTen" value="4" /><label for="star2RatingTen" title="4 star"></label>
+                        <input type="radio" id="star3RatingTen" name="ratingTen" value="3" /><label for="star3RatingTen" title="3 star"></label>
+                        <input type="radio" id="star4RatingTen" name="ratingTen" value="2" /><label for="star4RatingTen" title="2 star"></label>
+                        <input type="radio" id="star5RatingTen" name="ratingTen" value="1" /><label for="star5RatingTen" title="1 star"></label>
+                    </div>
               </div>
 
               <div class="question" id="q">
-                <p> Comfort level within the procedure room?</p>
-                <input type="radio" name="Comfort" id="l1" value="1">
-                <label for="l1"></label>
-                <input type="radio" name="Comfort" id="l2" value="2">
-                <label for="l2"></label>
-                <input type="radio" name="Comfort" id="l3" value="3">
-                <label for="l3"></label>
-                <input type="radio" name="Comfort" id="l4" value="4">
-                <label for="l4"></label>
-                <input type="radio" name="Comfort" id="l5" value="5">
-                <label for="l5"></label>
+                <p>11.Comfort level within the procedure room?</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingEleven" name="ratingEleven" value="5" /><label for="star1RatingEleven" title="5 star"></label>
+                        <input type="radio" id="star2RatingEleven" name="ratingEleven" value="4" /><label for="star2RatingEleven" title="4 star"></label>
+                        <input type="radio" id="star3RatingEleven" name="ratingEleven" value="3" /><label for="star3RatingEleven" title="3 star"></label>
+                        <input type="radio" id="star4RatingEleven" name="ratingEleven" value="2" /><label for="star4RatingEleven" title="2 star"></label>
+                        <input type="radio" id="star5RatingEleven" name="ratingEleven" value="1" /><label for="star5RatingEleven" title="1 star"></label>
+                    </div>
               </div>
 
               <div class="question" id="q">
-                <p>Conditions of the rooms(temperature,comfort,silence)</p>
-                <input type="radio" name="Conditions" id="m1" value="1">
-                <label for="m1"></label>
-                <input type="radio" name="Conditions" id="m2" value="2">
-                <label for="m2"></label>
-                <input type="radio" name="Conditions" id="m3" value="3">
-                <label for="m3"></label>
-                <input type="radio" name="Conditions" id="m4" value="4">
-                <label for="m4"></label>
-                <input type="radio" name="Conditions" id="m5" value="5">
-                <label for="m5"></label>
+                <p>12.Conditions of the rooms(temperature,comfort,silence)</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingTwelve" name="ratingTwelve" value="5" /><label for="star1RatingTwelve" title="5 star"></label>
+                        <input type="radio" id="star2RatingTwelve" name="ratingTwelve" value="4" /><label for="star2RatingTwelve" title="4 star"></label>
+                        <input type="radio" id="star3RatingTwelve" name="ratingTwelve" value="3" /><label for="star3RatingTwelve" title="3 star"></label>
+                        <input type="radio" id="star4RatingTwelve" name="ratingTwelve" value="2" /><label for="star4RatingTwelve" title="2 star"></label>
+                        <input type="radio" id="star5RatingTwelve" name="ratingTwelve" value="1" /><label for="star5RatingTwelve" title="1 star"></label>
+                    </div>
               </div>
 
 
              <div class="question" id="q">
-                <p>General impression of the ambient atmosphere</p>
-                <input type="radio" name="atmosphere" id="n1" value="1">
-                <label for="n1"></label>
-                <input type="radio" name="atmosphere" id="n2" value="2">
-                <label for="n2"></label>
-                <input type="radio" name="atmosphere" id="n3" value="3">
-                <label for="n3"></label>
-                <input type="radio" name="atmosphere" id="n4" value="4">
-                <label for="n4"></label>
-                <input type="radio" name="atmosphere" id="n5" value="5">
-                <label for="n5"></label>
+                <p>13.General impression of the ambient atmosphere</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingThirteen" name="ratingThirteen" value="5" /><label for="star1RatingThirteen" title="5 star"></label>
+                        <input type="radio" id="star2RatingThirteen" name="ratingThirteen" value="4" /><label for="star2RatingThirteen" title="4 star"></label>
+                        <input type="radio" id="star3RatingThirteen" name="ratingThirteen" value="3" /><label for="star3RatingThirteen" title="3 star"></label>
+                        <input type="radio" id="star4RatingThirteen" name="ratingThirteen" value="2" /><label for="star4RatingThirteen" title="2 star"></label>
+                        <input type="radio" id="star5RatingThirteen" name="ratingThirteen" value="1" /><label for="star5RatingThirteen" title="1 star"></label>
+                    </div>
               </div>
 
             <div class="question" id="q">
               <b id="topic">Toping 4 Clinic's pharmacy supplies and equipment </b>
-                <p>Do you think the clinic has the necessary equipment</p>
-                <input type="radio" name="equipment" id="o1" value="1">
-                <label for="o1"></label>
-                <input type="radio" name="equipment" id="o2" value="2">
-                <label for="o2"></label>
-                <input type="radio" name="equipment" id="o3" value="3">
-                <label for="o3"></label>
-                <input type="radio" name="equipment" id="o4" value="4">
-                <label for="o4"></label>
-                <input type="radio" name="equipment" id="o5" value="5">
-                <label for="o5"></label>
+                <p>14.Do you think the clinic has the necessary equipment</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingFourteen" name="ratingFourteen" value="5" /><label for="star1RatingFourteen" title="5 star"></label>
+                        <input type="radio" id="star2RatingFourteen" name="ratingFourteen" value="4" /><label for="star2RatingFourteen" title="4 star"></label>
+                        <input type="radio" id="star3RatingFourteen" name="ratingFourteen" value="3" /><label for="star3RatingFourteen" title="3 star"></label>
+                        <input type="radio" id="star4RatingFourteen" name="ratingFourteen" value="2" /><label for="star4RatingFourteen" title="2 star"></label>
+                        <input type="radio" id="star5RatingFourteen" name="ratingFourteen" value="1" /><label for="star5RatingFourteen" title="1 star"></label>
+                    </div>
               </div>
 
               <div class="question" id="q">
-                <p> Do you think the clinic's farmacy has the necessary drugs?</p>
-                <input type="radio" name="drugs" id="p1" value="1">
-                <label for="p1"></label>
-                <input type="radio" name="drugs" id="p2" value="2">
-                <label for="p2"></label>
-                <input type="radio" name="drugs" id="p3" value="3">
-                <label for="p3"></label>
-                <input type="radio" name="drugs" id="p4" value="4">
-                <label for="p4"></label>
-                <input type="radio" name="drugs" id="p5" value="5">
-                <label for="p5"></label>
+                <p>15.Do you think the clinic's farmacy has the necessary drugs?</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingFifteen" name="ratingFifteen" value="5" /><label for="star1RatingFifteen" title="5 star"></label>
+                        <input type="radio" id="star2RatingFifteen" name="ratingFifteen" value="4" /><label for="star2RatingFifteen" title="4 star"></label>
+                        <input type="radio" id="star3RatingFifteen" name="ratingFifteen" value="3" /><label for="star3RatingFifteen" title="3 star"></label>
+                        <input type="radio" id="star4RatingFifteen" name="ratingFifteen" value="2" /><label for="star4RatingFifteen" title="2 star"></label>
+                        <input type="radio" id="star5RatingFifteen" name="ratingFifteen" value="1" /><label for="star5RatingFifteen" title="1 star"></label>
+                    </div>
               </div>
 
               <div class="question" id="q">
-                <p>Do you think that the hospital should have more modern equipment than the current one</p>
-                <input type="radio" name="betterEquipment" id="q1" value="1">
-                <label for="q1"></label>
-                <input type="radio" name="betterEquipment" id="q2" value="2">
-                <label for="q2"></label>
-                <input type="radio" name="betterEquipment" id="q3" value="3">
-                <label for="q3"></label>
-                <input type="radio" name="betterEquipment" id="q4" value="4">
-                <label for="q4"></label>
-                <input type="radio" name="betterEquipment" id="q5" value="5">
-                <label for="q5"></label>
+                <p>16.Do you think that the hospital should have more modern equipment than the current one</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingSixteen" name="ratingSixteen" value="5" /><label for="star1RatingSixteen" title="5 star"></label>
+                        <input type="radio" id="star2RatingSixteen" name="ratingSixteen" value="4" /><label for="star2RatingSixteen" title="4 star"></label>
+                        <input type="radio" id="star3RatingSixteen" name="ratingSixteen" value="3" /><label for="star3RatingSixteen" title="3 star"></label>
+                        <input type="radio" id="star4RatingSixteen" name="ratingSixteen" value="2" /><label for="star4RatingSixteen" title="2 star"></label>
+                        <input type="radio" id="star5RatingSixteen" name="ratingSixteen" value="1" /><label for="star5RatingSixteen" title="1 star"></label>
+                    </div>
               </div>
 
 
              <div class="question" id="q">
-                <p>Did you noticed broken or damaged equipment in the hospital</p>
-                <input type="radio" name="brokenOrDemaged" id="r1" value="1">
-                <label for="r1"></label>
-                <input type="radio" name="brokenOrDemaged" id="r2" value="2">
-                <label for="r2"></label>
-                <input type="radio" name="brokenOrDemaged" id="r3" value="3">
-                <label for="r3"></label>
-                <input type="radio" name="brokenOrDemaged" id="r4" value="4">
-                <label for="r4"></label>
-                <input type="radio" name="brokenOrDemaged" id="r5" value="5">
-                <label for="r5"></label>
+                <p>17.Did you noticed broken or damaged equipment in the hospital</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingSeventeen" name="ratingSeventeen" value="5" /><label for="star1RatingSeventeen" title="5 star"></label>
+                        <input type="radio" id="star2RatingSeventeen" name="ratingSeventeen" value="4" /><label for="star2RatingSeventeen" title="4 star"></label>
+                        <input type="radio" id="star3RatingSeventeen" name="ratingSeventeen" value="3" /><label for="star3RatingSeventeen" title="3 star"></label>
+                        <input type="radio" id="star4RatingSeventeen" name="ratingSeventeen" value="2" /><label for="star4RatingSeventeen" title="2 star"></label>
+                        <input type="radio" id="star5RatingSeventeen" name="ratingSeventeen" value="1" /><label for="star5RatingSeventeen" title="1 star"></label>
+                    </div>
               </div>
 
             <div class="question" id="q">
-                <p>The doctor prescribed medications that I could buy at the clinic's pharmacy</p>
-                <input type="radio" name="pharmacyDrugs" id="s1" value="1">
-                <label for="s1"></label>
-                <input type="radio" name="pharmacyDrugs" id="s2" value="2">
-                <label for="s2"></label>
-                <input type="radio" name="pharmacyDrugs" id="s3" value="3">
-                <label for="s3"></label>
-                <input type="radio" name="pharmacyDrugs" id="s4" value="4">
-                <label for="s4"></label>
-                <input type="radio" name="pharmacyDrugs" id="s5" value="5">
-                <label for="s5"></label>
+                <p>18.The doctor prescribed medications that I could buy at the clinic's pharmacy</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingEighteen" name="ratingEighteen" value="5" /><label for="star1RatingEighteen" title="5 star"></label>
+                        <input type="radio" id="star2RatingEighteen" name="ratingEighteen" value="4" /><label for="star2RatingEighteen" title="4 star"></label>
+                        <input type="radio" id="star3RatingEighteen" name="ratingEighteen" value="3" /><label for="star3RatingEighteen" title="3 star"></label>
+                        <input type="radio" id="star4RatingEighteen" name="ratingEighteen" value="2" /><label for="star4RatingEighteen" title="2 star"></label>
+                        <input type="radio" id="star5RatingEighteen" name="ratingEighteen" value="1" /><label for="star5RatingEighteen" title="1 star"></label>
+                    </div>
               </div>
 
            <div class="question" id="q">
               <b id="topic">Toping 5 Website </b>
-                <p>Did you found it easy to use our website</p>
-                <input type="radio" name="website" id="t1" value="1">
-                <label for="t1"></label>
-                <input type="radio" name="website" id="t2" value="2">
-                <label for="t2"></label>
-                <input type="radio" name="website" id="t3" value="3">
-                <label for="t3"></label>
-                <input type="radio" name="website" id="t4" value="4">
-                <label for="t4"></label>
-                <input type="radio" name="website" id="t5" value="5">
-                <label for="t5"></label>
+                <p>19.Did you found it easy to use our website</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingNineteen" name="ratingNineteen" value="5" /><label for="star1RatingNineteen" title="5 star"></label>
+                        <input type="radio" id="star2RatingNineteen" name="ratingNineteen" value="4" /><label for="star2RatingNineteen" title="4 star"></label>
+                        <input type="radio" id="star3RatingNineteen" name="ratingNineteen" value="3" /><label for="star3RatingNineteen" title="3 star"></label>
+                        <input type="radio" id="star4RatingNineteen" name="ratingNineteen" value="2" /><label for="star4RatingNineteen" title="2 star"></label>
+                        <input type="radio" id="star5RatingNineteen" name="ratingNineteen" value="1" /><label for="star5RatingNineteen" title="1 star"></label>
+                    </div>
               </div>
 
               <div class="question" id="q">
-                <p> Did you have found all the necessary information on our website?</p>
-                <input type="radio" name="informations" id="u1" value="1">
-                <label for="u1"></label>
-                <input type="radio" name="informations" id="u2" value="2">
-                <label for="u2"></label>
-                <input type="radio" name="informations" id="u3" value="3">
-                <label for="u3"></label>
-                <input type="radio" name="informations" id="u4" value="4">
-                <label for="u4"></label>
-                <input type="radio" name="informations" id="u5" value="5">
-                <label for="u5"></label>
+                <p>20.Did you have found all the necessary information on our website?</p>
+                     <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingTwenty" name="ratingTwenty" value="5" /><label for="star1RatingTwenty" title="5 star"></label>
+                        <input type="radio" id="star2RatingTwenty" name="ratingTwenty" value="4" /><label for="star2RatingTwenty" title="4 star"></label>
+                        <input type="radio" id="star3RatingTwenty" name="ratingTwenty" value="3" /><label for="star3RatingTwenty" title="3 star"></label>
+                        <input type="radio" id="star4RatingTwenty" name="ratingTwenty" value="2" /><label for="star4RatingTwenty" title="2 star"></label>
+                        <input type="radio" id="star5RatingTwenty" name="ratingTwenty" value="1" /><label for="star5RatingTwenty" title="1 star"></label>
+                    </div>
               </div>
 
               <div class="question" id="q">
                 <b id="topic">Toping 6 General opinion </b>
-                <p>Overall, are you satisfied with the care you received in this facility?</p>
-                <input type="radio" name="satisfied" id="v1" value="1">
-                <label for="v1"></label>
-                <input type="radio" name="satisfied" id="v2" value="2">
-                <label for="v2"></label>
-                <input type="radio" name="satisfied" id="v3" value="3">
-                <label for="v3"></label>
-                <input type="radio" name="satisfied" id="v4" value="4">
-                <label for="v4"></label>
-                <input type="radio" name="satisfied" id="v5" value="5">
-                <label for="v5"></label>
+                <p>21.Overall, are you satisfied with the care you received in this facility?</p>
+                    <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingTwentyOne" name="ratingTwentyOne" value="5" /><label for="star1RatingTwentyOne" title="5 star"></label>
+                        <input type="radio" id="star2RatingTwentyOne" name="ratingTwentyOne" value="4" /><label for="star2RatingTwentyOne" title="4 star"></label>
+                        <input type="radio" id="star3RatingTwentyOne" name="ratingTwentyOne" value="3" /><label for="star3RatingTwentyOne" title="3 star"></label>
+                        <input type="radio" id="star4RatingTwentyOne" name="ratingTwentyOne" value="2" /><label for="star4RatingTwentyOne" title="2 star"></label>
+                        <input type="radio" id="star5RatingTwentyOne" name="ratingTwentyOne" value="1" /><label for="star5RatingTwentyOne" title="1 star"></label>
+                    </div>
               </div>
 
 
              <div class="question" id="q">
-                <p>Would you come to this institution again</p>
-                <input type="radio" name="again1" id="w1" value="1">
-                <label for="w1"></label>
-                <input type="radio" name="again1" id="w2" value="2">
-                <label for="w2"></label>
-                <input type="radio" name="again1" id="w3" value="3">
-                <label for="w3"></label>
-                <input type="radio" name="again1" id="w4" value="4">
-                <label for="w4"></label>
-                <input type="radio" name="again1" id="w5" value="5">
-                <label for="w5"></label>
+                <p>22.Would you come to this institution again</p>
+                     <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingTwentyTwo" name="ratingTwentyTwo" value="5" /><label for="star1RatingTwentyTwo" title="5 star"></label>
+                        <input type="radio" id="star2RatingTwentyTwo" name="ratingTwentyTwo" value="4" /><label for="star2RatingTwentyTwo" title="4 star"></label>
+                        <input type="radio" id="star3RatingTwentyTwo" name="ratingTwentyTwo" value="3" /><label for="star3RatingTwentyTwo" title="3 star"></label>
+                        <input type="radio" id="star4RatingTwentyTwo" name="ratingTwentyTwo" value="2" /><label for="star4RatingTwentyTwo" title="2 star"></label>
+                        <input type="radio" id="star5RatingTwentyTwo" name="ratingTwentyTwo" value="1" /><label for="star5RatingTwentyTwo" title="1 star"></label>
+                    </div>
               </div>
 
             <div class="question" id="q">
-                <p>Would you recommend this facility to your friends and family</p>
-                <input type="radio" name="recomendation" id="x1" value="1">
-                <label for="x1"></label>
-                <input type="radio" name="recomendation" id="x2" value="2">
-                <label for="x2"></label>
-                <input type="radio" name="recomendation" id="x3" value="3">
-                <label for="x3"></label>
-                <input type="radio" name="recomendation" id="x4" value="4">
-                <label for="x4"></label>
-                <input type="radio" name="recomendation" id="x5" value="5">
-                <label for="x5"></label>
+                <p>23.Would you recommend this facility to your friends and family</p>
+                     <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="star1RatingTwentyThree" name="ratingTwentyThree" value="5" /><label for="star5RatingTwentyThree" title="5 star"></label>
+                        <input type="radio" id="star2RatingTwentyThree" name="ratingTwentyThree" value="4" /><label for="star4RatingTwentyThree" title="4 star"></label>
+                        <input type="radio" id="star3RatingTwentyThree" name="ratingTwentyThree" value="3" /><label for="star3RatingTwentyThree" title="3 star"></label>
+                        <input type="radio" id="star4RatingTwentyThree" name="ratingTwentyThree" value="2" /><label for="star2RatingTwentyThree" title="2 star"></label>
+                        <input type="radio" id="star5RatingTwentyThree" name="ratingTwentyThree" value="1" /><label for="star1RatingTwentyThree" title="1 star"></label>
+                    </div>
               </div>
 
 
