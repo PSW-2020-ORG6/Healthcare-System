@@ -2,9 +2,6 @@
 using Model.Accounts;
 using Model.Hospital;
 using Model.MedicalExam;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
 using HealthClinic.Message;
 using HealthClinic.util;
 using System;
@@ -15,6 +12,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace HealthClinic.ViewModel
 {

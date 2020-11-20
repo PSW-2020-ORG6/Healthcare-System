@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\Xamarin.Forms.3.6.0.344457\build\Xamarin.Forms.props" Condition="Exists('packages\Xamarin.Forms.3.6.0.344457\build\Xamarin.Forms.props')" />
+  <Import Project="..\project-generated-code-backend\packages\Xamarin.Forms.4.5.0.617\build\Xamarin.Forms.props" Condition="Exists('..\project-generated-code-backend\packages\Xamarin.Forms.4.5.0.617\build\Xamarin.Forms.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -45,13 +45,13 @@
       <HintPath>..\project-generated-code-backend\packages\CommonServiceLocator.2.0.5\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
-      <HintPath>packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+      <HintPath>..\project-generated-code-backend\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
-      <HintPath>packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <HintPath>..\project-generated-code-backend\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
-      <HintPath>packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+      <HintPath>..\project-generated-code-backend\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\project-generated-code-backend\packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
@@ -92,7 +92,7 @@
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\project-generated-code-backend\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -145,6 +145,7 @@
     <Compile Include="ViewModel\DiagnosticReferralViewModel.cs" />
     <Compile Include="Message\DisplayAdditionalDocumentsMessage.cs" />
     <Compile Include="ViewModel\FollowUpViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\MedicineApprovalViewModel.cs" />
     <Compile Include="ViewModel\MedicineDetailViewModel.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Message\StartExamMessage.cs" />
     <Compile Include="Message\ViewPatientInfoMessage.cs" />
     <Compile Include="Message\ViewReportMessage.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\ActiveInpatientCareDialog.xaml.cs">
       <DependentUpon>ActiveInpatientCareDialog.xaml</DependentUpon>
     </Compile>
@@ -436,8 +438,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\Xamarin.Forms.3.6.0.344457\build\Xamarin.Forms.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Xamarin.Forms.3.6.0.344457\build\Xamarin.Forms.props'))" />
-    <Error Condition="!Exists('packages\Xamarin.Forms.3.6.0.344457\build\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Xamarin.Forms.3.6.0.344457\build\Xamarin.Forms.targets'))" />
+    <Error Condition="!Exists('..\project-generated-code-backend\packages\Xamarin.Forms.4.5.0.617\build\Xamarin.Forms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\project-generated-code-backend\packages\Xamarin.Forms.4.5.0.617\build\Xamarin.Forms.props'))" />
+    <Error Condition="!Exists('..\project-generated-code-backend\packages\Xamarin.Forms.4.5.0.617\build\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\project-generated-code-backend\packages\Xamarin.Forms.4.5.0.617\build\Xamarin.Forms.targets'))" />
   </Target>
-  <Import Project="packages\Xamarin.Forms.3.6.0.344457\build\Xamarin.Forms.targets" Condition="Exists('packages\Xamarin.Forms.3.6.0.344457\build\Xamarin.Forms.targets')" />
+  <Import Project="..\project-generated-code-backend\packages\Xamarin.Forms.4.5.0.617\build\Xamarin.Forms.targets" Condition="Exists('..\project-generated-code-backend\packages\Xamarin.Forms.4.5.0.617\build\Xamarin.Forms.targets')" />
 </Project>
