@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication.Backend.Model;
 
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201120140056_m")]
+    partial class m
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,7 +69,7 @@ namespace WebApplication.Migrations
                             Guest = true,
                             Name = "Jelena",
                             ParentName = "otac",
-                            SerialNumber = "8b59b122-8a01-4d76-8993-04c96896f2f8",
+                            SerialNumber = "4d9dae21-7088-422e-82f7-c8ff6cbc5bd0",
                             Surname = "Tanjic"
                         },
                         new
@@ -80,7 +82,7 @@ namespace WebApplication.Migrations
                             Guest = true,
                             Name = "Sara",
                             ParentName = "mama",
-                            SerialNumber = "3caa3334-ee68-4861-a65f-db3db48c9728",
+                            SerialNumber = "7e9cdc01-3628-4623-98c9-71a366106ca5",
                             Surname = "Milic"
                         });
                 });
@@ -243,9 +245,6 @@ namespace WebApplication.Migrations
                     b.Property<string>("ID")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
-                    b.Property<string>("DoctorName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<string>("Question1")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -323,7 +322,6 @@ namespace WebApplication.Migrations
                         new
                         {
                             ID = "001",
-                            DoctorName = "Pera Peric",
                             Question1 = "5",
                             Question10 = "5",
                             Question11 = "2",
@@ -351,7 +349,6 @@ namespace WebApplication.Migrations
                         new
                         {
                             ID = "005",
-                            DoctorName = "Mika Mikic",
                             Question1 = "5",
                             Question10 = "5",
                             Question11 = "2",
