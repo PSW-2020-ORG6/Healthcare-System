@@ -13,7 +13,7 @@ namespace WebApplication.Backend.Repositorys
         private MySqlConnection connection;
         public PatientRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=neynamneynam12");
             connection.Open();
 
         }
