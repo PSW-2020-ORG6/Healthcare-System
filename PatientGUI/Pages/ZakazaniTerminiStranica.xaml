@@ -1,0 +1,47 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:klinika_zdravo.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="klinika_zdravo.Pages.ZakazaniTerminiStranica"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="890"
+      Title="ZakazaniTerminiStranica" Background="White">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Center" FontSize="48" FontFamily="Microsoft Yi Baiti" FontWeight="Bold" VerticalAlignment="Top" Margin="0,27,0,0" Foreground="White" Background="#FF27A4AD" Width="607.2"><Run Text="PREGLED ZAKAZANIH TERMINA"/></TextBlock>
+        <DataGrid x:Name="dataGridTermini" ItemsSource="{Binding Termini}" SelectionMode ="Single" IsReadOnly="True" AutoGenerateColumns="False" Height="450" Width="780" FontSize="22" Background="#FFD7D7D7">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="TIP" FontSize="18" Width="*" Binding="{Binding Tip}"/>
+                <DataGridTextColumn Header="DATUM" FontSize="18" Width="*" Binding="{Binding Datum}"/>
+                <DataGridTextColumn Header="VREME" FontSize="18" Width="*" Binding="{Binding Vreme}"/>
+                <DataGridTextColumn Header="DOKTOR" FontSize="18" Width="*" Binding="{Binding Doktor}"/>
+                <DataGridTextColumn Header="SOBA" FontSize="18" Width="*" Binding="{Binding Soba}"/>
+            </DataGrid.Columns>
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="FontSize" Value="22"/>
+                    <Setter Property="Background" Value="#FFB0DEE1"/>
+
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+        </DataGrid>
+
+        <materialDesign:DialogHost BorderBrush="{DynamicResource MaterialDesignDivider}">
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Width="322" Height="200" HorizontalAlignment="Center" Background="LightGray">
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,16,0,0" FontSize="27">DA LI STE SIGURNI</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" FontSize="27" Margin="0,56,0,0">DA ZELITE DA</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" FontSize="27" Margin="0,96,0,0">OTKAZETE TERMIN?</TextBlock>
+                    <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="30,0,0,19" FontSize="16" Background="#FFA0A0A0" BorderBrush="Black">Odustanak</Button>
+                    <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,30,19" FontSize="16" Background="#FFA0A0A0" BorderBrush="Black" Click="Button_Click">Potvrda</Button>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+            <Grid>
+                <Button  VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,55,37" FontSize="20" Height="38" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Background="#FFA0A0A0" BorderBrush="Black" >OTKAZI</Button>
+            </Grid>
+        </materialDesign:DialogHost>
+
+    </Grid>
+</Page>

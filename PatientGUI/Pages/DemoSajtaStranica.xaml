@@ -1,0 +1,20 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:klinika_zdravo.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="klinika_zdravo.Pages.DemoSajtaStranica"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="890"
+      Title="DemoSajtaStranica" Background="White" >
+    <Grid>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="48" FontFamily="Microsoft Yi Baiti" FontWeight="Bold" Foreground="#FF27A4AD">Demo sajta</TextBlock>
+        <MediaElement x:Name="media" Margin="20,60" LoadedBehavior="Manual" Source="../Resources/tutorial4_output.mp4">
+            
+        </MediaElement>
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,200,13" Background="#FFA0A0A0" BorderBrush="Black" Click="Button_Click">PLAY</Button>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="200,0,0,13" Background="#FFA0A0A0" BorderBrush="Black" Click="Button_Click_1">STOP</Button>
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,23,0,13" Background="#FFA0A0A0" BorderBrush="Black" Click="Button_Click_2">PAUSE</Button>
+    </Grid>
+</Page>
