@@ -1,4 +1,4 @@
-.circle {
+.circleadd {
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -7,7 +7,15 @@
     font-size: 16px;
     border-radius: 50%;
 }
-
+.circledelete {
+    background-color: #ff0000;
+    border: none;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 50%;
+}
 
 .col {
     width: 80%;
@@ -24,5 +32,12 @@ input[type=text]:focus {
 }
 select {
     text-align-last: center;
-    height:65%;
+    height:75%;
+}
+.btnSearch {
+    background-color: #014779;
+    color: white;
+    border: thick;
+    font-family: 'Impact';
+    font-weight: 100;
 }
