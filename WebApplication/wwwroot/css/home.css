@@ -60,15 +60,19 @@
     font-family: 'Impact';
     position: inherit;
 }
-h4{
+label {
+    color: #014779;
+}
+h4 {
     color: #014779;
     font-family: 'Impact';
+    text-decoration: underline;
 }
+
 th {
     background-color: lightblue;
     
 }
-
 .noborder {
     border: none;
 }
