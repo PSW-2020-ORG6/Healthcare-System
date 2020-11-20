@@ -46,6 +46,7 @@ namespace Model.Accounts
             Console.WriteLine(Guest);
         }
         public Patient() : base() { }
+        public Patient(string serialNumber, string name, string surname) : base() { }
 
         public string ParentName { get => parentName; set => parentName = value; }
         public string Gender { get => gender; set => gender = value; }

@@ -63,7 +63,7 @@
 				<button type="button" class="btn btn-info btn-lg margin" data-toggle="modal" data-target="#feedbackModal">Add comment</button>
 			</h3><br/>
 			<h3 class="textSurvey">Survey
-				<button type="button" class="btn btn-info btn-lg margin" data-toggle="modal" v-on:click="SurveyShow()">Take survey</button>
+				<button type="button" class="btn btn-info btn-lg margin" data-toggle="modal" v-on:click="SurveyShow()"">Take survey</button>
 			</h3><br/> 
 			<div>
 				<div class="tab-content">

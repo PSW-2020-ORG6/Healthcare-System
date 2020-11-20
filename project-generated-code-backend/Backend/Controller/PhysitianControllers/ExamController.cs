@@ -35,12 +35,12 @@ namespace Backend.Controller.PhysitianControllers
         {
             reportService.NewReport(currentReport);
         }
-
+        /*
         public void AddDocument(AdditionalDocument additionalDocument)
         {
             currentReport.AddAdditionalDocument(additionalDocument);
         }
-
+        */
         private String GetPatientConditions()
         {
             Report lastReport = reportService.GetLastReportByPatient(selectedPatient);

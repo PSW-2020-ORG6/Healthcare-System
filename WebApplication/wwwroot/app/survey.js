@@ -15,6 +15,7 @@
                 You performance by completing this survey regarding your visit.<br>Thank you for taking time to share your expirience with us.<br><br>
                Please rate the following toppings on a scale of 1 to 5,with 1 being poor and 5 being exellent.
             </p>
+            <p>Please , choose a doctor who is a subject of a survey:</p>
             <div class="question" id="q">
               <b id="topic">Toping 1 Doctor</b>
                 <p>1.The doctor is welcoming and gentle?</p>
