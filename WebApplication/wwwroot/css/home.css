@@ -8,7 +8,6 @@
     font-size: 30px;
     font-weight: 100;
     font-family: 'Impact';
-
 }
 
 #navbarDropdown {
@@ -26,13 +25,6 @@
     padding-bottom: 10px;
 }
 
-.btn {
-    background-color: lightblue;
-    color: white;
-    border: thick;
-    font-family: 'Impact';
-    font-weight: 100;
-}
 
 .btn1 {
     background-color: lightblue;
@@ -71,7 +63,9 @@ h4 {
 
 th {
     background-color: lightblue;
-    
+    color: #014779;
+    font-family: 'Impact';
+    font-weight: 100;
 }
 .noborder {
     border: none;
