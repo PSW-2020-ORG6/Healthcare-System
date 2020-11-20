@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Model.Accounts;
 using Model.Blog;
 using Model.Hospital;
+using Model.MedicalExam;
 using Model.Util;
 using System;
 
@@ -24,6 +25,7 @@ namespace WebApplication.Backend.Model
 
         public DbSet<Question> Questions { get; set; }
         public DbSet<Survey> Surveys { get; set; }
+        public DbSet<Report> Reports { get; set; }
 
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
@@ -32,6 +34,7 @@ namespace WebApplication.Backend.Model
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Survey>().HasKey(o => o.ID );
+            modelBuilder.Entity<Report>().HasKey(o => o.SerialNumber);
 
             modelBuilder.Entity<Feedback>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Building>().HasKey(o => o.SerialNumber);

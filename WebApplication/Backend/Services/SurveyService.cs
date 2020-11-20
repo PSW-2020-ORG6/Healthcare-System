@@ -19,5 +19,10 @@ namespace WebApplication.Backend.Services
         {
             return surveyRepository.AddNewSurvey(survey);
         }
+
+        internal List<string> GetAllDoctorsFromReporstByPatientId(string patientId)
+        {
+            return surveyRepository.GetAllDoctorsFromReporstByPatientId(patientId);
+        }
     }
 }

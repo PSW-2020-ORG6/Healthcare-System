@@ -1,5 +1,6 @@
 ﻿using health_clinic_class_diagram.Backend.Model.Survey;
 using Microsoft.AspNetCore.Mvc;
+using Model.MedicalExam;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,15 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=mydb111;user=root;password=neynamneynam12");
+                connection = new MySqlConnection("server=localhost;port=3306;database=mydb111;user=root;password=root");
                 connection.Open();
             }
             catch (Exception e)
             {
             }
         }
-       
+
+     
 
         internal bool AddNewSurvey(String Results)
         {
@@ -42,6 +44,37 @@ namespace WebApplication.Backend.Repositorys
             connection.Close();
 
             return true;
+        }
+
+        internal List<Report> GetReports(string sqlDml)
+        {
+            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
+            List<Report> resultList = new List<Report>();
+            while (sqlReader.Read())
+            {
+                Report entity = new Report();
+                entity.PatientId = (string)sqlReader[5];
+                entity.PatientName = (String)sqlReader[1];
+                entity.PhysitianName = (String)sqlReader[2];
+               
+                resultList.Add(entity);
+            }
+            connection.Close();
+            return resultList;
+        }
+
+        internal List<string> GetAllDoctorsFromReporstByPatientId(string idPatient)
+        {
+            List<Report> reports = new List<Report>();
+            reports=GetReports("Select * from reports where patientId="+idPatient.ToString());
+            List<String> doctors = new List<String>();
+            foreach (Report r in reports)
+            {
+                doctors.Add(r.PhysitianName);
+            }
+
+            return doctors;
         }
     }
 }

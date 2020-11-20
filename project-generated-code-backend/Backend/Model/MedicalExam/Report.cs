@@ -16,31 +16,41 @@ namespace Model.MedicalExam
     {
         private DateTime date;
         private String findings;
-        private Patient patient;
-        private Physitian physitian;
+        public Patient patient;
+        public  Physitian physitian;
         private String patientConditions;
         private ProcedureType procedureType;
+        public String patientName;
+        public String physitianName;
+        public string patientId;
 
-        private List<AdditionalDocument> additionalDocument;
+        public String PatientName { get => patientName; set => patientName = value; }
+        public String PhysitianName { get => physitianName; set => physitianName = value; }
+        public String PatientId { get => patientId; set => patientId = value; }
 
-        public List<AdditionalDocument> AdditionalDocument
-        {
-            get
-            {
-                if (additionalDocument == null)
-                    additionalDocument = new List<AdditionalDocument>();
-                return additionalDocument;
-            }
-            set
-            {
-                RemoveAllAdditionalDocument();
-                if (value != null)
+
+
+        // private  List<AdditionalDocument> additionalDocument;
+        /*
+                public List<AdditionalDocument> AdditionalDocument
                 {
-                    foreach (AdditionalDocument oAdditionalDocument in value)
-                        AddAdditionalDocument(oAdditionalDocument);
+                    get
+                    {
+                        if (additionalDocument == null)
+                            additionalDocument = new List<AdditionalDocument>();
+                        return additionalDocument;
+                    }
+                    set
+                    {
+                        RemoveAllAdditionalDocument();
+                        if (value != null)
+                        {
+                            foreach (AdditionalDocument oAdditionalDocument in value)
+                                AddAdditionalDocument(oAdditionalDocument);
+                        }
+                    }
                 }
-            }
-        }
+        */
 
         public DateTime Date { get => date; }
         public string Findings { get => findings; set => findings = value; }
@@ -49,7 +59,7 @@ namespace Model.MedicalExam
         public string PatientConditions { get => patientConditions; set => patientConditions = value; }
         public ProcedureType ProcedureType { get => procedureType; }
 
-        public void AddAdditionalDocument(AdditionalDocument newAdditionalDocument)
+       /* public void AddAdditionalDocument(AdditionalDocument newAdditionalDocument)
         {
             if (newAdditionalDocument == null)
                 return;
@@ -58,7 +68,7 @@ namespace Model.MedicalExam
             if (!this.additionalDocument.Contains(newAdditionalDocument))
                 this.additionalDocument.Add(newAdditionalDocument);
         }
-
+       
         public void RemoveAdditionalDocument(AdditionalDocument oldAdditionalDocument)
         {
             if (oldAdditionalDocument == null)
@@ -73,7 +83,7 @@ namespace Model.MedicalExam
             if (additionalDocument != null)
                 additionalDocument.Clear();
         }
-
+       */
         public Report(DateTime date, string findings, Patient patient, Physitian physitian, string patientConditions) : base(Guid.NewGuid().ToString())
         {
             this.date = date;
@@ -81,6 +91,13 @@ namespace Model.MedicalExam
             this.patient = patient;
             this.physitian = physitian;
             this.patientConditions = patientConditions;
+        }
+        public Report() { }
+        public Report(String patient,String physitian,String patientId)
+        {
+            this.patientName = patient;
+            this.physitianName = physitian;
+            this.patientId = patientId;
         }
 
         [JsonConstructor]
@@ -92,7 +109,7 @@ namespace Model.MedicalExam
             this.physitian = physitian;
             this.patientConditions = patientConditions;
         }
-
+        /*
         public override bool Equals(object obj)
         {
             Report other = obj as Report;
@@ -113,12 +130,13 @@ namespace Model.MedicalExam
             }
             return this.Date.Equals(other.Date) && this.Findings.Equals(other.Findings);
         }
+        */
 
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
-
+        /*
         public override string ToString()
         {
             string ret = "date: " + this.date.ToString("dd.MM.yyyy.") + "\nfindings: " + this.findings;
@@ -128,6 +146,7 @@ namespace Model.MedicalExam
             }
             return ret;
         }
+        */
         public int CompareTo(Report other)
         {
             return this.Date.CompareTo(other.Date);
