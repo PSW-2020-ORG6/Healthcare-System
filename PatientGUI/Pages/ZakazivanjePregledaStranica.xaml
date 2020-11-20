@@ -1,0 +1,88 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:klinika_zdravo.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="klinika_zdravo.Pages.ZakazivanjePregledaStranica"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="890"
+      Title="ZakazivanjePregledaStranica" Background="White">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="48" FontFamily="Microsoft Yi Baiti" FontWeight="Bold" Foreground="#FF27A4AD" TextDecorations="{x:Null}"><Run Text="ZAKAZIVANJE PREGLEDA"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="26" Margin="68,163,0,403"><Run Text="Izaberite datum i vreme"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="26" Margin="68,196,0,370"><Run Text="I kliknite na potvrdi"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="26" Margin="68,283,0,283"><Run Text="Datum:"/></TextBlock>
+        <Viewbox HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,70,70,35">
+            <Calendar SelectedDate="10.10.2020" x:Name="datePicker" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0" DisplayDate="2020-10-10" FontSize="20" FontWeight="Bold" BorderBrush="Black" Background="LightGray"/>
+        </Viewbox>
+        <Border BorderThickness="0.5" BorderBrush="#FF27A4AD" HorizontalAlignment="Left" VerticalAlignment="Center" Height="75" Width="289" Margin="60,0,0,198"></Border>
+        <TextBox x:Name="boxDatum1" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="26" Width="135" Margin="169,278,0,278" Background="#FFD7D7D7" Text="{Binding SelectedDate, ElementName=datePicker, StringFormat=\{0:d.MM.yyyy.\}}" BorderBrush="Black"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="26" Margin="68,343,0,223">Vreme:</TextBlock>
+        <ComboBox x:Name="boxVreme1" Width="135" Height="43.2" HorizontalAlignment="Left" Margin="169,125,0,0" Background="#FFD7D7D7" FontSize="26" BorderBrush="#89000000">
+            <ComboBoxItem>12:00AM</ComboBoxItem>
+            <ComboBoxItem >13:00AM</ComboBoxItem>
+            <ComboBoxItem>10:00AM</ComboBoxItem>
+        </ComboBox>
+        <materialDesign:DialogHost x:Name="dialogZakazivanje" BorderBrush="{DynamicResource MaterialDesignDivider}">
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Width="320" Height="400" HorizontalAlignment="Center" Background="LightGray">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+
+
+
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextDecorations="Underline" FontSize="29" Margin="0,6,0,0">ZAKAZIVANJE</TextBlock>
+                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Margin="0,0,216,0" FontSize="18">DATUM:</TextBlock>
+                    <TextBlock x:Name="boxDatum" Height="25" Background="White" Grid.Row="1" Margin="110,0,30,0" FontSize="19" Text="{Binding Datum}" Foreground="Black"></TextBlock>
+                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Margin="0,0,216,0" FontSize="18">VREME:</TextBlock>
+                    <TextBlock x:Name="boxVreme" Background="White" Grid.Row="2" Height="25" Margin="110,0,30,0" FontSize="19" Text="{Binding Vreme}"/>
+                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3" Margin="0,0,216,0" FontSize="18">TIP:</TextBlock>
+                    <TextBlock x:Name="boxTip" Text="{Binding Tip}" Background="White" Grid.Row="3" Height="25" Margin="110,0,30,0" FontSize="19"/>
+                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="4" Margin="0,0,216,0" FontSize="18">DOKTOR:</TextBlock>
+                    <ComboBox x:Name="boxDoktor" Padding="0" VerticalAlignment="Stretch" Background="White" Grid.Row="4" Height="25" Margin="110,0,30,0" FontSize="19">
+                        <ComboBoxItem IsSelected="True">Dr. Gregory House</ComboBoxItem>
+                        <ComboBoxItem >Dr. Pera Peric</ComboBoxItem>
+                        <ComboBoxItem>Dr. Mane Manic</ComboBoxItem>
+                    </ComboBox>
+                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="5" Margin="0,0,216,0" FontSize="18">PROSTORIJA:</TextBlock>
+                    <TextBlock x:Name="boxSoba" Text="{Binding Prostorija}" Background="White" Grid.Row="5" Height="25" Margin="110,0,30,0" FontSize="19"/>
+                    <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="6" Margin="30,0,0,0" FontSize="13" Background="#FFA0A0A0" BorderBrush="Black">Odustanak</Button>
+                    <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="6" Margin="0,0,30,0" FontSize="13" Background="#FFA0A0A0" BorderBrush="Black" Click="Button_Click">Potvrda</Button>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+            <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="169,0,0,150" FontSize="22" Height="45" Background="#FFA0A0A0" BorderBrush="Black" Click="Button_Click_1" >Potvrdi</Button>
+        </materialDesign:DialogHost>
+
+
+        <materialDesign:DialogHost x:Name="dialogPotvrda" BorderBrush="{DynamicResource MaterialDesignDarkSeparatorBackground}">
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Width="200" Height="120" HorizontalAlignment="Center" Background="LightGray">
+                    <TextBlock HorizontalAlignment="Center" FontSize="22" Margin="0,0,0,59" VerticalAlignment="Center">Pregled je</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" FontSize="22" Margin="0,0,0,1" VerticalAlignment="Center">zakazan</TextBlock>
+                    <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,4" FontSize="16" Background="#FFA0A0A0" BorderBrush="Black">U redu</Button>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
+        <materialDesign:DialogHost x:Name="dialogNemaVreme" BorderBrush="{DynamicResource MaterialDesignDarkSeparatorBackground}">
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Width="200" Height="120" HorizontalAlignment="Center" Background="LightGray">
+                    <TextBlock HorizontalAlignment="Center" FontSize="22" Margin="0,0,0,59" VerticalAlignment="Center">Morate izabrati</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" FontSize="22" Margin="0,0,0,1" VerticalAlignment="Center">vreme pregleda</TextBlock>
+                    <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,4" FontSize="16" Background="#FFA0A0A0" BorderBrush="Black">U redu</Button>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
+
+    </Grid>
+</Page>
