@@ -1,0 +1,3 @@
+{"Name":"krvna slika","SerialNumber":"0da920fd-b0ae-4c74-ba98-957d9b1a8bd0"}
+{"Name":"analiza hormona","SerialNumber":"9102431d-517b-4a7a-81e0-6b3a13e58a72"}
+{"Name":"rendgen","SerialNumber":"73d62350-c865-4b60-8107-4eec023624a4"}

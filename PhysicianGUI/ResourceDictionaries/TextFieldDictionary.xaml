@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:HealthClinic.ResourceDictionaries">
+    
+    <!-- Date Picker Style -->
+    <Style x:Key="DatePicker" TargetType="DatePicker">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+    
+    <!-- TextBox -->
+    <Style TargetType="TextBox">
+        <Setter Property="Background" Value="FloralWhite"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+    </Style>
+    
+    <!-- TextBlock -->
+    <Style TargetType="TextBlock" x:Key="PersonalInfoTextBlock">
+        <Setter Property="Margin" Value="5,5,5,5"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+    
+</ResourceDictionary>

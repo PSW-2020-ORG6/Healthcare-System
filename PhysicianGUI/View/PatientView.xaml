@@ -1,0 +1,165 @@
+﻿<UserControl x:Class="HealthClinic.View.PatientView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:HealthClinic.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <!-- Open Options Menu -->
+        <Storyboard x:Key="OptionsOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)"
+                                           Storyboard.TargetName="MoreOptions">
+                <EasingDoubleKeyFrame KeyTime="0" Value = "0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="90"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <!-- Close Options Menu -->
+        <Storyboard x:Key="OptionsClose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)"
+                                           Storyboard.TargetName="MoreOptions">
+                <EasingDoubleKeyFrame KeyTime="0" Value = "90"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent = "ButtonBase.Click"
+                      SourceName = "ExpandPatientBtn">
+
+            <BeginStoryboard Storyboard="{StaticResource OptionsOpen}"/>
+        </EventTrigger>
+
+        <EventTrigger x:Name="BarClose" RoutedEvent = "ButtonBase.Click"
+                      SourceName = "CollapsePatientBtn">
+
+            <BeginStoryboard Storyboard="{StaticResource OptionsClose}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Heading and button -->
+        <Border Style="{StaticResource SegmentOutline}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Style="{StaticResource GoBackButton}" Command="{Binding ChangeToHomeViewCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/icons/go_back.png" Margin="8,8,8,8"/>
+                        <Label Content="Povratak na početnu stranicu" Style="{StaticResource GoBackButtonLabel}"/>
+                    </StackPanel>
+                </Button>
+
+                <Label Content="Pacijenti" Grid.Column="1" Style="{StaticResource HeadingLabel}" HorizontalAlignment="Center"/>
+
+                <Button x:Name="ShowPatientDetailBtn" Content="Prikaži detaljnije" Grid.Column="2" Margin="5,5,5,5" IsEnabled="{Binding DataGridRowIsSelected}" Command="{Binding ChangeToPatientDetailViewCommand}"/>
+
+            </Grid>
+        </Border>
+
+        <!-- Table and search/filter options -->
+        <Border Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource SegmentOutline}" Panel.ZIndex="1">
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Options Section -->
+                <Grid x:Name="MoreOptions" Height="0" Grid.Row="0" Panel.ZIndex="1">
+                    
+                    <!-- Search Section -->
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="1.5*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Style="{StaticResource SegmentOutline}" Grid.Row="1" Grid.Column="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="searchMedicineTextBox" Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0"/>
+                                <Button x:Name="searchMedicineBtn" Grid.Column="1" Style="{StaticResource IconButton}">
+                                    <Image Source="/icons/search.png"/>
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+
+                <!-- Expand/Collapse Section -->
+                <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="LightGray" Style="{StaticResource MoreOptions}">
+                    <Grid>
+                        <Button x:Name="CollapsePatientBtn" Click="CollapsePatientBtn_Click" Grid.Column="1" Visibility="Hidden" Style="{StaticResource IconButton}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Source="/icons/up_options.png" Grid.Column="1"/>
+                            </Grid>
+                        </Button>
+
+                        <Button x:Name="ExpandPatientBtn" Click="ExpandPatientBtn_Click" Grid.Column="1" Style="{StaticResource IconButton}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Source="/icons/down_options.png" Grid.Column="1"/>
+                            </Grid>
+                        </Button>
+
+                    </Grid>
+                </Border>
+
+                <!-- Table Section -->
+                <Border Style="{StaticResource SegmentOutline}" Grid.Row="2" Grid.RowSpan="1">
+                    <ScrollViewer x:Name="patientTableScrollViewer" VerticalScrollBarVisibility="Hidden">
+                        <DataGrid x:Name="patientDataGrid" ItemsSource="{Binding Patients}" SelectedItem="{Binding SelectedPatient}" Style="{StaticResource TableOutline}" PreviewMouseWheel="patientDataGrid_PreviewMouseWheel">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Ime i Prezime" Binding="{Binding FullName}" Width="*"/>
+                                <DataGridTextColumn Header="Datum rođenja" Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}" Width="0.5*"/>
+                                <DataGridTextColumn Header="JMBG" Binding="{Binding Id}" Width="0.5*"/>
+                                <DataGridTextColumn Header="Pregledan poslednji put" Binding="{Binding PreviousAppointment}" Width="1.25*"/>
+                                <DataGridTextColumn Header="Sledeći zakazan pregled" Binding="{Binding NextAppointment}" Width="1.25*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+                    
+                </Border>
+
+            </Grid>
+        </Border>
+
+    </Grid>
+</UserControl>

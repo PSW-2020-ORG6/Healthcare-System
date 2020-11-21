@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="HealthClinic.View.MedicineDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HealthClinic.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Heading Section -->
+        <Border Style="{StaticResource SegmentOutline}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Style="{StaticResource GoBackButton}" Command="{Binding GoBackCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/icons/go_back.png" Margin="8,8,8,8"/>
+                        <Label Content="Povratak na listu lekova" Style="{StaticResource GoBackButtonLabel}"/>
+                    </StackPanel>
+                </Button>
+
+                <Label Content="Lekovi" Grid.Column="1" Style="{StaticResource HeadingLabel}" HorizontalAlignment="Center"/>
+
+            </Grid>
+        </Border>
+
+        <!-- Medicine Info Section -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Medicine Details Section -->
+            <Border Style="{StaticResource SmallerSegmentOutline}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="Zaštićen naziv:" Grid.Row="0" Grid.Column="0"/>
+                    <Label Content="Generički naziv:" Grid.Row="1" Grid.Column="0"/>
+                    <Label Content="Proizvođač:" Grid.Row="2" Grid.Column="0"/>
+                    <Label Content="Vrsta leka:" Grid.Row="3" Grid.Column="0"/>
+
+                    <TextBlock Text="{Binding Medicine.CopyrightName}" Style="{StaticResource PersonalInfoTextBlock}" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="{Binding Medicine.GenericName}" Style="{StaticResource PersonalInfoTextBlock}" Grid.Row="1" Grid.Column="1"/>
+                    <TextBlock Text="{Binding Medicine.MedicineManufacturer}" Style="{StaticResource PersonalInfoTextBlock}" Grid.Row="2" Grid.Column="1"/>
+                    <TextBlock Text="{Binding Medicine.MedicineType}" Style="{StaticResource PersonalInfoTextBlock}" Grid.Row="3" Grid.Column="1"/>
+
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Grid>
+</UserControl>
