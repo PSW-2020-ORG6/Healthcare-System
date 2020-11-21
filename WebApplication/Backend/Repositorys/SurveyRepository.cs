@@ -17,7 +17,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=mydb111;user=root;password=root");
+                connection = new MySqlConnection("server=localhost;port=3306;database=bazamaja1;user=root;password=root");
                 connection.Open();
             }
             catch (Exception e)
@@ -38,7 +38,7 @@ namespace WebApplication.Backend.Repositorys
                 + "','" + surveyText.Question6 + "','" + surveyText.Question7 + "','" + surveyText.Question8 + "','" + surveyText.Question9 + "','" + surveyText.Question10 +
                 "','" + surveyText.Question11 + "','" + surveyText.Question12 + "','" + surveyText.Question13 + "','" + surveyText.Question14 + "','" + surveyText.Question15 +
                 "','" + surveyText.Question16 + "','" + surveyText.Question17 + "','" + surveyText.Question18 + "','" + surveyText.Question19 + "','" + surveyText.Question20
-                + "','" + surveyText.Question21+ "','" + surveyText.Question22 + "','" + surveyText.question23 + "','" + surveyText.ID + "','" + surveyText.DoctorName+ "')";
+                + "','" + surveyText.Question21+ "','" + surveyText.Question22 + "','" + surveyText.question23 + "','" + surveyText.SerialNumber + "','" + surveyText.DoctorName+ "')";
 
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             sqlCommand.ExecuteNonQuery();
@@ -55,7 +55,7 @@ namespace WebApplication.Backend.Repositorys
             while (sqlReader.Read())
             {
                 Report entity = new Report();
-                entity.PatientId = (string)sqlReader[5];
+                entity.PatientId = (string)sqlReader[3];
                 entity.PatientName = (String)sqlReader[1];
                 entity.PhysitianName = (String)sqlReader[2];
                
