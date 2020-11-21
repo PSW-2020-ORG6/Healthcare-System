@@ -1,0 +1,44 @@
+﻿.line {
+    height: 2px;
+    border-width: 0;
+    color: gray;
+    background-color: gray;
+}
+
+
+.text1 {
+    color: cadetblue;
+    font-size: 30px;
+    font-weight: 100;
+    font-family: 'Impact';
+    text-align: center;
+}
+
+hr {
+    height: 1px;
+    border-width: 0;
+    color: gray;
+    background-color: gray;
+}
+.combo{
+    width: 185px;
+    height: 30px;
+}
+
+.container .t{
+    float: left;
+    width: 50%;
+}
+
+.margin1 {
+    margin-left: 90%;
+}
+
+.btn2 {
+    background-color: cadetblue;
+    color: white;
+    border: thick;
+    font-family: 'Impact';
+    font-weight: 100;
+}
+

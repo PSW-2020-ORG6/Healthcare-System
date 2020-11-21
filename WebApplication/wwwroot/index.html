@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/home.css">
     <link rel="stylesheet" type="text/css" href="css/patient.css">
     <link rel="stylesheet" type="text/css" href="css/admin.css">
+    <link rel="stylesheet" type="text/css" href="css/registration.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="css/survey.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
@@ -32,6 +33,9 @@
                         <h1 class="navbar-brand" id="clinicLogoTxt">Health Clinic</h1>
                         <img src="pictures/logInverted.png" id="clinicLogoPic">
                     </li>
+                    <li class="nav-item dropdown">
+                        <button type="button" class="btn1 btn-info btn-lg navbar-brand" id="registration" v-on:click="registration">Registration</button>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -53,6 +57,7 @@
     <script src="js/axios.js"></script>
     <script src="app/admin.js"></script>
     <script src="app/patient.js"></script>
+    <script src="app/registration.js"></script>
     <script src="app/router.js"></script>
     <script src="app/survey.js"></script>
     <script src="app/statistics.js"></script>

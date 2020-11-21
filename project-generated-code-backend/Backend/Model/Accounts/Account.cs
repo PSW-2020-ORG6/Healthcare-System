@@ -17,7 +17,7 @@ namespace Model.Accounts
         protected DateTime dateOfBirth;
         protected String contact;
         protected String email;
-        protected Address address;
+        protected String address;
         protected String password;
 
         public string Name { get => name; set => name = value; }
@@ -28,11 +28,13 @@ namespace Model.Accounts
         public DateTime DateOfBirth { get => dateOfBirth; set => dateOfBirth = value; }
         public string Contact { get => contact; set => contact = value; }
         public string Email { get => email; set => email = value; }
-        public virtual Address Address { get => address; set => address = value; }
+        public string Address { get => address; set => address = value; }
 
         public String Password { get => password; }
 
-        public Account(String serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, String password) : base(serialNumber)
+        public Account(String serialNumber) : base(serialNumber) { }
+
+        public Account(String serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, String address, String password) : base(serialNumber)
         {
             this.name = name;
             this.surname = surname;
