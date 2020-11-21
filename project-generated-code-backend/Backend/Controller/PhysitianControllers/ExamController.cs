@@ -4,7 +4,6 @@
 // Purpose: Definition of Class ExamController
 
 using Backend.Service.PatientCareService;
-using Backend.Service.PatientCareService;
 using Model.Accounts;
 using Model.MedicalExam;
 using Model.Schedule;
