@@ -29,7 +29,6 @@
             question21: null,
             question22: null,
             question23: null,
-            Id: "000578515",
             DoctorsName:null
             }
         }
@@ -51,17 +50,17 @@
     <div>
         <p id="title">Survey</p>
         <div>
-            <p id="textSurvey">Select doctor to rate:<br>
-                <select  class="browser-default custom-select" v-model = "surveyText.DoctorName">
-                     <option div v-for="(doctor) in doctorsList" v-bind:value="doctor">{{doctor}}</option>
-                </select>
+            
            <p id="textSurvey">Dear patient,<br>
                At Health Clinic,we are commited to your healthcare.We are interested in knowing what do you thing abaut our services.
                 You performance by completing this survey regarding your visit.<br>Thank you for taking time to share your expirience with us.<br><br>
                Please rate the following toppings on a scale of 1 to 5,with 1 being poor and 5 being exellent.
             </p>
-            <p>Please , choose a doctor who is a subject of a survey:</p>
-            <div class="question" id="q">
+            <p id="textSurvey">Select doctor to rate:<br>
+                <select id="doctorSelect" class="browser-default custom-select" v-model = "surveyText.DoctorName">
+                     <option div  v-for="(doctor) in doctorsList" v-bind:value="doctor">{{doctor}}</option>
+                </select>
+            </p>            <div class="question" id="q">
               <b id="topic">Topic 1 Doctor</b>
                 <p>1.The doctor is welcoming and gentle?</p>
                     <div class="starrating risingstar d-flex justify-content-center flex-row-reverse" >
@@ -324,23 +323,74 @@
                     </div>
               </div>
 
-			  <button type="button" class="btn btn-info btn-lg " v-on:click="AddNewSurvey()">Send</button>
+			  <button type="button" class="btn btn-info btn-lg " data-toggle="modal"  v-on:click="AddNewSurvey()">Send</button>
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                              <p>Please choose a doctor who is a subject of this survey.</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                       <div class="modal fade" id="myModal1" role="dialog">
+                        <div class="modal-dialog">
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                              <p>Please answer all questions.</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
               <button type="button" class="btn btn-info btn-lg " data-dismiss="modal">Cancel</button>
         </div>
     </div>
 	`,
     methods: {
         AddNewSurvey: function (surveyText) {
+            if (!document.getElementById("star1RatingTwentyThree").checked && !document.getElementById("star1RatingTwentyTwo").checked &&
+                !document.getElementById("star1RatingTwentyOne").checked && !document.getElementById("star1RatingTwenty").checked &&
+                !document.getElementById("star2RatingNineteen").checked && !document.getElementById("star3RatingEighteen").checked &&
+                !document.getElementById("star1RatingSeventeen").checked && !document.getElementById("star1RatingSixteen").checked &&
+                !document.getElementById("star2RatingFifteen").checked && !document.getElementById("star1RatingFourteen").checked &&
+                !document.getElementById("star2RatingThirteen").checked && !document.getElementById("star4RatingTwelve").checked &&
+                !document.getElementById("star3RatingEleven").checked && !document.getElementById("star4RatingTen").checked &&
+                !document.getElementById("star2RatingNine").checked && !document.getElementById("star4RatingEight").checked &&
+                !document.getElementById("star2RatingSeven").checked && !document.getElementById("star4RatingSix").checked &&
+                !document.getElementById("star2RatingFive").checked && !document.getElementById("star4RatingFour").checked &&
+                !document.getElementById("star2RatingThree").checked && !document.getElementById("star4RatingTwo").checked &&
+                !document.getElementById("star4RatingOne").checked) {
+                $('#myModal1').modal('show');
+                return
+            }
+            selectedValue = $('#doctorSelect').val()
+            if (selectedValue == null) {
+                $('#myModal').modal('show');
+                return
+            }
+            
            // this.surveyText = this.question1.toString() + "," + this.question2.toString() + "," + this.question3.toString() + "," + this.question4.toString() + "," + this.question5.toString() + "," + this.question6.toString() + "," + this.question7.toString() + "," +
            //     this.question8.toString() + "," + this.question9.toString() + "," + this.question10.toString() + "," + this.question11.toString() + "," + this.question12.toString() + "," + this.question13.toString() + "," + this.question14.toString() + "," +
            //     this.question15.toString() + "," + this.question16.toString() + "," + this.question17.toString() + "," + this.question18.toString() + "," +
            //     this.question1.toString() + "," + this.question19.toString() + "," + this.question20.toString() + "," + this.question21.toString() + "," + this.question22.toString() + "," + this.question23.toString() + "," + this.selectedDoctor + ","+ "001234"
-            alert(this.surveyText)
             var surveyText = this.surveyText
             axios
                 .post('http://localhost:49900/survey/add',  surveyText)
                 .then(response => {
-                    alert("uspesno");
                 })
         }
     }

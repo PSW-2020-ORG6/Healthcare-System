@@ -33,7 +33,7 @@ namespace WebApplication.Backend.Model
         // only for testing purposes
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Survey>().HasKey(o => o.ID );
+            modelBuilder.Entity<Survey>().HasKey(o => o.SerialNumber );
             modelBuilder.Entity<Report>().HasKey(o => o.SerialNumber);
 
             modelBuilder.Entity<Feedback>().HasKey(o => o.SerialNumber);
@@ -79,11 +79,33 @@ namespace WebApplication.Backend.Model
            );
             
             modelBuilder.Entity<Survey>().HasData(
-                new Survey {ID="001",DoctorName="Pera Peric",Question1="5", Question2 = "5",Question3 = "5",
-                    Question4 = "5",Question5 = "4",Question6 = "3",Question7 = "5",Question8 = "5",
-                    Question9 = "1",Question10 = "5",Question11 = "2",Question12 = "5",Question13 = "5",
-                    Question14 = "5",Question15 = "5",Question16 = "5",Question17 = "5",Question18 = "5",
-                    Question19 = "5",Question20 = "5" ,Question21="3",Question22="2",Question23="4"}
+                new Survey {
+                    ID = "001",
+                    DoctorName = "Pera Peric",
+                    Question1 = "5",
+                    Question2 = "5",
+                    Question3 = "5",
+                    Question4 = "5",
+                    Question5 = "4",
+                    Question6 = "3",
+                    Question7 = "5",
+                    Question8 = "5",
+                    Question9 = "1",
+                    Question10 = "5",
+                    Question11 = "2",
+                    Question12 = "5",
+                    Question13 = "5",
+                    Question14 = "5",
+                    Question15 = "5",
+                    Question16 = "5",
+                    Question17 = "5",
+                    Question18 = "5",
+                    Question19 = "5",
+                    Question20 = "5",
+                    Question21 = "3",
+                    Question22 = "2",
+                    Question23 = "4"
+                }
            );
             modelBuilder.Entity<Survey>().HasData(
                new Survey

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace health_clinic_class_diagram.Backend.Model.Survey
 {
-    public class Survey 
+    public class Survey :Entity
     {
         public string id;
         public string doctorName;
