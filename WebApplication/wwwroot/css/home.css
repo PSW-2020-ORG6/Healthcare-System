@@ -3,12 +3,13 @@
     background-color: lightblue;
 }
 
-    .navbar-custom .navbar-brand {
-        color: white;
-        font-size: 30px;
-        font-weight: 100;
-        font-family: 'Impact';
-    }
+.navbar-custom .navbar-brand {
+    color: white;
+    font-size: 30px;
+    font-weight: 100;
+    font-family: 'Impact';
+
+}
 
 #navbarDropdown {
     background-color: lightblue;
@@ -25,7 +26,6 @@
     padding-bottom: 10px;
 }
 
-
 .btn {
     background-color: lightblue;
     color: white;
@@ -33,6 +33,16 @@
     font-family: 'Impact';
     font-weight: 100;
 }
+
+.btn1 {
+    background-color: lightblue;
+    color: white;
+    border: thick;
+    font-family: 'Impact';
+    font-weight: 100;
+    margin-left: 200%;
+}
+
 .margin{
     margin-left: 70%;
 }
