@@ -15,9 +15,9 @@ namespace WebApplication.Backend.Services
             this.surveyRepository = new SurveyRepository();
         }
 
-        internal bool AddNewSurvey(String survey)
+        internal bool AddNewSurvey(Survey surveyText)
         {
-            return surveyRepository.AddNewSurvey(survey);
+            return surveyRepository.AddNewSurvey(surveyText);
         }
 
         internal List<string> GetAllDoctorsFromReporstByPatientId(string patientId)

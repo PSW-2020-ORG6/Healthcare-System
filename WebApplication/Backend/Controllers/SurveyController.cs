@@ -20,9 +20,9 @@ namespace WebApplication.Backend.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult AddNewSurvey(String survey)
+        public IActionResult AddNewSurvey(Survey surveyText)
         {
-            surveyService.AddNewSurvey(survey);
+            surveyService.AddNewSurvey(surveyText);
             return Ok();
         }
         [HttpGet("getDoctors")]
