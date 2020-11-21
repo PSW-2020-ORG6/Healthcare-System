@@ -27,17 +27,18 @@ namespace WebApplication.Backend.Repositorys
 
      
 
-        internal bool AddNewSurvey(String Results)
+        internal bool AddNewSurvey(Survey surveyText)
         {
-            string[] results = Results.Split(",");
+            //string[] results = surveyText.Split(",");
+
             string sqlDml ="INSERT into surveys" +
                 "(Question1,Question2,Question3,Question4,Question5,Question6,Question7,Question8,Question9,Question10,Question11," +
                 "Question12,Question13,Question14,Question15,Question16,Question17,Question18,Question19,Question20,Question21,Question22,Question23,ID,DoctorName)VALUES ('"
-                + results[0]+"','"+ results[1] + "','" + results[2] + "','" + results[3] + "','" + results[4]
-                + "','" + results[5] + "','" + results[6] + "','" + results[7] + "','" + results[8] + "','" + results[9] +
-                "','" + results[10] + "','" + results[11] + "','" + results[12] + "','" + results[13] + "','" + results[14] +
-                "','" + results[15] + "','" + results[16] + "','" + results[17] + "','" + results[18] + "','" + results[19]
-                + "','" + results[20]+ "','" + results[21]+ "','" + results[22] + "','" + results[23] + "','" + results[24] + "')";
+                + surveyText .Question1+ "','"+ surveyText.Question2 + "','" + surveyText.Question3 + "','" + surveyText.Question4 + "','" + surveyText.Question5
+                + "','" + surveyText.Question6 + "','" + surveyText.Question7 + "','" + surveyText.Question8 + "','" + surveyText.Question9 + "','" + surveyText.Question10 +
+                "','" + surveyText.Question11 + "','" + surveyText.Question12 + "','" + surveyText.Question13 + "','" + surveyText.Question14 + "','" + surveyText.Question15 +
+                "','" + surveyText.Question16 + "','" + surveyText.Question17 + "','" + surveyText.Question18 + "','" + surveyText.Question19 + "','" + surveyText.Question20
+                + "','" + surveyText.Question21+ "','" + surveyText.Question22 + "','" + surveyText.question23 + "','" + surveyText.ID + "','" + surveyText.DoctorName+ "')";
 
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             sqlCommand.ExecuteNonQuery();
