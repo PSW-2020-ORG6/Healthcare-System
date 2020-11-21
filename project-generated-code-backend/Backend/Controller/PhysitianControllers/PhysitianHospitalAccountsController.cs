@@ -62,7 +62,7 @@ namespace Backend.Controller.PhysitianControllers
             return reportService.GetLastReportByPatient(patient);
         }
 
-        internal Appointment GetTodaysAppointmentForPatient(Patient patient)
+        public Appointment GetTodaysAppointmentForPatient(Patient patient)
         {
             return physitianScheduleService.GetTodaysAppointmentForPatient(patient);
         }

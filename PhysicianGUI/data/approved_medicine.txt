@@ -1,0 +1,1 @@
+{"CopyrightName":"Actapax","GenericName":"paroksetin","MedicineManufacturer":{"Name":"Zdravlje","SerialNumber":"98ee1c2d-a027-4e1e-b638-904d2022c2d5"},"MedicineType":{"Type":"antidepresiv","SerialNumber":"2b0b8f95-5b87-438b-a32c-c96e592340ac"},"SerialNumber":"6eb57787-99e3-4030-9409-352b801153a0"}

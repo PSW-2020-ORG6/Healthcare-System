@@ -1,0 +1,86 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:HealthClinic.ResourceDictionaries">
+    
+    <!-- Default Button Style -->
+    <Style TargetType="Button">
+        <Setter Property="Background" Value="DarkSeaGreen"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Red"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Icon Button Style -->
+    <Style x:Key="IconButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+    </Style>
+
+    <!-- Border Icon Button Style -->
+    <Style x:Key="BorderIconButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="Margin" Value="5, 5, 5, 5"/>
+    </Style>
+    
+    <!-- SideMenu Button Style -->
+    <Style x:Key="SideMenuButtons" TargetType="Button">
+        <Setter Property="Background" Value="DarkSeaGreen"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+    
+    <!-- Go Back Button Style -->
+    <Style x:Key="GoBackButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <!-- Submit Button Style -->
+    <Style x:Key="SubmitButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="DarkSeaGreen"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="5,5,5,5"/>
+        <Setter Property="Content" Value="Potvrda"/>
+    </Style>
+
+    <!-- Cancel Button Style -->
+    <Style x:Key="CancelButtonStyle" TargetType="Button" BasedOn="{StaticResource SubmitButtonStyle}">
+        <Setter Property="Background" Value="#7F800000"/>
+        <Setter Property="Content" Value="Odustanak"/>
+    </Style>
+    
+    <!-- Show Table Button Style -->
+    <Style x:Key="showTableButtonStyle" TargetType="Button" BasedOn="{StaticResource SubmitButtonStyle}">
+        <Setter Property="Background" Value="#BF8FBC8F"/>
+        <Setter Property="Margin" Value="50,5,50,5"/>
+    </Style>
+    
+    <!-- Table Options Button Style -->
+    <Style x:Key="TableOptionsButtonStyle" TargetType="Button" BasedOn="{StaticResource SubmitButtonStyle}">
+        <Setter Property="Margin" Value="0,0,0,0"/>
+        <Setter Property="Background" Value="#BF8FBC8F"/>
+    </Style>
+
+    <!-- Quick Appointment Button Style -->
+    <Style x:Key="QuickAppointmentButtonStyle" TargetType="Button" BasedOn="{StaticResource SubmitButtonStyle}">
+        <Setter Property="Background" Value="#FFEBDF6C"/>
+        <Setter Property="ToolTip" Value="Zakazuje se najbliži termin"/>
+    </Style>
+    
+    <!-- Radio Button Style-->
+    <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+</ResourceDictionary>

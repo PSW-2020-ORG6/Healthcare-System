@@ -9,7 +9,7 @@ using Backend.Dto;
 
 namespace Backend.Controller.PhysitianControllers
 {
-    class PhysitianMedicineController
+    public class PhysitianMedicineController
     {
         private PhysitianMedicineService physitianMedicineService;
         public PhysitianMedicineController()

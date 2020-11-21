@@ -1,0 +1,179 @@
+﻿<UserControl x:Class="HealthClinic.View.PatientDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:local="clr-namespace:HealthClinic.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Heading and button -->
+        <Border Grid.Row="0" Style="{StaticResource SegmentOutline}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Style="{StaticResource GoBackButton}" Command="{Binding ChangeToHomeViewCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/icons/go_back.png" Margin="8,8,8,8"/>
+                        <Label Content="Povratak na početnu stranicu" Style="{StaticResource GoBackButtonLabel}"/>
+                    </StackPanel>
+                </Button>
+
+                <Label Content="Informacije o pacijentu" Grid.Column="1" Style="{StaticResource HeadingLabel}" HorizontalAlignment="Center"/>
+
+            </Grid>
+        </Border>
+        
+        <!-- Patient Info -->
+        <Border Grid.Row="1" Style="{StaticResource SegmentOutline}">
+            <Grid Margin="10, 0, 10, 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Patient Info Labels -->
+                <Label Grid.Row="0" Grid.Column="0" Content="Ime i prezime:"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Patient}" Style="{StaticResource PersonalInfoTextBlock}"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="Datum rođenja:"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Patient.DateOfBirth, StringFormat=\{0:dd.MM.yyyy.\}}" Style="{StaticResource PersonalInfoTextBlock}"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="JMBG:"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Patient.Id}" Style="{StaticResource PersonalInfoTextBlock}"/>
+                <Label Grid.Row="3" Grid.Column="0" Content="Kontakt telefon:"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Patient.Contact}" Style="{StaticResource PersonalInfoTextBlock}"/>
+
+                <Button IsEnabled="{Binding IsInpatientCareNotActive}" Command="{Binding OpenNewInpatientCareDialogCommand}" Grid.Row="0" Grid.Column="3"  Style="{StaticResource BorderIconButton}" HorizontalAlignment="Stretch">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Započni bolničko lečenje" FontSize="12" VerticalAlignment="Center"/>
+                            <Image Source="/icons/bed.png"/>
+                        </StackPanel>
+                    </Button.Content>
+                    
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="2"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Command="{Binding OpenActiveInpatientCareDialogCommand}" IsEnabled="{Binding IsInpatientCareActive}" Grid.Row="1" Grid.Column="3" Style="{StaticResource BorderIconButton}" HorizontalAlignment="Stretch">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Trenutno bolničko lečenje" FontSize="12" VerticalAlignment="Center"/>
+                            <Image Source="/icons/curr_inpatient.png"/>
+                        </StackPanel>
+                    </Button.Content>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="2"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Command="{Binding OpenInpatientCareHistoryDialogCommand}" Grid.Row="2" Grid.Column="3" Style="{StaticResource BorderIconButton}" HorizontalAlignment="Stretch">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Istorija bolničkog lečenja" FontSize="12" VerticalAlignment="Center"/>
+                            <Image Source="/icons/prev_inpatient.png"/>
+                        </StackPanel>
+                    </Button.Content>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="2"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+            </Grid>
+        </Border>
+        
+        <!-- Patient Conditions -->
+        <Border Grid.Row="2" Style="{StaticResource SegmentOutline}">
+            <ScrollViewer x:Name="conditionsScrollViewer" VerticalScrollBarVisibility="Hidden">
+                <xctk:RichTextBox x:Name="conditionsRichTextBox" Text="{Binding PatientConditions, Mode=OneWay}" IsEnabled="False" Background="FloralWhite" PreviewMouseWheel="conditionsRichTextBox_PreviewMouseWheel">
+                    <xctk:RichTextBox.TextFormatter>
+                        <xctk:PlainTextFormatter />
+                    </xctk:RichTextBox.TextFormatter>
+                </xctk:RichTextBox>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Previous Exam Reports -->
+        <Border  Grid.Row="3" Style="{StaticResource SegmentOutline}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="4*"/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- ComboBox Section -->
+                    <Grid Grid.Column="0" Margin="5,5,5,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="15*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <ComboBox ItemsSource="{Binding ProcedureTypes}" SelectedIndex="{Binding SelectedProcedureType}" x:Name="ReportTypeCB" Grid.Column="0" Style="{StaticResource ComboBoxFlatStyle}"/>
+
+                        <ComboBox ItemsSource="{Binding Physitians}" SelectedIndex="{Binding SelectedPhysitian}" x:Name="PhysitianCB" Grid.Column="2" Style="{StaticResource ComboBoxFlatStyle}"/>
+
+                    </Grid>
+
+                    <!-- Buttons Section -->
+                    <Grid Grid.Column="2" Margin="5,5,5,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="GeneratePDFButton" Content="Generiši PDF" Grid.Column="0" IsEnabled="{Binding IsDataGridRowSelected}" Command="{Binding GeneratePDFCommand}"/>
+                        <Button Content="Otvori Izveštaj" Grid.Column="1" IsEnabled="{Binding IsDataGridRowSelected}" Command="{Binding OpenReportCommand}"/>
+                        <Button Content="Novi Izveštaj" Grid.Column="2" IsEnabled="{Binding IsNewReportEnabled}" Command="{Binding NewReportCommand}"/>
+                    </Grid>
+                </Grid>
+
+                <!-- Table Section -->
+                <ScrollViewer x:Name="reportsTableScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+                    <DataGrid x:Name="reportsDataGrid" Grid.Row="1" ItemsSource="{Binding Reports}" SelectedItem="{Binding SelectedReport}" Style="{StaticResource TableOutline}" PreviewMouseWheel="reportsDataGrid_PreviewMouseWheel">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Vrsta Pregleda" Binding="{Binding ProcedureType}" Width="*"/>
+                            <DataGridTextColumn Header="Datum" Binding="{Binding Date, StringFormat=\{0:dd.MM.yyyy\}}" Width="*"/>
+                            <DataGridTextColumn Header="Lekar" Binding="{Binding Physitian}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+
+    </Grid>
+</UserControl>
