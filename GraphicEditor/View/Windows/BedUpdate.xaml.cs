@@ -1,4 +1,5 @@
 ﻿using GraphicEditor.ViewModel;
+using Model.Hospital;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,16 +17,14 @@ using System.Windows.Shapes;
 namespace GraphicEditor.View.Windows
 {
     /// <summary>
-    /// Interaction logic for RoomInformation.xaml
+    /// Interaction logic for BedUpdate.xaml
     /// </summary>
-    public partial class RoomInformation : Window
+    public partial class BedUpdate : Window
     {
-        public RoomInformation()
+        public BedUpdate(Bed BedInfo)
         {
-            this.DataContext = RoomInformationViewModel.GetInstance();
-            RoomInformationViewModel.GetInstance().window = this;
+            this.DataContext = new BedUpdateViewModel(this, BedInfo);
             InitializeComponent();
         }
-
     }
 }

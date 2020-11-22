@@ -1,50 +1,36 @@
 ﻿using GraphicEditor.HelpClasses;
+using GraphicEditor.View.Windows;
+using Model.Hospital;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace GraphicEditor.ViewModel
 {
     public class RoomInformationViewModel : BindableBase
     {
+        public Window window;
 
         private static RoomInformationViewModel _instance;
 
-        private List<string> beds = new List<string>();
+        private List<Bed> beds = new List<Bed>();
 
-        private string selectedBed;
+        private Bed selectedBed;
 
-        private string bedInfo;
+        public MyICommand<Bed> NavCommandUpdate { get; private set; }
 
-        public string BedInfo
-        {
-            get => bedInfo;
-            set
-            {
-                SetProperty(ref bedInfo, value);
+        public MyICommand NavCommandExit { get; private set; }
 
-            }
-        }
-        public string SelectedBed
+        public Bed BedInfo
         {
             get => selectedBed;
             set
             {
-                SetProperty(ref selectedBed, value);
-                if (value.Equals("Bed1"))
-                {
-                    BedInfo = "Pacijent: \n ime :Petar \nPrezime: Petrovic \n Lezao: 2 dana \n Bolest: prehlada";
-                }
-                else if (value.Equals("Bed2"))
-                {
-                    BedInfo = "Pacijent: \n ime :Dusan \nPrezime: Lazarevic \n Lezao: 3 dana \n Bolest: prehlada";
-                }
-                else if (value.Equals("Bed3"))
-                {
-                    BedInfo = "Pacijent: \n ime :Marko \nPrezime: Markovic\n Lezao: 4 dana \n Bolest: prehlada";
-                }
+                if (value != null)
+                    SetProperty(ref selectedBed, value);
             }
-
         }
-        public List<string> Beds
+
+        public List<Bed> Beds
         {
             get => beds;
             set
@@ -65,10 +51,32 @@ namespace GraphicEditor.ViewModel
 
         private RoomInformationViewModel()
         {
-            beds.Add("Bed1");
-            beds.Add("Bed2");
-            beds.Add("Bed3");
-            SelectedBed = beds[0];
+            NavCommandExit = new MyICommand(exitInfo);
+            NavCommandUpdate = new MyICommand<Bed>(updateBedInfo);
+
+            beds.Add(new Bed("Bed 1", "bed01"));
+            beds.Add(new Bed("Bed 2", "bed02"));
+            beds.Add(new Bed("Bed 3", "bed03"));
+            beds.Add(new Bed("Bed 4", "bed04"));
+            beds.Add(new Bed("Bed 5", "bed05"));
+
+            selectedBed = beds[0];
+
+        }
+
+        void updateBedInfo(Bed bedInfo)
+        {
+            Bed p = new Bed(BedInfo.Name, BedInfo.Id);
+            BedUpdate w = new BedUpdate(p);
+            w.ShowDialog();
+            BedInfo.Id = p.Id;
+            BedInfo.Name = p.Name;
+            OnPropertyChanged("BedInfo");
+        }
+
+        void exitInfo()
+        {
+            window.Close();
         }
     }
 }
