@@ -1,0 +1,17 @@
+﻿.background {
+    background-color: lightskyblue;
+    background-attachment: scroll;
+    background-repeat: repeat-x;
+}
+
+.textbox {
+    background-color: lightskyblue;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    padding-top: 25px;
+}
+
+.borderless td, .borderless th {
+    border: none
+}

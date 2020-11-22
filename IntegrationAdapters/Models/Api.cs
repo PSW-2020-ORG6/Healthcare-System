@@ -10,7 +10,7 @@ namespace IntegrationAdapters.Models
     public class Api
     {
         [Key]
-        public string ApiKey { get; set; }
+        public string Key { get; set; }
         public string PharmacyName { get; set; }
         public string Url { get; set; }
 
