@@ -35,8 +35,8 @@ namespace Model.Hospital
             this.id = equipment.id;
         }
 
-        public string Name { get => name; }
-        public string Id { get => id; }
+        public string Name { get => name; set { name = value; } }
+        public string Id { get => id; set { name = value; } }
 
         public override bool Equals(object obj)
         {

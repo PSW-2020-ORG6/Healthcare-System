@@ -76,6 +76,7 @@
     <Compile Include="HelpClasses\JavaScriptControlHelper.cs" />
     <Compile Include="HelpClasses\MyICommand.cs" />
     <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\BedUpdateViewModel.cs" />
     <Compile Include="ViewModel\CardiologyBuildingUserControlViewModel.cs" />
     <Compile Include="ViewModel\CardiologyFirstFloorMapUserControlViewModel.cs" />
     <Compile Include="ViewModel\CardiologySecondFloorMapUserControlViewModel.cs" />
@@ -100,6 +101,9 @@
     </Compile>
     <Compile Include="View\UserControls\MapContentUserControl.xaml.cs">
       <DependentUpon>MapContentUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\BedUpdate.xaml.cs">
+      <DependentUpon>BedUpdate.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\HelpViewer.xaml.cs">
       <DependentUpon>HelpViewer.xaml</DependentUpon>
@@ -158,6 +162,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\MapContentUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\BedUpdate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
