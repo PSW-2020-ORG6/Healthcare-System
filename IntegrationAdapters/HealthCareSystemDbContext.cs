@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace IntegrationAdapters
 {
-    public class MyDbContext : DbContext
+    public class HealthCareSystemDbContext : DbContext
     {
         public DbSet<Api> Apis { get; set; }
 
-        public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
+        public HealthCareSystemDbContext(DbContextOptions<HealthCareSystemDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

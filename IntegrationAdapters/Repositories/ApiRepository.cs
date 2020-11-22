@@ -8,9 +8,9 @@ namespace IntegrationAdapters.Repositories
 {
     public class ApiRepository
     {
-        public readonly MyDbContext dbContext;
+        public readonly HealthCareSystemDbContext dbContext;
 
-        public ApiRepository(MyDbContext context)
+        public ApiRepository(HealthCareSystemDbContext context)
         {
             this.dbContext = context;
         }
