@@ -14,7 +14,7 @@ namespace IntegrationAdapters.Controllers
     {
         private readonly ApiService apiService;
 
-        public ApiController(MyDbContext context)
+        public ApiController(HealthCareSystemDbContext context)
         {
             this.apiService = new ApiService(context);
         }

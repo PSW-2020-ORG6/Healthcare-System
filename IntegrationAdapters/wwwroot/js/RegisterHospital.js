@@ -1,18 +1,18 @@
 ﻿$(document).ready(function () {
 	$("#btnRegister").click(function () {
-		var phName = $("#txtPhName").val();
-		var APIkey = $("#txtAPIKey").val();
-		var url = $("#txtUrl").val();
+		var PharmacyName = $("#txtPhName").val();
+		var Key = $("#txtAPIKey").val();
+		var Url = $("#txtUrl").val();
 		$.post({
 			url: '../api/registration',
-			data: JSON.stringify({ ApiKey: APIkey, PharmacyName: phName, Url: url }),
+			data: JSON.stringify({ Key: Key, PharmacyName: PharmacyName, Url: Url }),
 			contentType: 'application/json',
 			success: function () {
 				alert("Succes registration");
 				location.href = "../index.html";
 			},
 			error: function (message) {
-				alert("Neuspjesno")
+				alert("Failed registration")
 			}
 		});
 	});

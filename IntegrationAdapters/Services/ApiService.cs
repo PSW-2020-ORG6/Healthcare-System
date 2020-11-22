@@ -11,7 +11,7 @@ namespace IntegrationAdapters.Services
     {
         private ApiRepository apiRepository;
 
-        public ApiService(MyDbContext context)
+        public ApiService(HealthCareSystemDbContext context)
         {
             this.apiRepository = new ApiRepository(context);
         }
