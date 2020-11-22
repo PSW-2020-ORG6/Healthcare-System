@@ -21,7 +21,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Path Fill="Coral"
+                        <Path Fill="{TemplateBinding Background}"
                               Stroke="Black" 
                               StrokeThickness="3">
                             <Path.Data>
@@ -49,9 +49,8 @@
                                     VerticalAlignment="Top"
                                     Margin="0,10,10,0">
                             <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                                       Foreground="White">
-                            Pediatrics
-                            </TextBlock>
+                                       Foreground="White"
+                                       Text="{TemplateBinding Name}"/>
                             <Image Height="30"
                                Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
                         </StackPanel>
@@ -72,7 +71,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Path Fill="Purple"
+                        <Path Fill="{TemplateBinding Background}"
                               Stroke="Black" 
                               StrokeThickness="3">
                             <Path.Data>
@@ -92,9 +91,8 @@
                             <TextBlock Foreground="White"
                                    HorizontalAlignment="Center"
                                    Margin="0,-8,0,0" 
-                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}">
-                            Neurology
-                            </TextBlock>
+                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                   Text="{TemplateBinding Name}"/>
                             <Image Height="30"
                                Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
                         </StackPanel>
@@ -116,7 +114,7 @@
                 <ControlTemplate TargetType="Button">
                     <Grid>
                         <Path Height="252"
-                              Fill="Yellow"
+                              Fill="{TemplateBinding Background}"
                               Stroke="Black" 
                               StrokeThickness="3"
                               Width="153">
@@ -148,9 +146,8 @@
                                     VerticalAlignment="Center">
                             <TextBlock 
                                    Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
-                                   TextWrapping="Wrap">
-                                Oncology
-                            </TextBlock>
+                                   TextWrapping="Wrap"
+                                   Text="{TemplateBinding Name}"/>
                             <Image  Height="30"
                                 Margin="0,3,0,0"
                                 Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
@@ -183,7 +180,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Path Fill="Chocolate"
+                        <Path Fill="{TemplateBinding Background}"
                               Stroke="Black" 
                               StrokeThickness="3">
                             <Path.Data>
@@ -201,9 +198,8 @@
                                    HorizontalAlignment="Center"
                                    Margin="5"
                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                                   VerticalAlignment="Top">
-                            Dermatology
-                        </TextBlock>
+                                   VerticalAlignment="Top"
+                                   Text="{TemplateBinding Name}"/>
                         <Image  Height="30"
                                 HorizontalAlignment="Left" 
                                 Margin="10"

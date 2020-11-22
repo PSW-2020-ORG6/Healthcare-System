@@ -161,6 +161,23 @@
                         CommandParameter="oncology"
                         Style="{StaticResource ResourceKey=OctagonBuildingButtonStyle}" >
                 </Button>
+
+                <!--Test button-->
+                <Button x:Name="Test"
+                        Grid.Column="5"
+                        Grid.Row="5"
+                        Content="Test button">
+                    <Button.InputBindings>
+                        <MouseBinding MouseAction="RightClick"
+                                      Command="{Binding AddCommand}"
+                                      CommandParameter="{Binding ElementName=Test}"/>
+                        <MouseBinding MouseAction="LeftClick"
+                                      Command="{Binding NavCommand}"
+                                      CommandParameter="cardiology"/>
+                    </Button.InputBindings>
+                </Button>
+
+
             </Grid>
         </Grid>
     </Border>

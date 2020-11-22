@@ -77,6 +77,7 @@
     <Compile Include="HelpClasses\MyICommand.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="ViewModel\BedUpdateViewModel.cs" />
+    <Compile Include="ViewModel\AddBuildingViewModel.cs" />
     <Compile Include="ViewModel\CardiologyBuildingUserControlViewModel.cs" />
     <Compile Include="ViewModel\CardiologyFirstFloorMapUserControlViewModel.cs" />
     <Compile Include="ViewModel\CardiologySecondFloorMapUserControlViewModel.cs" />
@@ -104,6 +105,9 @@
     </Compile>
     <Compile Include="View\Windows\BedUpdate.xaml.cs">
       <DependentUpon>BedUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\AddBuilding.xaml.cs">
+      <DependentUpon>AddBuilding.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\HelpViewer.xaml.cs">
       <DependentUpon>HelpViewer.xaml</DependentUpon>
@@ -169,6 +173,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Windows\AddBuilding.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Windows\HelpViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -214,6 +222,11 @@
   <ItemGroup>
     <Content Include="HtmlHelpPages\Error.html" />
     <Content Include="HtmlHelpPages\MainWindow.html" />
+    <Resource Include="Resources\Icons\Hole.png" />
+    <Resource Include="Resources\Icons\rectangle.png" />
+    <Resource Include="Resources\Icons\triangle.png" />
+    <Resource Include="Resources\Icons\uBuilding.png" />
+    <Resource Include="Resources\Icons\octagon.png" />
     <Resource Include="Resources\Icons\bed.png" />
     <Resource Include="Resources\Images\MapPattern2-2.png" />
     <Resource Include="Resources\Images\MapPattern2-1.png" />
