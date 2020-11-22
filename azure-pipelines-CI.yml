@@ -23,6 +23,7 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: 'lukadoric_Health-Care-System'
     projectName: 'Health-Care-System'
+    extraProperties: 'sonar.pullrequest.base=develop'
  
 - task: NuGetToolInstaller@1
  
