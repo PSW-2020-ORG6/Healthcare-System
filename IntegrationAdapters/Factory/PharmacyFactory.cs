@@ -10,7 +10,7 @@ namespace IntegrationAdapters.Factory
     {
         public IAdapter GetPharmacyById(string id)
         {
-            return null;
+            throw new NotImplementedException();
         }
     }
 }

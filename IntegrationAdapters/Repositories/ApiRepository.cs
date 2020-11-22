@@ -32,7 +32,7 @@ namespace IntegrationAdapters.Repositories
         {
             List<Api> apis = dbContext.Apis.ToList();
             foreach (Api a in apis) {
-                if (a.ApiKey.Equals(api.ApiKey)) return true;
+                if (a.Key.Equals(api.Key)) return true;
             }
             return false;
         }
