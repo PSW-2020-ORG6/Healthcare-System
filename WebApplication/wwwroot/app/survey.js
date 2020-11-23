@@ -49,8 +49,7 @@
     template: `
     <div>
         <p id="title">Survey</p>
-        <div>
-            
+        <div id="sText">
            <p id="textSurvey">Dear patient,<br>
                At Health Clinic,we are commited to your healthcare.We are interested in knowing what do you thing abaut our services.
                 You performance by completing this survey regarding your visit.<br>Thank you for taking time to share your expirience with us.<br><br>
@@ -71,7 +70,6 @@
                         <input type="radio" id="star5RatingOne" name="ratingOne" value="1" v-model = "surveyText.question1"/><label for="star5RatingOne" title="1 star"></label>
                     </div>
               </div>
-
               <div class="question" id="q">
                 <p>2.The doctor answered all of your questions in an understandable manner?</p>
                     <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
@@ -82,8 +80,6 @@
                         <input type="radio" id="star5RatingTwo" name="ratingTwo" value="1" v-model = "surveyText.question2"/><label for="star5RatingTwo" title="1 star"></label>
                     </div>
               </div>
-
-
              <div class="question" id="q">
                 <p>3.The doctor takes care of you in a professional manner?</p>
                     <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
@@ -94,7 +90,6 @@
                         <input type="radio" id="star5RatingThree" name="ratingThree" value="1" v-model = "surveyText.question3"/><label for="star5RatingThree" title="1 star"></label>
                     </div>
               </div>
-
             <div class="question" id="q">
                 <p>4.Would you have the procedure done again by this doctor?</p>
                     <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
@@ -105,7 +100,6 @@
                         <input type="radio" id="star5RatingFour" name="ratingFour" value="1" v-model = "surveyText.question4"/><label for="star5RatingFour" title="1 star"></label>
                     </div>
               </div>
-
             <div class="question" id="q">
               <b id="topic">Topic 2 Nurse's care</b>
                 <p>5.The personal manner(courtosy,respect,sensitivity,friendliness) of the nurses and other support staff</p>
@@ -117,7 +111,6 @@
                         <input type="radio" id="star5RatingFive" name="ratingFive" value="1" v-model = "surveyText.question5"/><label for="star5RatingFive" title="1 star"></label>
                     </div>
               </div>
-
               <div class="question" id="q">
                 <p>6.The nursees answered all of your questions in an understandable manner?</p>
                     <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
@@ -128,7 +121,6 @@
                         <input type="radio" id="star5RatingSix" name="ratingSix" value="1" v-model = "surveyText.question6"/><label for="star5RatingSix" title="1 star"></label>
                     </div>
               </div>
-
               <div class="question" id="q">
                 <p>7.Orientation given to warn setup</p>
                     <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
@@ -139,8 +131,6 @@
                         <input type="radio" id="star5RatingSeven" name="ratingSeven" value="1" v-model = "surveyText.question7"/><label for="star5RatingSeven" title="1 star"></label>
                     </div>
               </div>
-
-
              <div class="question" id="q">
                 <p>8.The nurse gave you good discharge instructions</p>
                     <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
@@ -151,7 +141,6 @@
                         <input type="radio" id="star5RatingEight" name="ratingEight" value="1" v-model = "surveyText.question8"/><label for="star5RatingEight" title="1 star"></label>
                     </div>
               </div>
-
             <div class="question" id="q">
                 <p>9.The nurse was concerned for you?</p>
                     <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
@@ -162,7 +151,6 @@
                         <input type="radio" id="star5RatingNine" name="ratingNine" value="1" v-model = "surveyText.question9"/><label for="star5RatingNine" title="1 star"></label>
                     </div>
               </div>
-
             <div class="question" id="q">
               <b id="topic">Topic 3 Clinic's hygiene and ambience</b>
                 <p>10.The comfort and cleanliness of the facility </p>
@@ -174,7 +162,6 @@
                         <input type="radio" id="star5RatingTen" name="ratingTen" value="1" v-model = "surveyText.question10"/><label for="star5RatingTen" title="1 star"></label>
                     </div>
               </div>
-
               <div class="question" id="q">
                 <p>11.Comfort level within the procedure room?</p>
                     <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
@@ -185,7 +172,6 @@
                         <input type="radio" id="star5RatingEleven" name="ratingEleven" value="1" v-model = "surveyText.question11"/><label for="star5RatingEleven" title="1 star"></label>
                     </div>
               </div>
-
               <div class="question" id="q">
                 <p>12.Conditions of the rooms(temperature,comfort,silence)</p>
                     <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
@@ -196,8 +182,6 @@
                         <input type="radio" id="star5RatingTwelve" name="ratingTwelve" value="1" v-model = "surveyText.question12"/><label for="star5RatingTwelve" title="1 star"></label>
                     </div>
               </div>
-
-
              <div class="question" id="q">
                 <p>13.General impression of the ambient atmosphere</p>
                     <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
@@ -208,7 +192,6 @@
                         <input type="radio" id="star5RatingThirteen" name="ratingThirteen" value="1" v-model = "surveyText.question13"/><label for="star5RatingThirteen" title="1 star"></label>
                     </div>
               </div>
-
             <div class="question" id="q">
               <b id="topic">Topic 4 Clinic's pharmacy supplies and equipment </b>
                 <p>14.Do you think the clinic has the necessary equipment</p>
@@ -220,7 +203,6 @@
                         <input type="radio" id="star5RatingFourteen" name="ratingFourteen" value="1" v-model = "surveyText.question14"/><label for="star5RatingFourteen" title="1 star"></label>
                     </div>
               </div>
-
               <div class="question" id="q">
                 <p>15.Do you think the clinic's farmacy has the necessary drugs?</p>
                     <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
@@ -231,7 +213,6 @@
                         <input type="radio" id="star5RatingFifteen" name="ratingFifteen" value="1" v-model = "surveyText.question15"/><label for="star5RatingFifteen" title="1 star"></label>
                     </div>
               </div>
-
               <div class="question" id="q">
                 <p>16.Do you think that the hospital should have more modern equipment than the current one</p>
                     <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
@@ -242,8 +223,6 @@
                         <input type="radio" id="star5RatingSixteen" name="ratingSixteen" value="1" v-model = "surveyText.question16"/><label for="star5RatingSixteen" title="1 star"></label>
                     </div>
               </div>
-
-
              <div class="question" id="q">
                 <p>17.Did you noticed broken or damaged equipment in the hospital</p>
                     <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
@@ -264,7 +243,6 @@
                         <input type="radio" id="star5RatingEighteen" name="ratingEighteen" value="1" v-model="surveyText.question18"/><label for="star5RatingEighteen" title="1 star"></label>
                     </div>
               </div>
-
            <div class="question" id="q">
               <b id="topic">Topic 5 Website </b>
                 <p>19.Did you found it easy to use our website</p>
@@ -276,7 +254,6 @@
                         <input type="radio" id="star5RatingNineteen" name="ratingNineteen" value="1" v-model="surveyText.question19"/><label for="star5RatingNineteen" title="1 star"></label>
                     </div>
               </div>
-
               <div class="question" id="q">
                 <p>20.Did you have found all the necessary information on our website?</p>
                      <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
@@ -287,7 +264,6 @@
                         <input type="radio" id="star5RatingTwenty" name="ratingTwenty" value="1" v-model="surveyText.question20"/><label for="star5RatingTwenty" title="1 star"></label>
                     </div>
               </div>
-
               <div class="question" id="q">
                 <b id="topic">Topic 6 General opinion </b>
                 <p>21.Overall, are you satisfied with the care you received in this facility?</p>
@@ -299,8 +275,6 @@
                         <input type="radio" id="star5RatingTwentyOne" name="ratingTwentyOne" value="1" v-model="surveyText.question21"/><label for="star5RatingTwentyOne" title="1 star"></label>
                     </div>
               </div>
-
-
              <div class="question" id="q">
                 <p>22.Would you come to this institution again</p>
                      <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
@@ -311,7 +285,6 @@
                         <input type="radio" id="star5RatingTwentyTwo" name="ratingTwentyTwo" value="1" v-model="surveyText.question22"/><label for="star5RatingTwentyTwo" title="1 star"></label>
                     </div>
               </div>
-
             <div class="question" id="q">
                 <p>23.Would you recommend this facility to your friends and family</p>
                      <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
@@ -322,7 +295,6 @@
                         <input type="radio" id="star5RatingTwentyThree" name="ratingTwentyThree" value="1" v-model="surveyText.question23"/><label for="star5RatingTwentyThree" title="1 star"></label>
                     </div>
               </div>
-
 			  <button type="button" class="btn btn-info btn-lg " data-toggle="modal"  v-on:click="AddNewSurvey()">Send</button>
                     <div class="modal fade" id="myModal" role="dialog">
                         <div class="modal-dialog">
@@ -356,11 +328,32 @@
                           </div>
                         </div>
                       </div>
-              <button type="button" class="btn btn-info btn-lg " data-dismiss="modal">Cancel</button>
+
+                      <div class="modal fade" id="myModal5" role="dialog">
+                        <div class="modal-dialog">
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                              <p>Successfully added survey.</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="PatientShow()">Ok</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+              <button type="button" class="btn btn-info btn-lg " data-dismiss="modal" v-on:click="PatientShow()">Cancel</button>
         </div>
     </div>
 	`,
     methods: {
+        PatientShow: function () {
+            this.$router.push('patient');
+        },
         AddNewSurvey: function (surveyText) {
             if (!document.getElementById("star1RatingTwentyThree").checked && !document.getElementById("star1RatingTwentyTwo").checked &&
                 !document.getElementById("star1RatingTwentyOne").checked && !document.getElementById("star1RatingTwenty").checked &&
@@ -382,6 +375,7 @@
                 $('#myModal').modal('show');
                 return
             }
+           
             
            // this.surveyText = this.question1.toString() + "," + this.question2.toString() + "," + this.question3.toString() + "," + this.question4.toString() + "," + this.question5.toString() + "," + this.question6.toString() + "," + this.question7.toString() + "," +
            //     this.question8.toString() + "," + this.question9.toString() + "," + this.question10.toString() + "," + this.question11.toString() + "," + this.question12.toString() + "," + this.question13.toString() + "," + this.question14.toString() + "," +
@@ -392,6 +386,7 @@
                 .post('http://localhost:49900/survey/add',  surveyText)
                 .then(response => {
                 })
+            $('#myModal5').modal('show');
         }
     }
 });
