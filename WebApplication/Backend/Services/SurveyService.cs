@@ -10,14 +10,19 @@ namespace WebApplication.Backend.Services
     public class SurveyService
     {
         private SurveyRepository surveyRepository;
+        private ISurveyRepository isurveyRepository = new SurveyRepository();
         public SurveyService()
         {
             this.surveyRepository = new SurveyRepository();
         }
-
-        internal bool AddNewSurvey(Survey surveyText)
+        public SurveyService(ISurveyRepository iSurveyRepository)
         {
-            return surveyRepository.AddNewSurvey(surveyText);
+            this.isurveyRepository = iSurveyRepository;
+        }
+
+        public bool AddNewSurvey(Survey surveyText)
+        {
+            return isurveyRepository.AddNewSurvey(surveyText);
         }
 
         internal List<string> GetAllDoctorsFromReporstByPatientId(string patientId)
