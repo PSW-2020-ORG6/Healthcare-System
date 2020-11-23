@@ -78,7 +78,6 @@ namespace WebApplication.Backend.Repositorys
         {
             //string sqlDml = "Select id from patients where id=" + patientId;
 
-            // string sqlDml = string.Format("Select id from patients where id={0}", new object[] { patient.Id });
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             string id = "";

@@ -42,3 +42,8 @@ hr {
     font-weight: 100;
 }
 
+.container .t .star {
+    color: red;
+    font-size: 20px;
+}
+

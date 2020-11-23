@@ -10,27 +10,30 @@ namespace WebApplicationTests
     public class PatientRegistrationTest
     {
         [Fact]
-        public void Test1()
+        public void Patient_not_succesfully_registrate()
         {
-            var mockRepository = new Mock<IRegistrationRepository>();
-            //mockRepository.Setup(m => )
-            RegistrationService service = new RegistrationService(new RegistrationRepository());
+            var stubRepository = new Mock<IRegistrationRepository>();
+            IRegistrationRepository r = new RegistrationRepository();
+            Patient patient = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", "Glavna 3", "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", 223345677, "", "", "female", "ana123", "image", false);
+            stubRepository.Setup(m => m.addPatient(patient)).Returns(false);
+            RegistrationService service = new RegistrationService(stubRepository.Object);
 
-           // bool l = service.RegisterPatient(new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", "Glavna 3", "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", 223345677, "", "", "female", "ana123", false));
-           // bool l = service.RegisterPatient(new Patient("4", "Ana", "Anic", "143", DateTime.Now, "0643342345", "ana@gmail.com", "Glavna 3", "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", 223345677, "", "", "female", "ana123", false));
+            bool addedPatient = service.RegisterPatient(patient);
 
-            //Assert.False(l);
+            Assert.False(addedPatient);
         }
 
         [Fact]
-        public void Test2()
+        public void Patient_succesfully_registrate()
         {
-            RegistrationService service = new RegistrationService(new RegistrationRepository());
+            var stubRepository = new Mock<IRegistrationRepository>();
+            Patient patient = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", "Glavna 3", "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", 223345677, "", "", "female", "ana123", "image", false);
+            stubRepository.Setup(m => m.addPatient(patient)).Returns(true);
+            RegistrationService service = new RegistrationService(stubRepository.Object);
 
-            // bool l = service.RegisterPatient(new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", "Glavna 3", "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", 223345677, "", "", "female", "ana123", false));
-           // bool l = service.RegisterPatient(new Patient("4", "Ana", "Anic", "143", DateTime.Now, "0643342345", "ana@gmail.com", "Glavna 3", "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", 223345677, "", "", "female", "ana123", false));
+            bool addedPatient = service.RegisterPatient(patient);
 
-           // Assert.False(l);
+            Assert.True(addedPatient);
         }
 
 

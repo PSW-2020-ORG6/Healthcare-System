@@ -21,13 +21,24 @@ namespace WebApplication.Backend.Controllers
         }
 
         [HttpPost("registerPatient")]
-        public IActionResult RegisterPatient(Patient patientDTO)
+        public IActionResult RegisterPatient(PatientDTO patientDTO)
         {
-            if (registrationService.RegisterPatient(patientDTO))
-            {
-                return Ok();
+            if (patientDTO.IsCorrectName() && patientDTO.IsCorrectSurname() && patientDTO.IsCorrectParentName() && patientDTO.IsCorrectId() &&
+                patientDTO.IsCorrectDateOfBirth() && patientDTO.IsCorrectPlaceOfBirth() && patientDTO.IsCorrectMunicipalityOfBirth() &&
+                patientDTO.IsCorrectStateOfBirth() && patientDTO.IsCorrectNationality() && patientDTO.IsCorrectCitizenship() && patientDTO.IsCorrectAddress() &&
+                patientDTO.IsCorrectPlaceOfResidence() && patientDTO.IsCorrectMunicipalityOfResidence() && patientDTO.IsCorrectStateOfResidence() &&
+                patientDTO.IsCorrectProfession() && patientDTO.IsCorrectEmploymentStatus() && patientDTO.IsCorrectMaritalStatus() && patientDTO.IsCorrectContact() &&
+                patientDTO.IsCorrectEmail() && patientDTO.IsCorrectPassword() && patientDTO.IsCorrectGender() && patientDTO.IsCorrectHealthInsuranceNumber()) {
+                if (registrationService.RegisterPatient(new Patient(patientDTO)))
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
             }
-                return BadRequest();
+            return BadRequest();
         }
     }
 }

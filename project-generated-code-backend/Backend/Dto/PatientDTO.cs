@@ -47,7 +47,7 @@ namespace Backend.Dto
         public string StateOfBirth { get => stateOfBirth; set => stateOfBirth = value; }
         public string Nationality { get => nationality; set => nationality = value; }
         public string Citizenship { get => citizenship; set => citizenship = value; }
-        public string Addresss { get => address; set => address = value; }
+        public string Address { get => address; set => address = value; }
         public string PlaceOfResidence { get => placeOfResidence; set => placeOfResidence = value; }
         public string MunicipalityOfResidence { get => municipalityOfResidence; set => municipalityOfResidence = value; }
         public string StateOfResidence { get => stateOfResidence; set => stateOfResidence = value; }
@@ -64,5 +64,150 @@ namespace Backend.Dto
         public string Image { get => image; set => image = value; }
         public bool IsGuest { get => isGuest; set => isGuest = value; }
 
+        public bool IsCorrectName()
+        {
+            if (Name == null)
+                return false;
+            return true;
+        }
+
+        public bool IsCorrectSurname()
+        {
+            if (Surname == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectParentName()
+        {
+            if (ParentName == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectId()
+        {
+            if (Id == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectDateOfBirth()
+        {
+            if (DateOfBirth == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectPlaceOfBirth()
+        {
+            if (PlaceOfBirth == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectMunicipalityOfBirth()
+        {
+            if (MunicipalityOfBirth == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectStateOfBirth()
+        {
+            if (StateOfBirth == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectNationality()
+        {
+            if (Nationality == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectCitizenship()
+        {
+            if (Citizenship == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectAddress()
+        {
+            if (Address == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectPlaceOfResidence()
+        {
+            if (PlaceOfResidence == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectMunicipalityOfResidence()
+        {
+            if (MunicipalityOfResidence == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectStateOfResidence()
+        {
+            if (StateOfResidence == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectProfession()
+        {
+            if (Profession == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectEmploymentStatus()
+        {
+            if (EmploymentStatus == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectMaritalStatus()
+        {
+            if (MaritalStatus == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectContact()
+        {
+            if (Contact == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectEmail()
+        {
+            if (Email == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectPassword()
+        {
+            if (Password == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectGender()
+        {
+            if (Gender == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectHealthInsuranceNumber()
+        {
+            if (HealthInsuranceNumber == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectFamilyDiseases()
+        {
+            if (FamilyDiseases == null)
+                return false;
+            return true;
+        }
+        public bool IsCorrectPersonalDiseases()
+        {
+            if (PersonalDiseases == null)
+                return false;
+            return true;
+        }
     }
 }

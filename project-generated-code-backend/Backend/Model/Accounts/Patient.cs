@@ -21,7 +21,7 @@ namespace Model.Accounts
         private String citizenship;
         private String nationality;
         private String profession;
-        private String address;
+        //private String address;
         private String placeOfResidence;
         private String municipalityOfResidence;
         private String stateOfResidence;
@@ -53,16 +53,6 @@ namespace Model.Accounts
             this.Guest = isGuest;
             this.password = password;
         }
-        [JsonConstructor]
-        public Patient(PatientDTO patientDTO) : base(Guid.NewGuid().ToString(), patientDTO.Name, patientDTO.Surname, patientDTO.Id, patientDTO.DateOfBirth, patientDTO.Contact, patientDTO.Email, patientDTO.Addresss, patientDTO.Password)
-        {
-            this.parentName = patientDTO.ParentName;
-            this.gender = patientDTO.Gender;
-            //this.Guest = patientDTO.IsGuest;
-            this.password = patientDTO.Password;
-            Console.WriteLine(Guest);
-        }
-
 
         public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, string address, string parentName, string placeOfBirth, string municipalityOfBirth, string stateOfBirth, String citizenship, string nationality, string profession, string placeOfResidence, string municipalityOfResidence, string stateOfResidence, string employmentStatus, string maritalStatus,int healthInsuranceNumber,string familyDiseases, string personalDiseases, string gender, string password, string image, bool isGuest = false)
             : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address, password)
@@ -87,6 +77,31 @@ namespace Model.Accounts
             this.personalDiseases = personalDiseases;
             this.image = image;
         }
+
+        public Patient(PatientDTO patientDTO) : base(Guid.NewGuid().ToString(), patientDTO.Name, patientDTO.Surname, patientDTO.Id, patientDTO.DateOfBirth, patientDTO.Contact, patientDTO.Email, patientDTO.Address, patientDTO.Password)
+        {
+            this.parentName = patientDTO.ParentName;
+            this.gender = patientDTO.Gender;
+            this.Guest = patientDTO.IsGuest;
+            this.password = patientDTO.Password;
+            this.placeOfBirth = patientDTO.PlaceOfBirth;
+            this.municipalityOfBirth = patientDTO.MunicipalityOfBirth;
+            this.stateOfBirth = patientDTO.StateOfBirth;
+            this.citizenship = patientDTO.Citizenship;
+            this.nationality = patientDTO.Nationality;
+            this.profession = patientDTO.Profession;
+            this.placeOfResidence = patientDTO.PlaceOfResidence;
+            this.municipalityOfResidence = patientDTO.MunicipalityOfResidence;
+            this.stateOfResidence = patientDTO.StateOfResidence;
+            this.employmentStatus = patientDTO.EmploymentStatus;
+            this.maritalStatus = patientDTO.MaritalStatus;
+            this.healthInsuranceNumber = patientDTO.HealthInsuranceNumber;
+            this.familyDiseases = patientDTO.FamilyDiseases;
+            this.personalDiseases = patientDTO.PersonalDiseases;
+            this.image = patientDTO.Image;
+            //Console.WriteLine(Guest);
+        }
+
         public Patient() : base(Guid.NewGuid().ToString()) { }
         public Patient() : base() { }
         public Patient(string serialNumber, string name, string surname) : base() { }
