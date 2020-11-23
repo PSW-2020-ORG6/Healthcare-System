@@ -22,10 +22,8 @@ namespace GraphicEditor.View.Windows
     {
         public RoomInformation()
         {
-            this.DataContext = RoomInformationViewModel.GetInstance();
-            RoomInformationViewModel.GetInstance().window = this;
+            this.DataContext = new RoomInformationViewModel(this);
             InitializeComponent();
         }
-
     }
 }
