@@ -48,8 +48,7 @@ namespace GraphicEditor.ViewModel
         void exitInfo()
         {
             BedInfo.Id = _bedOriginal.Id;
-            BedInfo.Name = _bedOriginal.Name;
-            
+            BedInfo.Name = _bedOriginal.Name;         
             OnPropertyChanged("BedInfo");
             window.Close();
         }

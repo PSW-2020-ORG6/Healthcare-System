@@ -8,9 +8,7 @@ namespace GraphicEditor.ViewModel
 {
     public class RoomInformationViewModel : BindableBase
     {
-        public Window window;
-
-        private static RoomInformationViewModel _instance;
+        private Window window;
 
         private List<Bed> beds = new List<Bed>();
 
@@ -40,19 +38,12 @@ namespace GraphicEditor.ViewModel
             }
         }
 
-        public static RoomInformationViewModel GetInstance()
-        {
-            if (_instance == null)
-            {
-                _instance = new RoomInformationViewModel();
-            }
-            return _instance;
-        }
-
-        private RoomInformationViewModel()
+        public RoomInformationViewModel(Window _window)
         {
             NavCommandExit = new MyICommand(exitInfo);
             NavCommandUpdate = new MyICommand<Bed>(updateBedInfo);
+
+            window = _window;
 
             beds.Add(new Bed("Bed 1", "bed01"));
             beds.Add(new Bed("Bed 2", "bed02"));
