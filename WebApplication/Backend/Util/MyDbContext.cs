@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using health_clinic_class_diagram.Backend.Model.Hospital;
+using Microsoft.EntityFrameworkCore;
 using Model.Accounts;
 using Model.Blog;
+using Model.Hospital;
 using Model.Util;
 using System;
 
@@ -10,6 +12,9 @@ namespace WebApplication.Backend.Model
     {
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Patient> Patients { get; set; }
+        public DbSet<Building> Buildings { get; set; }
+
+        public DbSet<Equipment> Equipments { get; set; }
 
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
@@ -18,6 +23,8 @@ namespace WebApplication.Backend.Model
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Feedback>().HasKey(o => o.SerialNumber);
+            modelBuilder.Entity<Building>().HasKey(o => o.Id);
+            modelBuilder.Entity<Equipment>().HasKey(o => o.Id);
             modelBuilder.Entity<Patient>().HasAlternateKey(o=>o.Id);
             modelBuilder.Ignore<Address>();
             modelBuilder.Entity<Patient>().HasData(
