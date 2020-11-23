@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhysicianGUI", "..\Physicia
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationAdapters", "..\IntegrationAdapters\IntegrationAdapters.csproj", "{C1C33247-AAD2-48FB-8BB1-ED4CDED05E53}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationAdaptersTests", "..\IntegrationAdaptersTests\IntegrationAdaptersTests.csproj", "{18658EB5-FF41-4037-BC88-27ACCD39E9AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{C1C33247-AAD2-48FB-8BB1-ED4CDED05E53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1C33247-AAD2-48FB-8BB1-ED4CDED05E53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1C33247-AAD2-48FB-8BB1-ED4CDED05E53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18658EB5-FF41-4037-BC88-27ACCD39E9AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18658EB5-FF41-4037-BC88-27ACCD39E9AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18658EB5-FF41-4037-BC88-27ACCD39E9AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18658EB5-FF41-4037-BC88-27ACCD39E9AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
