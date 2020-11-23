@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Backend.Repositorys
 {
-    
-    public class SurveyRepository
+    public class SurveyRepository:ISurveyRepository
     {
         private MySqlConnection connection;
         public SurveyRepository()
@@ -24,13 +23,8 @@ namespace WebApplication.Backend.Repositorys
             {
             }
         }
-
-     
-
-        internal bool AddNewSurvey(Survey surveyText)
+        public bool AddNewSurvey(Survey surveyText)
         {
-            //string[] results = surveyText.Split(",");
-
             string sqlDml ="INSERT into surveys" +
                 "(Question1,Question2,Question3,Question4,Question5,Question6,Question7,Question8,Question9,Question10,Question11," +
                 "Question12,Question13,Question14,Question15,Question16,Question17,Question18,Question19,Question20,Question21,Question22,Question23,ID,DoctorName)VALUES ('"

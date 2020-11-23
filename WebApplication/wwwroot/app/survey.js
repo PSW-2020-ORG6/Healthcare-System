@@ -370,13 +370,6 @@
                 $('#myModal1').modal('show');
                 return
             }
-            selectedValue = $('#doctorSelect').val()
-            if (selectedValue == null) {
-                $('#myModal').modal('show');
-                return
-            }
-           
-            
            // this.surveyText = this.question1.toString() + "," + this.question2.toString() + "," + this.question3.toString() + "," + this.question4.toString() + "," + this.question5.toString() + "," + this.question6.toString() + "," + this.question7.toString() + "," +
            //     this.question8.toString() + "," + this.question9.toString() + "," + this.question10.toString() + "," + this.question11.toString() + "," + this.question12.toString() + "," + this.question13.toString() + "," + this.question14.toString() + "," +
            //     this.question15.toString() + "," + this.question16.toString() + "," + this.question17.toString() + "," + this.question18.toString() + "," +
