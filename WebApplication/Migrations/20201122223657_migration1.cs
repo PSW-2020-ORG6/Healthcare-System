@@ -26,10 +26,10 @@ namespace WebApplication.Migrations
                 name: "Patients",
                 columns: table => new
                 {
-                    SerialNumber = table.Column<string>(nullable: false),
+                    Id = table.Column<string>(nullable: false),
+                    SerialNumber = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Surname = table.Column<string>(nullable: true),
-                    Id = table.Column<string>(nullable: true),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
                     Contact = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
@@ -44,19 +44,19 @@ namespace WebApplication.Migrations
                     Citizenship = table.Column<string>(nullable: true),
                     Nationality = table.Column<string>(nullable: true),
                     Profession = table.Column<string>(nullable: true),
-                    Addresss = table.Column<string>(nullable: true),
                     EmploymentStatus = table.Column<string>(nullable: true),
                     MaritalStatus = table.Column<string>(nullable: true),
                     HealthInsuranceNumber = table.Column<int>(nullable: false),
                     FamilyDiseases = table.Column<string>(nullable: true),
                     PersonalDiseases = table.Column<string>(nullable: true),
                     Gender = table.Column<string>(nullable: true),
+                    Image = table.Column<string>(nullable: true),
                     Guest = table.Column<bool>(nullable: false),
                     Password = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Patients", x => x.SerialNumber);
+                    table.PrimaryKey("PK_Patients", x => x.Id);
                 });
         }
 

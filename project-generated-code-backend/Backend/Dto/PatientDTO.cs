@@ -34,6 +34,7 @@ namespace Backend.Dto
         private String familyDiseases;
         private String personalDiseases;
         private string password;
+        private String image;
         private bool isGuest;
 
         public string Name { get => name; set => name = value; }
@@ -60,6 +61,8 @@ namespace Backend.Dto
         public int HealthInsuranceNumber { get => healthInsuranceNumber; set => healthInsuranceNumber = value; }
         public string FamilyDiseases { get => familyDiseases; set => familyDiseases = value; }
         public string PersonalDiseases { get => personalDiseases; set => personalDiseases = value; }
+        public string Image { get => image; set => image = value; }
         public bool IsGuest { get => isGuest; set => isGuest = value; }
+
     }
 }

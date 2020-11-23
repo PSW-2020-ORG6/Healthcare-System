@@ -32,6 +32,7 @@ namespace Model.Accounts
         private int healthInsuranceNumber;
         private String familyDiseases;
         private String personalDiseases;
+        private String image;
         private bool guest;
         private string password;
 
@@ -61,6 +62,32 @@ namespace Model.Accounts
             this.password = patientDTO.Password;
             Console.WriteLine(Guest);
         }
+
+
+        public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, string address, string parentName, string placeOfBirth, string municipalityOfBirth, string stateOfBirth, String citizenship, string nationality, string profession, string placeOfResidence, string municipalityOfResidence, string stateOfResidence, string employmentStatus, string maritalStatus,int healthInsuranceNumber,string familyDiseases, string personalDiseases, string gender, string password, string image, bool isGuest = false)
+            : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address, password)
+        {
+            this.parentName = parentName;
+            this.gender = gender;
+            this.Guest = isGuest;
+            this.password = password;
+            this.placeOfBirth = placeOfBirth;
+            this.municipalityOfBirth = municipalityOfBirth;
+            this.stateOfBirth = stateOfBirth;
+            this.citizenship = citizenship;
+            this.nationality = nationality;
+            this.profession = profession;
+            this.placeOfResidence = placeOfResidence;
+            this.municipalityOfResidence = municipalityOfResidence;
+            this.stateOfResidence = stateOfResidence;
+            this.employmentStatus = employmentStatus;
+            this.maritalStatus = maritalStatus;
+            this.healthInsuranceNumber = healthInsuranceNumber;
+            this.familyDiseases = familyDiseases;
+            this.personalDiseases = personalDiseases;
+            this.image = image;
+        }
+        public Patient() : base(Guid.NewGuid().ToString()) { }
         public Patient() : base() { }
         public Patient(string serialNumber, string name, string surname) : base() { }
 
@@ -74,13 +101,13 @@ namespace Model.Accounts
         public string Citizenship { get => citizenship; set => citizenship = value; }
         public string Nationality { get => nationality; set => nationality = value; }
         public string Profession { get => profession; set => profession = value; }
-        public string Addresss { get => address; set => address = value; }
         public string EmploymentStatus { get => employmentStatus; set => employmentStatus = value; }
         public string MaritalStatus { get => maritalStatus; set => maritalStatus = value; }
         public int HealthInsuranceNumber { get => healthInsuranceNumber; set => healthInsuranceNumber = value; }
         public string FamilyDiseases { get => familyDiseases; set => familyDiseases = value; }
         public string PersonalDiseases { get => personalDiseases; set => personalDiseases = value; }
         public string Gender { get => gender; set => gender = value; }
+        public string Image { get => image; set => image = value; }
         public bool Guest { get => guest; set => guest = value; }
         public string Password { get => password; set => password = value; }
 
