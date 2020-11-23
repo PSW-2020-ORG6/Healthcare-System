@@ -12,12 +12,18 @@ namespace WebApplication.Backend.Services
     public class RegistrationService
     {
         private RegistrationRepository registrationRepository;
+        private IRegistrationRepository iregistrationRepository = new RegistrationRepository();
         public RegistrationService()
         {
             this.registrationRepository = new RegistrationRepository();
         }
 
-        public void RegisterPatient(Patient patientDTO)
+        public RegistrationService(IRegistrationRepository iregistrationRepository)
+        {
+            this.iregistrationRepository = iregistrationRepository;
+        }
+
+        public bool RegisterPatient(Patient patientDTO)
         {
             /*if (!IsJMBGValid(patientDTO.Id) && IsGuest(patientDTO.Id))
             {
@@ -32,16 +38,15 @@ namespace WebApplication.Backend.Services
                     newPatient.SerialNumber = p.SerialNumber;
                     //patientRepository.Update(newPatient);
                 }
-            }
-            else if (IsJMBGValid(patientDTO.Id))
+            }*/
+            if (IsJMBGValid(patientDTO.Id))
             {
-                //patientRepository.Save(new Patient(patientDTO));
+                return iregistrationRepository.addPatient(patientDTO);
             }
             else
             {
-                return;
-            }*/
-            registrationRepository.addPatient(patientDTO);
+                return false;
+            }
         }
 
         public bool IsGuest(String jmbg)
@@ -60,17 +65,19 @@ namespace WebApplication.Backend.Services
             return false;
         }
 
-        private bool IsJMBGValid(String jmbg)
+        public bool IsJMBGValid(String jmbg)
         {
-            /*List<Patient> patients = patientRepository.GetAllPatients();
-            foreach (Patient p in patients)
-            {
-                if (p.Id == jmbg)
+            String id = iregistrationRepository.GetPatientIdById(jmbg);
+
+            //List<String> patients = iregistrationRepository.GetAllPatients();
+            //foreach (String id in patients)
+            //{
+                if (id ==  "" || id == null)
                 {
-                    return false;
+                    return true;
                 }
-            }*/
-            return true;
+            //} 
+            return false;
         }
 
         public Patient GetExistingPatient(String jmbg)

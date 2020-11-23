@@ -21,9 +21,13 @@ namespace WebApplication.Backend.Controllers
         }
 
         [HttpPost("registerPatient")]
-        public void RegisterPatient(Patient patientDTO)
+        public IActionResult RegisterPatient(Patient patientDTO)
         {
-            registrationService.RegisterPatient(patientDTO);
+            if (registrationService.RegisterPatient(patientDTO))
+            {
+                return Ok();
+            }
+                return BadRequest();
         }
     }
 }

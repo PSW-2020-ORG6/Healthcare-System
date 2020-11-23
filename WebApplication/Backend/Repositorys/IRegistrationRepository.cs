@@ -10,5 +10,8 @@ namespace WebApplication.Backend.Repositorys
     public interface IRegistrationRepository
     {
         public bool addPatient(Patient patient);
+        public List<String> GetAllPatients();
+        public String GetPatientId(string idd);
+        public String GetPatientIdById(string patientId);
     }
 }

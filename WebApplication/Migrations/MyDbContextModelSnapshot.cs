@@ -19,13 +19,10 @@ namespace WebApplication.Migrations
 
             modelBuilder.Entity("Model.Accounts.Patient", b =>
                 {
-                    b.Property<string>("SerialNumber")
+                    b.Property<string>("Id")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<string>("Address")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Addresss")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Citizenship")
@@ -55,7 +52,7 @@ namespace WebApplication.Migrations
                     b.Property<int>("HealthInsuranceNumber")
                         .HasColumnType("int");
 
-                    b.Property<string>("Id")
+                    b.Property<string>("Image")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("MaritalStatus")
@@ -91,6 +88,9 @@ namespace WebApplication.Migrations
                     b.Property<string>("Profession")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("SerialNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("StateOfBirth")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -100,7 +100,7 @@ namespace WebApplication.Migrations
                     b.Property<string>("Surname")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("SerialNumber");
+                    b.HasKey("Id");
 
                     b.ToTable("Patients");
                 });
