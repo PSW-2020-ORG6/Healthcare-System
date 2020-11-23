@@ -9,6 +9,7 @@ const Statistics = { template: '<statistics></statistics>' }
 var temp = new Vue({
 	el: '#temp',
 	data: {
+		isHidden: false
 	},
 	methods: {
 		admin : function () {
