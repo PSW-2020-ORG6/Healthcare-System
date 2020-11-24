@@ -24,11 +24,9 @@ namespace WebApplication.Backend.Repositorys
                 Building entity = new Building();
                 entity.Id = (string)sqlReader[0];
                 entity.Name = (string)sqlReader[1];
-                entity.FloorIds = (string)sqlReader[2];
-                entity.Color = (string)sqlReader[3];
-                entity.Shape = (string)sqlReader[4];
+                entity.Color = (string)sqlReader[2];
+                entity.Shape = (string)sqlReader[3];
                 resultList.Add(entity);
-
             }
             connection.Close();
             return resultList;
