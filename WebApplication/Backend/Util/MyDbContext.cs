@@ -13,9 +13,7 @@ namespace WebApplication.Backend.Model
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Building> Buildings { get; set; }
-
         public DbSet<Equipment> Equipments { get; set; }
-
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
