@@ -1,6 +1,4 @@
 ﻿using Backend.Model.Util;
-using Model.Hospital;
-using System.Collections.Generic;
 
 namespace health_clinic_class_diagram.Backend.Model.Hospital
 {
@@ -8,6 +6,6 @@ namespace health_clinic_class_diagram.Backend.Model.Hospital
     {
         public string Id { get; }
         public string Name { get; set; }
-        public List<Room> Rooms { get; set; }
+        public string BuildingId { get; set; }
     }
 }

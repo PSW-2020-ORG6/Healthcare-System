@@ -22,8 +22,9 @@ namespace WebApplication.Backend.Repositorys
             while (sqlReader.Read())
             {
                 Equipment entity = new Equipment();
-                entity.Name = (String)sqlReader[0];
-                entity.Id = (String)sqlReader[1];
+                entity.Name = (string)sqlReader[0];
+                entity.Id = (string)sqlReader[1];
+                entity.RoomId = (string)sqlReader[2];
                 resultList.Add(entity);
 
             }
