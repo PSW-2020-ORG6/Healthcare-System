@@ -32,7 +32,6 @@ namespace Model.Accounts
 
         public Account(String serialNumber) : base(serialNumber) { }
 
-        public Account(string serialNumber) : base(serialNumber) { }
         public Account(String serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, String password) : base(serialNumber)
         {
             this.name = name;
