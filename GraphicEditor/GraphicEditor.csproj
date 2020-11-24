@@ -129,6 +129,7 @@
     <Compile Include="Repositories\Interfaces\IRoomRepository.cs" />
     <Compile Include="Repositories\RoomRepository.cs" />
     <Compile Include="ViewModel\BedUpdateViewModel.cs" />
+    <Compile Include="ViewModel\BuildingUpdateViewModel.cs" />
     <Compile Include="ViewModel\CardiologyBuildingUserControlViewModel.cs" />
     <Compile Include="ViewModel\CardiologyFirstFloorMapUserControlViewModel.cs" />
     <Compile Include="ViewModel\CardiologySecondFloorMapUserControlViewModel.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="ViewModel\LoginUserControlViewModel.cs" />
     <Compile Include="ViewModel\MapContentUserControlViewModel.cs" />
     <Compile Include="ViewModel\RoomInformationViewModel.cs" />
+    <Compile Include="ViewModel\RoomUpdateViewModel.cs" />
     <Compile Include="View\UserControls\CardiologyBuildingUserControl.xaml.cs">
       <DependentUpon>CardiologyBuildingUserControl.xaml</DependentUpon>
     </Compile>
@@ -157,11 +159,17 @@
     <Compile Include="View\Windows\BedUpdate.xaml.cs">
       <DependentUpon>BedUpdate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Windows\BuildingUpdate.xaml.cs">
+      <DependentUpon>BuildingUpdate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\HelpViewer.xaml.cs">
       <DependentUpon>HelpViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\RoomInformation.xaml.cs">
       <DependentUpon>RoomInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\RoomUpdate.xaml.cs">
+      <DependentUpon>RoomUpdate.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\RoomSearch.xaml.cs">
       <DependentUpon>RoomSearch.xaml</DependentUpon>
@@ -224,6 +232,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Windows\BuildingUpdate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Windows\HelpViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -233,6 +245,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Windows\RoomSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\RoomUpdate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

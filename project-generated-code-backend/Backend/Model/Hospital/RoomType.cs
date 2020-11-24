@@ -14,7 +14,7 @@ namespace Model.Hospital
 
         private string name;
 
-        public string Name { get => name; }
+        public string Name { get => name; set { name = value; } }
 
 
         public RoomType(string name) : base(Guid.NewGuid().ToString())

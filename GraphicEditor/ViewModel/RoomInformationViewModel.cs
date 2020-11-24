@@ -14,7 +14,13 @@ namespace GraphicEditor.ViewModel
 
         private Bed selectedBed;
 
-        public MyICommand<Bed> NavCommandUpdate { get; private set; }
+        private string roomName;
+
+        private Room room;
+
+        public MyICommand<Bed> NavCommandBedUpdate { get; private set; }
+
+        public MyICommand<Room> NavCommandRoomUpdate { get; private set; }
 
         public MyICommand NavCommandExit { get; private set; }
 
@@ -23,8 +29,7 @@ namespace GraphicEditor.ViewModel
             get => selectedBed;
             set
             {
-                if (value != null)
-                    SetProperty(ref selectedBed, value);
+                if (value != null) SetProperty(ref selectedBed, value);
             }
         }
 
@@ -34,16 +39,36 @@ namespace GraphicEditor.ViewModel
             set
             {
                 SetProperty(ref beds, value);
-
             }
         }
 
-        public RoomInformationViewModel(Window _window)
+        public string RoomName
+        {
+            get => roomName;
+            set
+            {
+                SetProperty(ref roomName, value);
+            }
+        }
+
+        public Room Room
+        {
+            get => room;
+            set
+            {
+                SetProperty(ref room, value);
+            }
+        }
+
+        public RoomInformationViewModel(Window _window, string _roomName)
         {
             NavCommandExit = new MyICommand(exitInfo);
-            NavCommandUpdate = new MyICommand<Bed>(updateBedInfo);
+            NavCommandBedUpdate = new MyICommand<Bed>(updateBedInfo);
+            NavCommandRoomUpdate = new MyICommand<Room>(updateRoomInfo);
 
             window = _window;
+            roomName = _roomName;
+            room = new Room(_roomName, 100, new RoomType("Basic"));
 
             beds.Add(new Bed("Bed 1", "bed01"));
             beds.Add(new Bed("Bed 2", "bed02"));
@@ -64,6 +89,16 @@ namespace GraphicEditor.ViewModel
             BedInfo.Name = p.Name;
             OnPropertyChanged("BedInfo");
         }
+
+        void updateRoomInfo(Room room)
+        {
+            Room rm = new Room(room.SerialNumber, room.Id, room.RoomType);
+            RoomUpdate r = new RoomUpdate(rm);
+            r.ShowDialog();
+            RoomName = rm.SerialNumber;
+            OnPropertyChanged("RoomName");
+        }
+
 
         void exitInfo()
         {

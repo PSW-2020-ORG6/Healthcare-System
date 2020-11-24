@@ -6,7 +6,7 @@ namespace GraphicEditor.ViewModel
 {
     public class BedUpdateViewModel : BindableBase
     {
-        private Window window;
+        private Window _window;
         private Bed _bed;
         private Bed _bedOriginal;
 
@@ -24,20 +24,20 @@ namespace GraphicEditor.ViewModel
             }
         }
 
-        public BedUpdateViewModel(Window _window, Bed _bedInfo)
+        public BedUpdateViewModel(Window window, Bed _bedInfo)
         {
-            window = _window;
+            _window = window;
             _bed = _bedInfo;
             _bedOriginal = new Bed(_bed.Name, _bed.Id);
 
             NavCommandExit = new MyICommand(exitInfo);
-            NavCommandUpdate = new MyICommand(updateBedInfo);
+            NavCommandUpdate = new MyICommand(updateRoomInfo);
         }
 
 
-        void updateBedInfo()
+        void updateRoomInfo()
         {
-            window.Close();
+            _window.Close();
         }
 
         void exitInfo()
@@ -45,7 +45,7 @@ namespace GraphicEditor.ViewModel
             BedInfo.Id = _bedOriginal.Id;
             BedInfo.Name = _bedOriginal.Name;
             OnPropertyChanged("BedInfo");
-            window.Close();
+            _window.Close();
         }
 
     }

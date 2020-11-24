@@ -17,46 +17,75 @@
             <viewUserControl:CardiologySecondFloorMapUserControl/>
         </DataTemplate>
     </UserControl.Resources>
-
-    <DockPanel>
-        <DockPanel Width="250">
-            <Button DockPanel.Dock="Top" 
+    
+        <DockPanel>
+            <Grid   DockPanel.Dock="Left"
+                    Width="200">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+                <Button Grid.Row="0"
                         Command="{Binding Path=NavCommand}"
                         CommandParameter="back" 
-                        Margin="5,5,5,0"
-                        Width="150">
-                <DockPanel>
-                    <materialDesign:PackIcon Kind="ArrowBack" 
+                        Margin="5,5,5,0">
+                    <DockPanel Width="auto">
+                        <materialDesign:PackIcon Kind="ArrowBack" 
                                                  Height="25" 
                                                  Width="25"/>
                     <TextBlock HorizontalAlignment="Center" 
                                    VerticalAlignment="Center">
                         BACK TO MAP
-                    </TextBlock>
-                </DockPanel>
-            </Button>
-
-            <ListBox Cursor="Hand" 
-                    DockPanel.Dock="Top"
-                    ItemsSource="{Binding Path=Floors}" 
-                    SelectedItem="{Binding Path=SelectedFloor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                    Style="{StaticResource MaterialDesignToolVerticalToggleListBox}"
-                    Height="57" 
-                    Width="190" Margin="30,0" />
+                        </TextBlock>
+                    </DockPanel>
+                </Button>
+            <ListBox Grid.Row="1"
+                     Cursor="Hand" 
+                     ItemsSource="{Binding Path=Floors}" 
+                     SelectedItem="{Binding Path=SelectedFloor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                     Style="{StaticResource MaterialDesignToolVerticalToggleListBox}"
+                     Margin="5,5,5,5"/>
             <Button Click="ShowRoomSearch"
                     DockPanel.Dock="Bottom"
                     Height="40" 
                     VerticalAlignment="Top"
                     Width="150">
                 <DockPanel Width="auto">
+                    <materialDesign:PackIcon Kind="Search" 
+                                             Height="25" 
+                                             Width="25"
+                                             VerticalAlignment="Center"/>
                     <TextBlock HorizontalAlignment="Center" 
-                                       VerticalAlignment="Center">
-                            Search rooms
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap">
+                        SEARCH ROOMS
                     </TextBlock>
                 </DockPanel>
             </Button>
-        </DockPanel>
-
+            <Button Grid.Row="2"
+                    Command="{Binding Path=BuildingUpdateCommand}"
+                    CommandParameter="{Binding Path=Building}"
+                    Height="50"
+                    Margin="5,5,5,5">
+                <DockPanel Width="auto">
+                    <materialDesign:PackIcon Kind="Edit" 
+                                             Height="25" 
+                                             Width="25"
+                                             VerticalAlignment="Center"/>
+                    <TextBlock HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap">
+                        EDIT BUILDING INFORMATION
+                    </TextBlock>
+                </DockPanel>
+            </Button>
+        </Grid>
+        <TextBlock  DockPanel.Dock="Top" 
+                    Text="{Binding Path=Building.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                    Style="{StaticResource MaterialDesignHeadline2TextBlock}" 
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Center"/>
         <TextBlock DockPanel.Dock="Top" 
                        Text="{Binding Path=SelectedFloor, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                        Style="{StaticResource MaterialDesignHeadline2TextBlock}" 
@@ -66,6 +95,5 @@
         <ContentControl BorderBrush="Black"
                             BorderThickness="1"
                             Content="{Binding Path=FloorViewModel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-
-    </DockPanel>
+        </DockPanel>
 </UserControl>

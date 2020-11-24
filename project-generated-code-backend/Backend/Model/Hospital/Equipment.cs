@@ -50,7 +50,7 @@ namespace Model.Hospital
         }
 
         public string Name { get => name; set { name = value; } }
-        public string Id { get => id; set { name = value; } }
+        public string Id { get => id; set { id = value; } }
 
         public string RoomId { get => roomId; set => roomId = value; }
 

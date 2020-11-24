@@ -1,6 +1,12 @@
 ﻿using GraphicEditor.HelpClasses;
+using health_clinic_class_diagram.Backend.Model.Hospital;
+using Model.Hospital;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using GraphicEditor.View.Windows;
+using System.Threading.Tasks;
 
 namespace GraphicEditor.ViewModel
 {
@@ -9,7 +15,10 @@ namespace GraphicEditor.ViewModel
         private MapContentUserControlViewModel _parent;
         private List<string> _floors = new List<string>(Constants.FLOOR_MAP.Values);
         private string _selectedFloor = Constants.FLOOR_MAP[Constants.FIRST];
+        private Building _building;
         public MyICommand<string> NavCommand { get; private set; }
+        public MyICommand<Building> BuildingUpdateCommand { get; private set; }
+
         public static CardiologyFirstFloorMapUserControlViewModel FirstFloor;
         public static CardiologySecondFloorMapUserControlViewModel SecondFloor;
         public BindableBase _floorViewModel;
@@ -18,9 +27,14 @@ namespace GraphicEditor.ViewModel
         {
             _parent = parent;
             NavCommand = new MyICommand<string>(ChooseFloor);
+            BuildingUpdateCommand= new MyICommand<Building>(editBuilding);
             FirstFloor = new CardiologyFirstFloorMapUserControlViewModel();
             SecondFloor = new CardiologySecondFloorMapUserControlViewModel();
             _floorViewModel = FirstFloor;
+
+            List<Floor> _buildingFloors = new List<Floor>();
+
+            _building = new Building("123", "Cardiology", _buildingFloors, "Color Blue", "Style");
         }
 
         public BindableBase FloorViewModel
@@ -37,6 +51,18 @@ namespace GraphicEditor.ViewModel
             get
             {
                 return _floors;
+            }
+        }
+
+        public Building Building
+        {
+            get
+            {
+                return _building;
+            }
+            set
+            {
+                SetProperty(ref _building, value);
             }
         }
 
@@ -70,6 +96,19 @@ namespace GraphicEditor.ViewModel
                     FloorViewModel = SecondFloor;
                     break;
             }
+        }
+
+        private void editBuilding(Building _building)
+        {
+            Building b = new Building(Building.Id, Building.Name, Building.Floors, Building.Color, Building.Shape);
+            BuildingUpdate r = new BuildingUpdate(b);
+            r.ShowDialog();
+            Building.Id = b.Id;
+            Building.Name = b.Name;
+            Building.Floors = b.Floors;
+            Building.Color = b.Color;
+            Building.Shape = b.Shape;
+            OnPropertyChanged("Building");
         }
     }
 }

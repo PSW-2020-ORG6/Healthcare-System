@@ -8,9 +8,9 @@ namespace GraphicEditor.View.Windows
     /// </summary>
     public partial class RoomInformation : Window
     {
-        public RoomInformation()
+        public RoomInformation(string roomName)
         {
-            this.DataContext = new RoomInformationViewModel(this);
+            this.DataContext = new RoomInformationViewModel(this, roomName);
             InitializeComponent();
         }
     }
