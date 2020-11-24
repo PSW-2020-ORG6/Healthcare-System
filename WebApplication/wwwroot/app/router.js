@@ -44,9 +44,7 @@ var temp = new Vue({
 			router.push("search")
 		}
 	}
-
 });
-
 
 const router = new VueRouter({
 	mode: 'hash',

@@ -76,10 +76,6 @@ namespace Model.MedicalExam
                 additionalDocument.Clear();
         }
 
-        public Report()
-        {
-        }
-
         public Report(DateTime date, string findings, Patient patient, Physitian physitian, string patientConditions) : base(Guid.NewGuid().ToString())
         {
             this.date = date;
