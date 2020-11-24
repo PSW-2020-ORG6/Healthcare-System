@@ -29,5 +29,19 @@ namespace WebApplication.Backend.Services
         {
             return surveyRepository.GetAllDoctorsFromReporstByPatientId(patientId);
         }
+
+        public List<double> getStatistics(string doctorId)
+        {
+            return isurveyRepository.getStatistics(doctorId);
+
+        }
+
+        public List<double> calculateStatistics(List<Survey> testInput)
+        {
+            return isurveyRepository.calculateStatistics(testInput);
+        }
+
+
+
     }
 }

@@ -86,3 +86,26 @@ p {
 .starrating > input:hover ~ label {
     color: lightblue;
 }
+
+
+#sText {
+    overflow-y: scroll;
+    height: 768px;
+    background-image: url("../pictures/surveyBackground.jpg");
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+
+#entireSurvey {
+    font-weight : bolder;
+
+}
+#doctorSelect {
+    width : 400px;
+}
+
+.buttonBottom {
+    width : 300px;
+    height : 200 px;
+    font-size : 24px;
+}

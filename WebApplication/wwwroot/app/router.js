@@ -48,7 +48,7 @@ const router = new VueRouter({
 			path: '/survey',
 			name: 'survey',
 			component: Survey,
-		},
+		},	
 	]
 });
 

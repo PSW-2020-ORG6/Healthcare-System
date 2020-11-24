@@ -9,8 +9,7 @@
     background-color: lightblue;
     color: white;
     font-family: Impact;
-    background-image: url("../pictures/ocenjivanje.jpg");
-    padding-bottom: 140px;
+    background-image: url("../pictures/rating.jpg");
 }
 
 #feedbackModalFooter {

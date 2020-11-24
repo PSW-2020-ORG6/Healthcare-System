@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication.Backend.Model;
 
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201123170325_migracija10")]
+    partial class migracija10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,7 +69,7 @@ namespace WebApplication.Migrations
                             Guest = true,
                             Name = "Jelena",
                             ParentName = "otac",
-                            SerialNumber = "80be9ef9-3da3-4c3d-8bca-bbf7bae20fd8",
+                            SerialNumber = "e1646f09-3a92-443f-88c4-099e49c849d8",
                             Surname = "Tanjic"
                         },
                         new
@@ -80,7 +82,7 @@ namespace WebApplication.Migrations
                             Guest = true,
                             Name = "Sara",
                             ParentName = "mama",
-                            SerialNumber = "81d4bb96-81b4-43b6-8e54-165081e4029e",
+                            SerialNumber = "ccd5d784-45bc-47ea-aa5a-0acf2e5f68aa",
                             Surname = "Milic"
                         });
                 });
@@ -134,35 +136,35 @@ namespace WebApplication.Migrations
                     b.HasData(
                         new
                         {
-                            SerialNumber = "9d815b54-bdee-4117-9be7-e339bce42f8c",
+                            SerialNumber = "ce76b5fc-6cbe-4e45-ab37-173a964cc39b",
                             PatientId = "0002",
                             PatientName = "Mika Mikic",
                             PhysitianName = "Pera Peric"
                         },
                         new
                         {
-                            SerialNumber = "03744665-b437-4a09-86fc-81cd3bdaaad9",
+                            SerialNumber = "032e21b0-b12e-49f5-a5d1-f3167a171d0d",
                             PatientId = "0002",
                             PatientName = "Mika Mikic",
                             PhysitianName = "Nikola Nikolic"
                         },
                         new
                         {
-                            SerialNumber = "8120ac60-d2d7-4413-87bd-a641b580c41e",
+                            SerialNumber = "55ee62a0-227c-4f0f-b6d2-d127ebb8ce1f",
                             PatientId = "0002",
                             PatientName = "Mika Mikic",
                             PhysitianName = "Bole Bolevic"
                         },
                         new
                         {
-                            SerialNumber = "9edc0d3e-4794-4f97-9e93-e5b266b037f8",
+                            SerialNumber = "73baa9f4-7ba7-4d91-9296-1342d3327a37",
                             PatientId = "0003",
                             PatientName = "Ana Anic",
                             PhysitianName = "Petar Petovic"
                         },
                         new
                         {
-                            SerialNumber = "16f6237b-e66d-45e1-9e35-031e78925ba9",
+                            SerialNumber = "509b7c29-23ce-41de-bb2c-f452ca7192da",
                             PatientId = "0003",
                             PatientName = "Ana Anic",
                             PhysitianName = "Bole Bolevic"
@@ -387,7 +389,7 @@ namespace WebApplication.Migrations
                     b.HasData(
                         new
                         {
-                            SerialNumber = "58ce9630-e321-4d82-823e-e4d8a4fe9229",
+                            SerialNumber = "9918e6d2-b9b4-48e5-948e-a67a58e9873c",
                             DoctorName = "Pera Peric",
                             ID = "001",
                             Question1 = "5",
@@ -416,7 +418,7 @@ namespace WebApplication.Migrations
                         },
                         new
                         {
-                            SerialNumber = "017e28e1-877d-4591-98ad-3c835dd9352c",
+                            SerialNumber = "b051bcd1-8f03-4dfc-abf6-d6eda4548dfd",
                             DoctorName = "Mika Mikic",
                             ID = "005",
                             Question1 = "5",

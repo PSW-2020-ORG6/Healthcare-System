@@ -16,7 +16,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;database=bazamaja1;user=root;password=root");
+                connection = new MySqlConnection("server=localhost;database=mydb;user=root;password=neynamneynam12");
                 connection.Open();
             }
             catch (Exception e)
@@ -32,23 +32,23 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///list of feedbacks
         ///</returns>
-        internal List<Feedback> GetFeedbacks(String query)
+        internal List<Feedback> GetFeedbacks(String sqlDml)
         {
-            MySqlCommand sqlCommand = new MySqlCommand(query, connection);
-            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<Feedback> resultList = new List<Feedback>();
-            while (sqlReader.Read())
-            {
-                Feedback entity = new Feedback();
-                entity.SerialNumber = (string)sqlReader[4];
-                entity.PatientId = (String)sqlReader[3];
-                entity.Text = (String)sqlReader[0];
-                entity.Date = Convert.ToDateTime(sqlReader[2]);
-                entity.Approved = (Boolean)sqlReader[1];
-                resultList.Add(entity);
-            }
-            connection.Close();
-            return resultList;
+                MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+                MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
+                List<Feedback> resultList = new List<Feedback>();
+                while (sqlReader.Read())
+                {
+                    Feedback entity = new Feedback();
+                    entity.SerialNumber = (string)sqlReader[0];
+                    entity.PatientId = (String)sqlReader[1];
+                    entity.Text = (String)sqlReader[2];
+                    entity.Date = Convert.ToDateTime(sqlReader[3]);
+                    entity.Approved = (Boolean)sqlReader[4];
+                    resultList.Add(entity);
+                }
+                connection.Close();
+                return resultList;
         }
         ///Tanja Drcelic RA124/2017
         /// <summary>

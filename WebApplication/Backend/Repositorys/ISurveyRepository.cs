@@ -9,5 +9,9 @@ namespace WebApplication.Backend.Repositorys
     public interface ISurveyRepository
     {
         public bool AddNewSurvey(Survey surveyText);
+
+        public List<double> calculateStatistics(List<Survey> reports);
+
+        public List<double> getStatistics(string doctorId);
     }
 }
