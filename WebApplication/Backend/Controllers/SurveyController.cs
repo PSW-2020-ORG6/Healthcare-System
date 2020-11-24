@@ -31,5 +31,12 @@ namespace WebApplication.Backend.Controllers
            return surveyService.GetAllDoctorsFromReporstByPatientId(patientId);
  
         }
+
+        [HttpGet("getStatisticsForDoctor")]
+        public List<double> getStatistics(string doctorId)
+        {
+            return surveyService.getStatistics(doctorId);
+
+        }
     }
 }

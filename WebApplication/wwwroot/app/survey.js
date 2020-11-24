@@ -47,13 +47,12 @@
 
     },
     template: `
-    <div>
-        <p id="title">Survey</p>
+    <div id = "entireSurvey">
         <div id="sText">
-           <p id="textSurvey">Dear patient,<br>
+           <p id="textSurvey"><i>Dear patient,<br>
                At Health Clinic,we are commited to your healthcare.We are interested in knowing what do you thing abaut our services.
                 You performance by completing this survey regarding your visit.<br>Thank you for taking time to share your expirience with us.<br><br>
-               Please rate the following toppings on a scale of 1 to 5,with 1 being poor and 5 being exellent.
+               Please rate the following toppings on a scale of 1 to 5,with 1 being poor and 5 being exellent.</i>
             </p>
             <p id="textSurvey">Select doctor to rate:<br>
                 <select id="doctorSelect" class="browser-default custom-select" v-model = "surveyText.DoctorName">
@@ -295,7 +294,7 @@
                         <input type="radio" id="star5RatingTwentyThree" name="ratingTwentyThree" value="1" v-model="surveyText.question23"/><label for="star5RatingTwentyThree" title="1 star"></label>
                     </div>
               </div>
-			  <button type="button" class="btn btn-info btn-lg " data-toggle="modal"  v-on:click="AddNewSurvey()">Send</button>
+			  <button type="button" class="btn btn-info btn-lg buttonBottom " data-toggle="modal"  v-on:click="AddNewSurvey()">Send</button>
                     <div class="modal fade" id="myModal" role="dialog">
                         <div class="modal-dialog">
                           <!-- Modal content-->
@@ -323,7 +322,7 @@
                               <p>Please answer all questions.</p>
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                              <button type="button" class="btn btn-default" data-dismiss="modal" >Ok</button>
                             </div>
                           </div>
                         </div>
@@ -346,7 +345,7 @@
                         </div>
                       </div>
 
-              <button type="button" class="btn btn-info btn-lg " data-dismiss="modal" v-on:click="PatientShow()">Cancel</button>
+              <button type="button" class="btn btn-info btn-lg buttonBottom " data-dismiss="modal" v-on:click="PatientShow()">Cancel</button>
         </div>
     </div>
 	`,

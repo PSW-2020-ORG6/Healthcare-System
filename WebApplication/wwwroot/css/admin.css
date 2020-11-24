@@ -14,3 +14,15 @@
     font-family: 'Impact';
     font-weight: 100;
 }
+
+#doctorSelect {
+    width : 300px;
+
+}
+
+#statisticTable {
+    color : white;
+    background-color : lightblue;
+    font-size : larger;
+    font-family : Impact;
+}

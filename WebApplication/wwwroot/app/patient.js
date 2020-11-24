@@ -99,7 +99,7 @@
 		AddNewFeedback: function (feedback) {
 			if (!document.getElementById("anonimous").checked)
 				this.feedback.patientId="0003"
-			if (feedback.text != null || feedback.text!="") {
+			if (feedback.text.localeCompare(null) || feedback.text.localeCompare("")) {
 				axios
 					.post("http://localhost:49900/feedback/add", feedback)
 					.then(response => {
@@ -107,9 +107,6 @@
 						$('#feedbackModal').modal('hide')
 					})
 
-					.catch(error => {
-						alert("You need to enter a comment first.");
-					})
 			}
 			else
 				alert("You need to enter a comment first.");
