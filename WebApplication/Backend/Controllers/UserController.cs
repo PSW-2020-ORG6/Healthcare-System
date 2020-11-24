@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
+using Model.MedicalExam;
+using System.Collections.Generic;
+using WebApplication.Backend.DTO;
+using WebApplication.Backend.Services;
 
 namespace WebApplication.Backend.Controllers
 {
@@ -10,14 +13,17 @@ namespace WebApplication.Backend.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        //private readonly PatientService patientService;
+        private readonly PrescriptionService prescriptionService;
+        private readonly ReportService reportService;
+        private SearchEntityDTO searchEntityDTO = new SearchEntityDTO();
         public UserController()
         {
-            //this.patientService = new PatientService();
+            this.prescriptionService = new PrescriptionService();
         }
-        [HttpPost("advancedSearch")]
-        public void GetAllFeedbacks(string advancedSearch,bool approximate, string date)
+        [HttpGet("advancedSearch")]
+        public List<SearchEntityDTO> GetAllFeedbacks([FromQuery]string prescriptionSearch, [FromQuery] string reportSearch, [FromQuery] bool approximate, [FromQuery] string date)
         {
+            return searchEntityDTO.MergeLists(prescriptionService.GetSearchedPrescription(prescriptionSearch),reportService.GetSearchedReport(reportSearch));
         }
     }
 }

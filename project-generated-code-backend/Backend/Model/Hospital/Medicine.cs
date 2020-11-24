@@ -20,7 +20,9 @@ namespace Model.Hospital
         public string GenericName { get => genericName; set => genericName = value; }
         public virtual MedicineManufacturer MedicineManufacturer { get => medicineManufacturer; set => medicineManufacturer = value; }
         public virtual MedicineType MedicineType { get => medicineType; set => medicineType = value; }
-
+        public Medicine() : base(Guid.NewGuid().ToString())
+        {
+        }
         public Medicine(string copyrightName, string genericName, MedicineManufacturer medicineManufacturer, MedicineType medicineType) : base(Guid.NewGuid().ToString())
         {
             this.copyrightName = copyrightName;
@@ -46,9 +48,6 @@ namespace Model.Hospital
             this.medicineType = medicineType;
         }
 
-        public Medicine()
-        {
-        }
 
         public override bool Equals(object obj)
         {

@@ -16,10 +16,7 @@ namespace Model.Hospital
         private String id;
         private String roomId;
 
-        public Equipment()
-        {
-        }
-
+        public Equipment() : base(Guid.NewGuid().ToString()) { }
         public Equipment(string name, string id) : base(Guid.NewGuid().ToString())
         {
             this.name = name;

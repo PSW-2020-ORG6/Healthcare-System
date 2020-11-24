@@ -13,7 +13,7 @@ namespace Model.Accounts
     public class Specialization : Entity
     {
         private String name;
-
+        public Specialization() : base(Guid.NewGuid().ToString()) { }
         public Specialization(string name) : base(Guid.NewGuid().ToString())
         {
             this.name = name;
@@ -25,7 +25,7 @@ namespace Model.Accounts
             this.name = name;
         }
 
-        public string Name { get => name; }
+        public string Name { get => name; set => name = value; }
 
         public override string ToString()
         {

@@ -13,6 +13,10 @@ namespace Model.MedicalExam
     {
         private List<MedicineDosage> medicineDosage;
 
+        public Prescription() : base(Guid.NewGuid().ToString())
+        {
+
+        }
         public Prescription(DateTime date, string notes) : base(Guid.NewGuid().ToString(), date, notes)
         {
             medicineDosage = new List<MedicineDosage>();
@@ -24,7 +28,7 @@ namespace Model.MedicalExam
             medicineDosage = new List<MedicineDosage>();
         }
 
-        public List<MedicineDosage> MedicineDosage
+        public virtual List<MedicineDosage> MedicineDosage
         {
             get
             {

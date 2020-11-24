@@ -16,17 +16,24 @@ namespace Model.MedicalExam
         private String note;
         private Medicine medicine;
 
-        public Medicine Medicine
+        public virtual Medicine Medicine
         {
             get
             {
                 return medicine;
             }
+            set
+            {
+                medicine = value;
+            }
         }
 
-        public double Amount { get => amount; }
-        public string Note { get => note; }
+        public double Amount { get => amount; set => amount = value; }
+        public string Note { get => note; set => note = value; }
+        public MedicineDosage() : base(Guid.NewGuid().ToString())
+        {
 
+        }
         public MedicineDosage(double ammount, string note, Medicine medicine) : base(Guid.NewGuid().ToString())
         {
             this.amount = ammount;

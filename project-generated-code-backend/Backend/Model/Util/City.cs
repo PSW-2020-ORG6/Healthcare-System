@@ -36,8 +36,8 @@ namespace Model.Util
             }
         }
 
-        public string Name { get => name; }
-        public string PostalCode { get => postalCode; }
+        public string Name { get => name; set => name = value; }
+        public string PostalCode { get => postalCode; set => postalCode = value; }
 
         public City(string name, string postalCode) : base(Guid.NewGuid().ToString())
         {
