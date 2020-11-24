@@ -5,6 +5,7 @@ using Model.Blog;
 using Model.Hospital;
 using Model.Util;
 using System;
+using System.Collections.Generic;
 
 namespace WebApplication.Backend.Model
 {

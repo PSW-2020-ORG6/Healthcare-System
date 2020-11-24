@@ -17,7 +17,7 @@ Vue.component("search", {
                     <a class=" nav-link active" data-toggle="tab" href="#simpleSearch">Simple</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#advancedSearch">Advinced</a>
+                    <a class="nav-link" data-toggle="tab" href="#advancedSearch">Advanced</a>
                 </li>
             </ul>
             <div>
@@ -177,30 +177,94 @@ Vue.component("search", {
             this.row += 1
 
         },
-        CloneEl: function(el) {
-            var clo = el.cloneNode(true);
-            return clo;
-        },
         DeleteRow: function () {
             this.row -= 1
         },
         AdvancedSearch: function () {
-            var advanced = document.getElementById("text1").value + "," + document.getElementById("select1").value
-            if (this.second)
-                advanced +=";" + document.getElementById("select21").value +","+ document.getElementById("text2").value + "," +  document.getElementById("select22").value
-            if (this.third) 
-                advanced += ";" + document.getElementById("select31").value + "," + document.getElementById("text3").value+","+ document.getElementById("select32").value
-            if (this.fourth) 
-                advanced += ";" + document.getElementById("select41").value + "," + document.getElementById("text4").value + "," + document.getElementById("select42").value
             var date = document.getElementById("dateFrom").value + ";" + document.getElementById("dateTo").value
-            axios
-                .post('http://localhost:49900/user/advancedSearch', advanced, document.getElementById("check").checked,date)
-                .then(response => {
-                    alert("ok");
-                })
-                .catch(error => {
-                    alert(error)
-                })
+            if (this.Validate()) {
+                var prescriptionSearch = this.PrescriptionSearch()
+                var reportSearch = this.ReportSearch()
+
+                axios
+                    .get('http://localhost:49900/user/advancedSearch', { params: { prescriptionSearch: prescriptionSearch, reportSearch: reportSearch, approximate: document.getElementById("check").checked, date: date } })
+                    .then(response => {
+                        alert('ok');
+                    })
+                    .catch(error => {
+                        alert(error)
+                    })
+            }
+        },
+        PrescriptionSearch: function () {
+            var advanced = '';
+            if (document.getElementById("select1").value == 'Medicine name' || document.getElementById("select1").value == 'Medicine type' || document.getElementById("select1").value == 'All')
+                advanced += " ,"+document.getElementById("text1").value + "," + document.getElementById("select1").value
+            if (this.second && (document.getElementById("select22").value == 'Medicine name' || document.getElementById("select22").value == 'Medicine type' || document.getElementById("select22").value == 'All')) {
+                if (advanced == '')
+                    advanced += "," + document.getElementById("text2").value + "," + document.getElementById("select22").value
+                else
+                    advanced += ";" + document.getElementById("select21").value + "," + document.getElementById("text2").value + "," + document.getElementById("select22").value
+        }
+            if (this.third && (document.getElementById("select32").value == 'Medicine name' || document.getElementById("select32").value == 'Medicine type' || document.getElementById("select32").value == 'All')) {
+                if (advanced == '')
+                    advanced += "," + document.getElementById("text3").value + "," + document.getElementById("select32").value
+                else
+                    if (advanced == '')
+                        advanced += "," + document.getElementById("text3").value + "," + document.getElementById("select32").value
+                    else
+                        advanced += ";" + document.getElementById("select31").value + "," + document.getElementById("text3").value + "," + document.getElementById("select32").value
+            }
+            if (this.fourth && (document.getElementById("select42").value == 'Medicine name' || document.getElementById("select42").value == 'Medicine type' || document.getElementById("select42").value == 'All')) {
+                if (advanced == '')
+                    advanced += ";" + document.getElementById("select41").value + "," + document.getElementById("text4").value + "," + document.getElementById("select42").value
+                else
+                    advanced += ";" + document.getElementById("select41").value + "," + document.getElementById("text4").value + "," + document.getElementById("select42").value
+            }
+            return advanced
+        },
+        ReportSearch: function () {
+            var advanced = '';
+            if (document.getElementById("select1").value == 'Procedure type' || document.getElementById("select1").value == 'Patient reports' || document.getElementById("select1").value == 'Specialist reports' || document.getElementById("select1").value == 'Doctor reports' || document.getElementById("select1").value == 'All')
+                advanced += " ,"+document.getElementById("text1").value + "," + document.getElementById("select1").value
+            if (this.second && (document.getElementById("select22").value == 'Procedure type' || document.getElementById("select22").value == 'Patient reports' || document.getElementById("select22").value == 'Specialist reports' || document.getElementById("select22").value == 'Doctor reports' || document.getElementById("select22").value == 'All')) {
+                if (advanced == '')
+                    advanced += "," + document.getElementById("text2").value + "," + document.getElementById("select22").value
+                else
+                    advanced += ";" + document.getElementById("select21").value + "," + document.getElementById("text2").value + "," + document.getElementById("select22").value
+            }
+            if(this.third && (document.getElementById("select32").value == 'Procedure type' || document.getElementById("select32").value == 'Patient reports' || document.getElementById("select32").value == 'Specialist reports' || document.getElementById("select32").value == 'Doctor reports' || document.getElementById("select32").value == 'All')){
+                if (advanced == '')
+                    advanced += "," + document.getElementById("text3").value + "," + document.getElementById("select32").value
+                else
+                        advanced += ";" + document.getElementById("select31").value + "," + document.getElementById("text3").value + "," + document.getElementById("select32").value
+            }
+            if (this.fourth && (document.getElementById("select42").value == 'Procedure type' || document.getElementById("select42").value == 'Patient reports' || document.getElementById("select42").value == 'Specialist reports' || document.getElementById("select42").value == 'Doctor reports' || document.getElementById("select42").value == 'All')) {
+
+                if (advanced == '')
+                    advanced += "," + document.getElementById("text4").value + "," + document.getElementById("select42").value
+                else
+                    advanced += ";" + document.getElementById("select41").value + "," + document.getElementById("text4").value + "," + document.getElementById("select42").value
+            }
+            return advanced
+        },
+        Validate: function () {
+
+            if (document.getElementById("text1").value == "")
+                alert("All fields must be filled!")
+            else if (this.second) {
+                if (document.getElementById("text2").value == "")
+                    alert("All fields must be filled!")
+            } else if (this.third) {
+                if (document.getElementById("text3").value == "")
+                    alert("All fields must be filled!")
+            } else if (this.fourth) {
+                if (document.getElementById("text4").value == "")
+                    alert("All fields must be filled!")
+            }else
+                return true
+
+            return false
         }
     }
 });

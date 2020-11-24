@@ -16,7 +16,9 @@ namespace Model.Util
 
         public string Street { get => street; set => street = value; }
 
-        public Address() { }
+        public Address() : base()
+        {
+        }
         public Address(string street) : base(Guid.NewGuid().ToString())
         {
             this.street = street;

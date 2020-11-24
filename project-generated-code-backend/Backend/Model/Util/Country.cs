@@ -36,7 +36,7 @@ namespace Model.Util
             }
         }
 
-        public string Name { get => name; }
+        public string Name { get => name; set => name = value; }
 
         public Country(string name) : base(Guid.NewGuid().ToString())
         {

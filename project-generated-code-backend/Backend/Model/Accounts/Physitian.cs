@@ -14,6 +14,7 @@ namespace Model.Accounts
     {
 
         private List<Specialization> specialization;
+        public Physitian() :base(Guid.NewGuid().ToString()){ }
         public Physitian(string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string password)
             : base(Guid.NewGuid().ToString(), name, surname, id, dateOfBirth, contact, email, address, password)
         {
@@ -42,7 +43,7 @@ namespace Model.Accounts
             }
         }
 
-        public List<Specialization> Specialization
+        public virtual List<Specialization> Specialization
         {
             get
             {
@@ -84,9 +85,9 @@ namespace Model.Accounts
 
 
         private TimeInterval workSchedule;
-        private System.Collections.Generic.List<TimeInterval> vacationTime;
+        private  List<TimeInterval> vacationTime;
 
-        public System.Collections.Generic.List<TimeInterval> VacationTime
+        public virtual List<TimeInterval> VacationTime
         {
             get
             {
@@ -129,7 +130,7 @@ namespace Model.Accounts
             if (vacationTime != null)
                 vacationTime.Clear();
         }
-        public TimeInterval WorkSchedule { get => workSchedule; set => workSchedule = value; }
+        public virtual TimeInterval WorkSchedule { get => workSchedule; set => workSchedule = value; }
 
         public String AllSpecializations
         {

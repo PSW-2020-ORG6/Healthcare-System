@@ -23,35 +23,33 @@ namespace Model.MedicalExam
         public String patientName;
         public String physitianName;
         public string patientId;
+        private List<AdditionalDocument> additionalDocument;
 
-
-         private  List<AdditionalDocument> additionalDocument;
-        
-                public List<AdditionalDocument> AdditionalDocument
+        public virtual List<AdditionalDocument> AdditionalDocument
+        {
+            get
+            {
+                if (additionalDocument == null)
+                    additionalDocument = new List<AdditionalDocument>();
+                return additionalDocument;
+            }
+            set
+            {
+                RemoveAllAdditionalDocument();
+                if (value != null)
                 {
-                    get
-                    {
-                        if (additionalDocument == null)
-                            additionalDocument = new List<AdditionalDocument>();
-                        return additionalDocument;
-                    }
-                    set
-                    {
-                        RemoveAllAdditionalDocument();
-                        if (value != null)
-                        {
-                            foreach (AdditionalDocument oAdditionalDocument in value)
-                                AddAdditionalDocument(oAdditionalDocument);
-                        }
-                    }
+                    foreach (AdditionalDocument oAdditionalDocument in value)
+                        AddAdditionalDocument(oAdditionalDocument);
                 }
-        
+            }
+        }
+
         public DateTime Date { get => date; }
         public string Findings { get => findings; set => findings = value; }
-        public Patient Patient { get => patient; }
-        public Physitian Physitian { get => physitian; }
+        public virtual Patient Patient { get => patient; set => patient = value; }
+        public virtual Physitian Physitian { get => physitian; set => physitian = value; }
         public string PatientConditions { get => patientConditions; set => patientConditions = value; }
-        public ProcedureType ProcedureType { get => procedureType; }
+        public virtual ProcedureType ProcedureType { get => procedureType; set => procedureType = value; }
 
         public void AddAdditionalDocument(AdditionalDocument newAdditionalDocument)
         {
@@ -77,7 +75,11 @@ namespace Model.MedicalExam
             if (additionalDocument != null)
                 additionalDocument.Clear();
         }
-       
+
+        public Report()
+        {
+        }
+
         public Report(DateTime date, string findings, Patient patient, Physitian physitian, string patientConditions) : base(Guid.NewGuid().ToString())
         {
             this.date = date;

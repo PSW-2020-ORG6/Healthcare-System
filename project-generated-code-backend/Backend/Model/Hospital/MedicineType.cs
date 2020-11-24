@@ -14,7 +14,9 @@ namespace Model.Hospital
         private String type;
 
         public string Type { get => type; set => type = value; }
-
+        public MedicineType() : base(Guid.NewGuid().ToString())
+        {
+        }
         public MedicineType(string type) : base(Guid.NewGuid().ToString())
         {
             this.type = type;
@@ -26,9 +28,6 @@ namespace Model.Hospital
             this.type = type;
         }
 
-        public MedicineType()
-        {
-        }
 
         public override bool Equals(object obj)
         {
