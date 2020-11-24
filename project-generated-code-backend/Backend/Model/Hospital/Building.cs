@@ -7,7 +7,7 @@ namespace health_clinic_class_diagram.Backend.Model.Hospital
     {
         public string Id { get; set;  }
         public string Name { get; set; }
-        public string Floors { get; set; }
+        public string FloorIds { get; set; }
         public string Color { get; set; }
         public string Shape { get; set; }
     }
