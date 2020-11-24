@@ -3,7 +3,11 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class Room
 
+using Backend.Dto;
 using Backend.Model.Util;
+using HealthClinic.Backend.Model.Hospital;
+using Model.Hospital;
+using Model.Util;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,8 +21,8 @@ namespace Model.Hospital
         private RoomType roomType;
         private List<Equipment> equipment;
 
-        public RoomType RoomType { get => roomType; }
-        public int Id { get => id; set => id = value; }
+        public RoomType RoomType { get => roomType; set { roomType = value; } }
+        public int Id { get => id; set { id = value; } }
 
         public List<Equipment> Equipment
         {

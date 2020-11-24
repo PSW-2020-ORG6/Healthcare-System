@@ -67,7 +67,7 @@
                    Source="/GraphicEditor;component/Resources/Images/floor.jpg"  />
 
             <!--Room1 button-->
-            <Button CommandParameter="room1"
+            <Button CommandParameter="Room1"
                     Command="{Binding Path=ShowRoomCommand}"
                     Grid.Column="0"
                     Grid.ColumnSpan="5"

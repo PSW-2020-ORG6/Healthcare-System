@@ -12,9 +12,9 @@ namespace GraphicEditor.ViewModel
             ShowRoomCommand = new MyICommand<string>(ShowRoom);
         }
 
-        private void ShowRoom(string a)
+        private void ShowRoom(string roomName)
         {
-            (new RoomInformation()).Show();
+            new RoomInformation(roomName).Show();
         }
 
     }
