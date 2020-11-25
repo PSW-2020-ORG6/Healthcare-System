@@ -88,6 +88,7 @@
                 <MenuItem Header="_Help">
                     <MenuItem Header="Demo" Click="Demo_Click"></MenuItem>
                     <MenuItem Header="About" Click="Help"></MenuItem>
+                    <MenuItem Header="Map" Click="Map_Click"></MenuItem>
                 </MenuItem>
             </Menu>
             <Menu Grid.Column="5" HorizontalAlignment="Right">
@@ -101,7 +102,8 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="213*"/>
+                <ColumnDefinition Width="26*"/>
+                <ColumnDefinition Width="187*"/>
                 <ColumnDefinition Width="213*"/>
                 <ColumnDefinition Width="35*"/>
                 <ColumnDefinition Width="18*"/>
@@ -122,7 +124,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Grid Height="50" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="8" Margin="0,7,-0.4,7.8">
+            <Grid Height="50" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="9" Margin="0,9">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="66*"/>
                     <ColumnDefinition Width="97*"/>
@@ -173,7 +175,7 @@
 
             </Grid>
 
-            <Grid Grid.Column="0"  Grid.Row="1" Grid.RowSpan="9" Grid.ColumnSpan="8" Margin="10,10.2,9.6,9.8">
+            <Grid Grid.Column="0"  Grid.Row="1" Grid.RowSpan="9" Grid.ColumnSpan="9" Margin="10">
                 <ContentControl Content="{Binding}" Name="Tables">
 
                 </ContentControl>
