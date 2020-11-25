@@ -1,24 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GalaSoft.MvvmLight.Messaging;
+using HCI_SIMS_PROJEKAT.Messages;
+using Model.Schedule;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Model.Accounts;
-using Model.Hospital;
-using Model.Schedule;
-using GalaSoft.MvvmLight.Messaging;
-using HCI_SIMS_PROJEKAT;
-using HCI_SIMS_PROJEKAT.Messages;
-using HCI_SIMS_PROJEKAT.ViewModels;
 
 namespace HCI_SIMS_PROJEKAT.Views
 {
@@ -48,7 +34,7 @@ namespace HCI_SIMS_PROJEKAT.Views
             Messenger.Default.Register<ConfirmDeleteAppointmentMessage>(this, (confirmDeleteAppointmentMessage) =>
             {
                 Appointment appointment = (Appointment)ScheduleTable.SelectedItem;
-                Messenger.Default.Send<DeleteAppointmentMessage>(new DeleteAppointmentMessage {  appointment = appointment });
+                Messenger.Default.Send<DeleteAppointmentMessage>(new DeleteAppointmentMessage { appointment = appointment });
             });
 
             DeleteAppointmentButton.IsEnabled = false;
@@ -67,7 +53,7 @@ namespace HCI_SIMS_PROJEKAT.Views
 
         private void DeleteAppointmentButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void ScheduleTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -77,7 +63,8 @@ namespace HCI_SIMS_PROJEKAT.Views
             {
                 DeleteAppointmentButton.IsEnabled = false;
                 EditAppointmentButton.IsEnabled = false;
-            } else
+            }
+            else
             {
                 DeleteAppointmentButton.IsEnabled = true;
                 EditAppointmentButton.IsEnabled = true;
@@ -91,7 +78,7 @@ namespace HCI_SIMS_PROJEKAT.Views
         }
 
 
-        
+
 
     }
 }

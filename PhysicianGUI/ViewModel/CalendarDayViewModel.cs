@@ -1,19 +1,15 @@
 ﻿using Backend.Controller.PhysitianControllers;
-using Model.Accounts;
-using Model.Schedule;
-using Model.Util;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using HealthClinic.Message;
 using HealthClinic.util;
+using Model.Accounts;
+using Model.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -82,7 +78,7 @@ namespace HealthClinic.ViewModel
                 return converter.ToObservable(physitianScheduleController.GetAppointmentsByDate(CurrentDate));
             }
             set
-            { 
+            {
             }
         }
 

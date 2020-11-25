@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace HealthClinic.View.Commands
 {
@@ -40,7 +35,7 @@ namespace HealthClinic.View.Commands
             new InputGestureCollection(){
 
                 new KeyGesture(Key.N, ModifierKeys.Control),
-                new KeyGesture(Key.Enter, ModifierKeys.Shift) 
+                new KeyGesture(Key.Enter, ModifierKeys.Shift)
             }
 
         );

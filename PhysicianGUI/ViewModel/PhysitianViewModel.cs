@@ -1,23 +1,20 @@
 ﻿using Backend.Controller.PhysitianControllers;
-using Model.Accounts;
-using Model.Schedule;
-using Model.Util;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using HealthClinic.FrontendAdapters;
 using HealthClinic.Message;
 using HealthClinic.util;
+using Model.Accounts;
+using Model.Schedule;
+using Model.Util;
+using PhysicianGUI.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using PhysicianGUI.View;
 
 namespace HealthClinic.ViewModel
 {
@@ -44,7 +41,7 @@ namespace HealthClinic.ViewModel
                 RaisePropertyChanged("Appointments");
             }
         }
-  
+
         public PhysitianViewModel()
         {
             //TODO: premestiti u login
@@ -63,7 +60,7 @@ namespace HealthClinic.ViewModel
         private List<PhysitianStats> getChartData(DateTime date)
         {
             List<PhysitianStats> result = new List<PhysitianStats>();
-            
+
             DateTime startOfMonth = date.AddDays(1 - date.Day);
             for (int i = 0; i <= DateTime.DaysInMonth(date.Year, date.Month) - 1; i++)
             {
@@ -206,7 +203,7 @@ namespace HealthClinic.ViewModel
             get
             {
                 CultureInfo srCulture = CultureInfo.GetCultureInfo("sr-Latn-RS");
-                return "Statistika rada za " + StatisticDisplayMonth.ToString("MMMMM", srCulture).ToLower() + " " + StatisticDisplayMonth.Year + "." ;
+                return "Statistika rada za " + StatisticDisplayMonth.ToString("MMMMM", srCulture).ToLower() + " " + StatisticDisplayMonth.Year + ".";
             }
         }
     }

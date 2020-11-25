@@ -1,27 +1,22 @@
 ﻿using Backend.Controller.SecretaryControllers;
 using Backend.Dto;
-using Model.Accounts;
-using Model.Hospital;
-using Model.Schedule;
-using Backend.Model.Util;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using HCI_SIMS_PROJEKAT.Messages;
-
 using HCI_SIMS_PROJEKAT.Util;
 using HCI_SIMS_PROJEKAT.Views;
+using Model.Accounts;
+using Model.Hospital;
+using Model.Schedule;
+using Model.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Model.Util;
 
 namespace HCI_SIMS_PROJEKAT.ViewModels
 {
@@ -338,13 +333,21 @@ namespace HCI_SIMS_PROJEKAT.ViewModels
         {
             AppointmentDTO appointmentDTO = new AppointmentDTO { ProcedureType = SelectedProcedureTypeItem.Item, Patient = _patient };
             availableAppointments = secretaryScheduleController.GetAllAvailableAppointments(appointmentDTO);
-            
-            if(_editAppointment == true)
+
+            if (_editAppointment == true)
             {
-                availableAppointments.Add(new AppointmentDTO { Time = _oldAppointment.TimeInterval,
-                    Date = _oldAppointment.Date, Patient = _oldAppointment.Patient, Physitian = _oldAppointment.Physitian, ProcedureType = _oldAppointment.ProcedureType, Room = _oldAppointment.Room, Urgency = _oldAppointment.Urgency });
+                availableAppointments.Add(new AppointmentDTO
+                {
+                    Time = _oldAppointment.TimeInterval,
+                    Date = _oldAppointment.Date,
+                    Patient = _oldAppointment.Patient,
+                    Physitian = _oldAppointment.Physitian,
+                    ProcedureType = _oldAppointment.ProcedureType,
+                    Room = _oldAppointment.Room,
+                    Urgency = _oldAppointment.Urgency
+                });
             }
-            
+
 
             allPhysitianItems = new ObservableCollection<ComboBoxItemWrapper<Physitian>>();
             allPhysitianItems.Add(new ComboBoxItemWrapper<Physitian>(null));
@@ -403,7 +406,7 @@ namespace HCI_SIMS_PROJEKAT.ViewModels
             dates.Add(new ComboBoxItemWrapper<DateTime>(DateTime.MinValue));
             ObservableCollection<ComboBoxItemWrapper<TimeInterval>> times = new ObservableCollection<ComboBoxItemWrapper<TimeInterval>>();
             times.Add(new ComboBoxItemWrapper<TimeInterval>(null));
-            
+
 
             foreach (AppointmentDTO appointment in availableAppointments)
             {

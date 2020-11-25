@@ -17,7 +17,7 @@ namespace HealthClinic.View.Dialogs.MedicineDialogs
 
         public EditMedicineDialog(Medicine medicine)
         {
-            
+
             this.DataContext = this;
             InitializeComponent();
             medicineDTO = medicine;
@@ -49,8 +49,8 @@ namespace HealthClinic.View.Dialogs.MedicineDialogs
             String copyrightName = copyrightNameInput.Text;
             String manufacturer = manufacturerInput.Text;
             String description = descriptionInput.Text;
-            medicineDTO = new Medicine(medicineDTO.SerialNumber,copyrightName, 
-                genericName, new MedicineManufacturer(medicineDTO.MedicineManufacturer.SerialNumber,manufacturer),
+            medicineDTO = new Medicine(medicineDTO.SerialNumber, copyrightName,
+                genericName, new MedicineManufacturer(medicineDTO.MedicineManufacturer.SerialNumber, manufacturer),
                 new MedicineType(medicineDTO.MedicineType.SerialNumber, description));
             this.Close();
         }

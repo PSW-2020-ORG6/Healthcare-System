@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace klinika_zdravo.Model
 {
@@ -24,7 +20,7 @@ namespace klinika_zdravo.Model
         private List<TerminiModel> _termini;
         private List<IstorijaBolestiModel> _istorijaBolesti;
 
-        
+
         public static AccountModel accountModel = new AccountModel("Vladimir", "Budjen", "Aleksandar", "01.01.1939", "0101939548967", "muski", "Sremska Kamenica", "Bocke", "Gavrila principa 39a", "064/958-45-17", "vladimirbudjen@gmail.com");
 
         public static AccountModel getInstance()

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace HealthClinic.View.ErrorCheck
 {
@@ -12,6 +7,6 @@ namespace HealthClinic.View.ErrorCheck
         public static Regex nameRegex = new Regex(@"^[A-Z][a-z]+$");
         public static Regex jmbgRegex = new Regex(@"^[0-9]+$");
 
-      
+
     }
 }

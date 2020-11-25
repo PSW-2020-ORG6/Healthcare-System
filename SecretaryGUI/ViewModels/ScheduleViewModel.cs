@@ -1,21 +1,17 @@
 ﻿using Backend.Controller.SecretaryControllers;
-using Model.Accounts;
-using Model.Hospital;
-using Model.Schedule;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using HCI_SIMS_PROJEKAT.Messages;
 using HCI_SIMS_PROJEKAT.Util;
 using HCI_SIMS_PROJEKAT.Views;
+using Model.Accounts;
+using Model.Hospital;
+using Model.Schedule;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -151,7 +147,7 @@ namespace HCI_SIMS_PROJEKAT.ViewModels
                 return;
             }
 
-            if(!_selectedPhysitian.ToString().Equals("Lekar ") && !_selectedRoom.ToString().Equals("Soba"))
+            if (!_selectedPhysitian.ToString().Equals("Lekar ") && !_selectedRoom.ToString().Equals("Soba"))
             {
 
                 foreach (Appointment a in allAppointments)

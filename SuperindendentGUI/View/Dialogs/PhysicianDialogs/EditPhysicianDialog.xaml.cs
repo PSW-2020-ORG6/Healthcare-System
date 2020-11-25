@@ -61,7 +61,7 @@ namespace HealthClinic.View.Dialogs.PhysicianDialogs
             physicianDTO = physitian;
             this.DataContext = this;
             InitializeComponent();
-            this.workingHours =physitian.WorkSchedule;
+            this.workingHours = physitian.WorkSchedule;
             countries = new Country[2];
             CountriesStringArray = new string[2];
             countries[0] = new Country("Srbija");
@@ -104,7 +104,7 @@ namespace HealthClinic.View.Dialogs.PhysicianDialogs
             CityCombo.SelectedIndex = 0;
 
             specialityCombo.SelectedIndex = 0;
-          
+
 
 
         }
@@ -254,7 +254,7 @@ namespace HealthClinic.View.Dialogs.PhysicianDialogs
                 return;
             }
             List<Specialization> speciality = physicianDTO.Specialization;
-            speciality[0] = new Specialization(speciality[0].SerialNumber,specialityCombo.Text);
+            speciality[0] = new Specialization(speciality[0].SerialNumber, specialityCombo.Text);
 
             PhysicianDTO = new Physitian(physicianDTO.SerialNumber, name, surname, jmbg, dateOfbirth, contactInput.Text, emailInput.Text, address, workInterval, Constants.password, speciality);
             this.Close();

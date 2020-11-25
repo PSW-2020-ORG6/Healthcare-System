@@ -1,20 +1,17 @@
-﻿using Model.Accounts;
-using Model.Hospital;
+﻿using Backend.Controller.PhysitianControllers;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using health_clinic_class_diagram.Backend.Controller.PhysitianControllers;
 using HealthClinic.FrontendAdapters;
 using HealthClinic.Message;
+using Model.Accounts;
+using Model.Hospital;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using health_clinic_class_diagram.Backend.Controller.PhysitianControllers;
-using Backend.Controller.PhysitianControllers;
 
 namespace HealthClinic.ViewModel
 {
@@ -60,7 +57,7 @@ namespace HealthClinic.ViewModel
             physitianHospitalController = new PhysitianHospitalController();
             allMedicine = new ObservableCollection<MedicineAdapter>();
 
-            foreach(Medicine m in physitianMedicineController.getAllApproved())
+            foreach (Medicine m in physitianMedicineController.getAllApproved())
             {
                 allMedicine.Add(new MedicineAdapter(m, true));
             }
@@ -97,14 +94,15 @@ namespace HealthClinic.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    if(selectedMedicine.IsApproved)
+                    if (selectedMedicine.IsApproved)
                     {
                         Messenger.Default.Send<OpenMedicineDetailViewMessage>(new OpenMedicineDetailViewMessage { Medicine = SelectedMedicine.Medicine });
-                    } else
+                    }
+                    else
                     {
                         Messenger.Default.Send<OpenMedicineApprovalViewMessage>(new OpenMedicineApprovalViewMessage { Medicine = SelectedMedicine.Medicine });
                     }
-                    
+
                 });
             }
         }
@@ -134,7 +132,7 @@ namespace HealthClinic.ViewModel
             ObservableCollection<MedicineAdapter> searchResults = new ObservableCollection<MedicineAdapter>();
             searchQuery = searchQuery.ToLower();
 
-            foreach(MedicineAdapter m in allMedicine)
+            foreach (MedicineAdapter m in allMedicine)
             {
                 String copyrightName = m.Medicine.CopyrightName.ToLower();
                 String genericName = m.Medicine.GenericName.ToLower();
@@ -144,15 +142,15 @@ namespace HealthClinic.ViewModel
                 {
                     continue;
                 }
-                if(selectedApproval == 2 && m.IsApproved)
+                if (selectedApproval == 2 && m.IsApproved)
                 {
                     continue;
                 }
-                if(SelectedManufacturer != 0 && !selectedManufacturer.Equals(m.Medicine.MedicineManufacturer))
+                if (SelectedManufacturer != 0 && !selectedManufacturer.Equals(m.Medicine.MedicineManufacturer))
                 {
                     continue;
                 }
-                if(copyrightName.Contains(searchQuery) || genericName.Contains(searchQuery) || medicineType.Contains(searchQuery))
+                if (copyrightName.Contains(searchQuery) || genericName.Contains(searchQuery) || medicineType.Contains(searchQuery))
                 {
                     searchResults.Add(m);
                 }
@@ -165,9 +163,9 @@ namespace HealthClinic.ViewModel
         {
             get
             {
-                for(int i=0; i < Manufacturers.Count; i++)
+                for (int i = 0; i < Manufacturers.Count; i++)
                 {
-                    if(selectedManufacturer.Equals(Manufacturers[i]))
+                    if (selectedManufacturer.Equals(Manufacturers[i]))
                     {
                         return i;
                     }

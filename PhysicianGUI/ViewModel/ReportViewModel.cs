@@ -1,18 +1,13 @@
-﻿using Model.Accounts;
-using Model.MedicalExam;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using HealthClinic.Message;
 using HealthClinic.util;
 using HealthClinic.View;
+using Model.Accounts;
+using Model.MedicalExam;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -81,13 +76,13 @@ namespace HealthClinic.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    if(submitDialog != null)
+                    if (submitDialog != null)
                     {
                         submitDialog.Close();
                         Messenger.Default.Send<SubmitReportMessage>(new SubmitReportMessage { Report = currentReport });
                         return;
                     }
-                    if(cancelDialog != null)
+                    if (cancelDialog != null)
                     {
                         cancelDialog.Close();
                         Messenger.Default.Send<SwitchViewMessage>(new SwitchViewMessage { ViewName = "PatientDetailView" });
@@ -178,10 +173,11 @@ namespace HealthClinic.ViewModel
         {
             get
             {
-                if(isNewReport)
+                if (isNewReport)
                 {
                     return Visibility.Visible;
-                } else
+                }
+                else
                 {
                     return Visibility.Hidden;
                 }

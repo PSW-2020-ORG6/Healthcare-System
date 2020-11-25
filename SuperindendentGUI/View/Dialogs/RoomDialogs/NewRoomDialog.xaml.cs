@@ -4,18 +4,7 @@ using Model.Hospital;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace HealthClinic.View.Dialogs.RoomDialogs
 {
@@ -29,9 +18,11 @@ namespace HealthClinic.View.Dialogs.RoomDialogs
         private RoomType[] _types;
         private RoomController controler;
         private Room roomDTO;
-      
 
-        public string[] Types { get => types; set
+
+        public string[] Types
+        {
+            get => types; set
             {
                 if (value != types) types = value;
                 OnPropertyChanged("Types");
@@ -50,7 +41,7 @@ namespace HealthClinic.View.Dialogs.RoomDialogs
             _types = typeList.ToArray();
             makeTypeComboStrings();
             InitializeComponent();
-            
+
         }
         private void makeTypeComboStrings()
         {
@@ -97,16 +88,16 @@ namespace HealthClinic.View.Dialogs.RoomDialogs
                 return;
             }
 
-            RoomDTO = new Room(id,new RoomType(type));
+            RoomDTO = new Room(id, new RoomType(type));
             this.Close();
         }
 
-       
-
-        
 
 
-        
+
+
+
+
     }
 
 

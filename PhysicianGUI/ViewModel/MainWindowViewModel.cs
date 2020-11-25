@@ -1,19 +1,14 @@
 ﻿using Backend.Controller.PhysitianControllers;
-using Model.Accounts;
-using Model.Hospital;
-using Model.MedicalExam;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using HealthClinic.Message;
 using HealthClinic.util;
 using HealthClinic.View;
-using System;
-using System.Collections.Generic;
+using Model.Accounts;
+using Model.Hospital;
+using Model.MedicalExam;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -204,15 +199,15 @@ namespace HealthClinic.ViewModel
                     {
                         SwitchView("SpecialistReferralView");
                     }
-                    if(diagnosticReferral != null)
+                    if (diagnosticReferral != null)
                     {
                         SwitchView("DiagnosticReferralView");
                     }
-                    if(prescription != null)
+                    if (prescription != null)
                     {
                         SwitchView("PrescriptionView");
                     }
-                    if(followUp != null)
+                    if (followUp != null)
                     {
                         SwitchView("FollowUpView");
                     }
@@ -350,10 +345,11 @@ namespace HealthClinic.ViewModel
 
                 case "PrescriptionView":
                     ContentControlView = new PrescriptionView();
-                    if(displayDocument)
+                    if (displayDocument)
                     {
                         ContentControlView.DataContext = new PrescriptionViewModel(selectedDocument as Prescription);
-                    } else
+                    }
+                    else
                     {
                         ContentControlView.DataContext = new PrescriptionViewModel();
                     }
@@ -365,7 +361,8 @@ namespace HealthClinic.ViewModel
                     if (displayDocument)
                     {
                         ContentControlView.DataContext = new SpecialistReferralViewModel(selectedDocument as SpecialistReferral);
-                    } else
+                    }
+                    else
                     {
                         ContentControlView.DataContext = new SpecialistReferralViewModel(currentPatient);
                     }
@@ -374,10 +371,11 @@ namespace HealthClinic.ViewModel
 
                 case "FollowUpView":
                     ContentControlView = new FollowUpView();
-                    if(displayDocument)
+                    if (displayDocument)
                     {
                         ContentControlView.DataContext = new FollowUpViewModel(selectedDocument as FollowUp);
-                    } else
+                    }
+                    else
                     {
                         ContentControlView.DataContext = new FollowUpViewModel(currentPatient);
                     }
@@ -386,10 +384,11 @@ namespace HealthClinic.ViewModel
 
                 case "DiagnosticReferralView":
                     ContentControlView = new DiagnosticReferralView();
-                    if(displayDocument)
+                    if (displayDocument)
                     {
                         ContentControlView.DataContext = new DiagnosticReferralViewModel(selectedDocument as DiagnosticReferral);
-                    } else
+                    }
+                    else
                     {
                         ContentControlView.DataContext = new DiagnosticReferralViewModel();
                     }
