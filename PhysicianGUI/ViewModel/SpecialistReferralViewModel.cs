@@ -1,26 +1,22 @@
 ﻿using Backend.Controller.PhysitianControllers;
 using Backend.Dto;
-using Model.Accounts;
-using Model.MedicalExam;
-using Model.Schedule;
-using Model.Util;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using health_clinic_class_diagram.Backend.Controller.PhysitianControllers;
+using HealthClinic.FrontendWrapperClasses;
 using HealthClinic.Message;
-using HealthClinic.util;
 using HealthClinic.View;
+using Model.Accounts;
+using Model.Hospital;
+using Model.MedicalExam;
+using Model.Schedule;
+using Model.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using HealthClinic.FrontendWrapperClasses;
-using Model.Hospital;
-using health_clinic_class_diagram.Backend.Controller.PhysitianControllers;
 
 namespace HealthClinic.ViewModel
 {
@@ -74,14 +70,14 @@ namespace HealthClinic.ViewModel
             hospitalController = new PhysitianHospitalController();
 
             ProcedureTypeItems = new ObservableCollection<ComboBoxItemWrapper<ProcedureType>>();
-            foreach(ProcedureType procedureType in hospitalController.GetProcedureTypes())
+            foreach (ProcedureType procedureType in hospitalController.GetProcedureTypes())
             {
                 ProcedureTypeItems.Add(new ComboBoxItemWrapper<ProcedureType>(procedureType));
             }
             selectedProcedureTypeItem = ProcedureTypeItems[0];
             RaisePropertyChanged("SelectedProcedureTypeItem");
             updateComboBoxes();
-            
+
         }
 
         public SpecialistReferralViewModel(SpecialistReferral specialistReferral)
@@ -148,9 +144,9 @@ namespace HealthClinic.ViewModel
                         Physitian physitian = selectedPhysitianItem.Item;
                         Room room = null;
 
-                        foreach(AppointmentDTO a in availableAppointments)
+                        foreach (AppointmentDTO a in availableAppointments)
                         {
-                            if(a.Physitian.Equals(physitian) && a.Time.Equals(dateTime))
+                            if (a.Physitian.Equals(physitian) && a.Time.Equals(dateTime))
                             {
                                 room = a.Room;
                                 break;
@@ -314,7 +310,7 @@ namespace HealthClinic.ViewModel
             allTimeItems = new ObservableCollection<ComboBoxItemWrapper<TimeInterval>>();
             allTimeItems.Add(new ComboBoxItemWrapper<TimeInterval>(null));
 
-            foreach(AppointmentDTO appointment in availableAppointments)
+            foreach (AppointmentDTO appointment in availableAppointments)
             {
                 ComboBoxItemWrapper<Physitian> physitian = new ComboBoxItemWrapper<Physitian>(appointment.Physitian);
                 DateTime d = appointment.Time.Start.Date;
@@ -322,15 +318,15 @@ namespace HealthClinic.ViewModel
                 TimeInterval t = createTimeIntervalForToday(appointment.Time);
                 ComboBoxItemWrapper<TimeInterval> time = new ComboBoxItemWrapper<TimeInterval>(t);
 
-                if(!allPhysitianItems.Contains(physitian))
+                if (!allPhysitianItems.Contains(physitian))
                 {
                     allPhysitianItems.Add(physitian);
                 }
-                if(!allDateItems.Contains(date))
+                if (!allDateItems.Contains(date))
                 {
                     allDateItems.Add(date);
                 }
-                if(!allTimeItems.Contains(time))
+                if (!allTimeItems.Contains(time))
                 {
                     allTimeItems.Add(time);
                 }
@@ -365,11 +361,11 @@ namespace HealthClinic.ViewModel
                 {
                     continue;
                 }
-                if(selectedDateItem != null && !selectedDateItem.Item.Equals(DateTime.MinValue) && !appointment.Date.Equals(selectedDateItem.Item))
+                if (selectedDateItem != null && !selectedDateItem.Item.Equals(DateTime.MinValue) && !appointment.Date.Equals(selectedDateItem.Item))
                 {
                     continue;
                 }
-                if(selectedTimeItem != null && selectedTimeItem.Item != null && !appointment.Time.TimeOfDayEquals(selectedTimeItem.Item))
+                if (selectedTimeItem != null && selectedTimeItem.Item != null && !appointment.Time.TimeOfDayEquals(selectedTimeItem.Item))
                 {
                     continue;
                 }

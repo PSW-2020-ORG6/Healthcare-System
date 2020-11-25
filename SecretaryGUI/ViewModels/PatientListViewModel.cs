@@ -1,22 +1,18 @@
-﻿using Backend.Controller.SecretaryControllers;
-using Model.Accounts;
+﻿using Backend.Controller;
+using Backend.Controller.SecretaryControllers;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using HCI_SIMS_PROJEKAT.Messages;
 using HCI_SIMS_PROJEKAT.Util;
 using HCI_SIMS_PROJEKAT.Views;
+using Model.Accounts;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Backend.Controller;
 
 namespace HCI_SIMS_PROJEKAT.ViewModels
 {
@@ -75,7 +71,7 @@ namespace HCI_SIMS_PROJEKAT.ViewModels
 
             Messenger.Default.Register<DeletePatientMessage>(this, (deletePatientMessage) =>
             {
-                if(deletePatientMessage.patient == null)
+                if (deletePatientMessage.patient == null)
                 {
                     return;
                 }
@@ -109,13 +105,13 @@ namespace HCI_SIMS_PROJEKAT.ViewModels
             {
                 if (p.Surname.ToLower().Contains(searchText.ToLower()))
                 {
-                    if(!SearchPatients.Contains(p))
+                    if (!SearchPatients.Contains(p))
                         SearchPatients.Add(p);
                 }
 
                 if (p.Id.ToLower().Contains(searchText.ToLower()))
                 {
-                    if(!SearchPatients.Contains(p))
+                    if (!SearchPatients.Contains(p))
                         SearchPatients.Add(p);
                 }
 

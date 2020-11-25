@@ -1,22 +1,11 @@
-﻿using Backend.Dto;
-using Backend.Service.SchedulingService.AppointmentGeneralitiesOptions;
+﻿using Backend.Service.SchedulingService.AppointmentGeneralitiesOptions;
 using HealthClinic.Backend.Model.Hospital;
 using Model.Hospital;
 using Model.Util;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace HealthClinic.View.Dialogs.RoomDialogs
 {
@@ -40,7 +29,7 @@ namespace HealthClinic.View.Dialogs.RoomDialogs
             Console.WriteLine(room.Id);
         }
 
- 
+
 
         protected virtual void OnPropertyChanged(string name)
         {
@@ -101,8 +90,8 @@ namespace HealthClinic.View.Dialogs.RoomDialogs
                 System.Windows.Forms.MessageBox.Show("Prostorija je zauzeta u datom periodu!");
                 return;
             }
-            RenovationDTO = new Renovation(room ,interval);
-           
+            RenovationDTO = new Renovation(room, interval);
+
             this.Close();
         }
 

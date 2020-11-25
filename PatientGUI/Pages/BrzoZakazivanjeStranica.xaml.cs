@@ -1,19 +1,7 @@
 ﻿using klinika_zdravo.Model;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace klinika_zdravo.Pages
 {
@@ -114,7 +102,7 @@ namespace klinika_zdravo.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(doktor.Text == "")
+            if (doktor.Text == "")
             {
                 dialogNemaDr.IsOpen = true;
             }
@@ -127,7 +115,7 @@ namespace klinika_zdravo.Pages
                 Doktor = doktor.Text;
                 dijalog.IsOpen = true;
             }
-            
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

@@ -1,6 +1,4 @@
-﻿using Model.MedicalExam;
-
-namespace HealthClinic.Message
+﻿namespace HealthClinic.Message
 {
     internal class DeleteDocumentMessage
     {

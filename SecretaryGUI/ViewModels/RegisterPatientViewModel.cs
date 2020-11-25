@@ -1,7 +1,6 @@
 ﻿using Backend.Controller;
 using Backend.Controller.SecretaryControllers;
 using Backend.Dto;
-using Backend.Model.Util;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -12,11 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace HCI_SIMS_PROJEKAT.ViewModels
@@ -73,19 +68,19 @@ namespace HCI_SIMS_PROJEKAT.ViewModels
             genderList.Add("Muski");
             genderList.Add("Zenski");
 
-           secretaryHospitalController = new SecretaryHospitalController();
-           countries = observableListConverterCountry.ToObservable(secretaryHospitalController.GetAllCountries());
-           foreach(Country c in countries)
+            secretaryHospitalController = new SecretaryHospitalController();
+            countries = observableListConverterCountry.ToObservable(secretaryHospitalController.GetAllCountries());
+            foreach (Country c in countries)
             {
                 Console.WriteLine(c);
             }
-           _country = countries[0];
-           cities = observableListConverterCity.ToObservable(_country.Cities);
-           _city = cities[0];
+            _country = countries[0];
+            cities = observableListConverterCity.ToObservable(_country.Cities);
+            _city = cities[0];
 
-           genders = observableListConverterGender.ToObservable(genderList);
-           _gender = genders[0];
-            
+            genders = observableListConverterGender.ToObservable(genderList);
+            _gender = genders[0];
+
         }
 
         public ObservableCollection<City> Cities
@@ -232,7 +227,7 @@ namespace HCI_SIMS_PROJEKAT.ViewModels
             }
 
             String parent = "";
-            if(!(ParentName == null))
+            if (!(ParentName == null))
             {
                 parent = ParentName;
             }
@@ -250,7 +245,7 @@ namespace HCI_SIMS_PROJEKAT.ViewModels
             }
 
             Console.WriteLine(_gender);
-            patientRegistrationController.RegisterPatient(new PatientDTO { Name = Name, Surname = Surname, Contact = Contact, DateOfBirth = DateOfBirth, Gender = _gender, Id = Id, ParentName = parent, Email = email, IsGuest = IsGuest, Address = adresa});
+            patientRegistrationController.RegisterPatient(new PatientDTO { Name = Name, Surname = Surname, Contact = Contact, DateOfBirth = DateOfBirth, Gender = _gender, Id = Id, ParentName = parent, Email = email, IsGuest = IsGuest, Address = adresa });
         }
 
 

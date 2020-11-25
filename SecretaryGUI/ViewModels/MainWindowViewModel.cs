@@ -1,17 +1,13 @@
-﻿using Model.Accounts;
-using Model.Schedule;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using HCI_SIMS_PROJEKAT.Messages;
 using HCI_SIMS_PROJEKAT.Views;
+using Model.Accounts;
+using Model.Schedule;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -30,7 +26,7 @@ namespace HCI_SIMS_PROJEKAT.ViewModels
         private String _personalizationSideBar;
         private String currentStyle;
         private CultureInfo Language = CultureInfo.GetCultureInfo("sr-Latn-RS");
-        
+
         public FrameworkElement ContentControlView
         {
             get { return _contentControlView; }
@@ -348,21 +344,21 @@ namespace HCI_SIMS_PROJEKAT.ViewModels
         {
             currentStyle = styleName;
 
-            switch(styleName)
+            switch (styleName)
             {
                 case "SkyBlue":
                     Application.Current.Resources["menuButtonStyle"] = Application.Current.Resources["MenuButton"];
                     Application.Current.Resources["sideBarStyle"] = Application.Current.Resources["WhiteSideBar"];
                     Application.Current.Resources["headerStyle"] = Application.Current.Resources["HeaderWhite"];
                     Application.Current.Resources["mainStyle"] = Application.Current.Resources["WhiteMainColor"];
-                    
+
                     break;
                 case "DarkPurple":
                     Application.Current.Resources["menuButtonStyle"] = Application.Current.Resources["DarkMenuButton"];
                     Application.Current.Resources["sideBarStyle"] = Application.Current.Resources["DarkSideBar"];
                     Application.Current.Resources["headerStyle"] = Application.Current.Resources["HeaderBlack"];
                     Application.Current.Resources["mainStyle"] = Application.Current.Resources["DarkMainColor"];
-                    
+
                     break;
             }
         }

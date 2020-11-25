@@ -1,13 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace HCI_SIMS_PROJEKAT.ViewModels
 {
@@ -18,7 +12,7 @@ namespace HCI_SIMS_PROJEKAT.ViewModels
         private String _yes;
         private String _no;
 
-        public DeleteAppointmentDialogViewModel (CultureInfo language)
+        public DeleteAppointmentDialogViewModel(CultureInfo language)
         {
             Language = language;
         }

@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using klinika_zdravo.Model;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using klinika_zdravo.Model;
-using System.Collections.ObjectModel;
 
 namespace klinika_zdravo.Pages
 {
@@ -35,7 +24,7 @@ namespace klinika_zdravo.Pages
             IstorijaBolesti = new ObservableCollection<IstorijaBolestiModel>();
             if (AccountModel.accountModel.IstorijaBolesti.Any())
             {
-                foreach(IstorijaBolestiModel ib in AccountModel.accountModel.IstorijaBolesti)
+                foreach (IstorijaBolestiModel ib in AccountModel.accountModel.IstorijaBolesti)
                 {
                     IstorijaBolesti.Add(ib);
                 }
@@ -58,7 +47,7 @@ namespace klinika_zdravo.Pages
             {
                 dialogNegacija.IsOpen = true;
             }
-            
+
         }
     }
 }

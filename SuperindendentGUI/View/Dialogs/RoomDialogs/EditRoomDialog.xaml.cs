@@ -5,17 +5,7 @@ using Model.Hospital;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace HealthClinic.View.Dialogs.RoomDialogs
 {
@@ -95,14 +85,14 @@ namespace HealthClinic.View.Dialogs.RoomDialogs
             int id;
             try
             {
-                 id = int.Parse(ID.Text);
+                id = int.Parse(ID.Text);
             }
             catch
             {
                 System.Windows.Forms.MessageBox.Show("Morate uneti ceo broj u id sobe!");
                 return;
             }
-            if (controler.RoomNumberExists(id) && id!=RoomDTO.Id)
+            if (controler.RoomNumberExists(id) && id != RoomDTO.Id)
             {
                 System.Windows.Forms.MessageBox.Show("Takav id već postoji!");
                 return;

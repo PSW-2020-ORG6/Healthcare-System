@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthClinic.FrontendWrapperClasses
 {
@@ -14,11 +10,11 @@ namespace HealthClinic.FrontendWrapperClasses
 
         public override string ToString()
         {
-            if(Item == null || Item.Equals(DateTime.MinValue))
-                {
+            if (Item == null || Item.Equals(DateTime.MinValue))
+            {
                 return "";
             }
-            if(Item is DateTime)
+            if (Item is DateTime)
             {
                 DateTime date = DateTime.Parse(Item.ToString());
                 return date.ToString("dd.MM.yyyy.");
@@ -29,11 +25,11 @@ namespace HealthClinic.FrontendWrapperClasses
         public override bool Equals(object obj)
         {
             ComboBoxItemWrapper<T> other = obj as ComboBoxItemWrapper<T>;
-            if(other == null)
+            if (other == null)
             {
                 return false;
             }
-            if(item != null && other.item == null)
+            if (item != null && other.item == null)
             {
                 return false;
             }
@@ -41,7 +37,7 @@ namespace HealthClinic.FrontendWrapperClasses
             {
                 return false;
             }
-            if(item == null && other.item == null)
+            if (item == null && other.item == null)
             {
                 return true;
             }

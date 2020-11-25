@@ -1,16 +1,11 @@
 ﻿using Backend.Controller.PhysitianControllers;
-using Backend.Dto;
-using Model.Accounts;
-using Model.Hospital;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using HealthClinic.Message;
 using HealthClinic.View;
+using Model.Accounts;
+using Model.Hospital;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -78,21 +73,21 @@ namespace HealthClinic.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    if(approveDialog != null)
+                    if (approveDialog != null)
                     {
                         approveDialog.Close();
                         approveDialog = null;
                         physitianMedicineController.Approve(medicine);
                         Messenger.Default.Send<SwitchViewMessage>(new SwitchViewMessage { ViewName = "MedicineView" });
                     }
-                    if(rejectDialog != null)
+                    if (rejectDialog != null)
                     {
                         rejectDialog.Close();
                         rejectDialog = null;
                         physitianMedicineController.Reject(new Rejection(rejectionReason, medicine));
                         Messenger.Default.Send<SwitchViewMessage>(new SwitchViewMessage { ViewName = "MedicineView" });
                     }
-                    
+
                 });
             }
         }
@@ -108,7 +103,7 @@ namespace HealthClinic.ViewModel
                         approveDialog.Close();
                         approveDialog = null;
                     }
-                    if(rejectDialog != null)
+                    if (rejectDialog != null)
                     {
                         rejectDialog.Close();
                         rejectDialog = null;

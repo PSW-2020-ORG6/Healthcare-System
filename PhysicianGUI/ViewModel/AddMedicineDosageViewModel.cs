@@ -9,11 +9,7 @@ using Model.Accounts;
 using Model.Hospital;
 using Model.MedicalExam;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -104,7 +100,7 @@ namespace HealthClinic.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    if(oldMedicineDosage != null)
+                    if (oldMedicineDosage != null)
                     {
                         Messenger.Default.Send<DeleteMedicineDosageMessage>(new DeleteMedicineDosageMessage { medicineDosage = oldMedicineDosage });
                     }

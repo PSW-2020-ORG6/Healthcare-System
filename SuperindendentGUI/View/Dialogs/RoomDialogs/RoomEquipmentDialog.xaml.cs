@@ -8,24 +8,17 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace HealthClinic.View.Dialogs.RoomDialogs
 {
     /// <summary>
     /// Interaction logic for RoomEquipmentDialog.xaml
     /// </summary>
-  
+
     public partial class RoomEquipmentDialog : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -66,7 +59,9 @@ namespace HealthClinic.View.Dialogs.RoomDialogs
         }
 
         public Room RoomDTO { get => _roomDTO; set => _roomDTO = value; }
-        public string[] CombosEquipment { get => combosEquipment; set
+        public string[] CombosEquipment
+        {
+            get => combosEquipment; set
             {
                 if (value != combosEquipment) combosEquipment = value;
                 OnPropertyChanged("CombosEquipment");
@@ -147,7 +142,7 @@ namespace HealthClinic.View.Dialogs.RoomDialogs
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            
+
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -176,12 +171,12 @@ namespace HealthClinic.View.Dialogs.RoomDialogs
             }
         }
 
-            
+
 
         private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DeleteButton.IsEnabled = dataGrid.SelectedIndex != -1;
-            if (roomComboBox.SelectedIndex!=-1)
+            if (roomComboBox.SelectedIndex != -1)
             {
                 moveButton.IsEnabled = dataGrid.SelectedIndex != -1;
             }
@@ -194,7 +189,7 @@ namespace HealthClinic.View.Dialogs.RoomDialogs
                 deleteRow();
             }
         }
- 
+
         private void moveButton_Click(object sender, RoutedEventArgs e)
         {
             int selecteIndex = dataGrid.SelectedIndex;
@@ -220,6 +215,6 @@ namespace HealthClinic.View.Dialogs.RoomDialogs
             }
         }
 
-    
+
     }
 }

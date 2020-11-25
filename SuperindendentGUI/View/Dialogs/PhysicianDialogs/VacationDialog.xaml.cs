@@ -1,25 +1,23 @@
 ﻿
+using Backend.Service.SchedulingService.AppointmentGeneralitiesOptions;
+using HealthClinic.Backend.Controller.SuperintendentControllers;
 using HealthClinic.Model;
+using Model.Accounts;
+using Model.Util;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
+using Syncfusion.Pdf.Grid;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
-using Syncfusion.Pdf;
-using Syncfusion.Pdf.Graphics;
-using System.Drawing;
-using Syncfusion.Pdf.Grid;
-using System.Data;
-using Model.Util;
-using Model.Accounts;
-using Model.Hospital;
-using Backend.Controller.SuperintendentControllers;
-using System.Linq;
-using HealthClinic.Backend.Controller.SuperintendentControllers;
-using Backend.Service.SchedulingService.AppointmentGeneralitiesOptions;
 
 namespace HealthClinic.View.Dialogs.PhysicianDialogs
 {
@@ -42,7 +40,7 @@ namespace HealthClinic.View.Dialogs.PhysicianDialogs
             _vacations = controller.GetAllVacations(PhysitianDTO);
             VacationModels = createVacationsModels(_vacations);
         }
-   
+
         public ObservableCollection<VacationViewModel> VacationModels
         {
             get => _vacationModels; set
@@ -62,12 +60,12 @@ namespace HealthClinic.View.Dialogs.PhysicianDialogs
             VacationModels = new ObservableCollection<VacationViewModel>();
             PhysitianDTO = physitian;
             refreshTable();
-            
+
         }
 
         private ObservableCollection<VacationViewModel> createVacationsModels(List<TimeInterval> interval)
         {
-            ObservableCollection< VacationViewModel > vacations= new ObservableCollection<VacationViewModel>();
+            ObservableCollection<VacationViewModel> vacations = new ObservableCollection<VacationViewModel>();
             foreach (TimeInterval ti in interval)
             {
                 vacations.Add(new VacationViewModel(ti));
@@ -123,7 +121,7 @@ namespace HealthClinic.View.Dialogs.PhysicianDialogs
 
             TimeInterval interval = new TimeInterval(startDate, endDate);
             PhysitianAvailabilityService availibilityService = new PhysitianAvailabilityService();
-            if (!availibilityService.canGoOnVacation(PhysitianDTO,interval))
+            if (!availibilityService.canGoOnVacation(PhysitianDTO, interval))
             {
                 System.Windows.Forms.MessageBox.Show("Lekar ima preglede u datom periodu ili dati period sadrži odmor!");
                 return;
@@ -166,7 +164,7 @@ namespace HealthClinic.View.Dialogs.PhysicianDialogs
 
         private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-                DeleteButton.IsEnabled = dataGrid.SelectedIndex != -1;
+            DeleteButton.IsEnabled = dataGrid.SelectedIndex != -1;
         }
 
         private void deleteKeyPressed(object sender, System.Windows.Input.KeyEventArgs e)
