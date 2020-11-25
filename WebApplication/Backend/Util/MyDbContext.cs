@@ -1,5 +1,4 @@
-﻿using health_clinic_class_diagram.Backend.Dto;
-using health_clinic_class_diagram.Backend.Model.Hospital;
+﻿using health_clinic_class_diagram.Backend.Model.Hospital;
 using Microsoft.EntityFrameworkCore;
 using Model.Accounts;
 using Model.Blog;
@@ -16,7 +15,7 @@ namespace WebApplication.Backend.Model
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Equipment> Equipments { get; set; }
         public DbSet<Floor> Floors { get; set; }
-        public DbSet<RoomDTO> Rooms { get; set; }
+        public DbSet<RoomGEA> Rooms { get; set; }
         public DbSet<MedicineManufacturer> MedicineManufacturers { get; set; }
         public DbSet<MedicineType> MedicineTypes { get; set; }
         public DbSet<Medicine> Medicine { get; set; }
@@ -30,7 +29,7 @@ namespace WebApplication.Backend.Model
             modelBuilder.Entity<Building>().HasKey(o => o.Id);
             modelBuilder.Entity<Equipment>().HasKey(o => o.Id);
             modelBuilder.Entity<Floor>().HasKey(o => o.Id);
-            modelBuilder.Entity<RoomDTO>().HasKey(o => o.Id);
+            modelBuilder.Entity<RoomGEA>().HasKey(o => o.Id);
             modelBuilder.Entity<MedicineManufacturer>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<MedicineType>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Medicine>().HasKey(o => o.SerialNumber);
