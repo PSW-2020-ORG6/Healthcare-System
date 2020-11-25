@@ -10,10 +10,10 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <!-- #Styles -->
-                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/ButtonStyles.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/RectangleStyles.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/TextBlockStyles.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/ImageStyles.xaml" />
+                <ResourceDictionary Source="/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml" />
+                <ResourceDictionary Source="/GraphicEditor;component/Resources/Styles/RectangleStyles.xaml" />
+                <ResourceDictionary Source="/GraphicEditor;component/Resources/Styles/TextBlockStyles.xaml" />
+                <ResourceDictionary Source="/GraphicEditor;component/Resources/Styles/ImageStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -158,7 +158,7 @@
             <Image Grid.Column="3"
                    Grid.ColumnSpan="3"
                    Grid.Row="10"
-                   Source="pack://application:,,,/Resources/Icons/toilet.png"/>
+                   Source="/GraphicEditor;component/Resources/Icons/toilet.png"/>
 
             <!--Elevator-->
             <Border BorderBrush="Black"
