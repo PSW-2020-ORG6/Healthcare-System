@@ -1,4 +1,4 @@
-﻿using health_clinic_class_diagram.Backend.Dto;
+﻿using health_clinic_class_diagram.Backend.Model.Hospital;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -14,14 +14,14 @@ namespace WebApplication.Backend.Repositorys
             connection.Open();
         }
 
-        internal List<RoomDTO> GetRooms(String sqlDml)
+        internal List<RoomGEA> GetRooms(String sqlDml)
         {
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<RoomDTO> resultList = new List<RoomDTO>();
+            List<RoomGEA> resultList = new List<RoomGEA>();
             while (sqlReader.Read())
             {
-                RoomDTO entity = new RoomDTO();
+                RoomGEA entity = new RoomGEA();
                 entity.SerialNumber = (string)sqlReader[0];
                 entity.Id = (string)sqlReader[1];
                 entity.FloorId = (string)sqlReader[2];
@@ -31,7 +31,7 @@ namespace WebApplication.Backend.Repositorys
             return resultList;
         }
 
-        public List<RoomDTO> GetAllRooms()
+        public List<RoomGEA> GetAllRooms()
         {
             return GetRooms("Select * from rooms");
         }
