@@ -579,5 +579,13 @@ namespace HealthClinic
 
             e.CanExecute = medicineBool;
         }
+
+        private void Map_Click(object sender, RoutedEventArgs e)
+        {
+            GraphicEditor.MainWindow map = new GraphicEditor.MainWindow();
+            this.Close();
+            map.DataContext = GraphicEditor.ViewModel.MapContentUserControlViewModel.HospitalMap;
+            map.Show();
+        }
     }
 }
