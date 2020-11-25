@@ -1,11 +1,6 @@
 ﻿using Backend.Repository;
 using HealthClinic.Backend.Model.Hospital;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthClinic.Backend.Repository
 {
@@ -21,5 +16,5 @@ namespace HealthClinic.Backend.Repository
             return JsonConvert.DeserializeObject<RoomBedType>(objectStringFormat);
         }
     }
-    
+
 }

@@ -90,7 +90,7 @@ namespace Model.Util
         public override bool Equals(object obj)
         {
             Country other = obj as Country;
-            if(other == null)
+            if (other == null)
             {
                 return false;
             }

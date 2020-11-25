@@ -6,7 +6,6 @@
 using Model.Accounts;
 using Model.Hospital;
 using Model.Util;
-using System;
 
 namespace Backend.Dto
 {

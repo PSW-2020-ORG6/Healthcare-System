@@ -1,11 +1,7 @@
 ﻿using Backend.Repository;
 using health_clinic_class_diagram.Backend.Model.Util;
 using Model.Accounts;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 
 namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
 {
@@ -62,16 +58,16 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
             return TypeOfUser.NO_USER;
         }
 
-            /// <summary>
-            /// Return TypeOfUser based on jmbg-userName and password
-            /// </summary>
-            /// <param name="jmbg"></param>
-            /// <param name="password"></param>
-            /// <returns></returns>
-        public TypeOfUser GetUserType(string jmbg,string password)
+        /// <summary>
+        /// Return TypeOfUser based on jmbg-userName and password
+        /// </summary>
+        /// <param name="jmbg"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public TypeOfUser GetUserType(string jmbg, string password)
         {
             TypeOfUser typeOfUser = CheckIfUserIsPatient(jmbg, password);
-            if (typeOfUser!= TypeOfUser.NO_USER)
+            if (typeOfUser != TypeOfUser.NO_USER)
             {
                 return typeOfUser;
             }
@@ -96,7 +92,7 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
             return account.Id.Equals(jmbg);
         }
 
-        private static bool IsValidPassword(string password,  Account account)
+        private static bool IsValidPassword(string password, Account account)
         {
             return account.Password.Equals(password);
         }

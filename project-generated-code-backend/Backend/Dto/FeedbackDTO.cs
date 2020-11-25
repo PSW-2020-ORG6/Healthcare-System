@@ -1,8 +1,4 @@
-﻿using Backend.Model.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 
 namespace health_clinic_class_diagram.Backend.Dto
 {
@@ -13,7 +9,7 @@ namespace health_clinic_class_diagram.Backend.Dto
         private String patientId;
         private Boolean approved;
         private String serialNumber;
-        public string SerialNumber { get => serialNumber; set => serialNumber=value; }
+        public string SerialNumber { get => serialNumber; set => serialNumber = value; }
         public string PatientId { get => patientId; set => patientId = value; }
         public string Text { get => text; set => text = value; }
         public DateTime Date { get => date; set => date = value; }

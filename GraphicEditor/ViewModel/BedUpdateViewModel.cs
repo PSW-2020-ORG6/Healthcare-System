@@ -1,10 +1,5 @@
 ﻿using GraphicEditor.HelpClasses;
 using Model.Hospital;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace GraphicEditor.ViewModel
@@ -48,7 +43,7 @@ namespace GraphicEditor.ViewModel
         void exitInfo()
         {
             BedInfo.Id = _bedOriginal.Id;
-            BedInfo.Name = _bedOriginal.Name;         
+            BedInfo.Name = _bedOriginal.Name;
             OnPropertyChanged("BedInfo");
             window.Close();
         }

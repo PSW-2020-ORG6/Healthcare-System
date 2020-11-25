@@ -4,11 +4,11 @@
 // Purpose: Definition of Class PhysitianScheduleController
 
 using Backend.Dto;
-using Model.Schedule;
 using Backend.Service.SchedulingService;
+using Model.Accounts;
+using Model.Schedule;
 using System;
 using System.Collections.Generic;
-using Model.Accounts;
 
 namespace Backend.Controller.PhysitianControllers
 {

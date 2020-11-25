@@ -3,10 +3,7 @@ using Backend.Repository;
 using Model.Accounts;
 using Model.Hospital;
 using Model.Util;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 {

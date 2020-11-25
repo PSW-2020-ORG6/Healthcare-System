@@ -71,17 +71,17 @@ namespace Model.MedicalExam
         public override bool Equals(object obj)
         {
             Prescription other = obj as Prescription;
-            if(other == null)
+            if (other == null)
             {
                 return false;
             }
-            if(this.medicineDosage.Count != other.medicineDosage.Count)
+            if (this.medicineDosage.Count != other.medicineDosage.Count)
             {
                 return false;
             }
-            foreach(MedicineDosage m in this.medicineDosage)
+            foreach (MedicineDosage m in this.medicineDosage)
             {
-                if(!other.medicineDosage.Contains(m))
+                if (!other.medicineDosage.Contains(m))
                 {
                     return false;
                 }
@@ -97,9 +97,9 @@ namespace Model.MedicalExam
         public override string ToString()
         {
             string ret = base.ToString();
-            foreach(MedicineDosage m in medicineDosage)
+            foreach (MedicineDosage m in medicineDosage)
             {
-                ret += "\nmedicine dosage: " +  m.ToString();
+                ret += "\nmedicine dosage: " + m.ToString();
             }
             return ret;
         }

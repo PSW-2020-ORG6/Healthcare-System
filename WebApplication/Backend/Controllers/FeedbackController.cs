@@ -47,7 +47,7 @@ namespace WebApplication.Backend.Controllers
                 feedbackService.AddNewFeedback(new Feedback(feedbackDTO));
                 return Ok();
             }
-                return BadRequest();
+            return BadRequest();
 
         }
 

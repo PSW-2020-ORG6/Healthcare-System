@@ -4,7 +4,6 @@
 // Purpose: Definition of Class PhysitianSpecialistSchedulingStrategy
 
 using Backend.Dto;
-using System;
 
 namespace Backend.Service.SchedulingService.SchedulingStrategies
 {

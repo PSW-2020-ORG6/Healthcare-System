@@ -6,7 +6,6 @@
 using Backend.Model.Util;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 
 namespace Model.Hospital
 {
@@ -34,7 +33,7 @@ namespace Model.Hospital
         public override bool Equals(object obj)
         {
             Rejection other = obj as Rejection;
-            if(other == null)
+            if (other == null)
             {
                 return false;
             }

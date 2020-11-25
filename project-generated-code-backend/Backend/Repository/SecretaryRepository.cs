@@ -4,11 +4,10 @@
 // Purpose: Definition of Interface SecretaryRepository
 
 using Model.Accounts;
-using System;
 
 namespace Backend.Repository
 {
-   public interface SecretaryRepository : GenericRepository<Secretary>
-   {
-   }
+    public interface SecretaryRepository : GenericRepository<Secretary>
+    {
+    }
 }

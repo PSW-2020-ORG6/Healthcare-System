@@ -4,11 +4,10 @@
 // Purpose: Definition of Interface EquipmentRepository
 
 using Model.Hospital;
-using System;
 
 namespace Backend.Repository
 {
-   public interface EquipmentRepository : GenericRepository<Equipment>
-   {
-   }
+    public interface EquipmentRepository : GenericRepository<Equipment>
+    {
+    }
 }

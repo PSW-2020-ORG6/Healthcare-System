@@ -11,7 +11,7 @@ namespace Model.Hospital
 {
     public class RoomType : Entity
     {
-     
+
         private string name;
 
         public string Name { get => name; }

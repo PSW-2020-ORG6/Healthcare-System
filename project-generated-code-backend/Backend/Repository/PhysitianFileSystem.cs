@@ -6,7 +6,6 @@
 using Model.Accounts;
 using Model.Schedule;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 
 namespace Backend.Repository

@@ -1,10 +1,6 @@
 ﻿using Backend.Repository;
-using Model.Accounts;
 using Model.Hospital;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace health_clinic_class_diagram.Backend.Service.MedicineService
 {

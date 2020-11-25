@@ -58,7 +58,7 @@ namespace Model.Hospital
         {
             Equipment other = obj as Equipment;
 
-            if(other == null)
+            if (other == null)
             {
                 return false;
             }

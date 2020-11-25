@@ -96,17 +96,17 @@ namespace Model.MedicalExam
         public override bool Equals(object obj)
         {
             Report other = obj as Report;
-            if(other == null)
+            if (other == null)
             {
                 return false;
             }
-            if(this.additionalDocument.Count != other.additionalDocument.Count)
+            if (this.additionalDocument.Count != other.additionalDocument.Count)
             {
                 return false;
             }
-            foreach(AdditionalDocument doc in additionalDocument)
+            foreach (AdditionalDocument doc in additionalDocument)
             {
-                if(!other.additionalDocument.Contains(doc))
+                if (!other.additionalDocument.Contains(doc))
                 {
                     return false;
                 }
@@ -122,7 +122,7 @@ namespace Model.MedicalExam
         public override string ToString()
         {
             string ret = "date: " + this.date.ToString("dd.MM.yyyy.") + "\nfindings: " + this.findings;
-            foreach(AdditionalDocument doc in this.additionalDocument)
+            foreach (AdditionalDocument doc in this.additionalDocument)
             {
                 ret += "\ndocument: " + doc.ToString();
             }

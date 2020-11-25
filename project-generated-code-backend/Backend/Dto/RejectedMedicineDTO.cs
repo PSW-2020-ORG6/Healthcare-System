@@ -4,7 +4,6 @@
 // Purpose: Definition of Class RejectedMedicineDTO
 
 using Model.Hospital;
-using System;
 
 namespace Backend.Dto
 {
