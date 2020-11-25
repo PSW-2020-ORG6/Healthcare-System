@@ -201,6 +201,17 @@
 
         <Grid x:Name="HeaderGrid" Grid.ColumnSpan="10" Margin="10" Style="{DynamicResource headerStyle}" >
             <Label x:Name="HeaderLabel" Margin="5,5,5,5" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource WhiteLabel}" Content="{Binding TitleHeader}"></Label>
+            <Button x:Name="MapOpen" 
+                    BorderThickness="0"
+                    Background="#FF4080F3"
+                    Click="MapButton_Click"
+                    FontSize="22"
+                    HorizontalAlignment="Center"
+                    Style="{DynamicResource menuButtonStyle}"
+                    Margin="179,8,153,10" 
+                    Width="70">
+                Map
+            </Button>
             <Button x:Name="ActionBarOpen" Style="{DynamicResource menuButtonStyle}" Margin="10,10,10,10" Width="40" HorizontalAlignment="Right">
                 <Image Source="slike/menu.png"></Image>
             </Button>
