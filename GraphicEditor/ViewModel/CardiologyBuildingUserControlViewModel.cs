@@ -1,9 +1,6 @@
 ﻿using GraphicEditor.HelpClasses;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GraphicEditor.ViewModel
 {
@@ -55,7 +52,7 @@ namespace GraphicEditor.ViewModel
                     var paramArray = cpy.Split(' ');
                     var param = paramArray[0].ToLower();
                     ChooseFloor(param);
-                }               
+                }
             }
         }
 

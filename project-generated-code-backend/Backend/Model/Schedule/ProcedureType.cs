@@ -75,13 +75,13 @@ namespace Model.Schedule
             {
                 return false;
             }
-            if(this.RequiredEquipment.Count != other.RequiredEquipment.Count)
+            if (this.RequiredEquipment.Count != other.RequiredEquipment.Count)
             {
                 return false;
             }
-            foreach(Equipment e in requiredEquipment)
+            foreach (Equipment e in requiredEquipment)
             {
-                if(!other.RequiredEquipment.Contains(e))
+                if (!other.RequiredEquipment.Contains(e))
                 {
                     return false;
                 }

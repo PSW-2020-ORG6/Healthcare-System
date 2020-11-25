@@ -1,13 +1,7 @@
-﻿using Backend.Dto;
-using Backend.Repository;
-using HealthClinic.Backend.Model.Hospital;
+﻿using HealthClinic.Backend.Model.Hospital;
 using Model.Hospital;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Backend.Repository
 {
@@ -23,9 +17,9 @@ namespace Backend.Repository
         public List<Renovation> GetRenovationsByRoom(Room room)
         {
             List<Renovation> renovations = new List<Renovation>();
-            foreach(Renovation renovation in GetAll())
+            foreach (Renovation renovation in GetAll())
             {
-                if(room.Equals(renovation.Room))
+                if (room.Equals(renovation.Room))
                 {
                     renovations.Add(renovation);
                 }

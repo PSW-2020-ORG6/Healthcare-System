@@ -5,11 +5,9 @@
 
 using Backend.Repository;
 using HCI_SIMS_PROJEKAT.Backend.Repository;
-using Model.Accounts;
 using Model.MedicalExam;
 using Model.Schedule;
 using Model.Util;
-using System;
 using System.Collections.Generic;
 
 namespace Backend.Service.HospitalAccountsService

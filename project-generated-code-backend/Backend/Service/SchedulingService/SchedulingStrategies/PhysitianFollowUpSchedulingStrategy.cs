@@ -4,10 +4,9 @@
 // Purpose: Definition of Class PhysitianFollowUpSchedulingStrategy
 
 using Backend.Dto;
-using System;
 
 namespace Backend.Service.SchedulingService.SchedulingStrategies
-{ 
+{
     public class PhysitianFollowUpSchedulingStrategy : SchedulingStrategy
     {
         private const int DISALLOW_SCHEDULING_HOURS = 24;

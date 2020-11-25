@@ -4,14 +4,11 @@
 // Purpose: Definition of Class AppointmentSchedulingService
 
 using Backend.Dto;
-using Model.Accounts;
-using Model.Hospital;
-using Model.Util;
+using Backend.Service.SchedulingService.AppointmentGeneralitiesOptions;
+using Backend.Service.SchedulingService.PriorityStrategies;
 using Backend.Service.SchedulingService.SchedulingStrategies;
 using System;
 using System.Collections.Generic;
-using Backend.Service.SchedulingService.AppointmentGeneralitiesOptions;
-using Backend.Service.SchedulingService.PriorityStrategies;
 
 namespace Backend.Service.SchedulingService
 {
@@ -39,7 +36,7 @@ namespace Backend.Service.SchedulingService
         public AppointmentDTO GetSuggestedAppointment(SuggestedAppointmentDTO suggestedAppointmentDTO)
         {
             DateTime currentDate = suggestedAppointmentDTO.DateStart;
-            
+
             while (!currentDate.Equals(suggestedAppointmentDTO.DateEnd))
             {
                 AppointmentDTO appointment = new AppointmentDTO();
@@ -57,7 +54,7 @@ namespace Backend.Service.SchedulingService
             {
                 DatePriorityStrategy datePriorityStrategy = new DatePriorityStrategy();
                 List<AppointmentDTO> suggestedAppointmentDTOsDate = datePriorityStrategy.FindSuggestedAppointments(suggestedAppointmentDTO);
-                foreach(AppointmentDTO appointmentDTO in suggestedAppointmentDTOsDate)
+                foreach (AppointmentDTO appointmentDTO in suggestedAppointmentDTOsDate)
                 {
                     List<AppointmentDTO> suggestedAppointmentDTOs = GetAvailableAppointments(appointmentDTO);
                     if (suggestedAppointmentDTOs.Count != 0)

@@ -16,10 +16,10 @@ namespace Model.Hospital
         private MedicineManufacturer medicineManufacturer;
         private MedicineType medicineType;
 
-        public string CopyrightName { get => copyrightName; }
-        public string GenericName { get => genericName; }
-        public MedicineManufacturer MedicineManufacturer { get => medicineManufacturer; }
-        public MedicineType MedicineType { get => medicineType; }
+        public string CopyrightName { get => copyrightName; set => copyrightName = value; }
+        public string GenericName { get => genericName; set => genericName = value; }
+        public virtual MedicineManufacturer MedicineManufacturer { get => medicineManufacturer; set => medicineManufacturer = value; }
+        public virtual MedicineType MedicineType { get => medicineType; set => medicineType = value; }
 
         public Medicine(string copyrightName, string genericName, MedicineManufacturer medicineManufacturer, MedicineType medicineType) : base(Guid.NewGuid().ToString())
         {
@@ -27,6 +27,14 @@ namespace Model.Hospital
             this.genericName = genericName;
             this.medicineManufacturer = medicineManufacturer;
             this.medicineType = medicineType;
+        }
+
+        public Medicine(string copyrightName, string genericName, string medicineManufacturer, string medicineType)
+        {
+            this.copyrightName = copyrightName;
+            this.genericName = genericName;
+            this.medicineManufacturer.Name = medicineManufacturer;
+            this.medicineType.Type = medicineType;
         }
 
         [JsonConstructor]
@@ -38,11 +46,15 @@ namespace Model.Hospital
             this.medicineType = medicineType;
         }
 
+        public Medicine()
+        {
+        }
+
         public override bool Equals(object obj)
         {
             Medicine other = obj as Medicine;
 
-            if(other == null)
+            if (other == null)
             {
                 return false;
             }

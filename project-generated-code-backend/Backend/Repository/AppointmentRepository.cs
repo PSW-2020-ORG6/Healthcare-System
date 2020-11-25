@@ -11,15 +11,15 @@ using System.Collections.Generic;
 
 namespace Backend.Repository
 {
-   public interface AppointmentRepository : GenericRepository<Appointment>
-   {
-      List<Appointment> GetAppointmentsByDate(DateTime date);
+    public interface AppointmentRepository : GenericRepository<Appointment>
+    {
+        List<Appointment> GetAppointmentsByDate(DateTime date);
 
-      List<Appointment> GetAppointmentsByPatient(Patient patient);
-      
-      List<Appointment> GetAppointmentsByPhysitian(Physitian physitian);
-      
-      List<Appointment> GetAppointmentsByRoom(Room room);
-   
-   }
+        List<Appointment> GetAppointmentsByPatient(Patient patient);
+
+        List<Appointment> GetAppointmentsByPhysitian(Physitian physitian);
+
+        List<Appointment> GetAppointmentsByRoom(Room room);
+
+    }
 }

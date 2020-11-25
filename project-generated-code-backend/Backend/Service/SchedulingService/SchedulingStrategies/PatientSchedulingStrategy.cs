@@ -6,7 +6,6 @@
 using Backend.Dto;
 using Model.Accounts;
 using Model.Schedule;
-using System;
 
 namespace Backend.Service.SchedulingService.SchedulingStrategies
 {

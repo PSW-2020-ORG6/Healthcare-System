@@ -10,7 +10,6 @@ using HealthClinic.Backend.Model.Hospital;
 using Model.Accounts;
 using Model.Hospital;
 using Model.MedicalExam;
-using Model.Util;
 using System;
 using System.Collections.Generic;
 

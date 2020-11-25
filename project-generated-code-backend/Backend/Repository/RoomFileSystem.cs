@@ -4,10 +4,8 @@
 // Purpose: Definition of Class RoomFileSystem
 
 using Model.Hospital;
-using Model.MedicalExam;
 using Model.Schedule;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 
 namespace Backend.Repository

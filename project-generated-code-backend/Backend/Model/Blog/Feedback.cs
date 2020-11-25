@@ -5,7 +5,6 @@
 
 using Backend.Model.Util;
 using health_clinic_class_diagram.Backend.Dto;
-using Model.Accounts;
 using System;
 
 namespace Model.Blog

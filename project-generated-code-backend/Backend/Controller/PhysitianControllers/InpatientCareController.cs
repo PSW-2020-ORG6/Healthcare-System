@@ -8,7 +8,6 @@ using Backend.Service.PatientCareService;
 using Model.Accounts;
 using Model.Hospital;
 using Model.MedicalExam;
-using System;
 using System.Collections.Generic;
 
 namespace Backend.Controller.PhysitianControllers

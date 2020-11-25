@@ -6,9 +6,6 @@
 using Backend.Dto;
 using Backend.Service.SchedulingService;
 using Backend.Service.SchedulingService.SchedulingStrategies;
-using Model.Accounts;
-using Model.MedicalExam;
-using System;
 
 namespace Backend.Controller.PhysitianControllers
 {

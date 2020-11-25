@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Model.Accounts;
+using System.Collections.Generic;
 using WebApplication.Backend.Services;
 
 namespace WebApplication.Backend.Controllers

@@ -6,7 +6,6 @@
 using Backend.Dto;
 using Backend.Service.HospitalAccountsService;
 using Model.Accounts;
-using System;
 
 namespace Backend.Controller
 {

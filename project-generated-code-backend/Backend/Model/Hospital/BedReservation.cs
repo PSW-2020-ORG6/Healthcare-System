@@ -49,11 +49,16 @@ namespace Model.Hospital
             this.patient = bedReservationDTO.Patient;
             this.bed = bedReservationDTO.Bed;
         }
+
+        public BedReservation()
+        {
+        }
+
         public override bool Equals(object obj)
         {
             BedReservation other = obj as BedReservation;
 
-            if(other == null)
+            if (other == null)
             {
                 return false;
             }

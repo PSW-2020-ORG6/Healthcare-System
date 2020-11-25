@@ -3,15 +3,13 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class PhysitianPriorityStrategy
 
-using Model.Accounts;
-using Model.Schedule;
+using Backend.Dto;
 using System;
 using System.Collections.Generic;
-using Backend.Dto;
 
 namespace Backend.Service.SchedulingService.PriorityStrategies
 {
-public class PhysitianPriorityStrategy : PriorityStrategy
+    public class PhysitianPriorityStrategy : PriorityStrategy
     {
         public List<AppointmentDTO> FindSuggestedAppointments(SuggestedAppointmentDTO suggestedAppointmentDTO)
         {
@@ -20,7 +18,7 @@ public class PhysitianPriorityStrategy : PriorityStrategy
             while (!currentDate.Equals(suggestedAppointmentDTO.DateEnd.AddDays(3)))
             {
                 AppointmentDTO appointment = new AppointmentDTO();
-                if (currentDate.CompareTo(DateTime.Today)<0)
+                if (currentDate.CompareTo(DateTime.Today) < 0)
                 {
                     continue;
                 }
@@ -29,7 +27,7 @@ public class PhysitianPriorityStrategy : PriorityStrategy
                 appointment.Patient = suggestedAppointmentDTO.Patient;
                 appointmentDTOs.Add(appointment);
                 currentDate = currentDate.AddDays(1);
-                if(currentDate == suggestedAppointmentDTO.DateStart)
+                if (currentDate == suggestedAppointmentDTO.DateStart)
                 {
                     currentDate = suggestedAppointmentDTO.DateEnd;
                 }

@@ -3,10 +3,8 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class RenovationService
 
-using Backend.Dto;
 using Backend.Repository;
 using HealthClinic.Backend.Model.Hospital;
-using Backend.Repository;
 using Model.Hospital;
 using System;
 using System.Collections.Generic;
@@ -49,14 +47,14 @@ namespace Backend.Service.HospitalResourcesService
 
         public void DeleteRenovationsWithRoom(Room room)
         {
-           foreach (Renovation r in renovationRepository.GetAll())
+            foreach (Renovation r in renovationRepository.GetAll())
             {
                 if (r.Room.SerialNumber.Equals(room.SerialNumber))
                 {
                     renovationRepository.Delete(r.SerialNumber);
                 }
             }
-            
+
         }
     }
 }

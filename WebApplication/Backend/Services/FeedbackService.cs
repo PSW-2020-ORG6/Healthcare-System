@@ -1,6 +1,5 @@
 ﻿using health_clinic_class_diagram.Backend.Dto;
 using Model.Blog;
-using System;
 using System.Collections.Generic;
 using WebApplication.Backend.Repositorys;
 
@@ -16,7 +15,7 @@ namespace WebApplication.Backend.Services
         {
             this.feedbackRepository = new FeedbackRepository();
         }
-       
+
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///calls method for get all feedback in feedback table
@@ -51,7 +50,7 @@ namespace WebApplication.Backend.Services
 
             return feedbackRepository.GetDisapprovedFeedbacks();
         }
-       
+
         ///Marija Vucetic 
         /// <summary>
         ///calls method for set na value of attribute Approved
@@ -63,7 +62,7 @@ namespace WebApplication.Backend.Services
         ///</param>>
         public void ApproveFeedback(FeedbackDTO feedback)
         {
-             feedbackRepository.ApproveFeedback(feedback);
+            feedbackRepository.ApproveFeedback(feedback);
         }
 
         ///Repovic Aleksa RA-52-2017

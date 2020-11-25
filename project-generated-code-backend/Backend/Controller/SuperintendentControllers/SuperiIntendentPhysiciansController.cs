@@ -1,11 +1,7 @@
 ﻿using HealthClinic.Backend.Service.HospitalAccountsService;
 using Model.Accounts;
 using Model.Util;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthClinic.Backend.Controller.SuperintendentControllers
 {

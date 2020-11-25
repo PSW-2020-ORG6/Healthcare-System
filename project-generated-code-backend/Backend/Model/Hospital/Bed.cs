@@ -8,8 +8,11 @@ using System;
 
 namespace Model.Hospital
 {
-   public class Bed : Equipment
-   {
+    public class Bed : Equipment
+    {
+        public Bed()
+        {
+        }
 
         public Bed(string name, string id) : base(Guid.NewGuid().ToString(), name, id)
         {

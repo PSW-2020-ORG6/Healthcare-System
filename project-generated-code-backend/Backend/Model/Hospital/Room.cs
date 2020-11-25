@@ -3,11 +3,7 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class Room
 
-using Backend.Dto;
 using Backend.Model.Util;
-using HealthClinic.Backend.Model.Hospital;
-using Model.Hospital;
-using Model.Util;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -22,7 +18,7 @@ namespace Model.Hospital
         private List<Equipment> equipment;
 
         public RoomType RoomType { get => roomType; }
-        public int Id { get => id; }
+        public int Id { get => id; set => id = value; }
 
         public List<Equipment> Equipment
         {
@@ -83,7 +79,6 @@ namespace Model.Hospital
             this.id = id;
             this.roomType = roomType;
             this.equipment = new List<Equipment>();
-
         }
 
         public override bool Equals(object obj)
