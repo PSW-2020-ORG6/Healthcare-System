@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using klinika_zdravo.Model;
 using klinika_zdravo.Pages;
-using klinika_zdravo.Model;
-
+using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Media;
 
 namespace klinika_zdravo
 {
@@ -27,6 +15,7 @@ namespace klinika_zdravo
         private ProfilnaStranica profilnaStranica = new ProfilnaStranica();
         private BlogStranica blogStranica = new BlogStranica();
         private KontaktiStranica kontaktiStranica = new KontaktiStranica();
+        private GraphicEditor.MainWindow map = new GraphicEditor.MainWindow();
         private ZakazivanjePregledaStranica zakazivanjePregledaStranica = new ZakazivanjePregledaStranica();
         private ZakazaniTerminiStranica zakazaniTerminiStranica = new ZakazaniTerminiStranica();
         private ZdravstveniKartonStranica zdravstveniKartonStranica = new ZdravstveniKartonStranica();
@@ -42,7 +31,7 @@ namespace klinika_zdravo
         {
             InitializeComponent();
             registrovani.Add(new AccountModel("Vladimir", "Budjen", "Aleksandar", "01.01.1939", "0101939548967", "muski", "Sremska Kamenica", "Bocke", "Gavrila principa 39a", "064/958-45-17", "vladimirbudjen@gmail.com", "sifra"));
-            registrovani.Add(new AccountModel("Pera", "Peric", "Petar", "01.02.1995", "1524885615485", "Muski", "Srbija", "Novi Sad", "Rumenacka 5", "064/8546-2525", "peraperic@gmail.com", "sifra"));            
+            registrovani.Add(new AccountModel("Pera", "Peric", "Petar", "01.02.1995", "1524885615485", "Muski", "Srbija", "Novi Sad", "Rumenacka 5", "064/8546-2525", "peraperic@gmail.com", "sifra"));
             AccountModel.accountModel = registrovani[0];
             AccountModel.accountModel.Termini.Add(new TerminiModel("pregled", "01.02.2020.", "15.45", "Gregory House", "415"));
             AccountModel.accountModel.Termini.Add(new TerminiModel("pregled", "01.02.2020.", "15.10", "ASD House", "415"));
@@ -59,9 +48,9 @@ namespace klinika_zdravo
         private void PocetnaClick(object sender, RoutedEventArgs e)
         {
 
-                MainFrame.Content = pocetnaStranica;
+            MainFrame.Content = pocetnaStranica;
 
-            
+
         }
 
         private void ProfilClick(object sender, RoutedEventArgs e)
@@ -91,10 +80,13 @@ namespace klinika_zdravo
 
         private void KontaktiClick(object sender, RoutedEventArgs e)
         {
+            MainFrame.Content = kontaktiStranica;
+        }
 
-                MainFrame.Content = kontaktiStranica;
-
-
+        private void MapClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            map.ShowDialog();
         }
 
         private void MenuOpen(object sender, RoutedEventArgs e)
@@ -167,7 +159,7 @@ namespace klinika_zdravo
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
 
-                MainFrame.Content = demoSajtaStranica;
+            MainFrame.Content = demoSajtaStranica;
 
         }
 
@@ -193,9 +185,9 @@ namespace klinika_zdravo
             //BoxSifraPrijava
             bool moze1 = false;
             bool moze2 = false;
-            foreach(AccountModel ac in registrovani)
+            foreach (AccountModel ac in registrovani)
             {
-                if(ac.eMail.Equals(BoxEmailPrijava.Text))
+                if (ac.eMail.Equals(BoxEmailPrijava.Text))
                 {
                     AccountModel.accountModel = ac;
                     moze1 = true;
@@ -213,7 +205,7 @@ namespace klinika_zdravo
                 prviDijalog.IsOpen = false;
                 ulogovan = true;
             }
-            else if(!moze1)
+            else if (!moze1)
             {
                 pogresanMailDialog.IsOpen = true;
                 return;
@@ -245,12 +237,12 @@ namespace klinika_zdravo
             if (radioMusko.IsChecked == true)
             {
                 pol = "Musko";
-            } 
-            if(radioZensko.IsChecked == true)
+            }
+            if (radioZensko.IsChecked == true)
             {
                 pol = "Zensko";
             }
-            
+
             bool unetiPodaci = true;
             if (radioZensko.IsChecked == false && radioMusko.IsChecked == false)
             {
@@ -311,9 +303,10 @@ namespace klinika_zdravo
             {
                 boxSifra.Background = Brushes.LightBlue;
                 unetiPodaci = false;
-                
+
             }
-            if (unetiPodaci) { 
+            if (unetiPodaci)
+            {
                 ulogovan = true;
                 MainFrame.Content = pocetnaStranica;
                 registrovani.Add(new AccountModel(boxIme.Text, boxPrezime.Text, boxRoditelj.Text, boxDatum.Text, boxJmbg.Text, pol, boxDrzava.Text, boxGrad.Text, boxUlica.Text, boxBroj.Text, boxEmail.Text, "sifra"));
@@ -330,7 +323,7 @@ namespace klinika_zdravo
 
         private void FocusOnEmail(object sender, RoutedEventArgs e)
         {
-            if(BoxEmailPrijava.Text == "e-mail")
+            if (BoxEmailPrijava.Text == "e-mail")
             {
                 BoxEmailPrijava.Text = "";
             }

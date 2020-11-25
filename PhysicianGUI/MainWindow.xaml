@@ -3,9 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HealthClinic"
         xmlns:viewmodel="clr-namespace:HealthClinic.ViewModel"
-        xmlns:view="clr-namespace:HealthClinic.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="616" Width="916">
     <Window.DataContext>
@@ -79,9 +77,21 @@
         <Grid Grid.ColumnSpan="2" Background="DarkSeaGreen">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Bolnica Zdravo" Style="{StaticResource TitleLabel}"/>
+            <Label Content="Bolnica Zdravo"
+                   Grid.Column="0"
+                   Style="{StaticResource TitleLabel}"/>
+            <Button x:Name="MapOpenBtn" 
+                    BorderThickness="0"  
+                    Click="MapOpenBtn_Click"
+                    Grid.Column="1"
+                    FontSize="20"
+                    Height="34"
+                    Width="182" Margin="90,2,91,-2" >
+                    Map
+            </Button>
         </Grid>
 
         <!-- Content -->

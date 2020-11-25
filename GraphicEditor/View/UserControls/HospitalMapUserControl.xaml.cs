@@ -10,8 +10,8 @@ namespace GraphicEditor.View.UserControls
     {
         public HospitalMapUserControl()
         {
-            this.DataContext = MapContentUserControlViewModel.HospitalMap;
             InitializeComponent();
+            this.DataContext = MapContentUserControlViewModel.HospitalMap;
         }
     }
 }

@@ -1,20 +1,4 @@
-﻿using Model.Accounts;
-using Model.Util;
-using HealthClinic.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace HealthClinic
 {
@@ -26,6 +10,7 @@ namespace HealthClinic
         public MainWindow()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         private void SideMenuOpenBtn_Click(object sender, RoutedEventArgs e)
@@ -40,13 +25,22 @@ namespace HealthClinic
 
         private void SideMenuOpenBtn_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if(SideMenuOpenBtn.IsEnabled)
+            if (SideMenuOpenBtn.IsEnabled)
             {
                 SideMenuOpenBtn.Visibility = Visibility.Visible;
-            } else
+            }
+            else
             {
                 SideMenuOpenBtn.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void MapOpenBtn_Click(object sender, RoutedEventArgs e)
+        {
+            GraphicEditor.MainWindow map = new GraphicEditor.MainWindow();
+            this.Close();
+            map.DataContext = GraphicEditor.ViewModel.MapContentUserControlViewModel.HospitalMap;
+            map.Show();
         }
     }
 }
