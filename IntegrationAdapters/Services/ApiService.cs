@@ -11,14 +11,26 @@ namespace IntegrationAdapters.Services
     {
         private ApiRepository apiRepository;
 
-        public ApiService(HealthCareSystemDbContext context)
+        public ApiService()
         {
-            this.apiRepository = new ApiRepository(context);
+            this.apiRepository = new ApiRepository();
         }
 
         public bool RegisterHospitalOnPharmacy(Api api)
         {
             return apiRepository.RegisterHospitalOnPharmacy(api);
+        }
+        public List<Api> GetAllApis()
+        {
+            return apiRepository.GetAllApis();
+        }
+        public string getApiKey(Api api)
+        {
+            return apiRepository.getApiKey(api);
+        }
+        public Api getApiByKey(List<Api> apis,string key)
+        {
+            return apiRepository.getApiByKey(apis,key);
         }
     }
 }
