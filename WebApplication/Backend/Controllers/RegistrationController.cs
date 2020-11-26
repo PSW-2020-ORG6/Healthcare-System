@@ -28,7 +28,9 @@ namespace WebApplication.Backend.Controllers
                 patientDTO.IsCorrectStateOfBirth() && patientDTO.IsCorrectNationality() && patientDTO.IsCorrectCitizenship() && patientDTO.IsCorrectAddress() &&
                 patientDTO.IsCorrectPlaceOfResidence() && patientDTO.IsCorrectMunicipalityOfResidence() && patientDTO.IsCorrectStateOfResidence() &&
                 patientDTO.IsCorrectProfession() && patientDTO.IsCorrectEmploymentStatus() && patientDTO.IsCorrectMaritalStatus() && patientDTO.IsCorrectContact() &&
-                patientDTO.IsCorrectEmail() && patientDTO.IsCorrectPassword() && patientDTO.IsCorrectGender() && patientDTO.IsCorrectHealthInsuranceNumber()) {
+                patientDTO.IsCorrectEmail() && patientDTO.IsCorrectPassword() && patientDTO.IsCorrectGender() && patientDTO.IsCorrectHealthInsuranceNumber())
+            {
+
                 if (registrationService.RegisterPatient(new Patient(patientDTO)))
                 {
                     return Ok();
@@ -38,7 +40,10 @@ namespace WebApplication.Backend.Controllers
                     return BadRequest();
                 }
             }
-            return BadRequest();
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }

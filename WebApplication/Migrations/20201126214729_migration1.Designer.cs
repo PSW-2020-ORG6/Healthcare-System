@@ -9,7 +9,7 @@ using WebApplication.Backend.Model;
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201122223657_migration1")]
+    [Migration("20201126214729_migration1")]
     partial class migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,8 +51,8 @@ namespace WebApplication.Migrations
                     b.Property<bool>("Guest")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("HealthInsuranceNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("HealthInsuranceNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Image")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
