@@ -34,6 +34,7 @@ namespace WebApplication.Migrations
                     Contact = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true),
                     ParentName = table.Column<string>(nullable: true),
                     PlaceOfBirth = table.Column<string>(nullable: true),
                     MunicipalityOfBirth = table.Column<string>(nullable: true),
@@ -46,13 +47,12 @@ namespace WebApplication.Migrations
                     Profession = table.Column<string>(nullable: true),
                     EmploymentStatus = table.Column<string>(nullable: true),
                     MaritalStatus = table.Column<string>(nullable: true),
-                    HealthInsuranceNumber = table.Column<int>(nullable: false),
+                    HealthInsuranceNumber = table.Column<string>(nullable: true),
                     FamilyDiseases = table.Column<string>(nullable: true),
                     PersonalDiseases = table.Column<string>(nullable: true),
                     Gender = table.Column<string>(nullable: true),
                     Image = table.Column<string>(nullable: true),
-                    Guest = table.Column<bool>(nullable: false),
-                    Password = table.Column<string>(nullable: true)
+                    Guest = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

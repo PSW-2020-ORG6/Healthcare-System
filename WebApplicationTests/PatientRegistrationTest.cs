@@ -14,7 +14,7 @@ namespace WebApplicationTests
         {
             var stubRepository = new Mock<IRegistrationRepository>();
             IRegistrationRepository r = new RegistrationRepository();
-            Patient patient = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", "Glavna 3", "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", 223345677, "", "", "female", "ana123", "image", false);
+            Patient patient = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", "Glavna 3", "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false);
             stubRepository.Setup(m => m.addPatient(patient)).Returns(false);
             RegistrationService service = new RegistrationService(stubRepository.Object);
 
@@ -27,7 +27,7 @@ namespace WebApplicationTests
         public void Patient_succesfully_registrate()
         {
             var stubRepository = new Mock<IRegistrationRepository>();
-            Patient patient = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", "Glavna 3", "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", 223345677, "", "", "female", "ana123", "image", false);
+            Patient patient = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", "Glavna 3", "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false);
             stubRepository.Setup(m => m.addPatient(patient)).Returns(true);
             RegistrationService service = new RegistrationService(stubRepository.Object);
 
@@ -41,9 +41,8 @@ namespace WebApplicationTests
         public void JmbgIsValidTest()
         {
             var stubRepository = new Mock<IRegistrationRepository>();
-            var patient = new Patient();
             IRegistrationRepository r = new RegistrationRepository();
-            Patient p = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", "Glavna 3", "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", 223345677, "", "", "female", "ana123", "image", false);
+            Patient p = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", "Glavna 3", "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false);
             stubRepository.Setup(m => m.GetPatientIdById("123")).Returns(p.Id);
             RegistrationService service = new RegistrationService(stubRepository.Object);
 
@@ -56,9 +55,8 @@ namespace WebApplicationTests
         public void JmbgIsNotValidTest()
         {
             var stubRepository = new Mock<IRegistrationRepository>();
-            var patient = new Patient();
             IRegistrationRepository r = new RegistrationRepository();
-            Patient p = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", "Glavna 3", "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", 223345677, "", "", "female", "ana123", "image", false);
+            Patient p = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", "Glavna 3", "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false);
             stubRepository.Setup(m => m.GetPatientIdById("1234")).Returns(p.Id);
             RegistrationService service = new RegistrationService(stubRepository.Object);
 

@@ -49,8 +49,8 @@ namespace WebApplication.Migrations
                     b.Property<bool>("Guest")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("HealthInsuranceNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("HealthInsuranceNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Image")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");

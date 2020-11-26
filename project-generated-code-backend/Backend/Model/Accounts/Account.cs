@@ -28,7 +28,7 @@ namespace Model.Accounts
         public string Contact { get => contact; set => contact = value; }
         public string Email { get => email; set => email = value; }
         public string Address { get => address; set => address = value; }
-        public String Password { get => password; }
+        public String Password { get => password; set => password = value; }
 
         public Account(String serialNumber) : base(serialNumber) { }
 

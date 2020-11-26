@@ -15,7 +15,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=mydb4;user=root;password=root");
+                connection = new MySqlConnection("server=localhost;port=3306;database=mydb5;user=root;password=root");
                 connection.Open();
             }
             catch (Exception e)
@@ -25,18 +25,15 @@ namespace WebApplication.Backend.Repositorys
 
         public bool addPatient(Patient patient)
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb4;user=root;password=root");
-            connection.Open();
+            //connection = new MySqlConnection("server=localhost;port=3306;database=mydb5;user=root;password=root");
+            //connection.Open();
             string[] dateString = patient.DateOfBirth.ToString().Split(" ");
             string[] partsOfDate = dateString[0].Split("/");
-           //string partsOfDate = patient.DateOfBirth.ToString();
-            /*string sqlDml = "INSERT INTO patients (text,approved,date,patientid,serialnumber)  VALUES('" + feedback.Text + "','" + 0 + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + "T" + dateString[1]
-                        + "','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";*/
-            string sqlDml = "INSERT INTO patients (SerialNumber, name,surname, parentName, id, dateOfBirth, placeOfBirth, municipalityOfBirth, stateOfBirth, nationality, citizenship, address, placeOfResidence, municipalityOfResidence, stateOfResidence, profession, employmentStatus, maritalStatus, contact,email, password, gender, healthInsuranceNumber, familyDiseases, personalDiseases,image, guest)  VALUES('" + patient.SerialNumber + "','" + patient.Name + "','" + patient.Surname + "','" + patient.ParentName + "','" + patient.Id + "','" + partsOfDate[2] + "-" + partsOfDate[0] + "-" + partsOfDate[1] + "T" + dateString[1]
-                       + "','" + patient.PlaceOfBirth
-                       + "','" + patient.MunicipalityOfBirth + " ','" + patient.StateOfBirth + " ','" + patient.Nationality + " ','" + patient.Citizenship + " ','" + patient.Address + " ','" + 
-                       patient.PlaceOfResidence + " ','" + patient.MunicipalityOfResidence + " ','" + patient.StateOfResidence + " ','" + patient.Profession + " ','" + patient.EmploymentStatus + " ','" + patient.MaritalStatus + " ','" + patient.Contact + " ','"
-                       + patient.Email + " ','" + patient.Password + " ','" + patient.Gender + " ','" + patient.HealthInsuranceNumber + " ','" + patient.FamilyDiseases + " ','" + patient.PersonalDiseases + " ','" + patient.Image + " ','" + 1 + "')";
+            string sqlDml = "INSERT into patients (Id,SerialNumber,Name,Surname,DateOfBirth,Contact,Email,Address,Password,ParentName,PlaceOfBirth,MunicipalityOfBirth,StateOfBirth,PlaceOfResidence,MunicipalityOfResidence,StateOfResidence,Citizenship,Nationality,Profession,EmploymentStatus,MaritalStatus,HealthInsuranceNumber,FamilyDiseases,PersonalDiseases,Gender,Image,Guest)  VALUES('" + patient.Id + "','" + patient.SerialNumber + "','" + patient.Name + "','" + patient.Surname + "','" + partsOfDate[2] + "-" + partsOfDate[0] + "-" + partsOfDate[1] + "T" + dateString[1]
+                       + " ','" + patient.Contact + " ','" + patient.Email + " ','" + patient.Address + " ','" + patient.Password + " ','" + patient.ParentName  + " ','" + patient.PlaceOfBirth
+                       + "','" + patient.MunicipalityOfBirth + " ','" + patient.StateOfBirth + " ','" + patient.PlaceOfResidence + " ','" + patient.MunicipalityOfResidence + " ','" + patient.StateOfResidence + " ','" + patient.Citizenship + " ','" + patient.Nationality + " ','" +
+                        patient.Profession + " ','" + patient.EmploymentStatus + " ','" + patient.MaritalStatus + " ','" +
+                         patient.HealthInsuranceNumber + " ','" + patient.FamilyDiseases + " ','" + patient.PersonalDiseases + " ','" + patient.Gender + " ','" + patient.Image + " ','" + 1 + "')";
 
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             sqlCommand.ExecuteNonQuery();
