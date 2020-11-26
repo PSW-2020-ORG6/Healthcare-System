@@ -14,8 +14,7 @@ namespace IntegrationAdapters.Models
         public string PharmacyName { get; set; }
         public string Url { get; set; }
 
-        public Api() { }
-
+        public Api() {}
 
         public Api(string Key, string PharmacyName, string Url)
         {

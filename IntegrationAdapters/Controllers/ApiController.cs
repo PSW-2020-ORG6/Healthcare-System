@@ -14,9 +14,9 @@ namespace IntegrationAdapters.Controllers
     {
         private readonly ApiService apiService;
 
-        public ApiController(HealthCareSystemDbContext context)
+        public ApiController()
         {
-            this.apiService = new ApiService(context);
+            this.apiService = new ApiService();
         }
 
         [HttpPost("registration")]
@@ -30,5 +30,6 @@ namespace IntegrationAdapters.Controllers
                 return BadRequest();
             }
         }
+        
     }
 }
