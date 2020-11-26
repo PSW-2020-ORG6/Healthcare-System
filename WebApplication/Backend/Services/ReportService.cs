@@ -16,22 +16,30 @@ namespace WebApplication.Backend.Services
             this.reportRepository = new ReportRepository();
         }
 
-        internal List<SearchEntityDTO> GetSearchedReport(string searchedReport)
+        public List<SearchEntityDTO> GetSearchedReport(string searchedReport, string dateTimes)
         {
-            string[] search = searchedReport.Split(";");
-            List<Report> firstSearchedList = reportRepository.GetReportsByProperty(search[0].Split(",")[2], search[0].Split(",")[1], false);
-            if (search.Length == 2)
-                return ConverToDTO(firstSearchedList);
-            for (int i = 1; i < search.Length; i++)
+            try
             {
-                if (search[i].Split(",")[2].Equals("AND"))
-                    firstSearchedList = OperationAND(firstSearchedList, reportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], false));
-                else if (search[i].Split(",")[2].Equals("OR"))
-                    firstSearchedList = OperationOR(firstSearchedList, reportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], false));
-                else
-                    firstSearchedList = OperationAND(firstSearchedList, reportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], true));
+                string[] search = searchedReport.Split(";");
+
+                List<Report> firstSearchedList = reportRepository.GetReportsByProperty(search[0].Split(",")[2], search[0].Split(",")[1], dateTimes);
+
+                for (int i = 1; i < search.Length; i++)
+                {
+                    if (search[i].Split(",")[0].Equals("AND"))
+                        firstSearchedList = OperationAND(firstSearchedList, reportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes));
+                    else if (search[i].Split(",")[0].Equals("OR"))
+                        firstSearchedList = OperationOR(firstSearchedList, reportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes));
+                    else
+                        firstSearchedList = OperationAND(firstSearchedList, reportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes));
+                }
+
+                return ConverToDTO(firstSearchedList);
             }
-            return ConverToDTO(firstSearchedList);
+            catch (Exception e)
+            {
+                return ConverToDTO(reportRepository.GetReportsByProperty(searchedReport.Split(",")[2], searchedReport.Split(",")[1], dateTimes));
+            }
 
         }
 
@@ -41,8 +49,8 @@ namespace WebApplication.Backend.Services
             foreach (Report report in reports)
             {
                 string text = "";
-                text +=report.Patient.FullName + "; "+report.ProcedureType.Specialization+report.Physitian.FullName+";"+report.ProcedureType.Name;
-                searchEntityDTOs.Add(new SearchEntityDTO("Report", text, report.Date));
+                text +="Patient: "+report.Patient.FullName + ";Doctor: "+report.ProcedureType.Specialization+" "+report.Physitian.FullName+"; Procedure Type: "+report.ProcedureType.Name;
+                searchEntityDTOs.Add(new SearchEntityDTO("Report", text,report.Date.ToString("dddd, MMMM dd yyyy")));
             }
             return searchEntityDTOs;
         }
@@ -54,36 +62,35 @@ namespace WebApplication.Backend.Services
             {
                 foreach (Report rsecond in secondSearchedList)
                 {
-                    if (!rfirst.SerialNumber.Equals(rsecond.SerialNumber))
+                    if (rfirst.SerialNumber.Equals(rsecond.SerialNumber))
                     {
-                        foreach (Report rReturnList in returnList)
+                        if (NotInResult(returnList, rfirst.SerialNumber))
                         {
-                            if (!rReturnList.SerialNumber.Equals(rfirst.SerialNumber) || !rReturnList.SerialNumber.Equals(rsecond.SerialNumber))
-                                returnList.Add(rfirst);
-                            returnList.Add(rsecond);
+                            returnList.Add(rfirst);
+                            break;
                         }
                     }
                 }
             }
             return returnList;
         }
+        private bool NotInResult(List<Report> returnList, string serialNumber)
+        {
+            foreach (Report rReturnList in returnList)
+            {
+                if (rReturnList.SerialNumber.Equals(serialNumber))
+                    return false;
+            }
+            return true;
+        }
         private List<Report> OperationOR(List<Report> firstSearchedList, List<Report> secondSearchedList)
         {
-            List<Report> returnList = new List<Report>();
-            foreach (Report rfirst in firstSearchedList)
+            List<Report> returnList = firstSearchedList;
+
+            foreach (Report rsecond in secondSearchedList)
             {
-                foreach (Report rsecond in secondSearchedList)
-                {
-                    if (rfirst.SerialNumber.Equals(rsecond.SerialNumber))
-                    {
-                        foreach (Report rReturnList in returnList)
-                        {
-                            if (!rReturnList.SerialNumber.Equals(rfirst.SerialNumber) || !rReturnList.SerialNumber.Equals(rsecond.SerialNumber))
-                                returnList.Add(rfirst);
-                            returnList.Add(rsecond);
-                        }
-                    }
-                }
+                if (NotInResult(returnList, rsecond.SerialNumber))
+                    returnList.Add(rsecond);
             }
             return returnList;
         }

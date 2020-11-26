@@ -26,11 +26,11 @@ namespace WebApplicationsTests
 
             prescriptions.Add(new Prescription { Date = DateTime.Today, Notes = "Uzimati po potrebi dva puta dnevno", MedicineDosage = medicineDosages1 });
             prescriptions.Add(new Prescription { Date = DateTime.Today, Notes = "Jedna tableta dnevno", MedicineDosage = medicineDosages2 });
-            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty("All", "Analgetik", false)).Returns(prescriptions);
-            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty("Medicine name", "Brufen", false)).Returns(prescriptions);
+            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty("All", "Analgetik", "")).Returns(prescriptions);
+            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty("Medicine name", "Brufen", "")).Returns(prescriptions);
 
             PrescriptionService prescriptionService = new PrescriptionService(stubRepositorty.Object);
-            List<SearchEntityDTO> searchEntityDTOs = prescriptionService.GetSearchedPrescription(",Analgetik,All;AND,Brufen,Medicine name");
+            List<SearchEntityDTO> searchEntityDTOs = prescriptionService.GetSearchedPrescription(",Analgetik,All;AND,Brufen,Medicine name","");
             Assert.NotNull(searchEntityDTOs);
         }
         [Fact]
@@ -46,15 +46,15 @@ namespace WebApplicationsTests
 
             prescriptions.Add(new Prescription { Date = DateTime.Today, Notes = "Uzimati po potrebi dva puta dnevno", MedicineDosage = medicineDosages1 });
             prescriptions.Add(new Prescription { Date = DateTime.Today, Notes = "Jedna tableta dnevno", MedicineDosage = medicineDosages2 });
-            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty("All", "Analgetik", false)).Returns(prescriptions);
-            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty("Medicine name", "Brufen", false)).Returns(prescriptions);
+            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty("All", "Analgetik", "")).Returns(prescriptions);
+            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty("Medicine name", "Brufen", "")).Returns(prescriptions);
 
             PrescriptionService prescriptionService = new PrescriptionService(stubRepositorty.Object);
-            List<SearchEntityDTO> searchEntityDTOs=prescriptionService.GetSearchedPrescription(",Analgetik,All;OR,Brufen,Medicine name");
+            List<SearchEntityDTO> searchEntityDTOs=prescriptionService.GetSearchedPrescription(",Analgetik,All;OR,Brufen,Medicine name","");
             Assert.NotNull(searchEntityDTOs);
         }
         [Fact]
-        public void Find_no_prescriptions_or()
+        public void Find_no_prescriptions_and()
         {
             var stubRepositorty = new Mock<IPrescriptionRepository>();
             List<Prescription> prescriptions1 = new List<Prescription>();
@@ -67,11 +67,11 @@ namespace WebApplicationsTests
             prescriptions1.Add(new Prescription { Date = DateTime.Today, Notes = "Uzimati po potrebi dva puta dnevno", MedicineDosage = medicineDosages1 });
             prescriptions2.Add(new Prescription { Date = DateTime.Today, Notes = "Uzimati po potrebi dva puta dnevno", MedicineDosage = medicineDosages2 });
             
-            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty("Medicine name", "Panadol", false)).Returns(prescriptions1);
-            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty("Medicine type", "Kafetin", false)).Returns(prescriptions2);
+            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty("Medicine name", "Panadol", "")).Returns(prescriptions1);
+            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty("Medicine type", "Kafetin", "")).Returns(prescriptions2);
 
             PrescriptionService prescriptionService = new PrescriptionService(stubRepositorty.Object);
-            List<SearchEntityDTO> searchEntityDTOs = prescriptionService.GetSearchedPrescription(",Panadol,Medicine name;OR,Kafetin,Medicine type");
+            List<SearchEntityDTO> searchEntityDTOs = prescriptionService.GetSearchedPrescription(",Panadol,Medicine name;AND,Kafetin,Medicine type","");
             Assert.Null(searchEntityDTOs);
         }
         [Fact]
@@ -88,12 +88,12 @@ namespace WebApplicationsTests
             prescriptions1.Add(new Prescription { Date = DateTime.Today, Notes = "Uzimati po potrebi dva puta dnevno", MedicineDosage = medicineDosages1 });
             prescriptions2.Add(new Prescription { Date = DateTime.Today, Notes = "Uzimati po potrebi dva puta dnevno", MedicineDosage = medicineDosages2 });
 
-            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty("Medicine name", "Panadol", false)).Returns(prescriptions1);
-            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty("Medicine type", "Panadol", true)).Returns(prescriptions2);
+            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty("Medicine name", "Panadol", "")).Returns(prescriptions1);
+            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty("Medicine type", "Panadol", "")).Returns(prescriptions2);
 
             PrescriptionService prescriptionService = new PrescriptionService(stubRepositorty.Object);
-            List<SearchEntityDTO> searchEntityDTOs = prescriptionService.GetSearchedPrescription(",Panadol,Medicine name;AND NOT,Panadol,Medicine type");
-            Assert.NotNull(searchEntityDTOs);
+            List<SearchEntityDTO> searchEntityDTOs = prescriptionService.GetSearchedPrescription(",Panadol,Medicine name;AND NOT,Panadol,Medicine type","");
+            Assert.Null(searchEntityDTOs);
         }
         [Fact]
         public void Find_prescriptions_and_or_and_not()
@@ -112,12 +112,12 @@ namespace WebApplicationsTests
             prescriptions1.Add(prescription1);
             prescriptions2.Add(prescription1);
             prescriptions2.Add(prescription2);
-            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty("All", "Analgetik", false)).Returns(prescriptions1);
-            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty("Medicine name", "Brufen", false)).Returns(prescriptions2);
-            stubRepositorty.Setup(l => l.GetPrescriptionsByProperty("Medicine name", "Kafetin", false)).Returns(prescriptions2);
+            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty("All", "Analgetik", "")).Returns(prescriptions1);
+            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty("Medicine name", "Brufen", "")).Returns(prescriptions2);
+            stubRepositorty.Setup(l => l.GetPrescriptionsByProperty("Medicine name", "Kafetin", "")).Returns(prescriptions2);
 
             PrescriptionService prescriptionService = new PrescriptionService(stubRepositorty.Object);
-            List<SearchEntityDTO> searchEntityDTOs = prescriptionService.GetSearchedPrescription(",Analgetik,All;OR,Brufen,Medicine name;AND,Kafetin,Medicine name");
+            List<SearchEntityDTO> searchEntityDTOs = prescriptionService.GetSearchedPrescription(",Analgetik,All;OR,Brufen,Medicine name;AND,Kafetin,Medicine name","");
             Assert.NotNull(searchEntityDTOs);
         }
         [Fact]
@@ -136,12 +136,12 @@ namespace WebApplicationsTests
 
 
             List<Prescription> emptyList=null;
-            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty("All", "Panadol", false)).Returns(emptyList);
-            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty("Medicine name", "Brufen", false)).Returns(prescriptions);
-            stubRepositorty.Setup(l => l.GetPrescriptionsByProperty("Medicine name", "Brufen", false)).Returns(prescriptions);
+            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty("All", "Panadol", "")).Returns(emptyList);
+            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty("Medicine name", "Brufen", "")).Returns(prescriptions);
+            stubRepositorty.Setup(l => l.GetPrescriptionsByProperty("Medicine name", "Brufen", "")).Returns(prescriptions);
 
             PrescriptionService prescriptionService = new PrescriptionService(stubRepositorty.Object);
-            List<SearchEntityDTO> searchEntityDTOs = prescriptionService.GetSearchedPrescription(",Panadol,All;AND,Brufen,Medicine name;OR,Brufen,Medincine name");
+            List<SearchEntityDTO> searchEntityDTOs = prescriptionService.GetSearchedPrescription(",Panadol,All;AND,Brufen,Medicine name;OR,Brufen,Medincine name","");
             Assert.Null(searchEntityDTOs);
         }
     }

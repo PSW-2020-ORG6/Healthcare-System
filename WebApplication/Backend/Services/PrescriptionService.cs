@@ -19,29 +19,29 @@ namespace WebApplication.Backend.Services
             this.iPrescriptionRepository = iPrescriptionRepository;
         }
 
-        public List<SearchEntityDTO> GetSearchedPrescription(string searchedPersription)
-        {
+        public List<SearchEntityDTO> GetSearchedPrescription(string searchedPersription,string dateTimes)
+        {   
             try
             {
                 string[] search = searchedPersription.Split(";");
 
-                List<Prescription> firstSearchedList= iPrescriptionRepository.GetPrescriptionsByProperty(search[0].Split(",")[2], search[0].Split(",")[1], false);
+                List<Prescription> firstSearchedList= prescriptionRepository.GetPrescriptionsByProperty(search[0].Split(",")[2], search[0].Split(",")[1], dateTimes);
 
                 for (int i = 1; i < search.Length; i++)
                 {
                     if (search[i].Split(",")[0].Equals("AND"))
-                        firstSearchedList = OperationAND(firstSearchedList, iPrescriptionRepository.GetPrescriptionsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], false));
+                        firstSearchedList = OperationAND(firstSearchedList, prescriptionRepository.GetPrescriptionsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes));
                     else if (search[i].Split(",")[0].Equals("OR"))
-                        firstSearchedList = OperationOR(firstSearchedList, iPrescriptionRepository.GetPrescriptionsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], false));
+                        firstSearchedList = OperationOR(firstSearchedList, prescriptionRepository.GetPrescriptionsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes));
                     else
-                        firstSearchedList = OperationAND(firstSearchedList, iPrescriptionRepository.GetPrescriptionsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], true));
+                        firstSearchedList = OperationAND(firstSearchedList, prescriptionRepository.GetPrescriptionsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes));
                 }
 
                 return ConverToDTO(firstSearchedList);
             }
             catch (Exception e)
             {
-                return ConverToDTO(iPrescriptionRepository.GetPrescriptionsByProperty(searchedPersription.Split(",")[2], searchedPersription.Split(",")[1], false));
+                return ConverToDTO(prescriptionRepository.GetPrescriptionsByProperty(searchedPersription.Split(",")[2], searchedPersription.Split(",")[1], dateTimes));
             }
 
         }
@@ -96,8 +96,8 @@ namespace WebApplication.Backend.Services
             {
                 string text="";
                 foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
-                    text += medicineDosage.Medicine.GenericName + " - " + medicineDosage.Medicine.MedicineType.Type + " - " + medicineDosage.Amount + " - " + medicineDosage.Note + ";";
-                searchEntityDTOs.Add(new SearchEntityDTO("Prescriprion", text, prescription.Date));
+                    text +="Medicine: "+ medicineDosage.Medicine.GenericName + " - " + medicineDosage.Medicine.MedicineType.Type + " - " + medicineDosage.Amount + " - " + medicineDosage.Note + ";\n";
+                searchEntityDTOs.Add(new SearchEntityDTO("Prescriprion", text, prescription.Date.ToString("dddd, MMMM dd yyyy")));
             }
             return searchEntityDTOs;
         }

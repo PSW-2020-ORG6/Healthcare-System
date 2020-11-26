@@ -16,14 +16,22 @@ namespace WebApplication.Backend.Controllers
         private readonly PrescriptionService prescriptionService;
         private readonly ReportService reportService;
         private SearchEntityDTO searchEntityDTO = new SearchEntityDTO();
+        private DateTimeDTO dateTimeDTO = new DateTimeDTO();
         public UserController()
         {
             this.prescriptionService = new PrescriptionService();
+            this.reportService = new ReportService();
         }
         [HttpGet("advancedSearch")]
-        public List<SearchEntityDTO> GetAllFeedbacks([FromQuery]string prescriptionSearch, [FromQuery] string reportSearch, [FromQuery] bool approximate, [FromQuery] string date)
+        public List<SearchEntityDTO> GetAllFeedbacks([FromQuery]string prescriptionSearch, [FromQuery] string reportSearch, [FromQuery] string date)
         {
-            return searchEntityDTO.MergeLists(prescriptionService.GetSearchedPrescription(prescriptionSearch),reportService.GetSearchedReport(reportSearch));
-        }
+            if(!searchEntityDTO.IsNotEmptySearches(prescriptionSearch, reportSearch))
+                return searchEntityDTO.MergeLists(prescriptionService.GetSearchedPrescription(prescriptionSearch, date),reportService.GetSearchedReport(reportSearch, date));
+            if (!searchEntityDTO.IsNotEmptySeacrh(prescriptionSearch))
+                return prescriptionService.GetSearchedPrescription(prescriptionSearch, date);
+            else
+                return reportService.GetSearchedReport(reportSearch, date);
+
+        }   
     }
 }
