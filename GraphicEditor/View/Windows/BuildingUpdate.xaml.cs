@@ -1,4 +1,5 @@
-﻿using GraphicEditor.ViewModel;
+﻿using GraphicEditor.HelpClasses;
+using GraphicEditor.ViewModel;
 using health_clinic_class_diagram.Backend.Model.Hospital;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,9 @@ namespace GraphicEditor.View.Windows
     /// </summary>
     public partial class BuildingUpdate : Window
     {
-        public BuildingUpdate(Building _building)
+        public BuildingUpdate(Building building, DialogAnswerListener<Building> dialogAnswerListener)
         {
-            this.DataContext = new BuildingUpdateViewModel(this, _building);
+            this.DataContext = new BuildingUpdateViewModel(this, building, dialogAnswerListener);
             InitializeComponent();
         }
     }

@@ -14,6 +14,7 @@ namespace GraphicEditor.ViewModel
             private Window _window;
             private Room _room;
             private Room _roomOriginal;
+            private DialogAnswerListener<Room> _dialogAnswerListener;
 
             public MyICommand NavCommandUpdate { get; private set; }
 
@@ -29,7 +30,7 @@ namespace GraphicEditor.ViewModel
                 }
             }
 
-            public RoomUpdateViewModel(Window window, Room _roomInfo)
+            public RoomUpdateViewModel(Window window, Room _roomInfo, DialogAnswerListener<Room> dialogAnswerListener)
             {
                 _window = window;
                 _room = _roomInfo;
@@ -41,15 +42,12 @@ namespace GraphicEditor.ViewModel
 
             void updateRoomInfo()
             {
+                _dialogAnswerListener.onConfirmUpdate(RoomInfo);
                 _window.Close();
             }
 
             void exitInfo()
             {
-                RoomInfo.SerialNumber = _roomOriginal.SerialNumber;
-                RoomInfo.Id= _roomOriginal.Id;
-                RoomInfo.RoomType = _roomOriginal.RoomType;
-                OnPropertyChanged("BedInfo");
                 _window.Close();
             }
     }

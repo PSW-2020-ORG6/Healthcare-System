@@ -179,7 +179,7 @@
                         <materialDesign:PackIcon Kind="NotebookEditOutline"
                                                  Width="25"
                                                  Height="25"/>
-                        <TextBlock Text="Update information of : "
+                        <TextBlock Text="Edit information of : "
                                    HorizontalAlignment="Center" 
                                    VerticalAlignment="Center"
                                    TextWrapping="Wrap"/>

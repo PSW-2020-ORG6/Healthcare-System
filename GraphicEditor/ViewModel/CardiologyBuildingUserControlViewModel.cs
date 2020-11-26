@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GraphicEditor.ViewModel
 {
-    public class CardiologyBuildingUserControlViewModel : BindableBase
+    public class CardiologyBuildingUserControlViewModel : BindableBase, DialogAnswerListener<Building>
     {
         private MapContentUserControlViewModel _parent;
         private List<string> _floors = new List<string>(Constants.FLOOR_MAP.Values);
@@ -101,14 +101,24 @@ namespace GraphicEditor.ViewModel
         private void editBuilding(Building _building)
         {
             Building b = new Building(Building.Id, Building.Name, Building.Floors, Building.Color, Building.Shape);
-            BuildingUpdate r = new BuildingUpdate(b);
+            BuildingUpdate r = new BuildingUpdate(b, this);
             r.ShowDialog();
-            Building.Id = b.Id;
-            Building.Name = b.Name;
-            Building.Floors = b.Floors;
-            Building.Color = b.Color;
-            Building.Shape = b.Shape;
+            
+        }
+
+        public void onConfirmUpdate(Building building)
+        {
+            Building.Id = building.Id;
+            Building.Name = building.Name;
+            Building.Floors = building.Floors;
+            Building.Color = building.Color;
+            Building.Shape = building.Shape;
             OnPropertyChanged("Building");
+        }
+
+        public void onCancelUpdate()
+        {
+            
         }
     }
 }
