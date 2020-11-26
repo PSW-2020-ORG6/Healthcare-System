@@ -15,6 +15,7 @@ namespace GraphicEditor.ViewModel
         private Window _window;
         private Building _building;
         private Building _buildingOriginal;
+        private DialogAnswerListener<Building> _dialogAnswerListener;
 
         public MyICommand NavCommandUpdate { get; private set; }
 
@@ -30,11 +31,12 @@ namespace GraphicEditor.ViewModel
             }
         }
 
-        public BuildingUpdateViewModel(Window window, Building _buildingInfo)
+        public BuildingUpdateViewModel(Window window, Building _buildingInfo, DialogAnswerListener<Building> dialogAnswerListener)
         {
             _window = window;
             _building = _buildingInfo;
             _buildingOriginal = new Building(_building.Id, _building.Name, _building.Floors, _building.Color, _building.Shape);
+            _dialogAnswerListener = dialogAnswerListener;
 
             NavCommandExit = new MyICommand(exitInfo);
             NavCommandUpdate = new MyICommand(updateBuildingInfo);
@@ -42,17 +44,12 @@ namespace GraphicEditor.ViewModel
 
         void updateBuildingInfo()
         {
+            _dialogAnswerListener.onConfirmUpdate(BuildingInfo);
             _window.Close();
         }
 
         void exitInfo()
         {
-            BuildingInfo.Id = _buildingOriginal.Id;
-            BuildingInfo.Name = _buildingOriginal.Name;
-            BuildingInfo.Floors = _buildingOriginal.Floors;
-            BuildingInfo.Color = _buildingOriginal.Color;
-            BuildingInfo.Shape = _buildingOriginal.Shape;
-            OnPropertyChanged("BedInfo");
             _window.Close();
         }
     }

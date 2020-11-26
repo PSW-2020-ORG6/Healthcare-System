@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace GraphicEditor.ViewModel
 {
-    public class RoomInformationViewModel : BindableBase
+    public class RoomInformationViewModel : BindableBase, DialogAnswerListener<Bed>, DialogAnswerListener<Room>
     {
         private Window window;
 
@@ -83,26 +83,42 @@ namespace GraphicEditor.ViewModel
         void updateBedInfo(Bed bedInfo)
         {
             Bed p = new Bed(BedInfo.Name, BedInfo.Id);
-            BedUpdate w = new BedUpdate(p);
+            BedUpdate w = new BedUpdate(p, this);
             w.ShowDialog();
-            BedInfo.Id = p.Id;
-            BedInfo.Name = p.Name;
-            OnPropertyChanged("BedInfo");
+            //BedInfo.Id = p.Id;
+            //BedInfo.Name = p.Name;
+            //OnPropertyChanged("BedInfo");
         }
 
         void updateRoomInfo(Room room)
         {
             Room rm = new Room(room.SerialNumber, room.Id, room.RoomType);
-            RoomUpdate r = new RoomUpdate(rm);
+            RoomUpdate r = new RoomUpdate(rm, this);
             r.ShowDialog();
-            RoomName = rm.SerialNumber;
-            OnPropertyChanged("RoomName");
+            
         }
 
 
         void exitInfo()
         {
             window.Close();
+        }
+
+        public void onConfirmUpdate(Bed b)
+        {
+            BedInfo.Id = b.Id;
+            BedInfo.Name = b.Name;
+            OnPropertyChanged("BedInfo");
+        }
+
+        public void onCancelUpdate()
+        {
+        }
+
+        public void onConfirmUpdate(Room room)
+        {
+            RoomName = room.SerialNumber;
+            OnPropertyChanged("RoomName");
         }
     }
 }
