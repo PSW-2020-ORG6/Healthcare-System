@@ -5,7 +5,8 @@ Vue.component("search", {
             row: 0,
             second: false,
             third: false,
-            fourth: false
+            fourth: false,
+            search:null
         }
     },
     template:
@@ -135,10 +136,7 @@ Vue.component("search", {
                                    </tbody>
                                 </table>
                             </div>
-                            <button v-if="row<3" class="circleadd" v-on:click="AddRow()"><i class="fa fa-plus"></i></button><br/><br/>                            
-                        
-                        <input id="check" type="checkbox"/>
-                        <label>Approximate search</label>
+                            <button v-if="row<3" class="circleadd" v-on:click="AddRow()"><i class="fa fa-plus"></i></button><br/><br/>
                         </div><br/><br/>
                         <div class="row">
                             <label>&nbsp&nbsp Date from &nbsp&nbsp</label><input id="dateFrom" type="date"></input>
@@ -149,17 +147,12 @@ Vue.component("search", {
                          <div class="row">
                             <h4>Search result:</h4>    
                          </div><br/>
-                         <table style="width: 100%">
-                         <th>Prescription datum</th>
-                         <tr>lek-cena-tip-opis</tr>
-                         <tr>opis</tr>
-                         </table><br/>
-                         <table style="width: 100%">
-                         <th>Report datum -tip</th>
-                         <tr>pacijent</tr>
-                         <tr>lekar</tr>
-                         <tr>opis</tr>
-                         </table>
+                         <table style = "width: 100%" v-for="s in search" >
+                            <th>{{s.type}} - {{s.date}}</th>
+                            <tr>{{s.text.split(";")[0]}}</tr>
+                            <tr>{{s.text.split(";")[1]}}</tr>
+                            <tr>{{s.text.split(";")[2]}}</tr>
+                         </table >
                     </div>
                     </div>
                 </div>
@@ -181,15 +174,15 @@ Vue.component("search", {
             this.row -= 1
         },
         AdvancedSearch: function () {
-            var date = document.getElementById("dateFrom").value + ";" + document.getElementById("dateTo").value
+            var date = "'" + document.getElementById("dateFrom").value + "' and '" + document.getElementById("dateTo").value + "'"
             if (this.Validate()) {
                 var prescriptionSearch = this.PrescriptionSearch()
                 var reportSearch = this.ReportSearch()
-
                 axios
-                    .get('http://localhost:49900/user/advancedSearch', { params: { prescriptionSearch: prescriptionSearch, reportSearch: reportSearch, approximate: document.getElementById("check").checked, date: date } })
+                    .get('http://localhost:49900/user/advancedSearch', { params: { prescriptionSearch: prescriptionSearch, reportSearch: reportSearch, date: date } })
                     .then(response => {
-                        alert('ok');
+                        this.search = response.data
+                        alert(this.search);
                     })
                     .catch(error => {
                         alert(error)
@@ -249,7 +242,6 @@ Vue.component("search", {
             return advanced
         },
         Validate: function () {
-
             if (document.getElementById("text1").value == "")
                 alert("All fields must be filled!")
             else if (this.second) {
@@ -263,7 +255,6 @@ Vue.component("search", {
                     alert("All fields must be filled!")
             }else
                 return true
-
             return false
         }
     }

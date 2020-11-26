@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class PrescriptionRepository
+    public class PrescriptionRepository: IPrescriptionRepository
     {
         private MySqlConnection connection;
         public PrescriptionRepository()
@@ -20,33 +20,32 @@ namespace WebApplication.Backend.Repositorys
             {
             }
         }
-        internal List<Prescription> GetAll()
+
+        public List<Prescription> GetPrescriptions(string sqlDml)
         {
-            return GetPrescriptions("Select * from prescriptions");
-        }
-        internal List<Prescription> GetPrescriptions(String sqlDml)
-        {
-            //sqlDml = "Select * from prescriptions where notes like 'Two per day-10 days'";
+            connection.Close();
+            connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<Prescription> resultList = new List<Prescription>();
+            List<Prescription> prescriptions = new List<Prescription>();
             while (sqlReader.Read())
             {
                 Prescription entity = new Prescription();
                 entity.SerialNumber = (string)sqlReader[0];
                 entity.Date = (DateTime)sqlReader[1];
                 entity.Notes = (string)sqlReader[2];
-                resultList.Add(entity);
+                prescriptions.Add(entity);
             }
             connection.Close();
-            foreach (Prescription prescription in resultList)
+            foreach (Prescription prescription in prescriptions)
             {
-                prescription.MedicineDosage = GetMedicineDosage("Select * from medicinedosages where PrescriptionSerialNumber like '" + prescription.SerialNumber + "'");
+                prescription.MedicineDosage = GetMedicineDosage("Select medicinedosages.SerialNumber,medicinedosages.Note,medicinedosages.Amount,medicines.SerialNumber,medicines.GenericName,medicines.CopyrightName,medicinetypes.SerialNumber,medicinetypes.Type  from medicinedosages,medicines,medicinetypes where medicinedosages.PrescriptionSerialNumber like '" + prescription.SerialNumber + "' and medicinedosages.MedicineSerialNumber like medicines.SerialNumber and medicines.MedicineTypeSerialNumber like medicinetypes.SerialNumber");
             }
-            return resultList;
+            return prescriptions;
         }
 
-        private List<MedicineDosage> GetMedicineDosage(String sqlDml)
+
+        public List<MedicineDosage> GetMedicineDosage(string sqlDml)
         {
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
@@ -57,53 +56,17 @@ namespace WebApplication.Backend.Repositorys
                 MedicineDosage entity = new MedicineDosage();
                 entity.SerialNumber = (string)sqlReader[0];
                 entity.Amount = (double)sqlReader[2];
-                entity.Note = (string)sqlReader[3];
-                entity.Medicine = new Medicine();
+                entity.Note = (string)sqlReader[1];
+                entity.Medicine = new Medicine {SerialNumber= (string)sqlReader[3],GenericName= (string)sqlReader[4],CopyrightName= (string)sqlReader[5],MedicineType=new MedicineType {SerialNumber= (string)sqlReader[6],Type= (string)sqlReader[7] } };
                 entity.Medicine.SerialNumber = (string)sqlReader[1];
                 resultList.Add(entity);
             }
             connection.Close();
-            foreach (MedicineDosage medicineDosage in resultList)
-            {
-                medicineDosage.Medicine = GetMedicine("Select * from medicines where SerialNumber like '" + medicineDosage.Medicine.SerialNumber + "'");
-            }
             return resultList;
         }
-        private Medicine GetMedicine(String sqlDml)
+        public List<Prescription> GetPrescriptionsByProperty(string property, string value, string dateTimes)
         {
-            connection.Open();
-            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
-            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-
-            Medicine entity = new Medicine();
-            while (sqlReader.Read())
-            {
-                entity.SerialNumber = (string)sqlReader[0];
-                entity.CopyrightName = (string)sqlReader[1];
-                entity.GenericName = (string)sqlReader[2];
-                entity.MedicineType = new MedicineType();
-                entity.MedicineType.SerialNumber = (string)sqlReader[4];
-            }
-            connection.Close();
-            entity.MedicineType.Type = GetMedicineType("Select type from medicinetypes where SerialNumber like '" + entity.MedicineType.SerialNumber + "'");
-
-            return entity;
-        }
-        private string GetMedicineType(string sqlDml)
-        {
-
-            connection.Open();
-            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
-            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            sqlReader.Read();
-            string type = (string)sqlReader[0];
-            connection.Close();
-            return type;
-
-        }
-        public List<Prescription> GetPrescriptionsByProperty(string property, string value,bool not)
-        {
-            List<Prescription> prescriptions = GetPrescriptions("Select prescriptions.SerialNumber,prescriptions.Date,prescriptions.Notes,medicinedosages.SerialNumber from prescriptions,medicinedosages,medicines,medicinetypes where medicines.MedicineTypeSerialNumber=medicinetypes.SerialNumber and medicinedosages.PrescriptionSerialNumber=prescriptions.SerialNumber and medicinedosages.MedicineSerialNumber=medicines.SerialNumber");
+            List<Prescription> prescriptions = GetPrescriptions("Select * from prescriptions where Date between "+dateTimes);
             List<Prescription> resultList = new List<Prescription>();
             foreach (Prescription prescription in prescriptions)
             {
@@ -111,27 +74,17 @@ namespace WebApplication.Backend.Repositorys
                 {
                     if (property.Equals("All"))
                     {
-                        if (!not)
-                        {
-                            if (medicineDosage.Medicine.GenericName.Equals(value) || medicineDosage.Medicine.MedicineType.Type.Equals(value))
-                                resultList.Add(prescription);
-                        }
-                        else
-                        {
-                            if (!medicineDosage.Medicine.GenericName.Equals(value) || !medicineDosage.Medicine.MedicineType.Type.Equals(value))
-                                resultList.Add(prescription);
-                        }
-                    }
-                    else if (property.Equals("Medicine name")) {
-                        if (!not && medicineDosage.Medicine.GenericName.Equals(value))
-                            resultList.Add(prescription);
-                        else if (not && !medicineDosage.Medicine.GenericName.Equals(value))
+                        if (medicineDosage.Medicine.GenericName.Contains(value.ToUpper()) || medicineDosage.Medicine.MedicineType.Type.Contains(value.ToUpper()))
                             resultList.Add(prescription);
                     }
-                    else {
-                        if (!not && medicineDosage.Medicine.MedicineType.Type.Equals(value))
+                    else if (property.Equals("Medicine name"))
+                    {
+                        if (medicineDosage.Medicine.GenericName.ToUpper().Contains(value.ToUpper()))
                             resultList.Add(prescription);
-                        else if(not && !medicineDosage.Medicine.MedicineType.Type.Equals(value))
+                    }
+                    else
+                    {
+                        if (medicineDosage.Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper()))
                             resultList.Add(prescription);
                     }
                 }

@@ -13,17 +13,25 @@ namespace WebApplication.Backend.Repositorys
         public PhysitianRepository()
         {
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
-            connection.Open();
+
+        }
+        public PhysitianRepository(MySqlConnection connection)
+        {
+            this.connection = connection;
 
         }
         internal List<Physitian> GetPhysitian(String sqlDml)
         {
+            connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             List<Physitian> resultList = new List<Physitian>();
             while (sqlReader.Read())
             {
                 Physitian entity = new Physitian();
+                entity.SerialNumber= (string)sqlReader[0];
+                entity.Name= (string)sqlReader[1];
+                entity.Surname= (string)sqlReader[2];
                 resultList.Add(entity);
 
             }

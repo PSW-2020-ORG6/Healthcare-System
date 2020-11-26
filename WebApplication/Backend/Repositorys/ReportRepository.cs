@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class ReportRepository
+    public class ReportRepository: IReportRepository
     {
         private MySqlConnection connection;
         public ReportRepository()
@@ -23,126 +23,100 @@ namespace WebApplication.Backend.Repositorys
             {
             }
         }
-        internal List<Report> GetAll()
-        {
-            return GetReports("Select * from reports");
-        }
 
-        internal List<Report> GetReports(String sqlDml)
+        public List<Report> GetReports(String sqlDml)
         {
+            connection.Close();
+            connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             List<Report> resultList = new List<Report>();
             while (sqlReader.Read())
             {
                 Report entity = new Report();
-                entity.SerialNumber = (string)sqlReader[0];
+                entity.SerialNumber = 
                 entity.Findings = (string)sqlReader[1];
                 entity.PatientConditions = (string)sqlReader[2];
-                entity.Patient = new Patient();
-                entity.Patient.SerialNumber=(string)sqlReader[3];
-                entity.Physitian = new Physitian();
-                entity.Physitian.SerialNumber = (string)sqlReader[4];
-                entity.ProcedureType = new ProcedureType();
-                entity.ProcedureType.SerialNumber = (string)sqlReader[5];
+                entity.Patient=new Patient { SerialNumber = (string)sqlReader[3] };
+                entity.Physitian=new Physitian { SerialNumber = (string)sqlReader[4] };
+                entity.ProcedureType=new ProcedureType { SerialNumber = (string)sqlReader[5]};
+                entity.Date=(DateTime)sqlReader[6];
                 resultList.Add(entity);
             }
             connection.Close();
             foreach (Report report in resultList)
             {
-                PatientRepository patientRepository = new PatientRepository();
+                PatientRepository patientRepository = new PatientRepository(connection);
                 report.Patient = patientRepository.GetPatientById("Select * from patients where SerialNumber like '" + report.Patient.SerialNumber + "'");
 
-                PhysitianRepository phisitionRepository = new PhysitianRepository();
-                report.Physitian = phisitionRepository.GetPhysitianById("Select * from physitians where SerialNumber like '" + report.Physitian.SerialNumber + "'");
+                PhysitianRepository phisitionRepository = new PhysitianRepository(connection);
+                report.Physitian = phisitionRepository.GetPhysitianById("Select * from accounts where SerialNumber like '" + report.Physitian.SerialNumber + "'");
 
-                report.ProcedureType =GetProcedureTypeById("Select * from proceduretypes where SerialNumber like '" + report.ProcedureType.SerialNumber + "'");
+                report.ProcedureType=GetProcedureTypeById("Select * from proceduretypes where SerialNumber like '" + report.ProcedureType.SerialNumber + "'");
 
             }
             return resultList;
         }
 
-        private ProcedureType GetProcedureTypeById(string sqlDml)
+        public ProcedureType GetProcedureTypeById(string sqlDml)
         {
+            connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            ProcedureType procedure = new ProcedureType();
             sqlReader.Read();
             ProcedureType entity = new ProcedureType();
+            entity.SerialNumber = (string)sqlReader[0];
             entity.Name = (string)sqlReader[1];
             entity.Specialization = new Specialization();
-            entity.Specialization.SerialNumber= GetSpecialization("Select Name from specializations where SerialNumber like '"+(string)sqlReader[2]+"'");
+            entity.Specialization= new Specialization { SerialNumber = (string)sqlReader[2] };
             connection.Close();
-    
-            return procedure;
+            entity.Specialization = GetSpecialization("Select * from specializations where SerialNumber like '" + entity.Specialization.SerialNumber + "'");
+            return entity;
         }
 
-        private string GetSpecialization(string sqlDml)
+        public Specialization GetSpecialization(string sqlDml)
         {
+            connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            string procedure="";
             sqlReader.Read();
-            procedure = (string)sqlReader[0];
+            Specialization specialization = new Specialization();
+            specialization.SerialNumber= (string)sqlReader[0];
+            specialization.Name= (string)sqlReader[2];
             connection.Close();
 
-            return procedure;
+            return specialization;
         }
 
-        internal List<Report> GetReportsByProperty(string property, string value, bool not)
+        public List<Report> GetReportsByProperty(string property, string value, string dateTimes)
         {
-            List<Report> reports = GetReports("Select * from reports");
+            List<Report> reports = GetReports("Select * from reports  where Date between " + dateTimes);
             List<Report> resultList = new List<Report>();
             foreach (Report report in reports)
             {
-                if (property.Equals("All")) {
-                    if (!not)
-                    {
-                        if (report.Physitian.Name.Equals(value) || report.Physitian.Surname.Equals(value) || report.Patient.Name.Equals(value) || report.Patient.Name.Equals(value))
-                            resultList.Add(report);
-                    }
-                    else
-                    {
-                        if (!report.Physitian.Name.Equals(value) || !report.Physitian.Surname.Equals(value) || !report.Patient.Name.Equals(value) || !report.Patient.Name.Equals(value))
-                            resultList.Add(report);
-
-                    }
+                if (property.Equals("All")) {                 
+                    if (report.Physitian.Name.ToUpper().Contains(value.ToUpper()) || report.Physitian.Surname.ToUpper().Contains(value.ToUpper()) || report.Patient.Name.ToUpper().Contains(value.ToUpper()) || report.Patient.Name.ToUpper().Contains(value.ToUpper()) || report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()) || report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
+                        resultList.Add(report);
                 }
                 else if (property.Equals("Patient reports"))
                 {
-                    if (!not && report.Patient.Name.Equals(value) || report.Patient.Name.Equals(value))
-                        resultList.Add(report);
-                    else if (not && !report.Patient.Name.Equals(value) || !report.Patient.Name.Equals(value))
+                    if (report.Patient.Name.ToUpper().Contains(value.ToUpper()) || report.Patient.Surname.ToUpper().Contains(value.ToUpper()))
                         resultList.Add(report);
                 }
                 else if(property.Equals("Doctor reports"))
                 {
-                    if (!not && report.Patient.Name.Equals(value) || report.Patient.Name.Equals(value))
-                        resultList.Add(report);
-                    else if (not && !report.Patient.Name.Equals(value) || !report.Patient.Name.Equals(value))
+                    if (report.Physitian.Name.ToUpper().Contains(value.ToUpper()) || report.Physitian.Surname.ToUpper().Contains(value.ToUpper()))
                         resultList.Add(report);
                 }
-                else if(property.Equals("Specialization reports"))
+                else if(property.Equals("Specialist reports"))
                 {
-                    if (!not && report.ProcedureType.Specialization.Equals(value) || report.ProcedureType.Specialization.Equals(value))
-                        resultList.Add(report);
-                    else if (not && !report.ProcedureType.Specialization.Equals(value) || !report.ProcedureType.Specialization.Equals(value))
+                    if (report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
                         resultList.Add(report);
                 }
-                else
-                {
-                    if (!not && report.ProcedureType.Name.Equals(value) || report.ProcedureType.Name.Equals(value))
+                else if (report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()))
                         resultList.Add(report);
-                    else if (not && !report.ProcedureType.Name.Equals(value) || !report.ProcedureType.Name.Equals(value))
-                        resultList.Add(report);
-                }
             }
             return resultList;
-        }
-
-        private List<Report> GetReport(string v)
-        {
-            throw new NotImplementedException();
         }
     }
 }

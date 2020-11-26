@@ -44,7 +44,7 @@ namespace Model.MedicalExam
             }
         }
 
-        public DateTime Date { get => date; }
+        public DateTime Date { get => date; set => date=value; }
         public string Findings { get => findings; set => findings = value; }
         public virtual Patient Patient { get => patient; set => patient = value; }
         public virtual Physitian Physitian { get => physitian; set => physitian = value; }
