@@ -1,4 +1,7 @@
 ﻿using GraphicEditor.HelpClasses;
+using GraphicEditor.View.Windows;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace GraphicEditor.ViewModel
 {
@@ -6,12 +9,28 @@ namespace GraphicEditor.ViewModel
     {
         private MapContentUserControlViewModel _parent;
         public MyICommand<string> NavCommand { get; private set; }
+        public MyICommand<object> AddCommand { get; private set; }
+
+        ResourceDictionary myResourceDictionary = new ResourceDictionary();
 
         public HospitalMapUserControlViewModel(MapContentUserControlViewModel parent)
         {
             _parent = parent;
             NavCommand = new MyICommand<string>(ChooseHospital);
+            AddCommand = new MyICommand<object>(AddBuilding);
         }
+
+        private void AddBuilding(object button)
+        {
+            Button but = (Button)button;
+            System.Console.WriteLine(but.Content);
+            if( but.Content.Equals("Empty field") )
+            {
+                AddBuildingViewModel.GetInstance().Button = but;
+                (new AddBuilding()).ShowDialog();
+            }
+        }
+
 
         private void ChooseHospital(string destination)
         {

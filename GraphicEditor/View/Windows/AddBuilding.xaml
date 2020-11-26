@@ -1,0 +1,103 @@
+﻿<Window x:Class="GraphicEditor.View.Windows.AddBuilding"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GraphicEditor.View.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="AddBuilding" Height="500" Width="1000">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- #Styles -->
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/ButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0"
+                   Grid.Column="0"
+                   Text="Building name:"/>
+        <TextBox x:Name="nameTextBox"
+                 Text="{Binding Path=nameText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                 Grid.Row="0"
+                 Grid.Column="1"/>
+        <TextBlock Grid.Row="1"
+                   Grid.Column="0"
+                   Text="Building color:"/>
+        <materialDesign:ColorPicker Grid.Row="1"
+                                    Grid.Column="1"
+                                    Color="{Binding Path=MyButtonColor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    HorizontalAlignment="Center"
+                                    MinWidth="100"/>
+        <TextBlock Grid.Row="2"
+                   Grid.Column="0"
+                   Text="Building shape:"/>
+        <ComboBox x:Name="BuildingShapesComboBox"
+                  Grid.Row="2"
+                  Grid.Column="1"
+                  HorizontalAlignment="Center"
+                  MinWidth="100"
+                  SelectedIndex="{Binding Shapes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ComboBoxItem IsSelected="True">
+                <StackPanel Orientation="Horizontal">
+                    <Image Height="30" 
+                               Margin="0,3,0,0"
+                               Source="/GraphicEditor;component/Resources/Icons/triangle.png"/>
+                    <TextBlock Text="Triangle" />
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <StackPanel Orientation="Horizontal">
+                    <Image Height="30" 
+                               Margin="0,3,0,0"
+                               Source="/GraphicEditor;component/Resources/Icons/uBuilding.png"/>
+                    <TextBlock Text="Ubuilding" />
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <StackPanel Orientation="Horizontal">
+                    <Image Height="30" 
+                               Margin="0,3,0,0"
+                               Source="/GraphicEditor;component/Resources/Icons/octagon.png"/>
+                    <TextBlock Text="Octagon" />
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <StackPanel Orientation="Horizontal">
+                    <Image Height="30" 
+                               Margin="0,3,0,0"
+                               Source="/GraphicEditor;component/Resources/Icons/Hole.png"/>
+                    <TextBlock Text="Hole" />
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <StackPanel Orientation="Horizontal">
+                    <Image Height="30" 
+                               Margin="0,3,0,0"
+                               Source="/GraphicEditor;component/Resources/Icons/rectangle.png"/>
+                    <TextBlock Text="Rectangle" />
+                </StackPanel>
+            </ComboBoxItem>
+        </ComboBox>
+        <Button Grid.Row="3"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Center"
+                Content="Add building"
+                Command="{Binding AddCommand}"/>
+    </Grid>
+</Window>
+
