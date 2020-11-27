@@ -8,5 +8,6 @@ namespace GraphicEditor.Repositories.Interfaces
     {
         List<Building> GetBuildings(String sqlDml);
         List<Building> GetAllBuildings();
+        List<Building> GetBuildingsByName(string name);
     }
 }

@@ -8,5 +8,6 @@ namespace WebApplication.Backend.Repositorys
     {
         List<Building> GetBuildings(String sqlDml);
         List<Building> GetAllBuildings();
+        List<Building> GetBuildingsByName(string name);
     }
 }
