@@ -63,19 +63,11 @@ namespace GraphicEditor.ViewModel
                 case Constants.BACK:
                     _parent.ContentViewModel = MapContentUserControlViewModel.HospitalMap;
                     break;
-                case Constants.BASEMENT:
-                    break;
-                case Constants.GROUND:
-                    break;
                 case Constants.FIRST:
                     FloorViewModel = FirstFloor;
                     break;
                 case Constants.SECOND:
                     FloorViewModel = SecondFloor;
-                    break;
-                case Constants.THIRD:
-                    break;
-                case Constants.FOURTH:
                     break;
             }
         }
