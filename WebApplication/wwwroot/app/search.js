@@ -9,6 +9,8 @@ Vue.component("search", {
             search:null
         }
     },
+    breforeMount() {
+    },
     template:
     `
         <div class= "container">
@@ -139,14 +141,22 @@ Vue.component("search", {
                             <button v-if="row<3" class="circleadd" v-on:click="AddRow()"><i class="fa fa-plus"></i></button><br/><br/>
                         </div><br/><br/>
                         <div class="row">
-                            <label>&nbsp&nbsp Date from &nbsp&nbsp</label><input id="dateFrom" type="date"></input>
+                            <label>&nbsp&nbsp Date from &nbsp&nbsp</label><input id="dateFrom" type="date" value="20-1-2011"></input>
                             <label>&nbsp&nbsp to &nbsp&nbsp</label><input id="dateTo" type="date"></input>
                         </div><br/><br/>
                         <button class="btnSearch btn-info btn-lg" v-on:click="AdvancedSearch()">Search</button>
                         <div class="container"><br/><hr/><br/>
                          <div class="row">
-                            <h4>Search result:</h4>    
+                            <h4>Search result:</h4>                      
                          </div><br/>
+                         <div class="row"  style="width:300px">
+                             <label>Sort by date:&nbsp&nbsp</label>
+                             <select id="sort" style="height:30px" v-on:change="Sort()">
+                                <option selected disabled>Select sort</option>
+                                <option>Ascending</option>
+                                <option>Descending</option>
+                             </select>
+                         </div>
                          <table style = "width: 100%" v-for="s in search" >
                             <th>{{s.type}} - {{s.date}}</th>
                             <tr>{{s.text.split(";")[0]}}</tr>
@@ -182,7 +192,6 @@ Vue.component("search", {
                     .get('http://localhost:49900/user/advancedSearch', { params: { prescriptionSearch: prescriptionSearch, reportSearch: reportSearch, date: date } })
                     .then(response => {
                         this.search = response.data
-                        alert(this.search);
                     })
                     .catch(error => {
                         alert(error)
@@ -256,6 +265,50 @@ Vue.component("search", {
             }else
                 return true
             return false
+        },
+        Sort: function () {
+            var sort = document.getElementById("sort").value;
+            var sorted = this.search
+            if (sort == "Ascending") {
+                for (var i = 0; i < sorted.length - 1; i++) {
+                    for (var j = i + 1; j < sorted.length; j++) {
+                        if (sorted[i].date.split(",")[1].split(" ")[2] > sorted[j].date.split(",")[1].split(" ")[2]) {
+                            let tmp = sorted[i]
+                            sorted[i] = sorted[j]
+                            sorted[j] = tmp
+                        } else if (sorted[i].date.split(",")[1].split("-")[2] == sorted[j].date.split(",")[1].split("-")[2] && sorted[i].date.split(",")[1].split(" ")[1] > sorted[j].date.split(",")[1].split(" ")[1]) {
+                            let tmp = sorted[i]
+                            sorted[i] = sorted[j]
+                            sorted[j] = tmp
+                            break
+                        } else if (sorted[i].date.split(",")[1].split(" ")[1] == sorted[j].date.split(",")[1].split(" ")[1] && sorted[i].date.split(",")[1].split(",")[0] > sorted[j].date.split(" ")[1].split("-")[0]) {
+                            let tmp = sorted[i]
+                            sorted[i] = sorted[j]
+                            sorted[j] = tmp
+                        }
+                    }
+                }
+            } else {
+                for (var i = 0; i < sorted.length - 1; i++) {
+                    for (var j = i + 1; j < sorted.length; j++) {
+                        if (sorted[i].date.split(",")[1].split(" ")[2] < sorted[j].date.split(",")[1].split(" ")[2]) {
+                            let tmp = sorted[i]
+                            sorted[i] = sorted[j]
+                            sorted[j] = tmp
+                        } else if (sorted[i].date.split(",")[1].split(" ")[2] == sorted[j].date.split(",")[1].split(" ")[2] && sorted[i].date.split(",")[1].split(" ")[1] < sorted[j].date.split(",")[1].split(" ")[1]) {
+                            let tmp = sorted[i]
+                            sorted[i] = sorted[j]
+                            sorted[j] = tmp
+                        } else if (sorted[i].date.split(",")[1].split(" ")[1] == sorted[j].date.split(",")[1].split(" ")[1] && sorted[i].date.split(",")[1].split(" ")[0] < sorted[j].date.split(",")[1].split(" ")[0]) {
+                            let tmp = sorted[i]
+                            sorted[i] = sorted[j]
+                            sorted[j] = tmp
+                        }
+                    }
+                }
+            }
+            this.search = null
+            this.search = sorted
         }
     }
 });

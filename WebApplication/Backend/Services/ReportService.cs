@@ -22,23 +22,23 @@ namespace WebApplication.Backend.Services
             {
                 string[] search = searchedReport.Split(";");
 
-                List<Report> firstSearchedList = reportRepository.GetReportsByProperty(search[0].Split(",")[2], search[0].Split(",")[1], dateTimes);
+                List<Report> firstSearchedList = reportRepository.GetReportsByProperty(search[0].Split(",")[2], search[0].Split(",")[1], dateTimes,false);
 
                 for (int i = 1; i < search.Length; i++)
                 {
                     if (search[i].Split(",")[0].Equals("AND"))
-                        firstSearchedList = OperationAND(firstSearchedList, reportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes));
+                        firstSearchedList = OperationAND(firstSearchedList, reportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes,false));
                     else if (search[i].Split(",")[0].Equals("OR"))
-                        firstSearchedList = OperationOR(firstSearchedList, reportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes));
+                        firstSearchedList = OperationOR(firstSearchedList, reportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes,false));
                     else
-                        firstSearchedList = OperationAND(firstSearchedList, reportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes));
+                        firstSearchedList = OperationAND(firstSearchedList, reportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes,true));
                 }
 
                 return ConverToDTO(firstSearchedList);
             }
             catch (Exception e)
             {
-                return ConverToDTO(reportRepository.GetReportsByProperty(searchedReport.Split(",")[2], searchedReport.Split(",")[1], dateTimes));
+                return ConverToDTO(reportRepository.GetReportsByProperty(searchedReport.Split(",")[2], searchedReport.Split(",")[1], dateTimes,false));
             }
 
         }

@@ -13,7 +13,7 @@ namespace WebApplication.Backend.Repositorys
         List<Report> GetReports(String sqlDml);
         ProcedureType GetProcedureTypeById(string sqlDml);
         Specialization GetSpecialization(string sqlDml);
-        List<Report> GetReportsByProperty(string property, string value, string dateTimes);
+        List<Report> GetReportsByProperty(string property, string value, string dateTimes,bool not);
 
     }
 }
