@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              xmlns:viewModel="clr-namespace:GraphicEditor.ViewModel"
              xmlns:viewUserControl="clr-namespace:GraphicEditor.View.UserControls"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="900">
 
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type viewModel:CardiologyFirstFloorMapUserControlViewModel}">
@@ -17,15 +17,15 @@
             <viewUserControl:CardiologySecondFloorMapUserControl/>
         </DataTemplate>
     </UserControl.Resources>
-    
-        <DockPanel>
-            <DockPanel DockPanel.Dock="Left"
-                       Width="200">
+
+    <DockPanel>
+        <DockPanel Width="250">
                 <Button DockPanel.Dock="Top" 
                         Command="{Binding Path=NavCommand}"
-                        CommandParameter="back" Margin="5,5,5,0"
-                        >
-                    <DockPanel Width="auto">
+                        CommandParameter="back" 
+                        Margin="5,5,5,0"
+                        Width="150">
+                    <DockPanel>
                         <materialDesign:PackIcon Kind="ArrowBack" 
                                                  Height="25" 
                                                  Width="25"/>
@@ -35,19 +35,37 @@
                         </TextBlock>
                     </DockPanel>
                 </Button>
-                <ListBox Cursor="Hand" 
-                         ItemsSource="{Binding Path=Floors}" 
-                         SelectedItem="{Binding Path=SelectedFloor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                         Style="{StaticResource MaterialDesignToolVerticalToggleListBox}"
-                         Margin="5,5,5,5"/>
-            </DockPanel>
-            <TextBlock DockPanel.Dock="Top" 
+
+            <ListBox Cursor="Hand" 
+                    DockPanel.Dock="Top"
+                    ItemsSource="{Binding Path=Floors}" 
+                    SelectedItem="{Binding Path=SelectedFloor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    Style="{StaticResource MaterialDesignToolVerticalToggleListBox}"
+                    Height="170" 
+                    Width="190" />
+            <Button Click="ShowRoomSearch"
+                    DockPanel.Dock="Bottom"
+                    Height="40" 
+                    VerticalAlignment="Top"
+                    Width="150">
+                <DockPanel Width="auto">
+                    <TextBlock HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center">
+                            Search rooms
+                    </TextBlock>
+                </DockPanel>
+            </Button>
+        </DockPanel>
+          
+        <TextBlock DockPanel.Dock="Top" 
                        Text="{Binding Path=SelectedFloor, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                        Style="{StaticResource MaterialDesignHeadline2TextBlock}" 
                        Margin="0,5,0,0"
                        HorizontalAlignment="Center"/>
-            <ContentControl BorderBrush="Black"
+
+        <ContentControl BorderBrush="Black"
                             BorderThickness="1"
                             Content="{Binding Path=FloorViewModel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-        </DockPanel>
+
+    </DockPanel>
 </UserControl>
