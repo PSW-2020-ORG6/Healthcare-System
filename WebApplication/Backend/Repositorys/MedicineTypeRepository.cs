@@ -14,9 +14,9 @@ namespace WebApplication.Backend.Repositorys
             connection.Open();
         }
 
-        internal List<MedicineType> GetMedicineTypes(String sqlDml)
+        private List<MedicineType> GetMedicineTypes(String query)
         {
-            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             List<MedicineType> resultList = new List<MedicineType>();
             while (sqlReader.Read())
@@ -32,7 +32,14 @@ namespace WebApplication.Backend.Repositorys
 
         public List<MedicineType> GetAllMedicineTypes()
         {
-            return GetMedicineTypes("Select * from medicineTypes");
+            try
+            {
+                return GetMedicineTypes("Select * from medicineTypes");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

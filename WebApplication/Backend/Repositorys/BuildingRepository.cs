@@ -14,9 +14,9 @@ namespace WebApplication.Backend.Repositorys
             connection.Open();
         }
 
-        public List<Building> GetBuildings(String sqlDml)
+        private List<Building> GetBuildings(String query)
         {
-            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             List<Building> resultList = new List<Building>();
             while (sqlReader.Read())
@@ -34,7 +34,14 @@ namespace WebApplication.Backend.Repositorys
 
         public List<Building> GetAllBuildings()
         {
-            return GetBuildings("Select * from buildings");
+            try
+            {
+                return GetBuildings("Select * from buildings");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public List<Building> GetBuildingsByName(string name)

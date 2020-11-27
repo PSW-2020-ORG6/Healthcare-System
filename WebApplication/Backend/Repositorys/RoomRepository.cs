@@ -14,9 +14,9 @@ namespace WebApplication.Backend.Repositorys
             connection.Open();
         }
 
-        public List<RoomGEA> GetRooms(String sqlDml)
+        private List<RoomGEA> GetRooms(String query)
         {
-            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             List<RoomGEA> resultList = new List<RoomGEA>();
             while (sqlReader.Read())
@@ -34,7 +34,14 @@ namespace WebApplication.Backend.Repositorys
 
         public List<RoomGEA> GetAllRooms()
         {
-            return GetRooms("Select * from rooms");
+            try
+            {
+                return GetRooms("Select * from rooms");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public List<RoomGEA> GetRoomsByName(string name)

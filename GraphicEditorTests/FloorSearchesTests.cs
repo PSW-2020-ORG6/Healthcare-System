@@ -31,6 +31,7 @@ namespace GraphicEditorTests
         {
             // Act
             var floors = _floorRepository.GetFloorsByName("dkghuskdgfydd");
+
             // Assert
             Assert.Empty(floors);
         }

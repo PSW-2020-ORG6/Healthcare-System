@@ -14,9 +14,9 @@ namespace WebApplication.Backend.Repositorys
             connection.Open();
         }
 
-        internal List<MedicineManufacturer> GetMedicineManufacturers(String sqlDml)
+        private List<MedicineManufacturer> GetMedicineManufacturers(String query)
         {
-            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             List<MedicineManufacturer> resultList = new List<MedicineManufacturer>();
             while (sqlReader.Read())
@@ -32,7 +32,14 @@ namespace WebApplication.Backend.Repositorys
 
         public List<MedicineManufacturer> GetAllMedicineManufacturers()
         {
-            return GetMedicineManufacturers("Select * from medicineManufacturers");
+            try
+            {
+                return GetMedicineManufacturers("Select * from medicineManufacturers");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

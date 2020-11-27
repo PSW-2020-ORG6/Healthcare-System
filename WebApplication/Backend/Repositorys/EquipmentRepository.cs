@@ -14,9 +14,9 @@ namespace WebApplication.Backend.Repositorys
             connection.Open();
         }
 
-        internal List<Equipment> GetEquipments(String sqlDml)
+        private List<Equipment> GetEquipments(String query)
         {
-            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             List<Equipment> resultList = new List<Equipment>();
             while (sqlReader.Read())
@@ -34,7 +34,14 @@ namespace WebApplication.Backend.Repositorys
 
         public List<Equipment> GetAllEquipments()
         {
-            return GetEquipments("Select * from equipments");
+            try
+            {
+                return GetEquipments("Select * from equipments");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

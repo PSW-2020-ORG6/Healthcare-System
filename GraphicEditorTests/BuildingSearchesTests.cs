@@ -31,6 +31,7 @@ namespace GraphicEditorTests
         {
             // Act
             var buildings = _buildingRepository.GetBuildingsByName("agfsdgdfhr");
+
             // Assert
             Assert.Empty(buildings);
         }

@@ -14,9 +14,9 @@ namespace WebApplication.Backend.Repositorys
             connection.Open();
         }
 
-        public List<Floor> GetFloors(String sqlDml)
+        private List<Floor> GetFloors(String query)
         {
-            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             List<Floor> resultList = new List<Floor>();
             while (sqlReader.Read())
@@ -33,7 +33,14 @@ namespace WebApplication.Backend.Repositorys
 
         public List<Floor> GetAllFloors()
         {
-            return GetFloors("Select * from floors");
+            try
+            {
+                return GetFloors("Select * from floors");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public List<Floor> GetFloorsByName(string name)

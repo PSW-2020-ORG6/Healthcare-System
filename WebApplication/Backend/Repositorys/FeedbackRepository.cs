@@ -32,9 +32,9 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///list of feedbacks
         ///</returns>
-        internal List<Feedback> GetFeedbacks(String sqlDml)
+        internal List<Feedback> GetFeedbacks(String query)
         {
-            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             List<Feedback> resultList = new List<Feedback>();
             while (sqlReader.Read())

@@ -21,7 +21,7 @@ namespace GraphicEditor.View.Windows
         {
             string roomName = RoomNameTextBox.Text;
             List<RoomGEA> rooms = roomRepository.GetRoomsByName(roomName);
-            SearchedRoomsTextBlock.Text = ReportOnFoundRooms(roomName, rooms); ;
+            SearchedRoomsTextBlock.Text = ReportOnFoundRooms(roomName, rooms);
             RoomNameTextBox.Text = null;
         }
 
@@ -41,7 +41,7 @@ namespace GraphicEditor.View.Windows
                         resultOfSearch += ",";
                 }
             }
-            return resultOfSearch += "nowhere."; ;
+            return resultOfSearch += "nowhere.";
         }
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
