@@ -26,9 +26,9 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///list of patients
         ///</returns>
-        internal List<Patient> GetPatients(String sqlDml)
+        internal List<Patient> GetPatients(String query)
         {
-            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             List<Patient> resultList = new List<Patient>();
             while (sqlReader.Read())

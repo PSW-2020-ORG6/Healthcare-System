@@ -31,6 +31,7 @@ namespace GraphicEditorTests
         {
             // Act
             var rooms = _roomRepository.GetRoomsByName("ahagkhdjaf");
+
             // Assert
             Assert.Empty(rooms);
         }
