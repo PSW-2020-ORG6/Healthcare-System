@@ -36,5 +36,17 @@ namespace WebApplication.Backend.Repositorys
         {
             return GetBuildings("Select * from buildings");
         }
+
+        public List<Building> GetBuildingsByName(string name)
+        {
+            try
+            {
+                return GetBuildings("Select * from buildings where Name like '%" + name + "%'");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }

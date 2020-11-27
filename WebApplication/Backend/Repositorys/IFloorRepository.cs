@@ -8,5 +8,6 @@ namespace WebApplication.Backend.Repositorys
     {
         List<Floor> GetFloors(String sqlDml);
         List<Floor> GetAllFloors();
+        List<Floor> GetFloorsByName(string name);
     }
 }

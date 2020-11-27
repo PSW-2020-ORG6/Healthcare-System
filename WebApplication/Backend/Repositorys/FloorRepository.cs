@@ -35,5 +35,17 @@ namespace WebApplication.Backend.Repositorys
         {
             return GetFloors("Select * from floors");
         }
+
+        public List<Floor> GetFloorsByName(string name)
+        {
+            try
+            {
+                return GetFloors("Select * from floors where Name like '%" + name + "%'");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }
