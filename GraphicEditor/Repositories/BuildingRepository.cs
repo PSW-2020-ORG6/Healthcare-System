@@ -23,7 +23,7 @@ namespace GraphicEditor.Repositories
             while (sqlReader.Read())
             {
                 Building entity = new Building();
-                entity.Id = (string)sqlReader[0];
+                entity.SerialNumber = (string)sqlReader[0];
                 entity.Name = (string)sqlReader[1];
                 entity.Color = (string)sqlReader[2];
                 entity.Shape = (string)sqlReader[3];
@@ -36,58 +36,6 @@ namespace GraphicEditor.Repositories
         public List<Building> GetAllBuildings()
         {
             return GetBuildings("Select * from buildings");
-        }
-
-        public Building GetBuildingById(String sqlDml)
-        {
-            try
-            {
-                Building building = GetBuildings(sqlDml)[0];
-                return building;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        public Building GetBuildingByName(String sqlDml)
-        {
-            try
-            {
-                Building building = GetBuildings(sqlDml)[1];
-                return building;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        public Building GetBuildingByColor(String sqlDml)
-        {
-            try
-            {
-                Building building = GetBuildings(sqlDml)[2];
-                return building;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        public Building GetBuildingByShape(String sqlDml)
-        {
-            try
-            {
-                Building building = GetBuildings(sqlDml)[3];
-                return building;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
         }
     }
 }

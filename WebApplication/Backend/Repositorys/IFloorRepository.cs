@@ -8,8 +8,5 @@ namespace WebApplication.Backend.Repositorys
     {
         List<Floor> GetFloors(String sqlDml);
         List<Floor> GetAllFloors();
-        Floor GetFloorById(String sqlDml);
-        Floor GetFloorByName(String sqlDml);
-        Floor GetFloorByBuildingId(String sqlDml);
     }
 }

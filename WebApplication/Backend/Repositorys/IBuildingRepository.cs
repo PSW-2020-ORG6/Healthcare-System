@@ -8,9 +8,5 @@ namespace WebApplication.Backend.Repositorys
     {
         List<Building> GetBuildings(String sqlDml);
         List<Building> GetAllBuildings();
-        Building GetBuildingById(String sqlDml);
-        Building GetBuildingByName(String sqlDml);
-        Building GetBuildingByColor(String sqlDml);
-        Building GetBuildingByShape(String sqlDml);
     }
 }

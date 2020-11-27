@@ -23,8 +23,9 @@ namespace WebApplication.Backend.Repositorys
             {
                 RoomGEA entity = new RoomGEA();
                 entity.SerialNumber = (string)sqlReader[0];
-                entity.Id = (string)sqlReader[1];
-                entity.FloorId = (string)sqlReader[2];
+                entity.Name = (string)sqlReader[1];
+                entity.FloorName = (string)sqlReader[2];
+                entity.BuildingName = (string)sqlReader[3];
                 resultList.Add(entity);
             }
             connection.Close();
@@ -36,38 +37,11 @@ namespace WebApplication.Backend.Repositorys
             return GetRooms("Select * from rooms");
         }
 
-        public RoomGEA GetRoomById(String sqlDml)
+        public List<RoomGEA> GetRoomsByName(string name)
         {
             try
             {
-                RoomGEA room = GetRooms(sqlDml)[1];
-                return room;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        public RoomGEA GetRoomByName(String sqlDml)
-        {
-            try
-            {
-                RoomGEA room = GetRooms(sqlDml)[0];
-                return room;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        public RoomGEA GetRoomByFloorId(String sqlDml)
-        {
-            try
-            {
-                RoomGEA room = GetRooms(sqlDml)[2];
-                return room;
+                return GetRooms("Select * from rooms where Name like '%" + name + "%'");
             }
             catch (Exception)
             {

@@ -23,9 +23,9 @@ namespace GraphicEditor.Repositories
             while (sqlReader.Read())
             {
                 Floor entity = new Floor();
-                entity.Id = (string)sqlReader[0];
+                entity.SerialNumber = (string)sqlReader[0];
                 entity.Name = (string)sqlReader[1];
-                entity.BuildingId = (string)sqlReader[2];
+                entity.BuildingName = (string)sqlReader[2];
                 resultList.Add(entity);
             }
             connection.Close();
@@ -35,45 +35,6 @@ namespace GraphicEditor.Repositories
         public List<Floor> GetAllFloors()
         {
             return GetFloors("Select * from floors");
-        }
-
-        public Floor GetFloorById(String sqlDml)
-        {
-            try
-            {
-                Floor floor = GetFloors(sqlDml)[0];
-                return floor;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        public Floor GetFloorByName(String sqlDml)
-        {
-            try
-            {
-                Floor floor = GetFloors(sqlDml)[1];
-                return floor;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        public Floor GetFloorByBuildingId(String sqlDml)
-        {
-            try
-            {
-                Floor floor = GetFloors(sqlDml)[2];
-                return floor;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
         }
     }
 }

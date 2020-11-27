@@ -8,8 +8,6 @@ namespace WebApplication.Backend.Repositorys
     {
         List<RoomGEA> GetRooms(String sqlDml);
         List<RoomGEA> GetAllRooms();
-        RoomGEA GetRoomById(String sqlDml);
-        RoomGEA GetRoomByName(String sqlDml);
-        RoomGEA GetRoomByFloorId(String sqlDml);
+        List<RoomGEA> GetRoomsByName(string name);
     }
 }
