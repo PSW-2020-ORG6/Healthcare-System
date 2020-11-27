@@ -11,40 +11,46 @@ namespace WebApplication.Backend.Services
     public class ReportService
     {
         private ReportRepository reportRepository;
+        private IReportRepository iReportRepository;
         public ReportService()
         {
             this.reportRepository = new ReportRepository();
         }
-
+        public ReportService(IReportRepository iReportRepository)
+        {
+            this.iReportRepository = iReportRepository;
+        }
         public List<SearchEntityDTO> GetSearchedReport(string searchedReport, string dateTimes)
         {
             try
             {
                 string[] search = searchedReport.Split(";");
 
-                List<Report> firstSearchedList = reportRepository.GetReportsByProperty(search[0].Split(",")[2], search[0].Split(",")[1], dateTimes,false);
+                List<Report> firstSearchedList = iReportRepository.GetReportsByProperty(search[0].Split(",")[2], search[0].Split(",")[1], dateTimes,false);
 
                 for (int i = 1; i < search.Length; i++)
                 {
                     if (search[i].Split(",")[0].Equals("AND"))
-                        firstSearchedList = OperationAND(firstSearchedList, reportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes,false));
+                        firstSearchedList = OperationAND(firstSearchedList, iReportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes,false));
                     else if (search[i].Split(",")[0].Equals("OR"))
-                        firstSearchedList = OperationOR(firstSearchedList, reportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes,false));
+                        firstSearchedList = OperationOR(firstSearchedList, iReportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes,false));
                     else
-                        firstSearchedList = OperationAND(firstSearchedList, reportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes,true));
+                        firstSearchedList = OperationAND(firstSearchedList, iReportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes,true));
                 }
 
                 return ConverToDTO(firstSearchedList);
             }
             catch (Exception e)
             {
-                return ConverToDTO(reportRepository.GetReportsByProperty(searchedReport.Split(",")[2], searchedReport.Split(",")[1], dateTimes,false));
+                return ConverToDTO(iReportRepository.GetReportsByProperty(searchedReport.Split(",")[2], searchedReport.Split(",")[1], dateTimes,false));
             }
 
         }
 
         private List<SearchEntityDTO> ConverToDTO(List<Report> reports)
         {
+            if (reports == null || reports.Count == 0)
+                return null;
             List<SearchEntityDTO> searchEntityDTOs = new List<SearchEntityDTO>();
             foreach (Report report in reports)
             {
