@@ -1,4 +1,6 @@
-﻿using GraphicEditor.ViewModel;
+﻿using GraphicEditor.View.Windows;
+using GraphicEditor.ViewModel;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace GraphicEditor.View.UserControls
@@ -12,6 +14,12 @@ namespace GraphicEditor.View.UserControls
         {
             InitializeComponent();
             this.DataContext = MapContentUserControlViewModel.HospitalMap;
+        }
+
+        private void ShowRoomSearch(object sender, RoutedEventArgs e)
+        {
+            RoomSearch roomSearch = new RoomSearch();
+            roomSearch.Show();
         }
     }
 }
