@@ -20,17 +20,18 @@ namespace WebApplication.Backend.Controllers
             registrationService = new RegistrationService();
         }
 
+        ///Aleksandra Milijevic RA 22/2017
+        /// <summary>
+        ///calls method for adding new patient in patient table
+        ///</summary>
+        ///<returns>
+        ///information about sucess in string format
+        ///</returns>
         [HttpPost("registerPatient")]
         public IActionResult RegisterPatient(PatientDTO patientDTO)
         {
-            if (patientDTO.IsCorrectName() && patientDTO.IsCorrectSurname() && patientDTO.IsCorrectParentName() && patientDTO.IsCorrectId() &&
-                patientDTO.IsCorrectDateOfBirth() && patientDTO.IsCorrectPlaceOfBirth() && patientDTO.IsCorrectMunicipalityOfBirth() &&
-                patientDTO.IsCorrectStateOfBirth() && patientDTO.IsCorrectNationality() && patientDTO.IsCorrectCitizenship() && patientDTO.IsCorrectAddress() &&
-                patientDTO.IsCorrectPlaceOfResidence() && patientDTO.IsCorrectMunicipalityOfResidence() && patientDTO.IsCorrectStateOfResidence() &&
-                patientDTO.IsCorrectProfession() && patientDTO.IsCorrectEmploymentStatus() && patientDTO.IsCorrectMaritalStatus() && patientDTO.IsCorrectContact() &&
-                patientDTO.IsCorrectEmail() && patientDTO.IsCorrectPassword() && patientDTO.IsCorrectGender() && patientDTO.IsCorrectHealthInsuranceNumber())
+            if (patientDTO.IsCorectRegistrationFields())
             {
-
                 if (registrationService.RegisterPatient(new Patient(patientDTO)))
                 {
                     return Ok();

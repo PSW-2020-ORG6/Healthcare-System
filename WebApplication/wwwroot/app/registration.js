@@ -37,6 +37,10 @@
 		<hr class="line">
 		
 		<table class="t">
+			<colgroup>
+                 <col style="width: 60%;">
+                 <col style="width: 40%;">
+            </colgroup>
 			<tr>
 				<td><label>Name</label><a class="star">*</a></td>
 				<td><input type="text" v-model="patientDTO.name"/></td><br/>
@@ -158,7 +162,7 @@
 			<tr>
 				<td><label>Employment status</label><a class="star">*</a></td>
 				<td><select class="combo" v-model="patientDTO.employmentStatus">
-					<option selected="selected">Employed</option>
+					<option>Employed</option>
 					<option>Unemployed</option>
 				</select></td><br/>
 			</tr>
@@ -253,36 +257,36 @@
 		nameValidation: function () {
 			if (this.patientDTO.name != undefined && this.patientDTO.name.length > 0) {
 				let nameMatch = this.patientDTO.name.match('[A-Za-z ]*');
-				if (nameMatch != this.patientDTO.name) return 'Ime u sebi moze sadrzati iskljucivo slova.';
-				else if (this.patientDTO.name[0].match('[A-Z]') === null) return 'Ime mora pocinjati velikim slovom.';
+				if (nameMatch != this.patientDTO.name) return 'The name may contain only letters';
+				else if (this.patientDTO.name[0].match('[A-Z]') === null) return 'The name must begin with a capital letter';
 			}
-			else if (this.patientDTO.name === '') return 'Ime je obavezno polje.';
+			else if (this.patientDTO.name === '') return 'Name is a required field';
 			else return null;
 		},
 		surnameValidation: function () {
 			if (this.patientDTO.surname != undefined && this.patientDTO.surname.length > 0) {
 				let surnameMatch = this.patientDTO.surname.match('[A-Za-z ]*');
-				if (surnameMatch != this.patientDTO.surname) return 'Prezimese u sebi moze sadrzati iskljucivo slova';
-				else if (this.patientDTO.surname[0].match('[A-Z]') === null) return 'Prezime mora pocinjati velikim slovom';
+				if (surnameMatch != this.patientDTO.surname) return 'The surname may contain only letters';
+				else if (this.patientDTO.surname[0].match('[A-Z]') === null) return 'The surname must begin with a capital letter';
 			}
-			else if (this.patientDTO.surname === '') return 'Prezime je obavezno polje.';
+			else if (this.patientDTO.surname === '') return 'Surname is a required field';
 			else return null;
 		},
 		parentNameValidation: function () {
 			if (this.patientDTO.parentName != undefined && this.patientDTO.parentName.length > 0) {
 				let parentNameMatch = this.patientDTO.parentName.match('[A-Za-z ]*');
-				if (parentNameMatch != this.patientDTO.parentName) return 'Ime roditelja u sebi moze sadrzati iskljucivo slova';
-				else if (this.patientDTO.parentName[0].match('[A-Z]') === null) return 'Ime roditelja mora pocinjati velikim slovom';
+				if (parentNameMatch != this.patientDTO.parentName) return 'The parent name may contain only letters';
+				else if (this.patientDTO.parentName[0].match('[A-Z]') === null) return 'The parent name must begin with a capital letter';
 			}
-			else if (this.patientDTO.parentName === '') return 'Prezime je obavezno polje.';
+			else if (this.patientDTO.parentName === '') return 'Parent name is a required field';
 			else return null;
 		},
 		mailValidation: function () {
 			if (this.patientDTO.email != undefined && this.patientDTO.email.length > 0) {
 				let mailMatch = this.patientDTO.email.match("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$");
-				if (mailMatch != this.patientDTO.email) return 'Nije dobra forma mail-a';
+				if (mailMatch != this.patientDTO.email) return 'Not a good form of mail';
 			}
-			else if (this.patientDTO.email === '') return 'Mail je obavezno polje.';
+			else if (this.patientDTO.email === '') return 'Mail name is a required field';
 			else return null;
 		},
     },
@@ -295,17 +299,7 @@
 				this.patientDTO.image = e.target.result;
 			};
 		},
-		//uploadImage(e) {
-		//	const image = e.target.files[0];
-		//	const reader = new FileReader();
-		//	reader.readAsDataURL(image);
-		//	reader.onload = e => {
-		//		this.previewImage = e.target.result;
-		//		console.log(this.previewImage);
-		//	};
-		//},
 		AddPatient: function (patientDTO) {
-			//alert(patient.image);
 			if (patientDTO.name != null && patientDTO.surname != null && patientDTO.parentName != null && patientDTO.id != null
 				&& patientDTO.dateOfBirth != null && patientDTO.placeOfBirth != null && patientDTO.municipalityOfBirth != null && patientDTO.stateOfBirth != null
 				&& patientDTO.nationality != null && patientDTO.citizenship != null && patientDTO.address != null && patientDTO.placeOfResidence != null
