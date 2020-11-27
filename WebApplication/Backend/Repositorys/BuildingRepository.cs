@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class BuildingRepository
+    public class BuildingRepository : IBuildingRepository
     {
         private MySqlConnection connection;
         public BuildingRepository()
@@ -14,7 +14,7 @@ namespace WebApplication.Backend.Repositorys
             connection.Open();
         }
 
-        internal List<Building> GetBuildings(String sqlDml)
+        public List<Building> GetBuildings(String sqlDml)
         {
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -35,6 +35,58 @@ namespace WebApplication.Backend.Repositorys
         public List<Building> GetAllBuildings()
         {
             return GetBuildings("Select * from buildings");
+        }
+
+        public Building GetBuildingById(String sqlDml)
+        {
+            try
+            {
+                Building building = GetBuildings(sqlDml)[0];
+                return building;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public Building GetBuildingByName(String sqlDml)
+        {
+            try
+            {
+                Building building = GetBuildings(sqlDml)[1];
+                return building;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public Building GetBuildingByColor(String sqlDml)
+        {
+            try
+            {
+                Building building = GetBuildings(sqlDml)[2];
+                return building;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public Building GetBuildingByShape(String sqlDml)
+        {
+            try
+            {
+                Building building = GetBuildings(sqlDml)[3];
+                return building;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }
