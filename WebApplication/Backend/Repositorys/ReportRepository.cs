@@ -88,13 +88,51 @@ namespace WebApplication.Backend.Repositorys
             return specialization;
         }
 
-        public List<Report> GetReportsByProperty(string property, string value, string dateTimes)
+        public List<Report> GetReportsByProperty(string property, string value, string dateTimes, bool not)
         {
             List<Report> reports = GetReports("Select * from reports  where Date between " + dateTimes);
+            if (not)
+                return Negation(property, value, reports);
+            return Regular(property, value, reports);
+        }
+
+        private List<Report> Negation(string property, string value, List<Report> reports)
+        {
             List<Report> resultList = new List<Report>();
             foreach (Report report in reports)
             {
-                if (property.Equals("All")) {                 
+                if (property.Equals("All"))
+                {
+                    if (!report.Physitian.Name.ToUpper().Contains(value.ToUpper()) && !report.Physitian.Surname.ToUpper().Contains(value.ToUpper()) && !report.Patient.Name.ToUpper().Contains(value.ToUpper()) && !report.Patient.Name.ToUpper().Contains(value.ToUpper()) && !report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()) && !report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
+                        resultList.Add(report);
+                }
+                else if (property.Equals("Patient reports"))
+                {
+                    if (!report.Patient.Name.ToUpper().Contains(value.ToUpper()) && !report.Patient.Surname.ToUpper().Contains(value.ToUpper()))
+                        resultList.Add(report);
+                }
+                else if (property.Equals("Doctor reports"))
+                {
+                    if (!report.Physitian.Name.ToUpper().Contains(value.ToUpper()) && !report.Physitian.Surname.ToUpper().Contains(value.ToUpper()))
+                        resultList.Add(report);
+                }
+                else if (property.Equals("Specialist reports"))
+                {
+                    if (!report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
+                        resultList.Add(report);
+                }
+                else if (!report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()))
+                    resultList.Add(report);
+            }
+            return resultList;
+        }
+        private List<Report> Regular(string property, string value, List<Report> reports)
+        {
+            List<Report> resultList = new List<Report>();
+            foreach (Report report in reports)
+            {
+                if (property.Equals("All"))
+                {
                     if (report.Physitian.Name.ToUpper().Contains(value.ToUpper()) || report.Physitian.Surname.ToUpper().Contains(value.ToUpper()) || report.Patient.Name.ToUpper().Contains(value.ToUpper()) || report.Patient.Name.ToUpper().Contains(value.ToUpper()) || report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()) || report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
                         resultList.Add(report);
                 }
@@ -103,18 +141,18 @@ namespace WebApplication.Backend.Repositorys
                     if (report.Patient.Name.ToUpper().Contains(value.ToUpper()) || report.Patient.Surname.ToUpper().Contains(value.ToUpper()))
                         resultList.Add(report);
                 }
-                else if(property.Equals("Doctor reports"))
+                else if (property.Equals("Doctor reports"))
                 {
                     if (report.Physitian.Name.ToUpper().Contains(value.ToUpper()) || report.Physitian.Surname.ToUpper().Contains(value.ToUpper()))
                         resultList.Add(report);
                 }
-                else if(property.Equals("Specialist reports"))
+                else if (property.Equals("Specialist reports"))
                 {
                     if (report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
                         resultList.Add(report);
                 }
                 else if (report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()))
-                        resultList.Add(report);
+                    resultList.Add(report);
             }
             return resultList;
         }

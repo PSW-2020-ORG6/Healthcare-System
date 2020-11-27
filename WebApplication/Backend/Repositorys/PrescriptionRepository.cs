@@ -64,9 +64,41 @@ namespace WebApplication.Backend.Repositorys
             connection.Close();
             return resultList;
         }
-        public List<Prescription> GetPrescriptionsByProperty(string property, string value, string dateTimes)
+        public List<Prescription> GetPrescriptionsByProperty(string property, string value, string dateTimes,bool not)
         {
             List<Prescription> prescriptions = GetPrescriptions("Select * from prescriptions where Date between "+dateTimes);
+            if(not)
+                return Negation(property, value, prescriptions);
+            return Regular(property, value, prescriptions);
+        }
+        private List<Prescription> Negation(string property, string value, List<Prescription> prescriptions)
+        {
+            List<Prescription> resultList = new List<Prescription>();
+            foreach (Prescription prescription in prescriptions)
+            {
+                foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
+                {
+                    if (property.Equals("All"))
+                    {
+                        if (!medicineDosage.Medicine.GenericName.Contains(value.ToUpper()) && !medicineDosage.Medicine.MedicineType.Type.Contains(value.ToUpper()))
+                            resultList.Add(prescription);
+                    }
+                    else if (property.Equals("Medicine name"))
+                    {
+                        if (!medicineDosage.Medicine.GenericName.ToUpper().Contains(value.ToUpper()))
+                            resultList.Add(prescription);
+                    }
+                    else
+                    {
+                        if (!medicineDosage.Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper()))
+                            resultList.Add(prescription);
+                    }
+                }
+            }
+            return resultList;
+        }
+        private List<Prescription> Regular(string property, string value, List<Prescription> prescriptions)
+        {
             List<Prescription> resultList = new List<Prescription>();
             foreach (Prescription prescription in prescriptions)
             {

@@ -11,6 +11,6 @@ namespace WebApplication.Backend.Repositorys
     {
         List<Prescription> GetPrescriptions(string sqlDml);
         List<MedicineDosage> GetMedicineDosage(string sqlDml);
-        List<Prescription> GetPrescriptionsByProperty(string property, string value, string dateTimes);
+        List<Prescription> GetPrescriptionsByProperty(string property, string value, string dateTimes, bool not);
     }
 }

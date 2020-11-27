@@ -34,21 +34,37 @@ namespace WebApplication.Backend.DTO
             catch (Exception e) { }
             return searchEntityDTOs;
         }
-        public bool IsNotEmptySearches(string prescriptionSearch,string reportSearch)
+        public bool IsValicSeacrhes(string prescriptionSearch,string reportSearch)
         {   
             if (prescriptionSearch==null || reportSearch==null || prescriptionSearch.Split(";").Length < 0 || prescriptionSearch.Split(",").Length < 3 || prescriptionSearch.Split(",").Length > 3 || reportSearch.Split(";").Length < 0 || reportSearch.Split(",").Length < 3 || reportSearch.Split(",").Length > 3)
-                return true;
-            return false;
+                return false;
+            return true;
         }
-        public bool IsNotEmptySeacrh(string search)
+        public bool IsValicSeacrh(string search)
         {
             if (search == null || search == null || search.Split(";").Length < 0 || search.Split(",").Length < 3 || search.Split(",").Length > 3)
-                return true;
-            return false;
+                return false;
+            return true;
         }
         public bool IsDateFormatValid(string date)
         {
-            return true;
+            try
+            {
+                if (date.Split("and")[0].Split("-").Length < 3 || date.Split("and")[1].Split("-").Length < 3 || date.Split("and")[0].Split("-").Length > 3 || date.Split("and")[1].Split("-").Length > 3)
+                    return false;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public bool IsNull(List<SearchEntityDTO> searchEntityDTOs)
+        {
+            if (searchEntityDTOs == null)
+                return true;
+            return false;
         }
     }
 }
