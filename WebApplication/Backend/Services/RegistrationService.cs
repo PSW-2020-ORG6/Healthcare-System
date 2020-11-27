@@ -19,6 +19,15 @@ namespace WebApplication.Backend.Services
             this.iregistrationRepository = iregistrationRepository;
         }
 
+        ///Aleksandra Milijevic RA 22/2017
+        /// <summary>
+        ///calls method for adding new row in patient table
+        ///</summary>
+        ///<returns>
+        ///true or false depending on sucess
+        ///</returns>
+        ///<param name="patient"> Patient type object
+        ///</param>>
         public bool RegisterPatient(Patient patient)
         {
             if (IsJMBGValid(patient.Id))
@@ -31,9 +40,18 @@ namespace WebApplication.Backend.Services
             }
         }
 
-        public bool IsJMBGValid(String jmbg)
+        ///Aleksandra Milijevic RA 22/2017
+        /// <summary>
+        ///calls a method to check for the existence of an id number
+        ///</summary>
+        ///<returns>
+        ///true or false depending on sucess
+        ///</returns>
+        ///<param name="patient"> Patient type object
+        ///</param>>
+        public bool IsJMBGValid(String idNumber)
         {
-            String id = iregistrationRepository.GetPatientIdById(jmbg);
+            String id = iregistrationRepository.GetPatientIdById(idNumber);
 
             if (id ==  "" || id == null)
             {

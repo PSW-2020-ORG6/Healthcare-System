@@ -9,7 +9,7 @@ using WebApplication.Backend.Model;
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201126214729_migration1")]
+    [Migration("20201127182853_migration1")]
     partial class migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,8 +24,8 @@ namespace WebApplication.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<string>("AddressSerialNumber")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<string>("Citizenship")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -104,6 +104,8 @@ namespace WebApplication.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AddressSerialNumber");
+
                     b.ToTable("Patients");
                 });
 
@@ -127,6 +129,26 @@ namespace WebApplication.Migrations
                     b.HasKey("SerialNumber");
 
                     b.ToTable("Feedbacks");
+                });
+
+            modelBuilder.Entity("Model.Util.Address", b =>
+                {
+                    b.Property<string>("SerialNumber")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("SerialNumber");
+
+                    b.ToTable("Addresses");
+                });
+
+            modelBuilder.Entity("Model.Accounts.Patient", b =>
+                {
+                    b.HasOne("Model.Util.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressSerialNumber");
                 });
 #pragma warning restore 612, 618
         }

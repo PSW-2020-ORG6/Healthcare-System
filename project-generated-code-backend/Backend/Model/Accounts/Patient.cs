@@ -32,9 +32,8 @@ namespace Model.Accounts
         private String personalDiseases;
         private String image;
         private bool guest;
-        //private string password;
 
-        public Patient(string name, string surname, string id, DateTime dateOfBirth, string contact, string email, String address, string parentName, string gender, string password, bool isGuest = false)
+        public Patient(string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string parentName, string gender, string password, bool isGuest = false)
             : base(Guid.NewGuid().ToString(), name, surname, id, dateOfBirth, contact, email, address, password)
         {
             this.parentName = parentName;
@@ -43,7 +42,7 @@ namespace Model.Accounts
             this.password = password;
         }
         [JsonConstructor]
-        public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, String address, string parentName, string gender, string password, bool isGuest = false)
+        public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string parentName, string gender, string password, bool isGuest = false)
             : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address, password)
         {
             this.parentName = parentName;
@@ -51,8 +50,7 @@ namespace Model.Accounts
             this.Guest = isGuest;
             this.password = password;
         }
-
-        public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, string address, string parentName, string placeOfBirth, string municipalityOfBirth, string stateOfBirth, String citizenship, string nationality, string profession, string placeOfResidence, string municipalityOfResidence, string stateOfResidence, string employmentStatus, string maritalStatus,string healthInsuranceNumber,string familyDiseases, string personalDiseases, string gender, string password, string image, bool isGuest = false)
+        public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string parentName, string placeOfBirth, string municipalityOfBirth, string stateOfBirth, String citizenship, string nationality, string profession, string placeOfResidence, string municipalityOfResidence, string stateOfResidence, string employmentStatus, string maritalStatus,string healthInsuranceNumber,string familyDiseases, string personalDiseases, string gender, string password, string image, bool isGuest = false)
             : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address, password)
         {
             this.parentName = parentName;
@@ -77,7 +75,7 @@ namespace Model.Accounts
         }
 
         [JsonConstructor]
-        public Patient(PatientDTO patientDTO) : base(Guid.NewGuid().ToString(), patientDTO.Name, patientDTO.Surname, patientDTO.Id, patientDTO.DateOfBirth, patientDTO.Contact, patientDTO.Email, patientDTO.Address, patientDTO.Password)
+        public Patient(PatientDTO patientDTO) : base(Guid.NewGuid().ToString(), patientDTO.Name, patientDTO.Surname, patientDTO.Id, patientDTO.DateOfBirth, patientDTO.Contact, patientDTO.Email, new Address { Street = patientDTO.Address }, patientDTO.Password)
         {
             this.parentName = patientDTO.ParentName;
             this.gender = patientDTO.Gender;
@@ -122,7 +120,6 @@ namespace Model.Accounts
         public string Gender { get => gender; set => gender = value; }
         public string Image { get => image; set => image = value; }
         public bool Guest { get => guest; set => guest = value; }
-        //public string Password { get => password; set => password = value; }
 
         public override string ToString()
         {
