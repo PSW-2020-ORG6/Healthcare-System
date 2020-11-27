@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class RoomRepository
+    public class RoomRepository : IRoomRepository
     {
         private MySqlConnection connection;
         public RoomRepository()
@@ -14,7 +14,7 @@ namespace WebApplication.Backend.Repositorys
             connection.Open();
         }
 
-        internal List<RoomGEA> GetRooms(String sqlDml)
+        public List<RoomGEA> GetRooms(String sqlDml)
         {
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -34,6 +34,45 @@ namespace WebApplication.Backend.Repositorys
         public List<RoomGEA> GetAllRooms()
         {
             return GetRooms("Select * from rooms");
+        }
+
+        public RoomGEA GetRoomById(String sqlDml)
+        {
+            try
+            {
+                RoomGEA room = GetRooms(sqlDml)[1];
+                return room;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public RoomGEA GetRoomByName(String sqlDml)
+        {
+            try
+            {
+                RoomGEA room = GetRooms(sqlDml)[0];
+                return room;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public RoomGEA GetRoomByFloorId(String sqlDml)
+        {
+            try
+            {
+                RoomGEA room = GetRooms(sqlDml)[2];
+                return room;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

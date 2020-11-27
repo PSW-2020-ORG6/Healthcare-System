@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class FloorRepository
+    public class FloorRepository : IFloorRepository
     {
         private MySqlConnection connection;
         public FloorRepository()
@@ -14,7 +14,7 @@ namespace WebApplication.Backend.Repositorys
             connection.Open();
         }
 
-        internal List<Floor> GetFloors(String sqlDml)
+        public List<Floor> GetFloors(String sqlDml)
         {
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -34,6 +34,45 @@ namespace WebApplication.Backend.Repositorys
         public List<Floor> GetAllFloors()
         {
             return GetFloors("Select * from floors");
+        }
+
+        public Floor GetFloorById(String sqlDml)
+        {
+            try
+            {
+                Floor floor = GetFloors(sqlDml)[0];
+                return floor;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public Floor GetFloorByName(String sqlDml)
+        {
+            try
+            {
+                Floor floor = GetFloors(sqlDml)[1];
+                return floor;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public Floor GetFloorByBuildingId(String sqlDml)
+        {
+            try
+            {
+                Floor floor = GetFloors(sqlDml)[2];
+                return floor;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }
