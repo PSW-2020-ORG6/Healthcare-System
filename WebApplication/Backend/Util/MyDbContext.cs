@@ -40,11 +40,13 @@ namespace WebApplication.Backend.Model
                  new Patient { Name = "Sara", Surname = "Milic", Id = "0003", DateOfBirth = new DateTime(2018, 1, 18), Contact = "kontaktMica", Password = "sifraMica", Address = new Address("neka adresaMica"), ParentName = "mama", Gender = "Zensko", Email = "emailMica", Guest = true }
             );
             modelBuilder.Entity<Building>().HasData(
-              new Building { SerialNumber = "10001", Name = "Cardiology", Color = "Orange", Shape = "Square" }
+              new Building { SerialNumber = "10001", Name = "Cardiology", Color = "Orange", Shape = "Square" },
+              new Building { SerialNumber = "10002", Name = "Orthopedy", Color = "Dark Orange", Shape = "Square" }
             );
             modelBuilder.Entity<Floor>().HasData(
               new Floor { SerialNumber = "1001", Name = "Floor1", BuildingName = "Cardiology" },
-              new Floor { SerialNumber = "1002", Name = "Floor2", BuildingName = "Cardiology" }
+              new Floor { SerialNumber = "1002", Name = "Floor2", BuildingName = "Cardiology" },
+              new Floor { SerialNumber = "1003", Name = "Floor1", BuildingName = "Orthopedy" }
             );
             modelBuilder.Entity<RoomGEA>().HasData(
                 new RoomGEA { SerialNumber = "101", Name = "Examination room", FloorName = "Floor 1", BuildingName = "Cardiology" },
@@ -54,7 +56,13 @@ namespace WebApplication.Backend.Model
                 new RoomGEA { SerialNumber = "105", Name = "Store room", FloorName = "Floor 1", BuildingName = "Cardiology" },
                 new RoomGEA { SerialNumber = "106", Name = "Operation room", FloorName = "Floor 2", BuildingName = "Cardiology" },
                 new RoomGEA { SerialNumber = "107", Name = "Operation room", FloorName = "Floor 2", BuildingName = "Cardiology" },
-                new RoomGEA { SerialNumber = "108", Name = "Store room", FloorName = "Floor 2", BuildingName = "Cardiology" }
+                new RoomGEA { SerialNumber = "108", Name = "Store room", FloorName = "Floor 2", BuildingName = "Cardiology" },
+                new RoomGEA { SerialNumber = "109", Name = "Examination room", FloorName = "Floor 1", BuildingName = "Orthopedy" },
+                new RoomGEA { SerialNumber = "110", Name = "Operation room", FloorName = "Floor 1", BuildingName = "Orthopedy" },
+                new RoomGEA { SerialNumber = "111", Name = "Examination room", FloorName = "Floor 1", BuildingName = "Orthopedy" },
+                new RoomGEA { SerialNumber = "112", Name = "Store room", FloorName = "Floor 1", BuildingName = "Orthopedy" },
+                new RoomGEA { SerialNumber = "113", Name = "Examination room", FloorName = "Floor 1", BuildingName = "Orthopedy" },
+                new RoomGEA { SerialNumber = "114", Name = "Examination room", FloorName = "Floor 1", BuildingName = "Orthopedy" }
             );
         }
     }

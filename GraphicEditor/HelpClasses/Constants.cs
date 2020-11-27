@@ -26,24 +26,11 @@ namespace GraphicEditor.HelpClasses
         // Constants used for building floors
         public static readonly Dictionary<string, string> FLOOR_MAP = new Dictionary<string, string>()
         {
-            {BASEMENT , "Basement"},
-            {GROUND , "Ground floor"},
             {FIRST, "First floor"},
-            {SECOND, "Second floor" },
-            {THIRD, "Third floor" },
-            {FOURTH, "Fourth floor" },
+            {SECOND, "Second floor" }
         };
 
-        public const string BASEMENT = "basement";
-        public const string GROUND = "ground";
         public const string FIRST = "first";
         public const string SECOND = "second";
-        public const string THIRD = "third";
-        public const string FOURTH = "fourth";
-        public const string FIFTH = "fifth";
-        public const string SIXTH = "sixth";
-        public const string SEVENTH = "seventh";
-        public const string EIGHTH = "eighth";
-        public const string NINTH = "ninth";
     }
 }

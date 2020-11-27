@@ -20,29 +20,29 @@
 
     <DockPanel>
         <DockPanel Width="250">
-                <Button DockPanel.Dock="Top" 
+            <Button DockPanel.Dock="Top" 
                         Command="{Binding Path=NavCommand}"
                         CommandParameter="back" 
                         Margin="5,5,5,0"
                         Width="150">
-                    <DockPanel>
-                        <materialDesign:PackIcon Kind="ArrowBack" 
+                <DockPanel>
+                    <materialDesign:PackIcon Kind="ArrowBack" 
                                                  Height="25" 
                                                  Width="25"/>
-                        <TextBlock HorizontalAlignment="Center" 
+                    <TextBlock HorizontalAlignment="Center" 
                                    VerticalAlignment="Center">
                         BACK TO MAP
-                        </TextBlock>
-                    </DockPanel>
-                </Button>
+                    </TextBlock>
+                </DockPanel>
+            </Button>
 
             <ListBox Cursor="Hand" 
                     DockPanel.Dock="Top"
                     ItemsSource="{Binding Path=Floors}" 
                     SelectedItem="{Binding Path=SelectedFloor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                     Style="{StaticResource MaterialDesignToolVerticalToggleListBox}"
-                    Height="170" 
-                    Width="190" />
+                    Height="57" 
+                    Width="190" Margin="30,0" />
             <Button Click="ShowRoomSearch"
                     DockPanel.Dock="Bottom"
                     Height="40" 
@@ -56,7 +56,7 @@
                 </DockPanel>
             </Button>
         </DockPanel>
-          
+
         <TextBlock DockPanel.Dock="Top" 
                        Text="{Binding Path=SelectedFloor, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                        Style="{StaticResource MaterialDesignHeadline2TextBlock}" 
