@@ -24,24 +24,24 @@ namespace WebApplication.Backend.Services
             try
             {
                 string[] search = searchedPersription.Split(";");
-
-                List<Prescription> firstSearchedList= prescriptionRepository.GetPrescriptionsByProperty(search[0].Split(",")[2], search[0].Split(",")[1], dateTimes,false);
+                string[] s= search[0].Split(",");
+                List<Prescription> firstSearchedList= iPrescriptionRepository.GetPrescriptionsByProperty(search[0].Split(",")[2], search[0].Split(",")[1], dateTimes,false);
 
                 for (int i = 1; i < search.Length; i++)
                 {
                     if (search[i].Split(",")[0].Equals("AND"))
-                        firstSearchedList = OperationAND(firstSearchedList, prescriptionRepository.GetPrescriptionsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes,false));
+                        firstSearchedList = OperationAND(firstSearchedList, iPrescriptionRepository.GetPrescriptionsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes,false));
                     else if (search[i].Split(",")[0].Equals("OR"))
-                        firstSearchedList = OperationOR(firstSearchedList, prescriptionRepository.GetPrescriptionsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes,false));
+                        firstSearchedList = OperationOR(firstSearchedList, iPrescriptionRepository.GetPrescriptionsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes,false));
                     else
-                        firstSearchedList = OperationAND(firstSearchedList, prescriptionRepository.GetPrescriptionsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes,true));
+                        firstSearchedList = OperationAND(firstSearchedList, iPrescriptionRepository.GetPrescriptionsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes,true));
                 }
 
                 return ConverToDTO(firstSearchedList);
             }
             catch (Exception e)
             {
-                return ConverToDTO(prescriptionRepository.GetPrescriptionsByProperty(searchedPersription.Split(",")[2], searchedPersription.Split(",")[1], dateTimes,false));
+                return ConverToDTO(iPrescriptionRepository.GetPrescriptionsByProperty(searchedPersription.Split(",")[2], searchedPersription.Split(",")[1], dateTimes,false));
             }
 
         }
