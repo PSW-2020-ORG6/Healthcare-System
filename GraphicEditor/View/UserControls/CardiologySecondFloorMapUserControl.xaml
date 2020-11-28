@@ -67,7 +67,7 @@
                    Source="/GraphicEditor;component/Resources/Images/floor.jpg"  />
 
             <!--Operation room1 button-->
-            <Button CommandParameter="operationRoom1"
+            <Button CommandParameter="Operation room 201"
                     Command="{Binding Path=ShowRoomCommand}"
                     Grid.Column="0"
                     Grid.ColumnSpan="7"
@@ -76,12 +76,14 @@
                     Style="{StaticResource ResourceKey=RoomButtonStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
-                                   TextWrapping="Wrap"><Run Text="Operation room1"/></TextBlock>
+                                   TextWrapping="Wrap">
+                        Operation room 201
+                    </TextBlock>
                 </StackPanel>
             </Button>
 
             <!--Store room button-->
-            <Button CommandParameter="storeRoom1"
+            <Button CommandParameter="Store room 202"
                     Grid.Column="10"
                     Grid.ColumnSpan="3"
                     Grid.Row="0"
@@ -90,14 +92,14 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
-                                Store room
+                                Store room 202
                     </TextBlock>
                 </StackPanel>
             </Button>
 
 
             <!--Operation room2 button-->
-            <Button CommandParameter="operationRoom2"
+            <Button CommandParameter="Operation room 203"
                     Command="{Binding Path=ShowRoomCommand}"
                     Grid.Column="0"
                     Grid.ColumnSpan="7"
@@ -107,7 +109,7 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
-                                Operation room2
+                                Operation room 203
                     </TextBlock>
                 </StackPanel>
             </Button>
