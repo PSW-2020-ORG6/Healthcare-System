@@ -3,15 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication.Backend.Util;
 
 namespace WebApplication.Backend.Repositorys
 {
     public interface ISurveyRepository
     {
         public bool AddNewSurvey(Survey surveyText);
-
-        public List<double> calculateStatistics(List<Survey> reports);
-
-        public List<double> getStatistics(string doctorId);
+        public List<StatisticAuxilaryClass> getStatisticsEachQuestion();
     }
 }

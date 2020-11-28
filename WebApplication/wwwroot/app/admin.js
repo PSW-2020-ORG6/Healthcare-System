@@ -9,14 +9,19 @@
             doctorId: null,
             statistics: [],
             doctorList: [],
-            doctorsList: []
+            doctorsList: [],
+
+
         }
     },
     beforeMount() {
+
+
+
         axios
             .get('http://localhost:49900/feedback/approved')
             .then(response => {
-                this.approvedFeedbacks = response.data
+                this.approvedFeedbacks = response.data            
             })
             .catch(error => {
                 alert(error)
@@ -46,7 +51,9 @@
         axios
             .get('http://localhost:49900/survey/getDoctors', { params: { patientId: "0003" } })
             .then(response => {
-                this.doctorsList = response.data
+                this.doctorsList = response.data;
+
+
             })
             .catch(error => {
                 alert(error)
@@ -59,50 +66,27 @@
     },
     template: `
     <div>
-        <br></br>
-        <br></br>
-        <br></br>
-            <div class="row">
-                  <div class="col">      
-                   </td></div>
-                  <div class="col"></div>
-                  <div class="col">
-                    <select id="doctorSelect" class="browser-default custom-select" v-model = "doctorId">
-                         <option div  v-for="(doctor) in doctorsList" v-bind:value="doctor">{{doctor}}</option>
-                    </select>
-                </div>
-                 <div class="col">
-                    <button class="btn btn-info btn-lg" v-on:click="getStatistics()">Show statistics</button>
-                </div>
-                 <div class="col">
-  
-                </div>
-            </div>
-
-         <br></br>
-    
-        <div >
-            <table id="statisticTable" class="table table-bordered  ">
-                 <thead>
-                         <th >Topic 1 : Doctor</th>
-     
-                         <th>Topic 2 : Nurse's care</th>
-
-                         <th>Topic 3 : Clinic's hygiene and ambience</th>
-
-                         <th>Topic 4 : Clinic's pharmacy supplies and equipment</th>
-
-                         <th >Topic 5 : Website </th>
-
-                         <th>Topic 6 : General opinion </th>
-                 </thead>
-                     <tbody>
-                          <tr>    
-                            <td v-for="s in statistics">{{s}}/5</td>
-                         </tr>                      
-                     </tbody>
-                </table>
+<br></br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <h3>
+			<button type="button" class="btn btn-info btn-lg margin" data-toggle="modal" v-on:click="StatisticsShow()">show statistics</button>
+			</h3><br/> 
         </div>
+        <div class="col-sm">
+        </div>
+        <div class="col-sm">
+        </div>
+      </div>
+    </div>
+
+			
+
+<br></br>
+<br></br>
+
+        <br></br>
         <br></br>
         <br></br>
         <br></br>
@@ -170,18 +154,30 @@
                 </div>
             </div>
         </div>
+
+
+
+
+
     </div>
+
+
+
 	`,
+
+
+
+
     methods: {
         DateSplit: function (date) {
             var dates = (date.split("T")[0]).split("-")
             return dates[2] + "." + dates[1] + "." + dates[0]
         },
-        getStatistics: function () {
+        getStatisticsEachQuestion: function () {
             axios
-                .get('http://localhost:49900/survey/getStatisticsForDoctor', { params: { doctorId: "Nikola Nikolic"} })
+                .get('http://localhost:49900/survey/getStatistiEachQuestion')
                 .then(response => {
-                    this.statistics = response.data;
+                    this.statisticEachQuestion = response.data;
                 })
 
         },
@@ -224,6 +220,13 @@
                 .catch(error => {
                     alert(error)
                 })
+        },
+        StatisticsShow: function () {
+            this.$router.push('statistics');
         }
+
     }
+
+
 });
+

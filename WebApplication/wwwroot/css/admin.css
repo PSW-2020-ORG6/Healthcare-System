@@ -1,4 +1,5 @@
 ﻿
+
 .btnban {
     background-color: lightcoral;
     color: white;
@@ -20,9 +21,163 @@
 
 }
 
+
 #statisticTable {
     color : white;
     background-color : lightblue;
     font-size : larger;
     font-family : Impact;
 }
+
+
+a {
+    text-decoration: none !important;
+    color: inherit
+}
+
+    a:hover {
+        color: #455A64
+    }
+
+.card {
+    border-radius: 10px;
+    background-color: lightblue;
+    padding-left: 60px;
+    padding-right: 60px;
+    margin-top: 70px;
+    opacity : 0.9;
+    color : white;
+    font-weight : 600;
+}
+
+div .circle-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%
+}
+
+#ratingImage {
+    top: -80px;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    border: 10px solid #fff;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.rating-on-img {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    color: #fff
+}
+
+.head-rate {
+    font-size: 70px;
+    margin-bottom: 0px;
+    cursor: pointer
+}
+
+.subhead-rate {
+    font-size: 20px;
+    font-weight: normal;
+    cursor: pointer
+}
+
+.heading0 {
+    margin-top: -50px
+}
+
+.rating-label {
+    font-weight: bold
+}
+
+.rating-bar {
+    width: 300px;
+    padding: 8px;
+    border-radius: 5px
+}
+
+.bar-container {
+    width: 100%;
+    background-color: #f1f1f1;
+    text-align: center;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer
+}
+
+
+.bar-5 {
+    height: 10px;
+    background-color: #FBC02D;
+    border-radius: 20px
+}
+
+.bar-4 {
+
+    height: 10px;
+    background-color: #FBC02D;
+    border-radius: 20px
+}
+
+.bar-3 {
+    height: 10px;
+    background-color: #FBC02D;
+    border-radius: 20px
+}
+
+.bar-2 {
+    height: 10px;
+    background-color: #FBC02D;
+    border-radius: 20px
+}
+
+.bar-1 {
+    height: 10px;
+    background-color: #FBC02D;
+    border-radius: 20px
+}
+
+.star-active {
+    color: #FBC02D;
+    margin-top: 50px;
+    margin-bottom: 10px
+}
+
+    .star-active:hover {
+        color: #F9A825;
+        cursor: pointer
+    }
+
+.review-heading {
+    font-size: 24px
+}
+
+.review-desc {
+    font-size: 15px
+
+}
+
+
+#selectDoctor {
+    width: 300px;
+    background-color : lightblue;
+    opacity : 0.8;
+    font-weight : bolder;
+    color : white;
+}
+
+
+#sText {
+    overflow-y: scroll;
+    height: 768px;
+    background-image: url("../pictures/surveyBackground.jpg");
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+
