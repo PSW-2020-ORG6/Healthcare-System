@@ -23,24 +23,28 @@ namespace WebApplication.Backend.Controllers
             this.reportService = new ReportService();
         }
         [HttpGet("advancedSearch")]
-        public List<SearchEntityDTO> GetAllFeedbacks([FromQuery]string prescriptionSearch, [FromQuery] string reportSearch, [FromQuery] string date)
+        public List<SearchEntityDTO> GetAllFeedbacks([FromQuery]string prescriptionSearch, [FromQuery]string reportSearch, [FromQuery] string date)
         {
             if (!searchEntityDTO.IsDateFormatValid(date))
                 return null;
-            if (!searchEntityDTO.IsValicSeacrhes(prescriptionSearch, reportSearch))
+            if (searchEntityDTO.IsValicSeacrhes(prescriptionSearch, reportSearch))
             {
                 List<SearchEntityDTO> prescriptions = prescriptionService.GetSearchedPrescription(prescriptionSearch, date);
                 List<SearchEntityDTO> reports = reportService.GetSearchedReport(reportSearch, date);
                 if (!searchEntityDTO.IsNull(prescriptions) && !searchEntityDTO.IsNull(reports))
                     return searchEntityDTO.MergeLists(prescriptions, reports);
+                else if (searchEntityDTO.IsNull(prescriptions))
+                    return reports;
+                else
+                    return prescriptions;
             }
-            else if (!searchEntityDTO.IsValicSeacrh(prescriptionSearch))
+            else if (searchEntityDTO.IsValicSeacrh(prescriptionSearch))
             {
                 List<SearchEntityDTO> prescriptions = prescriptionService.GetSearchedPrescription(prescriptionSearch, date);
                 if (!searchEntityDTO.IsNull(prescriptions))
                     return prescriptions;
             }
-            else
+            else if (searchEntityDTO.IsValicSeacrh(reportSearch))
             {
                 List<SearchEntityDTO> reports = reportService.GetSearchedReport(reportSearch, date);
                 if (!searchEntityDTO.IsNull(reports))

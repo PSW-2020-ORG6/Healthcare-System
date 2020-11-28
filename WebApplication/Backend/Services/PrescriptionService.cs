@@ -13,12 +13,22 @@ namespace WebApplication.Backend.Services
         public PrescriptionService()
         {
             this.prescriptionRepository = new PrescriptionRepository();
+            this.iPrescriptionRepository = new PrescriptionRepository();
         }
         public PrescriptionService(IPrescriptionRepository iPrescriptionRepository)
         {
             this.iPrescriptionRepository = iPrescriptionRepository;
         }
-
+        ///Tanja Drcelic RA124/2017
+        /// <summary>
+        ///Get prescriptions by search
+        ///</summary>
+        ///<param name="searchedPersription"> search
+        ///<param name="dateTimes"> search by date times
+        ///</param>
+        ///<returns>
+        ///list of prescription DTO objects
+        ///</returns>
         public List<SearchEntityDTO> GetSearchedPrescription(string searchedPersription,string dateTimes)
         {   
             try
@@ -45,7 +55,16 @@ namespace WebApplication.Backend.Services
             }
 
         }
-
+        ///Tanja Drcelic RA124/2017 and Marija Vucetic RA157/2017
+        /// <summary>
+        ///Get searched prescriptions by AND operation
+        ///</summary>
+        ///<param name="firstSearchedList"> first list for operation
+        ///<param name="secondSearchedList"> second list for operation
+        ///</param>
+        ///<returns>
+        ///list of prescriptions
+        ///</returns>
         private List<Prescription> OperationAND(List<Prescription> firstSearchedList, List<Prescription> secondSearchedList)
         {
             List<Prescription> returnList = new List<Prescription>();
@@ -75,7 +94,16 @@ namespace WebApplication.Backend.Services
             }
             return true;
         }
-
+        ///Tanja Drcelic RA124/2017
+        /// <summary>
+        ///Get searched prescriptions by OR operation
+        ///</summary>
+        ///<param name="firstSearchedList"> first list for operation
+        ///<param name="secondSearchedList"> second list for operation
+        ///</param>
+        ///<returns>
+        ///list of prescriptions
+        ///</returns>
         private List<Prescription> OperationOR(List<Prescription> firstSearchedList, List<Prescription> secondSearchedList)
         {
             List<Prescription> returnList = firstSearchedList;

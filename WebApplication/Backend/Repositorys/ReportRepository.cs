@@ -17,16 +17,22 @@ namespace WebApplication.Backend.Repositorys
             try
             {
                 connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
-                connection.Open();
             }
             catch (Exception e)
             {
             }
         }
-
+        ///Tanja Drcelic RA124/2017 and Marija Vucetic RA157/2017
+        /// <summary>
+        ///Get reports from table
+        ///</summary>
+        ///<param name="sqlDml"> data manipulation language
+        ///</param>
+        ///<returns>
+        ///list of reports
+        ///</returns>
         public List<Report> GetReports(String sqlDml)
         {
-            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -57,7 +63,15 @@ namespace WebApplication.Backend.Repositorys
             }
             return resultList;
         }
-
+        ///Tanja Drcelic RA124/2017
+        /// <summary>
+        ///Get procedure type by id from table
+        ///</summary>
+        ///<param name="sqlDml"> data manipulation language
+        ///</param>
+        ///<returns>
+        ///Procedure type
+        ///</returns>
         public ProcedureType GetProcedureTypeById(string sqlDml)
         {
             connection.Open();
@@ -73,7 +87,15 @@ namespace WebApplication.Backend.Repositorys
             entity.Specialization = GetSpecialization("Select * from specializations where SerialNumber like '" + entity.Specialization.SerialNumber + "'");
             return entity;
         }
-
+        ///Tanja Drcelic RA124/2017
+        /// <summary>
+        ///Get specialization by id from table
+        ///</summary>
+        ///<param name="sqlDml"> data manipulation language
+        ///</param>
+        ///<returns>
+        ///Physitian
+        ///</returns>
         public Specialization GetSpecialization(string sqlDml)
         {
             connection.Open();
@@ -84,10 +106,20 @@ namespace WebApplication.Backend.Repositorys
             specialization.SerialNumber= (string)sqlReader[0];
             specialization.Name= (string)sqlReader[2];
             connection.Close();
-
             return specialization;
         }
-
+        ///Tanja Drcelic RA124/2017
+        /// <summary>
+        ///Create sqlDml for get reports
+        ///</summary>
+        ///<param name="property"> search by property
+        ///<param name="value"> search value
+        ///<param name="dateTimes"> search by date times
+        ///<param name="not"> search for negation
+        ///</param>
+        ///<returns>
+        ///list of reports
+        ///</returns>
         public List<Report> GetReportsByProperty(string property, string value, string dateTimes, bool not)
         {
             List<Report> reports = GetReports("Select * from reports  where Date between " + dateTimes);

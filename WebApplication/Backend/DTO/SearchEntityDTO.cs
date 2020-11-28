@@ -36,14 +36,19 @@ namespace WebApplication.Backend.DTO
         }
         public bool IsValicSeacrhes(string prescriptionSearch,string reportSearch)
         {   
-            if (prescriptionSearch==null || reportSearch==null || prescriptionSearch.Split(";").Length < 0 || prescriptionSearch.Split(",").Length < 3 || prescriptionSearch.Split(",").Length > 3 || reportSearch.Split(";").Length < 0 || reportSearch.Split(",").Length < 3 || reportSearch.Split(",").Length > 3)
-                return false;
-            return true;
+            if(IsValicSeacrh(prescriptionSearch) && IsValicSeacrh(reportSearch))
+                return true;
+            return false;
         }
         public bool IsValicSeacrh(string search)
         {
-            if (search == null || search == null || search.Split(";").Length < 0 || search.Split(",").Length < 3 || search.Split(",").Length > 3)
+            if (search == null || search.Split(";").Length < 0 || search.Split(",").Length < 3 || search.Split(";").Length >4)
                 return false;
+            foreach (string searchString in search.Split(";"))
+            {
+                if (searchString.Split(",").Length < 0 || searchString.Split(",").Length > 3)
+                    return false;
+            }
             return true;
         }
         public bool IsDateFormatValid(string date)
