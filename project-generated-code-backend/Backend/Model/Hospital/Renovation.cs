@@ -1,7 +1,6 @@
 ﻿using Backend.Model.Util;
 using Model.Hospital;
 using Model.Util;
-using Newtonsoft.Json;
 using System;
 
 namespace HealthClinic.Backend.Model.Hospital
@@ -17,20 +16,23 @@ namespace HealthClinic.Backend.Model.Hospital
         public int Id { get => id; set => id = value; }
         public Room Room { get => room; set => room = value; }
 
-        public Renovation(Room room ,TimeInterval timeInteval) : base(Guid.NewGuid().ToString())
+        public Renovation(Room room, TimeInterval timeInteval) : base(Guid.NewGuid().ToString())
         {
             id = ++idMaker;
             TimeInterval = timeInteval;
             this.room = room;
         }
 
-        [JsonConstructor]
-        public Renovation(String serialNumber,Room room ,TimeInterval timeInteval) : base()
+        public Renovation(String serialNumber, Room room, TimeInterval timeInteval) : base()
         {
             this.SerialNumber = serialNumber;
             id = ++idMaker;
             this.room = room;
             TimeInterval = timeInteval;
+        }
+
+        public Renovation()
+        {
         }
 
         public override bool Equals(object obj)
@@ -41,7 +43,7 @@ namespace HealthClinic.Backend.Model.Hospital
                 return false;
             }
             return this.Room.Equals(other.Room) && this.TimeInterval.Equals(other.TimeInterval);
-            
+
         }
     }
 }

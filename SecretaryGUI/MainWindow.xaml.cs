@@ -1,20 +1,5 @@
-﻿using HCI_SIMS_PROJEKAT.ViewModels;
-using HCI_SIMS_PROJEKAT.Views;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HCI_SIMS_PROJEKAT
 {
@@ -26,7 +11,7 @@ namespace HCI_SIMS_PROJEKAT
         public MainWindow()
         {
             InitializeComponent();
-            
+
         }
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
@@ -36,12 +21,12 @@ namespace HCI_SIMS_PROJEKAT
 
         private void ScheduleButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void AppointmentButton_Click(object sender, RoutedEventArgs e)
         {
-           
+
         }
 
         private void ScheduleButtonFromMenu_Click(object sender, RoutedEventArgs e)
@@ -62,5 +47,12 @@ namespace HCI_SIMS_PROJEKAT
             }
         }
 
+        private void MapButton_Click(object sender, RoutedEventArgs e)
+        {
+            GraphicEditor.MainWindow map = new GraphicEditor.MainWindow();
+            this.Close();
+            map.DataContext = GraphicEditor.ViewModel.MapContentUserControlViewModel.HospitalMap;
+            map.Show();
+        }
     }
 }

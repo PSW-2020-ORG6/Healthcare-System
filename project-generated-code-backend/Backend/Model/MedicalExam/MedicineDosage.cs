@@ -45,7 +45,7 @@ namespace Model.MedicalExam
         public override bool Equals(object obj)
         {
             MedicineDosage other = obj as MedicineDosage;
-            if(other == null)
+            if (other == null)
             {
                 return false;
             }

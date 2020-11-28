@@ -4,14 +4,13 @@
 // Purpose: Definition of Interface PatientRepository
 
 using Model.Accounts;
-using System;
 using System.Collections.Generic;
 
 namespace Backend.Repository
 {
-   public interface PatientRepository : GenericRepository<Patient>
-   {
-      List<Patient> GetPatientsByPhysitian(Physitian physitian);
-   
-   }
+    public interface PatientRepository : GenericRepository<Patient>
+    {
+        List<Patient> GetPatientsByPhysitian(Physitian physitian);
+
+    }
 }

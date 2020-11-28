@@ -2,22 +2,13 @@
 using HealthClinic.View.Dialogs.MedicineDialogs;
 using HealthClinic.ViewModels;
 using Model.Hospital;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HealthClinic.View.TableViews
 {
@@ -26,7 +17,7 @@ namespace HealthClinic.View.TableViews
     /// </summary>
     public partial class RejectedMedicineTablePage : Page
     {
- 
+
 
         public static List<Rejection> _rejections;
         private SuperintendentMedicineController controller;
@@ -66,7 +57,7 @@ namespace HealthClinic.View.TableViews
 
         private void addRejectionsToRepository()
         {
-            controller.NewRejection(new Rejection("eeee", new Medicine("hoho", 
+            controller.NewRejection(new Rejection("eeee", new Medicine("hoho",
                 "hihi", new MedicineManufacturer("ee"), new MedicineType("JOJO"))));
             controller.NewRejection(new Rejection("11", new Medicine("22",
                 "33", new MedicineManufacturer("44"), new MedicineType("55"))));

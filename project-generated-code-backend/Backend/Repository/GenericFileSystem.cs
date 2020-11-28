@@ -11,9 +11,9 @@ using System.IO;
 
 namespace Backend.Repository
 {
-   public abstract class GenericFileSystem<T> : GenericRepository<T> where T : Entity
-   {
-      protected String path;
+    public abstract class GenericFileSystem<T> : GenericRepository<T> where T : Entity
+    {
+        protected String path;
 
         public void Delete(String id)
         {
@@ -37,9 +37,9 @@ namespace Backend.Repository
 
         public T GetById(String id)
         {
-            foreach(T entity in GetAll())
+            foreach (T entity in GetAll())
             {
-                if(entity.SerialNumber.Equals(id))
+                if (entity.SerialNumber.Equals(id))
                 {
                     return entity;
                 }

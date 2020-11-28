@@ -3,8 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:GraphicEditor.View.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="1250" d:DesignWidth="1500">
 
@@ -12,7 +10,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <!-- #Styles -->
-                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/ButtonStyles.xaml" />
+                <ResourceDictionary Source="/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml" />
+                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -37,6 +36,17 @@
                        HorizontalAlignment="Center"
                        Source="/GraphicEditor;component/Resources/Images/legendPattern.png"
                        VerticalAlignment="Center"/>
+                <Button Click="ShowRoomSearch"
+                    Height="40" 
+                    VerticalAlignment="Top"
+                    Width="150" Margin="46,539,49,-79">
+                    <DockPanel Width="auto">
+                        <TextBlock HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center">
+                            Search rooms
+                        </TextBlock>
+                    </DockPanel>
+                </Button>
             </Grid>
 
             <!--Map Pattern-->

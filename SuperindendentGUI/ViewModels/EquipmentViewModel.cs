@@ -1,10 +1,5 @@
 ﻿using Model.Hospital;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthClinic.Model
 {
@@ -19,7 +14,7 @@ namespace HealthClinic.Model
             get => _equipment.Name; set
             {
                 if (value != _equipment.Name)
-                    _equipment = new Equipment(_equipment.SerialNumber,value, _equipment.Id);
+                    _equipment = new Equipment(_equipment.SerialNumber, value, _equipment.Id);
                 OnPropertyChanged("Name");
             }
         }
@@ -29,7 +24,7 @@ namespace HealthClinic.Model
             get => _equipment.Id; set
             {
                 if (value != _equipment.Id)
-                    _equipment = new Equipment(_equipment.SerialNumber,_equipment.Name,value);
+                    _equipment = new Equipment(_equipment.SerialNumber, _equipment.Name, value);
                 OnPropertyChanged("Id");
             }
         }

@@ -32,23 +32,23 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///list of feedbacks
         ///</returns>
-        internal List<Feedback> GetFeedbacks(String sqlDml)
+        internal List<Feedback> GetFeedbacks(String query)
         {
-                MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
-                MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-                List<Feedback> resultList = new List<Feedback>();
-                while (sqlReader.Read())
-                {
-                    Feedback entity = new Feedback();
-                    entity.SerialNumber = (string)sqlReader[4];
-                    entity.PatientId = (String)sqlReader[3];
-                    entity.Text = (String)sqlReader[0];
-                    entity.Date = Convert.ToDateTime(sqlReader[2]);
-                    entity.Approved = (Boolean)sqlReader[1];
-                    resultList.Add(entity);
-                }
-                connection.Close();
-                return resultList;
+            MySqlCommand sqlCommand = new MySqlCommand(query, connection);
+            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
+            List<Feedback> resultList = new List<Feedback>();
+            while (sqlReader.Read())
+            {
+                Feedback entity = new Feedback();
+                entity.SerialNumber = (string)sqlReader[4];
+                entity.PatientId = (String)sqlReader[3];
+                entity.Text = (String)sqlReader[0];
+                entity.Date = Convert.ToDateTime(sqlReader[2]);
+                entity.Approved = (Boolean)sqlReader[1];
+                resultList.Add(entity);
+            }
+            connection.Close();
+            return resultList;
         }
         ///Tanja Drcelic RA124/2017
         /// <summary>
@@ -103,24 +103,24 @@ namespace WebApplication.Backend.Repositorys
         ///</param>
         internal void ApproveFeedback(FeedbackDTO feedback)
         {
-                string[] dateString = feedback.Date.ToString().Split(" ");
-                string[] partsOfDate = dateString[0].Split("/");
-                if (feedback.Approved)
-                {
-                    String sqlDml = "REPLACE  into feedbacks(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 0
-                        + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + " ','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
-                    MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
-                sqlCommand.ExecuteNonQuery();      
+            string[] dateString = feedback.Date.ToString().Split(" ");
+            string[] partsOfDate = dateString[0].Split("/");
+            if (feedback.Approved)
+            {
+                String sqlDml = "REPLACE  into feedbacks(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 0
+                    + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + " ','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
+                MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+                sqlCommand.ExecuteNonQuery();
             }
-                else
-                {
-                    string sqlDml = "REPLACE  into feedbacks(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 1
-                        + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + " ','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
+            else
+            {
+                string sqlDml = "REPLACE  into feedbacks(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 1
+                    + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + " ','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
 
-                    MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
-                    sqlCommand.ExecuteNonQuery();             
+                MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+                sqlCommand.ExecuteNonQuery();
             }
-               connection.Close();
+            connection.Close();
         }
         ////Repovic Aleksa RA52-2017
         /// <summary>
@@ -136,16 +136,16 @@ namespace WebApplication.Backend.Repositorys
         ///</param>
         internal bool AddNewFeedback(Feedback feedback)
         {
-                string[] dateString = DateTime.Now.ToString().Split(" ");
-                string[] partsOfDate = dateString[0].Split("/");
-                string sqlDml = "INSERT INTO feedbacks (text,approved,date,patientid,serialnumber)  VALUES('" + feedback.Text + "','" + 0 + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + "T" + dateString[1]
-                       + "','" +feedback.PatientId + " ','" + feedback.SerialNumber + "')";
+            string[] dateString = DateTime.Now.ToString().Split(" ");
+            string[] partsOfDate = dateString[0].Split("/");
+            string sqlDml = "INSERT INTO feedbacks (text,approved,date,patientid,serialnumber)  VALUES('" + feedback.Text + "','" + 0 + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + "T" + dateString[1]
+                   + "','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
 
-                MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
-                sqlCommand.ExecuteNonQuery();
-                connection.Close();
+            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            sqlCommand.ExecuteNonQuery();
+            connection.Close();
 
-                return true;
+            return true;
         }
     }
 }

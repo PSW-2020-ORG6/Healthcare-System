@@ -1,21 +1,17 @@
 ﻿using Backend.Controller.PhysitianControllers;
-using Model.Accounts;
-using Model.Schedule;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using health_clinic_class_diagram.Backend.Controller.PhysitianControllers;
 using HealthClinic.FrontendAdapters;
 using HealthClinic.Message;
-using HealthClinic.util;
+using Model.Accounts;
+using Model.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using health_clinic_class_diagram.Backend.Controller.PhysitianControllers;
 
 namespace HealthClinic.ViewModel
 {
@@ -77,7 +73,7 @@ namespace HealthClinic.ViewModel
             List<Patient> patientList = physitianHospitalAccountsController.GetPatientsByPhysitian();
             allPatients = new ObservableCollection<PatientAdapter>();
 
-            foreach(Patient p in patientList)
+            foreach (Patient p in patientList)
             {
                 Appointment nextAppointment = physitianHospitalAccountsController.GetNextAppointmentForPatient(p);
                 Appointment previousAppointment = physitianHospitalAccountsController.GetPreviousAppointmentForPatient(p);
@@ -127,14 +123,14 @@ namespace HealthClinic.ViewModel
         {
             ObservableCollection<PatientAdapter> retVal = new ObservableCollection<PatientAdapter>();
 
-            foreach(PatientAdapter p in allPatients)
+            foreach (PatientAdapter p in allPatients)
             {
-                if(p.FullName.ToLower().Contains(searchQuery.ToLower()) && !retVal.Contains(p))
+                if (p.FullName.ToLower().Contains(searchQuery.ToLower()) && !retVal.Contains(p))
                 {
                     retVal.Add(p);
                 }
 
-                if(p.Patient.Id.Contains(searchQuery) && !retVal.Contains(p))
+                if (p.Patient.Id.Contains(searchQuery) && !retVal.Contains(p))
                 {
                     retVal.Add(p);
                 }

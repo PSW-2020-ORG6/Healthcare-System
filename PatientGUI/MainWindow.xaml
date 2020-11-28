@@ -51,12 +51,30 @@
             <Button x:Name="BtnProfil" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Background="{x:Null}" Content="Profil" Height="50" Margin="0,0,100,0" FontSize="30" Padding="0" BorderBrush="{x:Null}" Click="ProfilClick" FontWeight="Bold" FontFamily="Microsoft Yi Baiti"/>
             <Button x:Name="BtnBlog" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Background="{x:Null}" Content="Blog" Height="50" Margin="100,0,0,0" FontSize="30" Padding="0" BorderBrush="{x:Null}" Click="BlogClick" FontWeight="Bold" FontFamily="Microsoft Yi Baiti"/>
             <Button x:Name="BtnKontakti" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Background="{x:Null}" Content="Kontakti" Height="50" Margin="300,0,0,0" FontSize="30" Padding="0" BorderBrush="{x:Null}" Click="KontaktiClick" FontWeight="Bold" FontFamily="Microsoft Yi Baiti"/>
+            <Button x:Name="BtnMap"
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center"
+                    Width="100" 
+                    Background="{x:Null}" 
+                    Content="Map" 
+                    Height="50" 
+                    Margin="500,0,0,0"
+                    FontSize="30"
+                    Padding="0"
+                    BorderBrush="{x:Null}" 
+                    Click="MapClick"
+                    FontWeight="Bold" 
+                    FontFamily="Microsoft Yi Baiti"/>
             <Border BorderBrush="#FF27A4AD" BorderThickness="0.5" HorizontalAlignment="Right" Margin="0,5,113,5"></Border>
         </Grid>
         <Grid VerticalAlignment="Bottom" Height="600" Margin="195,0">
-            <Frame x:Name="MainFrame"  NavigationUIVisibility="Hidden" Source="/klinika_zdravo;component/Pages/PocetnaStranica.xaml" />
-            
-            <materialDesign:DialogHost x:Name="prviDijalog" BorderBrush="{DynamicResource MaterialDesignDivider}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="683*"/>
+                <ColumnDefinition Width="207*"/>
+            </Grid.ColumnDefinitions>
+            <Frame x:Name="MainFrame"  NavigationUIVisibility="Hidden" Source="/klinika_zdravo;component/Pages/PocetnaStranica.xaml" Grid.ColumnSpan="2" />
+
+            <materialDesign:DialogHost x:Name="prviDijalog" BorderBrush="{DynamicResource MaterialDesignDivider}" Grid.ColumnSpan="2">
                 <materialDesign:DialogHost.DialogContent>
                     <Grid Width="260" Height="230" HorizontalAlignment="Center">
                         <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Padding="0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="25" Height="25"  Margin="0" Background="{x:Null}" Foreground="Black" BorderBrush="{x:Null}" >
@@ -76,9 +94,9 @@
                     <Button x:Name="prihvatiBTN" Content="Prijavi se"  Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-41,-190,0" Background="#FFA0A0A0" Foreground="White" BorderBrush="#FF797979" Click="prijaviSeBtnClick" FontFamily="Microsoft Yi Baiti" FontSize="20" FontWeight="Bold"/>
                 </Grid>
             </materialDesign:DialogHost>
-            
-            
-            <materialDesign:DialogHost x:Name="drugiDijalog" BorderBrush="{DynamicResource MaterialDesignDivider}">
+
+
+            <materialDesign:DialogHost x:Name="drugiDijalog" BorderBrush="{DynamicResource MaterialDesignDivider}" Grid.ColumnSpan="2">
                 <materialDesign:DialogHost.DialogContent>
                     <Grid Width="250" Height="130" Background="LightGray">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Margin="0,5,0,0" TextDecorations="Underline">ODJAVA</TextBlock>
@@ -89,9 +107,9 @@
                 </materialDesign:DialogHost.DialogContent>
                 <Button x:Name="odjavaBTN" Content="Odjavi se" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-41,-190,0" Background="#FF595858" Foreground="White" BorderBrush="#FF797979" Visibility="Hidden"/>
             </materialDesign:DialogHost>
-            
-            
-            <materialDesign:DialogHost x:Name="dijalogUpozorenje" BorderBrush="{DynamicResource MaterialDesignDivider}">
+
+
+            <materialDesign:DialogHost x:Name="dijalogUpozorenje" BorderBrush="{DynamicResource MaterialDesignDivider}" Grid.ColumnSpan="2">
                 <materialDesign:DialogHost.DialogContent>
                     <Grid Width="430" Height="350" HorizontalAlignment="Center" Background="LightGray">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36" Margin="0" TextDecorations="{x:Null}">MORATE BITI ULOGOVANI</TextBlock>
@@ -110,9 +128,9 @@
                     </Grid>
                 </materialDesign:DialogHost.DialogContent>
             </materialDesign:DialogHost>
-            
-            
-            <materialDesign:DialogHost x:Name="dijalogRegistracija" BorderBrush="{DynamicResource MaterialDesignDarkSeparatorBackground}">
+
+
+            <materialDesign:DialogHost x:Name="dijalogRegistracija" BorderBrush="{DynamicResource MaterialDesignDarkSeparatorBackground}" Grid.ColumnSpan="2">
                 <materialDesign:DialogHost.DialogContent>
                     <Grid Width="500" Height="400" HorizontalAlignment="Center" Background="LightGray">
                         <Grid.RowDefinitions>
@@ -169,7 +187,7 @@
             </materialDesign:DialogHost>
 
 
-            <materialDesign:DialogHost x:Name="pogresanMailDialog" BorderBrush="{DynamicResource MaterialDesignDarkSeparatorBackground}">
+            <materialDesign:DialogHost x:Name="pogresanMailDialog" BorderBrush="{DynamicResource MaterialDesignDarkSeparatorBackground}" Grid.ColumnSpan="2">
                 <materialDesign:DialogHost.DialogContent>
                     <Grid Width="200" Height="120" HorizontalAlignment="Center" Background="LightGray">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,9,0,0" FontSize="25" TextDecorations="Underline" FontWeight="Bold">Pogresan e-mail</TextBlock>
@@ -179,7 +197,7 @@
                 </materialDesign:DialogHost.DialogContent>
             </materialDesign:DialogHost>
 
-            <materialDesign:DialogHost x:Name="pogresnaSifraDialog" BorderBrush="{DynamicResource MaterialDesignDarkSeparatorBackground}">
+            <materialDesign:DialogHost x:Name="pogresnaSifraDialog" BorderBrush="{DynamicResource MaterialDesignDarkSeparatorBackground}" Grid.ColumnSpan="2">
                 <materialDesign:DialogHost.DialogContent>
                     <Grid Width="200" Height="120" HorizontalAlignment="Center" Background="LightGray">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,9,0,0" FontSize="25" TextDecorations="Underline" FontWeight="Bold">Pogresna sifra</TextBlock>
@@ -189,7 +207,7 @@
                 </materialDesign:DialogHost.DialogContent>
             </materialDesign:DialogHost>
 
-            <materialDesign:DialogHost x:Name="pogresniPodaciRegistracija" BorderBrush="{DynamicResource MaterialDesignDarkSeparatorBackground}">
+            <materialDesign:DialogHost x:Name="pogresniPodaciRegistracija" BorderBrush="{DynamicResource MaterialDesignDarkSeparatorBackground}" Grid.ColumnSpan="2">
                 <materialDesign:DialogHost.DialogContent>
                     <Grid Width="200" Height="120" HorizontalAlignment="Center" Background="LightGray">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0" FontSize="22" TextDecorations="{x:Null}">Morate uneti sve</TextBlock>
@@ -219,7 +237,7 @@
             <Button VerticalAlignment="Top" BorderThickness="0" Height="45" Margin="0,135,0,0" Background="{x:Null}" Content="Istorija Bolesti" FontSize="22" Padding="0" BorderBrush="#7F2E2E2E" Click="Button_Click_3" FontFamily="Microsoft Yi Baiti" FontWeight="Bold"/>
             <Button VerticalAlignment="Bottom" BorderThickness="0" Height="45" Margin="0" Background="{x:Null}" Content="Demo Sajta" FontSize="22" Padding="0" BorderBrush="#7F2E2E2E" Click="Button_Click_4" FontFamily="Microsoft Yi Baiti" FontWeight="Bold"/>
             <Button VerticalAlignment="Top" BorderThickness="0" Height="45" Margin="0,45,0,0" Background="{x:Null}" Content="Brzo zakazivanje" FontSize="22" Padding="0" BorderBrush="#7F2E2E2E" Click="Button_Click_9" FontFamily="Microsoft Yi Baiti" FontWeight="Bold"/>
-            
+
         </Grid>
     </Grid>
 </Window>

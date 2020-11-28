@@ -1,9 +1,6 @@
-﻿using Model.Hospital;
-using health_clinic_class_diagram.Backend.Service.MedicineService;
-using System;
+﻿using health_clinic_class_diagram.Backend.Service.MedicineService;
+using Model.Hospital;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Backend.Controller.SuperintendentControllers
 {

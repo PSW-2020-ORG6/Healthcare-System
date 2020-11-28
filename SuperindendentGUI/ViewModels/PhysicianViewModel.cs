@@ -1,12 +1,8 @@
 ﻿
 using Model.Accounts;
 using Model.Util;
-using Syncfusion.XPS;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
 namespace HealthClinic.Model
 {
@@ -54,7 +50,7 @@ namespace HealthClinic.Model
                 OnPropertyChanged("Jmbg");
             }
         }
-      
+
         public string Address
         {
             get => Physitian.Address.Street.ToString();
@@ -66,11 +62,11 @@ namespace HealthClinic.Model
                       _physitian.DateOfBirth, _physitian.Contact, _physitian.Email, new Address(value), _physitian.WorkSchedule, _physitian.Password, _physitian.Specialization);
                 }
                 OnPropertyChanged("Address");
-               
+
             }
         }
 
-  
+
         public string BirthDate
         {
             get => Physitian.DateOfBirth.ToString("yyyy-MM-dd"); set
@@ -145,7 +141,7 @@ namespace HealthClinic.Model
 
         public Physitian Physitian { get => _physitian; set => _physitian = value; }
 
-     
+
 
         public PhysicianViewModel(Physitian physitian)
         {

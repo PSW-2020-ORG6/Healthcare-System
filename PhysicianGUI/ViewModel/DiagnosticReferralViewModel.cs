@@ -1,21 +1,16 @@
-﻿using Backend.Controller.PhysitianControllers;
-using Model.Accounts;
-using Model.MedicalExam;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using health_clinic_class_diagram.Backend.Controller.PhysitianControllers;
 using HealthClinic.Message;
 using HealthClinic.util;
 using HealthClinic.View;
+using Model.Accounts;
+using Model.MedicalExam;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using health_clinic_class_diagram.Backend.Controller.PhysitianControllers;
 
 namespace HealthClinic.ViewModel
 {
@@ -37,9 +32,9 @@ namespace HealthClinic.ViewModel
         {
             get
             {
-                for(int i = 0; i < diagnosticTypes.Count; i++)
+                for (int i = 0; i < diagnosticTypes.Count; i++)
                 {
-                    if(diagnosticType.Equals(diagnosticTypes[i]))
+                    if (diagnosticType.Equals(diagnosticTypes[i]))
                     {
                         return i;
                     }

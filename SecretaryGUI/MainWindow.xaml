@@ -3,10 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:local="clr-namespace:HCI_SIMS_PROJEKAT"
         xmlns:viewmodels="clr-namespace:HCI_SIMS_PROJEKAT.ViewModels"
-        xmlns:views="clr-namespace:HCI_SIMS_PROJEKAT.Views"
         mc:Ignorable="d"
         Title="Klinika-Zdravo" Height="750" Width="430">
 
@@ -204,6 +201,17 @@
 
         <Grid x:Name="HeaderGrid" Grid.ColumnSpan="10" Margin="10" Style="{DynamicResource headerStyle}" >
             <Label x:Name="HeaderLabel" Margin="5,5,5,5" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource WhiteLabel}" Content="{Binding TitleHeader}"></Label>
+            <Button x:Name="MapOpen" 
+                    BorderThickness="0"
+                    Background="#FF4080F3"
+                    Click="MapButton_Click"
+                    FontSize="22"
+                    HorizontalAlignment="Center"
+                    Style="{DynamicResource menuButtonStyle}"
+                    Margin="179,8,153,10" 
+                    Width="70">
+                Map
+            </Button>
             <Button x:Name="ActionBarOpen" Style="{DynamicResource menuButtonStyle}" Margin="10,10,10,10" Width="40" HorizontalAlignment="Right">
                 <Image Source="slike/menu.png"></Image>
             </Button>

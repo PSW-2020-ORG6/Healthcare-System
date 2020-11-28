@@ -1,23 +1,12 @@
-﻿using Backend.Dto;
-using HealthClinic.Backend.Model.Hospital;
+﻿using HealthClinic.Backend.Model.Hospital;
 using HealthClinic.Model;
 using HealthClinic.View.TableViews;
 using Model.Hospital;
 using Model.Util;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace HealthClinic.View.Dialogs.RenovationDialogs
 {
@@ -57,10 +46,10 @@ namespace HealthClinic.View.Dialogs.RenovationDialogs
             {
                 if (roomModel.Id.Equals(renovationModel.Renovation.Room.Id))
                 {
-                    j= i; 
+                    j = i;
                 }
                 Ids[i++] = roomModel.Id.ToString();
-               
+
             }
 
             thisRoomCombo.SelectedIndex = j;
@@ -130,7 +119,7 @@ namespace HealthClinic.View.Dialogs.RenovationDialogs
             {
                 Console.WriteLine("NULL RENOVATION");
             }
-         
+
             this.Close();
         }
 
@@ -147,6 +136,6 @@ namespace HealthClinic.View.Dialogs.RenovationDialogs
             return room;
         }
 
-    
+
     }
 }

@@ -70,7 +70,7 @@ namespace Model.Accounts
         {
             Account other = obj as Account;
 
-            if(other == null)
+            if (other == null)
             {
                 return false;
             }

@@ -1,10 +1,5 @@
 ﻿using Backend.Controller.PhysitianControllers;
 using Backend.Dto;
-using Model.Accounts;
-using Model.Hospital;
-using Model.MedicalExam;
-using Model.Schedule;
-using Model.Util;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -13,16 +8,15 @@ using HealthClinic.util;
 using HealthClinic.View;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
-using Syncfusion.Pdf;
-using Syncfusion.Pdf.Graphics;
+using Model.Accounts;
+using Model.Hospital;
+using Model.MedicalExam;
+using Model.Schedule;
+using Model.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Font = iTextSharp.text.Font;
@@ -69,7 +63,7 @@ namespace HealthClinic.ViewModel
         public PatientDetailViewModel(Patient patient)
         {
             this.patient = patient;
-            
+
             Physitian loggedPhysitian = (Physitian)Application.Current.Properties["LoggedPhysitian"];
             physitianScheduleController = new PhysitianScheduleController(loggedPhysitian);
             physitianHospitalAccountsController = new PhysitianHospitalAccountsController(loggedPhysitian);
@@ -82,16 +76,16 @@ namespace HealthClinic.ViewModel
             physitians = new List<Physitian>();
             procedureTypes = new List<ProcedureType>();
 
-            physitians.Add(new Physitian("Svi", "Lekari", "invalid", DateTime.Today, "", "",  null, ""));
+            physitians.Add(new Physitian("Svi", "Lekari", "invalid", DateTime.Today, "", "", null, ""));
             procedureTypes.Add(new ProcedureType("Svi pregledi", 0, new Specialization("")));
 
-            foreach(Report r in allReports)
+            foreach (Report r in allReports)
             {
-                if(!procedureTypes.Contains(r.ProcedureType))
+                if (!procedureTypes.Contains(r.ProcedureType))
                 {
                     procedureTypes.Add(r.ProcedureType);
                 }
-                if(!physitians.Contains(r.Physitian))
+                if (!physitians.Contains(r.Physitian))
                 {
                     physitians.Add(r.Physitian);
                 }
@@ -141,7 +135,7 @@ namespace HealthClinic.ViewModel
             }
         }
 
-        
+
         public ICommand GeneratePDFCommand
         {
             get
@@ -162,8 +156,8 @@ namespace HealthClinic.ViewModel
                     Paragraph p3 = new Paragraph("Lekar: " + SelectedReport.Physitian, heading3);
                     Paragraph p4 = new Paragraph("Pacijent: " + patient.Name + " " + patient.Surname, heading3);
                     Paragraph p5 = new Paragraph("JMBG: " + patient.Id, heading3);
-                    
-                    
+
+
                     Paragraph p6 = new Paragraph("Osnovne informacije:", heading3);
                     Paragraph p7 = new Paragraph(SelectedReport.PatientConditions, paragraph);
                     Paragraph p8 = new Paragraph("Nalaz:", heading3);
@@ -183,12 +177,12 @@ namespace HealthClinic.ViewModel
                     document.Add(p9);
                     document.Add(blankLine);
 
-                    foreach(AdditionalDocument additionalDocument in selectedReport.AdditionalDocument)
+                    foreach (AdditionalDocument additionalDocument in selectedReport.AdditionalDocument)
                     {
                         Paragraph adp1 = new Paragraph(additionalDocument.ToString(), heading2);
                         document.Add(adp1);
                         List<Paragraph> adps = getAdditionalDocumentDetails(additionalDocument);
-                        foreach(Paragraph adp in adps)
+                        foreach (Paragraph adp in adps)
                         {
                             document.Add(adp);
                         }
@@ -207,7 +201,7 @@ namespace HealthClinic.ViewModel
             Font heading3 = new Font(Font.FontFamily.TIMES_ROMAN, 18);
             Font paragraph = new Font(Font.FontFamily.TIMES_ROMAN, 16);
             SpecialistReferral specialistReferral = additionalDocument as SpecialistReferral;
-            if(specialistReferral != null)
+            if (specialistReferral != null)
             {
                 Paragraph p1 = new Paragraph("Lekar kod kog je zakazan pregled: " + specialistReferral.Physitian, heading3);
                 Paragraph p2 = new Paragraph("Razlog: " + specialistReferral.Notes, paragraph);
@@ -216,7 +210,7 @@ namespace HealthClinic.ViewModel
             }
 
             DiagnosticReferral diagnosticReferral = additionalDocument as DiagnosticReferral;
-            if(diagnosticReferral != null)
+            if (diagnosticReferral != null)
             {
                 Paragraph p1 = new Paragraph("Izdat uput za tip dijagnostike: " + diagnosticReferral.DiagnosticType.ToString(), heading3);
                 Paragraph p2 = new Paragraph("Razlog: " + diagnosticReferral.Notes, paragraph);
@@ -225,9 +219,9 @@ namespace HealthClinic.ViewModel
             }
 
             Prescription prescription = additionalDocument as Prescription;
-            if(prescription != null)
+            if (prescription != null)
             {
-                foreach(MedicineDosage md in prescription.MedicineDosage)
+                foreach (MedicineDosage md in prescription.MedicineDosage)
                 {
                     Paragraph p = new Paragraph(md.Medicine + ": " + md.Amount + ", " + md.Note, paragraph);
                     paragraphs.Add(p);
@@ -235,7 +229,7 @@ namespace HealthClinic.ViewModel
             }
 
             FollowUp followUp = additionalDocument as FollowUp;
-            if(followUp != null)
+            if (followUp != null)
             {
                 Paragraph p1 = new Paragraph("Lekar kod kog je zakazana kontrola: " + followUp.Physitian, heading3);
                 Paragraph p2 = new Paragraph("Razlog: " + followUp.Notes, paragraph);
@@ -287,7 +281,7 @@ namespace HealthClinic.ViewModel
                 });
             }
         }
-        
+
         public ICommand OpenActiveInpatientCareDialogCommand
         {
             get
@@ -387,7 +381,7 @@ namespace HealthClinic.ViewModel
             get
             {
                 Report lastReport = physitianHospitalAccountsController.GetLastReportForPatient(patient);
-                if(lastReport == null)
+                if (lastReport == null)
                 {
                     return "";
                 }
@@ -401,9 +395,9 @@ namespace HealthClinic.ViewModel
         {
             get
             {
-                for(int i = 0; i < physitians.Count; i++)
+                for (int i = 0; i < physitians.Count; i++)
                 {
-                    if(selectedPhysitian.Equals(physitians[i]))
+                    if (selectedPhysitian.Equals(physitians[i]))
                     {
                         return i;
                     }
@@ -467,9 +461,9 @@ namespace HealthClinic.ViewModel
         {
             get
             {
-                for(int i=0; i < rooms.Count; i++)
+                for (int i = 0; i < rooms.Count; i++)
                 {
-                    if(selectedRoom.Equals(rooms[i]))
+                    if (selectedRoom.Equals(rooms[i]))
                     {
                         return i;
                     }
@@ -487,9 +481,9 @@ namespace HealthClinic.ViewModel
         {
             get
             {
-                for(int i=0; i < beds.Count; i++)
+                for (int i = 0; i < beds.Count; i++)
                 {
-                    if(selectedBed.Equals(beds[i]))
+                    if (selectedBed.Equals(beds[i]))
                     {
                         return i;
                     }
@@ -498,7 +492,7 @@ namespace HealthClinic.ViewModel
             }
             set
             {
-                if(value < 0 || value >= beds.Count)
+                if (value < 0 || value >= beds.Count)
                 {
                     value = 0;
                 }
@@ -541,14 +535,14 @@ namespace HealthClinic.ViewModel
         {
             ObservableCollection<Report> result = new ObservableCollection<Report>();
 
-            foreach(Report r in allReports)
+            foreach (Report r in allReports)
             {
-                if(SelectedProcedureType != 0 && !selectedProcedureType.Equals(r.ProcedureType))
+                if (SelectedProcedureType != 0 && !selectedProcedureType.Equals(r.ProcedureType))
                 {
                     continue;
                 }
 
-                if(SelectedPhysitian == 0 || selectedPhysitian.Equals(r.Physitian))
+                if (SelectedPhysitian == 0 || selectedPhysitian.Equals(r.Physitian))
                 {
                     result.Add(r);
                 }

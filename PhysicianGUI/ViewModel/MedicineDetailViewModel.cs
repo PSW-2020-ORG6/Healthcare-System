@@ -1,8 +1,8 @@
-﻿using Model.Hospital;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using HealthClinic.Message;
+using Model.Hospital;
 using System.Windows.Input;
 
 namespace HealthClinic.ViewModel

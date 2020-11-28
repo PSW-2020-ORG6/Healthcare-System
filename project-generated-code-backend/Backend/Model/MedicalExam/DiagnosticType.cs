@@ -28,7 +28,7 @@ namespace Model.MedicalExam
         public override bool Equals(object obj)
         {
             DiagnosticType other = obj as DiagnosticType;
-            if(other == null)
+            if (other == null)
             {
                 return false;
             }

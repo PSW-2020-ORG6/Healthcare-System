@@ -5,7 +5,6 @@
 
 using Model.Accounts;
 using Model.MedicalExam;
-using System;
 using System.Collections.Generic;
 
 namespace Backend.Repository

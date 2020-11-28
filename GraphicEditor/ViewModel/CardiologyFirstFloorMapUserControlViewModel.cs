@@ -1,6 +1,5 @@
 ﻿using GraphicEditor.HelpClasses;
 using GraphicEditor.View.Windows;
-using System;
 
 namespace GraphicEditor.ViewModel
 {

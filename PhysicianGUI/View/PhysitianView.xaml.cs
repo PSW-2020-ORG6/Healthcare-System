@@ -1,8 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using HealthClinic.Message;
 using System;
-using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace HealthClinic.View

@@ -52,7 +52,7 @@ namespace HealthClinic.Model
             }
         }
 
-    
+
         public VacationViewModel(TimeInterval timeInterval)
         {
             Vacation = timeInterval;

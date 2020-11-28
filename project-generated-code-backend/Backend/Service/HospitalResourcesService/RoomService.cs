@@ -4,13 +4,12 @@
 // Purpose: Definition of Class RoomService
 
 using Backend.Repository;
+using HCI_SIMS_PROJEKAT.Backend.Repository;
 using HealthClinic.Backend.Model.Hospital;
-using Backend.Repository;
 using Model.Hospital;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using HCI_SIMS_PROJEKAT.Backend.Repository;
 
 namespace Backend.Service.HospitalResourcesService
 {
@@ -24,7 +23,7 @@ namespace Backend.Service.HospitalResourcesService
 
         public List<Room> GetAll()
         {
-            return  roomRepository.GetAll();
+            return roomRepository.GetAll();
         }
 
         public void EditRoom(Room room)
@@ -50,8 +49,8 @@ namespace Backend.Service.HospitalResourcesService
 
         public void RemoveEquipmentById(String id, Room room)
         {
-           
-            foreach(Equipment e in room.Equipment.ToList())
+
+            foreach (Equipment e in room.Equipment.ToList())
             {
                 if (e.SerialNumber.Equals(id))
                 {

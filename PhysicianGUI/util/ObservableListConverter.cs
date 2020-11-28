@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthClinic.util
 {
@@ -12,7 +8,7 @@ namespace HealthClinic.util
         public ObservableCollection<T> ToObservable(List<T> list)
         {
             ObservableCollection<T> oc = new ObservableCollection<T>();
-            foreach(T item in list)
+            foreach (T item in list)
             {
                 oc.Add(item);
             }

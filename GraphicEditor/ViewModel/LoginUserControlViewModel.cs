@@ -1,17 +1,12 @@
 ﻿using GraphicEditor.HelpClasses;
-using System;
-using System.Security;
-using System.Windows.Controls;
-using health_clinic_class_diagram;
 using health_clinic_class_diagram.Backend.Controller;
-using health_clinic_class_diagram.Backend.Model;
-using health_clinic_class_diagram.Backend.Model.Util;
+using System.Windows.Controls;
 
 namespace GraphicEditor.ViewModel
 {
     public class LoginUserControlViewModel : BindableBase
     {
-        public MyICommand<PasswordBox> PasCommand { get; private set; } 
+        public MyICommand<PasswordBox> PasCommand { get; private set; }
         private string _userName = "asd";
         private string _pass = "asdasdad";
         private HospitalLogInController hospitalLogInController;
@@ -29,7 +24,7 @@ namespace GraphicEditor.ViewModel
             get => _pass;
             set
             {
-                SetProperty(ref _pass,value);
+                SetProperty(ref _pass, value);
             }
         }
         public LoginUserControlViewModel()

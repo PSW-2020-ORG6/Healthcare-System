@@ -226,6 +226,12 @@
     <Content Include="Resources\tutorial4_output.mp4" />
     <Content Include="Resources\tutorial4_output.wmv" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GraphicEditor\GraphicEditor.csproj">
+      <Project>{23c5ebdd-5c6a-4e35-98cb-fb0e98610e92}</Project>
+      <Name>GraphicEditor</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

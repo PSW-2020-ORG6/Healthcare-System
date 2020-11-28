@@ -6,7 +6,6 @@
 using Model.Accounts;
 using Model.MedicalExam;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 
 namespace Backend.Repository
@@ -21,9 +20,9 @@ namespace Backend.Repository
         public List<Report> GetReportsByPatient(Patient patient)
         {
             List<Report> reports = new List<Report>();
-            foreach(Report report in GetAll())
+            foreach (Report report in GetAll())
             {
-                if(patient.Equals(report.Patient))
+                if (patient.Equals(report.Patient))
                 {
                     reports.Add(report);
                 }

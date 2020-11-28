@@ -58,6 +58,7 @@
     <Compile Include="Backend\Model\Hospital\Renovation.cs" />
     <Compile Include="Backend\Model\Hospital\Room.cs" />
     <Compile Include="Backend\Model\Hospital\RoomBedType.cs" />
+    <Compile Include="Backend\Model\Hospital\RoomGEA.cs" />
     <Compile Include="Backend\Model\Hospital\RoomType.cs" />
     <Compile Include="Backend\Model\Hospital\Equipment.cs" />
     <Compile Include="Backend\Model\Hospital\Bed.cs" />
@@ -120,6 +121,8 @@
     <Compile Include="Backend\Service\HospitalAccountsService\PatientAccountsService.cs" />
     <Compile Include="Backend\Service\HospitalAccountsService\PhysicianAccountService.cs" />
     <Compile Include="Backend\Service\HospitalAccountsService\SecretaryAccountService.cs" />
+    <Compile Include="Backend\Service\HospitalResourcesService\BuildingService.cs" />
+    <Compile Include="Backend\Service\HospitalResourcesService\FloorService.cs" />
     <Compile Include="Backend\Service\MedicineService\MedicineAddingService.cs" />
     <Compile Include="Backend\Service\MedicineService\MedicineApprovalService.cs" />
     <Compile Include="Backend\Service\MedicineService\PhysitianMedicineService.cs" />

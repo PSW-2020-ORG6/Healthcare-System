@@ -6,7 +6,6 @@
 using Model.Accounts;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 
 namespace Model.MedicalExam
 {
@@ -29,7 +28,7 @@ namespace Model.MedicalExam
         public override bool Equals(object obj)
         {
             FollowUp other = obj as FollowUp;
-            if(other == null)
+            if (other == null)
             {
                 return false;
             }
@@ -43,7 +42,7 @@ namespace Model.MedicalExam
 
         public override string ToString()
         {
-            return base.ToString() + "\nphysitian: " + this.Physitian.FullName; 
+            return base.ToString() + "\nphysitian: " + this.Physitian.FullName;
         }
     }
 }

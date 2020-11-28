@@ -26,30 +26,30 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///list of patients
         ///</returns>
-        internal List<Patient> GetPatients(String sqlDml)
+        internal List<Patient> GetPatients(String query)
         {
-                MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
-                MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-                List<Patient> resultList = new List<Patient>();
-                while (sqlReader.Read())
-                {
-                    Patient entity = new Patient();
-                    entity.Id = (string)sqlReader[3];
-                    entity.Name = (string)sqlReader[1];
-                    entity.Surname = (string)sqlReader[2];
-                    entity.ParentName = (string)sqlReader[7];
-                    entity.SerialNumber = (string)sqlReader[0];
-                    entity.DateOfBirth = (DateTime)sqlReader[4];
-                    entity.Contact = (string)sqlReader[5];
-                    entity.Email = (string)sqlReader[6];
-                    entity.Gender = (string)sqlReader[8];
-                    entity.Guest = (Boolean)sqlReader[9];
-                    entity.Password = (string)sqlReader[10];
-                    resultList.Add(entity);
+            MySqlCommand sqlCommand = new MySqlCommand(query, connection);
+            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
+            List<Patient> resultList = new List<Patient>();
+            while (sqlReader.Read())
+            {
+                Patient entity = new Patient();
+                entity.Id = (string)sqlReader[3];
+                entity.Name = (string)sqlReader[1];
+                entity.Surname = (string)sqlReader[2];
+                entity.ParentName = (string)sqlReader[7];
+                entity.SerialNumber = (string)sqlReader[0];
+                entity.DateOfBirth = (DateTime)sqlReader[4];
+                entity.Contact = (string)sqlReader[5];
+                entity.Email = (string)sqlReader[6];
+                entity.Gender = (string)sqlReader[8];
+                entity.Guest = (Boolean)sqlReader[9];
+                entity.Password = (string)sqlReader[10];
+                resultList.Add(entity);
 
-                }
-                connection.Close();
-                return resultList;
+            }
+            connection.Close();
+            return resultList;
         }
         ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017
         /// <summary>
@@ -58,7 +58,8 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///list of all patients
         ///</returns>
-        public List<Patient> GetAllPatients() {
+        public List<Patient> GetAllPatients()
+        {
             return GetPatients("Select * from patients");
         }
     }

@@ -1,21 +1,16 @@
 ﻿using Backend.Controller.PhysitianControllers;
 using Backend.Dto;
-using Model.Accounts;
-using Model.MedicalExam;
-using Model.Schedule;
-using Model.Util;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using HealthClinic.Message;
-using HealthClinic.util;
 using HealthClinic.View;
+using Model.Accounts;
+using Model.MedicalExam;
+using Model.Schedule;
+using Model.Util;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -336,7 +331,7 @@ namespace HealthClinic.ViewModel
 
         private void updateComboBoxes()
         {
-            
+
         }
     }
 }

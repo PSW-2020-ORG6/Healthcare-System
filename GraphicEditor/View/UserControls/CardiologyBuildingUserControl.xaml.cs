@@ -1,18 +1,7 @@
-﻿using GraphicEditor.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GraphicEditor.View.Windows;
+using GraphicEditor.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GraphicEditor.View.UserControls
 {
@@ -25,6 +14,12 @@ namespace GraphicEditor.View.UserControls
         {
             this.DataContext = MapContentUserControlViewModel.CardiologyBuilding;
             InitializeComponent();
+        }
+
+        private void ShowRoomSearch(object sender, RoutedEventArgs e)
+        {
+            RoomSearch roomSearch = new RoomSearch();
+            roomSearch.Show();
         }
     }
 }

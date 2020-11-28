@@ -1,10 +1,10 @@
 ﻿using HealthClinic.View.Commands;
 using HealthClinic.View.TableViewModels;
+using HealthClinic.View.TableViews;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using MenuItem = System.Windows.Controls.MenuItem;
-using System.Threading;
-using HealthClinic.View.TableViews;
 
 namespace HealthClinic
 {
@@ -12,8 +12,9 @@ namespace HealthClinic
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     /// 
-    public enum currentTabIndex : int {
-        roomsTabIndex= 0,
+    public enum currentTabIndex : int
+    {
+        roomsTabIndex = 0,
         physiciansTabIndex = 1,
         secretariesTabIndex = 2,
         medicineTabIndex = 3,
@@ -121,11 +122,11 @@ namespace HealthClinic
             approvedMedicineSelected = null;
         }
 
-    private void Rooms_Executed(object sender, RoutedEventArgs e)
+        private void Rooms_Executed(object sender, RoutedEventArgs e)
         {
             setAllDelegatesToNull();
             CreateRoomDataContext();
-            
+
         }
 
         private void Physicians_Executed(object sender, RoutedEventArgs e)
@@ -169,12 +170,12 @@ namespace HealthClinic
             renovationTab.IsChecked = true;
             Tables.Focus();
             removeAllMenuItems();
-            
+
 
         }
 
 
-  
+
         public static event mainVoidDelegate deleteSelectedRoom;
         public static event mainVoidDelegate deleteSelectedPhysician;
         public static event mainVoidDelegate deleteSelectedSecretary;
@@ -209,7 +210,7 @@ namespace HealthClinic
                             deleteApprovedMedicine();
                             break;
                     }
-                    
+
                     break;
                 case (int)currentTabIndex.renovationsTabIndex:
                     deleteSelectedRenovation();
@@ -217,11 +218,11 @@ namespace HealthClinic
                 default:
                     break;
             }
-            
+
         }
 
 
-  
+
         public static event mainVoidDelegate editRoom;
         public static event mainVoidDelegate editPhysician;
         public static event mainVoidDelegate editSecretary;
@@ -303,7 +304,7 @@ namespace HealthClinic
         }
 
 
-      
+
 
         private void FocusTable_Executed(object sender, RoutedEventArgs e)
         {
@@ -323,7 +324,7 @@ namespace HealthClinic
 
 
         public static event mainVoidDelegate roomEquipment;
-   
+
 
 
         private void RoomEquipmentDialog_Executed(object sender, RoutedEventArgs e)
@@ -341,13 +342,13 @@ namespace HealthClinic
             workingHours();
         }
 
-      
+
         public static event mainVoidDelegate vacation;
 
         private void PhysicianVacationDialog_Executed(object sender, RoutedEventArgs e)
         {
             vacation();
-          
+
         }
 
         private void Rooms_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -377,7 +378,7 @@ namespace HealthClinic
 
         private void RoomRenovationDialog_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (SelectedTabIndex==((int)currentTabIndex.roomsTabIndex) && getSelecteRow() != -1)
+            if (SelectedTabIndex == ((int)currentTabIndex.roomsTabIndex) && getSelecteRow() != -1)
             {
                 e.CanExecute = true;
             }
@@ -474,7 +475,7 @@ namespace HealthClinic
 
         private int getSelecteRow()
         {
-            
+
             switch (SelectedTabIndex)
             {
                 case (int)currentTabIndex.roomsTabIndex:
@@ -514,13 +515,13 @@ namespace HealthClinic
 
         private void Demo_Click(object sender, RoutedEventArgs e)
         {
-            
+
             Thread.Sleep(500);
             Physicians_Executed(sender, e);
-            
+
             Thread.Sleep(2000);
             AddRow_Executed(sender, e);
-  
+
         }
 
         private void Help(object sender, RoutedEventArgs e)
@@ -577,6 +578,14 @@ namespace HealthClinic
             }
 
             e.CanExecute = medicineBool;
+        }
+
+        private void Map_Click(object sender, RoutedEventArgs e)
+        {
+            GraphicEditor.MainWindow map = new GraphicEditor.MainWindow();
+            this.Close();
+            map.DataContext = GraphicEditor.ViewModel.MapContentUserControlViewModel.HospitalMap;
+            map.Show();
         }
     }
 }

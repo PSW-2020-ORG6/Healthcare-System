@@ -54,7 +54,7 @@ namespace Model.Util
         public override bool Equals(object obj)
         {
             TimeInterval other = obj as TimeInterval;
-            if(other == null)
+            if (other == null)
             {
                 return false;
             }
@@ -80,13 +80,13 @@ namespace Model.Util
         {
             int thisStart = this.Start.Hour * 60 + this.Start.Minute;
             int thisEnd = this.End.Hour * 60 + this.End.Minute;
-            if(thisEnd < thisStart)
+            if (thisEnd < thisStart)
             {
                 thisEnd += 24 * 60;
             }
             int otherStart = other.Start.Hour * 60 + other.Start.Minute;
             int otherEnd = other.End.Hour * 60 + other.End.Minute;
-            if(otherEnd < otherStart)
+            if (otherEnd < otherStart)
             {
                 otherEnd += 24 * 60;
             }

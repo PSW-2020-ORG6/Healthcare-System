@@ -25,8 +25,8 @@ namespace HealthClinic.Model
             get => Medicine.CopyrightName; set
             {
                 if (value != Medicine.CopyrightName)
-                    Medicine = new Medicine(Medicine.SerialNumber ,value, Medicine.GenericName, Medicine.MedicineManufacturer, Medicine.MedicineType);
-                   
+                    Medicine = new Medicine(Medicine.SerialNumber, value, Medicine.GenericName, Medicine.MedicineManufacturer, Medicine.MedicineType);
+
                 OnPropertyChanged("CopyrightName");
             }
         }
@@ -35,7 +35,7 @@ namespace HealthClinic.Model
             get => Medicine.GenericName; set
             {
                 if (value != Medicine.GenericName)
-                    Medicine = new Medicine(Medicine.SerialNumber ,Medicine.CopyrightName, value, Medicine.MedicineManufacturer, Medicine.MedicineType);
+                    Medicine = new Medicine(Medicine.SerialNumber, Medicine.CopyrightName, value, Medicine.MedicineManufacturer, Medicine.MedicineType);
                 ;
                 OnPropertyChanged("GenericName");
             }
@@ -46,9 +46,9 @@ namespace HealthClinic.Model
             get => Medicine.MedicineManufacturer.ToString(); set
             {
                 if (value != Medicine.MedicineManufacturer.ToString())
-                    Medicine = new Medicine(Medicine.SerialNumber ,Medicine.CopyrightName, 
-                        Medicine.GenericName, new MedicineManufacturer(Medicine.MedicineManufacturer.SerialNumber,value), Medicine.MedicineType);
-                  
+                    Medicine = new Medicine(Medicine.SerialNumber, Medicine.CopyrightName,
+                        Medicine.GenericName, new MedicineManufacturer(Medicine.MedicineManufacturer.SerialNumber, value), Medicine.MedicineType);
+
                 OnPropertyChanged("Manufacturer");
             }
         }
@@ -59,10 +59,10 @@ namespace HealthClinic.Model
             get => Medicine.MedicineType.ToString(); set
             {
                 if (value != Medicine.MedicineType.ToString())
-                    Medicine = new Medicine(Medicine.SerialNumber,Medicine.CopyrightName, 
-                        Medicine.GenericName, Medicine.MedicineManufacturer, new MedicineType(Medicine.MedicineType.SerialNumber,value));
+                    Medicine = new Medicine(Medicine.SerialNumber, Medicine.CopyrightName,
+                        Medicine.GenericName, Medicine.MedicineManufacturer, new MedicineType(Medicine.MedicineType.SerialNumber, value));
 
-            
+
                 OnPropertyChanged("Manufacturer");
             }
         }

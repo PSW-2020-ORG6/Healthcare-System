@@ -2,8 +2,6 @@
 using HealthClinic.Model;
 using HealthClinic.View.Dialogs.SecretaryDialogs;
 using Model.Accounts;
-using Model.Util;
-using Syncfusion.XPS;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -210,14 +208,14 @@ namespace HealthClinic.View.TableViews
             {
                 editOption.IsEnabled = false;
                 deleteOption.IsEnabled = false;
-          
+
 
             }
             else
             {
                 editOption.IsEnabled = true;
                 deleteOption.IsEnabled = true;
-       
+
             }
         }
 

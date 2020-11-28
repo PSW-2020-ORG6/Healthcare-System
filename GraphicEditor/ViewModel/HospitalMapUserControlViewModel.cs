@@ -2,8 +2,6 @@
 
 namespace GraphicEditor.ViewModel
 {
-
-
     public class HospitalMapUserControlViewModel : BindableBase
     {
         private MapContentUserControlViewModel _parent;

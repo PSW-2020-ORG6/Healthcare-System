@@ -5,7 +5,6 @@
 
 using Model.Hospital;
 using Newtonsoft.Json;
-using System;
 
 namespace Backend.Repository
 {

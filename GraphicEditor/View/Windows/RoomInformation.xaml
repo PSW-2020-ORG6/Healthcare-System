@@ -3,31 +3,178 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GraphicEditor.View.UserControls"
         mc:Ignorable="d"
         Title="RoomInformation" 
-        Icon="/Resources/Icons/bed.png"
+        Icon="/GraphicEditor;component/Resources/Icons/bed.png"
         WindowStartupLocation="CenterScreen"
-        d:DesignHeight="300" d:DesignWidth="500">
-    
-    <Grid Background="AntiqueWhite">
-        
+        d:DesignHeight="500" d:DesignWidth="1000">
+    <Grid Background="AliceBlue">
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.7*" />
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
 
-        
-        <ComboBox ItemsSource="{Binding Path=Beds, Mode=TwoWay}"
+        <ListBox  ItemsSource="{Binding Path=Beds, Mode=TwoWay}"
                   Name="roomComboBox"
-                  SelectedItem="{Binding Path=SelectedBed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  SelectedItem="{Binding Path=BedInfo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   Grid.Column="0" 
                   Grid.RowSpan="3" 
                   Margin="20"
-                  FontSize="32"/>
+                  FontSize="14"
+                  Style="{StaticResource MaterialDesignToolVerticalToggleListBox}"
+                  Cursor="Hand">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Name}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
         <Grid Grid.Column="1" >
-            <Label  Content="{Binding Path=BedInfo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center"> </Label>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Top side -->
+            <TextBlock  Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="0"
+                        Text="PATIENT INFORMATION"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+
+            <!-- Left side -->         
+            <TextBlock  Grid.Column="0"
+                        Grid.Row="1"
+                        Text="UCIN: "
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+            <TextBlock  Grid.Column="0"
+                        Grid.Row="2"
+                        Text="First name: "
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+            <TextBlock  Grid.Column="0"
+                        Grid.Row="3"
+                        Text="Last name: "
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+            <TextBlock  Grid.Column="0"
+                        Grid.Row="4"
+                        Text="Diagnosis: "
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+            <TextBlock  Grid.Column="0"
+                        Grid.Row="5"
+                        Text="Date of arrival: "
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+            <TextBlock  Grid.Column="0"
+                        Grid.Row="6"
+                        Text="Leaving on: "
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+
+            <!-- Right side -->
+            <TextBox    Grid.Column="1"
+                        Grid.Row="1"
+                        Text="{Binding Path=BedInfo.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Width="150"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
+            <TextBox    Grid.Column="1"
+                        Grid.Row="2"
+                        Text="{Binding Path=BedInfo.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Width="150"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
+            <TextBox    Grid.Column="1"
+                        Grid.Row="3"
+                        Text="{Binding Path=BedInfo.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Width="150"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
+            <TextBox    Grid.Column="1"
+                        Grid.Row="4"
+                        Text="{Binding Path=BedInfo.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Width="150"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
+            <TextBox    Grid.Column="1"
+                        Grid.Row="5"
+                        Text="{Binding Path=BedInfo.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Width="150"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
+            <TextBox    Grid.Column="1"
+                        Grid.Row="6"
+                        Text="{Binding Path=BedInfo.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Width="150"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
+
+            <!-- Bottom side -->
+            <DockPanel  Grid.Column="0"
+                        Grid.Row="7"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Left">
+                
+                <Button HorizontalAlignment="Center"
+                        Margin="10"
+                        Style="{StaticResource MaterialDesignRaisedButton}" 
+                        Command="{Binding Path=NavCommandUpdate}"
+                        CommandParameter="{Binding Path=BedInfo}">
+                    <DockPanel>
+                        <TextBlock Text="Update information of : "/>
+                        <TextBlock Text="{Binding Path=BedInfo.Name}" />
+                    </DockPanel>
+                </Button>
+
+                <Button Content="Exit"
+                        HorizontalAlignment="Center"
+                        Margin="10"
+                        Command="{Binding Path=NavCommandExit}"
+                        Style="{StaticResource MaterialDesignRaisedButton}" />
+            </DockPanel>
+
+            
         </Grid>
         
     </Grid>

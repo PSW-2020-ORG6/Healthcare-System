@@ -23,7 +23,9 @@ namespace HealthClinic.View.Dialogs.PhysicianDialogs
         private String[] specialities;
         private Physitian physicianDTO;
 
-        public string[] Cities { get { if (CountryCombo.SelectedItem != null) { return citiesStringFromCountry(findCountryWithName(countries, CountryCombo.SelectedItem.ToString())); } else return cities; }
+        public string[] Cities
+        {
+            get { if (CountryCombo.SelectedItem != null) { return citiesStringFromCountry(findCountryWithName(countries, CountryCombo.SelectedItem.ToString())); } else return cities; }
             set
             {
                 if (value != cities) cities = value;
@@ -31,7 +33,10 @@ namespace HealthClinic.View.Dialogs.PhysicianDialogs
             }
         }
 
-        public string[] CountriesStringArray { get { return countriesStringArray; } set
+        public string[] CountriesStringArray
+        {
+            get { return countriesStringArray; }
+            set
             {
                 if (value != countriesStringArray) countriesStringArray = value;
                 OnPropertyChanged("CountriesStringArray");
@@ -40,7 +45,9 @@ namespace HealthClinic.View.Dialogs.PhysicianDialogs
 
 
 
-        public string[] Specialities { get => specialities; set
+        public string[] Specialities
+        {
+            get => specialities; set
             {
                 if (value != specialities) specialities = value;
                 OnPropertyChanged("Specialities");
@@ -53,7 +60,7 @@ namespace HealthClinic.View.Dialogs.PhysicianDialogs
         {
             this.DataContext = this;
             InitializeComponent();
-     
+
             countries = new Country[2];
             CountriesStringArray = new string[2];
             countries[0] = new Country("Srbija");
@@ -75,10 +82,10 @@ namespace HealthClinic.View.Dialogs.PhysicianDialogs
             Specialities[2] = "Hirurg";
 
             CountryCombo.SelectedIndex = 0;
-            Cities = citiesStringFromCountry(findCountryWithName(countries,CountryCombo.SelectedItem.ToString()));
-       
+            Cities = citiesStringFromCountry(findCountryWithName(countries, CountryCombo.SelectedItem.ToString()));
+
             CityCombo.SelectedIndex = 0;
-            
+
             specialityCombo.SelectedIndex = 0;
 
         }
@@ -93,9 +100,9 @@ namespace HealthClinic.View.Dialogs.PhysicianDialogs
                 i++;
             }
             List<String> nonBlank = new List<String>();
-            foreach(String s in stringArray)
+            foreach (String s in stringArray)
             {
-                if (s!=null)
+                if (s != null)
                 {
                     nonBlank.Add(s);
                 }
@@ -104,13 +111,13 @@ namespace HealthClinic.View.Dialogs.PhysicianDialogs
             stringArray = nonBlank.ToArray();
 
             return stringArray;
-            
+
         }
 
         private Country findCountryWithName(Country[] countrieArray, String name)
         {
-            
-            foreach(Country country in countrieArray)
+
+            foreach (Country country in countrieArray)
             {
                 if (country.Name.Equals(name))
                 {
@@ -119,12 +126,12 @@ namespace HealthClinic.View.Dialogs.PhysicianDialogs
             }
             return null;
 
-            
+
         }
 
-        private City stringToCity(Country country,string name)
+        private City stringToCity(Country country, string name)
         {
-            foreach(City city in country.City)
+            foreach (City city in country.City)
             {
                 if (city.Name.Equals(name))
                 {
@@ -149,19 +156,19 @@ namespace HealthClinic.View.Dialogs.PhysicianDialogs
                 Cities = citiesStringFromCountry(findCountryWithName(countries, CountryCombo.SelectedItem.ToString()));
                 CityCombo.SelectedIndex = 0;
             }
-         
+
         }
 
         private void TextInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            okButton.IsEnabled = !string.IsNullOrEmpty(nameTextInput.Text) && 
+            okButton.IsEnabled = !string.IsNullOrEmpty(nameTextInput.Text) &&
                 !string.IsNullOrEmpty(surnameTextInput.Text) && !string.IsNullOrEmpty(jmbgTextInput.Text)
                 && !string.IsNullOrEmpty(addressInput.Text) && isDateGood(dateTextInput.Text)
                 && !string.IsNullOrEmpty(emailInput.Text)
                 && !string.IsNullOrEmpty(contactInput.Text)
                 && isHoursDateGood(workStartInput.Text)
                 && isHoursDateGood(workEndInput.Text);
-                                
+
         }
 
         private bool isDateGood(string stringDate)
@@ -228,7 +235,7 @@ namespace HealthClinic.View.Dialogs.PhysicianDialogs
             Address address = new Address(addressInput.Text);
             String country = CountryCombo.Text;
             String city = CityCombo.Text;
-            DateTime dateOfbirth = 
+            DateTime dateOfbirth =
             DateTime.ParseExact(dateTextInput.Text, "yyyy-MM-dd",
                                        System.Globalization.CultureInfo.InvariantCulture);
             if (dateOfbirth > DateTime.Today)
@@ -238,8 +245,8 @@ namespace HealthClinic.View.Dialogs.PhysicianDialogs
             }
             List<Specialization> speciality = new List<Specialization>();
             speciality.Add(new Specialization(specialityCombo.Text));
-            
-            PhysicianDTO = new Physitian(Guid.NewGuid().ToString(),name, surname, jmbg ,dateOfbirth, contactInput.Text, emailInput.Text, address, workInterval, Constants.password, speciality);
+
+            PhysicianDTO = new Physitian(Guid.NewGuid().ToString(), name, surname, jmbg, dateOfbirth, contactInput.Text, emailInput.Text, address, workInterval, Constants.password, speciality);
             this.Close();
 
         }

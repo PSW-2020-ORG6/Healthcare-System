@@ -36,7 +36,7 @@ namespace Model.MedicalExam
         public override bool Equals(object obj)
         {
             DiagnosticReferral other = obj as DiagnosticReferral;
-            if(other == null)
+            if (other == null)
             {
                 return false;
             }

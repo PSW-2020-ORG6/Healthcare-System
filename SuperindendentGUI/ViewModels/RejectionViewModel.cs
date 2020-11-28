@@ -1,10 +1,5 @@
 ﻿using Model.Hospital;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthClinic.ViewModels
 {
@@ -20,7 +15,7 @@ namespace HealthClinic.ViewModels
             {
                 if (value != Medicine.CopyrightName)
                 {
-                    Medicine = new Medicine(Medicine.SerialNumber, value, Medicine.GenericName, 
+                    Medicine = new Medicine(Medicine.SerialNumber, value, Medicine.GenericName,
                     Medicine.MedicineManufacturer, Medicine.MedicineType);
                     Rejection = new Rejection(Rejection.SerialNumber, Rejection.Reason, Medicine);
                 }
@@ -38,7 +33,7 @@ namespace HealthClinic.ViewModels
                     Medicine.MedicineManufacturer, Medicine.MedicineType);
                     Rejection = new Rejection(Rejection.SerialNumber, Rejection.Reason, Medicine);
                 }
-                 
+
                 OnPropertyChanged("GenericName");
             }
         }
@@ -47,13 +42,14 @@ namespace HealthClinic.ViewModels
         {
             get => Medicine.MedicineManufacturer.ToString(); set
             {
-                if (value != Medicine.MedicineManufacturer.ToString()) { 
+                if (value != Medicine.MedicineManufacturer.ToString())
+                {
                     Medicine = new Medicine(Medicine.SerialNumber, Medicine.CopyrightName,
                     Medicine.GenericName, new MedicineManufacturer(Medicine.MedicineManufacturer.SerialNumber, value), Medicine.MedicineType);
                     Rejection = new Rejection(Rejection.SerialNumber, Rejection.Reason, Medicine);
                 }
 
-            OnPropertyChanged("Manufacturer");
+                OnPropertyChanged("Manufacturer");
             }
         }
 
@@ -66,7 +62,7 @@ namespace HealthClinic.ViewModels
                 {
                     Medicine = new Medicine(Medicine.SerialNumber, Medicine.CopyrightName,
                     Medicine.GenericName, Medicine.MedicineManufacturer, new MedicineType(Medicine.MedicineType.SerialNumber, value));
-                    Rejection = new Rejection(Rejection.SerialNumber,Rejection.Reason, Medicine);
+                    Rejection = new Rejection(Rejection.SerialNumber, Rejection.Reason, Medicine);
                 }
 
 
@@ -80,7 +76,7 @@ namespace HealthClinic.ViewModels
             {
                 if (value != Rejection.Reason)
                 {
-                    Rejection = new Rejection(Rejection.SerialNumber,value, Medicine);
+                    Rejection = new Rejection(Rejection.SerialNumber, value, Medicine);
                 }
                 OnPropertyChanged("Reason");
             }

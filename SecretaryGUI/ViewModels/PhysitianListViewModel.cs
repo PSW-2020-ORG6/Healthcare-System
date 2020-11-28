@@ -1,17 +1,13 @@
 ﻿using Backend.Controller.SecretaryControllers;
-using Model.Accounts;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using HCI_SIMS_PROJEKAT.Messages;
 using HCI_SIMS_PROJEKAT.Util;
+using Model.Accounts;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HCI_SIMS_PROJEKAT.ViewModels
 {

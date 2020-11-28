@@ -5,17 +5,8 @@ using Model.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace HealthClinic.View.Dialogs.SecretaryDialogs
 {
@@ -85,7 +76,7 @@ namespace HealthClinic.View.Dialogs.SecretaryDialogs
             CountriesStringArray = new string[2];
             CountriesStringArray[0] = "Srbija";
             CountriesStringArray[1] = "Hrvatska";
-    
+
             CountryCombo.SelectedIndex = 0;
             Cities = citiesStringFromCountry(findCountryWithName(countries, CountryCombo.SelectedItem.ToString()));
 
@@ -133,7 +124,7 @@ namespace HealthClinic.View.Dialogs.SecretaryDialogs
 
         }
 
- 
+
         protected virtual void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
@@ -219,8 +210,8 @@ namespace HealthClinic.View.Dialogs.SecretaryDialogs
                 return;
             }
 
-            SecretaryDTO = new Secretary(name, surname, jmbg, dateOfbirth, email, conctact ,new Address(address), Constants.password);
-  
+            SecretaryDTO = new Secretary(name, surname, jmbg, dateOfbirth, email, conctact, new Address(address), Constants.password);
+
             this.Close();
 
         }

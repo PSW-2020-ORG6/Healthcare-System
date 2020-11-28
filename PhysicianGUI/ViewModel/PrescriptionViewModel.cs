@@ -1,16 +1,12 @@
-﻿using Model.MedicalExam;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using HealthClinic.Message;
 using HealthClinic.util;
 using HealthClinic.View;
+using Model.MedicalExam;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -112,13 +108,13 @@ namespace HealthClinic.ViewModel
                     {
                         submitDialog.Close();
                         Prescription prescription = new Prescription(DateTime.Today, "");
-                        foreach(MedicineDosage md in AllMedicineDosage)
+                        foreach (MedicineDosage md in AllMedicineDosage)
                         {
                             prescription.AddMedicineDosage(md);
                         }
-                        Messenger.Default.Send<AddDocumentMessage>(new AddDocumentMessage { document = prescription});
+                        Messenger.Default.Send<AddDocumentMessage>(new AddDocumentMessage { document = prescription });
                     }
-                    if(cancelDialog != null)
+                    if (cancelDialog != null)
                     {
                         cancelDialog.Close();
                         Messenger.Default.Send<SwitchViewMessage>(new SwitchViewMessage { ViewName = "ReportView" });

@@ -1,11 +1,6 @@
-﻿using Backend.Controller.PhysitianControllers;
-using Model.Accounts;
+﻿using Model.Accounts;
 using Model.Schedule;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthClinic.FrontendAdapters
 {
@@ -50,7 +45,7 @@ namespace HealthClinic.FrontendAdapters
         {
             get
             {
-                if(nextAppointment == null)
+                if (nextAppointment == null)
                 {
                     return "";
                 }
@@ -77,7 +72,7 @@ namespace HealthClinic.FrontendAdapters
         {
             PatientAdapter other = obj as PatientAdapter;
 
-            if(other == null)
+            if (other == null)
             {
                 return false;
             }

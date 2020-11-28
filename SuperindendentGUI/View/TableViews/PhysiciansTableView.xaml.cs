@@ -1,12 +1,7 @@
-﻿
-using Backend.Controller.SuperintendentControllers;
-using HealthClinic.Backend.Controller.SuperintendentControllers;
+﻿using HealthClinic.Backend.Controller.SuperintendentControllers;
 using HealthClinic.Model;
 using HealthClinic.View.Dialogs.PhysicianDialogs;
 using Model.Accounts;
-using Model.Util;
-using Syncfusion.XPS;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -85,11 +80,11 @@ namespace HealthClinic.View.TableViews
 
         }
 
-        
+
 
         private void addRow()
         {
- 
+
             NewPhysicianDialog newPhysicianDialog = new NewPhysicianDialog();
             newPhysicianDialog.ShowDialog();
 

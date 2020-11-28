@@ -1,11 +1,7 @@
 ﻿using Model.Accounts;
 using Model.Util;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthClinic.Model
 {
@@ -13,7 +9,7 @@ namespace HealthClinic.Model
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private Secretary _secretary;
-      
+
 
         protected virtual void OnPropertyChanged(string name)
         {

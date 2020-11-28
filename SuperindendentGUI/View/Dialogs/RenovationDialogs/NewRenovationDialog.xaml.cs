@@ -1,23 +1,11 @@
-﻿using Backend.Dto;
-using HealthClinic.Backend.Model.Hospital;
-using HealthClinic.Model;
+﻿using HealthClinic.Backend.Model.Hospital;
 using HealthClinic.View.TableViews;
 using Model.Hospital;
 using Model.Util;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace HealthClinic.View.Dialogs.RenovationDialogs
 {
@@ -25,7 +13,7 @@ namespace HealthClinic.View.Dialogs.RenovationDialogs
     /// Interaction logic for NewRenovationDialog.xaml
     /// </summary>
     /// 
-   
+
 
     public partial class NewRenovationDialog : Window, INotifyPropertyChanged
     {
@@ -34,7 +22,9 @@ namespace HealthClinic.View.Dialogs.RenovationDialogs
         private Renovation renovationDTO;
         private Room roomDTO;
 
-        public string[] Ids { get => ids; set
+        public string[] Ids
+        {
+            get => ids; set
             {
                 if (value != ids) ids = value;
                 OnPropertyChanged("Ids");
@@ -52,7 +42,7 @@ namespace HealthClinic.View.Dialogs.RenovationDialogs
             int i = 0;
             foreach (Room room in RoomsTableView._rooms)
             {
-                Ids[i++]= room.Id.ToString();
+                Ids[i++] = room.Id.ToString();
             }
             thisRoomCombo.SelectedIndex = 0;
         }
@@ -112,12 +102,12 @@ namespace HealthClinic.View.Dialogs.RenovationDialogs
             Room room = findRumWithID(thisRoomCombo.Text);
 
 
-            RenovationDTO = new Renovation(room,interval);
+            RenovationDTO = new Renovation(room, interval);
             RoomDTO = room;
-  
+
             this.Close();
-            
-           
+
+
         }
 
         private Room findRumWithID(string id)
@@ -127,10 +117,10 @@ namespace HealthClinic.View.Dialogs.RenovationDialogs
             {
                 if (r.Id.ToString().Equals(id))
                 {
-            
+
                     room = r;
                 }
-               
+
 
             }
             return room;

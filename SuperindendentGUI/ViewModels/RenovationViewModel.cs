@@ -1,13 +1,7 @@
-﻿
-using Backend.Dto;
-using HealthClinic.Backend.Model.Hospital;
+﻿using HealthClinic.Backend.Model.Hospital;
 using Model.Hospital;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthClinic.Model
 {
@@ -17,20 +11,21 @@ namespace HealthClinic.Model
         private Renovation _renovation;
 
 
-        public string Room {
+        public string Room
+        {
             get => _renovation.Room.Id.ToString();
             set
             {
                 if (value != _renovation.Room.Id.ToString()) _renovation = new Renovation(new Room(_renovation.Room.SerialNumber, int.Parse(value), _renovation.Room.RoomType), _renovation.TimeInterval);
                 OnPropertyChanged("Room");
-             }
+            }
         }
         public string StartMoment
         {
             get => _renovation.TimeInterval.Start.ToString("yyyy-MM-dd");
             set
             {
-               
+
                 try
                 {
                     if (value != _renovation.TimeInterval.Start.ToString("yyyy-MM-dd")) _renovation.TimeInterval.Start = Convert.ToDateTime(value);
@@ -69,7 +64,7 @@ namespace HealthClinic.Model
             }
         }
 
-    
+
         public RenovationViewModel(Renovation renovation)
         {
             Renovation = renovation;

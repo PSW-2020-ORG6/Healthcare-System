@@ -20,8 +20,8 @@ namespace HealthClinic.View.TableViews
     public partial class RoomsTableView : System.Windows.Controls.UserControl
     {
 
-       
-       
+
+
         private DataGridView myDataGridView;
         public static List<Room> _rooms;
         private RoomController roomController;
@@ -50,7 +50,7 @@ namespace HealthClinic.View.TableViews
             roomController = new RoomController();
             renovationController = new RenovationController();
             Rooms = new ObservableCollection<RoomViewModel>();
-            
+
             refreshTable();
 
             dataGridRooms.SelectedIndex = 0;
@@ -68,7 +68,7 @@ namespace HealthClinic.View.TableViews
             return dataGridRooms.SelectedIndex;
         }
 
-        
+
         private void deleteRow()
         {
             if (dataGridRooms.SelectedIndex != -1)
@@ -88,9 +88,9 @@ namespace HealthClinic.View.TableViews
                 }
                 focusCurent();
             }
-     
+
         }
-  
+
         private void addRow()
         {
             NewRoomDialog newRoomDialog = new NewRoomDialog();
@@ -102,7 +102,7 @@ namespace HealthClinic.View.TableViews
                 refreshTable();
             }
             focusOnLast();
-          
+
         }
 
         private void editRow()
@@ -110,16 +110,16 @@ namespace HealthClinic.View.TableViews
             int selected = dataGridRooms.SelectedIndex;
             if (selected != -1)
             {
-           
+
                 EditRoomDialog editRoomDialog = new EditRoomDialog(Rooms.ElementAt(selected).Room);
                 editRoomDialog.ShowDialog();
                 if (editRoomDialog.RoomDTO != null)
                 {
 
-                    
+
                     roomController.EditRoom(editRoomDialog.RoomDTO);
                     refreshTable();
-     
+
                 }
 
                 focusOnLast();
@@ -142,7 +142,7 @@ namespace HealthClinic.View.TableViews
                 renovateSelectedDialog.Close();
 
             }
-         
+
 
         }
 
@@ -244,7 +244,7 @@ namespace HealthClinic.View.TableViews
 
         private void scroll()
         {
-                
+
 
             if (dataGridRooms.Items.Count > 0)
             {

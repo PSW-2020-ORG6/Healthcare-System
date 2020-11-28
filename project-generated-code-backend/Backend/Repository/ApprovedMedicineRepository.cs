@@ -4,11 +4,10 @@
 // Purpose: Definition of Interface ApprovedMedicineRepository
 
 using Model.Hospital;
-using System;
 
 namespace Backend.Repository
 {
-   public interface ApprovedMedicineRepository : GenericRepository<Medicine>
-   {
-   }
+    public interface ApprovedMedicineRepository : GenericRepository<Medicine>
+    {
+    }
 }

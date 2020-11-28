@@ -16,8 +16,6 @@ namespace GraphicEditor
         public static double MainScreenWidth = SystemParameters.PrimaryScreenWidth * SCREEN_FACTOR;
         public static double MainScreenHeight = SystemParameters.PrimaryScreenHeight * SCREEN_FACTOR;
 
-        
-
         public MainWindow()
         {
             Application.Current.MainWindow.Width = MainScreenWidth;
