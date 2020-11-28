@@ -30,7 +30,7 @@ namespace GraphicEditor.ViewModel
         private AddBuildingViewModel()
         {
             AddCommand = new MyICommand<object>(AddBuilding);
-            myResourceDictionary.Source = new Uri("/Resources/Styles/ButtonStyles.xaml", UriKind.RelativeOrAbsolute); //"pack://application:,,,/Resources/Styles/ButtonStyles.xaml"
+            myResourceDictionary.Source = new Uri("/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml", UriKind.RelativeOrAbsolute); //"pack://application:,,,/Resources/Styles/ButtonStyles.xaml"
         }
 
         public static AddBuildingViewModel GetInstance()
@@ -44,6 +44,7 @@ namespace GraphicEditor.ViewModel
 
         private void AddBuilding(object obj)
         {
+            DBtest.DatabaseConnection();
             Button.Name = nameText;
             switch (Shapes)
             {

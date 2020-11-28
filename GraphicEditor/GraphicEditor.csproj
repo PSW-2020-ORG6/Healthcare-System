@@ -139,6 +139,7 @@
     <Compile Include="ViewModel\CardiologyBuildingUserControlViewModel.cs" />
     <Compile Include="ViewModel\CardiologyFirstFloorMapUserControlViewModel.cs" />
     <Compile Include="ViewModel\CardiologySecondFloorMapUserControlViewModel.cs" />
+    <Compile Include="ViewModel\DBtest.cs" />
     <Compile Include="ViewModel\HospitalMapUserControlViewModel.cs" />
     <Compile Include="ViewModel\LoginUserControlViewModel.cs" />
     <Compile Include="ViewModel\MapContentUserControlViewModel.cs" />

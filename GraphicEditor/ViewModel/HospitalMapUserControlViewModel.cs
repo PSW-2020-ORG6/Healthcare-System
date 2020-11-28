@@ -1,5 +1,7 @@
 ﻿using GraphicEditor.HelpClasses;
 using GraphicEditor.View.Windows;
+using health_clinic_class_diagram.Backend.Model.Hospital;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -10,6 +12,7 @@ namespace GraphicEditor.ViewModel
         private MapContentUserControlViewModel _parent;
         public MyICommand<string> NavCommand { get; private set; }
         public MyICommand<object> AddCommand { get; private set; }
+
 
         ResourceDictionary myResourceDictionary = new ResourceDictionary();
 
