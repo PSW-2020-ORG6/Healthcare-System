@@ -13,13 +13,21 @@ namespace WebApplication.Backend.Repositorys
         public PhysitianRepository()
         {
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
-
         }
         public PhysitianRepository(MySqlConnection connection)
         {
             this.connection = connection;
 
         }
+        ///Tanja Drcelic RA124/2017
+        /// <summary>
+        ///Get physitions from table
+        ///</summary>
+        ///<param name="sqlDml"> data manipulation language
+        ///</param>
+        ///<returns>
+        ///list of physitions
+        ///</returns>
         internal List<Physitian> GetPhysitian(String sqlDml)
         {
             connection.Open();
@@ -33,12 +41,19 @@ namespace WebApplication.Backend.Repositorys
                 entity.Name= (string)sqlReader[1];
                 entity.Surname= (string)sqlReader[2];
                 resultList.Add(entity);
-
             }
             connection.Close();
             return resultList;
         }
-
+        ///Tanja Drcelic RA124/2017
+        /// <summary>
+        ///Get physition by id from table
+        ///</summary>
+        ///<param name="sqlDml"> data manipulation language
+        ///</param>
+        ///<returns>
+        ///Physitian
+        ///</returns>
         public Physitian GetPhysitianById(String sqlDml)
         {
             try

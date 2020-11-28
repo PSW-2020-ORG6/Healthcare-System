@@ -15,11 +15,22 @@ namespace WebApplication.Backend.Services
         public ReportService()
         {
             this.reportRepository = new ReportRepository();
+            this.iReportRepository = new ReportRepository();
         }
         public ReportService(IReportRepository iReportRepository)
         {
             this.iReportRepository = iReportRepository;
         }
+        ///Tanja Drcelic RA124/2017
+        /// <summary>
+        ///Get reports by search
+        ///</summary>
+        ///<param name="searchedReport"> search
+        ///<param name="dateTimes"> search by date times
+        ///</param>
+        ///<returns>
+        ///list of reports DTO objects
+        ///</returns>
         public List<SearchEntityDTO> GetSearchedReport(string searchedReport, string dateTimes)
         {
             try
@@ -60,7 +71,16 @@ namespace WebApplication.Backend.Services
             }
             return searchEntityDTOs;
         }
-
+        ///Tanja Drcelic RA124/2017 and Marija Vucetic RA157/2017
+        /// <summary>
+        ///Get searched reports by AND operation
+        ///</summary>
+        ///<param name="firstSearchedList"> first list for operation
+        ///<param name="secondSearchedList"> second list for operation
+        ///</param>
+        ///<returns>
+        ///list of reports
+        ///</returns>
         private List<Report> OperationAND(List<Report> firstSearchedList, List<Report> secondSearchedList)
         {
             List<Report> returnList = new List<Report>();
@@ -89,6 +109,16 @@ namespace WebApplication.Backend.Services
             }
             return true;
         }
+        ///Tanja Drcelic RA124/2017
+        /// <summary>
+        ///Get searched reports by OR operation
+        ///</summary>
+        ///<param name="firstSearchedList"> first list for operation
+        ///<param name="secondSearchedList"> second list for operation
+        ///</param>
+        ///<returns>
+        ///list of reports
+        ///</returns>
         private List<Report> OperationOR(List<Report> firstSearchedList, List<Report> secondSearchedList)
         {
             List<Report> returnList = firstSearchedList;

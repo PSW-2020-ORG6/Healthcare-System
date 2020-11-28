@@ -1,9 +1,5 @@
-﻿using Model.Hospital;
-using Model.MedicalExam;
-using System;
+﻿using Model.MedicalExam;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebApplication.Backend.Repositorys
 {

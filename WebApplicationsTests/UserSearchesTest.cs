@@ -215,7 +215,7 @@ namespace WebApplicationsTests
             stubRepositorty.Setup(n => n.GetReportsByProperty("Doctor reports", "Tanja", "'20-11-05' and '20-11-12'", false)).Returns(reports1);
 
             ReportService reportService = new ReportService(stubRepositorty.Object);
-            List<SearchEntityDTO> searchEntityDTOs = reportService.GetSearchedReport(",Tanja,All;OR,Nemanja,Doctor reports;AND ,Tanja,Doctor reports", "'20-11-05' and '20-11-12'");
+            List<SearchEntityDTO> searchEntityDTOs = reportService.GetSearchedReport(",Tanja,All;OR,Nemanja,Doctor reports;AND,Tanja,Doctor reports", "'20-11-05' and '20-11-12'");
             Assert.NotNull(searchEntityDTOs);
         }
     }
