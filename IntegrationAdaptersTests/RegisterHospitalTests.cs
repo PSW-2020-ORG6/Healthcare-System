@@ -20,10 +20,10 @@ namespace IntegrationAdaptersTests
         {          
             ApiService service = new ApiService();
 
-            Api registerFailed = new Api("k", "k", "k");
-            bool alreadyExists = service.RegisterHospitalOnPharmacy(registerFailed);
+            Api api = new Api("k", "k", "k");
+            bool result = service.RegisterHospitalOnPharmacy(api);
 
-            Assert.False(alreadyExists);
+            Assert.False(result);
         }
 
         [Fact]
@@ -31,10 +31,10 @@ namespace IntegrationAdaptersTests
         {
             ApiService service = new ApiService();
 
-            Api registerSuccessful = new Api("l", "l", "l");
-            bool notExists = service.RegisterHospitalOnPharmacy(registerSuccessful);
+            Api api = new Api("l", "l", "l");
+            bool result = service.RegisterHospitalOnPharmacy(api);
 
-            Assert.True(notExists);
+            Assert.True(result);
         }   
 
         [Fact]
