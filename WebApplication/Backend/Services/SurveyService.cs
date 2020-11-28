@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication.Backend.Repositorys;
+using WebApplication.Backend.Util;
 
 namespace WebApplication.Backend.Services
 {
@@ -30,18 +31,22 @@ namespace WebApplication.Backend.Services
             return surveyRepository.GetAllDoctorsFromReporstByPatientId(patientId);
         }
 
-        public List<double> getStatistics(string doctorId)
-        {
-            return isurveyRepository.getStatistics(doctorId);
 
+        public List<StatisticAuxilaryClass> getStatisticsEachQuestion()
+        {
+            return isurveyRepository.getStatisticsEachQuestion();
         }
 
-        public List<double> calculateStatistics(List<Survey> testInput)
+        public List<StatisticAuxilaryClass> getStatisticsForDoctor(string doctorID)
         {
-            return isurveyRepository.calculateStatistics(testInput);
+            return surveyRepository.getStatisticsForDoctor(doctorID);
+
         }
+        public List<StatisticAuxilaryClass> getStatisticsEachTopic()
+        {
+            return surveyRepository.getStatisticsEachTopic();
 
-
+        }
 
     }
 }

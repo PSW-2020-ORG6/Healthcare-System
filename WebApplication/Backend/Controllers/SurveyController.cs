@@ -5,14 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication.Backend.Services;
+using WebApplication.Backend.Util;
 
 namespace WebApplication.Backend.Controllers
 {
     [Route("survey")]
     [ApiController]
-    public class SurveyController: ControllerBase
+    public class SurveyController : ControllerBase
     {
-       
+
         private readonly SurveyService surveyService;
         public SurveyController()
         {
@@ -26,16 +27,31 @@ namespace WebApplication.Backend.Controllers
             return Ok();
         }
         [HttpGet("getDoctors")]
-        public List<String>GetAllDoctorsFromReporstByPatientId(String patientId)
+        public List<String> GetAllDoctorsFromReporstByPatientId(String patientId)
         {
-           return surveyService.GetAllDoctorsFromReporstByPatientId(patientId);
- 
+            return surveyService.GetAllDoctorsFromReporstByPatientId(patientId);
+
         }
 
-        [HttpGet("getStatisticsForDoctor")]
-        public List<double> getStatistics(string doctorId)
+
+
+        [HttpGet("getStatistiEachQuestion")]
+        public List<StatisticAuxilaryClass> getStatisticsEachQuestion()
         {
-            return surveyService.getStatistics(doctorId);
+            return surveyService.getStatisticsEachQuestion();
+        }
+
+        [HttpGet("getStatistiEachTopic")]
+        public List<StatisticAuxilaryClass> getStatisticsEachTopic()
+        {
+            return surveyService.getStatisticsEachTopic();
+
+        }
+
+        [HttpGet("getStatisticForDoctor")]
+        public List<StatisticAuxilaryClass> getStatisticsForDoctor(string ID)
+        {
+            return surveyService.getStatisticsForDoctor(ID);
 
         }
     }

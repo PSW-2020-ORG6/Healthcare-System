@@ -2,6 +2,7 @@
 const Admin = { template: '<admin></admin>' }
 const Patient = { template: '<patient></patient>' }
 const Survey = { template: '<survey></survey>' }
+const Statistics = { template: '<statistics></statistics>' }
 
 
 var temp = new Vue({
@@ -20,6 +21,9 @@ var temp = new Vue({
 		},
 		survey: function () {
 			router.push("survey")
+		},
+		statistics: function () {
+			router.push("statistics")
 		}
 	}
 
@@ -48,6 +52,11 @@ const router = new VueRouter({
 			path: '/survey',
 			name: 'survey',
 			component: Survey,
+		},	
+		{
+			path: '/statistics',
+			name: 'statistics',
+			component: Statistics,
 		},	
 	]
 });
