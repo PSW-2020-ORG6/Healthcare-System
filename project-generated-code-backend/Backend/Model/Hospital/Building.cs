@@ -19,5 +19,10 @@ namespace health_clinic_class_diagram.Backend.Model.Hospital
             Color = _color;
             Shape = _shape;
         } 
+
+        public Building()
+        {
+
+        }
     }
 }

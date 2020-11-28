@@ -23,6 +23,11 @@ namespace health_clinic_class_diagram.Backend.Model.Hospital
             Id = _id;
             Name = _name;
             Rooms = new List<Room>();
-        }        
+        }       
+        
+        public Floor()
+        {
+
+        }
     }
 }

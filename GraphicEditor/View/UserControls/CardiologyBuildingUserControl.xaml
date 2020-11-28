@@ -24,7 +24,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="60"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
                 <Button Grid.Row="0"
                         Command="{Binding Path=NavCommand}"
@@ -46,40 +46,45 @@
                      SelectedItem="{Binding Path=SelectedFloor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                      Style="{StaticResource MaterialDesignToolVerticalToggleListBox}"
                      Margin="5,5,5,5"/>
-            <Button Click="ShowRoomSearch"
+            
+            <StackPanel Grid.Row="2">
+                <Button Click="ShowRoomSearch"
+                    Margin="5"
                     DockPanel.Dock="Bottom"
-                    Height="40" 
-                    VerticalAlignment="Top"
-                    Width="150">
-                <DockPanel Width="auto">
-                    <materialDesign:PackIcon Kind="Search" 
+                    Height="30"
+                    VerticalAlignment="Top">
+                    <DockPanel Width="auto">
+                        <materialDesign:PackIcon Kind="Search" 
                                              Height="25" 
                                              Width="25"
                                              VerticalAlignment="Center"/>
-                    <TextBlock HorizontalAlignment="Center" 
+                        <TextBlock HorizontalAlignment="Center" 
                                VerticalAlignment="Center"
                                TextWrapping="Wrap">
                         SEARCH ROOMS
-                    </TextBlock>
-                </DockPanel>
-            </Button>
-            <Button Grid.Row="2"
+                        </TextBlock>
+                    </DockPanel>
+                </Button>
+                <Button Grid.Row="2"
                     Command="{Binding Path=BuildingUpdateCommand}"
                     CommandParameter="{Binding Path=Building}"
                     Height="50"
                     Margin="5,5,5,5">
-                <DockPanel Width="auto">
-                    <materialDesign:PackIcon Kind="Edit" 
+                    <DockPanel Width="auto">
+                        <materialDesign:PackIcon Kind="Edit" 
                                              Height="25" 
                                              Width="25"
                                              VerticalAlignment="Center"/>
-                    <TextBlock HorizontalAlignment="Center" 
+                        <TextBlock HorizontalAlignment="Center" 
                                VerticalAlignment="Center"
                                TextWrapping="Wrap">
                         EDIT BUILDING INFORMATION
-                    </TextBlock>
-                </DockPanel>
-            </Button>
+                        </TextBlock>
+                    </DockPanel>
+                </Button>
+
+            </StackPanel>
+            
         </Grid>
         <TextBlock  DockPanel.Dock="Top" 
                     Text="{Binding Path=Building.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
