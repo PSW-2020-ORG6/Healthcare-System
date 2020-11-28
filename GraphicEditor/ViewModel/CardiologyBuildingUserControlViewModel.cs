@@ -115,10 +115,5 @@ namespace GraphicEditor.ViewModel
             Building.Shape = building.Shape;
             OnPropertyChanged("Building");
         }
-
-        public void onCancelUpdate()
-        {
-            
-        }
     }
 }

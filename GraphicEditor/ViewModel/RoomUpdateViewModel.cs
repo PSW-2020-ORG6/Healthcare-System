@@ -35,6 +35,7 @@ namespace GraphicEditor.ViewModel
                 _window = window;
                 _room = _roomInfo;
                 _roomOriginal = new Room(_room.SerialNumber, _room.Id, _room.RoomType);
+                _dialogAnswerListener = dialogAnswerListener;
 
                 NavCommandExit = new MyICommand(exitInfo);
                 NavCommandUpdate = new MyICommand(updateRoomInfo);
