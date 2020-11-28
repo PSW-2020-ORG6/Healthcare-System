@@ -67,7 +67,7 @@
                    Source="/GraphicEditor;component/Resources/Images/floor.jpg"  />
 
             <!--Room1 button-->
-            <Button CommandParameter="Room1"
+            <Button CommandParameter="Examination room"
                     Command="{Binding Path=ShowRoomCommand}"
                     Grid.Column="0"
                     Grid.ColumnSpan="5"
@@ -76,12 +76,14 @@
                     Style="{StaticResource ResourceKey=RoomButtonStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
-                                   TextWrapping="Wrap"><Run Text="Room1"/></TextBlock>
+                                   TextWrapping="Wrap">
+                        Examination room
+                    </TextBlock>
                 </StackPanel>
             </Button>
 
             <!--Room2 button-->
-            <Button CommandParameter="room2"
+            <Button CommandParameter="Store room"
                     Command="{Binding Path=ShowRoomCommand}"
                     Grid.Column="5"
                     Grid.ColumnSpan="3"
@@ -91,13 +93,13 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
-                                Room2
+                                Store room
                     </TextBlock>
                 </StackPanel>
             </Button>
 
             <!--Room3 button-->
-            <Button CommandParameter="room3"
+            <Button CommandParameter="Examination room"
                     Command="{Binding Path=ShowRoomCommand}"
                     Grid.Column="10"
                     Grid.ColumnSpan="3"
@@ -107,13 +109,13 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
-                                Room3
+                                Examination room
                     </TextBlock>
                 </StackPanel>
             </Button>
 
             <!--Room4 button-->
-            <Button CommandParameter="room4"
+            <Button CommandParameter="Operation room"
                     Command="{Binding Path=ShowRoomCommand}"
                     Grid.Column="13"
                     Grid.ColumnSpan="5"
@@ -123,7 +125,7 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
-                                Room4
+                                Operation room
                     </TextBlock>
                 </StackPanel>
             </Button>

@@ -85,19 +85,14 @@ namespace GraphicEditor.ViewModel
             Bed p = new Bed(BedInfo.Name, BedInfo.Id);
             BedUpdate w = new BedUpdate(p, this);
             w.ShowDialog();
-            //BedInfo.Id = p.Id;
-            //BedInfo.Name = p.Name;
-            //OnPropertyChanged("BedInfo");
         }
 
         void updateRoomInfo(Room room)
         {
             Room rm = new Room(room.SerialNumber, room.Id, room.RoomType);
             RoomUpdate r = new RoomUpdate(rm, this);
-            r.ShowDialog();
-            
+            r.ShowDialog();          
         }
-
 
         void exitInfo()
         {
@@ -108,11 +103,9 @@ namespace GraphicEditor.ViewModel
         {
             BedInfo.Id = b.Id;
             BedInfo.Name = b.Name;
+            BedInfo.SerialNumber = b.SerialNumber;
             OnPropertyChanged("BedInfo");
-        }
-
-        public void onCancelUpdate()
-        {
+            OnPropertyChanged("Beds");
         }
 
         public void onConfirmUpdate(Room room)

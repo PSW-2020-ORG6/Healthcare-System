@@ -111,7 +111,7 @@
                         Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
             <TextBox    Grid.Column="1"
                         Grid.Row="3"
-                        Text="{Binding Path=BedInfo.Id, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=BedInfo.SerialNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         HorizontalAlignment="Center"
                         Margin="0,10"
                         Width="450"
