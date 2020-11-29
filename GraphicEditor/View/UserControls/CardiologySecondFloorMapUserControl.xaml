@@ -67,7 +67,7 @@
                    Source="/GraphicEditor;component/Resources/Images/floor.jpg"  />
 
             <!--Operation room1 button-->
-            <Button CommandParameter="Operation room 201"
+            <Button CommandParameter="Operation room"
                     Command="{Binding Path=ShowRoomCommand}"
                     Grid.Column="0"
                     Grid.ColumnSpan="7"
@@ -77,13 +77,13 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
-                        Operation room 201
+                        Operation room
                     </TextBlock>
                 </StackPanel>
             </Button>
 
             <!--Store room button-->
-            <Button CommandParameter="Store room 202"
+            <Button CommandParameter="Store room"
                     Grid.Column="10"
                     Grid.ColumnSpan="3"
                     Grid.Row="0"
@@ -92,14 +92,14 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
-                                Store room 202
+                                Store room
                     </TextBlock>
                 </StackPanel>
             </Button>
 
 
             <!--Operation room2 button-->
-            <Button CommandParameter="Operation room 203"
+            <Button CommandParameter="Operation room"
                     Command="{Binding Path=ShowRoomCommand}"
                     Grid.Column="0"
                     Grid.ColumnSpan="7"
@@ -109,7 +109,7 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
-                                Operation room 203
+                                Operation room
                     </TextBlock>
                 </StackPanel>
             </Button>

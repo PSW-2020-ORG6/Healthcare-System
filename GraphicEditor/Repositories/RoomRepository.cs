@@ -12,11 +12,11 @@ namespace GraphicEditor.Repositories
         public RoomRepository()
         {
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
-            connection.Open();
         }
 
         private List<RoomGEA> GetRooms(String query)
         {
+            connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             List<RoomGEA> resultList = new List<RoomGEA>();
