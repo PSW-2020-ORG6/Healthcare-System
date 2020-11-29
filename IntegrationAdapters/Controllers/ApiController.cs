@@ -22,14 +22,7 @@ namespace IntegrationAdapters.Controllers
         [HttpPost("registration")]
         public IActionResult RegisterHospitalOnPharmacy(Api api)
         {
-            if (apiService.RegisterHospitalOnPharmacy(api))
-            {
-                return Ok();
-            }
-            else
-            {
-                return BadRequest();
-            }
+            if (apiService.RegisterHospitalOnPharmacy(api)) return Ok(); else return BadRequest();
         }
 
     }

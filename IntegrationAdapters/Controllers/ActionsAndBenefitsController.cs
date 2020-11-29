@@ -12,23 +12,51 @@ namespace IntegrationAdapters.Controllers
     [ApiController]
     public class ActionsAndBenefitsController : ControllerBase
     {
-        private readonly ActionsAndBenefitsService  actionsAndBenefits;
-        public  List<ActionAndBenefitMessage> SubscribedMesseges = new List<ActionAndBenefitMessage>();
-        public ActionsAndBenefitsController(HealthCareSystemDbContext context)
+        private readonly ActionsAndBenefitsService  actionsAndBenefitsService;
+
+        public ActionsAndBenefitsController()
         {
-            this.actionsAndBenefits = new ActionsAndBenefitsService(context);
+            this.actionsAndBenefitsService = new ActionsAndBenefitsService();
         }
 
         [HttpGet("getActionsAndBenefits")]
         public IEnumerable<ActionAndBenefitMessage> GetActionsAndBenefits()
         {
-            return Program.Messages;
+            return GetSubscribedPharmacyMessages();
         }
 
         [HttpPost("publishActionsAndBenefits/{trid}")]
-        public void SaveActionsAndBenefitsMessage(Guid trid)
+        public IActionResult SaveActionsAndBenefitsMessage(Guid trid)
         {
-            Console.WriteLine("Sacuvaj u bazu: "+ trid);
+            if (GetActionAndBenefitMessageByID(trid) != null)
+            {
+                actionsAndBenefitsService.AddActionAndBenefitMessage(GetActionAndBenefitMessageByID(trid));
+                return Ok();
+            }
+            else return NotFound();
+              
         }
+      
+        public List<ActionAndBenefitMessage> GetSubscribedPharmacyMessages()
+        {
+            List<ActionAndBenefitMessage> SubscribedMessages = new List<ActionAndBenefitMessage>();
+            List<String> pharmacyNames = actionsAndBenefitsService.GetHospitalSubscribedPharmacies();
+            foreach(ActionAndBenefitMessage message in Program.Messages)
+            {
+                if (pharmacyNames.Contains(message.PharmacyName)) SubscribedMessages.Add(message);
+            }
+            return SubscribedMessages;
+        }
+
+        public ActionAndBenefitMessage GetActionAndBenefitMessageByID(Guid actionID)
+        {
+            List<ActionAndBenefitMessage> SubscribedMessages = GetSubscribedPharmacyMessages();
+            foreach(ActionAndBenefitMessage actionAndBenefitMessage in SubscribedMessages)
+            {
+                if (actionAndBenefitMessage.ActionID.Equals(actionID)) return actionAndBenefitMessage;
+            }
+            return null;
+        }
+       
     }
 }
