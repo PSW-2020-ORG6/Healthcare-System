@@ -29,7 +29,7 @@ namespace GraphicEditorTests
         }
 
         [Fact]
-        public void GetEquipmentByName_EquipmentExist_ReturnNull()
+        public void EquipmentDoesNotExist()
         {
             //Act
             var equipments = _eqipmentRepository.GetEquipmentsByName("pera");
