@@ -26,9 +26,9 @@ namespace GraphicEditor.Repositories
             while (sqlReader.Read())
             {
                 Equipment entity = new Equipment();
-                entity.Name = (string)sqlReader[2];
-                entity.Id = (string)sqlReader[0];
-                entity.RoomId = (string)sqlReader[3];
+                entity.SerialNumber = (string)sqlReader[0];
+                entity.Name = (string)sqlReader[1];
+                entity.RoomId = (string)sqlReader[2];
                 resultList.Add(entity);
 
             }

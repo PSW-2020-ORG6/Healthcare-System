@@ -35,7 +35,7 @@ namespace GraphicEditor.ViewModel
         {
             _window = window;
             _building = _buildingInfo;
-            _buildingOriginal = new Building(_building.Id, _building.Name, _building.Floors, _building.Color, _building.Shape);
+            _buildingOriginal = new Building( _building.Name, _building.Color, _building.Shape);
             _dialogAnswerListener = dialogAnswerListener;
 
             NavCommandExit = new MyICommand(exitInfo);

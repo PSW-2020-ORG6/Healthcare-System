@@ -11,19 +11,19 @@ namespace WebApplication.Backend.Repositorys
         public EquipmentRepository()
         {
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
-            connection.Open();
         }
 
         private List<Equipment> GetEquipments(String query)
         {
+            connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             List<Equipment> resultList = new List<Equipment>();
             while (sqlReader.Read())
             {
                 Equipment entity = new Equipment();
-                entity.Name = (string)sqlReader[0];
-                entity.Id = (string)sqlReader[1];
+                entity.SerialNumber = (string)sqlReader[0];
+                entity.Name = (string)sqlReader[1];
                 entity.RoomId = (string)sqlReader[2];
                 resultList.Add(entity);
 
@@ -37,6 +37,18 @@ namespace WebApplication.Backend.Repositorys
             try
             {
                 return GetEquipments("Select * from equipments");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public List<Equipment> GetEquipmentsByName(string name)
+        {
+            try
+            {
+                return GetEquipments("Select * from equipments where Name like '%" + name + "%'");
             }
             catch (Exception)
             {

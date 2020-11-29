@@ -1,4 +1,5 @@
-﻿using Model.Hospital;
+﻿using health_clinic_class_diagram.Backend.Model.Hospital;
+using Model.Hospital;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -11,33 +12,46 @@ namespace WebApplication.Backend.Repositorys
         public MedicineRepository()
         {
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
-            connection.Open();
         }
 
-        private List<Medicine> GetMedicine(String query)
+        private List<MedicineGEA> GetMedicines(String query)
         {
+            connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<Medicine> resultList = new List<Medicine>();
+            List<MedicineGEA> resultList = new List<MedicineGEA>();
             while (sqlReader.Read())
             {
-                Medicine entity = new Medicine();
+                MedicineGEA entity = new MedicineGEA();
                 entity.SerialNumber = (string)sqlReader[0];
                 entity.CopyrightName = (string)sqlReader[1];
                 entity.GenericName = (string)sqlReader[2];
-                entity.MedicineManufacturer.Name = (string)sqlReader[3];
-                entity.MedicineType.Type = (string)sqlReader[4];
+                entity.MedicineManufacturerId = (string)sqlReader[3];
+                entity.MedicineTypeId = (string)sqlReader[4];
                 resultList.Add(entity);
             }
             connection.Close();
             return resultList;
         }
 
-        public List<Medicine> GetAllMedicine()
+        public List<MedicineGEA> GetMedicinesByName(string name)
         {
             try
             {
-                return GetMedicine("Select * from medicine");
+                return GetMedicines("Select * from medicinegea where GenericName like '%" + name + "%'");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+
+        public List<MedicineGEA> GetAllMedicines()
+        {
+            try
+            {
+                return GetMedicines("Select * from medicinegea");
             }
             catch (Exception)
             {
