@@ -18,6 +18,7 @@ namespace IntegrationAdapters.Services
     {
         IConnection connection;
         IModel channel;
+        
         public override Task StartAsync(CancellationToken cancellationToken)
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };

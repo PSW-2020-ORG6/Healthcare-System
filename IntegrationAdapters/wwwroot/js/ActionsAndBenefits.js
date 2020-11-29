@@ -3,12 +3,12 @@
 	for (i in data) {
 		var dateFrom = data[i].dateFrom.split('T');
 		var dateTo = data[i].dateTo.split('T');
-		table += `<tr>
+		table += `<tr id="` + data[i].actionID +`">
 			<td>`+ data[i].pharmacyName+ `</td>
 			<td>`+ data[i].text + `</td>
 			<td>`+ dateFrom[0] + `</td>
 			<td>`+ dateTo[0] + `</td>
-			<td><button id="publishButton" type='button'>Publish</button></td>
+			<td><button id="publishButton" type='button' class = "form-style-4" >Publish</button></td>
 			</tr>`;
 	}
 	$('#actionsAndBenefitsTable').html(table);
@@ -26,12 +26,12 @@ $(document).ready(function () {
 				alert("Failed")
 			}
 		});
-
-	/*$('#').click(function () {
+	$('#actionsAndBenefitsTable').on('click','button',function () {
+		var trid = $(event.target).closest('tr').attr('id');
+		console.log('click')
 		$.post({
-			url: '../api/registration',
-			data: JSON.stringify({ Key: Key, PharmacyName: PharmacyName, Url: Url, Subscribed: Subscribed }),
-			contentType: 'application/json',
+			url: '../actionsandbenefits/publishActionsAndBenefits/'+trid, 
+			contentType: 'multipart/form-data',
 			success: function () {
 				alert("Successfuly published");
 			},
@@ -39,7 +39,6 @@ $(document).ready(function () {
 				alert("Failed to publish")
 			}
 		})
-	})*/
-
+	})
 		
 	});
