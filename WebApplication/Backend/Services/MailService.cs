@@ -25,7 +25,7 @@ namespace WebApplication.Backend.Services
         ///</summary>
         ///<param name="patient"> Patient type object
         ///</param>>
-        public async Task SendEmailAsync(Patient patient)
+        public void SendEmailAsync(Patient patient)
         {
             var email = new MimeMessage();
             email.Sender = MailboxAddress.Parse(_mailSettings.Mail);
@@ -40,7 +40,7 @@ namespace WebApplication.Backend.Services
             using var smtp = new SmtpClient();
             smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
             smtp.Authenticate(_mailSettings.Mail, _mailSettings.Password);
-            await smtp.SendAsync(email);
+            /*await*/ smtp.Send(email);
             smtp.Disconnect(true);
         }
 
