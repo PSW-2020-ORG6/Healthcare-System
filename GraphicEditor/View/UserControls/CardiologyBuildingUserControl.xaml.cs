@@ -21,5 +21,11 @@ namespace GraphicEditor.View.UserControls
             RoomSearch roomSearch = new RoomSearch();
             roomSearch.Show();
         }
+
+        private void SearchEquipment(object sender, RoutedEventArgs e)
+        {
+            EquipmentSearch equipmentSearch = new EquipmentSearch();
+            equipmentSearch.Show();
+        }
     }
 }

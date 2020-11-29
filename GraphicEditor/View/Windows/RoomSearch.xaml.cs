@@ -25,9 +25,11 @@ namespace GraphicEditor.View.Windows
             RoomNameTextBox.Text = null;
         }
 
-        private string ReportOnFoundRooms(string roomName, List<RoomGEA> rooms)
+        public static string ReportOnFoundRooms(string roomName, List<RoomGEA> rooms)
         {
             string resultOfSearch = roomName + " found at: ";
+            if (rooms == null)
+                return resultOfSearch += "nowhere.";
             int roomCounter = rooms.Count;
             if (roomCounter != 0)
             {

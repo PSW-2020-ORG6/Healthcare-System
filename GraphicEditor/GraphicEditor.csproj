@@ -124,10 +124,14 @@
     <Compile Include="HelpClasses\MyICommand.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Repositories\BuildingRepository.cs" />
+    <Compile Include="Repositories\EquipmentRepository.cs" />
     <Compile Include="Repositories\FloorRepository.cs" />
     <Compile Include="Repositories\Interfaces\IBuildingRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IEqipmentRepository.cs" />
     <Compile Include="Repositories\Interfaces\IFloorRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IMedicineRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRoomRepository.cs" />
+    <Compile Include="Repositories\MedicineRepository.cs" />
     <Compile Include="Repositories\RoomRepository.cs" />
     <Compile Include="ViewModel\BedUpdateViewModel.cs" />
     <Compile Include="ViewModel\BuildingUpdateViewModel.cs" />
@@ -162,6 +166,9 @@
     </Compile>
     <Compile Include="View\Windows\BuildingUpdate.xaml.cs">
       <DependentUpon>BuildingUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\EquipmentSearch.xaml.cs">
+      <DependentUpon>EquipmentSearch.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\HelpViewer.xaml.cs">
       <DependentUpon>HelpViewer.xaml</DependentUpon>
@@ -234,6 +241,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Windows\BuildingUpdate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\EquipmentSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
