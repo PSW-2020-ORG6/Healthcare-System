@@ -53,7 +53,7 @@ namespace WebApplication.Backend.Repositorys
             foreach (Report report in resultList)
             {
                 PatientRepository patientRepository = new PatientRepository(connection);
-                report.Patient = patientRepository.GetPatientById("Select * from patients where SerialNumber like '" + report.Patient.SerialNumber + "'");
+                report.Patient = patientRepository.GetPatientById("Select * from patients where Id like '" + report.Patient.SerialNumber + "'");
 
                 PhysitianRepository phisitionRepository = new PhysitianRepository(connection);
                 report.Physitian = phisitionRepository.GetPhysitianById("Select * from accounts where SerialNumber like '" + report.Physitian.SerialNumber + "'");
