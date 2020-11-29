@@ -1,9 +1,10 @@
 ﻿using GraphicEditor.HelpClasses;
 using GraphicEditor.View.Windows;
+using GraphicEditor.Repositories;
 using health_clinic_class_diagram.Backend.Model.Hospital;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace GraphicEditor.ViewModel
 {
@@ -13,14 +14,37 @@ namespace GraphicEditor.ViewModel
         public MyICommand<string> NavCommand { get; private set; }
         public MyICommand<object> AddCommand { get; private set; }
 
+        ResourceDictionary myResourceDictionary = new ResourceDictionary();
 
         ResourceDictionary myResourceDictionary = new ResourceDictionary();
+
+        public Grid HospitalMapGrid { get; set; }
+
+        BuildingRepository buildingRepository = new BuildingRepository();
 
         public HospitalMapUserControlViewModel(MapContentUserControlViewModel parent)
         {
             _parent = parent;
             NavCommand = new MyICommand<string>(ChooseHospital);
             AddCommand = new MyICommand<object>(AddBuilding);
+        }
+
+        public void InitialGridRender()
+        {
+            foreach (Building building in buildingRepository.GetAllBuildings())
+            {
+                Button but = new Button();
+                but.Style = (Style)myResourceDictionary[building.Style];
+                but.Name = "A" + building.SerialNumber;
+                var color = (Color)ColorConverter.ConvertFromString(building.Color);
+                Brush brush = new SolidColorBrush(color);    //Color.FromRgb(120,120,120)
+                but.Background = brush;
+                Grid.SetColumn(but, building.Column);
+                Grid.SetRow(but, building.Row);
+
+                HospitalMapGrid.Children.Add(but);
+                HospitalMapGrid.UpdateLayout();
+            }
         }
 
         private void AddBuilding(object button)
@@ -38,7 +62,6 @@ namespace GraphicEditor.ViewModel
             switch (destination)
             {
                 case Constants.EMERGENCY:
-
                     break;
                 case Constants.CARDIOLOGY:
                     _parent.ContentViewModel = MapContentUserControlViewModel.CardiologyBuilding;

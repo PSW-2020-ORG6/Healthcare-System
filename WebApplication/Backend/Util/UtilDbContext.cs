@@ -7,6 +7,7 @@ using Model.Hospital;
 using Model.MedicalExam;
 using Model.Util;
 using System;
+using System.Collections.Generic;
 
 namespace WebApplication.Backend.Model
 {
@@ -139,8 +140,8 @@ namespace WebApplication.Backend.Model
           );
 
             modelBuilder.Entity<Building>().HasData(
-              new Building { SerialNumber = "10001", Name = "Cardiology", Color = "Orange", Shape = "Square" },
-              new Building { SerialNumber = "10002", Name = "Orthopedy", Color = "Dark Orange", Shape = "Square" }
+              new Building { SerialNumber = "10001", Name = "Cardiology", Color = "Orange", Shape = "Square", Row = 5, Column = 5, Style = "TriangleBuildingButtonStyle" },
+              new Building { SerialNumber = "10002", Name = "Orthopedy", Color = "Dark Orange", Shape = "Square", Row = 5, Column = 3, Style = "UBuildingButtonStyle" }
             );
             modelBuilder.Entity<Floor>().HasData(
               new Floor { SerialNumber = "1001", Name = "Floor1", BuildingName = "Cardiology" },
