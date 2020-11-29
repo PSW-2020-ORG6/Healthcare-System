@@ -176,7 +176,6 @@
                 .catch(error => {
                     alert(error)
                 })
-
         },
         Disapprove: function (feedback) {
             axios
@@ -197,7 +196,6 @@
                 .catch(error => {
                     alert(error)
                 })
-
             axios
                 .get('http://localhost:49900/feedback/disapproved')
                 .then(response => {

@@ -1,9 +1,7 @@
-﻿
-#feedbackModalHeader {
+﻿#feedbackModalHeader {
     background-color: lightblue;
     color: white;
 }
-
 #feedbackModalBody {
     padding-top: 120px;
     background-color: lightblue;
@@ -11,12 +9,10 @@
     font-family: Impact;
     background-image: url("../pictures/rating.jpg");
 }
-
 #feedbackModalFooter {
     background-color: lightblue;
     color: white;
 }
-
 label {
     font-size: 20px;
 }

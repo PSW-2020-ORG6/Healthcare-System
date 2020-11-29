@@ -1,13 +1,10 @@
-﻿
-
-.btnban {
+﻿.btnban {
     background-color: lightcoral;
     color: white;
     border: thick;
     font-family: 'Impact';
     font-weight: 100;
 }
-
 .btnapprove {
     background-color: lightgreen;
     color: white;

@@ -8,11 +8,9 @@ namespace WebApplication.Backend.Services
 {
     public class PrescriptionService
     {
-        private PrescriptionRepository prescriptionRepository;
         private IPrescriptionRepository iPrescriptionRepository;
         public PrescriptionService()
         {
-            this.prescriptionRepository = new PrescriptionRepository();
             this.iPrescriptionRepository = new PrescriptionRepository();
         }
         public PrescriptionService(IPrescriptionRepository iPrescriptionRepository)
@@ -46,14 +44,12 @@ namespace WebApplication.Backend.Services
                     else
                         firstSearchedList = OperationAND(firstSearchedList, iPrescriptionRepository.GetPrescriptionsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes,true));
                 }
-
                 return ConverToDTO(firstSearchedList);
             }
             catch (Exception e)
             {
                 return ConverToDTO(iPrescriptionRepository.GetPrescriptionsByProperty(searchedPersription.Split(",")[2], searchedPersription.Split(",")[1], dateTimes,false));
             }
-
         }
         ///Tanja Drcelic RA124/2017 and Marija Vucetic RA157/2017
         /// <summary>
@@ -84,7 +80,6 @@ namespace WebApplication.Backend.Services
             }
             return returnList;
         }
-
         private bool NotInResult(List<Prescription> returnList, string serialNumber)
         {
             foreach (Prescription pReturnList in returnList)

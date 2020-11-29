@@ -14,11 +14,6 @@ namespace WebApplication.Backend.Repositorys
         {
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
         }
-        public PhysitianRepository(MySqlConnection connection)
-        {
-            this.connection = connection;
-
-        }
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///Get physitions from table
@@ -28,7 +23,7 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///list of physitions
         ///</returns>
-        internal List<Physitian> GetPhysitian(String sqlDml)
+        private List<Physitian> GetPhysitian(String sqlDml)
         {
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
@@ -54,17 +49,13 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///Physitian
         ///</returns>
-        public Physitian GetPhysitianById(String sqlDml)
+        public Physitian GetPhysitianById(string id)
         {
-            try
-            {
-                Physitian physitian = GetPhysitian(sqlDml)[0];
+            if (id != null) {
+                Physitian physitian = GetPhysitian("Select * from accounts where SerialNumber like '" + id + "'")[0];
                 return physitian;
             }
-            catch (Exception e)
-            {
                 return null;
-            }
         }
     }
 }

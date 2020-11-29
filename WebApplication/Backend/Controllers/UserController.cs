@@ -13,21 +13,20 @@ namespace WebApplication.Backend.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly PrescriptionService prescriptionService;
-        private readonly ReportService reportService;
+        private readonly PrescriptionService prescriptionService=new PrescriptionService();
+        private readonly ReportService reportService=new ReportService();
         private SearchEntityDTO searchEntityDTO = new SearchEntityDTO();
         private DateTimeDTO dateTimeDTO = new DateTimeDTO();
         public UserController()
         {
-            this.prescriptionService = new PrescriptionService();
             this.reportService = new ReportService();
         }
         [HttpGet("advancedSearch")]
         public List<SearchEntityDTO> GetAllFeedbacks([FromQuery]string prescriptionSearch, [FromQuery]string reportSearch, [FromQuery] string date)
         {
-            if (!searchEntityDTO.IsDateFormatValid(date))
+            if (!searchEntityDTO.IsDateFormat(date))
                 return null;
-            if (searchEntityDTO.IsValicSeacrhes(prescriptionSearch, reportSearch))
+            if (searchEntityDTO.IsSeacrhes(prescriptionSearch, reportSearch))
             {
                 List<SearchEntityDTO> prescriptions = prescriptionService.GetSearchedPrescription(prescriptionSearch, date);
                 List<SearchEntityDTO> reports = reportService.GetSearchedReport(reportSearch, date);
@@ -38,13 +37,13 @@ namespace WebApplication.Backend.Controllers
                 else
                     return prescriptions;
             }
-            else if (searchEntityDTO.IsValicSeacrh(prescriptionSearch))
+            else if (searchEntityDTO.IsSeacrh(prescriptionSearch))
             {
                 List<SearchEntityDTO> prescriptions = prescriptionService.GetSearchedPrescription(prescriptionSearch, date);
                 if (!searchEntityDTO.IsNull(prescriptions))
                     return prescriptions;
             }
-            else if (searchEntityDTO.IsValicSeacrh(reportSearch))
+            else if (searchEntityDTO.IsSeacrh(reportSearch))
             {
                 List<SearchEntityDTO> reports = reportService.GetSearchedReport(reportSearch, date);
                 if (!searchEntityDTO.IsNull(reports))

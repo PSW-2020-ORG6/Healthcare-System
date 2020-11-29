@@ -17,7 +17,6 @@ namespace WebApplication.Backend.Controllers
         {
             this.patientService = new PatientService();
         }
-
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///calls method for get all patients from patients table

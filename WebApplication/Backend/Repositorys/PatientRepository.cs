@@ -14,7 +14,7 @@ namespace WebApplication.Backend.Repositorys
         private MySqlConnection connection;
         public PatientRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb9;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
         }
         ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017 and Aleksa Repović RA52/2017
         /// <summary>
@@ -81,11 +81,14 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///single instance of Patient object
         ///</returns
-        public Patient GetPatientById(string patientId)
+        public Patient GetPatientById(string id)
         {
-            return GetPatients("Select * from patients where Id = '" + patientId + "'")[0];
+            if (id != null) {
+                Patient patient = GetPatients("Select * from patients where SerialNumber like '"+id+"'")[0];
+                return patient;
+            }
+            return null;
         }
-
         ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017
         /// <summary>
         ///Get patients from patients table

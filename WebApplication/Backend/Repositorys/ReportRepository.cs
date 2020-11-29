@@ -4,8 +4,6 @@ using Model.Schedule;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebApplication.Backend.Repositorys
 {
@@ -31,7 +29,7 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///list of reports
         ///</returns>
-        public List<Report> GetReports(String sqlDml)
+        private List<Report> GetReports(String sqlDml)
         {
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
@@ -52,14 +50,11 @@ namespace WebApplication.Backend.Repositorys
             connection.Close();
             foreach (Report report in resultList)
             {
-                PatientRepository patientRepository = new PatientRepository(connection);
-                report.Patient = patientRepository.GetPatientById("Select * from patients where Id like '" + report.Patient.SerialNumber + "'");
-
-                PhysitianRepository phisitionRepository = new PhysitianRepository(connection);
-                report.Physitian = phisitionRepository.GetPhysitianById("Select * from accounts where SerialNumber like '" + report.Physitian.SerialNumber + "'");
-
+                PatientRepository patientRepository = new PatientRepository();
+                report.Patient = patientRepository.GetPatientById(report.Patient.SerialNumber);
+                PhysitianRepository phisitionRepository = new PhysitianRepository();
+                report.Physitian = phisitionRepository.GetPhysitianById(report.Physitian.SerialNumber);
                 report.ProcedureType=GetProcedureTypeById("Select * from proceduretypes where SerialNumber like '" + report.ProcedureType.SerialNumber + "'");
-
             }
             return resultList;
         }
@@ -72,7 +67,7 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///Procedure type
         ///</returns>
-        public ProcedureType GetProcedureTypeById(string sqlDml)
+        private ProcedureType GetProcedureTypeById(string sqlDml)
         {
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
@@ -96,7 +91,7 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///Physitian
         ///</returns>
-        public Specialization GetSpecialization(string sqlDml)
+        private Specialization GetSpecialization(string sqlDml)
         {
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
@@ -123,70 +118,132 @@ namespace WebApplication.Backend.Repositorys
         public List<Report> GetReportsByProperty(string property, string value, string dateTimes, bool not)
         {
             List<Report> reports = GetReports("Select * from reports  where Date between " + dateTimes);
-            if (not)
-                return Negation(property, value, reports);
-            return Regular(property, value, reports);
+            if (!not && property.Equals("All"))
+                return GetReportssByAllProperties(value, reports);
+            else if (not && property.Equals("All"))
+                return GetRepportsByAllPropertiesNegation(value, reports);
+            else if (!not && property.Equals("Patient reports"))
+                return GetPrescriptionsByPatient(value, reports);
+            else if (not && property.Equals("Patient reports"))
+                return GetPrescriptionsByPatientNegation(value, reports);
+            else if (!not && property.Equals("Doctor reports"))
+                return GetPrescriptionsByPhysition(value, reports);
+            else if (not && property.Equals("Doctor reports"))
+                return GetPrescriptionsByPhysitionNegation(value, reports);
+            else if (!not && property.Equals("Specialist reports"))
+                return GetPrescriptionsBySpecialization(value, reports);
+            else if (not && property.Equals("Specialist reports"))
+                return GetPrescriptionsBySpecializationNegation(value, reports);
+            else if (!not && property.Equals("Procedure type"))
+                return GetPrescriptionsByProedureType(value, reports);
+            else
+                return GetPrescriptionsByProedureTypeNegation(value, reports);
         }
-
-        private List<Report> Negation(string property, string value, List<Report> reports)
+        private List<Report> GetPrescriptionsBySpecializationNegation(string value, List<Report> reports)
         {
             List<Report> resultList = new List<Report>();
             foreach (Report report in reports)
             {
-                if (property.Equals("All"))
-                {
-                    if (!report.Physitian.Name.ToUpper().Contains(value.ToUpper()) && !report.Physitian.Surname.ToUpper().Contains(value.ToUpper()) && !report.Patient.Name.ToUpper().Contains(value.ToUpper()) && !report.Patient.Name.ToUpper().Contains(value.ToUpper()) && !report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()) && !report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
-                        resultList.Add(report);
+                if (!report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
+                    resultList.Add(report);
                 }
-                else if (property.Equals("Patient reports"))
-                {
-                    if (!report.Patient.Name.ToUpper().Contains(value.ToUpper()) && !report.Patient.Surname.ToUpper().Contains(value.ToUpper()))
-                        resultList.Add(report);
-                }
-                else if (property.Equals("Doctor reports"))
-                {
-                    if (!report.Physitian.Name.ToUpper().Contains(value.ToUpper()) && !report.Physitian.Surname.ToUpper().Contains(value.ToUpper()))
-                        resultList.Add(report);
-                }
-                else if (property.Equals("Specialist reports"))
-                {
-                    if (!report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
-                        resultList.Add(report);
-                }
-                else if (!report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()))
+            return resultList;
+        }
+
+        private List<Report> GetPrescriptionsByProedureTypeNegation(string value, List<Report> reports)
+        {
+            List<Report> resultList = new List<Report>();
+            foreach (Report report in reports)
+            {
+                if (!report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()))
+                    resultList.Add(report);
+            }
+            return resultList;
+         }
+        private List<Report> GetPrescriptionsByProedureType(string value, List<Report> reports)
+        {
+            List<Report> resultList = new List<Report>();
+            foreach (Report report in reports)
+            {
+                if (report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()))
                     resultList.Add(report);
             }
             return resultList;
         }
-        private List<Report> Regular(string property, string value, List<Report> reports)
+        private List<Report> GetPrescriptionsBySpecialization(string value, List<Report> reports)
         {
             List<Report> resultList = new List<Report>();
             foreach (Report report in reports)
             {
-                if (property.Equals("All"))
-                {
-                    if (report.Physitian.Name.ToUpper().Contains(value.ToUpper()) || report.Physitian.Surname.ToUpper().Contains(value.ToUpper()) || report.Patient.Name.ToUpper().Contains(value.ToUpper()) || report.Patient.Name.ToUpper().Contains(value.ToUpper()) || report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()) || report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
-                        resultList.Add(report);
-                }
-                else if (property.Equals("Patient reports"))
-                {
-                    if (report.Patient.Name.ToUpper().Contains(value.ToUpper()) || report.Patient.Surname.ToUpper().Contains(value.ToUpper()))
-                        resultList.Add(report);
-                }
-                else if (property.Equals("Doctor reports"))
-                {
-                    if (report.Physitian.Name.ToUpper().Contains(value.ToUpper()) || report.Physitian.Surname.ToUpper().Contains(value.ToUpper()))
-                        resultList.Add(report);
-                }
-                else if (property.Equals("Specialist reports"))
-                {
                     if (report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
                         resultList.Add(report);
                 }
-                else if (report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()))
+            return resultList;
+        }
+
+        private List<Report> GetPrescriptionsByPhysitionNegation(string value, List<Report> reports)
+        {
+            List<Report> resultList = new List<Report>();
+            foreach (Report report in reports)
+            {
+                if (!report.Physitian.Name.ToUpper().Contains(value.ToUpper()) && !report.Physitian.Surname.ToUpper().Contains(value.ToUpper()))
                     resultList.Add(report);
             }
             return resultList;
         }
+        private List<Report> GetPrescriptionsByPhysition(string value, List<Report> reports)
+        {
+            List<Report> resultList = new List<Report>();
+            foreach (Report report in reports)
+            {
+                if (report.Physitian.Name.ToUpper().Contains(value.ToUpper()) || report.Physitian.Surname.ToUpper().Contains(value.ToUpper()))
+                    resultList.Add(report);
+            }
+            return resultList;
+        }
+
+        private List<Report> GetPrescriptionsByPatientNegation(string value, List<Report> reports)
+        {
+            List<Report> resultList = new List<Report>();
+            foreach (Report report in reports)
+            {
+                if (!report.Patient.Name.ToUpper().Contains(value.ToUpper()) && !report.Patient.Surname.ToUpper().Contains(value.ToUpper()))
+                    resultList.Add(report);
+            }
+            return resultList;
+        }
+        private List<Report> GetPrescriptionsByPatient(string value, List<Report> reports)
+        {
+            List<Report> resultList = new List<Report>();
+            foreach (Report report in reports)
+            {
+                if (report.Patient.Name.ToUpper().Contains(value.ToUpper()) || report.Patient.Surname.ToUpper().Contains(value.ToUpper()))
+                    resultList.Add(report);
+            }
+            return resultList;
+        }
+        private List<Report> GetReportssByAllProperties(string value, List<Report> reports)
+        {
+
+            List<Report> resultList = new List<Report>();
+            foreach (Report report in reports)
+            {
+                if (report.Physitian.Name.ToUpper().Contains(value.ToUpper()) || report.Physitian.Surname.ToUpper().Contains(value.ToUpper()) || report.Patient.Name.ToUpper().Contains(value.ToUpper()) || report.Patient.Name.ToUpper().Contains(value.ToUpper()) || report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()) || report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
+                    resultList.Add(report);
+            }
+            return resultList;
+        }
+        private List<Report> GetRepportsByAllPropertiesNegation(string value, List<Report> reports)
+        {
+
+            List<Report> resultList = new List<Report>();
+            foreach (Report report in reports)
+            {
+                    if (!report.Physitian.Name.ToUpper().Contains(value.ToUpper()) && !report.Physitian.Surname.ToUpper().Contains(value.ToUpper()) && !report.Patient.Name.ToUpper().Contains(value.ToUpper()) && !report.Patient.Name.ToUpper().Contains(value.ToUpper()) && !report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()) && !report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
+                        resultList.Add(report);
+             }
+            return resultList;
+        }
+
     }
 }

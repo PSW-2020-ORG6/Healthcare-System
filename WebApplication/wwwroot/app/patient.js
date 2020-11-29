@@ -33,7 +33,6 @@
 			.catch(error => {
 				alert(error.response.data)
 			})
-
 		axios
 			.get('http://localhost:49900/patient/all')
 			.then(response => {
@@ -306,11 +305,12 @@
 						this.feedback.text = null;
 						$('#feedbackModal').modal('hide')
 					})
-
+					.catch(error => {
+						alert("You need to enter a comment first.");
+					})
 			}
 			else
 				alert("You need to enter a comment first.");
-
 		},
 		DateSplit: function (date) {
 			var dates = (date.split("T")[0]).split("-")

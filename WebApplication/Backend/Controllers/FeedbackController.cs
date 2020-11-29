@@ -18,7 +18,6 @@ namespace WebApplication.Backend.Controllers
         {
             this.feedbackService = new FeedbackService();
         }
-
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///calls method for get all feedbacks from feedback table
@@ -31,7 +30,6 @@ namespace WebApplication.Backend.Controllers
         {
             return feedbackService.GetAllFeedbacks();
         }
-
         ///Repovic Aleksa RA-52-2017
         /// <summary>
         ///calls method for adding new feedback in feedback table
@@ -48,9 +46,7 @@ namespace WebApplication.Backend.Controllers
                 return Ok();
             }
             return BadRequest();
-
         }
-
         ///Aleksandra Milijevic RA 22/2017
         /// <summary>
         ///calls method for get approved feedbacks from feedback table
@@ -58,13 +54,11 @@ namespace WebApplication.Backend.Controllers
         ///<returns>
         ///list of approved feedbacks
         ///</returns>
-
         [HttpGet("approved")]
         public List<Feedback> GetApprovedFeedbacks()
         {
             return feedbackService.GetApprovedFeedbacks();
         }
-
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///calls method for get disapproved feedbacks from feedback table
