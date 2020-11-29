@@ -521,15 +521,6 @@
 						
 						alert("Person with that unique citizens identity number already already exists.");
 					})
-				/*axios
-					.post("http://localhost:49900/api/send", patientDTO)
-					.then(response => {
-						//alert("You have succesfully registrated.");
-					})
-
-					.catch(error => {
-						alert("Mail is not send.");
-					})*/
 			}
 			else {
 				alert("All fields are required.");
