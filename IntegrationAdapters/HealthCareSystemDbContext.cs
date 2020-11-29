@@ -10,12 +10,13 @@ namespace IntegrationAdapters
     public class HealthCareSystemDbContext : DbContext
     {
         public DbSet<Api> Apis { get; set; }
+        public DbSet<MedicineReport> Reports { get; set; }
 
         public HealthCareSystemDbContext(DbContextOptions<HealthCareSystemDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+           
         }
     }
     }

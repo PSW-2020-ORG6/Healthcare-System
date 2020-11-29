@@ -20,17 +20,20 @@ namespace IntegrationAdapters.Services
         {
             return apiRepository.RegisterHospitalOnPharmacy(api);
         }
+
         public List<Api> GetAllApis()
         {
             return apiRepository.GetAllApis();
         }
+
         public string getApiKey(Api api)
         {
             return apiRepository.getApiKey(api);
         }
-        public Api getApiByKey(List<Api> apis,string key)
+
+        public Api getApiByKey(List<Api> apis, string key)
         {
-            return apiRepository.getApiByKey(apis,key);
+            return apiRepository.getApiByKey(apis, key);
         }
     }
 }
