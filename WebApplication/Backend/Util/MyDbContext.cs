@@ -21,8 +21,6 @@ namespace WebApplication.Backend.Model
         public DbSet<Medicine> Medicine { get; set; }
         public DbSet<MedicineGEA> MedicineGEA { get; set; }
 
-        public DbSet<MedicineGEA> MedicineGEA { get; set; }
-
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
         // only for testing purposes
