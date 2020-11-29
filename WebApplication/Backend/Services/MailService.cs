@@ -55,7 +55,7 @@ namespace WebApplication.Backend.Services
         ///</param>>
         private string ParseId(string patientId)
         {
-            int id = int.Parse(patientId) - 6789 + 23 * 33;
+            long id = long.Parse(patientId) - 6789 + 23 * 33;
             return id.ToString();
         }
 

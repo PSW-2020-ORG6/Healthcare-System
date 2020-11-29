@@ -79,7 +79,7 @@ namespace WebApplication.Backend.Controllers
         ///</param>>
         private string ParseId(string patientId)
         {
-            int id = (int.Parse(patientId) - 23 * 33) + 6789;
+            long id = (long.Parse(patientId) - 23 * 33) + 6789;
             return id.ToString();
         }
     }
