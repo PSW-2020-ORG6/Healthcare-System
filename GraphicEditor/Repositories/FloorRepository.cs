@@ -12,11 +12,11 @@ namespace GraphicEditor.Repositories
         public FloorRepository()
         {
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
-            connection.Open();
         }
 
         private List<Floor> GetFloors(String query)
         {
+            connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             List<Floor> resultList = new List<Floor>();

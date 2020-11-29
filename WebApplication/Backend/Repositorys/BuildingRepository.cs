@@ -11,11 +11,11 @@ namespace WebApplication.Backend.Repositorys
         public BuildingRepository()
         {
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
-            connection.Open();
         }
 
         private List<Building> GetBuildings(String query)
         {
+            connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             List<Building> resultList = new List<Building>();
