@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IntegrationAdapters.Models
 {
-    public class MyDateTimeConverter : Newtonsoft.Json.JsonConverter
+    public class DateTimeConverter : Newtonsoft.Json.JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
