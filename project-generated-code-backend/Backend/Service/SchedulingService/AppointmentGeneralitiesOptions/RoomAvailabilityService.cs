@@ -56,14 +56,9 @@ namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
         public List<Bed> GetAvailableBeds(Room room)
         {
             List<Bed> beds = new List<Bed>();
-            foreach (Equipment equipment in room.Equipment)
+            foreach (Bed bed in room.Bed)
             {
-                beds.Add(equipment as Bed);
-                // ne razlikuje krevet i opremu
-                //if(equipment.IsBed() && !IsBedReserved(equipment))
-                //{
-                //    beds.Add(equipment as Bed);
-                //}
+                beds.Add(bed);
             }
             return beds;
         }

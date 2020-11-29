@@ -1,5 +1,6 @@
 ﻿using Backend.Repository;
 using Model.Accounts;
+using Model.Hospital;
 using Model.Schedule;
 using System.Collections.Generic;
 
@@ -34,6 +35,10 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
                 }
             }
             return patients;
+        }
+        public List<Patient> getPatientsByRoom(Room room)
+        {
+            return patientRepository.GetAll();
         }
 
         private bool IsPatientScheduledForPhysitian(Patient patient, Physitian physitian)

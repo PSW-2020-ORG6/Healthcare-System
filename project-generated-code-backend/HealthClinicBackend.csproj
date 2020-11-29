@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backend\Controller\HospitalLogInController.cs" />
+    <Compile Include="Backend\Controller\PatientControllers\PatientAccountsController.cs" />
     <Compile Include="Backend\Controller\PhysitianControllers\PhysitianHospitalController.cs" />
     <Compile Include="Backend\Controller\SuperintendentControllers\MedicineAddingController.cs" />
     <Compile Include="Backend\Controller\PhysitianControllers\PhysitianMedicineController.cs" />

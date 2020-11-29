@@ -20,6 +20,7 @@ namespace Model.Hospital
         private int id;
         private RoomType roomType;
         private List<Equipment> equipment;
+        private List<Bed> bed;
 
         public RoomType RoomType { get => roomType; set { roomType = value; } }
         public int Id { get => id; set { id = value; } }
@@ -68,6 +69,50 @@ namespace Model.Hospital
                 equipment.Clear();
         }
 
+        public List<Bed> Bed
+        {
+            get
+            {
+                if (bed == null)
+                    bed = new List<Bed>();
+                return bed;
+            }
+            set
+            {
+                RemoveAllEquipment();
+                if (value != null)
+                {
+                    foreach (Bed oBed in value)
+                        AddBed(oBed);
+                }
+            }
+        }
+
+        public void AddBed(Bed newBed)
+        {
+            if (newBed == null)
+                return;
+            if (this.bed == null)
+                this.bed = new List<Bed>();
+            if (!this.bed.Contains(newBed))
+                this.bed.Add(newBed);
+        }
+
+        public void RemoveBed(Bed oldBed)
+        {
+            if (oldBed == null)
+                return;
+            if (this.bed != null)
+                if (this.bed.Contains(oldBed))
+                    this.bed.Remove(oldBed);
+        }
+
+        public void RemoveAllBeds()
+        {
+            if (bed != null)
+                bed.Clear();
+        }
+
         [JsonConstructor]
         public Room(String serial, int id, RoomType roomType) : base(serial)
         {
@@ -75,6 +120,7 @@ namespace Model.Hospital
             this.id = id;
             this.roomType = roomType;
             this.equipment = new List<Equipment>();
+            this.bed = new List<Bed>();
 
         }
 
@@ -83,6 +129,7 @@ namespace Model.Hospital
             this.id = id;
             this.roomType = roomType;
             this.equipment = new List<Equipment>();
+            this.bed = new List<Bed>();
         }
 
         public override bool Equals(object obj)
