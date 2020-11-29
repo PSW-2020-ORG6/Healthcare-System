@@ -128,6 +128,7 @@
     <Compile Include="Repositories\FloorRepository.cs" />
     <Compile Include="Repositories\Interfaces\IBuildingRepository.cs" />
     <Compile Include="Repositories\Interfaces\IEquipmentRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IEqipmentRepository.cs" />
     <Compile Include="Repositories\Interfaces\IFloorRepository.cs" />
     <Compile Include="Repositories\Interfaces\IMedicineRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRoomRepository.cs" />
