@@ -15,7 +15,6 @@ namespace WebApplication.Backend.Services
         {
             this.feedbackRepository = new FeedbackRepository();
         }
-
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///calls method for get all feedback in feedback table
@@ -47,10 +46,8 @@ namespace WebApplication.Backend.Services
         ///</returns>
         internal List<Feedback> GetDisapprovedFeedbacks()
         {
-
             return feedbackRepository.GetDisapprovedFeedbacks();
         }
-
         ///Marija Vucetic 
         /// <summary>
         ///calls method for set na value of attribute Approved
@@ -64,7 +61,6 @@ namespace WebApplication.Backend.Services
         {
             feedbackRepository.ApproveFeedback(feedback);
         }
-
         ///Repovic Aleksa RA-52-2017
         /// <summary>
         ///calls method for adding new row in feedbacks table

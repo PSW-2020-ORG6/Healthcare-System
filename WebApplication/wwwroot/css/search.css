@@ -1,3 +1,4 @@
+@import url('file:///C:\Users\Administrator\Desktop\Novo\Healthcare-System\WebApplication\wwwroot\css\search.css');
 .circleadd {
     background-color: #4CAF50;
     border: none;
@@ -16,7 +17,6 @@
     font-size: 16px;
     border-radius: 50%;
 }
-
 .col {
     width: 80%;
     margin: 8px 0;
@@ -26,7 +26,6 @@
     transition: 0.5s;
     outline: none;
 }
-
 input[type=text]:focus {
     border: 3px solid #014779;
 }

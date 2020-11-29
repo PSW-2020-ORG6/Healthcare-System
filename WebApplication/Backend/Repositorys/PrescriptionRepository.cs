@@ -28,7 +28,7 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///list of prescriptions
         ///</returns>
-        public List<Prescription> GetPrescriptions(string sqlDml)
+        private List<Prescription> GetPrescriptions(string sqlDml)
         {
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
@@ -58,7 +58,7 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///list of medicine dosages
         ///</returns>
-        public List<MedicineDosage> GetMedicineDosage(string sqlDml)
+        private List<MedicineDosage> GetMedicineDosage(string sqlDml)
         {
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
@@ -92,58 +92,91 @@ namespace WebApplication.Backend.Repositorys
         public List<Prescription> GetPrescriptionsByProperty(string property, string value, string dateTimes,bool not)
         {
             List<Prescription> prescriptions = GetPrescriptions("Select * from prescriptions where Date between "+dateTimes);
-            if(not)
-                return Negation(property, value, prescriptions);
-            return Regular(property, value, prescriptions);
+            if (!not && property.Equals("All"))
+                return GetPrescriptionsByAllProperties(value, prescriptions);
+            else if (not && property.Equals("All"))
+                return GetPrescriptionsByAllPropertiesNegation(value, prescriptions);
+            else if (!not && property.Equals("Medicine name"))
+                return GetPrescriptionsByMedicineName(value, prescriptions);
+            else if (not && property.Equals("Medicine name"))
+                return GetPrescriptionsByMedicineNameNegation(value, prescriptions);
+            else if (!not && property.Equals("Medicine type"))
+                return GetPrescriptionsByMedicineType(value, prescriptions);
+            else
+                return GetPrescriptionsByMedicineTypeNegation(value, prescriptions);
         }
-        private List<Prescription> Negation(string property, string value, List<Prescription> prescriptions)
+        private List<Prescription> GetPrescriptionsByAllPropertiesNegation(string value, List<Prescription> prescriptions)
         {
             List<Prescription> resultList = new List<Prescription>();
             foreach (Prescription prescription in prescriptions)
             {
                 foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
                 {
-                    if (property.Equals("All"))
-                    {
-                        if (!medicineDosage.Medicine.GenericName.Contains(value.ToUpper()) && !medicineDosage.Medicine.MedicineType.Type.Contains(value.ToUpper()))
-                            resultList.Add(prescription);
-                    }
-                    else if (property.Equals("Medicine name"))
-                    {
-                        if (!medicineDosage.Medicine.GenericName.ToUpper().Contains(value.ToUpper()))
-                            resultList.Add(prescription);
-                    }
-                    else
-                    {
-                        if (!medicineDosage.Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper()))
-                            resultList.Add(prescription);
-                    }
+                    if (!medicineDosage.Medicine.GenericName.Contains(value.ToUpper()) && !medicineDosage.Medicine.MedicineType.Type.Contains(value.ToUpper()))
+                        resultList.Add(prescription);
                 }
             }
             return resultList;
         }
-        private List<Prescription> Regular(string property, string value, List<Prescription> prescriptions)
+        private List<Prescription> GetPrescriptionsByMedicineNameNegation(string value, List<Prescription> prescriptions) {
+                List<Prescription> resultList = new List<Prescription>();
+                foreach (Prescription prescription in prescriptions)
+                {
+                    foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
+                    {
+                            if (!medicineDosage.Medicine.GenericName.ToUpper().Contains(value.ToUpper()))
+                                resultList.Add(prescription);
+                    }
+                }
+                return resultList;
+         }
+        private List<Prescription> GetPrescriptionsByMedicineTypeNegation(string value,List<Prescription> prescriptions) {
+            List<Prescription> resultList = new List<Prescription>();
+            foreach (Prescription prescription in prescriptions)
+            {
+                foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
+                {
+                    if (!medicineDosage.Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper()))
+                        resultList.Add(prescription);
+                }
+            }
+            return resultList;
+    }
+        private List<Prescription> GetPrescriptionsByAllProperties(string value, List<Prescription> prescriptions)
         {
             List<Prescription> resultList = new List<Prescription>();
             foreach (Prescription prescription in prescriptions)
             {
                 foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
                 {
-                    if (property.Equals("All"))
-                    {
-                        if (medicineDosage.Medicine.GenericName.ToUpper().Contains(value.ToUpper()) || medicineDosage.Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper()))
-                            resultList.Add(prescription);
-                    }
-                    else if (property.Equals("Medicine name"))
-                    {
-                        if (medicineDosage.Medicine.GenericName.ToUpper().Contains(value.ToUpper()))
-                            resultList.Add(prescription);
-                    }
-                    else
-                    {
-                        if (medicineDosage.Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper()))
-                            resultList.Add(prescription);
-                    }
+                    if (medicineDosage.Medicine.GenericName.ToUpper().Contains(value.ToUpper()) || medicineDosage.Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper()))
+                        resultList.Add(prescription);
+                }
+            }
+            return resultList;
+        }
+        private List<Prescription> GetPrescriptionsByMedicineName(string value, List<Prescription> prescriptions)
+        {
+            List<Prescription> resultList = new List<Prescription>();
+            foreach (Prescription prescription in prescriptions)
+            {
+                foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
+                {
+                    if (medicineDosage.Medicine.GenericName.ToUpper().Contains(value.ToUpper()))
+                        resultList.Add(prescription);
+                }
+            }
+            return resultList;
+        }
+        private List<Prescription> GetPrescriptionsByMedicineType(string value, List<Prescription> prescriptions)
+        {
+            List<Prescription> resultList = new List<Prescription>();
+            foreach (Prescription prescription in prescriptions)
+            {
+                foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
+                {
+                    if (medicineDosage.Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper()))
+                        resultList.Add(prescription);
                 }
             }
             return resultList;

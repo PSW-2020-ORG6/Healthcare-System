@@ -269,7 +269,6 @@ Vue.component("search", {
             else if (!this.advancedSearches[2])
                 this.advancedSearches[2] = true
             this.rowAdvanced += 1
-
         },
         AddRowSimple: function () {
             if (!this.simpleSearches[0])
@@ -279,7 +278,6 @@ Vue.component("search", {
             else if (!this.simpleSearches[2])
                 this.simpleSearches[2] = true
             this.rowSimple += 1
-
         },
         DeleteRowAdvanced: function () {
             this.rowAdvanced -= 1

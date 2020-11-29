@@ -1,8 +1,6 @@
 ﻿using Model.MedicalExam;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WebApplication.Backend.DTO;
 using WebApplication.Backend.Repositorys;
 
@@ -10,11 +8,9 @@ namespace WebApplication.Backend.Services
 {
     public class ReportService
     {
-        private ReportRepository reportRepository;
         private IReportRepository iReportRepository;
         public ReportService()
         {
-            this.reportRepository = new ReportRepository();
             this.iReportRepository = new ReportRepository();
         }
         public ReportService(IReportRepository iReportRepository)
@@ -36,9 +32,7 @@ namespace WebApplication.Backend.Services
             try
             {
                 string[] search = searchedReport.Split(";");
-
                 List<Report> firstSearchedList = iReportRepository.GetReportsByProperty(search[0].Split(",")[2], search[0].Split(",")[1], dateTimes,false);
-
                 for (int i = 1; i < search.Length; i++)
                 {
                     if (search[i].Split(",")[0].Equals("AND"))
@@ -48,16 +42,13 @@ namespace WebApplication.Backend.Services
                     else
                         firstSearchedList = OperationAND(firstSearchedList, iReportRepository.GetReportsByProperty(search[i].Split(",")[2], search[i].Split(",")[1], dateTimes,true));
                 }
-
                 return ConverToDTO(firstSearchedList);
             }
             catch (Exception e)
             {
                 return ConverToDTO(iReportRepository.GetReportsByProperty(searchedReport.Split(",")[2], searchedReport.Split(",")[1], dateTimes,false));
             }
-
         }
-
         private List<SearchEntityDTO> ConverToDTO(List<Report> reports)
         {
             if (reports == null || reports.Count == 0)
@@ -122,7 +113,6 @@ namespace WebApplication.Backend.Services
         private List<Report> OperationOR(List<Report> firstSearchedList, List<Report> secondSearchedList)
         {
             List<Report> returnList = firstSearchedList;
-
             foreach (Report rsecond in secondSearchedList)
             {
                 if (NotInResult(returnList, rsecond.SerialNumber))

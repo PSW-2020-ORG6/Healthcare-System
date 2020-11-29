@@ -1,11 +1,6 @@
-﻿using health_clinic_class_diagram.Backend.Model.Hospital;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Model.Accounts;
-using Model.Blog;
-using Model.Hospital;
 using Model.Util;
-using System;
-using System.Collections.Generic;
 
 namespace WebApplication.Backend.Model
 {
