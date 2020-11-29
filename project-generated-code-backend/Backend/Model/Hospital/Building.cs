@@ -8,19 +8,20 @@ namespace health_clinic_class_diagram.Backend.Model.Hospital
         public string Name { get; set; }
         public string Color { get; set; }
         public string Shape { get; set; }
+        public int Row { get; set; }
+        public int Column { get; set; }
+        public string Style { get; set; }
 
-        public Building( string _name, string _color, string _shape)
+        public Building(string _name, string _color, string _shape)
         {
             Name = _name;
             Color = _color;
             Shape = _shape;
-        } 
+        }
 
         public Building()
         {
 
         }
-        public BuildingLocation Location { get; set;}
-        public string Style { get; set; }
     }
 }

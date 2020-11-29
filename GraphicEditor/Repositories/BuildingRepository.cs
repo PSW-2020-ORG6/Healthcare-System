@@ -27,6 +27,9 @@ namespace GraphicEditor.Repositories
                 entity.Name = (string)sqlReader[1];
                 entity.Color = (string)sqlReader[2];
                 entity.Shape = (string)sqlReader[3];
+                entity.Row = (int)sqlReader[4];
+                entity.Column = (int)sqlReader[5];
+                entity.Style = (string)sqlReader[6];
                 resultList.Add(entity);
             }
             connection.Close();

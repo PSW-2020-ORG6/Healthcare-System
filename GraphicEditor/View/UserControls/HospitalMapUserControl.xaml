@@ -67,7 +67,8 @@
             </Grid>
 
             <!--Map Pattern-->
-            <Grid Grid.Column="2"
+            <Grid x:Name="hospitalMapGrid"
+                  Grid.Column="2"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center"
                   Width="1000"
