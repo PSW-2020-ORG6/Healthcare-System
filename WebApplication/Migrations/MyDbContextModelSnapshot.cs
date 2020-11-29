@@ -37,6 +37,9 @@ namespace WebApplication.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("EmploymentStatus")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 

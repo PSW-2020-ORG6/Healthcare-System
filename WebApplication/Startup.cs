@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebApplication.Backend.Model;
+using WebApplication.Backend.Services;
 
 namespace WebApplication
 {
@@ -21,6 +22,8 @@ namespace WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            services.AddTransient<IMailService, MailService>();
             services.AddDbContext<UtilDbContext>(options=>
             options.UseMySql(ConfigurationExtensions.GetConnectionString(Configuration,"MyDbContextConnectionString")).UseLazyLoadingProxies());
         }

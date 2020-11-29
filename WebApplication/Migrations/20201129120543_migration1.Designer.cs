@@ -9,8 +9,8 @@ using WebApplication.Backend.Model;
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201128154305_mig1")]
-    partial class mig1
+    [Migration("20201129120543_migration1")]
+    partial class migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,9 @@ namespace WebApplication.Migrations
 
                     b.Property<string>("Email")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("EmploymentStatus")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");

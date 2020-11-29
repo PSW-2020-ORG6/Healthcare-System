@@ -2,6 +2,8 @@
 const Admin = { template: '<admin></admin>' }
 const Patient = { template: '<patient></patient>' }
 const Registration = { template: '<registration></registration>' }
+const EmailConfirmation = { template: '<emailConfirmation></emailConfirmation>' }
+const SuccessfulRegistration = { template: '<successfulRegistration></successfulRegistration>' }
 const Survey = { template: '<survey></survey>' }
 const Statistics = { template: '<statistics></statistics>' }
 
@@ -23,6 +25,12 @@ var temp = new Vue({
 		},
 		registration: function () {
 			router.push("registration")
+		},
+		emailConfirmation: function () {
+			router.push("emailConfirmation")
+		},
+		successfulTegistration: function () {
+			router.push("successfulRegistration")
 		}
 		},
 		survey: function () {
@@ -58,6 +66,16 @@ const router = new VueRouter({
 			path: '/registration',
 			name: 'registration',
 			component: Registration,
+		},
+		{
+			path: '/emailConfirmation',
+			name: 'emailConfirmation',
+			component: EmailConfirmation,
+		},
+		{
+			path: '/successfulRegistration',
+			name: 'successfulRegistration',
+			component: SuccessfulRegistration,
 		},
 		{
 			path: '/survey',

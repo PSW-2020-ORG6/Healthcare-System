@@ -46,5 +46,18 @@ namespace WebApplication.Backend.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPut("confirmationEmail/{id}")]
+        public IActionResult Confirmation(string id)
+        {
+            if (registrationService.ConfirmgEmailUpdate(id))
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
 }

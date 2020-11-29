@@ -64,7 +64,8 @@ namespace WebApplication.Migrations
                     PersonalDiseases = table.Column<string>(nullable: true),
                     Gender = table.Column<string>(nullable: true),
                     Image = table.Column<string>(nullable: true),
-                    Guest = table.Column<bool>(nullable: false)
+                    Guest = table.Column<bool>(nullable: false),
+                    EmailConfirmed = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

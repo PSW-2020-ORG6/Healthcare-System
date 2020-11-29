@@ -38,6 +38,7 @@ namespace Backend.Dto
         private String personalDiseases;
         private String image;
         private bool guest;
+        private bool emailConfirmed;
 
         public PatientDTO() { }
 
@@ -68,8 +69,9 @@ namespace Backend.Dto
         public string Gender { get => gender; set => gender = value; }
         public string Image { get => image; set => image = value; }
         public bool Guest { get => guest; set => guest = value; }
+        public bool EmailConfirmed { get => emailConfirmed; set => emailConfirmed = value; }
 
-         public bool IsCorectRegistrationFields()
+        public bool IsCorectRegistrationFields()
         {
             if(Name == null || Surname == null || ParentName == null || Id == null || DateOfBirth == null || PlaceOfBirth == null || MunicipalityOfBirth == null ||
                 StateOfBirth == null || Nationality == null || Citizenship == null || Address == null || Address == null || PlaceOfResidence == null ||

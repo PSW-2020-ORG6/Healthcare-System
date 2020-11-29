@@ -1,0 +1,35 @@
+﻿Vue.component("emailConfirmation", {
+	data: function () {
+		return {
+			name: null,
+		}
+	},
+	template: `
+	<div class="confirmEmail">
+		<h5>Please complete your registration by clicking this button</h5>
+		<button v-on:click="Confirm(); SuccessfulRegistration();">Confirm</button>
+		
+	</div>
+	`,
+	methods: {
+		Confirm: function () {
+			var queryString = location.href
+			var id = queryString.split("?");
+			var id1 = id[1].split("=");
+			axios
+				.put("http://localhost:49900/registration/confirmationEmail/" + id1[1])
+				.then(response => {
+					//window.location.href = '/successfulRegistration';
+					//this.SuccessfulRegistration();
+					alert("You have succesfully registrated.");
+				})
+
+				.catch(error => {
+					alert("Greska");
+				})
+		},
+		SuccessfulRegistration: function () {
+			this.$router.push('successfulRegistration');
+        }
+	},
+});

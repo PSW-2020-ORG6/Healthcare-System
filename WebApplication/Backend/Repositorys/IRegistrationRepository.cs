@@ -8,5 +8,6 @@ namespace WebApplication.Backend.Repositorys
         public bool addPatient(Patient patient);
         public String GetPatientId(string idd);
         public String GetPatientIdById(string patientId);
+        public bool ConfirmgEmailUpdate(string patientId);
     }
 }

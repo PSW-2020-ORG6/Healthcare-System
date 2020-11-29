@@ -11,7 +11,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=mydb1;user=root;password=neynamneynam12");
+                connection = new MySqlConnection("server=localhost;port=3306;database=mydb9;user=root;password=root");
             }
             catch (Exception e)
             {
@@ -37,21 +37,21 @@ namespace WebApplication.Backend.Repositorys
             sqlCommand1.ExecuteNonQuery();
             if (patient.Guest)
             {
-                string sqlDml = "INSERT into patients (Id,SerialNumber,Name,Surname,DateOfBirth,Contact,Email,AddressSerialNumber,Password,ParentName,PlaceOfBirth,MunicipalityOfBirth,StateOfBirth,PlaceOfResidence,MunicipalityOfResidence,StateOfResidence,Citizenship,Nationality,Profession,EmploymentStatus,MaritalStatus,HealthInsuranceNumber,FamilyDiseases,PersonalDiseases,Gender,Image,Guest)  VALUES('" + patient.Id + "','" + patient.SerialNumber + "','" + patient.Name + "','" + patient.Surname + "','" + partsOfDate[2] + "-" + partsOfDate[0] + "-" + partsOfDate[1] + "T" + dateString[1]
+                string sqlDml = "INSERT into patients (Id,SerialNumber,Name,Surname,DateOfBirth,Contact,Email,AddressSerialNumber,Password,ParentName,PlaceOfBirth,MunicipalityOfBirth,StateOfBirth,PlaceOfResidence,MunicipalityOfResidence,StateOfResidence,Citizenship,Nationality,Profession,EmploymentStatus,MaritalStatus,HealthInsuranceNumber,FamilyDiseases,PersonalDiseases,Gender,Image,Guest,EmailConfirmed)  VALUES('" + patient.Id + "','" + patient.SerialNumber + "','" + patient.Name + "','" + patient.Surname + "','" + partsOfDate[2] + "-" + partsOfDate[0] + "-" + partsOfDate[1] + "T" + dateString[1]
                            + " ','" + patient.Contact + " ','" + patient.Email + " ','" + patient.Address.SerialNumber + " ','" + patient.Password + " ','" + patient.ParentName + " ','" + patient.PlaceOfBirth
                            + "','" + patient.MunicipalityOfBirth + " ','" + patient.StateOfBirth + " ','" + patient.PlaceOfResidence + " ','" + patient.MunicipalityOfResidence + " ','" + patient.StateOfResidence + " ','" + patient.Citizenship + " ','" + patient.Nationality + " ','" +
                             patient.Profession + " ','" + patient.EmploymentStatus + " ','" + patient.MaritalStatus + " ','" +
-                             patient.HealthInsuranceNumber + " ','" + patient.FamilyDiseases + " ','" + patient.PersonalDiseases + " ','" + patient.Gender + " ','" + patient.Image + " ','" + 0 + "')";
+                             patient.HealthInsuranceNumber + " ','" + patient.FamilyDiseases + " ','" + patient.PersonalDiseases + " ','" + patient.Gender + " ','" + patient.Image + " ','" + 0 + " ','" + 0 + "')";
                 MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
                 sqlCommand.ExecuteNonQuery();
             }
             else
             {
-                string sqlDml = "INSERT into patients (Id,SerialNumber,Name,Surname,DateOfBirth,Contact,Email,AddressSerialNumber,Password,ParentName,PlaceOfBirth,MunicipalityOfBirth,StateOfBirth,PlaceOfResidence,MunicipalityOfResidence,StateOfResidence,Citizenship,Nationality,Profession,EmploymentStatus,MaritalStatus,HealthInsuranceNumber,FamilyDiseases,PersonalDiseases,Gender,Image,Guest)  VALUES('" + patient.Id + "','" + patient.SerialNumber + "','" + patient.Name + "','" + patient.Surname + "','" + partsOfDate[2] + "-" + partsOfDate[0] + "-" + partsOfDate[1] + "T" + dateString[1]
+                string sqlDml = "INSERT into patients (Id,SerialNumber,Name,Surname,DateOfBirth,Contact,Email,AddressSerialNumber,Password,ParentName,PlaceOfBirth,MunicipalityOfBirth,StateOfBirth,PlaceOfResidence,MunicipalityOfResidence,StateOfResidence,Citizenship,Nationality,Profession,EmploymentStatus,MaritalStatus,HealthInsuranceNumber,FamilyDiseases,PersonalDiseases,Gender,Image,Guest,EmailConfirmed)  VALUES('" + patient.Id + "','" + patient.SerialNumber + "','" + patient.Name + "','" + patient.Surname + "','" + partsOfDate[2] + "-" + partsOfDate[0] + "-" + partsOfDate[1] + "T" + dateString[1]
                            + " ','" + patient.Contact + " ','" + patient.Email + " ','" + patient.Address.SerialNumber + " ','" + patient.Password + " ','" + patient.ParentName + " ','" + patient.PlaceOfBirth
                            + "','" + patient.MunicipalityOfBirth + " ','" + patient.StateOfBirth + " ','" + patient.PlaceOfResidence + " ','" + patient.MunicipalityOfResidence + " ','" + patient.StateOfResidence + " ','" + patient.Citizenship + " ','" + patient.Nationality + " ','" +
                             patient.Profession + " ','" + patient.EmploymentStatus + " ','" + patient.MaritalStatus + " ','" +
-                             patient.HealthInsuranceNumber + " ','" + patient.FamilyDiseases + " ','" + patient.PersonalDiseases + " ','" + patient.Gender + " ','" + patient.Image + " ','" + 1 + "')";
+                             patient.HealthInsuranceNumber + " ','" + patient.FamilyDiseases + " ','" + patient.PersonalDiseases + " ','" + patient.Gender + " ','" + patient.Image + " ','" + 1 + " ','" + 0 + "')";
                 MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
                 sqlCommand.ExecuteNonQuery();
             }
@@ -89,6 +89,15 @@ namespace WebApplication.Backend.Repositorys
             return GetPatientId("Select id from patients where id=" + patientId);
         }
 
+        public bool ConfirmgEmailUpdate(string patientId)
+        {
+            connection.Open();
+            string sqlDml = "UPDATE patients SET EmailConfirmed = '1' WHERE (Id = '" + patientId + "')";
+            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            sqlCommand.ExecuteNonQuery();
+            connection.Close();
+            return true;
+        }
 
     }
 }
