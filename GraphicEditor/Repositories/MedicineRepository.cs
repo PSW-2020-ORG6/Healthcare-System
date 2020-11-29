@@ -1,71 +1,65 @@
 ﻿using GraphicEditor.Repositories.Interfaces;
 using health_clinic_class_diagram.Backend.Model.Hospital;
+using Model.Hospital;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace GraphicEditor.Repositories
 {
-    public class RoomRepository : IRoomRepository
+    public class MedicineRepository : IMedicineRepository
     {
+
         private MySqlConnection connection;
-        public RoomRepository()
+        public MedicineRepository()
         {
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
         }
 
-        private List<RoomGEA> GetRooms(String query)
+        private List<MedicineGEA> GetMedicines(String query)
         {
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<RoomGEA> resultList = new List<RoomGEA>();
+            List<MedicineGEA> resultList = new List<MedicineGEA>();
             while (sqlReader.Read())
             {
-                RoomGEA entity = new RoomGEA();
+                MedicineGEA entity = new MedicineGEA();
                 entity.SerialNumber = (string)sqlReader[0];
-                entity.Name = (string)sqlReader[1];
-                entity.FloorName = (string)sqlReader[2];
-                entity.BuildingName = (string)sqlReader[3];
+                entity.CopyrightName = (string)sqlReader[1];
+                entity.GenericName = (string)sqlReader[2];
+                entity.MedicineManufacturerId = (string)sqlReader[3];
+                entity.MedicineTypeId = (string)sqlReader[4];
                 resultList.Add(entity);
             }
             connection.Close();
             return resultList;
         }
 
-        public List<RoomGEA> GetAllRooms()
+        public List<MedicineGEA> GetMedicinesByName(string name)
         {
             try
             {
-                return GetRooms("Select * from rooms");
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        public List<RoomGEA> GetRoomsByName(string name)
-        {
-            try
-            {
-                return GetRooms("Select * from rooms where Name like '%" + name + "%'");
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        public List<RoomGEA> GetRoomsBySerialNumber(string serialNumber)
-        {
-            try
-            {
-                return GetRooms("Select * from rooms where SerialNumber like '%" + serialNumber + "%'");
+                return GetMedicines("Select * from medicinegea where GenericName like '%" + name + "%'");
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+
+        public List<MedicineGEA> GetAllMedicines()
+        {
+            try
+            {
+                return GetMedicines("Select * from medicinegea");
+            }
+            catch (Exception)
+            {
                 return null;
             }
         }
