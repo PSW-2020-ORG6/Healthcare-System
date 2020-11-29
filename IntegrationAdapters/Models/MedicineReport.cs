@@ -8,11 +8,11 @@ namespace IntegrationAdapters.Models
     public class MedicineReport
     {
         public string Id { get; set; }
-        public virtual DateTime date { get; set; }
-        public virtual List<MedicineDosage> dosage { get; set; }  
+        public virtual DateTime Date { get; set; }
+        public virtual List<MedicineDosage> Dosage { get; set; }  
 
         public MedicineReport() {
-            dosage = new List<MedicineDosage>();
+            Dosage = new List<MedicineDosage>();
         }
 
     }

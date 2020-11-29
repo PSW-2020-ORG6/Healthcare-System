@@ -12,17 +12,17 @@ namespace IntegrationAdapters.Services
     {
         public void GenerateFile(List<MedicineReport> medicineReports, string fileName)
         {
+            System.IO.File.WriteAllText(fileName, string.Empty);
             string result = "";
             TextWriter tw = new StreamWriter(fileName);
             foreach (var s in medicineReports)
             {
-                result += s.Id;
-                foreach (var m in s.dosage)
-                    result += " " + m.Amount + " ";
-                tw.Flush();
-                tw.WriteLine(result);
-
+                result += s.Date + "\n" + "----------------------" + "\n";
+                foreach (var m in s.Dosage)
+                    result += m.MedicineName + ": " + m.Amount + "\n";
+                result += "\n\n";
             }
+            tw.WriteLine(result);
             tw.Close();
         }
 

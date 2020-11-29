@@ -33,7 +33,7 @@ namespace IntegrationAdapters.Services
 
             foreach(MedicineReport m in GetAll())
             {
-                if(m.date >= timeInterval.Start && m.date <= timeInterval.End)
+                if(m.Date >= timeInterval.Start && m.Date <= timeInterval.End)
                 {
                     result.Add(m);
                 }
