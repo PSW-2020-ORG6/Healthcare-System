@@ -33,15 +33,16 @@ namespace IntegrationAdapters.Services
             consumer.Received += (model, ea) =>
             {
                 byte[] body = ea.Body.ToArray();
-                var jsonMessage = Encoding.UTF8.GetString(body);
-                Message message;
-                try {   // try deserialize with default datetime format
-                    message = JsonConvert.DeserializeObject<Message>(jsonMessage);
-                } catch (Exception)     // datetime format not default, deserialize with Java format (milliseconds since 1970/01/01)
+                var result  = Encoding.UTF8.GetString(body);
+                ActionAndBenefitMessage message;
+                try
+                { 
+                    message = JsonConvert.DeserializeObject<ActionAndBenefitMessage>(result);
+                } catch (Exception) 
                 {
-                    message = JsonConvert.DeserializeObject<Message>(jsonMessage, new MyDateTimeConverter());
+                    message = JsonConvert.DeserializeObject<ActionAndBenefitMessage>(result, new DateTimeConverter());
                 }
-                Console.WriteLine(" [x] Received {0}", message);
+                message.ActionID = Guid.NewGuid();
                 Program.Messages.Add(message);
             };
             channel.BasicConsume(queue: "hello",

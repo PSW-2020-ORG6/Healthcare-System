@@ -16,7 +16,7 @@ namespace IntegrationAdapters
 {
     public class Program
     {
-        public static List<Message> Messages = new List<Message>();
+        public static List<ActionAndBenefitMessage> Messages = new List<ActionAndBenefitMessage>();
 
         public static void Main(string[] args)
         {
@@ -28,16 +28,11 @@ namespace IntegrationAdapters
                 .UseWindowsService()
                 .ConfigureServices((hostContext, services) =>
                 {
-
-                    Messages.ForEach((theMoney) => Console.WriteLine("amount is {0}, and type is {1}", theMoney.Text, theMoney.Timestamp));
-                    services.AddHostedService<TimerService>();
                     services.AddHostedService<RabbitMQService>();
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
                 });
-
-
     }
 }
