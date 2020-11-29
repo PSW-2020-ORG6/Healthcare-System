@@ -3,6 +3,9 @@ using System;
 
 namespace WebApplication.Backend.Repositorys
 {
+    /// <summary>
+    /// This interface for class RegistrationRepository
+    /// </summary>
     public interface IRegistrationRepository
     {
         public bool addPatient(Patient patient);

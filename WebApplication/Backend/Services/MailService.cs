@@ -2,14 +2,15 @@
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using System.IO;
 using System.Threading.Tasks;
 using WebApplication.Backend.Model;
-using Microsoft.AspNetCore.Identity;
 using Model.Accounts;
 
 namespace WebApplication.Backend.Services
 {
+    /// <summary>
+    /// This class performs email sending
+    /// </summary>
     public class MailService : IMailService
     {
         private readonly MailSettings _mailSettings;
@@ -18,19 +19,23 @@ namespace WebApplication.Backend.Services
             _mailSettings = mailSettings.Value;
         }
 
-        public async Task SendEmailAsync(Patient patient/*MailRequest mailRequest*/)
+        ///Aleksandra Milijevic RA 22/2017
+        /// <summary>
+        ///email sending
+        ///</summary>
+        ///<param name="patient"> Patient type object
+        ///</param>>
+        public async Task SendEmailAsync(Patient patient)
         {
             var email = new MimeMessage();
             email.Sender = MailboxAddress.Parse(_mailSettings.Mail);
-            email.To.Add(MailboxAddress.Parse(patient.Email/*mailRequest.ToEmail*/));
-            email.Subject = $"Welcome {patient.Name/*mailRequest.Subject*/}";
+            email.To.Add(MailboxAddress.Parse(patient.Email));
+            email.Subject = $"Welcome {patient.Name}";
             var builder = new BodyBuilder();
 
-            //string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);
-            //manager.SendEmail(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>.");
+            string id1 = ParseId(patient.Id);
 
-            //builder.HtmlBody = "Please click on this link to confirm registration <a href=\"http://localhost:49900/#/emailConfirmation\">link</a>";
-            builder.HtmlBody = "Please click on this link to confirm registration <a href=\"http://localhost:49900/#/emailConfirmation?id=" + patient.Id + "\">link</a>";
+            builder.HtmlBody = "Please click on this link to confirm registration <a href=\"http://localhost:49900/#/emailConfirmation?id=" + id1 + "\">link</a>";
             email.Body = builder.ToMessageBody();
             using var smtp = new SmtpClient();
             smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
@@ -39,26 +44,20 @@ namespace WebApplication.Backend.Services
             smtp.Disconnect(true);
         }
 
-        /*public async Task SendWelcomeEmailAsync(WelcomeRequest request)
+        ///Aleksandra Milijevic RA 22/2017
+        /// <summary>
+        ///id encryption 
+        ///</summary>
+        ///<returns>
+        ///patient id
+        ///</returns>
+        ///<param name="patientId"> String type object
+        ///</param>>
+        private string ParseId(string patientId)
         {
-            string FilePath = Directory.GetCurrentDirectory() + "\\Templates\\WelcomeTemplate.html";
-            StreamReader str = new StreamReader(FilePath);
-            string MailText = str.ReadToEnd();
-            str.Close();
-            MailText = MailText.Replace("[username]", request.UserName).Replace("[email]", request.ToEmail);
-            var email = new MimeMessage();
-            email.Sender = MailboxAddress.Parse(_mailSettings.Mail);
-            email.To.Add(MailboxAddress.Parse(request.ToEmail));
-            email.Subject = $"Welcome {request.UserName}";
-            var builder = new BodyBuilder();
-            builder.HtmlBody = MailText;
-            email.Body = builder.ToMessageBody();
-            using var smtp = new SmtpClient();
-            smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
-            smtp.Authenticate(_mailSettings.Mail, _mailSettings.Password);
-            await smtp.SendAsync(email);
-            smtp.Disconnect(true);
-        }*/
+            int id = int.Parse(patientId) - 6789 + 23 * 33;
+            return id.ToString();
+        }
 
     }
 }

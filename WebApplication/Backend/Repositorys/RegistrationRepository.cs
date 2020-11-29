@@ -4,6 +4,9 @@ using System;
 
 namespace WebApplication.Backend.Repositorys
 {
+    /// <summary>
+    /// This class does connection with MySQL database patient and address tables
+    /// </summary>
     public class RegistrationRepository : IRegistrationRepository
     {
         private MySqlConnection connection;
@@ -89,6 +92,15 @@ namespace WebApplication.Backend.Repositorys
             return GetPatientId("Select id from patients where id=" + patientId);
         }
 
+        ////Aleksandra Milijevic RA 22/2017
+        /// <summary>
+        ///Update row into patient table
+        ///</summary>
+        ///<returns>
+        ///true if sucessful,else false
+        ///</returns>
+        ///<param name="patientId"> String type object
+        ///</param>
         public bool ConfirmgEmailUpdate(string patientId)
         {
             connection.Open();
