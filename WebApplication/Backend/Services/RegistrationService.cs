@@ -1,10 +1,12 @@
-﻿using Backend.Dto;
-using Model.Accounts;
+﻿using Model.Accounts;
 using System;
 using WebApplication.Backend.Repositorys;
 
 namespace WebApplication.Backend.Services
 {
+    /// <summary>
+    /// This class does connection with repository
+    /// </summary>
     public class RegistrationService
     {
         private RegistrationRepository registrationRepository;
@@ -47,7 +49,7 @@ namespace WebApplication.Backend.Services
         ///<returns>
         ///true or false depending on sucess
         ///</returns>
-        ///<param name="patient"> Patient type object
+        ///<param name="idNumber"> String type object
         ///</param>>
         public bool IsJMBGValid(String idNumber)
         {

@@ -4,7 +4,10 @@ using Model.Accounts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
+using WebApplication.Backend.Model;
 using WebApplication.Backend.Services;
 
 namespace WebApplication.Backend.Controllers
@@ -50,7 +53,9 @@ namespace WebApplication.Backend.Controllers
         [HttpPut("confirmationEmail/{id}")]
         public IActionResult Confirmation(string id)
         {
-            if (registrationService.ConfirmgEmailUpdate(id))
+            string siatientId = ParseId(id);
+            
+            if (registrationService.ConfirmgEmailUpdate(siatientId))
             {
                 return Ok();
             }
@@ -58,6 +63,21 @@ namespace WebApplication.Backend.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        ///Aleksandra Milijevic RA 22/2017
+        /// <summary>
+        ///id decryption 
+        ///</summary>
+        ///<returns>
+        ///patient id
+        ///</returns>
+        ///<param name="patientId"> String type object
+        ///</param>>
+        private string ParseId(string patientId)
+        {
+            int id = (int.Parse(patientId) - 23 * 33) + 6789;
+            return id.ToString();
         }
     }
 }
