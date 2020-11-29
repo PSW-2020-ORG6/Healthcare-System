@@ -24,5 +24,11 @@ namespace IntegrationAdapters.Controllers
         {
             return Program.Messages;
         }
+
+        [HttpPost("publishActionsAndBenefits/{trid}")]
+        public void SaveActionsAndBenefitsMessage(Guid trid)
+        {
+            Console.WriteLine("Sacuvaj u bazu: "+ trid);
+        }
     }
 }
