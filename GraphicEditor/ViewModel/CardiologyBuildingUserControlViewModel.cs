@@ -34,7 +34,7 @@ namespace GraphicEditor.ViewModel
 
             List<Floor> _buildingFloors = new List<Floor>();
 
-            _building = new Building("123", "Cardiology", _buildingFloors, "Color Blue", "Style");
+            _building = new Building( "Cardiology", "Color Blue", "Style");
         }
 
         public BindableBase FloorViewModel
@@ -100,7 +100,7 @@ namespace GraphicEditor.ViewModel
 
         private void editBuilding(Building _building)
         {
-            Building b = new Building(Building.Id, Building.Name, Building.Floors, Building.Color, Building.Shape);
+            Building b = new Building( Building.Name, Building.Color, Building.Shape);
             BuildingUpdate r = new BuildingUpdate(b, this);
             r.ShowDialog();
             
@@ -108,9 +108,7 @@ namespace GraphicEditor.ViewModel
 
         public void onConfirmUpdate(Building building)
         {
-            Building.Id = building.Id;
             Building.Name = building.Name;
-            Building.Floors = building.Floors;
             Building.Color = building.Color;
             Building.Shape = building.Shape;
             OnPropertyChanged("Building");

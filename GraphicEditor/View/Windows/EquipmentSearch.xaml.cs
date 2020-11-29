@@ -53,7 +53,7 @@ namespace GraphicEditor.View.Windows
 
         private string ReportOnFoundMedicine(string medicineName, List<MedicineGEA> medicines)
         {
-            string resultOfSearch="";
+            string resultOfSearch = "";
             int equipmentCounter = medicines.Count;
 
             if (equipmentCounter != 0)
@@ -62,7 +62,7 @@ namespace GraphicEditor.View.Windows
                 foreach (MedicineGEA medicine in medicines)
                 {
                     resultOfSearch += checkCounter + 1 + "\n";
-                    resultOfSearch += "\n"  + "Generic name: " + medicine.GenericName + " MedicineManufacturerId: " + medicine.MedicineManufacturerId + " MedicineTypeId: " + medicine.MedicineTypeId + " SerialNumber: " + medicine.SerialNumber;
+                    resultOfSearch += "\n" + "Generic name: " + medicine.GenericName + " MedicineManufacturerId: " + medicine.MedicineManufacturerId + " MedicineTypeId: " + medicine.MedicineTypeId + " SerialNumber: " + medicine.SerialNumber;
                     if (++checkCounter == equipmentCounter)
                         return resultOfSearch += ".";
                     else
@@ -82,9 +82,7 @@ namespace GraphicEditor.View.Windows
                 int checkCounter = 0;
                 foreach (Equipment equipment in equipments)
                 {
-                    //roomRepository = new RoomRepository();
                     List<RoomGEA> rooms = roomRepository.GetRoomsBySerialNumber(equipment.RoomId);
-                    //dopuni !!!
                     resultOfSearch += "\nInformation about rooms: ";
                     resultOfSearch += RoomSearch.ReportOnFoundRooms(equipment.RoomId, rooms);
                     if (++checkCounter == equipmentCounter)

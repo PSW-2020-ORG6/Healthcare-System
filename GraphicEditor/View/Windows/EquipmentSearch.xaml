@@ -20,7 +20,7 @@
                  HorizontalAlignment="Left" 
                  Height="44"
                  FontSize="16"
-                 Margin="221,54,0,0" 
+                 Margin="240,54,0,0" 
                  TextWrapping="Wrap" 
                  VerticalAlignment="Top" 
                  Width="211"/>
@@ -43,7 +43,7 @@
                    Height="29" 
                    Margin="58,371,0,0" 
                    TextWrapping="Wrap" 
-                   Text="Equipment type is: Bed and Table." 
+                   Text="Equipment type is: Bed and Table. Medicines: Brufen, Probiotic." 
                    FontSize="16"
                    VerticalAlignment="Top"
                    Width="493"/>
