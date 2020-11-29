@@ -17,10 +17,12 @@ namespace WebApplication.Backend.Controllers
     public class RegistrationController : ControllerBase
     {
         public RegistrationService registrationService;
+        private IMailService mailService;
 
-        public RegistrationController()
+        public RegistrationController(IMailService mailService)
         {
             registrationService = new RegistrationService();
+            this.mailService = mailService;
         }
 
         ///Aleksandra Milijevic RA 22/2017
@@ -37,6 +39,7 @@ namespace WebApplication.Backend.Controllers
             {
                 if (registrationService.RegisterPatient(new Patient(patientDTO)))
                 {
+                    mailService.SendEmailAsync(new Patient(patientDTO));
                     return Ok();
                 }
                 else

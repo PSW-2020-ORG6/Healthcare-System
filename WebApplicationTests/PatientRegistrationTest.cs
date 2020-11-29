@@ -1,7 +1,9 @@
+using Backend.Dto;
 using Model.Accounts;
 using Model.Util;
 using Moq;
 using System;
+using WebApplication.Backend.Controllers;
 using WebApplication.Backend.Repositorys;
 using WebApplication.Backend.Services;
 using Xunit;
@@ -80,18 +82,16 @@ namespace WebApplicationTests
 
         }
 
-        /*[Fact]
+        [Fact]
         public void SendingMailTest()
         {
             var mockMailService = new Mock<IMailService>();
-            Patient patient = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", new Address { Street = "Glavna 3" }, "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false);
-            //mockRepository.Setup(m => m.ConfirmgEmailUpdate(patient.Id)).Returns(true);
-            //RegistrationService service = new RegistrationService(mockRepository.Object);
+            var mockController = new Mock<RegistrationController>();
+            var controller = new RegistrationController(mockMailService.Object);
+            PatientDTO patientDTO = new PatientDTO("21", "Ana", "Anic", "12341112211", DateTime.Now, "0643342345", "ana@gmail.com", "Glavna 3", "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false, false);
+            Patient patient = new Patient(patientDTO);
+            controller.RegisterPatient(patientDTO);
             mockMailService.Verify(m => m.SendEmailAsync(patient));
-            //bool patientUpdated = service.ConfirmgEmailUpdate(patient.Id);
-
-            //Assert.True(patientUpdated);
-
-        }*/
+        }
     }
 }

@@ -42,6 +42,41 @@ namespace Backend.Dto
 
         public PatientDTO() { }
 
+        public PatientDTO(String serialNumber, String name, String surname, String id, DateTime dateOfBirth, String contact, String email, String address,
+                        String password, String parentName, String placeOfBirth, String municipalityOfBirth, String stateOfBirth, String citizenship, String nationality,
+                        String profession, String placeOfResidence, String municipalityOfResidence, String stateOfResidence, String employmentStatus,
+                        String maritalStatus, String gender, String healthInsuranceNumber, String familyDiseases, String personalDiseases, String image, bool guest, bool emailConfirmed)
+        {
+            this.serialNumber = serialNumber;
+            this.name = name;
+            this.surname = surname;
+            this.id = id;
+            this.dateOfBirth = dateOfBirth;
+            this.contact = contact;
+            this.email = email;
+            this.address = address;
+            this.password = password;
+            this.parentName = parentName;
+            this.placeOfBirth = placeOfBirth;
+            this.municipalityOfBirth = municipalityOfBirth;
+            this.stateOfBirth = stateOfBirth;
+            this.citizenship = citizenship;
+            this.nationality = nationality;
+            this.profession = profession;
+            this.placeOfResidence = placeOfResidence;
+            this.municipalityOfResidence = municipalityOfResidence;
+            this.stateOfResidence = stateOfResidence;
+            this.employmentStatus = employmentStatus;
+            this.maritalStatus = maritalStatus;
+            this.gender = gender;
+            this.healthInsuranceNumber = healthInsuranceNumber;
+            this.familyDiseases = familyDiseases;
+            this.personalDiseases = personalDiseases;
+            this.image = image;
+            this.guest = guest;
+            this.emailConfirmed = emailConfirmed;
+        }
+
         public string SerialNumber { get => serialNumber; set => serialNumber = value; }
         public string Name { get => name; set => name = value; }
         public string Surname { get => surname; set => surname = value; }
