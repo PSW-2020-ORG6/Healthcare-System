@@ -20,5 +20,7 @@ namespace health_clinic_class_diagram.Backend.Model.Hospital
         {
 
         }
+        public BuildingLocation Location { get; set;}
+        public string Style { get; set; }
     }
 }
