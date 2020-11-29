@@ -25,11 +25,12 @@ namespace IntegrationAdapters.Controllers
             if (apiService.RegisterHospitalOnPharmacy(api))
             {
                 return Ok();
-            } else
+            }
+            else
             {
                 return BadRequest();
             }
         }
-        
+
     }
 }

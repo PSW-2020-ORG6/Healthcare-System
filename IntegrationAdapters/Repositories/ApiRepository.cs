@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IntegrationAdapters.Repositories
 {
-    public class ApiRepository: IApiRepository
+    public class ApiRepository : IApiRepository
     {
         public DbContextOptions<HealthCareSystemDbContext> options = new DbContextOptionsBuilder<HealthCareSystemDbContext>()
                 .UseMySql(connectionString: "server=localhost;port=3306;database=newmydb;user=root;password=root")
@@ -26,7 +26,8 @@ namespace IntegrationAdapters.Repositories
                 dbContext.Add<Api>(api);
                 dbContext.SaveChanges();
                 return true;
-            } else
+            }
+            else
             {
                 return false;
             }
@@ -35,7 +36,8 @@ namespace IntegrationAdapters.Repositories
         public bool IsPharmacyExistsOnHospital(Api api)
         {
             List<Api> apis = dbContext.Apis.ToList();
-            foreach (Api a in apis) {
+            foreach (Api a in apis)
+            {
                 if (a.Key.Equals(api.Key)) return true;
             }
             return false;
@@ -56,5 +58,5 @@ namespace IntegrationAdapters.Repositories
             }
             return null;
         }
-    }   
+    }
 }

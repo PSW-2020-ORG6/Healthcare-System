@@ -8,7 +8,7 @@ namespace IntegrationAdapters.Models
 {
 
     public class Api
-    {
+    { 
         [Key]
         public string Key { get; set; }
         public string PharmacyName { get; set; }
