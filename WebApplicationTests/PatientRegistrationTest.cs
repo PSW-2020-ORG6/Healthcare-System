@@ -65,5 +65,19 @@ namespace WebApplicationTests
 
             Assert.False(hasPatient);
         }
+
+        [Fact]
+        public void ConfirmRegistrationTest()
+        {
+            var mockRepository = new Mock<IRegistrationRepository>();
+            Patient patient = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", new Address { Street = "Glavna 3" }, "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false);
+            mockRepository.Setup(m => m.ConfirmgEmailUpdate(patient.Id)).Returns(true);
+            RegistrationService service = new RegistrationService(mockRepository.Object);
+
+            bool patientUpdated = service.ConfirmgEmailUpdate(patient.Id);
+
+            Assert.True(patientUpdated);
+
+        }
     }
 }

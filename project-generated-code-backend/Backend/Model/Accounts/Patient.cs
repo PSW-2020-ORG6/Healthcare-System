@@ -32,6 +32,7 @@ namespace Model.Accounts
         private String personalDiseases;
         private String image;
         private bool guest;
+        private bool emailConfirmed;
 
         public Patient(string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string parentName, string gender, string password, bool isGuest = false)
             : base(Guid.NewGuid().ToString(), name, surname, id, dateOfBirth, contact, email, address, password)
@@ -96,6 +97,7 @@ namespace Model.Accounts
             this.personalDiseases = patientDTO.PersonalDiseases;
             this.image = patientDTO.Image;
             this.guest = patientDTO.Guest;
+            this.emailConfirmed = patientDTO.EmailConfirmed;
         }
 
         public Patient() : base(Guid.NewGuid().ToString()) { }
@@ -120,6 +122,7 @@ namespace Model.Accounts
         public string Gender { get => gender; set => gender = value; }
         public string Image { get => image; set => image = value; }
         public bool Guest { get => guest; set => guest = value; }
+        public bool EmailConfirmed { get => emailConfirmed; set => emailConfirmed = value; }
 
         public override string ToString()
         {

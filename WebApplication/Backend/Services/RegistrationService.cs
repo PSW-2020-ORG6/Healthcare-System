@@ -60,5 +60,10 @@ namespace WebApplication.Backend.Services
             return false;
         }
 
+        public bool ConfirmgEmailUpdate(string id)
+        {
+            return iregistrationRepository.ConfirmgEmailUpdate(id);
+        }
+
     }
 }

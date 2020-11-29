@@ -28,6 +28,7 @@
 				personalDiseases: null,
 				image: null,
 				guest: false,
+				emailConfirmed: false,
 				sucessFlag: false,
 			},
 		}
@@ -513,12 +514,21 @@
 				axios
 					.post("http://localhost:49900/registration/registerPatient", patientDTO)
 					.then(response => {
-						this.$modal.show('registrationInfo');
+						//this.$modal.show('registrationInfo');
 					})
 
 					.catch(error => {
 						
 						alert("Person with that unique citizens identity number already already exists.");
+					})
+				axios
+					.post("http://localhost:49900/api/send", patientDTO)
+					.then(response => {
+						//alert("You have succesfully registrated.");
+					})
+
+					.catch(error => {
+						alert("Mail is not send.");
 					})
 			}
 			else {
