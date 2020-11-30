@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using GraphicEditor.View.Windows;
 using System.Threading.Tasks;
+using health_clinic_class_diagram.Backend.Model.Util;
 
 namespace GraphicEditor.ViewModel
 {
@@ -34,7 +35,7 @@ namespace GraphicEditor.ViewModel
 
             List<Floor> _buildingFloors = new List<Floor>();
 
-            _building = new Building( "Cardiology", "Color Blue", "Style");
+            _building = new Building("Cardiology", "Color Blue");
         }
 
         public BindableBase FloorViewModel
@@ -100,17 +101,22 @@ namespace GraphicEditor.ViewModel
 
         private void editBuilding(Building _building)
         {
-            Building b = new Building( Building.Name, Building.Color, Building.Shape);
-            BuildingUpdate r = new BuildingUpdate(b, this);
-            r.ShowDialog();
-            
+            if (MainWindow.TypeOfUser == TypeOfUser.SUPERINTENDENT || MainWindow.TypeOfUser == TypeOfUser.NO_USER)
+            {
+                Building b = new Building(Building.Name, Building.Color);
+                BuildingUpdate r = new BuildingUpdate(b, this);
+                r.ShowDialog();
+            }
+            else
+            {
+                new Warning().ShowDialog();
+            }
         }
 
         public void onConfirmUpdate(Building building)
         {
             Building.Name = building.Name;
             Building.Color = building.Color;
-            Building.Shape = building.Shape;
             OnPropertyChanged("Building");
         }
     }

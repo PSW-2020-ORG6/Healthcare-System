@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using health_clinic_class_diagram.Backend.Model.Util;
 
 namespace HCI_SIMS_PROJEKAT
 {
@@ -49,10 +50,8 @@ namespace HCI_SIMS_PROJEKAT
 
         private void MapButton_Click(object sender, RoutedEventArgs e)
         {
-            GraphicEditor.MainWindow map = new GraphicEditor.MainWindow();
-            this.Close();
-            map.DataContext = GraphicEditor.ViewModel.MapContentUserControlViewModel.HospitalMap;
-            map.Show();
+            GraphicEditor.MainWindow map = new GraphicEditor.MainWindow(TypeOfUser.SECRETARY);
+            map.ShowDialog();
         }
     }
 }

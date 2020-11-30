@@ -13,7 +13,9 @@ namespace GraphicEditor.View.UserControls
         public HospitalMapUserControl()
         {
             InitializeComponent();
+            MapContentUserControlViewModel.HospitalMap.HospitalMapGrid = hospitalMapGrid;
             this.DataContext = MapContentUserControlViewModel.HospitalMap;
+            MapContentUserControlViewModel.HospitalMap.InitialGridRender();
         }
 
         private void ShowRoomSearch(object sender, RoutedEventArgs e)

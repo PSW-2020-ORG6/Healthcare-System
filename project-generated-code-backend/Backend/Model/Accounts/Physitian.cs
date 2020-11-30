@@ -19,6 +19,13 @@ namespace Model.Accounts
         {
             this.specialization = new List<Specialization>();
         }
+       public Physitian() { }
+        public Physitian(string name, string surname, string id)
+            : base(Guid.NewGuid().ToString(), name, surname, id)
+        {
+         
+        }
+
 
         [JsonConstructor]
         public Physitian(String serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, TimeInterval workSchedule, string password, List<Specialization> specialization = null)

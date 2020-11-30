@@ -1,9 +1,11 @@
 ﻿Vue.component("patient", {
 	data: function () {
 		return {
+			idPatient:"12",
 			approvedFeedbacks: null,
 			noapprovedFeedbacks: null,
 			patients: null,
+			doctorsList: null,
 			feedback: {
 				text: "",
 				approved: false,
@@ -61,7 +63,10 @@
 		<div class="container"><br/>
 			<h3 class="text">Comments
 				<button type="button" class="btn btn-info btn-lg margin" data-toggle="modal" data-target="#feedbackModal">Add comment</button>
-			</h3><br/>    
+			</h3><br/>
+			<h3 class="textSurvey">Survey
+				<button type="button" class="btn btn-info btn-lg margin" data-toggle="modal" v-on:click="SurveyShow()"">Take survey</button>
+			</h3><br/> 
 			<div>
 				<div class="tab-content">
     				<div id="profil" class="container tab-pane active"><br>
@@ -96,7 +101,7 @@
 		AddNewFeedback: function (feedback) {
 			if (!document.getElementById("anonimous").checked)
 				this.feedback.patientId="0003"
-			if (feedback.text != null || feedback.text!="") {
+			if (feedback.text.localeCompare(null) || feedback.text.localeCompare("")) {
 				axios
 					.post("http://localhost:49900/feedback/add", feedback)
 					.then(response => {
@@ -104,9 +109,6 @@
 						$('#feedbackModal').modal('hide')
 					})
 
-					.catch(error => {
-						alert("You need to enter a comment first.");
-					})
 			}
 			else
 				alert("You need to enter a comment first.");
@@ -115,6 +117,22 @@
 		DateSplit: function (date) {
 			var dates = (date.split("T")[0]).split("-")
 			return dates[2] + "." + dates[1] + "." + dates[0]
+		},
+		SurveyShow: function () {
+			axios
+				.get('http://localhost:49900/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient} })
+				.then(response => {
+					this.doctorsList = response.data
+					if (this.doctorsList.value != null || this.doctorsList != "") {
+						this.$router.push('survey');
+					} else {
+						alert("You have already completed the survey for all available doctors")
+					}
+				})
+				.catch(error => {
+					alert(error)
+				})
+			
 		}
 	}
 });

@@ -3,6 +3,8 @@ using klinika_zdravo.Pages;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
+using GraphicEditor.HelpClasses;
+using health_clinic_class_diagram.Backend.Model.Util;
 
 namespace klinika_zdravo
 {
@@ -15,7 +17,7 @@ namespace klinika_zdravo
         private ProfilnaStranica profilnaStranica = new ProfilnaStranica();
         private BlogStranica blogStranica = new BlogStranica();
         private KontaktiStranica kontaktiStranica = new KontaktiStranica();
-        private GraphicEditor.MainWindow map = new GraphicEditor.MainWindow();
+        private GraphicEditor.MainWindow map = new GraphicEditor.MainWindow(TypeOfUser.PATIENT);
         private ZakazivanjePregledaStranica zakazivanjePregledaStranica = new ZakazivanjePregledaStranica();
         private ZakazaniTerminiStranica zakazaniTerminiStranica = new ZakazaniTerminiStranica();
         private ZdravstveniKartonStranica zdravstveniKartonStranica = new ZdravstveniKartonStranica();
@@ -85,7 +87,6 @@ namespace klinika_zdravo
 
         private void MapClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
             map.ShowDialog();
         }
 

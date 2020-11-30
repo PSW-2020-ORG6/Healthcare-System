@@ -16,8 +16,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
-                connection.Open();
+                connection = new MySqlConnection("server=localhost;database=newdb;user=root;password=root");
             }
             catch (Exception e)
             {
@@ -32,23 +31,24 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///list of feedbacks
         ///</returns>
-        internal List<Feedback> GetFeedbacks(String query)
+        internal List<Feedback> GetFeedbacks(String sqlDml)
         {
-            MySqlCommand sqlCommand = new MySqlCommand(query, connection);
-            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<Feedback> resultList = new List<Feedback>();
-            while (sqlReader.Read())
-            {
-                Feedback entity = new Feedback();
-                entity.SerialNumber = (string)sqlReader[4];
-                entity.PatientId = (String)sqlReader[3];
-                entity.Text = (String)sqlReader[0];
-                entity.Date = Convert.ToDateTime(sqlReader[2]);
-                entity.Approved = (Boolean)sqlReader[1];
-                resultList.Add(entity);
-            }
-            connection.Close();
-            return resultList;
+            connection.Open();
+            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+                MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
+                List<Feedback> resultList = new List<Feedback>();
+                while (sqlReader.Read())
+                {
+                    Feedback entity = new Feedback();
+                    entity.SerialNumber = (string)sqlReader[0];
+                    entity.PatientId = (String)sqlReader[1];
+                    entity.Text = (String)sqlReader[2];
+                    entity.Date = Convert.ToDateTime(sqlReader[3]);
+                    entity.Approved = (Boolean)sqlReader[4];
+                    resultList.Add(entity);
+                }
+                connection.Close();
+                return resultList;
         }
         ///Tanja Drcelic RA124/2017
         /// <summary>
@@ -103,8 +103,9 @@ namespace WebApplication.Backend.Repositorys
         ///</param>
         internal void ApproveFeedback(FeedbackDTO feedback)
         {
+            connection.Open();
             string[] dateString = feedback.Date.ToString().Split(" ");
-            string[] partsOfDate = dateString[0].Split("/");
+            string[] partsOfDate = dateString[0].Split(".");
             if (feedback.Approved)
             {
                 String sqlDml = "REPLACE  into feedbacks(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 0
@@ -136,8 +137,9 @@ namespace WebApplication.Backend.Repositorys
         ///</param>
         internal bool AddNewFeedback(Feedback feedback)
         {
+            connection.Open();
             string[] dateString = DateTime.Now.ToString().Split(" ");
-            string[] partsOfDate = dateString[0].Split("/");
+            string[] partsOfDate = dateString[0].Split(".");
             string sqlDml = "INSERT INTO feedbacks (text,approved,date,patientid,serialnumber)  VALUES('" + feedback.Text + "','" + 0 + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + "T" + dateString[1]
                    + "','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
 

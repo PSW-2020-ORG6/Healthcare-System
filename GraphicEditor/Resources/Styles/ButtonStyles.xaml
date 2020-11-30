@@ -59,6 +59,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Opacity" Value="0.6"/>
         <Setter Property="Command" Value="{Binding NavCommand}"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -302,6 +303,7 @@
                                    Margin="5"
                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                                    VerticalAlignment="Top"
+                                   TextWrapping="Wrap"
                                    Text="{TemplateBinding Name}"/>
                         <Image  Height="30"
                                 HorizontalAlignment="Left" 

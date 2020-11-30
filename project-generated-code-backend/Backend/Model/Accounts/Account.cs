@@ -59,6 +59,11 @@ namespace Model.Accounts
             this.surname = surname;
             this.id = id;
         }
+        public Account( string name, string surname) 
+        {
+            this.name = name;
+            this.surname = surname;
+        }
         public Account() { }
 
         public override int GetHashCode()
