@@ -313,7 +313,6 @@
 				axios
 					.post("http://localhost:49900/registration/registerPatient", patientDTO)
 					.then(response => {
-						//this.$modal.show('registrationInfo');
 					})
 
 					.catch(error => {
