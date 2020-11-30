@@ -21,9 +21,9 @@ namespace IntegrationAdaptersTests
             ApiService service = new ApiService();
 
             Api api = new Api("k", "k", "k");
-            bool result = service.RegisterHospitalOnPharmacy(api);
+            bool result = service.IsPharmacyExistsOnHospital(api);
 
-            Assert.False(result);
+            Assert.True(result);
         }
 
         [Fact]
@@ -31,10 +31,10 @@ namespace IntegrationAdaptersTests
         {
             ApiService service = new ApiService();
 
-            Api api = new Api("l", "l", "l");
-            bool result = service.RegisterHospitalOnPharmacy(api);
+            Api api = new Api("r", "r", "r");
+            bool result = service.IsPharmacyExistsOnHospital(api);
 
-            Assert.True(result);
+            Assert.False(result);
         }   
 
         [Fact]

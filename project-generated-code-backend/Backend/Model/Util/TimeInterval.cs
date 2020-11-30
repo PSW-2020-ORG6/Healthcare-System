@@ -16,6 +16,8 @@ namespace Model.Util
         public DateTime Start { get => start; set => start = value; }
         public DateTime End { get => end; set => end = value; }
 
+        public TimeInterval() { }
+
         public String Time
         {
             get

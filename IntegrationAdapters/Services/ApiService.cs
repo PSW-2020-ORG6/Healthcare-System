@@ -35,5 +35,10 @@ namespace IntegrationAdapters.Services
         {
             return apiRepository.getApiByKey(apis, key);
         }
+
+        public bool IsPharmacyExistsOnHospital(Api api)
+        {
+            return apiRepository.IsPharmacyExistsOnHospital(api);
+        }
     }
 }

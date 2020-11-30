@@ -27,7 +27,7 @@ namespace IntegrationAdapters.Controllers
         public IActionResult Post(Interval interval)
         {
             List<MedicineReport> result = new List<MedicineReport>();
-            result = medicineReportService.GetByDateInterval(new TimeInterval(DateTime.Parse(interval.start), DateTime.Parse(interval.end)));
+            result = medicineReportService.GetByDateInterval(medicineReportService.GetAll(), new TimeInterval(DateTime.Parse(interval.start), DateTime.Parse(interval.end)));
             
             sftpService.GenerateFile(result,"SavedList.txt");
 
