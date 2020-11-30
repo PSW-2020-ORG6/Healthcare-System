@@ -34,15 +34,7 @@ namespace Model.Hospital
             this.id = id;
         }
 
-        [JsonConstructor]
-        public Equipment(String serialNumber, string name, string id, string roomId) : base()
-        {
-            this.SerialNumber = serialNumber;
-            this.name = name;
-            this.id = id;
-            this.roomId = roomId;
-        }
-
+       
         public Equipment(Equipment equipment) : base(equipment.SerialNumber)
         {
             this.name = equipment.name;

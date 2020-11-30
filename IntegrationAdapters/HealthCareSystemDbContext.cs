@@ -10,6 +10,7 @@ namespace IntegrationAdapters
     public class HealthCareSystemDbContext : DbContext
     {
         public DbSet<Api> Apis { get; set; }
+        public DbSet<ActionAndBenefitMessage> ActionAndBenefitMessage { get; set; }
         public DbSet<MedicineReport> Reports { get; set; }
 
         public HealthCareSystemDbContext(DbContextOptions<HealthCareSystemDbContext> options) : base(options) { }
@@ -19,4 +20,4 @@ namespace IntegrationAdapters
            
         }
     }
-    }
+}

@@ -33,20 +33,37 @@
                   VerticalAlignment="Center">
                 <!--Legend image-->
                 <Image Height="500"
+                       Margin="0 0 0 150"
                        HorizontalAlignment="Center"
                        Source="/GraphicEditor;component/Resources/Images/legendPattern.png"
                        VerticalAlignment="Center"/>
-                <Button Click="ShowRoomSearch"
-                    Height="40" 
-                    VerticalAlignment="Top"
-                    Width="150" Margin="46,539,49,-79">
-                    <DockPanel Width="auto">
-                        <TextBlock HorizontalAlignment="Center" 
-                                       VerticalAlignment="Center">
-                            Search rooms
-                        </TextBlock>
-                    </DockPanel>
-                </Button>
+                <StackPanel 
+                    VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Center">
+                        <Button Click="ShowRoomSearch"
+                            Margin="20"
+                            Height="40" 
+                            Width="150" >
+                            <DockPanel Width="auto">
+                                <TextBlock HorizontalAlignment="Center" 
+                                                       VerticalAlignment="Center">
+                                            Search rooms
+                                </TextBlock>
+                            </DockPanel>
+                    </Button>
+                    <Button Click="ShowEquipmentSearch"
+                        Margin="20"
+                        Height="40" 
+                        Width="150" >
+                        <DockPanel Width="auto">
+                            <TextBlock HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center">
+                                Search Equipment
+                            </TextBlock>
+                        </DockPanel>
+                    </Button>
+                </StackPanel>
+                
             </Grid>
 
             <!--Map Pattern-->
@@ -171,6 +188,22 @@
                         Grid.Row="3"
                         CommandParameter="oncology"
                         Style="{StaticResource ResourceKey=OctagonBuildingButtonStyle}" >
+                </Button>
+
+                <!--Test button-->
+                <Button x:Name="Test"
+                        Grid.Column="5"
+                        Grid.Row="5"
+                        Content="Empty field"
+                        Style="{StaticResource ResourceKey=NewBuildingButtonStyle}">
+                    <Button.InputBindings>
+                        <MouseBinding MouseAction="RightClick"
+                                      Command="{Binding AddCommand}"
+                                      CommandParameter="{Binding ElementName=Test}"/>
+                        <MouseBinding MouseAction="LeftClick"
+                                      Command="{Binding NavCommand}"
+                                    CommandParameter="emptyField"/>
+                    </Button.InputBindings>
                 </Button>
             </Grid>
         </Grid>

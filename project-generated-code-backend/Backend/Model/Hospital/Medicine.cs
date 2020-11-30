@@ -29,7 +29,7 @@ namespace Model.Hospital
             this.medicineType = medicineType;
         }
 
-        public Medicine(string copyrightName, string genericName, string medicineManufacturer, string medicineType)
+        public Medicine(string serialNumber, string copyrightName, string genericName, string medicineManufacturer, string medicineType):base(serialNumber)
         {
             this.copyrightName = copyrightName;
             this.genericName = genericName;
