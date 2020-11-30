@@ -16,6 +16,12 @@ namespace Model.Hospital
 {
     public class Room : Entity
     {
+        public string BuildingSerialNumber { get; set; }
+        public string FloorSerialNumber { get; set; }
+        public string Name { get; set; }
+        public string BuildingName { get; set; }
+
+
 
         private int id;
         private RoomType roomType;

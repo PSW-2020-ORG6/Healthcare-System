@@ -19,6 +19,7 @@ namespace WebApplication.Backend.Model
         public DbSet<Equipment> Equipments { get; set; }
         public DbSet<Floor> Floors { get; set; }
         public DbSet<RoomGEA> Rooms { get; set; }
+        public DbSet<BedGEA> Beds { get; set; }
         public DbSet<MedicineManufacturer> MedicineManufacturers { get; set; }
         public DbSet<MedicineType> MedicineTypes { get; set; }
         public DbSet<Medicine> Medicine { get; set; }
@@ -42,6 +43,7 @@ namespace WebApplication.Backend.Model
             modelBuilder.Entity<Equipment>().HasKey(o => o.Id);
             modelBuilder.Entity<Floor>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<RoomGEA>().HasKey(o => o.SerialNumber);
+            modelBuilder.Entity<BedGEA>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<MedicineManufacturer>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<MedicineType>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Medicine>().HasKey(o => o.SerialNumber);
@@ -140,7 +142,7 @@ namespace WebApplication.Backend.Model
           );
 
             modelBuilder.Entity<Building>().HasData(
-              new Building { SerialNumber = "10001", Name = "Cardiology", Color = "Orange", Row = 5, Column = 5, Style = "TriangleBuildingButtonStyle" },
+              new Building { SerialNumber = "10001", Name = "Cardiology", Color = "Orange", Row = 5, Column = 1, Style = "TriangleBuildingButtonStyle" },
               new Building { SerialNumber = "10002", Name = "Orthopedy", Color = "Red", Row = 5, Column = 3, Style = "UBuildingButtonStyle" }
             );
             modelBuilder.Entity<Floor>().HasData(
@@ -189,6 +191,35 @@ namespace WebApplication.Backend.Model
                    new MedicineGEA { SerialNumber = "21", CopyrightName = "Brufen", GenericName = "Brufen", MedicineManufacturerId = "1", MedicineTypeId = "11" },
                    new MedicineGEA { SerialNumber = "22", CopyrightName = "Probiotic", GenericName = "Probiotic", MedicineManufacturerId = "2", MedicineTypeId = "12" }
                 );
+            modelBuilder.Entity<BedGEA>().HasData(
+                new BedGEA
+                {
+                    SerialNumber = "1", 
+                    BuildingSerialNumber = "10001", 
+                    FloorSerialNumber = "1001", 
+                    RoomSerialNumber = "101",
+                    Name = "Bed 1", 
+                    PatientID = "0002"
+                },
+                new BedGEA
+                {
+                    SerialNumber = "2",
+                    BuildingSerialNumber = "10001",
+                    FloorSerialNumber = "1001",
+                    RoomSerialNumber = "101",
+                    Name = "Bed 2",
+                    PatientID = "0003"
+                },
+                new BedGEA
+                {
+                    SerialNumber = "3",
+                    BuildingSerialNumber = "10001",
+                    FloorSerialNumber = "1001",
+                    RoomSerialNumber = "102",
+                    Name = "Bed 3",
+                    PatientID = null
+                }
+            );
         }
     }
 }

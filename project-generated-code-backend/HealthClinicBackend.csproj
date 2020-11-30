@@ -52,8 +52,9 @@
     <Compile Include="Backend\Dto\SuggestedAppointmentDTO.cs" />
     <Compile Include="Backend\Model\Blog\BlogPost.cs" />
     <Compile Include="Backend\Model\Blog\Feedback.cs" />
+    <Compile Include="Backend\Model\Hospital\BedGEA.cs" />
     <Compile Include="Backend\Model\Hospital\Building.cs" />
-    <Compile Include="Backend\Model\Hospital\BuildingLocation.cs" />
+    <Compile Include="Backend\Model\Hospital\RoomLocation.cs" />
     <Compile Include="Backend\Model\Hospital\Floor.cs" />
     <Compile Include="Backend\Model\Hospital\Hospital.cs" />
     <Compile Include="Backend\Model\Hospital\MedicineGEA.cs" />

@@ -25,7 +25,6 @@ namespace WebApplication.Backend.Repositorys
                 entity.SerialNumber = (string)sqlReader[0];
                 entity.Name = (string)sqlReader[1];
                 entity.Color = (string)sqlReader[2];
-                entity.Shape = (string)sqlReader[3];
                 resultList.Add(entity);
             }
             connection.Close();
