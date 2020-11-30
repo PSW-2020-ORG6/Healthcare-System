@@ -52,9 +52,10 @@ namespace WebApplication.Backend.Repositorys
         public Physitian GetPhysitianById(string id)
         {
             if (id != null) {
-                Physitian physitian = GetPhysitian("Select * from accounts where SerialNumber like '" + id + "'")[0];
-                return physitian;
-            }
+                List<Physitian> physitians = GetPhysitian("Select * from accounts where SerialNumber like '" + id + "'");
+                if (physitians.Any())
+                    return physitians[0];
+         }
                 return null;
         }
     }

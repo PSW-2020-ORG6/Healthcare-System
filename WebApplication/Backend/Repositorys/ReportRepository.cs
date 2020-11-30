@@ -115,26 +115,26 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///list of reports
         ///</returns>
-        public List<Report> GetReportsByProperty(string property, string value, string dateTimes, bool not)
+        public List<Report> GetReportsByProperty(SearchProperty property, string value, string dateTimes, bool not)
         {
             List<Report> reports = GetReports("Select * from reports  where Date between " + dateTimes);
-            if (!not && property.Equals("All"))
+            if (!not && property.Equals(SearchProperty.All))
                 return GetReportssByAllProperties(value, reports);
-            else if (not && property.Equals("All"))
+            else if (not && property.Equals(SearchProperty.All))
                 return GetRepportsByAllPropertiesNegation(value, reports);
-            else if (!not && property.Equals("Patient reports"))
+            else if (!not && property.Equals(SearchProperty.Patient))
                 return GetPrescriptionsByPatient(value, reports);
-            else if (not && property.Equals("Patient reports"))
+            else if (not && property.Equals(SearchProperty.Patient))
                 return GetPrescriptionsByPatientNegation(value, reports);
-            else if (!not && property.Equals("Doctor reports"))
+            else if (!not && property.Equals(SearchProperty.Doctor))
                 return GetPrescriptionsByPhysition(value, reports);
-            else if (not && property.Equals("Doctor reports"))
+            else if (not && property.Equals(SearchProperty.Doctor))
                 return GetPrescriptionsByPhysitionNegation(value, reports);
-            else if (!not && property.Equals("Specialist reports"))
+            else if (!not && property.Equals(SearchProperty.Specialist))
                 return GetPrescriptionsBySpecialization(value, reports);
-            else if (not && property.Equals("Specialist reports"))
+            else if (not && property.Equals(SearchProperty.Specialist))
                 return GetPrescriptionsBySpecializationNegation(value, reports);
-            else if (!not && property.Equals("Procedure type"))
+            else if (!not && property.Equals(SearchProperty.ProcedureType))
                 return GetPrescriptionsByProedureType(value, reports);
             else
                 return GetPrescriptionsByProedureTypeNegation(value, reports);

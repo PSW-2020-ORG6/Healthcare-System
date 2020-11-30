@@ -89,18 +89,18 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///list of prescriptions
         ///</returns>
-        public List<Prescription> GetPrescriptionsByProperty(string property, string value, string dateTimes,bool not)
+        public List<Prescription> GetPrescriptionsByProperty(SearchProperty property, string value, string dateTimes,bool not)
         {
             List<Prescription> prescriptions = GetPrescriptions("Select * from prescriptions where Date between "+dateTimes);
-            if (!not && property.Equals("All"))
+            if (!not && property.Equals(SearchProperty.All))
                 return GetPrescriptionsByAllProperties(value, prescriptions);
-            else if (not && property.Equals("All"))
+            else if (not && property.Equals(SearchProperty.All))
                 return GetPrescriptionsByAllPropertiesNegation(value, prescriptions);
-            else if (!not && property.Equals("Medicine name"))
+            else if (!not && property.Equals(SearchProperty.MedicineName))
                 return GetPrescriptionsByMedicineName(value, prescriptions);
-            else if (not && property.Equals("Medicine name"))
+            else if (not && property.Equals(SearchProperty.MedicineName))
                 return GetPrescriptionsByMedicineNameNegation(value, prescriptions);
-            else if (!not && property.Equals("Medicine type"))
+            else if (!not && property.Equals(SearchProperty.MedicineType))
                 return GetPrescriptionsByMedicineType(value, prescriptions);
             else
                 return GetPrescriptionsByMedicineTypeNegation(value, prescriptions);

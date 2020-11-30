@@ -5,6 +5,6 @@ namespace WebApplication.Backend.Repositorys
 {
     public interface IPrescriptionRepository
     {
-        List<Prescription> GetPrescriptionsByProperty(string property, string value, string dateTimes, bool not);
+        List<Prescription> GetPrescriptionsByProperty(SearchProperty property, string value, string dateTimes, bool not);
     }
 }
