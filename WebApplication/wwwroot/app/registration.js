@@ -8,7 +8,9 @@
 				dateOfBirth: null,
 				contact: null,
 				email: null,
-				address: null,
+				address: {
+					street: null,
+				},
 				password: null,
 				parentName: null,
 				placeOfBirth: null,
@@ -122,7 +124,7 @@
 			</tr>
 			<tr>
 				<td><label>Address</label><a class="star">*</a></td>
-				<td><input type="text" class = "form-control input" v-model="patientDTO.address"/></td><br/>
+				<td><input type="text" class = "form-control input" v-model="patientDTO.address.street"/></td><br/>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>

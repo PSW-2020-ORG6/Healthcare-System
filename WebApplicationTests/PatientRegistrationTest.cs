@@ -88,7 +88,7 @@ namespace WebApplicationTests
             var mockMailService = new Mock<IMailService>();
             var mockController = new Mock<RegistrationController>();
             var controller = new RegistrationController(mockMailService.Object);
-            PatientDTO patientDTO = new PatientDTO("21", "Ana", "Anic", "12341112211", DateTime.Now, "0643342345", "ana@gmail.com", "Glavna 3", "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false, false);
+            PatientDTO patientDTO = new PatientDTO("21", "Ana", "Anic", "12341112211", DateTime.Now, "0643342345", "ana@gmail.com", new Address { Street = "Glavna 3" }, "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false, false);
             Patient patient = new Patient(patientDTO);
             controller.RegisterPatient(patientDTO);
             mockMailService.Verify(m => m.SendEmailAsync(patient));
