@@ -17,7 +17,7 @@
 	},
 	beforeMount() {
 		axios
-			.get('http://localhost:49900/patient/getPatientById', { params: { patientId: "123456789" } })
+			.get('http://localhost:49900/patient/getPatientById', { params: { patientId: "12345" } })
 			.then(response => {
 				this.patientDTO = response.data
 			})
@@ -215,6 +215,9 @@
 							  </div>
 							  <input type="text"  v-model="patientDTO.personalDiseases" class="form-control" id="basic-url" aria-describedby="basic-addon3" disabled>
 						</div>
+
+						<td><img  :src = "patientDTO.image" class = "form-control inputImage" style = "display:flex" width="100" heigh="50" /></td>
+
 				  </div>
 				  <div class="modal-footer textAndBackground">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -224,7 +227,7 @@
 			</div>
 
 	
-	<--END registration info modal-->
+	<!--END registration info modal-->
 
 		<div>
 			<div class="modal fade" tabindex="-1" role="dialog" id="feedbackModal">

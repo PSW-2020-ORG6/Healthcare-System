@@ -43,5 +43,6 @@ namespace WebApplication.Backend.Controllers
         {
             return patientService.GetPatientById(patientId);
         }
+
     }
 }
