@@ -102,7 +102,7 @@ namespace Backend.Dto
         public string PersonalDiseases { get => personalDiseases; set => personalDiseases = value; }
         public string Gender { get => gender; set => gender = value; }
         public string Image { get => image; set => image = value; }
-        public bool Guest { get => guest; set => guest = value; }
+        public bool IsGuest { get => guest; set => guest = value; }
         public bool EmailConfirmed { get => emailConfirmed; set => emailConfirmed = value; }
 
         public bool IsCorectRegistrationFields()

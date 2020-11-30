@@ -95,7 +95,7 @@ namespace Model.Accounts
             this.familyDiseases = patientDTO.FamilyDiseases;
             this.personalDiseases = patientDTO.PersonalDiseases;
             this.image = patientDTO.Image;
-            this.guest = patientDTO.Guest;
+            this.guest = patientDTO.IsGuest;
             this.emailConfirmed = patientDTO.EmailConfirmed;
         }
         public Patient() : base(Guid.NewGuid().ToString()) { }
