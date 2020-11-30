@@ -15,7 +15,7 @@ namespace IntegrationAdaptersTests
         public Mock<IMedicineReportRepository> Mock = new Mock<IMedicineReportRepository>();
 
         [Fact]
-        public void sendFileSuccess()
+        public void Sends_files_successfully()
         {  
             SftpService service = new SftpService();
             bool success = service.SendFile(@"C:\Users\dragana\Desktop\Projekat PSW\Healthcare-System\IntegrationAdaptersTests\bin\Debug\netcoreapp3.1\testFile.txt");
@@ -28,7 +28,7 @@ namespace IntegrationAdaptersTests
             Mock.Setup(expression: t => t.GetAll()).Returns(new List<MedicineReport> { new MedicineReport { Id = "1", Date = new DateTime(2020, 10, 5), Dosage = new List<MedicineDosage>() }, new MedicineReport { Id = "2", Date = new DateTime(2020, 5, 10), Dosage = new List<MedicineDosage>() } });
 
             MedicineReportService service = new MedicineReportService();
-            List<MedicineReport> result = service.GetByDateInterval(Mock.Object.GetAll(), new TimeInterval { Start = new DateTime(2020, 5, 10), End = new DateTime(2020, 10, 5) });
+            List<MedicineReport> result = service.GetByDateInterval(new TimeInterval { Start = new DateTime(2020, 5, 10), End = new DateTime(2020, 10, 5) });
 
             Assert.NotEmpty(result);
         }
@@ -39,7 +39,7 @@ namespace IntegrationAdaptersTests
             Mock.Setup(expression: t => t.GetAll()).Returns(new List<MedicineReport> { new MedicineReport { Id = "1", Date = new DateTime(2020, 10, 5), Dosage = new List<MedicineDosage>() }, new MedicineReport { Id = "2", Date = new DateTime(2020, 5, 10), Dosage = new List<MedicineDosage>() } });
 
             MedicineReportService service = new MedicineReportService();
-            List<MedicineReport> result = service.GetByDateInterval(Mock.Object.GetAll(), new TimeInterval { Start = new DateTime(2020, 6, 10), End = new DateTime(2020, 9, 5) });
+            List<MedicineReport> result = service.GetByDateInterval(new TimeInterval { Start = new DateTime(2020, 6, 10), End = new DateTime(2020, 9, 5) });
 
             Assert.Empty(result);
         }
