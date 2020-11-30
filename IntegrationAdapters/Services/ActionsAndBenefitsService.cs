@@ -9,11 +9,15 @@ namespace IntegrationAdapters.Services
 {
     public class ActionsAndBenefitsService
     {
-        private ActionsAndBenefitsRepository actionsAndBenefitsRepository;
+        private IActionsAndBenefitsRepository actionsAndBenefitsRepository;
 
         public ActionsAndBenefitsService()
         {
             this.actionsAndBenefitsRepository = new ActionsAndBenefitsRepository();
+        }
+        public ActionsAndBenefitsService(IActionsAndBenefitsRepository actionsAndBenefitsRepository)
+        {
+            this.actionsAndBenefitsRepository = actionsAndBenefitsRepository;
         }
 
         public bool AddActionAndBenefitMessage(ActionAndBenefitMessage actionsAndBenefitsMessage)
@@ -24,6 +28,20 @@ namespace IntegrationAdapters.Services
         public List<String> GetHospitalSubscribedPharmacies()
         {
             return actionsAndBenefitsRepository.GetHospitalSubscribedPharmacies();
+        }
+
+        public List<ActionAndBenefitMessage> GetAllPublishedActionsAndBenefitsMessages()
+        {
+            return actionsAndBenefitsRepository.GetAllPublishedActionsAndBenefitsMessages();
+        }
+        public ActionAndBenefitMessage GetActionAndBenefitMessegeByID(Guid acitonID)
+        {
+            return actionsAndBenefitsRepository.GetActionAndBenefitMessegeByID( acitonID);
+        }
+
+        public bool IsMessageExisting(ActionAndBenefitMessage api)
+        {
+            return actionsAndBenefitsRepository.IsMessageExisting(api);
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IntegrationAdapters.Repositories
 {
-    public class ActionsAndBenefitsRepository
+    public class ActionsAndBenefitsRepository : IActionsAndBenefitsRepository
     {
         public DbContextOptions<HealthCareSystemDbContext> options = new DbContextOptionsBuilder<HealthCareSystemDbContext>()
                 .UseMySql(connectionString: "server=localhost;port=3306;database=newmydb;user=root;password=root").UseLazyLoadingProxies()
@@ -51,6 +51,18 @@ namespace IntegrationAdapters.Repositories
             return SubscribedPharmacyNameList;
         }
 
+        public List<ActionAndBenefitMessage> GetAllPublishedActionsAndBenefitsMessages()
+        {
+            return dbContext.ActionAndBenefitMessage.ToList();
+        }
 
+        public ActionAndBenefitMessage GetActionAndBenefitMessegeByID( Guid id)
+        {
+            foreach (ActionAndBenefitMessage abMessage in GetAllPublishedActionsAndBenefitsMessages())
+            {
+                if (abMessage.ActionID.Equals(id)) return abMessage;
+            }
+            return null;
+        }
     }
 }
