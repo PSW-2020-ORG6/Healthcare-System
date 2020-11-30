@@ -1,6 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using health_clinic_class_diagram.Backend.Model.Hospital;
+using Microsoft.EntityFrameworkCore;
 using Model.Accounts;
+using Model.Blog;
+using Model.Hospital;
 using Model.Util;
+using System;
 
 namespace WebApplication.Backend.Model
 {
@@ -17,7 +21,6 @@ namespace WebApplication.Backend.Model
         public DbSet<MedicineType> MedicineTypes { get; set; }
         public DbSet<Medicine> Medicine { get; set; }
         public DbSet<MedicineGEA> MedicineGEA { get; set; }
-
         public UtilDbContext(DbContextOptions<UtilDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
