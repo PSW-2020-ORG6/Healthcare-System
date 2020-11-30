@@ -26,7 +26,7 @@ namespace WebApplication.Backend.Controllers
         {
             if (!searchEntityDTO.IsDateFormat(date))
                 return null;
-            if (searchEntityDTO.IsSeacrhes(prescriptionSearch, reportSearch))
+            if (searchEntityDTO.IsSearchesFormatValid(prescriptionSearch, reportSearch))
             {
                 List<SearchEntityDTO> prescriptions = prescriptionService.GetSearchedPrescription(prescriptionSearch, date);
                 List<SearchEntityDTO> reports = reportService.GetSearchedReport(reportSearch, date);
@@ -37,13 +37,13 @@ namespace WebApplication.Backend.Controllers
                 else
                     return prescriptions;
             }
-            else if (searchEntityDTO.IsSeacrh(prescriptionSearch))
+            else if (searchEntityDTO.IsSearchFormatValid(prescriptionSearch))
             {
                 List<SearchEntityDTO> prescriptions = prescriptionService.GetSearchedPrescription(prescriptionSearch, date);
                 if (!searchEntityDTO.IsNull(prescriptions))
                     return prescriptions;
             }
-            else if (searchEntityDTO.IsSeacrh(reportSearch))
+            else if (searchEntityDTO.IsSearchFormatValid(reportSearch))
             {
                 List<SearchEntityDTO> reports = reportService.GetSearchedReport(reportSearch, date);
                 if (!searchEntityDTO.IsNull(reports))

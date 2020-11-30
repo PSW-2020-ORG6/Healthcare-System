@@ -17,7 +17,8 @@ namespace WebApplication.Backend.DTO
         }
         private DateTime CreateDateTime(string date)
         {
-            return new DateTime(Convert.ToInt32(date.Split("-")[0]), Convert.ToInt32(date.Split("-")[1]), Convert.ToInt32(date.Split("-")[2]));
+            string[] dates =date.Split("-");
+            return new DateTime(Convert.ToInt32(dates[0]), Convert.ToInt32(dates[1]), Convert.ToInt32(dates[2]));
         }
     }
 }

@@ -25,11 +25,11 @@ namespace WebApplication.Backend.DTO
             }
             return searchEntityDTOs;
         }
-        public bool IsSeacrhes(string prescriptionSearch,string reportSearch)
+        public bool IsSearchesFormatValid(string prescriptionSearch,string reportSearch)
         {
-            return IsSeacrh(prescriptionSearch) && IsSeacrh(reportSearch);
+            return IsSearchFormatValid(prescriptionSearch) && IsSearchFormatValid(reportSearch);
         }
-        public bool IsSeacrh(string search)
+        public bool IsSearchFormatValid(string search)
         {
             if (search == null || search.Split(";").Length < 0 || search.Split(",").Length < 3 || search.Split(";").Length >4)
                 return false;
@@ -43,7 +43,7 @@ namespace WebApplication.Backend.DTO
         public bool IsDateFormat(string date)
         {
             if(date!=null)
-                return !(date.Split("and")[0].Split("-").Length < 3 || date.Split("and")[1].Split("-").Length < 3 || date.Split("and")[0].Split("-").Length > 3 || date.Split("and")[1].Split("-").Length > 3);
+                return date.Split("and")[0].Split("-").Length== 3 || date.Split("and")[1].Split("-").Length == 3;
             return false;
         }
         public bool IsNull(List<SearchEntityDTO> searchEntityDTOs)
