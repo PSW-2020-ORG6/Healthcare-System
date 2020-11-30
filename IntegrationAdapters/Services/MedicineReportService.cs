@@ -10,11 +10,16 @@ namespace IntegrationAdapters.Services
 {
     public class MedicineReportService
     {
-        private MedicineReportRepository medicineReportRepository;
+        private IMedicineReportRepository medicineReportRepository;
 
         public MedicineReportService()
         {
             this.medicineReportRepository = new MedicineReportRepository();
+        }
+
+        public MedicineReportService(IMedicineReportRepository imedicineReportRepository)
+        {
+            this.medicineReportRepository = imedicineReportRepository;
         }
 
         public void AddPrescription()

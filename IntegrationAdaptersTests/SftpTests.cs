@@ -27,7 +27,7 @@ namespace IntegrationAdaptersTests
         {
             Mock.Setup(expression: t => t.GetAll()).Returns(new List<MedicineReport> { new MedicineReport { Id = "1", Date = new DateTime(2020, 10, 5), Dosage = new List<MedicineDosage>() }, new MedicineReport { Id = "2", Date = new DateTime(2020, 5, 10), Dosage = new List<MedicineDosage>() } });
 
-            MedicineReportService service = new MedicineReportService();
+            MedicineReportService service = new MedicineReportService(Mock.Object);
             List<MedicineReport> result = service.GetByDateInterval(new TimeInterval { Start = new DateTime(2020, 5, 10), End = new DateTime(2020, 10, 5) });
 
             Assert.NotEmpty(result);
@@ -38,7 +38,7 @@ namespace IntegrationAdaptersTests
         {
             Mock.Setup(expression: t => t.GetAll()).Returns(new List<MedicineReport> { new MedicineReport { Id = "1", Date = new DateTime(2020, 10, 5), Dosage = new List<MedicineDosage>() }, new MedicineReport { Id = "2", Date = new DateTime(2020, 5, 10), Dosage = new List<MedicineDosage>() } });
 
-            MedicineReportService service = new MedicineReportService();
+            MedicineReportService service = new MedicineReportService(Mock.Object);
             List<MedicineReport> result = service.GetByDateInterval(new TimeInterval { Start = new DateTime(2020, 6, 10), End = new DateTime(2020, 9, 5) });
 
             Assert.Empty(result);

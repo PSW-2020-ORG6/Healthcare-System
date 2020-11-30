@@ -9,5 +9,6 @@ namespace IntegrationAdapters.Repositories
     public interface IMedicineReportRepository
     {
         public List<MedicineReport> GetAll();
+        void AddPrescription();
     }
 }
