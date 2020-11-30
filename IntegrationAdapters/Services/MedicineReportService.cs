@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IntegrationAdapters.Services
 {
-    public class MedicineReportService : IMedicineReportRepository
+    public class MedicineReportService
     {
         private MedicineReportRepository medicineReportRepository;
 

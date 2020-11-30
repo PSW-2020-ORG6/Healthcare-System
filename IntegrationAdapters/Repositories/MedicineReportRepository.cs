@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IntegrationAdapters.Repositories
 {
-    public class MedicineReportRepository
+    public class MedicineReportRepository : IMedicineReportRepository
     {
         public DbContextOptions<HealthCareSystemDbContext> options = new DbContextOptionsBuilder<HealthCareSystemDbContext>()
                 .UseMySql(connectionString: "server=localhost;port=3306;database=newmydb;user=root;password=root").UseLazyLoadingProxies()
