@@ -20,11 +20,9 @@ namespace GraphicEditor.View.Windows
     /// </summary>
     public partial class AddBuilding : Window
     {
-        public AddBuilding()
+        public AddBuilding(Button but)
         {
-            this.DataContext = AddBuildingViewModel.GetInstance();
-            AddBuildingViewModel.GetInstance().Window = this;
-
+            this.DataContext = new AddBuildingViewModel(this, but);
             InitializeComponent();
         }
     }

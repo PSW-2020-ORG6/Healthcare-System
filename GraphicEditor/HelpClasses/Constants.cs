@@ -22,7 +22,7 @@ namespace GraphicEditor.HelpClasses
         public const string PEDIATRICS = "pediatrics";
         public const string DERMATOLOGY = "dermatology";
         public const string ONCOLOGY = "oncology";
-        public const string EMPTYFIELD = "emptyField";
+        public const string EMPTY_FIELD = "emptyField";
 
         // Constants used for building floors
         public static readonly Dictionary<string, string> FLOOR_MAP = new Dictionary<string, string>()

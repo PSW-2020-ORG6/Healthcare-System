@@ -26,11 +26,9 @@ namespace GraphicEditor.ViewModel
         private void AddBuilding(object button)
         {
             Button but = (Button)button;
-            System.Console.WriteLine(but.Content);
             if( but.Content.Equals("Empty field") )
             {
-                AddBuildingViewModel.GetInstance().Button = but;
-                (new AddBuilding()).ShowDialog();
+                (new AddBuilding(but)).ShowDialog();
             }
         }
 
