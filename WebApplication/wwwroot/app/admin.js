@@ -81,8 +81,6 @@
       </div>
     </div>
 
-			
-
 <br></br>
 <br></br>
 
@@ -154,20 +152,8 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
     </div>
-
-
-
 	`,
-
-
-
-
     methods: {
         DateSplit: function (date) {
             var dates = (date.split("T")[0]).split("-")

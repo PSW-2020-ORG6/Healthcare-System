@@ -17,8 +17,6 @@ namespace WebApplication.Backend.Repositorys
             try
             {
                 connection = new MySqlConnection("server=localhost;database=newdb;user=root;password=root");
-                connection.Open();
-                connection.Open();
             }
             catch (Exception e)
             {
@@ -35,7 +33,8 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         internal List<Feedback> GetFeedbacks(String sqlDml)
         {
-                MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            connection.Open();
+            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
                 MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
                 List<Feedback> resultList = new List<Feedback>();
                 while (sqlReader.Read())
@@ -104,8 +103,9 @@ namespace WebApplication.Backend.Repositorys
         ///</param>
         internal void ApproveFeedback(FeedbackDTO feedback)
         {
+            connection.Open();
             string[] dateString = feedback.Date.ToString().Split(" ");
-            string[] partsOfDate = dateString[0].Split("/");
+            string[] partsOfDate = dateString[0].Split(".");
             if (feedback.Approved)
             {
                 String sqlDml = "REPLACE  into feedbacks(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 0
@@ -137,8 +137,9 @@ namespace WebApplication.Backend.Repositorys
         ///</param>
         internal bool AddNewFeedback(Feedback feedback)
         {
+            connection.Open();
             string[] dateString = DateTime.Now.ToString().Split(" ");
-            string[] partsOfDate = dateString[0].Split("/");
+            string[] partsOfDate = dateString[0].Split(".");
             string sqlDml = "INSERT INTO feedbacks (text,approved,date,patientid,serialnumber)  VALUES('" + feedback.Text + "','" + 0 + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + "T" + dateString[1]
                    + "','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
 

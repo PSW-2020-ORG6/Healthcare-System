@@ -1,9 +1,11 @@
 ﻿Vue.component("patient", {
 	data: function () {
 		return {
+			idPatient:"12",
 			approvedFeedbacks: null,
 			noapprovedFeedbacks: null,
 			patients: null,
+			doctorsList: null,
 			feedback: {
 				text: "",
 				approved: false,
@@ -117,7 +119,20 @@
 			return dates[2] + "." + dates[1] + "." + dates[0]
 		},
 		SurveyShow: function () {
-			this.$router.push('survey');
+			axios
+				.get('http://localhost:49900/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient} })
+				.then(response => {
+					this.doctorsList = response.data
+					if (this.doctorsList.value != null || this.doctorsList != "") {
+						this.$router.push('survey');
+					} else {
+						alert("You have already completed the survey for all available doctors")
+					}
+				})
+				.catch(error => {
+					alert(error)
+				})
+			
 		}
 	}
 });

@@ -10,25 +10,49 @@ namespace WebApplication.Backend.Services
 {
     public class SurveyService
     {
-        private SurveyRepository surveyRepository;
-        private ISurveyRepository isurveyRepository = new SurveyRepository();
+        private ISurveyRepository isurveyRepository;
         public SurveyService()
         {
-            this.surveyRepository = new SurveyRepository();
+            this.isurveyRepository = new SurveyRepository();
         }
         public SurveyService(ISurveyRepository iSurveyRepository)
         {
             this.isurveyRepository = iSurveyRepository;
         }
-
+        ////Marija Vucetic  RA157/2017
+        /// <summary>
+        ///adding new survez to database
+        ///</summary>
+        ///<returns>
+        ///true in case of success,false otherwise
+        ///</returns>
         public bool AddNewSurvey(Survey surveyText)
         {
             return isurveyRepository.AddNewSurvey(surveyText);
         }
 
+        internal List<string> GetAllDoctorsFromReporstByPatientIdFromSurvey(string patientId)
+        {
+            return isurveyRepository.GetAllDoctorsFromReporstByPatientIdFromSurvey(patientId);
+        }
+
+        internal List<string> GetAllDoctorsFromReporstByPatientIdForSurveyList(string patientId)
+        {
+            return isurveyRepository.GetAllDoctorsFromReporstByPatientIdForSurveyList(patientId);
+        }
+
+        ////Vucetic Marija RA157/2017
+        /// <summary>
+        ///getting all doctors from one patient's reports 
+        ///</summary>
+        ///<returns>
+        ///list of names of doctors
+        ///</returns>
+        ///<param name="idPatient"> String patient id
+        ///</param>
         internal List<string> GetAllDoctorsFromReporstByPatientId(string patientId)
         {
-            return surveyRepository.GetAllDoctorsFromReporstByPatientId(patientId);
+            return isurveyRepository.GetAllDoctorsFromReporstByPatientId(patientId);
         }
 
         ////Aleksa Repovic RA52/2017
@@ -54,7 +78,7 @@ namespace WebApplication.Backend.Services
         ///</param>
         public List<StatisticAuxilaryClass> getStatisticsForDoctor(string doctorID)
         {
-            return surveyRepository.getStatisticsForDoctor(doctorID);
+            return isurveyRepository.getStatisticsForDoctor(doctorID);
 
         }
 
@@ -67,7 +91,7 @@ namespace WebApplication.Backend.Services
         ///</returns>
         public List<StatisticAuxilaryClass> getStatisticsEachTopic()
         {
-            return surveyRepository.getStatisticsEachTopic();
+            return isurveyRepository.getStatisticsEachTopic();
 
         }
 

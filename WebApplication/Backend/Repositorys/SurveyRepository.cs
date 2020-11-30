@@ -164,10 +164,11 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         ///<param name="idPatient"> String patient id
         ///</param>
-        internal List<string> GetAllDoctorsFromReporstByPatientId(string idPatient)
+        ///
+        public List<string> GetAllDoctorsFromReporstByPatientId(string patientId)
         {
             List<Report> reports = new List<Report>();
-            reports = GetReports("Select * from reports where PatientSerialNumber like'" + idPatient.ToString() + "'");
+            reports = GetReports("Select * from reports where PatientSerialNumber like'" + patientId.ToString() + "'");
             List<String> doctors = new List<String>();
             foreach (Report r in reports)
             {
@@ -391,21 +392,16 @@ namespace WebApplication.Backend.Repositorys
                 statistics[4].AverageRating += Double.Parse(s.Question23);
                 statistics[4].increment(Int32.Parse(s.Question23));
             }
-            for (int i = 0; i < 5; i++)
-            {
-                statistics[i].generatePercents();
-
-                if (i == 0)
-                    statistics[i].AverageRating = statistics[i].AverageRating / reports.Count/5;
-                else if (i == 1)
-                    statistics[i].AverageRating = statistics[i].AverageRating / reports.Count/4;
-                else if (i == 2)
-                    statistics[i].AverageRating = statistics[i].AverageRating / reports.Count/5;
-                else if (i == 3)
-                    statistics[i].AverageRating = statistics[i].AverageRating / reports.Count/2;
-                else if (i == 4)
-                    statistics[i].AverageRating = statistics[i].AverageRating / reports.Count/3;
-            }
+            statistics[0].generatePercents();
+            statistics[1].generatePercents();
+            statistics[2].generatePercents();
+            statistics[3].generatePercents();
+            statistics[4].generatePercents();
+            statistics[0].AverageRating = statistics[0].AverageRating / reports.Count / 5;
+            statistics[1].AverageRating = statistics[1].AverageRating / reports.Count / 4;
+            statistics[2].AverageRating = statistics[2].AverageRating / reports.Count / 5;
+            statistics[3].AverageRating = statistics[3].AverageRating / reports.Count / 2;
+            statistics[4].AverageRating = statistics[4].AverageRating / reports.Count / 3;
             return round2Decimals(statistics);
         }
 
@@ -424,5 +420,80 @@ namespace WebApplication.Backend.Repositorys
             return input;
         }
 
+        ////Vucetic Marija RA157/2017
+        /// <summary>
+        ///returns all doctors from surveys conducted by one patient
+        ///</summary>
+        ///<returns>
+        ///list of names of doctors
+        ///</returns>
+        ///<param name="idPatient"> String patient id
+        ///</param>
+        ///
+        public List<string> GetAllDoctorsFromReporstByPatientIdFromSurvey(string patientId)
+        {
+            List<Physitian> result = new List<Physitian>();
+            result=GetDoctors("Select * from surveys where ID like'" + patientId.ToString() + "'");
+            List<String> doctors = new List<String>();
+            foreach (Physitian r in result)
+            {
+                doctors.Add(r.FullName.Trim());
+            }
+            return doctors;
+        }
+
+        ////Vucetic Marija RA157/2017
+        /// <summary>
+        ///returns all doctors froma database by patientid
+        ///</summary>
+        ///<returns>
+        ///list of names of doctors
+        ///</returns>
+        ///<param name="sqlDml">String sql command
+        ///</param>
+        ///
+        public List<Physitian> GetDoctors(string sqlDml)
+        {
+            connection.Open();
+            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
+            List<Physitian> resultList = new List<Physitian>();
+
+            while (sqlReader.Read())
+            {
+                Physitian entity = new Physitian();
+                entity.Name = (string)sqlReader[2];
+                resultList.Add(entity);
+
+            }
+            connection.Close();
+            return resultList;
+        }
+        ////Vucetic Marija RA157/2017
+        /// <summary>
+        /// returns all doctors for whom the patient can do a survey
+        ///</summary>
+        ///<returns>
+        ///list of names of doctors
+        ///</returns>
+        ///<param name="idPatient"> String patient id
+        ///</param>
+        ///
+        public List<string> GetAllDoctorsFromReporstByPatientIdForSurveyList(string patientId)
+        {
+            List<String> resultListFromSurvey = GetAllDoctorsFromReporstByPatientIdFromSurvey(patientId);
+            List<String> resultListFromReports = GetAllDoctorsFromReporstByPatientId(patientId);
+            List<String> resultList = new List<String>();
+             foreach (String physitianFromRepors in resultListFromReports)
+                {
+                    if (!resultListFromSurvey.Contains(physitianFromRepors))
+                    {
+                        resultList.Add(physitianFromRepors);
+                    }
+                    
+                }
+            
+            return resultList;
+        }
     }
 }

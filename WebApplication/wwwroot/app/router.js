@@ -24,7 +24,7 @@ var temp = new Vue({
 		},
 		statistics: function () {
 			router.push("statistics")
-		}
+		},
 	}
 
 });
