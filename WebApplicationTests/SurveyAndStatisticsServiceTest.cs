@@ -10,53 +10,26 @@ using Xunit;
 
 namespace WebApplicationTests
 {
-    public class UnitTest1
+    public class SurveyAndStatisticsServiceTest
     {
-            [Fact]
-            public void AddNewSurveyTest()
+        Survey surveyTest = new Survey
+               ("001", "Bozo Bozic", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3");
+       
+        [Fact]
+            public void Adds_new_survey()
             {
                 var stubRepository = new Mock<ISurveyRepository>();
                 var result = true;
-                Survey surveyTest = new Survey
-                ("001", "Bozo Bozic", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3");
+               
                 stubRepository.Setup(m => m.AddNewSurvey(surveyTest)).Returns(result);
                 SurveyService service = new SurveyService(stubRepository.Object);
                 bool result1 = service.AddNewSurvey(surveyTest);
+
                 Assert.True(result1);
             }
-        /*
+       
             [Fact]
-            public void getStatistiEachTopic()
-            {
-            
-                List<double> testResult = new List<double>();
-                for (int i=0; i < 6 ; i++) {
-                    testResult.Add(2);
-                }
-
-
-                Survey surveyTest1 = new Survey
-                ("001", "Bozo Bozic", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3");
-                Survey surveyTest2 = new Survey
-                ("001", "Bozo Bozic", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1");
-
-                List<Survey> testInput = new List<Survey>();
-                testInput.Add(surveyTest1);
-                testInput.Add(surveyTest2);
-
-                var stubRepository = new Mock<ISurveyRepository>();
-                var result = testResult;
-
-
-
-
-
-                Assert.True(true);
-          
-            }
-            */
-            [Fact]
-            public void getStatisticEachQuestion_correct()
+            public void get_Statistic_Each_Question_correct()
             {
                 using (var mock = AutoMock.GetLoose()) {
                     mock.Mock<ISurveyRepository>()
@@ -65,11 +38,9 @@ namespace WebApplicationTests
 
                 var cls = mock.Create<SurveyService>();
                 List<StatisticAuxilaryClass> expected = getSampleStatisticsEachQuestion();
-
                 List<StatisticAuxilaryClass> actual = cls.getStatisticsEachQuestion();
 
                 bool flag = true;
-
                 for (int i = 0; i < actual.Count; i++) {
                     flag = compareStatisticAuxilaryClass(actual[i], expected[i]);
                     if (flag == false)
@@ -78,7 +49,6 @@ namespace WebApplicationTests
 
                 Assert.True(flag);
                 }
-
             }
 
         private bool compareStatisticAuxilaryClass(StatisticAuxilaryClass p1 , StatisticAuxilaryClass p2) {
@@ -369,11 +339,8 @@ namespace WebApplicationTests
                         FoursPercent = "0%",
                         FivesPercent = "0"
                     }
-
                 };
-
                 return output;
             }
-
         }
 }

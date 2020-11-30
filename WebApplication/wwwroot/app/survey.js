@@ -3,9 +3,10 @@
         return {
             patient: {},
             doctorsList: [],
-            patientId: "12",
+           // patientId: "12",
             selectedDoctor: {},
-            surveyText :{
+            surveyText: {
+            id:"12",
             question1: null,
             question2: null,
             question3: null,
@@ -35,7 +36,7 @@
     },
     mounted() {
         axios
-            .get('http://localhost:49900/survey/getDoctors', { params: { patientId: this.patientId } })
+            .get('http://localhost:49900/survey/getDoctorsForSurveyList', { params: { patientId: this.surveyText.id } })
             .then(response => {
                 this.doctorsList = response.data
             })
