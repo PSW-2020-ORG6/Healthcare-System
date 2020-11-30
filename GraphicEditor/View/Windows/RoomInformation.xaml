@@ -222,8 +222,6 @@
                     </DockPanel>
                 </Button>
             </DockPanel>
-
         </Grid>
-        
     </Grid>
 </Window>

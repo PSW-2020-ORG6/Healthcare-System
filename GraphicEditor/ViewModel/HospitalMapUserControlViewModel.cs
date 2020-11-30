@@ -1,4 +1,5 @@
-﻿using GraphicEditor.HelpClasses;
+﻿using System;
+using GraphicEditor.HelpClasses;
 using GraphicEditor.View.Windows;
 using GraphicEditor.Repositories;
 using health_clinic_class_diagram.Backend.Model.Hospital;
@@ -14,9 +15,7 @@ namespace GraphicEditor.ViewModel
         public MyICommand<string> NavCommand { get; private set; }
         public MyICommand<object> AddCommand { get; private set; }
 
-        ResourceDictionary myResourceDictionary = new ResourceDictionary();
-
-        ResourceDictionary myResourceDictionary = new ResourceDictionary();
+        public ResourceDictionary ResourceDictionary = new ResourceDictionary();
 
         public Grid HospitalMapGrid { get; set; }
 
@@ -34,11 +33,12 @@ namespace GraphicEditor.ViewModel
         /// </summary>
         public void InitialGridRender()
         {
+            ResourceDictionary.Source = new Uri("/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml", UriKind.RelativeOrAbsolute);
             foreach (Building building in buildingRepository.GetAllBuildings())
             {
                 Button but = new Button();
-                but.Style = (Style)myResourceDictionary[building.Style];
-                but.Name = "Building" + building.SerialNumber;
+                but.Style = (Style)ResourceDictionary[building.Style];
+                but.Name = building.Name;
                 var color = (Color)ColorConverter.ConvertFromString(building.Color);
                 Brush brush = new SolidColorBrush(color);
                 but.Background = brush;

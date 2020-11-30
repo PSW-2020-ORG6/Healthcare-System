@@ -85,7 +85,6 @@ namespace klinika_zdravo
 
         private void MapClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
             map.ShowDialog();
         }
 

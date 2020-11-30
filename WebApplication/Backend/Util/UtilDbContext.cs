@@ -151,20 +151,20 @@ namespace WebApplication.Backend.Model
               new Floor { SerialNumber = "1003", Name = "Floor1", BuildingSerialNumber = "10002" }
             );
             modelBuilder.Entity<RoomGEA>().HasData(
-                new RoomGEA { SerialNumber = "101", Name = "Examination room", FloorName = "Floor 1", BuildingName = "Cardiology" },
-                new RoomGEA { SerialNumber = "102", Name = "Examination room", FloorName = "Floor 1", BuildingName = "Cardiology" },
-                new RoomGEA { SerialNumber = "103", Name = "Store room", FloorName = "Floor 1", BuildingName = "Cardiology" },
-                new RoomGEA { SerialNumber = "104", Name = "Examination room", FloorName = "Floor 1", BuildingName = "Cardiology" },
-                new RoomGEA { SerialNumber = "105", Name = "Store room", FloorName = "Floor 1", BuildingName = "Cardiology" },
-                new RoomGEA { SerialNumber = "106", Name = "Operation room", FloorName = "Floor 2", BuildingName = "Cardiology" },
-                new RoomGEA { SerialNumber = "107", Name = "Operation room", FloorName = "Floor 2", BuildingName = "Cardiology" },
-                new RoomGEA { SerialNumber = "108", Name = "Store room", FloorName = "Floor 2", BuildingName = "Cardiology" },
-                new RoomGEA { SerialNumber = "109", Name = "Examination room", FloorName = "Floor 1", BuildingName = "Orthopedy" },
-                new RoomGEA { SerialNumber = "110", Name = "Operation room", FloorName = "Floor 1", BuildingName = "Orthopedy" },
-                new RoomGEA { SerialNumber = "111", Name = "Examination room", FloorName = "Floor 1", BuildingName = "Orthopedy" },
-                new RoomGEA { SerialNumber = "112", Name = "Store room", FloorName = "Floor 1", BuildingName = "Orthopedy" },
-                new RoomGEA { SerialNumber = "113", Name = "Examination room", FloorName = "Floor 1", BuildingName = "Orthopedy" },
-                new RoomGEA { SerialNumber = "114", Name = "Examination room", FloorName = "Floor 1", BuildingName = "Orthopedy" }
+                new RoomGEA { SerialNumber = "101", Name = "Examination room 101", FloorName = "Floor 1", BuildingName = "Cardiology" },
+                new RoomGEA { SerialNumber = "102", Name = "Examination room 102", FloorName = "Floor 1", BuildingName = "Cardiology" },
+                new RoomGEA { SerialNumber = "103", Name = "Store room 103", FloorName = "Floor 1", BuildingName = "Cardiology" },
+                new RoomGEA { SerialNumber = "104", Name = "Examination room 104", FloorName = "Floor 1", BuildingName = "Cardiology" },
+                new RoomGEA { SerialNumber = "105", Name = "Store room 105", FloorName = "Floor 1", BuildingName = "Cardiology" },
+                new RoomGEA { SerialNumber = "106", Name = "Operation room 106", FloorName = "Floor 2", BuildingName = "Cardiology" },
+                new RoomGEA { SerialNumber = "107", Name = "Operation room 107", FloorName = "Floor 2", BuildingName = "Cardiology" },
+                new RoomGEA { SerialNumber = "108", Name = "Store room 108", FloorName = "Floor 2", BuildingName = "Cardiology" },
+                new RoomGEA { SerialNumber = "109", Name = "Examination room 109", FloorName = "Floor 1", BuildingName = "Orthopedy" },
+                new RoomGEA { SerialNumber = "110", Name = "Operation room 110", FloorName = "Floor 1", BuildingName = "Orthopedy" },
+                new RoomGEA { SerialNumber = "111", Name = "Examination room 111", FloorName = "Floor 1", BuildingName = "Orthopedy" },
+                new RoomGEA { SerialNumber = "112", Name = "Store room 112", FloorName = "Floor 1", BuildingName = "Orthopedy" },
+                new RoomGEA { SerialNumber = "113", Name = "Examination room 113", FloorName = "Floor 1", BuildingName = "Orthopedy" },
+                new RoomGEA { SerialNumber = "114", Name = "Examination room 114", FloorName = "Floor 1", BuildingName = "Orthopedy" }
             );
             modelBuilder.Entity<Equipment>().HasData(
                 new Equipment { SerialNumber = "73", RoomId = "101", Name = "Bed", Id = "11" },
@@ -180,8 +180,8 @@ namespace WebApplication.Backend.Model
 
                 );
             modelBuilder.Entity<MedicineManufacturer>().HasData(
-                new MedicineManufacturer { Name = "manufacturer1", SerialNumber = "1" },
-                new MedicineManufacturer { Name = "manufacturer2", SerialNumber = "2" }
+                new MedicineManufacturer { SerialNumber = "1", Name = "manufacturer1"  },
+                new MedicineManufacturer { SerialNumber = "2", Name = "manufacturer2"  }
                 );
             modelBuilder.Entity<MedicineType>().HasData(
                     new MedicineType { SerialNumber = "11", Type = "Antibiotic" },
