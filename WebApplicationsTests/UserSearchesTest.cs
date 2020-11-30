@@ -30,8 +30,8 @@ namespace WebApplicationsTests
 
             prescriptions.Add(new Prescription { Date = DateTime.Today, Notes = "Uzimati po potrebi dva puta dnevno", MedicineDosage = medicineDosages1 });
             prescriptions.Add(new Prescription { Date = DateTime.Today, Notes = "Jedna tableta dnevno", MedicineDosage = medicineDosages2 });
-            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty("All", "Analgetik", "'20-11-05' and '20-11-12'", false)).Returns(prescriptions);
-            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty("Medicine name", "Brufen", "'20-11-05' and '20-11-12'",false)).Returns(prescriptions);
+            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty(SearchProperty.All, "Analgetik", "'20-11-05' and '20-11-12'", false)).Returns(prescriptions);
+            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty(SearchProperty.MedicineName, "Brufen", "'20-11-05' and '20-11-12'",false)).Returns(prescriptions);
 
             PrescriptionService prescriptionService = new PrescriptionService(stubRepositorty.Object);
             List<SearchEntityDTO> searchEntityDTOs = prescriptionService.GetSearchedPrescription(",Analgetik,All;AND,Brufen,Medicine name", "'20-11-05' and '20-11-12'");
@@ -48,8 +48,8 @@ namespace WebApplicationsTests
             Physitian physitian2 = new Physitian { Name = "Nemanja", Surname = "Drcelic" };
             reports.Add(new Report { Patient = patient, Physitian = physitian1, ProcedureType = procedureType, Findings = "Sve ok" });
             reports.Add(new Report { Patient = patient, Physitian = physitian2, ProcedureType = procedureType, Findings = "Sve ok" });
-            stubRepositorty.Setup(m => m.GetReportsByProperty("All", "Tanja", "'20-11-05' and '20-11-12'", false)).Returns(reports);
-            stubRepositorty.Setup(n => n.GetReportsByProperty("Doctor reports", "Drcelic", "'20-11-05' and '20-11-12'", false)).Returns(reports);
+            stubRepositorty.Setup(m => m.GetReportsByProperty(SearchProperty.All, "Tanja", "'20-11-05' and '20-11-12'", false)).Returns(reports);
+            stubRepositorty.Setup(n => n.GetReportsByProperty(SearchProperty.Doctor, "Drcelic", "'20-11-05' and '20-11-12'", false)).Returns(reports);
 
             ReportService reportService= new ReportService(stubRepositorty.Object);
             List<SearchEntityDTO> searchEntityDTOs = reportService.GetSearchedReport(",Tanja,All;AND,Drcelic,Doctor reports", "'20-11-05' and '20-11-12'");
@@ -68,8 +68,8 @@ namespace WebApplicationsTests
 
             prescriptions.Add(new Prescription { Date = DateTime.Today, Notes = "Uzimati po potrebi dva puta dnevno", MedicineDosage = medicineDosages1 });
             prescriptions.Add(new Prescription { Date = DateTime.Today, Notes = "Jedna tableta dnevno", MedicineDosage = medicineDosages2 });
-            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty("All", "Analgetik", "'20-11-05' and '20-11-12'",false)).Returns(prescriptions);
-            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty("Medicine name", "Brufen", "'20-11-05' and '20-11-12'",false)).Returns(prescriptions);
+            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty(SearchProperty.All, "Analgetik", "'20-11-05' and '20-11-12'",false)).Returns(prescriptions);
+            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty(SearchProperty.MedicineName, "Brufen", "'20-11-05' and '20-11-12'",false)).Returns(prescriptions);
 
             PrescriptionService prescriptionService = new PrescriptionService(stubRepositorty.Object);
             List<SearchEntityDTO> searchEntityDTOs=prescriptionService.GetSearchedPrescription(",Analgetik,All;OR,Brufen,Medicine name", "'20-11-05' and '20-11-12'");
@@ -86,8 +86,8 @@ namespace WebApplicationsTests
             Physitian physitian2 = new Physitian { Name = "Nemanja", Surname = "Drcelic" };
             reports.Add(new Report { Patient = patient, Physitian = physitian1, ProcedureType = procedureType, Findings = "Sve ok" });
             reports.Add(new Report { Patient = patient, Physitian = physitian2, ProcedureType = procedureType, Findings = "Sve ok" });
-            stubRepositorty.Setup(m => m.GetReportsByProperty("All", "Tanja", "'20-11-05' and '20-11-12'", false)).Returns(reports);
-            stubRepositorty.Setup(n => n.GetReportsByProperty("Doctor reports", "Drcelic", "'20-11-05' and '20-11-12'", false)).Returns(reports);
+            stubRepositorty.Setup(m => m.GetReportsByProperty(SearchProperty.All, "Tanja", "'20-11-05' and '20-11-12'", false)).Returns(reports);
+            stubRepositorty.Setup(n => n.GetReportsByProperty(SearchProperty.Doctor, "Drcelic", "'20-11-05' and '20-11-12'", false)).Returns(reports);
 
             ReportService reportService = new ReportService(stubRepositorty.Object);
             List<SearchEntityDTO> searchEntityDTOs = reportService.GetSearchedReport(",Tanja,All;OR,Drcelic,Doctor reports", "'20-11-05' and '20-11-12'");
@@ -107,8 +107,8 @@ namespace WebApplicationsTests
             prescriptions1.Add(new Prescription { Date = DateTime.Today, Notes = "Uzimati po potrebi dva puta dnevno", MedicineDosage = medicineDosages1 });
             prescriptions2.Add(new Prescription { Date = DateTime.Today, Notes = "Uzimati po potrebi dva puta dnevno", MedicineDosage = medicineDosages2 });
             
-            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty("Medicine name", "Panadol", "'20-11-05' and '20-11-12'",false)).Returns(prescriptions1);
-            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty("Medicine type", "Kafetin", "'20-11-05' and '20-11-12'",false)).Returns(prescriptions2);
+            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty(SearchProperty.MedicineName, "Panadol", "'20-11-05' and '20-11-12'",false)).Returns(prescriptions1);
+            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty(SearchProperty.MedicineType, "Kafetin", "'20-11-05' and '20-11-12'",false)).Returns(prescriptions2);
 
             PrescriptionService prescriptionService = new PrescriptionService(stubRepositorty.Object);
             List<SearchEntityDTO> searchEntityDTOs = prescriptionService.GetSearchedPrescription(",Panadol,Medicine name;AND,Kafetin,Medicine type", "'20-11-05' and '20-11-12'");
@@ -126,8 +126,8 @@ namespace WebApplicationsTests
             Physitian physitian2 = new Physitian { Name = "Nemanja", Surname = "Drcelic" };
             reports1.Add(new Report { Patient = patient, Physitian = physitian1, ProcedureType = procedureType, Findings = "Sve ok" });
             reports2.Add(new Report { Patient = patient, Physitian = physitian2, ProcedureType = procedureType, Findings = "Sve ok" });
-            stubRepositorty.Setup(m => m.GetReportsByProperty("All", "Tanja", "'20-11-05' and '20-11-12'", false)).Returns(reports1);
-            stubRepositorty.Setup(n => n.GetReportsByProperty("Doctor reports", "Nemanja", "'20-11-05' and '20-11-12'", false)).Returns(reports2);
+            stubRepositorty.Setup(m => m.GetReportsByProperty(SearchProperty.All, "Tanja", "'20-11-05' and '20-11-12'", false)).Returns(reports1);
+            stubRepositorty.Setup(n => n.GetReportsByProperty(SearchProperty.Doctor, "Nemanja", "'20-11-05' and '20-11-12'", false)).Returns(reports2);
 
             ReportService reportService = new ReportService(stubRepositorty.Object);
             List<SearchEntityDTO> searchEntityDTOs = reportService.GetSearchedReport(",Tanja,All;AND,Nemanja,Doctor reports", "'20-11-05' and '20-11-12'");
@@ -147,8 +147,8 @@ namespace WebApplicationsTests
             prescriptions1.Add(new Prescription { Date = DateTime.Today, Notes = "Uzimati po potrebi dva puta dnevno", MedicineDosage = medicineDosages1 });
             prescriptions2.Add(new Prescription { Date = DateTime.Today, Notes = "Uzimati po potrebi dva puta dnevno", MedicineDosage = medicineDosages2 });
 
-            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty("Medicine name", "Panadol", "'20-11-05' and '20-11-12'",false)).Returns(prescriptions1);
-            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty("Medicine type", "Panadol", "'20-11-05' and '20-11-12'",true)).Returns(prescriptions2);
+            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty(SearchProperty.MedicineName, "Panadol", "'20-11-05' and '20-11-12'",false)).Returns(prescriptions1);
+            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty(SearchProperty.MedicineType, "Panadol", "'20-11-05' and '20-11-12'",true)).Returns(prescriptions2);
 
             PrescriptionService prescriptionService = new PrescriptionService(stubRepositorty.Object);
             List<SearchEntityDTO> searchEntityDTOs = prescriptionService.GetSearchedPrescription(",Panadol,Medicine name;AND NOT,Panadol,Medicine type", "'20-11-05' and '20-11-12'");
@@ -166,8 +166,8 @@ namespace WebApplicationsTests
             Physitian physitian2 = new Physitian { Name = "Nemanja", Surname = "Drcelic" };
             reports1.Add(new Report { Patient = patient, Physitian = physitian1, ProcedureType = procedureType, Findings = "Sve ok" });
             reports2.Add(new Report { Patient = patient, Physitian = physitian2, ProcedureType = procedureType, Findings = "Sve ok" });
-            stubRepositorty.Setup(m => m.GetReportsByProperty("All", "Tanja", "'20-11-05' and '20-11-12'", false)).Returns(reports1);
-            stubRepositorty.Setup(n => n.GetReportsByProperty("Doctor reports", "Tanja", "'20-11-05' and '20-11-12'", false)).Returns(reports2);
+            stubRepositorty.Setup(m => m.GetReportsByProperty(SearchProperty.All, "Tanja", "'20-11-05' and '20-11-12'", false)).Returns(reports1);
+            stubRepositorty.Setup(n => n.GetReportsByProperty(SearchProperty.Doctor, "Tanja", "'20-11-05' and '20-11-12'", false)).Returns(reports2);
 
             ReportService reportService = new ReportService(stubRepositorty.Object);
             List<SearchEntityDTO> searchEntityDTOs = reportService.GetSearchedReport(",Tanja,All;AND NOT,Tanja,Doctor reports", "'20-11-05' and '20-11-12'");
@@ -190,9 +190,9 @@ namespace WebApplicationsTests
             prescriptions1.Add(prescription1);
             prescriptions2.Add(prescription1);
             prescriptions2.Add(prescription2);
-            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty("All", "Analgetik", "'20-11-05' and '20-11-12'",false)).Returns(prescriptions1);
-            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty("Medicine name", "Brufen", "'20-11-05' and '20-11-12'",false)).Returns(prescriptions2);
-            stubRepositorty.Setup(l => l.GetPrescriptionsByProperty("Medicine name", "Kafetin", "'20-11-05' and '20-11-12'",false)).Returns(prescriptions2);
+            stubRepositorty.Setup(m => m.GetPrescriptionsByProperty(SearchProperty.All, "Analgetik", "'20-11-05' and '20-11-12'",false)).Returns(prescriptions1);
+            stubRepositorty.Setup(n => n.GetPrescriptionsByProperty(SearchProperty.MedicineName, "Brufen", "'20-11-05' and '20-11-12'",false)).Returns(prescriptions2);
+            stubRepositorty.Setup(l => l.GetPrescriptionsByProperty(SearchProperty.MedicineName, "Kafetin", "'20-11-05' and '20-11-12'",false)).Returns(prescriptions2);
 
             PrescriptionService prescriptionService = new PrescriptionService(stubRepositorty.Object);
             List<SearchEntityDTO> searchEntityDTOs = prescriptionService.GetSearchedPrescription(",Analgetik,All;OR,Brufen,Medicine name;AND,Kafetin,Medicine name", "'20-11-05' and '20-11-12'");
@@ -210,9 +210,9 @@ namespace WebApplicationsTests
             Physitian physitian2 = new Physitian { Name = "Nemanja", Surname = "Drcelic" };
             reports1.Add(new Report { Patient = patient, Physitian = physitian1, ProcedureType = procedureType, Findings = "Sve ok" });
             reports2.Add(new Report { Patient = patient, Physitian = physitian2, ProcedureType = procedureType, Findings = "Sve ok" });
-            stubRepositorty.Setup(m => m.GetReportsByProperty("All", "Tanja", "'20-11-05' and '20-11-12'", false)).Returns(reports1);
-            stubRepositorty.Setup(n => n.GetReportsByProperty("Doctor reports", "Nemanja", "'20-11-05' and '20-11-12'", false)).Returns(reports2);
-            stubRepositorty.Setup(n => n.GetReportsByProperty("Doctor reports", "Tanja", "'20-11-05' and '20-11-12'", false)).Returns(reports1);
+            stubRepositorty.Setup(m => m.GetReportsByProperty(SearchProperty.All, "Tanja", "'20-11-05' and '20-11-12'", false)).Returns(reports1);
+            stubRepositorty.Setup(n => n.GetReportsByProperty(SearchProperty.Doctor, "Nemanja", "'20-11-05' and '20-11-12'", false)).Returns(reports2);
+            stubRepositorty.Setup(n => n.GetReportsByProperty(SearchProperty.Doctor, "Tanja", "'20-11-05' and '20-11-12'", false)).Returns(reports1);
 
             ReportService reportService = new ReportService(stubRepositorty.Object);
             List<SearchEntityDTO> searchEntityDTOs = reportService.GetSearchedReport(",Tanja,All;OR,Nemanja,Doctor reports;AND,Tanja,Doctor reports", "'20-11-05' and '20-11-12'");
