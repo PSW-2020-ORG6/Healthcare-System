@@ -5,11 +5,4 @@ Paracetamol: 10
 Andol: 4
 
 
-6/4/2020 12:00:00 AM
-----------------------
-Brufen: 3
-Paracetamol: 11
-Andol: 7
-
-
 
