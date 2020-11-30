@@ -6,6 +6,7 @@ using health_clinic_class_diagram.Backend.Model.Hospital;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using health_clinic_class_diagram.Backend.Model.Util;
 
 namespace GraphicEditor.ViewModel
 {
@@ -52,10 +53,17 @@ namespace GraphicEditor.ViewModel
 
         private void AddBuilding(object button)
         {
-            Button but = (Button)button;
-            if( but.Content.Equals("Empty field") )
+            if (MainWindow.TypeOfUser == TypeOfUser.SUPERINTENDENT || MainWindow.TypeOfUser == TypeOfUser.NO_USER)
             {
-                (new AddBuilding(but)).ShowDialog();
+                Button but = (Button)button;
+                if (but.Content.Equals("Empty field"))
+                {
+                    (new AddBuilding(but)).ShowDialog();
+                }
+            }
+            else
+            {
+                new Warning().ShowDialog();
             }
         }
 

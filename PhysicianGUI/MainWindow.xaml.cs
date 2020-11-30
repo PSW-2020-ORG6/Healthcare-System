@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using health_clinic_class_diagram.Backend.Model.Util;
 
 namespace HealthClinic
 {
@@ -37,7 +38,7 @@ namespace HealthClinic
 
         private void MapOpenBtn_Click(object sender, RoutedEventArgs e)
         {
-            GraphicEditor.MainWindow map = new GraphicEditor.MainWindow();
+            GraphicEditor.MainWindow map = new GraphicEditor.MainWindow(TypeOfUser.PHYSICIAN);
             map.ShowDialog();
         }
     }
