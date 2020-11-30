@@ -13,7 +13,6 @@ namespace GraphicEditor.ViewModel
 {
     class AddBuildingViewModel : BindableBase
     {
-        private static AddBuildingViewModel _instance;
         public MyICommand<object> AddCommand { get; private set; }
 
         public Window Window { get; set; }
@@ -27,24 +26,16 @@ namespace GraphicEditor.ViewModel
         public System.Windows.Media.Color MyButtonColor { get; set; }
 
         public Button Button { get; set; }
-        private AddBuildingViewModel()
+        public AddBuildingViewModel(Window window, Button but)
         {
+            Window = window;
+            Button = but;
             AddCommand = new MyICommand<object>(AddBuilding);
-            myResourceDictionary.Source = new Uri("/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml", UriKind.RelativeOrAbsolute); //"pack://application:,,,/Resources/Styles/ButtonStyles.xaml"
-        }
-
-        public static AddBuildingViewModel GetInstance()
-        {
-            if(_instance == null)
-            {
-                _instance = new AddBuildingViewModel();
-            }
-            return _instance;
+            myResourceDictionary.Source = new Uri("/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml", UriKind.RelativeOrAbsolute);
         }
 
         private void AddBuilding(object obj)
         {
-            DBtest.DatabaseConnection();
             Button.Name = nameText;
             switch (Shapes)
             {
