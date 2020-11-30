@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GraphicEditor.Repositories.Interfaces
 {
-    public interface IEqipmentRepository
+    public interface IEquipmentRepository
     {
         List<Equipment> GetAllEquipments();
         List<Equipment> GetEquipmentsByName(string name);

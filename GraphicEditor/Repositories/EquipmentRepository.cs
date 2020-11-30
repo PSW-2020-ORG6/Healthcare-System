@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GraphicEditor.Repositories
 {
-    public class EquipmentRepository : IEqipmentRepository
+    public class EquipmentRepository : IEquipmentRepository
     {
         private MySqlConnection connection;
         public EquipmentRepository()

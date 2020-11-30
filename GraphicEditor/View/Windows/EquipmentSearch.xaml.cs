@@ -44,11 +44,11 @@ namespace GraphicEditor.View.Windows
                 medicines = new List<MedicineGEA>();
             }
             if (equipments.Count != 0)
-                SearcheEqipmentTextBlock.Text = ReportOnFoundEqipment(itemName, equipments);
+                SearchEquipmentTextBlock.Text = ReportOnFoundEqipment(itemName, equipments);
             else if (medicines.Count != 0)
-                SearcheEqipmentTextBlock.Text = ReportOnFoundMedicine(itemName, medicines);
+                SearchEquipmentTextBlock.Text = ReportOnFoundMedicine(itemName, medicines);
             else
-                SearcheEqipmentTextBlock.Text = "There is no such item.";
+                SearchEquipmentTextBlock.Text = "There is no such item.";
         }
 
         private string ReportOnFoundMedicine(string medicineName, List<MedicineGEA> medicines)
