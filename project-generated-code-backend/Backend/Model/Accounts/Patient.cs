@@ -13,7 +13,6 @@ namespace Model.Accounts
 {
     public class Patient : Account
     {
-
         private String parentName;
         private String placeOfBirth;
         private String municipalityOfBirth;
@@ -99,7 +98,6 @@ namespace Model.Accounts
             this.guest = patientDTO.Guest;
             this.emailConfirmed = patientDTO.EmailConfirmed;
         }
-
         public Patient() : base(Guid.NewGuid().ToString()) { }
         public Patient() : base() { }
         public Patient(string serialNumber, string name, string surname) : base() { }
