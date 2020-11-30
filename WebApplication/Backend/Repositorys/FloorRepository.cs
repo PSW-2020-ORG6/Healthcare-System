@@ -24,7 +24,7 @@ namespace WebApplication.Backend.Repositorys
                 Floor entity = new Floor();
                 entity.SerialNumber = (string)sqlReader[0];
                 entity.Name = (string)sqlReader[1];
-                entity.BuildingName = (string)sqlReader[2];
+                entity.BuildingSerialNumber = (string)sqlReader[2];
                 resultList.Add(entity);
             }
             connection.Close();
