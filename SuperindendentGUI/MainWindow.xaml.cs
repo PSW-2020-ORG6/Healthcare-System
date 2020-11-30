@@ -32,6 +32,7 @@ namespace HealthClinic
         private MenuItem _roomEquipmentItem;
         private MenuItem _physicianVacationItem;
         private MenuItem _physicianWorkingItem;
+        private GraphicEditor.MainWindow map = new GraphicEditor.MainWindow();
         public delegate void mainVoidDelegate();
         public delegate int mainIntDelegate();
 
@@ -582,9 +583,6 @@ namespace HealthClinic
 
         private void Map_Click(object sender, RoutedEventArgs e)
         {
-            GraphicEditor.MainWindow map = new GraphicEditor.MainWindow();
-            this.Close();
-            map.DataContext = GraphicEditor.ViewModel.MapContentUserControlViewModel.HospitalMap;
             map.Show();
         }
     }

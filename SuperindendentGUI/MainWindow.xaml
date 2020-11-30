@@ -60,7 +60,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Menu Grid.Column="0" x:Name="MyMeny">
+            <Menu Grid.Column="0" x:Name="MyMeny" Width="300">
                 <Menu.ItemsPanel>
                     <ItemsPanelTemplate>
                         <DockPanel HorizontalAlignment="Stretch"></DockPanel>
@@ -85,11 +85,12 @@
                     <Separator></Separator>
                     <MenuItem Header="Fokusiraj na tabelu" Command="cmd:RoutedCommands.FocusTable_Command"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="_Help">
+                <MenuItem Header="Additional">
                     <MenuItem Header="Demo" Click="Demo_Click"></MenuItem>
                     <MenuItem Header="About" Click="Help"></MenuItem>
                     <MenuItem Header="Map" Click="Map_Click"></MenuItem>
                 </MenuItem>
+                
             </Menu>
             <Menu Grid.Column="5" HorizontalAlignment="Right">
                 <MenuItem Header="_Nalog: Vladimir Budjen" HorizontalAlignment="Right">

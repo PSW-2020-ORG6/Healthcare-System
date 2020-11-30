@@ -12,7 +12,7 @@
         xmlns:viewModel="clr-namespace:GraphicEditor.ViewModel"
         mc:Ignorable="d"
         Title="GraphicEditor"
-        Icon="Resources/Icons/syringe.png"
+        Icon="/GraphicEditor;component/Resources/Icons/syringe.png"
         WindowStartupLocation="CenterScreen"
         MinWidth="1300"
         MinHeight="700">

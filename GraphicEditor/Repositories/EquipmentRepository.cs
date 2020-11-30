@@ -27,8 +27,8 @@ namespace GraphicEditor.Repositories
             {
                 Equipment entity = new Equipment();
                 entity.SerialNumber = (string)sqlReader[0];
-                entity.Name = (string)sqlReader[1];
-                entity.RoomId = (string)sqlReader[2];
+                entity.RoomId = (string)sqlReader[1];
+                entity.Name = (string)sqlReader[2];
                 resultList.Add(entity);
 
             }

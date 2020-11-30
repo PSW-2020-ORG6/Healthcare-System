@@ -67,7 +67,7 @@
                    Source="/GraphicEditor;component/Resources/Images/floor.jpg"  />
 
             <!--Operation room1 button-->
-            <Button CommandParameter="Operation room"
+            <Button CommandParameter="Operation room 106"
                     Command="{Binding Path=ShowRoomCommand}"
                     Grid.Column="0"
                     Grid.ColumnSpan="7"
@@ -77,13 +77,13 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
-                        Operation room
+                        Operation room 106
                     </TextBlock>
                 </StackPanel>
             </Button>
 
             <!--Store room button-->
-            <Button CommandParameter="Store room"
+            <Button CommandParameter="Store room 108"
                     Grid.Column="10"
                     Grid.ColumnSpan="3"
                     Grid.Row="0"
@@ -92,14 +92,14 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
-                                Store room
+                        Store room 108
                     </TextBlock>
                 </StackPanel>
             </Button>
 
 
             <!--Operation room2 button-->
-            <Button CommandParameter="Operation room"
+            <Button CommandParameter="Operation room 107"
                     Command="{Binding Path=ShowRoomCommand}"
                     Grid.Column="0"
                     Grid.ColumnSpan="7"
@@ -109,7 +109,7 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                    TextWrapping="Wrap">
-                                Operation room
+                        Operation room 107
                     </TextBlock>
                 </StackPanel>
             </Button>
