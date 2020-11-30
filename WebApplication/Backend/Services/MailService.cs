@@ -33,7 +33,7 @@ namespace WebApplication.Backend.Services
             email.Subject = $"Welcome {patient.Name}";
             var builder = new BodyBuilder();
 
-            string id1 = ParseId(patient.Id);
+            string id1 = IdEncryption(patient.Id);
 
             builder.HtmlBody = "Please click on this link to confirm registration <a href=\"http://localhost:49900/#/emailConfirmation?id=" + id1 + "\">link</a>";
             email.Body = builder.ToMessageBody();
@@ -46,14 +46,14 @@ namespace WebApplication.Backend.Services
 
         ///Aleksandra Milijevic RA 22/2017
         /// <summary>
-        ///id encryption 
+        ///id encryption to send email 
         ///</summary>
         ///<returns>
         ///patient id
         ///</returns>
         ///<param name="patientId"> String type object
         ///</param>>
-        private string ParseId(string patientId)
+        private string IdEncryption(string patientId)
         {
             long id = long.Parse(patientId) - 6789 + 23 * 33;
             return id.ToString();

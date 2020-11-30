@@ -53,7 +53,7 @@ namespace WebApplication.Backend.Services
         ///</param>>
         public bool IsJMBGValid(String idNumber)
         {
-            String id = iregistrationRepository.GetPatientIdById(idNumber);
+            String id = iregistrationRepository.FindPatientId(idNumber);
 
             if (id ==  "" || id == null)
             {
@@ -62,9 +62,9 @@ namespace WebApplication.Backend.Services
             return false;
         }
 
-        public bool ConfirmgEmailUpdate(string id)
+        public bool ConfirmEmailUpdate(string id)
         {
-            return iregistrationRepository.ConfirmgEmailUpdate(id);
+            return iregistrationRepository.ConfirmEmailUpdate(id);
         }
 
     }

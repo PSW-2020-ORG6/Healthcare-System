@@ -19,9 +19,6 @@
 			axios
 				.put("http://localhost:49900/registration/confirmationEmail/" + id1[1])
 				.then(response => {
-					//window.location.href = '/successfulRegistration';
-					//this.SuccessfulRegistration();
-					alert("You have succesfully registrated.");
 				})
 
 				.catch(error => {

@@ -28,7 +28,7 @@ namespace WebApplication.Backend.Controllers
         [HttpPost("registerPatient")]
         public IActionResult RegisterPatient(PatientDTO patientDTO)
         {
-            if (patientDTO.IsCorectRegistrationFields())
+            if (patientDTO.AreRegistrationFieldsValid())
             {
                 if (registrationService.RegisterPatient(new Patient(patientDTO)))
                 {
@@ -46,12 +46,19 @@ namespace WebApplication.Backend.Controllers
             }
         }
 
+        ///Aleksandra Milijevic RA 22/2017
+        /// <summary>
+        ///calls method for updating field emailConfirmed in patient table
+        ///</summary>
+        ///<returns>
+        ///information about sucess in IActionResult format
+        ///</returns>
         [HttpPut("confirmationEmail/{id}")]
         public IActionResult Confirmation(string id)
         {
-            string siatientId = ParseId(id);
+            string patientId = IdDecryption(id);
             
-            if (registrationService.ConfirmgEmailUpdate(siatientId))
+            if (registrationService.ConfirmEmailUpdate(patientId))
             {
                 return Ok();
             }
@@ -63,14 +70,14 @@ namespace WebApplication.Backend.Controllers
 
         ///Aleksandra Milijevic RA 22/2017
         /// <summary>
-        ///id decryption 
+        ///id decryption
         ///</summary>
         ///<returns>
         ///patient id
         ///</returns>
         ///<param name="patientId"> String type object
         ///</param>>
-        private string ParseId(string patientId)
+        private string IdDecryption(string patientId)
         {
             long id = (long.Parse(patientId) - 23 * 33) + 6789;
             return id.ToString();

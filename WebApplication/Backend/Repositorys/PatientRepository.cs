@@ -13,9 +13,7 @@ namespace WebApplication.Backend.Repositorys
         private MySqlConnection connection;
         public PatientRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
-            connection.Open();
-
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb1;user=root;password=neynamneynam12");
         }
         ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017 and Aleksa Repović RA52/2017
         /// <summary>
@@ -28,6 +26,7 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         internal List<Patient> GetPatients(String sqlDml)
         {
+            connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             List<Patient> resultList = new List<Patient>();
