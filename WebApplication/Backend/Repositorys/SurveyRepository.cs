@@ -214,6 +214,15 @@ namespace WebApplication.Backend.Repositorys
             return resultList;
         }
 
+        ////Repovic Aleksa RA52/2017
+        /// <summary>
+        ///calculates statistics for each doctor related question
+        ///</summary>
+        ///<returns>
+        ///list of objects containing informations about doctor related questions
+        ///</returns>
+        ///<param name="doctorId"> String for identification of doctor
+        ///</param>
         public List<StatisticAuxilaryClass> getStatisticsForDoctor(string doctorId)
         {
 
@@ -254,6 +263,13 @@ namespace WebApplication.Backend.Repositorys
             return round2Decimals(statistics);
         }
 
+        ////Aleksa Repovic RA52/2017
+        /// <summary>
+        ///calculates statistics for each survey question not related do doctor
+        ///</summary>
+        ///<returns>
+        ///list of objects containing information about each question
+        ///</returns>
         public List<StatisticAuxilaryClass> getStatisticsEachQuestion()
         {
 
@@ -315,6 +331,13 @@ namespace WebApplication.Backend.Repositorys
             return round2Decimals(statistics);
         }
 
+        ////Aleksa Repovic RA52/2017
+        /// <summary>
+        ///calculates statistics for each topic
+        ///</summary>
+        ///<returns>
+        ///list of objects containing information about each topic
+        ///</returns>
         public List<StatisticAuxilaryClass> getStatisticsEachTopic()
         {
 
@@ -386,14 +409,20 @@ namespace WebApplication.Backend.Repositorys
             return round2Decimals(statistics);
         }
 
+
+        ////Aleksa Repovic RA52/2017
+        /// <summary>
+        ///Helping class which rounds double values to 2 decimals
+        ///</summary>
+        ///<returns>
+        ///list of objects containing information about statistics with values rounded to 2 decimals
+        ///</returns>
         public List<StatisticAuxilaryClass> round2Decimals(List<StatisticAuxilaryClass> input) {
             foreach(StatisticAuxilaryClass i in input) {
                i.AverageRating = Math.Round(i.AverageRating, 2);
             }
             return input;
         }
-        public List<double> getStatisticByTopic(int topicID){
-            return null;
-        }
+
     }
 }
