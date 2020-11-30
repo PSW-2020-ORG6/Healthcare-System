@@ -5,7 +5,7 @@ using System.Text;
 
 namespace health_clinic_class_diagram.Backend.Model.Hospital
 {
-    public class BuildingLocation
+    public class RoomLocation
     {
         public string Id { get; set; }
         public string Row { get; set; }
