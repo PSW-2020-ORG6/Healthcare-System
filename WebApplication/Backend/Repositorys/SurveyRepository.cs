@@ -1,5 +1,6 @@
 ﻿using health_clinic_class_diagram.Backend.Model.Survey;
 using Microsoft.AspNetCore.Mvc;
+using Model.Accounts;
 using Model.MedicalExam;
 using MySql.Data.MySqlClient;
 using System;
@@ -17,25 +18,32 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=neynamneynam12");
-                connection.Open();
+                connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
             }
             catch (Exception e)
             {
             }
         }
-
-
+        ////Vucetic Marija RA157/2017
+        /// <summary>
+        ///adding new Survey to database
+        ///</summary>
+        ///<returns>
+        ///true if sucessful,else false
+        ///</returns>
+        ///<param name="surveyText"> Survey type object
+        ///</param>
         public bool AddNewSurvey(Survey surveyText)
         {
+            connection.Open();
             string sqlDml = "INSERT into surveys" +
                 "(Question1,Question2,Question3,Question4,Question5,Question6,Question7,Question8,Question9,Question10,Question11," +
-                "Question12,Question13,Question14,Question15,Question16,Question17,Question18,Question19,Question20,Question21,Question22,Question23,ID,DoctorName)VALUES ('"
+                "Question12,Question13,Question14,Question15,Question16,Question17,Question18,Question19,Question20,Question21,Question22,Question23,ID,DoctorName,SerialNumber)VALUES ('"
                 + surveyText.Question1 + "','" + surveyText.Question2 + "','" + surveyText.Question3 + "','" + surveyText.Question4 + "','" + surveyText.Question5
                 + "','" + surveyText.Question6 + "','" + surveyText.Question7 + "','" + surveyText.Question8 + "','" + surveyText.Question9 + "','" + surveyText.Question10 +
                 "','" + surveyText.Question11 + "','" + surveyText.Question12 + "','" + surveyText.Question13 + "','" + surveyText.Question14 + "','" + surveyText.Question15 +
                 "','" + surveyText.Question16 + "','" + surveyText.Question17 + "','" + surveyText.Question18 + "','" + surveyText.Question19 + "','" + surveyText.Question20
-                + "','" + surveyText.Question21 + "','" + surveyText.Question22 + "','" + surveyText.question23 + "','" + surveyText.SerialNumber + "','" + surveyText.DoctorName + "')";
+                + "','" + surveyText.Question21 + "','" + surveyText.Question22 + "','" + surveyText.question23 + "','" + surveyText.ID + "','" + surveyText.DoctorName + "','" + surveyText.SerialNumber+ "')";
 
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             sqlCommand.ExecuteNonQuery();
@@ -43,41 +51,134 @@ namespace WebApplication.Backend.Repositorys
 
             return true;
         }
-
+        ////Vucetic Marija RA157/2017
+        /// <summary>
+        ///getting all Reports with specific value of parameter
+        ///</summary>
+        ///<returns>
+        ///list of Reports type objects
+        ///</returns>
+        ///<param name="sqlDml"> String sql command
+        ///</param>
         internal List<Report> GetReports(string sqlDml)
         {
+            connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             List<Report> resultList = new List<Report>();
+
             while (sqlReader.Read())
             {
                 Report entity = new Report();
-                entity.PatientId = (string)sqlReader[3];
-                entity.PatientName = (String)sqlReader[1];
-                entity.PhysitianName = (String)sqlReader[2];
+                entity.patient = new Patient { Id = (String)sqlReader[3] };
+                entity.physitian = new Physitian { SerialNumber = (String)sqlReader[4] };
 
                 resultList.Add(entity);
+
             }
             connection.Close();
+            foreach (Report report in resultList)
+            {
+                report.physitian = GetDoctorById("Select * from accounts where SerialNumber like'" + report.physitian.SerialNumber + "'");
+            }
             return resultList;
         }
+        ////Vucetic Marija RA157/2017
+        /// <summary>
+        ///getting doctor by id
+        ///</summary>
+        ///<returns>
+        ///Physitian type of object
+        ///</returns>
+        ///<param name="sqlDml">String sql command
+        ///</param>
+        internal Physitian GetDoctorById(string sqlDml)
+        {
+            connection.Open();
+            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
+            sqlReader.Read();
+            Physitian entity = new Physitian();
+            entity.Name = (string)sqlReader[1];
+            entity.Surname = (string)sqlReader[2];
+            connection.Close();
+            return entity;
+        }
+        ////Vucetic Marija RA157/2017
+        /// <summary>
+        ///getting Patient by id
+        ///</summary>
+        ///<returns>
+        ///Patient object type
+        ///</returns>
+        ///<param name="idPetient">Strign id parameter
+        ///</param>
+        internal Patient GetPatientById(string idPetient)
+        {
+            Patient patient = new Patient();
+            patient = GetPatient("Select * from accounts where SerialNumber like '" + idPetient + "'");
+            return patient;
+        }
+        ////Vucetic Marija RA157/2017
+        /// <summary>
+        ///getting Patient from database
+        ///</summary>
+        ///<returns>
+        ///Patient type of object
+        ///</returns>
+        ///<param name="sqlDml"> String sql command
+        ///</param>
+        internal Patient GetPatient(String sqlDml)
+        {
+            connection.Open();
+            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
+            Patient patientResutl = new Patient();
+            while (sqlReader.Read())
+            {
+                Patient entity = new Patient();
+                entity.Id = (string)sqlReader[3];
+                entity.Name = (string)sqlReader[1];
+                entity.Surname = (string)sqlReader[2];
+                entity.ParentName = (string)sqlReader[7];
+                entity.SerialNumber = sqlReader[0].ToString();
+                entity.DateOfBirth = Convert.ToDateTime(sqlReader[4]);
+                entity.Contact = (string)sqlReader[5];
+                entity.Email = (string)sqlReader[6];
+                entity.Gender = (string)sqlReader[8];
+                entity.Guest = true;
+                //  Convert.ToBoolean(sqlReader[9]);
+                entity.Password = "password";
+                patientResutl = entity;
 
+            }
+            connection.Close();
+            return patientResutl;
+        }
+        ////Vucetic Marija RA157/2017
+        /// <summary>
+        ///getting all doctors from one patient's reports 
+        ///</summary>
+        ///<returns>
+        ///list of names of doctors
+        ///</returns>
+        ///<param name="idPatient"> String patient id
+        ///</param>
         internal List<string> GetAllDoctorsFromReporstByPatientId(string idPatient)
         {
             List<Report> reports = new List<Report>();
-            reports = GetReports("Select * from reports where patientId=" + idPatient.ToString());
+            reports = GetReports("Select * from reports where PatientSerialNumber like'" + idPatient.ToString() + "'");
             List<String> doctors = new List<String>();
             foreach (Report r in reports)
             {
-                doctors.Add(r.PhysitianName);
+                doctors.Add(r.physitian.FullName);
             }
-
             return doctors;
         }
 
-
         internal List<Survey> GetSurveys(string sqlDml)
         {
+            connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             List<Survey> resultList = new List<Survey>();
@@ -113,8 +214,6 @@ namespace WebApplication.Backend.Repositorys
             return resultList;
         }
 
-
-
         public List<StatisticAuxilaryClass> getStatisticsForDoctor(string doctorId)
         {
 
@@ -137,18 +236,12 @@ namespace WebApplication.Backend.Repositorys
                 statistics[2].increment(Int32.Parse(s.Question3));
                 statistics[3].AverageRating += Double.Parse(s.Question4);
                 statistics[3].increment(Int32.Parse(s.Question4));
-                
-
                 statistics[4].AverageRating +=( Double.Parse(s.Question4) + Double.Parse(s.Question3) + Double.Parse(s.Question2) + Double.Parse(s.Question1));
                 statistics[4].increment(Int32.Parse(s.Question4));
                 statistics[4].increment(Int32.Parse(s.Question3));
                 statistics[4].increment(Int32.Parse(s.Question2));
                 statistics[4].increment(Int32.Parse(s.Question1));
             }
-
-
-
-
             for (int i = 0; i < 5; i++)
             {
                 statistics[i].generatePercents();
@@ -160,8 +253,6 @@ namespace WebApplication.Backend.Repositorys
             }
             return round2Decimals(statistics);
         }
-
-       
 
         public List<StatisticAuxilaryClass> getStatisticsEachQuestion()
         {
@@ -216,17 +307,11 @@ namespace WebApplication.Backend.Repositorys
                 statistics[18].AverageRating += Double.Parse(s.Question23);
                 statistics[18].increment(Int32.Parse(s.Question23));
             }
-
-            
-
             for (int i = 0; i < 19; i++)
             {
                 statistics[i].generatePercents();
                 statistics[i].AverageRating = statistics[i].AverageRating / reports.Count;
-
             }
-
-
             return round2Decimals(statistics);
         }
 
@@ -283,9 +368,6 @@ namespace WebApplication.Backend.Repositorys
                 statistics[4].AverageRating += Double.Parse(s.Question23);
                 statistics[4].increment(Int32.Parse(s.Question23));
             }
-
-
-
             for (int i = 0; i < 5; i++)
             {
                 statistics[i].generatePercents();
@@ -310,11 +392,8 @@ namespace WebApplication.Backend.Repositorys
             }
             return input;
         }
-
         public List<double> getStatisticByTopic(int topicID){
             return null;
-
         }
-
     }
 }

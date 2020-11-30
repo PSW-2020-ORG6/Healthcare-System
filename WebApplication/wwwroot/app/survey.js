@@ -3,7 +3,7 @@
         return {
             patient: {},
             doctorsList: [],
-            patientId: "0002",
+            patientId: "12",
             selectedDoctor: {},
             surveyText :{
             question1: null,
@@ -44,7 +44,6 @@
             })
     },
     beforeMount() {
-
     },
     template: `
     <div id = "entireSurvey">
@@ -367,6 +366,11 @@
                 !document.getElementById("star2RatingThree").checked && !document.getElementById("star4RatingTwo").checked &&
                 !document.getElementById("star4RatingOne").checked) {
                 $('#myModal1').modal('show');
+                return
+            }
+            selectedValue = $('#doctorSelect').val()
+            if (selectedValue == null) {
+                $('#myModal').modal('show')
                 return
             }
            // this.surveyText = this.question1.toString() + "," + this.question2.toString() + "," + this.question3.toString() + "," + this.question4.toString() + "," + this.question5.toString() + "," + this.question6.toString() + "," + this.question7.toString() + "," +

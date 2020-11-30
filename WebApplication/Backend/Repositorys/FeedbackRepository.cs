@@ -16,7 +16,8 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;database=mydb;user=root;password=neynamneynam12");
+                connection = new MySqlConnection("server=localhost;database=newdb;user=root;password=root");
+                connection.Open();
                 connection.Open();
             }
             catch (Exception e)

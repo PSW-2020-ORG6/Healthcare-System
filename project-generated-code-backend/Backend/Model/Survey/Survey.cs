@@ -36,7 +36,6 @@ namespace health_clinic_class_diagram.Backend.Model.Survey
 
         public string ID { get => id; set => id =value; }
         public string DoctorName { get => doctorName; set => doctorName = value; }
-
         public string Question1 { get => question1; set => question1 = value; }
         public string Question2 { get => question2; set => question2 = value; }
         public string Question3 { get => question3; set => question3 = value; }
