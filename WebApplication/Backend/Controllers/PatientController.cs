@@ -30,5 +30,18 @@ namespace WebApplication.Backend.Controllers
         {
             return patientService.GetAllPatients();
         }
+
+        ///Aleksa Repović RA52/2017
+        /// <summary>
+        ///Get patient from patients table by ID
+        ///</summary>
+        ///<returns>
+        ///single instance of Patient object
+        ///</returns
+        [HttpGet("getPatientById")]
+        public Patient GetPatientById(string patientId)
+        {
+            return patientService.GetPatientById(patientId);
+        }
     }
 }

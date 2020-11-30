@@ -17,7 +17,7 @@ namespace WebApplication.Backend.Repositorys
             connection.Open();
 
         }
-        ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017
+        ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017 and Aleksa Repović RA52/2017
         /// <summary>
         ///Get patients from patients table
         ///</summary>
@@ -28,29 +28,61 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         internal List<Patient> GetPatients(String sqlDml)
         {
-                MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
-                MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-                List<Patient> resultList = new List<Patient>();
-                while (sqlReader.Read())
-                {
-                    Patient entity = new Patient();
-                    entity.Id = (string)sqlReader[3];
-                    entity.Name = (string)sqlReader[1];
-                    entity.Surname = (string)sqlReader[2];
-                    entity.ParentName = (string)sqlReader[7];
-                    entity.SerialNumber = sqlReader[0].ToString();
-                    entity.DateOfBirth = Convert.ToDateTime(sqlReader[4]);
-                    entity.Contact = (string)sqlReader[5];
-                    entity.Email = (string)sqlReader[6];
-                    entity.Gender = (string)sqlReader[8];
-                    //entity.Guest = (Boolean)sqlReader[9];
-                    entity.Password = "password";
-                    resultList.Add(entity);
+            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
+            List<Patient> resultList = new List<Patient>();
+            while (sqlReader.Read())
+            {
+                Patient entity = new Patient();
+                entity.Id = (string)sqlReader[0];
+                entity.SerialNumber = (string)sqlReader[1];
+                entity.Name = (string)sqlReader[2];
+                entity.Surname = (string)sqlReader[3];
+                entity.DateOfBirth = (DateTime)sqlReader[4];
+                entity.Contact = (string)sqlReader[5];
+                entity.Email = (string)sqlReader[6];
+                entity.Password = (string)sqlReader[8];
+                entity.ParentName = (string)sqlReader[9];
+                entity.PlaceOfBirth = (string)sqlReader[10];
+                entity.MunicipalityOfBirth = (string)sqlReader[11];
+                entity.StateOfBirth = (string)sqlReader[12];
+                entity.PlaceOfResidence = (string)sqlReader[13];
+                entity.MunicipalityOfResidence = (string)sqlReader[14];
+                entity.StateOfResidence = (string)sqlReader[15];
+                entity.Citizenship = (string)sqlReader[16];
+                entity.Nationality = (string)sqlReader[17];
+                entity.Profession = (string)sqlReader[18];
+                entity.EmploymentStatus = (string)sqlReader[19];
+                entity.MaritalStatus = (string)sqlReader[20];
+                entity.HealthInsuranceNumber = (string)sqlReader[21];
+                entity.FamilyDiseases = (string)sqlReader[22];
+                entity.PersonalDiseases = (string)sqlReader[23];
+                entity.Gender = (string)sqlReader[24];
+                entity.Guest = (bool)sqlReader[26];
+                entity.EmailConfirmed = (bool)sqlReader[27];
+
+                resultList.Add(entity);
 
             }
+
             connection.Close();
+
+
             return resultList;
         }
+
+        ///Aleksa Repović
+        /// <summary>
+        ///Get patient from patients table by ID
+        ///</summary>
+        ///<returns>
+        ///single instance of Patient object
+        ///</returns
+        public Patient GetPatientById(string patientId)
+        {
+            return GetPatients("Select * from patients where Id = '" + patientId + "'")[0];
+        }
+
         ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017
         /// <summary>
         ///Get patients from patients table
