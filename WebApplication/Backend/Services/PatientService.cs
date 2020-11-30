@@ -27,6 +27,7 @@ namespace WebApplication.Backend.Services
             return patientRepository.GetAllPatients();
         }
 
+
         ///Aleksa Repović
         /// <summary>
         ///Get patient from patients table by ID
@@ -36,7 +37,10 @@ namespace WebApplication.Backend.Services
         ///</returns
         internal Patient GetPatientById(string patientId)
         {
-            return patientRepository.GetPatientById(patientId);
+            Patient returnValue = patientRepository.GetPatientById(patientId);
+            returnValue.Address = patientRepository.getAddress(returnValue.Address.SerialNumber);
+            return returnValue;
         }
+
     }
 }
