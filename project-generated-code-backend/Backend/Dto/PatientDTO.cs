@@ -17,7 +17,7 @@ namespace Backend.Dto
         private DateTime dateOfBirth;
         private String contact;
         private String email;
-        private String address;
+        private Address address;
         private String password;
         private String parentName;
         private String placeOfBirth;
@@ -41,7 +41,7 @@ namespace Backend.Dto
 
         public PatientDTO() { }
 
-        public PatientDTO(String serialNumber, String name, String surname, String id, DateTime dateOfBirth, String contact, String email, String address,
+        public PatientDTO(String serialNumber, String name, String surname, String id, DateTime dateOfBirth, String contact, String email, Address address,
                         String password, String parentName, String placeOfBirth, String municipalityOfBirth, String stateOfBirth, String citizenship, String nationality,
                         String profession, String placeOfResidence, String municipalityOfResidence, String stateOfResidence, String employmentStatus,
                         String maritalStatus, String gender, String healthInsuranceNumber, String familyDiseases, String personalDiseases, String image, bool guest, bool emailConfirmed)
@@ -83,7 +83,7 @@ namespace Backend.Dto
         public DateTime DateOfBirth { get => dateOfBirth; set => dateOfBirth = value; }
         public string Contact { get => contact; set => contact = value; }
         public string Email { get => email; set => email = value; }
-        public String Address { get => address; set => address = value; }
+        public Address Address { get => address; set => address = value; }
         public string Password { get => password; set => password = value; }
         public string ParentName { get => parentName; set => parentName = value; }
         public string PlaceOfBirth { get => placeOfBirth; set => placeOfBirth = value; }

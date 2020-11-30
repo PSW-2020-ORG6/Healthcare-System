@@ -75,7 +75,7 @@ namespace Model.Accounts
         }
 
         [JsonConstructor]
-        public Patient(PatientDTO patientDTO) : base(Guid.NewGuid().ToString(), patientDTO.Name, patientDTO.Surname, patientDTO.Id, patientDTO.DateOfBirth, patientDTO.Contact, patientDTO.Email, new Address { Street = patientDTO.Address }, patientDTO.Password)
+        public Patient(PatientDTO patientDTO) : base(Guid.NewGuid().ToString(), patientDTO.Name, patientDTO.Surname, patientDTO.Id, patientDTO.DateOfBirth, patientDTO.Contact, patientDTO.Email, patientDTO.Address/*new Address { Street = patientDTO.Address }*/, patientDTO.Password)
         {
             this.parentName = patientDTO.ParentName;
             this.gender = patientDTO.Gender;
