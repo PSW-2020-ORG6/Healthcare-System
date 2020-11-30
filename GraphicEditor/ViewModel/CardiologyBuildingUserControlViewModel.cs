@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using GraphicEditor.View.Windows;
 using System.Threading.Tasks;
+using health_clinic_class_diagram.Backend.Model.Util;
 
 namespace GraphicEditor.ViewModel
 {
@@ -100,10 +101,16 @@ namespace GraphicEditor.ViewModel
 
         private void editBuilding(Building _building)
         {
-            Building b = new Building(Building.Name, Building.Color);
-            BuildingUpdate r = new BuildingUpdate(b, this);
-            r.ShowDialog();
-            
+            if (MainWindow.TypeOfUser == TypeOfUser.SUPERINTENDENT || MainWindow.TypeOfUser == TypeOfUser.NO_USER)
+            {
+                Building b = new Building(Building.Name, Building.Color);
+                BuildingUpdate r = new BuildingUpdate(b, this);
+                r.ShowDialog();
+            }
+            else
+            {
+                new Warning().ShowDialog();
+            }
         }
 
         public void onConfirmUpdate(Building building)

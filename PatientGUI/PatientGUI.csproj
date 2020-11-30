@@ -231,6 +231,10 @@
       <Project>{23c5ebdd-5c6a-4e35-98cb-fb0e98610e92}</Project>
       <Name>GraphicEditor</Name>
     </ProjectReference>
+    <ProjectReference Include="..\project-generated-code-backend\HealthClinicBackend.csproj">
+      <Project>{68bf1c57-c1a8-4eb8-9fa1-e91bf72f6a72}</Project>
+      <Name>HealthClinicBackend</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
