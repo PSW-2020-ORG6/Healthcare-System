@@ -19,6 +19,7 @@ namespace WebApplication.Backend.Model
         public DbSet<MedicineManufacturer> MedicineManufacturers { get; set; }
         public DbSet<MedicineType> MedicineTypes { get; set; }
         public DbSet<Medicine> Medicine { get; set; }
+        public DbSet<MedicineGEA> MedicineGEA { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -33,6 +34,7 @@ namespace WebApplication.Backend.Model
             modelBuilder.Entity<MedicineManufacturer>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<MedicineType>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Medicine>().HasKey(o => o.SerialNumber);
+            modelBuilder.Entity<MedicineGEA>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Patient>().HasAlternateKey(o => o.Id);
             modelBuilder.Ignore<Address>();
             modelBuilder.Entity<Patient>().HasData(
@@ -64,6 +66,31 @@ namespace WebApplication.Backend.Model
                 new RoomGEA { SerialNumber = "113", Name = "Examination room", FloorName = "Floor 1", BuildingName = "Orthopedy" },
                 new RoomGEA { SerialNumber = "114", Name = "Examination room", FloorName = "Floor 1", BuildingName = "Orthopedy" }
             );
+            modelBuilder.Entity<Equipment>().HasData(
+                new Equipment { SerialNumber = "73", RoomId = "101", Name = "Bed", Id = "11" },
+                new Equipment { SerialNumber = "74", RoomId = "102", Name = "Bed", Id = "12" },
+                new Equipment { SerialNumber = "75", RoomId = "103", Name = "Bed", Id = "13" },
+                new Equipment { SerialNumber = "76", RoomId = "101", Name = "Bed", Id = "14" },
+                new Equipment { SerialNumber = "77", RoomId = "102", Name = "Bed", Id = "15" },
+                new Equipment { SerialNumber = "78", RoomId = "104", Name = "Table", Id = "16" },
+                new Equipment { SerialNumber = "79", RoomId = "111", Name = "Table", Id = "17" },
+                new Equipment { SerialNumber = "80", RoomId = "111", Name = "Table", Id = "18" },
+                new Equipment { SerialNumber = "81", RoomId = "112", Name = "Bed", Id = "19" },
+                new Equipment { SerialNumber = "82", RoomId = "112", Name = "Bed", Id = "20" }
+
+                );
+            modelBuilder.Entity<MedicineManufacturer>().HasData(
+                new MedicineManufacturer { Name = "manufacturer1", SerialNumber = "1" },
+                new MedicineManufacturer { Name = "manufacturer2", SerialNumber = "2" }
+                );
+            modelBuilder.Entity<MedicineType>().HasData(
+                    new MedicineType { SerialNumber = "11", Type = "Antibiotic" },
+                    new MedicineType { SerialNumber = "12", Type = "Brufen" }
+                );
+            modelBuilder.Entity<MedicineGEA>().HasData(
+                   new MedicineGEA { SerialNumber = "21", CopyrightName = "Brufen", GenericName = "Brufen", MedicineManufacturerId = "1", MedicineTypeId = "11" },
+                   new MedicineGEA { SerialNumber = "22", CopyrightName = "Probiotic", GenericName = "Probiotic", MedicineManufacturerId = "2", MedicineTypeId = "12" }
+                );
         }
     }
 }

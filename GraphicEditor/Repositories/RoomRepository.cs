@@ -56,5 +56,18 @@ namespace GraphicEditor.Repositories
                 return null;
             }
         }
+
+        public List<RoomGEA> GetRoomsBySerialNumber(string serialNumber)
+        {
+            try
+            {
+                return GetRooms("Select * from rooms where SerialNumber like '%" + serialNumber + "%'");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
     }
 }
