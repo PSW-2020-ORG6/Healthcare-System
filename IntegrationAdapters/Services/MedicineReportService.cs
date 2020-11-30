@@ -27,12 +27,11 @@ namespace IntegrationAdapters.Services
             return medicineReportRepository.GetAll();
         }
 
-        public List<MedicineReport> GetByDateInterval(List<MedicineReport> reports, TimeInterval timeInterval)
+        public List<MedicineReport> GetByDateInterval(TimeInterval timeInterval)
         {
             List<MedicineReport> result = new List<MedicineReport>();
-            reports = GetAll();
 
-            foreach(MedicineReport m in reports)
+            foreach(MedicineReport m in GetAll())
             {
                 if(m.Date >= timeInterval.Start && m.Date <= timeInterval.End)
                 {
