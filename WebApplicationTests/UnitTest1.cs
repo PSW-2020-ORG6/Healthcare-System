@@ -68,8 +68,6 @@ namespace WebApplicationTests
 
                 List<StatisticAuxilaryClass> actual = cls.getStatisticsEachQuestion();
 
-
-
                 bool flag = true;
 
                 for (int i = 0; i < actual.Count; i++) {
@@ -100,7 +98,6 @@ namespace WebApplicationTests
    
             return true;
         }
-
 
             private List<StatisticAuxilaryClass> getSampleStatisticsEachQuestion() 
             {

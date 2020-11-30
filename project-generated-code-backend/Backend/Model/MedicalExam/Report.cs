@@ -24,14 +24,9 @@ namespace Model.MedicalExam
         public String physitianName;
         public string patientId;
 
-        public String PatientName { get => patientName; set => patientName = value; }
-        public String PhysitianName { get => physitianName; set => physitianName = value; }
-        public String PatientId { get => patientId; set => patientId = value; }
 
-
-
-        // private  List<AdditionalDocument> additionalDocument;
-        /*
+         private  List<AdditionalDocument> additionalDocument;
+        
                 public List<AdditionalDocument> AdditionalDocument
                 {
                     get
@@ -50,8 +45,7 @@ namespace Model.MedicalExam
                         }
                     }
                 }
-        */
-
+        
         public DateTime Date { get => date; }
         public string Findings { get => findings; set => findings = value; }
         public Patient Patient { get => patient; }
@@ -59,7 +53,7 @@ namespace Model.MedicalExam
         public string PatientConditions { get => patientConditions; set => patientConditions = value; }
         public ProcedureType ProcedureType { get => procedureType; }
 
-       /* public void AddAdditionalDocument(AdditionalDocument newAdditionalDocument)
+        public void AddAdditionalDocument(AdditionalDocument newAdditionalDocument)
         {
             if (newAdditionalDocument == null)
                 return;
@@ -83,7 +77,7 @@ namespace Model.MedicalExam
             if (additionalDocument != null)
                 additionalDocument.Clear();
         }
-       */
+       
         public Report(DateTime date, string findings, Patient patient, Physitian physitian, string patientConditions) : base(Guid.NewGuid().ToString())
         {
             this.date = date;
@@ -109,7 +103,7 @@ namespace Model.MedicalExam
             this.physitian = physitian;
             this.patientConditions = patientConditions;
         }
-        /*
+        
         public override bool Equals(object obj)
         {
             Report other = obj as Report;
@@ -130,13 +124,13 @@ namespace Model.MedicalExam
             }
             return this.Date.Equals(other.Date) && this.Findings.Equals(other.Findings);
         }
-        */
+        
 
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
-        /*
+        
         public override string ToString()
         {
             string ret = "date: " + this.date.ToString("dd.MM.yyyy.") + "\nfindings: " + this.findings;
@@ -146,7 +140,7 @@ namespace Model.MedicalExam
             }
             return ret;
         }
-        */
+        
         public int CompareTo(Report other)
         {
             return this.Date.CompareTo(other.Date);

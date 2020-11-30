@@ -26,14 +26,12 @@ namespace WebApplication.Backend.Controllers
             surveyService.AddNewSurvey(surveyText);
             return Ok();
         }
+
         [HttpGet("getDoctors")]
         public List<String> GetAllDoctorsFromReporstByPatientId(String patientId)
         {
             return surveyService.GetAllDoctorsFromReporstByPatientId(patientId);
-
         }
-
-
 
         [HttpGet("getStatistiEachQuestion")]
         public List<StatisticAuxilaryClass> getStatisticsEachQuestion()

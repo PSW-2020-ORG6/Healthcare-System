@@ -10,7 +10,7 @@ using System;
 
 namespace WebApplication.Backend.Model
 {
-    public class MyDbContext : DbContext
+    public class UtilDbContext : DbContext
     {
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Patient> Patients { get; set; }
@@ -28,7 +28,7 @@ namespace WebApplication.Backend.Model
         public DbSet<Report> Reports { get; set; }
 
 
-        public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
+        public UtilDbContext(DbContextOptions<UtilDbContext> options) : base(options) { }
 
         // only for testing purposes
         protected override void OnModelCreating(ModelBuilder modelBuilder)
