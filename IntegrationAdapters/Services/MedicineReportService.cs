@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IntegrationAdapters.Services
 {
-    public class MedicineReportService
+    public class MedicineReportService : IMedicineReportRepository
     {
         private MedicineReportRepository medicineReportRepository;
 
@@ -27,11 +27,12 @@ namespace IntegrationAdapters.Services
             return medicineReportRepository.GetAll();
         }
 
-        public List<MedicineReport> GetByDateInterval(TimeInterval timeInterval)
+        public List<MedicineReport> GetByDateInterval(List<MedicineReport> reports, TimeInterval timeInterval)
         {
             List<MedicineReport> result = new List<MedicineReport>();
+            reports = GetAll();
 
-            foreach(MedicineReport m in GetAll())
+            foreach(MedicineReport m in reports)
             {
                 if(m.Date >= timeInterval.Start && m.Date <= timeInterval.End)
                 {
