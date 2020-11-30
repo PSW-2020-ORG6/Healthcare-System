@@ -3,7 +3,6 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class PatientDTO
 
-//using Model.Util;
 using Model.Util;
 using System;
 
