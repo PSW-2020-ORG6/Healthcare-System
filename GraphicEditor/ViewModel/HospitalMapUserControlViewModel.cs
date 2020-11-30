@@ -29,15 +29,18 @@ namespace GraphicEditor.ViewModel
             AddCommand = new MyICommand<object>(AddBuilding);
         }
 
+        /// <summary>
+        /// Method for dynamic loading of buildings
+        /// </summary>
         public void InitialGridRender()
         {
             foreach (Building building in buildingRepository.GetAllBuildings())
             {
                 Button but = new Button();
                 but.Style = (Style)myResourceDictionary[building.Style];
-                but.Name = "A" + building.SerialNumber;
+                but.Name = "Building" + building.SerialNumber;
                 var color = (Color)ColorConverter.ConvertFromString(building.Color);
-                Brush brush = new SolidColorBrush(color);    //Color.FromRgb(120,120,120)
+                Brush brush = new SolidColorBrush(color);
                 but.Background = brush;
                 Grid.SetColumn(but, building.Column);
                 Grid.SetRow(but, building.Row);
