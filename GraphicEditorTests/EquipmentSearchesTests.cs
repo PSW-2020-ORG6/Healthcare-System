@@ -9,7 +9,7 @@ namespace GraphicEditorTests
 {
     public class EquipmentSearchesTests
     {
-        private readonly IEqipmentRepository _eqipmentRepository;
+        private readonly IEquipmentRepository _eqipmentRepository;
 
         public EquipmentSearchesTests()
         {
