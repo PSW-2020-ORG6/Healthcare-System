@@ -41,12 +41,12 @@ namespace WebApplicationTests
 
 
         [Fact]
-        public void JmbgIsValidTest()
+        public void Unique_citizens_identity_number_is_valid()
         {
             var stubRepository = new Mock<IRegistrationRepository>();
             IRegistrationRepository r = new RegistrationRepository();
             Patient p = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", new Address { Street = "Glavna 3" }, "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false);
-            stubRepository.Setup(m => m.GetPatientIdById("123")).Returns(p.Id);
+            stubRepository.Setup(m => m.FindPatientId("123")).Returns(p.Id);
             RegistrationService service = new RegistrationService(stubRepository.Object);
 
             bool hasPatient = service.IsJMBGValid("1234");
@@ -55,12 +55,12 @@ namespace WebApplicationTests
         }
 
         [Fact]
-        public void JmbgIsNotValidTest()
+        public void Unique_citizens_identity_number_is_not_valid()
         {
             var stubRepository = new Mock<IRegistrationRepository>();
             IRegistrationRepository r = new RegistrationRepository();
             Patient p = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", new Address { Street="Glavna 3"}, "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false);
-            stubRepository.Setup(m => m.GetPatientIdById("1234")).Returns(p.Id);
+            stubRepository.Setup(m => m.FindPatientId("1234")).Returns(p.Id);
             RegistrationService service = new RegistrationService(stubRepository.Object);
 
             bool hasPatient = service.IsJMBGValid("1234");
@@ -69,14 +69,14 @@ namespace WebApplicationTests
         }
 
         [Fact]
-        public void ConfirmRegistrationTest()
+        public void Confirm_registration()
         {
             var mockRepository = new Mock<IRegistrationRepository>();
             Patient patient = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", new Address { Street = "Glavna 3" }, "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false);
-            mockRepository.Setup(m => m.ConfirmgEmailUpdate(patient.Id)).Returns(true);
+            mockRepository.Setup(m => m.ConfirmEmailUpdate(patient.Id)).Returns(true);
             RegistrationService service = new RegistrationService(mockRepository.Object);
 
-            bool patientUpdated = service.ConfirmgEmailUpdate(patient.Id);
+            bool patientUpdated = service.ConfirmEmailUpdate(patient.Id);
 
             Assert.True(patientUpdated);
 
@@ -88,7 +88,7 @@ namespace WebApplicationTests
             var mockMailService = new Mock<IMailService>();
             var mockController = new Mock<RegistrationController>();
             var controller = new RegistrationController(mockMailService.Object);
-            PatientDTO patientDTO = new PatientDTO("21", "Ana", "Anic", "12341112211", DateTime.Now, "0643342345", "ana@gmail.com", new Address { Street = "Glavna 3" }, "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false, false);
+            PatientDTO patientDTO = new PatientDTO("21", "Ana", "Anic", "123411122111", DateTime.Now, "0643342345", "ana@gmail.com", new Address { Street = "Glavna 3" }, "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false, false);
             Patient patient = new Patient(patientDTO);
             controller.RegisterPatient(patientDTO);
             mockMailService.Verify(m => m.SendEmailAsync(patient));

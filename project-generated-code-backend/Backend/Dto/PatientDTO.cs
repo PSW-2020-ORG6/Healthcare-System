@@ -105,7 +105,7 @@ namespace Backend.Dto
         public bool IsGuest { get => guest; set => guest = value; }
         public bool EmailConfirmed { get => emailConfirmed; set => emailConfirmed = value; }
 
-        public bool IsCorectRegistrationFields()
+        public bool AreRegistrationFieldsValid()
         {
             if(Name == null || Surname == null || ParentName == null || Id == null || DateOfBirth == null || PlaceOfBirth == null || MunicipalityOfBirth == null ||
                 StateOfBirth == null || Nationality == null || Citizenship == null || Address == null || Address == null || PlaceOfResidence == null ||

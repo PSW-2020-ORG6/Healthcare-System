@@ -87,7 +87,7 @@ namespace WebApplication.Backend.Repositorys
             return id;
         }
 
-        public String GetPatientIdById(string patientId)
+        public String FindPatientId(string patientId)
         {
             return GetPatientId("Select id from patients where id=" + patientId);
         }
@@ -101,7 +101,7 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         ///<param name="patientId"> String type object
         ///</param>
-        public bool ConfirmgEmailUpdate(string patientId)
+        public bool ConfirmEmailUpdate(string patientId)
         {
             connection.Open();
             string sqlDml = "UPDATE patients SET EmailConfirmed = '1' WHERE (Id = '" + patientId + "')";
