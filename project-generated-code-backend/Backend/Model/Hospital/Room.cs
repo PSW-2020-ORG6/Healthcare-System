@@ -19,7 +19,6 @@ namespace Model.Hospital
         public string BuildingSerialNumber { get; set; }
         public string FloorSerialNumber { get; set; }
         public string Name { get; set; }
-        public string BuildingName { get; set; }
 
 
 
@@ -27,10 +26,15 @@ namespace Model.Hospital
         private RoomType roomType;
         private List<Equipment> equipment;
 
-        public RoomType RoomType { get => roomType; set { roomType = value; } }
+        public Room()
+        {
+
+        }
+
+        public virtual RoomType RoomType { get => roomType; set { roomType = value; } }
         public int Id { get => id; set { id = value; } }
 
-        public List<Equipment> Equipment
+        public virtual List<Equipment> Equipment
         {
             get
             {
