@@ -98,7 +98,6 @@ namespace Model.Accounts
             this.guest = patientDTO.IsGuest;
             this.emailConfirmed = patientDTO.EmailConfirmed;
         }
-        public Patient() : base(Guid.NewGuid().ToString()) { }
         public Patient() : base() { }
         public Patient(string serialNumber, string name, string surname) : base() { }
 

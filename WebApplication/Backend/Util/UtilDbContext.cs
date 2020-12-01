@@ -36,20 +36,21 @@ namespace WebApplication.Backend.Model
             modelBuilder.Entity<Medicine>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<MedicineGEA>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Patient>().HasAlternateKey(o => o.Id);
-            modelBuilder.Ignore<Address>();
+            modelBuilder.Entity<Address>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Patient>().HasData(
                  new Patient { Name = "Jelena", Surname = "Tanjic", Id = "0002", DateOfBirth = new DateTime(2017, 1, 18), Contact = "kontakt", Password = "sifra", Address = new Address("neka adresa"), ParentName = "otac", Gender = "Zensko", Email = "email", Guest = true },
                  new Patient { Name = "Sara", Surname = "Milic", Id = "0003", DateOfBirth = new DateTime(2018, 1, 18), Contact = "kontaktMica", Password = "sifraMica", Address = new Address("neka adresaMica"), ParentName = "mama", Gender = "Zensko", Email = "emailMica", Guest = true }
             );
-            modelBuilder.Entity<Building>().HasData(
-              new Building { SerialNumber = "10001", Name = "Cardiology", Color = "Orange", Shape = "Square" },
-              new Building { SerialNumber = "10002", Name = "Orthopedy", Color = "Dark Orange", Shape = "Square" }
-            );
-            modelBuilder.Entity<Floor>().HasData(
-              new Floor { SerialNumber = "1001", Name = "Floor1", BuildingName = "Cardiology" },
-              new Floor { SerialNumber = "1002", Name = "Floor2", BuildingName = "Cardiology" },
-              new Floor { SerialNumber = "1003", Name = "Floor1", BuildingName = "Orthopedy" }
-            );
+            // TODO: Comments
+            //modelBuilder.Entity<Building>().HasData(
+            //  new Building { SerialNumber = "10001", Name = "Cardiology", Color = "Orange", Shape = "Square" },
+            //  new Building { SerialNumber = "10002", Name = "Orthopedy", Color = "Dark Orange", Shape = "Square" }
+            //);
+            //modelBuilder.Entity<Floor>().HasData(
+            //  new Floor { SerialNumber = "1001", Name = "Floor1", BuildingName = "Cardiology" },
+            //  new Floor { SerialNumber = "1002", Name = "Floor2", BuildingName = "Cardiology" },
+            //  new Floor { SerialNumber = "1003", Name = "Floor1", BuildingName = "Orthopedy" }
+            //);
             modelBuilder.Entity<RoomGEA>().HasData(
                 new RoomGEA { SerialNumber = "101", Name = "Examination room", FloorName = "Floor 1", BuildingName = "Cardiology" },
                 new RoomGEA { SerialNumber = "102", Name = "Examination room", FloorName = "Floor 1", BuildingName = "Cardiology" },
@@ -91,8 +92,6 @@ namespace WebApplication.Backend.Model
                    new MedicineGEA { SerialNumber = "21", CopyrightName = "Brufen", GenericName = "Brufen", MedicineManufacturerId = "1", MedicineTypeId = "11" },
                    new MedicineGEA { SerialNumber = "22", CopyrightName = "Probiotic", GenericName = "Probiotic", MedicineManufacturerId = "2", MedicineTypeId = "12" }
                 );
-            modelBuilder.Entity<Patient>().HasKey(o=>o.Id);
-            modelBuilder.Entity<Address>().HasKey(o => o.SerialNumber);
         }
     }
 }
