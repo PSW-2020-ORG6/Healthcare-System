@@ -17,7 +17,7 @@
 	},
 	beforeMount() {
 		axios
-			.get('http://localhost:49900/patient/getPatientById', { params: { patientId: "12345" } })
+			.get('http://localhost:49900/patient/getPatientById', { params: { patientId: "1111" } })
 			.then(response => {
 				this.patientDTO = response.data
 			})
@@ -62,6 +62,10 @@
 					</button>
 				  </div>
 				  <div class="modal-body">
+							<td><img  :src = "patientDTO.image" class = "form-control inputImage" style = "display:flex" width="100" heigh="50" /></td>
+							<div class="input-group-prepend">
+								<td>&nbsp;</td>
+							</div>
 							<div class="input-group mb-3">
 							  <div class="input-group-prepend">
 								<span class="input-group-text width" id="basic-addon3">Name</span>
@@ -216,7 +220,7 @@
 							  <input type="text"  v-model="patientDTO.personalDiseases" class="form-control" id="basic-url" aria-describedby="basic-addon3" disabled>
 						</div>
 
-						<td><img  :src = "patientDTO.image" class = "form-control inputImage" style = "display:flex" width="100" heigh="50" /></td>
+						
 
 				  </div>
 				  <div class="modal-footer textAndBackground">

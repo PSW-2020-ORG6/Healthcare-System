@@ -16,8 +16,8 @@ namespace WebApplicationTests
         public void Patient_not_succesfully_registrate()
         {
             var stubRepository = new Mock<IRegistrationRepository>();
-            IRegistrationRepository r = new RegistrationRepository();
             Patient patient = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", new Address { Street = "Glavna 3" }, "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false);
+            stubRepository.Setup(m => m.IsPatientIdValid(patient.Id)).Returns(false);
             stubRepository.Setup(m => m.addPatient(patient)).Returns(false);
             RegistrationService service = new RegistrationService(stubRepository.Object);
 
@@ -31,41 +31,13 @@ namespace WebApplicationTests
         {
             var stubRepository = new Mock<IRegistrationRepository>();
             Patient patient = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", new Address { Street = "Glavna 3" }, "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false);
+            stubRepository.Setup(m => m.IsPatientIdValid(patient.Id)).Returns(true);
             stubRepository.Setup(m => m.addPatient(patient)).Returns(true);
             RegistrationService service = new RegistrationService(stubRepository.Object);
 
             bool addedPatient = service.RegisterPatient(patient);
 
             Assert.True(addedPatient);
-        }
-
-
-        [Fact]
-        public void Unique_citizens_identity_number_is_valid()
-        {
-            var stubRepository = new Mock<IRegistrationRepository>();
-            IRegistrationRepository r = new RegistrationRepository();
-            Patient p = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", new Address { Street = "Glavna 3" }, "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false);
-            stubRepository.Setup(m => m.FindPatientId("123")).Returns(p.Id);
-            RegistrationService service = new RegistrationService(stubRepository.Object);
-
-            bool hasPatient = service.IsJMBGValid("1234");
-
-            Assert.True(hasPatient);
-        }
-
-        [Fact]
-        public void Unique_citizens_identity_number_is_not_valid()
-        {
-            var stubRepository = new Mock<IRegistrationRepository>();
-            IRegistrationRepository r = new RegistrationRepository();
-            Patient p = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", new Address { Street="Glavna 3"}, "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false);
-            stubRepository.Setup(m => m.FindPatientId("1234")).Returns(p.Id);
-            RegistrationService service = new RegistrationService(stubRepository.Object);
-
-            bool hasPatient = service.IsJMBGValid("1234");
-
-            Assert.False(hasPatient);
         }
 
         [Fact]
@@ -83,15 +55,14 @@ namespace WebApplicationTests
         }
 
         [Fact]
-        public void SendingMailTest()
+        public void Sending_Mail()
         {
             var mockMailService = new Mock<IMailService>();
-            var mockController = new Mock<RegistrationController>();
+            Patient patient = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", new Address { Street = "Glavna 3" }, "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false);
+            mockMailService.Setup(a => a.SendEmail(patient));
             var controller = new RegistrationController(mockMailService.Object);
-            PatientDTO patientDTO = new PatientDTO("21", "Ana", "Anic", "123411122111", DateTime.Now, "0643342345", "ana@gmail.com", new Address { Street = "Glavna 3" }, "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false, false);
-            Patient patient = new Patient(patientDTO);
-            controller.RegisterPatient(patientDTO);
-            mockMailService.Verify(m => m.SendEmailAsync(patient));
+            controller.SendMail(patient);
+            mockMailService.Verify(m => m.SendEmail(patient));
         }
     }
 }

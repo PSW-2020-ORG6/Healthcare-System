@@ -25,7 +25,7 @@ namespace WebApplication.Backend.Services
         ///</summary>
         ///<param name="patient"> Patient type object
         ///</param>>
-        public void SendEmailAsync(Patient patient)
+        public void SendEmail(Patient patient)
         {
             var email = new MimeMessage();
             email.Sender = MailboxAddress.Parse(_mailSettings.Mail);

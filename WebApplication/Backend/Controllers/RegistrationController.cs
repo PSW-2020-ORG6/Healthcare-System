@@ -32,7 +32,7 @@ namespace WebApplication.Backend.Controllers
             {
                 if (registrationService.RegisterPatient(new Patient(patientDTO)))
                 {
-                    mailService.SendEmailAsync(new Patient(patientDTO));
+                    SendMail(new Patient(patientDTO));
                     return Ok();
                 }
                 else
@@ -44,6 +44,11 @@ namespace WebApplication.Backend.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        public void SendMail(Patient patient)
+        {
+            mailService.SendEmail(patient);
         }
 
         ///Aleksandra Milijevic RA 22/2017
