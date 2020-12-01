@@ -1,7 +1,6 @@
 using Autofac.Extras.Moq;
 using health_clinic_class_diagram.Backend.Model.Survey;
 using Moq;
-using System;
 using System.Collections.Generic;
 using WebApplication.Backend.Repositorys;
 using WebApplication.Backend.Services;
