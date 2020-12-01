@@ -81,7 +81,6 @@ namespace WebApplication.Backend.Repositorys
             while (sqlReader.Read())
             {
                 id = (string)sqlReader[0];
-
             }
             connection.Close();
             return id;

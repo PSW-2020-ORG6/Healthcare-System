@@ -1,5 +1,4 @@
 ﻿using Model.Accounts;
-using System.Threading.Tasks;
 
 namespace WebApplication.Backend.Services
 {

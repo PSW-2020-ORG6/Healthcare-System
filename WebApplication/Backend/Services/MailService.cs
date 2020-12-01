@@ -2,7 +2,6 @@
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using System.Threading.Tasks;
 using WebApplication.Backend.Model;
 using Model.Accounts;
 
@@ -32,9 +31,7 @@ namespace WebApplication.Backend.Services
             email.To.Add(MailboxAddress.Parse(patient.Email));
             email.Subject = $"Welcome {patient.Name}";
             var builder = new BodyBuilder();
-
             string id1 = IdEncryption(patient.Id);
-
             builder.HtmlBody = "Please click on this link to confirm registration <a href=\"http://localhost:49900/#/emailConfirmation?id=" + id1 + "\">link</a>";
             email.Body = builder.ToMessageBody();
             using var smtp = new SmtpClient();
