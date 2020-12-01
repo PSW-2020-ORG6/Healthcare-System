@@ -1,5 +1,4 @@
 ﻿using GraphicEditor.Repositories.Interfaces;
-using health_clinic_class_diagram.Backend.Model.Hospital;
 using Model.Hospital;
 using MySql.Data.MySqlClient;
 using System;
@@ -10,6 +9,8 @@ namespace GraphicEditor.Repositories
     public class RoomRepository : IRoomRepository
     {
         private MySqlConnection connection;
+        private EquipmentRepository equipmentRepository = new EquipmentRepository();
+
         public RoomRepository()
         {
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
@@ -27,8 +28,10 @@ namespace GraphicEditor.Repositories
                 entity.SerialNumber = (string)sqlReader[0];
                 entity.Name = (string)sqlReader[1];
                 entity.Id = (int)sqlReader[2];
-                entity.BuildingSerialNumber = (string)sqlReader[3];
-                entity.FloorSerialNumber = (string)sqlReader[4];
+                entity.FloorSerialNumber = (string)sqlReader[3];
+                entity.BuildingSerialNumber = (string)sqlReader[4];
+                entity.RoomTypeSerialNumber = (string)sqlReader[5];
+                entity.Equipment = equipmentRepository.GetEquipmentsByRoomSerialNumber((string)sqlReader[0]);
                 resultList.Add(entity);
             }
             connection.Close();
@@ -59,11 +62,24 @@ namespace GraphicEditor.Repositories
             }
         }
 
-        public List<Room> GetRoomsBySerialNumber(string serialNumber)
+        public Room GetRoomBySerialNumber(string serialNumber)
         {
             try
             {
-                return GetRooms("Select * from rooms where SerialNumber like '%" + serialNumber + "%'");
+                return GetRooms("Select * from rooms where SerialNumber='" + serialNumber + "'")[0];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public List<Room> GetRoomsByFloorSerialNumber(string floorSerialNumber)
+        {
+            try
+            {
+                return GetRooms("Select * from rooms where SerialNumber='" + floorSerialNumber + "'");
             }
             catch (Exception e)
             {

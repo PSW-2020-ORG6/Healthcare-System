@@ -7,5 +7,8 @@ namespace GraphicEditor.Repositories.Interfaces
     {
         List<Floor> GetAllFloors();
         List<Floor> GetFloorsByName(string name);
+        List<Floor> GetFloorsByBuildingSerialNumber(string buildingSerialNumber);
+        Floor GetFloorBySerialNumber(string serialNumber);
+
     }
 }

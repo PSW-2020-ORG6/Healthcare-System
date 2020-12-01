@@ -91,7 +91,7 @@ namespace GraphicEditor.ViewModel
         {
             Room rm = new Room(room.SerialNumber, room.Id, room.RoomType);
             RoomUpdate r = new RoomUpdate(rm, this);
-            r.ShowDialog();          
+            r.ShowDialog();
         }
 
         void exitInfo()

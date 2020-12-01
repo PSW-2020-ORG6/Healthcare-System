@@ -28,6 +28,10 @@ namespace Model.Hospital
             this.name = name;
         }
 
+        public RoomType()
+        {
+        }
+
         public override bool Equals(object obj)
         {
             RoomType other = obj as RoomType;

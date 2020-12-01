@@ -15,6 +15,8 @@ namespace Model.Hospital
         private String genericName;
         private MedicineManufacturer medicineManufacturer;
         private MedicineType medicineType;
+        private String medicineManufacturerSerialNumber;
+        private String medicineTypeSerialNumber;
 
         public string CopyrightName { get => copyrightName; set => copyrightName = value; }
         public string GenericName { get => genericName; set => genericName = value; }
@@ -23,6 +25,9 @@ namespace Model.Hospital
         public Medicine() : base(Guid.NewGuid().ToString())
         {
         }
+        public string MedicineManufacturerSerialNumber { get => medicineManufacturerSerialNumber; set => medicineManufacturerSerialNumber = value; }
+        public string MedicineTypeSerialNumber { get => medicineTypeSerialNumber; set => medicineTypeSerialNumber = value; }
+
         public Medicine(string copyrightName, string genericName, MedicineManufacturer medicineManufacturer, MedicineType medicineType) : base(Guid.NewGuid().ToString())
         {
             this.copyrightName = copyrightName;
@@ -31,7 +36,7 @@ namespace Model.Hospital
             this.medicineType = medicineType;
         }
 
-        public Medicine(string serialNumber, string copyrightName, string genericName, string medicineManufacturer, string medicineType):base(serialNumber)
+        public Medicine(string serialNumber, string copyrightName, string genericName, string medicineManufacturer, string medicineType) : base(serialNumber)
         {
             this.copyrightName = copyrightName;
             this.genericName = genericName;
@@ -48,6 +53,9 @@ namespace Model.Hospital
             this.medicineType = medicineType;
         }
 
+        public Medicine()
+        {
+        }
 
         public override bool Equals(object obj)
         {

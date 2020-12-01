@@ -7,5 +7,6 @@ namespace WebApplication.Backend.Repositorys
     {
         List<Building> GetAllBuildings();
         List<Building> GetBuildingsByName(string name);
+        Building GetBuildingBySerialNumber(string serialNumber);
     }
 }

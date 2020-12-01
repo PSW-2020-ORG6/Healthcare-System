@@ -3,11 +3,7 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class Room
 
-using Backend.Dto;
 using Backend.Model.Util;
-using HealthClinic.Backend.Model.Hospital;
-using Model.Hospital;
-using Model.Util;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -20,11 +16,10 @@ namespace Model.Hospital
         public string FloorSerialNumber { get; set; }
         public string Name { get; set; }
 
-
-
         private int id;
         private RoomType roomType;
         private List<Equipment> equipment;
+        private string roomTypeSerialNumber;
 
         public Room()
         {
@@ -33,6 +28,8 @@ namespace Model.Hospital
 
         public virtual RoomType RoomType { get => roomType; set { roomType = value; } }
         public int Id { get => id; set { id = value; } }
+
+        public string RoomTypeSerialNumber { get => roomTypeSerialNumber; set { roomTypeSerialNumber = value; } }
 
         public virtual List<Equipment> Equipment
         {

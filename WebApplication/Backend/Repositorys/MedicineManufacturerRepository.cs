@@ -41,5 +41,18 @@ namespace WebApplication.Backend.Repositorys
                 return null;
             }
         }
+
+        public MedicineManufacturer GetMedicineManufacturerBySerialNumber(string serialNumber)
+        {
+            try
+            {
+                return GetMedicineManufacturers("Select * from medicineManufacturers where SerialNumber='" + serialNumber + "'")[0];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
     }
 }

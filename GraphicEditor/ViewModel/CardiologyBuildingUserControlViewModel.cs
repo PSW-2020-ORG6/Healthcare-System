@@ -1,13 +1,9 @@
 ﻿using GraphicEditor.HelpClasses;
+using GraphicEditor.View.Windows;
 using health_clinic_class_diagram.Backend.Model.Hospital;
-using Model.Hospital;
+using health_clinic_class_diagram.Backend.Model.Util;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GraphicEditor.View.Windows;
-using System.Threading.Tasks;
-using health_clinic_class_diagram.Backend.Model.Util;
 
 namespace GraphicEditor.ViewModel
 {
@@ -28,7 +24,7 @@ namespace GraphicEditor.ViewModel
         {
             _parent = parent;
             NavCommand = new MyICommand<string>(ChooseFloor);
-            BuildingUpdateCommand= new MyICommand<Building>(editBuilding);
+            BuildingUpdateCommand = new MyICommand<Building>(editBuilding);
             FirstFloor = new CardiologyFirstFloorMapUserControlViewModel();
             SecondFloor = new CardiologySecondFloorMapUserControlViewModel();
             _floorViewModel = FirstFloor;

@@ -1,5 +1,4 @@
 ﻿using GraphicEditor.Repositories;
-using health_clinic_class_diagram.Backend.Model.Hospital;
 using Model.Hospital;
 using System.Collections.Generic;
 using System.Windows;
@@ -45,12 +44,6 @@ namespace GraphicEditor.View.Windows
                 }
             }
             return resultOfSearch += "nowhere.";
-        }
-
-        private void Refresh_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-            new RoomSearch().Show();
         }
     }
 }

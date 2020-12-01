@@ -7,5 +7,6 @@ namespace GraphicEditor.Repositories.Interfaces
     {
         List<Building> GetAllBuildings();
         List<Building> GetBuildingsByName(string name);
+        Building GetBuildingBySerialNumber(string serialNumber);
     }
 }

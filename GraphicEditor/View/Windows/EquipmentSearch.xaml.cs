@@ -1,5 +1,4 @@
 ﻿using GraphicEditor.Repositories;
-using health_clinic_class_diagram.Backend.Model.Hospital;
 using Model.Hospital;
 using System.Collections.Generic;
 using System.Windows;
@@ -27,13 +26,13 @@ namespace GraphicEditor.View.Windows
             string itemName = EquipmentNameTextBox.Text;
 
             List<Equipment> equipments = equipmentRepository.GetEquipmentsByName(itemName);
-            List<MedicineGEA> medicines = medicineRepository.GetMedicinesByName(itemName);
+            List<Medicine> medicines = medicineRepository.GetMedicinesByName(itemName);
 
             GenerateReport(itemName, equipments, medicines);
             EquipmentNameTextBox.Text = null;
         }
 
-        private void GenerateReport(string itemName, List<Equipment> equipments, List<MedicineGEA> medicines)
+        private void GenerateReport(string itemName, List<Equipment> equipments, List<Medicine> medicines)
         {
             if (equipments == null)
             {
@@ -41,33 +40,31 @@ namespace GraphicEditor.View.Windows
             }
             if (medicines == null)
             {
-                medicines = new List<MedicineGEA>();
+                medicines = new List<Medicine>();
             }
             if (equipments.Count != 0)
                 SearchEquipmentTextBlock.Text = ReportOnFoundEqipment(itemName, equipments);
             else if (medicines.Count != 0)
-                SearchEquipmentTextBlock.Text = ReportOnFoundMedicine(itemName, medicines);
+                SearchEquipmentTextBlock.Text = "";//= ReportOnFoundMedicine(itemName, medicines);
             else
                 SearchEquipmentTextBlock.Text = "There is no such item.";
         }
 
-        private string ReportOnFoundMedicine(string medicineName, List<MedicineGEA> medicines)
+        private string ReportOnFoundMedicine(string medicineName, Medicine medicine)
         {
             string resultOfSearch = "";
-            int equipmentCounter = medicines.Count;
+            int equipmentCounter = 1;
 
             if (equipmentCounter != 0)
             {
                 int checkCounter = 0;
-                foreach (MedicineGEA medicine in medicines)
-                {
-                    resultOfSearch += checkCounter + 1 + "\n";
-                    resultOfSearch += "\n" + "Generic name: " + medicine.GenericName + " MedicineManufacturerId: " + medicine.MedicineManufacturerId + " MedicineTypeId: " + medicine.MedicineTypeId + " SerialNumber: " + medicine.SerialNumber;
-                    if (++checkCounter == equipmentCounter)
-                        return resultOfSearch += ".";
-                    else
-                        resultOfSearch += ",";
-                }
+                resultOfSearch += checkCounter + 1 + "\n";
+                resultOfSearch += "\n" + "Generic name: " + medicine.GenericName + " MedicineManufacturerSerialNumber: " + medicine.MedicineManufacturer.SerialNumber + " MedicineTypeSerialNumber: " + medicine.MedicineType.SerialNumber + " SerialNumber: " + medicine.SerialNumber;
+                if (++checkCounter == equipmentCounter)
+                    return resultOfSearch += ".";
+                else
+                    resultOfSearch += ",";
+
             }
             return null;
         }
@@ -82,9 +79,9 @@ namespace GraphicEditor.View.Windows
                 int checkCounter = 0;
                 foreach (Equipment equipment in equipments)
                 {
-                    List<Room> rooms = roomRepository.GetRoomsBySerialNumber(equipment.RoomId);
+                    Room room = roomRepository.GetRoomBySerialNumber(equipment.RoomId);
                     resultOfSearch += "\nInformation about rooms: ";
-                    resultOfSearch += RoomSearch.ReportOnFoundRooms(equipment.RoomId, rooms);
+                    //resultOfSearch += RoomSearch.ReportOnFoundRooms(equipment.RoomId, room);
                     if (++checkCounter == equipmentCounter)
                         return resultOfSearch += ".";
                     else

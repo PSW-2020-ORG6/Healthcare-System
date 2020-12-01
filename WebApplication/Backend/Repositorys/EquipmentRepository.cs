@@ -8,6 +8,10 @@ namespace WebApplication.Backend.Repositorys
     public class EquipmentRepository
     {
         private MySqlConnection connection;
+        private BuildingRepository buildingRepository = new BuildingRepository();
+        private FloorRepository floorRepository = new FloorRepository();
+        private RoomRepository roomRepository = new RoomRepository();
+
         public EquipmentRepository()
         {
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
@@ -23,10 +27,16 @@ namespace WebApplication.Backend.Repositorys
             {
                 Equipment entity = new Equipment();
                 entity.SerialNumber = (string)sqlReader[0];
-                entity.RoomId = (string)sqlReader[1];
-                entity.Name = (string) sqlReader[2];
+                entity.Id = (string)sqlReader[1];
+                entity.RoomId = (string)sqlReader[2];
+                entity.Name = (string)sqlReader[3];
+                entity.Building = buildingRepository.GetBuildingBySerialNumber((string)sqlReader[4]);
+                entity.Floor = floorRepository.GetFloorBySerialNumber((string)sqlReader[5]);
+                entity.Room = roomRepository.GetRoomBySerialNumber((string)sqlReader[6]);
+                entity.BuildingSerialNumber = (string)sqlReader[4];
+                entity.FloorSerialNumber = (string)sqlReader[5];
+                entity.RoomSerialNumber = (string)sqlReader[6];
                 resultList.Add(entity);
-
             }
             connection.Close();
             return resultList;
@@ -49,6 +59,18 @@ namespace WebApplication.Backend.Repositorys
             try
             {
                 return GetEquipments("Select * from equipments where Name like '%" + name + "%'");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public List<Equipment> GetEquipmentsByRoomSerialNumber(string roomSerialNumber)
+        {
+            try
+            {
+                return GetEquipments("Select * from equipments where SerialNumber='" + roomSerialNumber + "'");
             }
             catch (Exception)
             {
