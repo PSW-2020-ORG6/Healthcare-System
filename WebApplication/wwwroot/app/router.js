@@ -31,7 +31,6 @@ var temp = new Vue({
 		},
 		successfulTegistration: function () {
 			router.push("successfulRegistration")
-		}
 		},
 		survey: function () {
 			router.push("survey")
