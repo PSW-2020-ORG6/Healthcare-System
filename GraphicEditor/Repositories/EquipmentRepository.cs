@@ -71,7 +71,7 @@ namespace GraphicEditor.Repositories
         {
             try
             {
-                return GetEquipments("Select * from equipments where SerialNumber='" + roomSerialNumber + "'");
+                return GetEquipments("Select * from equipments where RoomSerialNumber='" + roomSerialNumber + "'");
             }
             catch (Exception)
             {

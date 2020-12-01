@@ -9,6 +9,7 @@ namespace WebApplication.Backend.Repositorys
     {
         private MySqlConnection connection;
         private EquipmentRepository equipmentRepository = new EquipmentRepository();
+        private RoomTypeRepository roomTypeRepository = new RoomTypeRepository();
 
         public RoomRepository()
         {
@@ -30,7 +31,13 @@ namespace WebApplication.Backend.Repositorys
                 entity.FloorSerialNumber = (string)sqlReader[3];
                 entity.BuildingSerialNumber = (string)sqlReader[4];
                 entity.RoomTypeSerialNumber = (string)sqlReader[5];
+                entity.RoomType = roomTypeRepository.GetRoomTypeBySerialNumber((string)sqlReader[5]);
                 entity.Equipment = equipmentRepository.GetEquipmentsByRoomSerialNumber((string)sqlReader[0]);
+                entity.Row = (int)sqlReader[6];
+                entity.Column = (int)sqlReader[7];
+                entity.RowSpan = (int)sqlReader[8];
+                entity.ColumnSpan = (int)sqlReader[9];
+                entity.Style = (string)sqlReader[10];
                 resultList.Add(entity);
             }
             connection.Close();
@@ -78,7 +85,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetRooms("Select * from rooms where SerialNumber='" + floorSerialNumber + "'");
+                return GetRooms("Select * from rooms where FloorSerialNumber='" + floorSerialNumber + "'");
             }
             catch (Exception e)
             {

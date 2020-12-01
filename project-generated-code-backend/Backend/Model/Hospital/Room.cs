@@ -31,6 +31,12 @@ namespace Model.Hospital
 
         public string RoomTypeSerialNumber { get => roomTypeSerialNumber; set { roomTypeSerialNumber = value; } }
 
+        public int Row { get; set; }
+        public int Column { get; set; }
+        public int RowSpan { get ; set; } 
+        public int ColumnSpan { get ; set; }
+        public string Style { get; set; }
+
         public virtual List<Equipment> Equipment
         {
             get

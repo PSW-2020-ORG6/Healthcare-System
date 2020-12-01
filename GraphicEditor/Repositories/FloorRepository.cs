@@ -63,7 +63,7 @@ namespace GraphicEditor.Repositories
         {
             try
             {
-                return GetFloors("Select * from floors where SerialNumber='" + buildingSerialNumber + "'");
+                return GetFloors("Select * from floors where BuildingSerialNumber='" + buildingSerialNumber + "'");
             }
             catch (Exception e)
             {

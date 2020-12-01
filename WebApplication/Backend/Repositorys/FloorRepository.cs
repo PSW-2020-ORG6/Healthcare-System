@@ -62,7 +62,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetFloors("Select * from floors where SerialNumber='" + buildingSerialNumber + "'");
+                return GetFloors("Select * from floors where BuildingSerialNumber='" + buildingSerialNumber + "'");
             }
             catch (Exception e)
             {

@@ -35,7 +35,7 @@ namespace GraphicEditor.Repositories
         {
             try
             {
-                return GetRoomTypes("Select * from roomTypes where SerialNumber like '%" + serialNumber + "%'")[0];
+                return GetRoomTypes("Select * from roomTypes where SerialNumber='" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {
