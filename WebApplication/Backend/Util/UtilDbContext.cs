@@ -1,10 +1,14 @@
-﻿using health_clinic_class_diagram.Backend.Model.Hospital;
+﻿using health_clinic_class_diagram.Backend.Model.Survey;
+using health_clinic_class_diagram.Backend.Model.Hospital;
+using health_clinic_class_diagram.Backend.Model.Survey;
 using Microsoft.EntityFrameworkCore;
 using Model.Accounts;
 using Model.Blog;
 using Model.Hospital;
+using Model.MedicalExam;
 using Model.Util;
 using System;
+using System.Collections.Generic;
 
 namespace WebApplication.Backend.Model
 {
@@ -25,17 +29,22 @@ namespace WebApplication.Backend.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Survey>().HasKey(o => o.SerialNumber);
+            modelBuilder.Entity<Report>().HasKey(o => o.SerialNumber);
+
             modelBuilder.Entity<Feedback>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Building>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Equipment>().HasKey(o => o.Id);
             modelBuilder.Entity<Floor>().HasKey(o => o.SerialNumber);
-            modelBuilder.Entity<RoomGEA>().HasKey(o => o.SerialNumber);
+            modelBuilder.Entity<Room>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<MedicineManufacturer>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<MedicineType>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Medicine>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<MedicineGEA>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Patient>().HasAlternateKey(o => o.Id);
-            modelBuilder.Entity<Address>().HasKey(o => o.SerialNumber);
+            modelBuilder.Entity<RoomType>().HasKey(o => o.SerialNumber);
+            modelBuilder.Ignore<AdditionalDocument>();
+            modelBuilder.Ignore<Address>();
             modelBuilder.Entity<Patient>().HasData(
                  new Patient { Name = "Jelena", Surname = "Tanjic", Id = "0002", DateOfBirth = new DateTime(2017, 1, 18), Contact = "kontakt", Password = "sifra", Address = new Address("neka adresa"), ParentName = "otac", Gender = "Zensko", Email = "email", Guest = true },
                  new Patient { Name = "Sara", Surname = "Milic", Id = "0003", DateOfBirth = new DateTime(2018, 1, 18), Contact = "kontaktMica", Password = "sifraMica", Address = new Address("neka adresaMica"), ParentName = "mama", Gender = "Zensko", Email = "emailMica", Guest = true }
@@ -67,16 +76,17 @@ namespace WebApplication.Backend.Model
                 new RoomGEA { SerialNumber = "114", Name = "Examination room", FloorName = "Floor 1", BuildingName = "Orthopedy" }
             );
             modelBuilder.Entity<Equipment>().HasData(
-                new Equipment { SerialNumber = "73", RoomId = "101", Name = "Bed", Id = "11" },
-                new Equipment { SerialNumber = "74", RoomId = "102", Name = "Bed", Id = "12" },
-                new Equipment { SerialNumber = "75", RoomId = "103", Name = "Bed", Id = "13" },
-                new Equipment { SerialNumber = "76", RoomId = "101", Name = "Bed", Id = "14" },
-                new Equipment { SerialNumber = "77", RoomId = "102", Name = "Bed", Id = "15" },
-                new Equipment { SerialNumber = "78", RoomId = "104", Name = "Table", Id = "16" },
-                new Equipment { SerialNumber = "79", RoomId = "111", Name = "Table", Id = "17" },
-                new Equipment { SerialNumber = "80", RoomId = "111", Name = "Table", Id = "18" },
-                new Equipment { SerialNumber = "81", RoomId = "112", Name = "Bed", Id = "19" },
-                new Equipment { SerialNumber = "82", RoomId = "112", Name = "Bed", Id = "20" }
+               new Equipment { SerialNumber = "73", RoomId = "101", Name = "Bed", Id = "11" },
+               new Equipment { SerialNumber = "74", RoomId = "102", Name = "Bed", Id = "12" },
+               new Equipment { SerialNumber = "75", RoomId = "103", Name = "Bed", Id = "13" },
+               new Equipment { SerialNumber = "76", RoomId = "101", Name = "Bed", Id = "14" },
+               new Equipment { SerialNumber = "77", RoomId = "102", Name = "Bed", Id = "15" },
+               new Equipment { SerialNumber = "78", RoomId = "104", Name = "Table", Id = "16" },
+               new Equipment { SerialNumber = "79", RoomId = "111", Name = "Table", Id = "17" },
+               new Equipment { SerialNumber = "80", RoomId = "111", Name = "Table", Id = "18" },
+               new Equipment { SerialNumber = "81", RoomId = "112", Name = "Bed", Id = "19" },
+               new Equipment { SerialNumber = "82", RoomId = "112", Name = "Bed", Id = "20" }
+            );
 
                 );
             modelBuilder.Entity<MedicineManufacturer>().HasData(

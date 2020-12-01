@@ -1,5 +1,6 @@
 ﻿using GraphicEditor.Repositories.Interfaces;
 using health_clinic_class_diagram.Backend.Model.Hospital;
+using Model.Hospital;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -14,26 +15,27 @@ namespace GraphicEditor.Repositories
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
         }
 
-        private List<RoomGEA> GetRooms(String query)
+        private List<Room> GetRooms(String query)
         {
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<RoomGEA> resultList = new List<RoomGEA>();
+            List<Room> resultList = new List<Room>();
             while (sqlReader.Read())
             {
-                RoomGEA entity = new RoomGEA();
+                Room entity = new Room();
                 entity.SerialNumber = (string)sqlReader[0];
                 entity.Name = (string)sqlReader[1];
-                entity.FloorName = (string)sqlReader[2];
-                entity.BuildingName = (string)sqlReader[3];
+                entity.Id = (int)sqlReader[2];
+                entity.BuildingSerialNumber = (string)sqlReader[3];
+                entity.FloorSerialNumber = (string)sqlReader[4];
                 resultList.Add(entity);
             }
             connection.Close();
             return resultList;
         }
 
-        public List<RoomGEA> GetAllRooms()
+        public List<Room> GetAllRooms()
         {
             try
             {
@@ -45,7 +47,7 @@ namespace GraphicEditor.Repositories
             }
         }
 
-        public List<RoomGEA> GetRoomsByName(string name)
+        public List<Room> GetRoomsByName(string name)
         {
             try
             {
@@ -57,7 +59,7 @@ namespace GraphicEditor.Repositories
             }
         }
 
-        public List<RoomGEA> GetRoomsBySerialNumber(string serialNumber)
+        public List<Room> GetRoomsBySerialNumber(string serialNumber)
         {
             try
             {

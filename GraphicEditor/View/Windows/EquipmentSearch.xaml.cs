@@ -82,7 +82,7 @@ namespace GraphicEditor.View.Windows
                 int checkCounter = 0;
                 foreach (Equipment equipment in equipments)
                 {
-                    List<RoomGEA> rooms = roomRepository.GetRoomsBySerialNumber(equipment.RoomId);
+                    List<Room> rooms = roomRepository.GetRoomsBySerialNumber(equipment.RoomId);
                     resultOfSearch += "\nInformation about rooms: ";
                     resultOfSearch += RoomSearch.ReportOnFoundRooms(equipment.RoomId, rooms);
                     if (++checkCounter == equipmentCounter)

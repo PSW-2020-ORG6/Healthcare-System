@@ -61,7 +61,6 @@
     <Compile Include="Backend\Model\Hospital\Renovation.cs" />
     <Compile Include="Backend\Model\Hospital\Room.cs" />
     <Compile Include="Backend\Model\Hospital\RoomBedType.cs" />
-    <Compile Include="Backend\Model\Hospital\RoomGEA.cs" />
     <Compile Include="Backend\Model\Hospital\RoomType.cs" />
     <Compile Include="Backend\Model\Hospital\Equipment.cs" />
     <Compile Include="Backend\Model\Hospital\Bed.cs" />
