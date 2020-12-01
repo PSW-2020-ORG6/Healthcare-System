@@ -5,48 +5,36 @@ using System.Collections.Generic;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class MedicineTypeRepository
+    public class RoomTypeRepository
     {
         private MySqlConnection connection;
-        public MedicineTypeRepository()
+        public RoomTypeRepository()
         {
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
-            connection.Open();
         }
 
-        private List<MedicineType> GetMedicineTypes(String query)
+        private List<RoomType> GetRoomTypes(String query)
         {
+            connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<MedicineType> resultList = new List<MedicineType>();
+            List<RoomType> resultList = new List<RoomType>();
             while (sqlReader.Read())
             {
-                MedicineType entity = new MedicineType();
+                RoomType entity = new RoomType();
                 entity.SerialNumber = (string)sqlReader[0];
-                entity.Type = (string)sqlReader[1];
+                entity.Name = (string)sqlReader[1];
                 resultList.Add(entity);
             }
             connection.Close();
             return resultList;
         }
 
-        public List<MedicineType> GetAllMedicineTypes()
+        public RoomType GetRoomTypeBySerialNumber(string serialNumber)
         {
             try
             {
-                return GetMedicineTypes("Select * from medicineTypes");
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        public MedicineType GetMedicineTypeBySerialNumber(string serialNumber)
-        {
-            try
-            {
-                return GetMedicineTypes("Select * from medicineTypes where SerialNumber='" + serialNumber + "'")[0];
+                return GetRoomTypes("Select * from roomTypes where SerialNumber like '%" + serialNumber + "%'")[0];
             }
             catch (Exception e)
             {

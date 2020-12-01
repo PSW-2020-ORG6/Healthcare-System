@@ -1,49 +1,49 @@
 ﻿using GraphicEditor.Repositories.Interfaces;
-using health_clinic_class_diagram.Backend.Model.Hospital;
 using Model.Hospital;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GraphicEditor.Repositories
 {
     public class MedicineRepository : IMedicineRepository
     {
-
         private MySqlConnection connection;
+        private MedicineManufacturerRepository medicineManufacturer = new MedicineManufacturerRepository();
+        private MedicineTypeRepository medicineType = new MedicineTypeRepository();
+
         public MedicineRepository()
         {
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
         }
 
-        private List<MedicineGEA> GetMedicines(String query)
+        private List<Medicine> GetMedicines(String query)
         {
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<MedicineGEA> resultList = new List<MedicineGEA>();
+            List<Medicine> resultList = new List<Medicine>();
             while (sqlReader.Read())
             {
-                MedicineGEA entity = new MedicineGEA();
+                Medicine entity = new Medicine();
                 entity.SerialNumber = (string)sqlReader[0];
                 entity.CopyrightName = (string)sqlReader[1];
                 entity.GenericName = (string)sqlReader[2];
-                entity.MedicineManufacturerId = (string)sqlReader[3];
-                entity.MedicineTypeId = (string)sqlReader[4];
+                entity.MedicineManufacturer = medicineManufacturer.GetMedicineManufacturerBySerialNumber((string)sqlReader[3]);
+                entity.MedicineType = medicineType.GetMedicineTypeBySerialNumber((string)sqlReader[4]);
+                entity.MedicineManufacturerSerialNumber = (string)sqlReader[3];
+                entity.MedicineTypeSerialNumber = (string)sqlReader[4];
                 resultList.Add(entity);
             }
             connection.Close();
             return resultList;
         }
 
-        public List<MedicineGEA> GetMedicinesByName(string name)
+        public List<Medicine> GetMedicinesByName(string name)
         {
             try
             {
-                return GetMedicines("Select * from medicinegea where GenericName like '%" + name + "%'");
+                return GetMedicines("Select * from medicine where GenericName like '%" + name + "%'");
             }
             catch (Exception e)
             {
@@ -52,11 +52,11 @@ namespace GraphicEditor.Repositories
             }
         }
 
-        public List<MedicineGEA> GetAllMedicines()
+        public List<Medicine> GetAllMedicines()
         {
             try
             {
-                return GetMedicines("Select * from medicinegea");
+                return GetMedicines("Select * from medicine");
             }
             catch (Exception)
             {

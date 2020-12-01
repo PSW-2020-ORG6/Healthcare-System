@@ -9,6 +9,8 @@ namespace GraphicEditor.Repositories
     public class FloorRepository : IFloorRepository
     {
         private MySqlConnection connection;
+        private RoomRepository roomRepository = new RoomRepository();
+
         public FloorRepository()
         {
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
@@ -26,6 +28,7 @@ namespace GraphicEditor.Repositories
                 entity.SerialNumber = (string)sqlReader[0];
                 entity.Name = (string)sqlReader[1];
                 entity.BuildingSerialNumber = (string)sqlReader[2];
+                entity.Rooms = roomRepository.GetRoomsByFloorSerialNumber((string)sqlReader[0]);
                 resultList.Add(entity);
             }
             connection.Close();
@@ -52,6 +55,32 @@ namespace GraphicEditor.Repositories
             }
             catch (Exception)
             {
+                return null;
+            }
+        }
+
+        public List<Floor> GetFloorsByBuildingSerialNumber(string buildingSerialNumber)
+        {
+            try
+            {
+                return GetFloors("Select * from floors where SerialNumber='" + buildingSerialNumber + "'");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public Floor GetFloorBySerialNumber(string serialNumber)
+        {
+            try
+            {
+                return GetFloors("Select * from floors where SerialNumber='" + serialNumber + "'")[0];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
                 return null;
             }
         }

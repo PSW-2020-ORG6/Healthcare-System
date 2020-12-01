@@ -1,11 +1,12 @@
-﻿using Model.Hospital;
+﻿using GraphicEditor.Repositories.Interfaces;
+using Model.Hospital;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 
-namespace WebApplication.Backend.Repositorys
+namespace GraphicEditor.Repositories
 {
-    public class MedicineTypeRepository
+    public class MedicineTypeRepository : IMedicineTypeRepository
     {
         private MySqlConnection connection;
         public MedicineTypeRepository()

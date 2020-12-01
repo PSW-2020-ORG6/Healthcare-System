@@ -7,5 +7,7 @@ namespace WebApplication.Backend.Repositorys
     {
         List<Floor> GetAllFloors();
         List<Floor> GetFloorsByName(string name);
+        List<Floor> GetFloorsByBuildingSerialNumber(string buildingSerialNumber);
+        Floor GetFloorBySerialNumber(string serialNumber);
     }
 }

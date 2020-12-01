@@ -1,12 +1,12 @@
-﻿using System;
-using GraphicEditor.HelpClasses;
-using GraphicEditor.View.Windows;
+﻿using GraphicEditor.HelpClasses;
 using GraphicEditor.Repositories;
+using GraphicEditor.View.Windows;
 using health_clinic_class_diagram.Backend.Model.Hospital;
+using health_clinic_class_diagram.Backend.Model.Util;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using health_clinic_class_diagram.Backend.Model.Util;
 
 namespace GraphicEditor.ViewModel
 {

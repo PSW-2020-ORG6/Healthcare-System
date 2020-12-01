@@ -1,9 +1,5 @@
 ﻿using Model.Hospital;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GraphicEditor.Repositories.Interfaces
 {
@@ -11,5 +7,6 @@ namespace GraphicEditor.Repositories.Interfaces
     {
         List<Equipment> GetAllEquipments();
         List<Equipment> GetEquipmentsByName(string name);
+        List<Equipment> GetEquipmentsByRoomSerialNumber(string roomSerialNumber);
     }
 }

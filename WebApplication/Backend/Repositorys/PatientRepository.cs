@@ -16,7 +16,7 @@ namespace WebApplication.Backend.Repositorys
         {
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
         }
-        ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017 and Aleksa Repović RA52/2017
+        ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017
         /// <summary>
         ///Get patients from patients table
         ///</summary>
@@ -67,10 +67,7 @@ namespace WebApplication.Backend.Repositorys
                 resultList.Add(entity);
 
             }
-
             connection.Close();
-
-
             return resultList;
         }
 

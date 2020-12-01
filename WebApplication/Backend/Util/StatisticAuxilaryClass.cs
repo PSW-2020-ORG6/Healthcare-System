@@ -1,23 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebApplication.Backend.Util
 {
     public class StatisticAuxilaryClass
     {
-       private double averageRating;
-       private int ones;
-       private int twos;
-       private int threes;
-       private int fours;
-       private int fives;
-       private String onesPercent;
-       private String twosPercent;
-       private String threesPercent;
-       private String foursPercent;
-       private String fivesPercent;
+        private double averageRating;
+        private int ones;
+        private int twos;
+        private int threes;
+        private int fours;
+        private int fives;
+        private String onesPercent;
+        private String twosPercent;
+        private String threesPercent;
+        private String foursPercent;
+        private String fivesPercent;
 
 
         public StatisticAuxilaryClass()
@@ -66,7 +63,8 @@ namespace WebApplication.Backend.Util
             }
         }
 
-        public void generatePercents() {
+        public void generatePercents()
+        {
             if ((ones + twos + threes + fours + fives) == 0)
             {
                 onesPercent = 0.ToString() + "%";
@@ -87,5 +85,5 @@ namespace WebApplication.Backend.Util
 
     }
 
- 
+
 }

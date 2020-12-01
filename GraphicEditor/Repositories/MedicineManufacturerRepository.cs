@@ -1,40 +1,41 @@
-﻿using Model.Hospital;
+﻿using GraphicEditor.Repositories.Interfaces;
+using Model.Hospital;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 
-namespace WebApplication.Backend.Repositorys
+namespace GraphicEditor.Repositories
 {
-    public class MedicineTypeRepository
+    public class MedicineManufacturerRepository : IMedicineManufacturerRepository
     {
         private MySqlConnection connection;
-        public MedicineTypeRepository()
+        public MedicineManufacturerRepository()
         {
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
             connection.Open();
         }
 
-        private List<MedicineType> GetMedicineTypes(String query)
+        private List<MedicineManufacturer> GetMedicineManufacturers(String query)
         {
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<MedicineType> resultList = new List<MedicineType>();
+            List<MedicineManufacturer> resultList = new List<MedicineManufacturer>();
             while (sqlReader.Read())
             {
-                MedicineType entity = new MedicineType();
+                MedicineManufacturer entity = new MedicineManufacturer();
                 entity.SerialNumber = (string)sqlReader[0];
-                entity.Type = (string)sqlReader[1];
+                entity.Name = (string)sqlReader[1];
                 resultList.Add(entity);
             }
             connection.Close();
             return resultList;
         }
 
-        public List<MedicineType> GetAllMedicineTypes()
+        public List<MedicineManufacturer> GetAllMedicineManufacturers()
         {
             try
             {
-                return GetMedicineTypes("Select * from medicineTypes");
+                return GetMedicineManufacturers("Select * from medicineManufacturers");
             }
             catch (Exception)
             {
@@ -42,11 +43,11 @@ namespace WebApplication.Backend.Repositorys
             }
         }
 
-        public MedicineType GetMedicineTypeBySerialNumber(string serialNumber)
+        public MedicineManufacturer GetMedicineManufacturerBySerialNumber(string serialNumber)
         {
             try
             {
-                return GetMedicineTypes("Select * from medicineTypes where SerialNumber='" + serialNumber + "'")[0];
+                return GetMedicineManufacturers("Select * from medicineManufacturers where SerialNumber='" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {

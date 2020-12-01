@@ -16,7 +16,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
+                connection = new MySqlConnection("server=localhost;port=3306;database=mydb9;user=root;password=root");
             }
             catch (Exception e)
             {
@@ -40,11 +40,11 @@ namespace WebApplication.Backend.Repositorys
             while (sqlReader.Read())
             {
                 Feedback entity = new Feedback();
-                entity.SerialNumber = (string)sqlReader[4];
-                entity.PatientId = (String)sqlReader[3];
-                entity.Text = (String)sqlReader[0];
-                entity.Date = Convert.ToDateTime(sqlReader[2]);
-                entity.Approved = (Boolean)sqlReader[1];
+                entity.SerialNumber = (string)sqlReader[0];
+                entity.PatientId = (String)sqlReader[1];
+                entity.Text = (String)sqlReader[2];
+                entity.Date = Convert.ToDateTime(sqlReader[3]);
+                entity.Approved = (Boolean)sqlReader[4];
                 resultList.Add(entity);
             }
             connection.Close();

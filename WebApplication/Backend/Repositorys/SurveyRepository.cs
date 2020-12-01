@@ -1,12 +1,9 @@
 ﻿using health_clinic_class_diagram.Backend.Model.Survey;
-using Microsoft.AspNetCore.Mvc;
 using Model.Accounts;
 using Model.MedicalExam;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WebApplication.Backend.Util;
 
 namespace WebApplication.Backend.Repositorys
@@ -43,7 +40,7 @@ namespace WebApplication.Backend.Repositorys
                 + "','" + surveyText.Question6 + "','" + surveyText.Question7 + "','" + surveyText.Question8 + "','" + surveyText.Question9 + "','" + surveyText.Question10 +
                 "','" + surveyText.Question11 + "','" + surveyText.Question12 + "','" + surveyText.Question13 + "','" + surveyText.Question14 + "','" + surveyText.Question15 +
                 "','" + surveyText.Question16 + "','" + surveyText.Question17 + "','" + surveyText.Question18 + "','" + surveyText.Question19 + "','" + surveyText.Question20
-                + "','" + surveyText.Question21 + "','" + surveyText.Question22 + "','" + surveyText.question23 + "','" + surveyText.ID + "','" + surveyText.DoctorName + "','" + surveyText.SerialNumber+ "')";
+                + "','" + surveyText.Question21 + "','" + surveyText.Question22 + "','" + surveyText.question23 + "','" + surveyText.ID + "','" + surveyText.DoctorName + "','" + surveyText.SerialNumber + "')";
 
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             sqlCommand.ExecuteNonQuery();
@@ -246,7 +243,7 @@ namespace WebApplication.Backend.Repositorys
                 statistics[2].increment(Int32.Parse(s.Question3));
                 statistics[3].AverageRating += Double.Parse(s.Question4);
                 statistics[3].increment(Int32.Parse(s.Question4));
-                statistics[4].AverageRating +=( Double.Parse(s.Question4) + Double.Parse(s.Question3) + Double.Parse(s.Question2) + Double.Parse(s.Question1));
+                statistics[4].AverageRating += (Double.Parse(s.Question4) + Double.Parse(s.Question3) + Double.Parse(s.Question2) + Double.Parse(s.Question1));
                 statistics[4].increment(Int32.Parse(s.Question4));
                 statistics[4].increment(Int32.Parse(s.Question3));
                 statistics[4].increment(Int32.Parse(s.Question2));
@@ -256,7 +253,7 @@ namespace WebApplication.Backend.Repositorys
             {
                 statistics[i].generatePercents();
 
-                 if (i == 4)
+                if (i == 4)
                     statistics[i].AverageRating = statistics[i].AverageRating / reports.Count / 4;
                 else
                     statistics[i].AverageRating = statistics[i].AverageRating / reports.Count;
@@ -413,9 +410,11 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///list of objects containing information about statistics with values rounded to 2 decimals
         ///</returns>
-        public List<StatisticAuxilaryClass> round2Decimals(List<StatisticAuxilaryClass> input) {
-            foreach(StatisticAuxilaryClass i in input) {
-               i.AverageRating = Math.Round(i.AverageRating, 2);
+        public List<StatisticAuxilaryClass> round2Decimals(List<StatisticAuxilaryClass> input)
+        {
+            foreach (StatisticAuxilaryClass i in input)
+            {
+                i.AverageRating = Math.Round(i.AverageRating, 2);
             }
             return input;
         }
@@ -433,7 +432,7 @@ namespace WebApplication.Backend.Repositorys
         public List<string> GetAllDoctorsFromReporstByPatientIdFromSurvey(string patientId)
         {
             List<Physitian> result = new List<Physitian>();
-            result=GetDoctors("Select * from surveys where ID like'" + patientId.ToString() + "'");
+            result = GetDoctors("Select * from surveys where ID like'" + patientId.ToString() + "'");
             List<String> doctors = new List<String>();
             foreach (Physitian r in result)
             {
@@ -484,15 +483,15 @@ namespace WebApplication.Backend.Repositorys
             List<String> resultListFromSurvey = GetAllDoctorsFromReporstByPatientIdFromSurvey(patientId);
             List<String> resultListFromReports = GetAllDoctorsFromReporstByPatientId(patientId);
             List<String> resultList = new List<String>();
-             foreach (String physitianFromRepors in resultListFromReports)
+            foreach (String physitianFromRepors in resultListFromReports)
+            {
+                if (!resultListFromSurvey.Contains(physitianFromRepors))
                 {
-                    if (!resultListFromSurvey.Contains(physitianFromRepors))
-                    {
-                        resultList.Add(physitianFromRepors);
-                    }
-                    
+                    resultList.Add(physitianFromRepors);
                 }
-            
+
+            }
+
             return resultList;
         }
     }
