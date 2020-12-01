@@ -87,9 +87,14 @@ namespace WebApplication.Backend.Repositorys
             return id;
         }
 
-        public String FindPatientId(string patientId)
+        public bool IsPatientIdValid(string patientId)
         {
-            return GetPatientId("Select id from patients where id=" + patientId);
+            string id = GetPatientId("Select id from patients where id=" + patientId);
+            if (id == "" || id == null)
+            {
+                return true;
+            }
+            return false;
         }
 
         ////Aleksandra Milijevic RA 22/2017

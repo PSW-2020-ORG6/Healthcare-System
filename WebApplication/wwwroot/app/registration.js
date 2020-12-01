@@ -43,7 +43,7 @@
 		<table class="t">
 			<colgroup>
                  <col style="width: 60%;">
-                 <col style="width: 40%;">
+                 <col style="width: 50%;">
             </colgroup>
 			<tr>
 				<td><label>Name</label><a class="star">*</a></td>
@@ -313,6 +313,7 @@
 				axios
 					.post("http://localhost:49900/registration/registerPatient", patientDTO)
 					.then(response => {
+						alert("Mail has been sent.");
 					})
 
 					.catch(error => {

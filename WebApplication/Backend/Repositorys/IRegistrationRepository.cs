@@ -10,7 +10,7 @@ namespace WebApplication.Backend.Repositorys
     {
         public bool addPatient(Patient patient);
         public String GetPatientId(string idd);
-        public String FindPatientId(string patientId);
+        public bool IsPatientIdValid(string patientId);
         public bool ConfirmEmailUpdate(string patientId);
     }
 }

@@ -8,6 +8,6 @@ namespace WebApplication.Backend.Services
     /// </summary>
     public interface IMailService
     {
-        void SendEmailAsync(Patient patient);
+        void SendEmail(Patient patient);
     }
 }

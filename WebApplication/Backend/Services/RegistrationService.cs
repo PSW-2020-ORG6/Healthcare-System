@@ -9,11 +9,10 @@ namespace WebApplication.Backend.Services
     /// </summary>
     public class RegistrationService
     {
-        private RegistrationRepository registrationRepository;
         private IRegistrationRepository iregistrationRepository = new RegistrationRepository();
         public RegistrationService()
         {
-            this.registrationRepository = new RegistrationRepository();
+            this.iregistrationRepository = new RegistrationRepository();
         }
 
         public RegistrationService(IRegistrationRepository iregistrationRepository)
@@ -32,7 +31,7 @@ namespace WebApplication.Backend.Services
         ///</param>>
         public bool RegisterPatient(Patient patient)
         {
-            if (IsJMBGValid(patient.Id))
+            if (iregistrationRepository.IsPatientIdValid(patient.Id))
             {
                 return iregistrationRepository.addPatient(patient);
             }
@@ -40,26 +39,6 @@ namespace WebApplication.Backend.Services
             {
                 return false;
             }
-        }
-
-        ///Aleksandra Milijevic RA 22/2017
-        /// <summary>
-        ///calls a method to check for the existence of an id number
-        ///</summary>
-        ///<returns>
-        ///true or false depending on sucess
-        ///</returns>
-        ///<param name="idNumber"> String type object
-        ///</param>>
-        public bool IsJMBGValid(String idNumber)
-        {
-            String id = iregistrationRepository.FindPatientId(idNumber);
-
-            if (id ==  "" || id == null)
-            {
-                return true;
-            }
-            return false;
         }
 
         public bool ConfirmEmailUpdate(string id)
