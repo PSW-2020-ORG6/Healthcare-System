@@ -1,7 +1,6 @@
 ﻿using health_clinic_class_diagram.Backend.Model.Survey;
 using health_clinic_class_diagram.Backend.Model.Hospital;
 using health_clinic_class_diagram.Backend.Model.Schedule;
-using health_clinic_class_diagram.Backend.Model.Survey;
 using Microsoft.EntityFrameworkCore;
 using Model.Accounts;
 using Model.Blog;
@@ -46,6 +45,16 @@ namespace WebApplication.Backend.Model
         private static void FeedbackCreation(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Feedback>().HasKey(o => o.SerialNumber);
+            modelBuilder.Entity<Feedback>().HasKey(o => o.SerialNumber);
+            modelBuilder.Entity<Feedback>().HasData(
+                    new Feedback { PatientId = "0001", Text = "super", Date = new DateTime(2016, 11, 18), Approved = true },
+                    new Feedback { PatientId = "0001", Text = "onako", Date = new DateTime(2015, 5, 18), Approved = false },
+                    new Feedback { PatientId = "0002", Text = "moze bolje", Date = new DateTime(2018, 4, 8), Approved = true },
+                    new Feedback { PatientId = "0003", Text = "dobro", Date = new DateTime(2019, 3, 18), Approved = false },
+                    new Feedback { PatientId = "0007", Text = "nikako", Date = new DateTime(2019, 1, 10), Approved = true },
+                    new Feedback { PatientId = "0008", Text = "sve pohvale", Date = new DateTime(2019, 12, 11), Approved = false },
+                    new Feedback { PatientId = "00010", Text = "usluga na nivou", Date = new DateTime(2020, 3, 18), Approved = true },
+                    new Feedback { PatientId = "0004", Text = "ok", Date = new DateTime(2018, 1, 18), Approved = false });
         }
 
         private static void ReportCreation(ModelBuilder modelBuilder)
@@ -108,9 +117,10 @@ namespace WebApplication.Backend.Model
         private static void PatientCreation(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Patient>().HasAlternateKey(o => o.Id);
+            modelBuilder.Entity<Patient>().Ignore(o => o.Address);
             modelBuilder.Entity<Patient>().HasData(
-                 new Patient { Name = "Jelena", Surname = "Tanjic", Id = "0002", DateOfBirth = new DateTime(2017, 1, 18), Contact = "kontakt", Password = "sifra", ParentName = "otac", Gender = "Zensko", Email = "email", Guest = true, AddressSerialNumber = "200001" },
-                 new Patient { Name = "Sara", Surname = "Milic", Id = "0003", DateOfBirth = new DateTime(2018, 1, 18), Contact = "kontaktMica", Password = "sifraMica", ParentName = "mama", Gender = "Zensko", Email = "emailMica", Guest = true, AddressSerialNumber = "200002" }
+                 new Patient { Name = "Jelena", Surname = "Tanjic", Id = "0002", DateOfBirth = new DateTime(2017, 1, 18), Contact = "kontakt", Password = "sifra", Address = new Address("neka adresa"), ParentName = "otac", Gender = "Zensko", Email = "email", Guest = true },
+                 new Patient { Name = "Sara", Surname = "Milic", Id = "0003", DateOfBirth = new DateTime(2018, 1, 18), Contact = "kontaktMica", Password = "sifraMica", Address = new Address("neka adresaMica"), ParentName = "mama", Gender = "Zensko", Email = "emailMica", Guest = true }
             );
         }
 
@@ -316,8 +326,8 @@ namespace WebApplication.Backend.Model
             modelBuilder.Entity<Physitian>().Ignore(o => o.WorkSchedule);
             modelBuilder.Entity<Physitian>().Ignore(o => o.AllSpecializations);
             modelBuilder.Entity<Physitian>().HasData(
-                 new Physitian { SerialNumber = "600001", Name = "Gojko", Surname = "Simic", Id = "600001", DateOfBirth = new DateTime(1975, 11, 11), Contact = "Simic kontakt", Email = "simic@gmail.com", Password = "sifraSimic24dsf1", AddressSerialNumber = "200001" },
-                 new Physitian { SerialNumber = "600002", Name = "Klara", Surname = "Dicic", Id = "600002", DateOfBirth = new DateTime(1985, 4, 25), Contact = "Dicic kontakt", Email = "dicic@gmail.com", Password = "sifraDicic98754", AddressSerialNumber = "200002" }
+                 new Physitian { SerialNumber = "600001", Name = "Gojko", Surname = "Simic", Id = "600001", DateOfBirth = new DateTime(1975, 11, 11), Contact = "Simic kontakt", Email = "simic@gmail.com", Password = "sifraSimic24dsf1" },
+                 new Physitian { SerialNumber = "600002", Name = "Klara", Surname = "Dicic", Id = "600002", DateOfBirth = new DateTime(1985, 4, 25), Contact = "Dicic kontakt", Email = "dicic@gmail.com", Password = "sifraDicic98754" }
             );
         }
 
