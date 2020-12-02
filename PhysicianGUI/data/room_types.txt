@@ -1,2 +1,0 @@
-{"Name":"Sala za pregled","SerialNumber":"3438b17b-a376-44b7-903b-10f2e0f148d0"}
-{"Name":"Sala za operaciju","SerialNumber":"eb2b4f2e-c8c4-4903-be3e-b2d7d274b5fb"}

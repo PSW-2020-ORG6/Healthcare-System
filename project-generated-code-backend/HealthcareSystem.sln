@@ -15,14 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicEditor", "..\Graphic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphicEditorTests", "..\GraphicEditorTests\GraphicEditorTests.csproj", "{C8AFBC21-437A-48F4-BD91-7502D2A0330E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecretaryGUI", "..\SecretaryGUI\SecretaryGUI.csproj", "{6D77A087-1E3A-4993-9A8E-1F10DCC2DAC5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperindendentGUI", "..\SuperindendentGUI\SuperindendentGUI.csproj", "{DB931FC9-184F-4F70-8004-09DB5171DFDE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientGUI", "..\PatientGUI\PatientGUI.csproj", "{F18DDC7E-8936-4873-BF42-B4BD6C989939}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhysicianGUI", "..\PhysicianGUI\PhysicianGUI.csproj", "{A6BADDA7-1CD1-49BF-B139-0FBB1BA7FCF9}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationAdapters", "..\IntegrationAdapters\IntegrationAdapters.csproj", "{C1C33247-AAD2-48FB-8BB1-ED4CDED05E53}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationAdaptersTests", "..\IntegrationAdaptersTests\IntegrationAdaptersTests.csproj", "{6236CF73-AF2E-40A7-8B01-A25CA855FB47}"
@@ -51,22 +43,6 @@ Global
 		{C8AFBC21-437A-48F4-BD91-7502D2A0330E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8AFBC21-437A-48F4-BD91-7502D2A0330E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8AFBC21-437A-48F4-BD91-7502D2A0330E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6D77A087-1E3A-4993-9A8E-1F10DCC2DAC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D77A087-1E3A-4993-9A8E-1F10DCC2DAC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D77A087-1E3A-4993-9A8E-1F10DCC2DAC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D77A087-1E3A-4993-9A8E-1F10DCC2DAC5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DB931FC9-184F-4F70-8004-09DB5171DFDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DB931FC9-184F-4F70-8004-09DB5171DFDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DB931FC9-184F-4F70-8004-09DB5171DFDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DB931FC9-184F-4F70-8004-09DB5171DFDE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F18DDC7E-8936-4873-BF42-B4BD6C989939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F18DDC7E-8936-4873-BF42-B4BD6C989939}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F18DDC7E-8936-4873-BF42-B4BD6C989939}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F18DDC7E-8936-4873-BF42-B4BD6C989939}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A6BADDA7-1CD1-49BF-B139-0FBB1BA7FCF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A6BADDA7-1CD1-49BF-B139-0FBB1BA7FCF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A6BADDA7-1CD1-49BF-B139-0FBB1BA7FCF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A6BADDA7-1CD1-49BF-B139-0FBB1BA7FCF9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C1C33247-AAD2-48FB-8BB1-ED4CDED05E53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C1C33247-AAD2-48FB-8BB1-ED4CDED05E53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1C33247-AAD2-48FB-8BB1-ED4CDED05E53}.Release|Any CPU.ActiveCfg = Release|Any CPU
