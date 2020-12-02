@@ -30,10 +30,6 @@ namespace Model.Util
             this.street = street;
         }
 
-        public Address()
-        {
-        }
-
         public override string ToString()
         {
             return street;
