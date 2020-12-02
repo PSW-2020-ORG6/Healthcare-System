@@ -18,7 +18,7 @@ namespace WebApplicationTests
         {
             var stubRepository = new Mock<IRegistrationRepository>();
             stubRepository.Setup(m => m.IsPatientIdValid(patient.Id)).Returns(false);
-            stubRepository.Setup(m => m.addPatient(patient)).Returns(false);
+            stubRepository.Setup(m => m.AddPatient(patient)).Returns(false);
             RegistrationService service = new RegistrationService(stubRepository.Object);
 
             bool addedPatient = service.RegisterPatient(patient);
@@ -31,7 +31,7 @@ namespace WebApplicationTests
         {
             var stubRepository = new Mock<IRegistrationRepository>();
             stubRepository.Setup(m => m.IsPatientIdValid(patient.Id)).Returns(true);
-            stubRepository.Setup(m => m.addPatient(patient)).Returns(true);
+            stubRepository.Setup(m => m.AddPatient(patient)).Returns(true);
             RegistrationService service = new RegistrationService(stubRepository.Object);
 
             bool addedPatient = service.RegisterPatient(patient);

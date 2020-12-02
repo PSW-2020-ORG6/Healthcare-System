@@ -8,15 +8,15 @@ namespace WebApplication.Backend.Services
     /// </summary>
     public class RegistrationService
     {
-        private IRegistrationRepository iregistrationRepository = new RegistrationRepository();
+        private IRegistrationRepository registrationRepository = new RegistrationRepository();
         public RegistrationService()
         {
-            this.iregistrationRepository = new RegistrationRepository();
+            this.registrationRepository = new RegistrationRepository();
         }
 
-        public RegistrationService(IRegistrationRepository iregistrationRepository)
+        public RegistrationService(IRegistrationRepository registrationRepository)
         {
-            this.iregistrationRepository = iregistrationRepository;
+            this.registrationRepository = registrationRepository;
         }
 
         ///Aleksandra Milijevic RA 22/2017
@@ -30,9 +30,9 @@ namespace WebApplication.Backend.Services
         ///</param>>
         public bool RegisterPatient(Patient patient)
         {
-            if (iregistrationRepository.IsPatientIdValid(patient.Id))
+            if (registrationRepository.IsPatientIdValid(patient.Id))
             {
-                return iregistrationRepository.addPatient(patient);
+                return registrationRepository.AddPatient(patient);
             }
             else
             {
@@ -42,7 +42,7 @@ namespace WebApplication.Backend.Services
 
         public bool ConfirmEmailUpdate(string id)
         {
-            return iregistrationRepository.ConfirmEmailUpdate(id);
+            return registrationRepository.ConfirmEmailUpdate(id);
         }
 
     }

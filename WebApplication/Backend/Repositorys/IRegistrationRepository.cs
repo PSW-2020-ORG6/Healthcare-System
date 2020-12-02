@@ -8,7 +8,7 @@ namespace WebApplication.Backend.Repositorys
     /// </summary>
     public interface IRegistrationRepository
     {
-        public bool addPatient(Patient patient);
+        public bool AddPatient(Patient patient);
         public String GetPatientId(string idd);
         public bool IsPatientIdValid(string patientId);
         public bool ConfirmEmailUpdate(string patientId);
