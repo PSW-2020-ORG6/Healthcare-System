@@ -30,7 +30,7 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         ///<param name="patient"> Patient type object
         ///</param>
-        public bool addPatient(Patient patient)
+        public bool AddPatient(Patient patient)
         {
             connection.Open();
             string[] dateString = patient.DateOfBirth.ToString().Split(" ");
