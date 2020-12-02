@@ -9,7 +9,7 @@ using Xunit;
 
 namespace WebApplicationTests
 {
-    public class SurveyAndStatisticsServiceTest
+    public class SurveyAndStatisticsServiceTests
     {
         Survey surveyTest = new Survey
                ("001", "Bozo Bozic", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3");
