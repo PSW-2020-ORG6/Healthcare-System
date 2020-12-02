@@ -19,6 +19,7 @@ namespace WebApplication.Backend.Repositorys
             {
             }
         }
+
         ///Tanja Drcelic RA124/2017 and Marija Vucetic RA157/2017
         /// <summary>
         ///Get prescriptions from table
@@ -49,6 +50,7 @@ namespace WebApplication.Backend.Repositorys
             }
             return prescriptions;
         }
+
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///Get medicine dosages from table
@@ -77,6 +79,7 @@ namespace WebApplication.Backend.Repositorys
             connection.Close();
             return resultList;
         }
+
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///Create sqlDml for get prescriptions
@@ -105,6 +108,7 @@ namespace WebApplication.Backend.Repositorys
             else
                 return GetPrescriptionsByMedicineTypeNegation(value, prescriptions);
         }
+
         private List<Prescription> GetPrescriptionsByAllPropertiesNegation(string value, List<Prescription> prescriptions)
         {
             List<Prescription> resultList = new List<Prescription>();
@@ -118,6 +122,7 @@ namespace WebApplication.Backend.Repositorys
             }
             return resultList;
         }
+
         private List<Prescription> GetPrescriptionsByMedicineNameNegation(string value, List<Prescription> prescriptions) {
                 List<Prescription> resultList = new List<Prescription>();
                 foreach (Prescription prescription in prescriptions)
@@ -141,7 +146,8 @@ namespace WebApplication.Backend.Repositorys
                 }
             }
             return resultList;
-    }
+        }
+
         private List<Prescription> GetPrescriptionsByAllProperties(string value, List<Prescription> prescriptions)
         {
             List<Prescription> resultList = new List<Prescription>();
@@ -155,6 +161,7 @@ namespace WebApplication.Backend.Repositorys
             }
             return resultList;
         }
+
         private List<Prescription> GetPrescriptionsByMedicineName(string value, List<Prescription> prescriptions)
         {
             List<Prescription> resultList = new List<Prescription>();
@@ -168,6 +175,7 @@ namespace WebApplication.Backend.Repositorys
             }
             return resultList;
         }
+
         private List<Prescription> GetPrescriptionsByMedicineType(string value, List<Prescription> prescriptions)
         {
             List<Prescription> resultList = new List<Prescription>();

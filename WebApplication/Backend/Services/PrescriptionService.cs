@@ -13,10 +13,12 @@ namespace WebApplication.Backend.Services
         {
             this.iPrescriptionRepository = new PrescriptionRepository();
         }
+
         public PrescriptionService(IPrescriptionRepository iPrescriptionRepository)
         {
             this.iPrescriptionRepository = iPrescriptionRepository;
         }
+
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///Get prescriptions by search
@@ -51,6 +53,7 @@ namespace WebApplication.Backend.Services
                 return ConverToDTO(iPrescriptionRepository.GetPrescriptionsByProperty(Propeerty(searchedPersription.Split(",")[2]), searchedPersription.Split(",")[1], dateTimes,false));
             }
         }
+
 
         private SearchProperty Propeerty(string property){
             if (property.Equals("All"))
@@ -90,6 +93,7 @@ namespace WebApplication.Backend.Services
             }
             return returnList;
         }
+
         private bool NotInResult(List<Prescription> returnList, string serialNumber)
         {
             foreach (Prescription pReturnList in returnList)
@@ -99,6 +103,7 @@ namespace WebApplication.Backend.Services
             }
             return true;
         }
+
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///Get searched prescriptions by OR operation
@@ -120,6 +125,7 @@ namespace WebApplication.Backend.Services
             }
             return returnList;
         }
+
         private List<SearchEntityDTO> ConverToDTO(List<Prescription> prescriptions)
         {
             if (prescriptions == null || prescriptions.Count==0)

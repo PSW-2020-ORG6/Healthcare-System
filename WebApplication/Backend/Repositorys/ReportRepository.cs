@@ -20,6 +20,7 @@ namespace WebApplication.Backend.Repositorys
             {
             }
         }
+
         ///Tanja Drcelic RA124/2017 and Marija Vucetic RA157/2017
         /// <summary>
         ///Get reports from table
@@ -58,6 +59,7 @@ namespace WebApplication.Backend.Repositorys
             }
             return resultList;
         }
+
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///Get procedure type by id from table
@@ -103,6 +105,7 @@ namespace WebApplication.Backend.Repositorys
             connection.Close();
             return specialization;
         }
+
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///Create sqlDml for get reports
@@ -139,6 +142,7 @@ namespace WebApplication.Backend.Repositorys
             else
                 return GetPrescriptionsByProedureTypeNegation(value, reports);
         }
+
         private List<Report> GetPrescriptionsBySpecializationNegation(string value, List<Report> reports)
         {
             List<Report> resultList = new List<Report>();
@@ -170,6 +174,7 @@ namespace WebApplication.Backend.Repositorys
             }
             return resultList;
         }
+
         private List<Report> GetPrescriptionsBySpecialization(string value, List<Report> reports)
         {
             List<Report> resultList = new List<Report>();
@@ -191,6 +196,7 @@ namespace WebApplication.Backend.Repositorys
             }
             return resultList;
         }
+
         private List<Report> GetPrescriptionsByPhysition(string value, List<Report> reports)
         {
             List<Report> resultList = new List<Report>();
@@ -212,6 +218,7 @@ namespace WebApplication.Backend.Repositorys
             }
             return resultList;
         }
+
         private List<Report> GetPrescriptionsByPatient(string value, List<Report> reports)
         {
             List<Report> resultList = new List<Report>();
@@ -224,7 +231,6 @@ namespace WebApplication.Backend.Repositorys
         }
         private List<Report> GetReportssByAllProperties(string value, List<Report> reports)
         {
-
             List<Report> resultList = new List<Report>();
             foreach (Report report in reports)
             {
@@ -233,9 +239,9 @@ namespace WebApplication.Backend.Repositorys
             }
             return resultList;
         }
+
         private List<Report> GetRepportsByAllPropertiesNegation(string value, List<Report> reports)
         {
-
             List<Report> resultList = new List<Report>();
             foreach (Report report in reports)
             {
@@ -244,6 +250,5 @@ namespace WebApplication.Backend.Repositorys
              }
             return resultList;
         }
-
     }
 }
