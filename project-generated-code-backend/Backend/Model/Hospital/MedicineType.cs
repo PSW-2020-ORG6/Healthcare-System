@@ -28,10 +28,6 @@ namespace Model.Hospital
             this.type = type;
         }
 
-        public MedicineType()
-        {
-        }
-
         public override bool Equals(object obj)
         {
             MedicineType other = obj as MedicineType;

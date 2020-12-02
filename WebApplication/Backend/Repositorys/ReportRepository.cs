@@ -7,14 +7,14 @@ using System.Collections.Generic;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class ReportRepository: IReportRepository
+    public class ReportRepository : IReportRepository
     {
         private MySqlConnection connection;
         public ReportRepository()
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
+                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
             }
             catch (Exception e)
             {
@@ -39,13 +39,13 @@ namespace WebApplication.Backend.Repositorys
             while (sqlReader.Read())
             {
                 Report entity = new Report();
-                entity.SerialNumber = 
+                entity.SerialNumber =
                 entity.Findings = (string)sqlReader[1];
                 entity.PatientConditions = (string)sqlReader[2];
-                entity.Patient=new Patient { SerialNumber = (string)sqlReader[3] };
-                entity.Physitian=new Physitian { SerialNumber = (string)sqlReader[4] };
-                entity.ProcedureType=new ProcedureType { SerialNumber = (string)sqlReader[5]};
-                entity.Date=(DateTime)sqlReader[6];
+                entity.Patient = new Patient { SerialNumber = (string)sqlReader[3] };
+                entity.Physitian = new Physitian { SerialNumber = (string)sqlReader[4] };
+                entity.ProcedureType = new ProcedureType { SerialNumber = (string)sqlReader[5] };
+                entity.Date = (DateTime)sqlReader[6];
                 resultList.Add(entity);
             }
             connection.Close();
@@ -55,7 +55,7 @@ namespace WebApplication.Backend.Repositorys
                 report.Patient = patientRepository.GetPatientById(report.Patient.SerialNumber);
                 PhysitianRepository phisitionRepository = new PhysitianRepository();
                 report.Physitian = phisitionRepository.GetPhysitianById(report.Physitian.SerialNumber);
-                report.ProcedureType=GetProcedureTypeById("Select * from proceduretypes where SerialNumber like '" + report.ProcedureType.SerialNumber + "'");
+                report.ProcedureType = GetProcedureTypeById("Select * from proceduretypes where SerialNumber like '" + report.ProcedureType.SerialNumber + "'");
             }
             return resultList;
         }
@@ -79,7 +79,7 @@ namespace WebApplication.Backend.Repositorys
             entity.SerialNumber = (string)sqlReader[0];
             entity.Name = (string)sqlReader[1];
             entity.Specialization = new Specialization();
-            entity.Specialization= new Specialization { SerialNumber = (string)sqlReader[2] };
+            entity.Specialization = new Specialization { SerialNumber = (string)sqlReader[2] };
             connection.Close();
             entity.Specialization = GetSpecialization("Select * from specializations where SerialNumber like '" + entity.Specialization.SerialNumber + "'");
             return entity;
@@ -100,8 +100,8 @@ namespace WebApplication.Backend.Repositorys
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             sqlReader.Read();
             Specialization specialization = new Specialization();
-            specialization.SerialNumber= (string)sqlReader[0];
-            specialization.Name= (string)sqlReader[2];
+            specialization.SerialNumber = (string)sqlReader[0];
+            specialization.Name = (string)sqlReader[2];
             connection.Close();
             return specialization;
         }
@@ -150,7 +150,7 @@ namespace WebApplication.Backend.Repositorys
             {
                 if (!report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
                     resultList.Add(report);
-                }
+            }
             return resultList;
         }
 
@@ -163,7 +163,7 @@ namespace WebApplication.Backend.Repositorys
                     resultList.Add(report);
             }
             return resultList;
-         }
+        }
         private List<Report> GetPrescriptionsByProedureType(string value, List<Report> reports)
         {
             List<Report> resultList = new List<Report>();
@@ -180,9 +180,9 @@ namespace WebApplication.Backend.Repositorys
             List<Report> resultList = new List<Report>();
             foreach (Report report in reports)
             {
-                    if (report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
-                        resultList.Add(report);
-                }
+                if (report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
+                    resultList.Add(report);
+            }
             return resultList;
         }
 
@@ -245,9 +245,9 @@ namespace WebApplication.Backend.Repositorys
             List<Report> resultList = new List<Report>();
             foreach (Report report in reports)
             {
-                    if (!report.Physitian.Name.ToUpper().Contains(value.ToUpper()) && !report.Physitian.Surname.ToUpper().Contains(value.ToUpper()) && !report.Patient.Name.ToUpper().Contains(value.ToUpper()) && !report.Patient.Name.ToUpper().Contains(value.ToUpper()) && !report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()) && !report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
-                        resultList.Add(report);
-             }
+                if (!report.Physitian.Name.ToUpper().Contains(value.ToUpper()) && !report.Physitian.Surname.ToUpper().Contains(value.ToUpper()) && !report.Patient.Name.ToUpper().Contains(value.ToUpper()) && !report.Patient.Name.ToUpper().Contains(value.ToUpper()) && !report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()) && !report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
+                    resultList.Add(report);
+            }
             return resultList;
         }
     }

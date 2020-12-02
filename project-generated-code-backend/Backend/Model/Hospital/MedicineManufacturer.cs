@@ -15,7 +15,7 @@ namespace Model.Hospital
 
         public virtual string Name { get => name; set => name = value; }
 
-        public MedicineManufacturer(): base(Guid.NewGuid().ToString()) { }
+        public MedicineManufacturer() : base(Guid.NewGuid().ToString()) { }
         public MedicineManufacturer(string name) : base(Guid.NewGuid().ToString())
         {
             this.name = name;

@@ -107,7 +107,7 @@ namespace Backend.Dto
 
         public bool AreRegistrationFieldsValid()
         {
-            if(Name == null || Surname == null || ParentName == null || Id == null || DateOfBirth == null || PlaceOfBirth == null || MunicipalityOfBirth == null ||
+            if (Name == null || Surname == null || ParentName == null || Id == null || DateOfBirth == null || PlaceOfBirth == null || MunicipalityOfBirth == null ||
                 StateOfBirth == null || Nationality == null || Citizenship == null || Address == null || Address == null || PlaceOfResidence == null ||
                 MunicipalityOfResidence == null || StateOfResidence == null || Profession == null || EmploymentStatus == null || MaritalStatus == null ||
                 Contact == null || Email == null || Password == null || Gender == null || HealthInsuranceNumber == null)

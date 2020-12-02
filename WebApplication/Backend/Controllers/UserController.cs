@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Model.MedicalExam;
 using System.Collections.Generic;
 using WebApplication.Backend.DTO;
 using WebApplication.Backend.Services;
@@ -13,8 +12,8 @@ namespace WebApplication.Backend.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly PrescriptionService prescriptionService=new PrescriptionService();
-        private readonly ReportService reportService=new ReportService();
+        private readonly PrescriptionService prescriptionService = new PrescriptionService();
+        private readonly ReportService reportService = new ReportService();
         private SearchEntityDTO searchEntityDTO = new SearchEntityDTO();
 
         public UserController()
@@ -23,7 +22,7 @@ namespace WebApplication.Backend.Controllers
         }
 
         [HttpGet("advancedSearch")]
-        public List<SearchEntityDTO> GetAllFeedbacks([FromQuery]string prescriptionSearch, [FromQuery]string reportSearch, [FromQuery] string date)
+        public List<SearchEntityDTO> GetAllFeedbacks([FromQuery] string prescriptionSearch, [FromQuery] string reportSearch, [FromQuery] string date)
         {
             if (!searchEntityDTO.IsDateFormat(date))
                 return null;
@@ -50,7 +49,7 @@ namespace WebApplication.Backend.Controllers
                 if (!searchEntityDTO.IsNull(reports))
                     return reports;
             }
-                return null;
-        } 
+            return null;
+        }
     }
 }

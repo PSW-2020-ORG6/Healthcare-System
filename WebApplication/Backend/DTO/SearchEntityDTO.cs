@@ -7,7 +7,7 @@ namespace WebApplication.Backend.DTO
         private string text;
         private string date;
 
-        public SearchEntityDTO() 
+        public SearchEntityDTO()
         {
         }
 
@@ -25,21 +25,22 @@ namespace WebApplication.Backend.DTO
         public List<SearchEntityDTO> MergeLists(List<SearchEntityDTO> searchEntityDTOPrescriotions, List<SearchEntityDTO> searchEntityDTOReport)
         {
             List<SearchEntityDTO> searchEntityDTOs = searchEntityDTOPrescriotions;
-            if (searchEntityDTOReport != null) {
+            if (searchEntityDTOReport != null)
+            {
                 foreach (SearchEntityDTO searchEntityDTO in searchEntityDTOReport)
                     searchEntityDTOs.Add(searchEntityDTO);
             }
             return searchEntityDTOs;
         }
 
-        public bool IsSearchesFormatValid(string prescriptionSearch,string reportSearch)
+        public bool IsSearchesFormatValid(string prescriptionSearch, string reportSearch)
         {
             return IsSearchFormatValid(prescriptionSearch) && IsSearchFormatValid(reportSearch);
         }
 
         public bool IsSearchFormatValid(string search)
         {
-            if (search == null || search.Split(";").Length < 0 || search.Split(",").Length < 3 || search.Split(";").Length >4)
+            if (search == null || search.Split(";").Length < 0 || search.Split(",").Length < 3 || search.Split(";").Length > 4)
                 return false;
             foreach (string searchString in search.Split(";"))
             {
@@ -51,8 +52,8 @@ namespace WebApplication.Backend.DTO
 
         public bool IsDateFormat(string date)
         {
-            if(date!=null)
-                return date.Split("and")[0].Split("-").Length== 3 || date.Split("and")[1].Split("-").Length == 3;
+            if (date != null)
+                return date.Split("and")[0].Split("-").Length == 3 || date.Split("and")[1].Split("-").Length == 3;
             return false;
         }
 
