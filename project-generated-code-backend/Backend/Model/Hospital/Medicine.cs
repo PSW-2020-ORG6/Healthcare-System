@@ -53,10 +53,6 @@ namespace Model.Hospital
             this.medicineType = medicineType;
         }
 
-        public Medicine()
-        {
-        }
-
         public override bool Equals(object obj)
         {
             Medicine other = obj as Medicine;

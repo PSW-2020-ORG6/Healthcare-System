@@ -1,6 +1,6 @@
-﻿using health_clinic_class_diagram.Backend.Model.Survey;
-using health_clinic_class_diagram.Backend.Model.Hospital;
+﻿using health_clinic_class_diagram.Backend.Model.Hospital;
 using health_clinic_class_diagram.Backend.Model.Schedule;
+using health_clinic_class_diagram.Backend.Model.Survey;
 using Microsoft.EntityFrameworkCore;
 using Model.Accounts;
 using Model.Blog;
@@ -326,8 +326,8 @@ namespace WebApplication.Backend.Model
             modelBuilder.Entity<Physitian>().Ignore(o => o.WorkSchedule);
             modelBuilder.Entity<Physitian>().Ignore(o => o.AllSpecializations);
             modelBuilder.Entity<Physitian>().HasData(
-                 new Physitian { SerialNumber = "600001", Name = "Gojko", Surname = "Simic", Id = "600001", DateOfBirth = new DateTime(1975, 11, 11), Contact = "Simic kontakt", Email = "simic@gmail.com", Password = "sifraSimic24dsf1" },
-                 new Physitian { SerialNumber = "600002", Name = "Klara", Surname = "Dicic", Id = "600002", DateOfBirth = new DateTime(1985, 4, 25), Contact = "Dicic kontakt", Email = "dicic@gmail.com", Password = "sifraDicic98754" }
+                 new Physitian { SerialNumber = "600001", Name = "Gojko", Surname = "Simic", Id = "600001", DateOfBirth = new DateTime(1975, 11, 11), Contact = "Simic kontakt", Email = "simic@gmail.com", Password = "sifraSimic24dsf1", AddressSerialNumber = "200001" },
+                 new Physitian { SerialNumber = "600002", Name = "Klara", Surname = "Dicic", Id = "600002", DateOfBirth = new DateTime(1985, 4, 25), Contact = "Dicic kontakt", Email = "dicic@gmail.com", Password = "sifraDicic98754", AddressSerialNumber = "200002" }
             );
         }
 

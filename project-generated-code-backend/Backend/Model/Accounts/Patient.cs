@@ -50,7 +50,7 @@ namespace Model.Accounts
             this.Guest = isGuest;
             this.password = password;
         }
-        public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string parentName, string placeOfBirth, string municipalityOfBirth, string stateOfBirth, String citizenship, string nationality, string profession, string placeOfResidence, string municipalityOfResidence, string stateOfResidence, string employmentStatus, string maritalStatus,string healthInsuranceNumber,string familyDiseases, string personalDiseases, string gender, string password, string image, bool isGuest = false)
+        public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string parentName, string placeOfBirth, string municipalityOfBirth, string stateOfBirth, String citizenship, string nationality, string profession, string placeOfResidence, string municipalityOfResidence, string stateOfResidence, string employmentStatus, string maritalStatus, string healthInsuranceNumber, string familyDiseases, string personalDiseases, string gender, string password, string image, bool isGuest = false)
             : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address, password)
         {
             this.parentName = parentName;

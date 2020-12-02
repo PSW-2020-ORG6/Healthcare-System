@@ -89,7 +89,7 @@ namespace Model.Accounts
 
 
         private TimeInterval workSchedule;
-        private  List<TimeInterval> vacationTime;
+        private List<TimeInterval> vacationTime;
 
         public virtual List<TimeInterval> VacationTime
         {

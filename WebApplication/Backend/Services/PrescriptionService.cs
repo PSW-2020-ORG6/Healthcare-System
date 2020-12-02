@@ -29,33 +29,34 @@ namespace WebApplication.Backend.Services
         ///<returns>
         ///list of prescription DTO objects
         ///</returns>
-        public List<SearchEntityDTO> GetSearchedPrescription(string searchedPersription,string dateTimes)
-        {   
+        public List<SearchEntityDTO> GetSearchedPrescription(string searchedPersription, string dateTimes)
+        {
             try
             {
                 string[] search = searchedPersription.Split(";");
-                string[] s= search[0].Split(",");
-                List<Prescription> firstSearchedList= iPrescriptionRepository.GetPrescriptionsByProperty(Propeerty(search[0].Split(",")[2]), search[0].Split(",")[1], dateTimes,false);
+                string[] s = search[0].Split(",");
+                List<Prescription> firstSearchedList = iPrescriptionRepository.GetPrescriptionsByProperty(Propeerty(search[0].Split(",")[2]), search[0].Split(",")[1], dateTimes, false);
 
                 for (int i = 1; i < search.Length; i++)
                 {
                     if (search[i].Split(",")[0].Equals("AND"))
-                        firstSearchedList = OperationAND(firstSearchedList, iPrescriptionRepository.GetPrescriptionsByProperty(Propeerty(search[i].Split(",")[2]), search[i].Split(",")[1], dateTimes,false));
+                        firstSearchedList = OperationAND(firstSearchedList, iPrescriptionRepository.GetPrescriptionsByProperty(Propeerty(search[i].Split(",")[2]), search[i].Split(",")[1], dateTimes, false));
                     else if (search[i].Split(",")[0].Equals("OR"))
-                        firstSearchedList = OperationOR(firstSearchedList, iPrescriptionRepository.GetPrescriptionsByProperty(Propeerty(search[i].Split(",")[2]), search[i].Split(",")[1], dateTimes,false));
+                        firstSearchedList = OperationOR(firstSearchedList, iPrescriptionRepository.GetPrescriptionsByProperty(Propeerty(search[i].Split(",")[2]), search[i].Split(",")[1], dateTimes, false));
                     else
-                        firstSearchedList = OperationAND(firstSearchedList, iPrescriptionRepository.GetPrescriptionsByProperty(Propeerty(search[i].Split(",")[2]), search[i].Split(",")[1], dateTimes,true));
+                        firstSearchedList = OperationAND(firstSearchedList, iPrescriptionRepository.GetPrescriptionsByProperty(Propeerty(search[i].Split(",")[2]), search[i].Split(",")[1], dateTimes, true));
                 }
                 return ConverToDTO(firstSearchedList);
             }
             catch (Exception e)
             {
-                return ConverToDTO(iPrescriptionRepository.GetPrescriptionsByProperty(Propeerty(searchedPersription.Split(",")[2]), searchedPersription.Split(",")[1], dateTimes,false));
+                return ConverToDTO(iPrescriptionRepository.GetPrescriptionsByProperty(Propeerty(searchedPersription.Split(",")[2]), searchedPersription.Split(",")[1], dateTimes, false));
             }
         }
 
 
-        private SearchProperty Propeerty(string property){
+        private SearchProperty Propeerty(string property)
+        {
             if (property.Equals("All"))
                 return SearchProperty.All;
             else if (property.Equals("Medicine name"))
@@ -120,22 +121,22 @@ namespace WebApplication.Backend.Services
 
             foreach (Prescription psecond in secondSearchedList)
             {
-               if(NotInResult(returnList,psecond.SerialNumber))
-                     returnList.Add(psecond);
+                if (NotInResult(returnList, psecond.SerialNumber))
+                    returnList.Add(psecond);
             }
             return returnList;
         }
 
         private List<SearchEntityDTO> ConverToDTO(List<Prescription> prescriptions)
         {
-            if (prescriptions == null || prescriptions.Count==0)
+            if (prescriptions == null || prescriptions.Count == 0)
                 return null;
             List<SearchEntityDTO> searchEntityDTOs = new List<SearchEntityDTO>();
-            foreach(Prescription prescription in prescriptions)
+            foreach (Prescription prescription in prescriptions)
             {
-                string text="";
+                string text = "";
                 foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
-                    text +="Medicine: "+ medicineDosage.Medicine.GenericName + " - " + medicineDosage.Medicine.MedicineType.Type + " - " + medicineDosage.Amount + " - " + medicineDosage.Note + ";\n";
+                    text += "Medicine: " + medicineDosage.Medicine.GenericName + " - " + medicineDosage.Medicine.MedicineType.Type + " - " + medicineDosage.Amount + " - " + medicineDosage.Note + ";\n";
                 searchEntityDTOs.Add(new SearchEntityDTO("Prescriprion", text, prescription.Date.ToString("dddd, MMMM dd yyyy")));
             }
             return searchEntityDTOs;

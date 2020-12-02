@@ -62,7 +62,7 @@ namespace WebApplication.Backend.Controllers
         public IActionResult Confirmation(string id)
         {
             string patientId = IdDecryption(id);
-            
+
             if (registrationService.ConfirmEmailUpdate(patientId))
             {
                 return Ok();

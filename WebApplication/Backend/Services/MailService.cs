@@ -2,8 +2,8 @@
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using WebApplication.Backend.Model;
 using Model.Accounts;
+using WebApplication.Backend.Model;
 
 namespace WebApplication.Backend.Services
 {
@@ -37,7 +37,8 @@ namespace WebApplication.Backend.Services
             using var smtp = new SmtpClient();
             smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
             smtp.Authenticate(_mailSettings.Mail, _mailSettings.Password);
-            /*await*/ smtp.Send(email);
+            /*await*/
+            smtp.Send(email);
             smtp.Disconnect(true);
         }
 
