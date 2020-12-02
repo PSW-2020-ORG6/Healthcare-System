@@ -49,6 +49,18 @@ namespace WebApplication.Backend.Repositorys
             }
         }
 
+        public Equipment GetEquipmentsBySerialNumber(string serialNumber)
+        {
+            try
+            {
+                return GetEquipments("Select * from equipments where SerialNumber='" + serialNumber + "'")[0];
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public List<Equipment> GetEquipmentsByName(string name)
         {
             try

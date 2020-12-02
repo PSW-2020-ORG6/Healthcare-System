@@ -19,11 +19,11 @@ namespace Model.Accounts
         {
             this.specialization = new List<Specialization>();
         }
-       public Physitian() { }
+        public Physitian() { }
         public Physitian(string name, string surname, string id)
             : base(Guid.NewGuid().ToString(), name, surname, id)
         {
-         
+
         }
 
 
@@ -49,6 +49,11 @@ namespace Model.Accounts
                 if (specialization == null)
                     specialization = new List<Specialization>();
                 return specialization;
+            }
+            set
+            {
+                if (specialization == null)
+                    specialization = new List<Specialization>();
             }
         }
 
@@ -141,6 +146,11 @@ namespace Model.Accounts
                     specializations += s.ToString() + ", ";
                 }
                 return specializations;
+            }
+            set
+            {
+                if (specialization == null)
+                    AllSpecializations = " ";
             }
         }
 

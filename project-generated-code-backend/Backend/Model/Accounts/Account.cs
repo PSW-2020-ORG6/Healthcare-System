@@ -14,23 +14,24 @@ namespace Model.Accounts
         protected String name;
         protected String surname;
         protected String id;
+        protected String fullName;
         protected DateTime dateOfBirth;
         protected String contact;
         protected String email;
         protected Address address;
         protected String password;
+        private string addressSerialNumber;
 
         public string Name { get => name; set => name = value; }
         public string Surname { get => surname; set => surname = value; }
-        public string FullName { get => name + " " + surname; }
+        public string FullName { get => name + " " + surname; set => fullName = value; }
         public string Id { get => id; set => id = value; }
         public DateTime DateOfBirth { get => dateOfBirth; set => dateOfBirth = value; }
         public string Contact { get => contact; set => contact = value; }
         public string Email { get => email; set => email = value; }
         public virtual Address Address { get => address; set => address = value; }
         public String Password { get => password; set => password = value; }
-
-        public Account(String serialNumber) : base(serialNumber) { }
+        public string AddressSerialNumber { get => addressSerialNumber; set => addressSerialNumber = value; }
 
         public Account(String serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, String password) : base(serialNumber)
         {
@@ -59,7 +60,7 @@ namespace Model.Accounts
             this.surname = surname;
             this.id = id;
         }
-        public Account( string name, string surname) 
+        public Account(string name, string surname)
         {
             this.name = name;
             this.surname = surname;

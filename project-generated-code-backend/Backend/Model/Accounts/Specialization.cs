@@ -25,6 +25,10 @@ namespace Model.Accounts
             this.name = name;
         }
 
+        public Specialization()
+        {
+        }
+
         public string Name { get => name; set => name = value; }
 
         public override string ToString()

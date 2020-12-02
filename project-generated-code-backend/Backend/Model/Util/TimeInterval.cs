@@ -12,9 +12,11 @@ namespace Model.Util
     {
         private DateTime start;
         private DateTime end;
+        private string id;
 
         public DateTime Start { get => start; set => start = value; }
         public DateTime End { get => end; set => end = value; }
+        public string Id { get => id; set => id = value; }
 
         public TimeInterval() { }
 

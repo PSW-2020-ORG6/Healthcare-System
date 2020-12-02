@@ -1,11 +1,12 @@
-﻿using Model.Accounts;
+﻿using GraphicEditor.Repositories.Interfaces;
+using Model.Accounts;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 
-namespace WebApplication.Backend.Repositorys
+namespace GraphicEditor.Repositories
 {
-    public class PhysitianRepository
+    public class PhysitianRepository : IPhysitianRepository
     {
         private MySqlConnection connection;
         private AddressRepository addressRepository = new AddressRepository();
@@ -109,5 +110,6 @@ namespace WebApplication.Backend.Repositorys
                 return null;
             }
         }
+
     }
 }

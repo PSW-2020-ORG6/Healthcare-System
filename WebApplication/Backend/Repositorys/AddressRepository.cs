@@ -1,42 +1,42 @@
-﻿using GraphicEditor.Repositories.Interfaces;
-using Model.Hospital;
+﻿using Model.Util;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 
-namespace GraphicEditor.Repositories
+namespace WebApplication.Backend.Repositorys
 {
-    public class RoomTypeRepository : IRoomTypeRepository
+    public class AddressRepository
     {
         private MySqlConnection connection;
-        public RoomTypeRepository()
+
+        public AddressRepository()
         {
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
         }
 
-        private List<RoomType> GetRoomTypes(String query)
+        private List<Address> GetAddresses(String query)
         {
             connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<RoomType> resultList = new List<RoomType>();
+            List<Address> resultList = new List<Address>();
             while (sqlReader.Read())
             {
-                RoomType entity = new RoomType();
+                Address entity = new Address();
                 entity.SerialNumber = (string)sqlReader[0];
-                entity.Name = (string)sqlReader[1];
+                entity.Street = (string)sqlReader[1];
                 resultList.Add(entity);
             }
             connection.Close();
             return resultList;
         }
 
-        public List<RoomType> GetAllGetRoomTypes()
+        public List<Address> GetAllAddresses()
         {
             try
             {
-                return GetRoomTypes("Select * from roomTypes");
+                return GetAddresses("Select * from addresses");
             }
             catch (Exception)
             {
@@ -44,11 +44,24 @@ namespace GraphicEditor.Repositories
             }
         }
 
-        public RoomType GetRoomTypeBySerialNumber(string serialNumber)
+        public Address GetAddressBySerialNumber(string serialNumber)
         {
             try
             {
-                return GetRoomTypes("Select * from roomTypes where SerialNumber='" + serialNumber + "'")[0];
+                return GetAddresses("Select * from addresses where SerialNumber='" + serialNumber + "'")[0];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public List<Address> GetAddressesByStreet(string street)
+        {
+            try
+            {
+                return GetAddresses("Select * from addresses where Street='" + street + "'");
             }
             catch (Exception e)
             {

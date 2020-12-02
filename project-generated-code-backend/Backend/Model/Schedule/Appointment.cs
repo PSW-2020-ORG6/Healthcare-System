@@ -22,13 +22,13 @@ namespace Model.Schedule
         private ProcedureType procedureType;
         private bool urgency;
 
-        public Room Room { get => room; }
-        public Physitian Physitian { get => physitian; }
-        public Patient Patient { get => patient; }
-        public TimeInterval TimeInterval { get => timeInterval; }
-        public ProcedureType ProcedureType { get => procedureType; }
-        public bool Urgency { get => urgency; }
-        public DateTime Date { get => timeInterval.Start.Date; }
+        public Room Room { get => room; set => room = value; }
+        public Physitian Physitian { get => physitian; set => physitian = value; }
+        public Patient Patient { get => patient; set => patient = value; }
+        public TimeInterval TimeInterval { get => timeInterval; set => timeInterval = value; }
+        public ProcedureType ProcedureType { get => procedureType; set => procedureType = value; }
+        public bool Urgency { get => urgency; set => urgency = value; }
+        public DateTime Date { get => timeInterval.Start; }
 
         public Appointment(Room room, Physitian physitian, Patient patient, TimeInterval timeInterval, ProcedureType procedureType) : base(Guid.NewGuid().ToString())
         {
@@ -57,6 +57,10 @@ namespace Model.Schedule
             this.timeInterval = appointmentDTO.Time;
             this.procedureType = appointmentDTO.ProcedureType;
             this.urgency = appointmentDTO.Urgency;
+        }
+
+        public Appointment()
+        {
         }
 
         public override bool Equals(object obj)
