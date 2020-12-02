@@ -54,7 +54,7 @@ namespace GraphicEditor.Repositories
             }
             catch (Exception)
             {
-                return GetRooms("Select * from rooms");
+                return null;
             }
         }
 
