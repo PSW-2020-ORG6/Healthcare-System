@@ -18,6 +18,7 @@ namespace WebApplication.Backend.Repositorys
 
         private List<Room> GetRooms(String query)
         {
+            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();

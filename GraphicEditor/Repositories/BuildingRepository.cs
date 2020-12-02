@@ -18,6 +18,7 @@ namespace GraphicEditor.Repositories
 
         private List<Building> GetBuildings(String query)
         {
+            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();

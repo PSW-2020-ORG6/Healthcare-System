@@ -4,7 +4,6 @@
 // Purpose: Definition of Class Equipment
 
 using Backend.Model.Util;
-using health_clinic_class_diagram.Backend.Model.Hospital;
 using Newtonsoft.Json;
 using System;
 
@@ -32,7 +31,7 @@ namespace Model.Hospital
             this.id = id;
         }
 
-       
+
         public Equipment(Equipment equipment) : base(equipment.SerialNumber)
         {
             this.name = equipment.name;
@@ -43,9 +42,6 @@ namespace Model.Hospital
         public string Id { get => id; set { id = value; } }
 
         public string RoomId { get => roomId; set => roomId = value; }
-        public Building Building { get; set; }
-        public Floor Floor { get; set; }
-        public Room Room { get; set; }
         public string BuildingSerialNumber { get; set; }
         public string FloorSerialNumber { get; set; }
         public string RoomSerialNumber { get; set; }

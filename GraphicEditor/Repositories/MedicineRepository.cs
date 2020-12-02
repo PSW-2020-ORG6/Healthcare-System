@@ -19,6 +19,7 @@ namespace GraphicEditor.Repositories
 
         private List<Medicine> GetMedicines(String query)
         {
+            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();

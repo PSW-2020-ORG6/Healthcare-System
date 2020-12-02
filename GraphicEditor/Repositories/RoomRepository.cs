@@ -19,6 +19,7 @@ namespace GraphicEditor.Repositories
 
         private List<Room> GetRooms(String query)
         {
+            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -53,7 +54,7 @@ namespace GraphicEditor.Repositories
             }
             catch (Exception)
             {
-                return null;
+                return GetRooms("Select * from rooms");
             }
         }
 

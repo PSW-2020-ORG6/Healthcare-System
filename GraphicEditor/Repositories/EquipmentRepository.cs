@@ -9,9 +9,6 @@ namespace GraphicEditor.Repositories
     public class EquipmentRepository : IEquipmentRepository
     {
         private MySqlConnection connection;
-        private BuildingRepository buildingRepository = new BuildingRepository();
-        private FloorRepository floorRepository = new FloorRepository();
-        private RoomRepository roomRepository = new RoomRepository();
 
         public EquipmentRepository()
         {
@@ -20,6 +17,7 @@ namespace GraphicEditor.Repositories
 
         private List<Equipment> GetEquipments(String query)
         {
+            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -31,9 +29,6 @@ namespace GraphicEditor.Repositories
                 entity.Id = (string)sqlReader[1];
                 entity.RoomId = (string)sqlReader[2];
                 entity.Name = (string)sqlReader[3];
-                entity.Building = buildingRepository.GetBuildingBySerialNumber((string)sqlReader[4]);
-                entity.Floor = floorRepository.GetFloorBySerialNumber((string)sqlReader[5]);
-                entity.Room = roomRepository.GetRoomBySerialNumber((string)sqlReader[6]);
                 entity.BuildingSerialNumber = (string)sqlReader[4];
                 entity.FloorSerialNumber = (string)sqlReader[5];
                 entity.RoomSerialNumber = (string)sqlReader[6];

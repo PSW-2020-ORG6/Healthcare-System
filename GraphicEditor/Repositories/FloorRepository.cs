@@ -18,6 +18,7 @@ namespace GraphicEditor.Repositories
 
         private List<Floor> GetFloors(String query)
         {
+            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
