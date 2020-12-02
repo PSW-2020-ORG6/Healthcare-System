@@ -16,11 +16,12 @@ namespace WebApplication.Backend.Controllers
         private readonly PrescriptionService prescriptionService=new PrescriptionService();
         private readonly ReportService reportService=new ReportService();
         private SearchEntityDTO searchEntityDTO = new SearchEntityDTO();
-        private DateTimeDTO dateTimeDTO = new DateTimeDTO();
+
         public UserController()
         {
             this.reportService = new ReportService();
         }
+
         [HttpGet("advancedSearch")]
         public List<SearchEntityDTO> GetAllFeedbacks([FromQuery]string prescriptionSearch, [FromQuery]string reportSearch, [FromQuery] string date)
         {

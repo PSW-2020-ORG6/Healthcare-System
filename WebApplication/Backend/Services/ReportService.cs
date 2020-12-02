@@ -9,14 +9,17 @@ namespace WebApplication.Backend.Services
     public class ReportService
     {
         private IReportRepository iReportRepository;
+
         public ReportService()
         {
             this.iReportRepository = new ReportRepository();
         }
+
         public ReportService(IReportRepository iReportRepository)
         {
             this.iReportRepository = iReportRepository;
         }
+
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///Get reports by search
@@ -77,6 +80,7 @@ namespace WebApplication.Backend.Services
             }
             return searchEntityDTOs;
         }
+
         ///Tanja Drcelic RA124/2017 and Marija Vucetic RA157/2017
         /// <summary>
         ///Get searched reports by AND operation
@@ -106,6 +110,7 @@ namespace WebApplication.Backend.Services
             }
             return returnList;
         }
+
         private bool NotInResult(List<Report> returnList, string serialNumber)
         {
             foreach (Report rReturnList in returnList)
@@ -115,6 +120,7 @@ namespace WebApplication.Backend.Services
             }
             return true;
         }
+
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///Get searched reports by OR operation

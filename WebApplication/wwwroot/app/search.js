@@ -176,7 +176,7 @@ Vue.component("search", {
                                         </tr>
                                         <tr v-if="advancedSearches[1]">
                                             <td>
-                                                <select class="col">
+                                                <select class="col"  id="selectAdvanced31">
                                                     <option disabled>Please select one</option>
                                                     <option>AND</option>
                                                     <option>OR</option>
