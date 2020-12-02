@@ -17,7 +17,7 @@ namespace Model.MedicalExam
         private DateTime date;
         private String findings;
         public Patient patient;
-        public  Physitian physitian;
+        public Physitian physitian;
         private String patientConditions;
         private ProcedureType procedureType;
         public String patientName;
@@ -60,7 +60,7 @@ namespace Model.MedicalExam
             if (!this.additionalDocument.Contains(newAdditionalDocument))
                 this.additionalDocument.Add(newAdditionalDocument);
         }
-       
+
         public void RemoveAdditionalDocument(AdditionalDocument oldAdditionalDocument)
         {
             if (oldAdditionalDocument == null)
@@ -85,7 +85,7 @@ namespace Model.MedicalExam
             this.patientConditions = patientConditions;
         }
         public Report() { }
-        public Report(String patient,String physitian,String patientId)
+        public Report(String patient, String physitian, String patientId)
         {
             this.patientName = patient;
             this.physitianName = physitian;
@@ -101,7 +101,7 @@ namespace Model.MedicalExam
             this.physitian = physitian;
             this.patientConditions = patientConditions;
         }
-        
+
         public override bool Equals(object obj)
         {
             Report other = obj as Report;
@@ -122,13 +122,13 @@ namespace Model.MedicalExam
             }
             return this.Date.Equals(other.Date) && this.Findings.Equals(other.Findings);
         }
-        
+
 
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
-        
+
         public override string ToString()
         {
             string ret = "date: " + this.date.ToString("dd.MM.yyyy.") + "\nfindings: " + this.findings;
@@ -138,7 +138,7 @@ namespace Model.MedicalExam
             }
             return ret;
         }
-        
+
         public int CompareTo(Report other)
         {
             return this.Date.CompareTo(other.Date);

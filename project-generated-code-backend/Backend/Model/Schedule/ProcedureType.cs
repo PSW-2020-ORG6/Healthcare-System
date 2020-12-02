@@ -20,7 +20,10 @@ namespace Model.Schedule
         private int estimatedTimeInMinutes;
         private List<Equipment> requiredEquipment;
 
-        public virtual List<Equipment> RequiredEquipment
+        public Specialization Specialization { get => specialization; set => specialization = value; }
+        public string Name { get => name; set => name = value; }
+        public int EstimatedTimeInMinutes { get => estimatedTimeInMinutes; set => estimatedTimeInMinutes = value; }
+        public List<Equipment> RequiredEquipment
         {
             get
             {
@@ -110,6 +113,10 @@ namespace Model.Schedule
             this.specialization = specialization;
             this.estimatedTimeInMinutes = estimatedTimeInMinutes;
             this.requiredEquipment = new List<Equipment>();
+        }
+
+        public ProcedureType()
+        {
         }
 
         public override string ToString()

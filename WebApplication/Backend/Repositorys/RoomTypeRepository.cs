@@ -31,6 +31,18 @@ namespace WebApplication.Backend.Repositorys
             return resultList;
         }
 
+        public List<RoomType> GetAllGetRoomTypes()
+        {
+            try
+            {
+                return GetRoomTypes("Select * from roomTypes");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public RoomType GetRoomTypeBySerialNumber(string serialNumber)
         {
             try

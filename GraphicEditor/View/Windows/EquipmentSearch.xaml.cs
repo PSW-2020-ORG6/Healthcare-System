@@ -45,7 +45,8 @@ namespace GraphicEditor.View.Windows
             if (equipments.Count != 0)
                 SearchEquipmentTextBlock.Text = ReportOnFoundEqipment(itemName, equipments);
             else if (medicines.Count != 0)
-                SearchEquipmentTextBlock.Text = "";//= ReportOnFoundMedicine(itemName, medicines);
+                //TODO  ReportOnFoundMedicine(itemName, medicines);
+                SearchEquipmentTextBlock.Text = "";
             else
                 SearchEquipmentTextBlock.Text = "There is no such item.";
         }
@@ -81,7 +82,7 @@ namespace GraphicEditor.View.Windows
                 {
                     Room room = roomRepository.GetRoomBySerialNumber(equipment.RoomId);
                     resultOfSearch += "\nInformation about rooms: ";
-                    //resultOfSearch += RoomSearch.ReportOnFoundRooms(equipment.RoomId, room);
+                    //TODO resultOfSearch += RoomSearch.ReportOnFoundRooms(equipment.RoomId, room);
                     if (++checkCounter == equipmentCounter)
                         return resultOfSearch += ".";
                     else

@@ -3,7 +3,6 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class Bed
 
-using health_clinic_class_diagram.Backend.Model.Hospital;
 using Newtonsoft.Json;
 using System;
 

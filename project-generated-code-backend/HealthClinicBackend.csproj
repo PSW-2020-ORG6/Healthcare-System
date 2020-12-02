@@ -53,7 +53,6 @@
     <Compile Include="Backend\Model\Blog\BlogPost.cs" />
     <Compile Include="Backend\Model\Blog\Feedback.cs" />
     <Compile Include="Backend\Model\Hospital\Building.cs" />
-    <Compile Include="Backend\Model\Hospital\RoomLocation.cs" />
     <Compile Include="Backend\Model\Hospital\Floor.cs" />
     <Compile Include="Backend\Model\Hospital\Hospital.cs" />
     <Compile Include="Backend\Model\Hospital\Renovation.cs" />
@@ -73,6 +72,7 @@
     <Compile Include="Backend\Model\Accounts\Superintendent.cs" />
     <Compile Include="Backend\Model\Accounts\Patient.cs" />
     <Compile Include="Backend\Model\Accounts\Specialization.cs" />
+    <Compile Include="Backend\Model\Schedule\ProcedureTypeEquipmentUsage.cs" />
     <Compile Include="Backend\Model\Survey\Question.cs" />
     <Compile Include="Backend\Model\Survey\Survey.cs" />
     <Compile Include="Backend\Model\Util\Country.cs" />

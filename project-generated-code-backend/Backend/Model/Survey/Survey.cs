@@ -1,12 +1,9 @@
 ﻿using Backend.Model.Util;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace health_clinic_class_diagram.Backend.Model.Survey
 {
-    public class Survey :Entity
+    public class Survey : Entity
     {
         public string id;
         public string doctorName;
@@ -34,7 +31,7 @@ namespace health_clinic_class_diagram.Backend.Model.Survey
         public string question22;
         public string question23;
 
-        public string ID { get => id; set => id =value; }
+        public string ID { get => id; set => id = value; }
         public string DoctorName { get => doctorName; set => doctorName = value; }
         public string Question1 { get => question1; set => question1 = value; }
         public string Question2 { get => question2; set => question2 = value; }
@@ -62,7 +59,7 @@ namespace health_clinic_class_diagram.Backend.Model.Survey
 
 
         public Survey() { }
-        public Survey(String Id,String DovtorName,String AnswerQuestion1, String AnswerQuestion2, String AnswerQuestion3, String AnswerQuestion4,
+        public Survey(String Id, String DovtorName, String AnswerQuestion1, String AnswerQuestion2, String AnswerQuestion3, String AnswerQuestion4,
             String AnswerQuestion5, String AnswerQuestion6, String AnswerQuestion7, String AnswerQuestion8,
             String AnswerQuestion9, String AnswerQuestion10, String AnswerQuestion11, String AnswerQuestion12,
             String AnswerQuestion13, String AnswerQuestion14, String AnswerQuestion15, String AnswerQuestion16,
@@ -94,7 +91,7 @@ namespace health_clinic_class_diagram.Backend.Model.Survey
             this.question21 = AnswerQuestion21;
             this.question22 = AnswerQuestion22;
             this.question23 = AnswerQuestion23;
-           
+
         }
 
     }

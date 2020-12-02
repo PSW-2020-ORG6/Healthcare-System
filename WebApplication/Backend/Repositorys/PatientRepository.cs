@@ -14,7 +14,7 @@ namespace WebApplication.Backend.Repositorys
         private MySqlConnection connection;
         public PatientRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb9;user=root;password=root");
         }
         ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017
         /// <summary>
@@ -27,6 +27,7 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         internal List<Patient> GetPatients(String sqlDml)
         {
+            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -86,6 +87,7 @@ namespace WebApplication.Backend.Repositorys
             }
             return null;
         }
+
         ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017
         /// <summary>
         ///Get patients from patients table
@@ -96,6 +98,20 @@ namespace WebApplication.Backend.Repositorys
         public List<Patient> GetAllPatients()
         {
             return GetPatients("Select * from patients");
+        }
+
+
+        public Patient GetPatientBySerialNumber(string serialNumber)
+        {
+            try
+            {
+                return GetPatients("Select * from patients where SerialNumber='" + serialNumber + "'")[0];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
         }
 
 
