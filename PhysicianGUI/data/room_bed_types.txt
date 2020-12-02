@@ -1,2 +1,0 @@
-{"Name":"Soba za intezivnu negu","SerialNumber":"347518d9-8b9d-4306-bf27-a9dc72cabca1"}
-{"Name":"Soba za oporavak od operacije","SerialNumber":"163dc8a8-a38b-4257-9ea3-4d206187a9c8"}

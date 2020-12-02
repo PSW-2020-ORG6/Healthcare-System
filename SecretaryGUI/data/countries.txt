@@ -1,2 +1,0 @@
-{"Name":"Srbija", "SerialNumber":"1111", "city":[{"Name":"Novi Sad", "PostalCode":"21000", "SerialNumber":"111"}, {"Name":"Beograd", "PostalCode":"21002", "SerialNumber":"112"}, {"Name":"Subotica", "PostalCode":"21001", "SerialNumber":"113"}]}
-{"Name":"Hrvatska", "SerialNumber":"1112", "city":[{"Name":"Zagreb", "PostalCode":"30000", "SerialNumber":"222"}, {"Name":"Split", "PostalCode":"31000", "SerialNumber":"223"}, {"Name":"Osijek", "PostalCode":"32000", "SerialNumber":"224"}]}
