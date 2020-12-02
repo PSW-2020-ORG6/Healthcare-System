@@ -37,9 +37,6 @@ namespace WebApplication.Backend.Model
             modelBuilder.Entity<Building>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Building>().Ignore(o => o.Floors);
             modelBuilder.Entity<Equipment>().HasKey(o => o.Id);
-            modelBuilder.Entity<Equipment>().Ignore(o => o.Building);
-            modelBuilder.Entity<Equipment>().Ignore(o => o.Floor);
-            modelBuilder.Entity<Equipment>().Ignore(o => o.Room);
             modelBuilder.Entity<Floor>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Floor>().Ignore(o => o.Rooms);
             modelBuilder.Entity<Room>().HasKey(o => o.SerialNumber);
@@ -103,12 +100,12 @@ namespace WebApplication.Backend.Model
                 new Room { SerialNumber = "106", Name = "Operation room 106", Id = 106, FloorSerialNumber = "1002", BuildingSerialNumber = "10001", RoomTypeSerialNumber = "10000001", Row = 0, Column = 0, RowSpan = 4, ColumnSpan = 7, Style = "RoomButtonStyle" },
                 new Room { SerialNumber = "107", Name = "Operation room 107", Id = 107, FloorSerialNumber = "1002", BuildingSerialNumber = "10001", RoomTypeSerialNumber = "10000001", Row = 8, Column = 0, RowSpan = 4, ColumnSpan = 7, Style = "RoomButtonStyle" },
                 new Room { SerialNumber = "108", Name = "Store room 108", Id = 108, FloorSerialNumber = "1002", BuildingSerialNumber = "10001", RoomTypeSerialNumber = "10000002", Row = 0, Column = 10, RowSpan = 2, ColumnSpan = 3, Style = "RoomButtonStyle" },
-                new Room { SerialNumber = "109", Name = "Examination room 109", Id = 109, FloorSerialNumber = "1003", BuildingSerialNumber = "10002", RoomTypeSerialNumber = "10000003" },
-                new Room { SerialNumber = "110", Name = "Operation room 110", Id = 110, FloorSerialNumber = "1003", BuildingSerialNumber = "10002", RoomTypeSerialNumber = "10000001" },
-                new Room { SerialNumber = "111", Name = "Examination room 111", Id = 111, FloorSerialNumber = "1003", BuildingSerialNumber = "10002", RoomTypeSerialNumber = "10000003" },
-                new Room { SerialNumber = "112", Name = "Store room 112", Id = 112, FloorSerialNumber = "1003", BuildingSerialNumber = "10002", RoomTypeSerialNumber = "10000002" },
-                new Room { SerialNumber = "113", Name = "Examination room 113", Id = 113, FloorSerialNumber = "1003", BuildingSerialNumber = "10002", RoomTypeSerialNumber = "10000003" },
-                new Room { SerialNumber = "114", Name = "Examination room 114", Id = 114, FloorSerialNumber = "1003", BuildingSerialNumber = "10002", RoomTypeSerialNumber = "10000003" }
+                new Room { SerialNumber = "109", Name = "Examination room 109", Id = 109, FloorSerialNumber = "1003", BuildingSerialNumber = "10002", RoomTypeSerialNumber = "10000003", Style = "RoomButtonStyle" },
+                new Room { SerialNumber = "110", Name = "Operation room 110", Id = 110, FloorSerialNumber = "1003", BuildingSerialNumber = "10002", RoomTypeSerialNumber = "10000001", Style = "RoomButtonStyle" },
+                new Room { SerialNumber = "111", Name = "Examination room 111", Id = 111, FloorSerialNumber = "1003", BuildingSerialNumber = "10002", RoomTypeSerialNumber = "10000003", Style = "RoomButtonStyle" },
+                new Room { SerialNumber = "112", Name = "Store room 112", Id = 112, FloorSerialNumber = "1003", BuildingSerialNumber = "10002", RoomTypeSerialNumber = "10000002", Style = "RoomButtonStyle" },
+                new Room { SerialNumber = "113", Name = "Examination room 113", Id = 113, FloorSerialNumber = "1003", BuildingSerialNumber = "10002", RoomTypeSerialNumber = "10000003", Style = "RoomButtonStyle" },
+                new Room { SerialNumber = "114", Name = "Examination room 114", Id = 114, FloorSerialNumber = "1003", BuildingSerialNumber = "10002", RoomTypeSerialNumber = "10000003", Style = "RoomButtonStyle" }
             );
 
             modelBuilder.Entity<MedicineManufacturer>().HasData(

@@ -1,4 +1,5 @@
 ﻿using GraphicEditor.Repositories;
+using health_clinic_class_diagram.Backend.Model.Hospital;
 using Model.Hospital;
 using System.Collections.Generic;
 using System.Windows;
@@ -11,6 +12,8 @@ namespace GraphicEditor.View.Windows
     public partial class RoomSearch : Window
     {
         private RoomRepository roomRepository = new RoomRepository();
+        private FloorRepository floorRepository = new FloorRepository();
+        private BuildingRepository buildingRepository = new BuildingRepository();
 
         public RoomSearch()
         {
@@ -25,7 +28,7 @@ namespace GraphicEditor.View.Windows
             RoomNameTextBox.Text = null;
         }
 
-        public static string ReportOnFoundRooms(string roomName, List<Room> rooms)
+        public string ReportOnFoundRooms(string roomName, List<Room> rooms)
         {
             string resultOfSearch = roomName + " found at: ";
             if (rooms == null)
@@ -36,7 +39,7 @@ namespace GraphicEditor.View.Windows
                 int checkCounter = 0;
                 foreach (Room room in rooms)
                 {
-                    resultOfSearch += room.FloorSerialNumber + " in " + room.BuildingSerialNumber;
+                    resultOfSearch = PlaceOfFoundRooms(resultOfSearch, room);
                     if (++checkCounter == roomCounter)
                         return resultOfSearch += ".";
                     else
@@ -44,6 +47,14 @@ namespace GraphicEditor.View.Windows
                 }
             }
             return resultOfSearch += "nowhere.";
+        }
+
+        private string PlaceOfFoundRooms(string resultOfSearch, Room room)
+        {
+            Floor floor = floorRepository.GetFloorBySerialNumber(room.FloorSerialNumber);
+            Building building = buildingRepository.GetBuildingBySerialNumber(room.BuildingSerialNumber);
+            resultOfSearch += floor.Name + " in " + building.Name;
+            return resultOfSearch;
         }
     }
 }

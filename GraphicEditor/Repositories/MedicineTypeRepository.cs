@@ -12,11 +12,12 @@ namespace GraphicEditor.Repositories
         public MedicineTypeRepository()
         {
             connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
-            connection.Open();
         }
 
         private List<MedicineType> GetMedicineTypes(String query)
         {
+            connection.Close();
+            connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             List<MedicineType> resultList = new List<MedicineType>();

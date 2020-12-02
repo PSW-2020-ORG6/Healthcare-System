@@ -17,6 +17,7 @@ namespace WebApplication.Backend.Repositorys
 
         private List<Building> GetBuildings(String query)
         {
+            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
