@@ -1,6 +1,7 @@
 ﻿Vue.component("registration", {
 	data: function () {
 		return {
+			doctorsList: [],
 			patientDTO: {
 				name: null,
 				surname: null,
@@ -31,9 +32,21 @@
 				image: null,
 				guest: false,
 				emailConfirmed: false,
-				sucessFlag: false,
+				chosenDoctor:null,
+				//sucessFlag: false,
 			},
 		}
+	},
+	mounted() {
+		axios
+			.get('http://localhost:49900/registration/allPhysitians')
+			.then(response => {
+				this.doctorsList = response.data
+				alert(this.doctorsList);
+			})
+			.catch(error => {
+				alert(error)
+			})
 	},
 	template: `
     <div class="container">
@@ -237,6 +250,16 @@
 			<tr>
 				<td><label>Personal diseases</label></td>
 				<td><input type="text" class = "form-control input"  v-model="patientDTO.personalDiseases"/></td><br/>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><label>Chosen doctor</label></td>
+				<td><select class="combo form-control input" v-model = "patientDTO.chosenDoctor">
+                     <option div  v-for="doctor in doctorsList">{{doctor.name}} {{doctor.surname}}</option>
+                </select></td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>

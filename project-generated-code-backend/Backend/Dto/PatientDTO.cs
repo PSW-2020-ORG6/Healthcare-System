@@ -38,13 +38,14 @@ namespace Backend.Dto
         private String image;
         private bool guest;
         private bool emailConfirmed;
+        private string chosenDoctor;
 
         public PatientDTO() { }
 
         public PatientDTO(String serialNumber, String name, String surname, String id, DateTime dateOfBirth, String contact, String email, Address address,
                         String password, String parentName, String placeOfBirth, String municipalityOfBirth, String stateOfBirth, String citizenship, String nationality,
                         String profession, String placeOfResidence, String municipalityOfResidence, String stateOfResidence, String employmentStatus,
-                        String maritalStatus, String gender, String healthInsuranceNumber, String familyDiseases, String personalDiseases, String image, bool guest, bool emailConfirmed)
+                        String maritalStatus, String gender, String healthInsuranceNumber, String familyDiseases, String personalDiseases, String image, bool guest, bool emailConfirmed, string chosenDoctor)
         {
             this.serialNumber = serialNumber;
             this.name = name;
@@ -74,6 +75,7 @@ namespace Backend.Dto
             this.image = image;
             this.guest = guest;
             this.emailConfirmed = emailConfirmed;
+            this.chosenDoctor = chosenDoctor;
         }
 
         public string SerialNumber { get => serialNumber; set => serialNumber = value; }
@@ -104,6 +106,7 @@ namespace Backend.Dto
         public string Image { get => image; set => image = value; }
         public bool IsGuest { get => guest; set => guest = value; }
         public bool EmailConfirmed { get => emailConfirmed; set => emailConfirmed = value; }
+        public string ChosenDoctor { get => chosenDoctor; set => chosenDoctor = value; }
 
         public bool AreRegistrationFieldsValid()
         {

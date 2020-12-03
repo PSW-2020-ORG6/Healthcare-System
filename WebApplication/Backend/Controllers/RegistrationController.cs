@@ -1,6 +1,8 @@
 ﻿using Backend.Dto;
+using HealthClinicBackend.Backend.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Model.Accounts;
+using System.Collections.Generic;
 using WebApplication.Backend.Services;
 
 namespace WebApplication.Backend.Controllers
@@ -86,6 +88,12 @@ namespace WebApplication.Backend.Controllers
         {
             long id = (long.Parse(patientId) - 23 * 33) + 6789;
             return id.ToString();
+        }
+
+        [HttpGet("allPhysitians")]
+        public List<FamilyDoctorDTO> GetAllFeedbacks()
+        {
+            return registrationService.GetAllPhysitians();
         }
     }
 }
