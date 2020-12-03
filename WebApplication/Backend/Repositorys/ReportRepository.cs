@@ -54,7 +54,7 @@ namespace WebApplication.Backend.Repositorys
                 PatientRepository patientRepository = new PatientRepository();
                 report.Patient = patientRepository.GetPatientById(report.Patient.SerialNumber);
                 PhysitianRepository phisitionRepository = new PhysitianRepository();
-                report.Physitian = phisitionRepository.GetPhysitianById(report.Physitian.SerialNumber);
+                report.Physitian = phisitionRepository.GetPhysitianBySerialNumber(report.Physitian.SerialNumber);
                 report.ProcedureType = GetProcedureTypeById("Select * from proceduretypes where SerialNumber like '" + report.ProcedureType.SerialNumber + "'");
             }
             return resultList;

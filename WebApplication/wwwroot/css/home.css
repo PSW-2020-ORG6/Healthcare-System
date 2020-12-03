@@ -27,9 +27,10 @@
     border: thick;
     font-family: 'Impact';
     font-weight: 100;
+}
+.btn1 {
     margin-left: 200%;
 }
-
 .margin{
     margin-left: 70%;
 }

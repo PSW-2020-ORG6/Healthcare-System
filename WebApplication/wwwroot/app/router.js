@@ -39,7 +39,6 @@ var temp = new Vue({
 		statistics: function () {
 			router.push("statistics")
 		},
-		},
 		search: function () {
 			router.push("search")
 		}

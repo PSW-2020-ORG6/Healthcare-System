@@ -88,7 +88,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetPhysitians("Select * from physitian where SerialNumber='" + serialNumber + "'")[0];
+                return GetPhysitians("Select * from physitians where SerialNumber like '" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {
