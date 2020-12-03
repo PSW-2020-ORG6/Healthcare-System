@@ -8,8 +8,6 @@ namespace WebApplication.Backend.Repositorys.Interfaces
     {
         List<Patient> GetAllPatients();
         Patient GetPatientById(string id);
-        List<Address> GetAddresses(string sqlDml);
-        Address GetAddress(string adressId);
         Patient GetPatientBySerialNumber(string serialNumber);
     }
 }
