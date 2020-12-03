@@ -10,45 +10,39 @@ namespace Model.MedicalExam
 {
     public class DiagnosticReferral : AdditionalDocument
     {
-        private DiagnosticType diagnosticType;
+        public DiagnosticType DiagnosticType { get; set; }
 
-        public DiagnosticType DiagnosticType
+        public DiagnosticReferral(DateTime date, string notes, DiagnosticType diagnosticType) : base(
+            Guid.NewGuid().ToString(), date, notes)
         {
-            get
-            {
-                return diagnosticType;
-            }
-            set
-            {
-                this.diagnosticType = value;
-            }
-        }
-        public DiagnosticReferral(DateTime date, string notes, DiagnosticType diagnosticType) : base(Guid.NewGuid().ToString(), date, notes)
-        {
-            this.diagnosticType = diagnosticType;
+            DiagnosticType = diagnosticType;
         }
 
         [JsonConstructor]
-        public DiagnosticReferral(String serialNumber, DateTime date, string notes, DiagnosticType diagnosticType) : base(serialNumber, date, notes)
+        public DiagnosticReferral(String serialNumber, DateTime date, string notes, DiagnosticType diagnosticType) :
+            base(serialNumber, date, notes)
         {
-            this.diagnosticType = diagnosticType;
+            DiagnosticType = diagnosticType;
         }
+
         public override bool Equals(object obj)
         {
-            DiagnosticReferral other = obj as DiagnosticReferral;
-            if (other == null)
+            if (!(obj is DiagnosticReferral other))
             {
                 return false;
             }
-            return base.Equals(other) && this.DiagnosticType.Equals(other.DiagnosticType);
+
+            return base.Equals(other) && DiagnosticType.Equals(other.DiagnosticType);
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
+
         public override string ToString()
         {
-            return base.ToString() + "\ndiagnostic type: " + this.DiagnosticType.ToString();
+            return base.ToString() + "\ndiagnostic type: " + DiagnosticType;
         }
     }
 }

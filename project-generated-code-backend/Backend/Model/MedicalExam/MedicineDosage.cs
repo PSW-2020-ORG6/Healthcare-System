@@ -12,60 +12,49 @@ namespace Model.MedicalExam
 {
     public class MedicineDosage : Entity
     {
-        private double amount;
-        private String note;
-        private Medicine medicine;
+        public virtual Medicine Medicine { get; set; }
+        public double Amount { get; set; }
+        public string Note { get; set; }
 
-        public virtual Medicine Medicine
+        public MedicineDosage() : base()
         {
-            get
-            {
-                return medicine;
-            }
-            set
-            {
-                medicine = value;
-            }
         }
 
-        public double Amount { get => amount; set => amount = value; }
-        public string Note { get => note; set => note = value; }
-        public MedicineDosage() : base(Guid.NewGuid().ToString())
+        public MedicineDosage(double ammount, string note, Medicine medicine) : base()
         {
-
-        }
-        public MedicineDosage(double ammount, string note, Medicine medicine) : base(Guid.NewGuid().ToString())
-        {
-            this.amount = ammount;
-            this.note = note;
-            this.medicine = medicine;
+            Amount = ammount;
+            Note = note;
+            Medicine = medicine;
         }
 
         [JsonConstructor]
         public MedicineDosage(String serialNumber, double ammount, string note, Medicine medicine) : base(serialNumber)
         {
-            this.amount = ammount;
-            this.note = note;
-            this.medicine = medicine;
+            Amount = ammount;
+            Note = note;
+            Medicine = medicine;
         }
 
         public override bool Equals(object obj)
         {
-            MedicineDosage other = obj as MedicineDosage;
-            if (other == null)
+            if (!(obj is MedicineDosage other))
             {
                 return false;
             }
-            return this.Medicine.Equals(other.Medicine) && this.Amount == other.Amount && this.Medicine.Equals(other.Medicine);
+
+            const double TOLERANCE = 0.00001;
+            return Medicine.Equals(other.Medicine) && Math.Abs(Amount - other.Amount) < TOLERANCE &&
+                   Medicine.Equals(other.Medicine);
         }
 
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
+
         public override string ToString()
         {
-            return "medicine: " + medicine.ToString() + "\namount: " + amount + "\nnote: " + note;
+            return "medicine: " + Medicine + "\namount: " + Amount + "\nnote: " + Note;
         }
     }
 }

@@ -6,91 +6,42 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Model.MedicalExam
 {
     public class Prescription : AdditionalDocument
     {
-        private List<MedicineDosage> medicineDosage;
+        public virtual List<MedicineDosage> MedicineDosage { get; set; }
 
-        public Prescription() : base(Guid.NewGuid().ToString())
+        public Prescription() : base()
         {
-
         }
-        public Prescription(DateTime date, string notes) : base(Guid.NewGuid().ToString(), date, notes)
+
+        public Prescription(DateTime date, string notes) : base(date, notes)
         {
-            medicineDosage = new List<MedicineDosage>();
+            MedicineDosage = new List<MedicineDosage>();
         }
 
         [JsonConstructor]
         public Prescription(String serialNumber, DateTime date, string notes) : base(serialNumber, date, notes)
         {
-            medicineDosage = new List<MedicineDosage>();
-        }
-
-        public virtual List<MedicineDosage> MedicineDosage
-        {
-            get
-            {
-                if (medicineDosage == null)
-                    medicineDosage = new List<MedicineDosage>();
-                return medicineDosage;
-            }
-            set
-            {
-                RemoveAllMedicineDosage();
-                if (value != null)
-                {
-                    foreach (MedicineDosage oMedicineDosage in value)
-                        AddMedicineDosage(oMedicineDosage);
-                }
-            }
-        }
-
-        public void AddMedicineDosage(MedicineDosage newMedicineDosage)
-        {
-            if (newMedicineDosage == null)
-                return;
-            if (this.medicineDosage == null)
-                this.medicineDosage = new List<MedicineDosage>();
-            if (!this.medicineDosage.Contains(newMedicineDosage))
-                this.medicineDosage.Add(newMedicineDosage);
-        }
-
-        public void RemoveMedicineDosage(MedicineDosage oldMedicineDosage)
-        {
-            if (oldMedicineDosage == null)
-                return;
-            if (this.medicineDosage != null)
-                if (this.medicineDosage.Contains(oldMedicineDosage))
-                    this.medicineDosage.Remove(oldMedicineDosage);
-        }
-
-        public void RemoveAllMedicineDosage()
-        {
-            if (medicineDosage != null)
-                medicineDosage.Clear();
+            MedicineDosage = new List<MedicineDosage>();
         }
 
         public override bool Equals(object obj)
         {
-            Prescription other = obj as Prescription;
-            if (other == null)
+            if (!(obj is Prescription other))
             {
                 return false;
             }
-            if (this.medicineDosage.Count != other.medicineDosage.Count)
+
+            if (MedicineDosage.Count != other.MedicineDosage.Count)
             {
                 return false;
             }
-            foreach (MedicineDosage m in this.medicineDosage)
-            {
-                if (!other.medicineDosage.Contains(m))
-                {
-                    return false;
-                }
-            }
-            return base.Equals(obj);
+
+            return MedicineDosage.All(m => other.MedicineDosage.Contains(m)) && base.Equals(obj);
         }
 
         public override int GetHashCode()
@@ -100,12 +51,8 @@ namespace Model.MedicalExam
 
         public override string ToString()
         {
-            string ret = base.ToString();
-            foreach (MedicineDosage m in medicineDosage)
-            {
-                ret += "\nmedicine dosage: " + m.ToString();
-            }
-            return ret;
+            var ret = base.ToString();
+            return MedicineDosage.Aggregate(ret, (current, m) => current + ("\nmedicine dosage: " + m.ToString()));
         }
     }
 }

@@ -5,21 +5,17 @@ namespace Backend.Model.Util
 {
     public abstract class Entity
     {
-        private string serialNumber;
+        public string SerialNumber { get; set; }
 
-        public string SerialNumber { get => serialNumber; set => this.serialNumber = value; }
+        public Entity()
+        {
+            SerialNumber = Guid.NewGuid().ToString();
+        }
 
         [JsonConstructor]
         public Entity(string serialNumber)
         {
-            this.serialNumber = serialNumber;
+            SerialNumber = serialNumber;
         }
-
-        public Entity()
-        {
-            this.serialNumber = Guid.NewGuid().ToString();
-        }
-
-
     }
 }

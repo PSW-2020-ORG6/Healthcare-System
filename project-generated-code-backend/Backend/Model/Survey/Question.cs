@@ -1,20 +1,21 @@
 ﻿using System;
+using Backend.Model.Util;
 
 namespace health_clinic_class_diagram.Backend.Model.Survey
 {
-    public class Question
+    public class Question: Entity
     {
-        public string question;
-        public int id;
+        public string QuestionText { get; set; }
+        public int Id { get; set; }
 
-        public String QuestionText { get => question; set => question = value; }
-        public int Id { get => id; }
-
-        public Question() { }
-        public Question(int ID, String QuestionText)
+        public Question(): base()
         {
-            id = ID;
-            question = QuestionText;
+        }
+
+        public Question(int id, string questionText): base()
+        {
+            Id = Id;
+            QuestionText = QuestionText;
         }
     }
 }

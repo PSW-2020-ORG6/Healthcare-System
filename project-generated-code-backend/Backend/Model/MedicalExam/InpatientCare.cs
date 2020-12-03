@@ -12,53 +12,51 @@ namespace Model.MedicalExam
 {
     public class InpatientCare : Entity
     {
-        private DateTime dateOfAdmition;
-        private DateTime dateOfDischarge;
+        public DateTime DateOfAdmission { get; set; }
+        public DateTime DateOfDischarge { get; set; }
+        public Physitian Physitian { get; set; }
+        public Patient Patient { get; set; }
 
-        private Physitian physitian;
-        private Patient patient;
-
-        public DateTime DateOfAdmition { get => dateOfAdmition; }
-        public DateTime DateOfDischarge { get => dateOfDischarge; }
-        public Physitian Physitian { get => physitian; }
-        public Patient Patient { get => patient; }
-
-        public InpatientCare(DateTime dateOfAdmition, DateTime dateOfDischarge, Physitian physitian, Patient patient) : base(Guid.NewGuid().ToString())
+        public InpatientCare(DateTime dateOfAdmition, DateTime dateOfDischarge, Physitian physitian,
+            Patient patient) : base()
         {
-            this.dateOfAdmition = dateOfAdmition;
-            this.dateOfDischarge = dateOfDischarge;
-            this.physitian = physitian;
-            this.patient = patient;
+            DateOfAdmission = dateOfAdmition;
+            DateOfDischarge = dateOfDischarge;
+            Physitian = physitian;
+            Patient = patient;
         }
 
         [JsonConstructor]
-        public InpatientCare(String serialNumber, DateTime dateOfAdmition, DateTime dateOfDischarge, Physitian physitian, Patient patient) : base(serialNumber)
+        public InpatientCare(String serialNumber, DateTime dateOfAdmition, DateTime dateOfDischarge,
+            Physitian physitian, Patient patient) : base(serialNumber)
         {
-            this.dateOfAdmition = dateOfAdmition;
-            this.dateOfDischarge = dateOfDischarge;
-            this.physitian = physitian;
-            this.patient = patient;
+            DateOfAdmission = dateOfAdmition;
+            DateOfDischarge = dateOfDischarge;
+            Physitian = physitian;
+            Patient = patient;
         }
 
         public override bool Equals(object obj)
         {
-            InpatientCare other = obj as InpatientCare;
-            if (other == null)
+            if (!(obj is InpatientCare other))
             {
                 return false;
             }
-            return this.DateOfAdmition.Equals(other.DateOfAdmition) && this.DateOfDischarge.Equals(other.DateOfDischarge)
-                && this.Patient.Equals(other.Patient) && this.Physitian.Equals(other.Physitian);
+
+            return DateOfAdmission.Equals(other.DateOfAdmission) && DateOfDischarge.Equals(other.DateOfDischarge) &&
+                   Patient.Equals(other.Patient) && Physitian.Equals(other.Physitian);
         }
 
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
+
         public override string ToString()
         {
-            return "patient: " + patient.FullName + "\nphysitian: " + physitian.FullName + "\ndate of admition:"
-                + dateOfAdmition.ToString("dd.MM.yyyy.") + "\ndate of discharge:" + dateOfDischarge.ToString("dd.MM.yyyy.");
+            return "patient: " + Patient.FullName + "\nphysitian: " + Physitian.FullName + "\ndate of admition:" +
+                   DateOfAdmission.ToString("dd.MM.yyyy.") + "\ndate of discharge:" +
+                   DateOfDischarge.ToString("dd.MM.yyyy.");
         }
     }
 }

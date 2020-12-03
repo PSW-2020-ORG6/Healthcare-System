@@ -15,71 +15,53 @@ namespace Model.Schedule
 {
     public class Appointment : Entity
     {
-        private Room room;
-        private Physitian physitian;
-        private Patient patient;
-        private TimeInterval timeInterval;
-        private ProcedureType procedureType;
-        private bool urgency;
-        private bool active;
-        private DateTime date;
+        public Room Room { get; set; }
+        public Physitian Physitian { get; set; }
+        public Patient Patient { get; set; }
+        public TimeInterval TimeInterval { get; set; }
+        public ProcedureType ProcedureType { get; set; }
+        public bool Urgency { get; set; }
+        public DateTime Date { get; set; }
+        public bool Active { get; set; }
 
-        public Room Room { get => room; set => room = value; }
-        public Physitian Physitian { get => physitian; set => physitian = value; }
-        public Patient Patient { get => patient; set => patient = value; }
-        public TimeInterval TimeInterval { get => timeInterval; set => timeInterval = value; }
-        public ProcedureType ProcedureType { get => procedureType; set => procedureType = value; }
-        public bool Urgency { get => urgency; set => urgency = value; }
-        public bool Active { get => active; set => active = value; }
-        public DateTime Date { get => date; set => date = value; }
-
-        public Appointment(Room room, Physitian physitian, Patient patient, TimeInterval timeInterval, ProcedureType procedureType, Boolean active,DateTime date) : base(Guid.NewGuid().ToString())
+        public Appointment(Room room, Physitian physitian, Patient patient, TimeInterval timeInterval,
+            ProcedureType procedureType) : base()
         {
-            this.room = room;
-            this.physitian = physitian;
-            this.patient = patient;
-            this.timeInterval = timeInterval;
-            this.procedureType = procedureType;
-            this.active = active;
-            this.date = date;
+            Room = room;
+            Physitian = physitian;
+            Patient = patient;
+            TimeInterval = timeInterval;
+            ProcedureType = procedureType;
+        }
+        
+        public Appointment(): base()
+        {
         }
 
         [JsonConstructor]
-        public Appointment(String serialNumber, Room room, Physitian physitian, Patient patient, TimeInterval timeInterval, ProcedureType procedureType, Boolean active,DateTime date) : base(serialNumber)
+        public Appointment(String serialNumber, Room room, Physitian physitian, Patient patient,
+            TimeInterval timeInterval, ProcedureType procedureType) : base(serialNumber)
         {
-            this.room = room;
-            this.physitian = physitian;
-            this.patient = patient;
-            this.timeInterval = timeInterval;
-            this.procedureType = procedureType;
-            this.active = active;
-            this.date = date;
+            Room = room;
+            Physitian = physitian;
+            Patient = patient;
+            TimeInterval = timeInterval;
+            ProcedureType = procedureType;
         }
 
-        public Appointment(AppointmentDTO appointmentDTO) : base(Guid.NewGuid().ToString())
+        public Appointment(AppointmentDTO appointmentDTO) : base()
         {
-            this.room = appointmentDTO.Room;
-            this.physitian = appointmentDTO.Physitian;
-            this.patient = appointmentDTO.Patient;
-            this.timeInterval = appointmentDTO.Time;
-            this.procedureType = appointmentDTO.ProcedureType;
-            this.urgency = appointmentDTO.Urgency;
-            this.active = appointmentDTO.Active;
-            this.date = appointmentDTO.Date;
-        }
-
-        public Appointment()
-        {
+            Room = appointmentDTO.Room;
+            Physitian = appointmentDTO.Physitian;
+            Patient = appointmentDTO.Patient;
+            TimeInterval = appointmentDTO.Time;
+            ProcedureType = appointmentDTO.ProcedureType;
+            Urgency = appointmentDTO.Urgency;
         }
 
         public override bool Equals(object obj)
         {
-            Appointment other = obj as Appointment;
-            if (other == null)
-            {
-                return false;
-            }
-            return this.SerialNumber.Equals(other.SerialNumber);
+            return obj is Appointment other && SerialNumber.Equals(other.SerialNumber);
         }
 
         public override int GetHashCode()
@@ -89,8 +71,8 @@ namespace Model.Schedule
 
         public override string ToString()
         {
-            return "patient: " + patient.FullName + "\nphysitian: " + physitian.FullName + "\ntime interval: "
-                + timeInterval.ToString() + "\nroom: " + room.ToString() + "\nprocedure type: " + procedureType.ToString();
+            return "patient: " + Patient.FullName + "\nphysitian: " + Physitian.FullName + "\ntime interval: " +
+                   TimeInterval + "\nroom: " + Room + "\nprocedure type: " + ProcedureType;
         }
         
         public int CompareTo(Appointment other)
