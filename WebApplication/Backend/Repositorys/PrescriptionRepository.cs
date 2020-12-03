@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class PrescriptionRepository : IPrescriptionRepository
+    public class PrescriptionRepository: IPrescriptionRepository
     {
         private MySqlConnection connection;
         public PrescriptionRepository()

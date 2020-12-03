@@ -2,10 +2,11 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class ProcedureTypeEquipmentUsageRepository
+    public class ProcedureTypeEquipmentUsageRepository: IProcedureTypeEquipmentUsageRepository
     {
         private MySqlConnection connection;
         private ProcedureTypeRepository procedureTypeRepository = new ProcedureTypeRepository();
@@ -18,7 +19,6 @@ namespace WebApplication.Backend.Repositorys
 
         private List<ProcedureTypeEquipmentUsage> GetProcedureTypeEquipmentUsages(String query)
         {
-            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -41,7 +41,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetProcedureTypeEquipmentUsages("Select * from procedureTypeEquipmentUsages");
+                return GetProcedureTypeEquipmentUsages("Select * from procedureTypeEquipmentUsage");
             }
             catch (Exception)
             {
@@ -53,7 +53,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetProcedureTypeEquipmentUsages("Select * from procedureTypeEquipmentUsages where SerialNumber='" + serialNumber + "'")[0];
+                return GetProcedureTypeEquipmentUsages("Select * from procedureTypeEquipmentUsage where SerialNumber='" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {
@@ -66,7 +66,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetProcedureTypeEquipmentUsages("Select * from procedureTypeEquipmentUsages where EquipmentSerialNumber='" + equipmentSerialNumber + "'");
+                return GetProcedureTypeEquipmentUsages("Select * from procedureTypeEquipmentUsage where EquipmentSerialNumber='" + equipmentSerialNumber + "'");
             }
             catch (Exception e)
             {
@@ -79,7 +79,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetProcedureTypeEquipmentUsages("Select * from procedureTypeEquipmentUsages where ProcedureTypeSerialNumber='" + procedureTypeSerialNumber + "'");
+                return GetProcedureTypeEquipmentUsages("Select * from procedureTypeEquipmentUsage where ProcedureTypeSerialNumber='" + procedureTypeSerialNumber + "'");
             }
             catch (Exception e)
             {

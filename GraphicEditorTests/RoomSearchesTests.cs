@@ -1,5 +1,5 @@
-using GraphicEditor.Repositories;
-using GraphicEditor.Repositories.Interfaces;
+using WebApplication.Backend.Repositorys;
+using WebApplication.Backend.Repositorys.Interfaces;
 using Xunit;
 
 namespace GraphicEditorTests
@@ -15,15 +15,14 @@ namespace GraphicEditorTests
         }
 
         [Fact]
-        public void GetRoomsByName_RoomsExist_ReturnRooms()
+        public void GetRoomByName_RoomExist_ReturnRoom()
         {
             // Act
-            var rooms = _roomRepository.GetRoomsByName("Operation room");
+            var room = _roomRepository.GetRoomsByName("Operation room 106")[0];
 
             // Assert
-            Assert.NotNull(rooms);
-            foreach (var room in rooms)
-                Assert.Equal("Operation room", room.Name);
+            Assert.NotNull(room);
+            Assert.Equal("Operation room 106", room.Name);
         }
 
         [Fact]

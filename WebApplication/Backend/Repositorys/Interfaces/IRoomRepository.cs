@@ -1,7 +1,7 @@
 ﻿using Model.Hospital;
 using System.Collections.Generic;
 
-namespace WebApplication.Backend.Repositorys
+namespace WebApplication.Backend.Repositorys.Interfaces
 {
     public interface IRoomRepository
     {

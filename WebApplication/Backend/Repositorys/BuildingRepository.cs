@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
@@ -17,7 +18,6 @@ namespace WebApplication.Backend.Repositorys
 
         private List<Building> GetBuildings(String query)
         {
-            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -42,7 +42,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetBuildings("Select * from buildings");
+                return GetBuildings("Select * from building");
             }
             catch (Exception)
             {
@@ -54,7 +54,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetBuildings("Select * from buildings where Name like '%" + name + "%'");
+                return GetBuildings("Select * from building where Name like '%" + name + "%'");
             }
             catch (Exception)
             {
@@ -66,7 +66,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetBuildings("Select * from buildings where SerialNumber='" + serialNumber + "'")[0];
+                return GetBuildings("Select * from building where SerialNumber='" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {

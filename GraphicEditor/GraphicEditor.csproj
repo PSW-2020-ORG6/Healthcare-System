@@ -8,9 +8,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Repositories\**" />
 	  <Compile Remove="Repository\**" />
+	  <EmbeddedResource Remove="Repositories\**" />
 	  <EmbeddedResource Remove="Repository\**" />
+	  <None Remove="Repositories\**" />
 	  <None Remove="Repository\**" />
+	  <Page Remove="Repositories\**" />
 	  <Page Remove="Repository\**" />
 	</ItemGroup>
 
@@ -19,6 +23,7 @@
 			<Project>{68bf1c57-c1a8-4eb8-9fa1-e91bf72f6a72}</Project>
 			<Name>HealthClinicBackend</Name>
 		</ProjectReference>
+		<ProjectReference Include="..\WebApplication\WebApplication.csproj" />
 	</ItemGroup>
 	
 	<ItemGroup>

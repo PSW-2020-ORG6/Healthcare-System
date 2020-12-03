@@ -8,7 +8,7 @@ using WebApplication.Backend.Util;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class SurveyRepository : ISurveyRepository
+    public class SurveyRepository: ISurveyRepository
     {
         private MySqlConnection connection;
         public SurveyRepository()

@@ -2,10 +2,11 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class MedicineRepository
+    public class MedicineRepository: IMedicineRepository
     {
         private MySqlConnection connection;
         private MedicineManufacturerRepository medicineManufacturer = new MedicineManufacturerRepository();
@@ -18,7 +19,6 @@ namespace WebApplication.Backend.Repositorys
 
         private List<Medicine> GetMedicines(String query)
         {
-            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();

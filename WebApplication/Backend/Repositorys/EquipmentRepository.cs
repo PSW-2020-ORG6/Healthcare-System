@@ -2,10 +2,11 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class EquipmentRepository
+    public class EquipmentRepository: IEquipmentRepository
     {
         private MySqlConnection connection;
 
@@ -16,7 +17,6 @@ namespace WebApplication.Backend.Repositorys
 
         private List<Equipment> GetEquipments(String query)
         {
-            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -41,7 +41,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetEquipments("Select * from equipments");
+                return GetEquipments("Select * from equipment");
             }
             catch (Exception)
             {
@@ -53,7 +53,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetEquipments("Select * from equipments where SerialNumber='" + serialNumber + "'")[0];
+                return GetEquipments("Select * from equipment where SerialNumber='" + serialNumber + "'")[0];
             }
             catch (Exception)
             {
@@ -65,7 +65,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetEquipments("Select * from equipments where Name like '%" + name + "%'");
+                return GetEquipments("Select * from equipment where Name like '%" + name + "%'");
             }
             catch (Exception)
             {
@@ -77,7 +77,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetEquipments("Select * from equipments where RoomSerialNumber='" + roomSerialNumber + "'");
+                return GetEquipments("Select * from equipment where RoomSerialNumber='" + roomSerialNumber + "'");
             }
             catch (Exception)
             {

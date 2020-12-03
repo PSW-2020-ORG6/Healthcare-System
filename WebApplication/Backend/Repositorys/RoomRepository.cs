@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
@@ -18,7 +19,6 @@ namespace WebApplication.Backend.Repositorys
 
         private List<Room> GetRooms(String query)
         {
-            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -49,7 +49,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetRooms("Select * from rooms");
+                return GetRooms("Select * from room");
             }
             catch (Exception)
             {
@@ -61,7 +61,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetRooms("Select * from rooms where Name like '%" + name + "%'");
+                return GetRooms("Select * from room where Name like '%" + name + "%'");
             }
             catch (Exception)
             {
@@ -73,7 +73,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetRooms("Select * from rooms where SerialNumber='" + serialNumber + "'")[0];
+                return GetRooms("Select * from room where SerialNumber='" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {
@@ -86,7 +86,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetRooms("Select * from rooms where FloorSerialNumber='" + floorSerialNumber + "'");
+                return GetRooms("Select * from room where FloorSerialNumber='" + floorSerialNumber + "'");
             }
             catch (Exception e)
             {

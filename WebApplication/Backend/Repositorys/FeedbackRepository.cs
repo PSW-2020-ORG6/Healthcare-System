@@ -61,7 +61,7 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         public List<Feedback> GetAllFeedbacks()
         {
-            return GetFeedbacks("Select * from feedbacks");
+            return GetFeedbacks("Select * from feedback");
         }
         ///Aleksandra Milijevic RA 22/2017
         /// <summary>
@@ -74,7 +74,7 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         public List<Feedback> GetApprovedFeedbacks()
         {
-            return GetFeedbacks("Select * from feedbacks where approved is true");
+            return GetFeedbacks("Select * from feedback where approved is true");
         }
         ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017
         /// <summary>
@@ -87,7 +87,7 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         public List<Feedback> GetDisapprovedFeedbacks()
         {
-            return GetFeedbacks("Select * from feedbacks where approved is false");
+            return GetFeedbacks("Select * from feedback where approved is false");
         }
         ////Vucetic Marija RA157/2017
         /// <summary>
@@ -108,14 +108,14 @@ namespace WebApplication.Backend.Repositorys
             string[] partsOfDate = dateString[0].Split(".");
             if (feedback.Approved)
             {
-                String sqlDml = "REPLACE  into feedbacks(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 0
+                String sqlDml = "REPLACE  into feedback(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 0
                     + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + " ','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
                 MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
                 sqlCommand.ExecuteNonQuery();
             }
             else
             {
-                string sqlDml = "REPLACE  into feedbacks(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 1
+                string sqlDml = "REPLACE  into feedback(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 1
                     + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + " ','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
 
                 MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
@@ -140,7 +140,7 @@ namespace WebApplication.Backend.Repositorys
             connection.Open();
             string[] dateString = DateTime.Now.ToString().Split(" ");
             string[] partsOfDate = dateString[0].Split(".");
-            string sqlDml = "INSERT INTO feedbacks (text,approved,date,patientid,serialnumber)  VALUES('" + feedback.Text + "','" + 0 + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + "T" + dateString[1]
+            string sqlDml = "INSERT INTO feedback (text,approved,date,patientid,serialnumber)  VALUES('" + feedback.Text + "','" + 0 + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + "T" + dateString[1]
                    + "','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
 
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);

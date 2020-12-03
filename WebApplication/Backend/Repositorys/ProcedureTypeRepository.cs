@@ -4,10 +4,11 @@ using Model.Schedule;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class ProcedureTypeRepository
+    public class ProcedureTypeRepository: IProcedureTypeRepository
     {
         private MySqlConnection connection;
         private SpecializationRepository specializationRepository = new SpecializationRepository();
@@ -21,7 +22,6 @@ namespace WebApplication.Backend.Repositorys
 
         private List<ProcedureType> GetProcedureTypes(String query)
         {
-            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -44,7 +44,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetProcedureTypes("Select * from procedureTypes where SerialNumber='" + serialNumber + "'")[0];
+                return GetProcedureTypes("Select * from procedureType where SerialNumber='" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {

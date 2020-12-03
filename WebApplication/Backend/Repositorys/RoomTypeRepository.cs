@@ -2,10 +2,11 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class RoomTypeRepository
+    public class RoomTypeRepository: IRoomTypeRepository
     {
         private MySqlConnection connection;
         public RoomTypeRepository()
@@ -15,7 +16,6 @@ namespace WebApplication.Backend.Repositorys
 
         private List<RoomType> GetRoomTypes(String query)
         {
-            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -35,7 +35,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetRoomTypes("Select * from roomTypes");
+                return GetRoomTypes("Select * from roomType");
             }
             catch (Exception)
             {
@@ -47,7 +47,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetRoomTypes("Select * from roomTypes where SerialNumber='" + serialNumber + "'")[0];
+                return GetRoomTypes("Select * from roomType where SerialNumber='" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {

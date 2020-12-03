@@ -38,13 +38,13 @@ namespace Model.Hospital
             this.id = equipment.id;
         }
 
-        public string Name { get => name; set { name = value; } }
         public string Id { get => id; set { id = value; } }
-
         public string RoomId { get => roomId; set => roomId = value; }
+        public string Name { get => name; set { name = value; } }
         public string BuildingSerialNumber { get; set; }
         public string FloorSerialNumber { get; set; }
         public string RoomSerialNumber { get; set; }
+
 
         public override bool Equals(object obj)
         {

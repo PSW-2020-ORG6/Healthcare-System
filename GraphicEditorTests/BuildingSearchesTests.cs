@@ -1,5 +1,5 @@
-﻿using GraphicEditor.Repositories;
-using GraphicEditor.Repositories.Interfaces;
+﻿using WebApplication.Backend.Repositorys;
+using WebApplication.Backend.Repositorys.Interfaces;
 using Xunit;
 
 namespace GraphicEditorTests
@@ -15,15 +15,14 @@ namespace GraphicEditorTests
         }
 
         [Fact]
-        public void GetBuildingsByName_BuildingsExist_ReturnBuildings()
+        public void GetBuildingByName_BuildingExist_ReturnBuilding()
         {
             // Act
-            var buildings = _buildingRepository.GetBuildingsByName("Cardiology");
+            var building = _buildingRepository.GetBuildingsByName("Cardiology")[0];
 
             // Assert
-            Assert.NotNull(buildings);
-            foreach (var building in buildings)
-                Assert.Equal("Cardiology", building.Name);
+            Assert.NotNull(building);
+            Assert.Equal("Cardiology", building.Name);
         }
 
         [Fact]

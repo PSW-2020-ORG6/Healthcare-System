@@ -1,9 +1,7 @@
-﻿using GraphicEditor.Repositories;
-using Model.Hospital;
+﻿using Model.Hospital;
 using System.Collections.Generic;
 using System.Windows;
-using EquipmentRepository = GraphicEditor.Repositories.EquipmentRepository;
-using RoomRepository = GraphicEditor.Repositories.RoomRepository;
+using WebApplication.Backend.Repositorys;
 
 namespace GraphicEditor.View.Windows
 {
