@@ -11,28 +11,28 @@ namespace Model.MedicalExam
 {
     public class FollowUp : AdditionalDocument
     {
-        private Physitian physitian;
-        public Physitian Physitian { get => physitian; }
+        public Physitian Physitian { get; set; }
 
-        public FollowUp(DateTime date, string notes, Physitian physitian) : base(Guid.NewGuid().ToString(), date, notes)
+        public FollowUp(DateTime date, string notes, Physitian physitian) : base(date, notes)
         {
-            this.physitian = physitian;
+            Physitian = physitian;
         }
 
         [JsonConstructor]
-        public FollowUp(String serialNumber, DateTime date, string notes, Physitian physitian) : base(serialNumber, date, notes)
+        public FollowUp(string serialNumber, DateTime date, string notes, Physitian physitian) : base(serialNumber,
+            date, notes)
         {
-            this.physitian = physitian;
+            Physitian = physitian;
         }
 
         public override bool Equals(object obj)
         {
-            FollowUp other = obj as FollowUp;
-            if (other == null)
+            if (!(obj is FollowUp other))
             {
                 return false;
             }
-            return base.Equals(obj) && this.Physitian.Equals(other.Physitian);
+
+            return base.Equals(obj) && Physitian.Equals(other.Physitian);
         }
 
         public override int GetHashCode()
@@ -42,7 +42,7 @@ namespace Model.MedicalExam
 
         public override string ToString()
         {
-            return base.ToString() + "\nphysitian: " + this.Physitian.FullName;
+            return base.ToString() + "\nphysitian: " + Physitian.FullName;
         }
     }
 }

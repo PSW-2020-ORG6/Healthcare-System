@@ -9,83 +9,61 @@ using Model.Hospital;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Model.Schedule
 {
     public class ProcedureType : Entity
     {
+        // private String name;
+        // private Specialization specialization;
+        // private int estimatedTimeInMinutes;
+        // private List<Equipment> requiredEquipment;
+        public virtual Specialization Specialization { get; set; }
+        public string Name { get; set; }
+        public int EstimatedTimeInMinutes { get; set; }
+        public List<Equipment> RequiredEquipment { get; set; }
 
-        private String name;
-        private Specialization specialization;
-        private int estimatedTimeInMinutes;
-        private List<Equipment> requiredEquipment;
-
-        public virtual Specialization Specialization { get => specialization; set => specialization = value; }
-        public string Name { get => name; set => name = value; }
-        public int EstimatedTimeInMinutes { get => estimatedTimeInMinutes; set => estimatedTimeInMinutes = value; }
-        public List<Equipment> RequiredEquipment
+        public ProcedureType() : base()
         {
-            get
-            {
-                if (requiredEquipment == null)
-                    requiredEquipment = new List<Equipment>();
-                return requiredEquipment;
-            }
-            set
-            {
-                RemoveAllRequiredEquipment();
-                if (value != null)
-                {
-                    foreach (Equipment oEquipment in value)
-                        AddRequiredEquipment(oEquipment);
-                }
-            }
         }
 
-        public void AddRequiredEquipment(Equipment newEquipment)
+        public ProcedureType(string name, int estimatedTimeInMinutes, Specialization specialization) : base()
         {
-            if (newEquipment == null)
-                return;
-            if (this.requiredEquipment == null)
-                this.requiredEquipment = new List<Equipment>();
-            if (!this.requiredEquipment.Contains(newEquipment))
-                this.requiredEquipment.Add(newEquipment);
+            Name = name;
+            Specialization = specialization;
+            EstimatedTimeInMinutes = estimatedTimeInMinutes;
+            RequiredEquipment = new List<Equipment>();
         }
 
-        public void RemoveRequiredEquipment(Equipment oldEquipment)
+        [JsonConstructor]
+        public ProcedureType(String serialNumber, int estimatedTimeInMinutes, string name,
+            Specialization specialization) : base(serialNumber)
         {
-            if (oldEquipment == null)
-                return;
-            if (this.requiredEquipment != null)
-                if (this.requiredEquipment.Contains(oldEquipment))
-                    this.requiredEquipment.Remove(oldEquipment);
-        }
-
-        public void RemoveAllRequiredEquipment()
-        {
-            if (requiredEquipment != null)
-                requiredEquipment.Clear();
+            Name = name;
+            Specialization = specialization;
+            EstimatedTimeInMinutes = estimatedTimeInMinutes;
+            RequiredEquipment = new List<Equipment>();
         }
 
         public override bool Equals(object obj)
         {
-            ProcedureType other = obj as ProcedureType;
-            if (other == null)
+            if (!(obj is ProcedureType other))
             {
                 return false;
             }
-            if (this.RequiredEquipment.Count != other.RequiredEquipment.Count)
+
+            if (RequiredEquipment.Count != other.RequiredEquipment.Count)
             {
                 return false;
             }
-            foreach (Equipment e in requiredEquipment)
+
+            if (RequiredEquipment.Any(e => !other.RequiredEquipment.Contains(e)))
             {
-                if (!other.RequiredEquipment.Contains(e))
-                {
-                    return false;
-                }
+                return false;
             }
-            return this.Specialization.Equals(other.Specialization) && this.Name.Equals(other.Name);
+
+            return Specialization.Equals(other.Specialization) && Name.Equals(other.Name);
         }
 
         public override int GetHashCode()
@@ -93,27 +71,9 @@ namespace Model.Schedule
             return base.GetHashCode();
         }
 
-        public ProcedureType() : base(Guid.NewGuid().ToString()) { }
-        public ProcedureType(string name, int estimatedTimeInMinutes, Specialization specialization) : base(Guid.NewGuid().ToString())
-        {
-            this.name = name;
-            this.specialization = specialization;
-            this.estimatedTimeInMinutes = estimatedTimeInMinutes;
-            this.requiredEquipment = new List<Equipment>();
-        }
-
-        [JsonConstructor]
-        public ProcedureType(String serialNumber, int estimatedTimeInMinutes, string name, Specialization specialization) : base(serialNumber)
-        {
-            this.name = name;
-            this.specialization = specialization;
-            this.estimatedTimeInMinutes = estimatedTimeInMinutes;
-            this.requiredEquipment = new List<Equipment>();
-        }
-
         public override string ToString()
         {
-            return name;
+            return Name;
         }
     }
 }

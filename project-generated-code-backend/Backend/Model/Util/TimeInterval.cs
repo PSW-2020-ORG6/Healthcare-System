@@ -10,49 +10,33 @@ namespace Model.Util
 {
     public class TimeInterval
     {
-        private DateTime start;
-        private DateTime end;
-        private string id;
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+        public string Id { get; set; }
+        public string Time => Start.ToString("HH:mm") + " - " + End.ToString("HH:mm");
 
-        public DateTime Start { get => start; set => start = value; }
-        public DateTime End { get => end; set => end = value; }
-        public string Id { get => id; set => id = value; }
-
-        public TimeInterval() { }
-
-        public String Time
+        public TimeInterval()
         {
-            get
-            {
-                String start = this.start.ToString("HH:mm");
-                String end = this.end.ToString("HH:mm");
-                return start + " - " + end;
-            }
         }
 
         [JsonConstructor]
         public TimeInterval(DateTime start, DateTime end)
         {
-            this.start = start;
-            this.end = end;
+            Start = start;
+            End = end;
         }
+
         public TimeInterval(string start, string end)
         {
             try
             {
-                this.start = Convert.ToDateTime(start);
-                this.end = Convert.ToDateTime(end);
+                Start = Convert.ToDateTime(start);
+                End = Convert.ToDateTime(end);
             }
             catch
             {
-
+                // ignored
             }
-
-        }
-
-        public override string ToString()
-        {
-            return Start.ToString("HH:mm") + " - " + End.ToString("HH:mm");
         }
 
         public override bool Equals(object obj)
@@ -62,7 +46,8 @@ namespace Model.Util
             {
                 return false;
             }
-            return this.start.Equals(other.start) && this.end.Equals(other.end);
+
+            return Start.Equals(other.Start) && End.Equals(other.End);
         }
 
         public override int GetHashCode()
@@ -70,35 +55,45 @@ namespace Model.Util
             return base.GetHashCode();
         }
 
+        public override string ToString()
+        {
+            return Start.ToString("HH:mm") + " - " + End.ToString("HH:mm");
+        }
+
         public string ToStringHours()
         {
-            return "start: " + start.ToString("HH:mm") + "\nend: " + end.ToString("HH:mm");
+            return "start: " + Start.ToString("HH:mm") + "\nend: " + End.ToString("HH:mm");
         }
+
         public bool IsOverLapping(TimeInterval other)
         {
-            bool condition1 = other.Start.CompareTo(this.End) < 0 && other.End.CompareTo(this.Start) > 0;
-            bool condition2 = this.Start.CompareTo(other.End) < 0 && this.End.CompareTo(other.Start) > 0;
+            bool condition1 = other.Start.CompareTo(End) < 0 && other.End.CompareTo(Start) > 0;
+            bool condition2 = Start.CompareTo(other.End) < 0 && End.CompareTo(other.Start) > 0;
             return condition1 || condition2;
         }
+
         public bool IsTimeOfDayContained(TimeInterval other)
         {
-            int thisStart = this.Start.Hour * 60 + this.Start.Minute;
-            int thisEnd = this.End.Hour * 60 + this.End.Minute;
+            int thisStart = Start.Hour * 60 + Start.Minute;
+            int thisEnd = End.Hour * 60 + End.Minute;
             if (thisEnd < thisStart)
             {
                 thisEnd += 24 * 60;
             }
+
             int otherStart = other.Start.Hour * 60 + other.Start.Minute;
             int otherEnd = other.End.Hour * 60 + other.End.Minute;
             if (otherEnd < otherStart)
             {
                 otherEnd += 24 * 60;
             }
+
             return thisStart <= otherStart && thisEnd >= otherEnd;
         }
+
         public bool TimeOfDayEquals(TimeInterval other)
         {
-            return this.Start.TimeOfDay.Equals(other.Start.TimeOfDay) && this.End.TimeOfDay.Equals(other.End.TimeOfDay);
+            return Start.TimeOfDay.Equals(other.Start.TimeOfDay) && End.TimeOfDay.Equals(other.End.TimeOfDay);
         }
     }
 }

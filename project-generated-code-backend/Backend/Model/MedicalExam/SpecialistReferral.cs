@@ -12,33 +12,32 @@ namespace Model.MedicalExam
 {
     public class SpecialistReferral : AdditionalDocument
     {
-        private ProcedureType procedureType;
-        private Physitian physitian;
+        public ProcedureType ProcedureType { get; set; }
+        public Physitian Physitian { get; set; }
 
-        public ProcedureType ProcedureType { get => procedureType; }
-        public Physitian Physitian { get => physitian; }
-
-        public SpecialistReferral(DateTime date, string notes, ProcedureType procedureType, Physitian physitian) : base(Guid.NewGuid().ToString(), date, notes)
+        public SpecialistReferral(DateTime date, string notes, ProcedureType procedureType, Physitian physitian) :
+            base(date, notes)
         {
-            this.procedureType = procedureType;
-            this.physitian = physitian;
+            ProcedureType = procedureType;
+            Physitian = physitian;
         }
 
         [JsonConstructor]
-        public SpecialistReferral(String serialNumber, DateTime date, string notes, ProcedureType procedureType, Physitian physitian) : base(serialNumber, date, notes)
+        public SpecialistReferral(String serialNumber, DateTime date, string notes, ProcedureType procedureType,
+            Physitian physitian) : base(serialNumber, date, notes)
         {
-            this.procedureType = procedureType;
-            this.physitian = physitian;
+            ProcedureType = procedureType;
+            Physitian = physitian;
         }
 
         public override bool Equals(object obj)
         {
-            SpecialistReferral other = obj as SpecialistReferral;
-            if (other == null)
+            if (!(obj is SpecialistReferral other))
             {
                 return false;
             }
-            return this.SerialNumber.Equals(other.SerialNumber);
+
+            return SerialNumber.Equals(other.SerialNumber);
         }
 
         public override int GetHashCode()
@@ -48,8 +47,7 @@ namespace Model.MedicalExam
 
         public override string ToString()
         {
-            return base.ToString() + "\nphysitian: " + this.Physitian.FullName
-                + "\nspecialization: " + this.procedureType;
+            return base.ToString() + "\nphysitian: " + Physitian.FullName + "\nspecialization: " + ProcedureType;
         }
     }
 }

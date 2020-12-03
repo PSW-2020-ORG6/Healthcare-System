@@ -11,6 +11,7 @@ namespace WebApplication.Backend.Repositorys
     public class SurveyRepository : ISurveyRepository
     {
         private MySqlConnection connection;
+
         public SurveyRepository()
         {
             try
@@ -21,6 +22,7 @@ namespace WebApplication.Backend.Repositorys
             {
             }
         }
+
         ////Vucetic Marija RA157/2017
         /// <summary>
         ///adding new Survey to database
@@ -33,14 +35,20 @@ namespace WebApplication.Backend.Repositorys
         public bool AddNewSurvey(Survey surveyText)
         {
             connection.Open();
-            string sqlDml = "INSERT into survey" +
-                "(Question1,Question2,Question3,Question4,Question5,Question6,Question7,Question8,Question9,Question10,Question11," +
-                "Question12,Question13,Question14,Question15,Question16,Question17,Question18,Question19,Question20,Question21,Question22,Question23,ID,DoctorName,SerialNumber)VALUES ('"
-                + surveyText.Question1 + "','" + surveyText.Question2 + "','" + surveyText.Question3 + "','" + surveyText.Question4 + "','" + surveyText.Question5
-                + "','" + surveyText.Question6 + "','" + surveyText.Question7 + "','" + surveyText.Question8 + "','" + surveyText.Question9 + "','" + surveyText.Question10 +
-                "','" + surveyText.Question11 + "','" + surveyText.Question12 + "','" + surveyText.Question13 + "','" + surveyText.Question14 + "','" + surveyText.Question15 +
-                "','" + surveyText.Question16 + "','" + surveyText.Question17 + "','" + surveyText.Question18 + "','" + surveyText.Question19 + "','" + surveyText.Question20
-                + "','" + surveyText.Question21 + "','" + surveyText.Question22 + "','" + surveyText.question23 + "','" + surveyText.ID + "','" + surveyText.DoctorName + "','" + surveyText.SerialNumber + "')";
+            string sqlDml = "INSERT into surveys" +
+                            "(Question1,Question2,Question3,Question4,Question5,Question6,Question7,Question8,Question9,Question10,Question11," +
+                            "Question12,Question13,Question14,Question15,Question16,Question17,Question18,Question19,Question20,Question21,Question22,Question23,ID,DoctorName,SerialNumber)VALUES ('"
+                            + surveyText.Question1 + "','" + surveyText.Question2 + "','" + surveyText.Question3 +
+                            "','" + surveyText.Question4 + "','" + surveyText.Question5
+                            + "','" + surveyText.Question6 + "','" + surveyText.Question7 + "','" +
+                            surveyText.Question8 + "','" + surveyText.Question9 + "','" + surveyText.Question10 +
+                            "','" + surveyText.Question11 + "','" + surveyText.Question12 + "','" +
+                            surveyText.Question13 + "','" + surveyText.Question14 + "','" + surveyText.Question15 +
+                            "','" + surveyText.Question16 + "','" + surveyText.Question17 + "','" +
+                            surveyText.Question18 + "','" + surveyText.Question19 + "','" + surveyText.Question20
+                            + "','" + surveyText.Question21 + "','" + surveyText.Question22 + "','" +
+                            surveyText.Question23 + "','" + surveyText.Id + "','" + surveyText.DoctorName + "','" +
+                            surveyText.SerialNumber + "')";
 
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             sqlCommand.ExecuteNonQuery();
@@ -48,6 +56,7 @@ namespace WebApplication.Backend.Repositorys
 
             return true;
         }
+
         ////Vucetic Marija RA157/2017
         /// <summary>
         ///getting all Reports with specific value of parameter
@@ -67,19 +76,22 @@ namespace WebApplication.Backend.Repositorys
             while (sqlReader.Read())
             {
                 Report entity = new Report();
-                entity.patient = new Patient { Id = (String)sqlReader[3] };
-                entity.physitian = new Physitian { SerialNumber = (String)sqlReader[4] };
+                entity.Patient = new Patient {Id = (String) sqlReader[3]};
+                entity.Physitian = new Physitian {SerialNumber = (String) sqlReader[4]};
 
                 resultList.Add(entity);
-
             }
+
             connection.Close();
             foreach (Report report in resultList)
             {
-                report.physitian = GetDoctorById("Select * from physitian where SerialNumber like'" + report.physitian.SerialNumber + "'");
+                report.Physitian = GetDoctorById("Select * from accounts where SerialNumber like'" +
+                                                 report.Physitian.SerialNumber + "'");
             }
+
             return resultList;
         }
+
         ////Vucetic Marija RA157/2017
         /// <summary>
         ///getting doctor by id
@@ -96,11 +108,12 @@ namespace WebApplication.Backend.Repositorys
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             sqlReader.Read();
             Physitian entity = new Physitian();
-            entity.Name = (string)sqlReader[1];
-            entity.Surname = (string)sqlReader[2];
+            entity.Name = (string) sqlReader[1];
+            entity.Surname = (string) sqlReader[2];
             connection.Close();
             return entity;
         }
+
         ////Vucetic Marija RA157/2017
         /// <summary>
         ///getting Patient by id
@@ -116,6 +129,7 @@ namespace WebApplication.Backend.Repositorys
             patient = GetPatient("Select * from patient where SerialNumber like '" + idPetient + "'");
             return patient;
         }
+
         ////Vucetic Marija RA157/2017
         /// <summary>
         ///getting Patient from database
@@ -134,24 +148,25 @@ namespace WebApplication.Backend.Repositorys
             while (sqlReader.Read())
             {
                 Patient entity = new Patient();
-                entity.Id = (string)sqlReader[3];
-                entity.Name = (string)sqlReader[1];
-                entity.Surname = (string)sqlReader[2];
-                entity.ParentName = (string)sqlReader[7];
+                entity.Id = (string) sqlReader[3];
+                entity.Name = (string) sqlReader[1];
+                entity.Surname = (string) sqlReader[2];
+                entity.ParentName = (string) sqlReader[7];
                 entity.SerialNumber = sqlReader[0].ToString();
                 entity.DateOfBirth = Convert.ToDateTime(sqlReader[4]);
-                entity.Contact = (string)sqlReader[5];
-                entity.Email = (string)sqlReader[6];
-                entity.Gender = (string)sqlReader[8];
+                entity.Contact = (string) sqlReader[5];
+                entity.Email = (string) sqlReader[6];
+                entity.Gender = (string) sqlReader[8];
                 entity.Guest = true;
                 //  Convert.ToBoolean(sqlReader[9]);
                 entity.Password = "password";
                 patientResutl = entity;
-
             }
+
             connection.Close();
             return patientResutl;
         }
+
         ////Vucetic Marija RA157/2017
         /// <summary>
         ///getting all doctors from one patient's reports 
@@ -169,8 +184,9 @@ namespace WebApplication.Backend.Repositorys
             List<String> doctors = new List<String>();
             foreach (Report r in reports)
             {
-                doctors.Add(r.physitian.FullName);
+                doctors.Add(r.Physitian.FullName);
             }
+
             return doctors;
         }
 
@@ -183,31 +199,32 @@ namespace WebApplication.Backend.Repositorys
             while (sqlReader.Read())
             {
                 Survey entity = new Survey();
-                entity.question1 = (string)sqlReader[2];
-                entity.question2 = (string)sqlReader[3];
-                entity.question3 = (string)sqlReader[4];
-                entity.question4 = (string)sqlReader[5];
-                entity.question5 = (string)sqlReader[6];
-                entity.question6 = (string)sqlReader[7];
-                entity.question7 = (string)sqlReader[8];
-                entity.question8 = (string)sqlReader[9];
-                entity.question9 = (string)sqlReader[10];
-                entity.question10 = (string)sqlReader[11];
-                entity.question11 = (string)sqlReader[12];
-                entity.question12 = (string)sqlReader[13];
-                entity.question13 = (string)sqlReader[14];
-                entity.question14 = (string)sqlReader[15];
-                entity.question15 = (string)sqlReader[16];
-                entity.question16 = (string)sqlReader[17];
-                entity.question17 = (string)sqlReader[18];
-                entity.question18 = (string)sqlReader[19];
-                entity.question19 = (string)sqlReader[20];
-                entity.question20 = (string)sqlReader[21];
-                entity.question21 = (string)sqlReader[22];
-                entity.question22 = (string)sqlReader[23];
-                entity.question23 = (string)sqlReader[24];
+                entity.Question1 = (string) sqlReader[2];
+                entity.Question2 = (string) sqlReader[3];
+                entity.Question3 = (string) sqlReader[4];
+                entity.Question4 = (string) sqlReader[5];
+                entity.Question5 = (string) sqlReader[6];
+                entity.Question6 = (string) sqlReader[7];
+                entity.Question7 = (string) sqlReader[8];
+                entity.Question8 = (string) sqlReader[9];
+                entity.Question9 = (string) sqlReader[10];
+                entity.Question10 = (string) sqlReader[11];
+                entity.Question11 = (string) sqlReader[12];
+                entity.Question12 = (string) sqlReader[13];
+                entity.Question13 = (string) sqlReader[14];
+                entity.Question14 = (string) sqlReader[15];
+                entity.Question15 = (string) sqlReader[16];
+                entity.Question16 = (string) sqlReader[17];
+                entity.Question17 = (string) sqlReader[18];
+                entity.Question18 = (string) sqlReader[19];
+                entity.Question19 = (string) sqlReader[20];
+                entity.Question20 = (string) sqlReader[21];
+                entity.Question21 = (string) sqlReader[22];
+                entity.Question22 = (string) sqlReader[23];
+                entity.Question23 = (string) sqlReader[24];
                 resultList.Add(entity);
             }
+
             connection.Close();
             return resultList;
         }
@@ -223,7 +240,6 @@ namespace WebApplication.Backend.Repositorys
         ///</param>
         public List<StatisticAuxilaryClass> getStatisticsForDoctor(string doctorId)
         {
-
             List<Survey> reports = new List<Survey>();
             reports = GetSurveys("Select * from survey where DoctorName = '" + doctorId + "' ");
 
@@ -243,12 +259,14 @@ namespace WebApplication.Backend.Repositorys
                 statistics[2].increment(Int32.Parse(s.Question3));
                 statistics[3].AverageRating += Double.Parse(s.Question4);
                 statistics[3].increment(Int32.Parse(s.Question4));
-                statistics[4].AverageRating += (Double.Parse(s.Question4) + Double.Parse(s.Question3) + Double.Parse(s.Question2) + Double.Parse(s.Question1));
+                statistics[4].AverageRating += (Double.Parse(s.Question4) + Double.Parse(s.Question3) +
+                                                Double.Parse(s.Question2) + Double.Parse(s.Question1));
                 statistics[4].increment(Int32.Parse(s.Question4));
                 statistics[4].increment(Int32.Parse(s.Question3));
                 statistics[4].increment(Int32.Parse(s.Question2));
                 statistics[4].increment(Int32.Parse(s.Question1));
             }
+
             for (int i = 0; i < 5; i++)
             {
                 statistics[i].generatePercents();
@@ -258,6 +276,7 @@ namespace WebApplication.Backend.Repositorys
                 else
                     statistics[i].AverageRating = statistics[i].AverageRating / reports.Count;
             }
+
             return round2Decimals(statistics);
         }
 
@@ -270,7 +289,6 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         public List<StatisticAuxilaryClass> getStatisticsEachQuestion()
         {
-
             List<Survey> reports = new List<Survey>();
             reports = GetSurveys("Select * from survey");
 
@@ -321,11 +339,13 @@ namespace WebApplication.Backend.Repositorys
                 statistics[18].AverageRating += Double.Parse(s.Question23);
                 statistics[18].increment(Int32.Parse(s.Question23));
             }
+
             for (int i = 0; i < 19; i++)
             {
                 statistics[i].generatePercents();
                 statistics[i].AverageRating = statistics[i].AverageRating / reports.Count;
             }
+
             return round2Decimals(statistics);
         }
 
@@ -338,7 +358,6 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         public List<StatisticAuxilaryClass> getStatisticsEachTopic()
         {
-
             List<Survey> reports = new List<Survey>();
             reports = GetSurveys("Select * from survey");
 
@@ -389,6 +408,7 @@ namespace WebApplication.Backend.Repositorys
                 statistics[4].AverageRating += Double.Parse(s.Question23);
                 statistics[4].increment(Int32.Parse(s.Question23));
             }
+
             statistics[0].generatePercents();
             statistics[1].generatePercents();
             statistics[2].generatePercents();
@@ -416,6 +436,7 @@ namespace WebApplication.Backend.Repositorys
             {
                 i.AverageRating = Math.Round(i.AverageRating, 2);
             }
+
             return input;
         }
 
@@ -438,6 +459,7 @@ namespace WebApplication.Backend.Repositorys
             {
                 doctors.Add(r.FullName.Trim());
             }
+
             return doctors;
         }
 
@@ -461,13 +483,14 @@ namespace WebApplication.Backend.Repositorys
             while (sqlReader.Read())
             {
                 Physitian entity = new Physitian();
-                entity.Name = (string)sqlReader[2];
+                entity.Name = (string) sqlReader[2];
                 resultList.Add(entity);
-
             }
+
             connection.Close();
             return resultList;
         }
+
         ////Vucetic Marija RA157/2017
         /// <summary>
         /// returns all doctors for whom the patient can do a survey
@@ -489,7 +512,6 @@ namespace WebApplication.Backend.Repositorys
                 {
                     resultList.Add(physitianFromRepors);
                 }
-
             }
 
             return resultList;

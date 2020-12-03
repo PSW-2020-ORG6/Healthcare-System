@@ -9,120 +9,83 @@ using Model.Schedule;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Model.MedicalExam
 {
     public class Report : Entity
     {
-        private DateTime date;
-        private String findings;
-        public Patient patient;
-        public Physitian physitian;
-        private String patientConditions;
-        private ProcedureType procedureType;
-        public String patientName;
-        public String physitianName;
-        public string patientId;
-        private List<AdditionalDocument> additionalDocument;
+        public virtual List<AdditionalDocument> AdditionalDocument { get; set; }
+        public DateTime Date { get; set; }
+        public string Findings { get; set; }
+        public virtual Patient Patient { get; set; }
+        public virtual Physitian Physitian { get; set; }
+        public string PatientConditions { get; set; }
+        public virtual ProcedureType ProcedureType { get; set; }
+        public String PatientName { get; set; }
+        public String PhysitianName { get; set; }
+        public string PatientId { get; set; }
 
-        public virtual List<AdditionalDocument> AdditionalDocument
+        public Report() : base()
         {
-            get
-            {
-                if (additionalDocument == null)
-                    additionalDocument = new List<AdditionalDocument>();
-                return additionalDocument;
-            }
-            set
-            {
-                RemoveAllAdditionalDocument();
-                if (value != null)
-                {
-                    foreach (AdditionalDocument oAdditionalDocument in value)
-                        AddAdditionalDocument(oAdditionalDocument);
-                }
-            }
         }
 
-        public DateTime Date { get => date; set => date = value; }
-        public string Findings { get => findings; set => findings = value; }
-        public virtual Patient Patient { get => patient; set => patient = value; }
-        public virtual Physitian Physitian { get => physitian; set => physitian = value; }
-        public string PatientConditions { get => patientConditions; set => patientConditions = value; }
-        public virtual ProcedureType ProcedureType { get => procedureType; set => procedureType = value; }
+        public Report(String patient, String physitian, String patientId) : base()
+        {
+            PatientName = patient;
+            PhysitianName = physitian;
+            PatientId = patientId;
+        }
+
+        public Report(DateTime date, string findings, Patient patient, Physitian physitian, string patientConditions) :
+            base()
+        {
+            Date = date;
+            Findings = findings;
+            Patient = patient;
+            Physitian = physitian;
+            PatientConditions = patientConditions;
+        }
+
+        [JsonConstructor]
+        public Report(String serialNumber, DateTime date, string findings, Patient patient, Physitian physitian,
+            string patientConditions) : base(serialNumber)
+        {
+            Date = date;
+            Findings = findings;
+            Patient = patient;
+            Physitian = physitian;
+            PatientConditions = patientConditions;
+        }
 
         public void AddAdditionalDocument(AdditionalDocument newAdditionalDocument)
         {
             if (newAdditionalDocument == null)
                 return;
-            if (this.additionalDocument == null)
-                this.additionalDocument = new List<AdditionalDocument>();
-            if (!this.additionalDocument.Contains(newAdditionalDocument))
-                this.additionalDocument.Add(newAdditionalDocument);
-        }
-
-        public void RemoveAdditionalDocument(AdditionalDocument oldAdditionalDocument)
-        {
-            if (oldAdditionalDocument == null)
-                return;
-            if (this.additionalDocument != null)
-                if (this.additionalDocument.Contains(oldAdditionalDocument))
-                    this.additionalDocument.Remove(oldAdditionalDocument);
-        }
-
-        public void RemoveAllAdditionalDocument()
-        {
-            if (additionalDocument != null)
-                additionalDocument.Clear();
-        }
-
-        public Report(DateTime date, string findings, Patient patient, Physitian physitian, string patientConditions) : base(Guid.NewGuid().ToString())
-        {
-            this.date = date;
-            this.findings = findings;
-            this.patient = patient;
-            this.physitian = physitian;
-            this.patientConditions = patientConditions;
-        }
-        public Report() { }
-        public Report(String patient, String physitian, String patientId)
-        {
-            this.patientName = patient;
-            this.physitianName = physitian;
-            this.patientId = patientId;
-        }
-
-        [JsonConstructor]
-        public Report(String serialNumber, DateTime date, string findings, Patient patient, Physitian physitian, string patientConditions) : base(serialNumber)
-        {
-            this.date = date;
-            this.findings = findings;
-            this.patient = patient;
-            this.physitian = physitian;
-            this.patientConditions = patientConditions;
+            AdditionalDocument ??= new List<AdditionalDocument>();
+            if (!AdditionalDocument.Contains(newAdditionalDocument))
+                AdditionalDocument.Add(newAdditionalDocument);
         }
 
         public override bool Equals(object obj)
         {
-            Report other = obj as Report;
-            if (other == null)
+            if (!(obj is Report other))
             {
                 return false;
             }
-            if (this.additionalDocument.Count != other.additionalDocument.Count)
-            {
-                return false;
-            }
-            foreach (AdditionalDocument doc in additionalDocument)
-            {
-                if (!other.additionalDocument.Contains(doc))
-                {
-                    return false;
-                }
-            }
-            return this.Date.Equals(other.Date) && this.Findings.Equals(other.Findings);
-        }
 
+            if (AdditionalDocument.Count != other.AdditionalDocument.Count)
+            {
+                return false;
+            }
+
+            if (AdditionalDocument.Any(doc => !other.AdditionalDocument.Contains(doc)))
+            {
+                return false;
+            }
+
+            return Date.Equals(other.Date) && Findings.Equals(other.Findings);
+        }
 
         public override int GetHashCode()
         {
@@ -131,17 +94,13 @@ namespace Model.MedicalExam
 
         public override string ToString()
         {
-            string ret = "date: " + this.date.ToString("dd.MM.yyyy.") + "\nfindings: " + this.findings;
-            foreach (AdditionalDocument doc in this.additionalDocument)
-            {
-                ret += "\ndocument: " + doc.ToString();
-            }
-            return ret;
+            var ret = "date: " + Date.ToString("dd.MM.yyyy.") + "\nfindings: " + Findings;
+            return AdditionalDocument.Aggregate(ret, (current, doc) => current + ("\ndocument: " + doc));
         }
 
         public int CompareTo(Report other)
         {
-            return this.Date.CompareTo(other.Date);
+            return Date.CompareTo(other.Date);
         }
     }
 }

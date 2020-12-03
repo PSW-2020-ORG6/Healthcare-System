@@ -10,28 +10,32 @@ namespace Model.MedicalExam
 {
     public abstract class AdditionalDocument : Entity
     {
-        protected DateTime date;
-        protected String notes;
+        public DateTime Date { get; set; }
+        public string Notes { get; set; }
 
-        public DateTime Date { get => date; set => date = value; }
-        public string Notes { get => notes; set => notes = value; }
+        protected AdditionalDocument() : base()
+        {
+        }
 
+        protected AdditionalDocument(String serialNumber) : base(serialNumber)
+        {
+        }
 
-        public AdditionalDocument(String serialNumber) : base(serialNumber) { }
+        protected AdditionalDocument(DateTime date, string notes) : base()
+        {
+            Date = date;
+            Notes = notes;
+        }
+
         protected AdditionalDocument(String serialNumber, DateTime date, string notes) : base(serialNumber)
         {
-            this.date = date;
-            this.notes = notes;
+            Date = date;
+            Notes = notes;
         }
 
         public override bool Equals(object obj)
         {
-            AdditionalDocument other = obj as AdditionalDocument;
-            if (other == null)
-            {
-                return false;
-            }
-            return this.SerialNumber.Equals(other.SerialNumber);
+            return obj is AdditionalDocument other && SerialNumber.Equals(other.SerialNumber);
         }
 
         public override int GetHashCode()
@@ -41,7 +45,7 @@ namespace Model.MedicalExam
 
         public override string ToString()
         {
-            return "date: " + this.Date.ToString("dd.MM.yyyy.") + "\nnotes: " + this.Notes;
+            return "date: " + Date.ToString("dd.MM.yyyy.") + "\nnotes: " + Notes;
         }
     }
 }

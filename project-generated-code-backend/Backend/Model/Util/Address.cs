@@ -11,38 +11,30 @@ namespace Model.Util
 {
     public class Address : Entity
     {
-
-        private String street;
-
-        public string Street { get => street; set => street = value; }
+        public string Street { get; set; }
 
         public Address() : base()
         {
         }
-        public Address(string street) : base(Guid.NewGuid().ToString())
+        public Address(string street) : base()
         {
-            this.street = street;
+            Street = street;
         }
 
         [JsonConstructor]
-        public Address(String serialNumber, string street) : base(serialNumber)
+        public Address(string serialNumber, string street) : base(serialNumber)
         {
-            this.street = street;
+            Street = street;
         }
 
         public override string ToString()
         {
-            return street;
+            return Street;
         }
 
         public override bool Equals(object obj)
         {
-            Address other = obj as Address;
-            if (other == null)
-            {
-                return false;
-            }
-            return this.Street.Equals(other.Street);
+            return obj is Address other && Street.Equals(other.Street);
         }
 
         public override int GetHashCode()
