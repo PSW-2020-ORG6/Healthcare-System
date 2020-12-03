@@ -32,16 +32,16 @@ namespace WebApplication.Backend.Repositorys
                 entity.Surname = (string)sqlReader[2];
                 entity.FullName = entity.Name + " " + entity.Surname;
                 entity.Id = (string)sqlReader[3];
-                entity.DateOfBirth = (DateTime)sqlReader[4];
-                entity.Contact = (string)sqlReader[5];
-                entity.Email = (string)sqlReader[6];
-                entity.Address = addressRepository.GetAddressBySerialNumber((string)sqlReader[7]);
-                entity.Password = (string)sqlReader[8];
-                entity.Specialization = specializationRepository.GetSpecializationsBySerialNumber((string)sqlReader[9]);
-                entity.VacationTime = timeIntervalRepository.GetTimeIntervalsById((string)sqlReader[10]);
-                entity.WorkSchedule = timeIntervalRepository.GetTimeIntervalById((string)sqlReader[11]);
-                entity.AllSpecializations = specializationRepository.GetSpecializationsNameBySerialNumber((string)sqlReader[12]);
-                entity.AddressSerialNumber = (string)sqlReader[13];
+                //entity.DateOfBirth = (DateTime)sqlReader[4];
+                //entity.Contact = (string)sqlReader[5];
+                //entity.Email = (string)sqlReader[6];
+                //entity.Address = addressRepository.GetAddressBySerialNumber((string)sqlReader[7]);
+                //entity.Password = (string)sqlReader[8];
+                //entity.Specialization = specializationRepository.GetSpecializationsBySerialNumber((string)sqlReader[9]);
+                //entity.VacationTime = timeIntervalRepository.GetTimeIntervalsById((string)sqlReader[10]);
+                //entity.WorkSchedule = timeIntervalRepository.GetTimeIntervalById((string)sqlReader[11]);
+                //entity.AllSpecializations = specializationRepository.GetSpecializationsNameBySerialNumber((string)sqlReader[12]);
+                //entity.AddressSerialNumber = (string)sqlReader[13];
                 resultList.Add(entity);
             }
             connection.Close();

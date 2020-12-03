@@ -1,5 +1,7 @@
-﻿using Model.Accounts;
+﻿using HealthClinicBackend.Backend.Dto;
+using Model.Accounts;
 using System;
+using System.Collections.Generic;
 
 namespace WebApplication.Backend.Repositorys
 {
@@ -12,5 +14,6 @@ namespace WebApplication.Backend.Repositorys
         public String GetPatientId(string idd);
         public bool IsPatientIdValid(string patientId);
         public bool ConfirmEmailUpdate(string patientId);
+        public List<FamilyDoctorDTO> GetAllGeneralPractitionerPhysitions();
     }
 }

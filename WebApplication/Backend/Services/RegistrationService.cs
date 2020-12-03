@@ -1,4 +1,6 @@
-﻿using Model.Accounts;
+﻿using HealthClinicBackend.Backend.Dto;
+using Model.Accounts;
+using System.Collections.Generic;
 using WebApplication.Backend.Repositorys;
 
 namespace WebApplication.Backend.Services
@@ -9,6 +11,7 @@ namespace WebApplication.Backend.Services
     public class RegistrationService
     {
         private IRegistrationRepository registrationRepository = new RegistrationRepository();
+        private PhysitianRepository physitianRepository = new PhysitianRepository();
         public RegistrationService()
         {
             this.registrationRepository = new RegistrationRepository();
@@ -43,6 +46,11 @@ namespace WebApplication.Backend.Services
         public bool ConfirmEmailUpdate(string id)
         {
             return registrationRepository.ConfirmEmailUpdate(id);
+        }
+
+        public List<FamilyDoctorDTO> GetAllPhysitians()
+        {
+            return registrationRepository.GetAllGeneralPractitionerPhysitions();
         }
 
     }

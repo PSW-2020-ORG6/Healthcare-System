@@ -32,6 +32,7 @@ namespace Model.Accounts
         private String image;
         private bool guest;
         private bool emailConfirmed;
+        private string chosenDoctor;
 
         public Patient(string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string parentName, string gender, string password, bool isGuest = false)
             : base(Guid.NewGuid().ToString(), name, surname, id, dateOfBirth, contact, email, address, password)
@@ -75,7 +76,7 @@ namespace Model.Accounts
         }
 
         [JsonConstructor]
-        public Patient(PatientDTO patientDTO) : base(Guid.NewGuid().ToString(), patientDTO.Name, patientDTO.Surname, patientDTO.Id, patientDTO.DateOfBirth, patientDTO.Contact, patientDTO.Email, patientDTO.Address/*new Address { Street = patientDTO.Address }*/, patientDTO.Password)
+        public Patient(PatientDTO patientDTO) : base(Guid.NewGuid().ToString(), patientDTO.Name, patientDTO.Surname, patientDTO.Id, patientDTO.DateOfBirth, patientDTO.Contact, patientDTO.Email, patientDTO.Address, patientDTO.Password)
         {
             this.parentName = patientDTO.ParentName;
             this.gender = patientDTO.Gender;
@@ -97,6 +98,7 @@ namespace Model.Accounts
             this.image = patientDTO.Image;
             this.guest = patientDTO.IsGuest;
             this.emailConfirmed = patientDTO.EmailConfirmed;
+            this.chosenDoctor = patientDTO.ChosenDoctor;
         }
         public Patient() : base() { }
         public Patient(string serialNumber, string name, string surname) : base() { }
@@ -120,6 +122,7 @@ namespace Model.Accounts
         public string Image { get => image; set => image = value; }
         public bool Guest { get => guest; set => guest = value; }
         public bool EmailConfirmed { get => emailConfirmed; set => emailConfirmed = value; }
+        public string ChosenDoctor { get => chosenDoctor; set => chosenDoctor = value; }
 
         public override string ToString()
         {
