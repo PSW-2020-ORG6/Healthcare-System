@@ -1,8 +1,8 @@
-﻿using GraphicEditor.Repositories;
-using health_clinic_class_diagram.Backend.Model.Hospital;
+﻿using health_clinic_class_diagram.Backend.Model.Hospital;
 using Model.Hospital;
 using System.Collections.Generic;
 using System.Windows;
+using WebApplication.Backend.Repositorys;
 
 namespace GraphicEditor.View.Windows
 {

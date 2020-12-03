@@ -2,10 +2,11 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class PhysitianRepository
+    public class PhysitianRepository: IPhysitianRepository
     {
         private MySqlConnection connection;
         private AddressRepository addressRepository = new AddressRepository();
@@ -19,7 +20,6 @@ namespace WebApplication.Backend.Repositorys
 
         private List<Physitian> GetPhysitians(String query)
         {
-            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -52,7 +52,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetPhysitians("Select * from physitians");
+                return GetPhysitians("Select * from physitian");
             }
             catch (Exception)
             {
@@ -64,7 +64,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetPhysitians("Select * from physitians where Name like '%" + name + "%'");
+                return GetPhysitians("Select * from physitian where Name like '%" + name + "%'");
             }
             catch (Exception)
             {
@@ -76,7 +76,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetPhysitians("Select * from physitians where FullName like '%" + fullName + "%'");
+                return GetPhysitians("Select * from physitian where FullName like '%" + fullName + "%'");
             }
             catch (Exception)
             {
@@ -88,7 +88,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetPhysitians("Select * from physitians where SerialNumber='" + serialNumber + "'")[0];
+                return GetPhysitians("Select * from physitian where SerialNumber='" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {
@@ -101,7 +101,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetPhysitians("Select * from physitians where Id='" + id + "'")[0];
+                return GetPhysitians("Select * from physitian where Id='" + id + "'")[0];
             }
             catch (Exception e)
             {

@@ -2,10 +2,11 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class AddressRepository
+    public class AddressRepository: IAddressRepository
     {
         private MySqlConnection connection;
 
@@ -16,7 +17,6 @@ namespace WebApplication.Backend.Repositorys
 
         private List<Address> GetAddresses(String query)
         {
-            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -36,7 +36,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetAddresses("Select * from addresses");
+                return GetAddresses("Select * from address");
             }
             catch (Exception)
             {
@@ -48,7 +48,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetAddresses("Select * from addresses where SerialNumber='" + serialNumber + "'")[0];
+                return GetAddresses("Select * from address where SerialNumber='" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {
@@ -61,7 +61,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetAddresses("Select * from addresses where Street='" + street + "'");
+                return GetAddresses("Select * from address where Street='" + street + "'");
             }
             catch (Exception e)
             {

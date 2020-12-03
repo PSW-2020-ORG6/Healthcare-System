@@ -18,7 +18,7 @@ namespace GraphicEditor.Repositories
 
         private List<Building> GetBuildings(String query)
         {
-            connection.Close();
+            //connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -43,7 +43,7 @@ namespace GraphicEditor.Repositories
         {
             try
             {
-                return GetBuildings("Select * from buildings");
+                return GetBuildings("Select * from building");
             }
             catch (Exception)
             {
@@ -55,7 +55,7 @@ namespace GraphicEditor.Repositories
         {
             try
             {
-                return GetBuildings("Select * from buildings where Name like '%" + name + "%'");
+                return GetBuildings("Select * from building where Name like '%" + name + "%'");
             }
             catch (Exception)
             {
@@ -67,7 +67,7 @@ namespace GraphicEditor.Repositories
         {
             try
             {
-                return GetBuildings("Select * from buildings where SerialNumber='" + serialNumber + "'")[0];
+                return GetBuildings("Select * from building where SerialNumber='" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {

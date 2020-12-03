@@ -48,9 +48,10 @@ namespace GraphicEditor.Repositories
 
         public List<Room> GetAllRooms()
         {
+           
             try
             {
-                return GetRooms("Select * from rooms");
+                return GetRooms("Select * from room");
             }
             catch (Exception)
             {
@@ -62,7 +63,7 @@ namespace GraphicEditor.Repositories
         {
             try
             {
-                return GetRooms("Select * from rooms where Name like '%" + name + "%'");
+                return GetRooms("Select * from room where Name like '%" + name + "%'");
             }
             catch (Exception)
             {
@@ -74,7 +75,7 @@ namespace GraphicEditor.Repositories
         {
             try
             {
-                return GetRooms("Select * from rooms where SerialNumber='" + serialNumber + "'")[0];
+                return GetRooms("Select * from room where SerialNumber='" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {
@@ -87,7 +88,7 @@ namespace GraphicEditor.Repositories
         {
             try
             {
-                return GetRooms("Select * from rooms where FloorSerialNumber='" + floorSerialNumber + "'");
+                return GetRooms("Select * from room where FloorSerialNumber='" + floorSerialNumber + "'");
             }
             catch (Exception e)
             {

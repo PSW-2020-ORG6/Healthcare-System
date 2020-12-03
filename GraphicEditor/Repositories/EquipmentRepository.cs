@@ -42,7 +42,7 @@ namespace GraphicEditor.Repositories
         {
             try
             {
-                return GetEquipments("Select * from equipments");
+                return GetEquipments("Select * from equipment");
             }
             catch (Exception)
             {
@@ -54,7 +54,7 @@ namespace GraphicEditor.Repositories
         {
             try
             {
-                return GetEquipments("Select * from equipments where SerialNumber='" + serialNumber + "'")[0];
+                return GetEquipments("Select * from equipment where SerialNumber='" + serialNumber + "'")[0];
             }
             catch (Exception)
             {
@@ -66,7 +66,7 @@ namespace GraphicEditor.Repositories
         {
             try
             {
-                return GetEquipments("Select * from equipments where Name like '%" + name + "%'");
+                return GetEquipments("Select * from equipment where Name like '%" + name + "%'");
             }
             catch (Exception)
             {
@@ -78,7 +78,7 @@ namespace GraphicEditor.Repositories
         {
             try
             {
-                return GetEquipments("Select * from equipments where RoomSerialNumber='" + roomSerialNumber + "'");
+                return GetEquipments("Select * from equipment where RoomSerialNumber='" + roomSerialNumber + "'");
             }
             catch (Exception)
             {

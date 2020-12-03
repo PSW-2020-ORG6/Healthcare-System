@@ -2,10 +2,11 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class TimeIntervalRepository
+    public class TimeIntervalRepository: ITimeIntervalRepository
     {
         private MySqlConnection connection;
 
@@ -16,7 +17,6 @@ namespace WebApplication.Backend.Repositorys
 
         private List<TimeInterval> GetTimeIntervals(String query)
         {
-            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -37,7 +37,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetTimeIntervals("Select * from timeIntervals");
+                return GetTimeIntervals("Select * from timeInterval");
             }
             catch (Exception)
             {
@@ -49,7 +49,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetTimeIntervals("Select * from timeIntervals where Start='" + start + "'")[0];
+                return GetTimeIntervals("Select * from timeInterval where Start='" + start + "'")[0];
             }
             catch (Exception e)
             {
@@ -62,7 +62,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetTimeIntervals("Select * from timeIntervals where End='" + end + "'")[0];
+                return GetTimeIntervals("Select * from timeInterval where End='" + end + "'")[0];
             }
             catch (Exception e)
             {
@@ -75,7 +75,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetTimeIntervals("Select * from timeIntervals where Id='" + id + "'");
+                return GetTimeIntervals("Select * from timeInterval where Id='" + id + "'");
             }
             catch (Exception e)
             {
@@ -88,7 +88,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetTimeIntervals("Select * from timeIntervals where Id='" + id + "'")[0];
+                return GetTimeIntervals("Select * from timeInterval where Id='" + id + "'")[0];
             }
             catch (Exception e)
             {

@@ -244,16 +244,16 @@ namespace WebApplication.Backend.Model
         {
             modelBuilder.Entity<Equipment>().HasKey(o => o.Id);
             modelBuilder.Entity<Equipment>().HasData(
-               new Equipment { SerialNumber = "73", RoomId = "101", Name = "Bed", Id = "11", BuildingSerialNumber = "10001", FloorSerialNumber = "1001", RoomSerialNumber = "101" },
-               new Equipment { SerialNumber = "74", RoomId = "102", Name = "Bed", Id = "12", BuildingSerialNumber = "10001", FloorSerialNumber = "1001", RoomSerialNumber = "101" },
-               new Equipment { SerialNumber = "75", RoomId = "103", Name = "Bed", Id = "13", BuildingSerialNumber = "10001", FloorSerialNumber = "1001", RoomSerialNumber = "101" },
-               new Equipment { SerialNumber = "76", RoomId = "101", Name = "Bed", Id = "14", BuildingSerialNumber = "10001", FloorSerialNumber = "1001", RoomSerialNumber = "101" },
-               new Equipment { SerialNumber = "77", RoomId = "102", Name = "Bed", Id = "15", BuildingSerialNumber = "10001", FloorSerialNumber = "1002", RoomSerialNumber = "106" },
-               new Equipment { SerialNumber = "78", RoomId = "104", Name = "Table", Id = "16", BuildingSerialNumber = "10001", FloorSerialNumber = "1002", RoomSerialNumber = "106" },
-               new Equipment { SerialNumber = "79", RoomId = "111", Name = "Table", Id = "17", BuildingSerialNumber = "10001", FloorSerialNumber = "1002", RoomSerialNumber = "107" },
-               new Equipment { SerialNumber = "80", RoomId = "111", Name = "Table", Id = "18", BuildingSerialNumber = "10001", FloorSerialNumber = "1002", RoomSerialNumber = "107" },
-               new Equipment { SerialNumber = "81", RoomId = "112", Name = "Bed", Id = "19", BuildingSerialNumber = "10002", FloorSerialNumber = "1003", RoomSerialNumber = "114" },
-               new Equipment { SerialNumber = "82", RoomId = "112", Name = "Bed", Id = "20", BuildingSerialNumber = "10002", FloorSerialNumber = "1003", RoomSerialNumber = "114" }
+               new Equipment { SerialNumber = "73", Id = "11", RoomId = "101", Name = "Bed",  BuildingSerialNumber = "10001", FloorSerialNumber = "1001", RoomSerialNumber = "101" },
+               new Equipment { SerialNumber = "74", Id = "12", RoomId = "102", Name = "Bed",  BuildingSerialNumber = "10001", FloorSerialNumber = "1001", RoomSerialNumber = "101" },
+               new Equipment { SerialNumber = "75", Id = "13", RoomId = "103", Name = "Bed",  BuildingSerialNumber = "10001", FloorSerialNumber = "1001", RoomSerialNumber = "101" },
+               new Equipment { SerialNumber = "76", Id = "14", RoomId = "101", Name = "Bed",  BuildingSerialNumber = "10001", FloorSerialNumber = "1001", RoomSerialNumber = "101" },
+               new Equipment { SerialNumber = "77", Id = "15", RoomId = "102", Name = "Bed",  BuildingSerialNumber = "10001", FloorSerialNumber = "1002", RoomSerialNumber = "106" },
+               new Equipment { SerialNumber = "78", Id = "16", RoomId = "104", Name = "Table",  BuildingSerialNumber = "10001", FloorSerialNumber = "1002", RoomSerialNumber = "106" },
+               new Equipment { SerialNumber = "79", Id = "17", RoomId = "111", Name = "Table",  BuildingSerialNumber = "10001", FloorSerialNumber = "1002", RoomSerialNumber = "107" },
+               new Equipment { SerialNumber = "80", Id = "18", RoomId = "111", Name = "Table",  BuildingSerialNumber = "10001", FloorSerialNumber = "1002", RoomSerialNumber = "107" },
+               new Equipment { SerialNumber = "81", Id = "19", RoomId = "112", Name = "Bed",  BuildingSerialNumber = "10002", FloorSerialNumber = "1003", RoomSerialNumber = "114" },
+               new Equipment { SerialNumber = "82", Id = "20", RoomId = "112", Name = "Bed",  BuildingSerialNumber = "10002", FloorSerialNumber = "1003", RoomSerialNumber = "114" }
             );
         }
 

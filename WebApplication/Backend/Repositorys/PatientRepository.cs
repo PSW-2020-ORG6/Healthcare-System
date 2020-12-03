@@ -3,13 +3,14 @@ using Model.Util;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
     /// <summary>
     /// This class does connection with MySQL database patient table
     /// </summary>
-    public class PatientRepository
+    public class PatientRepository: IPatientRepository
     {
         private MySqlConnection connection;
         public PatientRepository()
@@ -25,9 +26,8 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///list of patients
         ///</returns>
-        internal List<Patient> GetPatients(String sqlDml)
+        private List<Patient> GetPatients(String sqlDml)
         {
-            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -83,7 +83,7 @@ namespace WebApplication.Backend.Repositorys
         {
             if (id != null)
             {
-                Patient patient = GetPatients("Select * from patients where SerialNumber like '" + id + "'")[0];
+                Patient patient = GetPatients("Select * from patient where SerialNumber like '" + id + "'")[0];
                 return patient;
             }
             return null;
@@ -98,7 +98,7 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         public List<Patient> GetAllPatients()
         {
-            return GetPatients("Select * from patients");
+            return GetPatients("Select * from patient");
         }
 
 
@@ -106,7 +106,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetPatients("Select * from patients where SerialNumber='" + serialNumber + "'")[0];
+                return GetPatients("Select * from patient where SerialNumber='" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {
@@ -125,7 +125,7 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///list of adresses
         ///</returns
-        public List<Address> getAddresses(string sqlDml)
+        public List<Address> GetAddresses(string sqlDml)
         {
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
@@ -151,9 +151,9 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///single adress
         ///</returns
-        public Address getAddress(string adressId)
+        public Address GetAddress(string adressId)
         {
-            return getAddresses("Select * from addresses where SerialNumber = '" + adressId + "'")[0];
+            return GetAddresses("Select * from address where SerialNumber = '" + adressId + "'")[0];
         }
 
     }

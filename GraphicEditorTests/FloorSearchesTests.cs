@@ -1,5 +1,5 @@
-﻿using GraphicEditor.Repositories;
-using GraphicEditor.Repositories.Interfaces;
+﻿using WebApplication.Backend.Repositorys;
+using WebApplication.Backend.Repositorys.Interfaces;
 using Xunit;
 
 namespace GraphicEditorTests
@@ -15,15 +15,14 @@ namespace GraphicEditorTests
         }
 
         [Fact]
-        public void GetFloorsByName_FloorsExist_ReturnFloors()
+        public void GetFloorByName_FloorExist_ReturnFloor()
         {
             // Act
-            var floors = _floorRepository.GetFloorsByName("Floor 1");
+            var floor = _floorRepository.GetFloorsByName("Floor1")[0];
 
             // Assert
-            Assert.NotNull(floors);
-            foreach (var floor in floors)
-                Assert.Equal("Floor 1", floor.Name);
+            Assert.NotNull(floor);
+            Assert.Equal("Floor1", floor.Name);
         }
 
         [Fact]

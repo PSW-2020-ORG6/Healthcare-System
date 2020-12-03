@@ -2,10 +2,11 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class AppointmentRepository
+    public class AppointmentRepository: IAppointmentRepository
     {
         private MySqlConnection connection;
         private RoomRepository roomRepository = new RoomRepository();
@@ -21,7 +22,6 @@ namespace WebApplication.Backend.Repositorys
 
         private List<Appointment> GetAppointments(String query)
         {
-            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -46,7 +46,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetAppointments("Select * from appointments");
+                return GetAppointments("Select * from appointment");
             }
             catch (Exception)
             {
@@ -58,7 +58,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetAppointments("Select * from appointments where SerialNumber='" + serialNumber + "'")[0];
+                return GetAppointments("Select * from appointment where SerialNumber='" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {
@@ -71,7 +71,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetAppointments("Select * from appointments where RoomSerialNumber='" + roomSerialNumber + "'");
+                return GetAppointments("Select * from appointment where RoomSerialNumber='" + roomSerialNumber + "'");
             }
             catch (Exception e)
             {
@@ -84,7 +84,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetAppointments("Select * from appointments where PhysitianSerialNumber='" + physitianSerialNumber + "'");
+                return GetAppointments("Select * from appointment where PhysitianSerialNumber='" + physitianSerialNumber + "'");
             }
             catch (Exception e)
             {
@@ -97,7 +97,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetAppointments("Select * from appointments where PatientSerialNumber='" + patientSerialNumber + "'");
+                return GetAppointments("Select * from appointment where PatientSerialNumber='" + patientSerialNumber + "'");
             }
             catch (Exception e)
             {

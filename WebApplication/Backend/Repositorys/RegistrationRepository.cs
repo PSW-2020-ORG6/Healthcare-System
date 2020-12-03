@@ -7,7 +7,7 @@ namespace WebApplication.Backend.Repositorys
     /// <summary>
     /// This class does connection with MySQL database patient and address tables
     /// </summary>
-    public class RegistrationRepository : IRegistrationRepository
+    public class RegistrationRepository: IRegistrationRepository
     {
         private MySqlConnection connection;
         public RegistrationRepository()

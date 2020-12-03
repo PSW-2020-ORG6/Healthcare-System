@@ -2,10 +2,11 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class MedicineTypeRepository
+    public class MedicineTypeRepository: IMedicineTypeRepository
     {
         private MySqlConnection connection;
         public MedicineTypeRepository()
@@ -15,7 +16,6 @@ namespace WebApplication.Backend.Repositorys
 
         private List<MedicineType> GetMedicineTypes(String query)
         {
-            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -35,7 +35,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetMedicineTypes("Select * from medicineTypes");
+                return GetMedicineTypes("Select * from medicineType");
             }
             catch (Exception)
             {
@@ -47,7 +47,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetMedicineTypes("Select * from medicineTypes where SerialNumber='" + serialNumber + "'")[0];
+                return GetMedicineTypes("Select * from medicineType where SerialNumber='" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {

@@ -37,7 +37,7 @@ namespace WebApplication.Backend.Services
         internal Patient GetPatientById(string patientId)
         {
             Patient returnValue = patientRepository.GetPatientById(patientId);
-            returnValue.Address = patientRepository.getAddress(returnValue.Address.SerialNumber);
+            returnValue.Address = patientRepository.GetAddress(returnValue.Address.SerialNumber);
             return returnValue;
         }
 

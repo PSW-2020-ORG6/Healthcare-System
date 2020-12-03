@@ -2,10 +2,11 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class SpecializationRepository
+    public class SpecializationRepository: ISpecializationRepository
     {
         private MySqlConnection connection;
 
@@ -16,7 +17,6 @@ namespace WebApplication.Backend.Repositorys
 
         private List<Specialization> GetSpecializations(String query)
         {
-            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
