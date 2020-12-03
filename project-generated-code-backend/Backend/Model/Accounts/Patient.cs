@@ -13,120 +13,93 @@ namespace Model.Accounts
 {
     public class Patient : Account
     {
-        private String parentName;
-        private String placeOfBirth;
-        private String municipalityOfBirth;
-        private String stateOfBirth;
-        private String citizenship;
-        private String nationality;
-        private String profession;
-        private String placeOfResidence;
-        private String municipalityOfResidence;
-        private String stateOfResidence;
-        private String employmentStatus;
-        private String maritalStatus;
-        private String gender;
-        private String healthInsuranceNumber;
-        private String familyDiseases;
-        private String personalDiseases;
-        private String image;
-        private bool guest;
-        private bool emailConfirmed;
-        private string chosenDoctor;
+        public string ParentName { get; set; }
+        public string PlaceOfBirth { get; set; }
+        public string MunicipalityOfBirth { get; set; }
+        public string StateOfBirth { get; set; }
+        public string PlaceOfResidence { get; set; }
+        public string MunicipalityOfResidence { get; set; }
+        public string StateOfResidence { get; set; }
+        public string Citizenship { get; set; }
+        public string Nationality { get; set; }
+        public string Profession { get; set; }
+        public string EmploymentStatus { get; set; }
+        public string MaritalStatus { get; set; }
+        public string HealthInsuranceNumber { get; set; }
+        public string FamilyDiseases { get; set; }
+        public string PersonalDiseases { get; set; }
+        public string Gender { get; set; }
+        public string Image { get; set; }
+        public bool Guest { get; set; }
+        public bool EmailConfirmed { get; set; }
 
+        public Patient() : base() { }
+        public Patient(string serialNumber, string name, string surname) : base(serialNumber, name, surname) { }
         public Patient(string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string parentName, string gender, string password, bool isGuest = false)
-            : base(Guid.NewGuid().ToString(), name, surname, id, dateOfBirth, contact, email, address, password)
+            : base(name, surname, id, dateOfBirth, contact, email, address, password)
         {
-            this.parentName = parentName;
-            this.gender = gender;
-            this.Guest = isGuest;
-            this.password = password;
+            ParentName = parentName;
+            Gender = gender;
+            Guest = isGuest;
+            Password = password;
         }
         [JsonConstructor]
         public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string parentName, string gender, string password, bool isGuest = false)
             : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address, password)
         {
-            this.parentName = parentName;
-            this.gender = gender;
-            this.Guest = isGuest;
-            this.password = password;
+            ParentName = parentName;
+            Gender = gender;
+            Guest = isGuest;
+            Password = password;
         }
         public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string parentName, string placeOfBirth, string municipalityOfBirth, string stateOfBirth, String citizenship, string nationality, string profession, string placeOfResidence, string municipalityOfResidence, string stateOfResidence, string employmentStatus, string maritalStatus, string healthInsuranceNumber, string familyDiseases, string personalDiseases, string gender, string password, string image, bool isGuest = false)
             : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address, password)
         {
-            this.parentName = parentName;
-            this.gender = gender;
-            this.Guest = isGuest;
-            this.password = password;
-            this.placeOfBirth = placeOfBirth;
-            this.municipalityOfBirth = municipalityOfBirth;
-            this.stateOfBirth = stateOfBirth;
-            this.citizenship = citizenship;
-            this.nationality = nationality;
-            this.profession = profession;
-            this.placeOfResidence = placeOfResidence;
-            this.municipalityOfResidence = municipalityOfResidence;
-            this.stateOfResidence = stateOfResidence;
-            this.employmentStatus = employmentStatus;
-            this.maritalStatus = maritalStatus;
-            this.healthInsuranceNumber = healthInsuranceNumber;
-            this.familyDiseases = familyDiseases;
-            this.personalDiseases = personalDiseases;
-            this.image = image;
+            ParentName = parentName;
+            Gender = gender;
+            Guest = isGuest;
+            Password = password;
+            PlaceOfBirth = placeOfBirth;
+            MunicipalityOfBirth = municipalityOfBirth;
+            StateOfBirth = stateOfBirth;
+            Citizenship = citizenship;
+            Nationality = nationality;
+            Profession = profession;
+            PlaceOfResidence = placeOfResidence;
+            MunicipalityOfResidence = municipalityOfResidence;
+            StateOfResidence = stateOfResidence;
+            EmploymentStatus = employmentStatus;
+            MaritalStatus = maritalStatus;
+            HealthInsuranceNumber = healthInsuranceNumber;
+            FamilyDiseases = familyDiseases;
+            PersonalDiseases = personalDiseases;
+            Image = image;
         }
 
-        [JsonConstructor]
-        public Patient(PatientDTO patientDTO) : base(Guid.NewGuid().ToString(), patientDTO.Name, patientDTO.Surname, patientDTO.Id, patientDTO.DateOfBirth, patientDTO.Contact, patientDTO.Email, patientDTO.Address, patientDTO.Password)
+        public Patient(PatientDTO patientDto) : base(patientDto.Name, patientDto.Surname, patientDto.Id,
+            patientDto.DateOfBirth, patientDto.Contact, patientDto.Email,
+            patientDto.Address, patientDto.Password)
         {
-            this.parentName = patientDTO.ParentName;
-            this.gender = patientDTO.Gender;
-            this.password = patientDTO.Password;
-            this.placeOfBirth = patientDTO.PlaceOfBirth;
-            this.municipalityOfBirth = patientDTO.MunicipalityOfBirth;
-            this.stateOfBirth = patientDTO.StateOfBirth;
-            this.citizenship = patientDTO.Citizenship;
-            this.nationality = patientDTO.Nationality;
-            this.profession = patientDTO.Profession;
-            this.placeOfResidence = patientDTO.PlaceOfResidence;
-            this.municipalityOfResidence = patientDTO.MunicipalityOfResidence;
-            this.stateOfResidence = patientDTO.StateOfResidence;
-            this.employmentStatus = patientDTO.EmploymentStatus;
-            this.maritalStatus = patientDTO.MaritalStatus;
-            this.healthInsuranceNumber = patientDTO.HealthInsuranceNumber;
-            this.familyDiseases = patientDTO.FamilyDiseases;
-            this.personalDiseases = patientDTO.PersonalDiseases;
-            this.image = patientDTO.Image;
-            this.guest = patientDTO.IsGuest;
-            this.emailConfirmed = patientDTO.EmailConfirmed;
-            this.chosenDoctor = patientDTO.ChosenDoctor;
-        }
-        public Patient() : base() { }
-        public Patient(string serialNumber, string name, string surname) : base() { }
-
-        public string ParentName { get => parentName; set => parentName = value; }
-        public string PlaceOfBirth { get => placeOfBirth; set => placeOfBirth = value; }
-        public string MunicipalityOfBirth { get => municipalityOfBirth; set => municipalityOfBirth = value; }
-        public string StateOfBirth { get => stateOfBirth; set => stateOfBirth = value; }
-        public string PlaceOfResidence { get => placeOfResidence; set => placeOfResidence = value; }
-        public string MunicipalityOfResidence { get => municipalityOfResidence; set => municipalityOfResidence = value; }
-        public string StateOfResidence { get => stateOfResidence; set => stateOfResidence = value; }
-        public string Citizenship { get => citizenship; set => citizenship = value; }
-        public string Nationality { get => nationality; set => nationality = value; }
-        public string Profession { get => profession; set => profession = value; }
-        public string EmploymentStatus { get => employmentStatus; set => employmentStatus = value; }
-        public string MaritalStatus { get => maritalStatus; set => maritalStatus = value; }
-        public string HealthInsuranceNumber { get => healthInsuranceNumber; set => healthInsuranceNumber = value; }
-        public string FamilyDiseases { get => familyDiseases; set => familyDiseases = value; }
-        public string PersonalDiseases { get => personalDiseases; set => personalDiseases = value; }
-        public string Gender { get => gender; set => gender = value; }
-        public string Image { get => image; set => image = value; }
-        public bool Guest { get => guest; set => guest = value; }
-        public bool EmailConfirmed { get => emailConfirmed; set => emailConfirmed = value; }
-        public string ChosenDoctor { get => chosenDoctor; set => chosenDoctor = value; }
-
-        public override string ToString()
-        {
-            return base.ToString();
+            ParentName = patientDto.ParentName;
+            Gender = patientDto.Gender;
+            Password = patientDto.Password;
+            PlaceOfBirth = patientDto.PlaceOfBirth;
+            MunicipalityOfBirth = patientDto.MunicipalityOfBirth;
+            StateOfBirth = patientDto.StateOfBirth;
+            Citizenship = patientDto.Citizenship;
+            Nationality = patientDto.Nationality;
+            Profession = patientDto.Profession;
+            PlaceOfResidence = patientDto.PlaceOfResidence;
+            MunicipalityOfResidence = patientDto.MunicipalityOfResidence;
+            StateOfResidence = patientDto.StateOfResidence;
+            EmploymentStatus = patientDto.EmploymentStatus;
+            MaritalStatus = patientDto.MaritalStatus;
+            HealthInsuranceNumber = patientDto.HealthInsuranceNumber;
+            FamilyDiseases = patientDto.FamilyDiseases;
+            PersonalDiseases = patientDto.PersonalDiseases;
+            Image = patientDto.Image;
+            Guest = patientDto.IsGuest;
+            EmailConfirmed = patientDto.EmailConfirmed;
         }
     }
 

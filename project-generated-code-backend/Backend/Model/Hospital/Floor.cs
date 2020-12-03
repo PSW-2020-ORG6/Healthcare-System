@@ -10,9 +10,8 @@ namespace health_clinic_class_diagram.Backend.Model.Hospital
         public string BuildingSerialNumber { get; set; }
         public List<Room> Rooms { get; set; }
 
-        public Floor()
+        public Floor() : base()
         {
-
         }
     }
 }

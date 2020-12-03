@@ -5,26 +5,35 @@
 
 using Newtonsoft.Json;
 using System;
+using Backend.Model.Util;
 
 namespace Model.Hospital
 {
-    public class Bed : Equipment
+    public class Bed : Entity
     {
+        public string Name { get; set; }
+        public string Id { get; set; }
+        public string RoomId { get; set; }
+        public string BuildingSerialNumber { get; set; }
+        public string FloorSerialNumber { get; set; }
+        public string RoomSerialNumber { get; set; }
         public string PatientID { get; set; }
 
         public Bed()
         {
         }
 
-        public Bed(string name, string id) : base(Guid.NewGuid().ToString(), name, id)
+        public Bed(string name, string id) : base()
         {
-
+            Name = name;
+            Id = id;
         }
 
         [JsonConstructor]
-        public Bed(String serialNumber, string name, string id) : base(serialNumber, name, id)
+        public Bed(String serialNumber, string name, string id) : base(serialNumber)
         {
-
+            Name = name;
+            Id = id;
         }
     }
 }

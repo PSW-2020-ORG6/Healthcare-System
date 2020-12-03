@@ -11,60 +11,54 @@ namespace Model.Hospital
 {
     public class Equipment : Entity
     {
-
-        private String name;
-        private String id;
-        private String roomId;
-
-        public Equipment() : base(Guid.NewGuid().ToString()) { }
-        public Equipment(string name, string id) : base(Guid.NewGuid().ToString())
-        {
-            this.name = name;
-            this.id = id;
-        }
-
-        [JsonConstructor]
-        public Equipment(String serialNumber, string name, string id) : base()
-        {
-            this.SerialNumber = serialNumber;
-            this.name = name;
-            this.id = id;
-        }
-
-
-        public Equipment(Equipment equipment) : base(equipment.SerialNumber)
-        {
-            this.name = equipment.name;
-            this.id = equipment.id;
-        }
-
-        public string Id { get => id; set { id = value; } }
-        public string RoomId { get => roomId; set => roomId = value; }
-        public string Name { get => name; set { name = value; } }
+        public string Name { get; set; }
+        public string Id { get; set; }
+        public string RoomId { get; set; }
         public string BuildingSerialNumber { get; set; }
         public string FloorSerialNumber { get; set; }
         public string RoomSerialNumber { get; set; }
 
+        public Equipment() : base()
+        {
+        }
+
+        public Equipment(string name, string id) : base()
+        {
+            Name = name;
+            Id = id;
+        }
+
+        [JsonConstructor]
+        public Equipment(String serialNumber, string name, string id) : base(serialNumber)
+        {
+            Name = name;
+            Id = id;
+        }
+
+        public Equipment(Equipment equipment) : base(equipment.SerialNumber)
+        {
+            Name = equipment.Name;
+            Id = equipment.Id;
+        }
 
         public override bool Equals(object obj)
         {
-            Equipment other = obj as Equipment;
-
-            if (other == null)
+            if (!(obj is Equipment other))
             {
                 return false;
             }
 
-            return this.Name.Equals(other.Name) && this.Id.Equals(other.Id);
+            return Name.Equals(other.Name) && Id.Equals(other.Id);
         }
 
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
+
         public override string ToString()
         {
-            return "name: " + this.Name + "\nid: " + this.Id;
+            return "name: " + Name + "\nid: " + Id;
         }
     }
 }

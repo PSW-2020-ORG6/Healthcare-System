@@ -11,41 +11,41 @@ namespace Model.Hospital
 {
     public class Rejection : Entity
     {
-        private String reason;
-        private Medicine medicine;
-
-        public string Reason { get => reason; }
-        public Medicine Medicine { get => medicine; }
+        public string Reason { get; set; }
+        public Medicine Medicine { get; set; }
 
         public Rejection(string reason, Medicine medicine) : base(Guid.NewGuid().ToString())
         {
-            this.reason = reason;
-            this.medicine = medicine;
+            Reason = reason;
+            Medicine = medicine;
         }
 
         [JsonConstructor]
         public Rejection(String serialNumber, string reason, Medicine medicine) : base(serialNumber)
         {
-            this.reason = reason;
-            this.medicine = medicine;
+            Reason = reason;
+            Medicine = medicine;
         }
 
         public override bool Equals(object obj)
         {
-            Rejection other = obj as Rejection;
+            var other = (Rejection) obj;
             if (other == null)
             {
                 return false;
             }
-            return this.Reason.Equals(other.Reason) && this.Medicine.Equals(other.Medicine);
+
+            return Reason.Equals(other.Reason) && Medicine.Equals(other.Medicine);
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
+
         public override string ToString()
         {
-            return "medicine: " + this.Medicine.ToString() + "\nreason: " + this.Reason;
+            return "medicine: " + Medicine + "\nreason: " + Reason;
         }
     }
 }

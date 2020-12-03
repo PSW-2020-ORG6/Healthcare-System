@@ -7,27 +7,18 @@ namespace HealthClinic.Backend.Model.Hospital
 {
     public class Renovation : Entity
     {
-        private static int idMaker = 0;
-        private int id;
-        private TimeInterval renovationTime;
-        private Room room;
+        public TimeInterval TimeInterval { get; set; }
+        public Room Room { get; set; }
 
-        public TimeInterval TimeInterval { get => renovationTime; set => renovationTime = value; }
-        public int Id { get => id; set => id = value; }
-        public Room Room { get => room; set => room = value; }
-
-        public Renovation(Room room, TimeInterval timeInteval) : base(Guid.NewGuid().ToString())
+        public Renovation(Room room, TimeInterval timeInteval) : base()
         {
-            id = ++idMaker;
             TimeInterval = timeInteval;
-            this.room = room;
+            Room = room;
         }
 
-        public Renovation(String serialNumber, Room room, TimeInterval timeInteval) : base()
+        public Renovation(String serialNumber, Room room, TimeInterval timeInteval) : base(serialNumber)
         {
-            this.SerialNumber = serialNumber;
-            id = ++idMaker;
-            this.room = room;
+            Room = room;
             TimeInterval = timeInteval;
         }
 
@@ -37,14 +28,12 @@ namespace HealthClinic.Backend.Model.Hospital
 
         public override bool Equals(object obj)
         {
-            Renovation other = obj as Renovation;
-            if (other == null)
+            if (!(obj is Renovation other))
             {
                 return false;
             }
-            return this.Room.Equals(other.Room) && this.TimeInterval.Equals(other.TimeInterval);
 
+            return Room.Equals(other.Room) && TimeInterval.Equals(other.TimeInterval);
         }
     }
 }
-

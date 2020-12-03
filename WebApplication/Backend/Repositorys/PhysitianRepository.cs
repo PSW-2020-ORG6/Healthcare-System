@@ -30,11 +30,11 @@ namespace WebApplication.Backend.Repositorys
                 entity.SerialNumber = (string)sqlReader[0];
                 entity.Name = (string)sqlReader[1];
                 entity.Surname = (string)sqlReader[2];
-                entity.FullName = entity.Name + " " + entity.Surname;
-                entity.Id = (string)sqlReader[4];
-                entity.DateOfBirth = (DateTime)sqlReader[5];
-                entity.Contact = (string)sqlReader[6];
-                entity.Email = (string)sqlReader[7];
+                // entity.FullName = entity.Name + " " + entity.Surname;
+                entity.Id = (string)sqlReader[3];
+                entity.DateOfBirth = (DateTime)sqlReader[4];
+                entity.Contact = (string)sqlReader[5];
+                entity.Email = (string)sqlReader[6];
                 //entity.Address = addressRepository.GetAddressBySerialNumber((string)sqlReader[7]);
                 entity.Password = (string)sqlReader[8];
                 //entity.Specialization = specializationRepository.GetSpecializationsBySerialNumber((string)sqlReader[9]);

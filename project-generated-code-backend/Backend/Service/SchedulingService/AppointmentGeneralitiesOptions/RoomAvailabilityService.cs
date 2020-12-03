@@ -5,6 +5,7 @@ using Model.Schedule;
 using Model.Util;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 {
@@ -56,42 +57,25 @@ namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
         public List<Bed> GetAvailableBeds(Room room)
         {
             List<Bed> beds = new List<Bed>();
-            foreach (Equipment equipment in room.Equipment)
+            foreach (Bed bed in room.Beds)
             {
-                beds.Add(equipment as Bed);
-                // ne razlikuje krevet i opremu
-                //if(equipment.IsBed() && !IsBedReserved(equipment))
-                //{
-                //    beds.Add(equipment as Bed);
-                //}
+                beds.Add(bed);
+                if(!IsBedReserved(bed))
+                {
+                    beds.Add(bed);
+                }
             }
             return beds;
         }
 
         private bool HasAvailableBed(Room room)
         {
-            return true;
-            // ne razlikuje krevet i opremu
-            //foreach(Equipment equipment in room.Equipment)
-            //{
-            //    if(equipment.IsBed() && !IsBedReserved(equipment))
-            //    {
-            //        return true;
-            //    }
-            //}
-            //return false;
+            return room.Beds.Any(bed => !IsBedReserved(bed));
         }
-        private bool IsBedReserved(Equipment bed)
+        private bool IsBedReserved(Bed bed)
         {
-            List<BedReservation> bedReservations = bedReservationRepository.GetAll();
-            foreach (BedReservation bedReservation in bedReservations)
-            {
-                if (bedReservation.Bed.Equals(bed))
-                {
-                    return false;
-                }
-            }
-            return true;
+            var bedReservations = bedReservationRepository.GetAll();
+            return bedReservations.All(bedReservation => !bedReservation.Bed.Equals(bed));
         }
         private bool IsRoomInRenovation(Room room, TimeInterval timeInterval)
         {

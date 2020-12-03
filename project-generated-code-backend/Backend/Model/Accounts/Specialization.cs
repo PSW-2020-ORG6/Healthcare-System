@@ -12,37 +12,35 @@ namespace Model.Accounts
 {
     public class Specialization : Entity
     {
-        private String name;
+        public string Name { get; set; }
+        
         public Specialization() : base(Guid.NewGuid().ToString()) { }
+        
         public Specialization(string name) : base(Guid.NewGuid().ToString())
         {
-            this.name = name;
+            Name = name;
         }
-
+        
         [JsonConstructor]
         public Specialization(String serialNumber, string name) : base(serialNumber)
         {
-            this.name = name;
+            Name = name;
         }
-        public string Name { get => name; set => name = value; }
 
         public override string ToString()
         {
-            return this.name;
+            return Name;
         }
 
         public override int GetHashCode()
         {
-            return 363513814 + EqualityComparer<string>.Default.GetHashCode(name);
+            return 363513814 + EqualityComparer<string>.Default.GetHashCode(Name);
         }
+        
         public override bool Equals(object obj)
         {
             Specialization other = obj as Specialization;
-            if (other == null)
-            {
-                return false;
-            }
-            return this.Name.Equals(other.Name);
+            return other != null && Name.Equals(other.Name);
         }
     }
 }

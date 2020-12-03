@@ -10,23 +10,10 @@ namespace Model.Blog
 {
     public class Comment
     {
-        private String text;
-        private DateTime date;
-        private Account account;
+        public Account Account { get; set; }
 
-        public Account Account
-        {
-            get
-            {
-                return account;
-            }
-            set
-            {
-                this.account = value;
-            }
-        }
+        public string Text { get; set; }
 
-        public string Text { get => text; set => text = value; }
-        public DateTime Date { get => date; set => date = value; }
+        public DateTime Date { get; set; }
     }
 }
