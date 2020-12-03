@@ -11,28 +11,41 @@ namespace Model.Blog
 {
     public class Feedback : Entity
     {
-        private String text;
-        private DateTime date;
-        private String patientId;
-        private Boolean approved;
-        public string PatientId { get => patientId; set => patientId = value; }
-        public string Text { get => text; set => text = value; }
-        public DateTime Date { get => date; set => date = value; }
-        public Boolean Approved { get => approved; set => approved = value; }
-        public Feedback(String text, String patientId, DateTime date, Boolean app)
+        public string PatientId { get; set; }
+
+        public string Text { get; set; }
+
+        public DateTime Date { get; set; }
+
+        public Boolean Approved { get; set; }
+
+        public Feedback() : base()
         {
-            this.PatientId = patientId;
-            this.Text = text;
-            this.Date = date;
-            this.Approved = app;
         }
-        public Feedback() { }
-        public Feedback(FeedbackDTO feedbackDTO)
+
+        public Feedback(String text, String patientId, DateTime date, Boolean app) : base()
         {
-            this.text = feedbackDTO.Text;
-            this.patientId = feedbackDTO.PatientId;
-            this.date = feedbackDTO.Date;
-            this.Approved = feedbackDTO.Approved;
+            PatientId = patientId;
+            Text = text;
+            Date = date;
+            Approved = app;
+        }
+
+        public Feedback(String serialNumber, String text, String patientId, DateTime date, Boolean app) : base(
+            serialNumber)
+        {
+            PatientId = patientId;
+            Text = text;
+            Date = date;
+            Approved = app;
+        }
+
+        public Feedback(FeedbackDTO feedbackDto) : base()
+        {
+            Text = feedbackDto.Text;
+            PatientId = feedbackDto.PatientId;
+            Date = feedbackDto.Date;
+            Approved = feedbackDto.Approved;
         }
     }
 }

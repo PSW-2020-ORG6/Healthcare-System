@@ -7,102 +7,81 @@ using Backend.Model.Util;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Model.Hospital
 {
     public class Room : Entity
     {
-        private int id;
-        private RoomType roomType;
-        private List<Equipment> equipment;
-        private string roomTypeSerialNumber;
-        private string style;
-
         public string Name { get; set; }
-        public int Id { get => id; set { id = value; } }
+        public int Id { get; set; }
         public string FloorSerialNumber { get; set; }
         public string BuildingSerialNumber { get; set; }
-        public string RoomTypeSerialNumber { get => roomTypeSerialNumber; set { roomTypeSerialNumber = value; } }
-        public virtual RoomType RoomType { get => roomType; set { roomType = value; } }
-        public virtual List<Equipment> Equipment
-        {
-            get
-            {
-                if (equipment == null)
-                    equipment = new List<Equipment>();
-                return equipment;
-            }
-            set
-            {
-                RemoveAllEquipment();
-                if (value != null)
-                {
-                    foreach (Equipment oEquipment in value)
-                        AddEquipment(oEquipment);
-                }
-            }
-        }
+        public string RoomTypeSerialNumber { get; set; }
+        public virtual RoomType RoomType { get; set; }
+        public virtual List<Equipment> Equipment { get; set; }
+        public virtual List<Bed> Beds { get; set; }
+
         public int Row { get; set; }
         public int Column { get; set; }
         public int RowSpan { get; set; }
         public int ColumnSpan { get; set; }
-        public string Style { get => style; set { style = value; } }
 
-        public Room()
+        public string Style { get; set; }
+
+        public Room() : base()
         {
+        }
 
+        [JsonConstructor]
+        public Room(String serialNumber, int id, RoomType roomType) : base(serialNumber)
+        {
+            Id = id;
+            RoomType = roomType;
+            Equipment = new List<Equipment>();
+            Beds = new List<Bed>();
+        }
+
+        public Room(int id, RoomType roomType) : base()
+        {
+            Id = id;
+            RoomType = roomType;
+            Equipment = new List<Equipment>();
+            Beds = new List<Bed>();
         }
 
         public void AddEquipment(Equipment newEquipment)
         {
             if (newEquipment == null)
                 return;
-            if (this.equipment == null)
-                this.equipment = new List<Equipment>();
-            if (!this.equipment.Contains(newEquipment))
-                this.equipment.Add(newEquipment);
+            Equipment ??= new List<Equipment>();
+            if (!Equipment.Contains(newEquipment))
+                Equipment.Add(newEquipment);
         }
 
         public void RemoveEquipment(Equipment oldEquipment)
         {
             if (oldEquipment == null)
                 return;
-            if (this.equipment != null)
-                if (this.equipment.Contains(oldEquipment))
-                    this.equipment.Remove(oldEquipment);
+            if (Equipment == null) return;
+            if (Equipment.Contains(oldEquipment))
+                Equipment.Remove(oldEquipment);
         }
 
         public void RemoveAllEquipment()
         {
-            if (equipment != null)
-                equipment.Clear();
-        }
-
-        [JsonConstructor]
-        public Room(String serial, int id, RoomType roomType) : base(serial)
-        {
-            this.SerialNumber = serial;
-            this.id = id;
-            this.roomType = roomType;
-            this.equipment = new List<Equipment>();
-
-        }
-
-        public Room(int id, RoomType roomType) : base()
-        {
-            this.id = id;
-            this.roomType = roomType;
-            this.equipment = new List<Equipment>();
+            if (Equipment != null)
+                Equipment.Clear();
         }
 
         public override bool Equals(object obj)
         {
-            Room other = obj as Room;
-            if (other == null)
+            if (!(obj is Room other))
             {
                 return false;
             }
-            return this.Id.Equals(other.Id) && this.RoomType.Equals(other.RoomType);
+
+            return Id.Equals(other.Id) && RoomType.Equals(other.RoomType);
         }
 
         public override int GetHashCode()
@@ -112,19 +91,12 @@ namespace Model.Hospital
 
         public override string ToString()
         {
-            return this.id.ToString();
+            return Id.ToString();
         }
 
         public bool ContainsAllEquipment(List<Equipment> requiredEquipment)
         {
-            foreach (Equipment e in requiredEquipment)
-            {
-                if (!this.Equipment.Contains(e))
-                {
-                    return false;
-                }
-            }
-            return true;
+            return requiredEquipment.All(e => Equipment.Contains(e));
         }
     }
 }

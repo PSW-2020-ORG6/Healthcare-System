@@ -14,44 +14,37 @@ namespace Model.Hospital
 {
     public class BedReservation : Entity
     {
-        private TimeInterval timeInterval;
-        private Patient patient;
-        private Bed bed;
+        public Bed Bed { get; set; }
 
-        public Bed Bed
-        {
-            get
-            {
-                return bed;
-            }
-        }
+        public Patient Patient { get; set; }
 
-        public Patient Patient { get => patient; }
-        public TimeInterval TimeInterval { get => timeInterval; }
-
-        public BedReservation(TimeInterval timeInterval, Patient patient, Bed bed) : base(Guid.NewGuid().ToString())
-        {
-            this.timeInterval = timeInterval;
-            this.patient = patient;
-            this.bed = bed;
-        }
-
-        [JsonConstructor]
-        public BedReservation(String serialNumber, TimeInterval timeInterval, Patient patient, Bed bed) : base(serialNumber)
-        {
-            this.timeInterval = timeInterval;
-            this.patient = patient;
-            this.bed = bed;
-        }
-        public BedReservation(BedReservationDTO bedReservationDTO) : base(Guid.NewGuid().ToString())
-        {
-            this.timeInterval = bedReservationDTO.TimeInterval;
-            this.patient = bedReservationDTO.Patient;
-            this.bed = bedReservationDTO.Bed;
-        }
+        public TimeInterval TimeInterval { get; set; }
 
         public BedReservation()
         {
+        }
+
+        public BedReservation(TimeInterval timeInterval, Patient patient, Bed bed) : base()
+        {
+            TimeInterval = timeInterval;
+            Patient = patient;
+            Bed = bed;
+        }
+
+        [JsonConstructor]
+        public BedReservation(String serialNumber, TimeInterval timeInterval, Patient patient, Bed bed) : base(
+            serialNumber)
+        {
+            TimeInterval = timeInterval;
+            Patient = patient;
+            Bed = bed;
+        }
+
+        public BedReservation(BedReservationDTO bedReservationDto) : base()
+        {
+            TimeInterval = bedReservationDto.TimeInterval;
+            Patient = bedReservationDto.Patient;
+            Bed = bedReservationDto.Bed;
         }
 
         public override bool Equals(object obj)
@@ -64,16 +57,17 @@ namespace Model.Hospital
             }
 
             return this.Patient.Equals(other.Patient) && this.TimeInterval.Equals(other.TimeInterval)
-                && this.Bed.Equals(other.Bed);
+                                                      && this.Bed.Equals(other.Bed);
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
+
         public override string ToString()
         {
-            return "patient: " + this.Patient.FullName + "\nbed: " + this.Bed.ToString() + "\ntime interval: "
-                + this.TimeInterval.ToString();
+            return "patient: " + Patient.FullName + "\nbed: " + Bed + "\ntime interval: " + TimeInterval;
         }
     }
 }

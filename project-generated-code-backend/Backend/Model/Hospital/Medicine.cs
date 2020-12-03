@@ -11,58 +11,48 @@ namespace Model.Hospital
 {
     public class Medicine : Entity
     {
-        private String copyrightName;
-        private String genericName;
-        private MedicineManufacturer medicineManufacturer;
-        private MedicineType medicineType;
-        private String medicineManufacturerSerialNumber;
-        private String medicineTypeSerialNumber;
+        public string CopyrightName { get; set; }
+        public string GenericName { get; set; }
+        public virtual MedicineManufacturer MedicineManufacturer { get; set; }
+        public virtual MedicineType MedicineType { get; set; }
+        public string MedicineManufacturerSerialNumber { get; set; }
+        public string MedicineTypeSerialNumber { get; set; }
 
-        public string CopyrightName { get => copyrightName; set => copyrightName = value; }
-        public string GenericName { get => genericName; set => genericName = value; }
-        public virtual MedicineManufacturer MedicineManufacturer { get => medicineManufacturer; set => medicineManufacturer = value; }
-        public virtual MedicineType MedicineType { get => medicineType; set => medicineType = value; }
-        public Medicine() : base(Guid.NewGuid().ToString())
+        public Medicine() : base()
         {
         }
-        public string MedicineManufacturerSerialNumber { get => medicineManufacturerSerialNumber; set => medicineManufacturerSerialNumber = value; }
-        public string MedicineTypeSerialNumber { get => medicineTypeSerialNumber; set => medicineTypeSerialNumber = value; }
 
-        public Medicine(string copyrightName, string genericName, MedicineManufacturer medicineManufacturer, MedicineType medicineType) : base(Guid.NewGuid().ToString())
+        public Medicine(string copyrightName, string genericName, MedicineManufacturer medicineManufacturer,
+            MedicineType medicineType) : base()
         {
-            this.copyrightName = copyrightName;
-            this.genericName = genericName;
-            this.medicineManufacturer = medicineManufacturer;
-            this.medicineType = medicineType;
+            CopyrightName = copyrightName;
+            GenericName = genericName;
+            MedicineManufacturer = medicineManufacturer;
+            MedicineType = medicineType;
         }
 
-        public Medicine(string serialNumber, string copyrightName, string genericName, string medicineManufacturer, string medicineType) : base(serialNumber)
+        public Medicine(string serialNumber, string copyrightName, string genericName, string medicineManufacturer,
+            string medicineType) : base(serialNumber)
         {
-            this.copyrightName = copyrightName;
-            this.genericName = genericName;
-            this.medicineManufacturer.Name = medicineManufacturer;
-            this.medicineType.Type = medicineType;
+            CopyrightName = copyrightName;
+            GenericName = genericName;
+            (MedicineManufacturer ?? new MedicineManufacturer()).Name = medicineManufacturer;
+            (MedicineType ?? new MedicineType()).Type = medicineType;
         }
 
         [JsonConstructor]
-        public Medicine(String serialNumber, string copyrightName, string genericName, MedicineManufacturer medicineManufacturer, MedicineType medicineType) : base(serialNumber)
+        public Medicine(String serialNumber, string copyrightName, string genericName,
+            MedicineManufacturer medicineManufacturer, MedicineType medicineType) : base(serialNumber)
         {
-            this.copyrightName = copyrightName;
-            this.genericName = genericName;
-            this.medicineManufacturer = medicineManufacturer;
-            this.medicineType = medicineType;
+            CopyrightName = copyrightName;
+            GenericName = genericName;
+            MedicineManufacturer = medicineManufacturer;
+            MedicineType = medicineType;
         }
 
         public override bool Equals(object obj)
         {
-            Medicine other = obj as Medicine;
-
-            if (other == null)
-            {
-                return false;
-            }
-
-            return this.CopyrightName.Equals(other.CopyrightName);
+            return obj is Medicine other && this.CopyrightName.Equals(other.CopyrightName);
         }
 
         public override int GetHashCode()

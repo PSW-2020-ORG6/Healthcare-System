@@ -13,7 +13,7 @@ namespace Model.Accounts
     {
 
         public Secretary(string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string password)
-            : base(Guid.NewGuid().ToString(), name, surname, id, dateOfBirth, contact, email, address, password)
+            : base(name, surname, id, dateOfBirth, contact, email, address, password)
         {
 
         }
