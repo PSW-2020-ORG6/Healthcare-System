@@ -7,7 +7,7 @@ namespace Backend.Service.PatientCareService
 {
     class ReportService
     {
-        private ReportRepository reportRepository;
+        private IReportRepository reportRepository;
 
         public ReportService()
         {

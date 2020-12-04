@@ -13,7 +13,7 @@ namespace Backend.Service.HospitalAccountsService
 {
     public class PatientRegistrationService
     {
-        public PatientRepository patientRepository;
+        public IPatientRepository patientRepository;
 
         public PatientRegistrationService()
         {

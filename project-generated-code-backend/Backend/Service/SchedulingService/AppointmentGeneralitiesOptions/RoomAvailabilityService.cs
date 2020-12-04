@@ -11,9 +11,9 @@ namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 {
     public class RoomAvailabilityService
     {
-        private AppointmentRepository appointmentRepository;
-        private RenovationRepository renovationRepository;
-        private BedReservationRepository bedReservationRepository;
+        private IAppointmentRepository appointmentRepository;
+        private IRenovationRepository renovationRepository;
+        private IBedReservationRepository bedReservationRepository;
 
         public RoomAvailabilityService()
         {

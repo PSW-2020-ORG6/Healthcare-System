@@ -29,10 +29,10 @@ namespace WebApplicationTests
 
             ProcedureType procedureType = new ProcedureType { Specialization = new Specialization { Name = "ophtamologist" }, Name = "pregled" };
             Patient patient = new Patient { Name = "Leposava", Surname = "Lepic" };
-            Physitian physitian1 = new Physitian { Name = "Tanja", Surname = "Drcelic" };
-            Physitian physitian2 = new Physitian { Name = "Nemanja", Surname = "Drcelic" };
-            reports.Add(new Report { Patient = patient, Physitian = physitian1, ProcedureType = procedureType, Findings = "Sve ok" });
-            reports.Add(new Report { Patient = patient, Physitian = physitian2, ProcedureType = procedureType, Findings = "Sve ok" });
+            Physician physitian1 = new Physician { Name = "Tanja", Surname = "Drcelic" };
+            Physician physitian2 = new Physician { Name = "Nemanja", Surname = "Drcelic" };
+            reports.Add(new Report { Patient = patient, Physician = physitian1, ProcedureType = procedureType, Findings = "Sve ok" });
+            reports.Add(new Report { Patient = patient, Physician = physitian2, ProcedureType = procedureType, Findings = "Sve ok" });
         }
 
         [Fact]
@@ -105,7 +105,7 @@ namespace WebApplicationTests
             var stubRepositorty = new Mock<IReportRepository>();
             List<Report> reports1 = new List<Report>();
             ProcedureType procedureType = new ProcedureType { Specialization = new Specialization { Name = "ophtamologist" }, Name = "pregled" };
-            reports1.Add(new Report { Patient = new Patient { Name = "Leposava", Surname = "Lepic" }, Physitian = new Physitian { Name = "Aleksandra", Surname = "Milijevic" }, ProcedureType = procedureType, Findings = "Sve ok" });
+            reports1.Add(new Report { Patient = new Patient { Name = "Leposava", Surname = "Lepic" }, Physician = new Physician { Name = "Aleksandra", Surname = "Milijevic" }, ProcedureType = procedureType, Findings = "Sve ok" });
             stubRepositorty.Setup(m => m.GetReportsByProperty(SearchProperty.All, "anja", "'20-11-05' and '20-11-12'", false)).Returns(reports);
             stubRepositorty.Setup(n => n.GetReportsByProperty(SearchProperty.Doctor, "Aleksandra", "'20-11-05' and '20-11-12'", false)).Returns(reports1);
 
@@ -133,8 +133,8 @@ namespace WebApplicationTests
             List<Report> reports1 = new List<Report>();
             ProcedureType procedureType = new ProcedureType { Specialization = new Specialization { Name = "ophtamologist" }, Name = "pregled" };
             Patient patient = new Patient { Name = "Leposava", Surname = "Lepic" };
-            Physitian physitian = new Physitian { Name = "Aleksandra", Surname = "Milijevic" };
-            reports1.Add(new Report { Patient = patient, Physitian = physitian, ProcedureType = procedureType, Findings = "Sve ok" });
+            Physician physician = new Physician { Name = "Aleksandra", Surname = "Milijevic" };
+            reports1.Add(new Report { Patient = patient, Physician = physician, ProcedureType = procedureType, Findings = "Sve ok" });
             stubRepositorty.Setup(m => m.GetReportsByProperty(SearchProperty.All, "anja", "'20-11-05' and '20-11-12'", false)).Returns(reports);
             stubRepositorty.Setup(n => n.GetReportsByProperty(SearchProperty.Doctor, "Tanja", "'20-11-05' and '20-11-12'", false)).Returns(reports);
 

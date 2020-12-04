@@ -16,24 +16,24 @@ namespace Backend.Controller.PhysitianControllers
 {
     public class PhysitianHospitalAccountsController
     {
-        private Physitian loggedPhysitian;
+        private Physician _loggedPhysician;
         private HospitalService hospitalService;
         private ReportService reportService;
         private PatientAccountsService patientAccountsService;
         private PhysitianScheduleService physitianScheduleService;
 
-        public PhysitianHospitalAccountsController(Physitian loggedPhysitian)
+        public PhysitianHospitalAccountsController(Physician loggedPhysician)
         {
-            this.loggedPhysitian = loggedPhysitian;
+            this._loggedPhysician = loggedPhysician;
             this.hospitalService = new HospitalService();
             this.reportService = new ReportService();
             this.patientAccountsService = new PatientAccountsService();
-            this.physitianScheduleService = new PhysitianScheduleService(loggedPhysitian);
+            this.physitianScheduleService = new PhysitianScheduleService(loggedPhysician);
         }
 
         public List<Patient> GetPatientsByPhysitian()
         {
-            return patientAccountsService.getPatientsForPhysitian(loggedPhysitian);
+            return patientAccountsService.getPatientsForPhysitian(_loggedPhysician);
         }
         
         public Appointment GetNextAppointmentForPatient(Patient patient)

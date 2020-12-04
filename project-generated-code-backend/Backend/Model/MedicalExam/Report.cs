@@ -19,7 +19,7 @@ namespace Model.MedicalExam
         public DateTime Date { get; set; }
         public string Findings { get; set; }
         public virtual Patient Patient { get; set; }
-        public virtual Physitian Physitian { get; set; }
+        public virtual Physician Physician { get; set; }
         public string PatientConditions { get; set; }
         public virtual ProcedureType ProcedureType { get; set; }
         public String PatientName { get; set; }
@@ -37,24 +37,24 @@ namespace Model.MedicalExam
             PatientId = patientId;
         }
 
-        public Report(DateTime date, string findings, Patient patient, Physitian physitian, string patientConditions) :
+        public Report(DateTime date, string findings, Patient patient, Physician physician, string patientConditions) :
             base()
         {
             Date = date;
             Findings = findings;
             Patient = patient;
-            Physitian = physitian;
+            Physician = physician;
             PatientConditions = patientConditions;
         }
 
         [JsonConstructor]
-        public Report(String serialNumber, DateTime date, string findings, Patient patient, Physitian physitian,
+        public Report(String serialNumber, DateTime date, string findings, Patient patient, Physician physician,
             string patientConditions) : base(serialNumber)
         {
             Date = date;
             Findings = findings;
             Patient = patient;
-            Physitian = physitian;
+            Physician = physician;
             PatientConditions = patientConditions;
         }
 

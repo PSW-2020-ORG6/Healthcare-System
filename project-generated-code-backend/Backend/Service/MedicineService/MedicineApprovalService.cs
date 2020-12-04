@@ -7,7 +7,7 @@ namespace health_clinic_class_diagram.Backend.Service.MedicineService
 {
     class MedicineApprovalService
     {
-        private Physitian loggedPhysitian;
+        private Physician _loggedPhysician;
 
         public void approve(Medicine medicine)
         {

@@ -77,7 +77,7 @@ namespace WebApplication.Backend.Repositorys
             {
                 Report entity = new Report();
                 entity.Patient = new Patient {Id = (String) sqlReader[3]};
-                entity.Physitian = new Physitian {SerialNumber = (String) sqlReader[4]};
+                entity.Physician = new Physician {SerialNumber = (String) sqlReader[4]};
 
                 resultList.Add(entity);
             }
@@ -85,8 +85,8 @@ namespace WebApplication.Backend.Repositorys
             connection.Close();
             foreach (Report report in resultList)
             {
-                report.Physitian = GetDoctorById("Select * from accounts where SerialNumber like'" +
-                                                 report.Physitian.SerialNumber + "'");
+                report.Physician = GetDoctorById("Select * from accounts where SerialNumber like'" +
+                                                 report.Physician.SerialNumber + "'");
             }
 
             return resultList;
@@ -101,13 +101,13 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         ///<param name="sqlDml">String sql command
         ///</param>
-        internal Physitian GetDoctorById(string sqlDml)
+        internal Physician GetDoctorById(string sqlDml)
         {
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
             sqlReader.Read();
-            Physitian entity = new Physitian();
+            Physician entity = new Physician();
             entity.Name = (string) sqlReader[1];
             entity.Surname = (string) sqlReader[2];
             connection.Close();
@@ -184,7 +184,7 @@ namespace WebApplication.Backend.Repositorys
             List<String> doctors = new List<String>();
             foreach (Report r in reports)
             {
-                doctors.Add(r.Physitian.FullName);
+                doctors.Add(r.Physician.FullName);
             }
 
             return doctors;
@@ -452,10 +452,10 @@ namespace WebApplication.Backend.Repositorys
         ///
         public List<string> GetAllDoctorsFromReporstByPatientIdFromSurvey(string patientId)
         {
-            List<Physitian> result = new List<Physitian>();
-            result = GetDoctors("Select * from survey where ID like'" + patientId.ToString() + "'");
+            List<Physician> result = new List<Physician>();
+            result = GetDoctors("Select * from surveys where ID like'" + patientId.ToString() + "'");
             List<String> doctors = new List<String>();
-            foreach (Physitian r in result)
+            foreach (Physician r in result)
             {
                 doctors.Add(r.FullName.Trim());
             }
@@ -473,16 +473,16 @@ namespace WebApplication.Backend.Repositorys
         ///<param name="sqlDml">String sql command
         ///</param>
         ///
-        public List<Physitian> GetDoctors(string sqlDml)
+        public List<Physician> GetDoctors(string sqlDml)
         {
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<Physitian> resultList = new List<Physitian>();
+            List<Physician> resultList = new List<Physician>();
 
             while (sqlReader.Read())
             {
-                Physitian entity = new Physitian();
+                Physician entity = new Physician();
                 entity.Name = (string) sqlReader[2];
                 resultList.Add(entity);
             }

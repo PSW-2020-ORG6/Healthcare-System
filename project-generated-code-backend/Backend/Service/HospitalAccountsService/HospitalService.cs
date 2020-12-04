@@ -16,10 +16,10 @@ namespace Backend.Service.HospitalAccountsService
     // Dodati PhysitianAccountsService i SecretaryAccountsService 
     public class HospitalService
     {
-        private PatientRepository patientRepository;
-        private CountryRepository countryRepository;
-        private ProcedureTypeRepository procedureTypeRepository;
-        private DiagnosticTypeRepository diagnosticTypeRepository;
+        private IPatientRepository patientRepository;
+        private ICountryRepository countryRepository;
+        private IProcedureTypeRepository procedureTypeRepository;
+        private IDiagnosticTypeRepository diagnosticTypeRepository;
 
         public HospitalService()
         {

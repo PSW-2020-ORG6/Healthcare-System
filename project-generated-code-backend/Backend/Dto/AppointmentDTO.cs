@@ -15,7 +15,7 @@ namespace Backend.Dto
     {
         public bool IsPreferedPhysitianSelected()
         {
-            return (Physitian != null);
+            return (Physician != null);
         }
 
         public bool IsPreferredTimeSelected()
@@ -36,7 +36,7 @@ namespace Backend.Dto
         private ProcedureType procedureType;
         private TimeInterval time;
         private DateTime date;
-        private Physitian physitian;
+        private Physician _physician;
         private Patient patient;
         private Room room;
         private bool urgency;
@@ -46,7 +46,7 @@ namespace Backend.Dto
 
         public ProcedureType ProcedureType { get => procedureType; set => procedureType = value; }
         public TimeInterval Time { get => time; set => time = value; }
-        public Physitian Physitian { get => physitian; set => physitian = value; }
+        public Physician Physician { get => _physician; set => _physician = value; }
         public Patient Patient { get => patient; set => patient = value; }
         public Room Room { get => room; set => room = value; }
         public bool Urgency { get => urgency; set => urgency = value; }

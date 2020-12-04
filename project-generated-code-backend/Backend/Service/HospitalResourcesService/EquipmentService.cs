@@ -41,7 +41,7 @@ namespace Backend.Service.HospitalResourcesService
         {
             equipmentRepository = new EquipmentFileSystem();
         }
-        public Backend.Repository.EquipmentRepository equipmentRepository;
+        public Backend.Repository.IEquipmentRepository equipmentRepository;
 
 
     }

@@ -35,7 +35,7 @@ namespace Backend.Controller.SecretaryControllers
             return patientAccountsService.getAllPatients();
         }
 
-        public List<Physitian> GetAllPhysitians()
+        public List<Physician> GetAllPhysitians()
         {
             return physicianService.GetAllPhysitians();
         }

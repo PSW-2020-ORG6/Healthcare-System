@@ -13,7 +13,7 @@ namespace Backend.Controller.PhysitianControllers
 {
     public class ExamController
     {
-        private Physitian loggedPhysitian;
+        private Physician _loggedPhysician;
         private Patient selectedPatient;
         private Report currentReport;
 
@@ -21,14 +21,14 @@ namespace Backend.Controller.PhysitianControllers
 
         public ExamController(Appointment appointment)
         {
-            this.loggedPhysitian = appointment.Physitian;
+            this._loggedPhysician = appointment.Physician;
             this.SelectedPatient = appointment.Patient;
             ProcedureType procedure = appointment.ProcedureType;
 
             reportService = new ReportService();
 
             String patientConditions = this.GetPatientConditions();
-            this.CurrentReport = new Report(DateTime.Today, "", selectedPatient, loggedPhysitian, patientConditions);
+            this.CurrentReport = new Report(DateTime.Today, "", selectedPatient, _loggedPhysician, patientConditions);
         }
 
         public void SaveReport()

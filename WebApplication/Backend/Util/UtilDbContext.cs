@@ -474,21 +474,21 @@ namespace WebApplication.Backend.Model
 
         private static void PhysicianCreation(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Physitian>().HasKey(o => o.SerialNumber);
-            modelBuilder.Entity<Physitian>().HasAlternateKey(o => o.Id);
-            modelBuilder.Entity<Physitian>().Ignore(o => o.Address);
-            modelBuilder.Entity<Physitian>().Ignore(o => o.Specialization);
-            modelBuilder.Entity<Physitian>().Ignore(o => o.VacationTime);
-            modelBuilder.Entity<Physitian>().Ignore(o => o.WorkSchedule);
-            modelBuilder.Entity<Physitian>().Ignore(o => o.AllSpecializations);
-            modelBuilder.Entity<Physitian>().HasData(
-                new Physitian
+            modelBuilder.Entity<Physician>().HasKey(o => o.SerialNumber);
+            modelBuilder.Entity<Physician>().HasAlternateKey(o => o.Id);
+            modelBuilder.Entity<Physician>().Ignore(o => o.Address);
+            modelBuilder.Entity<Physician>().Ignore(o => o.Specialization);
+            modelBuilder.Entity<Physician>().Ignore(o => o.VacationTime);
+            modelBuilder.Entity<Physician>().Ignore(o => o.WorkSchedule);
+            modelBuilder.Entity<Physician>().Ignore(o => o.AllSpecializations);
+            modelBuilder.Entity<Physician>().HasData(
+                new Physician
                 {
                     SerialNumber = "600001", Name = "Gojko", Surname = "Simic", Id = "600001",
                     DateOfBirth = new DateTime(1975, 11, 11), Contact = "Simic kontakt", Email = "simic@gmail.com",
                     Password = "sifraSimic24dsf1", AddressSerialNumber = "200001"
                 },
-                new Physitian
+                new Physician
                 {
                     SerialNumber = "600002", Name = "Klara", Surname = "Dicic", Id = "600002",
                     DateOfBirth = new DateTime(1985, 4, 25), Contact = "Dicic kontakt", Email = "dicic@gmail.com",
@@ -504,8 +504,8 @@ namespace WebApplication.Backend.Model
             modelBuilder.Entity<Appointment>().Ignore(o => o.Patient);
             modelBuilder.Entity<Appointment>().Ignore(o => o.TimeInterval);
             modelBuilder.Entity<Appointment>().Ignore(o => o.ProcedureType);
-            modelBuilder.Entity<Appointment>().Ignore(o => o.Physitian);
-           // modelBuilder.Entity<Appointment>().Ignore(o => o.Date);
+            modelBuilder.Entity<Appointment>().Ignore(o => o.Physician);
+            modelBuilder.Entity<Appointment>().Ignore(o => o.Date);
             modelBuilder.Entity<Appointment>().HasData(
                 new Appointment {SerialNumber = "200001", Urgency = true},
                 new Appointment {SerialNumber = "200002", Urgency = false}

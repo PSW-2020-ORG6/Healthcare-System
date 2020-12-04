@@ -17,16 +17,14 @@ namespace Backend.Service.PatientCareService
 {
     public class InpatientCareService
     {
-        private Physitian loggedPhysitian;
-        private RoomBedTypeRepository roomBedTypeRepository;
-        private InpatientCareRepository inpatientCareRepository;
-        private BedReservationRepository bedReservationRepository;
-        private RoomRepository roomRepository;
+        private Physician _loggedPhysician;
+        private IInpatientCareRepository inpatientCareRepository;
+        private IBedReservationRepository bedReservationRepository;
+        private IRoomRepository roomRepository;
 
-        public InpatientCareService(Physitian loggedPhysitian)
+        public InpatientCareService(Physician loggedPhysician)
         {
-            this.loggedPhysitian = loggedPhysitian;
-            this.roomBedTypeRepository = new RoomBedTypeFileSystem();
+            this._loggedPhysician = loggedPhysician;
             this.inpatientCareRepository = new InpatientCareFileSystem();
             this.bedReservationRepository = new BedReservationFileSystem();
             this.roomRepository = new RoomFileSystem();
@@ -43,11 +41,13 @@ namespace Backend.Service.PatientCareService
                     rooms.Add(room);
                 }
             }
+
             Console.WriteLine("GET AVAILABLE ROOMS");
             foreach (Room r in rooms)
             {
                 Console.WriteLine(r);
             }
+
             return rooms;
         }
 
@@ -68,7 +68,7 @@ namespace Backend.Service.PatientCareService
             bedReservationRepository.Delete(activeBedReservation.SerialNumber);
             DateTime dateOfAdmition = activeBedReservation.TimeInterval.Start;
             DateTime dateOfDischarge = DateTime.Now;
-            InpatientCare inpatientCare = new InpatientCare(dateOfAdmition, dateOfDischarge, loggedPhysitian, patient);
+            InpatientCare inpatientCare = new InpatientCare(dateOfAdmition, dateOfDischarge, _loggedPhysician, patient);
             inpatientCareRepository.Save(inpatientCare);
         }
 
@@ -76,6 +76,7 @@ namespace Backend.Service.PatientCareService
         {
             return bedReservationRepository.GetBedReservationByPatient(patient);
         }
+
         public List<InpatientCare> GetAllInpatientCares(Patient patient)
         {
             return inpatientCareRepository.GetInpatientCaresForPatient(patient);
@@ -83,14 +84,7 @@ namespace Backend.Service.PatientCareService
 
         private List<Room> GetAllRooms()
         {
-            List<RoomBedType> roomsContainingBedTypes = roomBedTypeRepository.GetAll();
-            List<Room> rooms = new List<Room>();
-            foreach (RoomBedType roomType in roomsContainingBedTypes)
-            {
-                rooms.AddRange(roomRepository.GetRoomsByRoomType(roomType));
-            }
-            return rooms;
+            return roomRepository.GetAll();
         }
-
     }
 }

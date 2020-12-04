@@ -15,7 +15,6 @@ namespace Backend.Service.HospitalResourcesService
 {
     public class RoomService
     {
-
         public Room GetById(String id)
         {
             throw new NotImplementedException();
@@ -49,7 +48,6 @@ namespace Backend.Service.HospitalResourcesService
 
         public void RemoveEquipmentById(String id, Room room)
         {
-
             foreach (Equipment e in room.Equipment.ToList())
             {
                 if (e.SerialNumber.Equals(id))
@@ -57,6 +55,7 @@ namespace Backend.Service.HospitalResourcesService
                     room.RemoveEquipment(e);
                 }
             }
+
             roomRepository.Update(room);
         }
 
@@ -69,25 +68,13 @@ namespace Backend.Service.HospitalResourcesService
         {
             List<RoomType> types = new List<RoomType>();
             types.AddRange(roomTypeRepository.GetAll());
-            types.AddRange(roomBedTypeRepository.GetAll());
             return types;
-        }
-
-        public List<RoomBedType> GetBedRoomTypes()
-        {
-            return roomBedTypeRepository.GetAll();
         }
 
         public void AddRoomType(RoomType roomType)
         {
             roomTypeRepository.Save(roomType);
         }
-
-        internal void AddRoomBedType(RoomBedType roomType)
-        {
-            roomBedTypeRepository.Save(roomType);
-        }
-
 
         public bool RoomNumberExists(int RoomNumber)
         {
@@ -99,6 +86,7 @@ namespace Backend.Service.HospitalResourcesService
                     exists = true;
                 }
             }
+
             return exists;
         }
 
@@ -108,16 +96,14 @@ namespace Backend.Service.HospitalResourcesService
         }
 
 
-        private Backend.Repository.RoomRepository roomRepository;
-        private RoomTypeRepository roomTypeRepository;
-        private RoomBedTypeRepository roomBedTypeRepository;
+        private Backend.Repository.IRoomRepository roomRepository;
+        private IRoomTypeRepository roomTypeRepository;
 
 
         public RoomService()
         {
             roomTypeRepository = new RoomTypeFileSystem();
             roomRepository = new RoomFileSystem();
-            roomBedTypeRepository = new RoomBedTypeFileSystem();
         }
     }
 }

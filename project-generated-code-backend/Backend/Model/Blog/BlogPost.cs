@@ -12,7 +12,7 @@ namespace Model.Blog
     public class BlogPost
     {
         private String Name { get; set; }
-        public Physitian Physitian { get; set; }
+        public Physician Physician { get; set; }
         public List<Feedback> Feedbacks { get; set; }
 
         public void AddFeedback(Feedback newFeedback)

@@ -75,7 +75,7 @@ namespace WebApplication.Backend.Services
             foreach (Report report in reports)
             {
                 string text = "";
-                text += "Patient: " + report.Patient.FullName + ";Doctor: " + report.ProcedureType.Specialization + " " + report.Physitian.FullName + "; Procedure Type: " + report.ProcedureType.Name;
+                text += "Patient: " + report.Patient.FullName + ";Doctor: " + report.ProcedureType.Specialization + " " + report.Physician.FullName + "; Procedure Type: " + report.ProcedureType.Name;
                 searchEntityDTOs.Add(new SearchEntityDTO("Report", text, report.Date.ToString("dddd, MMMM dd yyyy")));
             }
             return searchEntityDTOs;

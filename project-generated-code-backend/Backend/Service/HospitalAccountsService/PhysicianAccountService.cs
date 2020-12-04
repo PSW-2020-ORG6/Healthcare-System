@@ -7,59 +7,59 @@ namespace HealthClinic.Backend.Service.HospitalAccountsService
 {
     public class PhysicianAccountService
     {
-        public PhysitianRepository physitianRepository;
+        public IPhysitianRepository IPhysitianRepository;
 
         public PhysicianAccountService()
         {
-            physitianRepository = new PhysitianFileSystem();
+            IPhysitianRepository = new IPhysitianFileSystem();
         }
 
-        internal List<TimeInterval> GetAllVacations(Physitian physitianDTO)
+        internal List<TimeInterval> GetAllVacations(Physician physicianDto)
         {
-            return physitianRepository.GetById(physitianDTO.SerialNumber).VacationTime;
+            return IPhysitianRepository.GetById(physicianDto.SerialNumber).VacationTime;
         }
 
-        internal void AddVacation(TimeInterval timeInterval, Physitian physitianDTO)
+        internal void AddVacation(TimeInterval timeInterval, Physician physicianDto)
         {
-            physitianDTO.AddVacationTime(timeInterval);
-            physitianRepository.Update(physitianDTO);
+            physicianDto.AddVacationTime(timeInterval);
+            IPhysitianRepository.Update(physicianDto);
         }
 
-        internal void RemoveVacation(TimeInterval timeInterval, Physitian physitianDTO)
+        internal void RemoveVacation(TimeInterval timeInterval, Physician physicianDto)
         {
-            physitianDTO.RemoveVacationTime(timeInterval);
-            physitianRepository.Update(physitianDTO);
+            physicianDto.RemoveVacationTime(timeInterval);
+            IPhysitianRepository.Update(physicianDto);
         }
 
-        internal void DeletePhysician(Physitian physitian)
+        internal void DeletePhysician(Physician physician)
         {
-            physitianRepository.Delete(physitian.SerialNumber);
+            IPhysitianRepository.Delete(physician.SerialNumber);
         }
 
-        public List<Physitian> GetAllPhysitians()
+        public List<Physician> GetAllPhysitians()
         {
-            return physitianRepository.GetAll();
+            return IPhysitianRepository.GetAll();
         }
 
-        internal void NewPhysician(Physitian physitian)
+        internal void NewPhysician(Physician physician)
         {
-            physitianRepository.Save(physitian);
+            IPhysitianRepository.Save(physician);
         }
 
-        internal void EditPhysician(Physitian physitian)
+        internal void EditPhysician(Physician physician)
         {
-            physitianRepository.Update(physitian);
+            IPhysitianRepository.Update(physician);
         }
 
         internal void DeletePhysicianById(string id)
         {
-            physitianRepository.Delete(id);
+            IPhysitianRepository.Delete(id);
         }
 
         public bool jmbgExists(string jmbg)
         {
             bool exists = false;
-            foreach (Physitian p in physitianRepository.GetAll())
+            foreach (Physician p in IPhysitianRepository.GetAll())
             {
                 if (p.Id.Equals(jmbg))
                 {

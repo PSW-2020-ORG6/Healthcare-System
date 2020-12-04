@@ -13,7 +13,7 @@ namespace Backend.Service.SchedulingService
 {
     public class AppointmentService
     {
-        public AppointmentRepository appointmentRepository;
+        public IAppointmentRepository appointmentRepository;
 
         public AppointmentService()
         {

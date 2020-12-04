@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Backend.Model.Util
 {
     public abstract class Entity
     {
+        [Key]
         public string SerialNumber { get; set; }
 
         public Entity()

@@ -14,12 +14,12 @@ namespace Backend.Service.SchedulingService
 {
     public class PhysitianScheduleService
     {
-        private Physitian loggedPhysitian;
-        private AppointmentRepository appointmentRepository;
+        private Physician _loggedPhysician;
+        private IAppointmentRepository appointmentRepository;
 
-        public PhysitianScheduleService(Physitian loggedPhysitian)
+        public PhysitianScheduleService(Physician loggedPhysician)
         {
-            this.loggedPhysitian = loggedPhysitian;
+            this._loggedPhysician = loggedPhysician;
             this.appointmentRepository = new AppointmentFileSystem();
         }
 
@@ -31,7 +31,7 @@ namespace Backend.Service.SchedulingService
         public List<Appointment> GetAppointmentsByDate(DateTime date)
         {
             List<Appointment> appointments = new List<Appointment>();
-            foreach (Appointment appointment in appointmentRepository.GetAppointmentsByPhysitian(loggedPhysitian))
+            foreach (Appointment appointment in appointmentRepository.GetAppointmentsByPhysitian(_loggedPhysician))
             {
                 if (date.Equals(appointment.Date))
                 {
@@ -42,7 +42,7 @@ namespace Backend.Service.SchedulingService
         }
         public Appointment GetTodaysAppointmentForPatient(Patient patient)
         {
-            List<Appointment> appointments = appointmentRepository.GetAppointmentsByPhysitian(loggedPhysitian);
+            List<Appointment> appointments = appointmentRepository.GetAppointmentsByPhysitian(_loggedPhysician);
             foreach (Appointment appointment in appointments)
             {
                 if (appointment.Date.Equals(DateTime.Today) && appointment.Patient.Equals(patient))

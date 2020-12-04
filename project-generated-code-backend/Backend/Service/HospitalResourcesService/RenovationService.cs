@@ -38,7 +38,7 @@ namespace Backend.Service.HospitalResourcesService
             renovationRepository.Save(renovation);
         }
 
-        public RenovationRepository renovationRepository;
+        public IRenovationRepository renovationRepository;
 
         public RenovationService()
         {

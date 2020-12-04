@@ -8,7 +8,7 @@ namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 {
     class PatientAvailabilityService
     {
-        private AppointmentRepository appointmentRepository;
+        private IAppointmentRepository appointmentRepository;
 
         public PatientAvailabilityService()
         {

@@ -10,12 +10,12 @@ namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
     class AppointmentGeneralitiesManager
     {
         private AppointmentDTO appointmentPreferrences;
-        private PhysitianRepository physitianRepository;
-        private RoomRepository roomRepository;
+        private IPhysitianRepository _iPhysitianRepository;
+        private IRoomRepository roomRepository;
 
         public AppointmentGeneralitiesManager()
         {
-            this.physitianRepository = new PhysitianFileSystem();
+            this._iPhysitianRepository = new IPhysitianFileSystem();
             this.roomRepository = new RoomFileSystem();
         }
 
@@ -25,7 +25,7 @@ namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
             List<AppointmentDTO> appointments = new List<AppointmentDTO>();
 
             List<TimeInterval> allTimeIntervals = GetAllTimeIntervals();
-            List<Physitian> allPhysitians = GetAllPhysitians();
+            List<Physician> allPhysitians = GetAllPhysitians();
             List<Room> allRooms = GetAllRooms();
 
             PhysitianAvailabilityService physitianAvailabilityService = new PhysitianAvailabilityService();
@@ -33,7 +33,7 @@ namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 
             foreach (TimeInterval timeInterval in allTimeIntervals)
             {
-                foreach (Physitian physitian in allPhysitians)
+                foreach (Physician physitian in allPhysitians)
                 {
                     if (physitianAvailabilityService.IsPhysitianAvailable(physitian, timeInterval))
                     {
@@ -52,26 +52,26 @@ namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
             return appointments;
         }
 
-        private AppointmentDTO createAppointment(Physitian physitian, Room room, TimeInterval timeInterval)
+        private AppointmentDTO createAppointment(Physician physician, Room room, TimeInterval timeInterval)
         {
             AppointmentDTO appointment = new AppointmentDTO();
             appointment.ProcedureType = appointmentPreferrences.ProcedureType;
             appointment.Patient = appointmentPreferrences.Patient;
             appointment.Time = timeInterval;
-            appointment.Physitian = physitian;
+            appointment.Physician = physician;
             appointment.Room = room;
             return appointment;
         }
-        private List<Physitian> GetAllPhysitians()
+        private List<Physician> GetAllPhysitians()
         {
-            List<Physitian> physitians = new List<Physitian>();
+            List<Physician> physitians = new List<Physician>();
             if (appointmentPreferrences.IsPreferedPhysitianSelected())
             {
-                physitians.Add(appointmentPreferrences.Physitian);
+                physitians.Add(appointmentPreferrences.Physician);
             }
             else
             {
-                physitians = physitianRepository.GetPhysitiansByProcedureType(appointmentPreferrences.ProcedureType);
+                physitians = _iPhysitianRepository.GetPhysitiansByProcedureType(appointmentPreferrences.ProcedureType);
             }
             return physitians;
         }

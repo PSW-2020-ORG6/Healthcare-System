@@ -6,9 +6,9 @@ namespace health_clinic_class_diagram.Backend.Service.MedicineService
 {
     class PhysitianMedicineService
     {
-        private ApprovedMedicineRepository approvedMedicineRepository;
-        private WaitingMedicineRepository waitingMedicineRepository;
-        private RejectionRepository rejectionRepository;
+        private IApprovedMedicineRepository approvedMedicineRepository;
+        private IWaitingMedicineRepository waitingMedicineRepository;
+        private IRejectionRepository rejectionRepository;
 
         public PhysitianMedicineService()
         {

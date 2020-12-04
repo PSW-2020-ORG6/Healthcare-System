@@ -41,7 +41,7 @@ namespace Backend.Service.SchedulingService
             {
                 AppointmentDTO appointment = new AppointmentDTO();
                 appointment.Date = currentDate;
-                appointment.Physitian = suggestedAppointmentDTO.Physitian;
+                appointment.Physician = suggestedAppointmentDTO.Physician;
                 appointment.Patient = suggestedAppointmentDTO.Patient;
                 List<AppointmentDTO> suggestedAppointmentDTOs = GetAvailableAppointments(appointment);
                 if (suggestedAppointmentDTOs.Count != 0)

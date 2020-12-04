@@ -13,21 +13,21 @@ namespace Model.MedicalExam
     public class SpecialistReferral : AdditionalDocument
     {
         public ProcedureType ProcedureType { get; set; }
-        public Physitian Physitian { get; set; }
+        public Physician Physician { get; set; }
 
-        public SpecialistReferral(DateTime date, string notes, ProcedureType procedureType, Physitian physitian) :
+        public SpecialistReferral(DateTime date, string notes, ProcedureType procedureType, Physician physician) :
             base(date, notes)
         {
             ProcedureType = procedureType;
-            Physitian = physitian;
+            Physician = physician;
         }
 
         [JsonConstructor]
         public SpecialistReferral(String serialNumber, DateTime date, string notes, ProcedureType procedureType,
-            Physitian physitian) : base(serialNumber, date, notes)
+            Physician physician) : base(serialNumber, date, notes)
         {
             ProcedureType = procedureType;
-            Physitian = physitian;
+            Physician = physician;
         }
 
         public override bool Equals(object obj)
@@ -47,7 +47,7 @@ namespace Model.MedicalExam
 
         public override string ToString()
         {
-            return base.ToString() + "\nphysitian: " + Physitian.FullName + "\nspecialization: " + ProcedureType;
+            return base.ToString() + "\nphysitian: " + Physician.FullName + "\nspecialization: " + ProcedureType;
         }
     }
 }

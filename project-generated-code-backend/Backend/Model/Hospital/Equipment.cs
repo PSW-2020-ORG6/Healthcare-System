@@ -6,6 +6,9 @@
 using Backend.Model.Util;
 using Newtonsoft.Json;
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using health_clinic_class_diagram.Backend.Model.Hospital;
 
 namespace Model.Hospital
 {
@@ -14,9 +17,11 @@ namespace Model.Hospital
         public string Name { get; set; }
         public string Id { get; set; }
         public string RoomId { get; set; }
-        public string BuildingSerialNumber { get; set; }
-        public string FloorSerialNumber { get; set; }
-        public string RoomSerialNumber { get; set; }
+        [ForeignKey("Building")] public string BuildingSerialNumber { get; set; }
+        public Building Building { get; set; }
+        [ForeignKey("Floor")] public string FloorSerialNumber { get; set; }
+        public Floor Floor { get; set; }
+        [Key] public string RoomSerialNumber { get; set; }
 
         public Equipment() : base()
         {

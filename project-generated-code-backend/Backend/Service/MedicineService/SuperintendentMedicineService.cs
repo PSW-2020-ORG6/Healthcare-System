@@ -6,9 +6,9 @@ namespace health_clinic_class_diagram.Backend.Service.MedicineService
 {
     class SuperintendentMedicineService
     {
-        private RejectionRepository rejectionRepository;
-        private WaitingMedicineRepository waitingRepostitory;
-        private ApprovedMedicineRepository approvedRepository;
+        private IRejectionRepository rejectionRepository;
+        private IWaitingMedicineRepository waitingRepostitory;
+        private IApprovedMedicineRepository approvedRepository;
 
         public SuperintendentMedicineService()
         {
