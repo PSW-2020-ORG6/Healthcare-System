@@ -7,9 +7,9 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
 {
     public class PatientAccountsService
     {
-        private PatientRepository patientRepository;
-        private AppointmentRepository appointmentRepository;
-        private ReportRepository reportRepository;
+        private IPatientRepository patientRepository;
+        private IAppointmentRepository appointmentRepository;
+        private IReportRepository reportRepository;
 
         public PatientAccountsService()
         {
@@ -22,13 +22,13 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
         {
             return patientRepository.GetAll();
         }
-        public List<Patient> getPatientsForPhysitian(Physitian physitian)
+        public List<Patient> getPatientsForPhysitian(Physician physician)
         {
             List<Patient> allPatients = patientRepository.GetAll();
             List<Patient> patients = new List<Patient>();
             foreach (Patient patient in allPatients)
             {
-                if (IsPatientScheduledForPhysitian(patient, physitian))
+                if (IsPatientScheduledForPhysitian(patient, physician))
                 {
                     patients.Add(patient);
                 }
@@ -36,12 +36,12 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
             return patients;
         }
 
-        private bool IsPatientScheduledForPhysitian(Patient patient, Physitian physitian)
+        private bool IsPatientScheduledForPhysitian(Patient patient, Physician physician)
         {
             List<Appointment> patientAppointments = appointmentRepository.GetAppointmentsByPatient(patient);
             foreach (Appointment appointment in patientAppointments)
             {
-                if (appointment.Physitian.Equals(physitian))
+                if (appointment.Physician.Equals(physician))
                 {
                     return true;
                 }

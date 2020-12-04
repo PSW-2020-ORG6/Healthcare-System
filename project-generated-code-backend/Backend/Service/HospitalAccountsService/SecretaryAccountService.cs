@@ -6,7 +6,7 @@ namespace HealthClinic.Backend.Service.HospitalAccountsService
 {
     public class SecretaryAccountService
     {
-        public SecretaryRepository secretaryRepository;
+        public ISecretaryRepository secretaryRepository;
 
         public SecretaryAccountService()
         {

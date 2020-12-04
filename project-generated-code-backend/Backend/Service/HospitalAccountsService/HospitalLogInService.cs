@@ -7,15 +7,15 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
 {
     public class HospitalLogInService
     {
-        private PatientRepository patientRepository;
+        private IPatientRepository patientRepository;
 
-        private PhysitianRepository physitianRepository;
+        private IPhysitianRepository _iPhysitianRepository;
 
-        private SecretaryRepository secretaryRepository;
+        private ISecretaryRepository secretaryRepository;
         public HospitalLogInService()
         {
             patientRepository = new PatientFileSystem();
-            physitianRepository = new PhysitianFileSystem();
+            _iPhysitianRepository = new IPhysitianFileSystem();
             secretaryRepository = new SecretaryFileSystem();
         }
 
@@ -34,8 +34,8 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
 
         public TypeOfUser CheckIfUserIsPhysitians(string jmbg, string password)
         {
-            List<Physitian> physitians = physitianRepository.GetAll();
-            foreach (Physitian physitian in physitians)
+            List<Physician> physitians = _iPhysitianRepository.GetAll();
+            foreach (Physician physitian in physitians)
             {
                 if (CheckJmbg(jmbg, physitian) && IsValidPassword(password, physitian))
                 {

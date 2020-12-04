@@ -30,8 +30,8 @@ namespace WebApplication.Backend.Repositorys
             {
                 Appointment entity = new Appointment();
                 entity.SerialNumber = (string)sqlReader[0];
-                entity.Room = roomRepository.GetRoomBySerialNumber((string)sqlReader[5]);
-                entity.Physitian = physitianRepository.GetPhysitianBySerialNumber((string)sqlReader[4]);
+                entity.Room = roomRepository.GetRoomBySerialNumber((string)sqlReader[1]);
+                entity.Physician = physitianRepository.GetPhysitianBySerialNumber((string)sqlReader[2]);
                 entity.Patient = patientRepository.GetPatientBySerialNumber((string)sqlReader[3]);
                 entity.TimeInterval = timeIntervalRepository.GetTimeIntervalById((string)sqlReader[6]);
                 entity.ProcedureType = procedureTypeRepository.GetProcedureTypeBySerialNumber((string)sqlReader[7]);

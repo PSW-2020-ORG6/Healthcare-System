@@ -5,10 +5,10 @@ namespace WebApplication.Backend.Repositorys.Interfaces
 {
     public interface IPhysitianRepository
     {
-        List<Physitian> GetAllPhysitians();
-        List<Physitian> GetPhysitiansByName(string name);
-        List<Physitian> GetPhysitiansByFullName(string fullName);
-        Physitian GetPhysitianBySerialNumber(string serialNumber);
-        Physitian GetPhysitianById(string id);
+        List<Physician> GetAllPhysitians();
+        List<Physician> GetPhysitiansByName(string name);
+        List<Physician> GetPhysitiansByFullName(string fullName);
+        Physician GetPhysitianBySerialNumber(string serialNumber);
+        Physician GetPhysitianById(string id);
     }
 }

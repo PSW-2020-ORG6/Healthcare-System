@@ -26,6 +26,6 @@ namespace health_clinic_class_diagram.Backend.Service.SchedulingService
             throw new NotImplementedException();
         }
 
-        public AppointmentRepository appointmentRepository;
+        public IAppointmentRepository appointmentRepository;
     }
 }

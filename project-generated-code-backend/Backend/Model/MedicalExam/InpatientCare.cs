@@ -14,25 +14,25 @@ namespace Model.MedicalExam
     {
         public DateTime DateOfAdmission { get; set; }
         public DateTime DateOfDischarge { get; set; }
-        public Physitian Physitian { get; set; }
+        public Physician Physician { get; set; }
         public Patient Patient { get; set; }
 
-        public InpatientCare(DateTime dateOfAdmition, DateTime dateOfDischarge, Physitian physitian,
+        public InpatientCare(DateTime dateOfAdmition, DateTime dateOfDischarge, Physician physician,
             Patient patient) : base()
         {
             DateOfAdmission = dateOfAdmition;
             DateOfDischarge = dateOfDischarge;
-            Physitian = physitian;
+            Physician = physician;
             Patient = patient;
         }
 
         [JsonConstructor]
         public InpatientCare(String serialNumber, DateTime dateOfAdmition, DateTime dateOfDischarge,
-            Physitian physitian, Patient patient) : base(serialNumber)
+            Physician physician, Patient patient) : base(serialNumber)
         {
             DateOfAdmission = dateOfAdmition;
             DateOfDischarge = dateOfDischarge;
-            Physitian = physitian;
+            Physician = physician;
             Patient = patient;
         }
 
@@ -44,7 +44,7 @@ namespace Model.MedicalExam
             }
 
             return DateOfAdmission.Equals(other.DateOfAdmission) && DateOfDischarge.Equals(other.DateOfDischarge) &&
-                   Patient.Equals(other.Patient) && Physitian.Equals(other.Physitian);
+                   Patient.Equals(other.Patient) && Physician.Equals(other.Physician);
         }
 
         public override int GetHashCode()
@@ -54,7 +54,7 @@ namespace Model.MedicalExam
 
         public override string ToString()
         {
-            return "patient: " + Patient.FullName + "\nphysitian: " + Physitian.FullName + "\ndate of admition:" +
+            return "patient: " + Patient.FullName + "\nphysitian: " + Physician.FullName + "\ndate of admition:" +
                    DateOfAdmission.ToString("dd.MM.yyyy.") + "\ndate of discharge:" +
                    DateOfDischarge.ToString("dd.MM.yyyy.");
         }

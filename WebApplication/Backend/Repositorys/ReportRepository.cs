@@ -43,7 +43,7 @@ namespace WebApplication.Backend.Repositorys
                 entity.Findings = (string)sqlReader[1];
                 entity.PatientConditions = (string)sqlReader[2];
                 entity.Patient = new Patient { SerialNumber = (string)sqlReader[3] };
-                entity.Physitian = new Physitian { SerialNumber = (string)sqlReader[4] };
+                entity.Physician = new Physician { SerialNumber = (string)sqlReader[4] };
                 entity.ProcedureType = new ProcedureType { SerialNumber = (string)sqlReader[5] };
                 entity.Date = (DateTime)sqlReader[6];
                 resultList.Add(entity);
@@ -54,8 +54,8 @@ namespace WebApplication.Backend.Repositorys
                 PatientRepository patientRepository = new PatientRepository();
                 report.Patient = patientRepository.GetPatientById(report.Patient.SerialNumber);
                 PhysitianRepository phisitionRepository = new PhysitianRepository();
-                report.Physitian = phisitionRepository.GetPhysitianBySerialNumber(report.Physitian.SerialNumber);
-                report.ProcedureType = GetProcedureTypeById("Select * from proceduretype where SerialNumber like '" + report.ProcedureType.SerialNumber + "'");
+                report.Physician = phisitionRepository.GetPhysitianById(report.Physician.SerialNumber);
+                report.ProcedureType = GetProcedureTypeById("Select * from proceduretypes where SerialNumber like '" + report.ProcedureType.SerialNumber + "'");
             }
             return resultList;
         }
@@ -191,7 +191,7 @@ namespace WebApplication.Backend.Repositorys
             List<Report> resultList = new List<Report>();
             foreach (Report report in reports)
             {
-                if (!report.Physitian.Name.ToUpper().Contains(value.ToUpper()) && !report.Physitian.Surname.ToUpper().Contains(value.ToUpper()))
+                if (!report.Physician.Name.ToUpper().Contains(value.ToUpper()) && !report.Physician.Surname.ToUpper().Contains(value.ToUpper()))
                     resultList.Add(report);
             }
             return resultList;
@@ -202,7 +202,7 @@ namespace WebApplication.Backend.Repositorys
             List<Report> resultList = new List<Report>();
             foreach (Report report in reports)
             {
-                if (report.Physitian.Name.ToUpper().Contains(value.ToUpper()) || report.Physitian.Surname.ToUpper().Contains(value.ToUpper()))
+                if (report.Physician.Name.ToUpper().Contains(value.ToUpper()) || report.Physician.Surname.ToUpper().Contains(value.ToUpper()))
                     resultList.Add(report);
             }
             return resultList;
@@ -234,7 +234,7 @@ namespace WebApplication.Backend.Repositorys
             List<Report> resultList = new List<Report>();
             foreach (Report report in reports)
             {
-                if (report.Physitian.Name.ToUpper().Contains(value.ToUpper()) || report.Physitian.Surname.ToUpper().Contains(value.ToUpper()) || report.Patient.Name.ToUpper().Contains(value.ToUpper()) || report.Patient.Name.ToUpper().Contains(value.ToUpper()) || report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()) || report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
+                if (report.Physician.Name.ToUpper().Contains(value.ToUpper()) || report.Physician.Surname.ToUpper().Contains(value.ToUpper()) || report.Patient.Name.ToUpper().Contains(value.ToUpper()) || report.Patient.Name.ToUpper().Contains(value.ToUpper()) || report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()) || report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
                     resultList.Add(report);
             }
             return resultList;
@@ -245,7 +245,7 @@ namespace WebApplication.Backend.Repositorys
             List<Report> resultList = new List<Report>();
             foreach (Report report in reports)
             {
-                if (!report.Physitian.Name.ToUpper().Contains(value.ToUpper()) && !report.Physitian.Surname.ToUpper().Contains(value.ToUpper()) && !report.Patient.Name.ToUpper().Contains(value.ToUpper()) && !report.Patient.Name.ToUpper().Contains(value.ToUpper()) && !report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()) && !report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
+                if (!report.Physician.Name.ToUpper().Contains(value.ToUpper()) && !report.Physician.Surname.ToUpper().Contains(value.ToUpper()) && !report.Patient.Name.ToUpper().Contains(value.ToUpper()) && !report.Patient.Name.ToUpper().Contains(value.ToUpper()) && !report.ProcedureType.Name.ToUpper().Contains(value.ToUpper()) && !report.ProcedureType.Specialization.Name.ToUpper().Contains(value.ToUpper()))
                     resultList.Add(report);
             }
             return resultList;

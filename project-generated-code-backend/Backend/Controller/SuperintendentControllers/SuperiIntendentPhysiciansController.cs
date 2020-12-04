@@ -14,38 +14,38 @@ namespace HealthClinic.Backend.Controller.SuperintendentControllers
             physiciansService = new PhysicianAccountService();
         }
 
-        public List<Physitian> GetAllPhysitians()
+        public List<Physician> GetAllPhysitians()
         {
             return physiciansService.GetAllPhysitians();
         }
-        public void NewPhysician(Physitian physitian)
+        public void NewPhysician(Physician physician)
         {
-            physiciansService.NewPhysician(physitian);
+            physiciansService.NewPhysician(physician);
         }
 
-        public void EditPhysitian(Physitian physitian)
+        public void EditPhysitian(Physician physician)
         {
-            physiciansService.EditPhysician(physitian);
+            physiciansService.EditPhysician(physician);
         }
 
-        public void DeletePhysitian(Physitian physitian)
+        public void DeletePhysitian(Physician physician)
         {
-            physiciansService.DeletePhysician(physitian);
+            physiciansService.DeletePhysician(physician);
         }
 
-        public List<TimeInterval> GetAllVacations(Physitian physitianDTO)
+        public List<TimeInterval> GetAllVacations(Physician physicianDto)
         {
-            return physiciansService.GetAllVacations(physitianDTO);
+            return physiciansService.GetAllVacations(physicianDto);
         }
 
-        public void AddVacation(TimeInterval timeInterval, Physitian physitianDTO)
+        public void AddVacation(TimeInterval timeInterval, Physician physicianDto)
         {
-            physiciansService.AddVacation(timeInterval, physitianDTO);
+            physiciansService.AddVacation(timeInterval, physicianDto);
         }
 
-        public void RemoveVacation(TimeInterval timeInterval, Physitian physitianDTO)
+        public void RemoveVacation(TimeInterval timeInterval, Physician physicianDto)
         {
-            physiciansService.RemoveVacation(timeInterval, physitianDTO);
+            physiciansService.RemoveVacation(timeInterval, physicianDto);
         }
 
         public bool jmbgExists(string jmbg)

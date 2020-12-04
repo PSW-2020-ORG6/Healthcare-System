@@ -8,27 +8,27 @@ namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 {
     public class PhysitianAvailabilityService
     {
-        private AppointmentRepository appointmentRepository;
+        private IAppointmentRepository appointmentRepository;
 
         public PhysitianAvailabilityService()
         {
             this.appointmentRepository = new AppointmentFileSystem();
         }
 
-        public bool IsPhysitianAvailableAtAnyTime(Physitian physitian, List<TimeInterval> timeIntervals)
+        public bool IsPhysitianAvailableAtAnyTime(Physician physician, List<TimeInterval> timeIntervals)
         {
             foreach (TimeInterval timeInterval in timeIntervals)
             {
-                if (IsPhysitianAvailable(physitian, timeInterval))
+                if (IsPhysitianAvailable(physician, timeInterval))
                 {
                     return true;
                 }
             }
             return false;
         }
-        public bool IsAnyPhysitianAvailable(List<Physitian> physitians, TimeInterval timeInterval)
+        public bool IsAnyPhysitianAvailable(List<Physician> physitians, TimeInterval timeInterval)
         {
-            foreach (Physitian physitian in physitians)
+            foreach (Physician physitian in physitians)
             {
                 if (IsPhysitianAvailable(physitian, timeInterval))
                 {
@@ -37,23 +37,23 @@ namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
             }
             return false;
         }
-        public bool IsPhysitianAvailable(Physitian physitian, TimeInterval timeInterval)
+        public bool IsPhysitianAvailable(Physician physician, TimeInterval timeInterval)
         {
-            bool isTheirShift = physitian.IsTheirShift(timeInterval);
-            bool isNotOnVacation = !physitian.IsOnVacation(timeInterval);
-            bool isNotScheduled = !IsPhysitianScheduled(physitian, timeInterval);
+            bool isTheirShift = physician.IsTheirShift(timeInterval);
+            bool isNotOnVacation = !physician.IsOnVacation(timeInterval);
+            bool isNotScheduled = !IsPhysitianScheduled(physician, timeInterval);
             return isTheirShift && isNotOnVacation && isNotScheduled;
         }
-        public bool canGoOnVacation(Physitian physitian, TimeInterval timeInterval)
+        public bool canGoOnVacation(Physician physician, TimeInterval timeInterval)
         {
-            bool isNotOnVacation = !physitian.IsOnVacation(timeInterval);
-            bool isNotScheduled = !IsPhysitianScheduled(physitian, timeInterval);
+            bool isNotOnVacation = !physician.IsOnVacation(timeInterval);
+            bool isNotScheduled = !IsPhysitianScheduled(physician, timeInterval);
             return isNotOnVacation && isNotScheduled;
         }
 
-        private bool IsPhysitianScheduled(Physitian physitian, TimeInterval timeInterval)
+        private bool IsPhysitianScheduled(Physician physician, TimeInterval timeInterval)
         {
-            List<Appointment> appointments = appointmentRepository.GetAppointmentsByPhysitian(physitian);
+            List<Appointment> appointments = appointmentRepository.GetAppointmentsByPhysitian(physician);
             foreach (Appointment appointment in appointments)
             {
                 if (timeInterval.IsOverLapping(appointment.TimeInterval))

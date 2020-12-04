@@ -23,7 +23,7 @@ namespace Backend.Service.SchedulingService.PriorityStrategies
                     continue;
                 }
                 appointment.Date = currentDate;
-                appointment.Physitian = suggestedAppointmentDTO.Physitian;
+                appointment.Physician = suggestedAppointmentDTO.Physician;
                 appointment.Patient = suggestedAppointmentDTO.Patient;
                 appointmentDTOs.Add(appointment);
                 currentDate = currentDate.AddDays(1);

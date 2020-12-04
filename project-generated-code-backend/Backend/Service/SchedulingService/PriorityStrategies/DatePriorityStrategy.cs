@@ -16,10 +16,10 @@ namespace Backend.Service.SchedulingService.PriorityStrategies
 
         public List<AppointmentDTO> FindSuggestedAppointments(SuggestedAppointmentDTO suggestedAppointmentDTO)
         {
-            PhysitianFileSystem pfs = new PhysitianFileSystem();
-            List<Physitian> physitians = pfs.GetAll();
+            IPhysitianFileSystem pfs = new IPhysitianFileSystem();
+            List<Physician> physitians = pfs.GetAll();
             List<AppointmentDTO> appointmentDTOs = new List<AppointmentDTO>();
-            foreach (Physitian physitian in physitians)
+            foreach (Physician physitian in physitians)
             {
                 DateTime currentDate = suggestedAppointmentDTO.DateStart;
 
@@ -27,7 +27,7 @@ namespace Backend.Service.SchedulingService.PriorityStrategies
                 {
                     AppointmentDTO appointment = new AppointmentDTO();
                     appointment.Date = currentDate;
-                    appointment.Physitian = physitian;
+                    appointment.Physician = physitian;
                     appointment.Patient = suggestedAppointmentDTO.Patient;
                     appointmentDTOs.Add(appointment);
                     currentDate = currentDate.AddDays(1);

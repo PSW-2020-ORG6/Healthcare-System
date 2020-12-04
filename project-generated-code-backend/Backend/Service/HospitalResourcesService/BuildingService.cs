@@ -7,7 +7,7 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalResourcesService
 {
     public class BuildingService
     {
-        public BuildingRepository buildingRepository;
+        public IBuildingRepository buildingRepository;
 
         public BuildingService()
         {

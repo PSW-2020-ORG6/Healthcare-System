@@ -6,8 +6,8 @@ namespace health_clinic_class_diagram.Backend.Service.MedicineService
 {
     class MedicineAddingService
     {
-        private RejectionRepository rejectionRepository;
-        private WaitingMedicineRepository waitingRepostitory;
+        private IRejectionRepository rejectionRepository;
+        private IWaitingMedicineRepository waitingRepostitory;
         public void addMedicineToWaiting(Medicine medicine)
         {
             throw new NotImplementedException();

@@ -18,15 +18,15 @@ namespace WebApplication.Backend.Repositorys
             connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
         }
 
-        private List<Physitian> GetPhysitians(String query)
+        private List<Physician> GetPhysitians(String query)
         {
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<Physitian> resultList = new List<Physitian>();
+            List<Physician> resultList = new List<Physician>();
             while (sqlReader.Read())
             {
-                Physitian entity = new Physitian();
+                Physician entity = new Physician();
                 entity.SerialNumber = (string)sqlReader[0];
                 entity.Name = (string)sqlReader[1];
                 entity.Surname = (string)sqlReader[2];
@@ -48,7 +48,7 @@ namespace WebApplication.Backend.Repositorys
             return resultList;
         }
 
-        public List<Physitian> GetAllPhysitians()
+        public List<Physician> GetAllPhysitians()
         {
             try
             {
@@ -60,7 +60,7 @@ namespace WebApplication.Backend.Repositorys
             }
         }
 
-        public List<Physitian> GetPhysitiansByName(string name)
+        public List<Physician> GetPhysitiansByName(string name)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace WebApplication.Backend.Repositorys
             }
         }
 
-        public List<Physitian> GetPhysitiansByFullName(string fullName)
+        public List<Physician> GetPhysitiansByFullName(string fullName)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace WebApplication.Backend.Repositorys
             }
         }
 
-        public Physitian GetPhysitianBySerialNumber(string serialNumber)
+        public Physician GetPhysitianBySerialNumber(string serialNumber)
         {
             try
             {
@@ -97,7 +97,7 @@ namespace WebApplication.Backend.Repositorys
             }
         }
 
-        public Physitian GetPhysitianById(string id)
+        public Physician GetPhysitianById(string id)
         {
             try
             {

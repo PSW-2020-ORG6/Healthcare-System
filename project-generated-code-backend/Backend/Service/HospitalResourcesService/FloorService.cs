@@ -7,7 +7,7 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalResourcesService
 {
     public class FloorService
     {
-        public FloorRepository floorRepository;
+        public IFloorRepository floorRepository;
 
         public FloorService()
         {

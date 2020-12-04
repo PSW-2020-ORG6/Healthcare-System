@@ -14,13 +14,13 @@ namespace Backend.Controller.PhysitianControllers
 {
     public class PhysitianScheduleController
     {
-        private Physitian loggedPhysitian;
+        private Physician _loggedPhysician;
         private PhysitianScheduleService physitianScheduleService;
 
-        public PhysitianScheduleController(Physitian loggedPhysitian)
+        public PhysitianScheduleController(Physician loggedPhysician)
         {
-            this.loggedPhysitian = loggedPhysitian;
-            this.physitianScheduleService = new PhysitianScheduleService(loggedPhysitian);
+            this._loggedPhysician = loggedPhysician;
+            this.physitianScheduleService = new PhysitianScheduleService(loggedPhysician);
         }
         
         public List<Appointment> GetAppointmentsByDate(DateTime date)

@@ -16,7 +16,7 @@ namespace Model.Schedule
     public class Appointment : Entity
     {
         public Room Room { get; set; }
-        public Physitian Physitian { get; set; }
+        public Physician Physician { get; set; }
         public Patient Patient { get; set; }
         public TimeInterval TimeInterval { get; set; }
         public ProcedureType ProcedureType { get; set; }
@@ -24,11 +24,11 @@ namespace Model.Schedule
         public DateTime Date { get; set; }
         public bool Active { get; set; }
 
-        public Appointment(Room room, Physitian physitian, Patient patient, TimeInterval timeInterval,
+        public Appointment(Room room, Physician physician, Patient patient, TimeInterval timeInterval,
             ProcedureType procedureType) : base()
         {
             Room = room;
-            Physitian = physitian;
+            Physician = physician;
             Patient = patient;
             TimeInterval = timeInterval;
             ProcedureType = procedureType;
@@ -39,11 +39,11 @@ namespace Model.Schedule
         }
 
         [JsonConstructor]
-        public Appointment(String serialNumber, Room room, Physitian physitian, Patient patient,
+        public Appointment(String serialNumber, Room room, Physician physician, Patient patient,
             TimeInterval timeInterval, ProcedureType procedureType) : base(serialNumber)
         {
             Room = room;
-            Physitian = physitian;
+            Physician = physician;
             Patient = patient;
             TimeInterval = timeInterval;
             ProcedureType = procedureType;
@@ -52,7 +52,7 @@ namespace Model.Schedule
         public Appointment(AppointmentDTO appointmentDTO) : base()
         {
             Room = appointmentDTO.Room;
-            Physitian = appointmentDTO.Physitian;
+            Physician = appointmentDTO.Physician;
             Patient = appointmentDTO.Patient;
             TimeInterval = appointmentDTO.Time;
             ProcedureType = appointmentDTO.ProcedureType;
@@ -71,7 +71,7 @@ namespace Model.Schedule
 
         public override string ToString()
         {
-            return "patient: " + Patient.FullName + "\nphysitian: " + Physitian.FullName + "\ntime interval: " +
+            return "patient: " + Patient.FullName + "\nphysitian: " + Physician.FullName + "\ntime interval: " +
                    TimeInterval + "\nroom: " + Room + "\nprocedure type: " + ProcedureType;
         }
         

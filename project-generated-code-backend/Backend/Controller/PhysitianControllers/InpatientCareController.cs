@@ -14,13 +14,13 @@ namespace Backend.Controller.PhysitianControllers
 {
     public class InpatientCareController
     {
-        private Physitian loggedPhysitian;
+        private Physician _loggedPhysician;
         private InpatientCareService inpatientCareService;
 
-        public InpatientCareController(Physitian loggedPhysitian)
+        public InpatientCareController(Physician loggedPhysician)
         {
-            this.loggedPhysitian = loggedPhysitian;
-            this.inpatientCareService = new InpatientCareService(loggedPhysitian);
+            this._loggedPhysician = loggedPhysician;
+            this.inpatientCareService = new InpatientCareService(loggedPhysician);
         }
 
         public void StartInpatientCare(BedReservationDTO bedReservationDTO)
