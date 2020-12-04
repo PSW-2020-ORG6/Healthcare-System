@@ -33,7 +33,6 @@
 				guest: false,
 				emailConfirmed: false,
 				chosenDoctor:null,
-				//sucessFlag: false,
 			},
 		}
 	},

@@ -48,9 +48,9 @@ namespace WebApplication.Backend.Services
             return registrationRepository.ConfirmEmailUpdate(id);
         }
 
-        public List<FamilyDoctorDTO> GetAllPhysitians()
+        public List<FamilyDoctorDTO> GetAllPhysicians()
         {
-            return registrationRepository.GetAllGeneralPractitionerPhysitions();
+            return registrationRepository.GetAllGeneralPractitionerPhysicians();
         }
 
     }
