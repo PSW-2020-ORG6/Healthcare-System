@@ -14,6 +14,6 @@ namespace WebApplication.Backend.Repositorys
         public String GetPatientId(string idd);
         public bool IsPatientIdValid(string patientId);
         public bool ConfirmEmailUpdate(string patientId);
-        public List<FamilyDoctorDTO> GetAllGeneralPractitionerPhysitions();
+        public List<FamilyDoctorDTO> GetAllGeneralPractitionerPhysicians();
     }
 }
