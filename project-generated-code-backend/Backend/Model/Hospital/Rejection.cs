@@ -6,13 +6,20 @@
 using Backend.Model.Util;
 using Newtonsoft.Json;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.Hospital
 {
     public class Rejection : Entity
     {
         public string Reason { get; set; }
+        [ForeignKey("Medicine")] public string MedicineSerialNumber { get; set; }
         public Medicine Medicine { get; set; }
+
+        public Rejection(): base()
+        {
+
+        }
 
         public Rejection(string reason, Medicine medicine) : base(Guid.NewGuid().ToString())
         {
