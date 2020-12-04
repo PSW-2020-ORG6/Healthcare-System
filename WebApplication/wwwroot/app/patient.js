@@ -17,7 +17,7 @@
 	},
 	beforeMount() {
 		axios
-			.get('http://localhost:49900/patient/getPatientById', { params: { patientId: "1111" } })
+			.get('http://localhost:49900/patient/getPatientById', { params: { patientId: "12345" } })
 			.then(response => {
 				this.patientDTO = response.data
 			})
@@ -219,7 +219,12 @@
 							  <input type="text"  v-model="patientDTO.personalDiseases" class="form-control" id="basic-url" aria-describedby="basic-addon3" disabled>
 						</div>
 
-						
+							<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+								<span class="input-group-text width" id="basic-addon3">Chosen doctor</span>
+							  </div>
+							  <input type="text"  v-model="patientDTO.chosenDoctor" class="form-control" id="basic-url" aria-describedby="basic-addon3" disabled>
+						</div>
 
 				  </div>
 				  <div class="modal-footer textAndBackground">
