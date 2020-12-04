@@ -15,9 +15,9 @@ namespace WebApplication.Backend.Repositorys
         private MySqlConnection connection;
         public PatientRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydbx;user=root;password=root");
         }
-        ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017
+        ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017 and Aleksa Repovic RA52/2017
         /// <summary>
         ///Get patients from patients table
         ///</summary>
@@ -64,6 +64,7 @@ namespace WebApplication.Backend.Repositorys
                 entity.Image = (string)sqlReader[25];
                 entity.Guest = (bool)sqlReader[26];
                 entity.EmailConfirmed = (bool)sqlReader[27];
+                entity.ChosenDoctor = (string)sqlReader[28];
 
                 resultList.Add(entity);
 
@@ -83,7 +84,7 @@ namespace WebApplication.Backend.Repositorys
         {
             if (id != null)
             {
-                Patient patient = GetPatients("Select * from patient where SerialNumber like '" + id + "'")[0];
+                Patient patient = GetPatients("Select * from patient where Id like '" + id + "'")[0];
                 return patient;
             }
             return null;
