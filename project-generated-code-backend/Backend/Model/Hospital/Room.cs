@@ -7,7 +7,9 @@ using Backend.Model.Util;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using health_clinic_class_diagram.Backend.Model.Hospital;
 
 namespace Model.Hospital
 {
@@ -15,9 +17,10 @@ namespace Model.Hospital
     {
         public string Name { get; set; }
         public int Id { get; set; }
-        public string FloorSerialNumber { get; set; }
-        public string BuildingSerialNumber { get; set; }
-        public string RoomTypeSerialNumber { get; set; }
+        [ForeignKey("Floor")] public string FloorSerialNumber { get; set; }
+        public Floor Floor { get; set; }
+        public string BuildingSerialNumber { get; set; } // TODO: get this from Floor
+        [ForeignKey("RoomType")] public string RoomTypeSerialNumber { get; set; }
         public virtual RoomType RoomType { get; set; }
         public virtual List<Equipment> Equipment { get; set; }
         public virtual List<Bed> Beds { get; set; }
