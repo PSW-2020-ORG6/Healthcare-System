@@ -93,7 +93,7 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("allPhysitians")]
         public List<FamilyDoctorDTO> GetAllFeedbacks()
         {
-            return registrationService.GetAllPhysicians();
+            return registrationService.GetAllPhysitians();
         }
     }
 }

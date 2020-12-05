@@ -339,7 +339,7 @@ namespace WebApplication.Backend.Model
             modelBuilder.Entity<Appointment>().Ignore(o => o.TimeInterval);
             modelBuilder.Entity<Appointment>().Ignore(o => o.ProcedureType);
             modelBuilder.Entity<Appointment>().Ignore(o => o.Physitian);
-            modelBuilder.Entity<Appointment>().Ignore(o => o.Date);
+           // modelBuilder.Entity<Appointment>().Ignore(o => o.Date);
             modelBuilder.Entity<Appointment>().HasData(
                  new Appointment { SerialNumber = "200001", Urgency = true },
                  new Appointment { SerialNumber = "200002", Urgency = false }

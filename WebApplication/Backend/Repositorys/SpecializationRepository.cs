@@ -6,13 +6,13 @@ using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class SpecializationRepository: ISpecializationRepository
+    public class SpecializationRepository : ISpecializationRepository
     {
         private MySqlConnection connection;
 
         public SpecializationRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
         }
 
         private List<Specialization> GetSpecializations(String query)
@@ -66,7 +66,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetSpecializations("Select * from specialization where SerialNumber='" + serialNumber + "'")[0];
+                return GetSpecializations("Select * from specialization where SerialNumber like '" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {

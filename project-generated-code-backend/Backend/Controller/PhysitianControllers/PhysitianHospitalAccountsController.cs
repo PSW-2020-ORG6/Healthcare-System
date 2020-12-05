@@ -35,7 +35,7 @@ namespace Backend.Controller.PhysitianControllers
         {
             return patientAccountsService.getPatientsForPhysitian(loggedPhysitian);
         }
-
+        /*
         public Appointment GetNextAppointmentForPatient(Patient patient)
         {
 
@@ -65,5 +65,6 @@ namespace Backend.Controller.PhysitianControllers
         {
             return physitianScheduleService.GetTodaysAppointmentForPatient(patient);
         }
+        */
     }
 }

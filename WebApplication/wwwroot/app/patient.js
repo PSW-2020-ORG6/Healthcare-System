@@ -1,9 +1,11 @@
 ﻿Vue.component("patient", {
 	data: function () {
 		return {
-			idPatient:"12",
+			idPatient: "0002",
 			approvedFeedbacks: null,
 			noapprovedFeedbacks: null,
+			activeAppointments: null,
+			canceledAppointments: null,
 			patients: null,
 			doctorsList: null,
 			feedback: {
@@ -12,17 +14,18 @@
 				date: new Date().now,
 				patientId: "-1"
 			},
+			appointment: null,
 			patientDTO: {}
 		}
 	},
 	beforeMount() {
 		axios
-			.get('http://localhost:49900/patient/getPatientById', { params: { patientId: "12345" } })
+			.get('http://localhost:49900/patient/getPatientById', { params: { patientId: "0002" } })
 			.then(response => {
 				this.patientDTO = response.data
 			})
 			.catch(error => {
-				alert("Please add patient with id number : 12345")
+				alert("Please add patient with id number : 0002")
 			})
 
 		axios
@@ -40,6 +43,25 @@
 			})
 			.catch(error => {
 				alert(error.response.data)
+			})
+
+		axios
+			.get('http://localhost:49900/appointment/allAppointmentsByPatientIdActive', { params: { patientId: "5" } })
+			.then(response => {
+				this.activeAppointments = response.data
+			})
+
+			.catch(error => {
+				alert("greska kod activeAppoiuntments")
+			})
+
+		axios
+			.get('http://localhost:49900/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: "5" } })
+			.then(response => {
+				this.canceledAppointments = response.data
+			})
+			.catch(error => {
+				alert("greska kod canceledAppointments")
 			})
 	},
 	template: `
@@ -283,7 +305,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr v-for="f in approvedFeedbacks">
+										<tr v-for="a in ac">
 											<td>{{f.text}}</td>
 											<td>{{DateSplit(f.date)}}</td>
 											<td v-for="p in patients" v-if="parseInt(p.id) == parseInt(f.patientId)">{{p.name}} {{p.surname}}</td>
@@ -292,17 +314,59 @@
 									</tbody>
 								</table>
 							</div>
-						</div>			     
+						</div>		
 					</div>
 				</div>
 			</div>
+
+
+<div>
+				<div class="tab-content">
+    				<div id="profil" class="container tab-pane active"><br>
+    					<div class="container">
+							<div class="row">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>Date</th>
+											<th>Time</th>
+											<th>Physitian</th>
+											<th>Room</th>
+											<th>Procedure</th>
+											<th>Urgency</th>
+											<th></th>	
+											<th></th>	
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="a in activeAppointments">
+											<td>{{DateSplit(a.date)}}</td>
+											<td>{{a.timeInterval.time}}</td>
+											<td>{{a.physitian.fullName}}</td>
+											<td>{{a.room.name}}</td>
+											<td>{{a.procedureType.name}}</td>
+											<td>{{a.urgency}}</td>		
+											<td><button type="button" class="btn btn-info btn-lg">Survey</button></td>			
+											<td><button type="button" class="btn btn-info btn-lg">Cancel</button></td>										
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>		
+					</div>
+				</div>
+			</div>
+
+
+
+
 		</div>
 	</div>
 	`,
 	methods: {
 		AddNewFeedback: function (feedback) {
 			if (!document.getElementById("anonimous").checked)
-				this.feedback.patientId="0003"
+				this.feedback.patientId = "0003"
 			if (feedback.text.localeCompare(null) || feedback.text.localeCompare("")) {
 				axios
 					.post("http://localhost:49900/feedback/add", feedback)
@@ -323,7 +387,7 @@
 		},
 		SurveyShow: function () {
 			axios
-				.get('http://localhost:49900/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient} })
+				.get('http://localhost:49900/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient } })
 				.then(response => {
 					this.doctorsList = response.data
 					if (this.doctorsList.value != null || this.doctorsList != "") {
@@ -335,7 +399,7 @@
 				.catch(error => {
 					alert(error)
 				})
-			
+
 		}
 	}
 });

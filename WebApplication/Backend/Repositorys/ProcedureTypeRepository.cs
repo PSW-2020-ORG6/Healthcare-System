@@ -8,16 +8,16 @@ using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class ProcedureTypeRepository: IProcedureTypeRepository
+    public class ProcedureTypeRepository : IProcedureTypeRepository
     {
         private MySqlConnection connection;
         private SpecializationRepository specializationRepository = new SpecializationRepository();
         private EquipmentRepository equipmentRepository = new EquipmentRepository();
-        private ProcedureTypeEquipmentUsageRepository procedureTypeEquipmentUsageRepository = new ProcedureTypeEquipmentUsageRepository();
+        //private ProcedureTypeEquipmentUsageRepository procedureTypeEquipmentUsageRepository = new ProcedureTypeEquipmentUsageRepository();
 
         public ProcedureTypeRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
         }
 
         private List<ProcedureType> GetProcedureTypes(String query)
@@ -30,10 +30,10 @@ namespace WebApplication.Backend.Repositorys
             {
                 ProcedureType entity = new ProcedureType();
                 entity.SerialNumber = (string)sqlReader[0];
-                entity.Specialization = specializationRepository.GetSpecializationBySerialNumber((string)sqlReader[1]);
-                entity.Name = (string)sqlReader[2];
-                entity.EstimatedTimeInMinutes = (int)sqlReader[3];
-                AddingRequiredEquipments(sqlReader, entity);
+                entity.Specialization = specializationRepository.GetSpecializationBySerialNumber((string)sqlReader[3]);
+                entity.Name = (string)sqlReader[1];
+                entity.EstimatedTimeInMinutes = (int)sqlReader[2];
+                //AddingRequiredEquipments(sqlReader, entity);
                 resultList.Add(entity);
             }
             connection.Close();
@@ -52,7 +52,7 @@ namespace WebApplication.Backend.Repositorys
                 return null;
             }
         }
-
+        /*
         private void AddingRequiredEquipments(MySqlDataReader sqlReader, ProcedureType entity)
         {
             List<ProcedureTypeEquipmentUsage> procedureTypeEquipmentUsages = procedureTypeEquipmentUsageRepository.GetProcedureTypeEquipmentUsagesByProcedureTypeSerialNumber((string)sqlReader[0]);
@@ -61,6 +61,7 @@ namespace WebApplication.Backend.Repositorys
             {
                 entity.RequiredEquipment.Add(procedureTypeEquipmentUsage.Equipment);
             }
-        }
+        
+        }*/
     }
 }

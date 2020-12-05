@@ -10,5 +10,8 @@ namespace WebApplication.Backend.Repositorys.Interfaces
         List<Appointment> GetAppointmentByRoomSerialNumber(string roomSerialNumber);
         List<Appointment> GetAppointmentByPhysitianSerialNumber(string physitianSerialNumber);
         List<Appointment> GetAppointmentByPatientSerialNumber(string patientSerialNumber);
+        List<Appointment> GetAllAppointmentByPatientId(string patientId);
+        List<Appointment> GetAllAppointmentsByPatientIdActive(string patientId);
+        List<Appointment> GetAllAppointmentsByPatientIdCanceled(string patientId);
     }
 }

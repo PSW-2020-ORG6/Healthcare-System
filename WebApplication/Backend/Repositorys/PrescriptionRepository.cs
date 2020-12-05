@@ -6,14 +6,14 @@ using System.Collections.Generic;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class PrescriptionRepository: IPrescriptionRepository
+    public class PrescriptionRepository : IPrescriptionRepository
     {
         private MySqlConnection connection;
         public PrescriptionRepository()
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+                connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
             }
             catch (Exception e)
             {
@@ -94,7 +94,7 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         public List<Prescription> GetPrescriptionsByProperty(SearchProperty property, string value, string dateTimes, bool not)
         {
-            List<Prescription> prescriptions = GetPrescriptions("Select * from prescriptions where Date between " + dateTimes);
+            List<Prescription> prescriptions = GetPrescriptions("Select * from prescription where Date between " + dateTimes);
             if (!not && property.Equals(SearchProperty.All))
                 return GetPrescriptionsByAllProperties(value, prescriptions);
             else if (not && property.Equals(SearchProperty.All))

@@ -8,14 +8,14 @@ using WebApplication.Backend.Util;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class SurveyRepository: ISurveyRepository
+    public class SurveyRepository : ISurveyRepository
     {
         private MySqlConnection connection;
         public SurveyRepository()
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=neynamneynam12");
+                connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
             }
             catch (Exception e)
             {
@@ -33,7 +33,7 @@ namespace WebApplication.Backend.Repositorys
         public bool AddNewSurvey(Survey surveyText)
         {
             connection.Open();
-            string sqlDml = "INSERT into surveys" +
+            string sqlDml = "INSERT into survey" +
                 "(Question1,Question2,Question3,Question4,Question5,Question6,Question7,Question8,Question9,Question10,Question11," +
                 "Question12,Question13,Question14,Question15,Question16,Question17,Question18,Question19,Question20,Question21,Question22,Question23,ID,DoctorName,SerialNumber)VALUES ('"
                 + surveyText.Question1 + "','" + surveyText.Question2 + "','" + surveyText.Question3 + "','" + surveyText.Question4 + "','" + surveyText.Question5
@@ -76,7 +76,7 @@ namespace WebApplication.Backend.Repositorys
             connection.Close();
             foreach (Report report in resultList)
             {
-                report.physitian = GetDoctorById("Select * from accounts where SerialNumber like'" + report.physitian.SerialNumber + "'");
+                report.physitian = GetDoctorById("Select * from physitian where SerialNumber like'" + report.physitian.SerialNumber + "'");
             }
             return resultList;
         }
@@ -113,7 +113,7 @@ namespace WebApplication.Backend.Repositorys
         internal Patient GetPatientById(string idPetient)
         {
             Patient patient = new Patient();
-            patient = GetPatient("Select * from accounts where SerialNumber like '" + idPetient + "'");
+            patient = GetPatient("Select * from patient where SerialNumber like '" + idPetient + "'");
             return patient;
         }
         ////Vucetic Marija RA157/2017
@@ -165,7 +165,7 @@ namespace WebApplication.Backend.Repositorys
         public List<string> GetAllDoctorsFromReporstByPatientId(string patientId)
         {
             List<Report> reports = new List<Report>();
-            reports = GetReports("Select * from reports where PatientSerialNumber like'" + patientId.ToString() + "'");
+            reports = GetReports("Select * from report where PatientId like'" + patientId.ToString() + "'");
             List<String> doctors = new List<String>();
             foreach (Report r in reports)
             {
@@ -225,7 +225,7 @@ namespace WebApplication.Backend.Repositorys
         {
 
             List<Survey> reports = new List<Survey>();
-            reports = GetSurveys("Select * from surveys where DoctorName = '" + doctorId + "' ");
+            reports = GetSurveys("Select * from survey where DoctorName = '" + doctorId + "' ");
 
             List<StatisticAuxilaryClass> statistics = new List<StatisticAuxilaryClass>();
             for (int i = 0; i < 5; i++)
@@ -272,7 +272,7 @@ namespace WebApplication.Backend.Repositorys
         {
 
             List<Survey> reports = new List<Survey>();
-            reports = GetSurveys("Select * from surveys");
+            reports = GetSurveys("Select * from survey");
 
             List<StatisticAuxilaryClass> statistics = new List<StatisticAuxilaryClass>();
             for (int i = 0; i < 19; i++)
@@ -340,7 +340,7 @@ namespace WebApplication.Backend.Repositorys
         {
 
             List<Survey> reports = new List<Survey>();
-            reports = GetSurveys("Select * from surveys");
+            reports = GetSurveys("Select * from survey");
 
             List<StatisticAuxilaryClass> statistics = new List<StatisticAuxilaryClass>();
             for (int i = 0; i < 5; i++)
@@ -432,7 +432,7 @@ namespace WebApplication.Backend.Repositorys
         public List<string> GetAllDoctorsFromReporstByPatientIdFromSurvey(string patientId)
         {
             List<Physitian> result = new List<Physitian>();
-            result = GetDoctors("Select * from surveys where ID like'" + patientId.ToString() + "'");
+            result = GetDoctors("Select * from survey where ID like'" + patientId.ToString() + "'");
             List<String> doctors = new List<String>();
             foreach (Physitian r in result)
             {

@@ -6,7 +6,7 @@ using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class AppointmentRepository: IAppointmentRepository
+    public class AppointmentRepository : IAppointmentRepository
     {
         private MySqlConnection connection;
         private RoomRepository roomRepository = new RoomRepository();
@@ -17,7 +17,7 @@ namespace WebApplication.Backend.Repositorys
 
         public AppointmentRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
         }
 
         private List<Appointment> GetAppointments(String query)
@@ -30,12 +30,14 @@ namespace WebApplication.Backend.Repositorys
             {
                 Appointment entity = new Appointment();
                 entity.SerialNumber = (string)sqlReader[0];
-                entity.Room = roomRepository.GetRoomBySerialNumber((string)sqlReader[1]);
-                entity.Physitian = physitianRepository.GetPhysitianBySerialNumber((string)sqlReader[2]);
+                entity.Room = roomRepository.GetRoomBySerialNumber((string)sqlReader[5]);
+                entity.Physitian = physitianRepository.GetPhysitianBySerialNumber((string)sqlReader[4]);
                 entity.Patient = patientRepository.GetPatientBySerialNumber((string)sqlReader[3]);
-                entity.TimeInterval = timeIntervalRepository.GetTimeIntervalById((string)sqlReader[4]);
-                entity.ProcedureType = procedureTypeRepository.GetProcedureTypeBySerialNumber((string)sqlReader[5]);
-                entity.Urgency = (bool)sqlReader[6];
+                entity.TimeInterval = timeIntervalRepository.GetTimeIntervalById((string)sqlReader[6]);
+                entity.ProcedureType = procedureTypeRepository.GetProcedureTypeBySerialNumber((string)sqlReader[7]);
+                entity.Urgency = (bool)sqlReader[1];
+                entity.Active = (bool)sqlReader[2];
+                entity.Date = Convert.ToDateTime(sqlReader[8]);
                 resultList.Add(entity);
             }
             connection.Close();
@@ -98,6 +100,45 @@ namespace WebApplication.Backend.Repositorys
             try
             {
                 return GetAppointments("Select * from appointment where PatientSerialNumber='" + patientSerialNumber + "'");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public List<Appointment> GetAllAppointmentByPatientId(string patientId)
+        {
+            try
+            {
+                return GetAppointments("Select * from appointment where PatientSerialNumber like '" + patientId + "'");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public List<Appointment> GetAllAppointmentsByPatientIdActive(string patientId)
+        {
+            try
+            {
+                return GetAppointments("Select * from appointment where PatientSerialNumber='" + patientId + "'" + " AND  Active like '" + 1 + "'");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public List<Appointment> GetAllAppointmentsByPatientIdCanceled(string patientId)
+        {
+            try
+            {
+                return GetAppointments("Select * from appointment where PatientSerialNumber='" + patientId + "'" + " AND  Active like '" + 0 + "'");
             }
             catch (Exception e)
             {
