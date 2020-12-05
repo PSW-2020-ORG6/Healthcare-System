@@ -27,7 +27,7 @@ namespace Backend.Service.SchedulingService
         {
             Appointment appointment = new Appointment(appointmentDTO);
             appointmentRepository.Save(appointment);
-        }/*
+        }
         public List<Appointment> GetAppointmentsByDate(DateTime date)
         {
             List<Appointment> appointments = new List<Appointment>();
@@ -75,8 +75,8 @@ namespace Backend.Service.SchedulingService
                 }
             }
             return null;
-        }*/
-/*
+        }
+
         private bool IsInPast(Appointment appointment)
         {
             return appointment.Date.CompareTo(DateTime.Today) < 0;
@@ -95,6 +95,6 @@ namespace Backend.Service.SchedulingService
             appointments.Sort((a, b) => a.CompareTo(b));
             return appointments;
         }
-*/
+
     }
 }
