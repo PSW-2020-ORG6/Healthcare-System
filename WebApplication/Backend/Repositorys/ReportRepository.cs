@@ -14,7 +14,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+                connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
             }
             catch (Exception e)
             {
@@ -55,7 +55,7 @@ namespace WebApplication.Backend.Repositorys
                 report.Patient = patientRepository.GetPatientById(report.Patient.SerialNumber);
                 PhysitianRepository phisitionRepository = new PhysitianRepository();
                 report.Physitian = phisitionRepository.GetPhysitianBySerialNumber(report.Physitian.SerialNumber);
-                report.ProcedureType = GetProcedureTypeById("Select * from proceduretypes where SerialNumber like '" + report.ProcedureType.SerialNumber + "'");
+                report.ProcedureType = GetProcedureTypeById("Select * from proceduretype where SerialNumber like '" + report.ProcedureType.SerialNumber + "'");
             }
             return resultList;
         }
@@ -81,7 +81,7 @@ namespace WebApplication.Backend.Repositorys
             entity.Specialization = new Specialization();
             entity.Specialization = new Specialization { SerialNumber = (string)sqlReader[2] };
             connection.Close();
-            entity.Specialization = GetSpecialization("Select * from specializations where SerialNumber like '" + entity.Specialization.SerialNumber + "'");
+            entity.Specialization = GetSpecialization("Select * from specialization where SerialNumber like '" + entity.Specialization.SerialNumber + "'");
             return entity;
         }
         ///Tanja Drcelic RA124/2017
@@ -120,7 +120,7 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         public List<Report> GetReportsByProperty(SearchProperty property, string value, string dateTimes, bool not)
         {
-            List<Report> reports = GetReports("Select * from reports  where Date between " + dateTimes);
+            List<Report> reports = GetReports("Select * from report  where Date between " + dateTimes);
             if (!not && property.Equals(SearchProperty.All))
                 return GetReportssByAllProperties(value, reports);
             else if (not && property.Equals(SearchProperty.All))

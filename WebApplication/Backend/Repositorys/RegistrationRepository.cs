@@ -9,14 +9,14 @@ namespace WebApplication.Backend.Repositorys
     /// <summary>
     /// This class does connection with MySQL database patient and address tables
     /// </summary>
-    public class RegistrationRepository: IRegistrationRepository
+    public class RegistrationRepository : IRegistrationRepository
     {
         private MySqlConnection connection;
         public RegistrationRepository()
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+                connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
             }
             catch (Exception e)
             {
@@ -117,7 +117,7 @@ namespace WebApplication.Backend.Repositorys
             return true;
         }
 
-        public List<FamilyDoctorDTO> GetAllGeneralPractitionerPhysitians()
+        public List<FamilyDoctorDTO> GetAllGeneralPractitionerPhysitions()
         {
             return GetPhysitiansWithSpecializations("Select physitian.Name,physitian.Surname, specialization.Name from physitian,specialization where specialization.PhysitianSerialNumber= physitian.SerialNumber and specialization.Name like 'General practitioner'");
         }

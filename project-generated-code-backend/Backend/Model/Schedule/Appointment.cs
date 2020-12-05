@@ -21,6 +21,8 @@ namespace Model.Schedule
         private TimeInterval timeInterval;
         private ProcedureType procedureType;
         private bool urgency;
+        private bool active;
+        private DateTime date;
 
         public Room Room { get => room; set => room = value; }
         public Physitian Physitian { get => physitian; set => physitian = value; }
@@ -28,25 +30,30 @@ namespace Model.Schedule
         public TimeInterval TimeInterval { get => timeInterval; set => timeInterval = value; }
         public ProcedureType ProcedureType { get => procedureType; set => procedureType = value; }
         public bool Urgency { get => urgency; set => urgency = value; }
-        public DateTime Date { get => timeInterval.Start; }
+        public bool Active { get => active; set => active = value; }
+        public DateTime Date { get => date; set => date = value; }
 
-        public Appointment(Room room, Physitian physitian, Patient patient, TimeInterval timeInterval, ProcedureType procedureType) : base(Guid.NewGuid().ToString())
+        public Appointment(Room room, Physitian physitian, Patient patient, TimeInterval timeInterval, ProcedureType procedureType, Boolean active,DateTime date) : base(Guid.NewGuid().ToString())
         {
             this.room = room;
             this.physitian = physitian;
             this.patient = patient;
             this.timeInterval = timeInterval;
             this.procedureType = procedureType;
+            this.active = active;
+            this.date = date;
         }
 
         [JsonConstructor]
-        public Appointment(String serialNumber, Room room, Physitian physitian, Patient patient, TimeInterval timeInterval, ProcedureType procedureType) : base(serialNumber)
+        public Appointment(String serialNumber, Room room, Physitian physitian, Patient patient, TimeInterval timeInterval, ProcedureType procedureType, Boolean active,DateTime date) : base(serialNumber)
         {
             this.room = room;
             this.physitian = physitian;
             this.patient = patient;
             this.timeInterval = timeInterval;
             this.procedureType = procedureType;
+            this.active = active;
+            this.date = date;
         }
 
         public Appointment(AppointmentDTO appointmentDTO) : base(Guid.NewGuid().ToString())
@@ -57,6 +64,8 @@ namespace Model.Schedule
             this.timeInterval = appointmentDTO.Time;
             this.procedureType = appointmentDTO.ProcedureType;
             this.urgency = appointmentDTO.Urgency;
+            this.active = appointmentDTO.Active;
+            this.date = appointmentDTO.Date;
         }
 
         public Appointment()
@@ -83,10 +92,11 @@ namespace Model.Schedule
             return "patient: " + patient.FullName + "\nphysitian: " + physitian.FullName + "\ntime interval: "
                 + timeInterval.ToString() + "\nroom: " + room.ToString() + "\nprocedure type: " + procedureType.ToString();
         }
-
+        /*
         public int CompareTo(Appointment other)
         {
             return Date.CompareTo(other.Date);
         }
+        */
     }
 }

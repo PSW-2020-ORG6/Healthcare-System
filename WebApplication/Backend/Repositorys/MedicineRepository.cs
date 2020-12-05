@@ -6,7 +6,7 @@ using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class MedicineRepository: IMedicineRepository
+    public class MedicineRepository : IMedicineRepository
     {
         private MySqlConnection connection;
         private MedicineManufacturerRepository medicineManufacturer = new MedicineManufacturerRepository();
@@ -14,7 +14,7 @@ namespace WebApplication.Backend.Repositorys
 
         public MedicineRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
         }
 
         private List<Medicine> GetMedicines(String query)

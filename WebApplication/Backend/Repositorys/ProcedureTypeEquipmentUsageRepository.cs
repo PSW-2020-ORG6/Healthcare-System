@@ -6,7 +6,7 @@ using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class ProcedureTypeEquipmentUsageRepository: IProcedureTypeEquipmentUsageRepository
+    public class ProcedureTypeEquipmentUsageRepository : IProcedureTypeEquipmentUsageRepository
     {
         private MySqlConnection connection;
         private ProcedureTypeRepository procedureTypeRepository = new ProcedureTypeRepository();
@@ -14,7 +14,7 @@ namespace WebApplication.Backend.Repositorys
 
         public ProcedureTypeEquipmentUsageRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
         }
 
         private List<ProcedureTypeEquipmentUsage> GetProcedureTypeEquipmentUsages(String query)

@@ -6,12 +6,12 @@ using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class MedicineManufacturerRepository: IMedicineManufacturerRepository
+    public class MedicineManufacturerRepository : IMedicineManufacturerRepository
     {
         private MySqlConnection connection;
         public MedicineManufacturerRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
         }
 
         private List<MedicineManufacturer> GetMedicineManufacturers(String query)

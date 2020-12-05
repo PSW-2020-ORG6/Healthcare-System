@@ -6,13 +6,13 @@ using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class TimeIntervalRepository: ITimeIntervalRepository
+    public class TimeIntervalRepository : ITimeIntervalRepository
     {
         private MySqlConnection connection;
 
         public TimeIntervalRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
         }
 
         private List<TimeInterval> GetTimeIntervals(String query)
@@ -24,9 +24,9 @@ namespace WebApplication.Backend.Repositorys
             while (sqlReader.Read())
             {
                 TimeInterval entity = new TimeInterval();
-                entity.Start = (DateTime)sqlReader[0];
-                entity.End = (DateTime)sqlReader[1];
-                entity.Id = (string)sqlReader[2];
+                entity.Start = (DateTime)sqlReader[1];
+                entity.End = (DateTime)sqlReader[2];
+                entity.Id = (string)sqlReader[0];
                 resultList.Add(entity);
             }
             connection.Close();
@@ -88,7 +88,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetTimeIntervals("Select * from timeInterval where Id='" + id + "'")[0];
+                return GetTimeIntervals("Select * from timeinterval where Id='" + id + "'")[0];
             }
             catch (Exception e)
             {

@@ -6,7 +6,7 @@ using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class PhysitianRepository: IPhysitianRepository
+    public class PhysitianRepository : IPhysitianRepository
     {
         private MySqlConnection connection;
         private AddressRepository addressRepository = new AddressRepository();
@@ -15,7 +15,7 @@ namespace WebApplication.Backend.Repositorys
 
         public PhysitianRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
         }
 
         private List<Physitian> GetPhysitians(String query)
@@ -31,7 +31,17 @@ namespace WebApplication.Backend.Repositorys
                 entity.Name = (string)sqlReader[1];
                 entity.Surname = (string)sqlReader[2];
                 entity.FullName = entity.Name + " " + entity.Surname;
-                entity.Id = (string)sqlReader[3];
+                entity.Id = (string)sqlReader[4];
+                entity.DateOfBirth = (DateTime)sqlReader[5];
+                entity.Contact = (string)sqlReader[6];
+                entity.Email = (string)sqlReader[7];
+                //entity.Address = addressRepository.GetAddressBySerialNumber((string)sqlReader[7]);
+                entity.Password = (string)sqlReader[8];
+                //entity.Specialization = specializationRepository.GetSpecializationsBySerialNumber((string)sqlReader[9]);
+                //entity.VacationTime = timeIntervalRepository.GetTimeIntervalsById((string)sqlReader[10]);
+                //entity.WorkSchedule = timeIntervalRepository.GetTimeIntervalById((string)sqlReader[11]);
+                //entity.AllSpecializations = specializationRepository.GetSpecializationsNameBySerialNumber((string)sqlReader[12]);
+                //entity.AddressSerialNumber = (string)sqlReader[13];
                 resultList.Add(entity);
             }
             connection.Close();
@@ -78,7 +88,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetPhysitians("Select * from physitians where SerialNumber like '" + serialNumber + "'")[0];
+                return GetPhysitians("Select * from physitian where SerialNumber like '" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {

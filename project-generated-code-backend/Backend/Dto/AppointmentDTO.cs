@@ -40,6 +40,8 @@ namespace Backend.Dto
         private Patient patient;
         private Room room;
         private bool urgency;
+        private bool active;
+
         private int restrictedHours;
 
         public ProcedureType ProcedureType { get => procedureType; set => procedureType = value; }
@@ -48,7 +50,8 @@ namespace Backend.Dto
         public Patient Patient { get => patient; set => patient = value; }
         public Room Room { get => room; set => room = value; }
         public bool Urgency { get => urgency; set => urgency = value; }
-        public int RestrictedHours { get => restrictedHours; set => restrictedHours = value; }
+        public bool Active { get => active; set => active = value; }
         public DateTime Date { get => date; set => date = value; }
+        public int RestrictedHours { get => restrictedHours; set => restrictedHours = value; }
     }
 }
