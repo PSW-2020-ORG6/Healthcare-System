@@ -50,7 +50,7 @@ namespace WebApplication.Backend.Services
 
         public List<FamilyDoctorDTO> GetAllPhysitians()
         {
-            return registrationRepository.GetAllGeneralPractitionerPhysitions();
+            return registrationRepository.GetAllGeneralPracticePhysitions();
         }
 
     }

@@ -22,12 +22,12 @@ namespace Backend.Controller.PhysitianControllers
             this.loggedPhysitian = loggedPhysitian;
             this.physitianScheduleService = new PhysitianScheduleService(loggedPhysitian);
         }
-        /*
+        
         public List<Appointment> GetAppointmentsByDate(DateTime date)
         {
             return physitianScheduleService.GetAppointmentsByDate(date);
         }
-        */
+        
         public void NewAppointment(AppointmentDTO appointment)
         {
             physitianScheduleService.NewAppointment(appointment);

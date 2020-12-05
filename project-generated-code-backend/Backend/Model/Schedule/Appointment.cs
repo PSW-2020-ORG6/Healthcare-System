@@ -92,11 +92,11 @@ namespace Model.Schedule
             return "patient: " + patient.FullName + "\nphysitian: " + physitian.FullName + "\ntime interval: "
                 + timeInterval.ToString() + "\nroom: " + room.ToString() + "\nprocedure type: " + procedureType.ToString();
         }
-        /*
+        
         public int CompareTo(Appointment other)
         {
             return Date.CompareTo(other.Date);
         }
-        */
+        
     }
 }
