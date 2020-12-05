@@ -117,7 +117,7 @@ namespace WebApplication.Backend.Repositorys
             return true;
         }
 
-        public List<FamilyDoctorDTO> GetAllGeneralPracticePhysitions()
+        public List<FamilyDoctorDTO> GetAllGeneralPracticePhysitians()
         {
             return GetPhysitiansWithSpecializations("Select physitian.Name,physitian.Surname, specialization.Name from physitian,specialization where specialization.PhysitianSerialNumber= physitian.SerialNumber and specialization.Name like 'General practitioner'");
         }
