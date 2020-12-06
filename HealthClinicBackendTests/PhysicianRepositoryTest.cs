@@ -19,6 +19,8 @@ namespace HealthClinicBackendTests
             {
                 Assert.NotNull(physician.Address);
                 Assert.NotNull(physician.Address.City);
+                Assert.NotNull(physician.VacationTime);
+                Assert.NotNull(physician.WorkSchedule);
                 Assert.NotNull(physician.Specialization);
             }
             Assert.NotEmpty(result);

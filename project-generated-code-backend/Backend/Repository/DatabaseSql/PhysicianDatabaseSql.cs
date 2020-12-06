@@ -16,12 +16,13 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             List<Physician> physicians = dbContext.Physician
                 .Include(p => p.Address)
                 .Include(p => p.Address.City)
+                .Include(p => p.WorkSchedule)
                 .ToList();
 
             List<PhysicianSpecialization> physicianSpecializations = dbContext.PhysicianSpecialization
                 .Include(ps => ps.Physician)
                 .ToList();
-            
+
             foreach (var physician in physicians)
             {
                 var specializations = physicianSpecializations
@@ -36,7 +37,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public List<Physician> GetPhysitiansByProcedureType(ProcedureType procedureType)
         {
-            throw new System.NotImplementedException();
+            return GetAll().Where(p => p.Specialization.Contains(procedureType.Specialization)).ToList();
         }
     }
 }
