@@ -6,16 +6,20 @@
 using Backend.Model.Util;
 using Newtonsoft.Json;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.Util
 {
     public class Address : Entity
     {
         public string Street { get; set; }
+        [ForeignKey("City")] public string CitySerialNumber { get; set; }
+        public City City { get; set; }
 
         public Address() : base()
         {
         }
+
         public Address(string street) : base()
         {
             Street = street;

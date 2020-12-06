@@ -522,7 +522,7 @@ namespace WebApplication.Backend.Model
                     FloorSerialNumber = "1001",
                     RoomSerialNumber = "101",
                     Name = "Bed 1",
-                    PatientID = "0002",
+                    PatientSerialNumber = "0002",
                     Id = "100001",
                     RoomId = "101"
                 },
@@ -533,7 +533,7 @@ namespace WebApplication.Backend.Model
                     FloorSerialNumber = "1001",
                     RoomSerialNumber = "101",
                     Name = "Bed 2",
-                    PatientID = "0003",
+                    PatientSerialNumber = "0003",
                     Id = "100002",
                     RoomId = "102"
                 },
@@ -544,7 +544,7 @@ namespace WebApplication.Backend.Model
                     FloorSerialNumber = "1001",
                     RoomSerialNumber = "102",
                     Name = "Bed 3",
-                    PatientID = null,
+                    PatientSerialNumber = null,
                     Id = "100003",
                     RoomId = "103"
                 }

@@ -5,9 +5,11 @@
 
 using Newtonsoft.Json;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace Model.Util
 {
+    [Owned]
     public class TimeInterval
     {
         public DateTime Start { get; set; }

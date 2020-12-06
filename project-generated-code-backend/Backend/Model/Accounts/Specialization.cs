@@ -13,14 +13,16 @@ namespace Model.Accounts
     public class Specialization : Entity
     {
         public string Name { get; set; }
-        
-        public Specialization() : base(Guid.NewGuid().ToString()) { }
-        
+
+        public Specialization() : base(Guid.NewGuid().ToString())
+        {
+        }
+
         public Specialization(string name) : base(Guid.NewGuid().ToString())
         {
             Name = name;
         }
-        
+
         [JsonConstructor]
         public Specialization(String serialNumber, string name) : base(serialNumber)
         {
@@ -36,7 +38,7 @@ namespace Model.Accounts
         {
             return 363513814 + EqualityComparer<string>.Default.GetHashCode(Name);
         }
-        
+
         public override bool Equals(object obj)
         {
             Specialization other = obj as Specialization;
