@@ -13,7 +13,6 @@ namespace Model.Util
     public class Country : Entity
     {
         public string Name { get; set; }
-        public List<City> Cities { get; set; }
 
         public Country(string name) : base()
         {

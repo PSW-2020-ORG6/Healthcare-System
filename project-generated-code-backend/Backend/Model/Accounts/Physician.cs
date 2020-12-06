@@ -8,7 +8,9 @@ using Model.Util;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Model.Accounts
 {
@@ -16,18 +18,17 @@ namespace Model.Accounts
     {
         public virtual TimeInterval WorkSchedule { get; set; }
         public virtual List<TimeInterval> VacationTime { get; set; }
-        public virtual List<Specialization> Specialization { get; set; }
+        [NotMapped] public virtual List<Specialization> Specialization { get; set; }
+
         public String AllSpecializations
         {
-            get
-            {
-                return Specialization.Aggregate("", (current, s) => current + (s + ", "));
-            }
+            get { return Specialization.Aggregate("", (current, s) => current + (s + ", ")); }
         }
 
         public Physician() : base()
         {
         }
+
         public Physician(string name, string surname, string id)
             : base(name, surname, id)
         {

@@ -21,7 +21,8 @@ namespace Model.Hospital
         public Building Building { get; set; }
         [ForeignKey("Floor")] public string FloorSerialNumber { get; set; }
         public Floor Floor { get; set; }
-        [Key] public string RoomSerialNumber { get; set; }
+        [ForeignKey("Room")] public string RoomSerialNumber { get; set; }
+        public Room Room { get; set; }
 
         public Equipment() : base()
         {

@@ -6,6 +6,7 @@
 using Backend.Model.Util;
 using Newtonsoft.Json;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.Hospital
 {
@@ -13,10 +14,12 @@ namespace Model.Hospital
     {
         public string CopyrightName { get; set; }
         public string GenericName { get; set; }
+        
+        [ForeignKey("MedicineManufacturer")] public string MedicineManufacturerSerialNumber { get; set; }
         public virtual MedicineManufacturer MedicineManufacturer { get; set; }
+        
+        [ForeignKey("MedicineType")] public string MedicineTypeSerialNumber { get; set; }
         public virtual MedicineType MedicineType { get; set; }
-        public string MedicineManufacturerSerialNumber { get; set; }
-        public string MedicineTypeSerialNumber { get; set; }
 
         public Medicine() : base()
         {

@@ -12,6 +12,10 @@ namespace Model.Accounts
     public class Secretary : Account
     {
 
+        public Secretary(): base()
+        {
+        }
+
         public Secretary(string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string password)
             : base(name, surname, id, dateOfBirth, contact, email, address, password)
         {

@@ -6,6 +6,7 @@
 using Backend.Model.Util;
 using Model.Util;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.Accounts
 {
@@ -13,14 +14,16 @@ namespace Model.Accounts
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string FullName => Name + " " + Surname;
         public string Id { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Contact { get; set; }
         public string Email { get; set; }
+        [ForeignKey("Address")] public string AddressSerialNumber { get; set; }
         public virtual Address Address { get; set; }
         public String Password { get; set; }
-        public string AddressSerialNumber { get; set; }
+        
+        // this property does not need to be kept in databse
+        public string FullName => Name + " " + Surname;
 
         public Account(String serialNumber, string name, string surname, string id, DateTime dateOfBirth,
             string contact, string email, Address address, String password) : base(serialNumber)
@@ -34,7 +37,7 @@ namespace Model.Accounts
             Address = address;
             Password = password;
         }
-        
+
         public Account(string name, string surname, string id, DateTime dateOfBirth,
             string contact, string email, Address address, String password) : base()
         {
@@ -71,6 +74,7 @@ namespace Model.Accounts
             Name = name;
             Surname = surname;
         }
+
         public Account(string serialNumber, string name, string surname) : base(serialNumber)
         {
             Name = name;

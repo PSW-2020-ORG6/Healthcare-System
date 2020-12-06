@@ -5,7 +5,10 @@
 
 using Newtonsoft.Json;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using Backend.Model.Util;
+using health_clinic_class_diagram.Backend.Model.Hospital;
+using Model.Accounts;
 
 namespace Model.Hospital
 {
@@ -14,10 +17,14 @@ namespace Model.Hospital
         public string Name { get; set; }
         public string Id { get; set; }
         public string RoomId { get; set; }
-        public string BuildingSerialNumber { get; set; }
-        public string FloorSerialNumber { get; set; }
-        public string RoomSerialNumber { get; set; }
-        public string PatientID { get; set; }
+        [ForeignKey("Building")] public string BuildingSerialNumber { get; set; }
+        public Building Building { get; set; }
+        [ForeignKey("Floor")] public string FloorSerialNumber { get; set; }
+        public Floor Floor { get; set; }
+        [ForeignKey("Room")] public string RoomSerialNumber { get; set; }
+        public Room Room { get; set; }
+        [ForeignKey("Patient")]public string PatientSerialNumber { get; set; }
+        public Patient Patient { get; set; }
 
         public Bed()
         {

@@ -7,6 +7,7 @@ using Backend.Dto;
 using Model.Util;
 using Newtonsoft.Json;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace Model.Accounts
@@ -32,10 +33,19 @@ namespace Model.Accounts
         public string Image { get; set; }
         public bool Guest { get; set; }
         public bool EmailConfirmed { get; set; }
+        [ForeignKey("Physician")] public string PhysicianSerialNumber { get; set; }
+        public Physician ChosenPhysician { get; set; }
 
-        public Patient() : base() { }
-        public Patient(string serialNumber, string name, string surname) : base(serialNumber, name, surname) { }
-        public Patient(string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string parentName, string gender, string password, bool isGuest = false)
+        public Patient() : base()
+        {
+        }
+
+        public Patient(string serialNumber, string name, string surname) : base(serialNumber, name, surname)
+        {
+        }
+
+        public Patient(string name, string surname, string id, DateTime dateOfBirth, string contact, string email,
+            Address address, string parentName, string gender, string password, bool isGuest = false)
             : base(name, surname, id, dateOfBirth, contact, email, address, password)
         {
             ParentName = parentName;
@@ -43,8 +53,11 @@ namespace Model.Accounts
             Guest = isGuest;
             Password = password;
         }
+
         [JsonConstructor]
-        public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string parentName, string gender, string password, bool isGuest = false)
+        public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth,
+            string contact, string email, Address address, string parentName, string gender, string password,
+            bool isGuest = false)
             : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address, password)
         {
             ParentName = parentName;
@@ -52,7 +65,13 @@ namespace Model.Accounts
             Guest = isGuest;
             Password = password;
         }
-        public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email, Address address, string parentName, string placeOfBirth, string municipalityOfBirth, string stateOfBirth, String citizenship, string nationality, string profession, string placeOfResidence, string municipalityOfResidence, string stateOfResidence, string employmentStatus, string maritalStatus, string healthInsuranceNumber, string familyDiseases, string personalDiseases, string gender, string password, string image, bool isGuest = false)
+
+        public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth,
+            string contact, string email, Address address, string parentName, string placeOfBirth,
+            string municipalityOfBirth, string stateOfBirth, String citizenship, string nationality, string profession,
+            string placeOfResidence, string municipalityOfResidence, string stateOfResidence, string employmentStatus,
+            string maritalStatus, string healthInsuranceNumber, string familyDiseases, string personalDiseases,
+            string gender, string password, string image, bool isGuest = false)
             : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address, password)
         {
             ParentName = parentName;
@@ -102,5 +121,4 @@ namespace Model.Accounts
             EmailConfirmed = patientDto.EmailConfirmed;
         }
     }
-
 }

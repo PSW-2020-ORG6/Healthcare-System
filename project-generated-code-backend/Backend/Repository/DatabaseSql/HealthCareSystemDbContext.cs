@@ -1,11 +1,13 @@
 ﻿using health_clinic_class_diagram.Backend.Model.Hospital;
 using health_clinic_class_diagram.Backend.Model.Survey;
+using HealthClinicBackend.Backend.Repository.DatabaseSql.RelationHelpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Model.Accounts;
 using Model.Hospital;
 using Model.MedicalExam;
 using Model.Schedule;
+using Model.Util;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
@@ -14,22 +16,27 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         private const string CONNECTION_STRING =
             "User ID =postgres;Password=super;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
 
-        // public DbSet<Patient> Patients { get; set; }
-        // public DbSet<Specialization> Specializations { get; set; }
-        // public DbSet<Physician> Physicians { get; set; }
-        // public DbSet<Secretary> Secretaries { get; set; }
+        public DbSet<Address> Address { get; set; }
+        public DbSet<City> City { get; set; }
+        public DbSet<Country> Country { get; set; }
 
-        // public DbSet<Equipment> Equipments { get; set; }
-        // public DbSet<Bed> Beds { get; set; }
-        // public DbSet<RoomType> RoomTypes { get; set; }
-        // public DbSet<Room> Rooms { get; set; }
-        // public DbSet<Floor> Floors { get; set; }
-        // public DbSet<Building> Buildings { get; set; }
+        public DbSet<Specialization> Specialization { get; set; }
+        public DbSet<Physician> Physician { get; set; }
+        public DbSet<PhysicianSpecialization> PhysicianSpecialization { get; set; }
+        public DbSet<Patient> Patient { get; set; }
+        public DbSet<Secretary> Secretary { get; set; }
 
-        public DbSet<MedicineManufacturer> MedicineManufacturers { get; set; }
-        public DbSet<MedicineType> MedicineTypes { get; set; }
-        public DbSet<Medicine> Medicines { get; set; }
-        public DbSet<Rejection> Rejections { get; set; }
+        // public DbSet<Equipment> Equipment { get; set; }
+        // public DbSet<Bed> Bed { get; set; }
+        // public DbSet<RoomType> RoomType { get; set; }
+        // public DbSet<Room> Room { get; set; }
+        // public DbSet<Floor> Floor { get; set; }
+        // public DbSet<Building> Building { get; set; }
+
+        public DbSet<MedicineManufacturer> MedicineManufacturer { get; set; }
+        public DbSet<MedicineType> MedicineType { get; set; }
+        public DbSet<Medicine> Medicine { get; set; }
+        public DbSet<Rejection> Rejection { get; set; }
 
         // public DbSet<DiagnosticType> DiagnosticTypes { get; set; }
         // public DbSet<DiagnosticReferral> DiagnosticReferrals { get; set; }
@@ -89,6 +96,21 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             // modelBuilder.Entity<Room>()
             //     .HasOne(r => r.RoomType) // Room has RoomType
             //     .WithMany(); // RoomType can have many Rooms but doesn't reference them
+
+            modelBuilder.Entity<City>().HasOne(c => c.Country).WithMany();
+            modelBuilder.Entity<Address>().HasOne(a => a.City).WithMany();
+
+            modelBuilder.Entity<Physician>().HasOne(p => p.Address).WithMany();
+            modelBuilder.Entity<Patient>().HasOne(p => p.Address).WithMany();
+            modelBuilder.Entity<Secretary>().HasOne(s => s.Address).WithMany();
+
+            modelBuilder.Entity<PhysicianSpecialization>().HasKey("PhysicianSerialNumber", "SpecializationSerialNumber");
+            modelBuilder.Entity<PhysicianSpecialization>()
+                .HasOne(ps => ps.Physician)
+                .WithMany();
+            modelBuilder.Entity<PhysicianSpecialization>()
+                .HasOne(ps => ps.Specialization)
+                .WithMany();
         }
     }
 }
