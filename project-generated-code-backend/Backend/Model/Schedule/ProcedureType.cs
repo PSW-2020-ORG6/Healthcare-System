@@ -15,10 +15,6 @@ namespace Model.Schedule
 {
     public class ProcedureType : Entity
     {
-        // private String name;
-        // private Specialization specialization;
-        // private int estimatedTimeInMinutes;
-        // private List<Equipment> requiredEquipment;
         public virtual Specialization Specialization { get; set; }
         public string Name { get; set; }
         public int EstimatedTimeInMinutes { get; set; }
