@@ -33,8 +33,8 @@ namespace Model.Schedule
             TimeInterval = timeInterval;
             ProcedureType = procedureType;
         }
-        
-        public Appointment(): base()
+
+        public Appointment() : base()
         {
         }
 
@@ -47,6 +47,28 @@ namespace Model.Schedule
             Patient = patient;
             TimeInterval = timeInterval;
             ProcedureType = procedureType;
+        }
+
+        public Appointment(String serialNumber, Room room, Physician physician, Patient patient,
+            TimeInterval timeInterval, bool active, ProcedureType procedureType) : base(serialNumber)
+        {
+            Room = room;
+            Physician = physician;
+            Patient = patient;
+            TimeInterval = timeInterval;
+            ProcedureType = procedureType;
+            Active = active;
+        }
+
+        public Appointment(Room room, Physician physician, Patient patient,
+            TimeInterval timeInterval, bool active, ProcedureType procedureType) : base()
+        {
+            Room = room;
+            Physician = physician;
+            Patient = patient;
+            TimeInterval = timeInterval;
+            ProcedureType = procedureType;
+            Active = active;
         }
 
         public Appointment(AppointmentDTO appointmentDTO) : base()
@@ -74,11 +96,10 @@ namespace Model.Schedule
             return "patient: " + Patient.FullName + "\nphysitian: " + Physician.FullName + "\ntime interval: " +
                    TimeInterval + "\nroom: " + Room + "\nprocedure type: " + ProcedureType;
         }
-        
+
         public int CompareTo(Appointment other)
         {
             return Date.CompareTo(other.Date);
         }
-        
     }
 }
