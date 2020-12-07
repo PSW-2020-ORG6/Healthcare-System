@@ -9,13 +9,14 @@ using Model.Schedule;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace Model.MedicalExam
 {
     public class Report : Entity
     {
-        public virtual List<AdditionalDocument> AdditionalDocument { get; set; }
+        [NotMapped] public virtual List<AdditionalDocument> AdditionalDocument { get; set; }
         public DateTime Date { get; set; }
         public string Findings { get; set; }
         public virtual Patient Patient { get; set; }

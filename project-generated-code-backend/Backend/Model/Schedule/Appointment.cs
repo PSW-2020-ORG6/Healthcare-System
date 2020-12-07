@@ -10,15 +10,20 @@ using Model.Hospital;
 using Model.Util;
 using Newtonsoft.Json;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.Schedule
 {
     public class Appointment : Entity
     {
+        [ForeignKey("Room")] public string RoomSerialNumber { get; set; }
         public Room Room { get; set; }
+        [ForeignKey("Physician")] public string PhysicianSerialNumber { get; set; }
         public Physician Physician { get; set; }
+        [ForeignKey("Patient")] public string PatientSerialNumber { get; set; }
         public Patient Patient { get; set; }
         public TimeInterval TimeInterval { get; set; }
+        [ForeignKey("ProcedureType")] public string ProcedureTypeSerialnumber { get; set; }
         public ProcedureType ProcedureType { get; set; }
         public bool Urgency { get; set; }
         public DateTime Date { get; set; }

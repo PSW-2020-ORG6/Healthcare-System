@@ -6,7 +6,7 @@ using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class PatientDatabaseSql: GenericDatabaseSql<Patient>, IPatientRepository
+    public class PatientDatabaseSql : GenericDatabaseSql<Patient>, IPatientRepository
     {
         public override List<Patient> GetAll()
         {
@@ -21,6 +21,16 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public List<Patient> GetPatientsByPhysitian(Physician physician)
         {
             return GetAll().Where(p => p.ChosenPhysician.Equals(physician)).ToList();
+        }
+
+        public bool IsPatientIdValid(string id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool ConfirmEmailUpdate()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

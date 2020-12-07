@@ -11,7 +11,7 @@ namespace HealthClinic.Backend.Service.HospitalAccountsService
 
         public PhysicianAccountService()
         {
-            IPhysitianRepository = new IPhysitianFileSystem();
+            IPhysitianRepository = new PhysicianFileSystem();
         }
 
         internal List<TimeInterval> GetAllVacations(Physician physicianDto)

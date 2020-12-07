@@ -5,12 +5,18 @@
 
 using Newtonsoft.Json;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.MedicalExam
 {
     public class DiagnosticReferral : AdditionalDocument
     {
+        [ForeignKey("DiagnosticType")] public string DiagnosticTypeSerialNumber { get; set; }
         public DiagnosticType DiagnosticType { get; set; }
+
+        public DiagnosticReferral() : base()
+        {
+        }
 
         public DiagnosticReferral(DateTime date, string notes, DiagnosticType diagnosticType) : base(
             Guid.NewGuid().ToString(), date, notes)

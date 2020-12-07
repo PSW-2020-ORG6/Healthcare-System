@@ -11,6 +11,7 @@ namespace Backend.Repository
     public interface IPatientRepository : IGenericRepository<Patient>
     {
         List<Patient> GetPatientsByPhysitian(Physician physician);
-
+        bool IsPatientIdValid(string id);
+        bool ConfirmEmailUpdate();
     }
 }

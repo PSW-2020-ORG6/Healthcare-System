@@ -6,12 +6,18 @@
 using Model.Accounts;
 using Newtonsoft.Json;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.MedicalExam
 {
     public class FollowUp : AdditionalDocument
     {
+        [ForeignKey("Physician")] public string PhysicianSerialNumber { get; set; }
         public Physician Physician { get; set; }
+
+        public FollowUp() : base()
+        {
+        }
 
         public FollowUp(DateTime date, string notes, Physician physician) : base(date, notes)
         {

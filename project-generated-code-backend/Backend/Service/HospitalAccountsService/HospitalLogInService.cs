@@ -15,7 +15,7 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
         public HospitalLogInService()
         {
             patientRepository = new PatientFileSystem();
-            _iPhysitianRepository = new IPhysitianFileSystem();
+            _iPhysitianRepository = new PhysicianFileSystem();
             secretaryRepository = new SecretaryFileSystem();
         }
 

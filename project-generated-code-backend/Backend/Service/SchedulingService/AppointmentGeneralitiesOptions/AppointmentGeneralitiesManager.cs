@@ -15,7 +15,7 @@ namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 
         public AppointmentGeneralitiesManager()
         {
-            this._iPhysitianRepository = new IPhysitianFileSystem();
+            this._iPhysitianRepository = new PhysicianFileSystem();
             this.roomRepository = new RoomFileSystem();
         }
 

@@ -10,9 +10,9 @@ using System.Collections.Generic;
 
 namespace Backend.Repository
 {
-    public class IPhysitianFileSystem : GenericFileSystem<Physician>, IPhysitianRepository
+    public class PhysicianFileSystem : GenericFileSystem<Physician>, IPhysitianRepository
     {
-        public IPhysitianFileSystem()
+        public PhysicianFileSystem()
         {
             //path = @"./../../../../project-generated-code-backend/data/physitians.txt";
             path = @"./../../data/physitians.txt";
@@ -30,6 +30,11 @@ namespace Backend.Repository
                 }
             }
             return physitians;
+        }
+
+        public List<Physician> GetGeneralPractitioners()
+        {
+            throw new System.NotImplementedException();
         }
 
         public override Physician Instantiate(string objectStringFormat)
