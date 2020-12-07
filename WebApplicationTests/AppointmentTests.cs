@@ -16,8 +16,17 @@ namespace WebApplicationTests
         String patientIdTrue = "5";
         String patientIdFalse = "4ss";
         List<Appointment> appointments = new List<Appointment>();
-        Appointment appointment = new Appointment(new Room("101", 101, new Model.Hospital.RoomType("Examination room 101")), new Physitian("Gojko", "Simic", "600001"), new Model.Accounts.Patient("5", "Jelena", "Tanjic"), new TimeInterval(new DateTime(1975, 11, 11), new DateTime(1975, 11, 11)), new ProcedureType("Operation on patient 0002", 50, new Specialization("Neurosurgeon")), true, new DateTime(1975, 11, 11));
 
+        private Appointment appointment = new Appointment()
+        {
+            Room = new Room("101", 101, new Model.Hospital.RoomType("Examination room 101")),
+            Patient = new Model.Accounts.Patient("5", "Jelena", "Tanjic"),
+            Physician = new Physician("Gojko", "Simic", "600001"),
+            TimeInterval = new TimeInterval(new DateTime(1975, 11, 11), new DateTime(1975, 11, 11)),
+            ProcedureType = new ProcedureType("Operation on patient 0002", 50, new Specialization("Neurosurgeon")),
+            Active = true,
+            Date = new DateTime(1975, 11, 11)
+        };
 
         [Fact]
         public void Find_Appointments_By_PatientId_Success()
@@ -27,7 +36,8 @@ namespace WebApplicationTests
             appointments.Add(appointment);
 
             stubRepository.Setup(m => m.GetAllAppointmentByPatientId(patientIdTrue)).Returns(appointments);
-            WebApplication.Backend.Services.AppointmentsService service = new WebApplication.Backend.Services.AppointmentsService(stubRepository.Object);
+            WebApplication.Backend.Services.AppointmentsService service =
+                new WebApplication.Backend.Services.AppointmentsService(stubRepository.Object);
             appointments = service.GetAllAppointmentsByPatientId(patientIdTrue);
             if (appointments.Count == 0)
             {
@@ -37,6 +47,7 @@ namespace WebApplicationTests
             {
                 result = true;
             }
+
             Assert.True(result);
         }
 
@@ -48,7 +59,8 @@ namespace WebApplicationTests
             bool result;
 
             stubRepository.Setup(m => m.GetAllAppointmentByPatientId(patientIdFalse)).Returns(appointments);
-            WebApplication.Backend.Services.AppointmentsService service = new WebApplication.Backend.Services.AppointmentsService(stubRepository.Object);
+            WebApplication.Backend.Services.AppointmentsService service =
+                new WebApplication.Backend.Services.AppointmentsService(stubRepository.Object);
             appointments = service.GetAllAppointmentsByPatientId(patientIdFalse);
             if (appointments.Count != 0)
             {
@@ -58,6 +70,7 @@ namespace WebApplicationTests
             {
                 result = false;
             }
+
             Assert.False(result);
         }
     }

@@ -65,7 +65,7 @@ namespace WebApplication.Backend.Repositorys
                 //(string)sqlReader[26];
                 entity.Guest = (bool)sqlReader[27];
                 entity.EmailConfirmed = (bool)sqlReader[28];
-                entity.ChosenDoctor = (string)sqlReader[29];
+                // entity.ChosenDoctor = (string)sqlReader[29];
 
                 resultList.Add(entity);
 
