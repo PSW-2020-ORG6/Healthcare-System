@@ -79,4 +79,42 @@ INSERT INTO public."Bed"(
 	"SerialNumber", "Name", "Id", "RoomId", "BuildingSerialNumber", "FloorSerialNumber", "RoomSerialNumber", "PatientSerialNumber", "RoomSerialNumber2")
 	VALUES ('1', 'Bed 1', '10', '1', '1', '1', '1', '1', '1'),
 	('2', 'Bed 2', '10', '11', '1', '1', '1', '1', '3');
+
+INSERT INTO public."ProcedureType"(
+	"SerialNumber", "SpecializationSerialNumber", "Name", "EstimatedTimeInMinutes")
+	VALUES ('1', '1', 'Gallstones removal', '120'),
+	('2', '2', 'Bone fracture repair', '60'),
+	('3', '3', 'Bypass', '120'),
+	('4', '2', 'General practice exam', '30'),
+	('5', '1', 'COVID exam', '30');
+
+INSERT INTO public."Appointment"(
+	"SerialNumber", "RoomSerialNumber", "PhysicianSerialNumber", "PatientSerialNumber", "TimeInterval_Start", "TimeInterval_End", "TimeInterval_Id", "ProcedureTypeSerialnumber", "Urgency", "Date", "Active")
+	VALUES ('1', '1', '1', '1', '12-12-2020 12:00', '12-12-2020 14:00', '1', '1', true, '12-12-2020', 'true'),
+	('2', '3', '2', '2', '12-12-2020 12:00', '12-12-2020 13:00', '2', '1', true, '12-12-2020', 'true'),
+	('3', '4', '2', '3', '12-12-2020 10:30', '12-12-2020 12:30', '3', '1', false, '12-12-2020', 'true'),
+	('4', '2', '3', '2', '12-12-2020 10:00', '12-12-2020 10:30', '4', '1', false, '12-12-2020', 'true'),
+	('5', '1', '1', '1', '12-12-2020 10:00', '12-12-2020 10:30', '5', '1', true, '12-12-2020', 'true');
 	
+INSERT INTO public."Prescription"(
+	"SerialNumber", "Date", "Notes")
+	VALUES ('1', '6-12-2020', 'Prescribed for laryngitis.');
+
+INSERT INTO public."MedicineDosage"(
+	"SerialNumber", "MedicineSerialNumber", "Amount", "Note", "PrescriptionSerialNumber")
+	VALUES ('1', '1', 5, 'Every 12 hours. Before meal.', '1'),
+	('2', '2', 5, 'Every 6 hours. After meal.', '1');
+	
+INSERT INTO public."Question"(
+	"SerialNumber", "QuestionText", "Id")
+	VALUES ('1', 'How satisfied are you with our hospitality?', '1');
+	
+INSERT INTO public."Survey"(
+	"SerialNumber", "Id", "DoctorName", "Question1", "Question2", "Question3", "Question4", "Question5", "Question6", "Question7", "Question8", "Question9", "Question10", "Question11", "Question12", "Question13", "Question14", "Question15", "Question16", "Question17", "Question18", "Question19", "Question20", "Question22", "Question21", "Question23")
+	VALUES ('1', '1', '1', '1', 'Meredith Gray', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+
+INSERT INTO public."Feedback"(
+	"SerialNumber", "PatientId", "Text", "Date", "Approved")
+	VALUES ('1', '2', 'Great staff! Very professional.', '3-3-2020', 'true'),
+	('2', '3', 'Very helpfull and professional', '5-6-2020', 'true'),
+	('3', '1', 'Wonderful doctors!', '3-3-2020', 'false');

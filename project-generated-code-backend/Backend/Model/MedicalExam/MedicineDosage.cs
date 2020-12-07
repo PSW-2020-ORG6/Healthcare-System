@@ -7,11 +7,13 @@ using Backend.Model.Util;
 using Model.Hospital;
 using Newtonsoft.Json;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.MedicalExam
 {
     public class MedicineDosage : Entity
     {
+        [ForeignKey("Medicine")] public string MedicineSerialNumber { get; set; }
         public virtual Medicine Medicine { get; set; }
         public double Amount { get; set; }
         public string Note { get; set; }

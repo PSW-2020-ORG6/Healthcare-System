@@ -16,7 +16,7 @@ namespace Backend.Service.SchedulingService.PriorityStrategies
 
         public List<AppointmentDTO> FindSuggestedAppointments(SuggestedAppointmentDTO suggestedAppointmentDTO)
         {
-            IPhysitianFileSystem pfs = new IPhysitianFileSystem();
+            PhysicianFileSystem pfs = new PhysicianFileSystem();
             List<Physician> physitians = pfs.GetAll();
             List<AppointmentDTO> appointmentDTOs = new List<AppointmentDTO>();
             foreach (Physician physitian in physitians)

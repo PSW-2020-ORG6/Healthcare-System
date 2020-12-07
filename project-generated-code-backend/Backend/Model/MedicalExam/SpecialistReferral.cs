@@ -7,13 +7,20 @@ using Model.Accounts;
 using Model.Schedule;
 using Newtonsoft.Json;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.MedicalExam
 {
     public class SpecialistReferral : AdditionalDocument
     {
+        [ForeignKey("ProcedureType")] public string ProcedureTypeSerialNumber { get; set; }
         public ProcedureType ProcedureType { get; set; }
+        [ForeignKey("Physician")] public string PhysicianSerialNumber { get; set; }
         public Physician Physician { get; set; }
+
+        public SpecialistReferral() : base()
+        {
+        }
 
         public SpecialistReferral(DateTime date, string notes, ProcedureType procedureType, Physician physician) :
             base(date, notes)

@@ -39,5 +39,14 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             return GetAll().Where(p => p.Specialization.Contains(procedureType.Specialization)).ToList();
         }
+
+        public List<Physician> GetGeneralPractitioners()
+        {
+            return GetAll()
+                .Where(p => p.Specialization
+                    .Select(s => s.Name)
+                    .Contains("General Practitioner"))
+                .ToList();
+        }
     }
 }

@@ -21,6 +21,17 @@ namespace Backend.Repository
             throw new NotImplementedException();
         }
 
+        public bool IsPatientIdValid(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public bool ConfirmEmailUpdate()
+        {
+            throw new NotImplementedException();
+        }
+
         public override Patient Instantiate(string objectStringFormat)
         {
             return JsonConvert.DeserializeObject<Patient>(objectStringFormat);
