@@ -13,7 +13,6 @@ namespace Model.Util
 {
     public class City : Entity
     {
-        // public List<Address> Address { get; set; }
         public string Name { get; set; }
         [ForeignKey("Country")] public string CountrySerialNumber { get; set; }
         public Country Country { get; set; }
