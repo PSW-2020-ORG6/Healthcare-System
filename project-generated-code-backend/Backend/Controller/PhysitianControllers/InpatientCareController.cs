@@ -4,11 +4,11 @@
 // Purpose: Definition of Class InpatientCareController
 
 using Backend.Dto;
-using Backend.Service.PatientCareService;
 using Model.Accounts;
 using Model.Hospital;
 using Model.MedicalExam;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Service.PatientCareService;
 
 namespace Backend.Controller.PhysitianControllers
 {
@@ -30,7 +30,7 @@ namespace Backend.Controller.PhysitianControllers
 
         public void DischargeParient(Patient patient)
         {
-            inpatientCareService.DischargeParient(patient);
+            inpatientCareService.DischargePatient(patient);
         }
 
         public BedReservation getActiveInpatientCare(Patient patient)
