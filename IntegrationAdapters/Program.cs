@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IntegrationAdapters.Adapters;
 using IntegrationAdapters.Controllers;
+using IntegrationAdapters.gRPCProtocol;
 using IntegrationAdapters.Models;
 using IntegrationAdapters.Services;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +30,7 @@ namespace IntegrationAdapters
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddHostedService<RabbitMQService>();
+                    services.AddHostedService<ClientScheduleService>();
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
