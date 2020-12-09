@@ -26,7 +26,7 @@ namespace IntegrationAdapters
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<HealthCareSystemDbContext>(options =>
+            services.AddDbContext<IAHealthCareSystemDbContext>(options =>
                    options.UseMySql(ConfigurationExtensions.GetConnectionString(Configuration, "HealthCareSystemDbContextConnectionString")).UseLazyLoadingProxies());
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

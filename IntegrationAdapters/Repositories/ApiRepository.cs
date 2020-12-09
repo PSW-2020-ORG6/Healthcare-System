@@ -9,14 +9,14 @@ namespace IntegrationAdapters.Repositories
 {
     public class ApiRepository : IApiRepository
     {
-        public DbContextOptions<HealthCareSystemDbContext> options = new DbContextOptionsBuilder<HealthCareSystemDbContext>()
+        public DbContextOptions<IAHealthCareSystemDbContext> options = new DbContextOptionsBuilder<IAHealthCareSystemDbContext>()
                 .UseMySql(connectionString: "server=localhost;port=3306;database=newmydb;user=root;password=root")
                 .Options;
-        public readonly HealthCareSystemDbContext dbContext;
+        public readonly IAHealthCareSystemDbContext dbContext;
 
         public ApiRepository()
         {
-            this.dbContext = new HealthCareSystemDbContext(options);
+            this.dbContext = new IAHealthCareSystemDbContext(options);
         }
 
         public bool RegisterHospitalOnPharmacy(Api api)

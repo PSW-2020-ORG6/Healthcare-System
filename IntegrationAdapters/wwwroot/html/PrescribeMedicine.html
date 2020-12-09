@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="../jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="../js/PrescribeMedicine.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/registerHospital.css">
+    <title></title>
+</head>
+<body class="background" style="padding:200px 500px 200px 500px;">
+    <div id="table">
+        <table class="table-borderless">
+            <thead>
+                <tr>
+                    <th class="text-info" colspan="2">
+                        Prescribe Medication
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-info">
+                        <label>Patients name:</label>
+                    </td>
+                    <td>
+                        <input class="textbox" type="text" id="txtPatientName" placeholder="Patient name..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-info">
+                        <label>Patients Surname:</label>
+                    </td>
+                    <td>
+                        <input class="textbox" type="text" id="txtPatientSurname" placeholder="Patient surname..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-info">
+                        <label>Medicine:</label>
+                    </td>
+                    <td>
+                        <input class="textbox" type="text" id="txtMedicine"
+                               placeholder="Medicine..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-top: 25px">
+                        <input id="btnGetMedicineSpecification" type="button" class="btn btn-primary" value="Get medicine specification">
+                    </td>
+                    <td style="padding-top: 25px">
+                        <input id="btnAskPharmaciesForSpecification" type="button" class="btn btn-primary" value="Ask pharmacies for specification" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-info">
+                        <label>Quantity:</label>
+                    </td>
+                    <td>
+                        <input class="textbox" type="text" id="txtQuantity"
+                               placeholder="Quantity..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-info">
+                        <label>Pharmacy name:</label>
+                    </td>
+                    <td>
+                        <input class="textbox" type="text" id="txtPharmacyName"
+                               placeholder="Pharmacy name..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-info">
+                        <label>Note:</label>
+                    </td>
+                    <td>
+                        <input class="textbox" type="text" id="txtNote"
+                               placeholder="Note..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-top: 25px">
+                        <input id="btnCheckWithPharmacy" type="button" class="btn btn-primary" value="Check if pharmacy has medication">
+                    </td>
+                    <td style="padding-top: 25px">
+                        <input id="btnPrescribe" type="button" class="btn btn-primary" value="Prescribe medicine">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
