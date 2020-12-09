@@ -5,11 +5,12 @@
 
 using Backend.Dto;
 
-namespace Backend.Service.SchedulingService.SchedulingStrategies
+namespace HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies
 {
-    public class PhysitianFollowUpSchedulingStrategy : SchedulingStrategy
+    public class PhysicianFollowUpSchedulingStrategy : SchedulingStrategy
     {
         private const int DISALLOW_SCHEDULING_HOURS = 24;
+
         public AppointmentDTO PrepareAppointment(AppointmentDTO appointment)
         {
             appointment.RestrictedHours = DISALLOW_SCHEDULING_HOURS;

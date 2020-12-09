@@ -3,14 +3,14 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class PatientScheduleController
 
-using Backend.Dto;
-using Backend.Service.SchedulingService;
-using Backend.Service.SchedulingService.SchedulingStrategies;
-using Model.Schedule;
 using System;
 using System.Collections.Generic;
+using Backend.Dto;
+using HealthClinicBackend.Backend.Service.SchedulingService;
+using HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies;
+using Model.Schedule;
 
-namespace Backend.Controller.PatientControllers
+namespace HealthClinicBackend.Backend.Controller.PatientControllers
 {
     public class PatientScheduleController
     {
@@ -35,22 +35,22 @@ namespace Backend.Controller.PatientControllers
             return appointmentService.GetAppointmentsByDate(date);
         }
 
-        public void NewAppointment(Backend.Dto.AppointmentDTO appointmentDTO)
+        public void NewAppointment(global::Backend.Dto.AppointmentDTO appointmentDto)
         {
-            appointmentService.NewAppointment(appointmentDTO);
+            appointmentService.NewAppointment(appointmentDto);
         }
 
-        public Backend.Dto.AppointmentDTO GetSuggestedAppointment(String physitiansID, List<DateTime> dates, int prior)
+        public global::Backend.Dto.AppointmentDTO GetSuggestedAppointment(String physitiansId, List<DateTime> dates, int prior)
         {
             throw new NotImplementedException();
         }
-        public List<AppointmentDTO> GetAllAvailableAppointments(AppointmentDTO appointmentDTO)
+
+        public List<AppointmentDTO> GetAllAvailableAppointments(AppointmentDTO appointmentDto)
         {
-            return appointmentSchedulingService.GetAvailableAppointments(appointmentDTO);
+            return appointmentSchedulingService.GetAvailableAppointments(appointmentDto);
         }
 
         public AppointmentService appointmentService;
         public AppointmentSchedulingService appointmentSchedulingService;
-
     }
 }

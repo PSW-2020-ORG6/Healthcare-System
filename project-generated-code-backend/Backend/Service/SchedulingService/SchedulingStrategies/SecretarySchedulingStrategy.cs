@@ -5,7 +5,7 @@
 
 using Backend.Dto;
 
-namespace Backend.Service.SchedulingService.SchedulingStrategies
+namespace HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies
 {
     public class SecretarySchedulingStrategy : SchedulingStrategy
     {

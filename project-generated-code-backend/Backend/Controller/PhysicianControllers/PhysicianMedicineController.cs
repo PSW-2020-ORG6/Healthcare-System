@@ -1,13 +1,13 @@
-﻿using Model.Hospital;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using HealthClinicBackend.Backend.Service.MedicineService;
+using Model.Hospital;
 
-namespace Backend.Controller.PhysitianControllers
+namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {
-    public class PhysitianMedicineController
+    public class PhysicianMedicineController
     {
         private PhysicianMedicineService _physicianMedicineService;
-        public PhysitianMedicineController()
+        public PhysicianMedicineController()
         {
             this._physicianMedicineService = new PhysicianMedicineService();
         }
@@ -16,11 +16,11 @@ namespace Backend.Controller.PhysitianControllers
         {
             return _physicianMedicineService.GetMedicineManufacturers();
         }
-        public List<Medicine> getAllFromWaitingList()
+        public List<Medicine> GetAllFromWaitingList()
         {
             return _physicianMedicineService.GetAllFromWaitingList();
         }
-        public List<Medicine> getAllApproved()
+        public List<Medicine> GetAllApproved()
         {
             return _physicianMedicineService.GetAllApproved();
         }

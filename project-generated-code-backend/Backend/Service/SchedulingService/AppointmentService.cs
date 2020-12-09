@@ -3,42 +3,42 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class AppointmentService
 
-using Backend.Dto;
-using Backend.Repository;
-using Model.Schedule;
 using System;
 using System.Collections.Generic;
+using Backend.Dto;
+using Backend.Repository;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using Model.Schedule;
 
-namespace Backend.Service.SchedulingService
+namespace HealthClinicBackend.Backend.Service.SchedulingService
 {
     public class AppointmentService
     {
-        public IAppointmentRepository appointmentRepository;
+        private readonly IAppointmentRepository _appointmentRepository;
 
         public AppointmentService()
         {
-            appointmentRepository = new AppointmentFileSystem();
+            _appointmentRepository = new AppointmentDatabaseSql();
         }
 
         public void EditAppointment(Appointment appointment)
         {
-            appointmentRepository.Update(appointment);
+            _appointmentRepository.Update(appointment);
         }
 
         public void DeleteAppointment(Appointment appointment)
         {
-            appointmentRepository.Delete(appointment.SerialNumber);
+            _appointmentRepository.Delete(appointment.SerialNumber);
         }
 
         public List<Appointment> GetAppointmentsByDate(DateTime date)
         {
-            return appointmentRepository.GetAppointmentsByDate(date);
+            return _appointmentRepository.GetAppointmentsByDate(date);
         }
 
-        public void NewAppointment(AppointmentDTO appointmentDTO)
+        public void NewAppointment(AppointmentDTO appointmentDto)
         {
-            appointmentRepository.Save(new Appointment(appointmentDTO));
+            _appointmentRepository.Save(new Appointment(appointmentDto));
         }
-
     }
 }

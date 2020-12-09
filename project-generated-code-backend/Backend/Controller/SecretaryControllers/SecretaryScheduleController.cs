@@ -3,53 +3,53 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class SecretaryScheduleController
 
-using Backend.Dto;
-using Backend.Service.SchedulingService;
-using Backend.Service.SchedulingService.SchedulingStrategies;
-using Model.Schedule;
 using System;
 using System.Collections.Generic;
+using Backend.Dto;
+using HealthClinicBackend.Backend.Service.SchedulingService;
+using HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies;
+using Model.Schedule;
 
-namespace Backend.Controller.SecretaryControllers
+namespace HealthClinicBackend.Backend.Controller.SecretaryControllers
 {
     public class SecretaryScheduleController
     {
 
-        public AppointmentService appointmentService;
-        public AppointmentSchedulingService appointmentSchedulingService;
+        private readonly AppointmentService _appointmentService;
+        private readonly AppointmentSchedulingService _appointmentSchedulingService;
 
         public SecretaryScheduleController()
         {
-            appointmentSchedulingService = new AppointmentSchedulingService(new SecretarySchedulingStrategy());
-            appointmentService = new AppointmentService();
+            _appointmentSchedulingService = new AppointmentSchedulingService(new SecretarySchedulingStrategy());
+            _appointmentService = new AppointmentService();
         }
 
         public void EditAppointment(Appointment appointment)
         {
-            appointmentService.EditAppointment(appointment);
+            _appointmentService.EditAppointment(appointment);
         }
 
         public void DeleteAppointment(Appointment appointment)
         {
-            appointmentService.DeleteAppointment(appointment);
+            _appointmentService.DeleteAppointment(appointment);
         }
 
         public List<Appointment> GetAppointmentsByDate(DateTime date)
         {
-            return appointmentService.GetAppointmentsByDate(date);
+            return _appointmentService.GetAppointmentsByDate(date);
         }
 
-        public void NewAppointment(AppointmentDTO appointmentDTO)
+        public void NewAppointment(AppointmentDTO appointmentDto)
         {
-            appointmentService.NewAppointment(appointmentDTO);
+            _appointmentService.NewAppointment(appointmentDto);
         }
 
-        public List<AppointmentDTO> GetAllAvailableAppointments(AppointmentDTO appointmentDTO)
+        public List<AppointmentDTO> GetAllAvailableAppointments(AppointmentDTO appointmentDto)
         {
-            return appointmentSchedulingService.GetAvailableAppointments(appointmentDTO);
+            return _appointmentSchedulingService.GetAvailableAppointments(appointmentDto);
         }
 
-        public AppointmentDTO GetRecommendedAppointment(AppointmentDTO appointmentDTO)
+        public AppointmentDTO GetRecommendedAppointment(AppointmentDTO appointmentDto)
         {
             throw new NotImplementedException();
         }

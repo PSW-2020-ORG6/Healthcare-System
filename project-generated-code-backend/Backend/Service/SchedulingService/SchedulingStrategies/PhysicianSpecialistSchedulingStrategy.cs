@@ -5,9 +5,9 @@
 
 using Backend.Dto;
 
-namespace Backend.Service.SchedulingService.SchedulingStrategies
+namespace HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies
 {
-    public class PhysitianSpecialistSchedulingStrategy : SchedulingStrategy
+    public class PhysicianSpecialistSchedulingStrategy : SchedulingStrategy
     {
         private const int DISALLOW_SCHEDULING_HOURS = 24;
         public AppointmentDTO PrepareAppointment(AppointmentDTO appointment)

@@ -1,8 +1,8 @@
-﻿using Model.Hospital;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using HealthClinicBackend.Backend.Service.MedicineService;
+using Model.Hospital;
 
-namespace Backend.Controller.SuperintendentControllers
+namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 {
     public class SuperintendentMedicineController
     {
@@ -11,17 +11,17 @@ namespace Backend.Controller.SuperintendentControllers
         {
             superintendentMedicineService = new SuperintendentMedicineService();
         }
-        public List<Medicine> getAllApproved()
+        public List<Medicine> GetAllApproved()
         {
             return superintendentMedicineService.GetAllApproved();
         }
 
-        public List<Rejection> getAllRejected()
+        public List<Rejection> GetAllRejected()
         {
             return superintendentMedicineService.GetAllRejected();
         }
 
-        public List<Medicine> getAllWaiting()
+        public List<Medicine> GetAllWaiting()
         {
             return superintendentMedicineService.GetAllWaiting();
         }
@@ -31,14 +31,14 @@ namespace Backend.Controller.SuperintendentControllers
             superintendentMedicineService.DeleteWaitingMedicine(medicine);
         }
 
-        public void NewWaitinMedicine(Medicine medicine)
+        public void NewWaitingMedicine(Medicine medicine)
         {
             superintendentMedicineService.NewWaitingMedicine(medicine);
         }
 
-        public void EditWaitingMedicine(Medicine medicineDTO)
+        public void EditWaitingMedicine(Medicine medicineDto)
         {
-            superintendentMedicineService.EditWaitingMedicine(medicineDTO);
+            superintendentMedicineService.EditWaitingMedicine(medicineDto);
         }
 
         public void DeleteRejection(Rejection rejection)
