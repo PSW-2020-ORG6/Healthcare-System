@@ -21,5 +21,11 @@ namespace Backend.Repository
         List<Appointment> GetAppointmentsByPhysician(Physician physician);
 
         List<Appointment> GetAppointmentsByRoom(Room room);
+        List<Appointment> GetByRoomSerialNumber(string roomSerialNumber);
+        List<Appointment> GetByPhysicianSerialNumber(string physicianSerialNumber);
+        List<Appointment> GetByPatientSerialNumber(string patientSerialNumber);
+        List<Appointment> GetByPatientId(string patientId);
+        List<Appointment> GetByPatientIdActive(string patientId);
+        List<Appointment> GetByPatientIdCanceled(string patientId);
     }
 }

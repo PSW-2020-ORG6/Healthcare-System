@@ -3,15 +3,16 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class AppointmentFileSystem
 
-using Model.Accounts;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using Backend.Repository;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
+using Model.Accounts;
+using Newtonsoft.Json;
 
-namespace Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.FileSystem
 {
     public class AppointmentFileSystem : GenericFileSystem<Appointment>, IAppointmentRepository
     {
@@ -71,6 +72,36 @@ namespace Backend.Repository
                 }
             }
             return appointments;
+        }
+
+        public List<Appointment> GetByRoomSerialNumber(string roomSerialNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Appointment> GetByPhysicianSerialNumber(string physicianSerialNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Appointment> GetByPatientSerialNumber(string patientSerialNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Appointment> GetByPatientId(string patientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Appointment> GetByPatientIdActive(string patientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Appointment> GetByPatientIdCanceled(string patientId)
+        {
+            throw new NotImplementedException();
         }
 
         public override Appointment Instantiate(string objectStringFormat)
