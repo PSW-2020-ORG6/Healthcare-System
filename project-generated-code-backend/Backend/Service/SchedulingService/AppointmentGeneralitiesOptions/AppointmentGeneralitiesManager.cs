@@ -73,7 +73,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
             }
             else
             {
-                physicians = _physicianRepository.GetPhysitiansByProcedureType(_appointmentPreferences.ProcedureType);
+                physicians = _physicianRepository.GetByProcedureType(_appointmentPreferences.ProcedureType);
             }
 
             return physicians;

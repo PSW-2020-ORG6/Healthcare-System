@@ -1,8 +1,10 @@
-﻿using Backend.Repository;
+﻿using System.Collections.Generic;
+using Backend.Repository;
 using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Newtonsoft.Json;
 
-namespace health_clinic_class_diagram.Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.FileSystem
 {
     public class FloorFileSystem : GenericFileSystem<Floor>, IFloorRepository
     {
@@ -16,6 +18,16 @@ namespace health_clinic_class_diagram.Backend.Repository
         public override Floor Instantiate(string objectStringFormat)
         {
             return JsonConvert.DeserializeObject<Floor>(objectStringFormat);
+        }
+
+        public List<Floor> GetByName(string name)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public List<Floor> GetByBuildingSerialNumber(string buildingSerialNumber)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

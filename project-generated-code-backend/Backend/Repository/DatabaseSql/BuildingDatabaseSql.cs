@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using health_clinic_class_diagram.Backend.Repository;
 using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
@@ -13,6 +13,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             return dbContext.Building
                 .Include(b => b.Floors)
                 .ToList();
+        }
+
+        public List<Building> GetByName(string name)
+        {
+            return GetAll().Where(b => b.Name.Equals(name)).ToList();
         }
     }
 }
