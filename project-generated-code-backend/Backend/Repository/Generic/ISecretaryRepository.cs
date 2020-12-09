@@ -4,9 +4,8 @@
 // Purpose: Definition of Interface SecretaryRepository
 
 using HealthClinicBackend.Backend.Model.Accounts;
-using Model.Accounts;
 
-namespace Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.Generic
 {
     public interface ISecretaryRepository : IGenericRepository<Secretary>
     {

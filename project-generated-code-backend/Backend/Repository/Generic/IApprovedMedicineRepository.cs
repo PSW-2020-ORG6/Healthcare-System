@@ -5,7 +5,7 @@
 
 using HealthClinicBackend.Backend.Model.Hospital;
 
-namespace Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.Generic
 {
     public interface IApprovedMedicineRepository : IGenericRepository<Medicine>
     {

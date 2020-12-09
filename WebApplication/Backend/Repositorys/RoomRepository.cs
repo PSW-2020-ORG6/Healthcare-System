@@ -1,96 +1,37 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
     public class RoomRepository : IRoomRepository
     {
-        private MySqlConnection connection;
-        private EquipmentRepository equipmentRepository = new EquipmentRepository();
-        private RoomTypeRepository roomTypeRepository = new RoomTypeRepository();
+        private readonly RoomDatabaseSql _roomRepository;
 
         public RoomRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
-        }
-
-        private List<Room> GetRooms(String query)
-        {
-            connection.Open();
-            MySqlCommand sqlCommand = new MySqlCommand(query, connection);
-            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<Room> resultList = new List<Room>();
-            while (sqlReader.Read())
-            {
-                Room entity = new Room();
-                entity.SerialNumber = (string)sqlReader[0];
-                entity.Name = (string)sqlReader[1];
-                entity.Id = (int)sqlReader[2];
-                entity.FloorSerialNumber = (string)sqlReader[3];
-                entity.BuildingSerialNumber = (string)sqlReader[4];
-                entity.RoomTypeSerialNumber = (string)sqlReader[5];
-                entity.Row = (int)sqlReader[6];
-                entity.Column = (int)sqlReader[7];
-                entity.RowSpan = (int)sqlReader[8];
-                entity.ColumnSpan = (int)sqlReader[9];
-                entity.Style = (string)sqlReader[10];
-                resultList.Add(entity);
-            }
-            connection.Close();
-            return resultList;
+            _roomRepository = new RoomDatabaseSql();
         }
 
         public List<Room> GetAllRooms()
         {
-            try
-            {
-                return GetRooms("Select * from room");
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            return _roomRepository.GetAll();
         }
 
         public List<Room> GetRoomsByName(string name)
         {
-            try
-            {
-                return GetRooms("Select * from room where Name like '%" + name + "%'");
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            return _roomRepository.GetByName(name);
         }
 
         public Room GetRoomBySerialNumber(string serialNumber)
         {
-            try
-            {
-                return GetRooms("Select * from room where SerialNumber='" + serialNumber + "'")[0];
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
+            return _roomRepository.GetById(serialNumber);
         }
 
         public List<Room> GetRoomsByFloorSerialNumber(string floorSerialNumber)
         {
-            try
-            {
-                return GetRooms("Select * from room where FloorSerialNumber='" + floorSerialNumber + "'");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
+            return _roomRepository.GetByFloorSerialNumber(floorSerialNumber);
         }
     }
 }

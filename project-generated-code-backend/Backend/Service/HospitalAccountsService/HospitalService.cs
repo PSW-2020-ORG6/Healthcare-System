@@ -4,12 +4,11 @@
 // Purpose: Definition of Class HospitalService
 
 using System.Collections.Generic;
-using Backend.Repository;
-using HCI_SIMS_PROJEKAT.Backend.Repository;
 using HealthClinicBackend.Backend.Model.MedicalExam;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
 {

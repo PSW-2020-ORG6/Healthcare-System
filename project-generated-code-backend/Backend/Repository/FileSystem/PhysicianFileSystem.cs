@@ -4,8 +4,8 @@
 // Purpose: Definition of Class PhysitianFileSystem
 
 using System.Collections.Generic;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Model.Schedule;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Model.Accounts;
 using Newtonsoft.Json;
 

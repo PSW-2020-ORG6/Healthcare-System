@@ -4,7 +4,6 @@
 // Purpose: Definition of Class EquipmentFileSystem
 
 using System.Collections.Generic;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.Generic;
 using Newtonsoft.Json;

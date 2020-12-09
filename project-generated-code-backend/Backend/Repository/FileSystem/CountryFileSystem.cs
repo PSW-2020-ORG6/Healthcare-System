@@ -1,8 +1,8 @@
-﻿using Backend.Repository;
-using HealthClinicBackend.Backend.Model.Util;
+﻿using HealthClinicBackend.Backend.Model.Util;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Newtonsoft.Json;
 
-namespace HCI_SIMS_PROJEKAT.Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.FileSystem
 {
     class CountryFileSystem : GenericFileSystem<Country>, ICountryRepository
     {
