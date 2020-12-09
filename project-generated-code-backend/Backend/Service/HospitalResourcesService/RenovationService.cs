@@ -6,9 +6,8 @@
 using System;
 using System.Collections.Generic;
 using Backend.Repository;
-using HealthClinic.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
-using Model.Hospital;
 
 namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 {

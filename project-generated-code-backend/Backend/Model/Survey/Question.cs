@@ -1,7 +1,6 @@
-﻿using System;
-using Backend.Model.Util;
+﻿using HealthClinicBackend.Backend.Model.Util;
 
-namespace health_clinic_class_diagram.Backend.Model.Survey
+namespace HealthClinicBackend.Backend.Model.Survey
 {
     public class Question: Entity
     {

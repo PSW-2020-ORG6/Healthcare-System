@@ -3,13 +3,13 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class SpecialistReferral
 
-using Model.Accounts;
-using Model.Schedule;
-using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using HealthClinicBackend.Backend.Model.Schedule;
+using Model.Accounts;
+using Newtonsoft.Json;
 
-namespace Model.MedicalExam
+namespace HealthClinicBackend.Backend.Model.MedicalExam
 {
     public class SpecialistReferral : AdditionalDocument
     {

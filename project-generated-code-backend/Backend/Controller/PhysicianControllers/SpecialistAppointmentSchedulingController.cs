@@ -4,7 +4,7 @@
 // Purpose: Definition of Class SpecialistAppointmentSchedulingController
 
 using System.Collections.Generic;
-using Backend.Dto;
+using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Service.SchedulingService;
 using HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies;
 
@@ -19,7 +19,7 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
             this.appointmentSchedulingService = new AppointmentSchedulingService(new PhysicianSpecialistSchedulingStrategy());
         }
 
-        public List<AppointmentDTO> GetAllAvailableAppointments(AppointmentDTO appointmentDTO)
+        public List<AppointmentDto> GetAllAvailableAppointments(AppointmentDto appointmentDTO)
         {
             return appointmentSchedulingService.GetAvailableAppointments(appointmentDTO);
         }

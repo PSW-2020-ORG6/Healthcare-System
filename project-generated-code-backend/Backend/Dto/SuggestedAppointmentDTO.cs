@@ -1,20 +1,15 @@
-﻿using Model.Accounts;
-using System;
+﻿using System;
+using HealthClinicBackend.Backend.Model.Accounts;
+using Model.Accounts;
 
-namespace Backend.Dto
+namespace HealthClinicBackend.Backend.Dto
 {
-    public class SuggestedAppointmentDTO
+    public abstract class SuggestedAppointmentDto
     {
-        private DateTime dateStart;
-        private DateTime dateEnd;
-        private Physician _physician;
-        private Patient patient;
-        private bool prior;
-
-        public Physician Physician { get => _physician; set => _physician = value; }
-        public Patient Patient { get => patient; set => patient = value; }
-        public DateTime DateStart { get => dateStart; set => dateStart = value; }
-        public DateTime DateEnd { get => dateEnd; set => dateEnd = value; }
-        public bool Prior { get => prior; set => prior = value; }
+        public Physician Physician { get; set; }
+        public Patient Patient { get; set; }
+        public DateTime DateStart { get; set; }
+        public DateTime DateEnd { get; set; }
+        public bool Prior { get; set; }
     }
 }

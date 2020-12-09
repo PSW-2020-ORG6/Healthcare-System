@@ -1,8 +1,7 @@
-﻿using Backend.Model.Util;
-using Model.Hospital;
-using Model.Schedule;
+﻿using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Util;
 
-namespace health_clinic_class_diagram.Backend.Model.Schedule
+namespace HealthClinicBackend.Backend.Model.Schedule
 {
     public class ProcedureTypeEquipmentUsage : Entity
     {

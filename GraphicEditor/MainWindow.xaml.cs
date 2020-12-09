@@ -1,9 +1,9 @@
 ﻿using GraphicEditor.HelpClasses;
-using health_clinic_class_diagram.Backend.Model.Util;
 using System;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using HealthClinicBackend.Backend.Model.Util;
 
 namespace GraphicEditor
 {
@@ -13,7 +13,7 @@ namespace GraphicEditor
     public partial class MainWindow : Window
     {
         private const double SCREEN_FACTOR = 0.93;
-        public static TypeOfUser TypeOfUser = TypeOfUser.NO_USER;
+        public static TypeOfUser TypeOfUser = TypeOfUser.NoUser;
         public static double MainScreenWidth = SystemParameters.PrimaryScreenWidth * SCREEN_FACTOR;
         public static double MainScreenHeight = SystemParameters.PrimaryScreenHeight * SCREEN_FACTOR;
 

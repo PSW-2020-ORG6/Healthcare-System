@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Backend.Repository;
-using health_clinic_class_diagram.Backend.Model.Util;
+using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 
 namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
@@ -26,20 +26,20 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
         /// <returns></returns>
         public TypeOfUser GetUserType(string jmbg, string password)
         {
-            var typeOfUser = TypeOfUser.NO_USER;
+            var typeOfUser = TypeOfUser.NoUser;
             if (CheckIfUserIsPatient(jmbg, password))
             {
-                typeOfUser = TypeOfUser.PATIENT;
+                typeOfUser = TypeOfUser.Patient;
             }
 
             if (CheckIfUserIsPhysician(jmbg, password))
             {
-                typeOfUser = TypeOfUser.PHYSICIAN;
+                typeOfUser = TypeOfUser.Physician;
             }
 
             if (CheckIfUserIsSecretary(jmbg, password))
             {
-                typeOfUser = TypeOfUser.SECRETARY;
+                typeOfUser = TypeOfUser.Secretary;
             }
 
             return typeOfUser;

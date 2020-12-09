@@ -3,14 +3,14 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class Patient
 
-using Backend.Dto;
-using Model.Util;
-using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Util;
+using Model.Accounts;
+using Newtonsoft.Json;
 
-
-namespace Model.Accounts
+namespace HealthClinicBackend.Backend.Model.Accounts
 {
     public class Patient : Account
     {
@@ -95,7 +95,7 @@ namespace Model.Accounts
             Image = image;
         }
 
-        public Patient(PatientDTO patientDto) : base(patientDto.Name, patientDto.Surname, patientDto.Id,
+        public Patient(PatientDto patientDto) : base(patientDto.Name, patientDto.Surname, patientDto.Id,
             patientDto.DateOfBirth, patientDto.Contact, patientDto.Email,
             patientDto.Address, patientDto.Password)
         {

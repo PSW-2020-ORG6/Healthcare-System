@@ -5,10 +5,10 @@
 
 using System;
 using System.Collections.Generic;
-using Backend.Dto;
+using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Service.SchedulingService;
 using HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies;
-using Model.Schedule;
 
 namespace HealthClinicBackend.Backend.Controller.PatientControllers
 {
@@ -35,17 +35,17 @@ namespace HealthClinicBackend.Backend.Controller.PatientControllers
             return appointmentService.GetAppointmentsByDate(date);
         }
 
-        public void NewAppointment(global::Backend.Dto.AppointmentDTO appointmentDto)
+        public void NewAppointment(global::HealthClinicBackend.Backend.Dto.AppointmentDto appointmentDto)
         {
             appointmentService.NewAppointment(appointmentDto);
         }
 
-        public global::Backend.Dto.AppointmentDTO GetSuggestedAppointment(String physitiansId, List<DateTime> dates, int prior)
+        public global::HealthClinicBackend.Backend.Dto.AppointmentDto GetSuggestedAppointment(String physitiansId, List<DateTime> dates, int prior)
         {
             throw new NotImplementedException();
         }
 
-        public List<AppointmentDTO> GetAllAvailableAppointments(AppointmentDTO appointmentDto)
+        public List<AppointmentDto> GetAllAvailableAppointments(AppointmentDto appointmentDto)
         {
             return appointmentSchedulingService.GetAvailableAppointments(appointmentDto);
         }

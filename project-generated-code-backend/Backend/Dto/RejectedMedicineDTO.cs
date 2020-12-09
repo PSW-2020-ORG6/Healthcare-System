@@ -3,16 +3,13 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class RejectedMedicineDTO
 
-using Model.Hospital;
+using HealthClinicBackend.Backend.Model.Hospital;
 
-namespace Backend.Dto
+namespace HealthClinicBackend.Backend.Dto
 {
-    public class RejectedMedicineDTO
+    public class RejectedMedicineDto
     {
-        private string reason;
-        private Medicine medicine;
-
-        public string Reason { get => reason; set => reason = value; }
-        public Medicine Medicine { get => medicine; set => medicine = value; }
+        public string Reason { get; set; }
+        public Medicine Medicine { get; set; }
     }
 }

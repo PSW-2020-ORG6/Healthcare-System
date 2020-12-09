@@ -1,11 +1,12 @@
 ﻿using Model.Accounts;
-using Model.Hospital;
-using Model.Schedule;
-using Model.Util;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Schedule;
+using HealthClinicBackend.Backend.Model.Util;
 using WebApplication.Backend.Repositorys.Interfaces;
 using Xunit;
 
@@ -19,8 +20,8 @@ namespace WebApplicationTests
 
         private Appointment appointment = new Appointment()
         {
-            Room = new Room("101", 101, new Model.Hospital.RoomType("Examination room 101")),
-            Patient = new Model.Accounts.Patient("5", "Jelena", "Tanjic"),
+            Room = new Room("101", 101, new RoomType("Examination room 101")),
+            Patient = new Patient("5", "Jelena", "Tanjic"),
             Physician = new Physician("Gojko", "Simic", "600001"),
             TimeInterval = new TimeInterval(new DateTime(1975, 11, 11), new DateTime(1975, 11, 11)),
             ProcedureType = new ProcedureType("Operation on patient 0002", 50, new Specialization("Neurosurgeon")),

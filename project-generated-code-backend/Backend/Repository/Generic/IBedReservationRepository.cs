@@ -1,5 +1,6 @@
-﻿using Model.Accounts;
-using Model.Hospital;
+﻿using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Hospital;
+using Model.Accounts;
 
 namespace Backend.Repository
 {

@@ -1,5 +1,5 @@
-﻿using Model.Hospital;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Hospital;
 
 namespace WebApplication.Backend.Repositorys.Interfaces
 {

@@ -1,8 +1,8 @@
-﻿using Model.Schedule;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthClinicBackend.Backend.Model.Schedule;
 using WebApplication.Backend.Repositorys;
 using WebApplication.Backend.Repositorys.Interfaces;
 

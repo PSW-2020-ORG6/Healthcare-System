@@ -3,9 +3,9 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Interface GenericRepository
 
-using Backend.Model.Util;
 using System;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Util;
 
 namespace Backend.Repository
 {

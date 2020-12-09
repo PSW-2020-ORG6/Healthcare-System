@@ -1,6 +1,6 @@
 ﻿using GraphicEditor.HelpClasses;
 using GraphicEditor.View.Windows;
-using health_clinic_class_diagram.Backend.Model.Util;
+using HealthClinicBackend.Backend.Model.Util;
 
 namespace GraphicEditor.ViewModel
 {
@@ -15,7 +15,7 @@ namespace GraphicEditor.ViewModel
 
         private void ShowRoom(string roomName)
         {
-            if (MainWindow.TypeOfUser != TypeOfUser.PATIENT)
+            if (MainWindow.TypeOfUser != TypeOfUser.Patient)
             {
                 new RoomInformation(roomName).Show();
             }

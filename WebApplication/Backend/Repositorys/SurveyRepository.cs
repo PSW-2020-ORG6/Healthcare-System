@@ -1,9 +1,10 @@
-﻿using health_clinic_class_diagram.Backend.Model.Survey;
-using Model.Accounts;
-using Model.MedicalExam;
+﻿using Model.Accounts;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.MedicalExam;
+using HealthClinicBackend.Backend.Model.Survey;
 using WebApplication.Backend.Util;
 
 namespace WebApplication.Backend.Repositorys

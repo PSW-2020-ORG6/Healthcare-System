@@ -1,5 +1,5 @@
 ﻿using Backend.Repository;
-using Model.Util;
+using HealthClinicBackend.Backend.Model.Util;
 
 namespace HCI_SIMS_PROJEKAT.Backend.Repository
 {

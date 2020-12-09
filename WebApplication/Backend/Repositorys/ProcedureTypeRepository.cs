@@ -1,9 +1,7 @@
-﻿using health_clinic_class_diagram.Backend.Model.Schedule;
-using Model.Hospital;
-using Model.Schedule;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Schedule;
 using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys

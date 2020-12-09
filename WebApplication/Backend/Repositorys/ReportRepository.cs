@@ -1,9 +1,10 @@
 ﻿using Model.Accounts;
-using Model.MedicalExam;
-using Model.Schedule;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.MedicalExam;
+using HealthClinicBackend.Backend.Model.Schedule;
 
 namespace WebApplication.Backend.Repositorys
 {

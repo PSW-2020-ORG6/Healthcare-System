@@ -5,8 +5,8 @@
 
 using System;
 using System.Collections.Generic;
-using Backend.Dto;
 using Backend.Repository;
+using HealthClinicBackend.Backend.Dto;
 using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.PriorityStrategies
@@ -14,18 +14,18 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.PriorityStrategi
     public class DatePriorityStrategy : PriorityStrategy
     {
 
-        public List<AppointmentDTO> FindSuggestedAppointments(SuggestedAppointmentDTO suggestedAppointmentDTO)
+        public List<AppointmentDto> FindSuggestedAppointments(SuggestedAppointmentDto suggestedAppointmentDTO)
         {
             PhysicianFileSystem pfs = new PhysicianFileSystem();
             List<Physician> physitians = pfs.GetAll();
-            List<AppointmentDTO> appointmentDTOs = new List<AppointmentDTO>();
+            List<AppointmentDto> appointmentDTOs = new List<AppointmentDto>();
             foreach (Physician physitian in physitians)
             {
                 DateTime currentDate = suggestedAppointmentDTO.DateStart;
 
                 while (!currentDate.Equals(suggestedAppointmentDTO.DateEnd))
                 {
-                    AppointmentDTO appointment = new AppointmentDTO();
+                    AppointmentDto appointment = new AppointmentDto();
                     appointment.Date = currentDate;
                     appointment.Physician = physitian;
                     appointment.Patient = suggestedAppointmentDTO.Patient;

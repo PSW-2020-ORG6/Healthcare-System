@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Service.HospitalAccountsService;
 using Model.Accounts;
 

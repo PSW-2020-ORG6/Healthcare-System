@@ -6,7 +6,6 @@ using IntegrationAdapters.Models;
 using IntegrationAdapters.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Model.Util;
 
 namespace IntegrationAdapters.Controllers
 {

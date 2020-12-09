@@ -3,11 +3,11 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class DiagnosticType
 
-using Backend.Model.Util;
-using Newtonsoft.Json;
 using System;
+using HealthClinicBackend.Backend.Model.Util;
+using Newtonsoft.Json;
 
-namespace Model.MedicalExam
+namespace HealthClinicBackend.Backend.Model.MedicalExam
 {
     public class DiagnosticType : Entity
     {

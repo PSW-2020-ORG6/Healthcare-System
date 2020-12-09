@@ -7,6 +7,7 @@ using Model.Accounts;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Accounts;
 
 namespace Backend.Repository
 {

@@ -1,8 +1,8 @@
 ﻿using GraphicEditor.HelpClasses;
 using GraphicEditor.View.Windows;
-using Model.Hospital;
 using System.Collections.Generic;
 using System.Windows;
+using HealthClinicBackend.Backend.Model.Hospital;
 
 namespace GraphicEditor.ViewModel
 {

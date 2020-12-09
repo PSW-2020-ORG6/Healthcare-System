@@ -6,8 +6,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Backend.Dto;
 using Backend.Repository;
+using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using Model.Accounts;
 
@@ -35,7 +36,7 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
             return patients.Where(p => p.Id.Equals(jmbg)).Any(p => p.Guest);
         }
 
-        public void RegisterPatient(PatientDTO patientDto)
+        public void RegisterPatient(PatientDto patientDto)
         {
             if (!IsJmbgValid(patientDto.Id) && IsGuest(patientDto.Id))
             {

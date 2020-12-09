@@ -1,8 +1,8 @@
-﻿using Model.Hospital;
-using Model.MedicalExam;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.MedicalExam;
 
 namespace WebApplication.Backend.Repositorys
 {

@@ -3,20 +3,17 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class BedReservationDTO
 
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Util;
 using Model.Accounts;
-using Model.Hospital;
-using Model.Util;
 
-namespace Backend.Dto
+namespace HealthClinicBackend.Backend.Dto
 {
-    public class BedReservationDTO
+    public abstract class BedReservationDto
     {
-        private Bed bed;
-        private Patient patient;
-        private TimeInterval timeInterval;
-
-        public Bed Bed { get => bed; set => bed = value; }
-        public Patient Patient { get => patient; set => patient = value; }
-        public TimeInterval TimeInterval { get => timeInterval; set => timeInterval = value; }
+        public Bed Bed { get; set; }
+        public Patient Patient { get; set; }
+        public TimeInterval TimeInterval { get; set; }
     }
 }

@@ -1,5 +1,5 @@
-﻿using health_clinic_class_diagram.Backend.Model.Survey;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Survey;
 using WebApplication.Backend.Util;
 
 namespace WebApplication.Backend.Repositorys

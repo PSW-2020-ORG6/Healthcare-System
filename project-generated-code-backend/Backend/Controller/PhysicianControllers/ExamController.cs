@@ -4,10 +4,11 @@
 // Purpose: Definition of Class ExamController
 
 using System;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.MedicalExam;
+using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Service.PatientCareService;
 using Model.Accounts;
-using Model.MedicalExam;
-using Model.Schedule;
 
 namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {

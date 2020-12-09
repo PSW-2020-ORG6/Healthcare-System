@@ -1,5 +1,5 @@
-﻿using health_clinic_class_diagram.Backend.Model.Schedule;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Schedule;
 
 namespace WebApplication.Backend.Repositorys.Interfaces
 {

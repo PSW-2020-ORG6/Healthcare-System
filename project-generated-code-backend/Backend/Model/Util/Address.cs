@@ -3,12 +3,10 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class Address
 
-using Backend.Model.Util;
-using Newtonsoft.Json;
-using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
-namespace Model.Util
+namespace HealthClinicBackend.Backend.Model.Util
 {
     public class Address : Entity
     {

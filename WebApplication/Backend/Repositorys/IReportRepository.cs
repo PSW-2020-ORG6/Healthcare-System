@@ -1,5 +1,5 @@
-﻿using Model.MedicalExam;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.MedicalExam;
 
 namespace WebApplication.Backend.Repositorys
 {

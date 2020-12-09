@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Model.MedicalExam;
+using HealthClinicBackend.Backend.Model.MedicalExam;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql.RelationHelpers
 {

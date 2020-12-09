@@ -3,14 +3,12 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class Equipment
 
-using Backend.Model.Util;
-using Newtonsoft.Json;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using health_clinic_class_diagram.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Util;
+using Newtonsoft.Json;
 
-namespace Model.Hospital
+namespace HealthClinicBackend.Backend.Model.Hospital
 {
     public class Equipment : Entity
     {

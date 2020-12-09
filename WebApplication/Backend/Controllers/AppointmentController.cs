@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Model.Schedule;
 using System;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Schedule;
 using WebApplication.Backend.Services;
 
 namespace WebApplication.Backend.Controllers

@@ -1,7 +1,8 @@
 ﻿using Model.Accounts;
-using Model.Util;
 using Moq;
 using System;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Util;
 using WebApplication.Backend.Controllers;
 using WebApplication.Backend.Repositorys;
 using WebApplication.Backend.Services;

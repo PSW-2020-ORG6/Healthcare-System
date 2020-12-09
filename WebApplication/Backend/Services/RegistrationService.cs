@@ -1,6 +1,7 @@
 ﻿using HealthClinicBackend.Backend.Dto;
 using Model.Accounts;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Accounts;
 using WebApplication.Backend.Repositorys;
 
 namespace WebApplication.Backend.Services
@@ -48,7 +49,7 @@ namespace WebApplication.Backend.Services
             return registrationRepository.ConfirmEmailUpdate(id);
         }
 
-        public List<FamilyDoctorDTO> GetAllPhysicians()
+        public List<FamilyDoctorDto> GetAllPhysicians()
         {
             return registrationRepository.GetAllGeneralPracticePhysicians();
         }

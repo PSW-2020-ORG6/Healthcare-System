@@ -3,11 +3,11 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class GenericFileRepository
 
-using Backend.Model.Util;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using HealthClinicBackend.Backend.Model.Util;
 
 namespace Backend.Repository
 {

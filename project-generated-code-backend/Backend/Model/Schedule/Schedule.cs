@@ -5,7 +5,7 @@
 
 using System.Collections.Generic;
 
-namespace Model.Schedule
+namespace HealthClinicBackend.Backend.Model.Schedule
 {
     public class Schedule
     {

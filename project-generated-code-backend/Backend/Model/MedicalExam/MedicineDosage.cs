@@ -3,13 +3,13 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class MedicineDosage
 
-using Backend.Model.Util;
-using Model.Hospital;
-using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Util;
+using Newtonsoft.Json;
 
-namespace Model.MedicalExam
+namespace HealthClinicBackend.Backend.Model.MedicalExam
 {
     public class MedicineDosage : Entity
     {

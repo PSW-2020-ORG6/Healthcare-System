@@ -3,16 +3,17 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class Report
 
-using Backend.Model.Util;
-using Model.Accounts;
-using Model.Schedule;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Schedule;
+using HealthClinicBackend.Backend.Model.Util;
+using Model.Accounts;
+using Newtonsoft.Json;
 
-namespace Model.MedicalExam
+namespace HealthClinicBackend.Backend.Model.MedicalExam
 {
     public class Report : Entity
     {

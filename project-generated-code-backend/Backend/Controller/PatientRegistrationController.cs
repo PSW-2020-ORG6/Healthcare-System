@@ -3,7 +3,8 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class PatientRegistrationController
 
-using Backend.Dto;
+using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Service.HospitalAccountsService;
 using Model.Accounts;
 
@@ -18,7 +19,7 @@ namespace HealthClinicBackend.Backend.Controller
             _patientRegistrationService = new PatientRegistrationService();
         }
 
-        public void RegisterPatient(PatientDTO patientDto)
+        public void RegisterPatient(PatientDto patientDto)
         {
             _patientRegistrationService.RegisterPatient(patientDto);
         }

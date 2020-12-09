@@ -4,9 +4,10 @@
 // Purpose: Definition of Class InpatientCareFileSystem
 
 using Model.Accounts;
-using Model.MedicalExam;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.MedicalExam;
 
 namespace Backend.Repository
 {

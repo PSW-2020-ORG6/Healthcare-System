@@ -1,5 +1,6 @@
 ﻿using Model.Accounts;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Accounts;
 
 namespace WebApplication.Backend.Repositorys.Interfaces
 {

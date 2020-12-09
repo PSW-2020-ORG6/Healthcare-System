@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthClinicBackend.Backend.Model.Util;
 using IntegrationAdapters.Models;
 using IntegrationAdapters.Services;
 using Microsoft.AspNetCore.Mvc;
-using Model.Util;
 
 namespace IntegrationAdapters.Controllers
 {

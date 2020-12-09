@@ -3,12 +3,12 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class Prescription
 
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
-namespace Model.MedicalExam
+namespace HealthClinicBackend.Backend.Model.MedicalExam
 {
     public class Prescription : AdditionalDocument
     {

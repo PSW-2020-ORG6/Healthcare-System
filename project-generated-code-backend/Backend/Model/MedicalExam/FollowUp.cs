@@ -3,12 +3,12 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class FollowUp
 
-using Model.Accounts;
-using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using Model.Accounts;
+using Newtonsoft.Json;
 
-namespace Model.MedicalExam
+namespace HealthClinicBackend.Backend.Model.MedicalExam
 {
     public class FollowUp : AdditionalDocument
     {

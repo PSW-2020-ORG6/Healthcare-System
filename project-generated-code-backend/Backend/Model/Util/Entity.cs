@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
-namespace Backend.Model.Util
+namespace HealthClinicBackend.Backend.Model.Util
 {
     public abstract class Entity
     {

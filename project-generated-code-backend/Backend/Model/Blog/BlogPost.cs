@@ -3,11 +3,11 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class BlogPost
 
-using Model.Accounts;
 using System;
 using System.Collections.Generic;
+using Model.Accounts;
 
-namespace Model.Blog
+namespace HealthClinicBackend.Backend.Model.Blog
 {
     public class BlogPost
     {

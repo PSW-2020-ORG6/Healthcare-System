@@ -1,7 +1,7 @@
-﻿using health_clinic_class_diagram.Backend.Model.Survey;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Survey;
 using WebApplication.Backend.Services;
 using WebApplication.Backend.Util;
 

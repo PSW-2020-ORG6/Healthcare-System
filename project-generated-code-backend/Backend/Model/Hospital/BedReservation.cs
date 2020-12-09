@@ -3,14 +3,13 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class BedReservation
 
-using Backend.Dto;
-using Backend.Model.Util;
-using Model.Accounts;
-using Model.Util;
-using Newtonsoft.Json;
 using System;
+using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Util;
+using Newtonsoft.Json;
 
-namespace Model.Hospital
+namespace HealthClinicBackend.Backend.Model.Hospital
 {
     public class BedReservation : Entity
     {
@@ -40,7 +39,7 @@ namespace Model.Hospital
             Bed = bed;
         }
 
-        public BedReservation(BedReservationDTO bedReservationDto) : base()
+        public BedReservation(BedReservationDto bedReservationDto) : base()
         {
             TimeInterval = bedReservationDto.TimeInterval;
             Patient = bedReservationDto.Patient;

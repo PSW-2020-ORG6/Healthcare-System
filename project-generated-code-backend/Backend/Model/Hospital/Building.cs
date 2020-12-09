@@ -1,7 +1,7 @@
-﻿using Backend.Model.Util;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Util;
 
-namespace health_clinic_class_diagram.Backend.Model.Hospital
+namespace HealthClinicBackend.Backend.Model.Hospital
 {
     public class Building : Entity
     {

@@ -3,12 +3,12 @@
 // Created: Monday, May 25, 2020 17:06:42
 // Purpose: Definition of Class Rejection
 
-using Backend.Model.Util;
-using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using HealthClinicBackend.Backend.Model.Util;
+using Newtonsoft.Json;
 
-namespace Model.Hospital
+namespace HealthClinicBackend.Backend.Model.Hospital
 {
     public class Rejection : Entity
     {
