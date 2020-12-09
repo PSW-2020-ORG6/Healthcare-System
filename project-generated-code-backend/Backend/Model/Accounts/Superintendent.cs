@@ -3,11 +3,11 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class Superintendent
 
-using Model.Util;
-using Newtonsoft.Json;
 using System;
+using HealthClinicBackend.Backend.Model.Util;
+using Newtonsoft.Json;
 
-namespace Model.Accounts
+namespace HealthClinicBackend.Backend.Model.Accounts
 {
     public class Superintendent : Account
     {

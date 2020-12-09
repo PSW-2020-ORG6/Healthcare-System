@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using HCI_SIMS_PROJEKAT.Backend.Repository;
-using Model.Util;
+using HealthClinicBackend.Backend.Model.Util;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {

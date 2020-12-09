@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using health_clinic_class_diagram.Backend.Model.Hospital;
 
 namespace IntegrationAdapters
 {

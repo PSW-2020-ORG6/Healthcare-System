@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Backend.Repository;
-using HealthClinic.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Schedule;
+using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
-using Model.Hospital;
-using Model.Schedule;
-using Model.Util;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 {

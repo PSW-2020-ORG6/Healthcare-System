@@ -1,10 +1,11 @@
 ﻿using Model.Accounts;
-using Model.Hospital;
-using Model.MedicalExam;
-using Model.Schedule;
 using Moq;
 using System;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.MedicalExam;
+using HealthClinicBackend.Backend.Model.Schedule;
 using WebApplication.Backend.DTO;
 using WebApplication.Backend.Repositorys;
 using WebApplication.Backend.Services;

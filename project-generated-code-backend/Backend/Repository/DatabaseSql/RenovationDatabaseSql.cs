@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Backend.Repository;
-using HealthClinic.Backend.Model.Hospital;
-using Model.Hospital;
+using HealthClinicBackend.Backend.Model.Hospital;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {

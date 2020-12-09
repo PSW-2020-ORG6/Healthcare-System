@@ -3,16 +3,16 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class Appointment
 
-using Backend.Dto;
-using Backend.Model.Util;
-using Model.Accounts;
-using Model.Hospital;
-using Model.Util;
-using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Util;
+using Model.Accounts;
+using Newtonsoft.Json;
 
-namespace Model.Schedule
+namespace HealthClinicBackend.Backend.Model.Schedule
 {
     public class Appointment : Entity
     {
@@ -76,7 +76,7 @@ namespace Model.Schedule
             Active = active;
         }
 
-        public Appointment(AppointmentDTO appointmentDTO) : base()
+        public Appointment(AppointmentDto appointmentDTO) : base()
         {
             Room = appointmentDTO.Room;
             Physician = appointmentDTO.Physician;

@@ -3,11 +3,11 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class TimeInterval
 
-using Newtonsoft.Json;
 using System;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
-namespace Model.Util
+namespace HealthClinicBackend.Backend.Model.Util
 {
     [Owned]
     public class TimeInterval

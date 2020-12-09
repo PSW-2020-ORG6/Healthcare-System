@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using health_clinic_class_diagram.Backend.Model.Hospital;
 using health_clinic_class_diagram.Backend.Repository;
+using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 
 namespace HealthClinicBackend.Backend.Service.HospitalResourcesService

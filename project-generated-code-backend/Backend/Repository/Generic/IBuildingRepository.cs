@@ -1,5 +1,5 @@
 ﻿using Backend.Repository;
-using health_clinic_class_diagram.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Hospital;
 
 namespace health_clinic_class_diagram.Backend.Repository
 {

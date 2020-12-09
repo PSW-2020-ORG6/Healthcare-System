@@ -1,10 +1,11 @@
-﻿using Backend.Model.Util;
-using System;
+﻿using System;
+using HealthClinicBackend.Backend.Model.Util;
 
-namespace health_clinic_class_diagram.Backend.Model.Survey
+namespace HealthClinicBackend.Backend.Model.Survey
 {
     public class Survey : Entity
     {
+        // TODO: refactor: make a list of questions
         public string Id { get; set; }
         public string DoctorName { get; set; }
         public string Question1 { get; set; }

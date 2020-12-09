@@ -1,6 +1,6 @@
-﻿using Model.Hospital;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
+using HealthClinicBackend.Backend.Model.Hospital;
 using WebApplication.Backend.Repositorys;
 
 namespace GraphicEditor.View.Windows

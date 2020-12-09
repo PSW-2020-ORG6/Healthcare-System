@@ -4,14 +4,10 @@ using System.Text;
 
 namespace HealthClinicBackend.Backend.Dto
 {
-    public class FamilyDoctorDTO
+    public class FamilyDoctorDto
     {
-        private string name;
-        private string surname;
-        private string specialization;
-
-        public string Name { get => name; set => name = value; }
-        public string Surname { get => surname; set => surname = value; }
-        public string Specialization { get => specialization; set => specialization = value; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Specialization { get; set; }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Backend.Repository;
+using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Schedule;
 using Microsoft.EntityFrameworkCore;
-using Model.Hospital;
-using Model.Schedule;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {

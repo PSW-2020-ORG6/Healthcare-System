@@ -1,11 +1,11 @@
 ﻿using IntegrationAdapters.Models;
 using IntegrationAdapters.Repositories;
 using IntegrationAdapters.Services;
-using Model.Util;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using HealthClinicBackend.Backend.Model.Util;
 using Xunit;
 
 namespace IntegrationAdaptersTests

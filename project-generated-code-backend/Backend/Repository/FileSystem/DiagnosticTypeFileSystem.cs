@@ -1,4 +1,4 @@
-﻿using Model.MedicalExam;
+﻿using HealthClinicBackend.Backend.Model.MedicalExam;
 using Newtonsoft.Json;
 
 namespace Backend.Repository

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Service.MedicineService;
-using Model.Hospital;
 
 namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 {

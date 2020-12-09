@@ -1,8 +1,8 @@
-﻿using health_clinic_class_diagram.Backend.Dto;
-using Model.Blog;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Blog;
 
 namespace WebApplication.Backend.Repositorys
 {
@@ -101,7 +101,7 @@ namespace WebApplication.Backend.Repositorys
         ///</exception>
         ///<param name="feedback"> Feedback type object
         ///</param>
-        internal void ApproveFeedback(FeedbackDTO feedback)
+        internal void ApproveFeedback(FeedbackDto feedback)
         {
             connection.Open();
             string[] dateString = feedback.Date.ToString().Split(" ");

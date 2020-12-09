@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Backend.Model.Util;
 using Backend.Repository;
+using HealthClinicBackend.Backend.Model.Util;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 

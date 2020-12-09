@@ -3,10 +3,10 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class AdditionalDocument
 
-using Backend.Model.Util;
 using System;
+using HealthClinicBackend.Backend.Model.Util;
 
-namespace Model.MedicalExam
+namespace HealthClinicBackend.Backend.Model.MedicalExam
 {
     public abstract class AdditionalDocument : Entity
     {

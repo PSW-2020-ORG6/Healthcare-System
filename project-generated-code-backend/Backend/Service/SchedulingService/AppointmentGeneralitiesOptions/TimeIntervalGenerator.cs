@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Model.Schedule;
-using Model.Util;
+using HealthClinicBackend.Backend.Model.Schedule;
+using HealthClinicBackend.Backend.Model.Util;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 {

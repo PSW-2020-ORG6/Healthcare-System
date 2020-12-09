@@ -3,7 +3,7 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class FollowUpAppointmentSchedulingController
 
-using Backend.Dto;
+using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Service.SchedulingService;
 using HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies;
 
@@ -19,7 +19,7 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
                 new AppointmentSchedulingService(new PhysicianFollowUpSchedulingStrategy());
         }
 
-        public AppointmentDTO GetRecommendedAppointment(AppointmentDTO appointmentDto)
+        public AppointmentDto GetRecommendedAppointment(AppointmentDto appointmentDto)
         {
             return _appointmentSchedulingService.FindNearestAppointment(appointmentDto);
         }

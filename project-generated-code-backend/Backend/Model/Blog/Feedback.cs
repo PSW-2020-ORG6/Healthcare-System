@@ -3,11 +3,11 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class Comment
 
-using Backend.Model.Util;
-using health_clinic_class_diagram.Backend.Dto;
 using System;
+using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Util;
 
-namespace Model.Blog
+namespace HealthClinicBackend.Backend.Model.Blog
 {
     public class Feedback : Entity
     {
@@ -40,7 +40,7 @@ namespace Model.Blog
             Approved = app;
         }
 
-        public Feedback(FeedbackDTO feedbackDto) : base()
+        public Feedback(FeedbackDto feedbackDto) : base()
         {
             Text = feedbackDto.Text;
             PatientId = feedbackDto.PatientId;

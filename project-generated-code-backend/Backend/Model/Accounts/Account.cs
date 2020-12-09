@@ -3,12 +3,11 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class Account
 
-using Backend.Model.Util;
-using Model.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using HealthClinicBackend.Backend.Model.Util;
 
-namespace Model.Accounts
+namespace HealthClinicBackend.Backend.Model.Accounts
 {
     public abstract class Account : Entity
     {

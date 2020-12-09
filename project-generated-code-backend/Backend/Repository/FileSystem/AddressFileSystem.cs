@@ -1,5 +1,5 @@
 ﻿using Backend.Repository;
-using Model.Util;
+using HealthClinicBackend.Backend.Model.Util;
 using Newtonsoft.Json;
 
 namespace HCI_SIMS_PROJEKAT.Backend.Repository

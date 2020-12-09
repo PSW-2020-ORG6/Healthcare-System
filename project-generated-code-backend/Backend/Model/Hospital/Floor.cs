@@ -1,9 +1,8 @@
-﻿using Backend.Model.Util;
-using Model.Hospital;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using HealthClinicBackend.Backend.Model.Util;
 
-namespace health_clinic_class_diagram.Backend.Model.Hospital
+namespace HealthClinicBackend.Backend.Model.Hospital
 {
     public class Floor : Entity
     {

@@ -1,4 +1,4 @@
-﻿using health_clinic_class_diagram.Backend.Model.Util;
+﻿using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Service.HospitalAccountsService;
 
 namespace HealthClinicBackend.Backend.Controller

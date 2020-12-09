@@ -1,7 +1,7 @@
-﻿using health_clinic_class_diagram.Backend.Dto;
-using Microsoft.AspNetCore.Mvc;
-using Model.Blog;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Blog;
 using WebApplication.Backend.Services;
 
 namespace WebApplication.Backend.Controllers
@@ -38,7 +38,7 @@ namespace WebApplication.Backend.Controllers
         ///information about sucess in string format
         ///</returns>
         [HttpPost("add")]
-        public IActionResult AddNewFeedbacк(FeedbackDTO feedbackDTO)
+        public IActionResult AddNewFeedbacк(FeedbackDto feedbackDTO)
         {
             if (feedbackDTO.IsApprovalValid() && feedbackDTO.IsCorrectText())
             {
@@ -79,7 +79,7 @@ namespace WebApplication.Backend.Controllers
         ///list of not approved feedbacks
         ///</returns>
         [HttpPut("approve")]
-        public IActionResult ApproveFeedback(FeedbackDTO feedbackDTO)
+        public IActionResult ApproveFeedback(FeedbackDto feedbackDTO)
         {
             if (feedbackDTO.IsApprovalValid() && feedbackDTO.IsCorrectText())
             {

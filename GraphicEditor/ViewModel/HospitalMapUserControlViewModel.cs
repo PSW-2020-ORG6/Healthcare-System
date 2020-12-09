@@ -1,11 +1,11 @@
 ﻿using GraphicEditor.HelpClasses;
 using GraphicEditor.View.Windows;
-using health_clinic_class_diagram.Backend.Model.Hospital;
-using health_clinic_class_diagram.Backend.Model.Util;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Util;
 using WebApplication.Backend.Repositorys;
 
 namespace GraphicEditor.ViewModel
@@ -53,7 +53,7 @@ namespace GraphicEditor.ViewModel
 
         private void AddBuilding(object button)
         {
-            if (MainWindow.TypeOfUser == TypeOfUser.SUPERINTENDENT || MainWindow.TypeOfUser == TypeOfUser.NO_USER)
+            if (MainWindow.TypeOfUser == TypeOfUser.Superintendent || MainWindow.TypeOfUser == TypeOfUser.NoUser)
             {
                 Button but = (Button)button;
                 if (but.Content.Equals("Empty field"))

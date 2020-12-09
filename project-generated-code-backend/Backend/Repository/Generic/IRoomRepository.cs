@@ -3,9 +3,9 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Interface RoomRepository
 
-using Model.Hospital;
-using Model.Schedule;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Schedule;
 
 namespace Backend.Repository
 {

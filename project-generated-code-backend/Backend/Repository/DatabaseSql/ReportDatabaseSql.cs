@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Backend.Repository;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.MedicalExam;
 using Microsoft.EntityFrameworkCore;
 using Model.Accounts;
-using Model.MedicalExam;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {

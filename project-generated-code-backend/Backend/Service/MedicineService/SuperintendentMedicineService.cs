@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Backend.Repository;
+using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
-using Model.Hospital;
 
 namespace HealthClinicBackend.Backend.Service.MedicineService
 {

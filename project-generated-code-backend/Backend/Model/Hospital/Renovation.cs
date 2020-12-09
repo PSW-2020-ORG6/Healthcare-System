@@ -1,9 +1,7 @@
-﻿using Backend.Model.Util;
-using Model.Hospital;
-using Model.Util;
-using System;
+﻿using System;
+using HealthClinicBackend.Backend.Model.Util;
 
-namespace HealthClinic.Backend.Model.Hospital
+namespace HealthClinicBackend.Backend.Model.Hospital
 {
     public class Renovation : Entity
     {

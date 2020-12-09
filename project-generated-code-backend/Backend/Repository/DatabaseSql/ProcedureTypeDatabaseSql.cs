@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using HCI_SIMS_PROJEKAT.Backend.Repository;
-using Model.Schedule;
+using HealthClinicBackend.Backend.Model.Schedule;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {

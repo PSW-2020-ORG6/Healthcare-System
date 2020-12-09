@@ -4,8 +4,8 @@
 // Purpose: Definition of Interface PhysitianRepository
 
 using Model.Accounts;
-using Model.Schedule;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Schedule;
 
 namespace Backend.Repository
 {

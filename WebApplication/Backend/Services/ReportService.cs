@@ -1,6 +1,6 @@
-﻿using Model.MedicalExam;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.MedicalExam;
 using WebApplication.Backend.DTO;
 using WebApplication.Backend.Repositorys;
 

@@ -3,15 +3,15 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class ProcedureType
 
-using Backend.Model.Util;
-using Model.Accounts;
-using Model.Hospital;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Util;
+using Newtonsoft.Json;
 
-namespace Model.Schedule
+namespace HealthClinicBackend.Backend.Model.Schedule
 {
     public class ProcedureType : Entity
     {

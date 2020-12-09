@@ -3,17 +3,28 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class AppointmentDTO
 
-using Model.Accounts;
-using Model.Hospital;
-using Model.Schedule;
-using Model.Util;
 using System;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Schedule;
+using HealthClinicBackend.Backend.Model.Util;
+using Model.Accounts;
 
-namespace Backend.Dto
+namespace HealthClinicBackend.Backend.Dto
 {
-    public class AppointmentDTO
+    public class AppointmentDto
     {
-        public bool IsPreferedPhysitianSelected()
+        public ProcedureType ProcedureType { get; set; }
+        public TimeInterval Time { get; set; }
+        public Physician Physician { get; set; }
+        public Patient Patient { get; set; }
+        public Room Room { get; set; }
+        public bool Urgency { get; set; }
+        public bool Active { get; set; }
+        public DateTime Date { get; set; }
+        public int RestrictedHours { get; set; }
+
+        public bool IsPreferedPhysicianSelected()
         {
             return (Physician != null);
         }
@@ -22,36 +33,16 @@ namespace Backend.Dto
         {
             return (Time != null);
         }
+
         public bool IsPreferredDateSelected()
         {
             DateTime defaultDate = DateTime.MinValue;
-            return !date.Equals(defaultDate);
+            return !Date.Equals(defaultDate);
         }
 
         public bool IsPreferedRoomSelected()
         {
             return (Room != null);
         }
-
-        private ProcedureType procedureType;
-        private TimeInterval time;
-        private DateTime date;
-        private Physician _physician;
-        private Patient patient;
-        private Room room;
-        private bool urgency;
-        private bool active;
-
-        private int restrictedHours;
-
-        public ProcedureType ProcedureType { get => procedureType; set => procedureType = value; }
-        public TimeInterval Time { get => time; set => time = value; }
-        public Physician Physician { get => _physician; set => _physician = value; }
-        public Patient Patient { get => patient; set => patient = value; }
-        public Room Room { get => room; set => room = value; }
-        public bool Urgency { get => urgency; set => urgency = value; }
-        public bool Active { get => active; set => active = value; }
-        public DateTime Date { get => date; set => date = value; }
-        public int RestrictedHours { get => restrictedHours; set => restrictedHours = value; }
     }
 }

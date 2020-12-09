@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.MedicalExam;
+using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Service.HospitalAccountsService;
-using Model.MedicalExam;
-using Model.Schedule;
 
 namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {

@@ -1,7 +1,8 @@
 ﻿using Model.Accounts;
-using Model.Hospital;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Hospital;
 
 namespace Backend.Repository
 {

@@ -5,30 +5,30 @@
 
 using System;
 using System.Collections.Generic;
-using Backend.Dto;
+using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Service.SchedulingService;
 using Model.Accounts;
-using Model.Schedule;
 
 namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {
     public class PhysicianScheduleController
     {
         private Physician _loggedPhysician;
-        private PhysicianScheduleService _physicianScheduleService;
+        private readonly PhysicianScheduleService _physicianScheduleService;
 
         public PhysicianScheduleController(Physician loggedPhysician)
         {
             _loggedPhysician = loggedPhysician;
             _physicianScheduleService = new PhysicianScheduleService(loggedPhysician);
         }
-        
+
         public List<Appointment> GetAppointmentsByDate(DateTime date)
         {
             return _physicianScheduleService.GetAppointmentsByDate(date);
         }
-        
-        public void NewAppointment(AppointmentDTO appointment)
+
+        public void NewAppointment(AppointmentDto appointment)
         {
             _physicianScheduleService.NewAppointment(appointment);
         }

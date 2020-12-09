@@ -1,5 +1,5 @@
 ﻿using Backend.Repository;
-using Model.Schedule;
+using HealthClinicBackend.Backend.Model.Schedule;
 
 namespace HCI_SIMS_PROJEKAT.Backend.Repository
 {

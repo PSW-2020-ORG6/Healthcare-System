@@ -1,4 +1,4 @@
-﻿using Model.Schedule;
+﻿using HealthClinicBackend.Backend.Model.Schedule;
 
 namespace WebApplication.Backend.Repositorys.Interfaces
 {

@@ -6,11 +6,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Backend.Dto;
 using Backend.Repository;
+using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using Model.Accounts;
-using Model.Schedule;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService
 {
@@ -25,7 +26,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             _appointmentRepository = new AppointmentDatabaseSql();
         }
 
-        public void NewAppointment(AppointmentDTO appointmentDto)
+        public void NewAppointment(AppointmentDto appointmentDto)
         {
             var appointment = new Appointment(appointmentDto);
             _appointmentRepository.Save(appointment);

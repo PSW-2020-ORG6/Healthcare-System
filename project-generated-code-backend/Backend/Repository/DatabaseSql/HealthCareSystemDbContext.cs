@@ -1,14 +1,14 @@
-﻿using health_clinic_class_diagram.Backend.Model.Hospital;
-using health_clinic_class_diagram.Backend.Model.Survey;
+﻿using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Blog;
+using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.MedicalExam;
+using HealthClinicBackend.Backend.Model.Schedule;
+using HealthClinicBackend.Backend.Model.Survey;
+using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql.RelationHelpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Model.Accounts;
-using Model.Blog;
-using Model.Hospital;
-using Model.MedicalExam;
-using Model.Schedule;
-using Model.Util;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {

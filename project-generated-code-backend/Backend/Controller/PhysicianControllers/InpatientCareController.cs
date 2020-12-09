@@ -4,11 +4,12 @@
 // Purpose: Definition of Class InpatientCareController
 
 using System.Collections.Generic;
-using Backend.Dto;
+using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.MedicalExam;
 using HealthClinicBackend.Backend.Service.PatientCareService;
 using Model.Accounts;
-using Model.Hospital;
-using Model.MedicalExam;
 
 namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {
@@ -23,7 +24,7 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
             this.inpatientCareService = new InpatientCareService(loggedPhysician);
         }
 
-        public void StartInpatientCare(BedReservationDTO bedReservationDTO)
+        public void StartInpatientCare(BedReservationDto bedReservationDTO)
         {
             inpatientCareService.StartInpatientCare(bedReservationDTO);
         }

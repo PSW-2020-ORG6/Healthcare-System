@@ -3,21 +3,17 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class RenovationDTO
 
-using Model.Hospital;
-using Model.Util;
+using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Util;
 
-namespace Backend.Dto
+namespace HealthClinicBackend.Backend.Dto
 {
-    public class RenovationDTO
+    public class RenovationDto
     {
-        private Room room;
-        private TimeInterval timeInterval;
+        public Room Room { get; set; }
+        public TimeInterval TimeInterval { get; set; }
 
-        public Room Room { get => room; set => room = value; }
-        public TimeInterval TimeInterval { get => timeInterval; set => timeInterval = value; }
-
-
-        public RenovationDTO(Room room, TimeInterval timeInterval)
+        public RenovationDto(Room room, TimeInterval timeInterval)
         {
             Room = room;
             TimeInterval = timeInterval;

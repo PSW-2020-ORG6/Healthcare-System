@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Backend.Repository;
+using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.DatabaseSql.RelationHelpers;
 using Microsoft.EntityFrameworkCore;
 using Model.Accounts;
-using Model.Schedule;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {

@@ -3,6 +3,7 @@ using Model.Accounts;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Accounts;
 
 namespace WebApplication.Backend.Repositorys
 {
@@ -117,21 +118,21 @@ namespace WebApplication.Backend.Repositorys
             return true;
         }
 
-        public List<FamilyDoctorDTO> GetAllGeneralPracticePhysicians()
+        public List<FamilyDoctorDto> GetAllGeneralPracticePhysicians()
         {
             return GetPhysitiansWithSpecializations("Select physitian.Name,physitian.Surname, specialization.Name from physitian,specialization where specialization.PhysitianSerialNumber= physitian.SerialNumber and specialization.Name like 'General practitioner'");
         }
 
-        private List<FamilyDoctorDTO> GetPhysitiansWithSpecializations(string sqlDml)
+        private List<FamilyDoctorDto> GetPhysitiansWithSpecializations(string sqlDml)
         {
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<FamilyDoctorDTO> familyDoctors = new List<FamilyDoctorDTO>();
+            List<FamilyDoctorDto> familyDoctors = new List<FamilyDoctorDto>();
             string id = "";
             while (sqlReader.Read())
             {
-                FamilyDoctorDTO entity = new FamilyDoctorDTO();
+                FamilyDoctorDto entity = new FamilyDoctorDto();
                 entity.Name = (string)sqlReader[0];
                 entity.Surname = (string)sqlReader[1];
                 entity.Specialization = (string)sqlReader[2];

@@ -1,8 +1,8 @@
-﻿using Backend.Dto;
-using HealthClinicBackend.Backend.Dto;
+﻿using HealthClinicBackend.Backend.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Model.Accounts;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Accounts;
 using WebApplication.Backend.Services;
 
 namespace WebApplication.Backend.Controllers
@@ -28,7 +28,7 @@ namespace WebApplication.Backend.Controllers
         ///information about sucess in string format
         ///</returns>
         [HttpPost("registerPatient")]
-        public IActionResult RegisterPatient(PatientDTO patientDTO)
+        public IActionResult RegisterPatient(PatientDto patientDTO)
         {
             if (patientDTO.AreRegistrationFieldsValid())
             {
@@ -91,7 +91,7 @@ namespace WebApplication.Backend.Controllers
         }
 
         [HttpGet("allPhysitians")]
-        public List<FamilyDoctorDTO> GetAllFeedbacks()
+        public List<FamilyDoctorDto> GetAllFeedbacks()
         {
             return registrationService.GetAllPhysicians();
         }

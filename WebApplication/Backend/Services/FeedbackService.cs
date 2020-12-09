@@ -1,6 +1,6 @@
-﻿using health_clinic_class_diagram.Backend.Dto;
-using Model.Blog;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Blog;
 using WebApplication.Backend.Repositorys;
 
 namespace WebApplication.Backend.Services
@@ -57,7 +57,7 @@ namespace WebApplication.Backend.Services
         ///</returns>
         ///<param name="feedback"> Feedback type object
         ///</param>>
-        public void ApproveFeedback(FeedbackDTO feedback)
+        public void ApproveFeedback(FeedbackDto feedback)
         {
             feedbackRepository.ApproveFeedback(feedback);
         }

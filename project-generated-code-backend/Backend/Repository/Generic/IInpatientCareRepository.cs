@@ -4,8 +4,9 @@
 // Purpose: Definition of Interface InpatientCareRepository
 
 using Model.Accounts;
-using Model.MedicalExam;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.MedicalExam;
 
 namespace Backend.Repository
 {

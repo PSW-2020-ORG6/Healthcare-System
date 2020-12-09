@@ -1,5 +1,6 @@
-﻿using Model.Accounts;
-using Model.Schedule;
+﻿using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Schedule;
+using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Util
 {

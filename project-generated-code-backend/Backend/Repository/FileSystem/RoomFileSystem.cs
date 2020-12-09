@@ -3,10 +3,10 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class RoomFileSystem
 
-using Model.Hospital;
-using Model.Schedule;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Schedule;
 
 namespace Backend.Repository
 {

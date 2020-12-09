@@ -6,13 +6,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Backend.Dto;
 using Backend.Repository;
+using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.MedicalExam;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions;
 using Model.Accounts;
-using Model.Hospital;
-using Model.MedicalExam;
 
 namespace HealthClinicBackend.Backend.Service.PatientCareService
 {
@@ -43,7 +44,7 @@ namespace HealthClinicBackend.Backend.Service.PatientCareService
             return roomAvailabilityService.GetAvailableBeds(room);
         }
 
-        public void StartInpatientCare(BedReservationDTO bedReservationDto)
+        public void StartInpatientCare(BedReservationDto bedReservationDto)
         {
             _bedReservationRepository.Save(new BedReservation(bedReservationDto));
         }

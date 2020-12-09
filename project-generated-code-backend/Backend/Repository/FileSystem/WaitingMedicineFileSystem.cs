@@ -3,7 +3,7 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class WaitingMedicineFileSystem
 
-using Model.Hospital;
+using HealthClinicBackend.Backend.Model.Hospital;
 using Newtonsoft.Json;
 
 namespace Backend.Repository
