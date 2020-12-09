@@ -17,6 +17,7 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
         {
             //path = @"./../../../../project-generated-code-backend/data/physitians.txt";
             path = @"./../../data/physitians.txt";
+        }
 
         }
 
@@ -40,6 +41,7 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
                     physitians.Add(physitian);
                 }
             }
+
             return physitians;
         }
 

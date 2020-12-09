@@ -35,6 +35,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             return GetAll().Where(m => !m.IsApproved).ToList();
         }
 
+        public List<Medicine> GetByName(string name)
+        {
+            return GetAll().Where(m => m.CopyrightName.Equals(name) || m.CopyrightName.Equals(name)).ToList();
+        }
+
         public override Medicine GetById(string id)
         {
             return DbContext.Medicine.Find(id);

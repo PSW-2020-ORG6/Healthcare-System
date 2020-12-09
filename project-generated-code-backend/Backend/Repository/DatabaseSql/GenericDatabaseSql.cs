@@ -9,6 +9,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
     {
         private const string CONNECTION_STRING =
             "User ID =postgres;Password=super;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
+        // private const string CONNECTION_STRING =
+            // "server=localhost;port=3306;database=newdb;user=root;password=root";
 
         protected readonly HealthCareSystemDbContext DbContext;
 
@@ -16,6 +18,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             var options = new DbContextOptionsBuilder<HealthCareSystemDbContext>()
                 .UseNpgsql(CONNECTION_STRING)
+                // .UseMySql(CONNECTION_STRING)
                 .Options;
             DbContext = new HealthCareSystemDbContext(options);
         }

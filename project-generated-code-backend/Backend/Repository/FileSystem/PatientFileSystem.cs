@@ -23,7 +23,7 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
             throw new NotImplementedException();
         }
 
-        public bool IsPatientIdValid(string id)
+        public Patient GetByJmbg(string jbmg)
         {
             throw new NotImplementedException();
         }
