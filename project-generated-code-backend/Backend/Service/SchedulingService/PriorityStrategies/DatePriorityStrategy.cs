@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Repository.FileSystem;
 using Model.Accounts;

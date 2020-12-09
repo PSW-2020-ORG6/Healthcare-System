@@ -1,83 +1,18 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using HealthClinicBackend.Backend.Model.Hospital;
+using System.Linq;
 using HealthClinicBackend.Backend.Model.MedicalExam;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 
 namespace WebApplication.Backend.Repositorys
 {
     public class PrescriptionRepository : IPrescriptionRepository
     {
-        private MySqlConnection connection;
+        private readonly PrescriptionDatabaseSql _prescriptionRepository;
+
         public PrescriptionRepository()
         {
-            try
-            {
-                connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
-            }
-            catch (Exception e)
-            {
-            }
-        }
-
-        ///Tanja Drcelic RA124/2017 and Marija Vucetic RA157/2017
-        /// <summary>
-        ///Get prescriptions from table
-        ///</summary>
-        ///<param name="sqlDml"> data manipulation language
-        ///</param>
-        ///<returns>
-        ///list of prescriptions
-        ///</returns>
-        private List<Prescription> GetPrescriptions(string sqlDml)
-        {
-            connection.Open();
-            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
-            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<Prescription> prescriptions = new List<Prescription>();
-            while (sqlReader.Read())
-            {
-                Prescription entity = new Prescription();
-                entity.SerialNumber = (string)sqlReader[0];
-                entity.Date = (DateTime)sqlReader[1];
-                entity.Notes = (string)sqlReader[2];
-                prescriptions.Add(entity);
-            }
-            connection.Close();
-            foreach (Prescription prescription in prescriptions)
-            {
-                prescription.MedicineDosage = GetMedicineDosage("Select medicinedosages.SerialNumber,medicinedosages.Note,medicinedosages.Amount,medicines.SerialNumber,medicines.GenericName,medicines.CopyrightName,medicinetypes.SerialNumber,medicinetypes.Type  from medicinedosages,medicines,medicinetypes where medicinedosages.PrescriptionSerialNumber like '" + prescription.SerialNumber + "' and medicinedosages.MedicineSerialNumber like medicines.SerialNumber and medicines.MedicineTypeSerialNumber like medicinetypes.SerialNumber");
-            }
-            return prescriptions;
-        }
-
-        ///Tanja Drcelic RA124/2017
-        /// <summary>
-        ///Get medicine dosages from table
-        ///</summary>
-        ///<param name="sqlDml"> data manipulation language
-        ///</param>
-        ///<returns>
-        ///list of medicine dosages
-        ///</returns>
-        private List<MedicineDosage> GetMedicineDosage(string sqlDml)
-        {
-            connection.Open();
-            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
-            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<MedicineDosage> resultList = new List<MedicineDosage>();
-            while (sqlReader.Read())
-            {
-                MedicineDosage entity = new MedicineDosage();
-                entity.SerialNumber = (string)sqlReader[0];
-                entity.Amount = (double)sqlReader[2];
-                entity.Note = (string)sqlReader[1];
-                entity.Medicine = new Medicine { SerialNumber = (string)sqlReader[3], GenericName = (string)sqlReader[4], CopyrightName = (string)sqlReader[5], MedicineType = new MedicineType { SerialNumber = (string)sqlReader[6], Type = (string)sqlReader[7] } };
-                entity.Medicine.SerialNumber = (string)sqlReader[1];
-                resultList.Add(entity);
-            }
-            connection.Close();
-            return resultList;
+            _prescriptionRepository = new PrescriptionDatabaseSql();
         }
 
         ///Tanja Drcelic RA124/2017
@@ -92,38 +27,50 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///list of prescriptions
         ///</returns>
-        public List<Prescription> GetPrescriptionsByProperty(SearchProperty property, string value, string dateTimes, bool not)
+        public List<Prescription> GetPrescriptionsByProperty(SearchProperty property, string value, string dateTimes,
+            bool not)
         {
-            List<Prescription> prescriptions = GetPrescriptions("Select * from prescription where Date between " + dateTimes);
+            // TODO: parse dates:
+            DateTime start = DateTime.MinValue;
+            DateTime end = DateTime.MaxValue;
+
+            var prescriptions = _prescriptionRepository.GetAll()
+                .Where(p => p.Date <= end)
+                .Where(p => p.Date >= start)
+                .ToList();
+
             if (!not && property.Equals(SearchProperty.All))
                 return GetPrescriptionsByAllProperties(value, prescriptions);
-            else if (not && property.Equals(SearchProperty.All))
+            if (not && property.Equals(SearchProperty.All))
                 return GetPrescriptionsByAllPropertiesNegation(value, prescriptions);
-            else if (!not && property.Equals(SearchProperty.MedicineName))
+            if (!not && property.Equals(SearchProperty.MedicineName))
                 return GetPrescriptionsByMedicineName(value, prescriptions);
-            else if (not && property.Equals(SearchProperty.MedicineName))
+            if (not && property.Equals(SearchProperty.MedicineName))
                 return GetPrescriptionsByMedicineNameNegation(value, prescriptions);
-            else if (!not && property.Equals(SearchProperty.MedicineType))
+            if (!not && property.Equals(SearchProperty.MedicineType))
                 return GetPrescriptionsByMedicineType(value, prescriptions);
-            else
-                return GetPrescriptionsByMedicineTypeNegation(value, prescriptions);
+            return GetPrescriptionsByMedicineTypeNegation(value, prescriptions);
         }
 
-        private List<Prescription> GetPrescriptionsByAllPropertiesNegation(string value, List<Prescription> prescriptions)
+        private List<Prescription> GetPrescriptionsByAllPropertiesNegation(string value,
+            List<Prescription> prescriptions)
         {
             List<Prescription> resultList = new List<Prescription>();
             foreach (Prescription prescription in prescriptions)
             {
                 foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
                 {
-                    if (!medicineDosage.Medicine.GenericName.Contains(value.ToUpper()) && !medicineDosage.Medicine.MedicineType.Type.Contains(value.ToUpper()))
+                    if (!medicineDosage.Medicine.GenericName.Contains(value.ToUpper()) &&
+                        !medicineDosage.Medicine.MedicineType.Type.Contains(value.ToUpper()))
                         resultList.Add(prescription);
                 }
             }
+
             return resultList;
         }
 
-        private List<Prescription> GetPrescriptionsByMedicineNameNegation(string value, List<Prescription> prescriptions)
+        private List<Prescription> GetPrescriptionsByMedicineNameNegation(string value,
+            List<Prescription> prescriptions)
         {
             List<Prescription> resultList = new List<Prescription>();
             foreach (Prescription prescription in prescriptions)
@@ -134,9 +81,12 @@ namespace WebApplication.Backend.Repositorys
                         resultList.Add(prescription);
                 }
             }
+
             return resultList;
         }
-        private List<Prescription> GetPrescriptionsByMedicineTypeNegation(string value, List<Prescription> prescriptions)
+
+        private List<Prescription> GetPrescriptionsByMedicineTypeNegation(string value,
+            List<Prescription> prescriptions)
         {
             List<Prescription> resultList = new List<Prescription>();
             foreach (Prescription prescription in prescriptions)
@@ -147,6 +97,7 @@ namespace WebApplication.Backend.Repositorys
                         resultList.Add(prescription);
                 }
             }
+
             return resultList;
         }
 
@@ -157,10 +108,12 @@ namespace WebApplication.Backend.Repositorys
             {
                 foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
                 {
-                    if (medicineDosage.Medicine.GenericName.ToUpper().Contains(value.ToUpper()) || medicineDosage.Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper()))
+                    if (medicineDosage.Medicine.GenericName.ToUpper().Contains(value.ToUpper()) ||
+                        medicineDosage.Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper()))
                         resultList.Add(prescription);
                 }
             }
+
             return resultList;
         }
 
@@ -175,6 +128,7 @@ namespace WebApplication.Backend.Repositorys
                         resultList.Add(prescription);
                 }
             }
+
             return resultList;
         }
 
@@ -189,6 +143,7 @@ namespace WebApplication.Backend.Repositorys
                         resultList.Add(prescription);
                 }
             }
+
             return resultList;
         }
     }

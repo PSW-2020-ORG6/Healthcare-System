@@ -4,10 +4,10 @@
 // Purpose: Definition of Class SecretaryFileSystem
 
 using HealthClinicBackend.Backend.Model.Accounts;
-using Model.Accounts;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Newtonsoft.Json;
 
-namespace Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.FileSystem
 {
     public class SecretaryFileSystem : GenericFileSystem<Secretary>, ISecretaryRepository
     {

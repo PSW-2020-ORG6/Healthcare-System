@@ -2,58 +2,28 @@
 using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class RoomTypeRepository: IRoomTypeRepository
+    public class RoomTypeRepository : IRoomTypeRepository
     {
-        private MySqlConnection connection;
+        private readonly RoomTypeDatabaseSql _roomTypeRepository;
+
         public RoomTypeRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
-        }
-
-        private List<RoomType> GetRoomTypes(String query)
-        {
-            connection.Open();
-            MySqlCommand sqlCommand = new MySqlCommand(query, connection);
-            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<RoomType> resultList = new List<RoomType>();
-            while (sqlReader.Read())
-            {
-                RoomType entity = new RoomType();
-                entity.SerialNumber = (string)sqlReader[0];
-                entity.Name = (string)sqlReader[1];
-                resultList.Add(entity);
-            }
-            connection.Close();
-            return resultList;
+            _roomTypeRepository = new RoomTypeDatabaseSql();
         }
 
         public List<RoomType> GetAllGetRoomTypes()
         {
-            try
-            {
-                return GetRoomTypes("Select * from roomType");
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            return _roomTypeRepository.GetAll();
         }
 
         public RoomType GetRoomTypeBySerialNumber(string serialNumber)
         {
-            try
-            {
-                return GetRoomTypes("Select * from roomType where SerialNumber='" + serialNumber + "'")[0];
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
+            return _roomTypeRepository.GetById(serialNumber);
         }
     }
 }
