@@ -3,15 +3,13 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class SecretaryHospitalController
 
-using Backend.Service.HospitalAccountsService;
-using Backend.Service.HospitalResourcesService;
-using health_clinic_class_diagram.Backend.Service.HospitalAccountsService;
-using HealthClinic.Backend.Service.HospitalAccountsService;
 using Model.Accounts;
 using Model.Hospital;
 using Model.Schedule;
 using Model.Util;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Service.HospitalAccountsService;
+using HealthClinicBackend.Backend.Service.HospitalResourcesService;
 
 namespace Backend.Controller.SecretaryControllers
 {
@@ -47,7 +45,7 @@ namespace Backend.Controller.SecretaryControllers
 
         public List<Country> GetAllCountries()
         {
-            return hospitalService.getAllCountries();
+            return hospitalService.GetAllCountries();
         }
 
         public List<ProcedureType> GetAllProcedureTypes()

@@ -17,9 +17,8 @@ namespace Backend.Repository
 
         List<Appointment> GetAppointmentsByPatient(Patient patient);
 
-        List<Appointment> GetAppointmentsByPhysitian(Physician physician);
+        List<Appointment> GetAppointmentsByPhysician(Physician physician);
 
         List<Appointment> GetAppointmentsByRoom(Room room);
-
     }
 }

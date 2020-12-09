@@ -3,11 +3,11 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class RoomControler
 
-using Backend.Service.HospitalResourcesService;
 using HealthClinic.Backend.Model.Hospital;
 using Model.Hospital;
 using System;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Service.HospitalResourcesService;
 
 namespace Backend.Controller.SuperintendentControllers
 {

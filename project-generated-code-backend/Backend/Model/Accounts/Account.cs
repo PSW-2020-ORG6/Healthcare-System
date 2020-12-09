@@ -93,12 +93,17 @@ namespace Model.Accounts
         public override bool Equals(object obj)
         {
             Account other = obj as Account;
-            return other != null && this.Id.Equals(other.Id);
+            return other != null && Id.Equals(other.Id);
         }
 
         public override string ToString()
         {
             return FullName;
+        }
+
+        public bool AreCredentialsValid(string id, string password)
+        {
+            return Id.Equals(id) && Password.Equals(password);
         }
     }
 }

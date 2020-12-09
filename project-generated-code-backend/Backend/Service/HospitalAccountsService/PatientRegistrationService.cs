@@ -3,95 +3,66 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class PatientRegistrationService
 
-using Backend.Dto;
-using Backend.Repository;
-using Model.Accounts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Backend.Dto;
+using Backend.Repository;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using Model.Accounts;
 
-namespace Backend.Service.HospitalAccountsService
+namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
 {
     public class PatientRegistrationService
     {
-        public IPatientRepository patientRepository;
+        private readonly IPatientRepository _patientRepository;
 
         public PatientRegistrationService()
         {
-            patientRepository = new PatientFileSystem();
+            _patientRepository = new PatientDatabaseSql();
         }
 
-        private bool IsJMBGValid(String jmbg)
+        
+        private bool IsJmbgValid(string jmbg)
         {
-            List<Patient> patients = patientRepository.GetAll();
-            foreach (Patient p in patients)
-            {
-                if (p.Id == jmbg)
-                {
-                    return false;
-                }
-            }
-            return true;
+            List<Patient> patients = _patientRepository.GetAll();
+            return patients.All(p => p.Id != jmbg);
         }
 
-        public bool IsGuest(String jmbg)
+        private bool IsGuest(string jmbg)
         {
-            List<Patient> patients = patientRepository.GetAll();
-            foreach (Patient p in patients)
-            {
-                if (p.Id.Equals(jmbg))
-                {
-                    if (p.Guest)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            List<Patient> patients = _patientRepository.GetAll();
+            return patients.Where(p => p.Id.Equals(jmbg)).Any(p => p.Guest);
         }
 
-        public void RegisterPatient(PatientDTO patientDTO)
+        public void RegisterPatient(PatientDTO patientDto)
         {
-            if (!IsJMBGValid(patientDTO.Id) && IsGuest(patientDTO.Id))
+            if (!IsJmbgValid(patientDto.Id) && IsGuest(patientDto.Id))
             {
-                Patient p = GetExistingPatient(patientDTO.Id);
+                var p = GetExistingPatient(patientDto.Id);
                 if (p == null)
                 {
                     return;
                 }
-                else
-                {
-                    Patient newPatient = new Patient(patientDTO);
-                    newPatient.SerialNumber = p.SerialNumber;
-                    patientRepository.Update(newPatient);
-                }
+
+                var newPatient = new Patient(patientDto) {SerialNumber = p.SerialNumber};
+                _patientRepository.Update(newPatient);
             }
-            else if (IsJMBGValid(patientDTO.Id))
+            else if (IsJmbgValid(patientDto.Id))
             {
-                patientRepository.Save(new Patient(patientDTO));
-            }
-            else
-            {
-                return;
+                _patientRepository.Save(new Patient(patientDto));
             }
         }
 
-        public Patient GetExistingPatient(String jmbg)
+        private Patient GetExistingPatient(string jmbg)
         {
-            List<Patient> patients = patientRepository.GetAll();
-            foreach (Patient p in patients)
-            {
-                if (p.Id.Equals(jmbg))
-                {
-                    return p;
-                }
-            }
-            return null;
+            List<Patient> patients = _patientRepository.GetAll();
+            return patients.FirstOrDefault(p => p.Id.Equals(jmbg));
         }
 
         public void DeletePatientAccount(Patient patient)
         {
-            patientRepository.Delete(patient.SerialNumber);
+            _patientRepository.Delete(patient.SerialNumber);
         }
-
     }
 }

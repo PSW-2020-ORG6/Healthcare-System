@@ -3,16 +3,24 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class RenovationService
 
-using Backend.Repository;
-using HealthClinic.Backend.Model.Hospital;
-using Model.Hospital;
 using System;
 using System.Collections.Generic;
+using Backend.Repository;
+using HealthClinic.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using Model.Hospital;
 
-namespace Backend.Service.HospitalResourcesService
+namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 {
     public class RenovationService
     {
+        private readonly IRenovationRepository _renovationRepository;
+
+        public RenovationService()
+        {
+            _renovationRepository = new RenovationDatabaseSql();
+        }
+
         public Renovation GetById(String id)
         {
             throw new NotImplementedException();
@@ -20,41 +28,33 @@ namespace Backend.Service.HospitalResourcesService
 
         public List<Renovation> GetAll()
         {
-            return renovationRepository.GetAll();
+            return _renovationRepository.GetAll();
         }
 
         public void EditRenovation(Renovation renovation)
         {
-            renovationRepository.Update(renovation);
+            _renovationRepository.Update(renovation);
         }
 
         public void DeleteRenovation(Renovation renovation)
         {
-            renovationRepository.Delete(renovation.SerialNumber);
+            _renovationRepository.Delete(renovation.SerialNumber);
         }
 
         public void NewRenovation(Renovation renovation)
         {
-            renovationRepository.Save(renovation);
-        }
-
-        public IRenovationRepository renovationRepository;
-
-        public RenovationService()
-        {
-            renovationRepository = new RenovationFileSystem();
+            _renovationRepository.Save(renovation);
         }
 
         public void DeleteRenovationsWithRoom(Room room)
         {
-            foreach (Renovation r in renovationRepository.GetAll())
+            foreach (Renovation r in _renovationRepository.GetAll())
             {
                 if (r.Room.SerialNumber.Equals(room.SerialNumber))
                 {
-                    renovationRepository.Delete(r.SerialNumber);
+                    _renovationRepository.Delete(r.SerialNumber);
                 }
             }
-
         }
     }
 }

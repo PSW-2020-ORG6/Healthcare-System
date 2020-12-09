@@ -1,17 +1,18 @@
-﻿using health_clinic_class_diagram.Backend.Model.Hospital;
-using health_clinic_class_diagram.Backend.Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using health_clinic_class_diagram.Backend.Model.Hospital;
+using health_clinic_class_diagram.Backend.Repository;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 
-namespace health_clinic_class_diagram.Backend.Service.HospitalResourcesService
+namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 {
     public class BuildingService
     {
-        public IBuildingRepository buildingRepository;
+        private readonly IBuildingRepository _buildingRepository;
 
         public BuildingService()
         {
-            buildingRepository = new BuildingFileSystem();
+            _buildingRepository = new BuildingDatabaseSql();
         }
 
         public Building GetById()
@@ -21,7 +22,7 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalResourcesService
 
         public List<Building> GetAll()
         {
-            return buildingRepository.GetAll();
+            return _buildingRepository.GetAll();
         }
 
         public void EditBuilding(Building building)
@@ -31,7 +32,7 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalResourcesService
 
         public void NewBuilding(Building building)
         {
-            buildingRepository.Save(building);
+            _buildingRepository.Save(building);
         }
 
         public void DeleteBuilding(Building building)

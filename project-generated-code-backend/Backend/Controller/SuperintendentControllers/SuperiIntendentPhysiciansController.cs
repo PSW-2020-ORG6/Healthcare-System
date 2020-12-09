@@ -1,7 +1,7 @@
-﻿using HealthClinic.Backend.Service.HospitalAccountsService;
-using Model.Accounts;
+﻿using Model.Accounts;
 using Model.Util;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Service.HospitalAccountsService;
 
 namespace HealthClinic.Backend.Controller.SuperintendentControllers
 {
@@ -50,7 +50,7 @@ namespace HealthClinic.Backend.Controller.SuperintendentControllers
 
         public bool jmbgExists(string jmbg)
         {
-            return physiciansService.jmbgExists(jmbg);
+            return physiciansService.JmbgExists(jmbg);
         }
     }
 }

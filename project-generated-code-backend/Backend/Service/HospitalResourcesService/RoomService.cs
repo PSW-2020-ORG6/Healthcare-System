@@ -3,18 +3,27 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class RoomService
 
-using Backend.Repository;
-using HCI_SIMS_PROJEKAT.Backend.Repository;
-using HealthClinic.Backend.Model.Hospital;
-using Model.Hospital;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Backend.Repository;
+using HCI_SIMS_PROJEKAT.Backend.Repository;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using Model.Hospital;
 
-namespace Backend.Service.HospitalResourcesService
+namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 {
     public class RoomService
     {
+        private readonly IRoomRepository _roomRepository;
+        private readonly IRoomTypeRepository _roomTypeRepository;
+
+        public RoomService()
+        {
+            _roomTypeRepository = new RoomTypeDatabaseSql();
+            _roomRepository = new RoomDatabaseSql();
+        }
+
         public Room GetById(String id)
         {
             throw new NotImplementedException();
@@ -22,28 +31,28 @@ namespace Backend.Service.HospitalResourcesService
 
         public List<Room> GetAll()
         {
-            return roomRepository.GetAll();
+            return _roomRepository.GetAll();
         }
 
         public void EditRoom(Room room)
         {
-            roomRepository.Update(room);
+            _roomRepository.Update(room);
         }
 
         public void NewRoom(Room room)
         {
-            roomRepository.Save(room);
+            _roomRepository.Save(room);
         }
 
         public void DeleteRoom(Room room)
         {
-            roomRepository.Delete(room.SerialNumber);
+            _roomRepository.Delete(room.SerialNumber);
         }
 
         public void AddEquipment(Equipment equipment, Room room)
         {
             room.AddEquipment(equipment);
-            roomRepository.Update(room);
+            _roomRepository.Update(room);
         }
 
         public void RemoveEquipmentById(String id, Room room)
@@ -56,30 +65,30 @@ namespace Backend.Service.HospitalResourcesService
                 }
             }
 
-            roomRepository.Update(room);
+            _roomRepository.Update(room);
         }
 
         public List<RoomType> GetAllRoomTypes()
         {
-            return roomTypeRepository.GetAll();
+            return _roomTypeRepository.GetAll();
         }
 
         public List<RoomType> GetAutoAllRoomTypes()
         {
             List<RoomType> types = new List<RoomType>();
-            types.AddRange(roomTypeRepository.GetAll());
+            types.AddRange(_roomTypeRepository.GetAll());
             return types;
         }
 
         public void AddRoomType(RoomType roomType)
         {
-            roomTypeRepository.Save(roomType);
+            _roomTypeRepository.Save(roomType);
         }
 
         public bool RoomNumberExists(int RoomNumber)
         {
             bool exists = false;
-            foreach (Room r in roomRepository.GetAll())
+            foreach (Room r in _roomRepository.GetAll())
             {
                 if (r.Id == RoomNumber)
                 {
@@ -92,18 +101,7 @@ namespace Backend.Service.HospitalResourcesService
 
         public List<Equipment> GetAllEquipment(Room room)
         {
-            return roomRepository.GetById(room.SerialNumber).Equipment;
-        }
-
-
-        private Backend.Repository.IRoomRepository roomRepository;
-        private IRoomTypeRepository roomTypeRepository;
-
-
-        public RoomService()
-        {
-            roomTypeRepository = new RoomTypeFileSystem();
-            roomRepository = new RoomFileSystem();
+            return _roomRepository.GetById(room.SerialNumber).Equipment;
         }
     }
 }

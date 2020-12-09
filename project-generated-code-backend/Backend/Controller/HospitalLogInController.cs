@@ -1,5 +1,5 @@
 ﻿using health_clinic_class_diagram.Backend.Model.Util;
-using health_clinic_class_diagram.Backend.Service.HospitalAccountsService;
+using HealthClinicBackend.Backend.Service.HospitalAccountsService;
 
 namespace health_clinic_class_diagram.Backend.Controller
 {
