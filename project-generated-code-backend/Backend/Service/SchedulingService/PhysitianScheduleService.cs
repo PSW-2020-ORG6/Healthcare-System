@@ -31,7 +31,7 @@ namespace Backend.Service.SchedulingService
         public List<Appointment> GetAppointmentsByDate(DateTime date)
         {
             List<Appointment> appointments = new List<Appointment>();
-            foreach (Appointment appointment in appointmentRepository.GetAppointmentsByPhysitian(_loggedPhysician))
+            foreach (Appointment appointment in appointmentRepository.GetAppointmentsByPhysician(_loggedPhysician))
             {
                 if (date.Equals(appointment.Date))
                 {
@@ -42,7 +42,7 @@ namespace Backend.Service.SchedulingService
         }
         public Appointment GetTodaysAppointmentForPatient(Patient patient)
         {
-            List<Appointment> appointments = appointmentRepository.GetAppointmentsByPhysitian(_loggedPhysician);
+            List<Appointment> appointments = appointmentRepository.GetAppointmentsByPhysician(_loggedPhysician);
             foreach (Appointment appointment in appointments)
             {
                 if (appointment.Date.Equals(DateTime.Today) && appointment.Patient.Equals(patient))

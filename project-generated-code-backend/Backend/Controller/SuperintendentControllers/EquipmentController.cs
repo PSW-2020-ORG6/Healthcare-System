@@ -3,10 +3,10 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class EquipmentControler
 
-using Backend.Service.HospitalResourcesService;
 using Model.Hospital;
 using System;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Service.HospitalResourcesService;
 
 namespace Backend.Controller.SuperintendentControllers
 {

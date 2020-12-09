@@ -1,30 +1,30 @@
-﻿using Backend.Repository;
+﻿using System.Collections.Generic;
+using Backend.Repository;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using Model.Accounts;
 using Model.Schedule;
-using System.Collections.Generic;
 
-namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
+namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
 {
     public class PatientAccountsService
     {
-        private IPatientRepository patientRepository;
-        private IAppointmentRepository appointmentRepository;
-        private IReportRepository reportRepository;
+        private readonly IPatientRepository _patientRepository;
+        private readonly IAppointmentRepository _appointmentRepository;
 
         public PatientAccountsService()
         {
-            this.patientRepository = new PatientFileSystem();
-            this.appointmentRepository = new AppointmentFileSystem();
-            this.reportRepository = new ReportFileSystem();
+            _patientRepository = new PatientDatabaseSql();
+            // TODO: 
+            _appointmentRepository = new AppointmentFileSystem();
         }
 
         public List<Patient> getAllPatients()
         {
-            return patientRepository.GetAll();
+            return _patientRepository.GetAll();
         }
         public List<Patient> getPatientsForPhysitian(Physician physician)
         {
-            List<Patient> allPatients = patientRepository.GetAll();
+            List<Patient> allPatients = _patientRepository.GetAll();
             List<Patient> patients = new List<Patient>();
             foreach (Patient patient in allPatients)
             {
@@ -38,7 +38,7 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
 
         private bool IsPatientScheduledForPhysitian(Patient patient, Physician physician)
         {
-            List<Appointment> patientAppointments = appointmentRepository.GetAppointmentsByPatient(patient);
+            List<Appointment> patientAppointments = _appointmentRepository.GetAppointmentsByPatient(patient);
             foreach (Appointment appointment in patientAppointments)
             {
                 if (appointment.Physician.Equals(physician))

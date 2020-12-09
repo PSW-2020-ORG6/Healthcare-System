@@ -4,7 +4,7 @@
 // Purpose: Definition of Class PatientRegistrationController
 
 using Backend.Dto;
-using Backend.Service.HospitalAccountsService;
+using HealthClinicBackend.Backend.Service.HospitalAccountsService;
 using Model.Accounts;
 
 namespace Backend.Controller

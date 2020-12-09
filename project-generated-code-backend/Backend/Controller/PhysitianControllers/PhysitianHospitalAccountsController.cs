@@ -3,14 +3,13 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class PhysitianHospitalController
 
-using Backend.Service.HospitalAccountsService;
 using Backend.Service.PatientCareService;
 using Backend.Service.SchedulingService;
-using health_clinic_class_diagram.Backend.Service.HospitalAccountsService;
 using Model.Accounts;
 using Model.MedicalExam;
 using Model.Schedule;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Service.HospitalAccountsService;
 
 namespace Backend.Controller.PhysitianControllers
 {

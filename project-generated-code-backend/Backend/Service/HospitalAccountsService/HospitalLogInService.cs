@@ -1,61 +1,21 @@
-﻿using Backend.Repository;
+﻿using System.Linq;
+using Backend.Repository;
 using health_clinic_class_diagram.Backend.Model.Util;
-using Model.Accounts;
-using System.Collections.Generic;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 
-namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
+namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
 {
     public class HospitalLogInService
     {
-        private IPatientRepository patientRepository;
+        private readonly IPatientRepository _patientRepository;
+        private readonly IPhysitianRepository _physicianRepository;
+        private readonly ISecretaryRepository _secretaryRepository;
 
-        private IPhysitianRepository _iPhysitianRepository;
-
-        private ISecretaryRepository secretaryRepository;
         public HospitalLogInService()
         {
-            patientRepository = new PatientFileSystem();
-            _iPhysitianRepository = new PhysicianFileSystem();
-            secretaryRepository = new SecretaryFileSystem();
-        }
-
-        public TypeOfUser CheckIfUserIsPatient(string jmbg, string password)
-        {
-            List<Patient> patients = patientRepository.GetAll();
-            foreach (Patient patient in patients)
-            {
-                if (CheckJmbg(jmbg, patient) && IsValidPassword(password, patient))
-                {
-                    return TypeOfUser.PATIENT;
-                }
-            }
-            return TypeOfUser.NO_USER;
-        }
-
-        public TypeOfUser CheckIfUserIsPhysitians(string jmbg, string password)
-        {
-            List<Physician> physitians = _iPhysitianRepository.GetAll();
-            foreach (Physician physitian in physitians)
-            {
-                if (CheckJmbg(jmbg, physitian) && IsValidPassword(password, physitian))
-                {
-                    return TypeOfUser.PHYSICIAN;
-                }
-            }
-            return TypeOfUser.NO_USER;
-        }
-
-        public TypeOfUser CheckIfUserIsSecretaries(string jmbg, string password)
-        {
-            List<Secretary> secretaries = secretaryRepository.GetAll();
-            foreach (Secretary secretary in secretaries)
-            {
-                if (CheckJmbg(jmbg, secretary) && IsValidPassword(password, secretary))
-                {
-                    return TypeOfUser.PHYSICIAN;
-                }
-            }
-            return TypeOfUser.NO_USER;
+            _patientRepository = new PatientDatabaseSql();
+            _physicianRepository = new PhysicianDatabaseSql();
+            _secretaryRepository = new SecretaryDatabaseSql();
         }
 
         /// <summary>
@@ -66,35 +26,41 @@ namespace health_clinic_class_diagram.Backend.Service.HospitalAccountsService
         /// <returns></returns>
         public TypeOfUser GetUserType(string jmbg, string password)
         {
-            TypeOfUser typeOfUser = CheckIfUserIsPatient(jmbg, password);
-            if (typeOfUser != TypeOfUser.NO_USER)
+            var typeOfUser = TypeOfUser.NO_USER;
+            if (CheckIfUserIsPatient(jmbg, password))
             {
-                return typeOfUser;
+                typeOfUser = TypeOfUser.PATIENT;
             }
 
-            typeOfUser = CheckIfUserIsPhysitians(jmbg, password);
-            if (typeOfUser != TypeOfUser.NO_USER)
+            if (CheckIfUserIsPhysician(jmbg, password))
             {
-                return typeOfUser;
+                typeOfUser = TypeOfUser.PHYSICIAN;
             }
 
-            typeOfUser = CheckIfUserIsSecretaries(jmbg, password);
-            if (typeOfUser != TypeOfUser.NO_USER)
+            if (CheckIfUserIsSecretary(jmbg, password))
             {
-                return typeOfUser;
+                typeOfUser = TypeOfUser.SECRETARY;
             }
 
-            return TypeOfUser.NO_USER;
+            return typeOfUser;
         }
 
-        private static bool CheckJmbg(string jmbg, Account account)
+        private bool CheckIfUserIsPatient(string jmbg, string password)
         {
-            return account.Id.Equals(jmbg);
+            var patients = _patientRepository.GetAll();
+            return patients.Any(patient => patient.AreCredentialsValid(jmbg, password));
         }
 
-        private static bool IsValidPassword(string password, Account account)
+        private bool CheckIfUserIsPhysician(string jmbg, string password)
         {
-            return account.Password.Equals(password);
+            var physicians = _physicianRepository.GetAll();
+            return physicians.Any(physician => physician.AreCredentialsValid(jmbg, password));
+        }
+
+        private bool CheckIfUserIsSecretary(string jmbg, string password)
+        {
+            var secretaries = _secretaryRepository.GetAll();
+            return secretaries.Any(secretary => secretary.AreCredentialsValid(jmbg, password));
         }
     }
 }

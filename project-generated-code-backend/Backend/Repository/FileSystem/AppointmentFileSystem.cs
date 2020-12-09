@@ -46,7 +46,7 @@ namespace Backend.Repository
             return appointments;
         }
 
-        public List<Appointment> GetAppointmentsByPhysitian(Physician physician)
+        public List<Appointment> GetAppointmentsByPhysician(Physician physician)
         {
             List<Appointment> appointments = new List<Appointment>();
             foreach (Appointment appointment in GetAll())

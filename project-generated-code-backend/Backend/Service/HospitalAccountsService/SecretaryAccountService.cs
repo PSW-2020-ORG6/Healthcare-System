@@ -1,53 +1,48 @@
-﻿using Backend.Repository;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Backend.Repository;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using Model.Accounts;
-using System.Collections.Generic;
 
-namespace HealthClinic.Backend.Service.HospitalAccountsService
+namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
 {
     public class SecretaryAccountService
     {
-        public ISecretaryRepository secretaryRepository;
+        private readonly ISecretaryRepository _secretaryRepository;
 
         public SecretaryAccountService()
         {
-            secretaryRepository = new SecretaryFileSystem();
+            _secretaryRepository = new SecretaryDatabaseSql();
         }
 
         public List<Secretary> GetAllSecretaries()
         {
-            return secretaryRepository.GetAll();
+            return _secretaryRepository.GetAll();
         }
 
         internal void NewSecretary(Secretary secretary)
         {
-            secretaryRepository.Save(secretary);
+            _secretaryRepository.Save(secretary);
         }
 
         internal void EditSecretary(Secretary secretary)
         {
-            secretaryRepository.Update(secretary);
+            _secretaryRepository.Update(secretary);
         }
 
         internal void DeleteSecretaryById(string id)
         {
-            secretaryRepository.Delete(id);
+            _secretaryRepository.Delete(id);
         }
+
         public void DeleteSecretary(Secretary secretary)
         {
-            secretaryRepository.Delete(secretary.SerialNumber);
+            _secretaryRepository.Delete(secretary.SerialNumber);
         }
 
         public bool jmbgExists(string jmbg)
         {
-            bool exists = false;
-            foreach (Secretary p in secretaryRepository.GetAll())
-            {
-                if (p.Id.Equals(jmbg))
-                {
-                    exists = true;
-                }
-            }
-            return exists;
+            return _secretaryRepository.GetAll().Any(p => p.Id.Equals(jmbg));
         }
     }
 }
