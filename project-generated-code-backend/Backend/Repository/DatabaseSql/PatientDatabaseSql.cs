@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
 using Model.Accounts;
 
@@ -19,6 +19,18 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 .ToList();
         }
 
+        public override void Save(Patient newEntity)
+        {
+            dbContext.Patient.Add(newEntity);
+            dbContext.SaveChanges();
+        }
+
+        public override void Update(Patient updateEntity)
+        {
+            dbContext.Patient.Update(updateEntity);
+            dbContext.SaveChanges();
+        }
+
         public List<Patient> GetPatientsByPhysitian(Physician physician)
         {
             return GetAll().Where(p => p.ChosenPhysician.Equals(physician)).ToList();
@@ -31,12 +43,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public bool IsPatientIdValid(string id)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public bool ConfirmEmailUpdate()
-        {
-            throw new System.NotImplementedException();
+            return !GetAll().Any(p => p.Id.Equals(id));
         }
     }
 }

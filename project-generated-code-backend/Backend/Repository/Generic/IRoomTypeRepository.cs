@@ -1,7 +1,6 @@
-﻿using Backend.Repository;
-using HealthClinicBackend.Backend.Model.Hospital;
+﻿using HealthClinicBackend.Backend.Model.Hospital;
 
-namespace HCI_SIMS_PROJEKAT.Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.Generic
 {
     public interface IRoomTypeRepository : IGenericRepository<RoomType>
     {

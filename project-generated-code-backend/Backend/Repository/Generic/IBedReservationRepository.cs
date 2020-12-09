@@ -1,8 +1,7 @@
 ﻿using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
-using Model.Accounts;
 
-namespace Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.Generic
 {
     public interface IBedReservationRepository : IGenericRepository<BedReservation>
     {

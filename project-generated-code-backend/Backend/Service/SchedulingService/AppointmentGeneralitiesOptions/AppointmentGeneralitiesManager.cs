@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
@@ -81,7 +81,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
 
         private List<Room> GetAllRooms()
         {
-            return _roomRepository.GetRoomsByProcedureType(_appointmentPreferences.ProcedureType);
+            return _roomRepository.GetByProcedureType(_appointmentPreferences.ProcedureType);
         }
 
         private List<TimeInterval> GetAllTimeIntervals()

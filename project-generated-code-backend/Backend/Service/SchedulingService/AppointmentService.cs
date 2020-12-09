@@ -5,10 +5,10 @@
 
 using System;
 using System.Collections.Generic;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService
 {

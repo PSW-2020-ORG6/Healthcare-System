@@ -3,13 +3,13 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class InpatientCareFileSystem
 
-using Model.Accounts;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.MedicalExam;
+using HealthClinicBackend.Backend.Repository.Generic;
+using Newtonsoft.Json;
 
-namespace Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.FileSystem
 {
     public class InpatientCareFileSystem : GenericFileSystem<InpatientCare>, IInpatientCareRepository
     {

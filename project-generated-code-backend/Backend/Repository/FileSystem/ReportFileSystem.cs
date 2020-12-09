@@ -3,13 +3,13 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class ReportFileSystem
 
-using Model.Accounts;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.MedicalExam;
+using HealthClinicBackend.Backend.Repository.Generic;
+using Newtonsoft.Json;
 
-namespace Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.FileSystem
 {
     public class ReportFileSystem : GenericFileSystem<Report>, IReportRepository
     {
@@ -18,7 +18,7 @@ namespace Backend.Repository
             path = @"./../../../../project-generated-code-backend/data/reports.txt";
         }
 
-        public List<Report> GetReportsByPatient(Patient patient)
+        public List<Report> GetByPatient(Patient patient)
         {
             List<Report> reports = new List<Report>();
             foreach (Report report in GetAll())
@@ -29,6 +29,11 @@ namespace Backend.Repository
                 }
             }
             return reports;
+        }
+
+        public List<Report> GetByPatientId(string id)
+        {
+            throw new System.NotImplementedException();
         }
 
         public override Report Instantiate(string objectStringFormat)

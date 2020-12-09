@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Model.Hospital;
 
 namespace HealthClinicBackend.Backend.Repository.Generic
