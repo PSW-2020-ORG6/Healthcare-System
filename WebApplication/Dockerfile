@@ -3,6 +3,6 @@ RUN useradd -u 1234 nonrootuser
 USER nonrootuser
 WORKDIR /app
 COPY . .
-EXPOSE 49900
-ENV ASPNETCORE_URLS="http://*:49900"
-ENTRYPOINT ["dotnet", "WebApplication.dll"]
+EXPOSE 8080
+ENV PORT 8080
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet WebApplication.dll

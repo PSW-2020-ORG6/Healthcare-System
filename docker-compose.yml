@@ -1,0 +1,59 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:13.1
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+
+
+  rabbit:
+    image: rabbitmq:management-alpine
+    container_name: rabbitmq
+    ports:
+      - 15672:15672
+    networks:
+      - network
+  
+  integration-adapter:
+    image: integration-adapter
+    container_name: integration-adapter
+    build:
+      context: .
+      dockerfile: Dockerfile.integration_adapters
+    restart: on-failure
+    ports:
+      - 8080:8080
+    networks: 
+      - network
+    environment:
+      RABBITMQ_HOST: rabbit
+      RABBITMQ_USERNAME: guest
+      RABBITMQ_PASSOWRD: guest
+    depends_on:
+      - rabbit
+  
+  web-application:
+    image: web-application
+    container_name: web-application
+    build:
+      context: .
+      dockerfile: Dockerfile.web_application
+    restart: on-failure
+    ports:
+      - 5000:8080
+    networks: 
+      - network
+    environment:
+      RABBITMQ_HOST: rabbit
+      RABBITMQ_USERNAME: guest
+      RABBITMQ_PASSOWRD: guest
+    depends_on:
+      - rabbit
+
+
+networks:
+  network:
+    name: network
+    driver: bridge
