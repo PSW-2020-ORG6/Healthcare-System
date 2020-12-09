@@ -22,6 +22,11 @@ namespace Backend.Repository
             throw new NotImplementedException();
         }
 
+        public Patient GetByJmbg(string jbmg)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool IsPatientIdValid(string id)
         {
             throw new NotImplementedException();

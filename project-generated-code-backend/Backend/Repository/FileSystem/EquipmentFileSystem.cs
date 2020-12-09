@@ -3,10 +3,13 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class EquipmentFileSystem
 
+using System.Collections.Generic;
+using Backend.Repository;
 using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Newtonsoft.Json;
 
-namespace Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.FileSystem
 {
     public class EquipmentFileSystem : GenericFileSystem<Equipment>, IEquipmentRepository
     {
@@ -19,6 +22,16 @@ namespace Backend.Repository
         public override Equipment Instantiate(string objectStringFormat)
         {
             return JsonConvert.DeserializeObject<Equipment>(objectStringFormat);
+        }
+
+        public List<Equipment> GetByName(string name)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public List<Equipment> GetByRoomSerialNumber(string roomSerialNumber)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
