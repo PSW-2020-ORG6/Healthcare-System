@@ -7,26 +7,25 @@ using Backend.Dto;
 using HealthClinicBackend.Backend.Service.HospitalAccountsService;
 using Model.Accounts;
 
-namespace Backend.Controller
+namespace HealthClinicBackend.Backend.Controller
 {
     public class PatientRegistrationController
     {
-        public PatientRegistrationService patientRegistrationService;
+        private readonly PatientRegistrationService _patientRegistrationService;
 
         public PatientRegistrationController()
         {
-            patientRegistrationService = new PatientRegistrationService();
+            _patientRegistrationService = new PatientRegistrationService();
         }
 
-        public void RegisterPatient(PatientDTO patientDTO)
+        public void RegisterPatient(PatientDTO patientDto)
         {
-            patientRegistrationService.RegisterPatient(patientDTO);
+            _patientRegistrationService.RegisterPatient(patientDto);
         }
 
         public void DeletePatientAccount(Patient patient)
         {
-            patientRegistrationService.DeletePatientAccount(patient);
+            _patientRegistrationService.DeletePatientAccount(patient);
         }
-
     }
 }

@@ -1,6 +1,6 @@
 ﻿using GraphicEditor.HelpClasses;
-using health_clinic_class_diagram.Backend.Controller;
 using System.Windows.Controls;
+using HealthClinicBackend.Backend.Controller;
 
 namespace GraphicEditor.ViewModel
 {

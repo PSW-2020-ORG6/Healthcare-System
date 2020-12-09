@@ -1,12 +1,12 @@
-﻿using Model.Util;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Model.Util;
 
-namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
+namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 {
     class TimeIntervalFilter
     {
-        public List<TimeInterval> flterByDate(List<TimeInterval> timeIntervals, DateTime date)
+        public List<TimeInterval> FilterByDate(List<TimeInterval> timeIntervals, DateTime date)
         {
             List<TimeInterval> filteredTimeIntervals = new List<TimeInterval>();
             foreach (TimeInterval ti in timeIntervals)
@@ -18,7 +18,7 @@ namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
             }
             return filteredTimeIntervals;
         }
-        public List<TimeInterval> flterByTime(List<TimeInterval> timeIntervals, TimeInterval time)
+        public List<TimeInterval> FilterByTime(List<TimeInterval> timeIntervals, TimeInterval time)
         {
             List<TimeInterval> filteredTimeIntervals = new List<TimeInterval>();
             foreach (TimeInterval ti in timeIntervals)

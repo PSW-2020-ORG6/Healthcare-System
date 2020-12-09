@@ -1,15 +1,23 @@
-﻿using Backend.Dto;
+﻿using System;
+using System.Collections.Generic;
+using Backend.Dto;
 using Backend.Repository;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using Model.Accounts;
 using Model.Schedule;
-using System;
-using System.Collections.Generic;
 
-namespace health_clinic_class_diagram.Backend.Service.SchedulingService
+namespace HealthClinicBackend.Backend.Service.SchedulingService
 {
     class PatientScheduleService
     {
-        private Patient loggedPatient;
+        private Patient _loggedPatient;
+        private IAppointmentRepository _appointmentRepository;
+
+        public PatientScheduleService(Patient loggedPatient)
+        {
+            _loggedPatient = loggedPatient;
+            _appointmentRepository = new AppointmentDatabaseSql();
+        }
 
         public List<Appointment> GetAppointmentsByDate(DateTime date)
         {
@@ -21,11 +29,9 @@ namespace health_clinic_class_diagram.Backend.Service.SchedulingService
             throw new NotImplementedException();
         }
 
-        public void NewAppointment(AppointmentDTO appointmentDTO)
+        public void NewAppointment(AppointmentDTO appointmentDto)
         {
             throw new NotImplementedException();
         }
-
-        public IAppointmentRepository appointmentRepository;
     }
 }

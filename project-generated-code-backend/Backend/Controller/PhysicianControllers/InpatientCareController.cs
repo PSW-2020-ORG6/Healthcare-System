@@ -3,14 +3,14 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class InpatientCareController
 
+using System.Collections.Generic;
 using Backend.Dto;
+using HealthClinicBackend.Backend.Service.PatientCareService;
 using Model.Accounts;
 using Model.Hospital;
 using Model.MedicalExam;
-using System.Collections.Generic;
-using HealthClinicBackend.Backend.Service.PatientCareService;
 
-namespace Backend.Controller.PhysitianControllers
+namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {
     public class InpatientCareController
     {

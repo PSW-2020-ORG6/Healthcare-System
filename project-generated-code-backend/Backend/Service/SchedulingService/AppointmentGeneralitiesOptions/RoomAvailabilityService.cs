@@ -1,25 +1,26 @@
-﻿using Backend.Repository;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Backend.Repository;
 using HealthClinic.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using Model.Hospital;
 using Model.Schedule;
 using Model.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
+namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 {
     public class RoomAvailabilityService
     {
-        private IAppointmentRepository appointmentRepository;
-        private IRenovationRepository renovationRepository;
-        private IBedReservationRepository bedReservationRepository;
+        private readonly IAppointmentRepository _appointmentRepository;
+        private readonly IRenovationRepository _renovationRepository;
+        private readonly IBedReservationRepository _bedReservationRepository;
 
         public RoomAvailabilityService()
         {
-            this.appointmentRepository = new AppointmentFileSystem();
-            this.renovationRepository = new RenovationFileSystem();
-            this.bedReservationRepository = new BedReservationFileSystem();
+            _appointmentRepository = new AppointmentDatabaseSql(); 
+            _renovationRepository = new RenovationDatabaseSql();
+            _bedReservationRepository = new BedReservationDatabaseSql();
         }
 
         public bool IsRoomAvailableAtAnyTime(Room room, List<TimeInterval> timeIntervals)
@@ -51,7 +52,6 @@ namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 
         public bool IsRoomAvailableForInpatientCare(Room room)
         {
-            Console.WriteLine("" + HasAvailableBed(room) + " " + !IsRoomInRenovation(room, new TimeInterval(DateTime.Now, DateTime.Now)));
             return HasAvailableBed(room) && !IsRoomInRenovation(room, new TimeInterval(DateTime.Now, DateTime.Now));
         }
         public List<Bed> GetAvailableBeds(Room room)
@@ -74,12 +74,12 @@ namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
         }
         private bool IsBedReserved(Bed bed)
         {
-            var bedReservations = bedReservationRepository.GetAll();
+            var bedReservations = _bedReservationRepository.GetAll();
             return bedReservations.All(bedReservation => !bedReservation.Bed.Equals(bed));
         }
         private bool IsRoomInRenovation(Room room, TimeInterval timeInterval)
         {
-            List<Renovation> renovations = renovationRepository.GetRenovationsByRoom(room);
+            List<Renovation> renovations = _renovationRepository.GetRenovationsByRoom(room);
             foreach (Renovation renovation in renovations)
             {
                 if (timeInterval.IsOverLapping(renovation.TimeInterval))
@@ -92,7 +92,7 @@ namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 
         private bool IsRoomScheduled(Room room, TimeInterval timeInterval)
         {
-            List<Appointment> appointments = appointmentRepository.GetAppointmentsByRoom(room);
+            List<Appointment> appointments = _appointmentRepository.GetAppointmentsByRoom(room);
             foreach (Appointment appointment in appointments)
             {
                 if (timeInterval.IsOverLapping(appointment.TimeInterval))

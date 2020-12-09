@@ -1,18 +1,19 @@
-﻿using Backend.Repository;
+﻿using System.Collections.Generic;
+using Backend.Repository;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using Model.Accounts;
 using Model.Schedule;
 using Model.Util;
-using System.Collections.Generic;
 
-namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
+namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 {
     class PatientAvailabilityService
     {
-        private IAppointmentRepository appointmentRepository;
+        private readonly IAppointmentRepository _appointmentRepository;
 
         public PatientAvailabilityService()
         {
-            this.appointmentRepository = new AppointmentFileSystem();
+            _appointmentRepository = new AppointmentDatabaseSql();
         }
 
         public bool IsPatientAvailable(Patient patient, TimeInterval timeInterval)
@@ -21,7 +22,7 @@ namespace Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
         }
         private bool IsPatientScheduled(Patient patient, TimeInterval timeInterval)
         {
-            List<Appointment> appointments = appointmentRepository.GetAppointmentsByPatient(patient);
+            List<Appointment> appointments = _appointmentRepository.GetAppointmentsByPatient(patient);
             foreach (Appointment appointment in appointments)
             {
                 if (timeInterval.IsOverLapping(appointment.TimeInterval))

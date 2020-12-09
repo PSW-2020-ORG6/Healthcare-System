@@ -1,20 +1,20 @@
 ﻿using health_clinic_class_diagram.Backend.Model.Util;
 using HealthClinicBackend.Backend.Service.HospitalAccountsService;
 
-namespace health_clinic_class_diagram.Backend.Controller
+namespace HealthClinicBackend.Backend.Controller
 {
     public class HospitalLogInController
     {
-        public HospitalLogInService hospitalLogInService;
+        private readonly HospitalLogInService _hospitalLogInService;
 
         public HospitalLogInController()
         {
-            hospitalLogInService = new HospitalLogInService();
+            _hospitalLogInService = new HospitalLogInService();
         }
 
         public TypeOfUser GetUserType(string jmbg, string password)
         {
-            return hospitalLogInService.GetUserType(jmbg, password);
+            return _hospitalLogInService.GetUserType(jmbg, password);
         }
     }
 }
