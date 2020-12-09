@@ -15,10 +15,6 @@ namespace IntegrationAdapters.Services
         {
             this.medicineRepository = new MedicineRepository();
         }
-      /*  public MedicineService(IMedicineRepository medicineRepository)
-        {
-            this.medicineRepository = medicineRepository;
-        }*/
         public List<Medicine> GetAll()
         {
             return medicineRepository.GetAll();

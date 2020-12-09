@@ -14,11 +14,11 @@ namespace IntegrationAdapters.Models
         public Medicine()
         {
         }
-        public Medicine(string medicineID, string name, String medicineSpecification)
+        public Medicine(string medicineID, string name, string medicineSpecificationID)
         {
             MedicineID = medicineID;
             Name = name;
-            MedicineSpecificationID = medicineSpecification;
+            MedicineSpecificationID = medicineSpecificationID;
         }
     }
 }
