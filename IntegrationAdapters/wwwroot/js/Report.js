@@ -3,7 +3,7 @@
 		var start = $("#startDate").val();
 		var end = $("#endDate").val();
 		$.post({
-			url: '../sftp/report',
+			url: '../filetransfer/report',
 			data: JSON.stringify({ start: start, end: end}),
 			contentType: 'application/json',
 			success: function (data) {
