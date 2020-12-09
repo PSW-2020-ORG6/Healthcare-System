@@ -1,36 +1,36 @@
-﻿using health_clinic_class_diagram.Backend.Service.MedicineService;
-using Model.Hospital;
+﻿using Model.Hospital;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Service.MedicineService;
 
 namespace Backend.Controller.PhysitianControllers
 {
     public class PhysitianMedicineController
     {
-        private PhysitianMedicineService physitianMedicineService;
+        private PhysicianMedicineService _physicianMedicineService;
         public PhysitianMedicineController()
         {
-            this.physitianMedicineService = new PhysitianMedicineService();
+            this._physicianMedicineService = new PhysicianMedicineService();
         }
 
         public List<MedicineManufacturer> GetMedicineManufacturers()
         {
-            return physitianMedicineService.GetMedicineManufacturers();
+            return _physicianMedicineService.GetMedicineManufacturers();
         }
         public List<Medicine> getAllFromWaitingList()
         {
-            return physitianMedicineService.getAllFromWaitingList();
+            return _physicianMedicineService.GetAllFromWaitingList();
         }
         public List<Medicine> getAllApproved()
         {
-            return physitianMedicineService.getAllApproved();
+            return _physicianMedicineService.GetAllApproved();
         }
         public void Approve(Medicine medicine)
         {
-            physitianMedicineService.Approve(medicine);
+            _physicianMedicineService.Approve(medicine);
         }
         public void Reject(Rejection rejection)
         {
-            physitianMedicineService.Reject(rejection);
+            _physicianMedicineService.Reject(rejection);
         }
     }
 }

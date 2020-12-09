@@ -1,80 +1,79 @@
-﻿using Backend.Repository;
+﻿using System.Collections.Generic;
+using Backend.Repository;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Model.Hospital;
-using System.Collections.Generic;
 
-namespace health_clinic_class_diagram.Backend.Service.MedicineService
+namespace HealthClinicBackend.Backend.Service.MedicineService
 {
     class SuperintendentMedicineService
     {
-        private IRejectionRepository rejectionRepository;
-        private IWaitingMedicineRepository waitingRepostitory;
-        private IApprovedMedicineRepository approvedRepository;
+        private readonly IMedicineRepository _medicineRepository;
+        private readonly IRejectionRepository _rejectionRepository;
+
 
         public SuperintendentMedicineService()
         {
-            rejectionRepository = new RejectionFileSystem();
-            waitingRepostitory = new WaitingMedicineFileSystem();
-            approvedRepository = new ApprovedMedicineFileSystem();
+            _rejectionRepository = new RejectionDatabaseSql();
+            _medicineRepository = new MedicineDatabaseSql();
         }
 
-        public List<Medicine> getAllApproved()
+        public List<Medicine> GetAllApproved()
         {
-            return approvedRepository.GetAll();
+            return _medicineRepository.GetApproved();
         }
 
-        public List<Rejection> getAllRejected()
+        public List<Rejection> GetAllRejected()
         {
-            return rejectionRepository.GetAll();
+            return _rejectionRepository.GetAll();
         }
 
-        public List<Medicine> getAllWaiting()
+        public List<Medicine> GetAllWaiting()
         {
-            return waitingRepostitory.GetAll();
+            return _medicineRepository.GetWaiting();
         }
 
         public void DeleteWaitingMedicine(Medicine medicine)
         {
-            waitingRepostitory.Delete(medicine.SerialNumber);
+            _medicineRepository.Delete(medicine.SerialNumber);
         }
 
-        public void NewWaitinMedicine(Medicine medicine)
+        public void NewWaitingMedicine(Medicine medicine)
         {
-            waitingRepostitory.Save(medicine);
+            medicine.IsApproved = false;
+            _medicineRepository.Save(medicine);
         }
 
-        public void EditWaitingMedicine(Medicine medicineDTO)
+        public void EditWaitingMedicine(Medicine medicineDto)
         {
-            waitingRepostitory.Update(medicineDTO);
+            _medicineRepository.Update(medicineDto);
         }
 
         public void DeleteRejection(Rejection rejection)
         {
-            rejectionRepository.Delete(rejection.SerialNumber);
+            _rejectionRepository.Delete(rejection.SerialNumber);
         }
 
         public void NewRejection(Rejection rejection)
         {
-            rejectionRepository.Save(rejection);
+            _rejectionRepository.Save(rejection);
         }
 
         public void EditRejection(Rejection rejection)
         {
-            waitingRepostitory.Save(rejection.Medicine);
-            rejectionRepository.Delete(rejection.SerialNumber);
+            _medicineRepository.Save(rejection.Medicine);
+            _rejectionRepository.Delete(rejection.SerialNumber);
         }
 
         public void DeleteApprovedMedicine(Medicine medicine)
         {
-            approvedRepository.Delete(medicine.SerialNumber);
+            _medicineRepository.Delete(medicine.SerialNumber);
         }
 
         public void NewApprovedMedicine(Medicine medicine)
         {
-            approvedRepository.Save(medicine);
+            medicine.IsApproved = true;
+            _medicineRepository.Save(medicine);
         }
-
-
-
-        //TODO: Dodati metode za getovanje pojedinacnih i brisanje ako treba
     }
 }

@@ -1,38 +1,36 @@
-﻿using Backend.Repository;
+﻿using System.Collections.Generic;
+using Backend.Repository;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using Model.Accounts;
 using Model.MedicalExam;
-using System.Collections.Generic;
 
-namespace Backend.Service.PatientCareService
+namespace HealthClinicBackend.Backend.Service.PatientCareService
 {
     class ReportService
     {
-        private IReportRepository reportRepository;
+        private readonly IReportRepository _reportRepository;
 
         public ReportService()
         {
-            this.reportRepository = new ReportFileSystem();
+            _reportRepository = new ReportDatabaseSql();
         }
 
         public List<Report> GetReportsByPatient(Patient patient)
         {
-            return reportRepository.GetReportsByPatient(patient);
+            return _reportRepository.GetReportsByPatient(patient);
         }
 
         public Report GetLastReportByPatient(Patient patient)
         {
-            List<Report> reports = reportRepository.GetReportsByPatient(patient);
-            if (reports.Count > 0)
-            {
-                reports.Sort((a, b) => b.CompareTo(a));
-                return reports[0];
-            }
-            return null;
+            var reports = _reportRepository.GetReportsByPatient(patient);
+            if (reports.Count <= 0) return null;
+            reports.Sort((a, b) => b.CompareTo(a));
+            return reports[0];
         }
 
         public void NewReport(Report report)
         {
-            reportRepository.Save(report);
+            _reportRepository.Save(report);
         }
     }
 }
