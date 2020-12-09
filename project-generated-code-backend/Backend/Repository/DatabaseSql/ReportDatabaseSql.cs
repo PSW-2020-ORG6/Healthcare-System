@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.MedicalExam;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
 using Model.Accounts;
 
@@ -45,9 +45,14 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             return reports;
         }
 
-        public List<Report> GetReportsByPatient(Patient patient)
+        public List<Report> GetByPatient(Patient patient)
         {
             return GetAll().Where(x => x.PatientId.Equals(patient.SerialNumber)).ToList();
+        }
+
+        public List<Report> GetByPatientId(string id)
+        {
+            return GetAll().Where(r => r.PatientId.Equals(id)).ToList();
         }
     }
 }

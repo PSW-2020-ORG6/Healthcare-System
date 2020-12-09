@@ -1,7 +1,6 @@
-﻿using Backend.Repository;
-using HealthClinicBackend.Backend.Model.Util;
+﻿using HealthClinicBackend.Backend.Model.Util;
 
-namespace HCI_SIMS_PROJEKAT.Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.Generic
 {
     public interface ICountryRepository : IGenericRepository<Country>
     {

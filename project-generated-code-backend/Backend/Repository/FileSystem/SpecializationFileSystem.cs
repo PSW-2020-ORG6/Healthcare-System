@@ -1,9 +1,9 @@
-﻿using Backend.Repository;
+﻿using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
-using Model.Accounts;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Newtonsoft.Json;
 
-namespace HCI_SIMS_PROJEKAT.Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.FileSystem
 {
     public class SpecializationFileSystem : GenericFileSystem<Specialization>, ISpecializationRepository
     {
@@ -14,6 +14,11 @@ namespace HCI_SIMS_PROJEKAT.Backend.Repository
         public override Specialization Instantiate(string objectStringFormat)
         {
             return JsonConvert.DeserializeObject<Specialization>(objectStringFormat);
+        }
+
+        public List<Specialization> GetByName(string name)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

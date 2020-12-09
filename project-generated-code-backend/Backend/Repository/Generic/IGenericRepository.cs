@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Util;
 
-namespace Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.Generic
 {
     public interface IGenericRepository<T> where T : Entity
     {

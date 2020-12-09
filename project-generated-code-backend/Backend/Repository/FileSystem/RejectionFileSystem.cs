@@ -4,9 +4,10 @@
 // Purpose: Definition of Class RejectionFileSystem
 
 using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Newtonsoft.Json;
 
-namespace Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.FileSystem
 {
     public class RejectionFileSystem : GenericFileSystem<Rejection>, IRejectionRepository
     {

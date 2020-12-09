@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Hospital;
 
-namespace Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.Generic
 {
     public interface IRenovationRepository : IGenericRepository<Renovation>
     {
