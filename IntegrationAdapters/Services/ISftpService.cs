@@ -10,5 +10,6 @@ namespace IntegrationAdapters.Services
     {
         public void GenerateFile(List<MedicineReport> medicineReports, string fileName);
         public bool SendFile(string fileName);
+        public bool DownloadFile(string fileName);
     }
 }

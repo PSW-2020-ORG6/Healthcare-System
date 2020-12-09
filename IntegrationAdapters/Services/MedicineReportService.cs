@@ -3,6 +3,7 @@ using IntegrationAdapters.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using HealthClinicBackend.Backend.Model.Util;
 
@@ -36,14 +37,39 @@ namespace IntegrationAdapters.Services
         {
             List<MedicineReport> result = new List<MedicineReport>();
 
-            foreach(MedicineReport m in GetAll())
+            foreach (MedicineReport m in GetAll())
             {
-                if(m.Date >= timeInterval.Start && m.Date <= timeInterval.End)
+                if (m.Date >= timeInterval.Start && m.Date <= timeInterval.End)
                 {
                     result.Add(m);
                 }
             }
             return result;
         }
+
+        public void SendNotificationAboutReport(String myFile)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+                mail.From = new MailAddress("hospitallhospital@gmail.com");
+                mail.To.Add("ppharmacy98@gmail.com");
+                mail.Subject = "Notification about sent file";
+                mail.Body = "You can take file " + myFile;
+
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("hospitallhospital@gmail.com", "Hh123456789");
+                SmtpServer.EnableSsl = true;
+
+                SmtpServer.Send(mail);
+            }
+            catch (SmtpException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
     }
 }

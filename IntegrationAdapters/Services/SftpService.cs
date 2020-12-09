@@ -10,9 +10,15 @@ namespace IntegrationAdapters.Services
 {
     public class SftpService : ISftpService
     {
+        public SftpConfig config = new SftpConfig
+        {
+            Host = "192.168.0.23",
+            Port = 22,
+            Username = "tester",
+            Password = "password"
+        };
         public void GenerateFile(List<MedicineReport> medicineReports, string fileName)
         {
-            System.IO.File.WriteAllText(fileName, string.Empty);
             string result = "";
             TextWriter tw = new StreamWriter(fileName);
             foreach (var s in medicineReports)
@@ -28,13 +34,6 @@ namespace IntegrationAdapters.Services
 
         public bool SendFile(string fileName)
         {
-            SftpConfig config = new SftpConfig
-            {
-                Host = "192.168.100.4",
-                Port = 22,
-                Username = "tester",
-                Password = "password"
-            };
 
             using (var client = new SftpClient(config.Host, config.Port, config.Username, config.Password))
             {
@@ -54,8 +53,28 @@ namespace IntegrationAdapters.Services
                 }
             }
         }
+
+        public bool DownloadFile(string fileName)
+        {
+
+            using (var client = new SftpClient(config.Host, config.Port, config.Username, config.Password))
+            {
+                client.Connect();
+                if (client.IsConnected)
+                {
+                    using (var fileStream = new FileStream(fileName, FileMode.Create))
+                    {
+                        client.BufferSize = 4 * 1024;
+                        client.DownloadFile(fileName, fileStream);
+                    }
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
     }
-
-
 }
 
