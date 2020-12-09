@@ -11,7 +11,9 @@ namespace Backend.Repository
 {
     public interface IPhysitianRepository : IGenericRepository<Physician>
     {
-        List<Physician> GetPhysitiansByProcedureType(ProcedureType procedureType);
+        List<Physician> GetByName(string name);
+        Physician GetByJmbg(string jmbg);
+        List<Physician> GetByProcedureType(ProcedureType procedureType);
         List<Physician> GetGeneralPractitioners();
     }
 }

@@ -35,7 +35,17 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             return physicians;
         }
 
-        public List<Physician> GetPhysitiansByProcedureType(ProcedureType procedureType)
+        public List<Physician> GetByName(string name)
+        {
+            return GetAll().Where(p => p.Name.Equals(name)).ToList();
+        }
+
+        public Physician GetByJmbg(string jmbg)
+        {
+            return GetAll().Where(p => p.Id.Equals(jmbg)).ToList()[0];
+        }
+
+        public List<Physician> GetByProcedureType(ProcedureType procedureType)
         {
             return GetAll().Where(p => p.Specialization.Contains(procedureType.Specialization)).ToList();
         }

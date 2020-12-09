@@ -24,6 +24,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             return GetAll().Where(p => p.ChosenPhysician.Equals(physician)).ToList();
         }
 
+        public Patient GetByJmbg(string jbmg)
+        {
+            return GetAll().Where(p => p.Id.Equals(jbmg)).ToList()[0];
+        }
+
         public bool IsPatientIdValid(string id)
         {
             throw new System.NotImplementedException();

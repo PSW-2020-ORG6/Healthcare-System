@@ -17,13 +17,13 @@ namespace HealthClinicBackend.Backend.Model.Blog
 
         public DateTime Date { get; set; }
 
-        public Boolean Approved { get; set; }
+        public bool Approved { get; set; }
 
         public Feedback() : base()
         {
         }
 
-        public Feedback(String text, String patientId, DateTime date, Boolean app) : base()
+        public Feedback(string text, string patientId, DateTime date, bool app) : base()
         {
             PatientId = patientId;
             Text = text;
@@ -31,7 +31,7 @@ namespace HealthClinicBackend.Backend.Model.Blog
             Approved = app;
         }
 
-        public Feedback(String serialNumber, String text, String patientId, DateTime date, Boolean app) : base(
+        public Feedback(string serialNumber, string text, string patientId, DateTime date, bool app) : base(
             serialNumber)
         {
             PatientId = patientId;

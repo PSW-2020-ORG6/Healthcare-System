@@ -41,5 +41,51 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             return GetAll().Where(appointment => appointment.Room.Equals(room)).ToList();
         }
+
+        public List<Appointment> GetByRoomSerialNumber(string roomSerialNumber)
+        {
+            return GetAll()
+                .Where(appointment => appointment.Room.SerialNumber.Equals(roomSerialNumber))
+                .ToList();
+        }
+
+        public List<Appointment> GetByPhysicianSerialNumber(string physicianSerialNumber)
+        {
+            return GetAll()
+                .Where(appointment => appointment.Physician.SerialNumber.Equals(physicianSerialNumber))
+                .ToList();
+        }
+
+        public List<Appointment> GetByPatientSerialNumber(string patientSerialNumber)
+        {
+            return GetAll()
+                .Where(appointment => appointment.Patient.SerialNumber.Equals(patientSerialNumber))
+                .ToList();
+        }
+
+        public List<Appointment> GetByPatientId(string patientId)
+        {
+            return GetAll()
+                .Where(appointment => appointment.Patient.Id.Equals(patientId))
+                .ToList();
+        }
+
+        public List<Appointment> GetByPatientIdActive(string patientId)
+        {
+            return GetAll()
+                .Where(appointment => (appointment.Patient.Id.Equals(patientId) ||
+                                       appointment.Patient.SerialNumber.Equals(patientId)) &&
+                                      appointment.Active)
+                .ToList();
+        }
+
+        public List<Appointment> GetByPatientIdCanceled(string patientId)
+        {
+            return GetAll()
+                .Where(appointment => (appointment.Patient.Id.Equals(patientId) ||
+                                       appointment.Patient.SerialNumber.Equals(patientId)) &&
+                                      !appointment.Active)
+                .ToList();
+        }
     }
 }

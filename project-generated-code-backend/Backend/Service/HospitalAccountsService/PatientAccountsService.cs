@@ -3,6 +3,7 @@ using Backend.Repository;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using HealthClinicBackend.Backend.Repository.FileSystem;
 using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
