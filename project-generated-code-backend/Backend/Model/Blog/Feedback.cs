@@ -17,7 +17,7 @@ namespace HealthClinicBackend.Backend.Model.Blog
 
         public DateTime Date { get; set; }
 
-        public bool Approved { get; set; }
+        public Boolean Approved { get; set; }
 
         public Feedback() : base()
         {

@@ -1,4 +1,5 @@
-﻿using HealthClinicBackend.Backend.Model.Accounts;
+﻿using Backend.Repository;
+using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.Generic;
 

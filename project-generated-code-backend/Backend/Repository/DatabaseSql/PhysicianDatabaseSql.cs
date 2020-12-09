@@ -39,8 +39,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     .Select(physicianSpecialization => physicianSpecialization.Specialization)
                     .ToList();
                 physician.Specialization = specializations;
-
-
             }
 
             return physicians;
