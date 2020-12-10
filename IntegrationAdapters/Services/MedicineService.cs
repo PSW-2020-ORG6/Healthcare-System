@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthClinicBackend.Backend.Model.PharmacySupport;
 
 namespace IntegrationAdapters.Services
 {
@@ -15,15 +16,15 @@ namespace IntegrationAdapters.Services
         {
             this.medicineRepository = new MedicineRepository();
         }
-        public List<Medicine> GetAll()
+        public List<MedicinePharmacy> GetAll()
         {
             return medicineRepository.GetAll();
         }
-        public Medicine GetMedicineByID(String ID)
+        public MedicinePharmacy GetMedicineByID(String ID)
         {
             return medicineRepository.GetByID(ID);
         }
-        public Medicine GetMedicineByName(String Name)
+        public MedicinePharmacy GetMedicineByName(String Name)
         {
             return medicineRepository.GetByName(Name);
         }

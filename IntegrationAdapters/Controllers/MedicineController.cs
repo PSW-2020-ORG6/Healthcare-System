@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthClinicBackend.Backend.Model.PharmacySupport;
 
 namespace IntegrationAdapters.Controllers
 {
@@ -21,10 +22,10 @@ namespace IntegrationAdapters.Controllers
         [HttpGet("getMedicineSpecification/{MedicineName}")]
         public String GetMedicineSpeification(String MedicineName)
         {
-            Medicine medicine = medicineService.GetMedicineByName(MedicineName);
+            MedicinePharmacy medicinePharmacy = medicineService.GetMedicineByName(MedicineName);
             if (medicineService.GetMedicineByName(MedicineName) != null)
             {
-                return medicine.MedicineSpecificationID;
+                return medicinePharmacy.MedicineSpecificationID;
             }
             else
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthClinicBackend.Backend.Model.PharmacySupport;
 using HealthClinicBackend.Backend.Model.Util;
 using IntegrationAdapters.Models;
 using IntegrationAdapters.Services;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthClinicBackend.Backend.Model.PharmacySupport;
 using IntegrationAdapters.Adapters;
 using IntegrationAdapters.Controllers;
 using IntegrationAdapters.gRPCProtocol;

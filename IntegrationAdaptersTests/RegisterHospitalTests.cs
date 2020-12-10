@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using HealthClinicBackend.Backend.Model.PharmacySupport;
 using IntegrationAdapters;
 using IntegrationAdapters.Models;
 using IntegrationAdapters.Repositories;
