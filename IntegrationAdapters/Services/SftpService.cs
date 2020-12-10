@@ -42,7 +42,6 @@ namespace IntegrationAdapters.Services
                 {
                     using (var fileStream = new FileStream(fileName, FileMode.Open))
                     {
-                        client.BufferSize = 4 * 1024;
                         client.UploadFile(fileStream, Path.GetFileName(fileName));
                     }
                     return true;
