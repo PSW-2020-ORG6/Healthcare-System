@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HealthClinicBackend.Backend.Model.PharmacySupport;
+using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace IntegrationAdapters.Repositories
 {
-    public interface IActionsAndBenefitsRepository
+    public interface IActionsAndBenefitsRepository: IGenericRepository<ActionAndBenefitMessage>
     {
         public bool AddActionAndBenefitMessage(ActionAndBenefitMessage actionsAndBenefits);
         public bool IsMessageExisting(ActionAndBenefitMessage api);

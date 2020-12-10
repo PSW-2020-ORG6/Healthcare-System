@@ -5,19 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HealthClinicBackend.Backend.Model.PharmacySupport;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 
 namespace IntegrationAdapters.Repositories
 {
-    public class MedicineReportRepository : IMedicineReportRepository
+    public class MedicineReportRepository : GenericDatabaseSql<MedicineReport>, IMedicineReportRepository
     {
-        public DbContextOptions<IAHealthCareSystemDbContext> options = new DbContextOptionsBuilder<IAHealthCareSystemDbContext>()
-                .UseMySql(connectionString: "server=localhost;port=3306;database=newmydb;user=root;password=root").UseLazyLoadingProxies()
-                .Options;
-        public readonly IAHealthCareSystemDbContext dbContext;
+        // public DbContextOptions<IAHealthCareSystemDbContext> options = new DbContextOptionsBuilder<IAHealthCareSystemDbContext>()
+        //         .UseMySql(connectionString: "server=localhost;port=3306;database=newmydb;user=root;password=root").UseLazyLoadingProxies()
+        //         .Options;
+        // public readonly IAHealthCareSystemDbContext dbContext;
 
         public MedicineReportRepository()
         {
-            this.dbContext = new IAHealthCareSystemDbContext(options);
+            // this.dbContext = new IAHealthCareSystemDbContext(options);
         }
 
         public void AddPrescription()
@@ -32,9 +33,9 @@ namespace IntegrationAdapters.Repositories
             dbContext.SaveChanges();
         } 
 
-        public List<MedicineReport> GetAll()
+        public override List<MedicineReport> GetAll()
         {
-            return dbContext.Reports.ToList();
+            return dbContext.MedicineReport.ToList();
         }
 
     }
