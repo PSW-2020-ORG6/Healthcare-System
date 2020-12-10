@@ -52,10 +52,12 @@ namespace IntegrationAdapters.Services
             try
             {
                 MailMessage mail = new MailMessage();
+                MailAddress mailAddressFrom = new MailAddress("hospitallhospital@gmail.com");
+                MailAddress mailAddressTo = new MailAddress("ppharmacy98@gmail.com");
                 SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
-                mail.From = new MailAddress("hospitallhospital@gmail.com");
-                mail.To.Add("ppharmacy98@gmail.com");
+                mail.From = mailAddressFrom;
+                mail.To.Add(mailAddressTo);
                 mail.Subject = "Notification about sent file";
                 mail.Body = "You can take file " + myFile;
 
