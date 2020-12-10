@@ -5,6 +5,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using HealthClinicBackend.Backend.Model.PharmacySupport;
 using HealthClinicBackend.Backend.Model.Util;
 using Xunit;
 
@@ -25,7 +26,7 @@ namespace IntegrationAdaptersTests
         [Fact]
         public void Find_existing_report()
         {
-            Mock.Setup(expression: t => t.GetAll()).Returns(new List<MedicineReport> { new MedicineReport { Id = "1", Date = new DateTime(2020, 10, 5), Dosage = new List<MedicineDosage>() }, new MedicineReport { Id = "2", Date = new DateTime(2020, 5, 10), Dosage = new List<MedicineDosage>() } });
+            Mock.Setup(expression: t => t.GetAll()).Returns(new List<MedicineReport> { new MedicineReport { Id = "1", Date = new DateTime(2020, 10, 5), Dosage = new List<MedicineDosagePharmacy>() }, new MedicineReport { Id = "2", Date = new DateTime(2020, 5, 10), Dosage = new List<MedicineDosagePharmacy>() } });
 
             MedicineReportService service = new MedicineReportService(Mock.Object);
             List<MedicineReport> result = service.GetByDateInterval(new TimeInterval { Start = new DateTime(2020, 5, 10), End = new DateTime(2020, 10, 5) });
@@ -36,7 +37,7 @@ namespace IntegrationAdaptersTests
         [Fact]
         public void Find_no_existing_report()
         {
-            Mock.Setup(expression: t => t.GetAll()).Returns(new List<MedicineReport> { new MedicineReport { Id = "1", Date = new DateTime(2020, 10, 5), Dosage = new List<MedicineDosage>() }, new MedicineReport { Id = "2", Date = new DateTime(2020, 5, 10), Dosage = new List<MedicineDosage>() } });
+            Mock.Setup(expression: t => t.GetAll()).Returns(new List<MedicineReport> { new MedicineReport { Id = "1", Date = new DateTime(2020, 10, 5), Dosage = new List<MedicineDosagePharmacy>() }, new MedicineReport { Id = "2", Date = new DateTime(2020, 5, 10), Dosage = new List<MedicineDosagePharmacy>() } });
 
             MedicineReportService service = new MedicineReportService(Mock.Object);
             List<MedicineReport> result = service.GetByDateInterval(new TimeInterval { Start = new DateTime(2020, 6, 10), End = new DateTime(2020, 9, 5) });
