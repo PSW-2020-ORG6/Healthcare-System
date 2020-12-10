@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿var foundedPharmacy = '';
+$(document).ready(function () {
 	$("#btnGetMedicineSpecification").click(function () {
 		var MedicineName = $("#txtMedicine").val();
 		$.get({
@@ -50,4 +51,46 @@
 			}
 		});
 	});
+	$("#btnCheckWithPharmacy").click(function () {
+		var MedicineName = $("#txtMedicine").val();
+		var Quantity = parseInt($("#txtQuantity").val());
+		var IsPharmacyApproved = false;
+		$.post({
+			url: '../medicine/sendMessageGrpc',
+			data: JSON.stringify({ MedicineName: MedicineName, Quantity: Quantity, IsPharmacyApproved: IsPharmacyApproved }),
+			contentType: "application/json",
+			success: function () {
+				sleep(5000);
+				getMessageGrpc();
+			},
+			error: function (message) {
+				alert("Failed ")
+			}
+		});
+	});
+	function sleep(milliseconds) {
+		const date = Date.now();
+		let currentDate = null;
+		do {
+			currentDate = Date.now();
+		} while (currentDate - date < milliseconds);
+	}
+
+	
+	function getMessageGrpc() {
+		$.get({
+			url: '../medicine/getMessageGrpc',
+			contentType: 'application/json',
+			success: function (data) {
+				foundedPharmacy = data;
+				if (foundedPharmacy == undefined)
+					document.getElementById('txtPharmacyName').value = 'Pharmacy not found';
+				else
+					document.getElementById('txtPharmacyName').value= foundedPharmacy;
+			},
+			error: function (message) {
+				alert("Failed")
+			}
+		});
+	}
 });

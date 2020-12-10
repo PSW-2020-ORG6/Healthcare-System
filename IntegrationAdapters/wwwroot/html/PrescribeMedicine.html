@@ -65,15 +65,6 @@
                 </tr>
                 <tr>
                     <td class="text-info">
-                        <label>Pharmacy name:</label>
-                    </td>
-                    <td>
-                        <input class="textbox" type="text" id="txtPharmacyName"
-                               placeholder="Pharmacy name..." />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-info">
                         <label>Note:</label>
                     </td>
                     <td>
@@ -83,9 +74,15 @@
                 </tr>
                 <tr>
                     <td style="padding-top: 25px">
-                        <input id="btnCheckWithPharmacy" type="button" class="btn btn-primary" value="Check if pharmacy has medication">
+                        <input id="btnCheckWithPharmacy" type="button" class="btn btn-primary" value="Check which pharmacy has medication">
                     </td>
-                    <td style="padding-top: 25px">
+                    <td style="color:coral;">
+                        <input class="textbox" type="text" id="txtPharmacyName" style="background-color:white;"
+                               placeholder="Pharamacy name..." disabled/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-top: 25px" colspan="2">
                         <input id="btnPrescribe" type="button" class="btn btn-primary" value="Prescribe medicine">
                     </td>
                 </tr>

@@ -1,4 +1,5 @@
-﻿using IntegrationAdapters.Models;
+﻿using IntegrationAdapters.gRPCProtocol;
+using IntegrationAdapters.Models;
 using IntegrationAdapters.Models.DTO;
 using IntegrationAdapters.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -18,10 +19,14 @@ namespace IntegrationAdapters.Controllers
     public class MedicineController : ControllerBase
     {
         private readonly MedicineService medicineService;
+        private readonly ClientScheduleService grpcService;
+        private readonly NetGrpcServiceImpl grpcResponseService;
 
         public MedicineController()
         {
             this.medicineService = new MedicineService();
+            this.grpcService = new ClientScheduleService();
+            this.grpcResponseService = new NetGrpcServiceImpl();
         }
         [HttpGet("getMedicineSpecification/{medicineName}")]
         public IActionResult GetMedicineSpeification(string medicineName)
@@ -72,6 +77,21 @@ namespace IntegrationAdapters.Controllers
         private bool IsResponseValid(string text)
         {
             return text.Length != 0;
+                return "";
+            }
+        }
+
+        [HttpPost("sendMessageGrpc")]
+        public IActionResult SendMessageGrpc(MedicineMessage medicineMessage)
+        {
+            grpcService.SendMessageToPharmacy(medicineMessage);
+            return Ok();
+        }
+
+        [HttpGet("getMessageGrpc")]
+        public IActionResult GetActionsAndBenefits()
+        {
+            return Ok(Program.ResponseMessageGrpc);
         }
     }
 }
