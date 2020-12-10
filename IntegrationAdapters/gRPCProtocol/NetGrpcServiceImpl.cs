@@ -9,9 +9,15 @@ namespace IntegrationAdapters.gRPCProtocol
 {
     public class NetGrpcServiceImpl : NetGrpcService.NetGrpcServiceBase
     {
+        public String MessageResponseFromPharmacy { get; set; }
+        public Boolean IsReceived { get; set; }
+        public NetGrpcServiceImpl(){
+            IsReceived = false;
+         }
         public override Task<MessageResponseProto> transfer(MessageProto request, ServerCallContext context)
         {
-            Console.WriteLine(request.Message + " from spring; random int: " + request.RandomInteger.ToString());
+            this.IsReceived = true;
+            this.MessageResponseFromPharmacy = request.MedicineName;
             MessageResponseProto response = new MessageResponseProto();
             response.Response = "NET GRPC RESPONSE " + Guid.NewGuid().ToString();
             response.Status = "STATUS OK";
