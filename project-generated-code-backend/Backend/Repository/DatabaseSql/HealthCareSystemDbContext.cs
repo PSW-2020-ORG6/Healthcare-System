@@ -2,6 +2,7 @@
 using HealthClinicBackend.Backend.Model.Blog;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.MedicalExam;
+using HealthClinicBackend.Backend.Model.PharmacySupport;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Survey;
 using HealthClinicBackend.Backend.Model.Util;
@@ -9,6 +10,8 @@ using HealthClinicBackend.Backend.Repository.DatabaseSql.RelationHelpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Model.Accounts;
+using Medicine = HealthClinicBackend.Backend.Model.Hospital.Medicine;
+using MedicineDosage = HealthClinicBackend.Backend.Model.MedicalExam.MedicineDosage;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
@@ -58,6 +61,13 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public DbSet<Question> Question { get; set; }
         public DbSet<Survey> Survey { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
+
+        public DbSet<Api> Apis { get; set; }
+        public DbSet<ActionAndBenefitMessage> ActionAndBenefitMessage { get; set; }
+        public DbSet<MedicineDosagePharmacy> MedicineDosagePharmacy { get; set; }
+        public DbSet<MedicineReport> MedicineReport { get; set; }
+        public DbSet<MedicinePharmacy> MedicinePharmacy { get; set; }
+        public DbSet<MedicineSpecification> MedicineSpecification { get; set; }
 
         public HealthCareSystemDbContext(DbContextOptions<HealthCareSystemDbContext> options) : base(options)
         {
@@ -194,6 +204,28 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 .WithMany();
             modelBuilder.Entity<ReportFollowUp>()
                 .HasOne(x => x.FollowUp)
+                .WithOne();
+
+            modelBuilder.Entity<Api>()
+                .HasAlternateKey(a => a.Key);
+
+            modelBuilder.Entity<ActionAndBenefitMessage>()
+                .HasAlternateKey(abm => abm.ActionID);
+
+            modelBuilder.Entity<MedicineDosagePharmacy>()
+                .HasAlternateKey(md => md.Id);
+
+            modelBuilder.Entity<MedicinePharmacy>()
+                .HasAlternateKey(m => m.MedicineID);
+
+            modelBuilder.Entity<MedicineReport>()
+                .HasAlternateKey(mr => mr.Id);
+
+            modelBuilder.Entity<MedicineSpecification>()
+                .HasAlternateKey(ms => ms.ID);
+
+            modelBuilder.Entity<MedicineReport>()
+                .HasMany(mr => mr.Dosage)
                 .WithOne();
         }
     }

@@ -27,16 +27,11 @@ namespace IntegrationAdapters.Services
         {
             return medicineRepository.GetAll();
         }
-
-        public Medicine GetByID(string ID)
+        public MedicinePharmacy GetMedicineByID(String ID)
         {
-            foreach (Medicine medicine in GetAll())
-            {
-                if (medicine.MedicineID.Equals(ID)) return medicine;
-            }
-            return null;
+            return medicineRepository.GetByID(ID);
         }
-        public Medicine GetMedicineByName(String Name)
+        public MedicinePharmacy GetMedicineByName(String Name)
         {
             return medicineRepository.GetByName(Name);
         }
