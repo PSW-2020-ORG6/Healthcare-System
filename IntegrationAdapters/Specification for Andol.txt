@@ -1,6 +1,0 @@
-Medicine name: Andol
-Content: 1mg andol
-Medicine replacement: Brufen
-Producer: Jankovic
-Daily taking: 1
-

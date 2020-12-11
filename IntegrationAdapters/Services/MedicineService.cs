@@ -33,23 +33,31 @@ namespace IntegrationAdapters.Services
         {
             medicineRepository.AddMedicineRepository();
         }
-
-        public void GeneratePrescription(PrescriptionDTO prescription, string fileName)
+        
+        private string GeneratePrescriptionString(PrescriptionDTO prescription)
         {
-            System.IO.File.WriteAllText(fileName, string.Empty);
             string result = "";
-            TextWriter tw = new StreamWriter(fileName);
             result += prescription.PatientName + " " + prescription.PatientSurName + "\n\n";
             result += prescription.Medicine + "\n";
             result += prescription.Quantity + "\n";
             result += prescription.PharmacyName + "\n";
             result += prescription.Note + "\n";
-            tw.WriteLine(result);
+            return result;
+        }
+
+        public void GeneratePrescription(PrescriptionDTO prescription)
+        {
+            var fileName = "Prescription " + DateTime.Now.ToString("yyyy-MM-dd") + ".txt";
+            System.IO.File.WriteAllText(fileName, string.Empty);
+            TextWriter tw = new StreamWriter(fileName);
+            
+            tw.WriteLine(GeneratePrescriptionString(prescription));
             tw.Close();
         }
 
-        public void GenerateSpecification(string result, string fileName)
+        public void GenerateSpecification(string result, string MedicineName)
         {
+            var fileName = "Specification for " + MedicineName + ".txt";
             System.IO.File.WriteAllText(fileName, string.Empty);
             
             TextWriter tw = new StreamWriter(fileName);
