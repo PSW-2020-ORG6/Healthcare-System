@@ -23,13 +23,16 @@ namespace IntegrationAdapters.Controllers
         {
             this.medicineService = new MedicineService();
         }
-        [HttpGet("getMedicineSpecification/{MedicineName}")]
-        public String GetMedicineSpeification(String MedicineName)
+        [HttpGet("getMedicineSpecification/{medicineName}")]
+        public IActionResult GetMedicineSpeification(String medicineName)
         {
-            Medicine medicine = medicineService.GetMedicineByName(MedicineName);
-            if (medicineService.GetMedicineByName(MedicineName) != null)
+            Medicine medicine = medicineService.GetMedicineByName(medicineName);
+            if (medicineService.GetMedicineByName(medicineName) != null)
             {
-                return medicine.MedicineSpecificationID;
+                MedicineSpecification medicineSpecification = medicineService.GetById(medicine.MedicineSpecificationID);
+                medicineService.GenerateSpecificationFromHospital(medicineName, medicineSpecification);
+                return Ok();
+                
             }
             else
             {
@@ -44,10 +47,10 @@ namespace IntegrationAdapters.Controllers
             return Ok();
         }
 
-        [HttpGet("getSpecification/{MedicineName}")]
-        public IActionResult GetSpecification(string MedicineName)
+        [HttpGet("getSpecification/{medicineName}")]
+        public IActionResult GetSpecification(string medicineName)
         {
-            var endPoint = "http://localhost:8082/myapp/medication/getSpecification/" + MedicineName;
+            var endPoint = "http://localhost:8082/myapp/medication/getSpecification/" + medicineName;
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(endPoint);
             HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
             Stream receiveStream = webResponse.GetResponseStream();
@@ -56,7 +59,7 @@ namespace IntegrationAdapters.Controllers
             string text = readStream.ReadToEnd();
             if (IsResponseValid(text))
             {
-                medicineService.GenerateSpecification(text, MedicineName);
+                medicineService.GenerateSpecificationFromPharmacy(text, medicineName);
                 return Ok();
             }
             else
@@ -69,14 +72,7 @@ namespace IntegrationAdapters.Controllers
 
         private bool IsResponseValid(string text)
         {
-            if (text.Length != 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return text.Length != 0;
         }
     }
 }

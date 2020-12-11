@@ -47,7 +47,7 @@ namespace IntegrationAdapters.Services
 
         public void GeneratePrescription(PrescriptionDTO prescription)
         {
-            var fileName = "Prescription " + DateTime.Now.ToString("yyyy-MM-dd") + ".txt";
+            var fileName = GeneratePrescriptionFileName();
             System.IO.File.WriteAllText(fileName, string.Empty);
             TextWriter tw = new StreamWriter(fileName);
             
@@ -55,15 +55,46 @@ namespace IntegrationAdapters.Services
             tw.Close();
         }
 
-        public void GenerateSpecification(string result, string MedicineName)
+        public void GenerateSpecificationFromPharmacy(string responseText, string medicineName)
         {
-            var fileName = "Specification for " + MedicineName + ".txt";
+            var fileName = GenerateSpecificationFileName(medicineName);
             System.IO.File.WriteAllText(fileName, string.Empty);
             
             TextWriter tw = new StreamWriter(fileName);
             
-            tw.WriteLine(result);
+            tw.WriteLine(responseText);
             tw.Close();
+        }
+
+        public void GenerateSpecificationFromHospital(string medicineName, MedicineSpecification medicineSpecification)
+        {
+            var fileName = GenerateSpecificationFileName(medicineName);
+            System.IO.File.WriteAllText(fileName, string.Empty);
+
+            TextWriter tw = new StreamWriter(fileName);
+       
+            tw.WriteLine(GenerateSpecificationString(medicineSpecification));
+            tw.Close();
+        }
+
+        private string GenerateSpecificationString(MedicineSpecification medicineSpecification)
+        {
+            string result = "";
+            result += "Producer: " + medicineSpecification.Producer + "\n";
+            result += "Content: " + medicineSpecification.Content + "\n";
+            result += "Notes: " + medicineSpecification.Notes + "\n";
+            result += "Shape: " + medicineSpecification.Shape + "\n";
+            return result;
+        }
+
+        private string GenerateSpecificationFileName(string medicineName)
+        {
+            return "Specification for " + medicineName + ".txt";
+        }
+
+        private string GeneratePrescriptionFileName()
+        {
+            return "Prescription " + DateTime.Now.ToString("yyyy-MM-dd") + ".txt";
         }
     }
 }

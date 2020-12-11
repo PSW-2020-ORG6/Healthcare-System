@@ -38,6 +38,11 @@ namespace IntegrationAdapters.Repositories
             return dbContext.Medicine.ToList();
         }
 
+        public MedicineSpecification GetById(string id)
+        {
+            return dbContext.MedicineSpecification.Find(id);
+        }
+
         public Medicine GetByID(string ID)
         {
             foreach (Medicine medicine in GetAll())
