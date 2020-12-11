@@ -66,13 +66,16 @@ namespace IntegrationAdapters.Services
             tw.Close();
         }
 
-        public void GenerateSpecificationFromHospital(string medicineName, MedicineSpecification medicineSpecification)
+        public void GenerateSpecificationFromHospital(string medicineName)
         {
             var fileName = GenerateSpecificationFileName(medicineName);
             System.IO.File.WriteAllText(fileName, string.Empty);
 
             TextWriter tw = new StreamWriter(fileName);
-       
+
+            Medicine medicine = GetMedicineByName(medicineName);
+            MedicineSpecification medicineSpecification = GetById(medicine.MedicineSpecificationID);
+
             tw.WriteLine(GenerateSpecificationString(medicineSpecification));
             tw.Close();
         }
@@ -87,6 +90,7 @@ namespace IntegrationAdapters.Services
             return result;
         }
 
+
         private string GenerateSpecificationFileName(string medicineName)
         {
             return "Specification for " + medicineName + ".txt";
@@ -96,5 +100,11 @@ namespace IntegrationAdapters.Services
         {
             return "Prescription " + DateTime.Now.ToString("yyyy-MM-dd") + ".txt";
         }
+
+        public Medicine DoesMedicineExist(string medicineName)
+        {
+            return GetMedicineByName(medicineName);
+        }
+       
     }
 }

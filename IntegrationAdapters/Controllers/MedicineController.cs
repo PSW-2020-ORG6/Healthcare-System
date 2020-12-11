@@ -26,13 +26,11 @@ namespace IntegrationAdapters.Controllers
         [HttpGet("getMedicineSpecification/{medicineName}")]
         public IActionResult GetMedicineSpeification(String medicineName)
         {
-            Medicine medicine = medicineService.GetMedicineByName(medicineName);
-            if (medicineService.GetMedicineByName(medicineName) != null)
+            Medicine medicine = medicineService.DoesMedicineExist(medicineName);
+            if (medicine != null)
             {
-                MedicineSpecification medicineSpecification = medicineService.GetById(medicine.MedicineSpecificationID);
-                medicineService.GenerateSpecificationFromHospital(medicineName, medicineSpecification);
-                return Ok();
-                
+                medicineService.GenerateSpecificationFromHospital(medicineName);
+                return Ok();              
             }
             else
             {
