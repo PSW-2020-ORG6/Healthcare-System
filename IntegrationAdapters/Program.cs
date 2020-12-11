@@ -18,7 +18,7 @@ namespace IntegrationAdapters
     public class Program
     {
         public static List<ActionAndBenefitMessage> Messages = new List<ActionAndBenefitMessage>();
-        public static String ResponseMessageGrpc;
+        public static string ResponseMessageGrpc;
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

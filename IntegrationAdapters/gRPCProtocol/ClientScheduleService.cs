@@ -14,7 +14,7 @@ namespace IntegrationAdapters.gRPCProtocol
 {
     public class ClientScheduleService : IHostedService
     {
-        public String MessageResponseFromPharmacy { get; set; }
+        public string MessageResponseFromPharmacy { get; set; }
         private System.Timers.Timer timer;
         private Channel channel;
         private SpringGrpcService.SpringGrpcServiceClient client;
