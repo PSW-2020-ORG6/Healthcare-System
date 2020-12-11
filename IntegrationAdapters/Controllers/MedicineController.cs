@@ -40,8 +40,7 @@ namespace IntegrationAdapters.Controllers
         [HttpPost("prescribeMedicine")]
         public IActionResult PrescribeMedicine(PrescriptionDTO prescription)
         {
-            var fileName = "Prescription " + DateTime.Now.ToString("yyyy-MM-dd") + ".txt";
-            medicineService.GeneratePrescription(prescription, fileName);
+            medicineService.GeneratePrescription(prescription);
             return Ok();
         }
 
@@ -55,9 +54,9 @@ namespace IntegrationAdapters.Controllers
             Encoding encode = System.Text.Encoding.GetEncoding("utf-8");
             StreamReader readStream = new StreamReader(receiveStream, encode);
             string text = readStream.ReadToEnd();
-            if (text.Length != 0)
+            if (IsResponseValid(text))
             {
-                medicineService.GenerateSpecification(text, "Specification for " + MedicineName + ".txt");
+                medicineService.GenerateSpecification(text, MedicineName);
                 return Ok();
             }
             else
@@ -65,7 +64,19 @@ namespace IntegrationAdapters.Controllers
                 return BadRequest();
             }
 
-            
+
+        }
+
+        private bool IsResponseValid(string text)
+        {
+            if (text.Length != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

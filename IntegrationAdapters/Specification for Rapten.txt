@@ -1,0 +1,6 @@
+Medicine name: Rapten
+Content: 1mg paracetamola
+Medicine replacement: Brufen
+Producer: Jankovic
+Daily taking: 2
+
