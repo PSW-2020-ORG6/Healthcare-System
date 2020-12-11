@@ -51,6 +51,7 @@ $(document).ready(function () {
 			}
 		});
 	});
+
 	$("#btnCheckWithPharmacy").click(function () {
 		var MedicineName = $("#txtMedicine").val();
 		var Quantity = parseInt($("#txtQuantity").val());
@@ -60,7 +61,7 @@ $(document).ready(function () {
 			data: JSON.stringify({ MedicineName: MedicineName, Quantity: Quantity, IsPharmacyApproved: IsPharmacyApproved }),
 			contentType: "application/json",
 			success: function () {
-				sleep(5000);
+				sleep(3000);
 				getMessageGrpc();
 			},
 			error: function (message) {
@@ -68,6 +69,7 @@ $(document).ready(function () {
 			}
 		});
 	});
+
 	function sleep(milliseconds) {
 		const date = Date.now();
 		let currentDate = null;
@@ -75,7 +77,6 @@ $(document).ready(function () {
 			currentDate = Date.now();
 		} while (currentDate - date < milliseconds);
 	}
-
 	
 	function getMessageGrpc() {
 		$.get({

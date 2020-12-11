@@ -15,11 +15,11 @@ namespace IntegrationAdapters.Models
         {
         }
 
-        public MedicineMessage(string MedicineName, int Quantity, bool IsPharmacyApproved)
+        public MedicineMessage(string medicineName, int quantity, bool isPharmacyApproved)
         {
-            this.MedicineName = MedicineName;
-            this.Quantity = Quantity;
-            this.IsPharmacyApproved = IsPharmacyApproved;
+            this.MedicineName = medicineName;
+            this.Quantity = quantity;
+            this.IsPharmacyApproved = isPharmacyApproved;
         }
     }
 }
