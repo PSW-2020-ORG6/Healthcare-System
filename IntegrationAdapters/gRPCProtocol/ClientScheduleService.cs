@@ -33,9 +33,8 @@ namespace IntegrationAdapters.gRPCProtocol
             try
             {
                 MessageResponseProto response = await client.communicateAsync(new MessageProto() { MedicineName = message.MedicineName, Quantity = message.Quantity, IsPharmacyApproved = message.IsPharmacyApproved });
-                Console.WriteLine(response.Response + " is response;status: " + response.Status);
-            MessageResponseFromPharmacy = response.Response;
-            setingResponse(MessageResponseFromPharmacy);
+                MessageResponseFromPharmacy = response.Response;
+                SaveResponse(MessageResponseFromPharmacy);
             }
             catch (Exception exc)
             {
@@ -50,7 +49,7 @@ namespace IntegrationAdapters.gRPCProtocol
             return Task.CompletedTask;
         }
 
-        public void setingResponse(String message) 
+        public void SaveResponse(String message) 
         {
             Program.ResponseMessageGrpc = message;
         }
