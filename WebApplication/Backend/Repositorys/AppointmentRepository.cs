@@ -10,7 +10,7 @@ namespace WebApplication.Backend.Repositorys
     {
         private MySqlConnection connection;
         private RoomRepository roomRepository = new RoomRepository();
-        private PhysitianRepository physitianRepository = new PhysitianRepository();
+        private PhysicianRepository physitianRepository = new PhysicianRepository();
         private PatientRepository patientRepository = new PatientRepository();
         private TimeIntervalRepository timeIntervalRepository = new TimeIntervalRepository();
         private ProcedureTypeRepository procedureTypeRepository = new ProcedureTypeRepository();
@@ -31,7 +31,7 @@ namespace WebApplication.Backend.Repositorys
                 Appointment entity = new Appointment();
                 entity.SerialNumber = (string)sqlReader[0];
                 entity.Room = roomRepository.GetRoomBySerialNumber((string)sqlReader[1]);
-                entity.Physician = physitianRepository.GetPhysitianBySerialNumber((string)sqlReader[2]);
+                entity.Physician = physitianRepository.GetPhysicianBySerialNumber((string)sqlReader[2]);
                 entity.Patient = patientRepository.GetPatientBySerialNumber((string)sqlReader[3]);
                 entity.TimeInterval = timeIntervalRepository.GetTimeIntervalById((string)sqlReader[6]);
                 entity.ProcedureType = procedureTypeRepository.GetProcedureTypeBySerialNumber((string)sqlReader[7]);
@@ -145,6 +145,16 @@ namespace WebApplication.Backend.Repositorys
                 Console.WriteLine(e.Message);
                 return null;
             }
+        }
+
+        public List<Appointment> GetAppointmentsByDate(string date)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddAppointment(Appointment appointment)
+        {
+            throw new NotImplementedException();
         }
     }
 }

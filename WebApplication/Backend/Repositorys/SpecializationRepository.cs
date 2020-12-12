@@ -13,11 +13,12 @@ namespace WebApplication.Backend.Repositorys
 
         public SpecializationRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
         }
 
         private List<Specialization> GetSpecializations(String query)
         {
+            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -38,6 +39,18 @@ namespace WebApplication.Backend.Repositorys
             try
             {
                 return GetSpecializations("Select * from specialization where SerialNumber='" + serialNumber + "'");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+        public List<Specialization> GetSpecializationsByPhysicianSerialNumber(string serialNumber)
+        {
+            try
+            {
+                return GetSpecializations("Select * from specialization where PhysicianSerialNumber like '" + serialNumber + "'");
             }
             catch (Exception e)
             {
@@ -81,6 +94,18 @@ namespace WebApplication.Backend.Repositorys
             try
             {
                 return GetSpecializations("Select * from specialization where Name like '%" + name + "%'");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+        public List<Specialization> GetAllSpecializations()
+        {
+            try
+            {
+                return GetSpecializations("Select * from specialization");
             }
             catch (Exception e)
             {

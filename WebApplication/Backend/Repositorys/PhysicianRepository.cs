@@ -6,19 +6,19 @@ using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class PhysitianRepository : IPhysitianRepository
+    public class PhysicianRepository : IPhysicianRepository
     {
         private MySqlConnection connection;
         private AddressRepository addressRepository = new AddressRepository();
         private SpecializationRepository specializationRepository = new SpecializationRepository();
         private TimeIntervalRepository timeIntervalRepository = new TimeIntervalRepository();
 
-        public PhysitianRepository()
+        public PhysicianRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
         }
 
-        private List<Physician> GetPhysitians(String query)
+        private List<Physician> GetPhysicians(String query)
         {
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
@@ -30,29 +30,23 @@ namespace WebApplication.Backend.Repositorys
                 entity.SerialNumber = (string)sqlReader[0];
                 entity.Name = (string)sqlReader[1];
                 entity.Surname = (string)sqlReader[2];
-                // entity.FullName = entity.Name + " " + entity.Surname;
                 entity.Id = (string)sqlReader[3];
                 entity.DateOfBirth = (DateTime)sqlReader[4];
                 entity.Contact = (string)sqlReader[5];
                 entity.Email = (string)sqlReader[6];
-                //entity.Address = addressRepository.GetAddressBySerialNumber((string)sqlReader[7]);
                 entity.Password = (string)sqlReader[8];
-                //entity.Specialization = specializationRepository.GetSpecializationsBySerialNumber((string)sqlReader[9]);
-                //entity.VacationTime = timeIntervalRepository.GetTimeIntervalsById((string)sqlReader[10]);
-                //entity.WorkSchedule = timeIntervalRepository.GetTimeIntervalById((string)sqlReader[11]);
-                //entity.AllSpecializations = specializationRepository.GetSpecializationsNameBySerialNumber((string)sqlReader[12]);
-                //entity.AddressSerialNumber = (string)sqlReader[13];
+                entity.Specialization = specializationRepository.GetSpecializationsByPhysicianSerialNumber((string)sqlReader[0]);
                 resultList.Add(entity);
             }
             connection.Close();
             return resultList;
         }
 
-        public List<Physician> GetAllPhysitians()
+        public List<Physician> GetAllPhysicians()
         {
             try
             {
-                return GetPhysitians("Select * from physitian");
+                return GetPhysicians("Select * from physician");
             }
             catch (Exception)
             {
@@ -60,11 +54,11 @@ namespace WebApplication.Backend.Repositorys
             }
         }
 
-        public List<Physician> GetPhysitiansByName(string name)
+        public List<Physician> GetPhysiciansByName(string name)
         {
             try
             {
-                return GetPhysitians("Select * from physitian where Name like '%" + name + "%'");
+                return GetPhysicians("Select * from physician where Name like '%" + name + "%'");
             }
             catch (Exception)
             {
@@ -72,11 +66,11 @@ namespace WebApplication.Backend.Repositorys
             }
         }
 
-        public List<Physician> GetPhysitiansByFullName(string fullName)
+        public List<Physician> GetPhysiciansByFullName(string fullName)
         {
             try
             {
-                return GetPhysitians("Select * from physitian where FullName like '%" + fullName + "%'");
+                return GetPhysicians("Select * from physician where FullName like '%" + fullName + "%'");
             }
             catch (Exception)
             {
@@ -84,11 +78,11 @@ namespace WebApplication.Backend.Repositorys
             }
         }
 
-        public Physician GetPhysitianBySerialNumber(string serialNumber)
+        public Physician GetPhysicianBySerialNumber(string serialNumber)
         {
             try
             {
-                return GetPhysitians("Select * from physitian where SerialNumber like '" + serialNumber + "'")[0];
+                return GetPhysicians("Select * from physician where SerialNumber like '" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {
@@ -97,11 +91,11 @@ namespace WebApplication.Backend.Repositorys
             }
         }
 
-        public Physician GetPhysitianById(string id)
+        public Physician GetPhysicianById(string id)
         {
             try
             {
-                return GetPhysitians("Select * from physitian where Id='" + id + "'")[0];
+                return GetPhysicians("Select * from physician where Id='" + id + "'")[0];
             }
             catch (Exception e)
             {

@@ -12,7 +12,7 @@ namespace WebApplication.Backend.Services
     public class RegistrationService
     {
         private IRegistrationRepository registrationRepository = new RegistrationRepository();
-        private PhysitianRepository physitianRepository = new PhysitianRepository();
+        private PhysicianRepository physitianRepository = new PhysicianRepository();
         public RegistrationService()
         {
             this.registrationRepository = new RegistrationRepository();

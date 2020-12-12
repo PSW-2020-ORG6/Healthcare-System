@@ -7,7 +7,7 @@ const SuccessfulRegistration = { template: '<successfulRegistration></successful
 const Survey = { template: '<survey></survey>' }
 const Statistics = { template: '<statistics></statistics>' }
 const Search = { template: '<search></search>' }
-
+const Appointment = { template: '<appointment></appointment>' }
 
 var temp = new Vue({
 	el: '#temp',
@@ -41,7 +41,10 @@ var temp = new Vue({
 		},
 		search: function () {
 			router.push("search")
-		}
+		},
+		appointment: function () {
+			router.push("appointment")
+        }
 	}
 });
 
@@ -92,6 +95,11 @@ const router = new VueRouter({
 			path: '/search',
 			name: 'search',
 			component: Search,
+		},
+		{
+			path: '/appointment',
+			name: 'appointment',
+			component: Appointment,
 		}
 	]
 });
