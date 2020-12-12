@@ -176,7 +176,6 @@
                     .catch(error => {
                         alert("Error")
                     })
-        }
         },
         Refresh: function () {
             location.reload();

@@ -15,7 +15,7 @@ namespace WebApplication.Backend.Repositorys
 
         public ProcedureTypeRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
         }
 
         private List<ProcedureType> GetProcedureTypes(String query)
@@ -28,7 +28,7 @@ namespace WebApplication.Backend.Repositorys
             {
                 ProcedureType entity = new ProcedureType();
                 entity.SerialNumber = (string)sqlReader[0];
-                entity.Specialization = specializationRepository.GetSpecializationBySerialNumber((string)sqlReader[2]);
+                entity.Specialization = specializationRepository.GetSpecializationBySerialNumber((string)sqlReader[3]);
                 entity.Name = (string)sqlReader[1];
                 //entity.EstimatedTimeInMinutes = (int)sqlReader[2];
                 //AddingRequiredEquipments(sqlReader, entity);
