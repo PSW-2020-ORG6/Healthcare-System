@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using HealthClinicBackend.Backend.Model.Hospital;
-using WebApplication.Backend.Repositorys;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 
 namespace GraphicEditor.View.Windows
 {
@@ -10,9 +10,11 @@ namespace GraphicEditor.View.Windows
     /// </summary>
     public partial class EquipmentSearch : Window
     {
-        private EquipmentRepository equipmentRepository = new EquipmentRepository();
-        private RoomRepository roomRepository = new RoomRepository();
-        private MedicineRepository medicineRepository = new MedicineRepository();
+        private EquipmentDatabaseSql equipmentRepository = new EquipmentDatabaseSql();
+        private RoomDatabaseSql roomRepository = new RoomDatabaseSql();
+        private MedicineDatabaseSql medicineRepository = new MedicineDatabaseSql();
+        private FloorDatabaseSql floorRepository = new FloorDatabaseSql();
+        private BuildingDatabaseSql buildingRepository = new BuildingDatabaseSql();
 
         public EquipmentSearch()
         {
@@ -23,8 +25,8 @@ namespace GraphicEditor.View.Windows
         {
             string itemName = EquipmentNameTextBox.Text;
 
-            List<Equipment> equipments = equipmentRepository.GetEquipmentsByName(itemName);
-            List<Medicine> medicines = medicineRepository.GetMedicinesByName(itemName);
+            List<Equipment> equipments = equipmentRepository.GetByName(itemName);
+            List<Medicine> medicines = medicineRepository.GetByName(itemName);
 
             GenerateReport(itemName, equipments, medicines);
             EquipmentNameTextBox.Text = null;
@@ -78,9 +80,10 @@ namespace GraphicEditor.View.Windows
                 int checkCounter = 0;
                 foreach (Equipment equipment in equipments)
                 {
-                    Room room = roomRepository.GetRoomBySerialNumber(equipment.RoomId);
+                    Room room = roomRepository.GetBySerialNumber(equipment.RoomId);
                     resultOfSearch += "\nInformation about rooms: ";
-                    //TODO resultOfSearch += RoomSearch.ReportOnFoundRooms(equipment.RoomId, room);
+                    resultOfSearch += room.Name+" ";
+                    resultOfSearch=PlaceOfFoundRooms(resultOfSearch, room);
                     if (++checkCounter == equipmentCounter)
                         return resultOfSearch += ".";
                     else
@@ -89,11 +92,12 @@ namespace GraphicEditor.View.Windows
             }
             return null;
         }
-
-        private void RefreshClick(object sender, RoutedEventArgs e)
+        private string PlaceOfFoundRooms(string resultOfSearch, Room room)
         {
-            this.Close();
-            new EquipmentSearch().Show();
+            Floor floor = floorRepository.GetBySerialNumber(room.FloorSerialNumber);
+            Building building = buildingRepository.GetBySerialNumber(room.BuildingSerialNumber);
+            resultOfSearch += floor.Name + " in " + building.Name;
+            return resultOfSearch;
         }
     }
 }

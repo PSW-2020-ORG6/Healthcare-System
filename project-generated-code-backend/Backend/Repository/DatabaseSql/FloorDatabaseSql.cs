@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using HealthClinicBackend.Backend.Model.Hospital;
+﻿using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
@@ -16,6 +16,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 .ToList();
         }
 
+        
+        public override Floor GetById(string serialNumber)
+        {
+            return GetAll().Where(f => f.SerialNumber.Equals(serialNumber)).ToList()[0];
+        }
         public List<Floor> GetByName(string name)
         {
             return GetAll().Where(f => f.Name.Equals(name)).ToList();
