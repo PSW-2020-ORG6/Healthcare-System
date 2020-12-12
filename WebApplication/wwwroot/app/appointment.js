@@ -109,7 +109,7 @@
         },
         GetTimeIntervals: function () {
             axios
-                .get('http://localhost:49900/appointment/appointments', { params: { physicianId: this.choosenPhysician.serialNumber, specializationName: this.choosenSpecialization, date: this.date } })
+                .get('http://localhost:49900/appointment/appointments', { params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, date: this.date } })
                 .then(response => {
                     this.timeIntervals = response.data
                 })
@@ -166,15 +166,17 @@
             return false
         },
         MakeAppointment: function () {
-            axios
-                .post('http://localhost:49900/appointment/makeAppointment/' + this.choosenPhysician.serialNumber + '/' + this.timeInterval.id + '/' + this.date)
-                .then(response => {
-                    this.Refresh()
-                    alert("Appointment is made")
-                })
-                .catch (error => {
-                    alert("Error")
-            })
+            if (this.timeInterval!=null)
+                axios
+                    .post('http://localhost:49900/appointment/makeAppointment/' + this.choosenPhysician.id + '/' + this.timeInterval.id + '/' + this.date)
+                    .then(response => {
+                        this.Refresh()
+                        alert("Appointment is made")
+                    })
+                    .catch(error => {
+                        alert("Error")
+                    })
+        }
         },
         Refresh: function () {
             location.reload();

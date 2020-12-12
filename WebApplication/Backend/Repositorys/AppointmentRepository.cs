@@ -31,13 +31,13 @@ namespace WebApplication.Backend.Repositorys
                 Appointment entity = new Appointment();
                 entity.SerialNumber = (string)sqlReader[0];
                 entity.Urgency = (bool)sqlReader[1];
-                entity.Active = (bool)sqlReader[2];
-                entity.Patient = patientRepository.GetPatientBySerialNumber((string)sqlReader[3]);
-                entity.Room = roomRepository.GetRoomBySerialNumber((string)sqlReader[4]);
-                entity.Physician = physitianRepository.GetPhysicianBySerialNumber((string)sqlReader[5]);
-                entity.ProcedureType = procedureTypeRepository.GetProcedureTypeBySerialNumber((string)sqlReader[6]);
-                entity.Date = Convert.ToDateTime(sqlReader[7]);
-                entity.TimeInterval =timeIntervalRepository.GetTimeIntervalById((string)sqlReader[8]);
+                entity.Patient = patientRepository.GetPatientBySerialNumber((string)sqlReader[2]);
+                entity.Room = roomRepository.GetRoomBySerialNumber((string)sqlReader[3]);
+                entity.Physician = physitianRepository.GetPhysicianBySerialNumber((string)sqlReader[4]);
+                entity.ProcedureType = procedureTypeRepository.GetProcedureTypeBySerialNumber((string)sqlReader[5]);
+                entity.Date = Convert.ToDateTime(sqlReader[6]);
+                entity.TimeInterval =timeIntervalRepository.GetTimeIntervalById((string)sqlReader[7]);
+                entity.Active = (bool)sqlReader[8];
                 resultList.Add(entity);
             }
             connection.Close();
@@ -154,7 +154,18 @@ namespace WebApplication.Backend.Repositorys
 
         public bool AddAppointment(Appointment appointment)
         {
-            throw new NotImplementedException();
+            connection.Open();
+            string[] dateString = appointment.Date.ToString().Split(" ");
+            string[] partsOfDate = dateString[0].Split("/");
+
+            string sqlDml = "INSERT into appointment (SerialNumber,Urgency,PatientId,RoomId,PhysitianId,ProcedureTypeId,Date,TimeIntervalId,Active)  VALUES('"
+                + appointment.SerialNumber + "','" + 0 + "','" + "96736fd7-3018-4f3f-a14b-35610a1c8959" + "','" + "101" + "','" + appointment.Physician.SerialNumber
+                + "','" + "300001" + "','" + partsOfDate[2] + "-" + partsOfDate[0] + "-" + partsOfDate[1] + "T" + dateString[1]
+                + "','" + appointment.TimeInterval.Id + "','" + 1 + "')";
+            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            sqlCommand.ExecuteNonQuery();
+            connection.Close();
+            return true;
         }
     }
 }
