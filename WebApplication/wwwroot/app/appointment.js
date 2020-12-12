@@ -85,10 +85,9 @@
                                     <select class="select" v-model ="timeInterval">
                                         <option div  v-for="t in timeIntervals" v-bind:value="t">{{t.time}}</option>
                                     </select>
-                                    </br></br>
+                                    </br></br></br></br>
                                     <button class="btn btnPrev" v-on:click="PreviousStep()">Previous</button>
                                     <button class="btn btnNext" v-on:click="MakeAppointment()">Submit</button>
-                                    </br></br></br></br>
                                 </div></br>
                            </div>
                         </div>
@@ -148,7 +147,6 @@
         SpecialistForChoose: function () {
             this.physicianForChoose = []
             for (p in this.physicians) {
-                alert(p.specializations)
                 for (s in this.physicians[p].specializations) {
                     if (this.physicians[p].specializations[s].name == this.choosenSpecialization)
                         this.physicianForChoose.push(this.physicians[p])

@@ -15,6 +15,7 @@ namespace WebApplication.Backend.Services
         private IAppointmentRepository appointmentRepository = new AppointmentRepository();
         private IPhysicianRepository physicianRepository = new PhysicianRepository();
         private PhysicianDTO physitianDTO = new PhysicianDTO();
+        private TimeIntervalDTO timeIntervalDTO = new TimeIntervalDTO();
         private SpecializationDTO specializationDTO = new SpecializationDTO();
 
         public AppointmentService()
@@ -64,9 +65,9 @@ namespace WebApplication.Backend.Services
             return specializationDTO.ConvertListToSpecializationDTO(specializationRepository.GetAllSpecializations());
         }
 
-        public List<TimeInterval> GetAllAvailableAppointments(string physitianId, string specializationName, string date)
+        public List<TimeIntervalDTO> GetAllAvailableAppointments(string physitianId, string specializationName, string date)
         {
-            List<TimeInterval> timeIntervals = timeIntervalRepository.GetAllTimeIntervals();
+            List<TimeIntervalDTO> timeIntervals = timeIntervalDTO.ConvertListToTimeIntervalDTO(timeIntervalRepository.GetAllTimeIntervals());
             List<Appointment> appointments = appointmentRepository.GetAppointmentsByDate(date);
             if (!appointments.Any())
                 return timeIntervals;
@@ -74,10 +75,10 @@ namespace WebApplication.Backend.Services
                 return GetAvailableAppointments(timeIntervals, appointments, physitianId, specializationName, date);
         }
 
-        private List<TimeInterval> GetAvailableAppointments(List<TimeInterval> timeIntervals, List<Appointment> appointments, string physitianId, string specializationName, string date)
+        private List<TimeIntervalDTO> GetAvailableAppointments(List<TimeIntervalDTO> timeIntervals, List<Appointment> appointments, string physitianId, string specializationName, string date)
         {
-            List<TimeInterval> result = new List<TimeInterval>();
-            foreach (TimeInterval timeInterval in timeIntervals)
+            List<TimeIntervalDTO> result = new List<TimeIntervalDTO>();
+            foreach (TimeIntervalDTO timeInterval in timeIntervals)
             {
                 bool existance = false;
                 foreach (Appointment appointment in appointments)
