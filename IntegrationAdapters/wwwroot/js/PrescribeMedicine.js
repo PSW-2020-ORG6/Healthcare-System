@@ -79,15 +79,27 @@ $(document).ready(function () {
 	}
 	
 	function getMessageGrpc() {
+
+		$('#container').html('');
 		$.get({
 			url: '../medicine/getMessageGrpc',
 			contentType: 'application/json',
 			success: function (data) {
 				foundedPharmacy = data;
-				if (foundedPharmacy == undefined)
-					document.getElementById('txtPharmacyName').value = 'Pharmacy not found';
-				else
-					document.getElementById('txtPharmacyName').value= foundedPharmacy;
+				foundedPharmacy = foundedPharmacy.replace('[', '');
+				foundedPharmacy = foundedPharmacy.replace(']', '');
+				var foundedPharmacyArray = foundedPharmacy.split(',');
+				for (var value of foundedPharmacyArray) {
+					if (value == 'Pharmacy not found') {
+						$('#container').append(`<input class="textbox" type="text" id="${value}"  value="${value}" disabled>`)
+						$('#btnPrescribe').attr("disabled", true);
+					} else {
+						$('#container')
+							.append(`<input type="checkbox" id="${value}" name="interest" value="${value}">`)
+							.append(`<label for="${value}">${value}</label></div>`)
+							.append(`<br>`);
+					}
+				}
 			},
 			error: function (message) {
 				alert("Failed")
