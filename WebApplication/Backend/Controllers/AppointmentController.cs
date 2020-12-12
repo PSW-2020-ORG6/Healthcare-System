@@ -52,8 +52,8 @@ namespace WebApplication.Backend.Controllers
             return apointments;
         }
 
-        [HttpGet("allAppointmentsByPatientIdCanceled")]
-        public List<Appointment> GellAllAppointmentsByPatientIdCanceled(String patientId)
+        [HttpGet("appointments")]
+        public List<TimeInterval> GetAllAvailableAppointments(string physicianId, string specializationName, string date)
         {
             return appointmentService.GetAllAppointmentsByPatientIdCanceled(patientId);
         }
@@ -98,5 +98,19 @@ namespace WebApplication.Backend.Controllers
             else
                 return null;
         }
+
+        //[HttpPost("makeAppointment/{physicianId}/{timeIntervalId}/{date}")]
+        //public IActionResult MakeAppointment(string physicianId, string timeIntervalId, string date)
+        //{
+        //    if (physicianId != null && timeIntervalId != null && date != null)
+        //    {
+        //        if (appointmentService.AddAppointment(new Appointment(new AppointmentDTO(physicianId, date, timeIntervalId))))
+        //            return Ok();
+        //        else
+        //            return BadRequest();
+        //    }
+        //    else
+        //        return BadRequest();
+        //}
     }
 }
