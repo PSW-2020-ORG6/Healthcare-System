@@ -10,6 +10,7 @@ namespace WebApplication.Backend.DTO
     {
         private DateTime start;
         private DateTime end;
+        private string id;
         public string time => Start.ToString("HH:mm") + " - " + End.ToString("HH:mm");
         public TimeIntervalDTO()
         {
@@ -19,6 +20,7 @@ namespace WebApplication.Backend.DTO
         {
             this.Start = timeInterval.Start;
             this.End = timeInterval.End;
+            this.Id = timeInterval.Id;
         }
 
         public DateTime Start
@@ -45,7 +47,17 @@ namespace WebApplication.Backend.DTO
             }
         }
 
-
+        public string Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
+        }
         public List<TimeIntervalDTO> ConvertListToTimeIntervalDTO(List<TimeInterval> timeIntervals)
         {
             List<TimeIntervalDTO> timeIntervalsDTO = new List<TimeIntervalDTO>();

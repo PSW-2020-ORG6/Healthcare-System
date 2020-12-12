@@ -5,6 +5,7 @@ using HealthClinicBackend.Backend.Model.Schedule;
 using WebApplication.Backend.Services;
 using WebApplication.Backend.DTO;
 using HealthClinicBackend.Backend.Model.Util;
+using HealthClinicBackend.Backend.Dto;
 
 namespace WebApplication.Backend.Controllers
 {
@@ -64,18 +65,18 @@ namespace WebApplication.Backend.Controllers
                 return null;
         }
 
-        //[HttpPost("makeAppointment/{physicianId}/{timeIntervalId}/{date}")]
-        //public IActionResult MakeAppointment(string physicianId, string timeIntervalId, string date)
-        //{
-        //    if (physicianId != null && timeIntervalId != null && date != null)
-        //    {
-        //        if (appointmentService.AddAppointment(new Appointment(new AppointmentDTO(physicianId, date, timeIntervalId))))
-        //            return Ok();
-        //        else
-        //            return BadRequest();
-        //    }
-        //    else
-        //        return BadRequest();
-        //}
+        [HttpPost("makeAppointment/{physicianId}/{timeIntervalId}/{date}")]
+        public IActionResult MakeAppointment(string physicianId, string timeIntervalId, string date)
+        {
+            if (physicianId != null && timeIntervalId != null && date != null)
+            {
+                if (appointmentService.AddAppointment(new Appointment(new AppointmentDto(physicianId, date, timeIntervalId))))
+                    return Ok();
+                else
+                    return BadRequest();
+            }
+            else
+                return BadRequest();
+        }
     }
 }
