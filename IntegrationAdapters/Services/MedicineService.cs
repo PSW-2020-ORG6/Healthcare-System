@@ -3,8 +3,10 @@ using IntegrationAdapters.Models.DTO;
 using IntegrationAdapters.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace IntegrationAdapters.Services
@@ -21,6 +23,7 @@ namespace IntegrationAdapters.Services
         {
             return medicineRepository.GetAll();
         }
+   
         public Medicine GetMedicineByID(String ID)
         {
             return medicineRepository.GetByID(ID);
@@ -33,7 +36,13 @@ namespace IntegrationAdapters.Services
         {
             medicineRepository.AddMedicineRepository();
         }
-        
+
+        public MedicineSpecification GetById(string id)
+        {
+            return medicineRepository.GetById(id);
+        }
+
+
         private string GeneratePrescriptionString(PrescriptionDTO prescription)
         {
             string result = "";
@@ -64,6 +73,7 @@ namespace IntegrationAdapters.Services
             
             tw.WriteLine(responseText);
             tw.Close();
+            Process.Start("notepad.exe", fileName);
         }
 
         public void GenerateSpecificationFromHospital(string medicineName)
@@ -78,6 +88,8 @@ namespace IntegrationAdapters.Services
 
             tw.WriteLine(GenerateSpecificationString(medicineSpecification));
             tw.Close();
+            Process.Start("notepad.exe", fileName);
+
         }
 
         private string GenerateSpecificationString(MedicineSpecification medicineSpecification)

@@ -5,36 +5,29 @@
 			url: '../medicine/getMedicineSpecification/' + MedicineName,
 			contentType: 'application/json',
 			success: function (MedicineName) {
-				console.log(MedicineName);
-				if (MedicineName != "")
 					alert('Specification found!');
-				else {
-					$("#btnAskPharmaciesForSpecification").attr("disabled", false);
-					$("#btnGetMedicineSpecification").attr("disabled", true);
-					alert('Specification not found!Ask pharmacy!');
-				}
+
 			},
 			error: function (message) {
-				alert("Failed")
+				alert('Waiting for check in pharmacy...');
+				$.get({
+					url: '../medicine/getSpecification/' + MedicineName,
+					contentType: 'application/json',
+					success: function () {
+						alert('Success found specification in pharmacy');
+
+					},
+					error: function (message) {
+						alert('Specification not found in phmarmacy');
+					}
+				});
 			}
 		});
 	});
 
 	$("#btnAskPharmaciesForSpecification").click(function () {
 		var MedicineName = $("#txtMedicine").val();
-		$.get({
-			url: '../medicine/getSpecification/' + MedicineName,
-			contentType: 'application/json',
-			success: function () {
-				alert('Success found specification in pharmacy');
-	
-			},
-			error: function (message) {
-				$("#btnAskPharmaciesForSpecification").attr("disabled", true);
-				$("#btnGetMedicineSpecification").attr("disabled", false);
-				alert('Specification not found in phmarmacy');
-			}
-		});
+		
 	});
 
 	$("#btnPrescribe").click(function () {
