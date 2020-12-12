@@ -77,8 +77,7 @@ namespace IntegrationAdapters.Controllers
         private bool IsResponseValid(string text)
         {
             return text.Length != 0;
-                return "";
-            }
+
         }
 
         [HttpPost("sendMessageGrpc")]
