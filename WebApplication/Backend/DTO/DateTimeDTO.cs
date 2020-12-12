@@ -22,5 +22,9 @@ namespace WebApplication.Backend.DTO
             string[] dates = date.Split("-");
             return new DateTime(Convert.ToInt32(dates[0]), Convert.ToInt32(dates[1]), Convert.ToInt32(dates[2]));
         }
+        public bool IsPreferredTimeValid(string date)
+        {
+            return DateTime.Parse(date) > DateTime.Today.AddDays(2);
+        }
     }
 }

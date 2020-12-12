@@ -37,8 +37,8 @@ namespace WebApplicationTests
             appointments.Add(appointment);
 
             stubRepository.Setup(m => m.GetAllAppointmentByPatientId(patientIdTrue)).Returns(appointments);
-            WebApplication.Backend.Services.AppointmentsService service =
-                new WebApplication.Backend.Services.AppointmentsService(stubRepository.Object);
+            WebApplication.Backend.Services.AppointmentService service =
+                new WebApplication.Backend.Services.AppointmentService(stubRepository.Object);
             appointments = service.GetAllAppointmentsByPatientId(patientIdTrue);
             if (appointments.Count == 0)
             {
@@ -60,8 +60,8 @@ namespace WebApplicationTests
             bool result;
 
             stubRepository.Setup(m => m.GetAllAppointmentByPatientId(patientIdFalse)).Returns(appointments);
-            WebApplication.Backend.Services.AppointmentsService service =
-                new WebApplication.Backend.Services.AppointmentsService(stubRepository.Object);
+            WebApplication.Backend.Services.AppointmentService service =
+                new WebApplication.Backend.Services.AppointmentService(stubRepository.Object);
             appointments = service.GetAllAppointmentsByPatientId(patientIdFalse);
             if (appointments.Count != 0)
             {
