@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -48,6 +49,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public virtual T GetById(string id)
         {
             throw new System.NotImplementedException();
+        }
+
+        public virtual T GetBySerialNumber(string serialNumber)
+        {
+            return GetAll().Where(f => f.SerialNumber.Equals(serialNumber)).ToList()[0];
         }
 
         public virtual T Instantiate(string objectStringFormat)

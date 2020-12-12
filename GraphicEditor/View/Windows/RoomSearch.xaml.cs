@@ -2,7 +2,6 @@
 using System.Windows;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
-using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace GraphicEditor.View.Windows
 {
@@ -11,9 +10,9 @@ namespace GraphicEditor.View.Windows
     /// </summary>
     public partial class RoomSearch : Window
     {
-        private IRoomRepository roomRepository = new RoomDatabaseSql();
-        private IFloorRepository floorRepository = new FloorDatabaseSql();
-        private IBuildingRepository buildingRepository = new BuildingDatabaseSql();
+        private RoomDatabaseSql roomRepository = new RoomDatabaseSql();
+        private FloorDatabaseSql floorRepository = new FloorDatabaseSql();
+        private BuildingDatabaseSql buildingRepository = new BuildingDatabaseSql();
 
         public RoomSearch()
         {
@@ -52,8 +51,8 @@ namespace GraphicEditor.View.Windows
 
         private string PlaceOfFoundRooms(string resultOfSearch, Room room)
         {
-            Floor floor = floorRepository.GetById(room.FloorSerialNumber);
-            Building building = buildingRepository.GetById(room.BuildingSerialNumber);
+            Floor floor = floorRepository.GetBySerialNumber(room.FloorSerialNumber);
+            Building building = buildingRepository.GetBySerialNumber(room.BuildingSerialNumber);
             resultOfSearch += floor.Name + " in " + building.Name;
             return resultOfSearch;
         }

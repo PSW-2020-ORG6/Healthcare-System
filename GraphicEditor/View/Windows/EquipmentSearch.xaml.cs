@@ -2,7 +2,6 @@
 using System.Windows;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
-using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace GraphicEditor.View.Windows
 {
@@ -11,9 +10,11 @@ namespace GraphicEditor.View.Windows
     /// </summary>
     public partial class EquipmentSearch : Window
     {
-        private IEquipmentRepository equipmentRepository = new EquipmentDatabaseSql();
-        private IRoomRepository roomRepository = new RoomDatabaseSql();
-        private IMedicineRepository medicineRepository = new MedicineDatabaseSql();
+        private EquipmentDatabaseSql equipmentRepository = new EquipmentDatabaseSql();
+        private RoomDatabaseSql roomRepository = new RoomDatabaseSql();
+        private MedicineDatabaseSql medicineRepository = new MedicineDatabaseSql();
+        private FloorDatabaseSql floorRepository = new FloorDatabaseSql();
+        private BuildingDatabaseSql buildingRepository = new BuildingDatabaseSql();
 
         public EquipmentSearch()
         {
@@ -84,9 +85,10 @@ namespace GraphicEditor.View.Windows
                 int checkCounter = 0;
                 foreach (Equipment equipment in equipments)
                 {
-                    Room room = roomRepository.GetById(equipment.RoomId);
+                    Room room = roomRepository.GetBySerialNumber(equipment.RoomId);
                     resultOfSearch += "\nInformation about rooms: ";
-                    //TODO resultOfSearch += RoomSearch.ReportOnFoundRooms(equipment.RoomId, room);
+                    resultOfSearch += room.Name+" ";
+                    resultOfSearch=PlaceOfFoundRooms(resultOfSearch, room);
                     if (++checkCounter == equipmentCounter)
                         return resultOfSearch += ".";
                     else
@@ -96,11 +98,12 @@ namespace GraphicEditor.View.Windows
 
             return null;
         }
-
-        private void RefreshClick(object sender, RoutedEventArgs e)
+        private string PlaceOfFoundRooms(string resultOfSearch, Room room)
         {
-            this.Close();
-            new EquipmentSearch().Show();
+            Floor floor = floorRepository.GetBySerialNumber(room.FloorSerialNumber);
+            Building building = buildingRepository.GetBySerialNumber(room.BuildingSerialNumber);
+            resultOfSearch += floor.Name + " in " + building.Name;
+            return resultOfSearch;
         }
     }
 }

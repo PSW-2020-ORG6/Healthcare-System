@@ -29,7 +29,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public override Room GetById(string id)
         {
-            return GetAll().Where(r => r.SerialNumber.Equals(id)).ToList()[0];
+            return GetAll().Where(r => r.Id.Equals(id)).ToList()[0];
         }
 
         public List<Room> GetByProcedureType(ProcedureType procedureType)
@@ -44,7 +44,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public List<Room> GetByName(string name)
         {
-            return GetAll().Where(r => r.Name.Equals(name)).ToList();
+            return GetAll().Where(r => r.Name.ToLower().Contains(name.ToLower())).ToList();
         }
 
         public List<Room> GetByFloorSerialNumber(string floorSerialNumber)
