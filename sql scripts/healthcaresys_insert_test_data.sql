@@ -75,9 +75,9 @@ INSERT INTO public."Room"(
 	
 INSERT INTO public."Equipment"(
 	"SerialNumber", "Name", "Id", "RoomId", "BuildingSerialNumber", "FloorSerialNumber", "RoomSerialNumber")
-	VALUES ('1', 'Syringe', '123', '201', '1', '2', '2'),
-	('2', 'N95 mask', '431', '201', '1', '2', '2'),
-	('3', 'Scalpel', '111', '201', '1', '2', '2');
+	VALUES ('1', 'Syringe', '123', '1', '1', '2', '2'),
+	('2', 'N95 mask', '431', '2', '1', '2', '2'),
+	('3', 'Scalpel', '111', '3', '1', '2', '2');
 	
 INSERT INTO public."Bed"(
 	"SerialNumber", "Name", "Id", "RoomId", "BuildingSerialNumber", "FloorSerialNumber", "RoomSerialNumber", "PatientSerialNumber", "RoomSerialNumber2")

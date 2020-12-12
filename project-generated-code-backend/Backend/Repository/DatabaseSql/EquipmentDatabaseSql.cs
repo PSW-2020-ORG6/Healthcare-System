@@ -27,7 +27,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public List<Equipment> GetByName(string name)
         {
-            return GetAll().Where(e => e.Name.Equals(name)).ToList();
+            return GetAll().Where(r => r.Name.ToLower().Contains(name.ToLower())).ToList();
         }
 
         public List<Equipment> GetByRoomSerialNumber(string roomSerialNumber)
