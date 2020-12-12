@@ -36,27 +36,27 @@ namespace WebApplication.Backend.Controllers
         {
             return appointmentService.GetAllSpecializations();
         }
-        //[HttpGet("allAppointments")]
-        //public List<Appointment> GellAllAppointments()
-        //{
-        //    return appointmentsService.GetAllAppointments();
-        //}
+        [HttpGet("allAppointments")]
+        public List<Appointment> GellAllAppointments()
+        {
+            return appointmentService.GetAllAppointments();
+        }
 
         //[HttpGet("allAppointmentsByPatientIdActive")]
-        //public List<Appointment> GellAllAppointmentsByPatientIdActive(String patientId)
-        //{
-        //    List<Appointment> apointments = appointmentsService.GetAllAppointmentsByPatientIdActive(patientId);
-        //    return apointments;
-        //}
+        public List<Appointment> GellAllAppointmentsByPatientIdActive(String patientId)
+        {
+            List<Appointment> apointments = appointmentService.GetAllAppointmentsByPatientIdActive(patientId);
+            return apointments;
+        }
 
-        //[HttpGet("allAppointmentsByPatientIdCanceled")]
-        //public List<Appointment> GellAllAppointmentsByPatientIdCanceled(String patientId)
-        //{
-        //    return appointmentsService.GetAllAppointmentsByPatientIdCanceled(patientId);
-        //}
+        [HttpGet("allAppointmentsByPatientIdCanceled")]
+        public List<Appointment> GellAllAppointmentsByPatientIdCanceled(String patientId)
+        {
+            return appointmentService.GetAllAppointmentsByPatientIdCanceled(patientId);
+        }
 
         [HttpGet("appointments")]
-        public List<TimeInterval> GetAllAvailableAppointments(string physicianId, string specializationName, string date)
+        public List<TimeIntervalDTO> GetAllAvailableAppointments(string physicianId, string specializationName, string date)
         {
             if (dateTimeDTO.IsPreferredTimeValid(date))
                 return appointmentService.GetAllAvailableAppointments(physicianId, specializationName, date);

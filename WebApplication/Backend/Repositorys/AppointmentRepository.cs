@@ -17,7 +17,7 @@ namespace WebApplication.Backend.Repositorys
 
         public AppointmentRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
         }
 
         private List<Appointment> GetAppointments(String query)
@@ -30,14 +30,14 @@ namespace WebApplication.Backend.Repositorys
             {
                 Appointment entity = new Appointment();
                 entity.SerialNumber = (string)sqlReader[0];
-                entity.Room = roomRepository.GetRoomBySerialNumber((string)sqlReader[1]);
-                entity.Physician = physitianRepository.GetPhysicianBySerialNumber((string)sqlReader[2]);
-                entity.Patient = patientRepository.GetPatientBySerialNumber((string)sqlReader[3]);
-                entity.TimeInterval = timeIntervalRepository.GetTimeIntervalById((string)sqlReader[6]);
-                entity.ProcedureType = procedureTypeRepository.GetProcedureTypeBySerialNumber((string)sqlReader[7]);
                 entity.Urgency = (bool)sqlReader[1];
                 entity.Active = (bool)sqlReader[2];
-                entity.Date = Convert.ToDateTime(sqlReader[8]);
+                entity.Patient = patientRepository.GetPatientBySerialNumber((string)sqlReader[3]);
+                entity.Room = roomRepository.GetRoomBySerialNumber((string)sqlReader[4]);
+                entity.Physician = physitianRepository.GetPhysicianBySerialNumber((string)sqlReader[5]);
+                entity.ProcedureType = procedureTypeRepository.GetProcedureTypeBySerialNumber((string)sqlReader[6]);
+                entity.Date = Convert.ToDateTime(sqlReader[7]);
+                entity.TimeInterval =timeIntervalRepository.GetTimeIntervalById((string)sqlReader[8]);
                 resultList.Add(entity);
             }
             connection.Close();
@@ -149,7 +149,7 @@ namespace WebApplication.Backend.Repositorys
 
         public List<Appointment> GetAppointmentsByDate(string date)
         {
-            throw new NotImplementedException();
+            return GetAppointments("Select * from appointment where Date ='" + date + "'");
         }
 
         public bool AddAppointment(Appointment appointment)
