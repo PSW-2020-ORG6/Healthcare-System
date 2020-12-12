@@ -28,7 +28,7 @@ namespace WebApplication.Backend.Repositorys
             {
                 ProcedureType entity = new ProcedureType();
                 entity.SerialNumber = (string)sqlReader[0];
-                entity.Specialization = specializationRepository.GetSpecializationBySerialNumber((string)sqlReader[2]);
+                entity.Specialization = specializationRepository.GetSpecializationBySerialNumber((string)sqlReader[3]);
                 entity.Name = (string)sqlReader[1];
                 //entity.EstimatedTimeInMinutes = (int)sqlReader[2];
                 //AddingRequiredEquipments(sqlReader, entity);
