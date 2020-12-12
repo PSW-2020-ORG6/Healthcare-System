@@ -29,7 +29,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public List<Medicine> GetByName(string name)
         {
-            return GetAll().Where(m => m.CopyrightName.Equals(name) || m.CopyrightName.Equals(name)).ToList();
+            return GetAll().Where(m => m.CopyrightName.ToLower().Contains(name.ToLower()) || m.CopyrightName.ToLower().Contains(name.ToLower())).ToList();
         }
 
         public override Medicine GetById(string id)

@@ -9,7 +9,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
     class HealthCareSystemDbContextFactory : IDesignTimeDbContextFactory<HealthCareSystemDbContext>
     {
         private const string CONNECTION_STRING =
-            "User ID =postgres;Password=super;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
+            "User ID =postgres;Password=root;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
         public HealthCareSystemDbContext CreateDbContext(string[] args)
         {
             var options = new DbContextOptionsBuilder<HealthCareSystemDbContext>()

@@ -18,7 +18,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
     public class HealthCareSystemDbContext : DbContext
     {
         private const string CONNECTION_STRING =
-            "User ID =postgres;Password=super;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
+            "User ID =postgres;Password=root;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
 
         public DbSet<Address> Address { get; set; }
         public DbSet<City> City { get; set; }

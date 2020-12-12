@@ -7,8 +7,8 @@ INSERT INTO public."MedicineType"(
 	VALUES ('1', 'Antibiotik'), ('2', 'Analgetik');
 	
 INSERT INTO public."Medicine"(
-	"SerialNumber", "CopyrightName", "GenericName", "MedicineManufacturerSerialNumber", "MedicineTypeSerialNumber")
-	VALUES ('1', 'Panklav', 'Panklav', '1', '1'), ('2', 'Amikacin', 'Amikacin', '2', '1');
+	"SerialNumber", "CopyrightName", "GenericName", "IsApproved", "MedicineManufacturerSerialNumber", "MedicineTypeSerialNumber")
+	VALUES ('1', 'Panklav', 'Panklav','True', '1', '1'), ('2', 'Amikacin', 'Amikacin', 'True','2', '1');
 	
 INSERT INTO public."Rejection"(
 	"SerialNumber", "Reason", "MedicineSerialNumber")
@@ -71,9 +71,9 @@ INSERT INTO public."Room"(
 	
 INSERT INTO public."Equipment"(
 	"SerialNumber", "Name", "Id", "RoomId", "BuildingSerialNumber", "FloorSerialNumber", "RoomSerialNumber")
-	VALUES ('1', 'Syringe', '123', '201', '1', '2', '2'),
-	('2', 'N95 mask', '431', '201', '1', '2', '2'),
-	('3', 'Scalpel', '111', '201', '1', '2', '2');
+	VALUES ('1', 'Syringe', '123', '1', '1', '2', '2'),
+	('2', 'N95 mask', '431', '2', '1', '2', '2'),
+	('3', 'Scalpel', '111', '3', '1', '2', '2');
 	
 INSERT INTO public."Bed"(
 	"SerialNumber", "Name", "Id", "RoomId", "BuildingSerialNumber", "FloorSerialNumber", "RoomSerialNumber", "PatientSerialNumber", "RoomSerialNumber2")

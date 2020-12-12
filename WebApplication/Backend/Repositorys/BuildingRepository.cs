@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
-using WebApplication.Backend.Repositorys.Interfaces;
+using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class BuildingRepository : IBuildingRepository
+    public class BuildingRepository : IGenericRepository<Building>
     {
         private readonly BuildingDatabaseSql _buildingRepository;
 
@@ -29,6 +29,36 @@ namespace WebApplication.Backend.Repositorys
         public Building GetBuildingBySerialNumber(string serialNumber)
         {
             return _buildingRepository.GetById(serialNumber);
+        }
+
+        public List<Building> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Save(Building newEntity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Building updateEntity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Building GetById(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Building Instantiate(string objectStringFormat)
+        {
+            throw new NotImplementedException();
         }
     }
 }

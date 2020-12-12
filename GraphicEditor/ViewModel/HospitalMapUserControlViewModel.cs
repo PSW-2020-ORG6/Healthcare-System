@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Util;
-using WebApplication.Backend.Repositorys;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 
 namespace GraphicEditor.ViewModel
 {
@@ -20,7 +20,7 @@ namespace GraphicEditor.ViewModel
 
         public Grid HospitalMapGrid { get; set; }
 
-        BuildingRepository buildingRepository = new BuildingRepository();
+        BuildingDatabaseSql buildingRepository=new BuildingDatabaseSql();
 
         public HospitalMapUserControlViewModel(MapContentUserControlViewModel parent)
         {
@@ -35,7 +35,7 @@ namespace GraphicEditor.ViewModel
         public void InitialGridRender()
         {
             ResourceDictionary.Source = new Uri("/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml", UriKind.RelativeOrAbsolute);
-            foreach (Building building in buildingRepository.GetAllBuildings())
+            foreach (Building building in buildingRepository.GetAll())
             {
                 Button but = new Button();
                 but.Style = (Style)ResourceDictionary[building.Style];
