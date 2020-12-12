@@ -39,6 +39,17 @@ namespace HealthClinicBackend.Backend.Model.Schedule
             ProcedureType = procedureType;
         }
 
+        public Appointment(Room room, Physician physician, Patient patient, TimeInterval timeInterval,
+            ProcedureType procedureType, DateTime date) : base()
+        {
+            Room = room;
+            Physician = physician;
+            Patient = patient;
+            TimeInterval = timeInterval;
+            ProcedureType = procedureType;
+            Date = date;
+        }
+
         public Appointment() : base()
         {
         }
@@ -84,6 +95,7 @@ namespace HealthClinicBackend.Backend.Model.Schedule
             TimeInterval = appointmentDTO.Time;
             ProcedureType = appointmentDTO.ProcedureType;
             Urgency = appointmentDTO.Urgency;
+            Date = appointmentDTO.Date;
         }
 
         public override bool Equals(object obj)
