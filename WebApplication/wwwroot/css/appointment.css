@@ -41,3 +41,11 @@
 h6 {
     color: lightblue;
 }
+
+.error {
+    visibility: visible;
+}
+
+.correct {
+    visibility: hidden
+}

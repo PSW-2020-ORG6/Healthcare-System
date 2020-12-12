@@ -28,6 +28,7 @@
     template: `
         <div>
 		    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAppointment">Create new appointment</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAppointmentRecommendation">Create new appointment with recommendation</button>
             <div class="modal fade" id="createAppointment" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                      <div class="modal-content steps" style="width: 600px;height:500px">
@@ -93,6 +94,46 @@
                         </div>
                     </div>
                 </div>
+          </div>
+          <div class="modal fade" id="createAppointmentRecommendation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document" style="width:900px;height:500px">
+                    <div class="modal-content steps">
+                        <div class="container" align="center">
+                            <br/><h4 class="text">Create new appointment</h4><br/></br>
+                        </div>                   
+                        <div id="parameters" align="center">
+                            <label>Choose date span:</label></br>
+                                <div class="row">
+                                    <label>&nbsp&nbsp&nbsp Date from &nbsp</label><input id="dateFrom" type="date"></input>
+                                    <label>&nbsp to &nbsp</label><input id="dateTo" type="date"></input>
+                                 </div></br>
+                                 <label id="validationDates" class="correct" style="color:red">You must select a dates!</label></br> 
+                                 <label>Choose  specialization:</label></br>
+                                 <select id="selectSpecialization" class="select" v-model="choosenSpecialization" v-on:change="SpecialistForChoose()">
+                                        <option disabled>Please select one</option>
+                                        <option v-for="s in specializations">{{s.name}}</option>
+                                    </select></br>
+                                 <label id="validationSpecialization" class="correct" style="color:red">You must select a specialization!</label></br>
+                                 </br></br>
+                                 <label>Choose physician:</label></br>
+                                 <select id="selectPhysician" disabled class="select" v-model="choosenPhysician">
+                                         <option disabled selected="selected">Please select one</option>
+                                         <option v-for="p in physicianForChoose" v-bind:value="p">{{p.fullName}}</option>
+                                  </select></br>
+                                 <label id="validationPhysician" class="correct" style="color:red">You must select a physician!</label></br>
+                                 </br></br>
+                                 <label>Select the primary parameter:</label></br>
+                                 <input id="cbp" type="checkbox" value="physician" v-on:click="Checkbox('cbp')"/>
+                                 <label>physician</label>&nbsp&nbsp&nbsp
+                                 <input id="cbd" type="checkbox" value="date" v-on:click="Checkbox('cbd')"/>
+                                 <label>date</label></br>
+                                 <label id="validationParameter" class="correct" style="color:red">You must select a parameter!</label></br>
+                                 </br></br>
+		                         <button type="button" class="btn btn-primary" v-on:click="DisplayAppointments()">Display appointments</button>
+                                 </br></br>
+                            </div> 
+                        </div>
+            </div>
           </div>
      </div>
 	`,
@@ -179,6 +220,43 @@
         },
         Refresh: function () {
             location.reload();
+        },
+        DisplayAppointments: function () {
+            if (this.Validation2()) {
+
+            }
+        },
+        Validation2: function () {
+            this.ErrorMessages()
+            if (document.getElementById("dateFrom").value == "" || document.getElementById("dateTo").value == "" || document.getElementById("selectSpecialization").value == "" || document.getElementById("selectPhysician").value == "")
+                return false
+            if (document.getElementById("dateFrom").value > document.getElementById("dateTo").value)
+                return false
+            if (document.getElementById("cbp").checked == false && document.getElementById("cbd").checked == false)
+                return false
+            return true
+        },
+        ErrorMessages: function () {
+            if (document.getElementById("dateFrom").value == "" || document.getElementById("dateTo").value == "" || document.getElementById("dateFrom").value > document.getElementById("dateTo").value) {
+                document.getElementById("validationDates").className = "error"
+            } else {
+                document.getElementById("validationDates").className = "correct"
+            }
+            if (document.getElementById("selectSpecialization").value == "") {
+                document.getElementById("validationSpecialization").className = "error"
+            } else {
+                document.getElementById("validationSpecialization").className = "correct"
+            }
+            if (document.getElementById("selectPhysician").value == "") {
+                document.getElementById("validationPhysician").className = "error"
+            } else {
+                document.getElementById("validationPhysician").className = "correct"
+            }
+            if (document.getElementById("cbp").checked == false && document.getElementById("cbd").checked == false) {
+                document.getElementById("validationParameter").className = "error"
+            } else {
+                document.getElementById("validationParameter").className = "correct"
+            }
         }
     }
 });
