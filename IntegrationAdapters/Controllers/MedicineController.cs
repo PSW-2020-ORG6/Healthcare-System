@@ -24,17 +24,18 @@ namespace IntegrationAdapters.Controllers
             this.medicineService = new MedicineService();
         }
         [HttpGet("getMedicineSpecification/{medicineName}")]
-        public IActionResult GetMedicineSpeification(String medicineName)
+        public IActionResult GetMedicineSpeification(string medicineName)
         {
             Medicine medicine = medicineService.DoesMedicineExist(medicineName);
             if (medicine != null)
             {
-                medicineService.GenerateSpecificationFromHospital(medicineName);
+                 medicineService.GenerateSpecificationFromHospital(medicineName);
+                
                 return Ok();              
             }
             else
             {
-                return "";
+                return BadRequest();
             }
         }
 

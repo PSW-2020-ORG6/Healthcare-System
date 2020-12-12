@@ -12,5 +12,7 @@ namespace IntegrationAdapters.Repositories
         void AddMedicineRepository();
         public Medicine GetByID(String ID);
         public Medicine GetByName(String Name);
+
+        public MedicineSpecification GetById(string id);
     }
 }
