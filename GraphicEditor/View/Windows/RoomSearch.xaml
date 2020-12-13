@@ -18,8 +18,7 @@
                    Text="Name of the room: " 
                    VerticalAlignment="Top" 
                    Width="148" />
-        <TextBox x:Name="RoomNameTextBox"
-                 Text="{Binding Path=QueryForSearch, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+        <TextBox Text="{Binding Path=QueryForSearch, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                  HorizontalAlignment="Left" 
                  Height="34"
                  FontSize="16"
@@ -43,8 +42,9 @@
                    FontSize="16"
                    VerticalAlignment="Top"
                    Width="493"/>
-        <ListBox x:Name="SearchedRoomsTextBlock" 
-                  ItemsSource="{Binding Path=ReportOfSearch, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+        <ListBox ItemsSource="{Binding Path=ReportOfSearch, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  BorderBrush="#FF288DF1"
+                  BorderThickness="2"
                   SelectedIndex="0"
                   SelectedItem="{Binding Path=SelectedRoom, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   Style="{StaticResource MaterialDesignListBox}"
@@ -54,8 +54,7 @@
                   VerticalAlignment="Top" 
                   Width="374">
         </ListBox>
-        <Button x:Name="button" 
-                Command="{Binding Path=GoToCommand}"
+        <Button Command="{Binding Path=GoToCommand}"
                 CommandParameter="{Binding Path=SelectedRoom}"
                 HorizontalAlignment="Left"
                 Height="45" 

@@ -2,17 +2,17 @@
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using System.Collections.Generic;
-
 namespace GraphicEditor.ViewModel
 {
-    public class RoomSearchViewModel : BindableBase
+    public class EquipmentSearchViewModel : BindableBase
     {
         private RoomDatabaseSql roomRepository = new RoomDatabaseSql();
         private FloorDatabaseSql floorRepository = new FloorDatabaseSql();
         private BuildingDatabaseSql buildingRepository = new BuildingDatabaseSql();
+        private EquipmentDatabaseSql equipmentDatabaseSql = new EquipmentDatabaseSql();
 
-        private List<Room> _resultOfSearch;
-        public List<Room> ResultOfSearch
+        private List<Equipment> _resultOfSearch;
+        public List<Equipment> ResultOfSearch
         {
             get => _resultOfSearch;
             set
@@ -40,42 +40,43 @@ namespace GraphicEditor.ViewModel
                 SetProperty(ref _queryForSearch, value);
             }
         }
-        private Room _selectedRoom;
-        public Room SelectedRoom
+        private Equipment _selectedEquipment;
+        public Equipment SelectedEquipment
         {
-            get => _selectedRoom;
+            get => _selectedEquipment;
             set
             {
-                SetProperty(ref _selectedRoom, value);
+                SetProperty(ref _selectedEquipment, value);
             }
         }
 
         public MyICommand<string> SearchCommand { get; private set; }
 
-        public MyICommand<Room> GoToCommand { get; private set; }
+        public MyICommand<Equipment> GoToCommand { get; private set; }
 
-        public RoomSearchViewModel()
+        public EquipmentSearchViewModel()
         {
-            SearchCommand = new MyICommand<string>(SearchRooms);
-            GoToCommand = new MyICommand<Room>(FindRoom);
+            SearchCommand = new MyICommand<string>(SearchEquipment);
+            GoToCommand = new MyICommand<Equipment>(FindEquipment);
         }
 
-        private void SearchRooms(string roomName)
+        private void SearchEquipment(string equipmentName)
         {
-            _resultOfSearch = roomRepository.GetByName(roomName);
+            _resultOfSearch = equipmentDatabaseSql.GetByName(equipmentName);
             _reportOfSearch = new List<string>();
-            foreach (Room result in _resultOfSearch)
+            foreach (Equipment result in _resultOfSearch)
             {
                 Floor floor = floorRepository.GetBySerialNumber(result.FloorSerialNumber);
                 Building building = buildingRepository.GetBySerialNumber(floor.BuildingSerialNumber);
-                string fullLocation = building.Name + ", " + floor.Name + ", " + result.Name;
+                Room room = roomRepository.GetBySerialNumber(result.RoomSerialNumber);
+                string fullLocation = building.Name + ", " + floor.Name + ", " + room.Name + ", " + result.Name;
                 _reportOfSearch.Add(fullLocation);
             }
             OnPropertyChanged("ReportOfSearch");
 
         }
 
-        private void FindRoom(Room room)
+        private void FindEquipment(Equipment equipment)
         {
 
         }
