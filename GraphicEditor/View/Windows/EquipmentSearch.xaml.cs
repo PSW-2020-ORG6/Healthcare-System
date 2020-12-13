@@ -60,6 +60,7 @@ namespace GraphicEditor.View.Windows
                 int checkCounter = 0;
                 resultOfSearch += checkCounter + 1 + "\n";
                 foreach (Medicine m in medicine)
+                    // TODO
                    // resultOfSearch += "\n" + "Generic name: " + m.GenericName + " MedicineManufacturerSerialNumber: " 
                      //   + m.MedicineManufacturer.SerialNumber + " MedicineTypeSerialNumber: " 
                       //  + m.MedicineType.SerialNumber + " SerialNumber: " + m.SerialNumber;
