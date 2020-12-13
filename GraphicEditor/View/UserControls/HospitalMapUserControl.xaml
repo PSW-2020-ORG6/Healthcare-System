@@ -12,7 +12,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <!-- #Styles -->
                 <ResourceDictionary Source="/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml" />
-                
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -29,9 +29,10 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <!--Legend Pattern-->
-            <Grid Grid.Column="0"
-                  HorizontalAlignment="Left"
-                  VerticalAlignment="Center">
+            <Grid
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                 Height="1000">
                 <!--Legend image-->
                 <Image Height="500"
                        Margin="0 0 0 150"
@@ -41,16 +42,16 @@
                 <StackPanel 
                     VerticalAlignment="Bottom" 
                     HorizontalAlignment="Center">
-                        <Button Click="ShowRoomSearch"
+                    <Button Click="ShowRoomSearch"
                             Margin="20"
                             Height="40" 
                             Width="150" >
-                            <DockPanel Width="auto">
-                                <TextBlock HorizontalAlignment="Center" 
+                        <DockPanel Width="auto">
+                            <TextBlock HorizontalAlignment="Center" 
                                                        VerticalAlignment="Center">
                                             Search rooms
-                                </TextBlock>
-                            </DockPanel>
+                            </TextBlock>
+                        </DockPanel>
                     </Button>
                     <Button Click="ShowEquipmentSearch"
                         Margin="20"
@@ -63,8 +64,19 @@
                             </TextBlock>
                         </DockPanel>
                     </Button>
+                    <Button Click="ShowMedicineSearch"
+                        Margin="20"
+                        Height="40" 
+                        Width="150" >
+                        <DockPanel Width="auto">
+                            <TextBlock HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center">
+                                Search Medicine
+                            </TextBlock>
+                        </DockPanel>
+                    </Button>
                 </StackPanel>
-                
+
             </Grid>
 
             <!--Map Pattern-->
