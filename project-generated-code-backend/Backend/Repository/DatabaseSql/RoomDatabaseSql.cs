@@ -19,32 +19,32 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public override List<Room> GetAll()
         {
-            return dbContext.Room.ToList();
+            return DbContext.Room.ToList();
         }
 
         public override Room GetById(string id)
         {
-            return dbContext.Room.Find(id);
+            return DbContext.Room.Find(id);
         }
 
         public override void Save(Room newEntity)
         {
-            dbContext.Room.Add(newEntity);
-            dbContext.SaveChanges();
+            DbContext.Room.Add(newEntity);
+            DbContext.SaveChanges();
         }
 
         public override void Update(Room updateEntity)
         {
-            dbContext.Room.Update(updateEntity);
-            dbContext.SaveChanges();
+            DbContext.Room.Update(updateEntity);
+            DbContext.SaveChanges();
         }
 
         public override void Delete(string id)
         {
             var room = GetById(id);
             if (room == null) return;
-            dbContext.Room.Remove(room);
-            dbContext.SaveChanges();
+            DbContext.Room.Remove(room);
+            DbContext.SaveChanges();
         }
 
         public List<Room> GetByRoomType(RoomType roomType)

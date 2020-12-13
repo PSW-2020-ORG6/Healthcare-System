@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
@@ -18,32 +17,32 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public override List<Appointment> GetAll()
         {
-            return dbContext.Appointment.ToList();
+            return DbContext.Appointment.ToList();
         }
 
         public override Appointment GetById(string id)
         {
-            return dbContext.Appointment.Find(id);
+            return DbContext.Appointment.Find(id);
         }
 
         public override void Save(Appointment newEntity)
         {
-            dbContext.Appointment.Add(newEntity);
-            dbContext.SaveChanges();
+            DbContext.Appointment.Add(newEntity);
+            DbContext.SaveChanges();
         }
 
         public override void Update(Appointment updateEntity)
         {
-            dbContext.Appointment.Update(updateEntity);
-            dbContext.SaveChanges();
+            DbContext.Appointment.Update(updateEntity);
+            DbContext.SaveChanges();
         }
 
         public override void Delete(string id)
         {
             var appointment = GetById(id);
             if (appointment == null) return;
-            dbContext.Appointment.Remove(appointment);
-            dbContext.SaveChanges();
+            DbContext.Appointment.Remove(appointment);
+            DbContext.SaveChanges();
         }
 
         public List<Appointment> GetAppointmentsByDate(DateTime date)

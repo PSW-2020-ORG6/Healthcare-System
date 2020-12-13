@@ -18,7 +18,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public override List<Medicine> GetAll()
         {
-            return dbContext.Medicine.ToList();
+            return DbContext.Medicine.ToList();
         }
 
         public override Medicine GetById(string id)
@@ -59,11 +59,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public List<Medicine> GetWaiting()
         {
             return GetAll().Where(m => !m.IsApproved).ToList();
-        }
-
-        public List<Medicine> GetByName(string name)
-        {
-            return GetAll().Where(m => m.CopyrightName.ToLower().Contains(name.ToLower())).ToList();
         }
     }
 }

@@ -20,10 +20,5 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             return DbContext.ProcedureType.Find(id);
         }
-
-        public override ProcedureType GetById(string id)
-        {
-            return dbContext.ProcedureType.Find(id);
-        }
     }
 }

@@ -13,7 +13,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         }
         public override List<Bed> GetAll()
         {
-            return dbContext.Bed.ToList();
+            return DbContext.Bed.ToList();
         }
     }
 }
