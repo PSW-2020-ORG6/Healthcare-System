@@ -260,6 +260,7 @@
             return false
         },
         MakeAppointment: function () {
+            alert(this.timeInterval.start);
             if (this.timeInterval!=null)
                 axios
                     .post('http://localhost:49900/appointment/makeAppointment/' + this.choosenPhysician.id + '/' + this.timeInterval.start + '/' + this.date)
