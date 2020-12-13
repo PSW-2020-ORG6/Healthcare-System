@@ -18,11 +18,11 @@ namespace GraphicEditorTests
         public void GetRoomByName_RoomExist_ReturnRoom()
         {
             // Act
-            var room = _roomRepository.GetByName("Operation room 106")[0];
+            var room = _roomRepository.GetByName("OR 1")[0];
 
             // Assert
             Assert.NotNull(room);
-            Assert.Equal("Operation room 106", room.Name);
+            Assert.Equal("OR 1", room.Name);
         }
 
         [Fact]

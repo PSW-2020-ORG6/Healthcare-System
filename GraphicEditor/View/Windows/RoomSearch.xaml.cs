@@ -52,7 +52,7 @@ namespace GraphicEditor.View.Windows
         private string PlaceOfFoundRooms(string resultOfSearch, Room room)
         {
             Floor floor = floorRepository.GetBySerialNumber(room.FloorSerialNumber);
-            Building building = buildingRepository.GetBySerialNumber(room.BuildingSerialNumber);
+            Building building = buildingRepository.GetBySerialNumber(floor.BuildingSerialNumber);
             resultOfSearch += floor.Name + " in " + building.Name;
             return resultOfSearch;
         }

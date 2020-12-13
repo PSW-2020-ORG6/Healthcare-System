@@ -18,11 +18,11 @@ namespace GraphicEditorTests
         public void GetFloorByName_FloorExist_ReturnFloor()
         {
             // Act
-            var floor = _floorRepository.GetByName("Floor1")[0];
+            var floor = _floorRepository.GetByName("First floor")[0];
 
             // Assert
             Assert.NotNull(floor);
-            Assert.Equal("Floor1", floor.Name);
+            Assert.Equal("First floor", floor.Name);
         }
 
         [Fact]
