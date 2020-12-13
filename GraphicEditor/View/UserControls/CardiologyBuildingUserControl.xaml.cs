@@ -16,7 +16,7 @@ namespace GraphicEditor.View.UserControls
             InitializeComponent();
 
             MapContentUserControlViewModel.CardiologyBuilding.grid = CardiologyFirstFloorMapUserControl.FloorGrid;
-            //MapContentUserControlViewModel.CardiologyBuilding.FirstFloor.InitialGridRender();
+          //  MapContentUserControlViewModel.CardiologyBuilding.FirstFloor.InitialGridRender();
         }
 
         private void ShowRoomSearch(object sender, RoutedEventArgs e)
