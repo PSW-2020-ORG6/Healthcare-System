@@ -8,9 +8,9 @@ namespace WebApplication.Backend.DTO
 {
     public class PhysicianDTO
     {
-        private string fullName;
-        private string id;
-        private List<SpecializationDTO> specializations;
+        public string FullName { get; set; }
+        public string Id { get; set; }
+        public List<SpecializationDTO> Specializations { get; set; }
 
         public PhysicianDTO()
         {
@@ -22,23 +22,6 @@ namespace WebApplication.Backend.DTO
             Id = physician.Id;
             FullName = physician.FullName;
             Specializations = specializationDTO.ConvertListToSpecializationDTO(physician.Specialization);
-        }
-
-        public string FullName
-        {
-            get { return fullName; }
-            set { fullName = value; }
-        }
-        public string Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
-
-        public List<SpecializationDTO> Specializations
-        {
-            get { return specializations; }
-            set { specializations = value; }
         }
 
         public List<PhysicianDTO> ConvertListToPhysicianDTO(List<Physician> physicians)

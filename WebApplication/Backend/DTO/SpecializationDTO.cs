@@ -8,14 +8,8 @@ namespace WebApplication.Backend.DTO
 {
     public class SpecializationDTO
     {
-        private string name;
+        public string Name { get; set; }
 
-
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
         public List<SpecializationDTO> ConvertListToSpecializationDTO(List<Specialization> specializations)
         {
             List<SpecializationDTO> specializationsDTO = new List<SpecializationDTO>();

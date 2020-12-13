@@ -98,6 +98,15 @@ namespace HealthClinicBackend.Backend.Model.Schedule
             Date = appointmentDTO.Date;
         }
 
+        public Appointment(string physicianId, string date, DateTime timeIntervalStart)
+        {
+            this.Physician = new Physician { SerialNumber = physicianId };
+            string[] parts = date.Split("-");
+            this.Date = new DateTime(Int32.Parse(parts[0]), Int32.Parse(parts[1]), Int32.Parse(parts[2]), 0, 0, 0);
+            this.TimeInterval = new TimeInterval { Start = timeIntervalStart };
+            this.Active = true;
+        }
+
         public override bool Equals(object obj)
         {
             return obj is Appointment other && SerialNumber.Equals(other.SerialNumber);

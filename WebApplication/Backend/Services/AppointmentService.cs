@@ -85,7 +85,7 @@ namespace WebApplication.Backend.Services
                 {
                     foreach (Appointment appointment in appointments)
                     {
-                        if (timeIntervalDTO.CompareTimeIntervals(time, appointment.TimeInterval.Start) && appointment.Physician.SerialNumber == physician.SerialNumber && appointment.ProcedureType.Specialization.Name == specializationName && appointment.Active)
+                        if (CompareTimeIntervals(time, appointment.TimeInterval.Start) && appointment.Physician.SerialNumber == physician.SerialNumber && appointment.ProcedureType.Specialization.Name == specializationName && appointment.Active)
                         {
                             existance = true;
                             break;
@@ -97,6 +97,10 @@ namespace WebApplication.Backend.Services
                 time = time.Add(new TimeSpan(0, 20, 0));
             }
             return result;
+        }
+        private bool CompareTimeIntervals(DateTime dateTime1, DateTime dateTime2)
+        {
+            return dateTime1.Hour == dateTime2.Hour && dateTime1.Minute == dateTime2.Minute;
         }
         public bool AddAppointment(Appointment appointment)
         {
