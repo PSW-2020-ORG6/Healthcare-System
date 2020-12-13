@@ -3,9 +3,9 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class PhysitianPriorityStrategy
 
+using HealthClinicBackend.Backend.Dto;
 using System;
 using System.Collections.Generic;
-using HealthClinicBackend.Backend.Dto;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.PriorityStrategies
 {

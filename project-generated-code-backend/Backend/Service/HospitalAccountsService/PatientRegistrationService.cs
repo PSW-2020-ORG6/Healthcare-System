@@ -43,7 +43,7 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
                     return;
                 }
 
-                var newPatient = new Patient(patientDto) {SerialNumber = p.SerialNumber};
+                var newPatient = new Patient(patientDto) { SerialNumber = p.SerialNumber };
                 _patientRepository.Update(newPatient);
             }
             else if (IsJmbgValid(patientDto.Id))

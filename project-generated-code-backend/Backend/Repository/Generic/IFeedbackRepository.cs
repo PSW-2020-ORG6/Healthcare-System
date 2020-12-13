@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using HealthClinicBackend.Backend.Model.Blog;
+﻿using HealthClinicBackend.Backend.Model.Blog;
+using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Repository.Generic
 {

@@ -1,9 +1,9 @@
 ﻿using GraphicEditor.HelpClasses;
+using HealthClinicBackend.Backend.Model.Util;
 using System;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
-using HealthClinicBackend.Backend.Model.Util;
 
 namespace GraphicEditor
 {

@@ -3,12 +3,12 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class SecretaryScheduleController
 
-using System;
-using System.Collections.Generic;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Service.SchedulingService;
 using HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies;
+using System;
+using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Controller.SecretaryControllers
 {
