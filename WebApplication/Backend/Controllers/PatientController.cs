@@ -3,6 +3,7 @@ using Model.Accounts;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
 using WebApplication.Backend.Services;
+using HealthClinicBackend.Backend.Dto;
 
 namespace WebApplication.Backend.Controllers
 {
@@ -42,6 +43,18 @@ namespace WebApplication.Backend.Controllers
         public Patient GetPatientById(string patientId)
         {
             return patientService.GetPatientById(patientId);
+        }
+
+        [HttpGet("getMaliciousPatients")]
+        public List<Patient> GetMaliciousPatients()
+        {
+            return patientService.GetMaliciousPatients();
+        }
+
+        [HttpPut("blockMaliciousPatient")]
+        public bool BlockMaliciousPatient(PatientDto patient)
+        {
+            return patientService.BlockMaliciousPatient(patient.Id);
         }
 
     }

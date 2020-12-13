@@ -42,5 +42,14 @@ namespace WebApplication.Backend.Services
             return returnValue;
         }
 
+        internal List<Patient> GetMaliciousPatients()
+        {
+            return patientRepository.GetMaliciousPatients();
+        }
+
+        internal bool BlockMaliciousPatient(string patientId)
+        {
+            return patientRepository.BlockMaliciousPatient(patientId);
+        }
     }
 }

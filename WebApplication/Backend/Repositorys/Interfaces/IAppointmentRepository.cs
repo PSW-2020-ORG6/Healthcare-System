@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Schedule;
 
 namespace WebApplication.Backend.Repositorys.Interfaces
