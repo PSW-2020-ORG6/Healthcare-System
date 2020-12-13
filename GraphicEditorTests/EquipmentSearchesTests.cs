@@ -17,7 +17,7 @@ namespace GraphicEditorTests
         public void GetEquipmentByName_EquipmentExist_ReturnEquipment()
         {
             //Act
-            var equipment = _eqipmentRepository.GetByName("Scalpel")[0];
+            var equipment = _eqipmentRepository.GetByName("Mask")[0];
 
             //Assert
             Assert.NotNull(equipment);

@@ -36,7 +36,7 @@
                                                  Width="25"/>
                     <TextBlock HorizontalAlignment="Center" 
                                    VerticalAlignment="Center">
-                        BACK TO MAP
+                        Back to the map
                         </TextBlock>
                     </DockPanel>
                 </Button>
@@ -47,7 +47,7 @@
                      Style="{StaticResource MaterialDesignToolVerticalToggleListBox}"
                      Margin="5,5,5,5"/>
             
-            <StackPanel Grid.Row="2">
+            <StackPanel Grid.Row="2" Margin="0,0,0,-334">
                 <Button Click="ShowRoomSearch"
                     Margin="5"
                     DockPanel.Dock="Bottom"
@@ -61,11 +61,45 @@
                         <TextBlock HorizontalAlignment="Center" 
                                VerticalAlignment="Center"
                                TextWrapping="Wrap">
-                        SEARCH ROOMS
+                        Search Rooms
                         </TextBlock>
                     </DockPanel>
                 </Button>
-                <Button Grid.Row="2"
+                <Button Click="ShowEquipmentSearch"
+                    Margin="5"
+                    DockPanel.Dock="Bottom"
+                    Height="30"
+                    VerticalAlignment="Top">
+                    <DockPanel Width="auto">
+                        <materialDesign:PackIcon Kind="Search" 
+                                             Height="25" 
+                                             Width="25"
+                                             VerticalAlignment="Center"/>
+                        <TextBlock HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap">
+                        Search Equipment
+                        </TextBlock>
+                    </DockPanel>
+                </Button>
+                <Button Click="ShowMedicineSearch"
+                    Margin="5"
+                    DockPanel.Dock="Bottom"
+                    Height="30"
+                    VerticalAlignment="Top">
+                    <DockPanel Width="auto">
+                        <materialDesign:PackIcon Kind="Search" 
+                                             Height="25" 
+                                             Width="25"
+                                             VerticalAlignment="Center"/>
+                        <TextBlock HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap">
+                        Search Medicine
+                        </TextBlock>
+                    </DockPanel>
+                </Button>
+                <Button Grid.Row="5"
                     Command="{Binding Path=BuildingUpdateCommand}"
                     CommandParameter="{Binding Path=Building}"
                     Height="50"
@@ -78,11 +112,10 @@
                         <TextBlock HorizontalAlignment="Center" 
                                VerticalAlignment="Center"
                                TextWrapping="Wrap">
-                        EDIT BUILDING INFORMATION
+                        Edit Building Informaton
                         </TextBlock>
                     </DockPanel>
                 </Button>
-
             </StackPanel>
             
         </Grid>
