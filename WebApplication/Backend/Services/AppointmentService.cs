@@ -106,5 +106,15 @@ namespace WebApplication.Backend.Services
         {
             return appointmentRepository.AddAppointment(appointment);
         }
+
+        public Dictionary<string, List<TimeIntervalDTO>> AppointmentRecomendation(string physicianId, string specializationName, string[] dates)
+        {
+            Dictionary<string, List<TimeIntervalDTO>> availableAppointments = new Dictionary<string, List<TimeIntervalDTO>>();
+            foreach (string date in dates)
+            {
+                availableAppointments.Add(date, GetAllAvailableAppointments(physicianId, specializationName, date));
+            }
+            return availableAppointments;
+        }
     }
 }

@@ -26,5 +26,21 @@ namespace WebApplication.Backend.DTO
         {
             return DateTime.Parse(date) > DateTime.Today.AddDays(2);
         }
+
+        internal bool IsPreferredTimeIntervalValid(string dates)
+        {
+            string[] d = dates.Split(",");
+            foreach (string date in d)
+            {
+                if (!IsPreferredTimeValid(date))
+                    return false;
+            }
+            return true;
+        }
+
+        public string[] DateGeneration(string dates)
+        {
+            return dates.Split(",");
+        }
     }
 }
