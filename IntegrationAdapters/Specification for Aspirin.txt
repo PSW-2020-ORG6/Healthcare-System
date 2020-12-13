@@ -1,6 +1,0 @@
-Medicine name: Aspirin
-Content: m
-Medicine replacement: m
-Producer: m
-Daily taking: 5
-

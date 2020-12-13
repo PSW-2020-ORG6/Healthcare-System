@@ -64,6 +64,23 @@ namespace IntegrationAdapters.Controllers
             return BadRequest();
         }
 
+        [HttpPost("reportHttp")]
+        public IActionResult ReportUsingHttp(Interval interval)
+        {
+            var myFile = "SavedList" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt";
+
+            List<MedicineReport> result = medicineReportService.GetByDateInterval(new TimeInterval(DateTime.Parse(interval.start), DateTime.Parse(interval.end)));
+
+            sftpService.GenerateFile(result, myFile);
+
+                if (httpFTService.UploadFile(myFile))
+                {
+                    medicineReportService.SendNotificationAboutReport(myFile);
+                    return Ok(result);
+                }
+                else return BadRequest();
+        }
+
         [HttpGet("downloadReport")]
         public IActionResult Download()
         {

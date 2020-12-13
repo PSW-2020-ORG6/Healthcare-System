@@ -56,12 +56,14 @@ namespace IntegrationAdapters.Services
 
         public void GeneratePrescription(PrescriptionDTO prescription)
         {
+            SftpService sftpService = new SftpService();
             var fileName = GeneratePrescriptionFileName();
             System.IO.File.WriteAllText(fileName, string.Empty);
             TextWriter tw = new StreamWriter(fileName);
             
             tw.WriteLine(GeneratePrescriptionString(prescription));
             tw.Close();
+            sftpService.SendFile(fileName);
         }
 
         public void GenerateSpecificationFromPharmacy(string responseText, string medicineName)

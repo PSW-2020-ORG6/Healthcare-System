@@ -1,6 +1,0 @@
-Medicine name: Rapten
-Content: m
-Medicine replacement: m
-Producer: m
-Daily taking: 2
-
