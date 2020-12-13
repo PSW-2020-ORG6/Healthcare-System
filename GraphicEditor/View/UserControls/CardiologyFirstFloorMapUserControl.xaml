@@ -19,7 +19,8 @@
 
     <Border BorderBrush="Black" 
             BorderThickness="1">
-        <Grid Height="600"
+        <Grid x:Name="Grid"
+              Height="600"
               HorizontalAlignment="Center"
               VerticalAlignment="Center"
               Width="900">
