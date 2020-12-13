@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Schedule;
 using WebApplication.Backend.Repositorys.Interfaces;
+using HealthClinicBackend.Backend.Model.Util;
 
 namespace WebApplication.Backend.Repositorys
 {
@@ -36,7 +37,7 @@ namespace WebApplication.Backend.Repositorys
                 entity.Physician = physitianRepository.GetPhysicianBySerialNumber((string)sqlReader[4]);
                 entity.ProcedureType = procedureTypeRepository.GetProcedureTypeBySerialNumber((string)sqlReader[5]);
                 entity.Date = Convert.ToDateTime(sqlReader[6]);
-                entity.TimeInterval =timeIntervalRepository.GetTimeIntervalById((string)sqlReader[7]);
+                entity.TimeInterval = new TimeInterval { Start = (DateTime)sqlReader[7] };
                 entity.Active = (bool)sqlReader[8];
                 resultList.Add(entity);
             }
@@ -157,11 +158,14 @@ namespace WebApplication.Backend.Repositorys
             connection.Open();
             string[] dateString = appointment.Date.ToString().Split(" ");
             string[] partsOfDate = dateString[0].Split("/");
+            string[] dateString1 = appointment.TimeInterval.Start.ToString().Split(" ");
+            string[] partsOfDate1 = dateString1[0].Split("/");
 
-            string sqlDml = "INSERT into appointment (SerialNumber,Urgency,PatientId,RoomId,PhysitianId,ProcedureTypeId,Date,TimeIntervalId,Active)  VALUES('"
+            string sqlDml = "INSERT into appointment (SerialNumber,Urgency,PatientId,RoomId,PhysitianId,ProcedureTypeId,Date,TimeIntervalStart,Active)  VALUES('"
                 + appointment.SerialNumber + "','" + 0 + "','" + "96736fd7-3018-4f3f-a14b-35610a1c8959" + "','" + "101" + "','" + appointment.Physician.SerialNumber
                 + "','" + "300001" + "','" + partsOfDate[2] + "-" + partsOfDate[0] + "-" + partsOfDate[1] + "T" + dateString[1]
-                + "','" + appointment.TimeInterval.Id + "','" + 1 + "')";
+                + "','" + partsOfDate1[2] + "-" + partsOfDate1[0] + "-" + partsOfDate1[1] + "T" + dateString1[1]
+                + "','" + 1 + "')";
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             sqlCommand.ExecuteNonQuery();
             connection.Close();

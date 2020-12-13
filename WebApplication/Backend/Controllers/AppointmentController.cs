@@ -65,12 +65,12 @@ namespace WebApplication.Backend.Controllers
                 return null;
         }
 
-        [HttpPost("makeAppointment/{physicianId}/{timeIntervalId}/{date}")]
-        public IActionResult MakeAppointment(string physicianId, string timeIntervalId, string date)
+        [HttpPost("makeAppointment/{physicianId}/{timeIntervalStart}/{date}")]
+        public IActionResult MakeAppointment(string physicianId, DateTime timeIntervalStart, string date)
         {
-            if (physicianId != null && timeIntervalId != null && date != null)
+            if (physicianId != null && timeIntervalStart != null && date != null)
             {
-                if (appointmentService.AddAppointment(new Appointment(new AppointmentDto(physicianId, date, timeIntervalId))))
+                if (appointmentService.AddAppointment(new Appointment(new AppointmentDto(physicianId, date, timeIntervalStart))))
                     return Ok();
                 else
                     return BadRequest();

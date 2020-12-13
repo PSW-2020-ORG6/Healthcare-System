@@ -168,7 +168,7 @@
         MakeAppointment: function () {
             if (this.timeInterval!=null)
                 axios
-                    .post('http://localhost:49900/appointment/makeAppointment/' + this.choosenPhysician.id + '/' + this.timeInterval.id + '/' + this.date)
+                    .post('http://localhost:49900/appointment/makeAppointment/' + this.choosenPhysician.id + '/' + this.timeInterval.start + '/' + this.date)
                     .then(response => {
                         this.Refresh()
                         alert("Appointment is made")
