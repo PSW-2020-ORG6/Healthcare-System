@@ -9,6 +9,7 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
     public class BuildingService
     {
         private readonly IBuildingRepository _buildingRepository;
+        
 
         public BuildingService(IBuildingRepository buildingRepository)
         {
