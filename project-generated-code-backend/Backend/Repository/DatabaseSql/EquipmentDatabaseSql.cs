@@ -18,32 +18,32 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public override List<Equipment> GetAll()
         {
-            return dbContext.Equipment.ToList();
+            return DbContext.Equipment.ToList();
         }
 
         public override Equipment GetById(string id)
         {
-            return dbContext.Equipment.Find(id);
+            return DbContext.Equipment.Find(id);
         }
 
         public override void Save(Equipment newEntity)
         {
-            dbContext.Equipment.Add(newEntity);
-            dbContext.SaveChanges();
+            DbContext.Equipment.Add(newEntity);
+            DbContext.SaveChanges();
         }
 
         public override void Update(Equipment updateEntity)
         {
-            dbContext.Equipment.Update(updateEntity);
-            dbContext.SaveChanges();
+            DbContext.Equipment.Update(updateEntity);
+            DbContext.SaveChanges();
         }
 
         public override void Delete(string id)
         {
             var equipment = GetById(id);
             if (equipment == null) return;
-            dbContext.Equipment.Remove(equipment);
-            dbContext.SaveChanges();
+            DbContext.Equipment.Remove(equipment);
+            DbContext.SaveChanges();
         }
 
         public List<Equipment> GetByName(string name)

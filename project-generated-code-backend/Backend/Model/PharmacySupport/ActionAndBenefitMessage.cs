@@ -4,7 +4,7 @@ using HealthClinicBackend.Backend.Model.Util;
 
 namespace HealthClinicBackend.Backend.Model.PharmacySupport
 {
-    public class ActionAndBenefitMessage : Entity
+    public class ActionAndBenefitMessage: Entity
     {
         public Guid ActionID { get; set; }
         public string PharmacyName { get; set; }
@@ -12,11 +12,9 @@ namespace HealthClinicBackend.Backend.Model.PharmacySupport
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
 
-        public ActionAndBenefitMessage()
-        {
-        }
-
-        public ActionAndBenefitMessage(Guid id, string pharmacyName, string text, DateTime dateFrom, DateTime dateTo)
+        public ActionAndBenefitMessage() { }
+     
+        public ActionAndBenefitMessage(Guid id,string pharmacyName, string text, DateTime dateFrom, DateTime dateTo)
         {
             ActionID = id;
             PharmacyName = pharmacyName;

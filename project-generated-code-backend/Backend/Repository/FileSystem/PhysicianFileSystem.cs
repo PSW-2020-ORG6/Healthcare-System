@@ -19,8 +19,6 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
             path = @"./../../data/physitians.txt";
         }
 
-        }
-
         public List<Physician> GetByName(string name)
         {
             throw new System.NotImplementedException();

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.MedicalExam;
 using HealthClinicBackend.Backend.Repository.Generic;

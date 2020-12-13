@@ -8,6 +8,7 @@ using HealthClinicBackend.Backend.Model.Survey;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql.RelationHelpers;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
@@ -191,6 +192,9 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<ReportFollowUp>()
                 .HasOne(x => x.FollowUp)
                 .WithOne();
+
+            modelBuilder.Entity<ActionAndBenefitMessage>()
+                .HasAlternateKey(abm => abm.ActionID);
 
             modelBuilder.Ignore<AdditionalDocument>();
             QuestionCreation(modelBuilder);
@@ -741,7 +745,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Physician>().Ignore(o => o.Specialization);
             modelBuilder.Entity<Physician>().Ignore(o => o.VacationTime);
             modelBuilder.Entity<Physician>().Ignore(o => o.WorkSchedule);
-            modelBuilder.Entity<Physician>().Ignore(o => o.AllSpecializations);
+            //modelBuilder.Entity<Physician>().Ignore(o => o.AllSpecializations);
             modelBuilder.Entity<Physician>().HasData(
                 new Physician
                 {

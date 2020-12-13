@@ -28,11 +28,6 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
             throw new NotImplementedException();
         }
 
-        public Patient GetByJmbg(string jmbg)
-        {
-            throw new NotImplementedException();
-        }
-
         public override Patient Instantiate(string objectStringFormat)
         {
             return JsonConvert.DeserializeObject<Patient>(objectStringFormat);
@@ -54,6 +49,11 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
         }
 
         public Patient GetPatientBySerialNumber(string serialNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsPatientIdValid(string id)
         {
             throw new NotImplementedException();
         }
