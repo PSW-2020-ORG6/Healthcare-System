@@ -18,12 +18,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public override List<Appointment> GetAll()
         {
-            return DbContext.Appointment
-                .Include(a => a.Patient)
-                .Include(a => a.Physician)
-                .Include(a => a.Room)
-                .Include(a => a.ProcedureType)
-                .ToList();
+            return dbContext.Appointment.ToList();
         }
 
         public override Appointment GetById(string id)
@@ -73,27 +68,39 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public List<Appointment> GetByRoomSerialNumber(string roomSerialNumber)
         {
-            return GetAll().Where(appointment => appointment.Room.SerialNumber.Equals(roomSerialNumber)).ToList();
+            return GetAll()
+                .Where(appointment => appointment.Room.SerialNumber.Equals(roomSerialNumber))
+                .ToList();
         }
 
         public List<Appointment> GetByPhysicianSerialNumber(string physicianSerialNumber)
         {
-            return GetAll().Where(appointment => appointment.Physician.SerialNumber.Equals(physicianSerialNumber)).ToList();
+            return GetAll()
+                .Where(appointment => appointment.Physician.SerialNumber.Equals(physicianSerialNumber))
+                .ToList();
         }
 
         public List<Appointment> GetByPatientSerialNumber(string patientSerialNumber)
         {
-            return GetAll().Where(appointment => appointment.PatientSerialNumber.Equals(patientSerialNumber)).ToList();
+            return GetAll()
+                .Where(appointment => appointment.Patient.SerialNumber.Equals(patientSerialNumber))
+                .ToList();
         }
 
         public List<Appointment> GetByPatientId(string patientId)
         {
-            return GetAll().Where(appointment => appointment.PatientSerialNumber.Equals(patientId)).ToList();
+            return GetAll()
+                .Where(appointment => appointment.Patient.Id.Equals(patientId))
+                .ToList();
         }
 
         public List<Appointment> GetByPatientIdActive(string patientId)
         {
-            return GetAll().Where(appointment => appointment.PatientSerialNumber.Equals(patientId) && appointment.Active == true).ToList();
+            return GetAll()
+                .Where(appointment => (appointment.Patient.Id.Equals(patientId) ||
+                                       appointment.Patient.SerialNumber.Equals(patientId)) &&
+                                      appointment.Active)
+                .ToList();
         }
 
         public List<Appointment> GetByPatientIdCanceled(string patientId)

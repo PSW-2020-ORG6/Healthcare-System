@@ -32,28 +32,26 @@ namespace GraphicEditor.View.Windows
             EquipmentNameTextBox.Text = null;
         }
 
-        private void GenerateReport(string itemName, List<Equipment> equipments, List<Medicine> medicines)
+        private void GenerateReport(string itemName, List<Equipment> equipments, List<Medicine> medicine)
         {
             if (equipments == null)
             {
                 equipments = new List<Equipment>();
             }
-
-            if (medicines == null)
+            if (medicine == null)
             {
-                medicines = new List<Medicine>();
+                medicine = new List<Medicine>();
             }
 
             if (equipments.Count != 0)
                 SearchEquipmentTextBlock.Text = ReportOnFoundEqipment(itemName, equipments);
-            else if (medicines.Count != 0)
-                //TODO  ReportOnFoundMedicine(itemName, medicines);
-                SearchEquipmentTextBlock.Text = "";
+            else if (medicine.Count != 0)
+                SearchEquipmentTextBlock.Text = ReportOnFoundMedicine(itemName, medicine);
             else
                 SearchEquipmentTextBlock.Text = "There is no such item.";
         }
 
-        private string ReportOnFoundMedicine(string medicineName, Medicine medicine)
+        private string ReportOnFoundMedicine(string medicineName, List<Medicine> medicine)
         {
             string resultOfSearch = "";
             int equipmentCounter = 1;
@@ -62,11 +60,13 @@ namespace GraphicEditor.View.Windows
             {
                 int checkCounter = 0;
                 resultOfSearch += checkCounter + 1 + "\n";
-                resultOfSearch += "\n" + "Generic name: " + medicine.GenericName + " MedicineManufacturerSerialNumber: " + medicine.MedicineManufacturer.SerialNumber + " MedicineTypeSerialNumber: " + medicine.MedicineType.SerialNumber + " SerialNumber: " + medicine.SerialNumber;
+                foreach (Medicine m in medicine)
+                   // resultOfSearch += "\n" + "Generic name: " + m.GenericName + " MedicineManufacturerSerialNumber: " 
+                     //   + m.MedicineManufacturer.SerialNumber + " MedicineTypeSerialNumber: " 
+                      //  + m.MedicineType.SerialNumber + " SerialNumber: " + m.SerialNumber;
                 if (++checkCounter == equipmentCounter)
                     return resultOfSearch += ".";
-                else
-                    resultOfSearch += ",";
+                resultOfSearch += ",";
 
             return null;
         }
@@ -96,7 +96,7 @@ namespace GraphicEditor.View.Windows
         private string PlaceOfFoundRooms(string resultOfSearch, Room room)
         {
             Floor floor = floorRepository.GetBySerialNumber(room.FloorSerialNumber);
-            Building building = buildingRepository.GetBySerialNumber(room.BuildingSerialNumber);
+            Building building = buildingRepository.GetBySerialNumber(floor.BuildingSerialNumber);
             resultOfSearch += floor.Name + " in " + building.Name;
             return resultOfSearch;
         }
