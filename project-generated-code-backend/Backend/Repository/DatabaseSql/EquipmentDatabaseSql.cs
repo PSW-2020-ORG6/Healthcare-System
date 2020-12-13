@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using HealthClinicBackend.Backend.Model.Hospital;
+﻿using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
@@ -23,6 +23,31 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 .Include(e => e.Floor)
                 .Include(e => e.Room)
                 .ToList();
+        }
+
+        public override Equipment GetById(string id)
+        {
+            return dbContext.Equipment.Find(id);
+        }
+
+        public override void Save(Equipment newEntity)
+        {
+            dbContext.Equipment.Add(newEntity);
+            dbContext.SaveChanges();
+        }
+
+        public override void Update(Equipment updateEntity)
+        {
+            dbContext.Equipment.Update(updateEntity);
+            dbContext.SaveChanges();
+        }
+
+        public override void Delete(string id)
+        {
+            var equipment = GetById(id);
+            if (equipment == null) return;
+            dbContext.Equipment.Remove(equipment);
+            dbContext.SaveChanges();
         }
 
         public List<Equipment> GetByName(string name)

@@ -3,8 +3,8 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class Country
 
-using System;
 using Newtonsoft.Json;
+using System;
 
 namespace HealthClinicBackend.Backend.Model.Util
 {
