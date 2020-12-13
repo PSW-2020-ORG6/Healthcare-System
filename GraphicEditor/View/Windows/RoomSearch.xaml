@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="Search of the room" 
         WindowStartupLocation="CenterScreen"
@@ -17,7 +18,8 @@
                    Text="Name of the room: " 
                    VerticalAlignment="Top" 
                    Width="148" />
-        <TextBox x:Name="RoomNameTextBox" 
+        <TextBox x:Name="RoomNameTextBox"
+                 Text="{Binding Path=QueryForSearch, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                  HorizontalAlignment="Left" 
                  Height="34"
                  FontSize="16"
@@ -26,20 +28,13 @@
                  VerticalAlignment="Top" 
                  Width="211"/>
         <Button Content="Search"
-                Click="Search_Click"
+                Command="{Binding Path=SearchCommand}"
+                CommandParameter="{Binding Path=QueryForSearch}"
                 HorizontalAlignment="Left"
                 Height="34"
                 VerticalAlignment="Top"
                 Width="88" 
                 Margin="463,54,0,0" />
-        <TextBlock x:Name="SearchedRoomsTextBlock" 
-                   HorizontalAlignment="Left" 
-                   Height="216" 
-                   Margin="58,130,0,0" 
-                   TextWrapping="Wrap" 
-                   FontSize="14"
-                   VerticalAlignment="Top" 
-                   Width="493"/>
         <TextBlock HorizontalAlignment="Left" 
                    Height="29" 
                    Margin="58,371,0,0" 
@@ -48,5 +43,30 @@
                    FontSize="16"
                    VerticalAlignment="Top"
                    Width="493"/>
+        <ListBox x:Name="SearchedRoomsTextBlock" 
+                  ItemsSource="{Binding Path=ReportOfSearch, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  SelectedIndex="0"
+                  SelectedItem="{Binding Path=SelectedRoom, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  Style="{StaticResource MaterialDesignListBox}"
+                  HorizontalAlignment="Left"
+                  Height="231"
+                  Margin="58,116,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="374">
+        </ListBox>
+        <Button x:Name="button" 
+                Command="{Binding Path=GoToCommand}"
+                CommandParameter="{Binding Path=SelectedRoom}"
+                HorizontalAlignment="Left"
+                Height="45" 
+                Margin="492,200,0,0"
+                VerticalAlignment="Top" 
+                Width="59" 
+                RenderTransformOrigin="0.526,0.944">
+            <TextBlock Text="Go" 
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+        </Button>
     </Grid>
 </Window>

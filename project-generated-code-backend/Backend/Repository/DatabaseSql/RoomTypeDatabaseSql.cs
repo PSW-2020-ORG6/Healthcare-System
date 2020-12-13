@@ -11,5 +11,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             return dbContext.RoomType.ToList();
         }
+
     }
 }
