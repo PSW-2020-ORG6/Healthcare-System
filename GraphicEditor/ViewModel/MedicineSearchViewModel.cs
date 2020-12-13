@@ -2,17 +2,18 @@
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using System.Collections.Generic;
+
 namespace GraphicEditor.ViewModel
 {
-    public class EquipmentSearchViewModel : BindableBase
+    public class MedicineSearchViewModel : BindableBase
     {
         private RoomDatabaseSql roomRepository = new RoomDatabaseSql();
         private FloorDatabaseSql floorRepository = new FloorDatabaseSql();
         private BuildingDatabaseSql buildingRepository = new BuildingDatabaseSql();
-        private EquipmentDatabaseSql equipmentDatabaseSql = new EquipmentDatabaseSql();
+        private MedicineDatabaseSql medicineRepository = new MedicineDatabaseSql();
 
-        private List<Equipment> _resultOfSearch;
-        public List<Equipment> ResultOfSearch
+        private List<Medicine> _resultOfSearch;
+        public List<Medicine> ResultOfSearch
         {
             get => _resultOfSearch;
             set
@@ -40,44 +41,44 @@ namespace GraphicEditor.ViewModel
                 SetProperty(ref _queryForSearch, value);
             }
         }
-        private Equipment _selectedEquipment;
-        public Equipment SelectedEquipment
+        private Medicine _selectedMedicine;
+        public Medicine SelectedMedicine
         {
-            get => _selectedEquipment;
+            get => _selectedMedicine;
             set
             {
-                SetProperty(ref _selectedEquipment, value);
+                SetProperty(ref _selectedMedicine, value);
             }
         }
 
         public MyICommand<string> SearchCommand { get; private set; }
 
-        public MyICommand<Equipment> GoToCommand { get; private set; }
+        public MyICommand<Medicine> GoToCommand { get; private set; }
 
-        public EquipmentSearchViewModel()
+        public MedicineSearchViewModel()
         {
-            SearchCommand = new MyICommand<string>(SearchEquipment);
-            GoToCommand = new MyICommand<Equipment>(FindEquipment);
+            SearchCommand = new MyICommand<string>(SearchMedicine);
+            GoToCommand = new MyICommand<Medicine>(FindMedicine);
         }
 
-        private void SearchEquipment(string equipmentName)
+        private void SearchMedicine(string medicineName)
         {
-            _resultOfSearch = equipmentDatabaseSql.GetByName(equipmentName);
+            _resultOfSearch = medicineRepository.GetByName(medicineName);
             _reportOfSearch = new List<string>();
-            foreach (Equipment result in _resultOfSearch)
+            foreach (Medicine result in _resultOfSearch)
             {
-                Floor floor = floorRepository.GetBySerialNumber(result.FloorSerialNumber);
-                Building building = buildingRepository.GetBySerialNumber(floor.BuildingSerialNumber);
                 Room room = roomRepository.GetBySerialNumber(result.RoomSerialNumber);
-                string fullLocation = building.Name + ", " + floor.Name + ", " + room.Name + ", " 
-                                        + equipmentName + " in quantity: 1";
+                Floor floor = floorRepository.GetBySerialNumber(room.FloorSerialNumber);
+                Building building = buildingRepository.GetBySerialNumber(floor.BuildingSerialNumber);
+                string fullLocation = building.Name + ", " + floor.Name + ", " + room.Name + ", "
+                                    + medicineName +  " in quantity: 1";
                 _reportOfSearch.Add(fullLocation);
             }
             OnPropertyChanged("ReportOfSearch");
 
         }
 
-        private void FindEquipment(Equipment equipment)
+        private void FindMedicine(Medicine medicine)
         {
 
         }
