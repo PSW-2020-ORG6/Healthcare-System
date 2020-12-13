@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+
+package rs.ac.uns.ftn.grpc;
+option csharp_namespace = "IntegrationAdapters.gRPCProtocol.Protos";
+import "gRPCProtocol/Protos/model.proto";
+
+service NetGrpcService {
+  rpc transfer (MessageProto) returns (MessageResponseProto);
+}

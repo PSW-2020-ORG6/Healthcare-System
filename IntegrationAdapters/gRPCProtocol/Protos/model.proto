@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package rs.ac.uns.ftn.grpc;
+option csharp_namespace = "IntegrationAdapters.gRPCProtocol.Protos";
+message MessageProto {
+  string medicineName =1;
+   int32  quantity=2;
+   bool isPharmacyApproved=3;
+}
+
+message MessageResponseProto {
+  string response = 1;
+  string status = 2;
+}
+
