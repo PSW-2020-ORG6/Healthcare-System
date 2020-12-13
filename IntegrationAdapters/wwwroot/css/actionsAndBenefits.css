@@ -1,0 +1,14 @@
+﻿.form-style-4  {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 16px;
+}
+.form-style-4 {
+    background-color: lightskyblue;
+    border: none;
+    padding: 8px 10px 8px 10px;
+    border-radius: 5px;
+    color: coral;
+}
+.form-style-4 input[type=button]:hover {
+    background: #394D61;
+}
