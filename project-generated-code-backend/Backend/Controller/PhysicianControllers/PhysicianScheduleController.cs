@@ -3,12 +3,12 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class PhysitianScheduleController
 
-using System;
-using System.Collections.Generic;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Service.SchedulingService;
 using Model.Accounts;
+using System;
+using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {

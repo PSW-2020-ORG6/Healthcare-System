@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using HealthClinicBackend.Backend.Model.Hospital;
+﻿using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 {
@@ -17,7 +17,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
 
         public RoomAvailabilityService()
         {
-            _appointmentRepository = new AppointmentDatabaseSql(); 
+            _appointmentRepository = new AppointmentDatabaseSql();
             _renovationRepository = new RenovationDatabaseSql();
             _bedReservationRepository = new BedReservationDatabaseSql();
         }
@@ -59,7 +59,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
             foreach (Bed bed in room.Beds)
             {
                 beds.Add(bed);
-                if(!IsBedReserved(bed))
+                if (!IsBedReserved(bed))
                 {
                     beds.Add(bed);
                 }

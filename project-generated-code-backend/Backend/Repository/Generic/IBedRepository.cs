@@ -2,8 +2,8 @@
 
 namespace HealthClinicBackend.Backend.Repository.Generic
 {
-    public interface IBedRepository: IGenericRepository<Bed>
+    public interface IBedRepository : IGenericRepository<Bed>
     {
-        
+
     }
 }

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using HealthClinicBackend.Backend.Model.Util;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using HealthClinicBackend.Backend.Model.Util;
 
 namespace HealthClinicBackend.Backend.Model.Hospital
 {

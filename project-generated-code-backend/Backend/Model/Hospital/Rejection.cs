@@ -3,10 +3,10 @@
 // Created: Monday, May 25, 2020 17:06:42
 // Purpose: Definition of Class Rejection
 
-using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using HealthClinicBackend.Backend.Model.Util;
 using Newtonsoft.Json;
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HealthClinicBackend.Backend.Model.Hospital
 {
@@ -16,7 +16,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         [ForeignKey("Medicine")] public string MedicineSerialNumber { get; set; }
         public Medicine Medicine { get; set; }
 
-        public Rejection(): base()
+        public Rejection() : base()
         {
 
         }
@@ -36,7 +36,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
 
         public override bool Equals(object obj)
         {
-            var other = (Rejection) obj;
+            var other = (Rejection)obj;
             if (other == null)
             {
                 return false;

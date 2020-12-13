@@ -3,14 +3,12 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class PatientRegistrationService
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
-using Model.Accounts;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
 {
@@ -23,7 +21,7 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
             _patientRepository = new PatientDatabaseSql();
         }
 
-        
+
         private bool IsJmbgValid(string jmbg)
         {
             List<Patient> patients = _patientRepository.GetAll();
@@ -46,7 +44,7 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
                     return;
                 }
 
-                var newPatient = new Patient(patientDto) {SerialNumber = p.SerialNumber};
+                var newPatient = new Patient(patientDto) { SerialNumber = p.SerialNumber };
                 _patientRepository.Update(newPatient);
             }
             else if (IsJmbgValid(patientDto.Id))

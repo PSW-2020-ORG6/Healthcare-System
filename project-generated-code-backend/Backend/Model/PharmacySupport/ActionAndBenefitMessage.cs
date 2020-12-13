@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using HealthClinicBackend.Backend.Model.Util;
+﻿using HealthClinicBackend.Backend.Model.Util;
+using System;
 
 namespace HealthClinicBackend.Backend.Model.PharmacySupport
 {
-    public class ActionAndBenefitMessage: Entity
+    public class ActionAndBenefitMessage : Entity
     {
         public Guid ActionID { get; set; }
         public string PharmacyName { get; set; }

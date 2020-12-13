@@ -1,6 +1,6 @@
-﻿using System;
-using HealthClinicBackend.Backend.Model.Accounts;
+﻿using HealthClinicBackend.Backend.Model.Accounts;
 using Model.Accounts;
+using System;
 
 namespace HealthClinicBackend.Backend.Dto
 {

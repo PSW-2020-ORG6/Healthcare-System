@@ -3,7 +3,6 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class PhysitianHospitalController
 
-using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.MedicalExam;
 using HealthClinicBackend.Backend.Model.Schedule;
@@ -11,6 +10,7 @@ using HealthClinicBackend.Backend.Service.HospitalAccountsService;
 using HealthClinicBackend.Backend.Service.PatientCareService;
 using HealthClinicBackend.Backend.Service.SchedulingService;
 using Model.Accounts;
+using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {

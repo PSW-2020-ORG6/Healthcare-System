@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using HealthClinicBackend.Backend.Model.Hospital;
+﻿using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
@@ -15,21 +15,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 .Include(m => m.MedicineManufacturer)
                 .Include(m => m.MedicineType)
                 .ToList();
-        }
-
-        public List<Medicine> GetApproved()
-        {
-            return GetAll().Where(m => m.IsApproved).ToList();
-        }
-
-        public List<Medicine> GetWaiting()
-        {
-            return GetAll().Where(m => !m.IsApproved).ToList();
-        }
-
-        public List<Medicine> GetByName(string name)
-        {
-            return GetAll().Where(m => m.CopyrightName.ToLower().Contains(name.ToLower()) || m.CopyrightName.ToLower().Contains(name.ToLower())).ToList();
         }
 
         public override Medicine GetById(string id)
@@ -55,6 +40,21 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             if (medicine == null) return;
             dbContext.Medicine.Remove(medicine);
             dbContext.SaveChanges();
+        }
+
+        public List<Medicine> GetApproved()
+        {
+            return GetAll().Where(m => m.IsApproved).ToList();
+        }
+
+        public List<Medicine> GetWaiting()
+        {
+            return GetAll().Where(m => !m.IsApproved).ToList();
+        }
+
+        public List<Medicine> GetByName(string name)
+        {
+            return GetAll().Where(m => m.CopyrightName.ToLower().Contains(name.ToLower()) || m.CopyrightName.ToLower().Contains(name.ToLower())).ToList();
         }
     }
 }
