@@ -10,7 +10,7 @@
             statistics: [],
             doctorList: [],
             doctorsList: [],
-
+            maliciousPatients: [],
 
         }
     },
@@ -21,7 +21,7 @@
         axios
             .get('http://localhost:49900/feedback/approved')
             .then(response => {
-                this.approvedFeedbacks = response.data            
+                this.approvedFeedbacks = response.data
             })
             .catch(error => {
                 alert(error)
@@ -43,10 +43,14 @@
             .catch(error => {
                 alert(error)
             })
-
-
-
-
+        axios
+            .get('http://localhost:49900/patient/getMaliciousPatients')
+            .then(response => {
+                this.maliciousPatients = response.data
+            })
+            .catch(error => {
+                alert(error)
+            })
 
         axios
             .get('http://localhost:49900/survey/getDoctors', { params: { patientId: "0003" } })
@@ -84,6 +88,29 @@
 <br></br>
 <br></br>
 
+               <div class="tab-content">
+    	            <div id="approved" class="container tab-pane active"><br>
+    		            <div class="container">
+	                            <div class="row">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                          <tr>
+                                            <th>Patient</th>
+                                            <th colspan="2"></th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr v-for="mp in maliciousPatients">
+                                            <td >{{mp.name}} {{mp.surname}}</td>
+                                            <td style="text-align:center"><button class="btnban form-control" v-on:click="BlockMaliciousPatient(mp)">B L O C K</button></td>  
+                                          </tr>
+                                        </tbody>
+                                     </table>
+	                            </div>
+                          </div>			     
+		             </div>
+            </div>
+    
         <br></br>
         <br></br>
         <br></br>
@@ -182,6 +209,23 @@
                 .put('http://localhost:49900/feedback/approve', feedback)
                 .then(response => {
                     this.Refresh();
+                })
+                .catch(error => {
+                    alert(error)
+                })
+        },
+        BlockMaliciousPatient: function (MaliciousPatient) {
+            axios
+                .put('http://localhost:49900/patient/blockMaliciousPatient', MaliciousPatient)
+                .then(response => {
+                    axios
+                        .get('http://localhost:49900/patient/getMaliciousPatients')
+                        .then(response => {
+                            this.maliciousPatients = response.data
+                        })
+                        .catch(error => {
+                            alert(error)
+                        })
                 })
                 .catch(error => {
                     alert(error)

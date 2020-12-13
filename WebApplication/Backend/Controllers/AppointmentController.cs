@@ -99,5 +99,22 @@ namespace WebApplication.Backend.Controllers
                 return null;
         }
 
+        [HttpPut("cancelAppointment")]
+        public bool CancelAppointment(AppointmentDto appointment)
+        {
+            return appointmentsService.CancelAppointment(appointment.SerialNumber);
+        }
+
+        [HttpGet("checkIfMalicious")]
+        public bool CheckIfUserIsMaliciousment(string patientId)
+        {
+            return appointmentsService.CheckIfUserIsMalicious(patientId);
+        }
+
+        [HttpPut("setToMalicious")]
+        public bool CheckIfUserIsMaliciousment(AppointmentDto appointment)
+        {
+            return appointmentsService.CheckIfUserIsMalicious(appointment.Patient.Id);
+        }
     }
 }

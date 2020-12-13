@@ -28,6 +28,7 @@ namespace HealthClinicBackend.Backend.Model.Schedule
         public bool Urgency { get; set; }
         public DateTime Date { get; set; }
         public bool Active { get; set; }
+        public string DateOfCanceling { get; set; }
 
         public Appointment(Room room, Physician physician, Patient patient, TimeInterval timeInterval,
             ProcedureType procedureType) : base()
