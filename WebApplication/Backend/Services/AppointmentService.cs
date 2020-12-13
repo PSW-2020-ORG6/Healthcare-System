@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
+using Model.Accounts;
 using WebApplication.Backend.DTO;
 using WebApplication.Backend.Repositorys;
 using WebApplication.Backend.Repositorys.Interfaces;
@@ -65,32 +67,34 @@ namespace WebApplication.Backend.Services
             return specializationDTO.ConvertListToSpecializationDTO(specializationRepository.GetAllSpecializations());
         }
 
-        public List<TimeIntervalDTO> GetAllAvailableAppointments(string physitianId, string specializationName, string date)
+        public List<TimeIntervalDTO> GetAllAvailableAppointments(string physicianId, string specializationName, string date)
         {
-            List<TimeIntervalDTO> timeIntervals = timeIntervalDTO.ConvertListToTimeIntervalDTO(timeIntervalRepository.GetAllTimeIntervals());
+            Physician physician = physicianRepository.GetPhysicianBySerialNumber(physicianId);
             List<Appointment> appointments = appointmentRepository.GetAppointmentsByDate(date);
-            if (!appointments.Any())
-                return timeIntervals;
-            else
-                return GetAvailableAppointments(timeIntervals, appointments, physitianId, specializationName, date);
+            return GetAvailableAppointments(appointments, physician, specializationName);
         }
 
-        private List<TimeIntervalDTO> GetAvailableAppointments(List<TimeIntervalDTO> timeIntervals, List<Appointment> appointments, string physitianId, string specializationName, string date)
+        private List<TimeIntervalDTO> GetAvailableAppointments(List<Appointment> appointments, Physician physician, string specializationName)
         {
             List<TimeIntervalDTO> result = new List<TimeIntervalDTO>();
-            foreach (TimeIntervalDTO timeInterval in timeIntervals)
+            DateTime time = physician.WorkSchedule.Start;
+            while (time <= physician.WorkSchedule.End)
             {
                 bool existance = false;
-                foreach (Appointment appointment in appointments)
+                if (appointments.Any())
                 {
-                    if (timeInterval.Start == appointment.TimeInterval.Start && appointment.Physician.SerialNumber == physitianId && appointment.ProcedureType.Specialization.Name == specializationName && appointment.Active)
+                    foreach (Appointment appointment in appointments)
                     {
-                        existance = true;
-                        break;
+                        if (timeIntervalDTO.CompareTimeIntervals(time, appointment.TimeInterval.Start) && appointment.Physician.SerialNumber == physician.SerialNumber && appointment.ProcedureType.Specialization.Name == specializationName && appointment.Active)
+                        {
+                            existance = true;
+                            break;
+                        }
                     }
                 }
                 if (!existance)
-                    result.Add(timeInterval);
+                    result.Add(new TimeIntervalDTO(time));
+                time = time.Add(new TimeSpan(0, 20, 0));
             }
             return result;
         }

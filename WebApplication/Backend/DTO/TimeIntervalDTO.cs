@@ -15,6 +15,11 @@ namespace WebApplication.Backend.DTO
         public TimeIntervalDTO()
         {
         }
+        public TimeIntervalDTO(DateTime start)
+        {
+            this.Start = start;
+            this.End = start.Add(new TimeSpan(0, 20, 0));
+        }
 
         public TimeIntervalDTO(TimeInterval timeInterval)
         {
@@ -64,6 +69,11 @@ namespace WebApplication.Backend.DTO
             foreach (TimeInterval timeInterval in timeIntervals)
                 timeIntervalsDTO.Add(new TimeIntervalDTO(timeInterval));
             return timeIntervalsDTO;
+        }
+
+        public bool CompareTimeIntervals(DateTime dateTime1, DateTime dateTime2)
+        {
+            return dateTime1.Hour == dateTime2.Hour && dateTime1.Minute == dateTime2.Minute;
         }
     }
 }

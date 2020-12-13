@@ -48,12 +48,12 @@ namespace HealthClinicBackend.Backend.Dto
         public AppointmentDto()
         {
         }
-        public AppointmentDto(string physicianId, string date, string timeIntervalId)
+        public AppointmentDto(string physicianId, string date, DateTime timeIntervalStart)
         {
             this.Physician = new Physician { SerialNumber = physicianId };
             string[] parts = date.Split("-");
             this.Date = new DateTime(Int32.Parse(parts[0]), Int32.Parse(parts[1]), Int32.Parse(parts[2]), 0, 0, 0);
-            this.Time = new TimeInterval { Id = timeIntervalId };
+            this.Time = new TimeInterval { Start = timeIntervalStart };
             this.Active = true;
         }
     }

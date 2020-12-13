@@ -36,6 +36,7 @@ namespace WebApplication.Backend.Repositorys
                 entity.Email = (string)sqlReader[6];
                 entity.Password = (string)sqlReader[7];
                 entity.Specialization = specializationRepository.GetSpecializationsByPhysicianSerialNumber((string)sqlReader[0]);
+                entity.WorkSchedule = timeIntervalRepository.GetTimeIntervalById((string)sqlReader[9]);
                 resultList.Add(entity);
             }
             connection.Close();
