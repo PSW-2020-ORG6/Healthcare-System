@@ -61,14 +61,15 @@ namespace GraphicEditor.View.Windows
                 int checkCounter = 0;
                 resultOfSearch += checkCounter + 1 + "\n";
                 foreach (Medicine m in medicine)
-                    // resultOfSearch += "\n" + "Generic name: " + m.GenericName + " MedicineManufacturerSerialNumber: " 
-                    //   + m.MedicineManufacturer.SerialNumber + " MedicineTypeSerialNumber: " 
-                    //  + m.MedicineType.SerialNumber + " SerialNumber: " + m.SerialNumber;
-                    if (++checkCounter == equipmentCounter)
-                        return resultOfSearch += ".";
+                    // TODO
+                   // resultOfSearch += "\n" + "Generic name: " + m.GenericName + " MedicineManufacturerSerialNumber: " 
+                     //   + m.MedicineManufacturer.SerialNumber + " MedicineTypeSerialNumber: " 
+                      //  + m.MedicineType.SerialNumber + " SerialNumber: " + m.SerialNumber;
+                if (++checkCounter == equipmentCounter)
+                    return resultOfSearch += ".";
                 resultOfSearch += ",";
-            }
 
+            }
             return null;
         }
 
@@ -95,11 +96,11 @@ namespace GraphicEditor.View.Windows
             return null;
         }
         private string PlaceOfFoundRooms(string resultOfSearch, Room room)
-            {
-                Floor floor = floorRepository.GetBySerialNumber(room.FloorSerialNumber);
-                Building building = buildingRepository.GetBySerialNumber(floor.BuildingSerialNumber);
-                resultOfSearch += floor.Name + " in " + building.Name;
-                return resultOfSearch;
-            }
+        {
+            Floor floor = floorRepository.GetBySerialNumber(room.FloorSerialNumber);
+            Building building = buildingRepository.GetBySerialNumber(floor.BuildingSerialNumber);
+            resultOfSearch += floor.Name + " in " + building.Name;
+            return resultOfSearch;
         }
+    }
 }
