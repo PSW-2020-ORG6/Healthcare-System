@@ -44,6 +44,16 @@ namespace HealthClinicBackend.Backend.Controller.PatientControllers
         {
             throw new NotImplementedException();
         }
+        
+        public AppointmentDto MakeAppointment(AppointmentDto appointmentDto, int priority)
+        {
+            List<AppointmentDto> appointments = GetAllAvailableAppointments(appointmentDto);
+            if(appointments != null)
+            {
+                return appointments[0];
+            }
+            return null;
+        }
 
         public List<AppointmentDto> GetAllAvailableAppointments(AppointmentDto appointmentDto)
         {
