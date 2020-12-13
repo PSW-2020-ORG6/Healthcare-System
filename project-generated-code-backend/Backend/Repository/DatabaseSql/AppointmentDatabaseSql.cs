@@ -14,12 +14,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
     {
         public override List<Appointment> GetAll()
         {
-            return dbContext.Appointment
-                .Include(a => a.Patient)
-                .Include(a => a.Physician)
-                .Include(a => a.Room)
-                .Include(a => a.ProcedureType)
-                .ToList();
+            return dbContext.Appointment.ToList();
         }
 
         public override Appointment GetById(string id)

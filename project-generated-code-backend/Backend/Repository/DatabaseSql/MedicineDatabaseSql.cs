@@ -10,11 +10,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
     {
         public override List<Medicine> GetAll()
         {
-            // Use Include method to connect object and its references from other tables
-            return dbContext.Medicine
-                .Include(m => m.MedicineManufacturer)
-                .Include(m => m.MedicineType)
-                .ToList();
+            return dbContext.Medicine.ToList();
         }
 
         public override Medicine GetById(string id)
@@ -54,7 +50,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public List<Medicine> GetByName(string name)
         {
-            return GetAll().Where(m => m.CopyrightName.ToLower().Contains(name.ToLower()) || m.CopyrightName.ToLower().Contains(name.ToLower())).ToList();
+            return GetAll().Where(m => m.CopyrightName.ToLower().Contains(name.ToLower())).ToList();
         }
     }
 }

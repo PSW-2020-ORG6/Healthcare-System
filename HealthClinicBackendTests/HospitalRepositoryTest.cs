@@ -49,7 +49,6 @@ namespace HealthClinicBackendTests
             var result = subject.GetAll();
             foreach (var room in result)
             {
-                Assert.NotNull(room.Floor);
                 Assert.NotNull(room.RoomType);
                 Assert.NotNull(room.Equipment);
                 Assert.NotNull(room.Beds);
@@ -88,9 +87,6 @@ namespace HealthClinicBackendTests
             var result = subject.GetAll();
             foreach (var room in result)
             {
-                Assert.NotNull(room.Building);
-                Assert.NotNull(room.Floor);
-                Assert.NotNull(room.Room);
                 Assert.NotNull(room.Patient);
             }
 

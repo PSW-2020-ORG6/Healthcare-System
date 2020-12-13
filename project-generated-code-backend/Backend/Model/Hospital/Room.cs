@@ -17,8 +17,6 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public string Name { get; set; }
         public int Id { get; set; }
         [ForeignKey("Floor")] public string FloorSerialNumber { get; set; }
-        public Floor Floor { get; set; }
-        public string BuildingSerialNumber { get; set; } // TODO: get this from Floor
         [ForeignKey("RoomType")] public string RoomTypeSerialNumber { get; set; }
         public virtual RoomType RoomType { get; set; }
         public virtual List<Equipment> Equipment { get; set; }

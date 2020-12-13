@@ -11,12 +11,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
     {
         public override List<Room> GetAll()
         {
-            return dbContext.Room
-                .Include(r => r.Floor)
-                .Include(r => r.RoomType)
-                .Include(r => r.Equipment)
-                .Include(r => r.Beds)
-                .ToList();
+            return dbContext.Room.ToList();
         }
 
         public override Room GetById(string id)
