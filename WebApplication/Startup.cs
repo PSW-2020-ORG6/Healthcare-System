@@ -1,9 +1,13 @@
+using HealthClinicBackend.Backend.Repository;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Collections.Generic;
 using WebApplication.Backend.Model;
 using WebApplication.Backend.Services;
 
@@ -23,10 +27,21 @@ namespace WebApplication
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddTransient<IMailService, MailService>();
             //TODO: use postgresql
-            
-            services.AddDbContext<UtilDbContext>(options =>
-            options.UseNpgsql(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")));
-            
+            IConfiguration conf = Configuration.GetSection("DataBaseConnectionSettings");
+            DataBaseConnectionSettings dataBaseConnectionSettings = new DataBaseConnectionSettings();
+
+            services.AddControllers();
+
+            services.AddDbContext<HealthCareSystemDbContext>(options =>
+            {
+                options.UseNpgsql(
+                    dataBaseConnectionSettings.ConnectionString,
+                    x => x.MigrationsAssembly("Backend").EnableRetryOnFailure(
+                        dataBaseConnectionSettings.RetryCount, new TimeSpan(0, 0, 0, dataBaseConnectionSettings.RetryWaitInSeconds), new List<string>())
+                    );
+            });
+
+            services.AddControllers();
             // services.AddDbContext<UtilDbContext>(options =>
             // options.UseMySql(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")).UseLazyLoadingProxies());
         }
@@ -46,5 +61,8 @@ namespace WebApplication
             app.UseDefaultFiles();
             app.UseStaticFiles();
         }
+
+
+    
     }
 }

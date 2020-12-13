@@ -5,7 +5,13 @@ services:
     image: postgres:13.1
     restart: always
     environment:
-      POSTGRES_PASSWORD: example
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_USER: "user"
+      POSTGRES_DB: "healthcare-system-db"
+    ports: 
+      - "5432:5432"
+    networks: 
+      - network
 
 
   rabbit:
@@ -27,12 +33,21 @@ services:
       - 8080:8080
     networks: 
       - network
+    restart: on-failure
     environment:
       RABBITMQ_HOST: rabbit
       RABBITMQ_USERNAME: guest
       RABBITMQ_PASSOWRD: guest
+      DataBaseConnectionSettings:Host: "postgres"
+      DataBaseConnectionSettings:Port: "5432"
+      DataBaseConnectionSettings:User: "user"
+      DataBaseConnectionSettings:Database: "healthcare-system-db"
+      DataBaseConnectionSettings:Password: "password"
+      DataBaseConnectionSettings:RetryCount: 100
+      DataBaseConnectionSettings:RetryWaitInSeconds: 30
     depends_on:
       - rabbit
+      - postgres
   
   web-application:
     image: web-application
@@ -49,8 +64,18 @@ services:
       RABBITMQ_HOST: rabbit
       RABBITMQ_USERNAME: guest
       RABBITMQ_PASSOWRD: guest
+      DataBaseConnectionSettings:Host: "postgres"
+      DataBaseConnectionSettings:Port: "5432"
+      DataBaseConnectionSettings:User: "user"
+      DataBaseConnectionSettings:Database: "healthcare-system-db"
+      DataBaseConnectionSettings:Password: "password"
+      DataBaseConnectionSettings:RetryCount: 100
+      DataBaseConnectionSettings:RetryWaitInSeconds: 30
+
     depends_on:
       - rabbit
+      - postgres
+
 
 
 networks:

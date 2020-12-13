@@ -13,6 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using HealthClinicBackend.Backend.Repository;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 
 namespace IntegrationAdapters
 {
@@ -28,9 +30,22 @@ namespace IntegrationAdapters
    
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllers();
-            services.AddDbContext<IAHealthCareSystemDbContext>(options =>
-                   options.UseMySql(ConfigurationExtensions.GetConnectionString(Configuration, "HealthCareSystemDbContextConnectionString")).UseLazyLoadingProxies());
+
+            IConfiguration conf = Configuration.GetSection("DataBaseConnectionSettings");
+            DataBaseConnectionSettings dataBaseConnectionSettings = new DataBaseConnectionSettings();
+
+            services.AddControllers();
+
+            services.AddDbContext<HealthCareSystemDbContext>(options =>
+            {
+                options.UseNpgsql(
+                    dataBaseConnectionSettings.ConnectionString,
+                    x => x.MigrationsAssembly("Backend").EnableRetryOnFailure(
+                        dataBaseConnectionSettings.RetryCount, new TimeSpan(0, 0, 0, dataBaseConnectionSettings.RetryWaitInSeconds), new List<string>())
+                    ).UseLazyLoadingProxies();
+            });
         }
         private Server server;
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -63,13 +78,13 @@ namespace IntegrationAdapters
         private string CreateConnectionStringFromEnvironment()
         {
             string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
-            string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
-            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "demo";
+            string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "5432";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "healthcare-system-db";
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
+            string str = "User ID =postgres;Password=super;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
 
-
-            return $"server={server};port={port};database={database};user={user};password={password};";
+            return $"User ID =postgres;server={server};port={port};database={database};user={user};password={password};Integrated Security=true;Pooling=true;";
         }
         private void OnShutdown()
         {
@@ -78,5 +93,6 @@ namespace IntegrationAdapters
                 server.ShutdownAsync().Wait();
             }
         }
+
     }
 }
