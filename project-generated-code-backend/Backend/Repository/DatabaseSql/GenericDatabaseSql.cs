@@ -51,7 +51,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         }
         public virtual T GetBySerialNumber(string serialNumber)
         {
-            return GetAll().Where(f => f.SerialNumber.Equals(serialNumber)).ToList()[0];
+            return GetAll().Where(t => t.SerialNumber.Equals(serialNumber)).ToList()[0];
         }
 
         public virtual T Instantiate(string objectStringFormat)

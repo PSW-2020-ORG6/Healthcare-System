@@ -4,6 +4,7 @@ using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Util;
 using System;
 using System.Collections.Generic;
+using System.Windows.Controls;
 
 namespace GraphicEditor.ViewModel
 {
@@ -15,10 +16,10 @@ namespace GraphicEditor.ViewModel
         private Building _building;
         public MyICommand<string> NavCommand { get; private set; }
         public MyICommand<Building> BuildingUpdateCommand { get; private set; }
-
         public static CardiologyFirstFloorMapUserControlViewModel FirstFloor;
         public static CardiologySecondFloorMapUserControlViewModel SecondFloor;
         public BindableBase _floorViewModel;
+        public Grid grid;
 
         public CardiologyBuildingUserControlViewModel(MapContentUserControlViewModel parent)
         {
