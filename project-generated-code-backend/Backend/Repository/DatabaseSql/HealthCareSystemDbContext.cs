@@ -62,12 +62,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public DbSet<MedicinePharmacy> MedicinePharmacy { get; set; }
         public DbSet<MedicineSpecification> MedicineSpecification { get; set; }
 
-        public DbSet<Api> Apis { get; set; }
-        public DbSet<ActionAndBenefitMessage> ActionAndBenefitMessage { get; set; }
-        public DbSet<MedicineDosagePharmacy> MedicineDosagePharmacy { get; set; }
-        public DbSet<MedicineReport> MedicineReport { get; set; }
-        public DbSet<MedicinePharmacy> MedicinePharmacy { get; set; }
-        public DbSet<MedicineSpecification> MedicineSpecification { get; set; }
 
         public HealthCareSystemDbContext(DbContextOptions<HealthCareSystemDbContext> options) : base(options)
         {
