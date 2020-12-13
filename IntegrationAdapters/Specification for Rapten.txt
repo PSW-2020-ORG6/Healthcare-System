@@ -1,6 +1,6 @@
-Medicine name: Aspirin
+Medicine name: Rapten
 Content: m
 Medicine replacement: m
 Producer: m
-Daily taking: 5
+Daily taking: 2
 

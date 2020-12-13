@@ -26,9 +26,34 @@ $(document).ready(function () {
 		});
 	});
 
-	$("#btnAskPharmaciesForSpecification").click(function () {
+	$("#btnCheckWithPharmacyHttp").click(function () {
 		var MedicineName = $("#txtMedicine").val();
-		
+		var Quantity = parseInt($("#txtQuantity").val());
+		$.get({
+			url: '../medicine/getPharmacies/' + MedicineName + '/' + Quantity,
+			contentType: 'application/json',
+			success: function (foundedPharmacy) {
+				$('#container').html('');
+				var foundedPharmacy = foundedPharmacy.substring(0, foundedPharmacy.length - 1)
+				var foundedPharmacyArray = foundedPharmacy.split('#');
+				
+				for (var value of foundedPharmacyArray) {
+						if (value == 'Pharmacy not foun') {
+							$('#container').append(`<input class="textbox" type="text" id="${value}"  value="Pharmacy not found" disabled>`)
+							$('#btnPrescribe').attr("disabled", true);
+						} else {
+							$('#container')
+								.append(`<input type="checkbox" id="${value}" name="interest" value="${value}">`)
+								.append(`<label for="${value}">${value}</label></div>`)
+								.append(`<br>`);
+						}
+					}
+				},
+				
+			error: function (message) {
+				alert("Failed")
+			}
+		});
 	});
 
 	$("#btnPrescribe").click(function () {
