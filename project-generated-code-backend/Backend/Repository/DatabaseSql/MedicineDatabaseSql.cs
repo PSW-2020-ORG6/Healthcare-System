@@ -50,7 +50,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public List<Medicine> GetByName(string name)
         {
-            return GetAll().Where(m => m.CopyrightName.ToLower().Contains(name.ToLower())).ToList();
+            return GetAll().Where(m => m.CopyrightName.ToLower().Contains(name.ToLower()) || m.GenericName.ToLower().Contains(name.ToLower())).ToList();
+
         }
     }
 }
