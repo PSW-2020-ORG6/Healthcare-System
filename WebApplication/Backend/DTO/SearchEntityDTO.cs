@@ -3,9 +3,9 @@ namespace WebApplication.Backend.DTO
 {
     public class SearchEntityDTO
     {
-        private string type;
-        private string text;
-        private string date;
+        public string Type { get; set; }
+        public string Text { get; set; }
+        public string Date { get; set; }
 
         public SearchEntityDTO()
         {
@@ -13,14 +13,10 @@ namespace WebApplication.Backend.DTO
 
         public SearchEntityDTO(string type, string text, string date)
         {
-            this.type = type;
-            this.text = text;
-            this.date = date;
+            this.Type = type;
+            this.Text = text;
+            this.Date = date;
         }
-
-        public string Type { get => type; }
-        public string Text { get => text; }
-        public string Date { get => date; }
 
         public List<SearchEntityDTO> MergeLists(List<SearchEntityDTO> searchEntityDTOPrescriotions, List<SearchEntityDTO> searchEntityDTOReport)
         {

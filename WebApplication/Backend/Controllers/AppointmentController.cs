@@ -15,10 +15,12 @@ namespace WebApplication.Backend.Controllers
     {
         private readonly AppointmentService appointmentService;
         private readonly DateTimeDTO dateTimeDTO;
+        private readonly AppointmentDto appointmentDTO;
         public AppointmentController()
         {
             this.appointmentService = new AppointmentService();
             this.dateTimeDTO = new DateTimeDTO();
+            this.appointmentDTO = new AppointmentDto();
         }
 
         [HttpGet("allAppointmentsByPatientId")]
@@ -43,7 +45,7 @@ namespace WebApplication.Backend.Controllers
             return appointmentService.GetAllAppointments();
         }
 
-        //[HttpGet("allAppointmentsByPatientIdActive")]
+        [HttpGet("allAppointmentsByPatientIdActive")]
         public List<Appointment> GellAllAppointmentsByPatientIdActive(String patientId)
         {
             List<Appointment> apointments = appointmentService.GetAllAppointmentsByPatientIdActive(patientId);
@@ -68,9 +70,9 @@ namespace WebApplication.Backend.Controllers
         [HttpPost("makeAppointment/{physicianId}/{timeIntervalStart}/{date}")]
         public IActionResult MakeAppointment(string physicianId, DateTime timeIntervalStart, string date)
         {
-            if (physicianId != null && timeIntervalStart != null && date != null)
+            if (physicianId != null && timeIntervalStart != null && appointmentDTO.IsDataValid(date))
             {
-                if (appointmentService.AddAppointment(new Appointment(new AppointmentDto(physicianId, date, timeIntervalStart))))
+                if (appointmentService.AddAppointment(new Appointment(physicianId, date, timeIntervalStart)))
                     return Ok();
                 else
                     return BadRequest();
