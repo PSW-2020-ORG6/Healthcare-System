@@ -17,8 +17,13 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid>
+    <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -27,30 +32,47 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0"
-                   Grid.Column="0"
+        <TextBlock Grid.Row="1"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="2"
+                   FontSize="30"
                    Text="Building name:"/>
         <TextBox x:Name="nameTextBox"
                  Text="{Binding Path=nameText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                 Grid.Row="0"
-                 Grid.Column="1"/>
-        <TextBlock Grid.Row="1"
-                   Grid.Column="0"
+                 Grid.Row="1"
+                 Grid.Column="3"
+                 Grid.ColumnSpan="2"/>
+        <TextBlock Grid.Row="3"
+                   Grid.RowSpan="2"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="2"
+                   FontSize="30"
                    Text="Building color:"/>
-        <materialDesign:ColorPicker Grid.Row="1"
-                                    Grid.Column="1"
+        <materialDesign:ColorPicker Grid.Row="3"
+                                    Grid.RowSpan="2"
+                                    Grid.Column="3"
+                                    Grid.ColumnSpan="2"
                                     Color="{Binding Path=MyButtonColor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                     HorizontalAlignment="Center"
-                                    MinWidth="100"/>
-        <TextBlock Grid.Row="2"
-                   Grid.Column="0"
-                   Text="Building shape:"/>
+                                    MinWidth="100"
+                                    Width="230"/>
+        <TextBlock Grid.Row="5"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="2"
+                   FontSize="30"
+                   Text="Building shape:" HorizontalAlignment="Left" Margin="0,60,0,60" Grid.RowSpan="3" Width="333"/>
         <ComboBox x:Name="BuildingShapesComboBox"
-                  Grid.Row="2"
-                  Grid.Column="1"
+                  Grid.Row="6"
+                  Grid.Column="3"
+                  Grid.ColumnSpan="2"
                   HorizontalAlignment="Center"
-                  MinWidth="100"
+                  Width="150"
+                  Height="50"
                   SelectedIndex="{Binding Shapes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ComboBoxItem IsSelected="True">
                 <StackPanel Orientation="Horizontal">
@@ -93,11 +115,15 @@
                 </StackPanel>
             </ComboBoxItem>
         </ComboBox>
-        <Button Grid.Row="3"
+        <Button Grid.Row="7"
+                Grid.RowSpan="2"
+                Grid.Column="2"
                 Grid.ColumnSpan="2"
+                Height="45"
                 HorizontalAlignment="Center"
                 Content="Add building"
-                Command="{Binding AddCommand}"/>
+                Command="{Binding AddCommand}"
+                Width="130"/>
     </Grid>
 </Window>
 
