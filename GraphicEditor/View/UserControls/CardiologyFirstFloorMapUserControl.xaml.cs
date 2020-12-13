@@ -8,10 +8,13 @@ namespace GraphicEditor.View.UserControls
     /// </summary>
     public partial class CardiologyFirstFloorMapUserControl : UserControl
     {
+        public static Grid FloorGrid;
+
         public CardiologyFirstFloorMapUserControl()
         {
             this.DataContext = CardiologyBuildingUserControlViewModel.FirstFloor;
             InitializeComponent();
+            FloorGrid = Grid;
         }
     }
 }

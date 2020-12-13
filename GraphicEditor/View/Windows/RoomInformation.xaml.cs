@@ -1,4 +1,5 @@
 ﻿using GraphicEditor.ViewModel;
+using HealthClinicBackend.Backend.Model.Hospital;
 using System.Windows;
 
 namespace GraphicEditor.View.Windows
@@ -8,9 +9,9 @@ namespace GraphicEditor.View.Windows
     /// </summary>
     public partial class RoomInformation : Window
     {
-        public RoomInformation(string roomName)
+        public RoomInformation(Room room)
         {
-            this.DataContext = new RoomInformationViewModel(this, roomName);
+            this.DataContext = new RoomInformationViewModel(this, room);
             InitializeComponent();
         }
     }

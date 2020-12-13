@@ -15,5 +15,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             return DbContext.Bed.ToList();
         }
+
+        public List<Bed> GetByRoomSerialNumber(string roomSerialNumber)
+        {
+            return GetAll().Where(b => b.RoomSerialNumber.Equals(roomSerialNumber)).ToList();
+        }
+
     }
 }

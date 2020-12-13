@@ -60,24 +60,17 @@ namespace GraphicEditor.ViewModel
             }
         }
 
-        public RoomInformationViewModel(Window _window, string _roomName)
+        public RoomInformationViewModel(Window _window, Room _room)
         {
             NavCommandExit = new MyICommand(exitInfo);
             NavCommandBedUpdate = new MyICommand<Bed>(updateBedInfo);
             NavCommandRoomUpdate = new MyICommand<Room>(updateRoomInfo);
 
             window = _window;
-            roomName = _roomName;
-            room = new Room(_roomName, 100, new RoomType("Basic"));
-
-            beds.Add(new Bed("Bed 1", "bed01"));
-            beds.Add(new Bed("Bed 2", "bed02"));
-            beds.Add(new Bed("Bed 3", "bed03"));
-            beds.Add(new Bed("Bed 4", "bed04"));
-            beds.Add(new Bed("Bed 5", "bed05"));
-
+            roomName = _room.Name;
+            room = _room;
+            beds = _room.Beds;
             selectedBed = beds[0];
-
         }
 
         void updateBedInfo(Bed bedInfo)
