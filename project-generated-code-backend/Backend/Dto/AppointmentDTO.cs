@@ -55,5 +55,14 @@ namespace HealthClinicBackend.Backend.Dto
             DateTime dateTime = new DateTime(Int32.Parse(parts[0]), Int32.Parse(parts[1]), Int32.Parse(parts[2]), 0, 0, 0);
             return date != null && dateTime > DateTime.Today.AddDays(2);
         }
+
+        public AppointmentDto(string physicianId, string date, DateTime timeIntervalStart)
+        {
+            this.Physician = new Physician { SerialNumber = physicianId };
+            string[] parts = date.Split("-");
+            this.Date = new DateTime(Int32.Parse(parts[0]), Int32.Parse(parts[1]), Int32.Parse(parts[2]), 0, 0, 0);
+            this.Time = new TimeInterval { Start = timeIntervalStart };
+            this.Active = true;
+        }
     }
 }
