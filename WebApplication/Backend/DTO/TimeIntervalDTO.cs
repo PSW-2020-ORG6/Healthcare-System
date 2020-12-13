@@ -33,5 +33,10 @@ namespace WebApplication.Backend.DTO
                 timeIntervalsDTO.Add(new TimeIntervalDTO(timeInterval));
             return timeIntervalsDTO;
         }
+
+        public bool CompareTimeIntervals(DateTime dateTime1, DateTime dateTime2)
+        {
+            return dateTime1.Hour == dateTime2.Hour && dateTime1.Minute == dateTime2.Minute;
+        }
     }
 }
