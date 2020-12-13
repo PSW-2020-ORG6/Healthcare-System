@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
+﻿using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 using Xunit;
 
@@ -20,11 +17,11 @@ namespace GraphicEditorTests
         public void GetEquipmentByName_EquipmentExist_ReturnEquipment()
         {
             //Act
-            var equipment = _eqipmentRepository.GetByName("Bed 1")[0];
+            var equipment = _eqipmentRepository.GetByName("Scalpel")[0];
 
             //Assert
             Assert.NotNull(equipment);
-            Assert.Equal("Bed 1", equipment.Name);
+            Assert.Equal("Scalpel", equipment.Name);
         }
 
         [Fact]
