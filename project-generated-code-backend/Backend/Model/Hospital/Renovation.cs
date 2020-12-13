@@ -1,5 +1,5 @@
-﻿using System;
-using HealthClinicBackend.Backend.Model.Util;
+﻿using HealthClinicBackend.Backend.Model.Util;
+using System;
 
 namespace HealthClinicBackend.Backend.Model.Hospital
 {

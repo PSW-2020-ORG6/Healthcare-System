@@ -1,12 +1,12 @@
 ﻿using GraphicEditor.HelpClasses;
 using GraphicEditor.View.Windows;
+using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Util;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using HealthClinicBackend.Backend.Model.Hospital;
-using HealthClinicBackend.Backend.Model.Util;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 
 namespace GraphicEditor.ViewModel
 {
@@ -20,7 +20,7 @@ namespace GraphicEditor.ViewModel
 
         public Grid HospitalMapGrid { get; set; }
 
-        BuildingDatabaseSql buildingRepository=new BuildingDatabaseSql();
+        BuildingDatabaseSql buildingRepository = new BuildingDatabaseSql();
 
         public HospitalMapUserControlViewModel(MapContentUserControlViewModel parent)
         {

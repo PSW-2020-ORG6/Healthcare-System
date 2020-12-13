@@ -3,14 +3,14 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class Appointment
 
-using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Util;
 using Model.Accounts;
 using Newtonsoft.Json;
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HealthClinicBackend.Backend.Model.Schedule
 {

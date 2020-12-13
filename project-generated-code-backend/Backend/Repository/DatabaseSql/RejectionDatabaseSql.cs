@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using HealthClinicBackend.Backend.Model.Hospital;
+﻿using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.Generic;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class RejectionDatabaseSql: GenericDatabaseSql<Rejection>, IRejectionRepository
+    public class RejectionDatabaseSql : GenericDatabaseSql<Rejection>, IRejectionRepository
     {
         public override List<Rejection> GetAll()
         {

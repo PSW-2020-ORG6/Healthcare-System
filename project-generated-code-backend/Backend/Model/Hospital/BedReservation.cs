@@ -3,11 +3,11 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class BedReservation
 
-using System;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Util;
 using Newtonsoft.Json;
+using System;
 
 namespace HealthClinicBackend.Backend.Model.Hospital
 {

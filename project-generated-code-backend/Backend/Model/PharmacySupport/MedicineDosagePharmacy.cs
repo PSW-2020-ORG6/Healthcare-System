@@ -1,9 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using HealthClinicBackend.Backend.Model.Util;
+﻿using HealthClinicBackend.Backend.Model.Util;
 
 namespace HealthClinicBackend.Backend.Model.PharmacySupport
 {
-    public class MedicineDosagePharmacy: Entity
+    public class MedicineDosagePharmacy : Entity
     {
         public int Id { get; set; }
         public string MedicineName { get; set; }

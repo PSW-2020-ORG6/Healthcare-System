@@ -1,10 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using HealthClinicBackend.Backend.Model.Util;
+﻿using HealthClinicBackend.Backend.Model.Util;
 
 namespace HealthClinicBackend.Backend.Model.PharmacySupport
 {
-    public class Api: Entity
+    public class Api : Entity
     {
         public string Key { get; set; }
         public string PharmacyName { get; set; }

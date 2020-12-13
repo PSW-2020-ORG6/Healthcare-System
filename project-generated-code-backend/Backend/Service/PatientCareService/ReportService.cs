@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using HealthClinicBackend.Backend.Model.Accounts;
+﻿using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.MedicalExam;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
-using Model.Accounts;
+using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Service.PatientCareService
 {

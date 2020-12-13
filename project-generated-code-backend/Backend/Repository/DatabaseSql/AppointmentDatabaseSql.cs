@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using HealthClinicBackend.Backend.Model.Accounts;
+﻿using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
 using Model.Accounts;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
@@ -20,6 +20,31 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 .Include(a => a.Room)
                 .Include(a => a.ProcedureType)
                 .ToList();
+        }
+
+        public override Appointment GetById(string id)
+        {
+            return dbContext.Appointment.Find(id);
+        }
+
+        public override void Save(Appointment newEntity)
+        {
+            dbContext.Appointment.Add(newEntity);
+            dbContext.SaveChanges();
+        }
+
+        public override void Update(Appointment updateEntity)
+        {
+            dbContext.Appointment.Update(updateEntity);
+            dbContext.SaveChanges();
+        }
+
+        public override void Delete(string id)
+        {
+            var appointment = GetById(id);
+            if (appointment == null) return;
+            dbContext.Appointment.Remove(appointment);
+            dbContext.SaveChanges();
         }
 
         public List<Appointment> GetAppointmentsByDate(DateTime date)

@@ -3,9 +3,9 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class Account
 
+using HealthClinicBackend.Backend.Model.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using HealthClinicBackend.Backend.Model.Util;
 
 namespace HealthClinicBackend.Backend.Model.Accounts
 {
@@ -20,7 +20,7 @@ namespace HealthClinicBackend.Backend.Model.Accounts
         [ForeignKey("Address")] public string AddressSerialNumber { get; set; }
         public virtual Address Address { get; set; }
         public String Password { get; set; }
-        
+
         // this property does not need to be kept in databse
         public string FullName => Name + " " + Surname;
 

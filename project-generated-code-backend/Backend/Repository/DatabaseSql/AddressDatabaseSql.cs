@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using HealthClinicBackend.Backend.Model.Util;
+﻿using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.Generic;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class AddressDatabaseSql: GenericDatabaseSql<Address>, IAddressRepository
+    public class AddressDatabaseSql : GenericDatabaseSql<Address>, IAddressRepository
     {
         public override List<Address> GetAll()
         {

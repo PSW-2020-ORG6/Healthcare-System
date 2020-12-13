@@ -3,11 +3,11 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class PhysitianFileSystem
 
-using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.Generic;
 using Model.Accounts;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Repository.FileSystem
 {
