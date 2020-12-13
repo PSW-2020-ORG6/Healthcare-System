@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Schedule;
 using WebApplication.Backend.Repositorys;
 using WebApplication.Backend.Repositorys.Interfaces;
@@ -30,14 +31,30 @@ namespace WebApplication.Backend.Services
             return iappointmentRepository.GetAllAppointments();
         }
 
-        internal List<Appointment> GetAllAppointmentsByPatientIdActive(string patientId)
+        public List<Appointment> GetAllAppointmentsByPatientIdActive(string patientId)
         {
             return iappointmentRepository.GetAllAppointmentsByPatientIdActive(patientId);
         }
 
-        internal List<Appointment> GetAllAppointmentsByPatientIdCanceled(string patientId)
+        public List<Appointment> GetAllAppointmentsByPatientIdCanceled(string patientId)
         {
             return iappointmentRepository.GetAllAppointmentsByPatientIdCanceled(patientId);
         }
+
+        public bool CancelAppointment(string appointmentSerialNumber)
+        {
+            return iappointmentRepository.CancelAppointment(appointmentSerialNumber);
+
+        }
+
+        public bool CheckIfUserIsMalicious(string patientId) {
+            if (iappointmentRepository.CheckIfUserIsMalicious(patientId))
+            {
+                return iappointmentRepository.setUserToMalicious(patientId);
+            }
+            else
+                return false;
+        }
+
     }
 }

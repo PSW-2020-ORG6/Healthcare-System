@@ -15,7 +15,7 @@ namespace WebApplication.Backend.Repositorys
 
         public PhysitianRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=novabaza1;user=root;password=neynamneynam12");
         }
 
         private List<Physician> GetPhysitians(String query)

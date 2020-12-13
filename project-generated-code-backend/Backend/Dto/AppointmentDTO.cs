@@ -23,6 +23,7 @@ namespace HealthClinicBackend.Backend.Dto
         public bool Active { get; set; }
         public DateTime Date { get; set; }
         public int RestrictedHours { get; set; }
+        public string SerialNumber { get; set; }
 
         public bool IsPreferedPhysicianSelected()
         {

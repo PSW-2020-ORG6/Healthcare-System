@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Schedule;
 using WebApplication.Backend.Repositorys.Interfaces;
+using WebApplication.Backend.Util;
+using HealthClinicBackend.Backend.Dto;
 
 namespace WebApplication.Backend.Repositorys
 {
@@ -17,7 +19,7 @@ namespace WebApplication.Backend.Repositorys
 
         public AppointmentRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=novabaza1;user=root;password=neynamneynam12");
         }
 
         private List<Appointment> GetAppointments(String query)
@@ -146,5 +148,108 @@ namespace WebApplication.Backend.Repositorys
                 return null;
             }
         }
+
+        public bool CancelAppointment(string appointmentSerialNumber)
+        {
+            try
+            {
+                connection.Open();
+                String sqlDml = "UPDATE appointment SET active = 0 , DateOfCanceling = '" + DateTime.Now + "'  WHERE SerialNumber like '" + appointmentSerialNumber + "'";
+                MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+                sqlCommand.ExecuteNonQuery();
+
+                connection.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public bool CheckIfUserIsMalicious(string patientId)
+        {
+
+            String sqlDml = "Select  DateOfCanceling FROM appointment WHERE PatientSerialNumber like '" + patientId + "' AND Active = '0'";
+            try
+            {
+                connection.Open();
+                MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+                MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
+                List<DateSubstitute> datesToSort = new List<DateSubstitute>();
+                while (sqlReader.Read())
+                {
+                    string entity = (string)sqlReader[0];
+                    String[] entitySplit = (entity.Split(' ')[0]).Split('/');
+                    datesToSort.Add(new DateSubstitute(entitySplit[2], entitySplit[0], entitySplit[1]));
+
+
+                }
+
+                DateSubstitute sortingObject = new DateSubstitute();
+                List<DateSubstitute> sortedDates = sortingObject.SortDateSubstitutes(datesToSort);
+
+
+                connection.Close();
+
+                DateTime date = DateTime.Now;
+
+                String[] dateSplit = (date.ToString().Split(' ')[0]).Split('/');
+                DateSubstitute today = new DateSubstitute(dateSplit[2], dateSplit[0], dateSplit[1]);
+
+                if (sortedDates.Count >= 2)
+                {
+                    if (sortingObject.CalculateDiference(sortedDates[sortedDates.Count - 2], today) <= 30)
+                        return true;
+                }
+
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public List<DateTime> sortDates(List<DateTime> datesToSort)
+        {
+            DateTime temp;
+            for (int j = 0; j <= datesToSort.Count - 1; j++)
+            {
+                for (int i = 0; i <= datesToSort.Count - 1; i++)
+                {
+                    if (datesToSort[i].Year > datesToSort[i + 1].Year)
+                    {
+                        temp = datesToSort[i + 1];
+                        datesToSort[i + 1] = datesToSort[i];
+                        datesToSort[i] = temp;
+                    }
+                }
+            }
+
+            return datesToSort;
+        }
+
+        public bool setUserToMalicious(string patientId)
+        {
+            try
+            {
+                connection.Open();
+                String sqlDml = "UPDATE patient SET IsMalicious = '1'  WHERE id like '" + patientId + "'";
+                MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+                sqlCommand.ExecuteNonQuery();
+
+                connection.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+
     }
 }
