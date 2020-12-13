@@ -467,7 +467,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     CopyrightName = "Brufen",
                     GenericName = "Brufen",
                     MedicineManufacturerSerialNumber = "1",
-                    MedicineTypeSerialNumber = "11"
+                    MedicineTypeSerialNumber = "11",
+                    RoomSerialNumber = "101"
                 },
                 new Medicine
                 {
@@ -475,7 +476,17 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     CopyrightName = "Probiotic",
                     GenericName = "Probiotic",
                     MedicineManufacturerSerialNumber = "2",
-                    MedicineTypeSerialNumber = "12"
+                    MedicineTypeSerialNumber = "12",
+                    RoomSerialNumber = "102"
+                },
+                new Medicine
+                {
+                    SerialNumber = "23",
+                    CopyrightName = "Aspirin",
+                    GenericName = "Aspirin",
+                    MedicineManufacturerSerialNumber = "2",
+                    MedicineTypeSerialNumber = "12",
+                    RoomSerialNumber = "103"
                 }
             );
         }
@@ -769,6 +780,37 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     RoomId = "112",
                     Name = "Bed",
                     Id = "20",
+                    BuildingSerialNumber = "10002",
+                    FloorSerialNumber = "1003",
+                    RoomSerialNumber = "114"
+                },
+                new Equipment
+                {
+                    ///////////
+                    SerialNumber = "83",
+                    RoomId = "111",
+                    Name = "Mask",
+                    Id = "21",
+                    BuildingSerialNumber = "10001",
+                    FloorSerialNumber = "1002",
+                    RoomSerialNumber = "107"
+                },
+                new Equipment
+                {
+                    SerialNumber = "84",
+                    RoomId = "112",
+                    Name = "Stethoscope",
+                    Id = "22",
+                    BuildingSerialNumber = "10002",
+                    FloorSerialNumber = "1003",
+                    RoomSerialNumber = "114"
+                },
+                new Equipment
+                {
+                    SerialNumber = "85",
+                    RoomId = "112",
+                    Name = "Gloves",
+                    Id = "23",
                     BuildingSerialNumber = "10002",
                     FloorSerialNumber = "1003",
                     RoomSerialNumber = "114"

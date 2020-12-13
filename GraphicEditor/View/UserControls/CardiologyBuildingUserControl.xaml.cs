@@ -24,10 +24,16 @@ namespace GraphicEditor.View.UserControls
             roomSearch.Show();
         }
 
-        private void SearchEquipment(object sender, RoutedEventArgs e)
+        private void ShowEquipmentSearch(object sender, RoutedEventArgs e)
         {
             EquipmentSearch equipmentSearch = new EquipmentSearch();
             equipmentSearch.Show();
+        }
+
+        private void ShowMedicineSearch(object sender, RoutedEventArgs e)
+        {
+            MedicineSearch medicineSearch = new MedicineSearch();
+            medicineSearch.Show();
         }
     }
 }
