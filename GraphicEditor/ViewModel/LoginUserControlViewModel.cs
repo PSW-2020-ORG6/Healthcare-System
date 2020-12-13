@@ -35,8 +35,7 @@ namespace GraphicEditor.ViewModel
 
         private void checkLogin(PasswordBox pass)
         {
-            //repository is not implemented yet
-            //Console.WriteLine(hospitalLogInController.GetUserType(UserName,pass.Password));
+            MainWindow.TypeOfUser = hospitalLogInController.GetUserType(UserName, pass.Password);
         }
     }
 }
