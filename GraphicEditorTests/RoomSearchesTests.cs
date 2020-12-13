@@ -1,5 +1,5 @@
-using WebApplication.Backend.Repositorys;
-using WebApplication.Backend.Repositorys.Interfaces;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Xunit;
 
 namespace GraphicEditorTests
@@ -11,25 +11,25 @@ namespace GraphicEditorTests
         public RoomSearchesTests()
         {
             // Arrange
-            _roomRepository = new RoomRepository();
+            _roomRepository = new RoomDatabaseSql();
         }
 
         [Fact]
         public void GetRoomByName_RoomExist_ReturnRoom()
         {
             // Act
-            var room = _roomRepository.GetRoomsByName("Operation room 106")[0];
+            var room = _roomRepository.GetByName("OR 1")[0];
 
             // Assert
             Assert.NotNull(room);
-            Assert.Equal("Operation room 106", room.Name);
+            Assert.Equal("OR 1", room.Name);
         }
 
         [Fact]
         public void GetRoomsByName_RoomsDontExist_ReturnNull()
         {
             // Act
-            var rooms = _roomRepository.GetRoomsByName("ahagkhdjaf");
+            var rooms = _roomRepository.GetByName("ahagkhdjaf");
 
             // Assert
             Assert.Empty(rooms);

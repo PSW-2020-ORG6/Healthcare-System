@@ -1,5 +1,5 @@
-﻿using WebApplication.Backend.Repositorys;
-using WebApplication.Backend.Repositorys.Interfaces;
+﻿using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Xunit;
 
 namespace GraphicEditorTests
@@ -11,25 +11,25 @@ namespace GraphicEditorTests
         public FloorSearchesTests()
         {
             // Arrange
-            _floorRepository = new FloorRepository();
+            _floorRepository = new FloorDatabaseSql();
         }
 
         [Fact]
         public void GetFloorByName_FloorExist_ReturnFloor()
         {
             // Act
-            var floor = _floorRepository.GetFloorsByName("Floor1")[0];
+            var floor = _floorRepository.GetByName("First floor")[0];
 
             // Assert
             Assert.NotNull(floor);
-            Assert.Equal("Floor1", floor.Name);
+            Assert.Equal("First floor", floor.Name);
         }
 
         [Fact]
         public void GetFloorsByName_FloorsDontExist_ReturnNull()
         {
             // Act
-            var floors = _floorRepository.GetFloorsByName("dkghuskdgfydd");
+            var floors = _floorRepository.GetByName("dkghuskdgfydd");
 
             // Assert
             Assert.Empty(floors);

@@ -10,9 +10,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
     {
         public override List<Building> GetAll()
         {
-            return dbContext.Building
-                .Include(b => b.Floors)
-                .ToList();
+            return dbContext.Building.ToList();
         }
 
         public override Building GetById(string id)
