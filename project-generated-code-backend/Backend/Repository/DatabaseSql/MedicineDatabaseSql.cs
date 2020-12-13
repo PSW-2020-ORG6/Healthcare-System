@@ -46,11 +46,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             DbContext.SaveChanges();
         }
 
-        public List<Medicine> GetByName(string name)
-        {
-            return GetAll().Where(m => m.CopyrightName.Equals(name) || m.CopyrightName.Equals(name)).ToList();
-        }
-
         public List<Medicine> GetApproved()
         {
             return GetAll().Where(m => m.IsApproved).ToList();
@@ -59,6 +54,12 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public List<Medicine> GetWaiting()
         {
             return GetAll().Where(m => !m.IsApproved).ToList();
+        }
+
+        public List<Medicine> GetByName(string name)
+        {
+            return GetAll().Where(m => m.CopyrightName.ToLower().Contains(name.ToLower()) || m.GenericName.ToLower().Contains(name.ToLower())).ToList();
+
         }
     }
 }
