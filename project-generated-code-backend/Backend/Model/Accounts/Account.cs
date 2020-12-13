@@ -48,7 +48,6 @@ namespace HealthClinicBackend.Backend.Model.Accounts
             IsAdmin = isAdmin;
         }
 
-
         public Account(string name, string surname, string id, DateTime dateOfBirth,
             string contact, string email, Address address, String password) : base()
         {

@@ -3,14 +3,14 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class AppointmentSchedulingService
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Repository.Generic;
 using HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions;
 using HealthClinicBackend.Backend.Service.SchedulingService.PriorityStrategies;
 using HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService
 {

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using HealthClinicBackend.Backend.Model.Hospital;
+﻿using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
@@ -29,12 +29,27 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public override Room GetById(string id)
         {
-            return GetAll().Where(r => r.Id.Equals(id)).ToList()[0];
+            return dbContext.Room.Find(id);
         }
 
-        public List<Room> GetByProcedureType(ProcedureType procedureType)
+        public override void Save(Room newEntity)
         {
-            throw new System.NotImplementedException();
+            dbContext.Room.Add(newEntity);
+            dbContext.SaveChanges();
+        }
+
+        public override void Update(Room updateEntity)
+        {
+            dbContext.Room.Update(updateEntity);
+            dbContext.SaveChanges();
+        }
+
+        public override void Delete(string id)
+        {
+            var room = GetById(id);
+            if (room == null) return;
+            dbContext.Room.Remove(room);
+            dbContext.SaveChanges();
         }
 
         public List<Room> GetByRoomType(RoomType roomType)
@@ -50,6 +65,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public List<Room> GetByFloorSerialNumber(string floorSerialNumber)
         {
             return GetAll().Where(r => r.FloorSerialNumber.Equals(floorSerialNumber)).ToList();
+        }
+
+        public List<Room> GetByProcedureType(ProcedureType procedureType)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -65,7 +65,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
             foreach (Bed bed in room.Beds)
             {
                 beds.Add(bed);
-                if (!IsBedReserved(bed))
+                if(!IsBedReserved(bed))
                 {
                     beds.Add(bed);
                 }

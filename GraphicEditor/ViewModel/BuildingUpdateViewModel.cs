@@ -1,6 +1,6 @@
 ﻿using GraphicEditor.HelpClasses;
-using System.Windows;
 using HealthClinicBackend.Backend.Model.Hospital;
+using System.Windows;
 
 namespace GraphicEditor.ViewModel
 {

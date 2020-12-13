@@ -3,11 +3,11 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class HospitalService
 
-using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.MedicalExam;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.Generic;
+using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
 {

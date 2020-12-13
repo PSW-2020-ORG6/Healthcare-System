@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using HealthClinicBackend.Backend.Model.Schedule;
+﻿using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.Generic;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {

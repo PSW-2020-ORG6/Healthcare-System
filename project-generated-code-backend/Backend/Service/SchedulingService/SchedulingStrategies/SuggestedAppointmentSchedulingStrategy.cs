@@ -3,8 +3,8 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class SuggestedAppointmentSchedulingStrategy
 
-using System;
 using HealthClinicBackend.Backend.Dto;
+using System;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies
 {

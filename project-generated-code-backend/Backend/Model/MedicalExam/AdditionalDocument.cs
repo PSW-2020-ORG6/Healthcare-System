@@ -3,8 +3,8 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class AdditionalDocument
 
-using System;
 using HealthClinicBackend.Backend.Model.Util;
+using System;
 
 namespace HealthClinicBackend.Backend.Model.MedicalExam
 {

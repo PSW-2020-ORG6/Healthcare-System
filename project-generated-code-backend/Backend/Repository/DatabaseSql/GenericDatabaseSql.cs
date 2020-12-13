@@ -45,12 +45,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             throw new System.NotImplementedException();
         }
-
         public virtual T GetById(string id)
         {
             throw new System.NotImplementedException();
         }
-
         public virtual T GetBySerialNumber(string serialNumber)
         {
             return GetAll().Where(f => f.SerialNumber.Equals(serialNumber)).ToList()[0];

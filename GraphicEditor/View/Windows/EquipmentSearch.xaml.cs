@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Windows;
-using HealthClinicBackend.Backend.Model.Hospital;
+﻿using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using System.Collections.Generic;
+using System.Windows;
 
 namespace GraphicEditor.View.Windows
 {
@@ -87,8 +87,8 @@ namespace GraphicEditor.View.Windows
                 {
                     Room room = roomRepository.GetBySerialNumber(equipment.RoomId);
                     resultOfSearch += "\nInformation about rooms: ";
-                    resultOfSearch += room.Name+" ";
-                    resultOfSearch=PlaceOfFoundRooms(resultOfSearch, room);
+                    resultOfSearch += room.Name + " ";
+                    resultOfSearch = PlaceOfFoundRooms(resultOfSearch, room);
                     if (++checkCounter == equipmentCounter)
                         return resultOfSearch += ".";
                     else

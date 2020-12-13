@@ -2,8 +2,8 @@
 
 namespace HealthClinicBackend.Backend.Repository.Generic
 {
-    public interface IPrescriptionRepository: IGenericRepository<Prescription>
+    public interface IPrescriptionRepository : IGenericRepository<Prescription>
     {
-        
+
     }
 }

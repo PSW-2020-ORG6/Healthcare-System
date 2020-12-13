@@ -47,7 +47,6 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
                     return true;
                 }
             }
-
             return false;
         }
     }

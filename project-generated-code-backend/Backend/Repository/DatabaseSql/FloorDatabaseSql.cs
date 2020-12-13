@@ -24,14 +24,34 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 .ToList();
         }
 
-        
-        public override Floor GetById(string serialNumber)
+        public override Floor GetById(string id)
         {
-            return GetAll().Where(f => f.SerialNumber.Equals(serialNumber)).ToList()[0];
+            return dbContext.Floor.Find(id);
         }
+
+        public override void Save(Floor newEntity)
+        {
+            dbContext.Floor.Add(newEntity);
+            dbContext.SaveChanges();
+        }
+
+        public override void Update(Floor updateEntity)
+        {
+            dbContext.Floor.Update(updateEntity);
+            dbContext.SaveChanges();
+        }
+
+        public override void Delete(string id)
+        {
+            var floor = GetById(id);
+            if (floor == null) return;
+            dbContext.Floor.Remove(floor);
+            dbContext.SaveChanges();
+        }
+
         public List<Floor> GetByName(string name)
         {
-            return GetAll().Where(f => f.Name.Equals(name)).ToList();
+            return GetAll().Where(f => f.Name.ToLower().Contains(name.ToLower())).ToList();
         }
 
         public List<Floor> GetByBuildingSerialNumber(string buildingSerialNumber)

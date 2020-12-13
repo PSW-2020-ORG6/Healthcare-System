@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HealthClinicBackend.Backend.Dto
+﻿namespace HealthClinicBackend.Backend.Dto
 {
     public class FamilyDoctorDto
     {
