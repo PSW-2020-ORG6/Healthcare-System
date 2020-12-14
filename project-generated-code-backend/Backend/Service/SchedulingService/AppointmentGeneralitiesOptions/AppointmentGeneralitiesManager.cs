@@ -35,6 +35,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
             List<AppointmentDto> appointments = new List<AppointmentDto>();
 
             List<TimeInterval> allTimeIntervals = GetAllTimeIntervals();
+
             List<Physician> allPhysicians = GetAllPhysicians();
             List<Room> allRooms = GetAllRooms();
 
