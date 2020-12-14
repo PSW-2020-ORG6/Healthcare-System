@@ -21,7 +21,7 @@ namespace WebApplication.Backend.Services
         private SpecializationDTO specializationDTO = new SpecializationDTO();
         private AppointmentWithRecommendationDTO appointmentWithRecommendationDTO = new AppointmentWithRecommendationDTO();
         private DateFromStringConverter dateTimeDTO = new DateFromStringConverter();
-
+  
         public AppointmentService()
         {
             this.specializationRepository = new SpecializationRepository();
@@ -181,6 +181,42 @@ namespace WebApplication.Backend.Services
             return appointmentRepository.AddAppointment(appointment);
         }
 
+        public bool IsUserMalicious(string patientId)
+        {
+
+            List<DateTime> dates = appointmentRepository.GetCancelingDates(patientId);
+
+            DateTime date = DateTime.Now;
+
+            dates.Sort((date1, date2) => date2.CompareTo(date1));
+
+            if (dates.Count >= 2)
+            {
+                System.TimeSpan difference = dates[1].Subtract(date);
+                if (Math.Abs(difference.Days) <= 30)
+                    return true;
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool CancelAppointment(string appointmentSerialNumber)
+        {
+            return appointmentRepository.CancelAppointment(appointmentSerialNumber);
+
+        }
+
+        public bool SetUserToMalicious(string patientId)
+        {
+            return appointmentRepository.SetUserToMalicious(patientId);
+        }
+
         /// <summary>
         ///method for recommending appointment with date priority 
         ///</summary>
@@ -211,5 +247,10 @@ namespace WebApplication.Backend.Services
             }
             return availableAppointments;
         }
+
+
+
+
+
     }
 }
