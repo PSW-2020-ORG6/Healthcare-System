@@ -18,7 +18,7 @@ namespace IntegrationAdaptersTests
         public void Sends_files_successfully()
         {  
             SftpService service = new SftpService();
-            bool success = service.SendFile(@"C:\Users\dragana\Desktop\Projekat PSW\Healthcare-System\IntegrationAdaptersTests\bin\Debug\netcoreapp3.1\testFile.txt");
+            bool success = service.SendFile(@"‪C:\Users\HOME\Desktop\test.txt");
             Assert.True(success);   
         }
 

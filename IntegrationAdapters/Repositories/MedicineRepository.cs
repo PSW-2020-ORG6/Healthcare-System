@@ -37,19 +37,14 @@ namespace IntegrationAdapters.Repositories
         {
             return dbContext.Medicine.ToList();
         }
+        public List<MedicineSpecification> GetAllSpecifications()
+        {
+            return dbContext.MedicineSpecification.ToList();
+        }
 
         public MedicineSpecification GetById(string id)
         {
             return dbContext.MedicineSpecification.Find(id);
-        }
-
-        public Medicine GetByID(string ID)
-        {
-            foreach (Medicine medicine in GetAll())
-            {
-                if (medicine.MedicineID.Equals(ID)) return medicine;
-            }
-            return null;
         }
 
         public Medicine GetByName(string Name)
@@ -59,6 +54,15 @@ namespace IntegrationAdapters.Repositories
                 if (medicine.Name.Equals(Name)) return medicine;
             }
             return null;
+        }
+        public bool DoesMedicineExist(Medicine medicine)
+        {
+            List<Medicine> medicines = dbContext.Medicine.ToList();
+            foreach (Medicine m in medicines)
+            {
+                if (m.MedicineID.Equals(medicine.MedicineID)) return true;
+            }
+            return false;
         }
     }
 }

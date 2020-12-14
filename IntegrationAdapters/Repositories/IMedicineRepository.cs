@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace IntegrationAdapters.Repositories
 {
-    interface IMedicineRepository
+    public interface IMedicineRepository
     {
         public List<Medicine> GetAll();
         void AddMedicineRepository();
-        public Medicine GetByID(String ID);
         public Medicine GetByName(String Name);
 
         public MedicineSpecification GetById(string id);
+        public List<MedicineSpecification> GetAllSpecifications();
+        public bool DoesMedicineExist(Medicine medicine);
     }
 }
