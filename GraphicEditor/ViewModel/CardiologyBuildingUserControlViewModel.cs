@@ -1,4 +1,5 @@
 ﻿using GraphicEditor.HelpClasses;
+using GraphicEditor.View.UserControls;
 using GraphicEditor.View.Windows;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Util;
@@ -10,24 +11,26 @@ namespace GraphicEditor.ViewModel
 {
     public class CardiologyBuildingUserControlViewModel : BindableBase, DialogAnswerListener<Building>
     {
-        private MapContentUserControlViewModel _parent;
+        private CardiologyBuildingUserControl _buildingParent;
+        private MainWindowViewModel _mapParent;
         private List<string> _floors = new List<string>(Constants.FLOOR_MAP.Values);
         private string _selectedFloor = Constants.FLOOR_MAP[Constants.FIRST];
         private Building _building;
         public MyICommand<string> NavCommand { get; private set; }
         public MyICommand<Building> BuildingUpdateCommand { get; private set; }
-        public static CardiologyFirstFloorMapUserControlViewModel FirstFloor;
-        public static CardiologySecondFloorMapUserControlViewModel SecondFloor;
-        public BindableBase _floorViewModel;
+        public static CardiologyFirstFloorMapUserControl FirstFloor;
+        public static CardiologySecondFloorMapUserControl SecondFloor;
+        public CardiologyFirstFloorMapUserControl _floorViewModel;
         public Grid grid;
 
-        public CardiologyBuildingUserControlViewModel(MapContentUserControlViewModel parent)
+        public CardiologyBuildingUserControlViewModel(CardiologyBuildingUserControl buildingParent ,MainWindowViewModel mapParent)
         {
-            _parent = parent;
+            _mapParent = mapParent;
+            _buildingParent = buildingParent;
             NavCommand = new MyICommand<string>(ChooseFloor);
             BuildingUpdateCommand = new MyICommand<Building>(editBuilding);
-            FirstFloor = new CardiologyFirstFloorMapUserControlViewModel();
-            SecondFloor = new CardiologySecondFloorMapUserControlViewModel();
+            FirstFloor = new CardiologyFirstFloorMapUserControl(mapParent, this);
+            //SecondFloor = new CardiologySecondFloorMapUserControlViewModel();
             _floorViewModel = FirstFloor;
 
             List<Floor> _buildingFloors = new List<Floor>();
@@ -35,7 +38,7 @@ namespace GraphicEditor.ViewModel
             _building = new Building("Cardiology", "Color Blue");
         }
 
-        public BindableBase FloorViewModel
+        public CardiologyFirstFloorMapUserControl FloorViewModel
         {
             get { return _floorViewModel; }
             set
@@ -85,14 +88,14 @@ namespace GraphicEditor.ViewModel
             switch (destination)
             {
                 case Constants.BACK:
-                    _parent.ContentViewModel = MapContentUserControlViewModel.HospitalMap;
+                    _mapParent.CurrentUserControl = _mapParent.HospitalMap;
                     break;
                 case Constants.FIRST:
                     FloorViewModel = FirstFloor;
                     break;
-                case Constants.SECOND:
-                    FloorViewModel = SecondFloor;
-                    break;
+                //case Constants.SECOND:
+                //    FloorViewModel = SecondFloor;
+                //    break;
             }
         }
 

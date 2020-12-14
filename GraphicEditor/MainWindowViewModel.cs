@@ -1,22 +1,33 @@
 ﻿using GraphicEditor.HelpClasses;
+using GraphicEditor.View.UserControls;
 using GraphicEditor.ViewModel;
+using System.Windows.Controls;
 
 namespace GraphicEditor
 {
     public class MainWindowViewModel : BindableBase
     {
         public MyICommand<string> NavCommand { get; private set; }
-        private MapContentUserControlViewModel _mapContent = new MapContentUserControlViewModel();
-        private LoginUserControlViewModel _loginPage = new LoginUserControlViewModel();
-        private BindableBase currentViewModel;
+        //private MapContentUserControlViewModel _mapContent = new MapContentUserControlViewModel();
+        public CardiologyBuildingUserControl CardiologyBuilding;
+        public CardiologyFirstFloorMapUserControl CardiologyFloor;
+        public HospitalMapUserControl HospitalMap;
+        public LoginUserControl LoginPage;
+        private UserControl currentViewModel;
 
         public MainWindowViewModel()
         {
             NavCommand = new MyICommand<string>(OnNav);
-            CurrentViewModel = _mapContent;
+            
+
+            LoginPage = new LoginUserControl(this);
+            HospitalMap = new HospitalMapUserControl(this);
+            CardiologyBuilding = new CardiologyBuildingUserControl(this);
+
+            CurrentUserControl = HospitalMap;
         }
 
-        public BindableBase CurrentViewModel
+        public UserControl CurrentUserControl
         {
             get { return currentViewModel; }
             set
@@ -30,10 +41,13 @@ namespace GraphicEditor
             switch (destination)
             {
                 case Constants.MAP:
-                    CurrentViewModel = _mapContent;
+                    CurrentUserControl = HospitalMap;
                     break;
                 case Constants.LOGIN:
-                    CurrentViewModel = _loginPage;
+                    CurrentUserControl = LoginPage;
+                    break;
+                case Constants.BUILDING:
+                    CurrentUserControl = CardiologyBuilding;
                     break;
             }
         }

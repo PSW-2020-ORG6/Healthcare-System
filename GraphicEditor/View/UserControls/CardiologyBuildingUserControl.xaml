@@ -9,14 +9,14 @@
              xmlns:viewUserControl="clr-namespace:GraphicEditor.View.UserControls"
              d:DesignHeight="600" d:DesignWidth="900">
 
-    <UserControl.Resources>
+    <!--<UserControl.Resources>
         <DataTemplate DataType="{x:Type viewModel:CardiologyFirstFloorMapUserControlViewModel}">
             <viewUserControl:CardiologyFirstFloorMapUserControl/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:CardiologySecondFloorMapUserControlViewModel}">
             <viewUserControl:CardiologySecondFloorMapUserControl/>
         </DataTemplate>
-    </UserControl.Resources>
+    </UserControl.Resources>-->
     
         <DockPanel>
             <Grid   DockPanel.Dock="Left"
@@ -97,7 +97,8 @@
                        Margin="0,5,0,0"
                        HorizontalAlignment="Center"/>
 
-        <ContentControl BorderBrush="Black"
+        <ContentControl     x:Name="ContentPresenter"
+                            BorderBrush="Black"
                             BorderThickness="1"
                             Content="{Binding Path=FloorViewModel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
         </DockPanel>

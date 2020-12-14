@@ -10,12 +10,12 @@ namespace GraphicEditor.View.UserControls
     /// </summary>
     public partial class HospitalMapUserControl : UserControl
     {
-        public HospitalMapUserControl()
+        private MainWindowViewModel _viewModel;
+        public HospitalMapUserControl(MainWindowViewModel vm)
         {
             InitializeComponent();
-            MapContentUserControlViewModel.HospitalMap.HospitalMapGrid = hospitalMapGrid;
-            this.DataContext = MapContentUserControlViewModel.HospitalMap;
-            MapContentUserControlViewModel.HospitalMap.InitialGridRender();
+            _viewModel = vm;
+            this.DataContext = new HospitalMapUserControlViewModel(vm, this.hospitalMapGrid);
         }
 
         private void ShowRoomSearch(object sender, RoutedEventArgs e)
