@@ -45,8 +45,7 @@
         <ListBox ItemsSource="{Binding Path=ReportOfSearch, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   BorderBrush="#FF288DF1"
                   BorderThickness="2"
-                  SelectedIndex="0"
-                  SelectedItem="{Binding Path=SelectedRoom, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  SelectedIndex="{Binding Path=SelectedRoomIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   Style="{StaticResource MaterialDesignListBox}"
                   HorizontalAlignment="Left"
                   Height="231"
@@ -55,7 +54,7 @@
                   Width="374">
         </ListBox>
         <Button Command="{Binding Path=GoToCommand}"
-                CommandParameter="{Binding Path=SelectedRoom}"
+                CommandParameter="{Binding Path=SelectedRoom, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                 HorizontalAlignment="Left"
                 Height="45" 
                 Margin="492,200,0,0"

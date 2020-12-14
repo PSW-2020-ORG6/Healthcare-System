@@ -1,7 +1,10 @@
 ﻿using GraphicEditor.HelpClasses;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using System;
 using System.Collections.Generic;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace GraphicEditor.ViewModel
 {
@@ -11,6 +14,8 @@ namespace GraphicEditor.ViewModel
         private FloorDatabaseSql floorRepository = new FloorDatabaseSql();
         private BuildingDatabaseSql buildingRepository = new BuildingDatabaseSql();
         private MedicineDatabaseSql medicineRepository = new MedicineDatabaseSql();
+
+        private MainWindowViewModel parentViewModel;
 
         private List<Medicine> _resultOfSearch;
         public List<Medicine> ResultOfSearch
@@ -41,29 +46,34 @@ namespace GraphicEditor.ViewModel
                 SetProperty(ref _queryForSearch, value);
             }
         }
-        private Medicine _selectedMedicine;
-        public Medicine SelectedMedicine
+
+        public List<Medicine> FoundMedicines { get; set; }
+
+        private int _selectedMedicineIndex;
+        public int SelectedMedicineIndex
         {
-            get => _selectedMedicine;
+            get => _selectedMedicineIndex;
             set
             {
-                SetProperty(ref _selectedMedicine, value);
+                SetProperty(ref _selectedMedicineIndex, value);
             }
         }
 
         public MyICommand<string> SearchCommand { get; private set; }
 
-        public MyICommand<Medicine> GoToCommand { get; private set; }
+        public MyICommand GoToCommand { get; private set; }
 
-        public MedicineSearchViewModel()
+        public MedicineSearchViewModel(MainWindowViewModel vm)
         {
             SearchCommand = new MyICommand<string>(SearchMedicine);
-            GoToCommand = new MyICommand<Medicine>(FindMedicine);
+            GoToCommand = new MyICommand(FindMedicine);
+            parentViewModel = vm;
         }
 
         private void SearchMedicine(string medicineName)
         {
             _resultOfSearch = medicineRepository.GetByName(medicineName);
+            FoundMedicines = _resultOfSearch;
             _reportOfSearch = new List<string>();
             foreach (Medicine result in _resultOfSearch)
             {
@@ -78,9 +88,19 @@ namespace GraphicEditor.ViewModel
 
         }
 
-        private void FindMedicine(Medicine medicine)
+        private void FindMedicine()
         {
 
+            Medicine localMedicine = FoundMedicines[SelectedMedicineIndex];
+            parentViewModel.CurrentUserControl = parentViewModel.CardiologyBuilding;
+            CardiologyFirstFloorMapUserControlViewModel floorViewModel = parentViewModel.CardiologyBuilding.myViewModel.FirstFloor.Viewmodel;
+            Button button = floorViewModel.connections[localMedicine.RoomSerialNumber];
+            button.BorderBrush = new SolidColorBrush(Color.FromRgb(150, 0, 255));
+
+            CommonUtil.Run(() =>
+            {
+                button.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            }, TimeSpan.FromMilliseconds(5000));
         }
     }
 }
