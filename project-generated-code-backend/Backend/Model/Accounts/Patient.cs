@@ -31,6 +31,7 @@ namespace HealthClinicBackend.Backend.Model.Accounts
         public string PersonalDiseases { get; set; }
         public string Gender { get; set; }
         public string Image { get; set; }
+        public string Diagnose { get; set; }
         public bool Guest { get; set; }
         public bool EmailConfirmed { get; set; }
         [ForeignKey("Physician")] public string PhysicianSerialNumber { get; set; }
