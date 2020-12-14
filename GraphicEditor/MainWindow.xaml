@@ -21,18 +21,6 @@
         <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
     </Window.CommandBindings>
 
-    <!--<Window.Resources>
-        <DataTemplate DataType="{x:Type viewModel:HospitalMapUserControlViewModel}">
-            <viewUserControl:HospitalMapUserControl/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModel:MapContentUserControlViewModel}">
-            <viewUserControl:MapContentUserControl/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModel:LoginUserControlViewModel}">
-            <viewUserControl:LoginUserControl/>
-        </DataTemplate>
-    </Window.Resources>-->
-
     <Grid l:HelpProvider.HelpKey="Home">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
