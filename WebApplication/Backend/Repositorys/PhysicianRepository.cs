@@ -104,5 +104,18 @@ namespace WebApplication.Backend.Repositorys
                 return null;
             }
         }
+
+        public List<Physician> GetPhysicianBySpecialization(string specializationName, string physicianId)
+        {
+            try
+            {
+                return GetPhysicians("Select * from physician,specialization where specialization.Name='" + specializationName + "' and specialization.PhysicianSerialNumber = physician.SerialNumber and specialization.PhysicianSerialNumber !='" + physicianId + "'");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
     }
 }

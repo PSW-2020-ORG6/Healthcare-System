@@ -9,7 +9,10 @@
             physicianForChoose: [],
             id: 1,            
             timeIntervals: null,
-            timeInterval:null
+            timeInterval: null,
+            display: false,
+            appointmentDto: null,
+            informations: null
 			}
 		}
     ,
@@ -100,8 +103,9 @@
                     <div class="modal-content steps">
                         <div class="container" align="center">
                             <br/><h4 class="text">Create new appointment</h4><br/></br>
-                        </div>                   
-                        <div id="parameters" align="center">
+                        </div>  
+                        <div class="tab-content">
+                        <div id="parameters" align="center" v-if="!display">
                             <label>Choose date span:</label></br>
                                 <div class="row">
                                     <label>&nbsp&nbsp&nbsp Date from &nbsp</label><input id="dateFrom" type="date"></input>
@@ -116,7 +120,7 @@
                                  <label id="validationSpecialization" class="correct" style="color:red">You must select a specialization!</label></br>
                                  </br></br>
                                  <label>Choose physician:</label></br>
-                                 <select id="selectPhysician" disabled class="select" v-model="choosenPhysician">
+                                 <select id="selectPhysician" class="select" v-model="choosenPhysician">
                                          <option disabled selected="selected">Please select one</option>
                                          <option v-for="p in physicianForChoose" v-bind:value="p">{{p.fullName}}</option>
                                   </select></br>
@@ -132,7 +136,19 @@
 		                         <button type="button" class="btn btn-primary" v-on:click="DisplayAppointments()">Display appointments</button>
                                  </br></br>
                             </div> 
+                            <div  v-if="display">
+                                <label>Choose  time:</label></br>
+                                    <select class="select" v-model="informations">
+                                       <template v-for="a in appointmentDto">
+                                        <option  v-for="t in a.timeIntervals" v-bind:value="[a, t]">{{t.time}} &nbsp&nbsp {{a.date}}  &nbsp&nbsp {{a.physicianFullName}}</option>
+                                       </template>
+                                    </select>
+                                    </br></br></br></br>
+                                    <button class="btn btnNext" v-on:click="MakeAppointment2()">Submit</button>
+                                    </br></br>
+                            </div>
                         </div>
+                    </div>
             </div>
           </div>
      </div>
@@ -148,6 +164,7 @@
                 this.Steps()
             }
         },
+
         GetTimeIntervals: function () {
             axios
                 .get('http://localhost:49900/appointment/appointments', { params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, date: this.date } })
@@ -167,6 +184,19 @@
                 document.getElementById("step4").className = "circleStep circlesStepDisabled"
             }
             else if (this.id == 2) {
+                var datenew = this.date
+                var dates = ""
+                while (datenew != "2020-12-16") {
+                    //alert(datenew)
+                    dates = dates + datenew + ","
+                    datenew = new Date(datenew)
+                    datenew.setDate(datenew.getDate() + 1)
+                    var day = datenew.getDate()
+                    var month = datenew.getMonth() + 1
+                    var year = datenew.getFullYear()
+                    datenew = year + "-" + month + "-" + day
+                }
+                alert(dates)
                 document.getElementById("step1").className = "circleStep circleStepDone"
                 document.getElementById("step2").className = "circleStep circleStepDone"
                 document.getElementById("step3").className = "circleStep circlesStepDisabled"
@@ -184,6 +214,12 @@
                 document.getElementById("step3").className = "circleStep circleStepDone"
                 document.getElementById("step4").className = "circleStep circleStepDone"
             }
+        },
+        Checkbox: function (id) {
+            if (document.getElementById("cbp").checked == true && id == 'cbd')
+                document.getElementById("cbp").checked = false
+            else if (document.getElementById("cbd").checked == true && id == 'cbp')
+                document.getElementById("cbd").checked = false
         },
         SpecialistForChoose: function () {
             this.physicianForChoose = []
@@ -207,7 +243,6 @@
             return false
         },
         MakeAppointment: function () {
-            alert(this.timeInterval.start);
             if (this.timeInterval!=null)
                 axios
                     .post('http://localhost:49900/appointment/makeAppointment/' + this.choosenPhysician.id + '/' + this.timeInterval.start + '/' + this.date)
@@ -219,11 +254,56 @@
                         alert("Error")
                     })
         },
+        MakeAppointment2: function () {
+            if (this.informations != null)
+                axios
+                    .post('http://localhost:49900/appointment/makeAppointment/' + this.informations[0].physicianId + '/' + this.informations[1].start + '/' + this.informations[0].date)
+                    .then(response => {
+                        this.Refresh()
+                        alert("Appointment is made")
+                    })
+                    .catch(error => {
+                        alert("Error")
+                    })
+        },
         Refresh: function () {
             location.reload();
         },
+        CreateDates: function () {
+            var dateFrom = document.getElementById("dateFrom").value
+            var dateTo = document.getElementById("dateTo").value
+            var dates = ""
+            while (dateFrom != dateTo) {
+                dates = dates + dateFrom + ","
+                dateFrom = new Date(dateFrom)
+                dateFrom.setDate(dateFrom.getDate() + 1)
+                var day = dateFrom.getDate()
+                var month = dateFrom.getMonth() + 1
+                var year = dateFrom.getFullYear()
+                dateFrom = year + "-" + month + "-" + day
+            }
+            dates = dates + dateTo
+            return dates
+        },
         DisplayAppointments: function () {
             if (this.Validation2()) {
+                this.display = true;
+                if (document.getElementById("cbd").checked == true) {
+                    alert("uspesno")
+                    var dates = this.CreateDates()
+                    axios
+                        .get('http://localhost:49900/appointment/appointmentsWithReccomendation', { params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, dates: dates } })
+                        .then(response => {
+                            this.appointmentDto = response.data
+                        })
+                } else {
+                    var dates = this.CreateDates()
+                    axios
+                        .get('http://localhost:49900/appointment/appointmentsWithPhysicianPriority', { params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, dates: dates } })
+                        .then(response => {
+                            this.appointmentDto = response.data
+                        })
+                }
 
             }
         },

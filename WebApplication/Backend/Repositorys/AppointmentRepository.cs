@@ -164,12 +164,20 @@ namespace WebApplication.Backend.Repositorys
             string sqlDml = "INSERT into appointment (SerialNumber,Urgency,PatientId,RoomId,PhysitianId,ProcedureTypeId,Date,TimeIntervalStart,Active)  VALUES('"
                 + appointment.SerialNumber + "','" + 0 + "','" + "96736fd7-3018-4f3f-a14b-35610a1c8959" + "','" + null + "','" + appointment.Physician.SerialNumber
                 + "','" + "300001" + "','" + partsOfDate[2] + "-" + partsOfDate[0] + "-" + partsOfDate[1] + "T" + dateString[1]
-                + "','" + partsOfDate1[2] + "-" + partsOfDate1[0] + "-" + partsOfDate1[1] + "T" + dateString1[1]
+                + "','" + partsOfDate1[2] + "-" + partsOfDate1[0] + "-" + partsOfDate1[1] + "T" + ConvertTime(dateString1[1], dateString1[2])
                 + "','" + 1 + "')";
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             sqlCommand.ExecuteNonQuery();
             connection.Close();
             return true;
+        }
+
+        private string ConvertTime(string time, string partOfTheDay)
+        {
+            string[] parts = time.Split(":");
+            if(partOfTheDay == "PM")
+                return (Int32.Parse(parts[0]) + 12).ToString() + ":" + parts[1] + ":" + parts[2];
+            return time;
         }
     }
 }
