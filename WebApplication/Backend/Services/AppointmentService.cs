@@ -101,6 +101,11 @@ namespace WebApplication.Backend.Services
             return result;
         }
 
+        private bool CompareTimeIntervals(DateTime dateTime1, DateTime dateTime2)
+        {
+            return dateTime1.Hour == dateTime2.Hour && dateTime1.Minute == dateTime2.Minute;
+        }
+
         public List<AppointmentWithRecommendationDTO> AppointmentRecomendationWithPhysicianPriority(string physicianId, string specializationName, string[] dates)
         {
             List<AppointmentWithRecommendationDTO> availableAppointments = new List<AppointmentWithRecommendationDTO>();
