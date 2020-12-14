@@ -1,7 +1,13 @@
 ﻿using GraphicEditor.HelpClasses;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Timers;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace GraphicEditor.ViewModel
 {
@@ -10,6 +16,8 @@ namespace GraphicEditor.ViewModel
         private RoomDatabaseSql roomRepository = new RoomDatabaseSql();
         private FloorDatabaseSql floorRepository = new FloorDatabaseSql();
         private BuildingDatabaseSql buildingRepository = new BuildingDatabaseSql();
+
+        private MainWindowViewModel parentViewModel;
 
         private List<Room> _resultOfSearch;
         public List<Room> ResultOfSearch
@@ -31,6 +39,8 @@ namespace GraphicEditor.ViewModel
             }
         }
 
+        public List<Room> FoundRooms { get; set; }
+
         private string _queryForSearch;
         public string QueryForSearch
         {
@@ -40,29 +50,32 @@ namespace GraphicEditor.ViewModel
                 SetProperty(ref _queryForSearch, value);
             }
         }
-        private Room _selectedRoom;
-        public Room SelectedRoom
+        private int _selectedRoomIndex;
+        public int SelectedRoomIndex
         {
-            get => _selectedRoom;
+            get => _selectedRoomIndex;
             set
             {
-                SetProperty(ref _selectedRoom, value);
+                SetProperty(ref _selectedRoomIndex, value);
             }
         }
 
         public MyICommand<string> SearchCommand { get; private set; }
 
-        public MyICommand<Room> GoToCommand { get; private set; }
+        public MyICommand GoToCommand { get; private set; }
 
-        public RoomSearchViewModel()
+        public RoomSearchViewModel(MainWindowViewModel vm)
         {
             SearchCommand = new MyICommand<string>(SearchRooms);
-            GoToCommand = new MyICommand<Room>(FindRoom);
+            GoToCommand = new MyICommand(FindRoom);
+            parentViewModel = vm;
         }
 
         private void SearchRooms(string roomName)
         {
+            FoundRooms = new List<Room>();
             _resultOfSearch = roomRepository.GetByName(roomName);
+            FoundRooms = _resultOfSearch;
             _reportOfSearch = new List<string>();
             foreach (Room result in _resultOfSearch)
             {
@@ -70,14 +83,24 @@ namespace GraphicEditor.ViewModel
                 Building building = buildingRepository.GetBySerialNumber(floor.BuildingSerialNumber);
                 string fullLocation = building.Name + ", " + floor.Name + ", " + result.Name;
                 _reportOfSearch.Add(fullLocation);
+
             }
             OnPropertyChanged("ReportOfSearch");
 
         }
 
-        private void FindRoom(Room room)
+        private void FindRoom()
         {
-
-        }
+            Room room = FoundRooms[SelectedRoomIndex];
+            parentViewModel.CurrentUserControl = parentViewModel.CardiologyBuilding;
+            CardiologyFirstFloorMapUserControlViewModel floorViewModel = parentViewModel.CardiologyBuilding.myViewModel.FirstFloor.Viewmodel;
+            Button button = floorViewModel.connections[room.SerialNumber];
+            button.BorderBrush = new SolidColorBrush(Color.FromRgb(150,0,255));
+            
+            CommonUtil.Run(() =>
+            {
+                button.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            }, TimeSpan.FromMilliseconds(5000));
+        }   
     }
 }

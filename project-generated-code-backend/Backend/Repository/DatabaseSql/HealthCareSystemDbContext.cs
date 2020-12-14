@@ -309,17 +309,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     RowSpan = 2,
                     ColumnSpan = 5,
                     Style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "106",
-                    Name = "PROBAAA 106",
-                    Id = 106,
-                    FloorSerialNumber = "1001",
-                    RoomTypeSerialNumber = "10000002",
-                    Row = 15,
-                    Column = 15,
-                    Style = "RoomButtonStyle"
                 }
             );
         }

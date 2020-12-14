@@ -10,29 +10,33 @@ namespace GraphicEditor.View.UserControls
     /// </summary>
     public partial class CardiologyBuildingUserControl : UserControl
     {
+        private MainWindowViewModel _viewModel;
+        public CardiologyBuildingUserControlViewModel myViewModel;
         public CardiologyBuildingUserControl(MainWindowViewModel vm)
         {
             InitializeComponent();
-            this.DataContext = new CardiologyBuildingUserControlViewModel(this, vm);
+            _viewModel = vm;
+            myViewModel = new CardiologyBuildingUserControlViewModel(this, vm);
+            this.DataContext = myViewModel;
            
 
         }
 
         private void ShowRoomSearch(object sender, RoutedEventArgs e)
         {
-            RoomSearch roomSearch = new RoomSearch();
+            RoomSearch roomSearch = new RoomSearch(_viewModel);
             roomSearch.Show();
         }
 
         private void ShowEquipmentSearch(object sender, RoutedEventArgs e)
         {
-            EquipmentSearch equipmentSearch = new EquipmentSearch();
+            EquipmentSearch equipmentSearch = new EquipmentSearch(_viewModel);
             equipmentSearch.Show();
         }
 
         private void ShowMedicineSearch(object sender, RoutedEventArgs e)
         {
-            MedicineSearch medicineSearch = new MedicineSearch();
+            MedicineSearch medicineSearch = new MedicineSearch(_viewModel);
             medicineSearch.Show();
         }
     }

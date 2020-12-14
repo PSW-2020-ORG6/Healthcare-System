@@ -18,8 +18,8 @@ namespace GraphicEditor.ViewModel
         private Building _building;
         public MyICommand<string> NavCommand { get; private set; }
         public MyICommand<Building> BuildingUpdateCommand { get; private set; }
-        public static CardiologyFirstFloorMapUserControl FirstFloor;
-        public static CardiologySecondFloorMapUserControl SecondFloor;
+        public CardiologyFirstFloorMapUserControl FirstFloor;
+        //public CardiologySecondFloorMapUserControl SecondFloor;
         public CardiologyFirstFloorMapUserControl _floorViewModel;
         public Grid grid;
 
