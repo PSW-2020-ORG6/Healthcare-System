@@ -217,6 +217,24 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             ProcedureTypeCreation(modelBuilder);
             PhysicianCreation(modelBuilder);
             BedCreation(modelBuilder);
+            SecretaryCreation(modelBuilder);
+        }
+
+        private static void SecretaryCreation(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Secretary>()
+                .HasKey(r => r.SerialNumber);
+            modelBuilder.Entity<Secretary>().HasData(
+                new Secretary
+                {
+                    Name = "Marko",
+                    Surname = "Markovic",
+                    SerialNumber = "123a",
+                    AddressSerialNumber = "200001",
+                    Id="111",
+                    Password="123"
+                }
+                ) ;
         }
 
         private static void FeedbackCreation(ModelBuilder modelBuilder)

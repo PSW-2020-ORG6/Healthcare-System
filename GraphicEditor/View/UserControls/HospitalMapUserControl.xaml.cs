@@ -1,5 +1,6 @@
 ﻿using GraphicEditor.View.Windows;
 using GraphicEditor.ViewModel;
+using HealthClinicBackend.Backend.Model.Util;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -38,6 +39,11 @@ namespace GraphicEditor.View.UserControls
 
         private void MakeAppointment(object sender, RoutedEventArgs e)
         {
+            if (MainWindow.TypeOfUser != TypeOfUser.Secretary)
+            {
+                new Warning().ShowDialog();
+                return;
+            }
             Appointment appointment = new Appointment();
             appointment.Show();
         }

@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HealthClinicBackend.Migrations
 {
     [DbContext(typeof(HealthCareSystemDbContext))]
-    [Migration("20201214171358_fsdfsfdsdf")]
-    partial class fsdfsfdsdf
+    [Migration("20201214212347_mig1")]
+    partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -186,6 +186,17 @@ namespace HealthClinicBackend.Migrations
                     b.HasIndex("AddressSerialNumber");
 
                     b.ToTable("Secretary");
+
+                    b.HasData(
+                        new
+                        {
+                            SerialNumber = "123a",
+                            AddressSerialNumber = "200001",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = "111",
+                            Name = "Marko",
+                            Surname = "Markovic"
+                        });
                 });
 
             modelBuilder.Entity("HealthClinicBackend.Backend.Model.Accounts.Specialization", b =>
@@ -237,7 +248,7 @@ namespace HealthClinicBackend.Migrations
                     b.HasData(
                         new
                         {
-                            SerialNumber = "3d2beca3-b9e1-409a-b115-3adf36b5e6f9",
+                            SerialNumber = "e28a5af3-4c35-40e3-9808-13dcd3effacc",
                             Approved = true,
                             Date = new DateTime(2016, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = "0001",
@@ -245,7 +256,7 @@ namespace HealthClinicBackend.Migrations
                         },
                         new
                         {
-                            SerialNumber = "90c764a7-adb9-478e-ba5c-12abc7dc5abb",
+                            SerialNumber = "c760a97b-0794-4b84-9ac2-c4a6529c4da1",
                             Approved = false,
                             Date = new DateTime(2015, 5, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = "0001",
@@ -253,7 +264,7 @@ namespace HealthClinicBackend.Migrations
                         },
                         new
                         {
-                            SerialNumber = "d0a94946-41ec-494b-a705-8e1def3d1ec9",
+                            SerialNumber = "be5b1890-ae99-4f63-b714-4419c693db49",
                             Approved = true,
                             Date = new DateTime(2018, 4, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = "0002",
@@ -261,7 +272,7 @@ namespace HealthClinicBackend.Migrations
                         },
                         new
                         {
-                            SerialNumber = "cf7d48cd-92b7-46a2-a749-839c4b5e9c3c",
+                            SerialNumber = "708ba1a0-9508-4543-8c3f-3f9f3894c82b",
                             Approved = false,
                             Date = new DateTime(2019, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = "0003",
@@ -269,7 +280,7 @@ namespace HealthClinicBackend.Migrations
                         },
                         new
                         {
-                            SerialNumber = "7ec9311f-d1d8-4256-865f-3abdbb9e824f",
+                            SerialNumber = "da9ad15c-9abf-4755-b1ee-74f25bfd1a05",
                             Approved = true,
                             Date = new DateTime(2019, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = "0007",
@@ -277,7 +288,7 @@ namespace HealthClinicBackend.Migrations
                         },
                         new
                         {
-                            SerialNumber = "f683c5d9-b93c-4fb3-ba02-30a8a1c8de0d",
+                            SerialNumber = "8ea9daa4-9265-48f6-a668-3fc101648b4e",
                             Approved = false,
                             Date = new DateTime(2019, 12, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = "0008",
@@ -285,7 +296,7 @@ namespace HealthClinicBackend.Migrations
                         },
                         new
                         {
-                            SerialNumber = "08dde094-2115-4b7d-be91-3f41b3b93b3a",
+                            SerialNumber = "d275777c-5c31-4931-b725-5b1bbfb3f8ed",
                             Approved = true,
                             Date = new DateTime(2020, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = "00010",
@@ -293,7 +304,7 @@ namespace HealthClinicBackend.Migrations
                         },
                         new
                         {
-                            SerialNumber = "72aab4af-1535-4ade-82b0-99e3692a03ca",
+                            SerialNumber = "3340cffd-1642-48b9-864b-67db8ad5add6",
                             Approved = false,
                             Date = new DateTime(2018, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = "0004",
@@ -1398,139 +1409,139 @@ namespace HealthClinicBackend.Migrations
                         {
                             Id = 1,
                             QuestionText = "The doctor is welcoming and gentle?",
-                            SerialNumber = "1e596336-e8b8-4735-abf5-65297d07a3ce"
+                            SerialNumber = "b1bf24ce-9657-4449-9450-f2a24ca61af9"
                         },
                         new
                         {
                             Id = 2,
                             QuestionText = "The doctor answered all of your questions in an understandable manner?",
-                            SerialNumber = "8f97977b-c7d2-4620-8b31-d3f4396611d5"
+                            SerialNumber = "57818b64-cb08-4773-a1e0-3807da2d1b05"
                         },
                         new
                         {
                             Id = 3,
                             QuestionText = "The doctor takes care of you in a professional manner?",
-                            SerialNumber = "9c6d1aec-9a81-44f6-9e29-91dbf087128d"
+                            SerialNumber = "2c7aae01-5532-48ce-9059-4c6c37ff3cd1"
                         },
                         new
                         {
                             Id = 4,
                             QuestionText = "Would you have the procedure done again by this doctor?",
-                            SerialNumber = "effeb5b2-6ee7-4f2e-9c44-e4a532e9334c"
+                            SerialNumber = "2f2b9f3f-1c1b-40e2-a12a-a4b201a17db9"
                         },
                         new
                         {
                             Id = 5,
                             QuestionText = "The personal manner(courtosy,respect,sensitivity,friendliness) of the nurses and other support staff?",
-                            SerialNumber = "a9f9f098-1fe0-4c1d-8741-64b87e2bcb41"
+                            SerialNumber = "0836de93-86ca-4379-a580-c6dff7ebf17e"
                         },
                         new
                         {
                             Id = 6,
                             QuestionText = "The nursees answered all of your questions in an understandable manner?",
-                            SerialNumber = "34fad81b-fbe0-47e4-b3be-00101f45b8ea"
+                            SerialNumber = "18caf1a9-d233-4616-b080-21bd81f199be"
                         },
                         new
                         {
                             Id = 7,
                             QuestionText = "Orientation given to warn setup",
-                            SerialNumber = "6385b0d6-0e6e-465f-9ceb-7e886a218a05"
+                            SerialNumber = "88092ec0-db78-4ad2-b20e-528fbb81c7e9"
                         },
                         new
                         {
                             Id = 8,
                             QuestionText = "The nurse gave you good discharge instructions",
-                            SerialNumber = "d0bcf4e8-81ea-4d89-9b1a-662672fb5348"
+                            SerialNumber = "0fd26044-bcc6-4cdb-8c73-4bd2746a2aed"
                         },
                         new
                         {
                             Id = 9,
                             QuestionText = "The nurse was concern for you?",
-                            SerialNumber = "77ba541b-f950-4efe-85d4-98ecf32630fb"
+                            SerialNumber = "1633c156-1602-4bae-abb7-e91280b7048d"
                         },
                         new
                         {
                             Id = 10,
                             QuestionText = "The comfort and cleanliness of the facility",
-                            SerialNumber = "4eb89caa-91be-4085-b921-2c25d8864e23"
+                            SerialNumber = "00af91c3-c25e-4175-a78e-9b058fb29b52"
                         },
                         new
                         {
                             Id = 11,
                             QuestionText = "Comfort level within the procedure room?",
-                            SerialNumber = "32df310d-1bd1-4f73-b7f8-2840bcc5e88d"
+                            SerialNumber = "99277216-4604-434d-b55f-86b586e29cd3"
                         },
                         new
                         {
                             Id = 12,
                             QuestionText = "Conditions of the rooms(temperature,comfort,silence)",
-                            SerialNumber = "3f56aa75-a19f-413b-b111-c7407e731c48"
+                            SerialNumber = "1a75c498-c3bb-4fd2-a8ef-1e046a007e2b"
                         },
                         new
                         {
                             Id = 13,
                             QuestionText = "General impression of the ambient atmosphere",
-                            SerialNumber = "968f6ad0-dd24-4266-8b1a-38325176fa31"
+                            SerialNumber = "3d711f9c-d08b-4c7d-bb9c-f0cec2ed2ae8"
                         },
                         new
                         {
                             Id = 14,
                             QuestionText = "Do you think the clinic has the necessary equipment",
-                            SerialNumber = "e16a7bd1-b252-49c5-a919-3b0e98078b48"
+                            SerialNumber = "d56fedf0-707f-4da4-afdb-eb7585540832"
                         },
                         new
                         {
                             Id = 15,
                             QuestionText = "Do you think the clinic's farmacy has the necessary drugs?",
-                            SerialNumber = "85329164-ad38-496f-a1ce-08dc94205c4d"
+                            SerialNumber = "a223d002-ea90-4134-bbb3-1bf641a53781"
                         },
                         new
                         {
                             Id = 16,
                             QuestionText = "Do you think that the hospital should have more modern equipment than the current one",
-                            SerialNumber = "595a7379-5393-417f-a179-aed7e3da77d7"
+                            SerialNumber = "771de7d5-305f-4c60-9095-156c6b725d0f"
                         },
                         new
                         {
                             Id = 17,
                             QuestionText = "Did you noticed broken or damaged equipment in the hospital",
-                            SerialNumber = "7a34bc77-cda2-42dc-b34a-cad7f78851fe"
+                            SerialNumber = "74a27912-e2e6-4dfa-89a3-42755597766e"
                         },
                         new
                         {
                             Id = 18,
                             QuestionText = "The doctor prescribed medications that I could buy at the clinic's pharmacy",
-                            SerialNumber = "70735c00-71ee-4989-aa0d-3febd917e9b6"
+                            SerialNumber = "c7f553e9-17ae-4f25-aab8-955e53e3c1bc"
                         },
                         new
                         {
                             Id = 19,
                             QuestionText = "Did you found it easy to use our website?",
-                            SerialNumber = "a3ec695c-ed89-4290-b0c4-2790076e7088"
+                            SerialNumber = "81667430-d906-416e-9683-85afc7936fcf"
                         },
                         new
                         {
                             Id = 20,
                             QuestionText = "Did you have found all the necessary information on our website?",
-                            SerialNumber = "730fa57b-3a57-4bc8-a7cb-1b7813c60ef0"
+                            SerialNumber = "0feeb7a7-560b-4c74-a1aa-b0bb8226d3fa"
                         },
                         new
                         {
                             Id = 21,
                             QuestionText = "Overall, are you satisfied with the care you received in this facility?",
-                            SerialNumber = "8c6d5f63-b8c7-41fa-9afa-be8081087d8b"
+                            SerialNumber = "c556d5f5-17ea-4189-8b7e-c36b4e6deaf9"
                         },
                         new
                         {
                             Id = 22,
                             QuestionText = "Would you come to this institution again",
-                            SerialNumber = "f723fc76-5d4c-4ac5-8658-a474f9ed7354"
+                            SerialNumber = "5c5d0f9d-2664-44db-b2bb-74db1c02321b"
                         },
                         new
                         {
                             Id = 23,
                             QuestionText = ">Would you recommend this facility to your friends and family",
-                            SerialNumber = "0522bdab-028f-40b3-9475-0470d1b3085a"
+                            SerialNumber = "8edc821b-add7-4482-8775-501206d6592f"
                         });
                 });
 
@@ -1621,7 +1632,7 @@ namespace HealthClinicBackend.Migrations
                     b.HasData(
                         new
                         {
-                            SerialNumber = "abfd6e64-6f86-4e46-a0a9-d90c2ec99776",
+                            SerialNumber = "cfe631b4-915f-432d-8f4b-3c672605224e",
                             DoctorName = "Pera Peric",
                             Id = "001",
                             Question1 = "5",
@@ -1650,7 +1661,7 @@ namespace HealthClinicBackend.Migrations
                         },
                         new
                         {
-                            SerialNumber = "619a2011-2c3e-44e2-9c31-67f87591e076",
+                            SerialNumber = "f289ed44-f7eb-44cb-bc34-cb3620086bcd",
                             DoctorName = "Mika Mikic",
                             Id = "005",
                             Question1 = "5",
@@ -2061,14 +2072,14 @@ namespace HealthClinicBackend.Migrations
                                 new
                                 {
                                     AppointmentSerialNumber = "200001",
-                                    End = new DateTime(2020, 12, 14, 18, 13, 57, 285, DateTimeKind.Local).AddTicks(9213),
-                                    Start = new DateTime(2020, 12, 14, 18, 13, 57, 283, DateTimeKind.Local).AddTicks(2711)
+                                    End = new DateTime(2020, 12, 14, 22, 23, 46, 159, DateTimeKind.Local).AddTicks(925),
+                                    Start = new DateTime(2020, 12, 14, 22, 23, 46, 152, DateTimeKind.Local).AddTicks(8560)
                                 },
                                 new
                                 {
                                     AppointmentSerialNumber = "200002",
-                                    End = new DateTime(2020, 12, 14, 18, 13, 57, 286, DateTimeKind.Local).AddTicks(531),
-                                    Start = new DateTime(2020, 12, 14, 18, 13, 57, 286, DateTimeKind.Local).AddTicks(513)
+                                    End = new DateTime(2020, 12, 14, 22, 23, 46, 159, DateTimeKind.Local).AddTicks(2920),
+                                    Start = new DateTime(2020, 12, 14, 22, 23, 46, 159, DateTimeKind.Local).AddTicks(2889)
                                 });
                         });
                 });
