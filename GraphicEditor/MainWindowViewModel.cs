@@ -23,7 +23,7 @@ namespace GraphicEditor
             LoginPage = new LoginUserControl(this);
             HospitalMap = new HospitalMapUserControl(this);
             CardiologyBuilding = new CardiologyBuildingUserControl(this);
-            CurrentUserControl = HospitalMap;
+            CurrentUserControl = LoginPage;
         }
 
         public UserControl CurrentUserControl

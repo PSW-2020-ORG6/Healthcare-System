@@ -1,6 +1,6 @@
 ﻿using GraphicEditor.HelpClasses;
 using HealthClinicBackend.Backend.Controller;
-using System.Windows;
+using HealthClinicBackend.Backend.Model.Util;
 using System.Windows.Controls;
 
 namespace GraphicEditor.ViewModel
@@ -39,6 +39,12 @@ namespace GraphicEditor.ViewModel
         private void checkLogin(PasswordBox pass)
         {
             MainWindow.TypeOfUser = hospitalLogInController.GetUserType(UserName, pass.Password);
+            if (MainWindow.TypeOfUser != TypeOfUser.NoUser)
+            {
+                _parent.CurrentUserControl = _parent.HospitalMap;
+                UserName = "";
+                Password = "";
+            }
         }
     }
 }
