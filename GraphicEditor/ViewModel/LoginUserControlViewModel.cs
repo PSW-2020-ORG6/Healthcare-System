@@ -1,5 +1,6 @@
 ﻿using GraphicEditor.HelpClasses;
 using HealthClinicBackend.Backend.Controller;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace GraphicEditor.ViewModel
@@ -9,6 +10,7 @@ namespace GraphicEditor.ViewModel
         public MyICommand<PasswordBox> PasCommand { get; private set; }
         private string _userName = "asd";
         private string _pass = "asdasdad";
+        private MainWindowViewModel _parent;
         private HospitalLogInController hospitalLogInController;
         public string UserName
         {
@@ -27,8 +29,9 @@ namespace GraphicEditor.ViewModel
                 SetProperty(ref _pass, value);
             }
         }
-        public LoginUserControlViewModel()
+        public LoginUserControlViewModel(MainWindowViewModel vm)
         {
+            _parent = vm;
             PasCommand = new MyICommand<PasswordBox>(checkLogin);
             hospitalLogInController = new HospitalLogInController();
         }

@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using GraphicEditor.ViewModel;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace GraphicEditor.View.UserControls
 {
@@ -7,9 +9,10 @@ namespace GraphicEditor.View.UserControls
     /// </summary>
     public partial class LoginUserControl : UserControl
     {
-        public LoginUserControl()
+        public LoginUserControl(MainWindowViewModel vm)
         {
             InitializeComponent();
+            this.DataContext = new LoginUserControlViewModel(vm);
         }
     }
 }

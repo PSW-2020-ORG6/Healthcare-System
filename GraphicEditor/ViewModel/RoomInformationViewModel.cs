@@ -70,20 +70,21 @@ namespace GraphicEditor.ViewModel
             roomName = _room.Name;
             room = _room;
             beds = _room.Beds;
-            selectedBed = beds[0];
+            if (beds.Count != 0)
+                selectedBed = beds[0];
         }
 
         void updateBedInfo(Bed bedInfo)
         {
-            Bed p = new Bed(BedInfo.Name, BedInfo.Id);
-            BedUpdate w = new BedUpdate(p, this);
+            //Bed p = new Bed(BedInfo.Name, BedInfo.Id);
+            BedUpdate w = new BedUpdate(selectedBed, this);
             w.ShowDialog();
         }
 
         void updateRoomInfo(Room room)
         {
-            Room rm = new Room(room.SerialNumber, room.Id, room.RoomType);
-            RoomUpdate r = new RoomUpdate(rm, this);
+            //Room rm = new Room(room.SerialNumber, room.Id, room.RoomType);
+            RoomUpdate r = new RoomUpdate(room, this);
             r.ShowDialog();
         }
 
