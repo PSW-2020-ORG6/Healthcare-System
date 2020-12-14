@@ -5,6 +5,7 @@ using HealthClinicBackend.Backend.Model.Schedule;
 using WebApplication.Backend.Repositorys.Interfaces;
 using WebApplication.Backend.Util;
 using HealthClinicBackend.Backend.Dto;
+using NPOI.SS.Formula.Functions;
 
 namespace WebApplication.Backend.Repositorys
 {
@@ -169,37 +170,31 @@ namespace WebApplication.Backend.Repositorys
 
         public bool IsUserMalicious(string patientId)
         {
-
             String sqlDml = "Select  DateOfCanceling FROM appointment WHERE PatientSerialNumber like '" + patientId + "' AND Active = '0'";
             try
             {
                 connection.Open();
                 MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
                 MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-                List<DateSubstitute> datesToSort = new List<DateSubstitute>();
+                List<DateTime> dates = new List<DateTime>();
                 while (sqlReader.Read())
                 {
                     string entity = (string)sqlReader[0];
                     String[] entitySplit = (entity.Split(' ')[0]).Split('/');
-                    datesToSort.Add(new DateSubstitute(entitySplit[2], entitySplit[0], entitySplit[1]));
-
-
+                    String[] entitySplitHours = (entity.Split(' ')[1]).Split(':');
+                    dates.Add(new DateTime(Int32.Parse(entitySplit[2]), Int32.Parse(entitySplit[0]), Int32.Parse(entitySplit[1]), Int32.Parse(entitySplitHours[0]), Int32.Parse(entitySplitHours[1]), Int32.Parse(entitySplitHours[2])));
                 }
 
-                DateSubstitute sortingObject = new DateSubstitute();
-                List<DateSubstitute> sortedDates = sortingObject.SortDateSubstitutes(datesToSort);
-
+                dates.Sort((date1, date2) => date2.CompareTo(date1));
 
                 connection.Close();
 
                 DateTime date = DateTime.Now;
 
-                String[] dateSplit = (date.ToString().Split(' ')[0]).Split('/');
-                DateSubstitute today = new DateSubstitute(dateSplit[2], dateSplit[0], dateSplit[1]);
-
-                if (sortedDates.Count >= 2)
+                if (dates.Count >= 2)
                 {
-                    if (sortingObject.CalculateDiference(sortedDates[sortedDates.Count - 2], today) <= 30)
+                    System.TimeSpan difference = dates[1].Subtract(date);
+                    if (Math.Abs(difference.Days) <= 30)
                         return true;
                 }
 
@@ -209,28 +204,8 @@ namespace WebApplication.Backend.Repositorys
             {
                 return false;
             }
-
-            return true;
         }
 
-        public List<DateTime> sortDates(List<DateTime> datesToSort)
-        {
-            DateTime temp;
-            for (int j = 0; j <= datesToSort.Count - 1; j++)
-            {
-                for (int i = 0; i <= datesToSort.Count - 1; i++)
-                {
-                    if (datesToSort[i].Year > datesToSort[i + 1].Year)
-                    {
-                        temp = datesToSort[i + 1];
-                        datesToSort[i + 1] = datesToSort[i];
-                        datesToSort[i] = temp;
-                    }
-                }
-            }
-
-            return datesToSort;
-        }
 
         public bool setUserToMalicious(string patientId)
         {
