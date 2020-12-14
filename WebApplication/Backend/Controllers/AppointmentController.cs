@@ -14,12 +14,12 @@ namespace WebApplication.Backend.Controllers
     public class AppointmentController : ControllerBase
     {
         private readonly AppointmentService appointmentService;
-        private readonly DateTimeDTO dateTimeDTO;
+        private readonly DateFromStringConverter dateFromStringConverter;
         private readonly AppointmentDto appointmentDTO;
         public AppointmentController()
         {
             this.appointmentService = new AppointmentService();
-            this.dateTimeDTO = new DateTimeDTO();
+            this.dateFromStringConverter = new DateFromStringConverter();
             this.appointmentDTO = new AppointmentDto();
         }
 
@@ -61,7 +61,7 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("appointments")]
         public List<TimeIntervalDTO> GetAllAvailableAppointments(string physicianId, string specializationName, string date)
         {
-            if (dateTimeDTO.IsPreferredTimeValid(date))
+            if (dateFromStringConverter.IsPreferredTimeValid(date))
                 return appointmentService.GetAllAvailableAppointments(physicianId, specializationName, date);
             else
                 return null;
@@ -84,8 +84,8 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("appointmentsWithReccomendation")]
         public List<AppointmentWithRecommendationDTO> GetAllAvailableAppointmentsWithRecomendation(string physicianId, string specializationName, string dates)
         {
-            if (dateTimeDTO.IsPreferredTimeIntervalValid(dates))
-                return appointmentService.AppointmentRecomendation(physicianId, specializationName, dateTimeDTO.DateGeneration(dates));
+            if (dateFromStringConverter.IsPreferredTimeIntervalValid(dates))
+                return appointmentService.AppointmentRecomendation(physicianId, specializationName, dateFromStringConverter.DateGeneration(dates));
             else
                 return null;
         }
@@ -93,8 +93,8 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("appointmentsWithPhysicianPriority")]
         public List<AppointmentWithRecommendationDTO> GetAllAvailableAppointmentsWithPhysicianPriority(string physicianId, string specializationName, string dates)
         {
-            if (dateTimeDTO.IsPreferredTimeIntervalValid(dates))
-                return appointmentService.AppointmentRecomendationWithPhysicianPriority(physicianId, specializationName, dateTimeDTO.DateGeneration(dates));
+            if (dateFromStringConverter.IsPreferredTimeIntervalValid(dates))
+                return appointmentService.AppointmentRecomendationWithPhysicianPriority(physicianId, specializationName, dateFromStringConverter.DateGeneration(dates));
             else
                 return null;
         }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace WebApplication.Backend.DTO
 {
-    public class DateTimeDTO
+    public class DateFromStringConverter
     {
-        public DateTimeDTO()
+        public DateFromStringConverter()
         {
         }
 
