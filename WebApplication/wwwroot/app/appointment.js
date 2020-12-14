@@ -12,7 +12,9 @@
             timeInterval: null,
             display: false,
             appointmentDto: null,
-            informations: null
+            informations: null,
+            display1: false,
+            myDate:null
 			}
 		}
     ,
@@ -31,7 +33,10 @@
     template: `
         <div>
 		    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAppointment">Create new appointment</button>
+            </br>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAppointmentRecommendation">Create new appointment with recommendation</button>
+            </br>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAppointmentMyChoosenDoctor">Create new appointment with my choosen doctor</button>
             <div class="modal fade" id="createAppointment" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                      <div class="modal-content steps" style="width: 600px;height:500px">
@@ -149,6 +154,31 @@
                             </div>
                         </div>
                     </div>
+                  </div>
+                </div>
+             <div class="modal fade" id="createAppointmentMyChoosenDoctor" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document" style="width:900px;height:200px">
+                    <div class="modal-content steps">
+                        <div class="container" align="center">
+                            <br/><h4 class="text">Create new appointment</h4><br/></br>
+                        </div>
+                        <div id="parameters" align="center" v-if="!display1">
+                           
+                                    <label>&nbsp&nbsp&nbsp Choose date &nbsp</label></br><input id="myDate" type="date"></input>
+                                 </br></br>
+                                 <button type="button" class="btn btn-primary" v-on:click="DisplayAppointmentsMyChoosenDoctor()">Display appointments</button>
+                                 </br></br> 
+                        </div>
+                        <div  v-if="display1">
+                                <label>Choose  time:</label></br>
+                                    <select class="select" v-model ="timeInterval">
+                                        <option div  v-for="t in timeIntervals" v-bind:value="t">{{t.time}}</option>
+                                    </select>
+                                    </br></br></br></br>
+                                    <button class="btn btnNext" v-on:click="MakeAppointment3()">Submit</button>
+                                    </br></br>
+                           </div>
+                     </div>
             </div>
           </div>
      </div>
@@ -184,19 +214,6 @@
                 document.getElementById("step4").className = "circleStep circlesStepDisabled"
             }
             else if (this.id == 2) {
-                var datenew = this.date
-                var dates = ""
-                while (datenew != "2020-12-16") {
-                    //alert(datenew)
-                    dates = dates + datenew + ","
-                    datenew = new Date(datenew)
-                    datenew.setDate(datenew.getDate() + 1)
-                    var day = datenew.getDate()
-                    var month = datenew.getMonth() + 1
-                    var year = datenew.getFullYear()
-                    datenew = year + "-" + month + "-" + day
-                }
-                alert(dates)
                 document.getElementById("step1").className = "circleStep circleStepDone"
                 document.getElementById("step2").className = "circleStep circleStepDone"
                 document.getElementById("step3").className = "circleStep circlesStepDisabled"
@@ -338,6 +355,29 @@
             } else {
                 document.getElementById("validationParameter").className = "correct"
             }
-        }
+        },
+        DisplayAppointmentsMyChoosenDoctor: function () {
+            if (document.getElementById("myDate").value != "") {
+                this.myDate = document.getElementById("myDate").value;
+                this.display1 = true;
+                axios
+                    .get('http://localhost:49900/appointment/appointments', {
+                        params: {
+                            physicianId: "600001", specializationName: "General practitioner", date: document.getElementById("myDate").value
+                        }
+                    })
+                    .then(response => {
+                        this.timeIntervals = response.data
+                    })
+            }
+        },
+        MakeAppointment3: function () {
+            alert(this.timeInterval.start)
+                axios
+                    .post('http://localhost:49900/appointment/makeAppointment/' + "600001" + '/' + this.timeInterval.start + '/' + this.myDate)
+                    .then(response => {
+                        this.Refresh()
+                    })
+            }
     }
 });
