@@ -11,6 +11,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class AppointmentDatabaseSql : GenericDatabaseSql<Appointment>, IAppointmentRepository
     {
+        public AppointmentDatabaseSql() : base()
+        {
+        }
+
         public AppointmentDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
         {
         }
@@ -43,6 +47,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             if (appointment == null) return;
             DbContext.Appointment.Remove(appointment);
             DbContext.SaveChanges();
+        }
+
+        public override Appointment GetBySerialNumber(string serialNumber)
+        {
+            return GetAll().Where(t => t.SerialNumber.Equals(serialNumber)).ToList()[0];
         }
 
         public List<Appointment> GetAppointmentsByDate(DateTime date)
