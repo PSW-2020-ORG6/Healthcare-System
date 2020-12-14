@@ -71,7 +71,7 @@ namespace GraphicEditor.ViewModel
                 Floor floor = floorRepository.GetBySerialNumber(room.FloorSerialNumber);
                 Building building = buildingRepository.GetBySerialNumber(floor.BuildingSerialNumber);
                 string fullLocation = building.Name + ", " + floor.Name + ", " + room.Name + ", "
-                                    + medicineName +  " in quantity: 1";
+                                    + result.GenericName + " in quantity: " + result.Quantity;
                 _reportOfSearch.Add(fullLocation);
             }
             OnPropertyChanged("ReportOfSearch");

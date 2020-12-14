@@ -21,6 +21,8 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         [ForeignKey("MedicineType")] public string MedicineTypeSerialNumber { get; set; }
         public virtual MedicineType MedicineType { get; set; }
         [ForeignKey("Room")] public string RoomSerialNumber { get; set; }
+
+        public int Quantity { get; set; }
         public Medicine() : base()
         {
         }
