@@ -22,6 +22,7 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 
         public ExamController(Appointment appointment)
         {
+            //TODO
             //this._loggedPhysician = appointment.Physician;
             //this.SelectedPatient = appointment.Patient;
             //ProcedureType procedure = appointment.ProcedureType;
