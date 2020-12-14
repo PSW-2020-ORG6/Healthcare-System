@@ -46,7 +46,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
         }
         public bool IsRoomAvailable(Room room, TimeInterval timeInterval)
         {
-            return !IsRoomScheduled(room, timeInterval) && !IsRoomInRenovation(room, timeInterval);
+            return !IsRoomScheduled(room, timeInterval); //&& !IsRoomInRenovation(room, timeInterval);
         }
 
         public bool IsRoomAvailableForInpatientCare(Room room)

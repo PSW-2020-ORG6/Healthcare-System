@@ -152,6 +152,7 @@ namespace GraphicEditor.View.UserControls
             appointmentDto.Patient = selectedPatient;
             appointmentDto.Active = true;
             appointmentDto.Room = selectedRoom;
+            appointmentDto.Date = new DateTime(dateTime.Value.Year, dateTime.Value.Month, dateTime.Value.Day);
             if (appointmentDto.Patient == null || appointmentDto.Physician == null)
             {
                 MessageBox.Show("You did not select patient or physician");
@@ -162,7 +163,19 @@ namespace GraphicEditor.View.UserControls
                 MessageBox.Show("You did not select room");
                 return;
             }
-            List<AppointmentDto> appointmentDtos= secretaryScheduleController.MakeAppointment(appointmentDto,0);
+            ProcedureType procType = new ProcedureType("Procedura", 40, new Specialization("Family doctor"));
+            appointmentDto.ProcedureType = procType;
+            List<AppointmentDto> appointmentDtos1 = secretaryScheduleController.GetAllAvailableAppointments(appointmentDto);
+            List<AppointmentDto> result = new List<AppointmentDto>();
+            foreach(AppointmentDto ap in appointmentDtos1)
+            {
+                if(ap.Time.Start >= appointmentDto.Time.Start && ap.Time.End <= appointmentDto.Time.End)
+                {
+                    result.Add(ap);
+                }
+            }
+            int a = 5;
+            /*List<AppointmentDto> appointmentDtos= secretaryScheduleController.MakeAppointment(appointmentDto,0);*/
             //secretaryScheduleController.GetAllAvailableAppointments(appointmentDto);//call makeAppointment not getAllApp
         }
 
