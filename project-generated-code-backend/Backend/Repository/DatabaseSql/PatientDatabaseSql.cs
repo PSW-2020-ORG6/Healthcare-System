@@ -19,9 +19,9 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public override List<Patient> GetAll()
         {
             // Use Include method to connect object and its references from other tables
-            return DbContext.Patient
-                .Include(p => p.Address)
-                //.ThenInclude(p => p.City)
+            return dbContext.Patient
+                //.Include(p => p.Address)
+                //.Include(p => p.Address.City)
                 //.Include(p => p.ChosenPhysician)
                 .ToList();
         }
