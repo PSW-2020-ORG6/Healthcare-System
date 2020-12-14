@@ -19,14 +19,22 @@ namespace IntegrationAdapters.Services
         {
             this.medicineRepository = new MedicineRepository();
         }
+        public MedicineService(IMedicineRepository imedicineRepository)
+        {
+            this.medicineRepository = imedicineRepository;
+        }
         public List<Medicine> GetAll()
         {
             return medicineRepository.GetAll();
         }
-   
-        public Medicine GetMedicineByID(String ID)
+
+        public Medicine GetByID(string ID)
         {
-            return medicineRepository.GetByID(ID);
+            foreach (Medicine medicine in GetAll())
+            {
+                if (medicine.MedicineID.Equals(ID)) return medicine;
+            }
+            return null;
         }
         public Medicine GetMedicineByName(String Name)
         {
@@ -39,8 +47,22 @@ namespace IntegrationAdapters.Services
 
         public MedicineSpecification GetById(string id)
         {
-            return medicineRepository.GetById(id);
+            foreach (MedicineSpecification ms in GetAllSpecifications())
+            {
+                if (ms.ID.Equals(id))
+                {
+                    return ms;
+                }
+
+            }
+            return null;
+            
         }
+        public List<MedicineSpecification> GetAllSpecifications()
+        {
+            return medicineRepository.GetAllSpecifications();
+        }
+    
 
 
         private string GeneratePrescriptionString(PrescriptionDTO prescription)
@@ -102,6 +124,10 @@ namespace IntegrationAdapters.Services
             result += "Notes: " + medicineSpecification.Notes + "\n";
             result += "Shape: " + medicineSpecification.Shape + "\n";
             return result;
+        }
+        public bool DoesMedicineExist(Medicine medicine)
+        {
+            return medicineRepository.DoesMedicineExist(medicine);
         }
 
 

@@ -34,9 +34,9 @@ namespace IntegrationAdapters.Controllers
             Medicine medicine = medicineService.DoesMedicineExist(medicineName);
             if (medicine != null)
             {
-                 medicineService.GenerateSpecificationFromHospital(medicineName);
-                
-                return Ok();              
+                medicineService.GenerateSpecificationFromHospital(medicineName);
+
+                return Ok();
             }
             else
             {
@@ -74,7 +74,7 @@ namespace IntegrationAdapters.Controllers
         {
             var endPoint = "http://localhost:8082/myapp/medication/getPharmacies/" + medicineName + "/" + quantity;
             string text = GenerateResponse(endPoint);
-            
+
             if (IsResponseValid(text))
             {
                 return text;
@@ -115,6 +115,11 @@ namespace IntegrationAdapters.Controllers
             return Ok(Program.ResponseMessageGrpc);
         }
 
-        
-    }
-}
+        [HttpGet("getMedicine")]
+        public IActionResult GetMedicine()
+        {
+            medicineService.AddMedicine();
+            return Ok();
+        }
+    }   
+} 
