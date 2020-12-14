@@ -33,5 +33,9 @@ namespace GraphicEditor.HelpClasses
 
         public const string FIRST = "first";
         public const string SECOND = "second";
+
+        public const string EQUIPMENT = "Equipment";
+        public const string MEDICINES = "Medicines";
+        public const string BEDS = "Beds";
     }
 }

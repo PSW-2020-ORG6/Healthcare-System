@@ -21,7 +21,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public virtual RoomType RoomType { get; set; }
         public virtual List<Equipment> Equipment { get; set; }
         public virtual List<Bed> Beds { get; set; }
-
+        public virtual List<Medicine> Medinices { get; set; }
         public int Row { get; set; }
         public int Column { get; set; }
         public int RowSpan { get; set; }

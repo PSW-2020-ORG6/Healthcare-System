@@ -59,7 +59,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public List<Medicine> GetByName(string name)
         {
             return GetAll().Where(m => m.CopyrightName.ToLower().Contains(name.ToLower()) || m.GenericName.ToLower().Contains(name.ToLower())).ToList();
+        }
 
+        public List<Medicine> GetByRoomSerialNumber(string serialNumber)
+        {
+            return GetAll().Where(m => m.RoomSerialNumber.ToLower().Equals(serialNumber.ToLower())).ToList();
         }
     }
 }

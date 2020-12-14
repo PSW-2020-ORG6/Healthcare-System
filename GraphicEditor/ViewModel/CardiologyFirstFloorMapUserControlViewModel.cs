@@ -17,6 +17,8 @@ namespace GraphicEditor.ViewModel
         BedDatabaseSql bedRepository = new BedDatabaseSql();
         EquipmentDatabaseSql equipmentRepository = new EquipmentDatabaseSql();
         RoomTypeDatabaseSql roomTypeRepository = new RoomTypeDatabaseSql();
+        MedicineDatabaseSql medicineRepository = new MedicineDatabaseSql();
+        PatientDatabaseSql patientRepository = new PatientDatabaseSql();
 
         MainWindowViewModel mapParent;
         CardiologyBuildingUserControlViewModel buildingParent;
@@ -49,8 +51,13 @@ namespace GraphicEditor.ViewModel
                 button.Command = ShowRoomCommand;
                 button.CommandParameter = room;
                 room.Beds = bedRepository.GetByRoomSerialNumber(room.SerialNumber);
+                foreach(Bed bed in room.Beds)
+                {
+                    if (bed.PatientSerialNumber != null) bed.Patient = patientRepository.GetBySerialNumber(bed.PatientSerialNumber);
+                }
                 room.RoomType = roomTypeRepository.GetBySerialNumber(room.RoomTypeSerialNumber);
                 room.Equipment = equipmentRepository.GetByRoomSerialNumber(room.SerialNumber);
+                room.Medinices = medicineRepository.GetByRoomSerialNumber(room.SerialNumber);
 
                 RoomGrid.Children.Add(button);
                 RoomGrid.UpdateLayout();
