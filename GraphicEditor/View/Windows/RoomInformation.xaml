@@ -9,21 +9,35 @@
         Title="RoomInformation" 
         Icon="/GraphicEditor;component/Resources/Icons/bed.png"
         WindowStartupLocation="CenterScreen"
-        Height="550"
-        Width="1000">
+        MinHeight="700"
+        MinWidth="1100">
     <Grid Background="AliceBlue">
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.7*" />
-            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.15*" />
+            <ColumnDefinition Width="0.4*" />
         </Grid.ColumnDefinitions>
-        
-        <ListBox  ItemsSource="{Binding Path=Beds, Mode=TwoWay}"
+
+        <ListBox    ItemsSource="{Binding Path=Categories, Mode=OneWay}"
                     Grid.Column="0"
                     Grid.RowSpan="3"
                     DockPanel.Dock="Top"
-                    Name="roomComboBox"
-                    SelectedItem="{Binding Path=BedInfo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    Name="categoriesListBox"
+                    SelectedItem="{Binding Path=SelectedCategory, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    Margin="20"
+                    FontSize="14"
+                    Style="{StaticResource MaterialDesignToolVerticalToggleListBox}"
+                    Cursor="Hand">
+        </ListBox>
+
+        <ListBox    x:Name="bedsListBox"
+                    ItemsSource="{Binding Path=Beds, Mode=TwoWay}"
+                    Grid.Column="1"
+                    Grid.RowSpan="3"
+                    Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    DockPanel.Dock="Top"
+                    SelectedItem="{Binding Path=SelectedBed, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                     Margin="20"
                     FontSize="14"
                     Style="{StaticResource MaterialDesignToolVerticalToggleListBox}"
@@ -35,7 +49,43 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Grid Grid.Column="1" >
+        <ListBox    x:Name="equipmentListBox"
+                    ItemsSource="{Binding Path=Equipment, Mode=TwoWay}"
+                    Grid.Column="1"
+                    Grid.RowSpan="3"
+                    Visibility="{Binding Path=EquipmentVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    DockPanel.Dock="Top"
+                    SelectedItem="{Binding Path=SelectedEquipment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    Margin="20"
+                    FontSize="14"
+                    Style="{StaticResource MaterialDesignToolVerticalToggleListBox}"
+                    Cursor="Hand">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Name,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <ListBox    x:Name="medicineListBox"
+                    ItemsSource="{Binding Path=Medicines, Mode=TwoWay}"
+                    Grid.Column="1"
+                    Grid.RowSpan="3"
+                    Visibility="{Binding Path=MedicineVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    DockPanel.Dock="Top"
+                    SelectedItem="{Binding Path=SelectedMedicine, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    Margin="20"
+                    FontSize="14"
+                    Style="{StaticResource MaterialDesignToolVerticalToggleListBox}"
+                    Cursor="Hand">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=GenericName,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Grid Grid.Column="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
@@ -50,13 +100,17 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-
+            
+            <!-- Information-->
             <!-- Top side -->
             <TextBlock  Grid.Column="0"
                         Grid.ColumnSpan="2"
                         Grid.Row="0"
-                        Text="{Binding Path=RoomName}"
+                        Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=Room.Name}"
                         HorizontalAlignment="Center"
                         Margin="0,10"
                         Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
@@ -64,59 +118,173 @@
             <TextBlock  Grid.Column="0"
                         Grid.ColumnSpan="2"
                         Grid.Row="1"
-                        Text="PATIENT INFORMATION"
+                        Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="BED INFORMATION"
                         HorizontalAlignment="Center"
                         Margin="0,10"
                         Style="{StaticResource MaterialDesignButtonTextBlock}" />
 
+            <TextBlock  Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="1"
+                        Visibility="{Binding Path=EquipmentVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="EQUIPMENT INFORMATION"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+
+            <TextBlock  Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="1"
+                        Visibility="{Binding Path=MedicineVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="MEDICINE INFORMATION"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+
+            <!-- Bed -->
             <!-- Left side -->         
             <TextBlock  Grid.Column="0"
                         Grid.Row="2"
-                        Text="UCIN: "
+                        Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="Bed name: "
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Margin="0,10"
                         Style="{StaticResource MaterialDesignButtonTextBlock}" />
             <TextBlock  Grid.Column="0"
                         Grid.Row="3"
-                        Text="First name: "
+                        Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="Occupied:"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Margin="0,10"
                         Style="{StaticResource MaterialDesignButtonTextBlock}" />
             <TextBlock  Grid.Column="0"
                         Grid.Row="4"
-                        Text="Last name: "
+                        Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="Patient Name:"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Margin="0,10"
                         Style="{StaticResource MaterialDesignButtonTextBlock}" />
             <TextBlock  Grid.Column="0"
                         Grid.Row="5"
-                        Text="Diagnosis: "
+                        Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="Patient Surname:"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Margin="0,10"
                         Style="{StaticResource MaterialDesignButtonTextBlock}" />
             <TextBlock  Grid.Column="0"
                         Grid.Row="6"
+                        Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="Patient ID: "
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+            <TextBlock  Grid.Column="0"
+                        Grid.Row="7"
+                        Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="Diagnose: "
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+            <TextBlock  Grid.Column="0"
+                        Grid.Row="8"
+                        Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         Text="Date of arrival: "
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Margin="0,10"
                         Style="{StaticResource MaterialDesignButtonTextBlock}" />
             <TextBlock  Grid.Column="0"
-                        Grid.Row="7"
+                        Grid.Row="9"
+                        Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         Text="Leaving on: "
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Margin="0,10"
                         Style="{StaticResource MaterialDesignButtonTextBlock}" />
 
+            <!-- Equipment -->
+            <!-- Left side -->
+            <TextBlock  Grid.Column="0"
+                        Grid.Row="2"
+                        Visibility="{Binding Path=EquipmentVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="Equpment name: "
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+            <TextBlock  Grid.Column="0"
+                        Grid.Row="3"
+                        Visibility="{Binding Path=EquipmentVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="Quantity:"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+
+            <!-- Medicine -->
+            <!-- Left side -->
+            <TextBlock  Grid.Column="0"
+                        Grid.Row="2"
+                        Visibility="{Binding Path=MedicineVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="Medicine Copyright Name: "
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+            <TextBlock  Grid.Column="0"
+                        Grid.Row="3"
+                        Visibility="{Binding Path=MedicineVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="Medicine Generic Name: "
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+            <TextBlock  Grid.Column="0"
+                        Grid.Row="4"
+                        Visibility="{Binding Path=MedicineVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="Is Approved: "
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+            <TextBlock  Grid.Column="0"
+                        Grid.Row="5"
+                        Visibility="{Binding Path=MedicineVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="Medicine Manufacturer:"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+            <TextBlock  Grid.Column="0"
+                        Grid.Row="6"
+                        Visibility="{Binding Path=MedicineVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="Medicine Type:"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+            <TextBlock  Grid.Column="0"
+                        Grid.Row="7"
+                        Visibility="{Binding Path=MedicineVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="Quantity: "
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0,10"
+                        Style="{StaticResource MaterialDesignButtonTextBlock}" />
+
+            <!-- Bed -->
             <!-- Right side -->
             <TextBox    Grid.Column="1"
                         Grid.Row="2"
-                        Text="{Binding Path=BedInfo.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=SelectedBed.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                         HorizontalAlignment="Center"
                         Margin="0,10"
                         Width="150"
@@ -124,7 +292,8 @@
                         Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
             <TextBox    Grid.Column="1"
                         Grid.Row="3"
-                        Text="{Binding Path=BedInfo.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=SelectedBed.IsOccupied, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                         HorizontalAlignment="Center"
                         Margin="0,10"
                         Width="150"
@@ -132,7 +301,8 @@
                         Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
             <TextBox    Grid.Column="1"
                         Grid.Row="4"
-                        Text="{Binding Path=BedInfo.SerialNumber, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=SelectedBed.Patient.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                         HorizontalAlignment="Center"
                         Margin="0,10"
                         Width="150"
@@ -140,7 +310,8 @@
                         Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
             <TextBox    Grid.Column="1"
                         Grid.Row="5"
-                        Text="{Binding Path=BedInfo.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=SelectedBed.Patient.Surname, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                         HorizontalAlignment="Center"
                         Margin="0,10"
                         Width="150"
@@ -148,7 +319,8 @@
                         Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
             <TextBox    Grid.Column="1"
                         Grid.Row="6"
-                        Text="{Binding Path=BedInfo.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=SelectedBed.Patient.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                         HorizontalAlignment="Center"
                         Margin="0,10"
                         Width="150"
@@ -156,16 +328,115 @@
                         Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
             <TextBox    Grid.Column="1"
                         Grid.Row="7"
-                        Text="{Binding Path=BedInfo.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=SelectedBed.Patient.Diagnose, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Width="150"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
+            <TextBox    Grid.Column="1"
+                        Grid.Row="8"
+                        Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=SelectedBed.Patient.Diagnose, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Width="150"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
+            <TextBox    Grid.Column="1"
+                        Grid.Row="9"
+                        Visibility="{Binding Path=BedVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=SelectedBed.Patient.Diagnose, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                         HorizontalAlignment="Center"
                         Margin="0,10"
                         Width="150"
                         IsReadOnly="True"
                         Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
 
+            <!-- Equipment -->
+            <!-- Right side -->
+            <TextBox    Grid.Column="1"
+                        Grid.Row="2"
+                        Visibility="{Binding Path=EquipmentVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=SelectedEquipment.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Width="150"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
+            <TextBox    Grid.Column="1"
+                        Grid.Row="3"
+                        Visibility="{Binding Path=EquipmentVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=SelectedEquipment.Quantity, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Width="150"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
+
+
+            <!-- Medicine -->
+            <!-- Right side -->
+            <TextBox    Grid.Column="1"
+                        Grid.Row="2"
+                        Visibility="{Binding Path=MedicineVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=SelectedMedicine.CopyrightName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Width="150"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
+            <TextBox    Grid.Column="1"
+                        Grid.Row="3"
+                        Visibility="{Binding Path=MedicineVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=SelectedMedicine.GenericName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Width="150"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
+            <TextBox    Grid.Column="1"
+                        Grid.Row="4"
+                        Visibility="{Binding Path=MedicineVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=SelectedMedicine.IsApproved, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Width="150"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
+            <TextBox    Grid.Column="1"
+                        Grid.Row="5"
+                        Visibility="{Binding Path=MedicineVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=SelectedMedicine.MedicineManufacturer.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Width="150"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
+            <TextBox    Grid.Column="1"
+                        Grid.Row="6"
+                        Visibility="{Binding Path=MedicineVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=SelectedMedicine.MedicineType.Type, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Width="150"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
+            <TextBox    Grid.Column="1"
+                        Grid.Row="7"
+                        Visibility="{Binding Path=MedicineVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=SelectedMedicine.Quantity, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                        HorizontalAlignment="Center"
+                        Margin="0,10"
+                        Width="150"
+                        IsReadOnly="True"
+                        Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
+
+
             <!-- Bottom side -->
             <DockPanel  Grid.Column="0"
-                        Grid.Row="8"
+                        Grid.Row="10"
                         Grid.ColumnSpan="2"
                         HorizontalAlignment="Left">
 

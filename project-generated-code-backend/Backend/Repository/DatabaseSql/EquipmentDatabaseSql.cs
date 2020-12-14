@@ -45,7 +45,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public List<Equipment> GetByRoomSerialNumber(string roomSerialNumber)
         {
-            return GetAll().Where(e => e.SerialNumber.Equals(roomSerialNumber)).ToList();
+            return GetAll().Where(e => e.RoomSerialNumber.Equals(roomSerialNumber)).ToList();
         }
     }
 }

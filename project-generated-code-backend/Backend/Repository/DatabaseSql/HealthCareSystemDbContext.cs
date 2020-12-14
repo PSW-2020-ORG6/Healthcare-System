@@ -274,6 +274,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Room>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Room>().Ignore(o => o.RoomType);
             modelBuilder.Entity<Room>().Ignore(o => o.Equipment);
+            modelBuilder.Entity<Room>().Ignore(o => o.Beds);
+            modelBuilder.Entity<Room>().Ignore(o => o.Medinices);
             modelBuilder.Entity<Room>().Property(o => o.ColumnSpan).HasDefaultValue(1);
             modelBuilder.Entity<Room>().Property(o => o.RowSpan).HasDefaultValue(1);
 
@@ -792,21 +794,21 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Appointment>().Ignore(o => o.Physician);
             modelBuilder.Entity<Appointment>().Ignore(o => o.Date);
             modelBuilder.Entity<Appointment>().HasData(
-                new Appointment { SerialNumber = "200001", Urgency = true },
-                new Appointment { SerialNumber = "200002", Urgency = false }
+                new Appointment { SerialNumber = "200001", PatientSerialNumber="0002", PhysicianSerialNumber="600001", Urgency = true },
+                new Appointment { SerialNumber = "200002", PatientSerialNumber = "0002", PhysicianSerialNumber = "600001", Urgency = false }
             );
         }
 
         private static void BedCreation(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Bed>().Property(o => o.Quantity).HasDefaultValue(1);
+            modelBuilder.Entity<Bed>().Ignore(o => o.IsOccupied);
             modelBuilder.Entity<Bed>().HasData(
                 new Bed
                 {
                     SerialNumber = "100001",
                     BuildingSerialNumber = "10001",
                     FloorSerialNumber = "1001",
-
                     RoomSerialNumber = "101",
                     Name = "Bed 1",
                     PatientSerialNumber = "0002",
