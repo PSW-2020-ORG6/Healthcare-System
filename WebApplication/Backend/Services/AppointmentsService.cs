@@ -47,8 +47,8 @@ namespace WebApplication.Backend.Services
 
         }
 
-        public bool CheckIfUserIsMalicious(string patientId) {
-            if (iappointmentRepository.CheckIfUserIsMalicious(patientId))
+        public bool IsUserMalicious(string patientId) {
+            if (iappointmentRepository.IsUserMalicious(patientId))
             {
                 return iappointmentRepository.setUserToMalicious(patientId);
             }

@@ -133,6 +133,7 @@ namespace WebApplicationTests
             WebApplication.Backend.Services.AppointmentsService service =
                 new WebApplication.Backend.Services.AppointmentsService(stubRepository.Object);
             returnValue = service.CancelAppointment(appointmentSerialTrue);
+
             Assert.True(returnValue);
         }
 
@@ -145,29 +146,19 @@ namespace WebApplicationTests
             WebApplication.Backend.Services.AppointmentsService service =
                 new WebApplication.Backend.Services.AppointmentsService(stubRepository.Object);
             returnValue = service.CancelAppointment(appointmentSerialTrue);
+
             Assert.False(returnValue);
-        }
-
-        [Fact]
-        public void Patient_is_malicious()
-        {
-            var stubRepository = new Mock<IAppointmentRepository>();
-
-            stubRepository.Setup(m => m.CheckIfUserIsMalicious(patientIdTrue)).Returns(true);
-            WebApplication.Backend.Services.AppointmentsService service =
-                new WebApplication.Backend.Services.AppointmentsService(stubRepository.Object);
-            returnValue = service.CheckIfUserIsMalicious(patientIdTrue);
-            Assert.True(returnValue);
         }
 
         public void Patient_is_not_malicious()
         {
             var stubRepository = new Mock<IAppointmentRepository>();
 
-            stubRepository.Setup(m => m.CheckIfUserIsMalicious(patientIdTrue)).Returns(false);
+            stubRepository.Setup(m => m.IsUserMalicious(patientIdTrue)).Returns(false);
             WebApplication.Backend.Services.AppointmentsService service =
                 new WebApplication.Backend.Services.AppointmentsService(stubRepository.Object);
-            returnValue = service.CheckIfUserIsMalicious(patientIdTrue);
+            returnValue = service.IsUserMalicious(patientIdTrue);
+
             Assert.False(returnValue);
         }
 
