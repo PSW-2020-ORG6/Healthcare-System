@@ -64,6 +64,14 @@ namespace HealthClinicBackend.Backend.Model.Schedule
             TimeInterval = timeInterval;
             ProcedureType = procedureType;
         }
+        
+        public Appointment(string serialNumber, string physicianSerialNumber,
+            string patientSerialNumber, TimeInterval timeInterval) : base(serialNumber)
+        {
+            PhysicianSerialNumber = physicianSerialNumber;
+            PatientSerialNumber = patientSerialNumber;
+            TimeInterval = timeInterval;
+        }
 
         public Appointment(String serialNumber, Room room, Physician physician, Patient patient,
             TimeInterval timeInterval, bool active, ProcedureType procedureType) : base(serialNumber)

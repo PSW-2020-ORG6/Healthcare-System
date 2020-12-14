@@ -21,6 +21,12 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
             //path = @"./../../../../project-generated-code-backend/data/appointments.txt";
             path = @"./../../data/appointments.txt";
         }
+
+        public Appointment GetBySerialNumber(string serialNumber)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Appointment> GetAppointmentsByDate(DateTime date)
         {
             List<Appointment> appointmentsByDate = new List<Appointment>();

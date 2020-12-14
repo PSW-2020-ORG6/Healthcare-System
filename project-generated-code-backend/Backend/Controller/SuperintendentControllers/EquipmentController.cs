@@ -1,20 +1,26 @@
-// File:    EquipmentControler.cs
-// Author:  Luka Doric
-// Created: Sunday, June 7, 2020 4:19:02 PM
-// Purpose: Definition of Class EquipmentControler
-
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Service.HospitalResourcesService;
-using System;
 using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 {
     public class EquipmentController
     {
-        public Equipment GetById()
+        public EquipmentService equipmentService;
+
+        public EquipmentController()
         {
-            throw new NotImplementedException();
+            equipmentService = new EquipmentService();
+        }
+
+        public Equipment GetById(string id)
+        {
+            return equipmentService.GetById(id);
+        }
+
+        public List<Equipment> GetByName(string name)
+        {
+            return equipmentService.GetByName(name);
         }
 
         public List<Equipment> GetAll()
@@ -24,7 +30,7 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 
         public void EditEquipment(Equipment equipment)
         {
-            throw new NotImplementedException();
+            equipmentService.EditEquipment(equipment);
         }
 
         public void NewEquipment(Equipment equipment)
@@ -34,15 +40,7 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 
         public void DeleteEquipment(Equipment equipment)
         {
-            throw new NotImplementedException();
+            equipmentService.DeleteEquipment(equipment);
         }
-
-        public EquipmentService equipmentService;
-
-        public EquipmentController()
-        {
-            equipmentService = new EquipmentService();
-        }
-
     }
 }

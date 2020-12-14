@@ -55,6 +55,18 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             MedicineType = medicineType;
         }
 
+        public Medicine(string serialNumber, string copyrightName, string genericName, bool isApproved,
+          string medicineManufacturerSerialNumber, string medicineTypeSerialNumber, string roomSerialNumber)
+           : base(serialNumber)
+        {
+            CopyrightName = copyrightName;
+            GenericName = genericName;
+            IsApproved = isApproved;
+            MedicineManufacturerSerialNumber = medicineManufacturerSerialNumber;
+            MedicineTypeSerialNumber = medicineTypeSerialNumber;
+            RoomSerialNumber = roomSerialNumber;
+        }
+
         public override bool Equals(object obj)
         {
             return obj is Medicine other && this.CopyrightName.Equals(other.CopyrightName);

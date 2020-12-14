@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace HealthClinicBackend.Backend.Service.MedicineService
 {
-    class PhysicianMedicineService
+    public class PhysicianMedicineService
     {
         private readonly IMedicineRepository _medicineRepository;
         private readonly IRejectionRepository _rejectionRepository;
@@ -16,6 +16,21 @@ namespace HealthClinicBackend.Backend.Service.MedicineService
         {
             _medicineRepository = new MedicineDatabaseSql();
             _rejectionRepository = new RejectionFileSystem();
+        }
+
+        public PhysicianMedicineService(IMedicineRepository medicineRepository)
+        {
+            this._medicineRepository = medicineRepository;
+        }
+
+        public List<Medicine> GetAll()
+        {
+            return _medicineRepository.GetAll();
+        }
+
+        public List<Medicine> GetByName(string name)
+        {
+            return _medicineRepository.GetByName(name);
         }
 
         public List<Medicine> GetAllFromWaitingList()

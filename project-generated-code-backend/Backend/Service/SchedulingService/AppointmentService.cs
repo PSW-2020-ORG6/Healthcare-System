@@ -1,8 +1,3 @@
-// File:    AppointmentService.cs
-// Author:  Luka Doric
-// Created: Sunday, June 7, 2020 4:19:02 PM
-// Purpose: Definition of Class AppointmentService
-
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
@@ -19,6 +14,26 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         public AppointmentService()
         {
             _appointmentRepository = new AppointmentDatabaseSql();
+        }
+
+        public AppointmentService(IAppointmentRepository appointmentRepository)
+        {
+            _appointmentRepository = appointmentRepository;
+        }
+
+        public Appointment GetById(string id)
+        {
+            return _appointmentRepository.GetById(id);
+        }
+
+        public List<Appointment> GetByPhysicianSerialNumber(string physicianSerialNumber)
+        {
+            return _appointmentRepository.GetByPhysicianSerialNumber(physicianSerialNumber);
+        }
+
+        public List<Appointment> GetAll()
+        {
+            return _appointmentRepository.GetAll();
         }
 
         public void EditAppointment(Appointment appointment)

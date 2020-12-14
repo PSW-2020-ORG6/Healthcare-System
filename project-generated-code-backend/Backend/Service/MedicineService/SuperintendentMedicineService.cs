@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Service.MedicineService
 {
-    class SuperintendentMedicineService
+    public class SuperintendentMedicineService
     {
         private readonly IMedicineRepository _medicineRepository;
         private readonly IRejectionRepository _rejectionRepository;
@@ -15,6 +15,21 @@ namespace HealthClinicBackend.Backend.Service.MedicineService
         {
             _rejectionRepository = new RejectionDatabaseSql();
             _medicineRepository = new MedicineDatabaseSql();
+        }
+
+        public SuperintendentMedicineService(IMedicineRepository medicineRepository)
+        {
+            this._medicineRepository = medicineRepository;
+        }
+
+        public List<Medicine> GetAll()
+        {
+            return _medicineRepository.GetAll();
+        }
+
+        public List<Medicine> GetByName(string name)
+        {
+            return _medicineRepository.GetByName(name);
         }
 
         public List<Medicine> GetAllApproved()
