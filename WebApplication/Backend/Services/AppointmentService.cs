@@ -19,6 +19,7 @@ namespace WebApplication.Backend.Services
         private PhysicianDTO physitianDTO = new PhysicianDTO();
         private TimeIntervalDTO timeIntervalDTO = new TimeIntervalDTO();
         private SpecializationDTO specializationDTO = new SpecializationDTO();
+        private AppointmentDTO appointmentDTO = new AppointmentDTO();
         private AppointmentWithRecommendationDTO appointmentWithRecommendationDTO = new AppointmentWithRecommendationDTO();
         private DateFromStringConverter dateTimeDTO = new DateFromStringConverter();
   
@@ -38,26 +39,6 @@ namespace WebApplication.Backend.Services
         {
             this.appointmentRepository = appointmentRepository;
             this.timeIntervalRepository = timeIntervalRepository;
-        }
-
-        public List<Appointment> GetAllAppointmentsByPatientId(string patientId)
-        {
-            return appointmentRepository.GetAllAppointmentByPatientId(patientId);
-        }
-
-        public List<Appointment> GetAllAppointments()
-        {
-            return appointmentRepository.GetAllAppointments();
-        }
-
-        internal List<Appointment> GetAllAppointmentsByPatientIdActive(string patientId)
-        {
-            return appointmentRepository.GetAllAppointmentsByPatientIdActive(patientId);
-        }
-
-        internal List<Appointment> GetAllAppointmentsByPatientIdCanceled(string patientId)
-        {
-            return appointmentRepository.GetAllAppointmentsByPatientIdCanceled(patientId);
         }
         public List<PhysicianDTO> GetAllPhysicians()
         {
@@ -179,6 +160,51 @@ namespace WebApplication.Backend.Services
         public bool AddAppointment(Appointment appointment)
         {
             return appointmentRepository.AddAppointment(appointment);
+        }
+        public List<AppointmentDTO> GetAllAppointmentsByPatientId(string patientId)
+        {
+            return appointmentDTO.ConvertListToAppointmentDTO(appointmentRepository.GetAllAppointmentByPatientId(patientId));
+        }
+
+        public List<AppointmentDTO> GetAllAppointments()
+        {
+            return appointmentDTO.ConvertListToAppointmentDTO(appointmentRepository.GetAllAppointments());
+        }
+
+        internal List<AppointmentDTO> GetAllAppointmentsByPatientIdActive(string patientId)
+        {
+            return appointmentDTO.ConvertListToAppointmentDTO(appointmentRepository.GetAllAppointmentsByPatientIdActive(patientId));
+        }
+
+        internal List<AppointmentDTO> GetAllAppointmentsByPatientIdCanceled(string patientId)
+        {
+            return appointmentDTO.ConvertListToAppointmentDTO(appointmentRepository.GetAllAppointmentsByPatientIdCanceled(patientId));
+        }
+
+        public List<AppointmentDTO> GetAllAppointmentsByPatientIdPast(string patientId)
+        {
+            return appointmentDTO.ConvertListToAppointmentDTO(appointmentRepository.GetAllAppointmentsByPatientIdPast(patientId));
+        }
+
+        internal bool isSurveyDoneByPatientIdAppointmentDatePhysicianName(string patientId, string appointmentDate, string physicianName)
+        {
+            return appointmentRepository.IsSurveyDoneByPatientIdAppointmentDatePhysicianName(patientId, appointmentDate, physicianName);
+        }
+
+        internal void setSurveyDoneOnAppointment(string patientId, string appointmentDate, string physicianName)
+        {
+            appointmentRepository.SetSurveyDoneOnAppointment(patientId, appointmentDate, physicianName);
+        }
+
+        internal List<AppointmentDTO> GetAllAppointmentsWithoutDoneSurvey()
+        {
+            return appointmentDTO.ConvertListToAppointmentDTO(appointmentRepository.GetAllAppointmentsWithoutSurvey());
+
+        }
+
+        public List<Appointment> GetAllAppointmentsWithDoneSurvey()
+        {
+            return appointmentRepository.GetAllAppointmentsWithSurvey();
         }
 
         public bool IsUserMalicious(string patientId)

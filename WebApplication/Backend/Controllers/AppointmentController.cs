@@ -26,7 +26,7 @@ namespace WebApplication.Backend.Controllers
         public List<AppointmentDTO> GellAllAppointmentsByPatientId(String patientId)
         {
 
-            return appointmentsService.GetAllAppointmentsByPatientId(patientId);
+            return appointmentService.GetAllAppointmentsByPatientId(patientId);
         }
 
         [HttpGet("physicians")]
@@ -48,7 +48,7 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("allAppointmentsByPatientIdActive")]
         public List<AppointmentDTO> GellAllAppointmentsByPatientIdActive(String patientId)
         {
-            return appointmentsService.GetAllAppointmentsByPatientIdActive(patientId);
+            return appointmentService.GetAllAppointmentsByPatientIdActive(patientId);
         }
 
         [HttpGet("allAppointmentsByPatientIdCanceled")]
@@ -83,7 +83,7 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("allAppointmentsByPatientIdPast")]
         public List<AppointmentDTO> GellAllAppointmentsByPatientIdPast(String patientId)
         {
-            return appointmentsService.GetAllAppointmentsByPatientIdPast(patientId);
+            return appointmentService.GetAllAppointmentsByPatientIdPast(patientId);
         }
 
 
@@ -91,25 +91,25 @@ namespace WebApplication.Backend.Controllers
         public List<AppointmentDTO> GetAllAppointmentsWithDoneSurvey()
         {
             AppointmentDTO appointment = new AppointmentDTO();
-            return appointment.ConvertListToAppointmentDTO(appointmentsService.GetAllAppointmentsWithDoneSurvey());
+            return appointment.ConvertListToAppointmentDTO(appointmentService.GetAllAppointmentsWithDoneSurvey());
         }
 
         [HttpGet("allAppointmentsWithoutSurvey")]
         public List<AppointmentDTO> allAppointmentsWithoutSurvey()
         {
-            return appointmentsService.GetAllAppointmentsWithoutDoneSurvey();
+            return appointmentService.GetAllAppointmentsWithoutDoneSurvey();
         }
 
         [HttpGet("isSurveyDoneByPatientIdAppointmentDatePhysicianName")]
         public bool isSurveyDoneByPatientIdAppointmentDatePhysicianName([FromQuery] String patientId, [FromQuery] String appointmentDate, [FromQuery] String physicianName)
         {
-            return appointmentsService.isSurveyDoneByPatientIdAppointmentDatePhysicianName(patientId, appointmentDate, physicianName);
+            return appointmentService.isSurveyDoneByPatientIdAppointmentDatePhysicianName(patientId, appointmentDate, physicianName);
         }
 
         [HttpPut("setSurveyDoneOnAppointment")]
         public void setSurveyDoneOnAppointment(AppointmentDTO appointmentDto)
         {
-            appointmentsService.setSurveyDoneOnAppointment("0002", appointmentDto.Date.ToString(), appointmentDto.PhysicianDTO.FullName);
+            appointmentService.setSurveyDoneOnAppointment("0002", appointmentDto.Date.ToString(), appointmentDto.PhysicianDTO.FullName);
         }
 
         [HttpGet("appointmentsWithReccomendation")]

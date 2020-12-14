@@ -13,7 +13,7 @@ namespace WebApplication.Backend.Repositorys
 
         public SpecializationRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=baza;user=root;password=root");
         }
 
         private List<Specialization> GetSpecializations(String query)
@@ -87,18 +87,7 @@ namespace WebApplication.Backend.Repositorys
                 return null;
             }
         }
-        public List<Specialization> GetSpecializationsByPhysicianSerialNumber(string serialNumber)
-        {
-            try
-            {
-                return GetSpecializations("Select * from specialization where PhysicianSerialNumber like '" + serialNumber + "'");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
-        }
+       
         public List<Specialization> GetSpecializationByName(string name)
         {
             try

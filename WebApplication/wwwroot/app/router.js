@@ -48,7 +48,6 @@ var temp = new Vue({
 		},
 		appointments: function () {
 			router.push("appointments")
-		}
 		},
 		appointment: function () {
 			router.push("appointment")
