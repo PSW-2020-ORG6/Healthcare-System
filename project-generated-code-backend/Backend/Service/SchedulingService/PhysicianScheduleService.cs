@@ -20,6 +20,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         private readonly Physician _loggedPhysician;
         private readonly IAppointmentRepository _appointmentRepository;
 
+
         public PhysicianScheduleService(Physician loggedPhysician)
         {
             _loggedPhysician = loggedPhysician;
@@ -78,5 +79,6 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             appointments.Sort((a, b) => a.CompareTo(b));
             return appointments;
         }
+
     }
 }

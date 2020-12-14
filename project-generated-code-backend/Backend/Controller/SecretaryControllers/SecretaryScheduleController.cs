@@ -49,6 +49,12 @@ namespace HealthClinicBackend.Backend.Controller.SecretaryControllers
             return _appointmentSchedulingService.GetAvailableAppointments(appointmentDto);
         }
 
+
+        public List<AppointmentDto> MakeAppointment(AppointmentDto appointmentDto, int priority)
+        {
+            return _appointmentSchedulingService.MakeAppointment(appointmentDto, priority);
+        }
+
         public AppointmentDto GetRecommendedAppointment(AppointmentDto appointmentDto)
         {
             throw new NotImplementedException();

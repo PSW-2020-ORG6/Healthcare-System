@@ -4,9 +4,12 @@
 // Purpose: Definition of Class AppointmentSchedulingService
 
 using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Schedule;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions;
 using HealthClinicBackend.Backend.Service.SchedulingService.PriorityStrategies;
 using HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies;
+using Model.Accounts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +18,8 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
 {
     public class AppointmentSchedulingService
     {
+        private readonly AppointmentDatabaseSql _appointmentDatabaseSql;
+        private readonly PhysicianDatabaseSql _physicianDatabaseSql;
         private readonly SchedulingStrategy _schedulingStrategyContext;
         private readonly AppointmentGeneralitiesManager _appointmentGeneralitiesManager;
 
@@ -77,6 +82,33 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
                     if (suggestedAppointmentDtos.Count != 0)
                     {
                         return suggestedAppointmentDtos[0];
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public List<AppointmentDto> MakeAppointment(AppointmentDto appointmentDto, int priority)
+        {
+            List<AppointmentDto> appointments = GetAvailableAppointments(appointmentDto);
+            if (appointments == null || appointments.Count != 0)
+            {
+                return appointments;
+            }
+            if (priority == 0) //prioritet je doktor
+            {
+                appointmentDto.Date.AddDays(1);
+                MakeAppointment(appointmentDto, priority);
+            }
+            else
+            {
+                foreach(Physician physician in _physicianDatabaseSql.GetAll()){
+                    appointmentDto.Physician = physician;
+                    appointments = GetAvailableAppointments(appointmentDto);
+                    if (appointments != null || appointments.Count != 0)
+                    {
+                        return appointments;
                     }
                 }
             }
