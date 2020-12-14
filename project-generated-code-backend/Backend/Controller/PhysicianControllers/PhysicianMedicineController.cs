@@ -12,6 +12,16 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
             this._physicianMedicineService = new PhysicianMedicineService();
         }
 
+        public List<Medicine> GetAll()
+        {
+            return _physicianMedicineService.GetAll();
+        }
+
+        public List<Medicine> GetByName(string name)
+        {
+            return _physicianMedicineService.GetByName(name);
+        }
+
         public List<MedicineManufacturer> GetMedicineManufacturers()
         {
             return _physicianMedicineService.GetMedicineManufacturers();

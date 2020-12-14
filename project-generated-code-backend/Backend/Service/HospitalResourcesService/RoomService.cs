@@ -1,8 +1,3 @@
-// File:    RoomService.cs
-// Author:  Luka Doric
-// Created: Sunday, June 7, 2020 4:19:02 PM
-// Purpose: Definition of Class RoomService
-
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
@@ -23,9 +18,19 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
             _roomRepository = new RoomDatabaseSql();
         }
 
-        public Room GetById(String id)
+        public RoomService(IRoomRepository roomRepository)
         {
-            throw new NotImplementedException();
+            this._roomRepository = roomRepository;
+        }
+
+        public Room GetById(string id)
+        {
+            return _roomRepository.GetById(id);
+        }
+
+        public List<Room> GetByName(string name)
+        {
+            return _roomRepository.GetByName(name);
         }
 
         public List<Room> GetAll()

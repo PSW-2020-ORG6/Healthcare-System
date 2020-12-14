@@ -11,6 +11,17 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
         {
             superintendentMedicineService = new SuperintendentMedicineService();
         }
+
+        public List<Medicine> GetAll()
+        {
+            return superintendentMedicineService.GetAll();
+        }
+
+        public List<Medicine> GetByName(string name)
+        {
+            return superintendentMedicineService.GetByName(name);
+        }
+
         public List<Medicine> GetAllApproved()
         {
             return superintendentMedicineService.GetAllApproved();

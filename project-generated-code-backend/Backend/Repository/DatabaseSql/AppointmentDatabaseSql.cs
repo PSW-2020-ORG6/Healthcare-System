@@ -42,6 +42,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             dbContext.SaveChanges();
         }
 
+        public override Appointment GetBySerialNumber(string serialNumber)
+        {
+            return GetAll().Where(t => t.SerialNumber.Equals(serialNumber)).ToList()[0];
+        }
+
         public List<Appointment> GetAppointmentsByDate(DateTime date)
         {
             return GetAll().Where(appointment => appointment.Date.Equals(date)).ToList();

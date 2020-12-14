@@ -13,5 +13,11 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public Floor() : base()
         {
         }
+
+        public Floor(string serialNumber, string name, string buildingSerialNumber) : base()
+        {
+            Name = name;
+            BuildingSerialNumber = buildingSerialNumber;
+        }
     }
 }

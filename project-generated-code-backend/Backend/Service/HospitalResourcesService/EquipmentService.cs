@@ -1,12 +1,6 @@
-// File:    EquipmentService.cs
-// Author:  Luka Doric
-// Created: Sunday, June 7, 2020 4:19:02 PM
-// Purpose: Definition of Class EquipmentService
-
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
-using System;
 using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
@@ -20,9 +14,19 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
             _equipmentRepository = new EquipmentDatabaseSql();
         }
 
-        public Equipment GetById()
+        public EquipmentService(IEquipmentRepository equipmentRepository)
         {
-            throw new NotImplementedException();
+            _equipmentRepository = equipmentRepository;
+        }
+
+        public Equipment GetById(string id)
+        {
+            return _equipmentRepository.GetById(id);
+        }
+
+        public List<Equipment> GetByName(string name)
+        {
+            return _equipmentRepository.GetByName(name);
         }
 
         public List<Equipment> GetAll()
@@ -32,7 +36,7 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 
         public void EditEquipment(Equipment equipment)
         {
-            throw new NotImplementedException();
+            _equipmentRepository.Update(equipment);
         }
 
         public void NewEquipment(Equipment equipment)
@@ -42,7 +46,7 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 
         public void DeleteEquipment(Equipment equipment)
         {
-            throw new NotImplementedException();
+            _equipmentRepository.Delete(equipment.SerialNumber);
         }
     }
 }

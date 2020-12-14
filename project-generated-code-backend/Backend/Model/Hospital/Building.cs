@@ -21,5 +21,11 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             Name = _name;
             Color = _color;
         }
+
+        public Building(string _serialNumber, string _name, string _color) : base(_serialNumber)
+        {
+            Name = _name;
+            Color = _color;
+        }
     }
 }
