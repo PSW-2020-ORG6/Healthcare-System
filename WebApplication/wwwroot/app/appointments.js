@@ -187,6 +187,14 @@
 				.put("http://localhost:49900/appointment/cancelAppointment", appointment)
 				.then(response => {
 					axios
+						.put('http://localhost:49900/appointment/IsUserMalicious', appointment)
+						.then(response => {							
+						})
+						.catch(error => {
+							alert("greska kod malicious check")
+
+						})
+					axios
 						.get('http://localhost:49900/appointment/allAppointmentsByPatientIdActive', { params: { patientId: "0002" } })
 						.then(response => {
 							this.activeAppointments = response.data
