@@ -42,7 +42,6 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             List<Appointment> appointments = _appointmentRepository.GetAppointmentsByPhysician(_loggedPhysician);
             return appointments.FirstOrDefault(appointment =>
                 appointment.Date.Equals(DateTime.Today) && appointment.Patient.Equals(patient));
-            return null;
         }
 
         public Appointment GetPreviousAppointmentForPatient(Patient patient)

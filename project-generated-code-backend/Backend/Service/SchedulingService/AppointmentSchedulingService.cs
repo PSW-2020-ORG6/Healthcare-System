@@ -4,6 +4,7 @@
 // Purpose: Definition of Class AppointmentSchedulingService
 
 using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Repository.Generic;
 using HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions;
 using HealthClinicBackend.Backend.Service.SchedulingService.PriorityStrategies;
@@ -19,6 +20,8 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         public SchedulingStrategy SchedulingStrategyContext;
         private readonly AppointmentGeneralitiesManager _appointmentGeneralitiesManager;
 
+        private IPhysicianRepository _physicianRepository;
+
         public AppointmentSchedulingService(IPhysicianRepository physicianRepository,
             IRoomRepository roomRepository,
             IAppointmentRepository appointmentRepository,
@@ -28,6 +31,8 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             SchedulingStrategyContext = new PatientSchedulingStrategy();
             _appointmentGeneralitiesManager = new AppointmentGeneralitiesManager(physicianRepository, roomRepository,
                 appointmentRepository, renovationRepository, bedReservationRepository);
+
+            _physicianRepository = physicianRepository;
         }
 
         public List<AppointmentDto> GetAvailableAppointments(AppointmentDto appointmentPreferences)
@@ -87,6 +92,33 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
                     if (suggestedAppointmentDtos.Count != 0)
                     {
                         return suggestedAppointmentDtos[0];
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public List<AppointmentDto> MakeAppointment(AppointmentDto appointmentDto, int priority)
+        {
+            List<AppointmentDto> appointments = GetAvailableAppointments(appointmentDto);
+            if (appointments == null || appointments.Count != 0)
+            {
+                return appointments;
+            }
+            if (priority == 0) //prioritet je doktor
+            {
+                appointmentDto.Date.AddDays(1);
+                MakeAppointment(appointmentDto, priority);
+            }
+            else
+            {
+                foreach(Physician physician in _physicianRepository.GetAll()){
+                    appointmentDto.Physician = physician;
+                    appointments = GetAvailableAppointments(appointmentDto);
+                    if (appointments != null || appointments.Count != 0)
+                    {
+                        return appointments;
                     }
                 }
             }
