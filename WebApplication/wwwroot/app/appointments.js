@@ -9,6 +9,7 @@
 			doctorsList: null,
 			appointment: null,
 			sucessFlag: {},
+			isMalicious: {},
 			patientDTO: {}
 		}
 	},
@@ -187,8 +188,20 @@
 				.put("http://localhost:49900/appointment/cancelAppointment", appointment)
 				.then(response => {
 					axios
-						.put('http://localhost:49900/appointment/IsUserMalicious', appointment)
-						.then(response => {							
+						.get('http://localhost:49900/appointment/IsUserMalicious', { params: { patientId: "0002" } })
+						.then(response => {
+							this.isMalicious = response.data
+							if (this.isMalicious == true) {
+								axios
+									.put('http://localhost:49900/appointment/SetUserToMalicious', appointment)
+									.then(response => {
+									})
+
+									.catch(error => {
+										alert("greska kod activeAppoiuntments")
+
+									})
+							}
 						})
 						.catch(error => {
 							alert("greska kod malicious check")
