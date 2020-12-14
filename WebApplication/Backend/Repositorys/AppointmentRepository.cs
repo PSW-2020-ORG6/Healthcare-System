@@ -200,7 +200,7 @@ namespace WebApplication.Backend.Repositorys
             }
         }
 
-        public bool IsUserMalicious(string patientId)
+        public List<DateTime> GetCancelingDates(string patientId)
         {
             String sqlDml = "Select  DateOfCanceling FROM appointment WHERE PatientSerialNumber like '" + patientId + "' AND Active = '0'";
             try
@@ -217,29 +217,16 @@ namespace WebApplication.Backend.Repositorys
                     dates.Add(new DateTime(Int32.Parse(entitySplit[2]), Int32.Parse(entitySplit[0]), Int32.Parse(entitySplit[1]), Int32.Parse(entitySplitHours[0]), Int32.Parse(entitySplitHours[1]), Int32.Parse(entitySplitHours[2])));
                 }
 
-                dates.Sort((date1, date2) => date2.CompareTo(date1));
-
-                connection.Close();
-
-                DateTime date = DateTime.Now;
-
-                if (dates.Count >= 2)
-                {
-                    System.TimeSpan difference = dates[1].Subtract(date);
-                    if (Math.Abs(difference.Days) <= 30)
-                        return true;
-                }
-
-                return false;
+                return dates;
             }
             catch (Exception e)
             {
-                return false;
+                return null;
             }
         }
 
 
-        public bool setUserToMalicious(string patientId)
+        public bool SetUserToMalicious(string patientId)
         {
             try
             {
@@ -256,7 +243,6 @@ namespace WebApplication.Backend.Repositorys
                 return false;
             }
         }
-
 
     }
 }

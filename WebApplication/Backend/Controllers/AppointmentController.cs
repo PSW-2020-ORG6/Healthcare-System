@@ -105,11 +105,16 @@ namespace WebApplication.Backend.Controllers
             return appointmentsService.CancelAppointment(appointment.SerialNumber);
         }
 
-        [HttpPut("IsUserMalicious")]
-        public bool IsUserMalicious(Appointment appointment)
+        [HttpGet("IsUserMalicious")]
+        public bool IsUserMalicious(string patientId)
         {
-            return appointmentsService.IsUserMalicious(appointment.Patient.Id);
+            return appointmentsService.IsUserMalicious(patientId);
         }
 
+        [HttpPut("SetUserToMalicious")]
+        public bool SetUserToMalicious(Appointment appointment)
+        {
+            return appointmentsService.SetUserToMalicious(appointment.Patient.Id);
+        }
     }
 }
