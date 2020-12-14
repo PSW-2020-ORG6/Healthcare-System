@@ -66,12 +66,12 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public List<Appointment> GetAppointmentsByPhysician(Physician physician)
         {
-            return GetAll().Where(appointment => appointment.Physician.Equals(physician)).ToList();
+            return GetAll().Where(appointment => appointment.PhysicianSerialNumber.Equals(physician.SerialNumber)).ToList();
         }
 
         public List<Appointment> GetAppointmentsByRoom(Room room)
         {
-            return GetAll().Where(appointment => appointment.Room.Equals(room)).ToList();
+            return GetAll().Where(appointment => appointment.RoomSerialNumber.Equals(room.SerialNumber)).ToList();
         }
 
         public List<Appointment> GetByRoomSerialNumber(string roomSerialNumber)
