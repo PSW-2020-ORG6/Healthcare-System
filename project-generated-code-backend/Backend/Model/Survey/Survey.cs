@@ -31,6 +31,7 @@ namespace HealthClinicBackend.Backend.Model.Survey
         public string Question22 { get; set; }
         public string Question21 { get; set; }
         public string Question23 { get; set; }
+        public DateTime ReportDate { get; set; }
 
 
         public Survey() : base()
@@ -43,7 +44,7 @@ namespace HealthClinicBackend.Backend.Model.Survey
             String answerQuestion11, String answerQuestion12, String answerQuestion13, String answerQuestion14,
             String answerQuestion15, String answerQuestion16, String answerQuestion17, String answerQuestion18,
             String answerQuestion19, String answerQuestion20, String answerQuestion21, String answerQuestion22,
-            String answerQuestion23)
+            String answerQuestion23, DateTime reportDate)
         {
             Id = id;
             DoctorName = doctorName;
@@ -70,6 +71,7 @@ namespace HealthClinicBackend.Backend.Model.Survey
             Question21 = answerQuestion21;
             Question22 = answerQuestion22;
             Question23 = answerQuestion23;
+            ReportDate = reportDate;
         }
     }
 }

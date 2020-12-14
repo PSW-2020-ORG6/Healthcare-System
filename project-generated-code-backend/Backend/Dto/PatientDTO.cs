@@ -4,6 +4,7 @@
 // Purpose: Definition of Class PatientDTO
 
 using System;
+using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Util;
 
 namespace HealthClinicBackend.Backend.Dto
@@ -13,6 +14,7 @@ namespace HealthClinicBackend.Backend.Dto
         public PatientDto()
         {
         }
+    
 
         public string Name { get; set; }
 

@@ -30,13 +30,18 @@ namespace WebApplication.Backend.Repositorys
                 entity.SerialNumber = (string)sqlReader[0];
                 entity.Name = (string)sqlReader[1];
                 entity.Surname = (string)sqlReader[2];
-                entity.Id = (string)sqlReader[3];
-                entity.DateOfBirth = (DateTime)sqlReader[4];
-                entity.Contact = (string)sqlReader[5];
-                entity.Email = (string)sqlReader[6];
-                entity.Password = (string)sqlReader[7];
+                entity.FullName = (string)sqlReader[3];
+                entity.Id = (string)sqlReader[4];
+                entity.DateOfBirth = (DateTime)sqlReader[5];
+                entity.Contact = (string)sqlReader[6];
+                entity.Email = (string)sqlReader[7];
+                entity.Address = addressRepository.GetAddressBySerialNumber((string)sqlReader[9]);
+                entity.Password = (string)sqlReader[8];
                 entity.Specialization = specializationRepository.GetSpecializationsByPhysicianSerialNumber((string)sqlReader[0]);
-                entity.WorkSchedule = timeIntervalRepository.GetTimeIntervalById((string)sqlReader[9]);
+                //entity.VacationTime = timeIntervalRepository.GetTimeIntervalsById((string)sqlReader[10]);
+                // entity.WorkSchedule = timeIntervalRepository.GetTimeIntervalById((string)sqlReader[11]);
+                // entity.AllSpecializations = specializationRepository.GetSpecializationsNameBySerialNumber((string)sqlReader[12]);
+                entity.AddressSerialNumber = (string)sqlReader[9];
                 resultList.Add(entity);
             }
             connection.Close();
@@ -71,7 +76,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetPhysicians("Select * from physician where FullName like '%" + fullName + "%'");
+                return GetPhysitians("Select * from physitian where FullName like '" + fullName + "'");
             }
             catch (Exception)
             {

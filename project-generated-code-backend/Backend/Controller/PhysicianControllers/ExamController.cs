@@ -22,9 +22,9 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 
         public ExamController(Appointment appointment)
         {
-            this._loggedPhysician = appointment.Physician;
-            this.SelectedPatient = appointment.Patient;
-            ProcedureType procedure = appointment.ProcedureType;
+            //this._loggedPhysician = appointment.Physician;
+            //this.SelectedPatient = appointment.Patient;
+            //ProcedureType procedure = appointment.ProcedureType;
 
             reportService = new ReportService();
 

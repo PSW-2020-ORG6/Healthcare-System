@@ -14,7 +14,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
 
         public PatientAvailabilityService()
         {
-            _appointmentRepository = new AppointmentDatabaseSql();
+           // _appointmentRepository = new AppointmentDatabaseSql();
         }
 
         public bool IsPatientAvailable(Patient patient, TimeInterval timeInterval)
@@ -26,10 +26,10 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
             List<Appointment> appointments = _appointmentRepository.GetAppointmentsByPatient(patient);
             foreach (Appointment appointment in appointments)
             {
-                if (timeInterval.IsOverLapping(appointment.TimeInterval))
-                {
-                    return true;
-                }
+                //if (timeInterval.IsOverLapping(appointment.TimeInterval))
+                //{
+                //    return true;
+                //}
             }
             return false;
         }

@@ -17,7 +17,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         public PatientScheduleService(Patient loggedPatient)
         {
             _loggedPatient = loggedPatient;
-            _appointmentRepository = new AppointmentDatabaseSql();
+          //  _appointmentRepository = new AppointmentDatabaseSql();
         }
 
         public List<Appointment> GetAppointmentsByDate(DateTime date)

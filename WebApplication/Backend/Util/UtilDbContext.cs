@@ -479,7 +479,7 @@ namespace WebApplication.Backend.Model
             modelBuilder.Entity<Physician>().Ignore(o => o.Specialization);
             modelBuilder.Entity<Physician>().Ignore(o => o.VacationTime);
             modelBuilder.Entity<Physician>().Ignore(o => o.WorkSchedule);
-            modelBuilder.Entity<Physician>().Ignore(o => o.AllSpecializations);
+           // modelBuilder.Entity<Physician>().Ignore(o => o.AllSpecializations);
             modelBuilder.Entity<Physician>().HasData(
                 new Physician
                 {
@@ -499,11 +499,11 @@ namespace WebApplication.Backend.Model
         private static void AppointmentCreation(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Appointment>().HasKey(o => o.SerialNumber);
-            modelBuilder.Entity<Appointment>().Ignore(o => o.Room);
-            modelBuilder.Entity<Appointment>().Ignore(o => o.Patient);
-            modelBuilder.Entity<Appointment>().Ignore(o => o.TimeInterval);
-            modelBuilder.Entity<Appointment>().Ignore(o => o.ProcedureType);
-            modelBuilder.Entity<Appointment>().Ignore(o => o.Physician);
+            //modelBuilder.Entity<Appointment>().Ignore(o => o.Room);
+            //modelBuilder.Entity<Appointment>().Ignore(o => o.Patient);
+            //modelBuilder.Entity<Appointment>().Ignore(o => o.TimeInterval);
+            //modelBuilder.Entity<Appointment>().Ignore(o => o.ProcedureType);
+            //modelBuilder.Entity<Appointment>().Ignore(o => o.Physician);
             modelBuilder.Entity<Appointment>().Ignore(o => o.Date);
             modelBuilder.Entity<Appointment>().HasData(
                 new Appointment {SerialNumber = "200001", Urgency = true},

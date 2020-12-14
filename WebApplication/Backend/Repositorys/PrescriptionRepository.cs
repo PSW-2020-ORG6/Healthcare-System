@@ -13,8 +13,9 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
+                connection = new MySqlConnection("server=localhost;port=3306;database=baza;user=root;password=root");
             }
+
             catch (Exception e)
             {
             }
