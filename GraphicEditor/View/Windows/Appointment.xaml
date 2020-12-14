@@ -22,7 +22,7 @@
                 <TextBox x:Name="PhysicianTextBox"  Width="200" Margin="22" HorizontalAlignment="Left"></TextBox>
                 <Button Click="FilterPhysician" HorizontalAlignment="Right" Margin="22">Search</Button>
             </Grid>
-            <ListBox Height="150" SelectionChanged="MyListBox_SelectionChanged" x:Name="MyListBox" ItemsSource="{Binding Physicians}">
+            <ListBox Height="290" SelectionChanged="MyListBox_SelectionChanged" x:Name="MyListBox" ItemsSource="{Binding Physicians}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -37,26 +37,11 @@
                 <TextBox x:Name="PatientTextBox"  Width="200" Margin="22" HorizontalAlignment="Left"></TextBox>
                 <Button Click="FilterPatient" HorizontalAlignment="Right" Margin="22">Search</Button>
             </Grid>
-            <ListBox Height="150" SelectionChanged="PatientsSelectionChanged" x:Name="MyListBoxPatient" ItemsSource="{Binding Patients}">
+            <ListBox Height="250" SelectionChanged="PatientsSelectionChanged" x:Name="MyListBoxPatient" ItemsSource="{Binding Patients}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
                             <TextBlock Text="{Binding Path=FullName}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            <!--rooms -->
-            <Grid>
-                <TextBlock HorizontalAlignment="Center" FontSize="20">Search rooms</TextBlock>
-                <TextBox x:Name="RoomTextBox"  Width="200" Margin="22" HorizontalAlignment="Left"></TextBox>
-                <Button Click="FilterRooms" HorizontalAlignment="Right" Margin="22">Search</Button>
-            </Grid>
-            <ListBox Height="150" SelectionChanged="RoomSelectionChanged" x:Name="MyListBoxRoom" ItemsSource="{Binding Rooms}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Path=Name}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -72,7 +57,7 @@
                 <ComboBox Margin="0 20 10 0" Width="80" x:Name="ComboBox" ItemsSource="{Binding MyTime}"/>
             </Grid>
             <Grid>
-                  <TextBlock Margin="60 20 0 0" FontSize="20">Time to:</TextBlock>
+                <TextBlock Margin="60 20 0 0" FontSize="20">Time to:</TextBlock>
                 <ComboBox Margin="0 20 10 0" Width="80" x:Name="ComboBox2" ItemsSource="{Binding MyTime}"/>
             </Grid>
         </StackPanel>

@@ -1,4 +1,5 @@
-﻿using HealthClinicBackend.Backend.Controller.SecretaryControllers;
+﻿using GraphicEditor.View.Windows;
+using HealthClinicBackend.Backend.Controller.SecretaryControllers;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
@@ -151,19 +152,19 @@ namespace GraphicEditor.View.UserControls
             appointmentDto.ProcedureType = new ProcedureType();
             appointmentDto.Patient = selectedPatient;
             appointmentDto.Active = true;
-            appointmentDto.Room = selectedRoom;
+            //appointmentDto.Room = selectedRoom;
             appointmentDto.Date = new DateTime(dateTime.Value.Year, dateTime.Value.Month, dateTime.Value.Day);
             if (appointmentDto.Patient == null || appointmentDto.Physician == null)
             {
                 MessageBox.Show("You did not select patient or physician");
                 return;
             }
-            if (appointmentDto.Room == null)
-            {
-                MessageBox.Show("You did not select room");
-                return;
-            }
-            ProcedureType procType = new ProcedureType("Procedura", 40, new Specialization("Family doctor"));
+            //if (appointmentDto.Room == null)
+            //{
+            //    MessageBox.Show("You did not select room");
+            //    return;
+            //}
+            ProcedureType procType = new ProcedureType("Procedura", 30, new Specialization("Family doctor"));
             appointmentDto.ProcedureType = procType;
             List<AppointmentDto> appointmentDtos1 = secretaryScheduleController.GetAllAvailableAppointments(appointmentDto);
             List<AppointmentDto> result = new List<AppointmentDto>();
@@ -171,10 +172,13 @@ namespace GraphicEditor.View.UserControls
             {
                 if(ap.Time.Start >= appointmentDto.Time.Start && ap.Time.End <= appointmentDto.Time.End)
                 {
+                    ap.Date= new DateTime(dateTime.Value.Year, dateTime.Value.Month, dateTime.Value.Day);
                     result.Add(ap);
                 }
             }
             int a = 5;
+            AppointmentList win = new AppointmentList(result);
+            win.Show();
             /*List<AppointmentDto> appointmentDtos= secretaryScheduleController.MakeAppointment(appointmentDto,0);*/
             //secretaryScheduleController.GetAllAvailableAppointments(appointmentDto);//call makeAppointment not getAllApp
         }
@@ -199,24 +203,24 @@ namespace GraphicEditor.View.UserControls
             MyListBoxPatient.Items.Refresh();
         }
 
-        private void FilterRooms(object sender, RoutedEventArgs e)
-        {
-            Rooms.Clear();
-            foreach (Room r in roomDatabaseSql.GetAll())
-            {
-                if (r.Name.ToLower().Contains(RoomTextBox.Text.ToLower()))
-                {
-                    Rooms.Add(r);
-                    OnPropertyChanged();
-                }
-            }
-            MyListBoxRoom.Items.Refresh();
-        }
+        //private void FilterRooms(object sender, RoutedEventArgs e)
+        //{
+        //    Rooms.Clear();
+        //    foreach (Room r in roomDatabaseSql.GetAll())
+        //    {
+        //        if (r.Name.ToLower().Contains(RoomTextBox.Text.ToLower()))
+        //        {
+        //            Rooms.Add(r);
+        //            OnPropertyChanged();
+        //        }
+        //    }
+        //    MyListBoxRoom.Items.Refresh();
+        //}
 
-        private void RoomSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            int index = MyListBoxRoom.SelectedIndex;
-            selectedRoom = Rooms[index];
-        }
+        //private void RoomSelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    int index = MyListBoxRoom.SelectedIndex;
+        //    selectedRoom = Rooms[index];
+        //}
     }
 }
