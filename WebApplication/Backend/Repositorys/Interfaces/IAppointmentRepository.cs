@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Schedule;
 
@@ -15,7 +16,7 @@ namespace WebApplication.Backend.Repositorys.Interfaces
         List<Appointment> GetAllAppointmentsByPatientIdActive(string patientId);
         List<Appointment> GetAllAppointmentsByPatientIdCanceled(string patientId);
         bool CancelAppointment(string appointmentSerialNumber);
-        bool IsUserMalicious(string id);
-        bool setUserToMalicious(string id);
+        List<DateTime> GetCancelingDates(string id);
+        bool SetUserToMalicious(string id);
     }
 }

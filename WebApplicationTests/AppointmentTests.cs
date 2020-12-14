@@ -21,8 +21,14 @@ namespace WebApplicationTests
         String appointmentSerialFalse = "0408";
 
         List<Appointment> appointments = new List<Appointment>();
+        
 
         bool returnValue;
+        private List<DateTime> dates = new List<DateTime>() {
+            new DateTime(2020,12,1,10,45,49),
+            new DateTime(2020,12,11,10,45,49),
+            new DateTime(2020,12,9,10,45,49)
+        };
 
         private Appointment appointment = new Appointment()
         {
@@ -150,18 +156,31 @@ namespace WebApplicationTests
             Assert.False(returnValue);
         }
 
-        public void Patient_is_not_malicious()
+        [Fact]
+        public void User_is_malicious()
         {
             var stubRepository = new Mock<IAppointmentRepository>();
 
-            stubRepository.Setup(m => m.IsUserMalicious(patientIdTrue)).Returns(false);
+            stubRepository.Setup(m => m.GetCancelingDates("0002")).Returns(dates);       
             WebApplication.Backend.Services.AppointmentsService service =
                 new WebApplication.Backend.Services.AppointmentsService(stubRepository.Object);
-            returnValue = service.IsUserMalicious(patientIdTrue);
+            returnValue = service.IsUserMalicious("0002");
+
+            Assert.True(returnValue);
+        }
+
+        [Fact]
+        public void User_is_not_malicious()
+        {
+            var stubRepository = new Mock<IAppointmentRepository>();
+
+            stubRepository.Setup(m => m.GetCancelingDates(patientIdFalse)).Returns(new List<DateTime>());
+            WebApplication.Backend.Services.AppointmentsService service =
+                new WebApplication.Backend.Services.AppointmentsService(stubRepository.Object);
+            returnValue = service.IsUserMalicious(patientIdFalse);
 
             Assert.False(returnValue);
         }
-
 
     }
 }

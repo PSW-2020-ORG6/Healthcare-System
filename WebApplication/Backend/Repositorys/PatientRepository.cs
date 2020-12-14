@@ -165,7 +165,6 @@ namespace WebApplication.Backend.Repositorys
             return GetPatients("Select * from patient where IsMalicious = '1' and IsBlocked = '0' ");
         }
 
-
         public bool BlockMaliciousPatient(string patientId)
         {
             try
@@ -183,7 +182,6 @@ namespace WebApplication.Backend.Repositorys
                 return false;
             }
         }
-
 
     }
 }
