@@ -102,19 +102,19 @@ namespace WebApplication.Backend.Controllers
         [HttpPut("cancelAppointment")]
         public bool CancelAppointment(AppointmentDto appointment)
         {
-            return appointmentsService.CancelAppointment(appointment.SerialNumber);
+            return appointmentService.CancelAppointment(appointment.SerialNumber);
         }
 
         [HttpGet("IsUserMalicious")]
         public bool IsUserMalicious(string patientId)
         {
-            return appointmentsService.IsUserMalicious(patientId);
+            return appointmentService.IsUserMalicious(patientId);
         }
 
         [HttpPut("SetUserToMalicious")]
         public bool SetUserToMalicious(Appointment appointment)
         {
-            return appointmentsService.SetUserToMalicious(appointment.Patient.Id);
+            return appointmentService.SetUserToMalicious(appointment.Patient.Id);
         }
     }
 }
