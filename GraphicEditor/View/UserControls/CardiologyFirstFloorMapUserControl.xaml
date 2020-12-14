@@ -69,7 +69,7 @@
                    Source="/GraphicEditor;component/Resources/Images/floor.jpg"  />
 
             <!--Room1 button-->
-            <Button CommandParameter="Examination room 101"
+            <!--<Button CommandParameter="Examination room 101"
                     Command="{Binding Path=ShowRoomCommand}"
                     Grid.Column="0"
                     Grid.ColumnSpan="5"
@@ -82,10 +82,10 @@
                         Examination room 101
                     </TextBlock>
                 </StackPanel>
-            </Button>
+            </Button>-->
 
             <!--Room2 button-->
-            <Button CommandParameter="Store room 103"
+            <!--<Button CommandParameter="Store room 103"
                     Command="{Binding Path=ShowRoomCommand}"
                     Grid.Column="5"
                     Grid.ColumnSpan="3"
@@ -98,10 +98,10 @@
                         Store room 103
                     </TextBlock>
                 </StackPanel>
-            </Button>
+            </Button>-->
 
             <!--Room3 button-->
-            <Button CommandParameter="Examination room 102"
+            <!--<Button CommandParameter="Examination room 102"
                     Command="{Binding Path=ShowRoomCommand}"
                     Grid.Column="10"
                     Grid.ColumnSpan="4"
@@ -114,10 +114,10 @@
                         Examination room 102
                     </TextBlock>
                 </StackPanel>
-            </Button>
+            </Button>-->
 
             <!--Room4 button-->
-            <Button CommandParameter="Examination room 104"
+            <!--<Button CommandParameter="Examination room 104"
                     Command="{Binding Path=ShowRoomCommand}"
                     Grid.Column="14"
                     Grid.ColumnSpan="5"
@@ -130,10 +130,10 @@
                         Examination room 104
                     </TextBlock>
                 </StackPanel>
-            </Button>
+            </Button>-->
 
             <!--Room5 button-->
-            <Button CommandParameter="Store room 105"
+            <!--<Button CommandParameter="Store room 105"
                     Command="{Binding Path=ShowRoomCommand}"
                     Grid.Column="9"
                     Grid.ColumnSpan="5"
@@ -146,7 +146,7 @@
                                 Store room 105
                     </TextBlock>
                 </StackPanel>
-            </Button>
+            </Button>-->
 
             <!--Toilet-->
             <Border BorderBrush="Black"
