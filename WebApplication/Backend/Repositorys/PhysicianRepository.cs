@@ -38,9 +38,6 @@ namespace WebApplication.Backend.Repositorys
                 entity.Address = addressRepository.GetAddressBySerialNumber((string)sqlReader[9]);
                 entity.Password = (string)sqlReader[8];
                 entity.Specialization = specializationRepository.GetSpecializationsByPhysicianSerialNumber((string)sqlReader[0]);
-                //entity.VacationTime = timeIntervalRepository.GetTimeIntervalsById((string)sqlReader[10]);
-                // entity.WorkSchedule = timeIntervalRepository.GetTimeIntervalById((string)sqlReader[11]);
-                // entity.AllSpecializations = specializationRepository.GetSpecializationsNameBySerialNumber((string)sqlReader[12]);
                 entity.AddressSerialNumber = (string)sqlReader[9];
                 resultList.Add(entity);
             }

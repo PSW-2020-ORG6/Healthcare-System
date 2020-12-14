@@ -32,8 +32,6 @@ namespace WebApplication.Backend.Repositorys
                 entity.FloorSerialNumber = (string)sqlReader[3];
                 entity.BuildingSerialNumber = (string)sqlReader[4];
                 entity.RoomTypeSerialNumber = (string)sqlReader[5];
-                //entity.RoomType = roomTypeRepository.GetRoomTypeBySerialNumber((string)sqlReader[5]);
-                //entity.Equipment = equipmentRepository.GetEquipmentsByRoomSerialNumber((string)sqlReader[0]);
                 entity.Row = (int)sqlReader[6];
                 entity.Column = (int)sqlReader[7];
                 entity.RowSpan = (int)sqlReader[8];
