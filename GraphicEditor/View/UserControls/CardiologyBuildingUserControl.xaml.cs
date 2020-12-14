@@ -15,9 +15,6 @@ namespace GraphicEditor.View.UserControls
             InitializeComponent();
             this.DataContext = new CardiologyBuildingUserControlViewModel(this, vm);
            
-
-            //MapContentUserControlViewModel.CardiologyBuilding.grid = CardiologyFirstFloorMapUserControl.FloorGrid;
-            //MapContentUserControlViewModel.CardiologyBuilding.FirstFloor.InitialGridRender();
         }
 
         private void ShowRoomSearch(object sender, RoutedEventArgs e)
@@ -26,10 +23,16 @@ namespace GraphicEditor.View.UserControls
             roomSearch.Show();
         }
 
-        private void SearchEquipment(object sender, RoutedEventArgs e)
+        private void ShowEquipmentSearch(object sender, RoutedEventArgs e)
         {
             EquipmentSearch equipmentSearch = new EquipmentSearch();
             equipmentSearch.Show();
+        }
+
+        private void ShowMedicineSearch(object sender, RoutedEventArgs e)
+        {
+            MedicineSearch medicineSearch = new MedicineSearch();
+            medicineSearch.Show();
         }
     }
 }

@@ -4,13 +4,13 @@ using System.Windows;
 namespace GraphicEditor.View.Windows
 {
     /// <summary>
-    /// Interaction logic for EquipmentSearch.xaml
+    /// Interaction logic for MedicineSearch.xaml
     /// </summary>
-    public partial class EquipmentSearch : Window
+    public partial class MedicineSearch : Window
     {
-        public EquipmentSearch()
+        public MedicineSearch()
         {
-            this.DataContext = new EquipmentSearchViewModel();
+            this.DataContext = new MedicineSearchViewModel();
             InitializeComponent();
         }
     }

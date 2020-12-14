@@ -5,14 +5,15 @@ using System.Collections.Generic;
 
 namespace GraphicEditor.ViewModel
 {
-    public class RoomSearchViewModel : BindableBase
+    public class MedicineSearchViewModel : BindableBase
     {
         private RoomDatabaseSql roomRepository = new RoomDatabaseSql();
         private FloorDatabaseSql floorRepository = new FloorDatabaseSql();
         private BuildingDatabaseSql buildingRepository = new BuildingDatabaseSql();
+        private MedicineDatabaseSql medicineRepository = new MedicineDatabaseSql();
 
-        private List<Room> _resultOfSearch;
-        public List<Room> ResultOfSearch
+        private List<Medicine> _resultOfSearch;
+        public List<Medicine> ResultOfSearch
         {
             get => _resultOfSearch;
             set
@@ -40,42 +41,44 @@ namespace GraphicEditor.ViewModel
                 SetProperty(ref _queryForSearch, value);
             }
         }
-        private Room _selectedRoom;
-        public Room SelectedRoom
+        private Medicine _selectedMedicine;
+        public Medicine SelectedMedicine
         {
-            get => _selectedRoom;
+            get => _selectedMedicine;
             set
             {
-                SetProperty(ref _selectedRoom, value);
+                SetProperty(ref _selectedMedicine, value);
             }
         }
 
         public MyICommand<string> SearchCommand { get; private set; }
 
-        public MyICommand<Room> GoToCommand { get; private set; }
+        public MyICommand<Medicine> GoToCommand { get; private set; }
 
-        public RoomSearchViewModel()
+        public MedicineSearchViewModel()
         {
-            SearchCommand = new MyICommand<string>(SearchRooms);
-            GoToCommand = new MyICommand<Room>(FindRoom);
+            SearchCommand = new MyICommand<string>(SearchMedicine);
+            GoToCommand = new MyICommand<Medicine>(FindMedicine);
         }
 
-        private void SearchRooms(string roomName)
+        private void SearchMedicine(string medicineName)
         {
-            _resultOfSearch = roomRepository.GetByName(roomName);
+            _resultOfSearch = medicineRepository.GetByName(medicineName);
             _reportOfSearch = new List<string>();
-            foreach (Room result in _resultOfSearch)
+            foreach (Medicine result in _resultOfSearch)
             {
-                Floor floor = floorRepository.GetBySerialNumber(result.FloorSerialNumber);
+                Room room = roomRepository.GetBySerialNumber(result.RoomSerialNumber);
+                Floor floor = floorRepository.GetBySerialNumber(room.FloorSerialNumber);
                 Building building = buildingRepository.GetBySerialNumber(floor.BuildingSerialNumber);
-                string fullLocation = building.Name + ", " + floor.Name + ", " + result.Name;
+                string fullLocation = building.Name + ", " + floor.Name + ", " + room.Name + ", "
+                                    + medicineName +  " in quantity: 1";
                 _reportOfSearch.Add(fullLocation);
             }
             OnPropertyChanged("ReportOfSearch");
 
         }
 
-        private void FindRoom(Room room)
+        private void FindMedicine(Medicine medicine)
         {
 
         }
