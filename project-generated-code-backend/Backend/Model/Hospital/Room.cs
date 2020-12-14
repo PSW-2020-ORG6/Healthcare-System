@@ -96,7 +96,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
                 return false;
             }
 
-            return Id.Equals(other.Id) && RoomType.Equals(other.RoomType);
+            return Id.Equals(other.Id);
         }
 
         public override int GetHashCode()
