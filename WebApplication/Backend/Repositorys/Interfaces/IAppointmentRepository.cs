@@ -15,7 +15,7 @@ namespace WebApplication.Backend.Repositorys.Interfaces
         List<Appointment> GetAllAppointmentsByPatientIdActive(string patientId);
         List<Appointment> GetAllAppointmentsByPatientIdCanceled(string patientId);
         bool CancelAppointment(string appointmentSerialNumber);
-        bool CheckIfUserIsMalicious(string id);
+        bool IsUserMalicious(string id);
         bool setUserToMalicious(string id);
     }
 }

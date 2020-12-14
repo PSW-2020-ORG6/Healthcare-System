@@ -167,7 +167,7 @@ namespace WebApplication.Backend.Repositorys
             }
         }
 
-        public bool CheckIfUserIsMalicious(string patientId)
+        public bool IsUserMalicious(string patientId)
         {
 
             String sqlDml = "Select  DateOfCanceling FROM appointment WHERE PatientSerialNumber like '" + patientId + "' AND Active = '0'";
