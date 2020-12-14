@@ -14,9 +14,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             // Use Include method to connect object and its references from other tables
             List<Physician> physicians = dbContext.Physician
-                .Include(p => p.Address)
-                .Include(p => p.Address.City)
-                .Include(p => p.WorkSchedule)
                 .ToList();
 
             List<PhysicianSpecialization> physicianSpecializations = dbContext.PhysicianSpecialization

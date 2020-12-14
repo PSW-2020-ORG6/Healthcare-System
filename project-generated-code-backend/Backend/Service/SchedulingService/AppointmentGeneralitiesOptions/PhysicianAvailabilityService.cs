@@ -40,10 +40,10 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
         }
         public bool IsPhysicianAvailable(Physician physician, TimeInterval timeInterval)
         {
-            bool isTheirShift = physician.IsTheirShift(timeInterval);
-            bool isNotOnVacation = !physician.IsOnVacation(timeInterval);
+            //bool isTheirShift = physician.IsTheirShift(timeInterval);
+            //bool isNotOnVacation = !physician.IsOnVacation(timeInterval);
             bool isNotScheduled = !IsPhysicianScheduled(physician, timeInterval);
-            return isTheirShift && isNotOnVacation && isNotScheduled;
+            return /*isTheirShift && isNotOnVacation &&*/ isNotScheduled;
         }
         public bool canGoOnVacation(Physician physician, TimeInterval timeInterval)
         {
