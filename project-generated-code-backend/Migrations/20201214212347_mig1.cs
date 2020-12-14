@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HealthClinicBackend.Migrations
 {
-    public partial class fsdfsfdsdf : Migration
+    public partial class mig1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -881,8 +881,8 @@ namespace HealthClinicBackend.Migrations
                 columns: new[] { "SerialNumber", "Active", "PatientSerialNumber", "PhysicianSerialNumber", "ProcedureTypeSerialnumber", "RoomSerialNumber", "Urgency", "TimeInterval_End", "TimeInterval_Id", "TimeInterval_Start" },
                 values: new object[,]
                 {
-                    { "200002", false, "0002", "600002", null, "103", false, new DateTime(2020, 12, 14, 18, 13, 57, 286, DateTimeKind.Local).AddTicks(531), null, new DateTime(2020, 12, 14, 18, 13, 57, 286, DateTimeKind.Local).AddTicks(513) },
-                    { "200001", false, "0003", "600001", null, "101", true, new DateTime(2020, 12, 14, 18, 13, 57, 285, DateTimeKind.Local).AddTicks(9213), null, new DateTime(2020, 12, 14, 18, 13, 57, 283, DateTimeKind.Local).AddTicks(2711) }
+                    { "200002", false, "0002", "600002", null, "103", false, new DateTime(2020, 12, 14, 22, 23, 46, 159, DateTimeKind.Local).AddTicks(2920), null, new DateTime(2020, 12, 14, 22, 23, 46, 159, DateTimeKind.Local).AddTicks(2889) },
+                    { "200001", false, "0003", "600001", null, "101", true, new DateTime(2020, 12, 14, 22, 23, 46, 159, DateTimeKind.Local).AddTicks(925), null, new DateTime(2020, 12, 14, 22, 23, 46, 152, DateTimeKind.Local).AddTicks(8560) }
                 });
 
             migrationBuilder.InsertData(
@@ -899,14 +899,14 @@ namespace HealthClinicBackend.Migrations
                 columns: new[] { "SerialNumber", "Approved", "Date", "PatientId", "Text" },
                 values: new object[,]
                 {
-                    { "08dde094-2115-4b7d-be91-3f41b3b93b3a", true, new DateTime(2020, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "00010", "usluga na nivou" },
-                    { "f683c5d9-b93c-4fb3-ba02-30a8a1c8de0d", false, new DateTime(2019, 12, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "0008", "sve pohvale" },
-                    { "72aab4af-1535-4ade-82b0-99e3692a03ca", false, new DateTime(2018, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "0004", "ok" },
-                    { "cf7d48cd-92b7-46a2-a749-839c4b5e9c3c", false, new DateTime(2019, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "0003", "dobro" },
-                    { "d0a94946-41ec-494b-a705-8e1def3d1ec9", true, new DateTime(2018, 4, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "0002", "moze bolje" },
-                    { "90c764a7-adb9-478e-ba5c-12abc7dc5abb", false, new DateTime(2015, 5, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "0001", "onako" },
-                    { "3d2beca3-b9e1-409a-b115-3adf36b5e6f9", true, new DateTime(2016, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "0001", "super" },
-                    { "7ec9311f-d1d8-4256-865f-3abdbb9e824f", true, new DateTime(2019, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "0007", "nikako" }
+                    { "d275777c-5c31-4931-b725-5b1bbfb3f8ed", true, new DateTime(2020, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "00010", "usluga na nivou" },
+                    { "8ea9daa4-9265-48f6-a668-3fc101648b4e", false, new DateTime(2019, 12, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "0008", "sve pohvale" },
+                    { "3340cffd-1642-48b9-864b-67db8ad5add6", false, new DateTime(2018, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "0004", "ok" },
+                    { "708ba1a0-9508-4543-8c3f-3f9f3894c82b", false, new DateTime(2019, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "0003", "dobro" },
+                    { "be5b1890-ae99-4f63-b714-4419c693db49", true, new DateTime(2018, 4, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "0002", "moze bolje" },
+                    { "c760a97b-0794-4b84-9ac2-c4a6529c4da1", false, new DateTime(2015, 5, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "0001", "onako" },
+                    { "e28a5af3-4c35-40e3-9808-13dcd3effacc", true, new DateTime(2016, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "0001", "super" },
+                    { "da9ad15c-9abf-4755-b1ee-74f25bfd1a05", true, new DateTime(2019, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "0007", "nikako" }
                 });
 
             migrationBuilder.InsertData(
@@ -987,29 +987,29 @@ namespace HealthClinicBackend.Migrations
                 columns: new[] { "Id", "QuestionText", "SerialNumber" },
                 values: new object[,]
                 {
-                    { 5, "The personal manner(courtosy,respect,sensitivity,friendliness) of the nurses and other support staff?", "a9f9f098-1fe0-4c1d-8741-64b87e2bcb41" },
-                    { 6, "The nursees answered all of your questions in an understandable manner?", "34fad81b-fbe0-47e4-b3be-00101f45b8ea" },
-                    { 9, "The nurse was concern for you?", "77ba541b-f950-4efe-85d4-98ecf32630fb" },
-                    { 4, "Would you have the procedure done again by this doctor?", "effeb5b2-6ee7-4f2e-9c44-e4a532e9334c" },
-                    { 3, "The doctor takes care of you in a professional manner?", "9c6d1aec-9a81-44f6-9e29-91dbf087128d" },
-                    { 2, "The doctor answered all of your questions in an understandable manner?", "8f97977b-c7d2-4620-8b31-d3f4396611d5" },
-                    { 1, "The doctor is welcoming and gentle?", "1e596336-e8b8-4735-abf5-65297d07a3ce" },
-                    { 10, "The comfort and cleanliness of the facility", "4eb89caa-91be-4085-b921-2c25d8864e23" },
-                    { 7, "Orientation given to warn setup", "6385b0d6-0e6e-465f-9ceb-7e886a218a05" },
-                    { 11, "Comfort level within the procedure room?", "32df310d-1bd1-4f73-b7f8-2840bcc5e88d" },
-                    { 13, "General impression of the ambient atmosphere", "968f6ad0-dd24-4266-8b1a-38325176fa31" },
-                    { 14, "Do you think the clinic has the necessary equipment", "e16a7bd1-b252-49c5-a919-3b0e98078b48" },
-                    { 15, "Do you think the clinic's farmacy has the necessary drugs?", "85329164-ad38-496f-a1ce-08dc94205c4d" },
-                    { 16, "Do you think that the hospital should have more modern equipment than the current one", "595a7379-5393-417f-a179-aed7e3da77d7" },
-                    { 17, "Did you noticed broken or damaged equipment in the hospital", "7a34bc77-cda2-42dc-b34a-cad7f78851fe" },
-                    { 18, "The doctor prescribed medications that I could buy at the clinic's pharmacy", "70735c00-71ee-4989-aa0d-3febd917e9b6" },
-                    { 19, "Did you found it easy to use our website?", "a3ec695c-ed89-4290-b0c4-2790076e7088" },
-                    { 20, "Did you have found all the necessary information on our website?", "730fa57b-3a57-4bc8-a7cb-1b7813c60ef0" },
-                    { 21, "Overall, are you satisfied with the care you received in this facility?", "8c6d5f63-b8c7-41fa-9afa-be8081087d8b" },
-                    { 22, "Would you come to this institution again", "f723fc76-5d4c-4ac5-8658-a474f9ed7354" },
-                    { 23, ">Would you recommend this facility to your friends and family", "0522bdab-028f-40b3-9475-0470d1b3085a" },
-                    { 12, "Conditions of the rooms(temperature,comfort,silence)", "3f56aa75-a19f-413b-b111-c7407e731c48" },
-                    { 8, "The nurse gave you good discharge instructions", "d0bcf4e8-81ea-4d89-9b1a-662672fb5348" }
+                    { 5, "The personal manner(courtosy,respect,sensitivity,friendliness) of the nurses and other support staff?", "0836de93-86ca-4379-a580-c6dff7ebf17e" },
+                    { 6, "The nursees answered all of your questions in an understandable manner?", "18caf1a9-d233-4616-b080-21bd81f199be" },
+                    { 9, "The nurse was concern for you?", "1633c156-1602-4bae-abb7-e91280b7048d" },
+                    { 4, "Would you have the procedure done again by this doctor?", "2f2b9f3f-1c1b-40e2-a12a-a4b201a17db9" },
+                    { 3, "The doctor takes care of you in a professional manner?", "2c7aae01-5532-48ce-9059-4c6c37ff3cd1" },
+                    { 2, "The doctor answered all of your questions in an understandable manner?", "57818b64-cb08-4773-a1e0-3807da2d1b05" },
+                    { 1, "The doctor is welcoming and gentle?", "b1bf24ce-9657-4449-9450-f2a24ca61af9" },
+                    { 10, "The comfort and cleanliness of the facility", "00af91c3-c25e-4175-a78e-9b058fb29b52" },
+                    { 7, "Orientation given to warn setup", "88092ec0-db78-4ad2-b20e-528fbb81c7e9" },
+                    { 11, "Comfort level within the procedure room?", "99277216-4604-434d-b55f-86b586e29cd3" },
+                    { 13, "General impression of the ambient atmosphere", "3d711f9c-d08b-4c7d-bb9c-f0cec2ed2ae8" },
+                    { 14, "Do you think the clinic has the necessary equipment", "d56fedf0-707f-4da4-afdb-eb7585540832" },
+                    { 15, "Do you think the clinic's farmacy has the necessary drugs?", "a223d002-ea90-4134-bbb3-1bf641a53781" },
+                    { 16, "Do you think that the hospital should have more modern equipment than the current one", "771de7d5-305f-4c60-9095-156c6b725d0f" },
+                    { 17, "Did you noticed broken or damaged equipment in the hospital", "74a27912-e2e6-4dfa-89a3-42755597766e" },
+                    { 18, "The doctor prescribed medications that I could buy at the clinic's pharmacy", "c7f553e9-17ae-4f25-aab8-955e53e3c1bc" },
+                    { 19, "Did you found it easy to use our website?", "81667430-d906-416e-9683-85afc7936fcf" },
+                    { 20, "Did you have found all the necessary information on our website?", "0feeb7a7-560b-4c74-a1aa-b0bb8226d3fa" },
+                    { 21, "Overall, are you satisfied with the care you received in this facility?", "c556d5f5-17ea-4189-8b7e-c36b4e6deaf9" },
+                    { 22, "Would you come to this institution again", "5c5d0f9d-2664-44db-b2bb-74db1c02321b" },
+                    { 23, ">Would you recommend this facility to your friends and family", "8edc821b-add7-4482-8775-501206d6592f" },
+                    { 12, "Conditions of the rooms(temperature,comfort,silence)", "1a75c498-c3bb-4fd2-a8ef-1e046a007e2b" },
+                    { 8, "The nurse gave you good discharge instructions", "0fd26044-bcc6-4cdb-8c73-4bd2746a2aed" }
                 });
 
             migrationBuilder.InsertData(
@@ -1057,8 +1057,8 @@ namespace HealthClinicBackend.Migrations
                 columns: new[] { "SerialNumber", "DoctorName", "Id", "Question1", "Question10", "Question11", "Question12", "Question13", "Question14", "Question15", "Question16", "Question17", "Question18", "Question19", "Question2", "Question20", "Question21", "Question22", "Question23", "Question3", "Question4", "Question5", "Question6", "Question7", "Question8", "Question9" },
                 values: new object[,]
                 {
-                    { "abfd6e64-6f86-4e46-a0a9-d90c2ec99776", "Pera Peric", "001", "5", "5", "2", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "3", "2", "4", "5", "5", "4", "3", "5", "5", "1" },
-                    { "619a2011-2c3e-44e2-9c31-67f87591e076", "Mika Mikic", "005", "5", "5", "2", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "3", "2", "4", "5", "5", "4", "3", "5", "5", "1" }
+                    { "cfe631b4-915f-432d-8f4b-3c672605224e", "Pera Peric", "001", "5", "5", "2", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "3", "2", "4", "5", "5", "4", "3", "5", "5", "1" },
+                    { "f289ed44-f7eb-44cb-bc34-cb3620086bcd", "Mika Mikic", "005", "5", "5", "2", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "3", "2", "4", "5", "5", "4", "3", "5", "5", "1" }
                 });
 
             migrationBuilder.InsertData(
@@ -1087,6 +1087,11 @@ namespace HealthClinicBackend.Migrations
                     { "19", "10002", "1003", "Bed", "112", "114", "81" },
                     { "20", "10002", "1003", "Bed", "112", "114", "82" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Secretary",
+                columns: new[] { "SerialNumber", "AddressSerialNumber", "Contact", "DateOfBirth", "Email", "Id", "Name", "Password", "Surname" },
+                values: new object[] { "123a", "200001", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "111", "Marko", null, "Markovic" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Address_CitySerialNumber",
