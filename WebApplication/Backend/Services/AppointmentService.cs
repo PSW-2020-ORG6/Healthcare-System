@@ -20,7 +20,7 @@ namespace WebApplication.Backend.Services
         private TimeIntervalDTO timeIntervalDTO = new TimeIntervalDTO();
         private SpecializationDTO specializationDTO = new SpecializationDTO();
         private AppointmentWithRecommendationDTO appointmentWithRecommendationDTO = new AppointmentWithRecommendationDTO();
-        private DateTimeDTO dateTimeDTO = new DateTimeDTO();
+        private DateFromStringConverter dateTimeDTO = new DateFromStringConverter();
 
         public AppointmentService()
         {
@@ -76,6 +76,16 @@ namespace WebApplication.Backend.Services
             return GetAvailableAppointments(appointments, physician, specializationName);
         }
 
+        /// <summary>
+        ///calls method for get all available appointments
+        ///</summary>
+        ///<returns>
+        ///list of appointments
+        ///</returns>
+        ///<param name="appointments"> Appointment list type object
+        ///<param name="physician"> Physician type object
+        ///<param name="specializationName"> String type object
+        ///</param>>
         private List<TimeIntervalDTO> GetAvailableAppointments(List<Appointment> appointments, Physician physician, string specializationName)
         {
             List<TimeIntervalDTO> result = new List<TimeIntervalDTO>();
@@ -106,6 +116,16 @@ namespace WebApplication.Backend.Services
             return dateTime1.Hour == dateTime2.Hour && dateTime1.Minute == dateTime2.Minute;
         }
 
+        /// <summary>
+        ///method for recommending appointment with physician priority 
+        ///</summary>
+        ///<returns>
+        ///list of appointments
+        ///</returns>
+        ///<param name="physicianId"> String type object
+        ///<param name="specializationName"> String type object
+        ///<param name="dates"> String array type object
+        ///</param>>
         public List<AppointmentWithRecommendationDTO> AppointmentRecomendationWithPhysicianPriority(string physicianId, string specializationName, string[] dates)
         {
             List<AppointmentWithRecommendationDTO> availableAppointments = new List<AppointmentWithRecommendationDTO>();
@@ -123,6 +143,16 @@ namespace WebApplication.Backend.Services
             return availableAppointments;
         }
 
+        /// <summary>
+        ///method for extension date interval when there is not available appointments
+        ///</summary>
+        ///<returns>
+        ///list of appointments
+        ///</returns>
+        ///<param name="physicianId"> String type object
+        ///<param name="specializationName"> String type object
+        ///<param name="dates"> String array type object
+        ///</param>>
         private List<String> AdditionalDates(string[] dates)
         {
            List<string> newDates = new List<string>();
@@ -143,9 +173,7 @@ namespace WebApplication.Backend.Services
 
         private string DateConversion(DateTime date)
         {
-            string[] dateString = date.ToString().Split(" ");
-            string[] partsOfDate = dateString[0].Split("/");
-            return partsOfDate[2] + "-" + partsOfDate[0] + "-" + partsOfDate[1];
+             return date.ToString("yyyy-MM-dd");
         }
 
         public bool AddAppointment(Appointment appointment)
@@ -153,6 +181,16 @@ namespace WebApplication.Backend.Services
             return appointmentRepository.AddAppointment(appointment);
         }
 
+        /// <summary>
+        ///method for recommending appointment with date priority 
+        ///</summary>
+        ///<returns>
+        ///list of appointments
+        ///</returns>
+        ///<param name="physicianId"> String type object
+        ///<param name="specializationName"> String type object
+        ///<param name="dates"> String array type object
+        ///</param>>
         public List<AppointmentWithRecommendationDTO> AppointmentRecomendation(string physicianId, string specializationName, string[] dates)
         {
            List<AppointmentWithRecommendationDTO> availableAppointments = new List<AppointmentWithRecommendationDTO>();
