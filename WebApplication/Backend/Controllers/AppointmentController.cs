@@ -3,9 +3,8 @@ using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Schedule;
 using WebApplication.Backend.Services;
-using WebApplication.Backend.DTO;
-using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Dto;
+using WebApplication.Backend.DTO;
 
 namespace WebApplication.Backend.Controllers
 {
@@ -24,9 +23,10 @@ namespace WebApplication.Backend.Controllers
         }
 
         [HttpGet("allAppointmentsByPatientId")]
-        public List<Appointment> GellAllAppointmentsByPatientId(String patientId)
+        public List<AppointmentDTO> GellAllAppointmentsByPatientId(String patientId)
         {
-            return appointmentService.GetAllAppointmentsByPatientId(patientId);
+
+            return appointmentsService.GetAllAppointmentsByPatientId(patientId);
         }
 
         [HttpGet("physicians")]
@@ -40,20 +40,19 @@ namespace WebApplication.Backend.Controllers
             return appointmentService.GetAllSpecializations();
         }
         [HttpGet("allAppointments")]
-        public List<Appointment> GellAllAppointments()
+        public List<AppointmentDTO> GellAllAppointments()
         {
             return appointmentService.GetAllAppointments();
         }
 
         [HttpGet("allAppointmentsByPatientIdActive")]
-        public List<Appointment> GellAllAppointmentsByPatientIdActive(String patientId)
+        public List<AppointmentDTO> GellAllAppointmentsByPatientIdActive(String patientId)
         {
-            List<Appointment> apointments = appointmentService.GetAllAppointmentsByPatientIdActive(patientId);
-            return apointments;
+            return appointmentsService.GetAllAppointmentsByPatientIdActive(patientId);
         }
 
         [HttpGet("allAppointmentsByPatientIdCanceled")]
-        public List<Appointment> GellAllAppointmentsByPatientIdCanceled(String patientId)
+        public List<AppointmentDTO> GellAllAppointmentsByPatientIdCanceled(String patientId)
         {
             return appointmentService.GetAllAppointmentsByPatientIdCanceled(patientId);
         }
@@ -79,6 +78,38 @@ namespace WebApplication.Backend.Controllers
             }
             else
                 return BadRequest();
+        }
+
+        [HttpGet("allAppointmentsByPatientIdPast")]
+        public List<AppointmentDTO> GellAllAppointmentsByPatientIdPast(String patientId)
+        {
+            return appointmentsService.GetAllAppointmentsByPatientIdPast(patientId);
+        }
+
+
+        [HttpGet("allAppointmentsWithSurvey")]
+        public List<AppointmentDTO> GetAllAppointmentsWithDoneSurvey()
+        {
+            AppointmentDTO appointment = new AppointmentDTO();
+            return appointment.ConvertListToAppointmentDTO(appointmentsService.GetAllAppointmentsWithDoneSurvey());
+        }
+
+        [HttpGet("allAppointmentsWithoutSurvey")]
+        public List<AppointmentDTO> allAppointmentsWithoutSurvey()
+        {
+            return appointmentsService.GetAllAppointmentsWithoutDoneSurvey();
+        }
+
+        [HttpGet("isSurveyDoneByPatientIdAppointmentDatePhysicianName")]
+        public bool isSurveyDoneByPatientIdAppointmentDatePhysicianName([FromQuery] String patientId, [FromQuery] String appointmentDate, [FromQuery] String physicianName)
+        {
+            return appointmentsService.isSurveyDoneByPatientIdAppointmentDatePhysicianName(patientId, appointmentDate, physicianName);
+        }
+
+        [HttpPut("setSurveyDoneOnAppointment")]
+        public void setSurveyDoneOnAppointment(AppointmentDTO appointmentDto)
+        {
+            appointmentsService.setSurveyDoneOnAppointment("0002", appointmentDto.Date.ToString(), appointmentDto.PhysicianDTO.FullName);
         }
 
         [HttpGet("appointmentsWithReccomendation")]

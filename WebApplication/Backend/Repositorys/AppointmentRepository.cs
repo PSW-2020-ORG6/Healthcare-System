@@ -7,6 +7,8 @@ using WebApplication.Backend.Util;
 using HealthClinicBackend.Backend.Dto;
 using NPOI.SS.Formula.Functions;
 using HealthClinicBackend.Backend.Model.Util;
+using Model.Accounts;
+using HealthClinicBackend.Backend.Dto;
 
 namespace WebApplication.Backend.Repositorys
 {
@@ -34,7 +36,18 @@ namespace WebApplication.Backend.Repositorys
             {
                 Appointment entity = new Appointment();
                 entity.SerialNumber = (string)sqlReader[0];
+                entity.Room = roomRepository.GetRoomBySerialNumber((string)sqlReader[1]);
+                entity.Physician = physitianRepository.GetPhysitianBySerialNumber((string)sqlReader[2]);
+                entity.Patient = patientRepository.GetPatientBySerialNumber((string)sqlReader[3]);
+                entity.TimeInterval = timeIntervalRepository.GetTimeIntervalById((string)sqlReader[6]);
+                entity.ProcedureType = procedureTypeRepository.GetProcedureTypeBySerialNumber((string)sqlReader[7]);
                 entity.Urgency = (bool)sqlReader[1];
+                entity.Active = (bool)sqlReader[2];
+                entity.Date = Convert.ToDateTime(sqlReader[8]);
+                entity.IsSurveyDone = Convert.ToBoolean(sqlReader[10]);
+                
+
+
                 entity.Patient = patientRepository.GetPatientBySerialNumber((string)sqlReader[2]);
                 entity.Room = roomRepository.GetRoomBySerialNumber((string)sqlReader[3]);
                 entity.Physician = physitianRepository.GetPhysicianBySerialNumber((string)sqlReader[4]);
@@ -48,6 +61,8 @@ namespace WebApplication.Backend.Repositorys
             return resultList;
         }
 
+       
+
         public List<Appointment> GetAllAppointments()
         {
             try
@@ -59,7 +74,7 @@ namespace WebApplication.Backend.Repositorys
                 return null;
             }
         }
-
+        
         public Appointment GetAppointmentBySerialNumber(string serialNumber)
         {
             try
@@ -124,18 +139,29 @@ namespace WebApplication.Backend.Repositorys
                 return null;
             }
         }
-
         public List<Appointment> GetAllAppointmentsByPatientIdActive(string patientId)
         {
+            List<Appointment> allAppointments = new List<Appointment>();
+
             try
             {
-                return GetAppointments("Select * from appointment where PatientSerialNumber='" + patientId + "'" + " AND  Active like '" + 1 + "'");
+                allAppointments = GetAppointments("Select * from appointment where PatientSerialNumber='" + patientId + "'" + " AND  Active like '" + 1 + "'");
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return null;
             }
+            DateTime dateNow = DateTime.Now;
+            List<Appointment> appotintmentsInFuture = new List<Appointment>();
+            foreach (Appointment appointment in allAppointments)
+            {
+                if (appointment.Date > dateNow)
+                {
+                    appotintmentsInFuture.Add(appointment);
+                }
+            }
+            return appotintmentsInFuture;
         }
 
         public List<Appointment> GetAllAppointmentsByPatientIdCanceled(string patientId)
@@ -149,6 +175,111 @@ namespace WebApplication.Backend.Repositorys
                 Console.WriteLine(e.Message);
                 return null;
             }
+        }
+
+
+        public List<Appointment> GetAllAppointmentsByPatientIdPast(String patientId)
+        {
+            List<Appointment> allAppointments = new List<Appointment>();
+            try
+            {
+                allAppointments = GetAppointments("Select * from appointment where PatientSerialNumber='" + patientId + "'" + " AND  Active like '" + 1 + "'");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+            DateTime dateNow = DateTime.Now;
+            List<Appointment> appotintmentsInPast = new List<Appointment>();
+            foreach (Appointment appointment in allAppointments)
+            {
+                if (appointment.Date < dateNow)
+                {
+                    appotintmentsInPast.Add(appointment);
+                }
+            }
+            return appotintmentsInPast;
+        }
+        bool IAppointmentRepository.IsSurveyDoneByPatientIdAppointmentDatePhysicianName(String patientId, String appointmentDate, String physicianName)
+        {
+            bool var = false;
+            List<Physician> physitianResult = physitianRepository.GetPhysitiansByFullName(physicianName);
+            List<String> physicianId = new List<string>();
+            foreach (Physician physician in physitianResult)
+            {
+                physicianId.Add(physician.Id);
+            }
+
+            List<Appointment> appointmentList = GetAppointments("Select * from appointment where PatientSerialNumber like '" + patientId + "'" + " and PhysitianId like '" + physicianId[0] + "'" + " and Date like '" + appointmentDate + "'");
+            return appointmentList[0].IsSurveyDone;
+
+
+        }
+        public void SetSurveyDoneOnAppointment(String patientId, String appointmentDate, String physicianName)
+        {
+            String dateD;
+
+            String[] date = appointmentDate.Split(" ")[0].Split(".");
+            if (date[1].Length == 1)
+                dateD = date[2] + "-" + "0" + date[1] + "-" + date[0] + " 00:00:00";
+            else
+                dateD = date[2] + "-" + date[1] + "-" + date[0] + " 00:00:00";
+
+            connection.Open();
+            List<Physician> physitianResult = physitianRepository.GetPhysitiansByFullName(physicianName);
+            List<String> physicianId = new List<string>();
+            foreach (Physician physician in physitianResult)
+            {
+                physicianId.Add(physician.Id);
+            }
+            String sqlDml = "Update appointment set isSurveyDone=1 where PatientSerialNumber like '" + patientId + "'" + "and Date like '" + dateD + "'" + "and PhysitianId like '" + physicianId[0] + "'";
+            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            sqlCommand.ExecuteNonQuery();
+
+        }
+
+        public List<Appointment> GetAllAppointmentsWithSurvey()
+        {
+
+            List<Appointment> allAppointments = new List<Appointment>();
+            try
+            {
+                return allAppointments = GetAppointments("Select * from appointment where isSurveyDone like '" + 1 + "'");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+
+
+        }
+
+        public List<Appointment> GetAllAppointmentsWithoutSurvey()
+        {
+
+            List<Appointment> allAppointments = new List<Appointment>();
+            try
+            {
+                allAppointments = GetAppointments("Select * from appointment where isSurveyDone like '" + 0 + "'");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+            DateTime dateNow = DateTime.Now;
+            List<Appointment> appotintmentsInPastWitohutSurvey = new List<Appointment>();
+            foreach (Appointment appointment in allAppointments)
+            {
+                if (appointment.Date < dateNow)
+                {
+                    appotintmentsInPastWitohutSurvey.Add(appointment);
+                }
+            }
+            return appotintmentsInPastWitohutSurvey;
+
         }
 
         public List<Appointment> GetAppointmentsByDate(string date)

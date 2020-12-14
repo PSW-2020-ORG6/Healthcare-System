@@ -17,7 +17,7 @@ namespace WebApplication.Backend.Repositorys
         private MySqlConnection connection;
         public PatientRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=novabaza1;user=root;password=neynamneynam12;Convert Zero Datetime=true;");
+            connection = new MySqlConnection("server=localhost;port=3306;database=baza;user=root;password=root;Convert Zero Datetime=true;");
         }
         ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017 and Aleksa Repovic RA52/2017
         /// <summary>
@@ -68,7 +68,8 @@ namespace WebApplication.Backend.Repositorys
                 entity.Guest = (bool)sqlReader[26];
                 entity.EmailConfirmed = (bool)sqlReader[27];
                 entity.PhysicianSerialNumber = (string)sqlReader[28];
-               // entity.ChosenPhysician = new Physician();
+                // entity.ChosenPhysician = new Physician();
+
                 resultList.Add(entity);
 
             }

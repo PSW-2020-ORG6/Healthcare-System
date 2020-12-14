@@ -4,6 +4,7 @@
 // Purpose: Definition of Class AppointmentDTO
 
 using System;
+using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
@@ -14,6 +15,7 @@ namespace HealthClinicBackend.Backend.Dto
 {
     public class AppointmentDto
     {
+        public String SerialNumber { get; set; }
         public ProcedureType ProcedureType { get; set; }
         public TimeInterval Time { get; set; }
         public Physician Physician { get; set; }
@@ -23,7 +25,8 @@ namespace HealthClinicBackend.Backend.Dto
         public bool Active { get; set; }
         public DateTime Date { get; set; }
         public int RestrictedHours { get; set; }
-        public string SerialNumber { get; set; }
+        public bool IsSurveyDone { get; set; }
+        public TimeInterval TimeInterval { get; set; }
 
         public bool IsPreferedPhysicianSelected()
         {

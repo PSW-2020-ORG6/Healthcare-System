@@ -18,7 +18,6 @@ namespace WebApplication.Backend.Repositorys
 
         private List<Specialization> GetSpecializations(String query)
         {
-            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(query, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -88,7 +87,18 @@ namespace WebApplication.Backend.Repositorys
                 return null;
             }
         }
-
+        public List<Specialization> GetSpecializationsByPhysicianSerialNumber(string serialNumber)
+        {
+            try
+            {
+                return GetSpecializations("Select * from specialization where PhysicianSerialNumber like '" + serialNumber + "'");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
         public List<Specialization> GetSpecializationByName(string name)
         {
             try

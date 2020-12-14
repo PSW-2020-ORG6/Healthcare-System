@@ -13,7 +13,7 @@ namespace WebApplication.Backend.Repositorys
 
         public FloorRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=baza;user=root;password=root");
         }
 
         private List<Floor> GetFloors(String query)

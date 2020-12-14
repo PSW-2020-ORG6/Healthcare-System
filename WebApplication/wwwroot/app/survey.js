@@ -1,36 +1,39 @@
-﻿Vue.component("survey", {
+﻿var doctorNameAppointment
+Vue.component("survey", {
     data: function () {
         return {
             patient: {},
             doctorsList: [],
-           // patientId: "12",
+            // patientId: "12",
+            dName: doctorNameAppointment,
             selectedDoctor: {},
             surveyText: {
-            id:"12",
-            question1: null,
-            question2: null,
-            question3: null,
-            question4: null,
-            question5: null,
-            question6: null,
-            question7: null,
-            question8: null,
-            question9: null,
-            question10: null,
-            question11: null,
-            question12: null,
-            question13: null,
-            question14: null,
-            question15: null,
-            question16: null,
-            question17: null,
-            question18: null,
-            question19: null,
-            question20: null,
-            question21: null,
-            question22: null,
-            question23: null,
-            DoctorsName:null
+                id: "0002",
+                question1: null,
+                question2: null,
+                question3: null,
+                question4: null,
+                question5: null,
+                question6: null,
+                question7: null,
+                question8: null,
+                question9: null,
+                question10: null,
+                question11: null,
+                question12: null,
+                question13: null,
+                question14: null,
+                question15: null,
+                question16: null,
+                question17: null,
+                question18: null,
+                question19: null,
+                question20: null,
+                question21: null,
+                question22: null,
+                question23: null,
+                DoctorName: null,
+                reportDate: null,
             }
         }
     },
@@ -56,7 +59,8 @@
             </p>
             <p id="textSurvey">Select doctor to rate:<br>
                 <select id="doctorSelect" class="browser-default custom-select" v-model = "surveyText.DoctorName">
-                     <option div  v-for="(doctor) in doctorsList" v-bind:value="doctor">{{doctor}}</option>
+                     <option div v-if="dName==null" v-for="(doctor) in doctorsList" v-bind:value="doctor">{{doctor}}</option>
+                    <option div v-if="dName!=null"  v-bind:value="dName">{{this.dName}}</option>
                 </select>
             </p>            <div class="question" id="q">
               <b id="topic">Topic 1 Doctor</b>
@@ -339,17 +343,18 @@
                               <p>Successfully added survey.</p>
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="PatientShow()">Ok</button>
+                              <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="PatientShow()" >Ok</button>
                             </div>
                           </div>
                         </div>
                       </div>
 
-              <button type="button" class="btn btn-info btn-lg buttonBottom " data-dismiss="modal" v-on:click="PatientShow()">Cancel</button>
+              <button type="button" class="btn btn-info btn-lg buttonBottom " data-dismiss="modal" v-on:click="PatientShow()" >Cancel</button>
         </div>
     </div>
 	`,
     methods: {
+
         PatientShow: function () {
             this.$router.push('patient');
         },
@@ -366,7 +371,10 @@
                 !document.getElementById("star2RatingFive").checked && !document.getElementById("star4RatingFour").checked &&
                 !document.getElementById("star2RatingThree").checked && !document.getElementById("star4RatingTwo").checked &&
                 !document.getElementById("star4RatingOne").checked) {
+
                 $('#myModal1').modal('show');
+
+
                 return
             }
             selectedValue = $('#doctorSelect').val()
@@ -374,16 +382,334 @@
                 $('#myModal').modal('show')
                 return
             }
-           // this.surveyText = this.question1.toString() + "," + this.question2.toString() + "," + this.question3.toString() + "," + this.question4.toString() + "," + this.question5.toString() + "," + this.question6.toString() + "," + this.question7.toString() + "," +
-           //     this.question8.toString() + "," + this.question9.toString() + "," + this.question10.toString() + "," + this.question11.toString() + "," + this.question12.toString() + "," + this.question13.toString() + "," + this.question14.toString() + "," +
-           //     this.question15.toString() + "," + this.question16.toString() + "," + this.question17.toString() + "," + this.question18.toString() + "," +
-           //     this.question1.toString() + "," + this.question19.toString() + "," + this.question20.toString() + "," + this.question21.toString() + "," + this.question22.toString() + "," + this.question23.toString() + "," + this.selectedDoctor + ","+ "001234"
+
             var surveyText = this.surveyText
+            var textSptlit = $('#doctorSelect').val()
+
+            var parts = textSptlit.split("-")
+            var doctorName = parts[0]
+            var dDate = parts[1].split(".")
+            dDateVar = dDate[2] + "," + dDate[1] + "," + dDate[0]
+            var dateSurvey = new Date("'" + dDateVar + "'")
+            alert(dDate)
+            alert(dDateVar)
+            alert(dateSurvey)
+
+            this.surveyText.DoctorName = doctorName
+            this.surveyText.reportDate = dateSurvey;
+
+
             axios
-                .post('http://localhost:49900/survey/add',  surveyText)
+                .post('http://localhost:49900/survey/add', surveyText)
                 .then(response => {
                 })
             $('#myModal5').modal('show');
+        }
+    }
+});
+
+Vue.component("appointments", {
+    data: function () {
+        return {
+            appointmentDto:null,
+            idPatient: "0002",
+            isSurveyDone: null,
+            activeAppointments: null,
+            canceledAppointments: null,
+            appointmentsWithSurvey: null,
+            appointmentsWithoutSurvey: null,
+            pastAppointments: null,
+            patients: null,
+            doctorsList: null,
+            appointment: null,
+            patientDTO: {}
+        }
+    },
+    beforeMount() {
+        axios
+            .get('http://localhost:49900/appointment/allAppointmentsByPatientIdActive', { params: { patientId: "0002" } })
+            .then(response => {
+                this.activeAppointments = response.data
+            })
+
+            .catch(error => {
+                alert("greska kod activeAppoiuntments")
+            })
+
+        axios
+            .get('http://localhost:49900/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: "0002" } })
+            .then(response => {
+                this.canceledAppointments = response.data
+
+            })
+            .catch(error => {
+                alert("greska kod canceledAppointments")
+            })
+
+        axios
+            .get('http://localhost:49900/appointment/allAppointmentsByPatientIdPast', { params: { patientId: "0002" } })
+            .then(response => {
+                this.pastAppointments = response.data
+
+            })
+            .catch(error => {
+                alert("greska kod canceledAppointments")
+            })
+        axios
+            .get('http://localhost:49900/appointment/allAppointmentsWithSurvey', { params: { patientId: "0002" } })
+            .then(response => {
+                this.appointmentsWithSurvey = response.data
+
+            })
+            .catch(error => {
+                alert("greska kod appointmentsWithSurvey")
+            })
+        axios
+            .get('http://localhost:49900/appointment/allAppointmentsWithoutSurvey', { params: { patientId: "0002" } })
+            .then(response => {
+                this.appointmentsWithoutSurvey = response.data
+
+            })
+            .catch(error => {
+                alert("greska kod appointmentsWithoutSurvey")
+            })
+
+
+        axios
+            .get('http://localhost:49900/survey/getDoctorsForSurveyList', { params: { patientId: "0002" } })
+            .then(response => {
+                this.doctorsList = response.data
+            })
+            .catch(error => {
+                alert(error)
+            })
+
+
+    },
+    template: `
+	<div>
+
+
+		<div class="container"><br/>
+			
+			<p>Active Appointments<p>
+			<div>
+				<div class="tab-content">
+    				<div id="profil" class="container tab-pane active"><br>
+    					<div class="container">
+							<div class="row">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>Date</th>
+											<th>Time</th>
+											<th>Physitian</th>
+											<th>Room</th>
+											<th>Procedure</th>
+											<th>Urgency</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="appointmentDto in activeAppointments">
+											<td>{{DateSplit(appointmentDto.date)}}</td>
+											<td>{{TimeSplit(appointmentDto.timeIntervalDTO.start)}}</td>
+											<td>{{appointmentDto.physicianDTO.fullName}}</td>
+											<td>{{appointmentDto.roomDTO.name}}</td>
+											<td>{{appointmentDto.procedureTypeDTO.name}}</td>
+											<td>{{appointmentDto.urgency}}</td>
+											<td><button type="button" class="btn btn-info btn-lg">Cancel</button></td>										
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>		
+					</div>
+				</div>
+			</div>
+		<br></br>
+		
+<p>Canceled Appointments</p>
+			<div>
+				<div class="tab-content">
+    				<div id="profil" class="container tab-pane active"><br>
+    					<div class="container">
+							<div class="row">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>Date</th>
+											<th>Time</th>
+											<th>Physitian</th>
+											<th>Room</th>
+											<th>Procedure</th>
+											<th>Urgency</th>	
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="appointmentDto in canceledAppointments">
+											<td>{{DateSplit(appointmentDto.date)}}</td>
+											<td>{{TimeSplit(appointmentDto.timeIntervalDTO.start)}}</td>
+											<td>{{appointmentDto.physicianDTO.fullName}}</td>
+											<td>{{appointmentDto.roomDTO.name}}</td>
+											<td>{{appointmentDto.procedureTypeDTO.name}}</td>
+											<td>{{appointmentDto.urgency}}</td>						
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>		
+					</div>
+				</div>
+			</div>
+			<br></br>
+
+		<p>Past Appointments</p>
+			<div>
+				<div class="tab-content">
+    				<div id="profil" class="container tab-pane active"><br>
+    					<div class="container">
+							<div class="row">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>Date</th>
+											<th>Time</th>
+											<th>Physitian</th>
+											<th>Room</th>
+											<th>Procedure</th>
+											<th>Urgency</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="appointmentDto in appointmentsWithSurvey">
+											<td>{{DateSplit(appointmentDto.date)}}</td>
+											<td>{{TimeSplit(appointmentDto.timeIntervalDTO.start)}}</td>
+											<td>{{appointmentDto.physicianDTO.fullName}}</td>
+											<td>{{appointmentDto.roomDTO.name}}</td>
+											<td>{{appointmentDto.procedureTypeDTO.name}}</td>
+											<td>{{appointmentDto.urgency}}</td>				
+                                         </tr>
+									</tbody>
+								</table>
+							</div>
+						</div>		
+					</div>
+				</div>
+			</div><br></br>
+
+        <p>Avaliable surveys</p>
+			<div>
+				<div class="tab-content">
+    				<div id="profil" class="container tab-pane active"><br>
+    					<div class="container">
+							<div class="row">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>Date</th>
+											<th>Time</th>
+											<th>Physitian</th>
+											<th>Room</th>
+											<th>Procedure</th>
+											<th>Urgency</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="appointmentDto in appointmentsWithoutSurvey">
+											<td>{{DateSplit(appointmentDto.date)}}</td>
+											<td>{{TimeSplit(appointmentDto.timeIntervalDTO.start)}}</td>
+											<td>{{appointmentDto.physicianDTO.fullName}}</td>
+											<td>{{appointmentDto.roomDTO.name}}</td>
+											<td>{{appointmentDto.procedureTypeDTO.name}}</td>
+											<td>{{appointmentDto.urgency}}</td>				
+											<td><button  type="button" id="surveyAppointmentButton" class="btn btn-info btn-lg" v-on:click="DoctorNameAndDate(appointmentDto.physicianDTO.fullName,appointmentDto.date);SetSurveyDone(appointmentDto)"  >Survey</button></td>
+                                         </tr>
+									</tbody>
+								</table>
+							</div>
+						</div>		
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
+		</div>
+	</div>
+	`,
+    methods: {
+        ButtonHide: function (patientId, doctorName, date) {
+            var dateD = (date.split("T")[0]).split("-")
+            var doctorName = doctorName
+            dateDate = dateD[0] + "-" + dateD[1] + "-" + dateD[2] + " 00:00:00"
+            axios
+                .get("http://localhost:49900/appointment/isSurveyDoneByPatientIdAppointmentDatePhysicianName", { params: { patientId: this.patientId, appointmentDate: dateDate, physicianName: doctorName } })
+                .then(response => {
+
+                    if (response.data == true) {
+                        alert("usao u true")
+                        return false
+                    } else {
+                        alert("usao u false")
+
+                        return true
+                    }
+                })
+                .catch(error => {
+                    alert("greska kod isSurveyDone");
+                })
+        },
+        SetSurveyDone: function (appointmentDto) {
+
+            axios
+                .put("http://localhost:49900/appointment/setSurveyDoneOnAppointment", appointmentDto)
+                .then(response => {
+                })
+                .catch(error => {
+                    alert("greska kod SetisSurveyDone");
+                })
+
+        },
+        DoctorNameAndDate: function (doctorName, date) {
+            var dateD = (date.split("T")[0]).split("-")
+            doctorNameAppointment = doctorName + "-" + dateD[2] + "." + dateD[1] + "." + dateD[0] + "."
+            this.SurveyShow()
+        },
+        AddNewFeedback: function (feedback) {
+            if (!document.getElementById("anonimous").checked)
+                this.feedback.patientId = "0003"
+            if (feedback.text.localeCompare(null) || feedback.text.localeCompare("")) {
+                axios
+                    .post("http://localhost:49900/feedback/add", feedback)
+                    .then(response => {
+                        this.feedback.text = null;
+                        $('#feedbackModal').modal('hide')
+                    })
+                    .catch(error => {
+                        alert("You need to enter a comment first.");
+                    })
+            }
+            else
+                alert("You need to enter a comment first.");
+        },
+        DateSplit: function (date) {
+            var dates = (date.split("T")[0]).split("-")
+            return dates[2] + "." + dates[1] + "." + dates[0]
+        },
+        TimeSplit: function (time) {
+            var time = time.split("T")[1].split(":")
+            return time[0] + ":" + time[1]
+        },
+        SurveyShow: function () {
+            this.$router.push('survey');
+
+
         }
     }
 });
