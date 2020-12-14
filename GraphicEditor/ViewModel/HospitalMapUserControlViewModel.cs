@@ -1,4 +1,5 @@
 ﻿using GraphicEditor.HelpClasses;
+using GraphicEditor.View.UserControls;
 using GraphicEditor.View.Windows;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Util;
@@ -12,7 +13,7 @@ namespace GraphicEditor.ViewModel
 {
     public class HospitalMapUserControlViewModel : BindableBase
     {
-        private MapContentUserControlViewModel _parent;
+        private MainWindowViewModel _parent;
         public MyICommand<string> NavCommand { get; private set; }
         public MyICommand<object> AddCommand { get; private set; }
 
@@ -22,12 +23,20 @@ namespace GraphicEditor.ViewModel
 
         BuildingDatabaseSql buildingRepository = new BuildingDatabaseSql();
 
-        public HospitalMapUserControlViewModel(MapContentUserControlViewModel parent)
+        public HospitalMapUserControlViewModel( MainWindowViewModel parent, Grid hospitalMapGrid)
         {
             _parent = parent;
+            HospitalMapGrid = hospitalMapGrid;
             NavCommand = new MyICommand<string>(ChooseHospital);
             AddCommand = new MyICommand<object>(AddBuilding);
+
+            InitialGridRender();
         }
+
+        //_viewModel.HospitalMap.hospitalMapGrid
+        //MapContentUserControlViewModel.HospitalMap.HospitalMapGrid = hospitalMapGrid;
+        //this.DataContext = MapContentUserControlViewModel.HospitalMap;
+        //MapContentUserControlViewModel.HospitalMap.InitialGridRender();
 
         /// <summary>
         /// Method for dynamic loading of buildings
@@ -75,7 +84,7 @@ namespace GraphicEditor.ViewModel
                 case Constants.EMERGENCY:
                     break;
                 case Constants.CARDIOLOGY:
-                    _parent.ContentViewModel = MapContentUserControlViewModel.CardiologyBuilding;
+                    _parent.CurrentUserControl = _parent.CardiologyBuilding;
                     break;
                 case Constants.ORTHOPEDICS:
 
