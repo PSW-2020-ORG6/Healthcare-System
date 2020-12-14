@@ -87,7 +87,8 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
 
         private List<Room> GetAllRooms()
         {
-            return _roomRepository.GetByProcedureType(_appointmentPreferences.ProcedureType);
+            return _roomRepository.GetAll();
+            //return _roomRepository.GetByProcedureType(_appointmentPreferences.ProcedureType);
         }
 
         private List<TimeInterval> GetAllTimeIntervals()

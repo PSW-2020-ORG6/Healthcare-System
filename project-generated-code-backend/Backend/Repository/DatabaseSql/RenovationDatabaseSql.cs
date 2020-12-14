@@ -6,6 +6,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class RenovationDatabaseSql : GenericDatabaseSql<Renovation>, IRenovationRepository
     {
+        public RenovationDatabaseSql() : base()
+        {
+        }
+
         public RenovationDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
         {
         }

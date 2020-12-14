@@ -35,5 +35,11 @@ namespace GraphicEditor.View.UserControls
             MedicineSearch medicineSearch = new MedicineSearch(_viewModel);
             medicineSearch.Show();
         }
+
+        private void MakeAppointment(object sender, RoutedEventArgs e)
+        {
+            Appointment appointment = new Appointment();
+            appointment.Show();
+        }
     }
 }
