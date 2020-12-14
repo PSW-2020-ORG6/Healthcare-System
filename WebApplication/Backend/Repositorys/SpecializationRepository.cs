@@ -33,5 +33,10 @@ namespace WebApplication.Backend.Repositorys
         {
             return _specializationRepository.GetByName(name);
         }
+
+        public List<Specialization> GetAllSpecializations()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

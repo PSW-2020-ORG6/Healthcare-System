@@ -75,7 +75,7 @@ namespace GraphicEditor.ViewModel
                 if (value != null)
                 {
                     SetProperty(ref _selectedFloor, value);
-                    String cpy = String.Copy(_selectedFloor);
+                    String cpy = new String(_selectedFloor);
                     var paramArray = cpy.Split(' ');
                     var param = paramArray[0].ToLower();
                     ChooseFloor(param);

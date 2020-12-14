@@ -13,7 +13,7 @@ namespace WebApplication.Backend.Services
     public class AppointmentService : IAppointmentService
     {
         private ISpecializationRepository specializationRepository;
-        private ITimeIntervalRepository timeIntervalRepository = new TimeIntervalRepository();
+        //private ITimeIntervalRepository timeIntervalRepository = new TimeIntervalRepository();
         private IAppointmentRepository appointmentRepository = new AppointmentRepository();
         private IPhysicianRepository physicianRepository = new PhysicianRepository();
         private PhysicianDTO physitianDTO = new PhysicianDTO();
@@ -37,7 +37,7 @@ namespace WebApplication.Backend.Services
         public AppointmentService(IAppointmentRepository appointmentRepository, ITimeIntervalRepository timeIntervalRepository)
         {
             this.appointmentRepository = appointmentRepository;
-            this.timeIntervalRepository = timeIntervalRepository;
+            //this.timeIntervalRepository = timeIntervalRepository;
         }
 
         public List<Appointment> GetAllAppointmentsByPatientId(string patientId)

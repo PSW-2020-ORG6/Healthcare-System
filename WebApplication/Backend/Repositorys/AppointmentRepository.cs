@@ -54,5 +54,15 @@ namespace WebApplication.Backend.Repositorys
         {
             return _appointmentRepository.GetByPatientIdCanceled(patientId);
         }
+
+        public List<Appointment> GetAppointmentsByDate(string date)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool AddAppointment(Appointment appointment)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

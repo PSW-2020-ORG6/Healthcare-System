@@ -34,12 +34,27 @@ namespace WebApplication.Backend.Repositorys
 
         public Physician GetPhysicianById(string id)
         {
-            return _physicianRepository.GetById(serialNumber);
+            return _physicianRepository.GetById(id);
         }
 
-        public List<Physician> GetPhysicianBySpecialization(string specializationName, string physicianId)
+        public Physician GetPhysicianBySpecialization(string specializationName, string physicianId)
         {
-            return _physicianRepository.GetByJmbg(id);
+            return _physicianRepository.GetByJmbg(physicianId);
+        }
+
+        public List<Physician> GetAllPhysicians()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Physician GetPhysicianBySerialNumber(string serialNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Physician> IPhysicianRepository.GetPhysicianBySpecialization(string specializationName, string physicianId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
