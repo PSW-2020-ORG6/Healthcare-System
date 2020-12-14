@@ -8,10 +8,10 @@ namespace GraphicEditor.View.Windows
     /// </summary>
     public partial class RoomSearch : Window
     {
-        public RoomSearch()
+        public RoomSearch(MainWindowViewModel vm)
         {
-            this.DataContext = new RoomSearchViewModel();
             InitializeComponent();
+            this.DataContext = new RoomSearchViewModel(vm);  
         }
     }
 }

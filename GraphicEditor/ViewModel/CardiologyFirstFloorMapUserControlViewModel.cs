@@ -4,8 +4,10 @@ using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace GraphicEditor.ViewModel
 {
@@ -26,6 +28,7 @@ namespace GraphicEditor.ViewModel
         Grid RoomGrid;
 
         public ResourceDictionary ResourceDictionary = new ResourceDictionary();
+        public Dictionary<string, Button> connections = new Dictionary<string, Button>();
 
         public CardiologyFirstFloorMapUserControlViewModel(MainWindowViewModel _mapParent, CardiologyBuildingUserControlViewModel _buildingParent, Grid grid)
         {
@@ -60,12 +63,15 @@ namespace GraphicEditor.ViewModel
                 room.Medinices = medicineRepository.GetByRoomSerialNumber(room.SerialNumber);
 
                 RoomGrid.Children.Add(button);
-                RoomGrid.UpdateLayout();
+                connections.Add(room.SerialNumber, button);
             }
+            RoomGrid.UpdateLayout();
         }
 
         private void ShowRoom(Room room)
         {
+            Button button = connections[room.SerialNumber];
+            button.BorderBrush = new SolidColorBrush(Color.FromRgb(0,0,0));
             if (MainWindow.TypeOfUser != TypeOfUser.Patient)
             {
                 new RoomInformation(room).Show();
