@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
@@ -9,14 +10,24 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
     {
         private readonly IFloorRepository _floorRepository;
 
-        public FloorService(IFloorRepository floorRepository)
+        public FloorService()
         {
-            _floorRepository = floorRepository;
+            _floorRepository = new FloorDatabaseSql();
         }
 
-        public Floor GetById()
+        public FloorService(IFloorRepository floorRepository)
         {
-            throw new NotImplementedException();
+            this._floorRepository = floorRepository;
+        }
+
+        public Floor GetById(string id)
+        {
+            return _floorRepository.GetById(id);
+        }
+
+        public List<Floor> GetByName(string name)
+        {
+            return _floorRepository.GetByName(name);
         }
 
         public List<Floor> GetAll()
@@ -26,7 +37,7 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 
         public void EditFloor(Floor floor)
         {
-            throw new NotImplementedException();
+            _floorRepository.Update(floor);
         }
 
         public void NewFloor(Floor floor)
@@ -36,7 +47,7 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 
         public void DeleteFloor(Floor floor)
         {
-            throw new NotImplementedException();
+            _floorRepository.Delete(floor.SerialNumber);
         }
     }
 }

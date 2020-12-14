@@ -1,8 +1,3 @@
-// File:    RoomControler.cs
-// Author:  Luka Doric
-// Created: Sunday, June 7, 2020 4:19:02 PM
-// Purpose: Definition of Class RoomControler
-
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Service.HospitalResourcesService;
 using System;
@@ -14,6 +9,11 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
     {
         private readonly RoomService _roomService;
 
+        public RoomController()
+        {
+            _roomService = new RoomService();
+        }
+
         public RoomController(RoomService roomService)
         {
             _roomService = roomService;
@@ -21,7 +21,12 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 
         public Room GetById(String id)
         {
-            throw new NotImplementedException();
+            return _roomService.GetById(id);
+        }
+
+        public List<Room> GetByName(string name)
+        {
+            return _roomService.GetByName(name);
         }
 
         public List<Room> GetAll()
@@ -68,7 +73,6 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
         {
             return _roomService.GetAutoAllRoomTypes();
         }
-
 
         public void AddRoomTypes(RoomType roomType)
         {

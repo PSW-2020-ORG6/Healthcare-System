@@ -9,16 +9,20 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
     public class BuildingService
     {
         private readonly IBuildingRepository _buildingRepository;
-        
+
+        public BuildingService()
+        {
+            _buildingRepository = new BuildingDatabaseSql();
+        }
 
         public BuildingService(IBuildingRepository buildingRepository)
         {
             _buildingRepository = buildingRepository;
         }
 
-        public Building GetById()
+        public Building GetById(string id)
         {
-            throw new NotImplementedException();
+            return _buildingRepository.GetById(id);
         }
 
         public List<Building> GetAll()
@@ -26,9 +30,14 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
             return _buildingRepository.GetAll();
         }
 
+        public List<Building> GetByName(string name)
+        {
+            return _buildingRepository.GetByName(name);
+        }
+
         public void EditBuilding(Building building)
         {
-            throw new NotImplementedException();
+            _buildingRepository.Update(building);
         }
 
         public void NewBuilding(Building building)
@@ -38,7 +47,7 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 
         public void DeleteBuilding(Building building)
         {
-            throw new NotImplementedException();
+            _buildingRepository.Delete(building.SerialNumber);
         }
     }
 }

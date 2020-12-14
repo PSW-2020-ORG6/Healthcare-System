@@ -7,6 +7,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class RoomTypeDatabaseSql : GenericDatabaseSql<RoomType>, IRoomTypeRepository
     {
+        public RoomTypeDatabaseSql() : base()
+        {
+        }
+
         public RoomTypeDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
         {
         }
