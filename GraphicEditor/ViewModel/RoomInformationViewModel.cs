@@ -77,8 +77,11 @@ namespace GraphicEditor.ViewModel
         void updateBedInfo(Bed bedInfo)
         {
             //Bed p = new Bed(BedInfo.Name, BedInfo.Id);
-            BedUpdate w = new BedUpdate(selectedBed, this);
-            w.ShowDialog();
+            if (selectedBed != null)
+            {
+                BedUpdate w = new BedUpdate(selectedBed, this);
+                w.ShowDialog();
+            }
         }
 
         void updateRoomInfo(Room room)
