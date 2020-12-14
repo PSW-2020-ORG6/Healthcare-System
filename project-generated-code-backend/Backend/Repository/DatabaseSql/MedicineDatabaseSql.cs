@@ -60,5 +60,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             return GetAll().Where(m => !m.IsApproved).ToList();
         }
+
+        public List<Medicine> GetByRoomSerialNumber(string serialNumber)
+        {
+            return GetAll().Where(m => m.RoomSerialNumber.ToLower().Equals(serialNumber.ToLower())).ToList();
+        }
     }
 }
