@@ -214,19 +214,6 @@
                 document.getElementById("step4").className = "circleStep circlesStepDisabled"
             }
             else if (this.id == 2) {
-                var datenew = this.date
-                var dates = ""
-                while (datenew != "2020-12-16") {
-                    //alert(datenew)
-                    dates = dates + datenew + ","
-                    datenew = new Date(datenew)
-                    datenew.setDate(datenew.getDate() + 1)
-                    var day = datenew.getDate()
-                    var month = datenew.getMonth() + 1
-                    var year = datenew.getFullYear()
-                    datenew = year + "-" + month + "-" + day
-                }
-                alert(dates)
                 document.getElementById("step1").className = "circleStep circleStepDone"
                 document.getElementById("step2").className = "circleStep circleStepDone"
                 document.getElementById("step3").className = "circleStep circlesStepDisabled"
@@ -319,7 +306,6 @@
             if (this.Validation2()) {
                 this.display = true;
                 if (document.getElementById("cbd").checked == true) {
-                    alert("uspesno")
                     var dates = this.CreateDates()
                     axios
                         .get('http://localhost:49900/appointment/appointmentsWithReccomendation', { params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, dates: dates } })
@@ -385,7 +371,6 @@
             }
         },
         MakeAppointment3: function () {
-            alert(this.timeInterval.start)
                 axios
                     .post('http://localhost:49900/appointment/makeAppointment/' + "600001" + '/' + this.timeInterval.start + '/' + this.myDate)
                     .then(response => {
