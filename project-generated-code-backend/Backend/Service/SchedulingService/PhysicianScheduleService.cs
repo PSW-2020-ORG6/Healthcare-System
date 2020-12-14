@@ -19,6 +19,11 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         private readonly Physician _loggedPhysician;
         private readonly IAppointmentRepository _appointmentRepository;
 
+        public PhysicianScheduleService(Physician loggedPhysician)
+        {
+            _loggedPhysician = loggedPhysician;
+            _appointmentRepository = new AppointmentDatabaseSql();
+        }
         public PhysicianScheduleService(Physician loggedPhysician, IAppointmentRepository appointmentRepository)
         {
             _loggedPhysician = loggedPhysician;
@@ -42,7 +47,6 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             List<Appointment> appointments = _appointmentRepository.GetAppointmentsByPhysician(_loggedPhysician);
             return appointments.FirstOrDefault(appointment =>
                 appointment.Date.Equals(DateTime.Today) && appointment.Patient.Equals(patient));
-            return null;
         }
 
         public Appointment GetPreviousAppointmentForPatient(Patient patient)
@@ -78,5 +82,6 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             appointments.Sort((a, b) => a.CompareTo(b));
             return appointments;
         }
+
     }
 }
