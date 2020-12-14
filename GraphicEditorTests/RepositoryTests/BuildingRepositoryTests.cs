@@ -2,20 +2,20 @@
 using HealthClinicBackend.Backend.Repository.Generic;
 using Xunit;
 
-namespace GraphicEditorTests
+namespace GraphicEditorTests.RepositoryTests
 {
-    public class BuildingSearchesTests
+    public class BuildingRepositoryTests
     {
         private readonly IBuildingRepository _buildingRepository;
 
-        public BuildingSearchesTests()
+        public BuildingRepositoryTests()
         {
             // Arrange
             _buildingRepository = new BuildingDatabaseSql();
         }
 
         [Fact]
-        public void GetBuildingByName_BuildingExist_ReturnBuilding()
+        public void GetBuildingByName_BuildingExists_ReturnBuilding()
         {
             // Act
             var building = _buildingRepository.GetByName("Cardiology")[0];
@@ -33,6 +33,17 @@ namespace GraphicEditorTests
 
             // Assert
             Assert.Empty(buildings);
+        }
+
+        [Fact]
+        public void GetAllBuildings_BuildingsExist_ReturnBuildings()
+        {
+            // Act
+            var buildings = _buildingRepository.GetAll();
+
+            // Assert
+            Assert.NotEmpty(buildings);
+            Assert.NotNull(buildings);
         }
     }
 }

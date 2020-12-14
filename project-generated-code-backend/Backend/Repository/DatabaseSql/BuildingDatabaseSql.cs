@@ -18,32 +18,32 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public override List<Building> GetAll()
         {
-            return dbContext.Building.ToList();
+            return DbContext.Building.ToList();
         }
 
         public override Building GetById(string id)
         {
-            return dbContext.Building.Find(id);
+            return DbContext.Building.Find(id);
         }
 
         public override void Save(Building newEntity)
         {
-            dbContext.Building.Add(newEntity);
-            dbContext.SaveChanges();
+            DbContext.Building.Add(newEntity);
+            DbContext.SaveChanges();
         }
 
         public override void Update(Building updateEntity)
         {
-            dbContext.Building.Update(updateEntity);
-            dbContext.SaveChanges();
+            DbContext.Building.Update(updateEntity);
+            DbContext.SaveChanges();
         }
 
         public override void Delete(string id)
         {
             var building = GetById(id);
             if (building == null) return;
-            dbContext.Building.Remove(building);
-            dbContext.SaveChanges();
+            DbContext.Building.Remove(building);
+            DbContext.SaveChanges();
         }
 
         public List<Building> GetByName(string name)

@@ -19,9 +19,20 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
             _roomService = roomService;
         }
 
+
+        public RoomController()
+        {
+            _roomService = new RoomService();
+        }
+
         public Room GetById(String id)
         {
-            throw new NotImplementedException();
+            return _roomService.GetById(id);
+        }
+
+        public List<Room> GetByName(string name)
+        {
+            return _roomService.GetByName(name);
         }
 
         public List<Room> GetAll()
@@ -68,7 +79,6 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
         {
             return _roomService.GetAutoAllRoomTypes();
         }
-
 
         public void AddRoomTypes(RoomType roomType)
         {

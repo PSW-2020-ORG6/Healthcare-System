@@ -17,6 +17,21 @@ namespace HealthClinicBackend.Backend.Service.MedicineService
             _rejectionRepository = rejectionRepository;
         }
 
+        public SuperintendentMedicineService(IMedicineRepository medicineRepository)
+        {
+            this._medicineRepository = medicineRepository;
+        }
+
+        public List<Medicine> GetAll()
+        {
+            return _medicineRepository.GetAll();
+        }
+
+        public List<Medicine> GetByName(string name)
+        {
+            return _medicineRepository.GetByName(name);
+        }
+
         public List<Medicine> GetAllApproved()
         {
             return _medicineRepository.GetApproved();

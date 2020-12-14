@@ -8,14 +8,12 @@ using HealthClinicBackend.Backend.Model.Survey;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql.RelationHelpers;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class HealthCareSystemDbContext : DbContext
     {
-        private const string CONNECTION_STRING =
-            "User ID =postgres;Password=root;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
-
         public DbSet<Address> Address { get; set; }
         public DbSet<Admin> Admin { get; set; }
         public DbSet<City> City { get; set; }
@@ -56,11 +54,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public HealthCareSystemDbContext(DbContextOptions<HealthCareSystemDbContext> options) : base(options)
         {
         }
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseNpgsql(CONNECTION_STRING);
-        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -651,7 +644,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Physician>().Ignore(o => o.Specialization);
             modelBuilder.Entity<Physician>().Ignore(o => o.VacationTime);
             modelBuilder.Entity<Physician>().Ignore(o => o.WorkSchedule);
-            modelBuilder.Entity<Physician>().Ignore(o => o.AllSpecializations);
             modelBuilder.Entity<Physician>().HasData(
                 new Physician
                 {

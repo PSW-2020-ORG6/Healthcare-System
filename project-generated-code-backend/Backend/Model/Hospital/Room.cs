@@ -42,6 +42,21 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             Beds = new List<Bed>();
         }
 
+        public Room(string serialNumber, string name, int id, string floorSerialNumber, string roomTypeSerialNumber,
+            int row, int column, int rowSpan, int columnSpan, string style)
+          : base(serialNumber)
+        {
+            Name = name;
+            Id = id;
+            FloorSerialNumber = floorSerialNumber;
+            RoomTypeSerialNumber = roomTypeSerialNumber;
+            Row = row;
+            Column = column;
+            RowSpan = rowSpan;
+            ColumnSpan = columnSpan;
+            Style = style;
+        }
+
         public Room(int id, RoomType roomType) : base()
         {
             Id = id;

@@ -31,7 +31,7 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 
         public void EditEquipment(Equipment equipment)
         {
-            throw new NotImplementedException();
+            _equipmentService.EditEquipment(equipment);
         }
 
         public void NewEquipment(Equipment equipment)
@@ -41,7 +41,12 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 
         public void DeleteEquipment(Equipment equipment)
         {
-            throw new NotImplementedException();
+            _equipmentService.DeleteEquipment(equipment);
+        }
+
+        public List<Equipment> GetByName(string name)
+        {
+            return _equipmentService.GetByName(name);
         }
     }
 }

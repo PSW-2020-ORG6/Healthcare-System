@@ -18,7 +18,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public override List<Medicine> GetAll()
         {
-            return dbContext.Medicine.ToList();
+            return DbContext.Medicine.ToList();
         }
 
         public override Medicine GetById(string id)
