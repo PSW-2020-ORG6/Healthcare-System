@@ -21,8 +21,13 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public Floor Floor { get; set; }
         [ForeignKey("Room")] public string RoomSerialNumber { get; set; }
         public Room Room { get; set; }
+        public int Quantity { get; set; }
 
         public Equipment() : base()
+        {
+        }
+
+        public Equipment(string serialNumber) : base(serialNumber)
         {
         }
 
