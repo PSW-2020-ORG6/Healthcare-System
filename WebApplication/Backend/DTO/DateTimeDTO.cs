@@ -17,7 +17,7 @@ namespace WebApplication.Backend.DTO
             return dateTimes;
         }
 
-        private DateTime CreateDateTime(string date)
+        public DateTime CreateDateTime(string date)
         {
             string[] dates = date.Split("-");
             return new DateTime(Convert.ToInt32(dates[0]), Convert.ToInt32(dates[1]), Convert.ToInt32(dates[2]));

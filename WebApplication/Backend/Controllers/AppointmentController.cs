@@ -82,10 +82,19 @@ namespace WebApplication.Backend.Controllers
         }
 
         [HttpGet("appointmentsWithReccomendation")]
-        public Dictionary<string, List<TimeIntervalDTO>> GetAllAvailableAppointmentsWithRecomendation(string physicianId, string specializationName, string dates)
+        public List<AppointmentWithRecommendationDTO> GetAllAvailableAppointmentsWithRecomendation(string physicianId, string specializationName, string dates)
         {
             if (dateTimeDTO.IsPreferredTimeIntervalValid(dates))
                 return appointmentService.AppointmentRecomendation(physicianId, specializationName, dateTimeDTO.DateGeneration(dates));
+            else
+                return null;
+        }
+
+        [HttpGet("appointmentsWithPhysicianPriority")]
+        public List<AppointmentWithRecommendationDTO> GetAllAvailableAppointmentsWithPhysicianPriority(string physicianId, string specializationName, string dates)
+        {
+            if (dateTimeDTO.IsPreferredTimeIntervalValid(dates))
+                return appointmentService.AppointmentRecomendationWithPhysicianPriority(physicianId, specializationName, dateTimeDTO.DateGeneration(dates));
             else
                 return null;
         }

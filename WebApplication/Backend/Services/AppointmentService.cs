@@ -10,7 +10,7 @@ using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Services
 {
-    public class AppointmentService
+    public class AppointmentService : IAppointmentService
     {
         private ISpecializationRepository specializationRepository;
         private ITimeIntervalRepository timeIntervalRepository = new TimeIntervalRepository();
@@ -19,6 +19,8 @@ namespace WebApplication.Backend.Services
         private PhysicianDTO physitianDTO = new PhysicianDTO();
         private TimeIntervalDTO timeIntervalDTO = new TimeIntervalDTO();
         private SpecializationDTO specializationDTO = new SpecializationDTO();
+        private AppointmentWithRecommendationDTO appointmentWithRecommendationDTO = new AppointmentWithRecommendationDTO();
+        private DateTimeDTO dateTimeDTO = new DateTimeDTO();
 
         public AppointmentService()
         {
@@ -78,7 +80,7 @@ namespace WebApplication.Backend.Services
         {
             List<TimeIntervalDTO> result = new List<TimeIntervalDTO>();
             DateTime time = physician.WorkSchedule.Start;
-            while (time <= physician.WorkSchedule.End)
+            while (time < physician.WorkSchedule.End) 
             {
                 bool existance = false;
                 if (appointments.Any())
@@ -98,21 +100,71 @@ namespace WebApplication.Backend.Services
             }
             return result;
         }
-        private bool CompareTimeIntervals(DateTime dateTime1, DateTime dateTime2)
+
+        public List<AppointmentWithRecommendationDTO> AppointmentRecomendationWithPhysicianPriority(string physicianId, string specializationName, string[] dates)
         {
-            return dateTime1.Hour == dateTime2.Hour && dateTime1.Minute == dateTime2.Minute;
+            List<AppointmentWithRecommendationDTO> availableAppointments = new List<AppointmentWithRecommendationDTO>();
+            foreach (string date in dates)
+            {
+                availableAppointments.Add(new AppointmentWithRecommendationDTO(date, physicianId, GetAllAvailableAppointments(physicianId, specializationName, date), ""));
+            }
+            if (!availableAppointments.Any())
+            {
+                foreach (string date in AdditionalDates(dates))
+                {
+                    availableAppointments.Add(new AppointmentWithRecommendationDTO(date, physicianId, GetAllAvailableAppointments(physicianId, specializationName, date), ""));
+                }
+            }
+            return availableAppointments;
         }
+
+        private List<String> AdditionalDates(string[] dates)
+        {
+           List<string> newDates = new List<string>();
+            DateTime dateTimeFrom = dateTimeDTO.CreateDateTime(dates[0]);
+            DateTime dateTimeTo = dateTimeDTO.CreateDateTime(dates[dates.Length - 1]);
+            while (newDates.Count < 3)
+            {
+                dateTimeTo = dateTimeTo.AddDays(1);
+                newDates.Add(DateConversion(dateTimeTo));
+            }
+            while (newDates.Count < 6 && dateTimeDTO.IsPreferredTimeValid(DateConversion(dateTimeFrom)))
+            {
+                dateTimeFrom = dateTimeFrom.AddDays(-1);
+                newDates.Add(DateConversion(dateTimeFrom));
+            }
+            return newDates;
+        }
+
+        private string DateConversion(DateTime date)
+        {
+            string[] dateString = date.ToString().Split(" ");
+            string[] partsOfDate = dateString[0].Split("/");
+            return partsOfDate[2] + "-" + partsOfDate[0] + "-" + partsOfDate[1];
+        }
+
         public bool AddAppointment(Appointment appointment)
         {
             return appointmentRepository.AddAppointment(appointment);
         }
 
-        public Dictionary<string, List<TimeIntervalDTO>> AppointmentRecomendation(string physicianId, string specializationName, string[] dates)
+        public List<AppointmentWithRecommendationDTO> AppointmentRecomendation(string physicianId, string specializationName, string[] dates)
         {
-            Dictionary<string, List<TimeIntervalDTO>> availableAppointments = new Dictionary<string, List<TimeIntervalDTO>>();
+           List<AppointmentWithRecommendationDTO> availableAppointments = new List<AppointmentWithRecommendationDTO>();
             foreach (string date in dates)
             {
-                availableAppointments.Add(date, GetAllAvailableAppointments(physicianId, specializationName, date));
+                availableAppointments.Add(new AppointmentWithRecommendationDTO(date, physicianId, GetAllAvailableAppointments(physicianId, specializationName, date), ""));
+            }
+            if (!availableAppointments.Any())
+            {
+                List<Physician> physicians = physicianRepository.GetPhysicianBySpecialization(specializationName, physicianId);
+                foreach(Physician physician in physicians)
+                {
+                    foreach (string date in dates)
+                    {
+                        availableAppointments.Add(new AppointmentWithRecommendationDTO(date, physician.Id, GetAllAvailableAppointments(physician.Id, specializationName, date), physician.FullName));
+                    }
+                }
             }
             return availableAppointments;
         }
