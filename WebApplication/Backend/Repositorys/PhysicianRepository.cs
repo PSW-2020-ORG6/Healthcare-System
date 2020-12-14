@@ -76,7 +76,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetPhysitians("Select * from physitian where FullName like '" + fullName + "'");
+                return GetPhysicians("Select * from physitian where FullName like '" + fullName + "'");
             }
             catch (Exception)
             {

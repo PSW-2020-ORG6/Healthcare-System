@@ -15,7 +15,6 @@ namespace WebApplication.Backend.DTO
         public ProcedureTypeDTO ProcedureTypeDTO { get; set; }
         public bool Urgency { get; set; }
         public DateTime Date { get; set; }
-        public PatientDto PatientDTO { get; set; }
         public bool Active { get; set; }
         public bool IsSurveyDone { get; set; }
 

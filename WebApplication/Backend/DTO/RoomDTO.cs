@@ -15,6 +15,7 @@ namespace WebApplication.Backend.DTO
         }
         public RoomDTO() { }
 
+
         public string Name
         {
             get { return name; }

@@ -9,6 +9,8 @@ using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
 using WebApplication.Backend.Repositorys.Interfaces;
 using Xunit;
+using WebApplication.Backend.DTO;
+using WebApplication.Backend.Services;
 
 namespace WebApplicationTests
 {
@@ -30,11 +32,15 @@ namespace WebApplicationTests
             new DateTime(2020,12,9,10,45,49)
         };
 
+        List<AppointmentDTO> appointmentsDto = new List<AppointmentDTO>();
+
+        AppointmentDTO appointmentDTO =new AppointmentDTO();
+
         private Appointment appointment = new Appointment()
         {
             Room = new Room("101", 101, new RoomType("Examination room 101")),
             Patient = new Patient("5", "Jelena", "Tanjic"),
-            Physician = new Physician("Gojko", "Simic", "600001"),
+            Physician = new Physician("Gojko", "Simic", new Specialization("Neurosurgeon")),
             TimeInterval = new TimeInterval(new DateTime(1975, 11, 11), new DateTime(1975, 11, 11)),
             ProcedureType = new ProcedureType("Operation on patient 0002", 50, new Specialization("Neurosurgeon")),
             Active = true,
@@ -83,28 +89,32 @@ namespace WebApplicationTests
                     }
 
     };
+            Date = new DateTime(1975, 11, 11)
+        };
+        private Appointment appointment1 = new Appointment()
+        {
+            Room = new Room("102", 102, new RoomType("Examination room 102")),
+            Patient = new Patient("4", "Mika", "Mikic"),
+            Physician = new Physician("Hari", "Haler",new Specialization("Neurosurgeon")),
+            TimeInterval = new TimeInterval(new DateTime(1975, 11, 11), new DateTime(1975, 11, 11)),
+            ProcedureType = new ProcedureType("Operation on patient 0002", 50, new Specialization("Neurosurgeon")),
+            Active = true,
+            Date = new DateTime(1975, 11, 11)
+        };
 
         [Fact]
         public void Find_Appointments_By_PatientId_Success()
         {
             var stubRepository = new Mock<IAppointmentRepository>();
-            bool result;
             appointments.Add(appointment);
+            appointments.Add(appointment1);
+            appointmentsDto = appointmentDTO.ConvertListToAppointmentDTO(appointments);
 
             stubRepository.Setup(m => m.GetAllAppointmentByPatientId(patientIdTrue)).Returns(appointments);
-            WebApplication.Backend.Services.AppointmentService service =
-                new WebApplication.Backend.Services.AppointmentService(stubRepository.Object);
-            appointments = service.GetAllAppointmentsByPatientId(patientIdTrue);
-            if (appointments.Count == 0)
-            {
-                result = false;
-            }
-            else
-            {
-                result = true;
-            }
-
-            Assert.True(result);
+            AppointmentService service =new AppointmentService(stubRepository.Object);
+            appointmentsDto = service.GetAllAppointmentsByPatientId(patientIdTrue);
+       
+            Assert.NotEmpty(appointmentsDto);
         }
 
 
@@ -112,22 +122,14 @@ namespace WebApplicationTests
         public void Find_Appointments_By_PatientId_Failure()
         {
             var stubRepository = new Mock<IAppointmentRepository>();
-            bool result;
+            appointmentsDto = appointmentDTO.ConvertListToAppointmentDTO(appointments);
+
 
             stubRepository.Setup(m => m.GetAllAppointmentByPatientId(patientIdFalse)).Returns(appointments);
-            WebApplication.Backend.Services.AppointmentService service =
-                new WebApplication.Backend.Services.AppointmentService(stubRepository.Object);
-            appointments = service.GetAllAppointmentsByPatientId(patientIdFalse);
-            if (appointments.Count != 0)
-            {
-                result = true;
-            }
-            else
-            {
-                result = false;
-            }
+            AppointmentService service =new AppointmentService(stubRepository.Object);
+            appointmentsDto = service.GetAllAppointmentsByPatientId(patientIdFalse);
 
-            Assert.False(result);
+            Assert.Empty(appointmentsDto);
         }
 
         [Fact]

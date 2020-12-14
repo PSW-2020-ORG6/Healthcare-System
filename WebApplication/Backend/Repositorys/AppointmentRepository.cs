@@ -9,6 +9,7 @@ using NPOI.SS.Formula.Functions;
 using HealthClinicBackend.Backend.Model.Util;
 using Model.Accounts;
 using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Util;
 
 namespace WebApplication.Backend.Repositorys
 {
@@ -23,7 +24,7 @@ namespace WebApplication.Backend.Repositorys
 
         public AppointmentRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=baza;user=root;password=root");
         }
 
         private List<Appointment> GetAppointments(String query)
@@ -37,7 +38,7 @@ namespace WebApplication.Backend.Repositorys
                 Appointment entity = new Appointment();
                 entity.SerialNumber = (string)sqlReader[0];
                 entity.Room = roomRepository.GetRoomBySerialNumber((string)sqlReader[1]);
-                entity.Physician = physitianRepository.GetPhysitianBySerialNumber((string)sqlReader[2]);
+                entity.Physician = physitianRepository.GetPhysicianBySerialNumber((string)sqlReader[2]);
                 entity.Patient = patientRepository.GetPatientBySerialNumber((string)sqlReader[3]);
                 entity.TimeInterval = timeIntervalRepository.GetTimeIntervalById((string)sqlReader[6]);
                 entity.ProcedureType = procedureTypeRepository.GetProcedureTypeBySerialNumber((string)sqlReader[7]);
@@ -204,7 +205,7 @@ namespace WebApplication.Backend.Repositorys
         bool IAppointmentRepository.IsSurveyDoneByPatientIdAppointmentDatePhysicianName(String patientId, String appointmentDate, String physicianName)
         {
             bool var = false;
-            List<Physician> physitianResult = physitianRepository.GetPhysitiansByFullName(physicianName);
+            List<Physician> physitianResult = physitianRepository.GetPhysiciansByFullName(physicianName);
             List<String> physicianId = new List<string>();
             foreach (Physician physician in physitianResult)
             {
@@ -227,7 +228,7 @@ namespace WebApplication.Backend.Repositorys
                 dateD = date[2] + "-" + date[1] + "-" + date[0] + " 00:00:00";
 
             connection.Open();
-            List<Physician> physitianResult = physitianRepository.GetPhysitiansByFullName(physicianName);
+            List<Physician> physitianResult = physitianRepository.GetPhysiciansByFullName(physicianName);
             List<String> physicianId = new List<string>();
             foreach (Physician physician in physitianResult)
             {

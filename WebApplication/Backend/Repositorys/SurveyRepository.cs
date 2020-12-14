@@ -462,8 +462,8 @@ namespace WebApplication.Backend.Repositorys
             List<String> resulList = new List<String>();
             foreach (Report r in reports)
             {
-                PhysitianRepository phisitionRepository = new PhysitianRepository();
-                List<Physician> physitians = phisitionRepository.GetPhysitiansByFullName(r.Physician.FullName);
+                PhysicianRepository phisitionRepository = new PhysicianRepository();
+                List<Physician> physitians = phisitionRepository.GetPhysiciansByFullName(r.Physician.FullName);
                 foreach (Physician p in physitians)
                 {
                     r.Physician.FullName = p.FullName;
