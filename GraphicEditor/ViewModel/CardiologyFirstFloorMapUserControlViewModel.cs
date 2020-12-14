@@ -18,11 +18,20 @@ namespace GraphicEditor.ViewModel
         EquipmentDatabaseSql equipmentRepository = new EquipmentDatabaseSql();
         RoomTypeDatabaseSql roomTypeRepository = new RoomTypeDatabaseSql();
 
+        MainWindowViewModel mapParent;
+        CardiologyBuildingUserControlViewModel buildingParent;
+
+        Grid RoomGrid;
+
         public ResourceDictionary ResourceDictionary = new ResourceDictionary();
 
-        public CardiologyFirstFloorMapUserControlViewModel()
+        public CardiologyFirstFloorMapUserControlViewModel(MainWindowViewModel _mapParent, CardiologyBuildingUserControlViewModel _buildingParent, Grid grid)
         {
+            mapParent = _mapParent;
+            buildingParent = _buildingParent;
             ShowRoomCommand = new MyICommand<Room>(ShowRoom);
+            RoomGrid = grid;
+            InitialGridRender();
         }
 
         public void InitialGridRender()
@@ -32,7 +41,7 @@ namespace GraphicEditor.ViewModel
             {
                 Button button = new Button();
                 button.Style = (Style)ResourceDictionary[room.Style];
-                button.Name = room.Name;
+                button.Content = room.Name;
                 Grid.SetColumnSpan(button, room.ColumnSpan);
                 Grid.SetRowSpan(button, room.RowSpan);
                 Grid.SetColumn(button, room.Column);
@@ -43,8 +52,8 @@ namespace GraphicEditor.ViewModel
                 room.RoomType = roomTypeRepository.GetBySerialNumber(room.RoomTypeSerialNumber);
                 room.Equipment = equipmentRepository.GetByRoomSerialNumber(room.SerialNumber);
 
-                //HospitalMapGrid.Children.Add(button);
-                //HospitalMapGrid.UpdateLayout();
+                RoomGrid.Children.Add(button);
+                RoomGrid.UpdateLayout();
             }
         }
 

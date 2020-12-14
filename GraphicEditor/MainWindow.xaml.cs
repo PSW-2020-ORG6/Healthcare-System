@@ -19,10 +19,12 @@ namespace GraphicEditor
 
         public MainWindow()
         {
+            InitializeComponent();
             Application.Current.MainWindow.Width = MainScreenWidth;
             Application.Current.MainWindow.Height = MainScreenHeight;
+            this.DataContext = new MainWindowViewModel();
 
-            InitializeComponent();
+            
             TimeManaged();
         }
 

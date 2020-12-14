@@ -10,12 +10,13 @@ namespace GraphicEditor.View.UserControls
     /// </summary>
     public partial class CardiologyBuildingUserControl : UserControl
     {
-        public CardiologyBuildingUserControl()
+        public CardiologyBuildingUserControl(MainWindowViewModel vm)
         {
-            this.DataContext = MapContentUserControlViewModel.CardiologyBuilding;
             InitializeComponent();
+            this.DataContext = new CardiologyBuildingUserControlViewModel(this, vm);
+           
 
-            MapContentUserControlViewModel.CardiologyBuilding.grid = CardiologyFirstFloorMapUserControl.FloorGrid;
+            //MapContentUserControlViewModel.CardiologyBuilding.grid = CardiologyFirstFloorMapUserControl.FloorGrid;
             //MapContentUserControlViewModel.CardiologyBuilding.FirstFloor.InitialGridRender();
         }
 

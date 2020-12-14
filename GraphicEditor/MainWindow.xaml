@@ -17,15 +17,11 @@
         MinWidth="1300"
         MinHeight="700">
 
-    <Window.DataContext>
-        <local:MainWindowViewModel/>
-    </Window.DataContext>
-
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
     </Window.CommandBindings>
 
-    <Window.Resources>
+    <!--<Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:HospitalMapUserControlViewModel}">
             <viewUserControl:HospitalMapUserControl/>
         </DataTemplate>
@@ -35,7 +31,7 @@
         <DataTemplate DataType="{x:Type viewModel:LoginUserControlViewModel}">
             <viewUserControl:LoginUserControl/>
         </DataTemplate>
-    </Window.Resources>
+    </Window.Resources>-->
 
     <Grid l:HelpProvider.HelpKey="Home">
         <Grid.RowDefinitions>
@@ -58,10 +54,13 @@
         </DockPanel>
 
         <!-- Map -->
-        <ContentControl Grid.Row="1" 
-                        Content="{Binding Path=CurrentViewModel}"
+        <ScrollViewer Grid.Row="1" >
+            <ContentControl 
+                        Content="{Binding Path=CurrentUserControl, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         BorderBrush="Black"
                         BorderThickness="1"/>
+        </ScrollViewer>
+        
 
         <!-- StatusBar -->
         <DockPanel Grid.Row="2" >
