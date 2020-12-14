@@ -12,7 +12,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <!-- #Styles -->
                 <ResourceDictionary Source="/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml" />
-
+                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -40,12 +40,13 @@
                        Source="/GraphicEditor;component/Resources/Images/legendPattern.png"
                        VerticalAlignment="Center"/>
                 <StackPanel 
+                    Margin="0 600 0 0"
                     VerticalAlignment="Bottom" 
                     HorizontalAlignment="Center">
                     <Button Click="ShowRoomSearch"
                             Margin="20"
                             Height="40" 
-                            Width="150" >
+                            Width="160" >
                         <DockPanel Width="auto">
                             <TextBlock HorizontalAlignment="Center" 
                                                        VerticalAlignment="Center">
@@ -54,13 +55,13 @@
                         </DockPanel>
                     </Button>
                     <Button Click="ShowEquipmentSearch"
-                        Margin="20"
-                        Height="40" 
-                        Width="150" >
+                                Margin="20"
+                                Height="40" 
+                                Width="160" >
                         <DockPanel Width="auto">
                             <TextBlock HorizontalAlignment="Center" 
-                                           VerticalAlignment="Center">
-                                Search Equipment
+                                    VerticalAlignment="Center">
+                                                Search Equipment
                             </TextBlock>
                         </DockPanel>
                     </Button>
@@ -72,6 +73,17 @@
                             <TextBlock HorizontalAlignment="Center" 
                                            VerticalAlignment="Center">
                                 Search Medicine
+                            </TextBlock>
+                        </DockPanel>
+                    </Button>
+                    <Button Click="MakeAppointment"
+                                Margin="20"
+                                Height="40" 
+                                Width="160" >
+                        <DockPanel Width="auto">
+                            <TextBlock HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center">
+                                                Make appointment
                             </TextBlock>
                         </DockPanel>
                     </Button>

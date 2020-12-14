@@ -5,6 +5,7 @@
 
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 using HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions;
 using HealthClinicBackend.Backend.Service.SchedulingService.PriorityStrategies;
@@ -21,6 +22,16 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         private readonly AppointmentGeneralitiesManager _appointmentGeneralitiesManager;
 
         private IPhysicianRepository _physicianRepository;
+
+        public AppointmentSchedulingService()
+        {
+            var physicianRepository = new PhysicianDatabaseSql();
+            SchedulingStrategyContext = new PatientSchedulingStrategy();
+            _appointmentGeneralitiesManager = new AppointmentGeneralitiesManager(physicianRepository, new RoomDatabaseSql(),
+                new AppointmentDatabaseSql(), new RenovationDatabaseSql(), new BedReservationDatabaseSql());
+
+            _physicianRepository = physicianRepository;
+        }
 
         public AppointmentSchedulingService(IPhysicianRepository physicianRepository,
             IRoomRepository roomRepository,

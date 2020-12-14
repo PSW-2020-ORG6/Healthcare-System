@@ -17,6 +17,13 @@ namespace HealthClinicBackend.Backend.Controller.SecretaryControllers
         private readonly AppointmentService _appointmentService;
         private readonly AppointmentSchedulingService _appointmentSchedulingService;
 
+        public SecretaryScheduleController()
+        {
+            _appointmentSchedulingService = new AppointmentSchedulingService();
+            _appointmentSchedulingService.SchedulingStrategyContext = new SecretarySchedulingStrategy();
+            _appointmentService = new AppointmentService();
+        }
+
         public SecretaryScheduleController(AppointmentSchedulingService appointmentSchedulingService,
             AppointmentService appointmentService)
         {

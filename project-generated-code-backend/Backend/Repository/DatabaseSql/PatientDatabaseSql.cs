@@ -20,9 +20,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             // Use Include method to connect object and its references from other tables
             return DbContext.Patient
-                //.Include(p => p.Address)
-                //.Include(p => p.Address.City)
-                //.Include(p => p.ChosenPhysician)
                 .ToList();
         }
 
