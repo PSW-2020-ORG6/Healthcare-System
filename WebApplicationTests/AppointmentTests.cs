@@ -89,8 +89,7 @@ namespace WebApplicationTests
                     }
 
     };
-            Date = new DateTime(1975, 11, 11)
-        };
+        
         private Appointment appointment1 = new Appointment()
         {
             Room = new Room("102", 102, new RoomType("Examination room 102")),
