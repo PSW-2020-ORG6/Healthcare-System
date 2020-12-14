@@ -17,8 +17,6 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public Patient Patient { get; set; }
 
 
-        private bool occupied;
-
         public bool IsOccupied 
         { 
             get

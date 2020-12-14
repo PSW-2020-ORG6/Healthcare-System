@@ -20,19 +20,19 @@ namespace GraphicEditor.View.UserControls
 
         private void ShowRoomSearch(object sender, RoutedEventArgs e)
         {
-            RoomSearch roomSearch = new RoomSearch();
+            RoomSearch roomSearch = new RoomSearch(_viewModel);
             roomSearch.Show();
         }
 
         private void ShowEquipmentSearch(object sender, RoutedEventArgs e)
         {
-            EquipmentSearch equipmentSearch = new EquipmentSearch();
+            EquipmentSearch equipmentSearch = new EquipmentSearch(_viewModel);
             equipmentSearch.Show();
         }
 
         private void ShowMedicineSearch(object sender, RoutedEventArgs e)
         {
-            MedicineSearch medicineSearch = new MedicineSearch();
+            MedicineSearch medicineSearch = new MedicineSearch(_viewModel);
             medicineSearch.Show();
         }
     }

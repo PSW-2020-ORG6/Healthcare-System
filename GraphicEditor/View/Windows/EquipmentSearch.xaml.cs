@@ -8,9 +8,9 @@ namespace GraphicEditor.View.Windows
     /// </summary>
     public partial class EquipmentSearch : Window
     {
-        public EquipmentSearch()
+        public EquipmentSearch(MainWindowViewModel viewModel)
         {
-            this.DataContext = new EquipmentSearchViewModel();
+            this.DataContext = new EquipmentSearchViewModel(viewModel);
             InitializeComponent();
         }
     }
