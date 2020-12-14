@@ -8,10 +8,10 @@ namespace GraphicEditor.View.Windows
     /// </summary>
     public partial class MedicineSearch : Window
     {
-        public MedicineSearch()
+        public MedicineSearch(MainWindowViewModel viewModel)
         {
-            this.DataContext = new MedicineSearchViewModel();
             InitializeComponent();
+            this.DataContext = new MedicineSearchViewModel(viewModel);
         }
     }
 }
