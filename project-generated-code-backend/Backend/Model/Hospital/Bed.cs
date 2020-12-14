@@ -11,14 +11,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HealthClinicBackend.Backend.Model.Hospital
 {
-    public class Bed : Entity
+    public class Bed : Equipment
     {
-        public string Name { get; set; }
-        public string Id { get; set; }
-        public string RoomId { get; set; }
-        [ForeignKey("Building")] public string BuildingSerialNumber { get; set; }
-        [ForeignKey("Floor")] public string FloorSerialNumber { get; set; }
-        [ForeignKey("Room")] public string RoomSerialNumber { get; set; }
+        //public string Name { get; set; }
+        //public string Id { get; set; }
+        //public string RoomId { get; set; }
+        //[ForeignKey("Building")] public string BuildingSerialNumber { get; set; }
+        //[ForeignKey("Floor")] public string FloorSerialNumber { get; set; }
+        //[ForeignKey("Room")] public string RoomSerialNumber { get; set; }
         [ForeignKey("Patient")] public string PatientSerialNumber { get; set; }
         public Patient Patient { get; set; }
 

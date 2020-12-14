@@ -246,6 +246,9 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Room>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Room>().Ignore(o => o.RoomType);
             modelBuilder.Entity<Room>().Ignore(o => o.Equipment);
+            modelBuilder.Entity<Room>().Property(o => o.ColumnSpan).HasDefaultValue(1);
+            modelBuilder.Entity<Room>().Property(o => o.RowSpan).HasDefaultValue(1);
+
             modelBuilder.Entity<Room>().HasData(
                 new Room
                 {
@@ -315,94 +318,12 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 new Room
                 {
                     SerialNumber = "106",
-                    Name = "Operation room 106",
+                    Name = "PROBAAA 106",
                     Id = 106,
-                    FloorSerialNumber = "1002",
-                    RoomTypeSerialNumber = "10000001",
-                    Row = 0,
-                    Column = 0,
-                    RowSpan = 4,
-                    ColumnSpan = 7,
-                    Style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "107",
-                    Name = "Operation room 107",
-                    Id = 107,
-                    FloorSerialNumber = "1002",
-                    RoomTypeSerialNumber = "10000001",
-                    Row = 8,
-                    Column = 0,
-                    RowSpan = 4,
-                    ColumnSpan = 7,
-                    Style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "108",
-                    Name = "Store room 108",
-                    Id = 108,
-                    FloorSerialNumber = "1002",
+                    FloorSerialNumber = "1001",
                     RoomTypeSerialNumber = "10000002",
-                    Row = 0,
-                    Column = 10,
-                    RowSpan = 2,
-                    ColumnSpan = 3,
-                    Style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "109",
-                    Name = "Examination room 109",
-                    Id = 109,
-                    FloorSerialNumber = "1003",
-                    RoomTypeSerialNumber = "10000003",
-                    Style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "110",
-                    Name = "Operation room 110",
-                    Id = 110,
-                    FloorSerialNumber = "1003",
-                    RoomTypeSerialNumber = "10000001",
-                    Style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "111",
-                    Name = "Examination room 111",
-                    Id = 111,
-                    FloorSerialNumber = "1003",
-                    RoomTypeSerialNumber = "10000003",
-                    Style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "112",
-                    Name = "Store room 112",
-                    Id = 112,
-                    FloorSerialNumber = "1003",
-                    RoomTypeSerialNumber = "10000002",
-                    Style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "113",
-                    Name = "Examination room 113",
-                    Id = 113,
-                    FloorSerialNumber = "1003",
-                    RoomTypeSerialNumber = "10000003",
-                    Style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "114",
-                    Name = "Examination room 114",
-                    Id = 114,
-                    FloorSerialNumber = "1003",
-                    RoomTypeSerialNumber = "10000003",
+                    Row = 15,
+                    Column = 15,
                     Style = "RoomButtonStyle"
                 }
             );
@@ -431,6 +352,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Medicine>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Medicine>().Ignore(o => o.MedicineManufacturer);
             modelBuilder.Entity<Medicine>().Ignore(o => o.MedicineType);
+            modelBuilder.Entity<Medicine>().Property(o => o.Quantity).HasDefaultValue(1);
             modelBuilder.Entity<Medicine>().HasData(
                 new Medicine
                 {
@@ -439,7 +361,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     GenericName = "Brufen",
                     MedicineManufacturerSerialNumber = "1",
                     MedicineTypeSerialNumber = "11",
-                    RoomSerialNumber = "101"
+                    RoomSerialNumber = "101",
+                    Quantity = 50
                 },
                 new Medicine
                 {
@@ -448,7 +371,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     GenericName = "Probiotic",
                     MedicineManufacturerSerialNumber = "2",
                     MedicineTypeSerialNumber = "12",
-                    RoomSerialNumber = "102"
+                    RoomSerialNumber = "102",
+                    Quantity = 30
                 },
                 new Medicine
                 {
@@ -457,7 +381,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     GenericName = "Aspirin",
                     MedicineManufacturerSerialNumber = "2",
                     MedicineTypeSerialNumber = "12",
-                    RoomSerialNumber = "103"
+                    RoomSerialNumber = "103",
+                    Quantity = 150
                 }
             );
         }
@@ -591,57 +516,9 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         private static void EquipmentCreation(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Equipment>().HasKey(o => o.Id);
+            modelBuilder.Entity<Equipment>().Property(o => o.Quantity).HasDefaultValue(1);
             modelBuilder.Entity<Equipment>().HasData(
-                new Equipment
-                {
-                    SerialNumber = "73",
-                    RoomId = "101",
-                    Name = "Bed",
-                    Id = "11",
-                    BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1001",
-                    RoomSerialNumber = "101"
-                },
-                new Equipment
-                {
-                    SerialNumber = "74",
-                    RoomId = "102",
-                    Name = "Bed",
-                    Id = "12",
-                    BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1001",
-                    RoomSerialNumber = "101"
-                },
-                new Equipment
-                {
-                    SerialNumber = "75",
-                    RoomId = "103",
-                    Name = "Bed",
-                    Id = "13",
-                    BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1001",
-                    RoomSerialNumber = "101"
-                },
-                new Equipment
-                {
-                    SerialNumber = "76",
-                    RoomId = "101",
-                    Name = "Bed",
-                    Id = "14",
-                    BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1001",
-                    RoomSerialNumber = "101"
-                },
-                new Equipment
-                {
-                    SerialNumber = "77",
-                    RoomId = "102",
-                    Name = "Bed",
-                    Id = "15",
-                    BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1002",
-                    RoomSerialNumber = "106"
-                },
+                //new Equipment
                 new Equipment
                 {
                     SerialNumber = "78",
@@ -650,78 +527,63 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     Id = "16",
                     BuildingSerialNumber = "10001",
                     FloorSerialNumber = "1002",
-                    RoomSerialNumber = "106"
-                },
-                new Equipment
-                {
-                    SerialNumber = "79",
-                    RoomId = "111",
-                    Name = "Table",
-                    Id = "17",
-                    BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1002",
-                    RoomSerialNumber = "107"
+                    RoomSerialNumber = "104",
+                    Quantity = 6
                 },
                 new Equipment
                 {
                     SerialNumber = "80",
-                    RoomId = "111",
+                    RoomId = "101",
                     Name = "Table",
                     Id = "18",
                     BuildingSerialNumber = "10001",
                     FloorSerialNumber = "1002",
-                    RoomSerialNumber = "107"
+                    RoomSerialNumber = "101",
+                    Quantity = 3
                 },
                 new Equipment
                 {
                     SerialNumber = "81",
-                    RoomId = "112",
-                    Name = "Bed",
+                    RoomId = "102",
+                    Name = "Syringe",
                     Id = "19",
                     BuildingSerialNumber = "10002",
                     FloorSerialNumber = "1003",
-                    RoomSerialNumber = "114"
+                    RoomSerialNumber = "102",
+                    Quantity = 100
                 },
                 new Equipment
                 {
-                    SerialNumber = "82",
-                    RoomId = "112",
-                    Name = "Bed",
-                    Id = "20",
-                    BuildingSerialNumber = "10002",
-                    FloorSerialNumber = "1003",
-                    RoomSerialNumber = "114"
-                },
-                new Equipment
-                {
-                    ///////////
                     SerialNumber = "83",
-                    RoomId = "111",
+                    RoomId = "104",
                     Name = "Mask",
                     Id = "21",
                     BuildingSerialNumber = "10001",
                     FloorSerialNumber = "1002",
-                    RoomSerialNumber = "107"
+                    RoomSerialNumber = "104",
+                    Quantity = 30
                 },
                 new Equipment
                 {
                     SerialNumber = "84",
-                    RoomId = "112",
+                    RoomId = "101",
                     Name = "Stethoscope",
                     Id = "22",
                     BuildingSerialNumber = "10002",
                     FloorSerialNumber = "1003",
-                    RoomSerialNumber = "114"
+                    RoomSerialNumber = "101",
+                    Quantity = 10
                 },
                 new Equipment
                 {
                     SerialNumber = "85",
-                    RoomId = "112",
+                    RoomId = "105",
                     Name = "Gloves",
                     Id = "23",
                     BuildingSerialNumber = "10002",
                     FloorSerialNumber = "1003",
-                    RoomSerialNumber = "114"
+                    RoomSerialNumber = "105",
+                    Quantity = 30
                 }
             );
         }
@@ -846,6 +708,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         private static void BedCreation(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Bed>().Property(o => o.Quantity).HasDefaultValue(1);
             modelBuilder.Entity<Bed>().HasData(
                 new Bed
                 {
