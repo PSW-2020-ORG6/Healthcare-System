@@ -14,10 +14,17 @@ namespace HealthClinicBackend.Backend.Repository
         public int RetryCount { get; set; }
         public int RetryWaitInSeconds { get; set; }
 
-        public string ConnectionString
+        public DataBaseConnectionSettings()
         {
-            get => $"server={Host} ;userid={User}; pwd={Password};"
-                   + $"port={Port}; database={Database}";
+            Host = "localhost";
+            User = "postgres";
+            Password = "super";
+            Port = "5432";
+            Database = "healthcare-system-db";
         }
+
+        public string ConnectionString =>
+            $"server={Host} ;userid={User}; pwd={Password};"
+            + $"port={Port}; database={Database}";
     }
 }

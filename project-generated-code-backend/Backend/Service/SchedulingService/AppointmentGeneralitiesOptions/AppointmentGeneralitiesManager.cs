@@ -11,7 +11,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
     class AppointmentGeneralitiesManager
     {
         private AppointmentDto _appointmentPreferences;
-        private readonly IPhysitianRepository _physicianRepository;
+        private readonly IPhysicianRepository _physicianRepository;
         private readonly IRoomRepository _roomRepository;
 
         public AppointmentGeneralitiesManager()

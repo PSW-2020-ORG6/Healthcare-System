@@ -9,7 +9,7 @@ using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Repository.Generic
 {
-    public interface IPhysitianRepository : IGenericRepository<Physician>
+    public interface IPhysicianRepository : IGenericRepository<Physician>
     {
         List<Physician> GetByName(string name);
         Physician GetByJmbg(string jmbg);

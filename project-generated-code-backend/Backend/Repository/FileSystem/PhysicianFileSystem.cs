@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace HealthClinicBackend.Backend.Repository.FileSystem
 {
-    public class PhysicianFileSystem : GenericFileSystem<Physician>, IPhysitianRepository
+    public class PhysicianFileSystem : GenericFileSystem<Physician>, IPhysicianRepository
     {
         public PhysicianFileSystem()
         {

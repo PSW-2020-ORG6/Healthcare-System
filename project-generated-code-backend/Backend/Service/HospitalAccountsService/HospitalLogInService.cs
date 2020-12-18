@@ -8,7 +8,7 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
     public class HospitalLogInService
     {
         private readonly IPatientRepository _patientRepository;
-        private readonly IPhysitianRepository _physicianRepository;
+        private readonly IPhysicianRepository _physicianRepository;
         private readonly ISecretaryRepository _secretaryRepository;
 
         public HospitalLogInService()

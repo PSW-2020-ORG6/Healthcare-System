@@ -8,7 +8,7 @@ using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class PhysicianDatabaseSql : GenericDatabaseSql<Physician>, IPhysitianRepository
+    public class PhysicianDatabaseSql : GenericDatabaseSql<Physician>, IPhysicianRepository
     {
         public override List<Physician> GetAll()
         {
@@ -52,11 +52,12 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public List<Physician> GetGeneralPractitioners()
         {
-            return GetAll()
-                .Where(p => p.Specialization
-                    .Select(s => s.Name)
-                    .Contains("General Practitioner"))
-                .ToList();
+            return new List<Physician> {GetById("2")};
+            // return GetAll()
+            //     .Where(p => p.Specialization
+            //         .Select(s => s.Name)
+            //         .Contains("General practitioner"))
+            //     .ToList();
         }
     }
 }

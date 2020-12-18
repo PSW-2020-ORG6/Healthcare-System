@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Blog;

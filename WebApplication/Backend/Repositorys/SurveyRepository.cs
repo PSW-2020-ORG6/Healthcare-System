@@ -1,5 +1,4 @@
 ﻿using Model.Accounts;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +15,15 @@ namespace WebApplication.Backend.Repositorys
         private readonly SurveyDatabaseSql _surveyRepository;
         private readonly PhysicianDatabaseSql _physicianRepository;
         private readonly ReportDatabaseSql _reportRepository;
-        private MySqlConnection connection;
+        private readonly PatientDatabaseSql _patientRepository;
+        // private MySqlConnection connection;
 
         public SurveyRepository()
         {
             _surveyRepository = new SurveyDatabaseSql();
+            _physicianRepository = new PhysicianDatabaseSql();
+            _reportRepository = new ReportDatabaseSql();
+            _patientRepository = new PatientDatabaseSql();
         }
 
         ////Vucetic Marija RA157/2017
@@ -49,28 +52,29 @@ namespace WebApplication.Backend.Repositorys
         ///</param>
         internal List<Report> GetReports(string sqlDml)
         {
-            connection.Open();
-            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
-            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<Report> resultList = new List<Report>();
-
-            while (sqlReader.Read())
-            {
-                Report entity = new Report();
-                entity.Patient = new Patient {Id = (String) sqlReader[3]};
-                entity.Physician = new Physician {SerialNumber = (String) sqlReader[4]};
-
-                resultList.Add(entity);
-            }
-
-            connection.Close();
-            foreach (Report report in resultList)
-            {
-                report.Physician = GetDoctorById("Select * from accounts where SerialNumber like'" +
-                                                 report.Physician.SerialNumber + "'");
-            }
-
-            return resultList;
+            throw new NotImplementedException();
+            // connection.Open();
+            // MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            // MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
+            // List<Report> resultList = new List<Report>();
+            //
+            // while (sqlReader.Read())
+            // {
+            //     Report entity = new Report();
+            //     entity.Patient = new Patient {Id = (String) sqlReader[3]};
+            //     entity.Physician = new Physician {SerialNumber = (String) sqlReader[4]};
+            //
+            //     resultList.Add(entity);
+            // }
+            //
+            // connection.Close();
+            // foreach (Report report in resultList)
+            // {
+            //     report.Physician = GetDoctorById("Select * from accounts where SerialNumber like'" +
+            //                                      report.Physician.SerialNumber + "'");
+            // }
+            //
+            // return resultList;
         }
 
         ////Vucetic Marija RA157/2017
@@ -84,15 +88,16 @@ namespace WebApplication.Backend.Repositorys
         ///</param>
         internal Physician GetDoctorById(string sqlDml)
         {
-            connection.Open();
-            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
-            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            sqlReader.Read();
-            Physician entity = new Physician();
-            entity.Name = (string) sqlReader[1];
-            entity.Surname = (string) sqlReader[2];
-            connection.Close();
-            return entity;
+            throw new NotImplementedException();
+            // connection.Open();
+            // MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            // MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
+            // sqlReader.Read();
+            // Physician entity = new Physician();
+            // entity.Name = (string) sqlReader[1];
+            // entity.Surname = (string) sqlReader[2];
+            // connection.Close();
+            // return entity;
         }
 
         ////Vucetic Marija RA157/2017
@@ -102,13 +107,14 @@ namespace WebApplication.Backend.Repositorys
         ///<returns>
         ///Patient object type
         ///</returns>
-        ///<param name="idPetient">Strign id parameter
+        ///<param name="idPatient">Strign id parameter
         ///</param>
-        internal Patient GetPatientById(string idPetient)
+        internal Patient GetPatientById(string idPatient)
         {
-            Patient patient = new Patient();
-            patient = GetPatient("Select * from patient where SerialNumber like '" + idPetient + "'");
-            return patient;
+            return _patientRepository.GetById(idPatient);
+            // Patient patient = new Patient();
+            // patient = GetPatient("Select * from patient where SerialNumber like '" + idPetient + "'");
+            // return patient;
         }
 
         ////Vucetic Marija RA157/2017
@@ -122,30 +128,31 @@ namespace WebApplication.Backend.Repositorys
         ///</param>
         internal Patient GetPatient(String sqlDml)
         {
-            connection.Open();
-            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
-            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            Patient patientResutl = new Patient();
-            while (sqlReader.Read())
-            {
-                Patient entity = new Patient();
-                entity.Id = (string) sqlReader[3];
-                entity.Name = (string) sqlReader[1];
-                entity.Surname = (string) sqlReader[2];
-                entity.ParentName = (string) sqlReader[7];
-                entity.SerialNumber = sqlReader[0].ToString();
-                entity.DateOfBirth = Convert.ToDateTime(sqlReader[4]);
-                entity.Contact = (string) sqlReader[5];
-                entity.Email = (string) sqlReader[6];
-                entity.Gender = (string) sqlReader[8];
-                entity.Guest = true;
-                //  Convert.ToBoolean(sqlReader[9]);
-                entity.Password = "password";
-                patientResutl = entity;
-            }
-
-            connection.Close();
-            return patientResutl;
+            throw new NotImplementedException();
+            // connection.Open();
+            // MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            // MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
+            // Patient patientResutl = new Patient();
+            // while (sqlReader.Read())
+            // {
+            //     Patient entity = new Patient();
+            //     entity.Id = (string) sqlReader[3];
+            //     entity.Name = (string) sqlReader[1];
+            //     entity.Surname = (string) sqlReader[2];
+            //     entity.ParentName = (string) sqlReader[7];
+            //     entity.SerialNumber = sqlReader[0].ToString();
+            //     entity.DateOfBirth = Convert.ToDateTime(sqlReader[4]);
+            //     entity.Contact = (string) sqlReader[5];
+            //     entity.Email = (string) sqlReader[6];
+            //     entity.Gender = (string) sqlReader[8];
+            //     entity.Guest = true;
+            //     //  Convert.ToBoolean(sqlReader[9]);
+            //     entity.Password = "password";
+            //     patientResutl = entity;
+            // }
+            //
+            // connection.Close();
+            // return patientResutl;
         }
 
         ////Vucetic Marija RA157/2017
@@ -423,20 +430,21 @@ namespace WebApplication.Backend.Repositorys
         ///
         public List<Physician> GetDoctors(string sqlDml)
         {
-            connection.Open();
-            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
-            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<Physician> resultList = new List<Physician>();
-
-            while (sqlReader.Read())
-            {
-                Physician entity = new Physician();
-                entity.Name = (string) sqlReader[2];
-                resultList.Add(entity);
-            }
-
-            connection.Close();
-            return resultList;
+            throw new NotImplementedException();
+            // connection.Open();
+            // MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            // MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
+            // List<Physician> resultList = new List<Physician>();
+            //
+            // while (sqlReader.Read())
+            // {
+            //     Physician entity = new Physician();
+            //     entity.Name = (string) sqlReader[2];
+            //     resultList.Add(entity);
+            // }
+            //
+            // connection.Close();
+            // return resultList;
         }
 
         ////Vucetic Marija RA157/2017

@@ -12,51 +12,51 @@ namespace WebApplication.Backend.Controllers
     public class SurveyController : ControllerBase
     {
 
-        private readonly SurveyService surveyService;
+        private readonly SurveyService _surveyService;
         public SurveyController()
         {
-            this.surveyService = new SurveyService();
+            this._surveyService = new SurveyService();
         }
 
         [HttpPost("add")]
         public IActionResult AddNewSurvey(Survey surveyText)
         {
-            surveyService.AddNewSurvey(surveyText);
+            _surveyService.AddNewSurvey(surveyText);
             return Ok();
         }
         [HttpGet("getDoctors")]
         public List<String> GetAllDoctorsFromReporstByPatientId(String patientId)
         {
-            return surveyService.GetAllDoctorsFromReporstByPatientId(patientId);
+            return _surveyService.GetAllDoctorsFromReporstByPatientId(patientId);
         }
         [HttpGet("getDoctorsFromSurvey")]
         public List<String> GetAllDoctorsFromReporstByPatientIdForSurvey(String patientId)
         {
-            return surveyService.GetAllDoctorsFromReporstByPatientIdFromSurvey(patientId);
+            return _surveyService.GetAllDoctorsFromReporstByPatientIdFromSurvey(patientId);
         }
         [HttpGet("getDoctorsForSurveyList")]
         public List<String> GetAllDoctorsFromReporstByPatientIdForSurveyList(String patientId)
         {
-            return surveyService.GetAllDoctorsFromReporstByPatientIdForSurveyList(patientId);
+            return _surveyService.GetAllDoctorsFromReporstByPatientIdForSurveyList(patientId);
         }
 
         [HttpGet("getStatistiEachQuestion")]
-        public List<StatisticAuxilaryClass> getStatisticsEachQuestion()
+        public List<StatisticAuxilaryClass> GetStatisticsEachQuestion()
         {
-            return surveyService.getStatisticsEachQuestion();
+            return _surveyService.getStatisticsEachQuestion();
         }
 
         [HttpGet("getStatistiEachTopic")]
-        public List<StatisticAuxilaryClass> getStatisticsEachTopic()
+        public List<StatisticAuxilaryClass> GetStatisticsEachTopic()
         {
-            return surveyService.getStatisticsEachTopic();
+            return _surveyService.getStatisticsEachTopic();
 
         }
 
         [HttpGet("getStatisticForDoctor")]
-        public List<StatisticAuxilaryClass> getStatisticsForDoctor(string ID)
+        public List<StatisticAuxilaryClass> GetStatisticsForDoctor(string ID)
         {
-            return surveyService.getStatisticsForDoctor(ID);
+            return _surveyService.getStatisticsForDoctor(ID);
 
         }
     }

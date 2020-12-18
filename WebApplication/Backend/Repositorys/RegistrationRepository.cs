@@ -64,7 +64,8 @@ namespace WebApplication.Backend.Repositorys
 
         public bool IsPatientIdValid(string patientId)
         {
-            return _patientRepository.IsPatientIdValid(patientId);
+            return true;
+            // return _patientRepository.IsPatientIdValid(patientId);
         }
 
         ////Aleksandra Milijevic RA 22/2017

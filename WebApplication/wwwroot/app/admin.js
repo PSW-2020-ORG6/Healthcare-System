@@ -17,11 +17,10 @@
     beforeMount() {
 
 
-
         axios
             .get('http://localhost:49900/feedback/approved')
             .then(response => {
-                this.approvedFeedbacks = response.data            
+                this.approvedFeedbacks = response.data
             })
             .catch(error => {
                 alert(error)
@@ -45,11 +44,8 @@
             })
 
 
-
-
-
         axios
-            .get('http://localhost:49900/survey/getDoctors', { params: { patientId: "0003" } })
+            .get('http://localhost:49900/survey/getDoctors', {params: {patientId: "111"}})
             .then(response => {
                 this.doctorsList = response.data;
 
@@ -58,9 +54,6 @@
             .catch(error => {
                 alert(error)
             })
-
-
-
 
 
     },

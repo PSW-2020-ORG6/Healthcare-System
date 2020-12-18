@@ -9,7 +9,7 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
 {
     public class PhysicianAccountService
     {
-        private readonly IPhysitianRepository _physicianRepository;
+        private readonly IPhysicianRepository _physicianRepository;
 
         public PhysicianAccountService()
         {
