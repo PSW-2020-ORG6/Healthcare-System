@@ -17,6 +17,8 @@ namespace WebApplication.Backend.DTO
         public DateTime Date { get; set; }
         public bool Active { get; set; }
         public bool IsSurveyDone { get; set; }
+        public string SerialNumber { get; set; }
+        public PatientDto PatientDTO { get; set; }
 
         public AppointmentDTO() { }
 
@@ -30,11 +32,15 @@ namespace WebApplication.Backend.DTO
             Active = appointment.Active;
             IsSurveyDone = appointment.IsSurveyDone;
             Date = appointment.Date;
+            SerialNumber = appointment.SerialNumber;
+            PatientDTO = new PatientDto(appointment.Patient);
         }
 
         public List<AppointmentDTO> ConvertListToAppointmentDTO(List<Appointment> appointments)
         {
             List<AppointmentDTO> appointmentsDTO = new List<AppointmentDTO>();
+            if(appointments == null)
+                return appointmentsDTO;
             foreach (Appointment appointment in appointments)
                 appointmentsDTO.Add(new AppointmentDTO(appointment));
             return appointmentsDTO;

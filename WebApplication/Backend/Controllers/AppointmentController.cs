@@ -109,7 +109,7 @@ namespace WebApplication.Backend.Controllers
         [HttpPut("setSurveyDoneOnAppointment")]
         public void setSurveyDoneOnAppointment(AppointmentDTO appointmentDto)
         {
-            appointmentService.setSurveyDoneOnAppointment("0002", appointmentDto.Date.ToString(), appointmentDto.PhysicianDTO.FullName);
+            appointmentService.setSurveyDoneOnAppointment("00096736fd7-3018-4f3f-a14b-35610a1c89592", appointmentDto.Date.ToString(), appointmentDto.PhysicianDTO.FullName);
         }
 
         [HttpGet("appointmentsWithReccomendation")]
@@ -131,7 +131,7 @@ namespace WebApplication.Backend.Controllers
         }
 
         [HttpPut("cancelAppointment")]
-        public bool CancelAppointment(AppointmentDto appointment)
+        public bool CancelAppointment(AppointmentDTO appointment)
         {
             return appointmentService.CancelAppointment(appointment.SerialNumber);
         }
@@ -143,9 +143,9 @@ namespace WebApplication.Backend.Controllers
         }
 
         [HttpPut("SetUserToMalicious")]
-        public bool SetUserToMalicious(Appointment appointment)
+        public bool SetUserToMalicious(AppointmentDTO appointment)
         {
-            return appointmentService.SetUserToMalicious(appointment.Patient.Id);
+            return appointmentService.SetUserToMalicious(appointment.PatientDTO.Id);
         }
     }
 }

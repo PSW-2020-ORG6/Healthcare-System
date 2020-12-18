@@ -13,7 +13,7 @@ namespace WebApplication.Backend.Repositorys
 
         public BuildingRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=baza;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
         }
 
         private List<Building> GetBuildings(String query)

@@ -24,7 +24,7 @@ namespace WebApplication.Backend.Repositorys
 
         public AppointmentRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=baza;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
         }
 
         private List<Appointment> GetAppointments(String query)
@@ -37,18 +37,7 @@ namespace WebApplication.Backend.Repositorys
             {
                 Appointment entity = new Appointment();
                 entity.SerialNumber = (string)sqlReader[0];
-                entity.Room = roomRepository.GetRoomBySerialNumber((string)sqlReader[1]);
-                entity.Physician = physitianRepository.GetPhysicianBySerialNumber((string)sqlReader[2]);
-                entity.Patient = patientRepository.GetPatientBySerialNumber((string)sqlReader[3]);
-                entity.TimeInterval = timeIntervalRepository.GetTimeIntervalById((string)sqlReader[6]);
-                entity.ProcedureType = procedureTypeRepository.GetProcedureTypeBySerialNumber((string)sqlReader[7]);
                 entity.Urgency = (bool)sqlReader[1];
-                entity.Active = (bool)sqlReader[2];
-                entity.Date = Convert.ToDateTime(sqlReader[8]);
-                entity.IsSurveyDone = Convert.ToBoolean(sqlReader[10]);
-                
-
-
                 entity.Patient = patientRepository.GetPatientBySerialNumber((string)sqlReader[2]);
                 entity.Room = roomRepository.GetRoomBySerialNumber((string)sqlReader[3]);
                 entity.Physician = physitianRepository.GetPhysicianBySerialNumber((string)sqlReader[4]);
@@ -56,6 +45,7 @@ namespace WebApplication.Backend.Repositorys
                 entity.Date = Convert.ToDateTime(sqlReader[6]);
                 entity.TimeInterval = new TimeInterval { Start = (DateTime)sqlReader[7] };
                 entity.Active = (bool)sqlReader[8];
+                entity.IsSurveyDone = Convert.ToBoolean(sqlReader[9]);
                 resultList.Add(entity);
             }
             connection.Close();
@@ -93,7 +83,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetAppointments("Select * from appointment where RoomSerialNumber='" + roomSerialNumber + "'");
+                return GetAppointments("Select * from appointment where RoomId='" + roomSerialNumber + "'");
             }
             catch (Exception e)
             {
@@ -106,7 +96,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetAppointments("Select * from appointment where PhysitianSerialNumber='" + physitianSerialNumber + "'");
+                return GetAppointments("Select * from appointment where PhysitianId='" + physitianSerialNumber + "'");
             }
             catch (Exception e)
             {
@@ -119,7 +109,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetAppointments("Select * from appointment where PatientSerialNumber='" + patientSerialNumber + "'");
+                return GetAppointments("Select * from appointment where PatientId='" + patientSerialNumber + "'");
             }
             catch (Exception e)
             {
@@ -132,7 +122,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetAppointments("Select * from appointment where PatientSerialNumber like '" + patientId + "'");
+                return GetAppointments("Select * from appointment where PatientId like '" + patientId + "'");
             }
             catch (Exception e)
             {
@@ -146,7 +136,7 @@ namespace WebApplication.Backend.Repositorys
 
             try
             {
-                allAppointments = GetAppointments("Select * from appointment where PatientSerialNumber='" + patientId + "'" + " AND  Active like '" + 1 + "'");
+                allAppointments = GetAppointments("Select * from appointment where PatientId='" + patientId + "'" + " AND  Active like '" + 1 + "'");
             }
             catch (Exception e)
             {
@@ -169,7 +159,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetAppointments("Select * from appointment where PatientSerialNumber='" + patientId + "'" + " AND  Active like '" + 0 + "'");
+                return GetAppointments("Select * from appointment where PatientId='" + patientId + "'" + " AND  Active like '" + 0 + "'");
             }
             catch (Exception e)
             {
@@ -184,7 +174,7 @@ namespace WebApplication.Backend.Repositorys
             List<Appointment> allAppointments = new List<Appointment>();
             try
             {
-                allAppointments = GetAppointments("Select * from appointment where PatientSerialNumber='" + patientId + "'" + " AND  Active like '" + 1 + "'");
+                allAppointments = GetAppointments("Select * from appointment where PatientId='" + patientId + "'" + " AND  Active like '" + 1 + "'");
             }
             catch (Exception e)
             {
@@ -212,7 +202,7 @@ namespace WebApplication.Backend.Repositorys
                 physicianId.Add(physician.Id);
             }
 
-            List<Appointment> appointmentList = GetAppointments("Select * from appointment where PatientSerialNumber like '" + patientId + "'" + " and PhysitianId like '" + physicianId[0] + "'" + " and Date like '" + appointmentDate + "'");
+            List<Appointment> appointmentList = GetAppointments("Select * from appointment where PatientId like '" + patientId + "'" + " and PhysitianId like '" + physicianId[0] + "'" + " and Date like '" + appointmentDate + "'");
             return appointmentList[0].IsSurveyDone;
 
 
@@ -221,11 +211,11 @@ namespace WebApplication.Backend.Repositorys
         {
             String dateD;
 
-            String[] date = appointmentDate.Split(" ")[0].Split(".");
+            String[] date = appointmentDate.Split(" ")[0].Split("/");
             if (date[1].Length == 1)
-                dateD = date[2] + "-" + "0" + date[1] + "-" + date[0] + " 00:00:00";
+                dateD = date[2] + "-" + date[0] + "-" + "0" + date[1];
             else
-                dateD = date[2] + "-" + date[1] + "-" + date[0] + " 00:00:00";
+                dateD = date[2] + "-" + date[0] + "-" + date[1];
 
             connection.Open();
             List<Physician> physitianResult = physitianRepository.GetPhysiciansByFullName(physicianName);
@@ -234,7 +224,7 @@ namespace WebApplication.Backend.Repositorys
             {
                 physicianId.Add(physician.Id);
             }
-            String sqlDml = "Update appointment set isSurveyDone=1 where PatientSerialNumber like '" + patientId + "'" + "and Date like '" + dateD + "'" + "and PhysitianId like '" + physicianId[0] + "'";
+            String sqlDml = "Update appointment set isSurveyDone=1 where PatientId like '" + "96736fd7-3018-4f3f-a14b-35610a1c8959" + "'" + "and Date like '" + dateD + "'" + "and PhysitianId like '" + physicianId[0] + "'";
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             sqlCommand.ExecuteNonQuery();
 
@@ -296,11 +286,11 @@ namespace WebApplication.Backend.Repositorys
             string[] dateString1 = appointment.TimeInterval.Start.ToString().Split(" ");
             string[] partsOfDate1 = dateString1[0].Split("/");
 
-            string sqlDml = "INSERT into appointment (SerialNumber,Urgency,PatientId,RoomId,PhysitianId,ProcedureTypeId,Date,TimeIntervalStart,Active)  VALUES('"
-                + appointment.SerialNumber + "','" + 0 + "','" + "96736fd7-3018-4f3f-a14b-35610a1c8959" + "','" + null + "','" + appointment.Physician.SerialNumber
+            string sqlDml = "INSERT into appointment (SerialNumber,Urgency,PatientId,RoomId,PhysitianId,ProcedureTypeId,Date,TimeIntervalStart,Active,isSurveyDone,TimeIntervalSerialNumber)  VALUES('"
+                + appointment.SerialNumber + "','" + 0 + "','" + "96736fd7-3018-4f3f-a14b-35610a1c8959" + "','" + "101" + "','" + appointment.Physician.SerialNumber
                 + "','" + "300001" + "','" + partsOfDate[2] + "-" + partsOfDate[0] + "-" + partsOfDate[1] + "T" + dateString[1]
                 + "','" + partsOfDate1[2] + "-" + partsOfDate1[0] + "-" + partsOfDate1[1] + "T" + ConvertTime(dateString1[1], dateString1[2])
-                + "','" + 1 + "')";
+                + "','" + 1 + "','" + 0 + "','" + appointment.TimeInterval.Id + "')";
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             sqlCommand.ExecuteNonQuery();
             connection.Close();
@@ -335,7 +325,7 @@ namespace WebApplication.Backend.Repositorys
 
         public List<DateTime> GetCancelingDates(string patientId)
         {
-            String sqlDml = "Select  DateOfCanceling FROM appointment WHERE PatientSerialNumber like '" + patientId + "' AND Active = '0'";
+            String sqlDml = "Select  DateOfCanceling FROM appointment WHERE PatientId like '" + patientId + "' AND Active = '0'";
             try
             {
                 connection.Open();
