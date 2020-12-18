@@ -18,7 +18,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=baza;user=root;password=root");
+                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
             }
             catch (Exception e)
             {
@@ -38,8 +38,8 @@ namespace WebApplication.Backend.Repositorys
         {
             connection.Open();
             String[] surveyDate = surveyText.ReportDate.ToString().Split(" ");
-            String[] surveyDateParts = surveyDate[0].Split(".");
-            String dateSurvey = surveyDateParts[2] + "-" + surveyDateParts[1] + "-" + (Int32.Parse(surveyDateParts[0]) + 1).ToString() + " 00:00:00";
+            String[] surveyDateParts = surveyDate[0].Split("/");
+            String dateSurvey = surveyDateParts[2] + "-" + surveyDateParts[0] + "-" + (Int32.Parse(surveyDateParts[1]) + 1).ToString() + " 00:00:00";
             string sqlDml = "INSERT into survey" +
                             "(Question1,Question2,Question3,Question4,Question5,Question6,Question7,Question8,Question9,Question10,Question11," +
                             "Question12,Question13,Question14,Question15,Question16,Question17,Question18,Question19,Question20,Question21,Question22,Question23,ID,DoctorName,SerialNumber,reportDate)VALUES ('"

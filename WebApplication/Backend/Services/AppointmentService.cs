@@ -112,7 +112,9 @@ namespace WebApplication.Backend.Services
             List<AppointmentWithRecommendationDTO> availableAppointments = new List<AppointmentWithRecommendationDTO>();
             foreach (string date in dates)
             {
-                availableAppointments.Add(new AppointmentWithRecommendationDTO(date, physicianId, GetAllAvailableAppointments(physicianId, specializationName, date), ""));
+                List<TimeIntervalDTO> appointments = GetAllAvailableAppointments(physicianId, specializationName, date);
+                if(appointments.Count > 0)
+                    availableAppointments.Add(new AppointmentWithRecommendationDTO(date, physicianId, appointments, ""));
             }
             if (!availableAppointments.Any())
             {
@@ -258,7 +260,9 @@ namespace WebApplication.Backend.Services
            List<AppointmentWithRecommendationDTO> availableAppointments = new List<AppointmentWithRecommendationDTO>();
             foreach (string date in dates)
             {
-                availableAppointments.Add(new AppointmentWithRecommendationDTO(date, physicianId, GetAllAvailableAppointments(physicianId, specializationName, date), ""));
+                List<TimeIntervalDTO> appointments = GetAllAvailableAppointments(physicianId, specializationName, date);
+                if (appointments.Count > 0)
+                    availableAppointments.Add(new AppointmentWithRecommendationDTO(date, physicianId, appointments, ""));
             }
             if (!availableAppointments.Any())
             {

@@ -8,7 +8,7 @@ Vue.component("survey", {
             dName: doctorNameAppointment,
             selectedDoctor: {},
             surveyText: {
-                id: "0002",
+                id: "96736fd7-3018-4f3f-a14b-35610a1c8959",
                 question1: null,
                 question2: null,
                 question3: null,
@@ -412,7 +412,7 @@ Vue.component("appointments", {
     data: function () {
         return {
             appointmentDto:null,
-            idPatient: "0002",
+            idPatient: "96736fd7-3018-4f3f-a14b-35610a1c8959",
             isSurveyDone: null,
             activeAppointments: null,
             canceledAppointments: null,
@@ -422,12 +422,13 @@ Vue.component("appointments", {
             patients: null,
             doctorsList: null,
             appointment: null,
-            patientDTO: {}
+            patientDTO: {},
+            isMalicious: {}
         }
     },
     beforeMount() {
         axios
-            .get('http://localhost:49900/appointment/allAppointmentsByPatientIdActive', { params: { patientId: "0002" } })
+            .get('http://localhost:49900/appointment/allAppointmentsByPatientIdActive', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
             .then(response => {
                 this.activeAppointments = response.data
             })
@@ -437,7 +438,7 @@ Vue.component("appointments", {
             })
 
         axios
-            .get('http://localhost:49900/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: "0002" } })
+            .get('http://localhost:49900/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
             .then(response => {
                 this.canceledAppointments = response.data
 
@@ -447,7 +448,7 @@ Vue.component("appointments", {
             })
 
         axios
-            .get('http://localhost:49900/appointment/allAppointmentsByPatientIdPast', { params: { patientId: "0002" } })
+            .get('http://localhost:49900/appointment/allAppointmentsByPatientIdPast', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
             .then(response => {
                 this.pastAppointments = response.data
 
@@ -456,7 +457,7 @@ Vue.component("appointments", {
                 alert("greska kod canceledAppointments")
             })
         axios
-            .get('http://localhost:49900/appointment/allAppointmentsWithSurvey', { params: { patientId: "0002" } })
+            .get('http://localhost:49900/appointment/allAppointmentsWithSurvey', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
             .then(response => {
                 this.appointmentsWithSurvey = response.data
 
@@ -465,7 +466,7 @@ Vue.component("appointments", {
                 alert("greska kod appointmentsWithSurvey")
             })
         axios
-            .get('http://localhost:49900/appointment/allAppointmentsWithoutSurvey', { params: { patientId: "0002" } })
+            .get('http://localhost:49900/appointment/allAppointmentsWithoutSurvey', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
             .then(response => {
                 this.appointmentsWithoutSurvey = response.data
 
@@ -476,7 +477,7 @@ Vue.component("appointments", {
 
 
         axios
-            .get('http://localhost:49900/survey/getDoctorsForSurveyList', { params: { patientId: "0002" } })
+            .get('http://localhost:49900/survey/getDoctorsForSurveyList', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
             .then(response => {
                 this.doctorsList = response.data
             })
@@ -518,7 +519,7 @@ Vue.component("appointments", {
 											<td>{{appointmentDto.roomDTO.name}}</td>
 											<td>{{appointmentDto.procedureTypeDTO.name}}</td>
 											<td>{{appointmentDto.urgency}}</td>
-											<td><button type="button" class="btn btn-info btn-lg">Cancel</button></td>										
+											<td><button type="button" class="btn btn-info btn-lg" v-on:click="cancelAppointment(appointmentDto)">Cancel</button></td>									
 										</tr>
 									</tbody>
 								</table>
@@ -710,6 +711,53 @@ Vue.component("appointments", {
             this.$router.push('survey');
 
 
-        }
+        },
+        cancelAppointment: function (appointment) {
+			axios
+
+				.put("http://localhost:49900/appointment/cancelAppointment", appointment)
+				.then(response => {
+					axios
+						.get('http://localhost:49900/appointment/IsUserMalicious', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
+						.then(response => {
+							this.isMalicious = response.data
+							if (this.isMalicious == true) {
+								axios
+									.put('http://localhost:49900/appointment/SetUserToMalicious', appointment)
+									.then(response => {
+									})
+
+									.catch(error => {
+										alert("greska kod activeAppoiuntments")
+
+									})
+							}
+						})
+						.catch(error => {
+							alert("greska kod malicious check")
+
+						})
+					axios
+						.get('http://localhost:49900/appointment/allAppointmentsByPatientIdActive', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
+						.then(response => {
+							this.activeAppointments = response.data
+						})
+
+						.catch(error => {
+							alert("greska kod activeAppoiuntments")
+
+						})
+
+					axios
+						.get('http://localhost:49900/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
+						.then(response => {
+							this.canceledAppointments = response.data
+
+						})
+						.catch(error => {
+							alert("greska kod canceledAppointments")
+						})
+				})
+		}
     }
 });

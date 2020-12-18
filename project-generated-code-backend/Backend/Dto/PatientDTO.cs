@@ -14,7 +14,13 @@ namespace HealthClinicBackend.Backend.Dto
         public PatientDto()
         {
         }
-    
+
+        public PatientDto(Patient patient)
+        {
+            Id = patient.Id;
+        }
+
+
 
         public string Name { get; set; }
 

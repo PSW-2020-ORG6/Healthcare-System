@@ -15,9 +15,10 @@ namespace WebApplication.Backend.Repositorys
     public class PatientRepository : IPatientRepository
     {
         private MySqlConnection connection;
+        private PhysicianRepository physicianRepository = new PhysicianRepository();
         public PatientRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=baza;user=root;password=root;Convert Zero Datetime=true;");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root;Convert Zero Datetime=true;");
         }
         ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017 and Aleksa Repovic RA52/2017
         /// <summary>
@@ -42,34 +43,31 @@ namespace WebApplication.Backend.Repositorys
                 entity.SerialNumber = (string)sqlReader[1];
                 entity.Name = (string)sqlReader[2];
                 entity.Surname = (string)sqlReader[3];
-                entity.DateOfBirth = (DateTime)sqlReader[4];
-                entity.Contact = (string)sqlReader[5];
-                entity.Email = (string)sqlReader[6];
-                entity.AddressSerialNumber = (string)sqlReader[6];
-                entity.Address.SerialNumber = (string)sqlReader[7];
+                entity.DateOfBirth = (DateTime)sqlReader[5];
+                entity.Contact = (string)sqlReader[6];
+                entity.Email = (string)sqlReader[7];
+                entity.Address.SerialNumber = (string)sqlReader[9];
                 entity.Password = (string)sqlReader[8];
-                entity.ParentName = (string)sqlReader[9];
-                entity.PlaceOfBirth = (string)sqlReader[10];
-                entity.MunicipalityOfBirth = (string)sqlReader[11];
-                entity.StateOfBirth = (string)sqlReader[12];
-                entity.PlaceOfResidence = (string)sqlReader[13];
-                entity.MunicipalityOfResidence = (string)sqlReader[14];
-                entity.StateOfResidence = (string)sqlReader[15];
-                entity.Citizenship = (string)sqlReader[16];
-                entity.Nationality = (string)sqlReader[17];
-                entity.Profession = (string)sqlReader[18];
-                entity.EmploymentStatus = (string)sqlReader[19];
-                entity.MaritalStatus = (string)sqlReader[20];
-                entity.HealthInsuranceNumber = (string)sqlReader[21];
-                entity.FamilyDiseases = (string)sqlReader[22];
-                entity.PersonalDiseases = (string)sqlReader[23];
-                entity.Gender = (string)sqlReader[24];
-                entity.Image = (string)sqlReader[25];
-                entity.Guest = (bool)sqlReader[26];
-                entity.EmailConfirmed = (bool)sqlReader[27];
-                entity.PhysicianSerialNumber = (string)sqlReader[28];
-                // entity.ChosenPhysician = new Physician();
-
+                entity.ParentName = (string)sqlReader[10];
+                entity.PlaceOfBirth = (string)sqlReader[11];
+                entity.MunicipalityOfBirth = (string)sqlReader[12];
+                entity.StateOfBirth = (string)sqlReader[13];
+                entity.PlaceOfResidence = (string)sqlReader[14];
+                entity.MunicipalityOfResidence = (string)sqlReader[15];
+                entity.StateOfResidence = (string)sqlReader[16];
+                entity.Citizenship = (string)sqlReader[17];
+                entity.Nationality = (string)sqlReader[18];
+                entity.Profession = (string)sqlReader[19];
+                entity.EmploymentStatus = (string)sqlReader[20];
+                entity.MaritalStatus = (string)sqlReader[21];
+                entity.HealthInsuranceNumber = (string)sqlReader[22];
+                entity.FamilyDiseases = (string)sqlReader[23];
+                entity.PersonalDiseases = (string)sqlReader[24];
+                entity.Gender = (string)sqlReader[25];
+                entity.Image = (string)sqlReader[26];
+                entity.Guest = (bool)sqlReader[27];
+                entity.EmailConfirmed = (bool)sqlReader[28];
+                //entity.ChosenPhysician = physicianRepository. (string)sqlReader[29];
                 resultList.Add(entity);
 
             }
