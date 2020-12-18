@@ -1,9 +1,39 @@
-﻿.btnban {
+﻿#AdminMain {
+    background-image: url("../pictures/AdminBackground.jpg");
+    background-repeat: no-repeat;
+    overflow-y: scroll;
+    height: 768px;
+}
+
+.table {
+    background-color : white;
+    opacity : 0.92;
+}
+
+#ShowStatistics {
+    background-image: url("../pictures/StatisticsV3.png");
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    opacity: 0.8;
+}
+
+
+#MaliciousUsers {
+    background-image: url("../pictures/MaliciousUSersV2.png");
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    opacity : 0.8;
+}
+
+.btnban {
     background-color: lightcoral;
     color: white;
     border: thick;
     font-family: 'Impact';
     font-weight: 100;
+    opacity: 1;
 }
 .btnapprove {
     background-color: lightgreen;
@@ -11,12 +41,14 @@
     border: thick;
     font-family: 'Impact';
     font-weight: 100;
+    opacity : initial;
 }
 
 #doctorSelect {
     width : 300px;
 
 }
+
 
 
 #statisticTable {
