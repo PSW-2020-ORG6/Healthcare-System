@@ -18,7 +18,7 @@ namespace WebApplication.Backend.Repositorys
         private PhysicianRepository physicianRepository = new PhysicianRepository();
         public PatientRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root;Convert Zero Datetime=true;");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=neynamneynam12;Convert Zero Datetime=true;");
         }
         ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017 and Aleksa Repovic RA52/2017
         /// <summary>
