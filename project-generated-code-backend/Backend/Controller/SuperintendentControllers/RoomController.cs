@@ -12,6 +12,12 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 {
     public class RoomController
     {
+        private readonly RoomService _roomService;
+
+        public RoomController(RoomService roomService)
+        {
+            _roomService = roomService;
+        }
         public Room GetById(String id)
         {
             throw new NotImplementedException();
@@ -19,65 +25,58 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 
         public List<Room> GetAll()
         {
-            return roomService.GetAll();
+            return _roomService.GetAll();
         }
 
         public void EditRoom(Room room)
         {
-            roomService.EditRoom(room);
+            _roomService.EditRoom(room);
         }
 
         public void NewRoom(Room room)
         {
-            roomService.NewRoom(room);
+            _roomService.NewRoom(room);
         }
 
         public void DeleteRoom(Room room)
         {
-            roomService.DeleteRoom(room);
+            _roomService.DeleteRoom(room);
         }
 
         public void AddEquipment(Equipment equipment, Room room)
         {
-            roomService.AddEquipment(equipment, room);
+            _roomService.AddEquipment(equipment, room);
         }
 
         public void RemoveEquipmentById(String id, Room room)
         {
-            roomService.RemoveEquipmentById(id, room);
+            _roomService.RemoveEquipmentById(id, room);
         }
 
         public List<Equipment> GetAllEquipment(Room room)
         {
-            return roomService.GetAllEquipment(room);
+            return _roomService.GetAllEquipment(room);
         }
 
         public List<RoomType> GetAllRoomTypes()
         {
-            return roomService.GetAllRoomTypes();
+            return _roomService.GetAllRoomTypes();
         }
 
         public List<RoomType> GetAllAutoRoomTypes()
         {
-            return roomService.GetAutoAllRoomTypes();
+            return _roomService.GetAutoAllRoomTypes();
         }
 
 
         public void AddRoomTypes(RoomType roomType)
         {
-            roomService.AddRoomType(roomType);
+            _roomService.AddRoomType(roomType);
         }
 
         public bool RoomNumberExists(int RoomNumber)
         {
-            return roomService.RoomNumberExists(RoomNumber);
-        }
-
-        public RoomService roomService;
-
-        public RoomController()
-        {
-            roomService = new RoomService();
+            return _roomService.RoomNumberExists(RoomNumber);
         }
     }
 }

@@ -9,13 +9,18 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Repository.Generic;
 using WebApplication.Backend.Controllers;
 using WebApplication.Backend.Model;
 using WebApplication.Backend.Repositorys;
 using WebApplication.Backend.Repositorys.Interfaces;
 using WebApplication.Backend.Services;
+using IAppointmentRepository = HealthClinicBackend.Backend.Repository.Generic.IAppointmentRepository;
 using IPatientRepository = HealthClinicBackend.Backend.Repository.Generic.IPatientRepository;
+using IPrescriptionRepository = HealthClinicBackend.Backend.Repository.Generic.IPrescriptionRepository;
+using IReportRepository = HealthClinicBackend.Backend.Repository.Generic.IReportRepository;
+using ISurveyRepository = HealthClinicBackend.Backend.Repository.Generic.ISurveyRepository;
 
 namespace WebApplication
 {
@@ -54,9 +59,29 @@ namespace WebApplication
 
             services.AddScoped<IPhysicianRepository, PhysicianDatabaseSql>();
             services.AddScoped<IPatientRepository, PatientDatabaseSql>();
+            services.AddScoped<IAppointmentRepository, AppointmentDatabaseSql>();
+            services.AddScoped<IFeedbackRepository, FeedbackDatabaseSql>();
+            services.AddScoped<IPatientRepository, PatientDatabaseSql>();
+            services.AddScoped<IPrescriptionRepository, PrescriptionDatabaseSql>();
+            services.AddScoped<IReportRepository, ReportDatabaseSql>();
+            services.AddScoped<ISurveyRepository, SurveyDatabaseSql>();
+
             services.AddScoped<IRegistrationRepository, RegistrationRepository>();
+
             services.AddScoped<IRegistrationService, RegistrationService>();
+            services.AddScoped<AppointmentsService, AppointmentsService>();
+            services.AddScoped<FeedbackService, FeedbackService>();
+            services.AddScoped<PatientService, PatientService>();
+            services.AddScoped<PrescriptionService, PrescriptionService>();
+            services.AddScoped<RegistrationService, RegistrationService>();
+            services.AddScoped<ReportService, ReportService>();
+            services.AddScoped<SurveyService, SurveyService>();
+
             services.AddScoped<RegistrationController, RegistrationController>();
+            services.AddScoped<AppointmentController, AppointmentController>();
+            services.AddScoped<FeedbackController, FeedbackController>();
+            services.AddScoped<SurveyController, SurveyController>();
+            services.AddScoped<UserController, UserController>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,33 +94,13 @@ namespace WebApplication
 
             using (var scope = app.ApplicationServices.CreateScope())
             using (var context = scope.ServiceProvider.GetService<HealthCareSystemDbContext>())
-            using (var controller = scope.ServiceProvider.GetService<RegistrationController>())
             {
-                Console.WriteLine("Connecting to db");
-                foreach (var medicineManufacturer in context.MedicineManufacturer)
+                Console.WriteLine("Patients");
+                foreach (var patient in context.Patient)
                 {
-                    Console.WriteLine(medicineManufacturer.Name);
+                    Console.WriteLine($"{patient.Name} {patient.Id}");
                 }
-            
-                Console.WriteLine("Loading physicians");
-                foreach (var physician in context.Physician)
-                {
-                    Console.WriteLine($"{physician.Name} {physician.Surname}");
-                }
-            
-                if (controller == null)
-                {
-                    Console.WriteLine("Controller is null");
-                }
-                else
-                {
-                    Console.WriteLine("Loading physicians");
-                    foreach (var physician in controller.GetAllGeneralPractitioners())
-                    {
-                        Console.WriteLine($"{physician.Name} {physician.Surname} {physician.Specialization}");
-                    }
-                }
-            
+
                 // try
                 // {
                 //     Console.WriteLine("Data seeding started.");

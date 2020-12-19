@@ -5,7 +5,7 @@ using HealthClinicBackend.Backend.Model.Accounts;
 
 namespace WebApplication.Backend.Services
 {
-    public interface IRegistrationService : IDisposable
+    public interface IRegistrationService
     {
         public bool RegisterPatient(Patient patient);
 

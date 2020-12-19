@@ -11,13 +11,12 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
 {
     class PatientScheduleService
     {
-        private Patient _loggedPatient;
+        public Patient LoggedPatient;
         private IAppointmentRepository _appointmentRepository;
 
-        public PatientScheduleService(Patient loggedPatient)
+        public PatientScheduleService(IAppointmentRepository appointmentRepository)
         {
-            _loggedPatient = loggedPatient;
-            _appointmentRepository = new AppointmentDatabaseSql();
+            _appointmentRepository = appointmentRepository;
         }
 
         public List<Appointment> GetAppointmentsByDate(DateTime date)

@@ -17,10 +17,10 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
         private readonly IRoomRepository _roomRepository;
         private readonly IRoomTypeRepository _roomTypeRepository;
 
-        public RoomService()
+        public RoomService(IRoomRepository roomRepository, IRoomTypeRepository roomTypeRepository)
         {
-            _roomTypeRepository = new RoomTypeDatabaseSql();
-            _roomRepository = new RoomDatabaseSql();
+            _roomRepository = roomRepository;
+            _roomTypeRepository = roomTypeRepository;
         }
 
         public Room GetById(String id)
@@ -84,12 +84,12 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
             _roomTypeRepository.Save(roomType);
         }
 
-        public bool RoomNumberExists(int RoomNumber)
+        public bool RoomNumberExists(int roomNumber)
         {
             bool exists = false;
             foreach (Room r in _roomRepository.GetAll())
             {
-                if (r.Id == RoomNumber)
+                if (r.Id == roomNumber)
                 {
                     exists = true;
                 }

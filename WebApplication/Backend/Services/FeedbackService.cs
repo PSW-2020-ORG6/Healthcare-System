@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Blog;
-using WebApplication.Backend.Repositorys;
+using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace WebApplication.Backend.Services
 {
@@ -10,11 +10,13 @@ namespace WebApplication.Backend.Services
     /// </summary>
     public class FeedbackService
     {
-        private FeedbackRepository feedbackRepository;
-        public FeedbackService()
+        private readonly IFeedbackRepository _feedbackRepository;
+
+        public FeedbackService(IFeedbackRepository feedbackRepository)
         {
-            this.feedbackRepository = new FeedbackRepository();
+            _feedbackRepository = feedbackRepository;
         }
+
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///calls method for get all feedback in feedback table
@@ -24,8 +26,9 @@ namespace WebApplication.Backend.Services
         ///</returns>
         internal List<Feedback> GetAllFeedbacks()
         {
-            return feedbackRepository.GetAllFeedbacks();
+            return _feedbackRepository.GetAll();
         }
+
         ///Aleksandra Milijevic RA 22/2017
         /// <summary>
         ///calls method for get approved feedbacks from feedback table
@@ -35,8 +38,9 @@ namespace WebApplication.Backend.Services
         ///</returns>
         internal List<Feedback> GetApprovedFeedbacks()
         {
-            return feedbackRepository.GetApprovedFeedbacks();
+            return _feedbackRepository.GetApproved();
         }
+
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///calls method for get disapproved feedback from feedback table
@@ -46,8 +50,9 @@ namespace WebApplication.Backend.Services
         ///</returns>
         internal List<Feedback> GetDisapprovedFeedbacks()
         {
-            return feedbackRepository.GetDisapprovedFeedbacks();
+            return _feedbackRepository.GetDisapproved();
         }
+
         ///Marija Vucetic 
         /// <summary>
         ///calls method for set na value of attribute Approved
@@ -55,12 +60,14 @@ namespace WebApplication.Backend.Services
         ///<returns>
         ///list of not approved feedbacks
         ///</returns>
-        ///<param name="feedback"> Feedback type object
+        ///<param name="feedbackDto"> Feedback type object
         ///</param>>
-        public void ApproveFeedback(FeedbackDto feedback)
+        public void ApproveFeedback(FeedbackDto feedbackDto)
         {
-            feedbackRepository.ApproveFeedback(feedback);
+            var feedback = new Feedback(feedbackDto) {Approved = true};
+            _feedbackRepository.Update(feedback);
         }
+
         ///Repovic Aleksa RA-52-2017
         /// <summary>
         ///calls method for adding new row in feedbacks table
@@ -72,7 +79,8 @@ namespace WebApplication.Backend.Services
         ///</param>>
         public bool AddNewFeedback(Feedback feedback)
         {
-            return feedbackRepository.AddNewFeedback(feedback);
+            _feedbackRepository.Save(feedback);
+            return true;
         }
     }
 }

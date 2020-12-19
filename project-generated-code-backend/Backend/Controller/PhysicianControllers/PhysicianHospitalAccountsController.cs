@@ -16,24 +16,24 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {
     public class PhysicianHospitalAccountsController
     {
-        private readonly Physician _loggedPhysician;
+        public Physician LoggedPhysician;
         private HospitalService _hospitalService;
         private readonly ReportService _reportService;
         private readonly PatientAccountsService _patientAccountsService;
         private readonly PhysicianScheduleService _physicianScheduleService;
 
-        public PhysicianHospitalAccountsController(Physician loggedPhysician)
+        public PhysicianHospitalAccountsController(HospitalService hospitalService, ReportService reportService,
+            PatientAccountsService patientAccountsService, PhysicianScheduleService physicianScheduleService)
         {
-            _loggedPhysician = loggedPhysician;
-            _hospitalService = new HospitalService();
-            _reportService = new ReportService();
-            _patientAccountsService = new PatientAccountsService();
-            _physicianScheduleService = new PhysicianScheduleService(loggedPhysician);
+            _hospitalService = hospitalService;
+            _reportService = reportService;
+            _patientAccountsService = patientAccountsService;
+            _physicianScheduleService = physicianScheduleService;
         }
 
         public List<Patient> GetPatientsByPhysician()
         {
-            return _patientAccountsService.getPatientsForPhysitian(_loggedPhysician);
+            return _patientAccountsService.GetPatientsForPhysitian(LoggedPhysician);
         }
 
         public Appointment GetNextAppointmentForPatient(Patient patient)

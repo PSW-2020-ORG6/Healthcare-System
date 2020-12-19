@@ -36,7 +36,7 @@
     },
     mounted() {
         axios
-            .get('http://localhost:49900/survey/getDoctorsForSurveyList', { params: { patientId: this.surveyText.id } })
+            .get('/survey/getDoctorsForSurveyList', { params: { patientId: this.surveyText.id } })
             .then(response => {
                 this.doctorsList = response.data
             })
@@ -380,7 +380,7 @@
            //     this.question1.toString() + "," + this.question19.toString() + "," + this.question20.toString() + "," + this.question21.toString() + "," + this.question22.toString() + "," + this.question23.toString() + "," + this.selectedDoctor + ","+ "001234"
             var surveyText = this.surveyText
             axios
-                .post('http://localhost:49900/survey/add',  surveyText)
+                .post('/survey/add',  surveyText)
                 .then(response => {
                 })
             $('#myModal5').modal('show');

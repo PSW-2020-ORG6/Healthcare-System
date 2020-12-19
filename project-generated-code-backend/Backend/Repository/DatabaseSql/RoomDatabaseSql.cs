@@ -9,6 +9,9 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class RoomDatabaseSql : GenericDatabaseSql<Room>, IRoomRepository
     {
+        public RoomDatabaseSql(HealthCareSystemDbContext context) : base(context)
+        {
+        }
         public override List<Room> GetAll()
         {
             return dbContext.Room

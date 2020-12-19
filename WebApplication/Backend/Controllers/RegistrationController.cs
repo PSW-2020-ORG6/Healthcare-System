@@ -10,7 +10,7 @@ namespace WebApplication.Backend.Controllers
 {
     [Route("registration")]
     [ApiController]
-    public class RegistrationController : ControllerBase, IDisposable
+    public class RegistrationController : ControllerBase
     {
         public IRegistrationService registrationService;
         private IMailService mailService;
@@ -95,11 +95,6 @@ namespace WebApplication.Backend.Controllers
         public List<FamilyDoctorDto> GetAllGeneralPractitioners()
         {
             return registrationService.GetAllPhysicians();
-        }
-
-        public void Dispose()
-        {
-            registrationService.Dispose();
         }
     }
 }

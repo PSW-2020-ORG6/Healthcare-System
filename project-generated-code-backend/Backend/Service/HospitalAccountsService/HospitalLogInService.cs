@@ -11,11 +11,12 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
         private readonly IPhysicianRepository _physicianRepository;
         private readonly ISecretaryRepository _secretaryRepository;
 
-        public HospitalLogInService(IPhysicianRepository physicianRepository)
+        public HospitalLogInService(IPatientRepository patientRepository, IPhysicianRepository physicianRepository,
+            ISecretaryRepository secretaryRepository)
         {
-            _patientRepository = new PatientDatabaseSql();
+            _patientRepository = patientRepository;
             _physicianRepository = physicianRepository;
-            _secretaryRepository = new SecretaryDatabaseSql();
+            _secretaryRepository = secretaryRepository;
         }
 
         /// <summary>

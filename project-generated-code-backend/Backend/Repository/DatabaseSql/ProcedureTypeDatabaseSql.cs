@@ -5,8 +5,12 @@ using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class ProcedureTypeDatabaseSql: GenericDatabaseSql<ProcedureType>, IProcedureTypeRepository
+    public class ProcedureTypeDatabaseSql : GenericDatabaseSql<ProcedureType>, IProcedureTypeRepository
     {
+        public ProcedureTypeDatabaseSql(HealthCareSystemDbContext context) : base(context)
+        {
+        }
+
         public override List<ProcedureType> GetAll()
         {
             return dbContext.ProcedureType.ToList();

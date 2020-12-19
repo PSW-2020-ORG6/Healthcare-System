@@ -7,13 +7,13 @@ using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Service.PatientCareService
 {
-    class ReportService
+    public class ReportService
     {
         private readonly IReportRepository _reportRepository;
 
-        public ReportService()
+        public ReportService(IReportRepository reportRepository)
         {
-            _reportRepository = new ReportDatabaseSql();
+            _reportRepository = reportRepository;
         }
 
         public List<Report> GetReportsByPatient(Patient patient)

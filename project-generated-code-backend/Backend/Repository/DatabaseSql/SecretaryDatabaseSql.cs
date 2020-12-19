@@ -6,8 +6,12 @@ using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class SecretaryDatabaseSql: GenericDatabaseSql<Secretary>, ISecretaryRepository
+    public class SecretaryDatabaseSql : GenericDatabaseSql<Secretary>, ISecretaryRepository
     {
+        public SecretaryDatabaseSql(HealthCareSystemDbContext context) : base(context)
+        {
+        }
+
         public override List<Secretary> GetAll()
         {
             return dbContext.Secretary.ToList();

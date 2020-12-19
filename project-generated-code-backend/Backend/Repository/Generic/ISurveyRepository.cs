@@ -1,6 +1,8 @@
-﻿namespace HealthClinicBackend.Backend.Repository.Generic
+﻿using HealthClinicBackend.Backend.Model.Survey;
+
+namespace HealthClinicBackend.Backend.Repository.Generic
 {
-    public interface ISurveyRepository
+    public interface ISurveyRepository: IGenericRepository<Survey>
     {
         
     }

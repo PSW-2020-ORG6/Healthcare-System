@@ -15,9 +15,9 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
     {
         private readonly IRenovationRepository _renovationRepository;
 
-        public RenovationService()
+        public RenovationService(IRenovationRepository renovationRepository)
         {
-            _renovationRepository = new RenovationDatabaseSql();
+            _renovationRepository = renovationRepository;
         }
 
         public Renovation GetById(String id)

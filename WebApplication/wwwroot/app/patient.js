@@ -1,7 +1,7 @@
 ﻿Vue.component("patient", {
 	data: function () {
 		return {
-			idPatient: "0002",
+			idPatient: "111",
 			approvedFeedbacks: null,
 			noapprovedFeedbacks: null,
 			activeAppointments: null,
@@ -20,16 +20,16 @@
 	},
 	beforeMount() {
 		axios
-			.get('http://localhost:49900/patient/getPatientById', { params: { patientId: "0002" } })
+			.get('/patient/getPatientById', { params: { patientId: "111" } })
 			.then(response => {
 				this.patientDTO = response.data
 			})
 			.catch(error => {
-				alert("Please add patient with id number : 0002")
+				alert("Please add patient with id number : 111")
 			})
 
 		axios
-			.get('http://localhost:49900/feedback/approved')
+			.get('/feedback/approved')
 			.then(response => {
 				this.approvedFeedbacks = response.data
 			})
@@ -37,7 +37,7 @@
 				alert(error.response.data)
 			})
 		axios
-			.get('http://localhost:49900/patient/all')
+			.get('/patient/all')
 			.then(response => {
 				this.patients = response.data
 			})
@@ -46,7 +46,7 @@
 			})
 
 		axios
-			.get('http://localhost:49900/appointment/allAppointmentsByPatientIdActive', { params: { patientId: "5" } })
+			.get('/appointment/allAppointmentsByPatientIdActive', { params: { patientId: "5" } })
 			.then(response => {
 				this.activeAppointments = response.data
 			})
@@ -56,7 +56,7 @@
 			})
 
 		axios
-			.get('http://localhost:49900/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: "5" } })
+			.get('/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: "5" } })
 			.then(response => {
 				this.canceledAppointments = response.data
 			})
@@ -369,7 +369,7 @@
 				this.feedback.patientId = "0003"
 			if (feedback.text.localeCompare(null) || feedback.text.localeCompare("")) {
 				axios
-					.post("http://localhost:49900/feedback/add", feedback)
+					.post("/feedback/add", feedback)
 					.then(response => {
 						this.feedback.text = null;
 						$('#feedbackModal').modal('hide')
@@ -387,7 +387,7 @@
 		},
 		SurveyShow: function () {
 			axios
-				.get('http://localhost:49900/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient } })
+				.get('/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient } })
 				.then(response => {
 					this.doctorsList = response.data
 					if (this.doctorsList.value != null || this.doctorsList != "") {

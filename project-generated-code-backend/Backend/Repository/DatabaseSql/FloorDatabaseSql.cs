@@ -8,6 +8,9 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class FloorDatabaseSql : GenericDatabaseSql<Floor>, IFloorRepository
     {
+        public FloorDatabaseSql(HealthCareSystemDbContext context) : base(context)
+        {
+        }
         public override List<Floor> GetAll()
         {
             return dbContext.Floor

@@ -5,8 +5,12 @@ using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class SurveyDatabaseSql: GenericDatabaseSql<Survey>, ISurveyRepository
+    public class SurveyDatabaseSql : GenericDatabaseSql<Survey>, ISurveyRepository
     {
+        public SurveyDatabaseSql(HealthCareSystemDbContext context) : base(context)
+        {
+        }
+
         public override List<Survey> GetAll()
         {
             return dbContext.Survey.ToList();

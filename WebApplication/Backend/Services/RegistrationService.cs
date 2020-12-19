@@ -1,9 +1,7 @@
 ﻿using System;
 using HealthClinicBackend.Backend.Dto;
-using Model.Accounts;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
-using HealthClinicBackend.Backend.Repository.Generic;
 using WebApplication.Backend.Repositorys;
 
 namespace WebApplication.Backend.Services
@@ -11,15 +9,9 @@ namespace WebApplication.Backend.Services
     /// <summary>
     /// This class does connection with repository
     /// </summary>
-    public class RegistrationService : IRegistrationService, IDisposable
+    public class RegistrationService : IRegistrationService
     {
-        private IRegistrationRepository _registrationRepository;
-
-        // private IPhysicianRepository _physicianRepository;
-        // public RegistrationService()
-        // {
-        //     this.registrationRepository = new RegistrationRepository();
-        // }
+        private readonly IRegistrationRepository _registrationRepository;
 
         public RegistrationService(IRegistrationRepository registrationRepository)
         {
@@ -55,11 +47,6 @@ namespace WebApplication.Backend.Services
         public List<FamilyDoctorDto> GetAllPhysicians()
         {
             return _registrationRepository.GetAllGeneralPracticePhysicians();
-        }
-
-        public void Dispose()
-        {
-            _registrationRepository.Dispose();
         }
     }
 }

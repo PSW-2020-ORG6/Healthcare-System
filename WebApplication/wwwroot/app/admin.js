@@ -18,7 +18,7 @@
 
 
         axios
-            .get('http://localhost:49900/feedback/approved')
+            .get('/feedback/approved')
             .then(response => {
                 this.approvedFeedbacks = response.data
             })
@@ -27,7 +27,7 @@
             })
 
         axios
-            .get('http://localhost:49900/feedback/disapproved')
+            .get('/feedback/disapproved')
             .then(response => {
                 this.disapprovedFeedbacks = response.data
             })
@@ -35,7 +35,7 @@
                 alert(error)
             })
         axios
-            .get('http://localhost:49900/patient/all')
+            .get('/patient/all')
             .then(response => {
                 this.patients = response.data
             })
@@ -45,7 +45,7 @@
 
 
         axios
-            .get('http://localhost:49900/survey/getDoctors', {params: {patientId: "111"}})
+            .get('/survey/getDoctors', {params: {patientId: "111"}})
             .then(response => {
                 this.doctorsList = response.data;
 
@@ -154,7 +154,7 @@
         },
         getStatisticsEachQuestion: function () {
             axios
-                .get('http://localhost:49900/survey/getStatistiEachQuestion')
+                .get('/survey/getStatistiEachQuestion')
                 .then(response => {
                     this.statisticEachQuestion = response.data;
                 })
@@ -162,7 +162,7 @@
         },
         Approve: function (feedback) {
             axios
-                .put('http://localhost:49900/feedback/approve', feedback)
+                .put('/feedback/approve', feedback)
                 .then(response => {
                     this.Refresh();
                 })
@@ -172,7 +172,7 @@
         },
         Disapprove: function (feedback) {
             axios
-                .put('http://localhost:49900/feedback/approve', feedback)
+                .put('/feedback/approve', feedback)
                 .then(response => {
                     this.Refresh();
                 })
@@ -182,7 +182,7 @@
         },
         Refresh: function () {
             axios
-                .get('http://localhost:49900/feedback/approved')
+                .get('/feedback/approved')
                 .then(response => {
                     this.approvedFeedbacks = response.data
                 })
@@ -190,7 +190,7 @@
                     alert(error)
                 })
             axios
-                .get('http://localhost:49900/feedback/disapproved')
+                .get('/feedback/disapproved')
                 .then(response => {
                     this.disapprovedFeedbacks = response.data
                 })

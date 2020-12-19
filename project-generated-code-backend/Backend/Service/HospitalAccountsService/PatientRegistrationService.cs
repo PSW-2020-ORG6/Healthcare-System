@@ -18,9 +18,9 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
     {
         private readonly IPatientRepository _patientRepository;
 
-        public PatientRegistrationService()
+        public PatientRegistrationService(IPatientRepository patientRepository)
         {
-            _patientRepository = new PatientDatabaseSql();
+            _patientRepository = patientRepository;
         }
 
         

@@ -3,8 +3,10 @@ using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class MedicineTypeDatabaseSql: GenericDatabaseSql<MedicineType>, IMedicineTypeRepository
+    public class MedicineTypeDatabaseSql : GenericDatabaseSql<MedicineType>, IMedicineTypeRepository
     {
-        
+        public MedicineTypeDatabaseSql(HealthCareSystemDbContext context) : base(context)
+        {
+        }
     }
 }

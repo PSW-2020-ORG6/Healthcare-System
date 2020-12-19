@@ -10,30 +10,30 @@ namespace WebApplication.Backend.Controllers
     [ApiController]
     public class AppointmentController : ControllerBase
     {
-        private readonly AppointmentsService appointmentsService;
+        private readonly AppointmentsService _appointmentsService;
 
-        public AppointmentController()
+        public AppointmentController(AppointmentsService appointmentsService)
         {
-            this.appointmentsService = new AppointmentsService();
+            _appointmentsService = appointmentsService;
         }
 
         [HttpGet("allAppointmentsByPatientId")]
         public List<Appointment> GellAllAppointmentsByPatientId(String patientId)
         {
-            return appointmentsService.GetAllAppointmentsByPatientId(patientId);
+            return _appointmentsService.GetAllAppointmentsByPatientId(patientId);
         }
 
         [HttpGet("allAppointments")]
         public List<Appointment> GellAllAppointments()
         {
-            return appointmentsService.GetAllAppointments();
+            return _appointmentsService.GetAllAppointments();
         }
 
 
         [HttpGet("allAppointmentsByPatientIdActive")]
         public List<Appointment> GellAllAppointmentsByPatientIdActive(String patientId)
         {
-            List<Appointment> apointments = appointmentsService.GetAllAppointmentsByPatientIdActive(patientId);
+            List<Appointment> apointments = _appointmentsService.GetAllAppointmentsByPatientIdActive(patientId);
             return apointments;
         }
 
@@ -41,7 +41,7 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("allAppointmentsByPatientIdCanceled")]
         public List<Appointment> GellAllAppointmentsByPatientIdCanceled(String patientId)
         {
-            return appointmentsService.GetAllAppointmentsByPatientIdCanceled(patientId);
+            return _appointmentsService.GetAllAppointmentsByPatientIdCanceled(patientId);
         }
     }
 }

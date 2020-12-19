@@ -7,15 +7,16 @@ using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.MedicineService
 {
-    class PhysicianMedicineService
+    public class PhysicianMedicineService
     {
         private readonly IMedicineRepository _medicineRepository;
         private readonly IRejectionRepository _rejectionRepository;
 
-        public PhysicianMedicineService()
+        public PhysicianMedicineService(IMedicineRepository medicineRepository,
+            IRejectionRepository rejectionRepository)
         {
-            _medicineRepository = new MedicineDatabaseSql();
-            _rejectionRepository = new RejectionFileSystem();
+            _medicineRepository = medicineRepository;
+            _rejectionRepository = rejectionRepository;
         }
 
         public List<Medicine> GetAllFromWaitingList()
@@ -42,7 +43,6 @@ namespace HealthClinicBackend.Backend.Service.MedicineService
         {
             medicine.IsApproved = true;
             _medicineRepository.Update(medicine);
-            
         }
 
         public void Reject(Rejection rejection)

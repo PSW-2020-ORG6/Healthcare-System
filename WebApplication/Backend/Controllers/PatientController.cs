@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Model.Accounts;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
@@ -13,11 +14,13 @@ namespace WebApplication.Backend.Controllers
     [ApiController]
     public class PatientController : ControllerBase
     {
-        private readonly PatientService patientService;
-        public PatientController()
+        private readonly PatientService _patientService;
+
+        public PatientController(PatientService patientService)
         {
-            this.patientService = new PatientService();
+            _patientService = patientService;
         }
+
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///calls method for get all patients from patients table
@@ -28,7 +31,7 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("all")]
         public List<Patient> GetAllFeedbacks()
         {
-            return patientService.GetAllPatients();
+            return _patientService.GetAllPatients();
         }
 
         ///Aleksa Repović RA52/2017
@@ -41,8 +44,10 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("getPatientById")]
         public Patient GetPatientById(string patientId)
         {
-            return patientService.GetPatientById(patientId);
+            Console.WriteLine($"Patient id: {patientId}");
+            var result = _patientService.GetPatientById(patientId);
+            Console.WriteLine(result);
+            return result;
         }
-
     }
 }

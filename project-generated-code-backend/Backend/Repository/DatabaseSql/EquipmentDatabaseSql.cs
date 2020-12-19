@@ -8,6 +8,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class EquipmentDatabaseSql : GenericDatabaseSql<Equipment>, IEquipmentRepository
     {
+        public EquipmentDatabaseSql(HealthCareSystemDbContext context) : base(context)
+        {
+        }
+
         public override List<Equipment> GetAll()
         {
             return dbContext.Equipment

@@ -8,6 +8,9 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class BedDatabaseSql: GenericDatabaseSql<Bed>, IBedRepository
     {
+        public BedDatabaseSql(HealthCareSystemDbContext context) : base(context)
+        {
+        }
         public override List<Bed> GetAll()
         {
             return dbContext.Bed

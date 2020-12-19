@@ -13,9 +13,9 @@ namespace WebApplication.Backend.Controllers
     {
 
         private readonly SurveyService _surveyService;
-        public SurveyController()
+        public SurveyController(SurveyService surveyService)
         {
-            this._surveyService = new SurveyService();
+            _surveyService = surveyService;
         }
 
         [HttpPost("add")]

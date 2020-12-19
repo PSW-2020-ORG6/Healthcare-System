@@ -15,42 +15,42 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {
     public class InpatientCareController
     {
-        private Physician _loggedPhysician;
-        private InpatientCareService inpatientCareService;
+        private Physician LoggedPhysician;
+        private readonly InpatientCareService _inpatientCareService;
 
-        public InpatientCareController(Physician loggedPhysician)
+        public InpatientCareController(InpatientCareService inpatientCareService)
         {
-            this._loggedPhysician = loggedPhysician;
-            this.inpatientCareService = new InpatientCareService(loggedPhysician);
+            _inpatientCareService = inpatientCareService;
         }
 
         public void StartInpatientCare(BedReservationDto bedReservationDTO)
         {
-            inpatientCareService.StartInpatientCare(bedReservationDTO);
+            _inpatientCareService.StartInpatientCare(bedReservationDTO);
         }
 
-        public void DischargeParient(Patient patient)
+        public void DischargePatient(Patient patient)
         {
-            inpatientCareService.DischargePatient(patient);
+            _inpatientCareService.DischargePatient(patient);
         }
 
-        public BedReservation getActiveInpatientCare(Patient patient)
+        public BedReservation GetActiveInpatientCare(Patient patient)
         {
-            return inpatientCareService.GetActiveBedReservation(patient);
+            return _inpatientCareService.GetActiveBedReservation(patient);
         }
-        public List<InpatientCare> getPreviousInpatientCares(Patient patient)
+
+        public List<InpatientCare> GetPreviousInpatientCares(Patient patient)
         {
-            return inpatientCareService.GetAllInpatientCares(patient);
+            return _inpatientCareService.GetAllInpatientCares(patient);
         }
 
         public List<Room> GetAvailableRooms()
         {
-            return inpatientCareService.GetAvailableRooms();
-        }
-        public List<Bed> GetAvailableBeds(Room room)
-        {
-            return inpatientCareService.GetAvailableBeds(room);
+            return _inpatientCareService.GetAvailableRooms();
         }
 
+        public List<Bed> GetAvailableBeds(Room room)
+        {
+            return _inpatientCareService.GetAvailableBeds(room);
+        }
     }
 }

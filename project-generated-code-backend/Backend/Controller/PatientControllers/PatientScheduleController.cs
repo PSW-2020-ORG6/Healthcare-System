@@ -14,43 +14,45 @@ namespace HealthClinicBackend.Backend.Controller.PatientControllers
 {
     public class PatientScheduleController
     {
-        public PatientScheduleController(AppointmentSchedulingService appointmentSchedulingService)
+        private readonly AppointmentService _appointmentService;
+        private readonly AppointmentSchedulingService _appointmentSchedulingService;
+
+        public PatientScheduleController(AppointmentSchedulingService appointmentSchedulingService,
+            AppointmentService appointmentService)
         {
-            appointmentSchedulingService = this.appointmentSchedulingService;
-            appointmentService = new AppointmentService();
+            _appointmentSchedulingService = appointmentSchedulingService;
+            _appointmentService = appointmentService;
         }
 
         public void EditAppointment(Appointment appointment)
         {
-            appointmentService.EditAppointment(appointment);
+            _appointmentService.EditAppointment(appointment);
         }
 
         public void DeleteAppointment(Appointment appointment)
         {
-            appointmentService.DeleteAppointment(appointment);
+            _appointmentService.DeleteAppointment(appointment);
         }
 
         public List<Appointment> GetAppointmentsByDate(DateTime date)
         {
-            return appointmentService.GetAppointmentsByDate(date);
+            return _appointmentService.GetAppointmentsByDate(date);
         }
 
         public void NewAppointment(global::HealthClinicBackend.Backend.Dto.AppointmentDto appointmentDto)
         {
-            appointmentService.NewAppointment(appointmentDto);
+            _appointmentService.NewAppointment(appointmentDto);
         }
 
-        public global::HealthClinicBackend.Backend.Dto.AppointmentDto GetSuggestedAppointment(String physitiansId, List<DateTime> dates, int prior)
+        public AppointmentDto GetSuggestedAppointment(String physitiansId,
+            List<DateTime> dates, int prior)
         {
             throw new NotImplementedException();
         }
 
         public List<AppointmentDto> GetAllAvailableAppointments(AppointmentDto appointmentDto)
         {
-            return appointmentSchedulingService.GetAvailableAppointments(appointmentDto);
+            return _appointmentSchedulingService.GetAvailableAppointments(appointmentDto);
         }
-
-        public AppointmentService appointmentService;
-        public AppointmentSchedulingService appointmentSchedulingService;
     }
 }

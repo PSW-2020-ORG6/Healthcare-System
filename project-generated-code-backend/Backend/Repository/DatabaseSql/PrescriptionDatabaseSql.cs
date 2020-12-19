@@ -8,6 +8,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class PrescriptionDatabaseSql : GenericDatabaseSql<Prescription>, IPrescriptionRepository
     {
+        public PrescriptionDatabaseSql(HealthCareSystemDbContext context) : base(context)
+        {
+        }
+
         public override List<Prescription> GetAll()
         {
             return dbContext.Prescription

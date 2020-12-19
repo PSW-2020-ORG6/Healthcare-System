@@ -12,9 +12,9 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
     {
         private readonly IAppointmentRepository _appointmentRepository;
 
-        public PatientAvailabilityService()
+        public PatientAvailabilityService(IAppointmentRepository appointmentRepository)
         {
-            _appointmentRepository = new AppointmentDatabaseSql();
+            _appointmentRepository = appointmentRepository;
         }
 
         public bool IsPatientAvailable(Patient patient, TimeInterval timeInterval)

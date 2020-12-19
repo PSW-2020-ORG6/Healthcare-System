@@ -11,9 +11,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class PhysicianDatabaseSql : GenericDatabaseSql<Physician>, IPhysicianRepository, IDisposable
     {
-        public PhysicianDatabaseSql(HealthCareSystemDbContext context)
+        public PhysicianDatabaseSql(HealthCareSystemDbContext context): base(context)
         {
-            dbContext = context;
         }
         public override List<Physician> GetAll()
         {

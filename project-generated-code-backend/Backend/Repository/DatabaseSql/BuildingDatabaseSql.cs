@@ -6,8 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class BuildingDatabaseSql: GenericDatabaseSql<Building>, IBuildingRepository
+    public class BuildingDatabaseSql : GenericDatabaseSql<Building>, IBuildingRepository
     {
+        public BuildingDatabaseSql(HealthCareSystemDbContext context) : base(context)
+        {
+        }
+
         public override List<Building> GetAll()
         {
             return dbContext.Building

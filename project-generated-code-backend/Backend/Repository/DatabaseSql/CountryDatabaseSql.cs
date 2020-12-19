@@ -5,8 +5,12 @@ using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class CountryDatabaseSql: GenericDatabaseSql<Country>, ICountryRepository
+    public class CountryDatabaseSql : GenericDatabaseSql<Country>, ICountryRepository
     {
+        public CountryDatabaseSql(HealthCareSystemDbContext context) : base(context)
+        {
+        }
+
         public override List<Country> GetAll()
         {
             return dbContext.Country.ToList();

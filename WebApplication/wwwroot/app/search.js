@@ -299,7 +299,7 @@ Vue.component("search", {
                 var prescriptionSearch = this.PrescriptionAdvancedSearch()
                 var reportSearch = this.ReportAdvancedSearch()
                 axios
-                    .get('http://localhost:49900/user/advancedSearch', { params: { prescriptionSearch: prescriptionSearch, reportSearch: reportSearch, date: date } })
+                    .get('/user/advancedSearch', { params: { prescriptionSearch: prescriptionSearch, reportSearch: reportSearch, date: date } })
                     .then(response => {
                         this.search = response.data
                     })
@@ -432,7 +432,7 @@ Vue.component("search", {
                 var prescriptionSimpleSearch = this.PrescriptionSimpleSearch()
                 var reportSimpleSearch = this.ReportSimpleSearch()
                 axios
-                    .get('http://localhost:49900/user/advancedSearch', { params: { prescriptionSearch: prescriptionSimpleSearch, reportSearch: reportSimpleSearch, date: date } })
+                    .get('/user/advancedSearch', { params: { prescriptionSearch: prescriptionSimpleSearch, reportSearch: reportSimpleSearch, date: date } })
                     .then(response => {
                         this.search = response.data
                     })

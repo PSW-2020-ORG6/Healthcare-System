@@ -19,29 +19,33 @@ namespace HealthClinicBackend.Backend.Service.PatientCareService
 {
     public class InpatientCareService
     {
-        private readonly Physician _loggedPhysician;
+        public Physician LoggedPhysician;
         private readonly IInpatientCareRepository _inpatientCareRepository;
         private readonly IBedReservationRepository _bedReservationRepository;
         private readonly IRoomRepository _roomRepository;
 
-        public InpatientCareService(Physician loggedPhysician)
+        private readonly RoomAvailabilityService _roomAvailabilityService;
+
+        public InpatientCareService(IInpatientCareRepository inpatientCareRepository,
+            IBedReservationRepository bedReservationRepository, IRoomRepository roomRepository,
+            IAppointmentRepository appointmentRepository, IRenovationRepository renovationRepository)
         {
-            _loggedPhysician = loggedPhysician;
-            _inpatientCareRepository = new InpatientCareDatabaseSql();
-            _bedReservationRepository = new BedReservationDatabaseSql();
-            _roomRepository = new RoomDatabaseSql();
+            _inpatientCareRepository = inpatientCareRepository;
+            _bedReservationRepository = bedReservationRepository;
+            _roomRepository = roomRepository;
+
+            _roomAvailabilityService =
+                new RoomAvailabilityService(appointmentRepository, renovationRepository, bedReservationRepository);
         }
 
         public List<Room> GetAvailableRooms()
         {
-            RoomAvailabilityService roomAvailabilityService = new RoomAvailabilityService();
-            return GetAllRooms().Where(room => roomAvailabilityService.IsRoomAvailableForInpatientCare(room)).ToList();
+            return GetAllRooms().Where(room => _roomAvailabilityService.IsRoomAvailableForInpatientCare(room)).ToList();
         }
 
         public List<Bed> GetAvailableBeds(Room room)
         {
-            RoomAvailabilityService roomAvailabilityService = new RoomAvailabilityService();
-            return roomAvailabilityService.GetAvailableBeds(room);
+            return _roomAvailabilityService.GetAvailableBeds(room);
         }
 
         public void StartInpatientCare(BedReservationDto bedReservationDto)
@@ -55,7 +59,7 @@ namespace HealthClinicBackend.Backend.Service.PatientCareService
             _bedReservationRepository.Delete(activeBedReservation.SerialNumber);
             DateTime dateOfAdmission = activeBedReservation.TimeInterval.Start;
             DateTime dateOfDischarge = DateTime.Now;
-            InpatientCare inpatientCare = new InpatientCare(dateOfAdmission, dateOfDischarge, _loggedPhysician, patient);
+            InpatientCare inpatientCare = new InpatientCare(dateOfAdmission, dateOfDischarge, LoggedPhysician, patient);
             _inpatientCareRepository.Save(inpatientCare);
         }
 

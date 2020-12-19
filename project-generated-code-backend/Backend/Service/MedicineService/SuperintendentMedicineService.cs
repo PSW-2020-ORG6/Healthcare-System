@@ -5,16 +5,17 @@ using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.MedicineService
 {
-    class SuperintendentMedicineService
+    public class SuperintendentMedicineService
     {
         private readonly IMedicineRepository _medicineRepository;
         private readonly IRejectionRepository _rejectionRepository;
 
 
-        public SuperintendentMedicineService()
+        public SuperintendentMedicineService(IMedicineRepository medicineRepository,
+            IRejectionRepository rejectionRepository)
         {
-            _rejectionRepository = new RejectionDatabaseSql();
-            _medicineRepository = new MedicineDatabaseSql();
+            _rejectionRepository = rejectionRepository;
+            _medicineRepository = medicineRepository;
         }
 
         public List<Medicine> GetAllApproved()

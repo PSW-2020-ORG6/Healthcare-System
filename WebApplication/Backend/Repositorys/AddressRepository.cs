@@ -7,11 +7,11 @@ namespace WebApplication.Backend.Repositorys
 {
     public class AddressRepository : IAddressRepository
     {
-        private readonly AddressDatabaseSql _addressRepository;
+        private readonly HealthClinicBackend.Backend.Repository.Generic.IAddressRepository _addressRepository;
 
-        public AddressRepository()
+        public AddressRepository(HealthClinicBackend.Backend.Repository.Generic.IAddressRepository addressRepository)
         {
-            _addressRepository = new AddressDatabaseSql();
+            _addressRepository = addressRepository;
         }
 
         public List<Address> GetAllAddresses()

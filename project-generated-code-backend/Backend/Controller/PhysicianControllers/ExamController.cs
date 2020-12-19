@@ -8,54 +8,41 @@ using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.MedicalExam;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Service.PatientCareService;
-using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {
     public class ExamController
     {
-        private Physician _loggedPhysician;
-        private Patient selectedPatient;
-        private Report currentReport;
+        private Patient _selectedPatient;
+        private Report _currentReport;
 
-        private ReportService reportService;
+        private readonly ReportService _reportService;
 
-        public ExamController(Appointment appointment)
+        public ExamController(ReportService reportService)
         {
-            this._loggedPhysician = appointment.Physician;
-            this.SelectedPatient = appointment.Patient;
-            ProcedureType procedure = appointment.ProcedureType;
+            _reportService = reportService;
+        }
 
-            reportService = new ReportService();
-
-            String patientConditions = this.GetPatientConditions();
-            this.CurrentReport = new Report(DateTime.Today, "", selectedPatient, _loggedPhysician, patientConditions);
+        public void StartExam(Appointment appointment)
+        {
+            String patientConditions = GetPatientConditions();
+            _currentReport = new Report(DateTime.Today, "", _selectedPatient, appointment.Physician, patientConditions);
         }
 
         public void SaveReport()
         {
-            reportService.NewReport(currentReport);
+            _reportService.NewReport(_currentReport);
         }
 
         public void AddDocument(AdditionalDocument additionalDocument)
         {
-            currentReport.AddAdditionalDocument(additionalDocument);
+            _currentReport.AddAdditionalDocument(additionalDocument);
         }
 
         private String GetPatientConditions()
         {
-            Report lastReport = reportService.GetLastReportByPatient(selectedPatient);
-
-            if (lastReport != null)
-            {
-                return lastReport.PatientConditions;
-            }
-
-            return "";
+            Report lastReport = _reportService.GetLastReportByPatient(_selectedPatient);
+            return lastReport != null ? lastReport.PatientConditions : "";
         }
-
-        public Report CurrentReport { get => currentReport; set => currentReport = value; }
-        public Patient SelectedPatient { get => selectedPatient; set => selectedPatient = value; }
-
     }
 }

@@ -11,9 +11,9 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
     {
         private readonly IAppointmentRepository _appointmentRepository;
 
-        public PhysicianAvailabilityService()
+        public PhysicianAvailabilityService(IAppointmentRepository appointmentRepository)
         {
-            _appointmentRepository = new AppointmentDatabaseSql();
+            _appointmentRepository = appointmentRepository;
         }
 
         public bool IsPhysicianAvailableAtAnyTime(Physician physician, List<TimeInterval> timeIntervals)

@@ -19,9 +19,13 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         public SchedulingStrategy SchedulingStrategyContext { get; set; }
         private readonly AppointmentGeneralitiesManager _appointmentGeneralitiesManager;
 
-        public AppointmentSchedulingService(IPhysicianRepository physicianRepository)
+        public AppointmentSchedulingService(IPhysicianRepository physicianRepository, IRoomRepository roomRepository,
+            IAppointmentRepository appointmentRepository, IRenovationRepository renovationRepository,
+            IBedReservationRepository bedReservationRepository)
         {
-            _appointmentGeneralitiesManager = new AppointmentGeneralitiesManager(physicianRepository);
+            AppointmentDto appointmentDto = new AppointmentDto();
+            _appointmentGeneralitiesManager = new AppointmentGeneralitiesManager(appointmentDto, physicianRepository,
+                roomRepository, appointmentRepository, renovationRepository, bedReservationRepository);
         }
 
         public List<AppointmentDto> GetAvailableAppointments(AppointmentDto appointmentPreferences)

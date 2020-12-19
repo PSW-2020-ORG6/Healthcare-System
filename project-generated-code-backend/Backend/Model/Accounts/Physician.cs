@@ -23,7 +23,8 @@ namespace Model.Accounts
 
         public String AllSpecializations
         {
-            get { return Specialization.Aggregate("", (current, s) => current + (s + ", ")); }
+            // get { return Specialization.Aggregate("", (current, s) => current + (s + ", ")); }
+            get { return "General Practitioner"; }
         }
 
         public Physician() : base()

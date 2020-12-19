@@ -17,13 +17,12 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
 {
     public class PhysicianScheduleService
     {
-        private readonly Physician _loggedPhysician;
+        public Physician LoggedPhysician;
         private readonly IAppointmentRepository _appointmentRepository;
 
-        public PhysicianScheduleService(Physician loggedPhysician)
+        public PhysicianScheduleService(IAppointmentRepository appointmentRepository)
         {
-            _loggedPhysician = loggedPhysician;
-            _appointmentRepository = new AppointmentDatabaseSql();
+            _appointmentRepository = appointmentRepository;
         }
 
         public void NewAppointment(AppointmentDto appointmentDto)
@@ -34,13 +33,13 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
 
         public List<Appointment> GetAppointmentsByDate(DateTime date)
         {
-            return _appointmentRepository.GetAppointmentsByPhysician(_loggedPhysician)
+            return _appointmentRepository.GetAppointmentsByPhysician(LoggedPhysician)
                 .Where(appointment => date.Equals(appointment.Date)).ToList();
         }
 
         public Appointment GetTodaysAppointmentForPatient(Patient patient)
         {
-            List<Appointment> appointments = _appointmentRepository.GetAppointmentsByPhysician(_loggedPhysician);
+            List<Appointment> appointments = _appointmentRepository.GetAppointmentsByPhysician(LoggedPhysician);
             return appointments.FirstOrDefault(appointment =>
                 appointment.Date.Equals(DateTime.Today) && appointment.Patient.Equals(patient));
         }

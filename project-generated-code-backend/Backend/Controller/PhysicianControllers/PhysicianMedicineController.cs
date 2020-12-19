@@ -6,10 +6,10 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {
     public class PhysicianMedicineController
     {
-        private PhysicianMedicineService _physicianMedicineService;
-        public PhysicianMedicineController()
+        private readonly PhysicianMedicineService _physicianMedicineService;
+        public PhysicianMedicineController(PhysicianMedicineService physicianMedicineService)
         {
-            this._physicianMedicineService = new PhysicianMedicineService();
+            _physicianMedicineService = physicianMedicineService;
         }
 
         public List<MedicineManufacturer> GetMedicineManufacturers()

@@ -12,24 +12,27 @@ namespace WebApplication.Backend.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly PrescriptionService prescriptionService = new PrescriptionService();
-        private readonly ReportService reportService = new ReportService();
+        private readonly PrescriptionService _prescriptionService;
+        private readonly ReportService _reportService;
         private SearchEntityDTO searchEntityDTO = new SearchEntityDTO();
 
-        public UserController()
+        public UserController(PrescriptionService prescriptionService, ReportService reportService)
         {
-            this.reportService = new ReportService();
+            _prescriptionService = prescriptionService;
+            _reportService = reportService;
         }
 
         [HttpGet("advancedSearch")]
-        public List<SearchEntityDTO> GetAllFeedbacks([FromQuery] string prescriptionSearch, [FromQuery] string reportSearch, [FromQuery] string date)
+        public List<SearchEntityDTO> GetAllFeedbacks([FromQuery] string prescriptionSearch,
+            [FromQuery] string reportSearch, [FromQuery] string date)
         {
             if (!searchEntityDTO.IsDateFormat(date))
                 return null;
             if (searchEntityDTO.IsSearchesFormatValid(prescriptionSearch, reportSearch))
             {
-                List<SearchEntityDTO> prescriptions = prescriptionService.GetSearchedPrescription(prescriptionSearch, date);
-                List<SearchEntityDTO> reports = reportService.GetSearchedReport(reportSearch, date);
+                List<SearchEntityDTO> prescriptions =
+                    _prescriptionService.GetSearchedPrescription(prescriptionSearch, date);
+                List<SearchEntityDTO> reports = _reportService.GetSearchedReport(reportSearch, date);
                 if (!searchEntityDTO.IsNull(prescriptions) && !searchEntityDTO.IsNull(reports))
                     return searchEntityDTO.MergeLists(prescriptions, reports);
                 else if (searchEntityDTO.IsNull(prescriptions))
@@ -39,16 +42,18 @@ namespace WebApplication.Backend.Controllers
             }
             else if (searchEntityDTO.IsSearchFormatValid(prescriptionSearch))
             {
-                List<SearchEntityDTO> prescriptions = prescriptionService.GetSearchedPrescription(prescriptionSearch, date);
+                List<SearchEntityDTO> prescriptions =
+                    _prescriptionService.GetSearchedPrescription(prescriptionSearch, date);
                 if (!searchEntityDTO.IsNull(prescriptions))
                     return prescriptions;
             }
             else if (searchEntityDTO.IsSearchFormatValid(reportSearch))
             {
-                List<SearchEntityDTO> reports = reportService.GetSearchedReport(reportSearch, date);
+                List<SearchEntityDTO> reports = _reportService.GetSearchedReport(reportSearch, date);
                 if (!searchEntityDTO.IsNull(reports))
                     return reports;
             }
+
             return null;
         }
     }

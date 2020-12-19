@@ -11,9 +11,9 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
     {
         private readonly ISecretaryRepository _secretaryRepository;
 
-        public SecretaryAccountService()
+        public SecretaryAccountService(ISecretaryRepository secretaryRepository)
         {
-            _secretaryRepository = new SecretaryDatabaseSql();
+            _secretaryRepository = secretaryRepository;
         }
 
         public List<Secretary> GetAllSecretaries()

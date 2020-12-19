@@ -5,8 +5,12 @@ using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class AddressDatabaseSql: GenericDatabaseSql<Address>, IAddressRepository
+    public class AddressDatabaseSql : GenericDatabaseSql<Address>, IAddressRepository
     {
+        public AddressDatabaseSql(HealthCareSystemDbContext context) : base(context)
+        {
+        }
+
         public override List<Address> GetAll()
         {
             return dbContext.Address.ToList();

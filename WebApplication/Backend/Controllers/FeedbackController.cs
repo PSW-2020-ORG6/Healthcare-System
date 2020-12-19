@@ -13,10 +13,10 @@ namespace WebApplication.Backend.Controllers
     [ApiController]
     public class FeedbackController : ControllerBase
     {
-        private readonly FeedbackService feedbackService;
-        public FeedbackController()
+        private readonly FeedbackService _feedbackService;
+        public FeedbackController(FeedbackService feedbackService)
         {
-            this.feedbackService = new FeedbackService();
+            _feedbackService = feedbackService;
         }
         ///Tanja Drcelic RA124/2017
         /// <summary>
@@ -28,7 +28,7 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("all")]
         public List<Feedback> GetAllFeedbacks()
         {
-            return feedbackService.GetAllFeedbacks();
+            return _feedbackService.GetAllFeedbacks();
         }
         ///Repovic Aleksa RA-52-2017
         /// <summary>
@@ -42,7 +42,7 @@ namespace WebApplication.Backend.Controllers
         {
             if (feedbackDTO.IsApprovalValid() && feedbackDTO.IsCorrectText())
             {
-                feedbackService.AddNewFeedback(new Feedback(feedbackDTO));
+                _feedbackService.AddNewFeedback(new Feedback(feedbackDTO));
                 return Ok();
             }
             return BadRequest();
@@ -57,7 +57,7 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("approved")]
         public List<Feedback> GetApprovedFeedbacks()
         {
-            return feedbackService.GetApprovedFeedbacks();
+            return _feedbackService.GetApprovedFeedbacks();
         }
         ///Tanja Drcelic RA124/2017
         /// <summary>
@@ -69,7 +69,7 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("disapproved")]
         public List<Feedback> GetDisapprovedFeedbacks()
         {
-            return feedbackService.GetDisapprovedFeedbacks();
+            return _feedbackService.GetDisapprovedFeedbacks();
         }
         ///Marija Vucetic 
         /// <summary>
@@ -83,7 +83,7 @@ namespace WebApplication.Backend.Controllers
         {
             if (feedbackDTO.IsApprovalValid() && feedbackDTO.IsCorrectText())
             {
-                feedbackService.ApproveFeedback(feedbackDTO);
+                _feedbackService.ApproveFeedback(feedbackDTO);
                 return Ok();
             }
             return BadRequest();

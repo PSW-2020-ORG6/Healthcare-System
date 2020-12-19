@@ -1,7 +1,6 @@
-﻿using Model.Accounts;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
-using WebApplication.Backend.Repositorys;
+using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace WebApplication.Backend.Services
 {
@@ -10,11 +9,13 @@ namespace WebApplication.Backend.Services
     /// </summary>
     public class PatientService
     {
-        private PatientRepository patientRepository;
-        public PatientService()
+        private readonly IPatientRepository _patientRepository;
+
+        public PatientService(IPatientRepository patientRepository)
         {
-            this.patientRepository = new PatientRepository();
+            _patientRepository = patientRepository;
         }
+
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///calls method for get all patients in patients table
@@ -24,7 +25,7 @@ namespace WebApplication.Backend.Services
         ///</returns>
         internal List<Patient> GetAllPatients()
         {
-            return patientRepository.GetAllPatients();
+            return _patientRepository.GetAll();
         }
 
 
@@ -37,10 +38,7 @@ namespace WebApplication.Backend.Services
         ///</returns
         internal Patient GetPatientById(string patientId)
         {
-            Patient returnValue = patientRepository.GetPatientById(patientId);
-            // returnValue.Address = patientRepository.GetAddress(returnValue.Address.SerialNumber);
-            return returnValue;
+            return _patientRepository.GetById(patientId);
         }
-
     }
 }

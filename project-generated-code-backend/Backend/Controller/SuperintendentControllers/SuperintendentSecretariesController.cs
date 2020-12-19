@@ -9,15 +9,16 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
     {
         private readonly SecretaryAccountService _secretaryService;
 
-        public SuperintendentSecretariesController()
+        public SuperintendentSecretariesController(SecretaryAccountService secretaryAccountService)
         {
-            _secretaryService = new SecretaryAccountService();
+            _secretaryService = secretaryAccountService;
         }
 
         public List<Secretary> GetAllSecretaries()
         {
             return _secretaryService.GetAllSecretaries();
         }
+
         public void NewSecretary(Secretary secretary)
         {
             _secretaryService.NewSecretary(secretary);

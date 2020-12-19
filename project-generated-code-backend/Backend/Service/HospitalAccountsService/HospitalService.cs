@@ -20,11 +20,12 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
         private readonly IProcedureTypeRepository _procedureTypeRepository;
         private readonly IDiagnosticTypeRepository _diagnosticTypeRepository;
 
-        public HospitalService()
+        public HospitalService(ICountryRepository countryRepository, IProcedureTypeRepository procedureTypeRepository,
+            IDiagnosticTypeRepository diagnosticTypeRepository)
         {
-            _countryRepository = new CountryDatabaseSql();
-            _procedureTypeRepository = new ProcedureTypeDatabaseSql();
-            _diagnosticTypeRepository = new DiagnosticTypeDatabaseSql();
+            _countryRepository = countryRepository;
+            _procedureTypeRepository = procedureTypeRepository;
+            _diagnosticTypeRepository = diagnosticTypeRepository;
         }
 
         internal List<ProcedureType> GetAllProcedureTypes()

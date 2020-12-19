@@ -12,6 +12,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class AppointmentDatabaseSql : GenericDatabaseSql<Appointment>, IAppointmentRepository
     {
+        public AppointmentDatabaseSql(HealthCareSystemDbContext context) : base(context)
+        {
+        }
+
         public override List<Appointment> GetAll()
         {
             return dbContext.Appointment

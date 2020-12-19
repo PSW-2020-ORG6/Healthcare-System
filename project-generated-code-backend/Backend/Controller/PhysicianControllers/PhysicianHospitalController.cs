@@ -9,9 +9,9 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
     {
         private readonly HospitalService _hospitalService;
 
-        public PhysicianHospitalController()
+        public PhysicianHospitalController(HospitalService hospitalService)
         {
-            this._hospitalService = new HospitalService();
+            _hospitalService = hospitalService;
         }
 
         public List<DiagnosticType> GetDiagnosticTypes()

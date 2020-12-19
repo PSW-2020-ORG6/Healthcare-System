@@ -14,10 +14,21 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
         private readonly IPhysicianRepository _physicianRepository;
         private readonly IRoomRepository _roomRepository;
 
-        public AppointmentGeneralitiesManager(IPhysicianRepository physicianRepository)
+        private readonly PhysicianAvailabilityService _physicianAvailabilityService;
+        private readonly RoomAvailabilityService _roomAvailabilityService;
+
+        public AppointmentGeneralitiesManager(AppointmentDto appointmentPreferences,
+            IPhysicianRepository physicianRepository, IRoomRepository roomRepository,
+            IAppointmentRepository appointmentRepository, IRenovationRepository renovationRepository,
+            IBedReservationRepository bedReservationRepository)
         {
+            _appointmentPreferences = appointmentPreferences;
             _physicianRepository = physicianRepository;
-            _roomRepository = new RoomDatabaseSql();
+            _roomRepository = roomRepository;
+
+            _physicianAvailabilityService = new PhysicianAvailabilityService(appointmentRepository);
+            _roomAvailabilityService =
+                new RoomAvailabilityService(appointmentRepository, renovationRepository, bedReservationRepository);
         }
 
         public List<AppointmentDto> GetAllAvailableAppointments(AppointmentDto appointmentPreferences)
@@ -29,18 +40,15 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
             List<Physician> allPhysicians = GetAllPhysicians();
             List<Room> allRooms = GetAllRooms();
 
-            PhysicianAvailabilityService physicianAvailabilityService = new PhysicianAvailabilityService();
-            RoomAvailabilityService roomAvailabilityService = new RoomAvailabilityService();
-
             foreach (TimeInterval timeInterval in allTimeIntervals)
             {
                 foreach (Physician physician in allPhysicians)
                 {
-                    if (physicianAvailabilityService.IsPhysicianAvailable(physician, timeInterval))
+                    if (_physicianAvailabilityService.IsPhysicianAvailable(physician, timeInterval))
                     {
                         foreach (Room room in allRooms)
                         {
-                            if (roomAvailabilityService.IsRoomAvailable(room, timeInterval))
+                            if (_roomAvailabilityService.IsRoomAvailable(room, timeInterval))
                             {
                                 AppointmentDto appointmentDto = CreateAppointment(physician, room, timeInterval);
                                 appointments.Add(appointmentDto);

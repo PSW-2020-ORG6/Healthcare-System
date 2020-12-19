@@ -1,21 +1,20 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using HealthClinicBackend.Backend.Model.Survey;
-using WebApplication.Backend.Repositorys;
+using HealthClinicBackend.Backend.Repository.Generic;
 using WebApplication.Backend.Util;
 
 namespace WebApplication.Backend.Services
 {
     public class SurveyService
     {
-        private ISurveyRepository isurveyRepository;
-        public SurveyService()
+        private readonly ISurveyRepository _surveyRepository;
+
+        public SurveyService(ISurveyRepository surveyRepository)
         {
-            this.isurveyRepository = new SurveyRepository();
+            _surveyRepository = surveyRepository;
         }
-        public SurveyService(ISurveyRepository iSurveyRepository)
-        {
-            this.isurveyRepository = iSurveyRepository;
-        }
+
         ////Marija Vucetic  RA157/2017
         /// <summary>
         ///adding new survez to database
@@ -23,19 +22,23 @@ namespace WebApplication.Backend.Services
         ///<returns>
         ///true in case of success,false otherwise
         ///</returns>
-        public bool AddNewSurvey(Survey surveyText)
+        public bool AddNewSurvey(Survey survey)
         {
-            return isurveyRepository.AddNewSurvey(surveyText);
+            _surveyRepository.Save(survey);
+            return true;
         }
 
         internal List<string> GetAllDoctorsFromReporstByPatientIdFromSurvey(string patientId)
         {
-            return isurveyRepository.GetAllDoctorsFromReporstByPatientIdFromSurvey(patientId);
+            return _surveyRepository.GetAll()
+                .Where(s => s.Id.Equals(patientId))
+                .Select(s => s.DoctorName).ToList();
         }
 
         internal List<string> GetAllDoctorsFromReporstByPatientIdForSurveyList(string patientId)
         {
-            return isurveyRepository.GetAllDoctorsFromReporstByPatientIdForSurveyList(patientId);
+            return new List<string>();
+            // return _surveyRepository.GetAllDoctorsFromReporstByPatientIdForSurveyList(patientId);
         }
 
         ////Vucetic Marija RA157/2017
@@ -49,7 +52,8 @@ namespace WebApplication.Backend.Services
         ///</param>
         internal List<string> GetAllDoctorsFromReporstByPatientId(string patientId)
         {
-            return isurveyRepository.GetAllDoctorsFromReporstByPatientId(patientId);
+            return new List<string>();
+            // return _surveyRepository.GetAllDoctorsFromReporstByPatientId(patientId);
         }
 
         ////Aleksa Repovic RA52/2017
@@ -61,7 +65,8 @@ namespace WebApplication.Backend.Services
         ///</returns>
         public List<StatisticAuxilaryClass> getStatisticsEachQuestion()
         {
-            return isurveyRepository.getStatisticsEachQuestion();
+            return new List<StatisticAuxilaryClass>();
+            // return _surveyRepository.getStatisticsEachQuestion();
         }
 
         ////Repovic Aleksa RA52/2017
@@ -75,8 +80,8 @@ namespace WebApplication.Backend.Services
         ///</param>
         public List<StatisticAuxilaryClass> getStatisticsForDoctor(string doctorID)
         {
-            return isurveyRepository.getStatisticsForDoctor(doctorID);
-
+            return new List<StatisticAuxilaryClass>();
+            // return _surveyRepository.getStatisticsForDoctor(doctorID);
         }
 
         ////Aleksa Repovic RA52/2017
@@ -88,9 +93,8 @@ namespace WebApplication.Backend.Services
         ///</returns>
         public List<StatisticAuxilaryClass> getStatisticsEachTopic()
         {
-            return isurveyRepository.getStatisticsEachTopic();
-
+            return new List<StatisticAuxilaryClass>();
+            // return _surveyRepository.getStatisticsEachTopic();
         }
-
     }
 }
