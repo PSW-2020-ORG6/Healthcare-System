@@ -38,7 +38,7 @@
 	},
 	mounted() {
 		axios
-			.get('http://localhost:49900/registration/allPhysitians')
+			.get('http://localhost:5000/registration/allPhysitians')
 			.then(response => {
 				this.doctorsList = response.data
 				alert(this.doctorsList);
@@ -210,7 +210,7 @@
 				<td><input type="text" class = "form-control input"  v-model="patientDTO.email"/></td><br/>
 			</tr>
 			<tr><td>&nbsp;</td>
-				 <td align="left" style="color: red;font-size:12px">{{mailValidation}}</td>
+				 <td align="left" style="color: #ff0000;font-size:12px">{{mailValidation}}</td>
 			</tr>
 			<tr>
 				<td><label>Password</label><a class="star">*</a></td>
