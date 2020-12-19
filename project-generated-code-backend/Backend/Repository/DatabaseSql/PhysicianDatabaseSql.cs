@@ -10,6 +10,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class PhysicianDatabaseSql : GenericDatabaseSql<Physician>, IPhysicianRepository
     {
+        public PhysicianDatabaseSql(HealthCareSystemDbContext context)
+        {
+            dbContext = context;
+        }
         public override List<Physician> GetAll()
         {
             // Use Include method to connect object and its references from other tables

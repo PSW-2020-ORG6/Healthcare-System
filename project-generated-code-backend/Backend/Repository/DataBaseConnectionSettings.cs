@@ -16,15 +16,9 @@ namespace HealthClinicBackend.Backend.Repository
 
         public DataBaseConnectionSettings()
         {
-            Host = "localhost";
-            User = "postgres";
-            Password = "super";
-            Port = "5432";
-            Database = "healthcare-system-db";
         }
 
         public string ConnectionString =>
-            $"server={Host} ;userid={User}; pwd={Password};"
-            + $"port={Port}; database={Database}";
+            $"server={Host};userid={User};password={Password};port={Port};database={Database}";
     }
 }

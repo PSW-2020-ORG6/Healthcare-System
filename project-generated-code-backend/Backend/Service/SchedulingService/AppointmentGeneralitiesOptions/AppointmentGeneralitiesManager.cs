@@ -14,9 +14,9 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
         private readonly IPhysicianRepository _physicianRepository;
         private readonly IRoomRepository _roomRepository;
 
-        public AppointmentGeneralitiesManager()
+        public AppointmentGeneralitiesManager(IPhysicianRepository physicianRepository)
         {
-            _physicianRepository = new PhysicianDatabaseSql();
+            _physicianRepository = physicianRepository;
             _roomRepository = new RoomDatabaseSql();
         }
 

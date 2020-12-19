@@ -14,9 +14,9 @@ namespace HealthClinicBackend.Backend.Controller.PatientControllers
 {
     public class PatientScheduleController
     {
-        public PatientScheduleController()
+        public PatientScheduleController(AppointmentSchedulingService appointmentSchedulingService)
         {
-            appointmentSchedulingService = new AppointmentSchedulingService(new PatientSchedulingStrategy());
+            appointmentSchedulingService = this.appointmentSchedulingService;
             appointmentService = new AppointmentService();
         }
 

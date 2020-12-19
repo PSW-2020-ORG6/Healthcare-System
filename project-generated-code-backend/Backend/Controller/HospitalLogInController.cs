@@ -7,9 +7,9 @@ namespace HealthClinicBackend.Backend.Controller
     {
         private readonly HospitalLogInService _hospitalLogInService;
 
-        public HospitalLogInController()
+        public HospitalLogInController(HospitalLogInService hospitalLogInService)
         {
-            _hospitalLogInService = new HospitalLogInService();
+            _hospitalLogInService = hospitalLogInService;
         }
 
         public TypeOfUser GetUserType(string jmbg, string password)

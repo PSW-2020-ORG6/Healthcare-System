@@ -11,12 +11,12 @@ namespace WebApplication.Backend.Controllers
     [ApiController]
     public class RegistrationController : ControllerBase
     {
-        public RegistrationService registrationService;
+        public IRegistrationService registrationService;
         private IMailService mailService;
 
-        public RegistrationController(IMailService mailService)
+        public RegistrationController(IMailService mailService, IRegistrationService registrationService)
         {
-            registrationService = new RegistrationService();
+            this.registrationService = registrationService;
             this.mailService = mailService;
         }
 

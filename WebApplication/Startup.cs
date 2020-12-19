@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Repository.Generic;
 using WebApplication.Backend.Model;
+using WebApplication.Backend.Repositorys;
 using WebApplication.Backend.Services;
 
 namespace WebApplication
@@ -31,19 +32,26 @@ namespace WebApplication
             IConfiguration conf = Configuration.GetSection("DataBaseConnectionSettings");
             DataBaseConnectionSettings dataBaseConnectionSettings = conf.Get<DataBaseConnectionSettings>();
 
+            Console.WriteLine($"Connection string: {dataBaseConnectionSettings.ConnectionString}");
+            
             services.AddDbContext<HealthCareSystemDbContext>(options =>
             {
-                options.UseNpgsql(
-                    dataBaseConnectionSettings.ConnectionString);
                 // options.UseNpgsql(
-                //     dataBaseConnectionSettings.ConnectionString,
-                //     x => x.MigrationsAssembly("Backend").EnableRetryOnFailure(dataBaseConnectionSettings.RetryCount,
-                //         new TimeSpan(0, 0, 0, dataBaseConnectionSettings.RetryWaitInSeconds), new List<string>())
-                // );
+                //     dataBaseConnectionSettings.ConnectionString);
+                options.UseNpgsql(
+                    dataBaseConnectionSettings.ConnectionString,
+                    x => x.MigrationsAssembly("Backend").EnableRetryOnFailure(dataBaseConnectionSettings.RetryCount,
+                        new TimeSpan(0, 0, 0, dataBaseConnectionSettings.RetryWaitInSeconds), new List<string>())
+                );
             });
 
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddTransient<IMailService, MailService>();
+
+            services.AddScoped<IPhysicianRepository, PhysicianDatabaseSql>();
+            services.AddScoped<IPatientRepository, PatientDatabaseSql>();
+            services.AddScoped<IRegistrationRepository, RegistrationRepository>();
+            services.AddScoped<IRegistrationService, RegistrationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

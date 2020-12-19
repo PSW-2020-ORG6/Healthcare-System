@@ -13,7 +13,7 @@ namespace WebApplication.Backend.Repositorys
     public class SurveyRepository : ISurveyRepository
     {
         private readonly SurveyDatabaseSql _surveyRepository;
-        private readonly PhysicianDatabaseSql _physicianRepository;
+        // private readonly PhysicianDatabaseSql _physicianRepository;
         private readonly ReportDatabaseSql _reportRepository;
         private readonly PatientDatabaseSql _patientRepository;
         // private MySqlConnection connection;
@@ -21,7 +21,7 @@ namespace WebApplication.Backend.Repositorys
         public SurveyRepository()
         {
             _surveyRepository = new SurveyDatabaseSql();
-            _physicianRepository = new PhysicianDatabaseSql();
+            // _physicianRepository = new PhysicianDatabaseSql();
             _reportRepository = new ReportDatabaseSql();
             _patientRepository = new PatientDatabaseSql();
         }

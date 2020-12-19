@@ -12,7 +12,10 @@ namespace WebApplicationTests
 {
     public class PatientRegistrationTests
     {
-        private Patient patient = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", new Address { Street = "Glavna 3" }, "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false);
+        private Patient patient = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com",
+            new Address {Street = "Glavna 3"}, "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin",
+            "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image",
+            false);
 
         [Fact]
         public void Patient_not_succesfully_registrate()
@@ -57,7 +60,7 @@ namespace WebApplicationTests
         {
             var mockMailService = new Mock<IMailService>();
             mockMailService.Setup(a => a.SendEmail(patient));
-            var controller = new RegistrationController(mockMailService.Object);
+            var controller = new RegistrationController(mockMailService.Object, null);
             controller.SendMail(patient);
             mockMailService.Verify(m => m.SendEmail(patient));
         }

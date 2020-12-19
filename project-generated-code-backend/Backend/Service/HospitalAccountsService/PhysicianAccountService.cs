@@ -11,9 +11,9 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
     {
         private readonly IPhysicianRepository _physicianRepository;
 
-        public PhysicianAccountService()
+        public PhysicianAccountService(IPhysicianRepository physicianRepository)
         {
-            _physicianRepository = new PhysicianDatabaseSql();
+            _physicianRepository = physicianRepository;
         }
 
         internal List<TimeInterval> GetAllVacations(Physician physicianDto)

@@ -2,19 +2,20 @@
 using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using HealthClinicBackend.Backend.Repository.Generic;
 using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Repositorys
 {
-    public class PhysitianRepository : IPhysitianRepository
+    public class PhysicianRepository : IPhysitianRepository
     {
-        private readonly PhysicianDatabaseSql _physicianRepository;
+        private readonly IPhysicianRepository _physicianRepository;
 
-        public PhysitianRepository()
+        public PhysicianRepository(IPhysicianRepository physicianRepository)
         {
-            _physicianRepository = new PhysicianDatabaseSql();
+            _physicianRepository = physicianRepository;
         }
-        
+
         public List<Physician> GetAllPhysitians()
         {
             return _physicianRepository.GetAll();

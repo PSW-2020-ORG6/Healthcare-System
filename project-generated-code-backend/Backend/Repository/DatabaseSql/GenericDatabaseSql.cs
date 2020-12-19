@@ -8,20 +8,20 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class GenericDatabaseSql<T> : IGenericRepository<T> where T : Entity
     {
-        private const string CONNECTION_STRING =
-            "User ID =postgres;Password=super;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
+        // private const string CONNECTION_STRING =
+        //     "User ID =postgres;Password=super;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
         // private const string CONNECTION_STRING =
             // "server=localhost;port=3306;database=newdb;user=root;password=root";
 
-        public readonly HealthCareSystemDbContext dbContext;
+        protected HealthCareSystemDbContext dbContext;
 
         protected GenericDatabaseSql()
         {
-            var options = new DbContextOptionsBuilder<HealthCareSystemDbContext>()
-                .UseNpgsql(CONNECTION_STRING)
-                // .UseMySql(CONNECTION_STRING)
-                .Options;
-            dbContext = new HealthCareSystemDbContext(options);
+            // var options = new DbContextOptionsBuilder<HealthCareSystemDbContext>()
+            //     .UseNpgsql(CONNECTION_STRING)
+            //     // .UseMySql(CONNECTION_STRING)
+            //     .Options;
+            // dbContext = new HealthCareSystemDbContext(options);
         }
 
         public virtual List<T> GetAll()

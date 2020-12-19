@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using HealthClinicBackend.Backend.Model.Accounts;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace WebApplication.Backend.Repositorys
 {
@@ -12,13 +12,13 @@ namespace WebApplication.Backend.Repositorys
     /// </summary>
     public class RegistrationRepository : IRegistrationRepository
     {
-        private readonly PatientDatabaseSql _patientRepository;
-        private readonly PhysicianDatabaseSql _physicianRepository;
+        private readonly IPatientRepository _patientRepository;
+        private readonly IPhysicianRepository _physicianRepository;
 
-        public RegistrationRepository()
+        public RegistrationRepository(IPhysicianRepository physicianRepository, IPatientRepository patientRepository)
         {
-            _patientRepository = new PatientDatabaseSql();
-            _physicianRepository = new PhysicianDatabaseSql();
+            _patientRepository = patientRepository;
+            _physicianRepository = physicianRepository;
         }
 
         ////Aleksandra Milijevic RA 22/2017

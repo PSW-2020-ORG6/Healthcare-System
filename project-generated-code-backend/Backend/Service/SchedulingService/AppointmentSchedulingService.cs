@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Repository.Generic;
 using HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions;
 using HealthClinicBackend.Backend.Service.SchedulingService.PriorityStrategies;
 using HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies;
@@ -15,26 +16,25 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
 {
     public class AppointmentSchedulingService
     {
-        private readonly SchedulingStrategy _schedulingStrategyContext;
+        public SchedulingStrategy SchedulingStrategyContext { get; set; }
         private readonly AppointmentGeneralitiesManager _appointmentGeneralitiesManager;
 
-        public AppointmentSchedulingService(SchedulingStrategy schedulingStrategyContext)
+        public AppointmentSchedulingService(IPhysicianRepository physicianRepository)
         {
-            _schedulingStrategyContext = schedulingStrategyContext;
-            _appointmentGeneralitiesManager = new AppointmentGeneralitiesManager();
+            _appointmentGeneralitiesManager = new AppointmentGeneralitiesManager(physicianRepository);
         }
 
         public List<AppointmentDto> GetAvailableAppointments(AppointmentDto appointmentPreferences)
         {
             AppointmentDto preparedAppointmentPreferences =
-                _schedulingStrategyContext.PrepareAppointment(appointmentPreferences);
+                SchedulingStrategyContext.PrepareAppointment(appointmentPreferences);
             return _appointmentGeneralitiesManager.GetAllAvailableAppointments(preparedAppointmentPreferences);
         }
 
         public AppointmentDto FindNearestAppointment(AppointmentDto appointmentPreferences)
         {
             AppointmentDto preparedAppointmentPreferences =
-                _schedulingStrategyContext.PrepareAppointment(appointmentPreferences);
+                SchedulingStrategyContext.PrepareAppointment(appointmentPreferences);
             throw new NotImplementedException();
         }
 
@@ -64,7 +64,11 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
                 DatePriorityStrategy datePriorityStrategy = new DatePriorityStrategy();
                 List<AppointmentDto> suggestedAppointmentDtosDate =
                     datePriorityStrategy.FindSuggestedAppointments(suggestedAppointmentDto);
-                return (from appointmentDto in suggestedAppointmentDtosDate select GetAvailableAppointments(appointmentDto) into suggestedAppointmentDtOs where suggestedAppointmentDtOs.Count != 0 select suggestedAppointmentDtOs[0]).FirstOrDefault();
+                return (from appointmentDto in suggestedAppointmentDtosDate
+                    select GetAvailableAppointments(appointmentDto)
+                    into suggestedAppointmentDtOs
+                    where suggestedAppointmentDtOs.Count != 0
+                    select suggestedAppointmentDtOs[0]).FirstOrDefault();
             }
             else
             {
