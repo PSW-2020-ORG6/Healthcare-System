@@ -26,7 +26,7 @@ namespace WebApplication.Backend.Controllers
         ///list of feedbacks
         ///</returns>
         [HttpGet("all")]
-        public List<Feedback> GetAllFeedbacks()
+        public List<FeedbackDto> GetAllFeedbacks()
         {
             return feedbackService.GetAllFeedbacks();
         }
@@ -55,9 +55,9 @@ namespace WebApplication.Backend.Controllers
         ///list of approved feedbacks
         ///</returns>
         [HttpGet("approved")]
-        public List<Feedback> GetApprovedFeedbacks()
+        public List<FeedbackDto> GetApprovedFeedbacks()
         {
-            return feedbackService.GetApprovedFeedbacks();
+             return feedbackService.GetApprovedFeedbacks();
         }
         ///Tanja Drcelic RA124/2017
         /// <summary>
@@ -67,7 +67,7 @@ namespace WebApplication.Backend.Controllers
         ///list of not approved feedbacks
         ///</returns>
         [HttpGet("disapproved")]
-        public List<Feedback> GetDisapprovedFeedbacks()
+        public List<FeedbackDto> GetDisapprovedFeedbacks()
         {
             return feedbackService.GetDisapprovedFeedbacks();
         }

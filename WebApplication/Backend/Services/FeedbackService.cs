@@ -11,6 +11,7 @@ namespace WebApplication.Backend.Services
     public class FeedbackService
     {
         private FeedbackRepository feedbackRepository;
+        private FeedbackDto feedbackDTO = new FeedbackDto();
         public FeedbackService()
         {
             this.feedbackRepository = new FeedbackRepository();
@@ -22,9 +23,9 @@ namespace WebApplication.Backend.Services
         ///<returns>
         ///list of feedbacks
         ///</returns>
-        internal List<Feedback> GetAllFeedbacks()
+        internal List<FeedbackDto> GetAllFeedbacks()
         {
-            return feedbackRepository.GetAllFeedbacks();
+            return feedbackDTO.ConvertListToFeedbackDTO(feedbackRepository.GetAllFeedbacks());
         }
         ///Aleksandra Milijevic RA 22/2017
         /// <summary>
@@ -33,9 +34,9 @@ namespace WebApplication.Backend.Services
         ///<returns>
         ///list of approved feedbacks
         ///</returns>
-        internal List<Feedback> GetApprovedFeedbacks()
+        internal List<FeedbackDto> GetApprovedFeedbacks()
         {
-            return feedbackRepository.GetApprovedFeedbacks();
+            return feedbackDTO.ConvertListToFeedbackDTO(feedbackRepository.GetApprovedFeedbacks());
         }
         ///Tanja Drcelic RA124/2017
         /// <summary>
@@ -44,9 +45,9 @@ namespace WebApplication.Backend.Services
         ///<returns>
         ///list of not approved feedbacks
         ///</returns>
-        internal List<Feedback> GetDisapprovedFeedbacks()
+        internal List<FeedbackDto> GetDisapprovedFeedbacks()
         {
-            return feedbackRepository.GetDisapprovedFeedbacks();
+            return feedbackDTO.ConvertListToFeedbackDTO(feedbackRepository.GetDisapprovedFeedbacks());
         }
         ///Marija Vucetic 
         /// <summary>

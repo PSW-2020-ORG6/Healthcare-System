@@ -12,10 +12,10 @@
 				text: "",
 				approved: false,
 				date: new Date().now,
-				patientId: "-1"
+				patientId: "0002"
 			},
 			appointment: null,
-			patientDTO: {}
+			patientDTO: null
 		}
 	},
 	beforeMount() {
@@ -23,6 +23,7 @@
 			.get('http://localhost:49900/patient/getPatientById', { params: { patientId: "0002" } })
 			.then(response => {
 				this.patientDTO = response.data
+
 			})
 			.catch(error => {
 				alert("Please add patient with id number : 0002")
@@ -46,7 +47,7 @@
 			})
 
 		axios
-			.get('http://localhost:49900/appointment/allAppointmentsByPatientIdActive', { params: { patientId: "5" } })
+			.get('http://localhost:49900/appointment/allAppointmentsByPatientIdActive', { params: { patientId: "0002" } })
 			.then(response => {
 				this.activeAppointments = response.data
 			})
@@ -56,7 +57,7 @@
 			})
 
 		axios
-			.get('http://localhost:49900/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: "5" } })
+			.get('http://localhost:49900/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: "0002" } })
 			.then(response => {
 				this.canceledAppointments = response.data
 			})
@@ -305,11 +306,11 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr v-for="a in ac">
-											<td>{{f.text}}</td>
-											<td>{{DateSplit(f.date)}}</td>
-											<td v-for="p in patients" v-if="parseInt(p.id) == parseInt(f.patientId)">{{p.name}} {{p.surname}}</td>
-											<td v-if="parseInt(f.patientId) == -1">Anonimous</td>
+										<tr v-for="a in approvedFeedbacks">
+											<td>{{a.text}}</td>
+											<td>{{DateSplit(a.date)}}</td>
+											<td v-for="p in patients" v-if="parseInt(p.id) == parseInt(a.patientId)">{{p.name}} {{p.surname}}</td>
+											<td v-if="parseInt(a.patientId) == -1">Anonimous</td>
 										</tr>
 									</tbody>
 								</table>
@@ -367,6 +368,8 @@
 		AddNewFeedback: function (feedback) {
 			if (!document.getElementById("anonimous").checked)
 				this.feedback.patientId = "0003"
+			else
+				this.feedback.id = "-1"
 			if (feedback.text.localeCompare(null) || feedback.text.localeCompare("")) {
 				axios
 					.post("http://localhost:49900/feedback/add", feedback)

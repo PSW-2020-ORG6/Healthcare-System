@@ -34,7 +34,7 @@ namespace HealthClinicBackend.Backend.Model.Accounts
         public bool Guest { get; set; }
         public bool EmailConfirmed { get; set; }
         [ForeignKey("Physician")] public string PhysicianSerialNumber { get; set; }
-        public Physician ChosenPhysician { get; set; }
+        public String ChosenPhysician { get; set; }
 
         public Patient() : base()
         {
@@ -97,7 +97,7 @@ namespace HealthClinicBackend.Backend.Model.Accounts
 
         public Patient(PatientDto patientDto) : base(patientDto.Name, patientDto.Surname, patientDto.Id,
             patientDto.DateOfBirth, patientDto.Contact, patientDto.Email,
-            patientDto.Address, patientDto.Password)
+            new Address(patientDto.Address), patientDto.Password)
         {
             ParentName = patientDto.ParentName;
             Gender = patientDto.Gender;
@@ -119,6 +119,7 @@ namespace HealthClinicBackend.Backend.Model.Accounts
             Image = patientDto.Image;
             Guest = patientDto.IsGuest;
             EmailConfirmed = patientDto.EmailConfirmed;
+            ChosenPhysician = patientDto.ChosenDoctor;
         }
     }
 }

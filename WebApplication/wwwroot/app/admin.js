@@ -145,7 +145,7 @@
             <br/><h3 class="text">Comments</h3><br/>
 	        <ul class="nav nav-tabs" role="tablist">
     	        <li class="nav-item">
-    		        <a class="nav-link active .cards" data-toggle="tab" href="#approved">Approved</a>
+    		        <a class="nav-link active .cards" data-toggle="tab" href="#approvedF">Approved</a>
     	        </li>
     	        <li class="nav-item">
     		        <a class="nav-link .cards" data-toggle="tab" href="#disapproved">Disapproved</a>
@@ -153,7 +153,7 @@
             </ul>
             <div>
                 <div class="tab-content">
-    	            <div id="approved" class="container tab-pane active"><br>
+    	            <div id="approvedF" class="container tab-pane active"><br>
     		            <div class="container">
 	                            <div class="row">
                                     <table class="table table-bordered">
@@ -204,6 +204,7 @@
                 </div>
             </div>
         </div>
+        </br></br>
     </div>
 	`,
     methods: {

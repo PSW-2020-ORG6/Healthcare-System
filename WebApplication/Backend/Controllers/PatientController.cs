@@ -40,7 +40,7 @@ namespace WebApplication.Backend.Controllers
         ///single instance of Patient object
         ///</returns
         [HttpGet("getPatientById")]
-        public Patient GetPatientById(string patientId)
+        public PatientDto GetPatientById(string patientId)
         {
             return patientService.GetPatientById(patientId);
         }
