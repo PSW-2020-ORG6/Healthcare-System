@@ -289,7 +289,7 @@
 			<h3 class="text">Comments
 				<button type="button" class="btn btn-info btn-lg margin" data-toggle="modal" data-target="#feedbackModal">Add comment</button>
 			</h3><br/>
-			<h3 class="textSurvey">Survey
+			<h3 class="textSurvey">
 				<button type="button" class="btn btn-info btn-lg margin" data-toggle="modal" v-on:click="SurveyShow()"">Take survey</button>
 			</h3><br/> 
 			<div>
@@ -297,21 +297,19 @@
     				<div id="profil" class="container tab-pane active"><br>
     					<div class="container">
 							<div class="row">
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>Comment</th>
-											<th>Date</th>
-											<th colspan="2">Patient</th>
-										</tr>
-									</thead>
+								<table class="table table-bordered tableBorder" style="width:500px;height:400px" Align = "center">
 									<tbody>
-										<tr v-for="a in approvedFeedbacks">
-											<td>{{a.text}}</td>
-											<td>{{DateSplit(a.date)}}</td>
-											<td v-for="p in patients" v-if="parseInt(p.id) == parseInt(a.patientId)">{{p.name}} {{p.surname}}</td>
-											<td v-if="parseInt(a.patientId) == -1">Anonimous</td>
-										</tr>
+										<tr v-for="a in approvedFeedbacks" class="xx">
+                                            <template v-for="p in patients">
+                                            <td v-if="parseInt(a.patientId) != -1 && parseInt(p.id) == parseInt(a.patientId)">{{p.name}} {{p.surname}}
+                                            &nbsp&nbsp&nbsp&nbsp {{DateSplit(a.date)}}</br></br>
+                                            {{a.text}}</td>
+											</template>
+											<td v-if="parseInt(a.patientId) == -1">Anonimous
+                                            <!--<template v-if="parseInt(a.patientId) == -1">Anonimous</template>-->
+                                             &nbsp&nbsp&nbsp&nbsp {{DateSplit(a.date)}}</br></br>
+                                            {{a.text}}</td>
+                                        </tr>
 									</tbody>
 								</table>
 							</div>
@@ -319,48 +317,6 @@
 					</div>
 				</div>
 			</div>
-
-
-<div>
-				<div class="tab-content">
-    				<div id="profil" class="container tab-pane active"><br>
-    					<div class="container">
-							<div class="row">
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>Date</th>
-											<th>Time</th>
-											<th>Physitian</th>
-											<th>Room</th>
-											<th>Procedure</th>
-											<th>Urgency</th>
-											<th></th>	
-											<th></th>	
-										</tr>
-									</thead>
-									<tbody>
-										<tr v-for="a in activeAppointments">
-											<td>{{DateSplit(a.date)}}</td>
-											<td>{{a.timeInterval.time}}</td>
-											<td>{{a.physitian.fullName}}</td>
-											<td>{{a.room.name}}</td>
-											<td>{{a.procedureType.name}}</td>
-											<td>{{a.urgency}}</td>		
-											<td><button type="button" class="btn btn-info btn-lg">Survey</button></td>			
-											<td><button type="button" class="btn btn-info btn-lg">Cancel</button></td>										
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>		
-					</div>
-				</div>
-			</div>
-
-
-
-
 		</div>
 	</div>
 	`,

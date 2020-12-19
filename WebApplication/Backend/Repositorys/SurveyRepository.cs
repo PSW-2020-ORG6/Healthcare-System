@@ -91,7 +91,7 @@ namespace WebApplication.Backend.Repositorys
             connection.Close();
             foreach (Report report in resultList)
             {
-                report.Physician = GetDoctorById("Select * from physitian where SerialNumber like'" + report.Physician.SerialNumber + "'");
+                report.Physician = GetDoctorById("Select * from physician where SerialNumber like'" + report.Physician.SerialNumber + "'");
             }
             return resultList;
         }
@@ -109,10 +109,12 @@ namespace WebApplication.Backend.Repositorys
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            sqlReader.Read();
             Physician entity = new Physician();
-            entity.Name = (string) sqlReader[1];
-            entity.Surname = (string) sqlReader[2];
+            while (sqlReader.Read())
+            {
+                entity.Name = (string)sqlReader[1];
+                entity.Surname = (string)sqlReader[2];
+            }
             connection.Close();
             return entity;
         }
