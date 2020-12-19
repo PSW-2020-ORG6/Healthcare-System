@@ -33,6 +33,7 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         private List<Report> GetReports(String sqlDml)
         {
+            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -40,13 +41,12 @@ namespace WebApplication.Backend.Repositorys
             while (sqlReader.Read())
             {
                 Report entity = new Report();
-                entity.SerialNumber =
-                entity.Findings = (string)sqlReader[1];
-                entity.PatientConditions = (string)sqlReader[2];
+                entity.Findings = (string)sqlReader[2];
+                entity.PatientConditions = (string)sqlReader[5];
                 entity.Patient = new Patient { SerialNumber = (string)sqlReader[3] };
                 entity.Physician = new Physician { SerialNumber = (string)sqlReader[4] };
-                entity.ProcedureType = new ProcedureType { SerialNumber = (string)sqlReader[5] };
-                entity.Date = (DateTime)sqlReader[6];
+                entity.ProcedureType = new ProcedureType { SerialNumber = (string)sqlReader[6] };
+                entity.Date = (DateTime)sqlReader[1];
                 resultList.Add(entity);
             }
             connection.Close();
@@ -56,7 +56,7 @@ namespace WebApplication.Backend.Repositorys
                 report.Patient = patientRepository.GetPatientById(report.Patient.SerialNumber);
                 PhysicianRepository phisitionRepository = new PhysicianRepository();
                 report.Physician = phisitionRepository.GetPhysicianById(report.Physician.SerialNumber);
-                report.ProcedureType = GetProcedureTypeById("Select * from proceduretypes where SerialNumber like '" + report.ProcedureType.SerialNumber + "'");
+                report.ProcedureType = GetProcedureTypeById("Select * from proceduretype where SerialNumber like '" + report.ProcedureType.SerialNumber + "'");
             }
             return resultList;
         }
@@ -80,7 +80,7 @@ namespace WebApplication.Backend.Repositorys
             entity.SerialNumber = (string)sqlReader[0];
             entity.Name = (string)sqlReader[1];
             entity.Specialization = new Specialization();
-            entity.Specialization = new Specialization { SerialNumber = (string)sqlReader[2] };
+            entity.Specialization = new Specialization { SerialNumber = (string)sqlReader[3] };
             connection.Close();
             entity.Specialization = GetSpecialization("Select * from specialization where SerialNumber like '" + entity.Specialization.SerialNumber + "'");
             return entity;
@@ -102,7 +102,7 @@ namespace WebApplication.Backend.Repositorys
             sqlReader.Read();
             Specialization specialization = new Specialization();
             specialization.SerialNumber = (string)sqlReader[0];
-            specialization.Name = (string)sqlReader[2];
+            specialization.Name = (string)sqlReader[1];
             connection.Close();
             return specialization;
         }
