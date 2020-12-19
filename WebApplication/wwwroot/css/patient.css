@@ -22,3 +22,14 @@ label {
     color: white;
     background-color: lightblue;
 }
+.tableBorder {
+    border:hidden;
+    border-width:medium;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    font-family:Impact;
+}
+
+.xx {
+    border-width:thick;
+}
