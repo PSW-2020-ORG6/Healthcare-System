@@ -1,9 +1,10 @@
-﻿using Model.Accounts;
+﻿using System;
+using Model.Accounts;
 using System.Collections.Generic;
 
 namespace WebApplication.Backend.Repositorys.Interfaces
 {
-    public interface IPhysitianRepository
+    public interface IPhysitianRepository : IDisposable
     {
         List<Physician> GetAllPhysitians();
         List<Physician> GetPhysitiansByName(string name);

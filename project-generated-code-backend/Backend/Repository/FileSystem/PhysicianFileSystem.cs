@@ -52,5 +52,9 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
         {
             return JsonConvert.DeserializeObject<Physician>(objectStringFormat);
         }
+
+        public void Dispose()
+        {
+        }
     }
 }

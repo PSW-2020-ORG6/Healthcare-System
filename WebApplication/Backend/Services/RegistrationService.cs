@@ -1,4 +1,5 @@
-﻿using HealthClinicBackend.Backend.Dto;
+﻿using System;
+using HealthClinicBackend.Backend.Dto;
 using Model.Accounts;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
@@ -10,9 +11,9 @@ namespace WebApplication.Backend.Services
     /// <summary>
     /// This class does connection with repository
     /// </summary>
-    public class RegistrationService: IRegistrationService
+    public class RegistrationService : IRegistrationService, IDisposable
     {
-        private IRegistrationRepository registrationRepository;
+        private IRegistrationRepository _registrationRepository;
 
         // private IPhysicianRepository _physicianRepository;
         // public RegistrationService()
@@ -22,8 +23,7 @@ namespace WebApplication.Backend.Services
 
         public RegistrationService(IRegistrationRepository registrationRepository)
         {
-            this.registrationRepository = registrationRepository;
-            // _physicianRepository = physicianRepository;
+            _registrationRepository = registrationRepository;
         }
 
         ///Aleksandra Milijevic RA 22/2017
@@ -37,9 +37,9 @@ namespace WebApplication.Backend.Services
         ///</param>>
         public bool RegisterPatient(Patient patient)
         {
-            if (registrationRepository.IsPatientIdValid(patient.Id))
+            if (_registrationRepository.IsPatientIdValid(patient.Id))
             {
-                return registrationRepository.AddPatient(patient);
+                return _registrationRepository.AddPatient(patient);
             }
             else
             {
@@ -49,12 +49,17 @@ namespace WebApplication.Backend.Services
 
         public bool ConfirmEmailUpdate(string id)
         {
-            return registrationRepository.ConfirmEmailUpdate(id);
+            return _registrationRepository.ConfirmEmailUpdate(id);
         }
 
         public List<FamilyDoctorDto> GetAllPhysicians()
         {
-            return registrationRepository.GetAllGeneralPracticePhysicians();
+            return _registrationRepository.GetAllGeneralPracticePhysicians();
+        }
+
+        public void Dispose()
+        {
+            _registrationRepository.Dispose();
         }
     }
 }

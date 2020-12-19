@@ -41,5 +41,9 @@ namespace WebApplication.Backend.Repositorys
         {
             return _physicianRepository.GetByJmbg(id);
         }
+
+        public void Dispose()
+        {
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace WebApplication.Backend.Repositorys
     /// <summary>
     /// This interface for class RegistrationRepository
     /// </summary>
-    public interface IRegistrationRepository
+    public interface IRegistrationRepository : IDisposable
     {
         public bool AddPatient(Patient patient);
         public String GetPatientId(string idd);

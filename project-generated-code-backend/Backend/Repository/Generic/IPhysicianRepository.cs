@@ -3,13 +3,14 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Interface PhysitianRepository
 
+using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Schedule;
 using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Repository.Generic
 {
-    public interface IPhysicianRepository : IGenericRepository<Physician>
+    public interface IPhysicianRepository : IGenericRepository<Physician>, IDisposable
     {
         List<Physician> GetByName(string name);
         Physician GetByJmbg(string jmbg);

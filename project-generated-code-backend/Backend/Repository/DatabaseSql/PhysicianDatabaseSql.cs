@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.DatabaseSql.RelationHelpers;
@@ -8,7 +9,7 @@ using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class PhysicianDatabaseSql : GenericDatabaseSql<Physician>, IPhysicianRepository
+    public class PhysicianDatabaseSql : GenericDatabaseSql<Physician>, IPhysicianRepository, IDisposable
     {
         public PhysicianDatabaseSql(HealthCareSystemDbContext context)
         {
@@ -23,18 +24,18 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 .Include(p => p.WorkSchedule)
                 .ToList();
 
-            List<PhysicianSpecialization> physicianSpecializations = dbContext.PhysicianSpecialization
-                .Include(ps => ps.Physician)
-                .ToList();
-
-            foreach (var physician in physicians)
-            {
-                var specializations = physicianSpecializations
-                    .Where(ps => ps.PhysicianSerialNumber.Equals(physician.SerialNumber))
-                    .Select(physicianSpecialization => physicianSpecialization.Specialization)
-                    .ToList();
-                physician.Specialization = specializations;
-            }
+            // List<PhysicianSpecialization> physicianSpecializations = dbContext.PhysicianSpecialization
+            //     .Include(ps => ps.Physician)
+            //     .ToList();
+            //
+            // foreach (var physician in physicians)
+            // {
+            //     var specializations = physicianSpecializations
+            //         .Where(ps => ps.PhysicianSerialNumber.Equals(physician.SerialNumber))
+            //         .Select(physicianSpecialization => physicianSpecialization.Specialization)
+            //         .ToList();
+            //     physician.Specialization = specializations;
+            // }
 
             return physicians;
         }
@@ -62,6 +63,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             //         .Select(s => s.Name)
             //         .Contains("General practitioner"))
             //     .ToList();
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }

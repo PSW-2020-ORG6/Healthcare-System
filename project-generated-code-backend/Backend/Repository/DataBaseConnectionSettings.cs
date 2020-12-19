@@ -19,6 +19,6 @@ namespace HealthClinicBackend.Backend.Repository
         }
 
         public string ConnectionString =>
-            $"server={Host};userid={User};password={Password};port={Port};database={Database}";
+            $"userid={User};password={Password};server={Host};port={Port};database={Database}";
     }
 }

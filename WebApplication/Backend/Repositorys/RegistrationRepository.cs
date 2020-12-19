@@ -90,10 +90,16 @@ namespace WebApplication.Backend.Repositorys
         public List<FamilyDoctorDto> GetAllGeneralPracticePhysicians()
         {
             // TODO: use real physician object! services and especially repositories do not care about the appearance of your web app
-            return _physicianRepository.GetGeneralPractitioners()
+            // TODO: get general practitioners, not all and add specialization
+            return _physicianRepository.GetAll()
                 .Select(gp => new FamilyDoctorDto
-                    {Name = gp.Name, Surname = gp.Surname, Specialization = gp.Specialization[0].Name})
+                    {Name = gp.Name, Surname = gp.Surname, Specialization = "General Practitioner"})
                 .ToList();
+        }
+
+        public void Dispose()
+        {
+            _physicianRepository?.Dispose();
         }
     }
 }

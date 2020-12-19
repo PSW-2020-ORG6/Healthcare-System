@@ -1,4 +1,5 @@
-﻿using HealthClinicBackend.Backend.Dto;
+﻿using System;
+using HealthClinicBackend.Backend.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Model.Accounts;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace WebApplication.Backend.Controllers
 {
     [Route("registration")]
     [ApiController]
-    public class RegistrationController : ControllerBase
+    public class RegistrationController : ControllerBase, IDisposable
     {
         public IRegistrationService registrationService;
         private IMailService mailService;
@@ -91,9 +92,14 @@ namespace WebApplication.Backend.Controllers
         }
 
         [HttpGet("allPhysitians")]
-        public List<FamilyDoctorDto> GetAllFeedbacks()
+        public List<FamilyDoctorDto> GetAllGeneralPractitioners()
         {
             return registrationService.GetAllPhysicians();
+        }
+
+        public void Dispose()
+        {
+            registrationService.Dispose();
         }
     }
 }
