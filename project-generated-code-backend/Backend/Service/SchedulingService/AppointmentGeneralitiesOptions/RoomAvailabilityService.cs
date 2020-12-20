@@ -17,7 +17,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
 
         public RoomAvailabilityService()
         {
-           // _appointmentRepository = new AppointmentDatabaseSql(); 
+            _appointmentRepository = new AppointmentDatabaseSql(); 
             _renovationRepository = new RenovationDatabaseSql();
             _bedReservationRepository = new BedReservationDatabaseSql();
         }
@@ -94,10 +94,10 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
             List<Appointment> appointments = _appointmentRepository.GetAppointmentsByRoom(room);
             foreach (Appointment appointment in appointments)
             {
-                //if (timeInterval.IsOverLapping(appointment.TimeInterval))
-                //{
-                //    return true;
-                //}
+                if (timeInterval.IsOverLapping(appointment.TimeInterval))
+                {
+                    return true;
+                }
             }
             return false;
         }
