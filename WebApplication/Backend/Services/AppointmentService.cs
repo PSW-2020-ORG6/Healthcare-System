@@ -271,7 +271,7 @@ namespace WebApplication.Backend.Services
                 {
                     foreach (string date in dates)
                     {
-                        availableAppointments.Add(new AppointmentWithRecommendationDTO(date, physician.Id, GetAllAvailableAppointments(physician.Id, specializationName, date), physician.FullName));
+                        availableAppointments.Add(new AppointmentWithRecommendationDTO(date, physician.Id, GetAllAvailableAppointments(physician.Id, specializationName, date), physician.Name + " " + physician.Surname));
                     }
                 }
             }

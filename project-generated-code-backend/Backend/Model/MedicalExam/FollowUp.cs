@@ -48,7 +48,7 @@ namespace HealthClinicBackend.Backend.Model.MedicalExam
 
         public override string ToString()
         {
-            return base.ToString() + "\nphysitian: " + Physician.FullName;
+            return base.ToString() + "\nphysitian: " + Physician.Name + " " + Physician.Surname;
         }
     }
 }

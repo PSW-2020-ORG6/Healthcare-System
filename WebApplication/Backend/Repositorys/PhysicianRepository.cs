@@ -39,7 +39,6 @@ namespace WebApplication.Backend.Repositorys
                 entity.Specialization = specializationRepository.GetSpecializationsByPhysicianSerialNumber((string)sqlReader[0]);
                 entity.AddressSerialNumber = (string)sqlReader[8];
                 entity.WorkSchedule = timeIntervalRepository.GetTimeIntervalById((string)sqlReader[9]);
-                entity.FullName = (string)sqlReader[10];
                 resultList.Add(entity);
             }
             connection.Close();

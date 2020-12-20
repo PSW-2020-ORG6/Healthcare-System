@@ -20,7 +20,7 @@ namespace WebApplication.Backend.DTO
         {
             SpecializationDTO specializationDTO = new SpecializationDTO();
             Id = physician.Id;
-            FullName = physician.FullName;
+            FullName = physician.Name + " " + physician.Surname;
             Specializations = specializationDTO.ConvertListToSpecializationDTO(physician.Specialization);
         }
 

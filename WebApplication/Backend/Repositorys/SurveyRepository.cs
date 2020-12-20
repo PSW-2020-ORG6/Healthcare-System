@@ -465,11 +465,12 @@ namespace WebApplication.Backend.Repositorys
             foreach (Report r in reports)
             {
                 PhysicianRepository phisitionRepository = new PhysicianRepository();
-                List<Physician> physitians = phisitionRepository.GetPhysiciansByFullName(r.Physician.FullName);
+                List<Physician> physitians = phisitionRepository.GetPhysiciansByFullName(r.Physician.Name + " " + r.Physician.Surname);
                 foreach (Physician p in physitians)
                 {
-                    r.Physician.FullName = p.FullName;
-                    resulList.Add(r.Physician.FullName + "-" + r.Date.ToString().Split(" ")[0]);
+                    r.Physician.Name = p.Name;
+                    r.Physician.Surname = p.Surname;
+                    resulList.Add(r.Physician.Name + " " + r.Physician.Surname + "-" + r.Date.ToString().Split(" ")[0]);
                 }
             }
             return resulList;
