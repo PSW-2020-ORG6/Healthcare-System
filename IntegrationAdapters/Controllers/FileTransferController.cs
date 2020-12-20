@@ -36,7 +36,7 @@ namespace IntegrationAdapters.Controllers
         [HttpPost("report")]
         public IActionResult Post(Interval interval)
         {
-            var myFile = "SavedList" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt";
+            var myFile = "Report" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt";
             
             List<MedicineReport> result = medicineReportService.GetByDateInterval(new TimeInterval(DateTime.Parse(interval.start), DateTime.Parse(interval.end)));
 
@@ -67,7 +67,7 @@ namespace IntegrationAdapters.Controllers
         [HttpPost("reportHttp")]
         public IActionResult ReportUsingHttp(Interval interval)
         {
-            var myFile = "SavedList" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt";
+            var myFile = "ReportHttp" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt";
 
             List<MedicineReport> result = medicineReportService.GetByDateInterval(new TimeInterval(DateTime.Parse(interval.start), DateTime.Parse(interval.end)));
 

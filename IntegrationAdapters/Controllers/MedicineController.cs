@@ -114,12 +114,5 @@ namespace IntegrationAdapters.Controllers
         {
             return Ok(Program.ResponseMessageGrpc);
         }
-
-        [HttpGet("getMedicine")]
-        public IActionResult GetMedicine()
-        {
-            medicineService.AddMedicine();
-            return Ok();
-        }
     }   
 } 

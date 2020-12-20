@@ -20,7 +20,7 @@ namespace IntegrationAdaptersTests
         {          
             ApiService service = new ApiService();
 
-            Api api = new Api("k", "k", "k");
+            Api api = new Api("1", "Jankovic", "url");
             bool result = service.IsPharmacyExistsOnHospital(api);
 
             Assert.True(result);
