@@ -94,7 +94,7 @@
                 </div>
                 <div class="col-sm">
                   <h3>
-			        <button id="UserExperiences" type="button" class="btn btn-info btn-lg margin form-control" SurveyShow></button>
+			        <button id="UserExperiences" type="button" class="btn btn-info btn-lg margin form-control" data-toggle="modal" data-target="#FeedbacksModal"></button>
 			        </h3><br/> 
                 </div>
                 <div class="col-sm">
