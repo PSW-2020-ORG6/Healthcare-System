@@ -136,11 +136,11 @@ namespace HealthClinicBackend.Backend.Model.Schedule
 
         public override string ToString()
         {
-            return "patient: " + Patient.FullName + "\nphysitian: " + Physician.FullName + "\ntime interval: " +
+            return "patient: " + Patient.Name + " " + Patient.Surname + "\nphysitian: " + Physician.Name + " " + Physician.Surname + "\ntime interval: " +
                    TimeInterval + "\nroom: " + Room + "\nprocedure type: " + ProcedureType;
-            }
+        }
 
-            public int CompareTo(Appointment other)
+        public int CompareTo(Appointment other)
         {
             return Date.CompareTo(other.Date);
         }

@@ -69,7 +69,7 @@ namespace WebApplication.Backend.Repositorys
                 entity.Guest = (bool)sqlReader[26];
                 entity.EmailConfirmed = (bool)sqlReader[27];
                 Physician p = physicianRepository.GetPhysicianBySerialNumber((string)sqlReader[28]);
-                entity.ChosenPhysician = p.FullName;
+                entity.ChosenPhysician = p.Name + " " + p.Surname;
                 resultList.Add(entity);
 
             }

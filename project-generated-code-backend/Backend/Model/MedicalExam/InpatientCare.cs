@@ -55,7 +55,7 @@ namespace HealthClinicBackend.Backend.Model.MedicalExam
 
         public override string ToString()
         {
-            return "patient: " + Patient.FullName + "\nphysitian: " + Physician.FullName + "\ndate of admition:" +
+            return "patient: " + Patient.Name + " " + Patient.Surname + "\nphysitian: " + Physician.Name + " " + Physician.Surname + "\ndate of admition:" +
                    DateOfAdmission.ToString("dd.MM.yyyy.") + "\ndate of discharge:" +
                    DateOfDischarge.ToString("dd.MM.yyyy.");
         }

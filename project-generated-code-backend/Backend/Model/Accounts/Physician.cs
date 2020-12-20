@@ -61,9 +61,8 @@ namespace Model.Accounts
         }
 
         public Physician(string name, string surname, Specialization specialization)
+            :base(name,surname)
         {
-            this.Name = name;
-            this.Surname = surname;
             this.Specialization = new List<Specialization>();
             Specialization.Add(specialization);
         }

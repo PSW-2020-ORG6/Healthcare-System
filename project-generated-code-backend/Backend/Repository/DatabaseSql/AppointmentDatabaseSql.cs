@@ -10,8 +10,8 @@ using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class AppointmentDatabaseSql : GenericDatabaseSql<Appointment> //IAppointmentRepository
-    {/*
+    public class AppointmentDatabaseSql : GenericDatabaseSql<Appointment>,IAppointmentRepository
+    {
         public override List<Appointment> GetAll()
         {
             return dbContext.Appointment
@@ -29,7 +29,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public List<Appointment> GetAppointmentsByPatient(Patient patient)
         {
-            return null; //GetAll().Where(appointment => appointment.Patient.Equals(patient)).ToList();
+            return GetAll().Where(appointment => appointment.Patient.Equals(patient)).ToList();
         }
 
         public List<Appointment> GetAppointmentsByPhysician(Physician physician)
@@ -40,6 +40,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public List<Appointment> GetAppointmentsByRoom(Room room)
         {
             return GetAll().Where(appointment => appointment.Room.Equals(room)).ToList();
-        }*/
+        }
     }
 }
