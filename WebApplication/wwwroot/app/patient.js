@@ -67,12 +67,9 @@
 	template: `
 	<div id="Patient">
 	
-			<br></br>
         <br></br>
         <br></br>
-        <br></br>
-        <br></br>
-        <!--ICONS-->
+        <!--ICONS ROW 1-->
             <div>
               <div class="row">
                 <div class="col-sm">
@@ -97,7 +94,45 @@
                 </div>
                 <div class="col-sm">
                   <h3>
-			        <button id="UserExperiences" type="button" class="btn btn-info btn-lg margin form-control" data-toggle="modal" data-target="#FeedbacksModal"></button>
+			        <button id="UserExperiences" type="button" class="btn btn-info btn-lg margin form-control" SurveyShow></button>
+			        </h3><br/> 
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                </div>  
+                <div class="col-sm">
+                </div>
+              </div>
+<br></br>
+<br></br>
+	<!--ICONS ROW 2-->
+			<div class="row">
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                  <h3>
+			        <button id="Search" type="button" class="btn btn-info btn-lg margin form-control" v-on:click="SearchShow()"></button>
+			        </h3><br/> 
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                  <h3>
+			        <button id="AppointmentsShow" type="button" class="btn btn-info btn-lg margin form-control" v-on:click="AppointmentsShow()"></button>
+			        </h3><br/> 
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                  <h3>
+			        <button id="SurveyShow" type="button" class="btn btn-info btn-lg margin form-control" v-on:click="SurveyShow()"></button>
 			        </h3><br/> 
                 </div>
                 <div class="col-sm">
@@ -395,6 +430,12 @@
 		DateSplit: function (date) {
 			var dates = (date.split("T")[0]).split("-")
 			return dates[2] + "." + dates[1] + "." + dates[0]
+		},
+		SearchShow: function () {
+			this.$router.push('search');
+		},
+		AppointmentsShow: function () {
+			this.$router.push('appointments');
 		},
 		SurveyShow: function () {
 			axios

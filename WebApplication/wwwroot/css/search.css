@@ -1,6 +1,6 @@
 @import url('file:///C:\Users\Administrator\Desktop\Novo\Healthcare-System\WebApplication\wwwroot\css\search.css');
 .circleadd {
-    background-color: #4CAF50;
+    background-color: black;
     border: none;
     color: white;
     text-decoration: none;
@@ -8,8 +8,15 @@
     font-size: 16px;
     border-radius: 50%;
 }
+#search {
+    background-image: url("../pictures/PatientBackgroundV10.jpg");
+    background-repeat: no-repeat;
+    overflow-y: scroll;
+    height: 768px;
+}
+
 .circledelete {
-    background-color: #ff0000;
+    background-color: black;
     border: none;
     color: white;
     text-decoration: none;
