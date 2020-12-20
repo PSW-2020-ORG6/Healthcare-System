@@ -18,7 +18,7 @@ namespace IntegrationAdaptersTests
         public void Sends_files_successfully()
         {  
             SftpService service = new SftpService();
-            bool success = service.SendFile(@"‪C:\Users\HOME\Desktop\test.txt");
+            bool success = service.SendFile(@"test.txt");
             Assert.True(success);   
         }
 

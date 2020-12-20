@@ -81,11 +81,12 @@ namespace IntegrationAdapters.Services
             SftpService sftpService = new SftpService();
             var fileName = GeneratePrescriptionFileName();
             System.IO.File.WriteAllText(fileName, string.Empty);
-            TextWriter tw = new StreamWriter(fileName);
-            
+            TextWriter tw = new StreamWriter(fileName);       
             tw.WriteLine(GeneratePrescriptionString(prescription));
             tw.Close();
             sftpService.SendFile(fileName);
+            MedicineReportService medicineReportService = new MedicineReportService();
+            medicineReportService.SendNotificationAboutReport(fileName);
         }
 
         public void GenerateSpecificationFromPharmacy(string responseText, string medicineName)

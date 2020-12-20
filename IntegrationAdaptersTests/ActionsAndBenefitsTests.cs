@@ -17,7 +17,7 @@ namespace IntegrationAdaptersTests
         public static Guid guid2 = new Guid("a69b4d8e-55ce-4cdf-bfa6-7462e085a909");
         public ActionAndBenefitMessage actionAndBenefitMessage1 = new ActionAndBenefitMessage(guid, "Jankovic", "50% off brufen", new DateTime(2020, 5, 21), new DateTime(2020, 6, 21));
         public ActionAndBenefitMessage actionAndBenefitMessage2 = new ActionAndBenefitMessage(new Guid("0e90a9a7-2722-45bb-a3de-7832131dcfe3"), "BENU", "2 vitamins Mg for 1 price",  new DateTime(2020, 2, 16), new DateTime(2020, 4, 12));
-        public ActionAndBenefitMessage actionAndBenefitMessage3 = new ActionAndBenefitMessage(new Guid("0e65a9a7-2722-45bb-a3de-7832131dcfe3"), "Jankovic", "aspirin 50% off", new DateTime(2020, 11, 16), new DateTime(2020, 4, 12));
+        public ActionAndBenefitMessage actionAndBenefitMessage3 = new ActionAndBenefitMessage(new Guid("53bfe576-cbfd-4b2e-ab06-8a44be76abad"), "Jankovic", "opis", new DateTime(2020, 12, 3), new DateTime(2020, 12, 11));
 
         [Fact]
         public void Find_existing_published_message()
