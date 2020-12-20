@@ -73,9 +73,6 @@
 
         <br></br>
         <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
         <!--ICONS-->
             <div>
               <div class="row">

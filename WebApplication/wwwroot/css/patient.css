@@ -15,6 +15,27 @@
     opacity: 0.8;
 }
 
+#AppointmentsShow {
+    background-image: url("../pictures/AppointmentsResized.png");
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.8;
+}
+
+#SurveyShow {
+    background-image: url("../pictures/TakeSurveyResized.png");
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.8;
+}
+
+
 #LeaveComment {
     background-image: url("../pictures/LeaveCommentResized.png");
     height: 150px;
@@ -29,6 +50,16 @@
     background-color: white;
     color: #014779;
     font-family: Impact;
+}
+
+#Search {
+    background-image: url("../pictures/SearchIconResized.png");
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.8;
 }
 
 #UserExperiences {

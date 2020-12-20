@@ -511,7 +511,7 @@ Vue.component("appointments", {
             })
     },
     template: `
-	<div>
+	<div id="appointments">
         </br>
             <div class="row create" >
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAppointment">Create new appointment</button>&nbsp&nbsp&nbsp&nbsp
