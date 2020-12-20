@@ -53,7 +53,7 @@
             })
 
         axios
-            .get('http://localhost:49900/survey/getDoctors', { params: { patientId: "0003" } })
+            .get('http://localhost:49900/survey/getDoctors', { params: { patientId: "001" } })
             .then(response => {
                 this.doctorsList = response.data;
 
@@ -72,19 +72,44 @@
     <div id = "AdminMain">
 
         <br></br>
-
-            <div class="container">
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <!--ICONS-->
+            <div>
               <div class="row">
                 <div class="col-sm">
-                  <h3>
-			        <button id="ShowStatistics" type="button" class="btn btn-info btn-lg margin" data-toggle="modal" v-on:click="StatisticsShow()"></button>
-			        </h3><br/> 
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
                 </div>
                 <div class="col-sm">
                   <h3>
-			        <button id="MaliciousUsers" type="button" class="btn btn-info btn-lg margin" data-toggle="modal" data-target="#MaliciousUsersModal"></button>
+			        <button id="ShowStatistics" type="button" class="btn btn-info btn-lg margin form-control" data-toggle="modal" v-on:click="StatisticsShow()"></button>
 			        </h3><br/> 
                 </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                  <h3>
+			        <button id="MaliciousUsers" type="button" class="btn btn-info btn-lg margin form-control" data-toggle="modal" data-target="#MaliciousUsersModal"></button>
+			        </h3><br/> 
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                  <h3>
+			        <button id="FeedbacksControl" type="button" class="btn btn-info btn-lg margin form-control" data-toggle="modal" data-target="#FeedbacksModal"></button>
+			        </h3><br/> 
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                </div>  
                 <div class="col-sm">
                 </div>
               </div>
@@ -93,7 +118,7 @@
         <br></br>
         <br></br>
 
-
+        <!--MALICIOUS USERS MODAL-->
             <div class="modal fade" id="MaliciousUsersModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
 			  <div class="modal-dialog modal-dialog-scrollable" role="document">
 				<div class="modal-content">
@@ -134,77 +159,91 @@
 			  </div>
 			</div>
 
-
+        <!--FEEDBACKS MODAL-->
+            <div class="modal fade" id="FeedbacksModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+				<div class="modal-content">
+				  <div class="modal-header textAndBackground">
+					<h5 class="modal-title" id="exampleModalScrollableTitle">Feedback Control</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body">		
+                                <br/><h3 class="text">Comments</h3><br/>
+	                            <ul class="nav nav-tabs" role="tablist">
+    	                            <li class="nav-item">
+    		                            <a class="nav-link active .cards" data-toggle="tab" href="#approvedF">Approved</a>
+    	                            </li>
+    	                            <li class="nav-item">
+    		                            <a class="nav-link .cards" data-toggle="tab" href="#disapprovedF">Disapproved</a>
+    	                            </li>
+                                </ul>
+                                <div>
+                                    <div class="tab-content">
+    	                                <div id="approvedF" class="container tab-pane active"><br>
+    		                                <div class="container">
+	                                                <div class="row">
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                              <tr>
+                                                                <th>Comment</th>
+                                                                <th>Date</th>
+                                                                <th colspan="2">Patient</th>
+                                                              </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                              <tr v-for="f in approvedFeedbacks">
+                                                                <td>{{f.text}}</td>
+                                                                <td>{{DateSplit(f.date)}}</td>
+                                                                <td v-for="p in patients" v-if="parseInt(p.id) == parseInt(f.patientId)">{{p.name}} {{p.surname}}</td>
+                                                                <td v-if="parseInt(f.patientId) == -1">Anonimous</td>
+                                                                <td style="text-align:center"><button class="btnban form-control" v-on:click="Disapprove(f)">D I S A P P R O V E</button></td>  
+                                                              </tr>
+                                                            </tbody>
+                                                         </table>
+	                                                </div>
+                                              </div>			     
+		                                 </div>
+		                                <div id="disapprovedF" class="container tab-pane fade"><br>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Comment</th>
+                                                                <th>Date</th>
+                                                                <th colspan="2">Patient</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr v-for="f in disapprovedFeedbacks">
+                                                                <td>{{f.text}}</td>
+                                                                <td>{{DateSplit(f.date)}}</td>
+                                                                <td v-for="p in patients" v-if="parseInt(p.id)== parseInt(f.patientId)">{{p.name}} {{p.surname}}</td>
+                                                                <td v-if="parseInt(f.patientId) == -1">Anonimous</td>
+                                                                <td style="text-align:center"><button class="btnapprove form-control" v-on:click="Approve(f)">A P P R O V E</button></td>
+                                                            </tr>
+                                                         </tbody>
+                                                     </table> 
+                                                </div>
+                                            </div>			
+                                        </div>
+                                    </div>
+                                </div>
+				  </div>
+				  <div class="modal-footer textAndBackground">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				  </div>
+				</div>
+			  </div>
+			</div>
     
         <br></br>
         <br></br>
         <br></br>
         <br></br>
 
-        <div class="container">
-            <br/><h3 class="text">Comments</h3><br/>
-	        <ul class="nav nav-tabs" role="tablist">
-    	        <li class="nav-item">
-    		        <a class="nav-link active .cards" data-toggle="tab" href="#approvedF">Approved</a>
-    	        </li>
-    	        <li class="nav-item">
-    		        <a class="nav-link .cards" data-toggle="tab" href="#disapproved">Disapproved</a>
-    	        </li>
-            </ul>
-            <div>
-                <div class="tab-content">
-    	            <div id="approvedF" class="container tab-pane active"><br>
-    		            <div class="container">
-	                            <div class="row">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                          <tr>
-                                            <th>Comment</th>
-                                            <th>Date</th>
-                                            <th colspan="2">Patient</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr v-for="f in approvedFeedbacks">
-                                            <td>{{f.text}}</td>
-                                            <td>{{DateSplit(f.date)}}</td>
-                                            <td v-for="p in patients" v-if="parseInt(p.id) == parseInt(f.patientId)">{{p.name}} {{p.surname}}</td>
-                                            <td v-if="parseInt(f.patientId) == -1">Anonimous</td>
-                                            <td style="text-align:center"><button class="btnban form-control" v-on:click="Disapprove(f)">D I S A P P R O V E</button></td>  
-                                          </tr>
-                                        </tbody>
-                                     </table>
-	                            </div>
-                          </div>			     
-		             </div>
-		            <div id="disapproved" class="container tab-pane fade"><br>
-                        <div class="container">
-                            <div class="row">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Comment</th>
-                                            <th>Date</th>
-                                            <th colspan="2">Patient</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="f in disapprovedFeedbacks">
-                                            <td>{{f.text}}</td>
-                                            <td>{{DateSplit(f.date)}}</td>
-                                            <td v-for="p in patients" v-if="parseInt(p.id)== parseInt(f.patientId)">{{p.name}} {{p.surname}}</td>
-                                            <td v-if="parseInt(f.patientId) == -1">Anonimous</td>
-                                            <td style="text-align:center"><button class="btnapprove form-control" v-on:click="Approve(f)">A P P R O V E</button></td>
-                                        </tr>
-                                     </tbody>
-                                 </table> 
-                            </div>
-                        </div>			
-                    </div>
-                </div>
-            </div>
-        </div>
-        </br></br>
     </div>
 	`,
     methods: {
