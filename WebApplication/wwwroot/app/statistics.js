@@ -3135,7 +3135,7 @@
     methods: {
         getStatisticsForDoctor: function () {
             axios          
-                .get('http://localhost:49900/survey/getStatisticForDoctor', { params: { ID: this.selectedDoctor.id } })
+                .get('http://localhost:49900/survey/getStatisticForDoctor', { params: { ID: this.selectedDoctor.fullName } })
                 .then(response => {
 
                     this.statisticDoctor = response.data;
