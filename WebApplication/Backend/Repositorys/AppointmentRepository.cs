@@ -24,7 +24,7 @@ namespace WebApplication.Backend.Repositorys
 
         public AppointmentRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=neynamneynam12");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
         }
 
         private List<Appointment> GetAppointments(String query)

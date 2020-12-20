@@ -10,7 +10,7 @@ namespace WebApplication.Backend.DTO
     {
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
-        public string time => Start.ToString("HH:mm") + " - " + End.ToString("HH:mm");
+        public string Time => Start.ToString("HH:mm") + " - " + End.ToString("HH:mm");
         public TimeIntervalDTO()
         {
         }
