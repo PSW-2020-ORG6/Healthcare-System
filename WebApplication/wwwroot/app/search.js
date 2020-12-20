@@ -11,6 +11,7 @@ Vue.component("search", {
     },
     template:
     `
+    <div id="search">
         <div class= "container">
             <br/><h3 class="text">Search - prescription and report</h3><br/>
             <ul class="nav nav-tabs" role="tablist">
@@ -23,7 +24,7 @@ Vue.component("search", {
             </ul>
             <div>
                 <div class="tab-content">
-                    <div id="simpleSearch" class="container tab-pane active"><br/>
+                    <div id="simpleSearch" class="container tab-pane active">
                         <div class="container">
                             <div class="container"><br/>
                                 <div class="row">
@@ -267,6 +268,7 @@ Vue.component("search", {
                  </table>
             </div><br/>
         </div> 
+</div>
 	`,
     methods: {
         AddRowAdvanced: function () {

@@ -10,5 +10,6 @@ namespace WebApplication.Backend.Repositorys.Interfaces
         List<Physician> GetPhysiciansByFullName(string fullName);
         Physician GetPhysicianBySerialNumber(string serialNumber);
         Physician GetPhysicianById(string id);
+        List<Physician> GetPhysicianBySpecialization(string specializationName, string physicianId);
     }
 }

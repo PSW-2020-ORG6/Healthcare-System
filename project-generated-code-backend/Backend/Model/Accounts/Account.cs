@@ -20,10 +20,6 @@ namespace HealthClinicBackend.Backend.Model.Accounts
         [ForeignKey("Address")] public string AddressSerialNumber { get; set; }
         public virtual Address Address { get; set; }
         public String Password { get; set; }
-        
-        // this property does not need to be kept in databse
-        public string FullName => Name + " " + Surname;
-
         public Account(String serialNumber, string name, string surname, string id, DateTime dateOfBirth,
             string contact, string email, Address address, String password) : base(serialNumber)
         {
@@ -93,11 +89,6 @@ namespace HealthClinicBackend.Backend.Model.Accounts
         {
             Account other = obj as Account;
             return other != null && Id.Equals(other.Id);
-        }
-
-        public override string ToString()
-        {
-            return FullName;
         }
 
         public bool AreCredentialsValid(string id, string password)

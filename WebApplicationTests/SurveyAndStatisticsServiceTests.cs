@@ -6,14 +6,15 @@ using WebApplication.Backend.Repositorys;
 using WebApplication.Backend.Services;
 using WebApplication.Backend.Util;
 using Xunit;
+using System;
 
 namespace WebApplicationTests
 {
     public class SurveyAndStatisticsServiceTests
     {
         Survey surveyTest = new Survey
-               ("001", "Bozo Bozic", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3");
-       
+               ("001", "Bozo Bozic", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", new DateTime(2017, 05, 17));
+
         [Fact]
             public void Adds_new_survey()
             {

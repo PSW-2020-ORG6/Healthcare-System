@@ -593,12 +593,8 @@
                 alert(error)
             })
 
-
-
-
-
         axios
-            .get('http://localhost:49900/survey/getDoctors', { params: { patientId: "0003" } })
+            .get('http://localhost:49900/appointment/physicians')
             .then(response => {
                 this.doctorsList = response.data
             })
@@ -781,12 +777,9 @@
     beforeMount() {
 
         axios
-            .get('http://localhost:49900/survey/getDoctors', { params: { patientId: "0003" } })
+            .get('http://localhost:49900/appointment/physicians')
             .then(response => {
                 this.doctorsList = response.data
-            })
-            .catch(error => {
-                alert(error)
             })
 
 
@@ -812,7 +805,7 @@
 
 
             <select id = "selectDoctor" class="form-control custom-select" v-model = "selectedDoctor">
-              <option div  v-for="(doctor) in doctorsList" v-bind:value="doctor" v-on:click="getStatisticsForDoctor()" >{{doctor}}</option>
+              <option div  v-for="(doctor) in doctorsList" v-bind:value="doctor" v-on:click="getStatisticsForDoctor()" >{{doctor.fullName}}</option>
             </select>
 
 
@@ -829,7 +822,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="heading0 mb-3 text-center">
-                                                                        <h2>{{this.selectedDoctor}}</h2>
+                                                                        <h2>{{this.selectedDoctor.fullName}}</h2>
                                                                     </div>
                                                                     <div class="rating-bar0 justify-content-center">
                                                                         <table class="text-left mx-auto">
@@ -3141,9 +3134,10 @@
 
     methods: {
         getStatisticsForDoctor: function () {
-            axios
-                .get('http://localhost:49900/survey/getStatisticForDoctor', { params: { ID: this.selectedDoctor } })
+            axios          
+                .get('http://localhost:49900/survey/getStatisticForDoctor', { params: { ID: this.selectedDoctor.fullName } })
                 .then(response => {
+
                     this.statisticDoctor = response.data;
 
 

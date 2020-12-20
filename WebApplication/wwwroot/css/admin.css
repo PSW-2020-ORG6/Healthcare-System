@@ -1,29 +1,72 @@
-﻿.btnban {
+﻿#AdminMain {
+    background-image: url("../pictures/AdminBackground.jpg");
+    background-repeat: no-repeat;
+    overflow-y: scroll;
+    height: 768px;
+}
+
+
+
+.table {
+    background-color: white;
+    opacity: 0.92;
+}
+
+
+#ShowStatistics {
+    background-image: url("../pictures/StatisticsV3.png");
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    opacity: 0.8;
+}
+
+#MaliciousUsers {
+    background-image: url("../pictures/MaliciousUSersV2.png");
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    opacity: 0.8;
+}
+
+#FeedbacksControl {
+    background-image: url("../pictures/FeedbacksV2.png");
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    opacity: 0.8;
+}
+
+
+.btnban {
     background-color: lightcoral;
     color: white;
     border: thick;
     font-family: 'Impact';
     font-weight: 100;
+    opacity: 1;
 }
+
 .btnapprove {
     background-color: lightgreen;
     color: white;
     border: thick;
     font-family: 'Impact';
     font-weight: 100;
+    opacity: initial;
 }
 
 #doctorSelect {
-    width : 300px;
-
+    width: 300px;
 }
 
 
+
 #statisticTable {
-    color : white;
-    background-color : lightblue;
-    font-size : larger;
-    font-family : Impact;
+    color: white;
+    background-color: lightblue;
+    font-size: larger;
+    font-family: Impact;
 }
 
 
@@ -42,9 +85,9 @@ a {
     padding-left: 60px;
     padding-right: 60px;
     margin-top: 70px;
-    opacity : 0.9;
-    color : white;
-    font-weight : 600;
+    opacity: 0.9;
+    color: white;
+    font-weight: 600;
 }
 
 div .circle-img {
@@ -116,7 +159,6 @@ div .circle-img {
 }
 
 .bar-4 {
-
     height: 10px;
     background-color: #FBC02D;
     border-radius: 20px
@@ -146,10 +188,10 @@ div .circle-img {
     margin-bottom: 10px
 }
 
-    .star-active:hover {
+.star-active:hover {
         color: #F9A825;
         cursor: pointer
-    }
+}
 
 .review-heading {
     font-size: 24px
@@ -157,16 +199,15 @@ div .circle-img {
 
 .review-desc {
     font-size: 15px
-
 }
 
 
 #selectDoctor {
     width: 300px;
-    background-color : lightblue;
-    opacity : 0.8;
-    font-weight : bolder;
-    color : white;
+    background-color: lightblue;
+    opacity: 0.8;
+    font-weight: bolder;
+    color: white;
 }
 
 
@@ -177,4 +218,3 @@ div .circle-img {
     background-repeat: no-repeat;
     background-size: auto;
 }
-

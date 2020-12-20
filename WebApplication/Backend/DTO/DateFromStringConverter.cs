@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace WebApplication.Backend.DTO
 {
-    public class DateTimeDTO
+    public class DateFromStringConverter
     {
-        public DateTimeDTO()
+        public DateFromStringConverter()
         {
         }
 
@@ -17,7 +17,7 @@ namespace WebApplication.Backend.DTO
             return dateTimes;
         }
 
-        private DateTime CreateDateTime(string date)
+        public DateTime CreateDateTime(string date)
         {
             string[] dates = date.Split("-");
             return new DateTime(Convert.ToInt32(dates[0]), Convert.ToInt32(dates[1]), Convert.ToInt32(dates[2]));
@@ -25,6 +25,22 @@ namespace WebApplication.Backend.DTO
         public bool IsPreferredTimeValid(string date)
         {
             return DateTime.Parse(date) > DateTime.Today.AddDays(2);
+        }
+
+        internal bool IsPreferredTimeIntervalValid(string dates)
+        {
+            string[] d = dates.Split(",");
+            foreach (string date in d)
+            {
+                if (!IsPreferredTimeValid(date))
+                    return false;
+            }
+            return true;
+        }
+
+        public string[] DateGeneration(string dates)
+        {
+            return dates.Split(",");
         }
     }
 }

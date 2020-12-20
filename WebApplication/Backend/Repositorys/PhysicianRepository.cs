@@ -15,7 +15,7 @@ namespace WebApplication.Backend.Repositorys
 
         public PhysicianRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=neynamneynam12");
         }
 
         private List<Physician> GetPhysicians(String query)
@@ -34,8 +34,10 @@ namespace WebApplication.Backend.Repositorys
                 entity.DateOfBirth = (DateTime)sqlReader[4];
                 entity.Contact = (string)sqlReader[5];
                 entity.Email = (string)sqlReader[6];
+                entity.Address = addressRepository.GetAddressBySerialNumber((string)sqlReader[8]);
                 entity.Password = (string)sqlReader[7];
                 entity.Specialization = specializationRepository.GetSpecializationsByPhysicianSerialNumber((string)sqlReader[0]);
+                entity.AddressSerialNumber = (string)sqlReader[8];
                 entity.WorkSchedule = timeIntervalRepository.GetTimeIntervalById((string)sqlReader[9]);
                 resultList.Add(entity);
             }
@@ -71,7 +73,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetPhysicians("Select * from physician where FullName like '%" + fullName + "%'");
+                return GetPhysicians("Select * from physician where FullName like '" + fullName + "'");
             }
             catch (Exception)
             {
@@ -97,6 +99,19 @@ namespace WebApplication.Backend.Repositorys
             try
             {
                 return GetPhysicians("Select * from physician where Id='" + id + "'")[0];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public List<Physician> GetPhysicianBySpecialization(string specializationName, string physicianId)
+        {
+            try
+            {
+                return GetPhysicians("Select * from physician,specialization where specialization.Name='" + specializationName + "' and specialization.PhysicianSerialNumber = physician.SerialNumber and specialization.PhysicianSerialNumber !='" + physicianId + "'");
             }
             catch (Exception e)
             {

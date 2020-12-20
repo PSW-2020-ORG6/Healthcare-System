@@ -17,7 +17,6 @@ namespace Backend.Repository
     {
         public AppointmentFileSystem()
         {
-            //path = @"./../../../../project-generated-code-backend/data/appointments.txt";
             path = @"./../../data/appointments.txt";
         }
         public List<Appointment> GetAppointmentsByDate(DateTime date)

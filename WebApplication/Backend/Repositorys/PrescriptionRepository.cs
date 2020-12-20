@@ -13,8 +13,9 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
+                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=neynamneynam12");
             }
+
             catch (Exception e)
             {
             }
@@ -31,6 +32,7 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         private List<Prescription> GetPrescriptions(string sqlDml)
         {
+            connection.Close();
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
@@ -46,7 +48,7 @@ namespace WebApplication.Backend.Repositorys
             connection.Close();
             foreach (Prescription prescription in prescriptions)
             {
-                prescription.MedicineDosage = GetMedicineDosage("Select medicinedosages.SerialNumber,medicinedosages.Note,medicinedosages.Amount,medicines.SerialNumber,medicines.GenericName,medicines.CopyrightName,medicinetypes.SerialNumber,medicinetypes.Type  from medicinedosages,medicines,medicinetypes where medicinedosages.PrescriptionSerialNumber like '" + prescription.SerialNumber + "' and medicinedosages.MedicineSerialNumber like medicines.SerialNumber and medicines.MedicineTypeSerialNumber like medicinetypes.SerialNumber");
+                prescription.MedicineDosage = GetMedicineDosage("Select medicinedosage.SerialNumber,medicinedosage.Note,medicinedosage.Amount,medicine.SerialNumber,medicine.GenericName,medicine.CopyrightName,medicinetype.SerialNumber,medicinetype.Type  from medicinedosage,medicine,medicinetype where medicinedosage.PrescriptionSerialNumber like '" + prescription.SerialNumber + "' and medicinedosage.MedicineSerialNumber like medicine.SerialNumber and medicine.MedicineTypeSerialNumber like medicinetype.SerialNumber");
             }
             return prescriptions;
         }

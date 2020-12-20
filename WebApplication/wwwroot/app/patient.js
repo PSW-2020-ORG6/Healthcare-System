@@ -1,6 +1,7 @@
 ﻿Vue.component("patient", {
 	data: function () {
 		return {
+			patientDTO: null,
 			idPatient: "0002",
 			approvedFeedbacks: null,
 			noapprovedFeedbacks: null,
@@ -12,10 +13,9 @@
 				text: "",
 				approved: false,
 				date: new Date().now,
-				patientId: "-1"
+				patientId: "0002"
 			},
-			appointment: null,
-			patientDTO: {}
+			appointment: null			
 		}
 	},
 	beforeMount() {
@@ -46,7 +46,7 @@
 			})
 
 		axios
-			.get('http://localhost:49900/appointment/allAppointmentsByPatientIdActive', { params: { patientId: "5" } })
+			.get('http://localhost:49900/appointment/allAppointmentsByPatientIdActive', { params: { patientId: "0002" } })
 			.then(response => {
 				this.activeAppointments = response.data
 			})
@@ -56,7 +56,7 @@
 			})
 
 		axios
-			.get('http://localhost:49900/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: "5" } })
+			.get('http://localhost:49900/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: "0002" } })
 			.then(response => {
 				this.canceledAppointments = response.data
 			})
@@ -65,13 +65,88 @@
 			})
 	},
 	template: `
-	<div>
+	<div id="Patient">
+	
+        <br></br>
+        <br></br>
+        <!--ICONS ROW 1-->
+            <div>
+              <div class="row">
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                  <h3>
+			        <button id="MyInformations" type="button" class="btn btn-info btn-lg margin form-control" data-toggle="modal" data-target="#registrationInfo"></button>
+			        </h3><br/> 
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                  <h3>
+			        <button id="LeaveComment" type="button" class="btn btn-info btn-lg margin form-control" data-toggle="modal" data-target="#CommentModal"></button>
+			        </h3><br/> 
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                  <h3>
+			        <button id="UserExperiences" type="button" class="btn btn-info btn-lg margin form-control" SurveyShow></button>
+			        </h3><br/> 
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                </div>  
+                <div class="col-sm">
+                </div>
+              </div>
+<br></br>
+<br></br>
+	<!--ICONS ROW 2-->
+			<div class="row">
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                  <h3>
+			        <button id="Search" type="button" class="btn btn-info btn-lg margin form-control" v-on:click="SearchShow()"></button>
+			        </h3><br/> 
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                  <h3>
+			        <button id="AppointmentsShow" type="button" class="btn btn-info btn-lg margin form-control" v-on:click="AppointmentsShow()"></button>
+			        </h3><br/> 
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                  <h3>
+			        <button id="SurveyShow" type="button" class="btn btn-info btn-lg margin form-control" v-on:click="SurveyShow()"></button>
+			        </h3><br/> 
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                </div>  
+                <div class="col-sm">
+                </div>
+              </div>
+            </div>
 
 <!-- Registration Info -->
-
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrationInfo">
-			  My Informations
-			</button>
 
 			<div class="modal fade" id="registrationInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
 			  <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -259,8 +334,9 @@
 	
 	<!--END registration info modal-->
 
+	<!-- Leave Comment -->
 		<div>
-			<div class="modal fade" tabindex="-1" role="dialog" id="feedbackModal">
+			<div class="modal fade" tabindex="-1" role="dialog" id="CommentModal">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header" id="feedbackModalHeader">
@@ -284,89 +360,59 @@
 				</div>
 			</div>  
 		</div>
-		<div class="container"><br/>
-			<h3 class="text">Comments
-				<button type="button" class="btn btn-info btn-lg margin" data-toggle="modal" data-target="#feedbackModal">Add comment</button>
-			</h3><br/>
-			<h3 class="textSurvey">Survey
-				<button type="button" class="btn btn-info btn-lg margin" data-toggle="modal" v-on:click="SurveyShow()"">Take survey</button>
-			</h3><br/> 
-			<div>
-				<div class="tab-content">
-    				<div id="profil" class="container tab-pane active"><br>
-    					<div class="container">
-							<div class="row">
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>Comment</th>
-											<th>Date</th>
-											<th colspan="2">Patient</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr v-for="a in ac">
-											<td>{{f.text}}</td>
-											<td>{{DateSplit(f.date)}}</td>
-											<td v-for="p in patients" v-if="parseInt(p.id) == parseInt(f.patientId)">{{p.name}} {{p.surname}}</td>
-											<td v-if="parseInt(f.patientId) == -1">Anonimous</td>
-										</tr>
+<!--END Leave Comment -->
+
+<!--User feedbacks -->
+		<div>
+			<div class="modal fade" tabindex="-1" role="dialog" id="FeedbacksModal">
+				<div class="modal-dialog  modal-xl" role="document">
+					<div class="modal-content">
+						<div class="modal-header" id="feedbackModalHeader">
+							<h5 class="modal-title">User experiences</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body" id="feedbackModalBody">
+								<div class="tab-content" >
+											<div class="row" >
+												<table class="table table-bordered tableBorder" style="width:500px;height:400px" Align = "center" id="UserExp">
+													<tbody>
+														<tr v-for="a in approvedFeedbacks" class="xx">
+															<template v-for="p in patients">
+															<td v-if="parseInt(a.patientId) != -1 && parseInt(p.id) == parseInt(a.patientId)">{{p.name}} {{p.surname}}
+															&nbsp&nbsp&nbsp&nbsp {{DateSplit(a.date)}}</br></br>
+															{{a.text}}</td>
+															</template>
+															<td v-if="parseInt(a.patientId) == -1">Anonimous
+															<!--<template v-if="parseInt(a.patientId) == -1">Anonimous</template>-->
+												&nbsp&nbsp&nbsp&nbsp {{DateSplit(a.date)}}</br></br>
+											{{a.text}}</td>
+                                        </tr>
 									</tbody>
-								</table>
+								</table>	
+									</div>
+								</div>
 							</div>
-						</div>		
+						</div>
+						<div class="modal-footer" id="feedbackModalFooter">
+							<button type="button" class="btn btn-info btn-lg " data-dismiss="modal">Cancel</button>
+						</div>
 					</div>
 				</div>
-			</div>
-
-
-<div>
-				<div class="tab-content">
-    				<div id="profil" class="container tab-pane active"><br>
-    					<div class="container">
-							<div class="row">
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>Date</th>
-											<th>Time</th>
-											<th>Physitian</th>
-											<th>Room</th>
-											<th>Procedure</th>
-											<th>Urgency</th>
-											<th></th>	
-											<th></th>	
-										</tr>
-									</thead>
-									<tbody>
-										<tr v-for="a in activeAppointments">
-											<td>{{DateSplit(a.date)}}</td>
-											<td>{{a.timeInterval.time}}</td>
-											<td>{{a.physitian.fullName}}</td>
-											<td>{{a.room.name}}</td>
-											<td>{{a.procedureType.name}}</td>
-											<td>{{a.urgency}}</td>		
-											<td><button type="button" class="btn btn-info btn-lg">Survey</button></td>			
-											<td><button type="button" class="btn btn-info btn-lg">Cancel</button></td>										
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>		
-					</div>
-				</div>
-			</div>
-
-
-
-
+			</div>  
 		</div>
+<!--END User comments -->
+
 	</div>
+
 	`,
 	methods: {
 		AddNewFeedback: function (feedback) {
 			if (!document.getElementById("anonimous").checked)
 				this.feedback.patientId = "0003"
+			else
+				this.feedback.id = "-1"
 			if (feedback.text.localeCompare(null) || feedback.text.localeCompare("")) {
 				axios
 					.post("http://localhost:49900/feedback/add", feedback)
@@ -384,6 +430,12 @@
 		DateSplit: function (date) {
 			var dates = (date.split("T")[0]).split("-")
 			return dates[2] + "." + dates[1] + "." + dates[0]
+		},
+		SearchShow: function () {
+			this.$router.push('search');
+		},
+		AppointmentsShow: function () {
+			this.$router.push('appointments');
 		},
 		SurveyShow: function () {
 			axios

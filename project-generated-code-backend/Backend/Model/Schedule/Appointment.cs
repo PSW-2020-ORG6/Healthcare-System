@@ -28,15 +28,32 @@ namespace HealthClinicBackend.Backend.Model.Schedule
         public bool Urgency { get; set; }
         public DateTime Date { get; set; }
         public bool Active { get; set; }
+        public string DateOfCanceling { get; set; }
 
+        public bool IsSurveyDone { get; set; }
+        
         public Appointment(Room room, Physician physician, Patient patient, TimeInterval timeInterval,
-            ProcedureType procedureType) : base()
+            ProcedureType procedureType, Boolean active, DateTime date) : base()
         {
             Room = room;
             Physician = physician;
             Patient = patient;
             TimeInterval = timeInterval;
             ProcedureType = procedureType;
+            Active = active;
+            Date = date;
+        }
+        public Appointment(Room room, Physician physician, Patient patient, TimeInterval timeInterval,
+            ProcedureType procedureType, Boolean active, DateTime date,Boolean isSurveyDone) : base()
+        {
+            Room = room;
+            Physician = physician;
+            Patient = patient;
+            TimeInterval = timeInterval;
+            ProcedureType = procedureType;
+            Active = active;
+            Date = date;
+            IsSurveyDone = isSurveyDone;
         }
 
         public Appointment(Room room, Physician physician, Patient patient, TimeInterval timeInterval,
@@ -119,7 +136,7 @@ namespace HealthClinicBackend.Backend.Model.Schedule
 
         public override string ToString()
         {
-            return "patient: " + Patient.FullName + "\nphysitian: " + Physician.FullName + "\ntime interval: " +
+            return "patient: " + Patient.Name + " " + Patient.Surname + "\nphysitian: " + Physician.Name + " " + Physician.Surname + "\ntime interval: " +
                    TimeInterval + "\nroom: " + Room + "\nprocedure type: " + ProcedureType;
         }
 

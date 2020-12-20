@@ -16,7 +16,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
+                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=neynamneynam12");
             }
             catch (Exception e)
             {
@@ -105,18 +105,18 @@ namespace WebApplication.Backend.Repositorys
         {
             connection.Open();
             string[] dateString = feedback.Date.ToString().Split(" ");
-            string[] partsOfDate = dateString[0].Split(".");
+            string[] partsOfDate = dateString[0].Split("/");
             if (feedback.Approved)
             {
                 String sqlDml = "REPLACE  into feedback(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 0
-                    + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + " ','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
+                    + "','" + partsOfDate[2] + "-" + partsOfDate[0] + "-" + partsOfDate[1] + " ','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
                 MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
                 sqlCommand.ExecuteNonQuery();
             }
             else
             {
                 string sqlDml = "REPLACE  into feedback(Text,Approved,Date,PatientId,SerialNumber)Values('" + feedback.Text + "','" + 1
-                    + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + " ','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
+                    + "','" + partsOfDate[2] + "-" + partsOfDate[0] + "-" + partsOfDate[1] + " ','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
 
                 MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
                 sqlCommand.ExecuteNonQuery();

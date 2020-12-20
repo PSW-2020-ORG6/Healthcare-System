@@ -12,7 +12,7 @@ namespace WebApplication.Backend.Repositorys
 
         public AddressRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=neynamneynam12");
         }
 
         private List<Address> GetAddresses(String query)

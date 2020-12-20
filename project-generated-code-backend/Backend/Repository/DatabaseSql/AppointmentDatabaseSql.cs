@@ -10,7 +10,7 @@ using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class AppointmentDatabaseSql : GenericDatabaseSql<Appointment>, IAppointmentRepository
+    public class AppointmentDatabaseSql : GenericDatabaseSql<Appointment>,IAppointmentRepository
     {
         public override List<Appointment> GetAll()
         {

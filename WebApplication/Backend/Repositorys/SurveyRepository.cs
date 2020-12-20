@@ -6,6 +6,7 @@ using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.MedicalExam;
 using HealthClinicBackend.Backend.Model.Survey;
 using WebApplication.Backend.Util;
+using HealthClinicBackend.Backend.Model.Schedule;
 
 namespace WebApplication.Backend.Repositorys
 {
@@ -17,7 +18,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
+                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=neynamneynam12");
             }
             catch (Exception e)
             {
@@ -36,9 +37,12 @@ namespace WebApplication.Backend.Repositorys
         public bool AddNewSurvey(Survey surveyText)
         {
             connection.Open();
-            string sqlDml = "INSERT into surveys" +
+            String[] surveyDate = surveyText.ReportDate.ToString().Split(" ");
+            String[] surveyDateParts = surveyDate[0].Split("/");
+            String dateSurvey = surveyDateParts[2] + "-" + surveyDateParts[0] + "-" + (Int32.Parse(surveyDateParts[1]) + 1).ToString() + " 00:00:00";
+            string sqlDml = "INSERT into survey" +
                             "(Question1,Question2,Question3,Question4,Question5,Question6,Question7,Question8,Question9,Question10,Question11," +
-                            "Question12,Question13,Question14,Question15,Question16,Question17,Question18,Question19,Question20,Question21,Question22,Question23,ID,DoctorName,SerialNumber)VALUES ('"
+                            "Question12,Question13,Question14,Question15,Question16,Question17,Question18,Question19,Question20,Question21,Question22,Question23,ID,DoctorName,SerialNumber,reportDate)VALUES ('"
                             + surveyText.Question1 + "','" + surveyText.Question2 + "','" + surveyText.Question3 +
                             "','" + surveyText.Question4 + "','" + surveyText.Question5
                             + "','" + surveyText.Question6 + "','" + surveyText.Question7 + "','" +
@@ -49,7 +53,7 @@ namespace WebApplication.Backend.Repositorys
                             surveyText.Question18 + "','" + surveyText.Question19 + "','" + surveyText.Question20
                             + "','" + surveyText.Question21 + "','" + surveyText.Question22 + "','" +
                             surveyText.Question23 + "','" + surveyText.Id + "','" + surveyText.DoctorName + "','" +
-                            surveyText.SerialNumber + "')";
+                            surveyText.SerialNumber + "','" + dateSurvey + "')";
 
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             sqlCommand.ExecuteNonQuery();
@@ -77,22 +81,20 @@ namespace WebApplication.Backend.Repositorys
             while (sqlReader.Read())
             {
                 Report entity = new Report();
-                entity.Patient = new Patient {Id = (String) sqlReader[3]};
-                entity.Physician = new Physician {SerialNumber = (String) sqlReader[4]};
+                entity.Patient = new Patient { Id = (String)sqlReader[2] };
+                entity.Physician = new Physician { SerialNumber = (String)sqlReader[3] };
+                entity.Date = Convert.ToDateTime(sqlReader[1]);
 
                 resultList.Add(entity);
-            }
 
+            }
             connection.Close();
             foreach (Report report in resultList)
             {
-                report.Physician = GetDoctorById("Select * from accounts where SerialNumber like'" +
-                                                 report.Physician.SerialNumber + "'");
+                report.Physician = GetDoctorById("Select * from physician where SerialNumber like'" + report.Physician.SerialNumber + "'");
             }
-
             return resultList;
         }
-
         ////Vucetic Marija RA157/2017
         /// <summary>
         ///getting doctor by id
@@ -107,10 +109,12 @@ namespace WebApplication.Backend.Repositorys
             connection.Open();
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
             MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            sqlReader.Read();
             Physician entity = new Physician();
-            entity.Name = (string) sqlReader[1];
-            entity.Surname = (string) sqlReader[2];
+            while (sqlReader.Read())
+            {
+                entity.Name = (string)sqlReader[1];
+                entity.Surname = (string)sqlReader[2];
+            }
             connection.Close();
             return entity;
         }
@@ -168,28 +172,7 @@ namespace WebApplication.Backend.Repositorys
             return patientResutl;
         }
 
-        ////Vucetic Marija RA157/2017
-        /// <summary>
-        ///getting all doctors from one patient's reports 
-        ///</summary>
-        ///<returns>
-        ///list of names of doctors
-        ///</returns>
-        ///<param name="idPatient"> String patient id
-        ///</param>
-        ///
-        public List<string> GetAllDoctorsFromReporstByPatientId(string patientId)
-        {
-            List<Report> reports = new List<Report>();
-            reports = GetReports("Select * from report where PatientId like'" + patientId.ToString() + "'");
-            List<String> doctors = new List<String>();
-            foreach (Report r in reports)
-            {
-                doctors.Add(r.Physician.FullName);
-            }
-
-            return doctors;
-        }
+       
 
         internal List<Survey> GetSurveys(string sqlDml)
         {
@@ -200,29 +183,30 @@ namespace WebApplication.Backend.Repositorys
             while (sqlReader.Read())
             {
                 Survey entity = new Survey();
-                entity.Question1 = (string) sqlReader[2];
-                entity.Question2 = (string) sqlReader[3];
-                entity.Question3 = (string) sqlReader[4];
-                entity.Question4 = (string) sqlReader[5];
-                entity.Question5 = (string) sqlReader[6];
-                entity.Question6 = (string) sqlReader[7];
-                entity.Question7 = (string) sqlReader[8];
-                entity.Question8 = (string) sqlReader[9];
-                entity.Question9 = (string) sqlReader[10];
-                entity.Question10 = (string) sqlReader[11];
-                entity.Question11 = (string) sqlReader[12];
-                entity.Question12 = (string) sqlReader[13];
-                entity.Question13 = (string) sqlReader[14];
-                entity.Question14 = (string) sqlReader[15];
-                entity.Question15 = (string) sqlReader[16];
-                entity.Question16 = (string) sqlReader[17];
-                entity.Question17 = (string) sqlReader[18];
-                entity.Question18 = (string) sqlReader[19];
-                entity.Question19 = (string) sqlReader[20];
-                entity.Question20 = (string) sqlReader[21];
-                entity.Question21 = (string) sqlReader[22];
-                entity.Question22 = (string) sqlReader[23];
-                entity.Question23 = (string) sqlReader[24];
+                entity.Question1 = (string) sqlReader[3];
+                entity.Question2 = (string) sqlReader[4];
+                entity.Question3 = (string) sqlReader[5];
+                entity.Question4 = (string) sqlReader[6];
+                entity.Question5 = (string) sqlReader[7];
+                entity.Question6 = (string) sqlReader[8];
+                entity.Question7 = (string) sqlReader[9];
+                entity.Question8 = (string) sqlReader[10];
+                entity.Question9 = (string) sqlReader[11];
+                entity.Question10 = (string) sqlReader[12];
+                entity.Question11 = (string) sqlReader[13];
+                entity.Question12 = (string) sqlReader[14];
+                entity.Question13 = (string) sqlReader[15];
+                entity.Question14 = (string) sqlReader[16];
+                entity.Question15 = (string) sqlReader[17];
+                entity.Question16 = (string) sqlReader[18];
+                entity.Question17 = (string) sqlReader[19];
+                entity.Question18 = (string) sqlReader[20];
+                entity.Question19 = (string) sqlReader[21];
+                entity.Question20 = (string) sqlReader[22];
+                entity.Question21 = (string) sqlReader[23];
+                entity.Question22 = (string) sqlReader[24];
+                entity.Question23 = (string) sqlReader[25];
+                entity.ReportDate = Convert.ToDateTime(sqlReader[26]);
                 resultList.Add(entity);
             }
 
@@ -242,7 +226,7 @@ namespace WebApplication.Backend.Repositorys
         public List<StatisticAuxilaryClass> getStatisticsForDoctor(string doctorId)
         {
             List<Survey> reports = new List<Survey>();
-            reports = GetSurveys("Select * from survey where DoctorName = '" + doctorId + "' ");
+            reports = GetSurveys("Select * from survey where DoctorName like '" + doctorId + "' ");
 
             List<StatisticAuxilaryClass> statistics = new List<StatisticAuxilaryClass>();
             for (int i = 0; i < 5; i++)
@@ -453,16 +437,45 @@ namespace WebApplication.Backend.Repositorys
         ///
         public List<string> GetAllDoctorsFromReporstByPatientIdFromSurvey(string patientId)
         {
-            List<Physician> result = new List<Physician>();
-            result = GetDoctors("Select * from surveys where ID like'" + patientId.ToString() + "'");
-            List<String> doctors = new List<String>();
-            foreach (Physician r in result)
+            List<Survey> result = GetSurveys("Select * from survey where ID like '" + patientId + "'");
+            List<String> resultList = new List<String>();
+            foreach (Survey r in result)
             {
-                doctors.Add(r.FullName.Trim());
+                resultList.Add(r.DoctorName + "-" + r.ReportDate.ToString().Split(" ")[0]);
             }
 
-            return doctors;
+            return resultList;
         }
+
+
+        ////Vucetic Marija RA157/2017
+        /// <summary>
+        ///getting all doctors from one patient's reports 
+        ///</summary>
+        ///<returns>
+        ///list of names of doctors
+        ///</returns>
+        ///<param name="idPatient"> String patient id
+        ///</param>
+        ///
+        public List<String> GetAllDoctorsFromReporstByPatientId(string patientId)
+        {
+            List<Report> reports = GetReports("Select * from report where PatientId like'" + patientId.ToString() + "'");
+            List<String> resulList = new List<String>();
+            foreach (Report r in reports)
+            {
+                PhysicianRepository phisitionRepository = new PhysicianRepository();
+                List<Physician> physitians = phisitionRepository.GetPhysiciansByFullName(r.Physician.Name + " " + r.Physician.Surname);
+                foreach (Physician p in physitians)
+                {
+                    r.Physician.Name = p.Name;
+                    r.Physician.Surname = p.Surname;
+                    resulList.Add(r.Physician.Name + " " + r.Physician.Surname + "-" + r.Date.ToString().Split(" ")[0]);
+                }
+            }
+            return resulList;
+        }
+
 
         ////Vucetic Marija RA157/2017
         /// <summary>
@@ -484,14 +497,13 @@ namespace WebApplication.Backend.Repositorys
             while (sqlReader.Read())
             {
                 Physician entity = new Physician();
-                entity.Name = (string) sqlReader[2];
+                entity.Name = (string)sqlReader[2];
                 resultList.Add(entity);
-            }
 
+            }
             connection.Close();
             return resultList;
         }
-
         ////Vucetic Marija RA157/2017
         /// <summary>
         /// returns all doctors for whom the patient can do a survey
@@ -502,18 +514,41 @@ namespace WebApplication.Backend.Repositorys
         ///<param name="idPatient"> String patient id
         ///</param>
         ///
-        public List<string> GetAllDoctorsFromReporstByPatientIdForSurveyList(string patientId)
+
+        public List<String> GetAllDoctorsFromReporstByPatientIdForSurveyList(string patientId)
         {
             List<String> resultListFromSurvey = GetAllDoctorsFromReporstByPatientIdFromSurvey(patientId);
             List<String> resultListFromReports = GetAllDoctorsFromReporstByPatientId(patientId);
             List<String> resultList = new List<String>();
-            foreach (String physitianFromRepors in resultListFromReports)
+            AppointmentRepository appointmentRepository = new AppointmentRepository();
+            List<Appointment> pastAppointments = appointmentRepository.GetAllAppointmentsByPatientIdPast(patientId);
+            List<String> resultListPastAppointments = new List<string>();
+
+            /*
+            foreach (Appointment appointment in pastAppointments)
             {
-                if (!resultListFromSurvey.Contains(physitianFromRepors))
-                {
-                    resultList.Add(physitianFromRepors);
-                }
+                resultListPastAppointments.Add(appointment.Physician.FullName + "-" + appointment.Date.ToString().Split(" ")[0]);
             }
+            */
+            foreach (String physicianFromRepors in resultListFromReports)
+            {
+                resultList.Add(physicianFromRepors);
+            }
+            foreach (String physicianFromPastAppointmentst in resultListPastAppointments)
+            {
+                resultList.Add(physicianFromPastAppointmentst);
+            }
+
+
+            foreach (String physicianFromSurvey in resultListFromSurvey)
+            {
+                if (resultList.Contains(physicianFromSurvey))
+                {
+                    resultList.Remove(physicianFromSurvey);
+                }
+
+            }
+
 
             return resultList;
         }

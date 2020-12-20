@@ -1,13 +1,86 @@
-﻿#feedbackModalHeader {
+﻿#Patient {
+    background-image: url("../pictures/PatientBackgroundV10.jpg");
+    background-repeat: no-repeat;
+    overflow-y: scroll;
+    height: 768px;
+}
+
+#MyInformations {
+    background-image: url("../pictures/MyInformationsResized.png");
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.8;
+}
+
+#AppointmentsShow {
+    background-image: url("../pictures/AppointmentsResized.png");
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.8;
+}
+
+#SurveyShow {
+    background-image: url("../pictures/TakeSurveyResized.png");
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.8;
+}
+
+
+#LeaveComment {
+    background-image: url("../pictures/LeaveCommentResized.png");
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.8;
+}
+
+#UserExp {
+    background-color: white;
+    color: #014779;
+    font-family: Impact;
+}
+
+#Search {
+    background-image: url("../pictures/SearchIconResized.png");
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.8;
+}
+
+#UserExperiences {
+    background-image: url("../pictures/UserExperiences.png");
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.8;
+}
+
+#feedbackModalHeader {
     background-color: lightblue;
     color: white;
 }
 #feedbackModalBody {
     padding-top: 120px;
-    background-color: lightblue;
+    background-color: white;
     color: white;
     font-family: Impact;
-    background-image: url("../pictures/rating.jpg");
 }
 #feedbackModalFooter {
     background-color: lightblue;
@@ -21,4 +94,15 @@ label {
     font-weight: bolder;
     color: white;
     background-color: lightblue;
+}
+.tableBorder {
+    border:hidden;
+    border-width:medium;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    font-family:Impact;
+}
+
+.xx {
+    border-width:thick;
 }

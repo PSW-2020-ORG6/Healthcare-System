@@ -41,3 +41,17 @@
 h6 {
     color: lightblue;
 }
+
+.error {
+    visibility: visible;
+}
+
+.correct {
+    visibility: hidden
+}
+
+.create {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

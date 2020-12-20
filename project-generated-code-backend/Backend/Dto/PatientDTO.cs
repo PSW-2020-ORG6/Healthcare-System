@@ -4,6 +4,7 @@
 // Purpose: Definition of Class PatientDTO
 
 using System;
+using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Util;
 
 namespace HealthClinicBackend.Backend.Dto
@@ -13,6 +14,40 @@ namespace HealthClinicBackend.Backend.Dto
         public PatientDto()
         {
         }
+
+        public PatientDto(Patient patient)
+        {
+            Id = patient.Id;
+            Name = patient.Name;
+            Surname = patient.Surname;
+            DateOfBirth = patient.DateOfBirth;
+            Contact = patient.Contact;
+            Email = patient.Email;
+            Address = new AddressDto(patient.Address);
+            Password = patient.Password;
+            ParentName = patient.ParentName;
+            PlaceOfBirth = patient.PlaceOfBirth;
+            MunicipalityOfBirth = patient.MunicipalityOfBirth;
+            StateOfBirth = patient.StateOfBirth;
+            PlaceOfResidence = patient.PlaceOfResidence;
+            MunicipalityOfResidence = patient.MunicipalityOfResidence;
+            StateOfResidence = patient.StateOfResidence;
+            Citizenship = patient.Citizenship;
+            Nationality = patient.Nationality;
+            Profession = patient.Profession;
+            EmploymentStatus = patient.EmploymentStatus;
+            MaritalStatus = patient.MaritalStatus;
+            HealthInsuranceNumber = patient.HealthInsuranceNumber;
+            FamilyDiseases = patient.FamilyDiseases;
+            PersonalDiseases = patient.PersonalDiseases;
+            Gender = patient.Gender;
+            Image = patient.Image;
+            IsGuest = patient.Guest;
+            EmailConfirmed = patient.EmailConfirmed;
+            ChosenDoctor = patient.ChosenPhysician;
+        }
+
+
 
         public string Name { get; set; }
 
@@ -26,7 +61,7 @@ namespace HealthClinicBackend.Backend.Dto
 
         public string Email { get; set; }
 
-        public Address Address { get; set; }
+        public AddressDto Address { get; set; }
 
         public string Password { get; set; }
 
@@ -78,6 +113,12 @@ namespace HealthClinicBackend.Backend.Dto
                    MunicipalityOfResidence != null && StateOfResidence != null && Profession != null &&
                    EmploymentStatus != null && MaritalStatus != null && Contact != null && Email != null &&
                    Password != null && Gender != null && HealthInsuranceNumber != null;
+        }
+
+        public PatientDto ConvertToPatientDTO(Patient patient)
+        {
+            PatientDto patientDto = new PatientDto(patient);
+            return patientDto;
         }
     }
 }

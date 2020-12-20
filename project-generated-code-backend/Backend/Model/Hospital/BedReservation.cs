@@ -66,7 +66,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
 
         public override string ToString()
         {
-            return "patient: " + Patient.FullName + "\nbed: " + Bed + "\ntime interval: " + TimeInterval;
+            return "patient: " + Patient.Name + " " + Patient.Surname + "\nbed: " + Bed + "\ntime interval: " + TimeInterval;
         }
     }
 }

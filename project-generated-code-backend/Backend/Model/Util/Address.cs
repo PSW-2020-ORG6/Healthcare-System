@@ -4,6 +4,7 @@
 // Purpose: Definition of Class Address
 
 using System.ComponentModel.DataAnnotations.Schema;
+using HealthClinicBackend.Backend.Dto;
 using Newtonsoft.Json;
 
 namespace HealthClinicBackend.Backend.Model.Util
@@ -27,6 +28,11 @@ namespace HealthClinicBackend.Backend.Model.Util
         public Address(string serialNumber, string street) : base(serialNumber)
         {
             Street = street;
+        }
+
+        public Address(AddressDto addressDto)
+        {
+            Street = addressDto.Street;
         }
 
         public override string ToString()

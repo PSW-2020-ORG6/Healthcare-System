@@ -17,15 +17,18 @@ namespace Model.Accounts
 {
     public class Physician : Account
     {
+        
+        private Specialization specialization;
+
         public virtual TimeInterval WorkSchedule { get; set; }
         public virtual List<TimeInterval> VacationTime { get; set; }
         [NotMapped] public virtual List<Specialization> Specialization { get; set; }
-
+        
         public String AllSpecializations
         {
             get { return Specialization.Aggregate("", (current, s) => current + (s + ", ")); }
         }
-
+        
         public Physician() : base()
         {
         }
@@ -33,6 +36,11 @@ namespace Model.Accounts
         public Physician(string name, string surname, string id)
             : base(name, surname, id)
         {
+        }
+        public Physician(string name, string surname)
+            : base(name, surname)
+        {
+            Specialization = new List<Specialization>();
         }
 
         public Physician(string name, string surname, string id, DateTime dateOfBirth, string contact, string email,
@@ -50,6 +58,13 @@ namespace Model.Accounts
         {
             WorkSchedule = new TimeInterval();
             Specialization = specialization ?? new List<Specialization>();
+        }
+
+        public Physician(string name, string surname, Specialization specialization)
+            :base(name,surname)
+        {
+            this.Specialization = new List<Specialization>();
+            Specialization.Add(specialization);
         }
 
         public void AddSpecialization(Specialization newSpecialization)

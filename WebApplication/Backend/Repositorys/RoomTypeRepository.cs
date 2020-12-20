@@ -11,7 +11,7 @@ namespace WebApplication.Backend.Repositorys
         private MySqlConnection connection;
         public RoomTypeRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=newdb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=neynamneynam12");
         }
 
         private List<RoomType> GetRoomTypes(String query)
@@ -47,7 +47,7 @@ namespace WebApplication.Backend.Repositorys
         {
             try
             {
-                return GetRoomTypes("Select * from roomType where SerialNumber='" + serialNumber + "'")[0];
+                return GetRoomTypes("Select * from roomtype where SerialNumber='" + serialNumber + "'")[0];
             }
             catch (Exception e)
             {

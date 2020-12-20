@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
 using WebApplication.Backend.Repositorys;
+using HealthClinicBackend.Backend.Dto;
 
 namespace WebApplication.Backend.Services
 {
@@ -11,6 +12,7 @@ namespace WebApplication.Backend.Services
     public class PatientService
     {
         private PatientRepository patientRepository;
+        private PatientDto patientDTO = new PatientDto();
         public PatientService()
         {
             this.patientRepository = new PatientRepository();
@@ -35,12 +37,19 @@ namespace WebApplication.Backend.Services
         ///<returns>
         ///single instance of Patient object
         ///</returns
-        internal Patient GetPatientById(string patientId)
+        internal PatientDto GetPatientById(string patientId)
         {
-            Patient returnValue = patientRepository.GetPatientById(patientId);
-            returnValue.Address = patientRepository.GetAddress(returnValue.Address.SerialNumber);
-            return returnValue;
+            return patientDTO.ConvertToPatientDTO(patientRepository.GetPatientById(patientId));
         }
 
+        internal List<Patient> GetMaliciousPatients()
+        {
+            return patientRepository.GetMaliciousPatients();
+        }
+
+        internal bool BlockMaliciousPatient(string patientId)
+        {
+            return patientRepository.BlockMaliciousPatient(patientId);
+        }
     }
 }

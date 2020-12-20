@@ -16,6 +16,13 @@ body {
     color: black
 }
 
+#appointments {
+    background-image: url("../pictures/PatientBackgroundV10.jpg");
+    background-repeat: no-repeat;
+    overflow-y: scroll;
+    height: 768px;
+}
+
 p {
     color: dodgerblue;
     font-family: Bitter, sans-serif;
