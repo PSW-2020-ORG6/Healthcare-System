@@ -183,29 +183,29 @@ namespace WebApplication.Backend.Repositorys
             while (sqlReader.Read())
             {
                 Survey entity = new Survey();
-                entity.Question1 = (string) sqlReader[2];
-                entity.Question2 = (string) sqlReader[3];
-                entity.Question3 = (string) sqlReader[4];
-                entity.Question4 = (string) sqlReader[5];
-                entity.Question5 = (string) sqlReader[6];
-                entity.Question6 = (string) sqlReader[7];
-                entity.Question7 = (string) sqlReader[8];
-                entity.Question8 = (string) sqlReader[9];
-                entity.Question9 = (string) sqlReader[10];
-                entity.Question10 = (string) sqlReader[11];
-                entity.Question11 = (string) sqlReader[12];
-                entity.Question12 = (string) sqlReader[13];
-                entity.Question13 = (string) sqlReader[14];
-                entity.Question14 = (string) sqlReader[15];
-                entity.Question15 = (string) sqlReader[16];
-                entity.Question16 = (string) sqlReader[17];
-                entity.Question17 = (string) sqlReader[18];
-                entity.Question18 = (string) sqlReader[19];
-                entity.Question19 = (string) sqlReader[20];
-                entity.Question20 = (string) sqlReader[21];
-                entity.Question21 = (string) sqlReader[22];
-                entity.Question22 = (string) sqlReader[23];
-                entity.Question23 = (string) sqlReader[24];
+                entity.Question1 = (string) sqlReader[3];
+                entity.Question2 = (string) sqlReader[4];
+                entity.Question3 = (string) sqlReader[5];
+                entity.Question4 = (string) sqlReader[6];
+                entity.Question5 = (string) sqlReader[7];
+                entity.Question6 = (string) sqlReader[8];
+                entity.Question7 = (string) sqlReader[9];
+                entity.Question8 = (string) sqlReader[10];
+                entity.Question9 = (string) sqlReader[11];
+                entity.Question10 = (string) sqlReader[12];
+                entity.Question11 = (string) sqlReader[13];
+                entity.Question12 = (string) sqlReader[14];
+                entity.Question13 = (string) sqlReader[15];
+                entity.Question14 = (string) sqlReader[16];
+                entity.Question15 = (string) sqlReader[17];
+                entity.Question16 = (string) sqlReader[18];
+                entity.Question17 = (string) sqlReader[19];
+                entity.Question18 = (string) sqlReader[20];
+                entity.Question19 = (string) sqlReader[21];
+                entity.Question20 = (string) sqlReader[22];
+                entity.Question21 = (string) sqlReader[23];
+                entity.Question22 = (string) sqlReader[24];
+                entity.Question23 = (string) sqlReader[25];
                 entity.ReportDate = Convert.ToDateTime(sqlReader[26]);
                 resultList.Add(entity);
             }
@@ -226,7 +226,7 @@ namespace WebApplication.Backend.Repositorys
         public List<StatisticAuxilaryClass> getStatisticsForDoctor(string doctorId)
         {
             List<Survey> reports = new List<Survey>();
-            reports = GetSurveys("Select * from survey where DoctorName = '" + doctorId + "' ");
+            reports = GetSurveys("Select * from survey where DoctorName like '" + doctorId + "' ");
 
             List<StatisticAuxilaryClass> statistics = new List<StatisticAuxilaryClass>();
             for (int i = 0; i < 5; i++)
