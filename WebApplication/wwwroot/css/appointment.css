@@ -49,3 +49,9 @@ h6 {
 .correct {
     visibility: hidden
 }
+
+.create {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
