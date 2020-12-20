@@ -63,10 +63,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
         }
 
-        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        // { 
-        //     optionsBuilder.UseNpgsql(CONNECTION_STRING);
-        // }
+         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+         { 
+             optionsBuilder.UseNpgsql(CONNECTION_STRING);
+         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -111,7 +111,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Physician>().HasOne(p => p.Address).WithMany();
             modelBuilder.Entity<Patient>().HasOne(p => p.Address).WithMany();
             modelBuilder.Entity<Secretary>().HasOne(s => s.Address).WithMany();
-            /*
+            
             modelBuilder.Entity<Appointment>()
                 .HasOne(a => a.Patient)
                 .WithMany();
@@ -124,7 +124,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Appointment>()
                 .HasOne(a => a.Room)
                 .WithMany();
-*/
+
             // Relation helpers are used for many-to-many relations
             modelBuilder.Entity<PhysicianSpecialization>()
                 .HasKey("PhysicianSerialNumber", "SpecializationSerialNumber");

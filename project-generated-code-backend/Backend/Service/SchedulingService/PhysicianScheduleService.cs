@@ -23,7 +23,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         public PhysicianScheduleService(Physician loggedPhysician)
         {
             _loggedPhysician = loggedPhysician;
-            //_appointmentRepository = new AppointmentDatabaseSql();
+            _appointmentRepository = new AppointmentDatabaseSql();
         }
 
         public void NewAppointment(AppointmentDto appointmentDto)
@@ -40,9 +40,9 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
 
         public Appointment GetTodaysAppointmentForPatient(Patient patient)
         {
-            //List<Appointment> appointments = _appointmentRepository.GetAppointmentsByPhysician(_loggedPhysician);
-            //return appointments.FirstOrDefault(appointment =>
-            //    appointment.Date.Equals(DateTime.Today) && appointment.Patient.Equals(patient));
+            List<Appointment> appointments = _appointmentRepository.GetAppointmentsByPhysician(_loggedPhysician);
+            return appointments.FirstOrDefault(appointment =>
+                appointment.Date.Equals(DateTime.Today) && appointment.Patient.Equals(patient));
             return null;
         }
 

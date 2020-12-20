@@ -41,7 +41,7 @@ namespace WebApplicationTests
         public static IEnumerable<object[]> AppointmentDate =>
             new List<object[]>
             {
-                    new object[] { "60001","surgerion","2020-12-25" ,HttpStatusCode.OK },
+                    new object[] { "60001","surgeon","2020-12-25" ,HttpStatusCode.OK },
                     new object[] { null,null,null,HttpStatusCode.BadRequest }
             };
 

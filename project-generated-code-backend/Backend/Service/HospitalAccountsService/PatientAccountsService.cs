@@ -42,10 +42,10 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
             List<Appointment> patientAppointments = _appointmentRepository.GetAppointmentsByPatient(patient);
             foreach (Appointment appointment in patientAppointments)
             {
-                //if (appointment.Physician.Equals(physician))
-                //{
-                //    return true;
-                //}
+                if (appointment.Physician.Equals(physician))
+                {
+                    return true;
+                }
             }
             return false;
         }
