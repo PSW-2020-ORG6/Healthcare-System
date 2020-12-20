@@ -1,6 +1,7 @@
 ﻿Vue.component("patient", {
 	data: function () {
 		return {
+			patientDTO: null,
 			idPatient: "0002",
 			approvedFeedbacks: null,
 			noapprovedFeedbacks: null,
@@ -14,8 +15,7 @@
 				date: new Date().now,
 				patientId: "0002"
 			},
-			appointment: null,
-			patientDTO: null
+			appointment: null			
 		}
 	},
 	beforeMount() {
@@ -23,7 +23,6 @@
 			.get('http://localhost:49900/patient/getPatientById', { params: { patientId: "0002" } })
 			.then(response => {
 				this.patientDTO = response.data
-
 			})
 			.catch(error => {
 				alert("Please add patient with id number : 0002")
@@ -66,13 +65,53 @@
 			})
 	},
 	template: `
-	<div>
+	<div id="Patient">
+	
+			<br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <!--ICONS-->
+            <div>
+              <div class="row">
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                  <h3>
+			        <button id="MyInformations" type="button" class="btn btn-info btn-lg margin form-control" data-toggle="modal" data-target="#registrationInfo"></button>
+			        </h3><br/> 
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                  <h3>
+			        <button id="LeaveComment" type="button" class="btn btn-info btn-lg margin form-control" data-toggle="modal" data-target="#CommentModal"></button>
+			        </h3><br/> 
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                  <h3>
+			        <button id="UserExperiences" type="button" class="btn btn-info btn-lg margin form-control" data-toggle="modal" data-target="#FeedbacksModal"></button>
+			        </h3><br/> 
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                </div>  
+                <div class="col-sm">
+                </div>
+              </div>
+            </div>
 
 <!-- Registration Info -->
-
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrationInfo">
-			  My Informations
-			</button>
 
 			<div class="modal fade" id="registrationInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
 			  <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -260,8 +299,9 @@
 	
 	<!--END registration info modal-->
 
+	<!-- Leave Comment -->
 		<div>
-			<div class="modal fade" tabindex="-1" role="dialog" id="feedbackModal">
+			<div class="modal fade" tabindex="-1" role="dialog" id="CommentModal">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header" id="feedbackModalHeader">
@@ -285,40 +325,52 @@
 				</div>
 			</div>  
 		</div>
-		<div class="container"><br/>
-			<h3 class="text">Comments
-				<button type="button" class="btn btn-info btn-lg margin" data-toggle="modal" data-target="#feedbackModal">Add comment</button>
-			</h3><br/>
-			<h3 class="textSurvey">
-				<button type="button" class="btn btn-info btn-lg margin" data-toggle="modal" v-on:click="SurveyShow()"">Take survey</button>
-			</h3><br/> 
-			<div>
-				<div class="tab-content">
-    				<div id="profil" class="container tab-pane active"><br>
-    					<div class="container">
-							<div class="row">
-								<table class="table table-bordered tableBorder" style="width:500px;height:400px" Align = "center">
-									<tbody>
-										<tr v-for="a in approvedFeedbacks" class="xx">
-                                            <template v-for="p in patients">
-                                            <td v-if="parseInt(a.patientId) != -1 && parseInt(p.id) == parseInt(a.patientId)">{{p.name}} {{p.surname}}
-                                            &nbsp&nbsp&nbsp&nbsp {{DateSplit(a.date)}}</br></br>
-                                            {{a.text}}</td>
-											</template>
-											<td v-if="parseInt(a.patientId) == -1">Anonimous
-                                            <!--<template v-if="parseInt(a.patientId) == -1">Anonimous</template>-->
-                                             &nbsp&nbsp&nbsp&nbsp {{DateSplit(a.date)}}</br></br>
-                                            {{a.text}}</td>
+<!--END Leave Comment -->
+
+<!--User feedbacks -->
+		<div>
+			<div class="modal fade" tabindex="-1" role="dialog" id="FeedbacksModal">
+				<div class="modal-dialog  modal-xl" role="document">
+					<div class="modal-content">
+						<div class="modal-header" id="feedbackModalHeader">
+							<h5 class="modal-title">User experiences</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body" id="feedbackModalBody">
+								<div class="tab-content" >
+											<div class="row" >
+												<table class="table table-bordered tableBorder" style="width:500px;height:400px" Align = "center" id="UserExp">
+													<tbody>
+														<tr v-for="a in approvedFeedbacks" class="xx">
+															<template v-for="p in patients">
+															<td v-if="parseInt(a.patientId) != -1 && parseInt(p.id) == parseInt(a.patientId)">{{p.name}} {{p.surname}}
+															&nbsp&nbsp&nbsp&nbsp {{DateSplit(a.date)}}</br></br>
+															{{a.text}}</td>
+															</template>
+															<td v-if="parseInt(a.patientId) == -1">Anonimous
+															<!--<template v-if="parseInt(a.patientId) == -1">Anonimous</template>-->
+												&nbsp&nbsp&nbsp&nbsp {{DateSplit(a.date)}}</br></br>
+											{{a.text}}</td>
                                         </tr>
 									</tbody>
-								</table>
+								</table>	
+									</div>
+								</div>
 							</div>
-						</div>		
+						</div>
+						<div class="modal-footer" id="feedbackModalFooter">
+							<button type="button" class="btn btn-info btn-lg " data-dismiss="modal">Cancel</button>
+						</div>
 					</div>
 				</div>
-			</div>
+			</div>  
 		</div>
+<!--END User comments -->
+
 	</div>
+
 	`,
 	methods: {
 		AddNewFeedback: function (feedback) {
