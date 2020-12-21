@@ -1,14 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using WebApplication.Backend.Repositorys.Interfaces;
-using WebApplication.Backend.Util;
-using HealthClinicBackend.Backend.Dto;
-using NPOI.SS.Formula.Functions;
-using HealthClinicBackend.Backend.Model.Util;
-using Model.Accounts;
-using HealthClinicBackend.Backend.Dto;
-using HealthClinicBackend.Backend.Model.Util;
 
 namespace WebApplication.Backend.Repositorys
 {
@@ -50,6 +44,7 @@ namespace WebApplication.Backend.Repositorys
         {
             return _appointmentRepository.GetByPatientId(patientId);
         }
+
         public List<Appointment> GetAllAppointmentsByPatientIdActive(string patientId)
         {
             return _appointmentRepository.GetByPatientIdActive(patientId);
@@ -60,24 +55,71 @@ namespace WebApplication.Backend.Repositorys
             return _appointmentRepository.GetByPatientIdCanceled(patientId);
         }
 
+        public List<Appointment> GetAllAppointmentsByPatientIdPast(string patientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsSurveyDoneByPatientIdAppointmentDatePhysicianName(string patientId, string appointmentDate,
+            string physicianName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetSurveyDoneOnAppointment(string patientId, string appointmentDate, string physicianName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Appointment> GetAllAppointmentsWithoutSurvey()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Appointment> GetAllAppointmentsWithSurvey()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CancelAppointment(string appointmentSerialNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<DateTime> GetCancelingDates(string id)
+        {
+            throw new NotImplementedException();
+        }
+
 
         public bool SetUserToMalicious(string patientId)
         {
-            try
-            {
-                connection.Open();
-                String sqlDml = "UPDATE patient SET IsMalicious = '1'  WHERE id like '" + patientId + "'";
-                MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
-                sqlCommand.ExecuteNonQuery();
-
-                connection.Close();
-                return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
+            // TODO: move this logic to service and call patient repository
+            return true;
+            // try
+            // {
+            //     connection.Open();
+            //     String sqlDml = "UPDATE patient SET IsMalicious = '1'  WHERE id like '" + patientId + "'";
+            //     MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            //     sqlCommand.ExecuteNonQuery();
+            //
+            //     connection.Close();
+            //     return true;
+            // }
+            // catch (Exception e)
+            // {
+            //     return false;
+            // }
         }
 
+        public List<Appointment> GetAppointmentsByDate(string date)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddAppointment(Appointment appointment)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

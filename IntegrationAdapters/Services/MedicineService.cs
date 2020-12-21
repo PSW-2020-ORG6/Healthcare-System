@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthClinicBackend.Backend.Model.PharmacySupport;
 
 namespace IntegrationAdapters.Services
 {
@@ -19,22 +20,27 @@ namespace IntegrationAdapters.Services
         {
             this.medicineRepository = new MedicineRepository();
         }
+
         public MedicineService(IMedicineRepository imedicineRepository)
         {
             this.medicineRepository = imedicineRepository;
         }
-        public List<Medicine> GetAll()
+
+        public List<MedicinePharmacy> GetAll()
         {
             return medicineRepository.GetAll();
         }
-        public MedicinePharmacy GetMedicineByID(String ID)
+
+        public MedicinePharmacy GetByID(String id)
         {
-            return medicineRepository.GetByID(ID);
+            return medicineRepository.GetAll().Find(m => m.MedicineID.Equals(id));
         }
+
         public MedicinePharmacy GetMedicineByName(String Name)
         {
             return medicineRepository.GetByName(Name);
         }
+
         public void AddMedicine()
         {
             medicineRepository.AddMedicineRepository();
@@ -48,16 +54,15 @@ namespace IntegrationAdapters.Services
                 {
                     return ms;
                 }
-
             }
+
             return null;
-            
         }
+
         public List<MedicineSpecification> GetAllSpecifications()
         {
             return medicineRepository.GetAllSpecifications();
         }
-    
 
 
         private string GeneratePrescriptionString(PrescriptionDTO prescription)
@@ -76,7 +81,7 @@ namespace IntegrationAdapters.Services
             SftpService sftpService = new SftpService();
             var fileName = GeneratePrescriptionFileName();
             System.IO.File.WriteAllText(fileName, string.Empty);
-            TextWriter tw = new StreamWriter(fileName);       
+            TextWriter tw = new StreamWriter(fileName);
             tw.WriteLine(GeneratePrescriptionString(prescription));
             tw.Close();
             sftpService.SendFile(fileName);
@@ -88,9 +93,9 @@ namespace IntegrationAdapters.Services
         {
             var fileName = GenerateSpecificationFileName(medicineName);
             System.IO.File.WriteAllText(fileName, string.Empty);
-            
+
             TextWriter tw = new StreamWriter(fileName);
-            
+
             tw.WriteLine(responseText);
             tw.Close();
             Process.Start("notepad.exe", fileName);
@@ -103,13 +108,12 @@ namespace IntegrationAdapters.Services
 
             TextWriter tw = new StreamWriter(fileName);
 
-            Medicine medicine = GetMedicineByName(medicineName);
+            MedicinePharmacy medicine = GetMedicineByName(medicineName);
             MedicineSpecification medicineSpecification = GetById(medicine.MedicineSpecificationID);
 
             tw.WriteLine(GenerateSpecificationString(medicineSpecification));
             tw.Close();
             Process.Start("notepad.exe", fileName);
-
         }
 
         private string GenerateSpecificationString(MedicineSpecification medicineSpecification)
@@ -121,7 +125,8 @@ namespace IntegrationAdapters.Services
             result += "Shape: " + medicineSpecification.Shape + "\n";
             return result;
         }
-        public bool DoesMedicineExist(Medicine medicine)
+
+        public bool DoesMedicineExist(MedicinePharmacy medicine)
         {
             return medicineRepository.DoesMedicineExist(medicine);
         }
@@ -137,10 +142,9 @@ namespace IntegrationAdapters.Services
             return "Prescription " + DateTime.Now.ToString("yyyy-MM-dd") + ".txt";
         }
 
-        public Medicine DoesMedicineExist(string medicineName)
+        public MedicinePharmacy DoesMedicineExist(string medicineName)
         {
             return GetMedicineByName(medicineName);
         }
-       
     }
 }

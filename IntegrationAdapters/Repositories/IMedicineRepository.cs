@@ -12,10 +12,10 @@ namespace IntegrationAdapters.Repositories
     {
         public List<MedicinePharmacy> GetAll();
         void AddMedicineRepository();
-        public Medicine GetByName(String Name);
+        public MedicinePharmacy GetByName(String Name);
 
         public MedicineSpecification GetById(string id);
         public List<MedicineSpecification> GetAllSpecifications();
-        public bool DoesMedicineExist(Medicine medicine);
+        public bool DoesMedicineExist(MedicinePharmacy medicine);
     }
 }

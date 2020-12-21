@@ -21,6 +21,11 @@ namespace WebApplication.Backend.Repositorys
             return _physicianRepository.GetAll();
         }
 
+        public List<Physician> GetAllPhysicians()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Physician> GetPhysiciansByName(string name)
         {
             return _physicianRepository.GetByName(name);
@@ -32,14 +37,21 @@ namespace WebApplication.Backend.Repositorys
             return new List<Physician>();
         }
 
+        public Physician GetPhysicianBySerialNumber(string serialNumber)
+        {
+            throw new NotImplementedException();
+        }
+
         public Physician GetPhysicianById(string id)
         {
-            return _physicianRepository.GetById(serialNumber);
+            return _physicianRepository.GetById(id);
         }
 
         public List<Physician> GetPhysicianBySpecialization(string specializationName, string physicianId)
         {
-            return _physicianRepository.GetByJmbg(id);
+            // TODO: return real values
+            return new List<Physician>();
+            // return _physicianRepository.GetByJmbg(physicianId);
         }
     }
 }

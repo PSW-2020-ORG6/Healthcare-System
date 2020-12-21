@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthClinicBackend.Backend.Model.PharmacySupport;
 using IntegrationAdapters.Models;
 using IntegrationAdapters.Services;
 using Microsoft.AspNetCore.Hosting;
@@ -27,9 +28,9 @@ namespace IntegrationAdapters.Controllers
 
         public FileTransferController(IWebHostEnvironment env)
         {
-            this.sftpService = new SftpService();
-            this.httpFTService = new HttpFTService();
-            this.medicineReportService = new MedicineReportService();
+            sftpService = new SftpService();
+            httpFTService = new HttpFTService();
+            medicineReportService = new MedicineReportService();
             this.env = env;
         }
 

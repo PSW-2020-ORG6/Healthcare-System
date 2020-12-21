@@ -25,14 +25,15 @@ namespace IntegrationAdapters.Controllers
 
         public MedicineController()
         {
-            this.medicineService = new MedicineService();
-            this.grpcService = new ClientScheduleService();
-            this.grpcResponseService = new NetGrpcServiceImpl();
+            medicineService = new MedicineService();
+            grpcService = new ClientScheduleService();
+            grpcResponseService = new NetGrpcServiceImpl();
         }
+
         [HttpGet("getMedicineSpecification/{medicineName}")]
         public IActionResult GetMedicineSpeification(string medicineName)
         {
-            Medicine medicine = medicineService.DoesMedicineExist(medicineName);
+            MedicinePharmacy medicine = medicineService.DoesMedicineExist(medicineName);
             if (medicine != null)
             {
                 medicineService.GenerateSpecificationFromHospital(medicineName);
@@ -66,8 +67,6 @@ namespace IntegrationAdapters.Controllers
             {
                 return BadRequest();
             }
-
-
         }
 
         [HttpGet("getPharmacies/{medicineName}/{quantity}")]
@@ -89,13 +88,12 @@ namespace IntegrationAdapters.Controllers
         private bool IsResponseValid(string text)
         {
             return text.Length != 0;
-
         }
 
         private string GenerateResponse(string endPoint)
         {
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(endPoint);
-            HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
+            HttpWebRequest webRequest = (HttpWebRequest) WebRequest.Create(endPoint);
+            HttpWebResponse webResponse = (HttpWebResponse) webRequest.GetResponse();
             Stream receiveStream = webResponse.GetResponseStream();
             Encoding encode = System.Text.Encoding.GetEncoding("utf-8");
             StreamReader readStream = new StreamReader(receiveStream, encode);
@@ -115,5 +113,5 @@ namespace IntegrationAdapters.Controllers
         {
             return Ok(Program.ResponseMessageGrpc);
         }
-    }   
-} 
+    }
+}

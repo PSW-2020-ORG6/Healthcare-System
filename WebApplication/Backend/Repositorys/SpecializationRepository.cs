@@ -18,18 +18,6 @@ namespace WebApplication.Backend.Repositorys
         {
             return new List<Specialization>();
         }
-        public List<Specialization> GetSpecializationsByPhysicianSerialNumber(string serialNumber)
-        {
-            try
-            {
-                return GetSpecializations("Select * from specialization where PhysicianSerialNumber like '" + serialNumber + "'");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
-        }
 
         public string GetSpecializationsNameBySerialNumber(string serialNumber)
         {
@@ -40,22 +28,15 @@ namespace WebApplication.Backend.Repositorys
         {
             return _specializationRepository.GetById(serialNumber);
         }
-       
+
         public List<Specialization> GetSpecializationByName(string name)
         {
             return _specializationRepository.GetByName(name);
         }
+
         public List<Specialization> GetAllSpecializations()
         {
-            try
-            {
-                return GetSpecializations("Select * from specialization");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
+            return _specializationRepository.GetAll();
         }
     }
 }

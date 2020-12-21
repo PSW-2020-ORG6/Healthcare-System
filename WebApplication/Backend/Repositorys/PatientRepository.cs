@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using WebApplication.Backend.Repositorys.Interfaces;
-using HealthClinicBackend.Backend.Dto;
 
 namespace WebApplication.Backend.Repositorys
 {
@@ -78,6 +78,19 @@ namespace WebApplication.Backend.Repositorys
         public Address GetAddress(string adressId)
         {
             return _addressRepository.GetById(adressId);
+        }
+
+        public List<Patient> GetMaliciousPatients()
+        {
+            return GetAllPatients().Where(p => p.IsMalicious).ToList();
+        }
+
+        public bool BlockMaliciousPatient(string patientId)
+        {
+            var patient = GetPatientById(patientId) ?? GetPatientBySerialNumber(patientId);
+            patient.IsBlocked = true;
+            _patientRepository.Update(patient);
+            return true;
         }
     }
 }
