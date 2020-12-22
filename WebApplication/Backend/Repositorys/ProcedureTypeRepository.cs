@@ -15,7 +15,7 @@ namespace WebApplication.Backend.Repositorys
 
         public ProcedureTypeRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=neynamneynam12");
         }
 
         private List<ProcedureType> GetProcedureTypes(String query)
