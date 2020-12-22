@@ -9,18 +9,13 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Repository.Generic;
 using WebApplication.Backend.Controllers;
 using WebApplication.Backend.Model;
 using WebApplication.Backend.Repositorys;
 using WebApplication.Backend.Repositorys.Interfaces;
 using WebApplication.Backend.Services;
-using IAppointmentRepository = HealthClinicBackend.Backend.Repository.Generic.IAppointmentRepository;
 using IPatientRepository = HealthClinicBackend.Backend.Repository.Generic.IPatientRepository;
-using IPrescriptionRepository = HealthClinicBackend.Backend.Repository.Generic.IPrescriptionRepository;
-using IReportRepository = HealthClinicBackend.Backend.Repository.Generic.IReportRepository;
-using ISurveyRepository = HealthClinicBackend.Backend.Repository.Generic.ISurveyRepository;
 
 namespace WebApplication
 {
@@ -38,19 +33,15 @@ namespace WebApplication
         {
             services.AddControllers();
 
-            IConfiguration conf = Configuration.GetSection("DataBaseConnectionSettings");
-            DataBaseConnectionSettings dataBaseConnectionSettings = conf.Get<DataBaseConnectionSettings>();
-
-            Console.WriteLine($"Connection string: {dataBaseConnectionSettings.ConnectionString}");
-
+        
             services.AddDbContext<HealthCareSystemDbContext>(options =>
             {
                 // options.UseNpgsql(
                 //     dataBaseConnectionSettings.ConnectionString);
                 options.UseNpgsql(
-                    dataBaseConnectionSettings.ConnectionString,
-                    x => x.MigrationsAssembly("Backend").EnableRetryOnFailure(dataBaseConnectionSettings.RetryCount,
-                        new TimeSpan(0, 0, 0, dataBaseConnectionSettings.RetryWaitInSeconds), new List<string>())
+                    CreateConnectionStringFromEnvironment(),
+                    x => x.MigrationsAssembly("Backend").EnableRetryOnFailure(5,
+                        new TimeSpan(0, 0, 0, 30), new List<string>())
                 );
             });
 
@@ -59,29 +50,9 @@ namespace WebApplication
 
             services.AddScoped<IPhysicianRepository, PhysicianDatabaseSql>();
             services.AddScoped<IPatientRepository, PatientDatabaseSql>();
-            services.AddScoped<IAppointmentRepository, AppointmentDatabaseSql>();
-            services.AddScoped<IFeedbackRepository, FeedbackDatabaseSql>();
-            services.AddScoped<IPatientRepository, PatientDatabaseSql>();
-            services.AddScoped<IPrescriptionRepository, PrescriptionDatabaseSql>();
-            services.AddScoped<IReportRepository, ReportDatabaseSql>();
-            services.AddScoped<ISurveyRepository, SurveyDatabaseSql>();
-
             services.AddScoped<IRegistrationRepository, RegistrationRepository>();
-
             services.AddScoped<IRegistrationService, RegistrationService>();
-            services.AddScoped<AppointmentsService, AppointmentsService>();
-            services.AddScoped<FeedbackService, FeedbackService>();
-            services.AddScoped<PatientService, PatientService>();
-            services.AddScoped<PrescriptionService, PrescriptionService>();
-            services.AddScoped<RegistrationService, RegistrationService>();
-            services.AddScoped<ReportService, ReportService>();
-            services.AddScoped<SurveyService, SurveyService>();
-
             services.AddScoped<RegistrationController, RegistrationController>();
-            services.AddScoped<AppointmentController, AppointmentController>();
-            services.AddScoped<FeedbackController, FeedbackController>();
-            services.AddScoped<SurveyController, SurveyController>();
-            services.AddScoped<UserController, UserController>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -94,12 +65,32 @@ namespace WebApplication
 
             using (var scope = app.ApplicationServices.CreateScope())
             using (var context = scope.ServiceProvider.GetService<HealthCareSystemDbContext>())
+            //using (var controller = scope.ServiceProvider.GetService<RegistrationController>())
             {
-                Console.WriteLine("Patients");
-                foreach (var patient in context.Patient)
+                Console.WriteLine("Connecting to db");
+                foreach (var medicineManufacturer in context.MedicineManufacturer)
                 {
-                    Console.WriteLine($"{patient.Name} {patient.Id}");
+                    Console.WriteLine(medicineManufacturer.Name);
                 }
+            
+                Console.WriteLine("Loading physicians");
+                foreach (var physician in context.Physician)
+                {
+                    Console.WriteLine($"{physician.Name} {physician.Surname}");
+                }
+
+                /*if (controller == null)
+                {
+                    Console.WriteLine("Controller is null");
+                }
+                else
+                {
+                    Console.WriteLine("Loading physicians");
+                    foreach (var physician in controller.GetAllGeneralPractitioners())
+                    {
+                        Console.WriteLine($"{physician.Name} {physician.Surname} {physician.Specialization}");
+                    }
+                }*/
 
                 // try
                 // {
@@ -120,6 +111,18 @@ namespace WebApplication
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
             app.UseDefaultFiles();
             app.UseStaticFiles();
+        }
+
+        private string CreateConnectionStringFromEnvironment()
+        {
+            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
+            string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "5432";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "healthcare-system-db";
+            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "user";
+            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "password";
+            string str = "User ID =postgres;Password=super;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
+
+            return $"userid={user};server={server};port={port};database={database};password={password};";
         }
     }
 }

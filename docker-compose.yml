@@ -3,7 +3,6 @@ version: "3.8"
 services:
   postgres:
     image: postgres:13.1
-    restart: always
     environment:
       POSTGRES_PASSWORD: "password"
       POSTGRES_USER: "user"
@@ -12,6 +11,10 @@ services:
       - "5432:5432"
     networks: 
       - network
+    volumes:
+      - sql-scripts:/docker-entrypoint-initdb.d/
+      - data:/var/lib/postgresql/data
+    
 
 
   rabbit:
@@ -28,21 +31,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.integration_adapters
-    restart: on-failure
     ports:
       - 8080:8080
     networks: 
       - network
-    restart: on-failure
     environment:
       RABBITMQ_HOST: rabbit
       RABBITMQ_USERNAME: guest
       RABBITMQ_PASSOWRD: guest
-      DataBaseConnectionSettings:Host: "postgres"
-      DataBaseConnectionSettings:Port: "5432"
-      DataBaseConnectionSettings:User: "user"
-      DataBaseConnectionSettings:Database: "healthcare-system-db"
-      DataBaseConnectionSettings:Password: "password"
+      DATABASE_HOST: "postgres"
       DataBaseConnectionSettings:RetryCount: 100
       DataBaseConnectionSettings:RetryWaitInSeconds: 30
     depends_on:
@@ -55,7 +52,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.web_application
-    restart: on-failure
     ports:
       - 5000:8080
     networks: 
@@ -64,19 +60,18 @@ services:
       RABBITMQ_HOST: rabbit
       RABBITMQ_USERNAME: guest
       RABBITMQ_PASSOWRD: guest
-      DataBaseConnectionSettings:Host: "postgres"
-      DataBaseConnectionSettings:Port: "5432"
-      DataBaseConnectionSettings:User: "user"
-      DataBaseConnectionSettings:Database: "healthcare-system-db"
-      DataBaseConnectionSettings:Password: "password"
+      DATABASE_HOST: "postgres"
       DataBaseConnectionSettings:RetryCount: 100
       DataBaseConnectionSettings:RetryWaitInSeconds: 30
-
+    volumes:
+      - sql-scripts:/app/sql
     depends_on:
       - rabbit
       - postgres
 
-
+volumes:
+  sql-scripts:
+  data:
 
 networks:
   network:
