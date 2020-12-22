@@ -9,6 +9,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class PatientDatabaseSql : GenericDatabaseSql<Patient>, IPatientRepository
     {
+        public PatientDatabaseSql() : base()
+        {
+        }
+
         public PatientDatabaseSql(HealthCareSystemDbContext context) : base(context)
         {
         }

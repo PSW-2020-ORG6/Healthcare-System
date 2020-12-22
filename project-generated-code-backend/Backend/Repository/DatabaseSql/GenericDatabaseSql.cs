@@ -2,18 +2,27 @@
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Npgsql;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class GenericDatabaseSql<T> : IGenericRepository<T> where T : Entity
     {
-        // private const string CONNECTION_STRING =
-        //     "User ID =postgres;Password=super;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
+        private const string CONNECTION_STRING =
+            "User ID =postgres;Password=super;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
         // private const string CONNECTION_STRING =
         // "server=localhost;port=3306;database=newdb;user=root;password=root";
 
         protected HealthCareSystemDbContext dbContext;
+
+        protected GenericDatabaseSql()
+        {
+            var options = new DbContextOptionsBuilder<HealthCareSystemDbContext>()
+                .UseNpgsql(CONNECTION_STRING)
+                .Options;
+            dbContext = new HealthCareSystemDbContext(options);
+        }
 
         protected GenericDatabaseSql(HealthCareSystemDbContext context)
         {

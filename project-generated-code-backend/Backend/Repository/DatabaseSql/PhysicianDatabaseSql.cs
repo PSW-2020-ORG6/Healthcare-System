@@ -11,9 +11,14 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class PhysicianDatabaseSql : GenericDatabaseSql<Physician>, IPhysicianRepository, IDisposable
     {
-        public PhysicianDatabaseSql(HealthCareSystemDbContext context): base(context)
+        public PhysicianDatabaseSql() : base()
         {
         }
+
+        public PhysicianDatabaseSql(HealthCareSystemDbContext context) : base(context)
+        {
+        }
+
         public override List<Physician> GetAll()
         {
             // Use Include method to connect object and its references from other tables
@@ -66,7 +71,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public void Dispose()
         {
-            
         }
     }
 }

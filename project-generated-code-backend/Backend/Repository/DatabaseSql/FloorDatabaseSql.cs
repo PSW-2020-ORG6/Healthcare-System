@@ -8,6 +8,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class FloorDatabaseSql : GenericDatabaseSql<Floor>, IFloorRepository
     {
+        public FloorDatabaseSql() : base()
+        {
+            
+        }
         public FloorDatabaseSql(HealthCareSystemDbContext context) : base(context)
         {
         }

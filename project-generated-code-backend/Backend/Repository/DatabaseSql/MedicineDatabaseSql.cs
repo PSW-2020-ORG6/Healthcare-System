@@ -8,6 +8,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class MedicineDatabaseSql : GenericDatabaseSql<Medicine>, IMedicineRepository
     {
+        public MedicineDatabaseSql() : base()
+        {
+        }
+
         public MedicineDatabaseSql(HealthCareSystemDbContext context) : base(context)
         {
         }

@@ -8,6 +8,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class SecretaryDatabaseSql : GenericDatabaseSql<Secretary>, ISecretaryRepository
     {
+        public SecretaryDatabaseSql() : base()
+        {
+        }
+
         public SecretaryDatabaseSql(HealthCareSystemDbContext context) : base(context)
         {
         }
