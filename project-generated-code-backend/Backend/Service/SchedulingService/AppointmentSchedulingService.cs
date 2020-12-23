@@ -20,6 +20,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
     {
         public SchedulingStrategy SchedulingStrategyContext;
         private readonly AppointmentGeneralitiesManager _appointmentGeneralitiesManager;
+        private SchedulingStrategy _appointmentStrategy;
 
         private IPhysicianRepository _physicianRepository;
 
@@ -52,6 +53,56 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
                 SchedulingStrategyContext.PrepareAppointment(appointmentPreferences);
             return _appointmentGeneralitiesManager.GetAllAvailableAppointments(preparedAppointmentPreferences);
         }
+        public List<AppointmentDto> GetAvailableAppointmentsGEA(AppointmentDto appointmentPreferences, int priority)
+        {
+            List<AppointmentDto> appointments = new List<AppointmentDto>();
+            List<Physician> physicians = _physicianRepository.GetAll();
+            int physicianIndex = 0;
+            bool firstTime = true;
+            do
+            {
+                appointments = _appointmentGeneralitiesManager.GetAllAvailableAppointmentsGEA(appointmentPreferences);
+                if (appointments == null || appointments.Count == 0)
+                {
+                    if (priority == 0) //doctor is priority
+                    {
+                        if(!firstTime)
+                        {
+                            appointmentPreferences.Date.AddDays(1);
+                            appointmentPreferences.Time.Start.Date.AddDays(1);
+                            appointmentPreferences.Time.End.Date.AddDays(1);
+                        }
+                        else
+                        {
+                            firstTime = false;
+                        }
+                        appointmentPreferences.Time.Start = new DateTime(appointmentPreferences.Time.Start.Year,
+                                                                        appointmentPreferences.Time.Start.Month,
+                                                                        appointmentPreferences.Time.Start.Day,
+                                                                        0, 0, 0);
+                        appointmentPreferences.Time.End = new DateTime(appointmentPreferences.Time.Start.Year,
+                                                                        appointmentPreferences.Time.Start.Month,
+                                                                        appointmentPreferences.Time.Start.Day,
+                                                                        23, 59, 59);
+                    }
+                    else
+                    {
+                        if( physicianIndex < physicians.Count )
+                        {
+                            appointmentPreferences.Physician = physicians[physicianIndex];
+                            physicianIndex++;
+                        }
+                        else
+                        {
+                            priority = 0;
+                        }
+                    }
+                }
+            } while (appointments.Count == 0 );
+            
+            return appointments;
+        }
+
 
         public AppointmentDto FindNearestAppointment(AppointmentDto appointmentPreferences)
         {

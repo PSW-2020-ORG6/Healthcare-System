@@ -15,6 +15,9 @@ using System.Windows.Controls;
 
 namespace GraphicEditor.View.UserControls
 {
+    /// <summary>
+    /// Interaction logic for Appointment.xaml
+    /// </summary>
     public partial class Appointment : Window, INotifyPropertyChanged
     {
         public List<Physician> physicians = new List<Physician>();
@@ -35,6 +38,7 @@ namespace GraphicEditor.View.UserControls
             set
             {
                 physicians = value;
+                // Call OnPropertyChanged whenever the property is updated
                 OnPropertyChanged();
             }
         }
@@ -45,6 +49,7 @@ namespace GraphicEditor.View.UserControls
             set
             {
                 patients = value;
+                // Call OnPropertyChanged whenever the property is updated
                 OnPropertyChanged();
             }
         }
@@ -55,6 +60,7 @@ namespace GraphicEditor.View.UserControls
             set
             {
                 rooms = value;
+                // Call OnPropertyChanged whenever the property is updated
                 OnPropertyChanged();
             }
         }
@@ -64,6 +70,7 @@ namespace GraphicEditor.View.UserControls
             set
             {
                 myTime = value;
+                // Call OnPropertyChanged whenever the property is updated
                 OnPropertyChanged();
             }
         }
@@ -117,7 +124,7 @@ namespace GraphicEditor.View.UserControls
         private void GetAllTermins(object sender, RoutedEventArgs e)
         {
             AppointmentDto appointmentDto = new AppointmentDto();
-            //TODO set components here
+            //setuj ovde !!!
 
             string[] s = ComboBox.Text.Split(":");
             string[] s2 = ComboBox2.Text.Split(":");
@@ -137,44 +144,24 @@ namespace GraphicEditor.View.UserControls
 
             DateTime dateTime2 = new DateTime(dateTime.Value.Year, dateTime.Value.Month, dateTime.Value.Day
                 , Int32.Parse(s2[0]), Int32.Parse(s2[1]), 0);
+            //validate if something is null
             appointmentDto.Time = new TimeInterval(dateTime1, dateTime2);
             appointmentDto.Physician = selectedPhysician;
             appointmentDto.ProcedureType = new ProcedureType();
             appointmentDto.Patient = selectedPatient;
             appointmentDto.Active = true;
-            /*TODO add this without causing errors
-            appointmentDto.Room = selectedRoom;*/
             appointmentDto.Date = new DateTime(dateTime.Value.Year, dateTime.Value.Month, dateTime.Value.Day);
             if (appointmentDto.Patient == null || appointmentDto.Physician == null)
             {
                 MessageBox.Show("You did not select patient or physician");
                 return;
             }
-            /*TODO add this without causing errors
-            if (appointmentDto.Room == null)
-            {
-                MessageBox.Show("You did not select room");
-                return;
-            }*/
             ProcedureType procType = new ProcedureType("Procedura", 30, new Specialization("Family doctor"));
             appointmentDto.ProcedureType = procType;
-            List<AppointmentDto> appointmentDtos1 = secretaryScheduleController.GetAllAvailableAppointments(appointmentDto);
-            List<AppointmentDto> result = new List<AppointmentDto>();
-            foreach(AppointmentDto ap in appointmentDtos1)
-            {
-                if(ap.Time.Start >= appointmentDto.Time.Start && ap.Time.End <= appointmentDto.Time.End)
-                {
-                    ap.Date= new DateTime(dateTime.Value.Year, dateTime.Value.Month, dateTime.Value.Day);
-                    result.Add(ap);
-                }
-            }
-            int a = 5;
-            AppointmentList win = new AppointmentList(result);
+            List<AppointmentDto> appointmentDtos1 = secretaryScheduleController.GetAllAvailableAppointmentsGEA(appointmentDto, 0);
+            
+            AppointmentList win = new AppointmentList(appointmentDtos1);
             win.Show();
-            /*TODO add this without causing errors
-            List<AppointmentDto> appointmentDtos= secretaryScheduleController.MakeAppointment(appointmentDto,0);
-            secretaryScheduleController.GetAllAvailableAppointments(appointmentDto);//call makeAppointment not getAllApp
-            */
         }
 
         private void PatientsSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -196,26 +183,25 @@ namespace GraphicEditor.View.UserControls
             }
             MyListBoxPatient.Items.Refresh();
         }
-        /*TODO add this without causing errors
-        private void FilterRooms(object sender, RoutedEventArgs e)
-        {
-            Rooms.Clear();
-            foreach (Room r in roomDatabaseSql.GetAll())
-            {
-                if (r.Name.ToLower().Contains(RoomTextBox.Text.ToLower()))
-                {
-                    Rooms.Add(r);
-                    OnPropertyChanged();
-                }
-            }
-            MyListBoxRoom.Items.Refresh();
-        }
 
-        private void roomselectionchanged(object sender, selectionchangedeventargs e)
-        {
-            int index = mylistboxroom.selectedindex;
-            selectedroom = rooms[index];
-        }
-        */
+        //private void FilterRooms(object sender, RoutedEventArgs e)
+        //{
+        //    Rooms.Clear();
+        //    foreach (Room r in roomDatabaseSql.GetAll())
+        //    {
+        //        if (r.Name.ToLower().Contains(RoomTextBox.Text.ToLower()))
+        //        {
+        //            Rooms.Add(r);
+        //            OnPropertyChanged();
+        //        }
+        //    }
+        //    MyListBoxRoom.Items.Refresh();
+        //}
+
+        //private void RoomSelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    int index = MyListBoxRoom.SelectedIndex;
+        //    selectedRoom = Rooms[index];
+        //}
     }
 }

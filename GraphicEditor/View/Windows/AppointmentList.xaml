@@ -21,7 +21,7 @@
                         <TextBlock Text="Room:"/>
                         <TextBlock Text="{Binding Path=Room}" />
                         <TextBlock Text="Date:"/>
-                        <TextBlock Text="{Binding Path=Date}" />
+                        <TextBlock Text="{Binding Path=Time.Start}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
