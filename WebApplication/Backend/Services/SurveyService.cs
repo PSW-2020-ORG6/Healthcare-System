@@ -119,7 +119,22 @@ namespace WebApplication.Backend.Services
                 statistics[i].AverageRating = statistics[i].AverageRating / reports.Count;
             }
 
-            foreach (StatisticAuxilaryClass i in statistics)
+
+            return Round2Decimals(statistics);
+        }
+
+        ////Repovic Aleksa RA52/2017
+        /// <summary>
+        ///Helping class that rounds average values to 2 decimals
+        ///</summary>
+        ///<returns>
+        ///list of objects containing informations about doctor related questions
+        ///</returns>
+        ///<param name="doctorId"> String for identification of doctor
+        ///</param>
+        public List<StatisticAuxilaryClass> Round2Decimals(List<StatisticAuxilaryClass> statistics) { 
+
+           foreach (StatisticAuxilaryClass i in statistics)
             {
                 i.AverageRating = Math.Round(i.AverageRating, 2);
             }
@@ -127,16 +142,16 @@ namespace WebApplication.Backend.Services
             return statistics;
         }
 
-        ////Repovic Aleksa RA52/2017
-        /// <summary>
-        ///calculates statistics for each doctor related question
-        ///</summary>
-        ///<returns>
-        ///list of objects containing informations about doctor related questions
-        ///</returns>
-        ///<param name="doctorId"> String for identification of doctor
-        ///</param>
-        public List<StatisticAuxilaryClass> getStatisticsForDoctor(string doctorID)
+    ////Repovic Aleksa RA52/2017
+    /// <summary>
+    ///calculates statistics for each doctor related question
+    ///</summary>
+    ///<returns>
+    ///list of objects containing informations about doctor related questions
+    ///</returns>
+    ///<param name="doctorId"> String for identification of doctor
+    ///</param>
+    public List<StatisticAuxilaryClass> getStatisticsForDoctor(string doctorID)
         {
             List<Survey> reports = isurveyRepository.GetSurveysbyDoctorId(doctorID);
           
@@ -174,12 +189,7 @@ namespace WebApplication.Backend.Services
                     statistics[i].AverageRating = statistics[i].AverageRating / reports.Count;
             }
 
-            foreach (StatisticAuxilaryClass i in statistics)
-            {
-                i.AverageRating = Math.Round(i.AverageRating, 2);
-            }
-
-            return statistics;
+            return Round2Decimals(statistics);
 
         }
 
@@ -254,12 +264,7 @@ namespace WebApplication.Backend.Services
             statistics[3].AverageRating = statistics[3].AverageRating / reports.Count / 2;
             statistics[4].AverageRating = statistics[4].AverageRating / reports.Count / 3;
 
-            foreach (StatisticAuxilaryClass i in statistics)
-            {
-                i.AverageRating = Math.Round(i.AverageRating, 2);
-            }
-
-            return statistics;
+            return Round2Decimals(statistics);
 
         }
 

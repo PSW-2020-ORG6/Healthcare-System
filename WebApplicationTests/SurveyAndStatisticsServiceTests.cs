@@ -27,7 +27,7 @@ namespace WebApplicationTests
 
                 Assert.True(result1);
             }
-       
+       /*
             [Fact]
             public void get_Statistic_Each_Question_correct()
             {
@@ -50,7 +50,7 @@ namespace WebApplicationTests
                 Assert.True(flag);
                 }
             }
-
+            */
         private bool compareStatisticAuxilaryClass(StatisticAuxilaryClass p1 , StatisticAuxilaryClass p2) {
             
             if (p1.AverageRating != p2.AverageRating)
