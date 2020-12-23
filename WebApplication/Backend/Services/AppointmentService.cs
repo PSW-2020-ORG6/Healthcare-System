@@ -163,47 +163,155 @@ namespace WebApplication.Backend.Services
         {
             return appointmentRepository.AddAppointment(appointment);
         }
+
+        /// <summary>
+        ///method for getting patient's appointments 
+        ///</summary>
+        ///<param name="patientId"> String type object
+        ///<returns>
+        ///list of appointments
+        ///</returns>
         public List<AppointmentDTO> GetAllAppointmentsByPatientId(string patientId)
         {
             return appointmentDTO.ConvertListToAppointmentDTO(appointmentRepository.GetAllAppointmentByPatientId(patientId));
         }
 
+        /// <summary>
+        ///method for getting all appointments 
+        ///</summary>
+        ///<returns>
+        ///list of appointments
+        ///</returns>
         public List<AppointmentDTO> GetAllAppointments()
         {
             return appointmentDTO.ConvertListToAppointmentDTO(appointmentRepository.GetAllAppointments());
         }
 
+        /// <summary>
+        ///method for getting patient's scheduled appointments 
+        ///</summary>
+        ///<param name="patientId"> String type object
+        ///<returns>
+        ///list of appointments
+        ///</returns>
         internal List<AppointmentDTO> GetAllAppointmentsByPatientIdActive(string patientId)
         {
-            return appointmentDTO.ConvertListToAppointmentDTO(appointmentRepository.GetAllAppointmentsByPatientIdActive(patientId));
+            List<Appointment> allAppointments = appointmentRepository.GetAllAppointmentsByPatientIdActive(patientId);
+            DateTime dateNow = DateTime.Now;
+            List<Appointment> appotintmentsInFuture = new List<Appointment>();
+            foreach (Appointment appointment in allAppointments)
+            {
+                if (appointment.Date > dateNow)
+                {
+                    appotintmentsInFuture.Add(appointment);
+                }
+            }
+            return appointmentDTO.ConvertListToAppointmentDTO(appotintmentsInFuture);
         }
 
+        /// <summary>
+        ///method for getting patient's canceled appointments
+        ///</summary>
+        ///<param name="patientId"> String type object
+        ///<returns>
+        ///list of appointments
+        ///</returns>
         internal List<AppointmentDTO> GetAllAppointmentsByPatientIdCanceled(string patientId)
         {
             return appointmentDTO.ConvertListToAppointmentDTO(appointmentRepository.GetAllAppointmentsByPatientIdCanceled(patientId));
         }
 
+        /// <summary>
+        ///method for getting patient's all past appointments 
+        ///</summary>
+        ///<param name="patientId"> String type object
+        ///<returns>
+        ///list of appoitnemtns
+        ///</returns>
         public List<AppointmentDTO> GetAllAppointmentsByPatientIdPast(string patientId)
         {
-            return appointmentDTO.ConvertListToAppointmentDTO(appointmentRepository.GetAllAppointmentsByPatientIdPast(patientId));
+            List<Appointment> allAppointments =appointmentRepository.GetAllAppointmentsByPatientIdPast(patientId);
+            DateTime dateNow = DateTime.Now;
+            List<Appointment> appotintmentsInPast = new List<Appointment>();
+            foreach (Appointment appointment in allAppointments)
+            {
+                if (appointment.Date < dateNow)
+                {
+                    appotintmentsInPast.Add(appointment);
+                }
+            }
+            return appointmentDTO.ConvertListToAppointmentDTO(appotintmentsInPast);
         }
 
+        /// <summary>
+        ///method for checking if survey is done on specific appointment
+        ///</summary>
+        ///<param name="patientId"> String type object
+        ///<param name="appointmentDate"> String type object
+        ///<param name="physicianName"> String array type object
+        ///<returns>
+        ///bool value
+        ///</returns>
         internal bool isSurveyDoneByPatientIdAppointmentDatePhysicianName(string patientId, string appointmentDate, string physicianName)
         {
-            return appointmentRepository.IsSurveyDoneByPatientIdAppointmentDatePhysicianName(patientId, appointmentDate, physicianName);
+            List<Physician> physitianResult = physicianRepository.GetPhysiciansByFullName(physicianName);
+            List<String> physicianId = new List<string>();
+            foreach (Physician physician in physitianResult)
+            {
+                physicianId.Add(physician.Id);
+            }
+            return appointmentRepository.IsSurveyDoneByPatientIdAppointmentDatePhysicianName(patientId, appointmentDate, physitianResult[0].Id);
         }
 
-        internal void setSurveyDoneOnAppointment(string patientId, string appointmentDate, string physicianName)
+        /// <summary>
+        ///method for setting value of isSurveyDone on true in database
+        ///</summary>
+        internal void setSurveyDoneOnAppointment(AppointmentDTO appointmentDto)
         {
-            appointmentRepository.SetSurveyDoneOnAppointment(patientId, appointmentDate, physicianName);
+            String dateD;
+
+            String[] dateVar = appointmentDto.Date.ToString().Split(" ")[0].Split(".");
+            if (dateVar[1].Length == 1)
+                dateD = dateVar[2] + "-" + "0" + dateVar[1] + "-" + dateVar[0];
+            else
+                dateD = dateVar[2] + "-" + dateVar[1] + "-" + dateVar[0];
+
+            List<Physician> physitianResult = physicianRepository.GetPhysiciansByFullName(appointmentDto.PhysicianDTO.FullName);
+            List<String> physicianId = new List<string>();
+            foreach (Physician physician in physitianResult)
+            {
+                physicianId.Add(physician.Id);
+            }
+            appointmentRepository.SetSurveyDoneOnAppointment(appointmentDto.PatientDTO.Id,dateD, physicianId[0]);
         }
 
+        /// <summary>
+        ///method for getting all appointments without survey done
+        ///</summary>
+        ///<returns>
+        ///list of appointments
+        ///</returns>
         internal List<AppointmentDTO> GetAllAppointmentsWithoutDoneSurvey()
         {
-            return appointmentDTO.ConvertListToAppointmentDTO(appointmentRepository.GetAllAppointmentsWithoutSurvey());
-
+            List<Appointment> allAppointments = appointmentRepository.GetAllAppointmentsWithoutSurvey();
+            DateTime dateNow = DateTime.Now;
+            List<Appointment> appotintmentsInPastWitohutSurvey = new List<Appointment>();
+            foreach (Appointment appointment in allAppointments)
+            {
+                if (appointment.Date < dateNow)
+                {
+                    appotintmentsInPastWitohutSurvey.Add(appointment);
+                }
+            }
+            return appointmentDTO.ConvertListToAppointmentDTO(appotintmentsInPastWitohutSurvey);
         }
 
+        /// <summary>
+        ///method for getting all appointments with survey done
+        ///</summary>
+        ///<returns>
+        ///list of appointments
+        ///</returns>
         public List<Appointment> GetAllAppointmentsWithDoneSurvey()
         {
             return appointmentRepository.GetAllAppointmentsWithSurvey();
@@ -277,10 +385,5 @@ namespace WebApplication.Backend.Services
             }
             return availableAppointments;
         }
-
-
-
-
-
     }
 }

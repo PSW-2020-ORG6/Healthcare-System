@@ -25,7 +25,6 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("allAppointmentsByPatientId")]
         public List<AppointmentDTO> GellAllAppointmentsByPatientId(String patientId)
         {
-
             return appointmentService.GetAllAppointmentsByPatientId(patientId);
         }
 
@@ -34,11 +33,13 @@ namespace WebApplication.Backend.Controllers
         {
             return appointmentService.GetAllPhysicians();
         }
+
         [HttpGet("specializations")]
         public List<SpecializationDTO> GetAllSpecializations()
         {
             return appointmentService.GetAllSpecializations();
         }
+
         [HttpGet("allAppointments")]
         public List<AppointmentDTO> GellAllAppointments()
         {
@@ -109,7 +110,7 @@ namespace WebApplication.Backend.Controllers
         [HttpPut("setSurveyDoneOnAppointment")]
         public void setSurveyDoneOnAppointment(AppointmentDTO appointmentDto)
         {
-            appointmentService.setSurveyDoneOnAppointment("00096736fd7-3018-4f3f-a14b-35610a1c89592", appointmentDto.Date.ToString(), appointmentDto.PhysicianDTO.FullName);
+            appointmentService.setSurveyDoneOnAppointment(appointmentDto);
         }
 
         [HttpGet("appointmentsWithReccomendation")]

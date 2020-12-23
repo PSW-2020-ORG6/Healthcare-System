@@ -23,7 +23,6 @@ namespace WebApplication.Backend.Services
             this.registrationRepository = registrationRepository;
         }
 
-        ///Aleksandra Milijevic RA 22/2017
         /// <summary>
         ///calls method for adding new row in patient table
         ///</summary>

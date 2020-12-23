@@ -391,9 +391,7 @@ Vue.component("survey", {
             var dDate = parts[1].split(".")
             dDateVar = dDate[2] + "," + dDate[1] + "," + dDate[0]
             var dateSurvey = new Date("'" + dDateVar + "'")
-            alert(dDate)
-            alert(dDateVar)
-            alert(dateSurvey)
+            
 
             this.surveyText.DoctorName = doctorName
             this.surveyText.reportDate = dateSurvey;

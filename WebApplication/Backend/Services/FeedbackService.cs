@@ -16,7 +16,6 @@ namespace WebApplication.Backend.Services
         {
             this.feedbackRepository = new FeedbackRepository();
         }
-        ///Tanja Drcelic RA124/2017
         /// <summary>
         ///calls method for get all feedback in feedback table
         ///</summary>
@@ -27,7 +26,6 @@ namespace WebApplication.Backend.Services
         {
             return feedbackDTO.ConvertListToFeedbackDTO(feedbackRepository.GetAllFeedbacks());
         }
-        ///Aleksandra Milijevic RA 22/2017
         /// <summary>
         ///calls method for get approved feedbacks from feedback table
         ///</summary>
@@ -38,7 +36,6 @@ namespace WebApplication.Backend.Services
         {
             return feedbackDTO.ConvertListToFeedbackDTO(feedbackRepository.GetApprovedFeedbacks());
         }
-        ///Tanja Drcelic RA124/2017
         /// <summary>
         ///calls method for get disapproved feedback from feedback table
         ///</summary>
@@ -49,7 +46,6 @@ namespace WebApplication.Backend.Services
         {
             return feedbackDTO.ConvertListToFeedbackDTO(feedbackRepository.GetDisapprovedFeedbacks());
         }
-        ///Marija Vucetic 
         /// <summary>
         ///calls method for set na value of attribute Approved
         ///</summary>
@@ -62,7 +58,6 @@ namespace WebApplication.Backend.Services
         {
             feedbackRepository.ApproveFeedback(feedback);
         }
-        ///Repovic Aleksa RA-52-2017
         /// <summary>
         ///calls method for adding new row in feedbacks table
         ///</summary>

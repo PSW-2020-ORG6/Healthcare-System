@@ -13,12 +13,13 @@ namespace WebApplication.Backend.Repositorys
     public class SurveyRepository : ISurveyRepository
     {
         private MySqlConnection connection;
+        
 
         public SurveyRepository()
         {
             try
             {
-                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=neynamneynam12");
+                connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
             }
             catch (Exception e)
             {
@@ -38,8 +39,8 @@ namespace WebApplication.Backend.Repositorys
         {
             connection.Open();
             String[] surveyDate = surveyText.ReportDate.ToString().Split(" ");
-            String[] surveyDateParts = surveyDate[0].Split("/");
-            String dateSurvey = surveyDateParts[2] + "-" + surveyDateParts[0] + "-" + (Int32.Parse(surveyDateParts[1]) + 1).ToString() + " 00:00:00";
+            String[] surveyDateParts = surveyDate[0].Split(".");
+            String dateSurvey = surveyDateParts[2] + "-" + surveyDateParts[1]+ "-" + (Int32.Parse(surveyDateParts[0]) + 1).ToString();
             string sqlDml = "INSERT into survey" +
                             "(Question1,Question2,Question3,Question4,Question5,Question6,Question7,Question8,Question9,Question10,Question11," +
                             "Question12,Question13,Question14,Question15,Question16,Question17,Question18,Question19,Question20,Question21,Question22,Question23,ID,DoctorName,SerialNumber,reportDate)VALUES ('"
@@ -71,30 +72,7 @@ namespace WebApplication.Backend.Repositorys
         ///</returns>
         ///<param name="sqlDml"> String sql command
         ///</param>
-        internal List<Report> GetReports(string sqlDml)
-        {
-            connection.Open();
-            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
-            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
-            List<Report> resultList = new List<Report>();
-
-            while (sqlReader.Read())
-            {
-                Report entity = new Report();
-                entity.Patient = new Patient { Id = (String)sqlReader[2] };
-                entity.Physician = new Physician { SerialNumber = (String)sqlReader[3] };
-                entity.Date = Convert.ToDateTime(sqlReader[1]);
-
-                resultList.Add(entity);
-
-            }
-            connection.Close();
-            foreach (Report report in resultList)
-            {
-                report.Physician = GetDoctorById("Select * from physician where SerialNumber like'" + report.Physician.SerialNumber + "'");
-            }
-            return resultList;
-        }
+        
         ////Vucetic Marija RA157/2017
         /// <summary>
         ///getting doctor by id
@@ -167,13 +145,33 @@ namespace WebApplication.Backend.Repositorys
                 entity.Password = "password";
                 patientResutl = entity;
             }
-
             connection.Close();
             return patientResutl;
         }
+        public List<Report>GetReports(string sqlDml)
+        {
+            connection.Open();
+            MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
+            MySqlDataReader sqlReader = sqlCommand.ExecuteReader();
+            List<Report> resultList = new List<Report>();
 
-       
+            while (sqlReader.Read())
+            {
+                Report entity = new Report();
+                entity.Patient = new Patient { Id = (String)sqlReader[2] };
+                entity.Physician = new Physician { SerialNumber = (String)sqlReader[3] };
+                entity.Date = Convert.ToDateTime(sqlReader[1]);
 
+                resultList.Add(entity);
+
+            }
+            connection.Close();
+            foreach (Report report in resultList)
+            {
+                report.Physician = GetDoctorById("Select * from physician where SerialNumber like'" + report.Physician.SerialNumber + "'");
+            }
+            return resultList;
+        }
         public List<Survey> GetSurveys(string sqlDml)
         {
             connection.Open();
@@ -258,10 +256,8 @@ namespace WebApplication.Backend.Repositorys
             {
                 resultList.Add(r.DoctorName + "-" + r.ReportDate.ToString().Split(" ")[0]);
             }
-
             return resultList;
         }
-
 
         ////Vucetic Marija RA157/2017
         /// <summary>
@@ -275,7 +271,7 @@ namespace WebApplication.Backend.Repositorys
         ///
         public List<String> GetAllDoctorsFromReporstByPatientId(string patientId)
         {
-            List<Report> reports = GetReports("Select * from report where PatientId like'" + patientId.ToString() + "'");
+            List<Report> reports =GetReports ("Select * from report where PatientId like'" + patientId.ToString() + "'");
             List<String> resulList = new List<String>();
             foreach (Report r in reports)
             {
@@ -319,53 +315,7 @@ namespace WebApplication.Backend.Repositorys
             connection.Close();
             return resultList;
         }
-        ////Vucetic Marija RA157/2017
-        /// <summary>
-        /// returns all doctors for whom the patient can do a survey
-        ///</summary>
-        ///<returns>
-        ///list of names of doctors
-        ///</returns>
-        ///<param name="idPatient"> String patient id
-        ///</param>
-        ///
 
-        public List<String> GetAllDoctorsFromReporstByPatientIdForSurveyList(string patientId)
-        {
-            List<String> resultListFromSurvey = GetAllDoctorsFromReporstByPatientIdFromSurvey(patientId);
-            List<String> resultListFromReports = GetAllDoctorsFromReporstByPatientId(patientId);
-            List<String> resultList = new List<String>();
-            AppointmentRepository appointmentRepository = new AppointmentRepository();
-            List<Appointment> pastAppointments = appointmentRepository.GetAllAppointmentsByPatientIdPast(patientId);
-            List<String> resultListPastAppointments = new List<string>();
-
-            /*
-            foreach (Appointment appointment in pastAppointments)
-            {
-                resultListPastAppointments.Add(appointment.Physician.FullName + "-" + appointment.Date.ToString().Split(" ")[0]);
-            }
-            */
-            foreach (String physicianFromRepors in resultListFromReports)
-            {
-                resultList.Add(physicianFromRepors);
-            }
-            foreach (String physicianFromPastAppointmentst in resultListPastAppointments)
-            {
-                resultList.Add(physicianFromPastAppointmentst);
-            }
-
-
-            foreach (String physicianFromSurvey in resultListFromSurvey)
-            {
-                if (resultList.Contains(physicianFromSurvey))
-                {
-                    resultList.Remove(physicianFromSurvey);
-                }
-
-            }
-
-
-            return resultList;
-        }
+        
     }
 }
