@@ -19,7 +19,6 @@ namespace WebApplication.Backend.Services
             this.iPrescriptionRepository = iPrescriptionRepository;
         }
 
-        ///Tanja Drcelic RA124/2017
         /// <summary>
         ///Get prescriptions by search
         ///</summary>
@@ -65,7 +64,6 @@ namespace WebApplication.Backend.Services
                 return SearchProperty.MedicineType;
         }
 
-        ///Tanja Drcelic RA124/2017 and Marija Vucetic RA157/2017
         /// <summary>
         ///Get searched prescriptions by AND operation
         ///</summary>
@@ -105,7 +103,6 @@ namespace WebApplication.Backend.Services
             return true;
         }
 
-        ///Tanja Drcelic RA124/2017
         /// <summary>
         ///Get searched prescriptions by OR operation
         ///</summary>

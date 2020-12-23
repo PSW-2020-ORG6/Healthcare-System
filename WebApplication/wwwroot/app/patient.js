@@ -2,7 +2,7 @@
 	data: function () {
 		return {
 			patientDTO: null,
-			idPatient: "0002",
+			idPatient: "96736fd7-3018-4f3f-a14b-35610a1c8959",
 			approvedFeedbacks: null,
 			noapprovedFeedbacks: null,
 			activeAppointments: null,
@@ -13,19 +13,19 @@
 				text: "",
 				approved: false,
 				date: new Date().now,
-				patientId: "0002"
+				patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959"
 			},
 			appointment: null			
 		}
 	},
 	beforeMount() {
 		axios
-			.get('http://localhost:49900/patient/getPatientById', { params: { patientId: "0002" } })
+			.get('http://localhost:49900/patient/getPatientById', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
 			.then(response => {
 				this.patientDTO = response.data
 			})
 			.catch(error => {
-				alert("Please add patient with id number : 0002")
+				alert("Please add patient with id number : 96736fd7-3018-4f3f-a14b-35610a1c8959")
 			})
 
 		axios
@@ -46,7 +46,7 @@
 			})
 
 		axios
-			.get('http://localhost:49900/appointment/allAppointmentsByPatientIdActive', { params: { patientId: "0002" } })
+			.get('http://localhost:49900/appointment/allAppointmentsByPatientIdActive', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
 			.then(response => {
 				this.activeAppointments = response.data
 			})
@@ -56,7 +56,7 @@
 			})
 
 		axios
-			.get('http://localhost:49900/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: "0002" } })
+			.get('http://localhost:49900/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
 			.then(response => {
 				this.canceledAppointments = response.data
 			})

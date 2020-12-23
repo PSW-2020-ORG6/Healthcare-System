@@ -137,8 +137,8 @@ namespace WebApplicationTests
             var stubRepository = new Mock<IAppointmentRepository>();
 
             stubRepository.Setup(m => m.CancelAppointment(appointmentSerialTrue)).Returns(true);
-            WebApplication.Backend.Services.AppointmentsService service =
-                new WebApplication.Backend.Services.AppointmentsService(stubRepository.Object);
+            WebApplication.Backend.Services.AppointmentService service =
+                new WebApplication.Backend.Services.AppointmentService(stubRepository.Object);
             returnValue = service.CancelAppointment(appointmentSerialTrue);
 
             Assert.True(returnValue);
@@ -150,8 +150,8 @@ namespace WebApplicationTests
             var stubRepository = new Mock<IAppointmentRepository>();
 
             stubRepository.Setup(m => m.CancelAppointment(appointmentSerialFalse)).Returns(false);
-            WebApplication.Backend.Services.AppointmentsService service =
-                new WebApplication.Backend.Services.AppointmentsService(stubRepository.Object);
+            WebApplication.Backend.Services.AppointmentService service =
+                new WebApplication.Backend.Services.AppointmentService(stubRepository.Object);
             returnValue = service.CancelAppointment(appointmentSerialTrue);
 
             Assert.False(returnValue);
@@ -163,8 +163,8 @@ namespace WebApplicationTests
             var stubRepository = new Mock<IAppointmentRepository>();
 
             stubRepository.Setup(m => m.GetCancelingDates("0002")).Returns(dates);       
-            WebApplication.Backend.Services.AppointmentsService service =
-                new WebApplication.Backend.Services.AppointmentsService(stubRepository.Object);
+            WebApplication.Backend.Services.AppointmentService service =
+                new WebApplication.Backend.Services.AppointmentService(stubRepository.Object);
             returnValue = service.IsUserMalicious("0002");
 
             Assert.True(returnValue);
@@ -176,8 +176,8 @@ namespace WebApplicationTests
             var stubRepository = new Mock<IAppointmentRepository>();
 
             stubRepository.Setup(m => m.GetCancelingDates(patientIdFalse)).Returns(new List<DateTime>());
-            WebApplication.Backend.Services.AppointmentsService service =
-                new WebApplication.Backend.Services.AppointmentsService(stubRepository.Object);
+            WebApplication.Backend.Services.AppointmentService service =
+                new WebApplication.Backend.Services.AppointmentService(stubRepository.Object);
             returnValue = service.IsUserMalicious(patientIdFalse);
 
             Assert.False(returnValue);

@@ -17,7 +17,6 @@ namespace WebApplication.Backend.Services
         {
             this.patientRepository = new PatientRepository();
         }
-        ///Tanja Drcelic RA124/2017
         /// <summary>
         ///calls method for get all patients in patients table
         ///</summary>
@@ -29,8 +28,6 @@ namespace WebApplication.Backend.Services
             return patientRepository.GetAllPatients();
         }
 
-
-        ///Aleksa Repović
         /// <summary>
         ///Get patient from patients table by ID
         ///</summary>

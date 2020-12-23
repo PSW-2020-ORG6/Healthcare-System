@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.MedicalExam;
 using HealthClinicBackend.Backend.Model.Survey;
+using Model.Accounts;
 using WebApplication.Backend.Repositorys;
 using WebApplication.Backend.Util;
 
@@ -9,6 +11,7 @@ namespace WebApplication.Backend.Services
     public class SurveyService
     {
         private ISurveyRepository isurveyRepository;
+       
         public SurveyService()
         {
             this.isurveyRepository = new SurveyRepository();
@@ -17,7 +20,6 @@ namespace WebApplication.Backend.Services
         {
             this.isurveyRepository = iSurveyRepository;
         }
-        ////Marija Vucetic  RA157/2017
         /// <summary>
         ///adding new survez to database
         ///</summary>
@@ -29,17 +31,54 @@ namespace WebApplication.Backend.Services
             return isurveyRepository.AddNewSurvey(surveyText);
         }
 
+        /// <summary>
+        ///method for getting doctor's full name from survey done by one patient 
+        ///</summary>
+        ///<param name="patientId"> String type object
+        ///<returns>
+        ///list of doctor's full name (string)
+        ///</returns>
         internal List<string> GetAllDoctorsFromReporstByPatientIdFromSurvey(string patientId)
         {
             return isurveyRepository.GetAllDoctorsFromReporstByPatientIdFromSurvey(patientId);
         }
 
+        /// <summary>
+        ///method for getting avaliable doctors as survey subject
+        ///the result is a combination of several methods
+        ///</summary>
+        ///<param name="patientId"> String type object
+        ///<returns>
+        ///list of appointments
+        ///</returns>
         internal List<string> GetAllDoctorsFromReporstByPatientIdForSurveyList(string patientId)
         {
-            return isurveyRepository.GetAllDoctorsFromReporstByPatientIdForSurveyList(patientId);
+            List<String> resultListFromSurvey = isurveyRepository.GetAllDoctorsFromReporstByPatientIdFromSurvey(patientId);
+            List<String> resultListFromReports = isurveyRepository.GetAllDoctorsFromReporstByPatientId(patientId);
+            List<String> resultList = new List<String>();
+            AppointmentRepository appointmentRepository = new AppointmentRepository();
+            List<String> resultListPastAppointments = appointmentRepository.GetAllDoctorsFromAppointmentsWithoutSurvey(patientId);
+
+            foreach (String physicianFromRepors in resultListFromReports)
+            {
+                resultList.Add(physicianFromRepors);
+            }
+            foreach (String physicianFromPastAppointmentst in resultListPastAppointments)
+            {
+                resultList.Add(physicianFromPastAppointmentst);
+            }
+
+
+            foreach (String physicianFromSurvey in resultListFromSurvey)
+            {
+                if (resultList.Contains(physicianFromSurvey))
+                {
+                    resultList.Remove(physicianFromSurvey);
+                }
+            }
+            return resultList;
         }
 
-        ////Vucetic Marija RA157/2017
         /// <summary>
         ///getting all doctors from one patient's reports 
         ///</summary>
@@ -50,10 +89,23 @@ namespace WebApplication.Backend.Services
         ///</param>
         internal List<string> GetAllDoctorsFromReporstByPatientId(string patientId)
         {
-            return isurveyRepository.GetAllDoctorsFromReporstByPatientId(patientId);
+            List<Report> reports = isurveyRepository.GetReports("Select * from report where PatientId like'" + patientId.ToString() + "'");
+            List<String> resulList = new List<String>();
+            foreach (Report r in reports)
+            {
+                PhysicianRepository phisitionRepository = new PhysicianRepository();
+                List<Physician> physitians = phisitionRepository.GetPhysiciansByFullName(r.Physician.Name + " " + r.Physician.Surname);
+                foreach (Physician p in physitians)
+                {
+                    r.Physician.Name = p.Name;
+                    r.Physician.Surname = p.Surname;
+                    resulList.Add(r.Physician.Name + " " + r.Physician.Surname + "-" + r.Date.ToString().Split(" ")[0]);
+                }
+            }
+            return resulList;
+            
         }
 
-        ////Aleksa Repovic RA52/2017
         /// <summary>
         ///calculates statistics for each survey question not related do doctor
         ///</summary>
@@ -123,7 +175,6 @@ namespace WebApplication.Backend.Services
             return Round2Decimals(statistics);
         }
 
-        ////Repovic Aleksa RA52/2017
         /// <summary>
         ///Helping class that rounds average values to 2 decimals
         ///</summary>
@@ -142,7 +193,6 @@ namespace WebApplication.Backend.Services
             return statistics;
         }
 
-    ////Repovic Aleksa RA52/2017
     /// <summary>
     ///calculates statistics for each doctor related question
     ///</summary>
@@ -193,7 +243,6 @@ namespace WebApplication.Backend.Services
 
         }
 
-        ////Aleksa Repovic RA52/2017
         /// <summary>
         ///calculates statistics for each topic
         ///</summary>
@@ -265,8 +314,6 @@ namespace WebApplication.Backend.Services
             statistics[4].AverageRating = statistics[4].AverageRating / reports.Count / 3;
 
             return Round2Decimals(statistics);
-
         }
-
     }
 }

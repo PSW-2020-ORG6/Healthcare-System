@@ -20,7 +20,6 @@ namespace WebApplication.Backend.Services
             this.iReportRepository = iReportRepository;
         }
 
-        ///Tanja Drcelic RA124/2017
         /// <summary>
         ///Get reports by search
         ///</summary>
@@ -81,7 +80,6 @@ namespace WebApplication.Backend.Services
             return searchEntityDTOs;
         }
 
-        ///Tanja Drcelic RA124/2017 and Marija Vucetic RA157/2017
         /// <summary>
         ///Get searched reports by AND operation
         ///</summary>
@@ -121,7 +119,6 @@ namespace WebApplication.Backend.Services
             return true;
         }
 
-        ///Tanja Drcelic RA124/2017
         /// <summary>
         ///Get searched reports by OR operation
         ///</summary>
