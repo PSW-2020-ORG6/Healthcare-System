@@ -49,6 +49,10 @@ namespace HealthClinicBackend.Backend.Controller.SecretaryControllers
             return _appointmentSchedulingService.GetAvailableAppointments(appointmentDto);
         }
 
+        public List<AppointmentDto> GetAllAvailableAppointmentsGEA(AppointmentDto appointmentDto, int priority)
+        {
+            return _appointmentSchedulingService.GetAvailableAppointmentsGEA(appointmentDto, priority);
+        }
 
         public List<AppointmentDto> MakeAppointment(AppointmentDto appointmentDto, int priority)
         {

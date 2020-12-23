@@ -56,7 +56,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public List<Room> GetByProcedureType(ProcedureType procedureType)
         {
-            throw new System.NotImplementedException();
+            return GetAll(); //TO DO
         }
     }
 }
