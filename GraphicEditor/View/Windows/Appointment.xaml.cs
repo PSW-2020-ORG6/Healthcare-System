@@ -144,42 +144,24 @@ namespace GraphicEditor.View.UserControls
 
             DateTime dateTime2 = new DateTime(dateTime.Value.Year, dateTime.Value.Month, dateTime.Value.Day
                 , Int32.Parse(s2[0]), Int32.Parse(s2[1]), 0);
-            //validate time !!!
-            //validate is something null
+            //validate if something is null
             appointmentDto.Time = new TimeInterval(dateTime1, dateTime2);
             appointmentDto.Physician = selectedPhysician;
             appointmentDto.ProcedureType = new ProcedureType();
             appointmentDto.Patient = selectedPatient;
             appointmentDto.Active = true;
-            //appointmentDto.Room = selectedRoom;
             appointmentDto.Date = new DateTime(dateTime.Value.Year, dateTime.Value.Month, dateTime.Value.Day);
             if (appointmentDto.Patient == null || appointmentDto.Physician == null)
             {
                 MessageBox.Show("You did not select patient or physician");
                 return;
             }
-            //if (appointmentDto.Room == null)
-            //{
-            //    MessageBox.Show("You did not select room");
-            //    return;
-            //}
             ProcedureType procType = new ProcedureType("Procedura", 30, new Specialization("Family doctor"));
             appointmentDto.ProcedureType = procType;
-            List<AppointmentDto> appointmentDtos1 = secretaryScheduleController.GetAllAvailableAppointments(appointmentDto);
-            List<AppointmentDto> result = new List<AppointmentDto>();
-            foreach(AppointmentDto ap in appointmentDtos1)
-            {
-                if(ap.Time.Start >= appointmentDto.Time.Start && ap.Time.End <= appointmentDto.Time.End)
-                {
-                    ap.Date= new DateTime(dateTime.Value.Year, dateTime.Value.Month, dateTime.Value.Day);
-                    result.Add(ap);
-                }
-            }
-            int a = 5;
-            AppointmentList win = new AppointmentList(result);
+            List<AppointmentDto> appointmentDtos1 = secretaryScheduleController.GetAllAvailableAppointmentsGEA(appointmentDto, 0);
+            
+            AppointmentList win = new AppointmentList(appointmentDtos1);
             win.Show();
-            /*List<AppointmentDto> appointmentDtos= secretaryScheduleController.MakeAppointment(appointmentDto,0);*/
-            //secretaryScheduleController.GetAllAvailableAppointments(appointmentDto);//call makeAppointment not getAllApp
         }
 
         private void PatientsSelectionChanged(object sender, SelectionChangedEventArgs e)
