@@ -214,6 +214,13 @@ namespace WebApplication.Backend.Repositorys
             return resultList;
         }
 
+        ////Aleksa Repovic RA52/2017
+        /// <summary>
+        ///Return all surveys from database with desired doctors ID
+        ///</summary>
+        ///<returns>
+        ///list of survey objects 
+        ///</returns>
         public List<Survey> GetSurveysbyDoctorId(string doctorId) {
 
             List<Survey> reports = new List<Survey>();
