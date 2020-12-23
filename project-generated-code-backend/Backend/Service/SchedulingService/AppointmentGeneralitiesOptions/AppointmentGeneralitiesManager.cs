@@ -15,7 +15,6 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
         private readonly PhysicianAvailabilityService _physicianAvailabilityService;
         private readonly RoomAvailabilityService _roomAvailabilityService;
 
-
         public AppointmentGeneralitiesManager(IPhysicianRepository physicianRepository,
             IRoomRepository roomRepository,
             IAppointmentRepository appointmentRepository,
@@ -38,6 +37,41 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
 
             List<Physician> allPhysicians = GetAllPhysicians();
             List<Room> allRooms = GetAllRooms();
+
+            foreach (TimeInterval timeInterval in allTimeIntervals)
+            {
+                foreach (Physician physician in allPhysicians)
+                {
+                    if (_physicianAvailabilityService.IsPhysicianAvailable(physician, timeInterval))
+                    {
+                        foreach (Room room in allRooms)
+                        {
+                            if (_roomAvailabilityService.IsRoomAvailable(room, timeInterval))
+                            {
+                                AppointmentDto appointmentDto = CreateAppointment(physician, room, timeInterval);
+                                appointments.Add(appointmentDto);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return appointments;
+        }
+
+
+        /***
+         * Authors Peki and Hadzi
+         */
+        public List<AppointmentDto> GetAllAvailableAppointmentsGEA(AppointmentDto appointmentPreferences)
+        {
+            _appointmentPreferences = appointmentPreferences;
+            List<AppointmentDto> appointments = new List<AppointmentDto>();
+
+            List<TimeInterval> allTimeIntervals = GetAllTimeIntervalsGEA(); //free appointments for chosen time interval
+
+            List<Physician> allPhysicians = GetAllPhysiciansGEA();
+            List<Room> allRooms = GetAllRoomsGEA();
 
             foreach (TimeInterval timeInterval in allTimeIntervals)
             {
@@ -86,12 +120,54 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
             return physicians;
         }
 
+        private List<Physician> GetAllPhysiciansGEA()
+        {
+            List<Physician> physicians = new List<Physician>();
+            if (_appointmentPreferences.IsPreferedPhysicianSelected())
+            {
+                physicians.Add(_appointmentPreferences.Physician);
+            }
+            else
+            {
+                physicians = _physicianRepository.GetByProcedureType(_appointmentPreferences.ProcedureType);
+            }
+            return physicians;
+        }
+
         private List<Room> GetAllRooms()
         {
             return _roomRepository.GetAll();
             //return _roomRepository.GetByProcedureType(_appointmentPreferences.ProcedureType);
         }
 
+        private List<Room> GetAllRoomsGEA()
+        {
+            return _roomRepository.GetByProcedureType(_appointmentPreferences.ProcedureType);
+        }
+
+
+        /***
+         * This method determines time intervals 
+         */
+        private List<TimeInterval> GetAllTimeIntervalsGEA()
+        {
+            TimeIntervalGenerator generator = new TimeIntervalGenerator(_appointmentPreferences.ProcedureType,
+                _appointmentPreferences.RestrictedHours);
+            List<TimeInterval> timeIntervals = new List<TimeInterval>();
+            List<TimeInterval> generatedTimeIntervals = generator.GenerateTimeIntervalsForDay(_appointmentPreferences.Date);
+            foreach( TimeInterval timeInterval in generatedTimeIntervals )
+            {
+                if( timeInterval.Start >= _appointmentPreferences.Time.Start && timeInterval.End <=_appointmentPreferences.Time.End )
+                {
+                    timeIntervals.Add(timeInterval);
+                }
+            }
+            return timeIntervals;
+        }
+
+        /***
+         * This method determines date intervals
+         * */
         private List<TimeInterval> GetAllTimeIntervals()
         {
             TimeIntervalGenerator generator = new TimeIntervalGenerator(_appointmentPreferences.ProcedureType,
@@ -104,10 +180,11 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
             else
             {
                 timeIntervals = generator.GenerateAllTimeIntervals();
-                ;
             }
 
             return timeIntervals;
         }
+
+
     }
 }
