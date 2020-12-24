@@ -10,7 +10,7 @@
     <StackPanel>
         
         <TextBlock HorizontalAlignment="Center"  Text="Appointments" FontSize="48"/>
-        <ListBox Height="500" VerticalAlignment="Center" x:Name="appointmentListBox" SelectionChanged="showEquipmentDetails" ItemsSource="{Binding AppointmentDtos}">
+        <ListBox Height="450" VerticalAlignment="Center" x:Name="appointmentListBox" SelectionChanged="selectionChanged" ItemsSource="{Binding AppointmentDtos}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -26,5 +26,10 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Grid VerticalAlignment="Center" >
+            <Button Click="createAppointment" HorizontalAlignment="Left" Margin="180 0 0 0" FontSize="20" Height="40"  Content="Create appointment"/>
+            <Button Click="showEquipmentButton" HorizontalAlignment="Right" Margin="0 0 180 0" FontSize="20" Height="40"  Content="Show equipments"/>
+        </Grid>
+        
     </StackPanel>
 </Window>
