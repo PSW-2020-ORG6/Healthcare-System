@@ -211,7 +211,7 @@ namespace WebApplication.Backend.Model
         }
 
         private static void SurveyCreation(ModelBuilder modelBuilder)
-        {
+        {/*
             modelBuilder.Entity<Survey>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Survey>().HasData(
                 new Survey
@@ -273,6 +273,7 @@ namespace WebApplication.Backend.Model
                     Question23 = "4"
                 }
             );
+            */
         }
 
         private static void QuestionCreation(ModelBuilder modelBuilder)

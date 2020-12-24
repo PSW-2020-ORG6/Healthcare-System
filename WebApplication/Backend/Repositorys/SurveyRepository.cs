@@ -44,16 +44,16 @@ namespace WebApplication.Backend.Repositorys
             string sqlDml = "INSERT into survey" +
                             "(Question1,Question2,Question3,Question4,Question5,Question6,Question7,Question8,Question9,Question10,Question11," +
                             "Question12,Question13,Question14,Question15,Question16,Question17,Question18,Question19,Question20,Question21,Question22,Question23,ID,DoctorName,SerialNumber,reportDate)VALUES ('"
-                            + surveyText.Question1 + "','" + surveyText.Question2 + "','" + surveyText.Question3 +
-                            "','" + surveyText.Question4 + "','" + surveyText.Question5
-                            + "','" + surveyText.Question6 + "','" + surveyText.Question7 + "','" +
-                            surveyText.Question8 + "','" + surveyText.Question9 + "','" + surveyText.Question10 +
-                            "','" + surveyText.Question11 + "','" + surveyText.Question12 + "','" +
-                            surveyText.Question13 + "','" + surveyText.Question14 + "','" + surveyText.Question15 +
-                            "','" + surveyText.Question16 + "','" + surveyText.Question17 + "','" +
-                            surveyText.Question18 + "','" + surveyText.Question19 + "','" + surveyText.Question20
-                            + "','" + surveyText.Question21 + "','" + surveyText.Question22 + "','" +
-                            surveyText.Question23 + "','" + surveyText.Id + "','" + surveyText.DoctorName + "','" +
+                            + surveyText.Questions[0] + "','" + surveyText.Questions[1] + "','" + surveyText.Questions[2] +
+                            "','" + surveyText.Questions[3] + "','" + surveyText.Questions[4]
+                            + "','" + surveyText.Questions[5] + "','" + surveyText.Questions[6] + "','" +
+                            surveyText.Questions[7] + "','" + surveyText.Questions[8] + "','" + surveyText.Questions[9] +
+                            "','" + surveyText.Questions[10] + "','" + surveyText.Questions[11] + "','" +
+                            surveyText.Questions[12] + "','" + surveyText.Questions[13] + "','" + surveyText.Questions[14] +
+                            "','" + surveyText.Questions[15] + "','" + surveyText.Questions[16] + "','" +
+                            surveyText.Questions[17] + "','" + surveyText.Questions[18] + "','" + surveyText.Questions[19]
+                            + "','" + surveyText.Questions[20] + "','" + surveyText.Questions[21] + "','" +
+                            surveyText.Questions[22] + "','" + surveyText.Id + "','" + surveyText.DoctorName + "','" +
                             surveyText.SerialNumber + "','" + dateSurvey + "')";
 
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
@@ -181,29 +181,29 @@ namespace WebApplication.Backend.Repositorys
             while (sqlReader.Read())
             {
                 Survey entity = new Survey();
-                entity.Question1 = (string) sqlReader[3];
-                entity.Question2 = (string) sqlReader[4];
-                entity.Question3 = (string) sqlReader[5];
-                entity.Question4 = (string) sqlReader[6];
-                entity.Question5 = (string) sqlReader[7];
-                entity.Question6 = (string) sqlReader[8];
-                entity.Question7 = (string) sqlReader[9];
-                entity.Question8 = (string) sqlReader[10];
-                entity.Question9 = (string) sqlReader[11];
-                entity.Question10 = (string) sqlReader[12];
-                entity.Question11 = (string) sqlReader[13];
-                entity.Question12 = (string) sqlReader[14];
-                entity.Question13 = (string) sqlReader[15];
-                entity.Question14 = (string) sqlReader[16];
-                entity.Question15 = (string) sqlReader[17];
-                entity.Question16 = (string) sqlReader[18];
-                entity.Question17 = (string) sqlReader[19];
-                entity.Question18 = (string) sqlReader[20];
-                entity.Question19 = (string) sqlReader[21];
-                entity.Question20 = (string) sqlReader[22];
-                entity.Question21 = (string) sqlReader[23];
-                entity.Question22 = (string) sqlReader[24];
-                entity.Question23 = (string) sqlReader[25];
+                entity.Questions[0] = (string) sqlReader[3];
+                entity.Questions[1] = (string) sqlReader[4];
+                entity.Questions[2] = (string) sqlReader[5];
+                entity.Questions[3] = (string) sqlReader[6];
+                entity.Questions[4] = (string) sqlReader[7];
+                entity.Questions[5] = (string) sqlReader[8];
+                entity.Questions[6] = (string) sqlReader[9];
+                entity.Questions[7] = (string) sqlReader[10];
+                entity.Questions[8] = (string) sqlReader[11];
+                entity.Questions[9] = (string) sqlReader[12];
+                entity.Questions[10] = (string) sqlReader[13];
+                entity.Questions[11] = (string) sqlReader[14];
+                entity.Questions[12] = (string) sqlReader[15];
+                entity.Questions[13] = (string) sqlReader[16];
+                entity.Questions[14] = (string) sqlReader[17];
+                entity.Questions[15] = (string) sqlReader[18];
+                entity.Questions[16] = (string) sqlReader[19];
+                entity.Questions[17]= (string) sqlReader[20];
+                entity.Questions[18] = (string) sqlReader[21];
+                entity.Questions[19] = (string) sqlReader[22];
+                entity.Questions[20] = (string) sqlReader[23];
+                entity.Questions[21]= (string) sqlReader[24];
+                entity.Questions[22] = (string) sqlReader[25];
                 entity.ReportDate = Convert.ToDateTime(sqlReader[26]);
                 resultList.Add(entity);
             }
