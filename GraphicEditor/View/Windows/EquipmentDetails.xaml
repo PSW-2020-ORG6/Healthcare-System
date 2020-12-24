@@ -9,7 +9,7 @@
         Title="EquipmentDetails" Height="450" Width="800">
     <Grid>
         <TextBlock HorizontalAlignment="Center"  Text="Equipment" FontSize="48"/>
-        <ListBox Height="300" VerticalAlignment="Center" x:Name="EquipmentListBox"  ItemsSource="{Binding Equipments}">
+        <ListBox Height="300" VerticalAlignment="Center" x:Name="EquipmentListBox" ItemsSource="{Binding ListOfEquipments, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
