@@ -23,19 +23,29 @@ namespace IntegrationAdapters.Repositories
             MedicineSpecification medicineSpecifications = new MedicineSpecification("1", "sastav", "tip", "tableta", "poruka", "sa receptom", "jankovic", new List<string>() { "123", "123" });
             MedicineSpecification medicineSpecifications1 = new MedicineSpecification("2", "sastav4", "tip4", "tableta", "poruka4", "sa receptom", "zgin", new List<string>() { "123", "123" });
             MedicineSpecification medicineSpecifications2 = new MedicineSpecification("3", "sastav7", "tip7", "tableta", "poruka7", "sa receptom", "jankovic", new List<string>() { "123", "123" });
-            Medicine medicine = new Medicine { MedicineID = "1", Name = "Brufen", MedicineSpecificationID = "1" };
-            Medicine medicine1 = new Medicine { MedicineID = "2", Name = "Paracetamol", MedicineSpecificationID = "2" };
-            Medicine medicine2 = new Medicine { MedicineID = "3", Name = "Frveks", MedicineSpecificationID = "3" };
-
+            Medicine medicine = new Medicine { MedicineID = "1", Name = "Brufen", MedicineSpecificationID = "1", Quantity = 5 };
+            Medicine medicine1 = new Medicine { MedicineID = "2", Name = "Paracetamol", MedicineSpecificationID = "2" , Quantity = 4};
+            Medicine medicine2 = new Medicine { MedicineID = "3", Name = "Frveks", MedicineSpecificationID = "3", Quantity = 10 };
 
             dbContext.AddRange(medicineSpecifications, medicineSpecifications1, medicineSpecifications2);
             dbContext.AddRange(medicine, medicine1, medicine2);
             dbContext.SaveChanges();
         }
 
+         public void AddMedicine(Medicine medicine)
+        {
+            dbContext.Add(medicine);
+            dbContext.SaveChanges();
+        }
+
         public List<Medicine> GetAll()
         {
             return dbContext.Medicine.ToList();
+        }
+
+        public void SaveChanges()
+        {
+            dbContext.SaveChanges();
         }
         public List<MedicineSpecification> GetAllSpecifications()
         {

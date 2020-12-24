@@ -32,7 +32,7 @@ namespace IntegrationAdapters.Controllers
         public IActionResult GetMedicineSpeification(string medicineName)
         {
             Medicine medicine = medicineService.DoesMedicineExist(medicineName);
-            if (medicine != null)
+            if (medicine != null && medicine.MedicineSpecificationID != null)
             {
                 medicineService.GenerateSpecificationFromHospital(medicineName);
 
@@ -68,6 +68,35 @@ namespace IntegrationAdapters.Controllers
 
 
         }
+
+	[HttpGet("getMedicine/{medicineName}/{quantity}")]
+        public string GetMedicine(string medicineName, int quantity)
+        {
+            var endPoint = "http://localhost:8082/myapp/medication/getMedicine/" + medicineName + "/" + quantity;
+            string text = GenerateResponse(endPoint);
+
+            if (IsResponseValid(text))
+            {
+                return text;
+            }
+            else
+            {
+                return "Medicine not found";
+            }
+        }
+
+        [HttpPost("addMedicine/{id}/{name}/{quantity}")]
+        public IActionResult AddMedicine(string id, string name, int quantity)
+        {
+            if (medicineService.AddMedicineUrgently(new Medicine(id, name, null, quantity), quantity))
+            {
+                return Ok();
+            } else
+            {
+                return BadRequest();
+            }
+        }
+
 
         [HttpGet("getPharmacies/{medicineName}/{quantity}")]
         public string GetPharmacies(string medicineName, int quantity)

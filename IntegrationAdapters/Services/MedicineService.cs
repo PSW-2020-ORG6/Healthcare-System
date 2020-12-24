@@ -28,6 +28,23 @@ namespace IntegrationAdapters.Services
             return medicineRepository.GetAll();
         }
 
+	public bool AddMedicineUrgently(Medicine medicine, int quantity)
+        {
+            Medicine med = GetMedicineByName(medicine.Name);
+            if (med != null) 
+            {
+                med.Quantity += quantity;
+                medicineRepository.SaveChanges();
+            } 
+            else
+            {
+                medicineRepository.AddMedicine(medicine);
+                
+            }
+            return true;
+        }
+
+
         public Medicine GetByID(string ID)
         {
             foreach (Medicine medicine in GetAll())

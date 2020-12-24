@@ -11,6 +11,8 @@ namespace IntegrationAdapters.Models
         public String Name { get; set; }
         public String MedicineSpecificationID { get; set; }
 
+        public int Quantity { get; set; }
+
         public Medicine()
         {
         }
@@ -19,6 +21,14 @@ namespace IntegrationAdapters.Models
             MedicineID = medicineID;
             Name = name;
             MedicineSpecificationID = medicineSpecificationID;
+        }
+
+        public Medicine(string medicineID, string name, string medicineSpecificationID, int quantity)
+        {
+            MedicineID = medicineID;
+            Name = name;
+            MedicineSpecificationID = medicineSpecificationID;
+            Quantity = quantity;
         }
     }
 }

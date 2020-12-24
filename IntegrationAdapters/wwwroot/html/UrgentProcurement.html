@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="../jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="../js/UrgentProcurement.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/registerHospital.css">
+</head>
+<body class="background" style="padding:200px 500px 200px 500px;">
+    <div id="table">
+        <table class="table-borderless">
+            <thead>
+                <tr>
+                    <th class="text-info" colspan="2">
+                        Urgent procurement
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-info">
+                        <label>Medicine name:</label>
+                    </td>
+                    <td>
+                        <input class="textbox" type="text" id="txtMedicine"
+                               placeholder="Medicine name..." />
+                    </td>
+                </tr>
+           
+                <tr>
+                    <td class="text-info">
+                        <label>Quantity:</label>
+                    </td>
+                    <td>
+                        <input class="textbox" type="text" id="txtQuantity"
+                               placeholder="Quantity..." />
+                    </td>
+                </tr>
+                
+                <tr style="color:coral">
+                    <td style="padding-top: 25px">
+                        <input style="background-color:coral;" id="btnProcurement" type="button" class="btn btn-primary" value="Procure medicine">
+                    </td>
+                    <td style="color:coral;" id="container">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
