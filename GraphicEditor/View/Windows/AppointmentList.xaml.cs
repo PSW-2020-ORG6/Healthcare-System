@@ -1,9 +1,14 @@
-﻿using HealthClinicBackend.Backend.Controller.SecretaryControllers;
+﻿using GraphicEditor.HelpClasses;
+using GraphicEditor.ViewModel;
+using HealthClinicBackend.Backend.Controller.SecretaryControllers;
 using HealthClinicBackend.Backend.Dto;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace GraphicEditor.View.Windows
 {
@@ -18,6 +23,7 @@ namespace GraphicEditor.View.Windows
         private int selectedIndex=-1;
         public SecretaryScheduleController secretaryScheduleController = new SecretaryScheduleController();
         private Window parent;
+        private MainWindowViewModel parentViewModel;
 
         public List<AppointmentDto> AppointmentDtos
         {
@@ -33,12 +39,13 @@ namespace GraphicEditor.View.Windows
         {
             InitializeComponent();
         }
-        public AppointmentList(List<AppointmentDto> listOfAppointments, Window parent)
+        public AppointmentList(List<AppointmentDto> listOfAppointments, Window parent, MainWindowViewModel _viewModel)
         {
             InitializeComponent();
             this.DataContext = this;
             appointmentDtos = listOfAppointments;
             this.parent = parent;
+            this.parentViewModel = _viewModel;
         }
 
 
@@ -79,6 +86,25 @@ namespace GraphicEditor.View.Windows
             string serialNumber = appointmentDtos[selectedIndex].Room.SerialNumber;
             EquipmentDetails win = new EquipmentDetails(serialNumber);
             win.Show();
+        }
+
+        private void goToButtonClick(object sender, RoutedEventArgs e)
+        {
+            if(selectedIndex == -1)
+            {
+                MessageBox.Show("You did not selected any appointment !!!");
+                return;
+            }
+            AppointmentDto appointmentDto = appointmentDtos[selectedIndex];
+            parentViewModel.CurrentUserControl = parentViewModel.CardiologyBuilding;
+            CardiologyFirstFloorMapUserControlViewModel floorViewModel = parentViewModel.CardiologyBuilding.myViewModel.FirstFloor.Viewmodel;
+            Button button = floorViewModel.connections[appointmentDto.Room.SerialNumber];
+            button.BorderBrush = new SolidColorBrush(Color.FromRgb(150, 0, 255));
+
+            CommonUtil.Run(() =>
+            {
+                button.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            }, TimeSpan.FromMilliseconds(5000));
         }
     }
 }
