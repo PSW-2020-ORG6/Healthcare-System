@@ -33,6 +33,7 @@ namespace GraphicEditor.View.UserControls
         public SecretaryScheduleController secretaryScheduleController = new SecretaryScheduleController();
         public PatientDatabaseSql patientDatabaseSql = new PatientDatabaseSql();
         public RoomDatabaseSql roomDatabaseSql = new RoomDatabaseSql();
+        MainWindowViewModel _viewModel;
         public List<Physician> Physicians
         {
             get { return physicians; }
@@ -71,7 +72,7 @@ namespace GraphicEditor.View.UserControls
                 OnPropertyChanged();
             }
         }
-        public Appointment()
+        public Appointment(MainWindowViewModel _viewModel)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -82,6 +83,7 @@ namespace GraphicEditor.View.UserControls
             ComboBox.Items.Refresh();
             ComboBox2.Items.Refresh();
             doctorPriority.IsChecked = true;
+            this._viewModel = _viewModel;
 
         }
 
@@ -171,7 +173,7 @@ namespace GraphicEditor.View.UserControls
             int priority=doctorPriority.IsChecked== true ? 0:1;
             List<AppointmentDto> appointmentDtos1 = secretaryScheduleController.GetAllAvailableAppointmentsGEA(appointmentDto, priority);
             
-            AppointmentList win = new AppointmentList(appointmentDtos1,this);
+            AppointmentList win = new AppointmentList(appointmentDtos1, this, _viewModel);
             win.Show();
         }
 
