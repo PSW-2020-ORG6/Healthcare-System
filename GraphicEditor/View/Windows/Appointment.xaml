@@ -20,9 +20,12 @@
             <Grid>
                 <TextBlock HorizontalAlignment="Center" FontSize="20">Search physician</TextBlock>
                 <TextBox x:Name="PhysicianTextBox"  Width="200" Margin="22" HorizontalAlignment="Left"></TextBox>
-                <Button Click="FilterPhysician" HorizontalAlignment="Right" Margin="22">Search</Button>
+                <Button HorizontalAlignment="Right" Margin="22" Command="{Binding FilterPhysician}" CommandParameter="{Binding ElementName=PhysicianTextBox}">Search</Button>
             </Grid>
-            <ListBox Height="290" SelectionChanged="MyListBox_SelectionChanged" x:Name="MyListBox" ItemsSource="{Binding Physicians}">
+            <ListBox Height="290" x:Name="MyListBox" SelectedIndex="{Binding PhysiciansIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding Physicians, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                <ListBox.InputBindings>
+                    
+                </ListBox.InputBindings>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -35,9 +38,9 @@
             <Grid>
                 <TextBlock HorizontalAlignment="Center" FontSize="20">Search patient</TextBlock>
                 <TextBox x:Name="PatientTextBox"  Width="200" Margin="22" HorizontalAlignment="Left"></TextBox>
-                <Button Click="FilterPatient" HorizontalAlignment="Right" Margin="22">Search</Button>
+                <Button HorizontalAlignment="Right" Margin="22" Command="{Binding FilterPatient}" CommandParameter="{Binding ElementName=PatientTextBox}">Search</Button>
             </Grid>
-            <ListBox Height="250" SelectionChanged="PatientsSelectionChanged" x:Name="MyListBoxPatient" ItemsSource="{Binding Patients}">
+            <ListBox Height="250" x:Name="MyListBoxPatient" SelectedIndex="{Binding PatientIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding Patients, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -50,20 +53,20 @@
         <StackPanel Grid.Row="0" Grid.Column="1">
             <Grid>
                 <TextBlock Margin="60 20 0 0"  FontSize="20">Pick date:</TextBlock>
-                <DatePicker x:Name="Date" Margin="0 20 10 0"  Width="100" ></DatePicker>
+                <DatePicker x:Name="Date" Margin="0 20 10 0"  Width="100" SelectedDate="{Binding DatePicker, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DatePicker>
             </Grid>
             <Grid>
                 <TextBlock Margin="60 20 0 0" FontSize="20">Time from:</TextBlock>
-                <ComboBox Margin="20 20 10 0" Width="80" x:Name="ComboBox" ItemsSource="{Binding MyTime}"/>
+                <ComboBox SelectedIndex="{Binding FromTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="20 20 10 0" Width="80" x:Name="ComboBox" ItemsSource="{Binding MyTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
             </Grid>
             <Grid>
                 <TextBlock Margin="60 20 0 0" FontSize="20">Time to:</TextBlock>
-                <ComboBox Margin="20 20 10 0" Width="80" x:Name="ComboBox2" ItemsSource="{Binding MyTime}"/>
+                <ComboBox SelectedIndex="{Binding ToTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="20 20 10 0" Width="80" x:Name="ComboBox2"  ItemsSource="{Binding MyTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
             </Grid>
-            <RadioButton x:Name="doctorPriority" FontSize="20" GroupName="priority" Margin="60 40 0 0">Doctor is priority</RadioButton>
-            <RadioButton x:Name="terminPriority" FontSize="20" GroupName="priority" Margin="60 10 0 0">Termin is priority</RadioButton>
+            <RadioButton IsChecked="{Binding IsCheckedDoctorPriority, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="doctorPriority" FontSize="20" GroupName="priority" Margin="60 40 0 0">Doctor is priority</RadioButton>
+            <RadioButton IsChecked="{Binding IsCheckedTerminPriority, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="terminPriority" FontSize="20" GroupName="priority" Margin="60 10 0 0">Termin is priority</RadioButton>
         </StackPanel>
-        <Button Click="DisplayPossibleAppointments" Content="Show available termins" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="200" />
+        <Button Command="{Binding ShowTermins}" Content="Show available termins" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="200" />
 
 
     </Grid>
