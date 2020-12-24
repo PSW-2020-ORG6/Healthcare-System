@@ -27,8 +27,9 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Grid VerticalAlignment="Center" >
-            <Button Click="createAppointment" HorizontalAlignment="Left" Margin="180 0 0 0" FontSize="20" Height="40"  Content="Create appointment"/>
-            <Button Click="showEquipmentButton" HorizontalAlignment="Right" Margin="0 0 180 0" FontSize="20" Height="40"  Content="Show equipments"/>
+            <Button Click="createAppointment" HorizontalAlignment="Left" Margin="50 0 0 0" FontSize="20" Height="40"  Content="Create appointment"/>
+            <Button Click="showEquipmentButton" HorizontalAlignment="Center" Margin="0 0 0 0" FontSize="20" Height="40"  Content="Show equipments"/>
+            <Button Click="goToButtonClick" HorizontalAlignment="Right" Margin="0 0 150 0" Content="Go to" FontSize="20" Height="40"/>
         </Grid>
         
     </StackPanel>

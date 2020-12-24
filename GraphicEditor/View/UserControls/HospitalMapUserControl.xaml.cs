@@ -42,7 +42,7 @@ namespace GraphicEditor.View.UserControls
                 new Warning().ShowDialog();
                 return;
             }
-            Appointment appointment = new Appointment();
+            Appointment appointment = new Appointment(_viewModel);
             appointment.Show();
         }
     }
