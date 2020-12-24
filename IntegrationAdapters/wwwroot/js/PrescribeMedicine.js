@@ -36,12 +36,12 @@ $(document).ready(function () {
 				$('#container').html('');
 				var foundedPharmacy = foundedPharmacy.substring(0, foundedPharmacy.length - 1)
 				var foundedPharmacyArray = foundedPharmacy.split('#');
+				
 				for (var value of foundedPharmacyArray) {
 						if (value == 'Pharmacy not foun') {
 							$('#container').append(`<input class="textbox" type="text" id="${value}"  value="Pharmacy not found" disabled>`)
 							$('#btnPrescribe').attr("disabled", true);
 						} else {
-							$('#btnPrescribe').attr("disabled", false);
 							$('#container')
 								.append(`<input type="checkbox" id="${value}" name="interest" value="${value}">`)
 								.append(`<label for="${value}">${value}</label></div>`)
@@ -119,7 +119,6 @@ $(document).ready(function () {
 						$('#container').append(`<input class="textbox" type="text" id="${value}"  value="${value}" disabled>`)
 						$('#btnPrescribe').attr("disabled", true);
 					} else {
-						$('#btnPrescribe').attr("disabled", false);
 						$('#container')
 							.append(`<input type="checkbox" id="${value}" name="interest" value="${value}">`)
 							.append(`<label for="${value}">${value}</label></div>`)

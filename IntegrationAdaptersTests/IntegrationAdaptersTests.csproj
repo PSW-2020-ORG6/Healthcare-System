@@ -18,4 +18,10 @@
     <ProjectReference Include="..\IntegrationAdapters\IntegrationAdapters.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="tests\test.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

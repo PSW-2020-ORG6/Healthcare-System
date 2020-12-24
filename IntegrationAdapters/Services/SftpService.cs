@@ -12,7 +12,7 @@ namespace IntegrationAdapters.Services
     {
         public SftpConfig config = new SftpConfig
         {
-            Host = "192.168.0.23",
+            Host = "192.168.0.116",
             Port = 22,
             Username = "tester",
             Password = "password"
