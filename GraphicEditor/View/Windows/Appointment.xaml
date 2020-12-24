@@ -54,14 +54,16 @@
             </Grid>
             <Grid>
                 <TextBlock Margin="60 20 0 0" FontSize="20">Time from:</TextBlock>
-                <ComboBox Margin="0 20 10 0" Width="80" x:Name="ComboBox" ItemsSource="{Binding MyTime}"/>
+                <ComboBox Margin="20 20 10 0" Width="80" x:Name="ComboBox" ItemsSource="{Binding MyTime}"/>
             </Grid>
             <Grid>
                 <TextBlock Margin="60 20 0 0" FontSize="20">Time to:</TextBlock>
-                <ComboBox Margin="0 20 10 0" Width="80" x:Name="ComboBox2" ItemsSource="{Binding MyTime}"/>
+                <ComboBox Margin="20 20 10 0" Width="80" x:Name="ComboBox2" ItemsSource="{Binding MyTime}"/>
             </Grid>
+            <RadioButton x:Name="doctorPriority" FontSize="20" GroupName="priority" Margin="60 40 0 0">Doctor is priority</RadioButton>
+            <RadioButton x:Name="terminPriority" FontSize="20" GroupName="priority" Margin="60 10 0 0">Termin is priority</RadioButton>
         </StackPanel>
-        <Button Click="GetAllTermins" Content="Show available termins" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="200" />
+        <Button Click="DisplayPossibleAppointments" Content="Show available termins" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="200" />
 
 
     </Grid>
