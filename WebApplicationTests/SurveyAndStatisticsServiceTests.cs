@@ -13,7 +13,7 @@ namespace WebApplicationTests
     public class SurveyAndStatisticsServiceTests
     {
         Survey surveyTest = new Survey
-               ("001", "Bozo Bozic", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", new DateTime(2017, 05, 17));
+               ("001", "Bozo Bozic", /*"3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", */new DateTime(2017, 05, 17));
 
         [Fact]
             public void Adds_new_survey()
