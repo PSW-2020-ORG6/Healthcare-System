@@ -38,7 +38,6 @@ namespace GraphicEditor.View.UserControls
             set
             {
                 physicians = value;
-                // Call OnPropertyChanged whenever the property is updated
                 OnPropertyChanged();
             }
         }
@@ -49,7 +48,6 @@ namespace GraphicEditor.View.UserControls
             set
             {
                 patients = value;
-                // Call OnPropertyChanged whenever the property is updated
                 OnPropertyChanged();
             }
         }
@@ -60,7 +58,6 @@ namespace GraphicEditor.View.UserControls
             set
             {
                 rooms = value;
-                // Call OnPropertyChanged whenever the property is updated
                 OnPropertyChanged();
             }
         }
@@ -70,7 +67,6 @@ namespace GraphicEditor.View.UserControls
             set
             {
                 myTime = value;
-                // Call OnPropertyChanged whenever the property is updated
                 OnPropertyChanged();
             }
         }
@@ -84,6 +80,7 @@ namespace GraphicEditor.View.UserControls
             createTimeForDropBox();
             ComboBox.Items.Refresh();
             ComboBox2.Items.Refresh();
+            doctorPriority.IsChecked = true;
 
         }
 
@@ -121,10 +118,9 @@ namespace GraphicEditor.View.UserControls
             selectedPhysician = Physicians[index];
         }
 
-        private void GetAllTermins(object sender, RoutedEventArgs e)
+        private void DisplayPossibleAppointments(object sender, RoutedEventArgs e)
         {
             AppointmentDto appointmentDto = new AppointmentDto();
-            //setuj ovde !!!
 
             string[] s = ComboBox.Text.Split(":");
             string[] s2 = ComboBox2.Text.Split(":");
@@ -139,12 +135,25 @@ namespace GraphicEditor.View.UserControls
                 MessageBox.Show("You did not select date from date picker");
                 return;
             }
+            int hours = Int32.Parse(s[0]);
+            int min = Int32.Parse(s[1]);
+            int hours2 = Int32.Parse(s2[0]);
+            int min2 = Int32.Parse(s2[1]);
+            if (hours > hours2 || (hours == hours2 && min > min2))
+            {
+                MessageBox.Show("Time FROM must be less then TO !!!");
+                return;
+            }
+            if (DateTime.Now> dateTime)
+            {
+                MessageBox.Show("You can not select date in past !!!");
+                return;
+            }
             DateTime dateTime1 = new DateTime(dateTime.Value.Year, dateTime.Value.Month, dateTime.Value.Day
-                , Int32.Parse(s[0]), Int32.Parse(s[1]), 0);
+                , hours, min, 0);
 
             DateTime dateTime2 = new DateTime(dateTime.Value.Year, dateTime.Value.Month, dateTime.Value.Day
-                , Int32.Parse(s2[0]), Int32.Parse(s2[1]), 0);
-            //validate if something is null
+                , hours2, min2, 0);
             appointmentDto.Time = new TimeInterval(dateTime1, dateTime2);
             appointmentDto.Physician = selectedPhysician;
             appointmentDto.ProcedureType = new ProcedureType();
@@ -158,9 +167,10 @@ namespace GraphicEditor.View.UserControls
             }
             ProcedureType procType = new ProcedureType("Procedura", 30, new Specialization("Family doctor"));
             appointmentDto.ProcedureType = procType;
-            List<AppointmentDto> appointmentDtos1 = secretaryScheduleController.GetAllAvailableAppointmentsGEA(appointmentDto, 0);
+            int priority=doctorPriority.IsChecked== true ? 0:1;
+            List<AppointmentDto> appointmentDtos1 = secretaryScheduleController.GetAllAvailableAppointmentsGEA(appointmentDto, priority);
             
-            AppointmentList win = new AppointmentList(appointmentDtos1);
+            AppointmentList win = new AppointmentList(appointmentDtos1,this);
             win.Show();
         }
 

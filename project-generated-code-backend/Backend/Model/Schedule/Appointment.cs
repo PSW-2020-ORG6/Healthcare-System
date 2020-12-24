@@ -120,6 +120,9 @@ namespace HealthClinicBackend.Backend.Model.Schedule
             ProcedureType = appointmentDTO.ProcedureType;
             Urgency = appointmentDTO.Urgency;
             Date = appointmentDTO.Date;
+            RoomSerialNumber = Room.SerialNumber;
+            PhysicianSerialNumber = Physician.SerialNumber;
+            PatientSerialNumber = Patient.SerialNumber;
         }
 
         public Appointment(string physicianId, string date, DateTime timeIntervalStart)
