@@ -1,6 +1,6 @@
 ﻿using GraphicEditor.HelpClasses;
+using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
@@ -10,10 +10,11 @@ namespace GraphicEditor.ViewModel
 {
     public class EquipmentSearchViewModel : BindableBase
     {
-        private RoomDatabaseSql roomRepository = new RoomDatabaseSql();
-        private FloorDatabaseSql floorRepository = new FloorDatabaseSql();
-        private BuildingDatabaseSql buildingRepository = new BuildingDatabaseSql();
-        private EquipmentDatabaseSql equipmentDatabaseSql = new EquipmentDatabaseSql();
+        private RoomController roomController = new RoomController();
+        private FloorController floorController = new FloorController();
+        private BuildingController buildingController = new BuildingController();
+        private EquipmentController equipmentController = new EquipmentController();
+        private MainWindowViewModel parentViewModel;
 
         private List<Equipment> _resultOfSearch;
         public List<Equipment> ResultOfSearch
@@ -70,8 +71,6 @@ namespace GraphicEditor.ViewModel
 
         public MyICommand GoToCommand { get; private set; }
 
-        private MainWindowViewModel parentViewModel;
-
         public EquipmentSearchViewModel(MainWindowViewModel vm)
         {
             SearchCommand = new MyICommand<string>(SearchEquipment);
@@ -81,15 +80,15 @@ namespace GraphicEditor.ViewModel
 
         private void SearchEquipment(string equipmentName)
         {
-            _resultOfSearch = equipmentDatabaseSql.GetByName(equipmentName);
+            _resultOfSearch = equipmentController.GetByName(equipmentName);
             FoundEquipment = _resultOfSearch;
             _reportOfSearch = new List<string>();
             foreach (Equipment result in _resultOfSearch)
             {
-                Floor floor = floorRepository.GetBySerialNumber(result.FloorSerialNumber);
-                Building building = buildingRepository.GetBySerialNumber(floor.BuildingSerialNumber);
-                Room room = roomRepository.GetBySerialNumber(result.RoomSerialNumber);
-                string fullLocation = building.Name + ", " + floor.Name + ", " + room.Name + ", " 
+                Floor floor = floorController.GetById(result.FloorSerialNumber);
+                Building building = buildingController.GetById(floor.BuildingSerialNumber);
+                Room room = roomController.GetById(result.RoomSerialNumber);
+                string fullLocation = building.Name + ", " + floor.Name + ", " + room.Name + ", "
                                         + result.Name + " in quantity: " + result.Quantity;
                 _reportOfSearch.Add(fullLocation);
             }
@@ -102,6 +101,11 @@ namespace GraphicEditor.ViewModel
             Equipment equipment = FoundEquipment[SelectedEquipmentIndex];
             parentViewModel.CurrentUserControl = parentViewModel.CardiologyBuilding;
             CardiologyFirstFloorMapUserControlViewModel floorViewModel = parentViewModel.CardiologyBuilding.myViewModel.FirstFloor.Viewmodel;
+            HighlightRoom(equipment, floorViewModel);
+        }
+
+        private void HighlightRoom(Equipment equipment, CardiologyFirstFloorMapUserControlViewModel floorViewModel)
+        {
             Button button = floorViewModel.connections[equipment.RoomSerialNumber];
             button.BorderBrush = new SolidColorBrush(Color.FromRgb(150, 0, 255));
 

@@ -36,17 +36,15 @@ namespace GraphicEditor.ViewModel
             NavCommandUpdate = new MyICommand(updateRoomInfo);
         }
 
-
-        void updateRoomInfo()
+        public void updateRoomInfo()
         {
             _bedUpdateAnswerListener.onConfirmUpdate(BedInfo);
             _window.Close();
         }
 
-        void exitInfo()
+        public void exitInfo()
         {
             _window.Close();
         }
-
     }
 }

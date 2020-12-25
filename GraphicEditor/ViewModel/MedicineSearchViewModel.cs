@@ -1,6 +1,6 @@
 ﻿using GraphicEditor.HelpClasses;
+using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
@@ -10,10 +10,10 @@ namespace GraphicEditor.ViewModel
 {
     public class MedicineSearchViewModel : BindableBase
     {
-        private RoomDatabaseSql roomRepository = new RoomDatabaseSql();
-        private FloorDatabaseSql floorRepository = new FloorDatabaseSql();
-        private BuildingDatabaseSql buildingRepository = new BuildingDatabaseSql();
-        private MedicineDatabaseSql medicineRepository = new MedicineDatabaseSql();
+        private RoomController roomController = new RoomController();
+        private FloorController floorController = new FloorController();
+        private BuildingController buildingController = new BuildingController();
+        private SuperintendentMedicineController medicineController = new SuperintendentMedicineController();
 
         private MainWindowViewModel parentViewModel;
 
@@ -72,28 +72,31 @@ namespace GraphicEditor.ViewModel
 
         private void SearchMedicine(string medicineName)
         {
-            _resultOfSearch = medicineRepository.GetByName(medicineName);
+            _resultOfSearch = medicineController.GetByName(medicineName);
             FoundMedicines = _resultOfSearch;
             _reportOfSearch = new List<string>();
             foreach (Medicine result in _resultOfSearch)
             {
-                Room room = roomRepository.GetBySerialNumber(result.RoomSerialNumber);
-                Floor floor = floorRepository.GetBySerialNumber(room.FloorSerialNumber);
-                Building building = buildingRepository.GetBySerialNumber(floor.BuildingSerialNumber);
+                Room room = roomController.GetById(result.RoomSerialNumber);
+                Floor floor = floorController.GetById(room.FloorSerialNumber);
+                Building building = buildingController.GetById(floor.BuildingSerialNumber);
                 string fullLocation = building.Name + ", " + floor.Name + ", " + room.Name + ", "
                                     + result.GenericName + " in quantity: " + result.Quantity;
                 _reportOfSearch.Add(fullLocation);
             }
             OnPropertyChanged("ReportOfSearch");
-
         }
 
         private void FindMedicine()
         {
-
             Medicine localMedicine = FoundMedicines[SelectedMedicineIndex];
             parentViewModel.CurrentUserControl = parentViewModel.CardiologyBuilding;
             CardiologyFirstFloorMapUserControlViewModel floorViewModel = parentViewModel.CardiologyBuilding.myViewModel.FirstFloor.Viewmodel;
+            HighlightRoom(localMedicine, floorViewModel);
+        }
+
+        private void HighlightRoom(Medicine localMedicine, CardiologyFirstFloorMapUserControlViewModel floorViewModel)
+        {
             Button button = floorViewModel.connections[localMedicine.RoomSerialNumber];
             button.BorderBrush = new SolidColorBrush(Color.FromRgb(150, 0, 255));
 

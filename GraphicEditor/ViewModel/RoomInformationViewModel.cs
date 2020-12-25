@@ -1,46 +1,29 @@
 ﻿using GraphicEditor.HelpClasses;
 using GraphicEditor.View.Windows;
 using HealthClinicBackend.Backend.Model.Hospital;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace GraphicEditor.ViewModel
 {
     public class RoomInformationViewModel : BindableBase, DialogAnswerListener<Bed>, DialogAnswerListener<Room>
     {
         private RoomInformation window;
-
         private List<Bed> beds = new List<Bed>();
-
         private Bed selectedBed;
-
         private List<Equipment> equipment = new List<Equipment>();
-
         private Equipment selectedEquipment;
-
         private List<Medicine> medicines = new List<Medicine>();
-
         private Medicine selectedMedicine;
-
-        //private List<Object> items = new List<Object>();
-
-        //private Object selectedItem;
-
+        /* TODO add this without causing errors
+        private List<Object> items = new List<Object>();
+        private Object selectedItem;*/
         private string roomName;
-
         private Room room;
-
-        private string[] categories = { "Equipment", "Medicines", "Beds"};
-
+        private string[] categories = { "Equipment", "Medicines", "Beds" };
         private string selectedCategory;
-
         private Visibility bedVisibility;
-
         private Visibility equipmentVisibility;
-
         private Visibility medicineVisibility;
 
         public MyICommand<Bed> NavCommandBedUpdate { get; private set; }
@@ -150,15 +133,16 @@ namespace GraphicEditor.ViewModel
             }
         }
 
-        //public string RoomName
-        //{
-        //    get => roomName;
-        //    set
-        //    {
-        //        SetProperty(ref roomName, value);
-        //    }
-        //}
-
+        /* TODO add this without causing errors
+        public string roomname
+        {
+            get => roomname;
+            set
+            {
+                setproperty(ref roomname, value);
+            }
+        }*/
+        
         public Room Room
         {
             get => room;
@@ -190,8 +174,6 @@ namespace GraphicEditor.ViewModel
             medicineVisibility = Visibility.Hidden;
             bedVisibility = Visibility.Hidden;
 
-
-
             if (beds.Count != 0)
                 selectedBed = beds[0];
 
@@ -204,7 +186,7 @@ namespace GraphicEditor.ViewModel
 
         void ChangeCaterogy()
         {
-            switch(selectedCategory)
+            switch (selectedCategory)
             {
                 case Constants.EQUIPMENT:
                     EquipmentVisibility = Visibility.Visible;
@@ -246,17 +228,19 @@ namespace GraphicEditor.ViewModel
 
         public void onConfirmUpdate(Bed b)
         {
-            //BedInfo.Id = b.Id;
-            //BedInfo.Name = b.Name;
-            //BedInfo.SerialNumber = b.SerialNumber;
-            //OnPropertyChanged("BedInfo");
-            //OnPropertyChanged("Beds");
+            /* TODO add this without causing errors
+            BedInfo.Id = b.Id;
+            BedInfo.Name = b.Name;
+            BedInfo.SerialNumber = b.SerialNumber;
+            OnPropertyChanged("BedInfo");
+            OnPropertyChanged("Beds");*/
         }
 
         public void onConfirmUpdate(Room room)
         {
-            //RoomName = room.SerialNumber;
-            //OnPropertyChanged("RoomName");
+            /* TODO add this without causing errors
+            RoomName = room.SerialNumber;
+            OnPropertyChanged("RoomName");*/
         }
     }
 }

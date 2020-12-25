@@ -36,13 +36,13 @@ namespace GraphicEditor.ViewModel
             NavCommandUpdate = new MyICommand(updateBuildingInfo);
         }
 
-        void updateBuildingInfo()
+        public void updateBuildingInfo()
         {
             _dialogAnswerListener.onConfirmUpdate(BuildingInfo);
             _window.Close();
         }
 
-        void exitInfo()
+        public void exitInfo()
         {
             _window.Close();
         }

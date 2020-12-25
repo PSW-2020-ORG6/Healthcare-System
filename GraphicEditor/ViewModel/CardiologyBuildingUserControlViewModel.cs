@@ -19,7 +19,8 @@ namespace GraphicEditor.ViewModel
         public MyICommand<string> NavCommand { get; private set; }
         public MyICommand<Building> BuildingUpdateCommand { get; private set; }
         public CardiologyFirstFloorMapUserControl FirstFloor;
-        //public CardiologySecondFloorMapUserControl SecondFloor;
+        /* TODO add this without causing errors
+        public CardiologySecondFloorMapUserControl SecondFloor;*/
         public CardiologyFirstFloorMapUserControl _floorViewModel;
         public Grid grid;
 
@@ -30,74 +31,76 @@ namespace GraphicEditor.ViewModel
             NavCommand = new MyICommand<string>(ChooseFloor);
             BuildingUpdateCommand = new MyICommand<Building>(editBuilding);
             FirstFloor = new CardiologyFirstFloorMapUserControl(mapParent, this);
-            //SecondFloor = new CardiologySecondFloorMapUserControlViewModel();
-            _floorViewModel = FirstFloor;
+            /* TODO add this without causing errors
+           SecondFloor = new CardiologySecondFloorMapUserControlViewModel();*/
+        _floorViewModel = FirstFloor;
 
-            List<Floor> _buildingFloors = new List<Floor>();
+           List<Floor> _buildingFloors = new List<Floor>();
 
-            _building = new Building("Cardiology", "Color Blue");
+           _building = new Building("Cardiology", "Color Blue");
+       }
+
+       public CardiologyFirstFloorMapUserControl FloorViewModel
+       {
+           get { return _floorViewModel; }
+           set
+           {
+               SetProperty(ref _floorViewModel, value);
+           }
+       }
+
+       public List<string> Floors
+       {
+           get
+           {
+               return _floors;
+           }
+       }
+
+       public Building Building
+       {
+           get
+           {
+               return _building;
+           }
+           set
+           {
+               SetProperty(ref _building, value);
+           }
+       }
+
+       public string SelectedFloor
+       {
+           get { return _selectedFloor; }
+           set
+           {
+               if (value != null)
+               {
+                   SetProperty(ref _selectedFloor, value);
+                   String cpy = new String(_selectedFloor);
+                   var paramArray = cpy.Split(' ');
+                   var param = paramArray[0].ToLower();
+                   ChooseFloor(param);
+               }
+           }
+       }
+
+       private void ChooseFloor(string destination)
+       {
+           switch (destination)
+           {
+               case Constants.BACK:
+                   _mapParent.CurrentUserControl = _mapParent.HospitalMap;
+                   break;
+               case Constants.FIRST:
+                   FloorViewModel = FirstFloor;
+                   break;
+               /* TODO add this without causing errors
+               case Constants.SECOND:
+                   FloorViewModel = SecondFloor;
+                   break;*/
         }
-
-        public CardiologyFirstFloorMapUserControl FloorViewModel
-        {
-            get { return _floorViewModel; }
-            set
-            {
-                SetProperty(ref _floorViewModel, value);
-            }
-        }
-
-        public List<string> Floors
-        {
-            get
-            {
-                return _floors;
-            }
-        }
-
-        public Building Building
-        {
-            get
-            {
-                return _building;
-            }
-            set
-            {
-                SetProperty(ref _building, value);
-            }
-        }
-
-        public string SelectedFloor
-        {
-            get { return _selectedFloor; }
-            set
-            {
-                if (value != null)
-                {
-                    SetProperty(ref _selectedFloor, value);
-                    String cpy = new String(_selectedFloor);
-                    var paramArray = cpy.Split(' ');
-                    var param = paramArray[0].ToLower();
-                    ChooseFloor(param);
-                }
-            }
-        }
-
-        private void ChooseFloor(string destination)
-        {
-            switch (destination)
-            {
-                case Constants.BACK:
-                    _mapParent.CurrentUserControl = _mapParent.HospitalMap;
-                    break;
-                case Constants.FIRST:
-                    FloorViewModel = FirstFloor;
-                    break;
-                //case Constants.SECOND:
-                //    FloorViewModel = SecondFloor;
-                //    break;
-            }
-        }
+    }
 
         private void editBuilding(Building _building)
         {
