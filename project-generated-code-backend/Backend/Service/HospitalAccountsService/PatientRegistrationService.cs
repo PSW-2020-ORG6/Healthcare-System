@@ -1,8 +1,3 @@
-// File:    PatientRegistrationService.cs
-// Author:  Luka Doric
-// Created: Sunday, June 7, 2020 4:19:02 PM
-// Purpose: Definition of Class PatientRegistrationService
-
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
@@ -21,6 +16,10 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
             _patientRepository = new PatientDatabaseSql();
         }
 
+        public PatientRegistrationService(IPatientRepository patientRepository)
+        {
+            _patientRepository = patientRepository;
+        }
 
         private bool IsJmbgValid(string jmbg)
         {

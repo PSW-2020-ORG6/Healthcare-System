@@ -1,6 +1,5 @@
 ﻿using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.Generic;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,6 +10,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public override List<Bed> GetAll()
         {
             return dbContext.Bed.ToList();
+        }
+
+        public override Bed GetById(string id)
+        {
+            return dbContext.Bed.Find(id);
         }
 
         public List<Bed> GetByRoomSerialNumber(string roomSerialNumber)

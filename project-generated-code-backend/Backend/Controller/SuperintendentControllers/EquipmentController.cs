@@ -1,5 +1,6 @@
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Service.HospitalResourcesService;
+using System;
 using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
@@ -41,6 +42,11 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
         public void DeleteEquipment(Equipment equipment)
         {
             equipmentService.DeleteEquipment(equipment);
+        }
+
+        public List<Equipment> GetByRoomSerialNumber(string roomSerialNumber)
+        {
+            return equipmentService.GetByRoomSerialNumber(roomSerialNumber);
         }
     }
 }

@@ -6,9 +6,6 @@ using System.Windows;
 
 namespace GraphicEditor.View.Windows
 {
-    /// <summary>
-    /// Interaction logic for AppointmentList.xaml
-    /// </summary>
     public partial class AppointmentList : Window, INotifyPropertyChanged
     {
 
@@ -21,7 +18,6 @@ namespace GraphicEditor.View.Windows
             set
             {
                 appointmentDtos = value;
-                // Call OnPropertyChanged whenever the property is updated
                 OnPropertyChanged();
             }
         }
@@ -35,8 +31,6 @@ namespace GraphicEditor.View.Windows
             this.DataContext = this;
             appointmentDtos = listOfAppointments;
         }
-
-
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {

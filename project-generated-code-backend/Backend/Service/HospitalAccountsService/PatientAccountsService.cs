@@ -4,6 +4,7 @@ using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.FileSystem;
 using HealthClinicBackend.Backend.Repository.Generic;
 using Model.Accounts;
+using System;
 using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
@@ -18,6 +19,21 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
             _patientRepository = new PatientDatabaseSql();
             // TODO: 
             _appointmentRepository = new AppointmentFileSystem();
+        }
+
+        public PatientAccountsService(IPatientRepository patientRepository)
+        {
+            _patientRepository = patientRepository;
+        }
+
+        public Patient GetById(string id)
+        {
+            return _patientRepository.GetById(id);
+        }
+
+        public List<Patient> GetByName(string name)
+        {
+            return _patientRepository.GetByName(name);
         }
 
         public List<Patient> getAllPatients()

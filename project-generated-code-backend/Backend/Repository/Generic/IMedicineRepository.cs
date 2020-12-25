@@ -8,5 +8,6 @@ namespace HealthClinicBackend.Backend.Repository.Generic
         public List<Medicine> GetApproved();
         public List<Medicine> GetWaiting();
         List<Medicine> GetByName(string name);
+        List<Medicine> GetByRoomSerialNumber(string roomSerialNumber);
     }
 }

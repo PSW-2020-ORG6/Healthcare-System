@@ -1,5 +1,6 @@
 ﻿using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Service.MedicineService;
+using System;
 using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
@@ -20,6 +21,11 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
         public List<Medicine> GetByName(string name)
         {
             return superintendentMedicineService.GetByName(name);
+        }
+
+        public List<Medicine> GetByRoomSerialNumber(string roomSerialNumber)
+        {
+            return superintendentMedicineService.GetByRoomSerialNumber(roomSerialNumber);
         }
 
         public List<Medicine> GetAllApproved()

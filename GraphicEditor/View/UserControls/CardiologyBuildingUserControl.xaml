@@ -9,7 +9,8 @@
              xmlns:viewUserControl="clr-namespace:GraphicEditor.View.UserControls"
              d:DesignHeight="600" d:DesignWidth="900">
 
-    <!--<UserControl.Resources>
+    <!-- TODO add this without causing errors
+        <UserControl.Resources>
         <DataTemplate DataType="{x:Type viewModel:CardiologyFirstFloorMapUserControlViewModel}">
             <viewUserControl:CardiologyFirstFloorMapUserControl/>
         </DataTemplate>

@@ -38,5 +38,10 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
         {
             return JsonConvert.DeserializeObject<Patient>(objectStringFormat);
         }
+
+        public List<Patient> GetByName(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

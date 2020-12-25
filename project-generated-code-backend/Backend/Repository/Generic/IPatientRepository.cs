@@ -9,5 +9,6 @@ namespace HealthClinicBackend.Backend.Repository.Generic
         List<Patient> GetPatientsByPhysitian(Physician physician);
         Patient GetByJmbg(string jbmg);
         bool IsPatientIdValid(string id);
+        List<Patient> GetByName(string name);
     }
 }

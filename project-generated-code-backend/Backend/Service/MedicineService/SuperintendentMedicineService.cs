@@ -1,6 +1,7 @@
 ﻿using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
+using System;
 using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Service.MedicineService
@@ -25,6 +26,11 @@ namespace HealthClinicBackend.Backend.Service.MedicineService
         public List<Medicine> GetAll()
         {
             return _medicineRepository.GetAll();
+        }
+
+        public List<Medicine> GetByRoomSerialNumber(string roomSerialNumber)
+        {
+            return _medicineRepository.GetByRoomSerialNumber(roomSerialNumber);
         }
 
         public List<Medicine> GetByName(string name)
