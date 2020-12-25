@@ -14,7 +14,7 @@ namespace GraphicEditor.View.Windows
         {
             InitializeComponent();
             string currentDirectory = Directory.GetCurrentDirectory();
-            currentDirectory = currentDirectory.Replace("\\bin\\Debug", "");
+            currentDirectory = currentDirectory.Replace("\\bin\\Debug\\netcore3.1", "");
             string path = String.Format("{0}/HtmlHelpPages/{1}.html", currentDirectory, key);
             if (!File.Exists(path))
             {

@@ -112,11 +112,11 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="43"/>
                     <ColumnDefinition Width="198"/>
-                    <ColumnDefinition Width="43"/>
+                    <ColumnDefinition Width="45"/>
                     <ColumnDefinition Width="198"/>
                     <ColumnDefinition Width="40"/>
                     <ColumnDefinition Width="198"/>
-                    <ColumnDefinition Width="42"/>
+                    <ColumnDefinition Width="43"/>
                     <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
@@ -127,7 +127,7 @@
                     <RowDefinition Height="200"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="200"/>
-                    <RowDefinition Height="44"/>
+                    <RowDefinition Height="43"/>
                     <RowDefinition Height="200"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
@@ -140,24 +140,6 @@
                        HorizontalAlignment="Center"
                        Source="/GraphicEditor;component/Resources/Images/MapPattern2-2.png" 
                        VerticalAlignment="Center" />
-
-                <!--Emergency Ambulance button-->
-                <Button x:Name="EmergencyAmbulanceButton"
-                        Grid.Column="1"
-                        Grid.Row="1"
-                        Background="DarkRed"
-                        CommandParameter="emergency"
-                        Style="{StaticResource ResourceKey=DefaultRectangleBuildingButtonStyle}">
-                    <StackPanel>
-                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
-                                   TextWrapping="Wrap">
-                                Emergency Ambulance
-                        </TextBlock>
-                        <Image Height="30" 
-                               Margin="0,3,0,0"
-                               Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
-                    </StackPanel>
-                </Button>
 
                 <!--Cardiology button-->
                 <Button x:Name="CardiologyButton"
@@ -177,58 +159,8 @@
                     </StackPanel>
                 </Button>
 
-                <!--Orthopedics button-->
-                <Button x:Name="OrthopedyButton"
-                        Grid.Column="5"
-                        Grid.Row="1"
-                        Background="OrangeRed" 
-                        CommandParameter="orthopedics"
-                        Style="{StaticResource ResourceKey=DefaultRectangleBuildingButtonStyle}">
-                    <StackPanel>
-                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
-                                   TextWrapping="Wrap">
-                                Orthopedics
-                        </TextBlock>
-                        <Image Height="30"
-                               Margin="0,3,0,0"
-                               Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png" />
-                    </StackPanel>
-                </Button>
-
-                <!--Pediatrics button-->
-                <Button x:Name="PediatryButton"
-                        Grid.Column="7"
-                        Grid.Row="1"
-                        CommandParameter="pediatrics"
-                        Style="{StaticResource ResourceKey=TriangleBuildingButtonStyle}">
-                </Button>
-
-                <!--Dermatology button-->
-                <Button x:Name="DermatologyButton"
-                        Grid.Column="1"
-                        Grid.Row="3"
-                        CommandParameter="dermatology"
-                        Style="{StaticResource ResourceKey=DermatologyBuildingButtonStyle}">
-                </Button>
-
-                <!--Neurology button-->
-                <Button x:Name="NeurologyButton"
-                        Grid.Column="3"
-                        Grid.Row="3"
-                        CommandParameter="neurology"
-                        Style="{StaticResource ResourceKey=UBuildingButtonStyle}" >
-                </Button>
-
-                <!--Oncology button-->
-                <Button x:Name="OncologyButton"
-                        Grid.Column="5"
-                        Grid.Row="3"
-                        CommandParameter="oncology"
-                        Style="{StaticResource ResourceKey=OctagonBuildingButtonStyle}" >
-                </Button>
-
                 <!--Test button-->
-                <Button x:Name="Test"
+                <!--<Button x:Name="Test"
                         Grid.Column="5"
                         Grid.Row="5"
                         Content="Empty field"
@@ -241,7 +173,7 @@
                                       Command="{Binding NavCommand}"
                                     CommandParameter="emptyField"/>
                     </Button.InputBindings>
-                </Button>
+                </Button>-->
             </Grid>
         </Grid>
     </Border>

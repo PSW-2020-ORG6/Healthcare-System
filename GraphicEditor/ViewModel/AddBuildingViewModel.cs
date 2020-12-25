@@ -32,7 +32,6 @@ namespace GraphicEditor.ViewModel
 
         private void AddBuilding(object obj)
         {
-            Button.Name = NameText;
             switch (Shapes)
             {
                 case 0:
@@ -57,7 +56,8 @@ namespace GraphicEditor.ViewModel
         private void SettingButtonLook(string buildingButtonStyle)
         {
             Button.Style = (Style)myResourceDictionary[buildingButtonStyle];
-            Button.Background = new SolidColorBrush(MyButtonColor);
+            Button.Background = new SolidColorBrush(MyButtonColor); 
+            Button.Name = NameText;
         }
     }
 }
