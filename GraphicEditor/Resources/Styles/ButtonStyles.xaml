@@ -5,6 +5,7 @@
     <Style x:Key="DefaultRectangleBuildingButtonStyle"
            BasedOn="{StaticResource {x:Type Button}}"
            TargetType="Button">
+        <!--<Setter Property="Content" Value="{DataTemplateKey DataType=Name}" />-->
         <Setter Property="Command" Value="{Binding NavCommand}"/>
         <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="BorderThickness" Value="3"/>
@@ -33,9 +34,9 @@
                                                     <PathFigure.Segments>
                                                         <PolyLineSegment>
                                                             <PolyLineSegment.Points>
-                                                                <Point X="150" Y="0" />
-                                                                <Point X="150" Y="150"/>
-                                                                <Point X="0" Y="150"/>
+                                                                <Point X="130" Y="0" />
+                                                                <Point X="130" Y="130"/>
+                                                                <Point X="0" Y="130"/>
                                                             </PolyLineSegment.Points>
                                                         </PolyLineSegment>
                                                     </PathFigure.Segments>
@@ -51,21 +52,41 @@
                                     Margin="0,10,10,0">
                             <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                                        Foreground="White"
-                                       Text="{TemplateBinding Content}"/>
+                                       Text="Add new building"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"/>
                             <Image Height="30"
                                Source="/GraphicEditor;component/Resources/Icons/Plus-icon.png"/>
                         </StackPanel>
+                        <Grid.InputBindings>
+                            <MouseBinding MouseAction="RightClick"
+                                      Command="{Binding AddCommand}"
+                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                            <MouseBinding MouseAction="LeftClick"
+                                      Command="{Binding NavCommand}"
+                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                        </Grid.InputBindings>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Opacity" Value="0.6"/>
+        <Setter Property="Background" Value="DimGray"/>
+        <Setter Property="Opacity" Value="0.5"/>
         <Setter Property="Command" Value="{Binding NavCommand}"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="20" />
         <Setter Property="BorderBrush" Value="Aqua"/>
+        <!--<Button.InputBindings>
+            <MouseBinding MouseAction="RightClick"
+                                      Command="{Binding AddCommand}"
+                                      CommandParameter="{Binding ElementName=Test}"/>
+            <MouseBinding MouseAction="LeftClick"
+                                      Command="{Binding NavCommand}"
+                                    CommandParameter="emptyField"/>
+        </Button.InputBindings>-->
+
     </Style>
 
     <Style x:Key="RectangleBuildingButtonStyle"
@@ -82,13 +103,13 @@
                                     <PathGeometry>
                                         <PathGeometry.Figures>
                                             <PathFigureCollection>
-                                                <PathFigure IsClosed="True" IsFilled="True" StartPoint="0,0" >
+                                                <PathFigure IsClosed="True" IsFilled="True" StartPoint="5,5" >
                                                     <PathFigure.Segments>
                                                         <PolyLineSegment>
                                                             <PolyLineSegment.Points>
-                                                                <Point X="150" Y="0" />
-                                                                <Point X="150" Y="150"/>
-                                                                <Point X="0" Y="150"/>
+                                                                <Point X="145" Y="5" />
+                                                                <Point X="145" Y="145"/>
+                                                                <Point X="5" Y="145"/>
                                                             </PolyLineSegment.Points>
                                                         </PolyLineSegment>
                                                     </PathFigure.Segments>
@@ -99,9 +120,8 @@
                                 </GeometryGroup>
                             </Path.Data>
                         </Path>
-                        <StackPanel HorizontalAlignment="Right"
-                                    VerticalAlignment="Top"
-                                    Margin="0,10,10,0">
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
                             <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                                        Foreground="White"
                                        Text="{TemplateBinding Name}"/>
