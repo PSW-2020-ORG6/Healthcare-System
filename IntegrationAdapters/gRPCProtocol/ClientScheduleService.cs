@@ -41,7 +41,6 @@ namespace IntegrationAdapters.gRPCProtocol
                 Console.WriteLine(exc.StackTrace);
             }
         }
-
         public Task StopAsync(CancellationToken cancellationToken)
         {
             channel?.ShutdownAsync();

@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>1fd49c3f-a363-4c1a-b90c-1fee7db54a59</UserSecretsId>
+    <StartupObject>IntegrationAdapters.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

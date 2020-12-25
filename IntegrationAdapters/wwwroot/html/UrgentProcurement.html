@@ -27,7 +27,7 @@
                                placeholder="Medicine name..." />
                     </td>
                 </tr>
-           
+
                 <tr>
                     <td class="text-info">
                         <label>Quantity:</label>
@@ -37,14 +37,20 @@
                                placeholder="Quantity..." />
                     </td>
                 </tr>
-                
+
                 <tr style="color:coral">
                     <td style="padding-top: 25px">
-                        <input style="background-color:coral;" id="btnProcurement" type="button" class="btn btn-primary" value="Procure medicine">
+                        <input style="background-color:coral;" id="btnProcurement" type="button" class="btn btn-primary" value="Procure medicine HTTP">
                     </td>
-                    <td style="color:coral;" id="container">
+                    <td style="padding-top: 25px">
+                        <input style="background-color:coral;" id="btnProcurementGrpc" type="button" class="btn btn-primary" value="Procure medicine GRPC">
                     </td>
                 </tr>
+                <tr style="color:coral">
+                    <td style="color:coral;" id="container" colspan="2">
+                    </td>
+                </tr>
+
             </tbody>
         </table>
     </div>
