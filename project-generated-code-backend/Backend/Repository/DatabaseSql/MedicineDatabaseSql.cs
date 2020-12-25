@@ -26,6 +26,26 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             return DbContext.Medicine.Find(id);
         }
 
+        public List<Medicine> GetWaiting()
+        {
+            return GetAll().Where(m => !m.IsApproved).ToList();
+        }
+
+        public List<Medicine> GetByName(string name)
+        {
+            return GetAll().Where(m => m.CopyrightName.ToLower().Contains(name.ToLower()) || m.GenericName.ToLower().Contains(name.ToLower())).ToList();
+        }
+
+        public List<Medicine> GetByRoomSerialNumber(string serialNumber)
+        {
+            return GetAll().Where(m => m.RoomSerialNumber.ToLower().Equals(serialNumber.ToLower())).ToList();
+        }
+
+        public List<Medicine> GetApproved()
+        {
+            return GetAll().Where(m => m.IsApproved).ToList();
+        }
+
         public override void Save(Medicine newEntity)
         {
             DbContext.Medicine.Add(newEntity);
@@ -44,26 +64,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             if (medicine == null) return;
             DbContext.Medicine.Remove(medicine);
             DbContext.SaveChanges();
-        }
-
-        public List<Medicine> GetByName(string name)
-        {
-            return GetAll().Where(m => m.CopyrightName.Equals(name) || m.CopyrightName.Equals(name)).ToList();
-        }
-
-        public List<Medicine> GetApproved()
-        {
-            return GetAll().Where(m => m.IsApproved).ToList();
-        }
-
-        public List<Medicine> GetWaiting()
-        {
-            return GetAll().Where(m => !m.IsApproved).ToList();
-        }
-
-        public List<Medicine> GetByRoomSerialNumber(string serialNumber)
-        {
-            return GetAll().Where(m => m.RoomSerialNumber.ToLower().Equals(serialNumber.ToLower())).ToList();
         }
     }
 }

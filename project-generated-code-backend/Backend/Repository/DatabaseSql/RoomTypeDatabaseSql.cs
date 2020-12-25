@@ -20,5 +20,34 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             return DbContext.RoomType.ToList();
         }
 
+        public List<RoomType> GetByName(string name)
+        {
+            return GetAll().Where(rt => rt.Name.ToLower().Contains(name.ToLower())).ToList();
+        }
+
+        public override RoomType GetById(string id)
+        {
+            return DbContext.RoomType.Find(id);
+        }
+
+        public override void Save(RoomType newEntity)
+        {
+            DbContext.RoomType.Add(newEntity);
+            DbContext.SaveChanges();
+        }
+
+        public override void Update(RoomType updateEntity)
+        {
+            DbContext.RoomType.Update(updateEntity);
+            DbContext.SaveChanges();
+        }
+
+        public override void Delete(string id)
+        {
+            var roomType = GetById(id);
+            if (roomType == null) return;
+            DbContext.RoomType.Remove(roomType);
+            DbContext.SaveChanges();
+        }
     }
 }

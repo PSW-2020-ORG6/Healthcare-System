@@ -16,7 +16,6 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         [ForeignKey("Patient")] public string PatientSerialNumber { get; set; }
         public Patient Patient { get; set; }
 
-
         public bool IsOccupied 
         { 
             get

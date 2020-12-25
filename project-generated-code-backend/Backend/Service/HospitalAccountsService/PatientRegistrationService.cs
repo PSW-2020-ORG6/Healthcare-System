@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
@@ -15,6 +16,11 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
     public class PatientRegistrationService
     {
         private readonly IPatientRepository _patientRepository;
+
+        public PatientRegistrationService()
+        {
+            _patientRepository = new PatientDatabaseSql();
+        }
 
         public PatientRegistrationService(IPatientRepository patientRepository)
         {

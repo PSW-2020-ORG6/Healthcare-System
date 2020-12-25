@@ -7,6 +7,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class RejectionDatabaseSql : GenericDatabaseSql<Rejection>, IRejectionRepository
     {
+        public RejectionDatabaseSql() : base()
+        {
+        }
+
         public RejectionDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
         {
         }

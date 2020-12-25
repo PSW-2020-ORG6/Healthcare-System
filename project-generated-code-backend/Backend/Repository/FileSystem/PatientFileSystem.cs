@@ -57,5 +57,10 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
         {
             throw new NotImplementedException();
         }
+
+        public List<Patient> GetByName(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
