@@ -145,6 +145,40 @@
                 </div>
               </div>
             </div>
+</br>
+<!-- Advertisements -->
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active" style="height:300px">
+            </br>
+            <h3> Vitamin D3 1000 IU</h3></br>
+            Vitamin D3 1000 IU doprinosi normalnoj funkciji imunog sistema, koštano-mišićnog sistema, smanjenju gubitka koštane mase kod žena u post-menopauzalnom periodu.</br></br>
+            Podrška imunom sistemu, kao i kod stanja kao što su osteopenija, osteoporoza, autoimuna, kardiovaskularna i maligna oboljenja.
+        </br></br>
+        </div>
+        <div class="carousel-item" v-for="it in [0,1]" style="height:300px">
+            </br>
+            <h3>Oligovit Complex Galenika</h3></br>
+            Oligovit dražeje se primenjuju:</br>
+        - Kao dodatak ishrani u stanjima neadekvatne ishrane (u toku dijete, gladovanja)</br>
+        - Kao dopuna u vitaminima i mineralima u toku trudnoće i dojenja</br>
+        - Kod premorenosti posle teškog fizičkog napora</br>
+        - U stanjima oporavka posle: bolesti praćenih visokim temperaturama, hirurških zahvata</br>
+        - Kod zaostajanja u rastenju, nedostatka apetita, gubitka u telesnoj masi</br>
+        - Kod deficita nastalog zbog gastrointestinalnih i hepatobilijarnih bolesti</br>
+        - Kod patoloških stanja (hipertireoidizam, stres itd.) u kojima su povećane potrebe za vitaminima i mineralima.
+        </br></br>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div></br>
 
 <!-- Registration Info -->
 

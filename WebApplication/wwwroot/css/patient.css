@@ -106,3 +106,15 @@ label {
 .xx {
     border-width:thick;
 }
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    height: 100px;
+    width: 100px;
+    filter: invert(1);
+}
+
+.carousel-item {
+    background-color: lightblue;
+    background-image: linear-gradient(to right,lightblue, white, lightblue);
+    opacity: 0.9;
+}
