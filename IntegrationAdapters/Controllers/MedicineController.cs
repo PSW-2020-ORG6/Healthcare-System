@@ -30,7 +30,7 @@ namespace IntegrationAdapters.Controllers
         }
         [HttpGet("getMedicineSpecification/{medicineName}")]
         public IActionResult GetMedicineSpeification(string medicineName)
-        {
+        {  
             Medicine medicine = medicineService.DoesMedicineExist(medicineName);
             if (medicine != null && medicine.MedicineSpecificationID != null)
             {
@@ -65,8 +65,6 @@ namespace IntegrationAdapters.Controllers
             {
                 return BadRequest();
             }
-
-
         }
 
 	[HttpGet("getMedicine/{medicineName}/{quantity}")]
