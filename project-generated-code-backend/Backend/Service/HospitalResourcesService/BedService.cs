@@ -10,7 +10,6 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
     {
         private readonly IBedRepository _bedRepository;
 
-
         public BedService()
         {
             _bedRepository = new BedDatabaseSql();
@@ -29,6 +28,11 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
         public List<Bed> GetByName(string name)
         {
             return _bedRepository.GetByName(name);
+        }
+
+        public List<Bed> GetByRoomSerialNumber(string roomSerialNumber)
+        {
+            return _bedRepository.GetByRoomSerialNumber(roomSerialNumber);
         }
 
         public List<Bed> GetAll()

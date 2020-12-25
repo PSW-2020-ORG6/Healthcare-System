@@ -22,6 +22,10 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
         {
             return _physicianMedicineService.GetByName(name);
         }
+        public List<Medicine> GetByRoomSerialNumber(string roomSerialNumber)
+        {
+            return _physicianMedicineService.GetByRoomSerialNumber(roomSerialNumber);
+        }
 
         public List<MedicineManufacturer> GetMedicineManufacturers()
         {

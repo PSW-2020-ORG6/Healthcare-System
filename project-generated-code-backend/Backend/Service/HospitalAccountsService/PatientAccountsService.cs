@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Schedule;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
@@ -9,6 +11,12 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
     {
         private readonly IPatientRepository _patientRepository;
         private readonly IAppointmentRepository _appointmentRepository;
+
+        public PatientAccountsService()
+        {
+            _patientRepository = new PatientDatabaseSql();
+            _appointmentRepository = new AppointmentDatabaseSql();
+        }
 
         public PatientAccountsService(IPatientRepository patientRepository,
             IAppointmentRepository appointmentRepository)
@@ -37,6 +45,11 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
             return patients;
         }
 
+        internal List<Patient> GetPatientsForPhysitian(Physician physician)
+        {
+            throw new NotImplementedException();
+        }
+
         private bool IsPatientScheduledForPhysician(Patient patient, Physician physician)
         {
             List<Appointment> patientAppointments = _appointmentRepository.GetAppointmentsByPatient(patient);
@@ -49,6 +62,16 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
             }
 
             return false;
+        }
+
+        public Patient GetById(string id)
+        {
+            return _patientRepository.GetById(id);
+        }
+
+        public List<Patient> GetByName(string name)
+        {
+            return _patientRepository.GetByName(name);
         }
     }
 }

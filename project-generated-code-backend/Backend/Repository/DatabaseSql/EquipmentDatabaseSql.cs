@@ -26,6 +26,16 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             return DbContext.Equipment.Find(id);
         }
 
+        public List<Equipment> GetByName(string name)
+        {
+            return GetAll().Where(r => r.Name.ToLower().Contains(name.ToLower())).ToList();
+        }
+
+        public List<Equipment> GetByRoomSerialNumber(string roomSerialNumber)
+        {
+            return GetAll().Where(e => e.RoomSerialNumber.Equals(roomSerialNumber)).ToList();
+        }
+
         public override void Save(Equipment newEntity)
         {
             DbContext.Equipment.Add(newEntity);
@@ -44,16 +54,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             if (equipment == null) return;
             DbContext.Equipment.Remove(equipment);
             DbContext.SaveChanges();
-        }
-
-        public List<Equipment> GetByName(string name)
-        {
-            return GetAll().Where(r => r.Name.ToLower().Contains(name.ToLower())).ToList();
-        }
-
-        public List<Equipment> GetByRoomSerialNumber(string roomSerialNumber)
-        {
-            return GetAll().Where(e => e.RoomSerialNumber.Equals(roomSerialNumber)).ToList();
         }
     }
 }

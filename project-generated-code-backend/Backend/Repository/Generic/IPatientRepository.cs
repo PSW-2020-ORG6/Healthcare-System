@@ -17,6 +17,6 @@ namespace HealthClinicBackend.Backend.Repository.Generic
         List<Patient> GetAllPatients();
         Patient GetById(string id);
         Patient GetPatientBySerialNumber(string serialNumber);
-
+        List<Patient> GetByName(string name);
     }
 }

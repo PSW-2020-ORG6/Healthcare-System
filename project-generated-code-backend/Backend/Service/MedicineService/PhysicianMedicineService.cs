@@ -2,6 +2,7 @@
 using System.Linq;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.Generic;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 
 namespace HealthClinicBackend.Backend.Service.MedicineService
 {
@@ -20,6 +21,11 @@ namespace HealthClinicBackend.Backend.Service.MedicineService
         public PhysicianMedicineService(IMedicineRepository medicineRepository)
         {
             this._medicineRepository = medicineRepository;
+        }
+
+        public List<Medicine> GetByRoomSerialNumber(string roomSerialNumber)
+        {
+            return _medicineRepository.GetByRoomSerialNumber(roomSerialNumber);
         }
 
         public List<Medicine> GetAll()

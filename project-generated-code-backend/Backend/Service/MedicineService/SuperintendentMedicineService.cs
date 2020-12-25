@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.MedicineService
@@ -9,6 +10,11 @@ namespace HealthClinicBackend.Backend.Service.MedicineService
         private readonly IMedicineRepository _medicineRepository;
         private readonly IRejectionRepository _rejectionRepository;
 
+        public SuperintendentMedicineService()
+        {
+            _medicineRepository = new MedicineDatabaseSql();
+            _rejectionRepository = new RejectionDatabaseSql();
+        }
 
         public SuperintendentMedicineService(IMedicineRepository medicineRepository,
             IRejectionRepository rejectionRepository)
@@ -25,6 +31,11 @@ namespace HealthClinicBackend.Backend.Service.MedicineService
         public List<Medicine> GetAll()
         {
             return _medicineRepository.GetAll();
+        }
+
+        public List<Medicine> GetByRoomSerialNumber(string roomSerialNumber)
+        {
+            return _medicineRepository.GetByRoomSerialNumber(roomSerialNumber);
         }
 
         public List<Medicine> GetByName(string name)
