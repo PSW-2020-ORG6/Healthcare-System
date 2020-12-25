@@ -5,9 +5,6 @@ using System.Windows;
 
 namespace GraphicEditor.View.Windows
 {
-    /// <summary>
-    /// Interaction logic for BedUpdate.xaml
-    /// </summary>
     public partial class BedUpdate : Window
     {
         public BedUpdate(Bed bedInfo, DialogAnswerListener<Bed> bedUpdateAnswerListener)

@@ -5,9 +5,6 @@ using System.Windows;
 
 namespace GraphicEditor.View.Windows
 {
-    /// <summary>
-    /// Interaction logic for BuildingUpdate.xaml
-    /// </summary>
     public partial class BuildingUpdate : Window
     {
         public BuildingUpdate(Building building, DialogAnswerListener<Building> dialogAnswerListener)

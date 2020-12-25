@@ -14,17 +14,17 @@ namespace GraphicEditor.ViewModel
 {
     public class CardiologyFirstFloorMapUserControlViewModel : BindableBase
     {
-        RoomController roomController = new RoomController();
-        RoomTypeController roomTypeController = new RoomTypeController();
-        BedController bedController = new BedController();
-        EquipmentController equipmentController = new EquipmentController();
-        SuperintendentMedicineController medicineController = new SuperintendentMedicineController();
-        PatientController patientController = new PatientController();
         public ResourceDictionary ResourceDictionary = new ResourceDictionary();
         public Dictionary<string, Button> connections = new Dictionary<string, Button>();
         MainWindowViewModel mapParent;
         CardiologyBuildingUserControlViewModel buildingParent;
         Grid RoomGrid;
+        private RoomController roomController = new RoomController();
+        private RoomTypeController roomTypeController = new RoomTypeController();
+        private BedController bedController = new BedController();
+        private EquipmentController equipmentController = new EquipmentController();
+        private SuperintendentMedicineController medicineController = new SuperintendentMedicineController();
+        private PatientController patientController = new PatientController();
 
         public MyICommand<Room> ShowRoomCommand { get; private set; }
 
@@ -68,8 +68,7 @@ namespace GraphicEditor.ViewModel
 
         private void ShowRoom(Room room)
         {
-            Button button = connections[room.SerialNumber];
-            button.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            ClearHighlightOnRoom(room);
             if (MainWindow.TypeOfUser != TypeOfUser.Patient)
             {
                 new RoomInformation(room).Show();
@@ -78,6 +77,12 @@ namespace GraphicEditor.ViewModel
             {
                 new Warning().ShowDialog();
             }
+        }
+
+        private void ClearHighlightOnRoom(Room room)
+        {
+            Button button = connections[room.SerialNumber];
+            button.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
         }
     }
 }

@@ -4,9 +4,6 @@ using System.Windows.Controls;
 
 namespace GraphicEditor.View.Windows
 {
-    /// <summary>
-    /// Interaction logic for AddBuilding.xaml
-    /// </summary>
     public partial class AddBuilding : Window
     {
         public AddBuilding(Button but)

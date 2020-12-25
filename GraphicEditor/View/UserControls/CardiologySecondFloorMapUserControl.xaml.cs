@@ -1,7 +1,4 @@
-﻿using GraphicEditor.ViewModel;
-using System.Windows.Controls;
-
-namespace GraphicEditor.View.UserControls
+﻿namespace GraphicEditor.View.UserControls
 {
     /// TODO add this without causing errors
     /// <summary>
