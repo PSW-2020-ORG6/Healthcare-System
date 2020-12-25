@@ -1,6 +1,7 @@
 ﻿using GraphicEditor.HelpClasses;
 using GraphicEditor.View.UserControls;
 using GraphicEditor.View.Windows;
+using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
@@ -13,15 +14,15 @@ namespace GraphicEditor.ViewModel
 {
     public class HospitalMapUserControlViewModel : BindableBase
     {
+        public ResourceDictionary ResourceDictionary = new ResourceDictionary();
         private MainWindowViewModel _parent;
+        private BuildingController buildingController = new BuildingController();
+
         public MyICommand<string> NavCommand { get; private set; }
+
         public MyICommand<object> AddCommand { get; private set; }
 
-        public ResourceDictionary ResourceDictionary = new ResourceDictionary();
-
         public Grid HospitalMapGrid { get; set; }
-
-        BuildingDatabaseSql buildingRepository = new BuildingDatabaseSql();
 
         public HospitalMapUserControlViewModel( MainWindowViewModel parent, Grid hospitalMapGrid)
         {
@@ -33,18 +34,17 @@ namespace GraphicEditor.ViewModel
             InitialGridRender();
         }
 
-        //_viewModel.HospitalMap.hospitalMapGrid
-        //MapContentUserControlViewModel.HospitalMap.HospitalMapGrid = hospitalMapGrid;
-        //this.DataContext = MapContentUserControlViewModel.HospitalMap;
-        //MapContentUserControlViewModel.HospitalMap.InitialGridRender();
+        /*TODO add this without causing errors
+        _viewmodel.hospitalmap.hospitalmapgrid
+        mapcontentusercontrolviewmodel.hospitalmap.hospitalmapgrid = hospitalmapgrid;
+        this.datacontext = mapcontentusercontrolviewmodel.hospitalmap;
+        mapcontentusercontrolviewmodel.hospitalmap.initialgridrender();
+        */
 
-        /// <summary>
-        /// Method for dynamic loading of buildings
-        /// </summary>
         public void InitialGridRender()
         {
             ResourceDictionary.Source = new Uri("/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml", UriKind.RelativeOrAbsolute);
-            foreach (Building building in buildingRepository.GetAll())
+            foreach (Building building in buildingController.GetAll())
             {
                 Button but = new Button();
                 but.Style = (Style) ResourceDictionary[building.Style];
@@ -87,16 +87,12 @@ namespace GraphicEditor.ViewModel
                     _parent.CurrentUserControl = _parent.CardiologyBuilding;
                     break;
                 case Constants.ORTHOPEDICS:
-
                     break;
                 case Constants.PEDIATRICS:
-
                     break;
                 case Constants.DERMATOLOGY:
-
                     break;
                 case Constants.ONCOLOGY:
-
                     break;
             }
         }

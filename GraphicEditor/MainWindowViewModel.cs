@@ -8,7 +8,8 @@ namespace GraphicEditor
     public class MainWindowViewModel : BindableBase
     {
         public MyICommand<string> NavCommand { get; private set; }
-        //private MapContentUserControlViewModel _mapContent = new MapContentUserControlViewModel();
+        /* TODO add this without causing errors
+        private MapContentUserControlViewModel _mapContent = new MapContentUserControlViewModel();*/
         public CardiologyBuildingUserControl CardiologyBuilding;
         public CardiologyFirstFloorMapUserControl CardiologyFloor;
         public HospitalMapUserControl HospitalMap;
@@ -19,7 +20,6 @@ namespace GraphicEditor
         {
             NavCommand = new MyICommand<string>(OnNav);
             
-
             LoginPage = new LoginUserControl(this);
             HospitalMap = new HospitalMapUserControl(this);
             CardiologyBuilding = new CardiologyBuildingUserControl(this);

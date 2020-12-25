@@ -5,21 +5,17 @@ using System.Windows.Controls;
 
 namespace GraphicEditor.View.UserControls
 {
-    /// <summary>
-    /// Interaction logic for CardiologyBuildingUserControl.xaml
-    /// </summary>
     public partial class CardiologyBuildingUserControl : UserControl
     {
         private MainWindowViewModel _viewModel;
         public CardiologyBuildingUserControlViewModel myViewModel;
+
         public CardiologyBuildingUserControl(MainWindowViewModel vm)
         {
             InitializeComponent();
             _viewModel = vm;
             myViewModel = new CardiologyBuildingUserControlViewModel(this, vm);
             this.DataContext = myViewModel;
-           
-
         }
 
         private void ShowRoomSearch(object sender, RoutedEventArgs e)
