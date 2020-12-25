@@ -11,20 +11,21 @@ namespace GraphicEditor.View.Windows
     /// </summary>
     public partial class HelpViewer : Window
     {
-        private JavaScriptControlHelper ch;
+        private JavaScriptControlHelper controlHelper;
+
         public HelpViewer(string key, Window originator)
         {
             InitializeComponent();
-            string curDir = Directory.GetCurrentDirectory();
-            curDir = curDir.Replace("\\bin\\Debug", "");
-            string path = String.Format("{0}/HtmlHelpPages/{1}.html", curDir, key);
+            string currentDirectory = Directory.GetCurrentDirectory();
+            currentDirectory = currentDirectory.Replace("\\bin\\Debug\\netcore3.1", "");
+            string path = String.Format("{0}/HtmlHelpPages/{1}.html", currentDirectory, key);
             if (!File.Exists(path))
             {
                 key = "Error";
             }
-            Uri u = new Uri(String.Format("file:///{0}/HtmlHelpPages/{1}.html", curDir, key));
-            ch = new JavaScriptControlHelper(originator);
-            wbHelp.ObjectForScripting = ch;
+            Uri u = new Uri(String.Format("file:///{0}/HtmlHelpPages/{1}.html", currentDirectory, key));
+            controlHelper = new JavaScriptControlHelper(originator);
+            wbHelp.ObjectForScripting = controlHelper;
             wbHelp.Navigate(u);
 
         }

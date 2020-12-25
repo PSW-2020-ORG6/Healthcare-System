@@ -16,9 +16,9 @@ namespace GraphicEditor.ViewModel
 
         public int Shapes { get; set; }
 
-        public string nameText { get; set; }
+        public string NameText { get; set; }
 
-        public System.Windows.Media.Color MyButtonColor { get; set; }
+        public Color MyButtonColor { get; set; }
 
         public Button Button { get; set; }
         public AddBuildingViewModel(Window window, Button but)
@@ -31,32 +31,32 @@ namespace GraphicEditor.ViewModel
 
         private void AddBuilding(object obj)
         {
-            Button.Name = nameText;
             switch (Shapes)
             {
                 case 0:
-                    Button.Style = (Style)myResourceDictionary["TriangleBuildingButtonStyle"];
-                    Button.Background = new SolidColorBrush(MyButtonColor);
+                    SettingButtonLook("TriangleBuildingButtonStyle");
                     break;
                 case 1:
-                    Button.Style = (Style)myResourceDictionary["UBuildingButtonStyle"];
-                    Button.Background = new SolidColorBrush(MyButtonColor);
+                    SettingButtonLook("UBuildingButtonStyle");
                     break;
                 case 2:
-                    Button.Style = (Style)myResourceDictionary["OctagonBuildingButtonStyle"];
-                    Button.Background = new SolidColorBrush(MyButtonColor);
+                    SettingButtonLook("OctagonBuildingButtonStyle");
                     break;
                 case 3:
-                    Button.Style = (Style)myResourceDictionary["DermatologyBuildingButtonStyle"];
-                    Button.Background = new SolidColorBrush(MyButtonColor);
+                    SettingButtonLook("DermatologyBuildingButtonStyle");
                     break;
                 case 4:
-                    Button.Style = (Style)myResourceDictionary["RectangleBuildingButtonStyle"];
-                    Button.Background = new SolidColorBrush(MyButtonColor);
+                    SettingButtonLook("RectangleBuildingButtonStyle");
                     break;
             }
             Window.Close();
         }
 
+        private void SettingButtonLook(string buildingButtonStyle)
+        {
+            Button.Style = (Style)myResourceDictionary[buildingButtonStyle];
+            Button.Background = new SolidColorBrush(MyButtonColor); 
+            Button.Name = NameText;
+        }
     }
 }
