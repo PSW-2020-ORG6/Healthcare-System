@@ -218,3 +218,9 @@ div .circle-img {
     background-repeat: no-repeat;
     background-size: auto;
 }
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    height:100px;
+    width:100px;
+    filter: invert(1);
+}
