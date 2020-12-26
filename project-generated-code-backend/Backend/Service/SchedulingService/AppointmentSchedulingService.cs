@@ -59,9 +59,14 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             List<Physician> physicians = _physicianRepository.GetAll();
             int physicianIndex = 0;
             bool firstTime = true;
+            bool noDoctors = false;
             do
             {
-                appointments = _appointmentGeneralitiesManager.GetAllAvailableAppointmentsGEA(appointmentPreferences);
+                appointments = _appointmentGeneralitiesManager.GetAllAvailableAppointmentsGEA(appointmentPreferences, ref noDoctors );
+                if( noDoctors )
+                {
+                    break;
+                }
                 if (appointments == null || appointments.Count == 0)
                 {
                     if (priority == 0) //doctor is priority

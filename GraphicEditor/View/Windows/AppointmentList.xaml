@@ -18,6 +18,7 @@
                         <TextBlock Text="{Binding Path=Patient}" />
                         <TextBlock Text="Physician:"/>
                         <TextBlock Text="{Binding Path=Physician}" />
+                        <TextBlock Text="{Binding Path=Physician.Specialization[0].Name}"/>
                         <TextBlock Text="Room:"/>
                         <TextBlock Text="{Binding Path=Room}" />
                         <TextBlock Text="Date:"/>
