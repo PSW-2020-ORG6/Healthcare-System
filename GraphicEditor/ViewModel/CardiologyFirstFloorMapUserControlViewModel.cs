@@ -25,22 +25,26 @@ namespace GraphicEditor.ViewModel
         private EquipmentController equipmentController = new EquipmentController();
         private SuperintendentMedicineController medicineController = new SuperintendentMedicineController();
         private PatientController patientController = new PatientController();
+        private Floor floor;
+        private string buildingStyle;
 
         public MyICommand<Room> ShowRoomCommand { get; private set; }
 
-        public CardiologyFirstFloorMapUserControlViewModel(MainWindowViewModel _mapParent, CardiologyBuildingUserControlViewModel _buildingParent, Grid grid)
+        public CardiologyFirstFloorMapUserControlViewModel(MainWindowViewModel _mapParent, CardiologyBuildingUserControlViewModel _buildingParent, Grid grid, Floor floor)
         {
             mapParent = _mapParent;
             buildingParent = _buildingParent;
+            buildingStyle = _buildingParent.Building.Style;
             ShowRoomCommand = new MyICommand<Room>(ShowRoom);
             RoomGrid = grid;
-            InitialGridRender();
+            RoomInitialization(floor.SerialNumber);
         }
 
-        public void InitialGridRender()
+        public void RoomInitialization(string floorSerialNumber)
         {
             ResourceDictionary.Source = new Uri("/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml", UriKind.RelativeOrAbsolute);
-            foreach (Room room in roomController.GetAll())
+            List<Room> floorRooms = roomController.GetByFloorSerialNumber(floorSerialNumber);
+            foreach (Room room in floorRooms)
             {
                 Button button = new Button();
                 button.Style = (Style)ResourceDictionary[room.Style];

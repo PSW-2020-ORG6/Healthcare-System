@@ -12,7 +12,6 @@ namespace GraphicEditor
         /* TODO add this without causing errors
         private MapContentUserControlViewModel _mapContent = new MapContentUserControlViewModel();*/
         public CardiologyBuildingUserControl CardiologyBuilding;
-        public CardiologyFirstFloorMapUserControl CardiologyFloor;
         public HospitalMapUserControl HospitalMap;
         public LoginUserControl LoginPage;
         private UserControl currentViewModel;
@@ -23,7 +22,7 @@ namespace GraphicEditor
             
             LoginPage = new LoginUserControl(this);
             HospitalMap = new HospitalMapUserControl(this);
-            CardiologyBuilding = new CardiologyBuildingUserControl(this, new Building());
+            //CardiologyBuilding = new CardiologyBuildingUserControl(this, new Building());
             CurrentUserControl = LoginPage;
         }
 
