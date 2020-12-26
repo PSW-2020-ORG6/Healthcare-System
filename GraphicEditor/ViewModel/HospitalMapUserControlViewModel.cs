@@ -16,16 +16,17 @@ namespace GraphicEditor.ViewModel
 {
     public class HospitalMapUserControlViewModel : BindableBase
     {
+        public ResourceDictionary ResourceDictionary = new ResourceDictionary();
         private MainWindowViewModel _parent;
+        private BuildingController buildingController = new BuildingController();
+
         public MyICommand<string> NavCommand { get; private set; }
 
         public MyICommand<Button> AddCommand { get; private set; }
 
-        public ResourceDictionary ResourceDictionary = new ResourceDictionary();
+        public MyICommand<Button> DeleteCommand { get; private set; }
 
         public Grid HospitalMapGrid { get; set; }
-
-        BuildingDatabaseSql buildingRepository = new BuildingDatabaseSql();
 
         public HospitalMapUserControlViewModel( MainWindowViewModel parent, Grid hospitalMapGrid)
         {
@@ -33,6 +34,7 @@ namespace GraphicEditor.ViewModel
             HospitalMapGrid = hospitalMapGrid;
             NavCommand = new MyICommand<string>(ChooseHospital);
             AddCommand = new MyICommand<Button>(AddBuilding);
+            DeleteCommand = new MyICommand<Button>(DeleteBuilding);
 
             LoadBuildingsFromDatabase();
         }
@@ -50,12 +52,13 @@ namespace GraphicEditor.ViewModel
             coordinates.Remove((3, 1)); // Delete later, this position is taken by hardcoded Cardiology building!
 
             ResourceDictionary.Source = new Uri("/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml", UriKind.RelativeOrAbsolute);
-            foreach (Building building in buildingRepository.GetAll())
+            foreach (Building building in buildingController.GetAll())
             {
                 Button but = new Button();
-                but.Style = (Style) ResourceDictionary[building.Style];
+                but.Style = (Style)ResourceDictionary[building.Style];
                 but.Name = building.Name;
-                var color = (Color) ColorConverter.ConvertFromString(building.Color);
+                but.Content = building.Column.ToString() + " " + building.Row.ToString() + " " + building.SerialNumber;
+                var color = (Color)ColorConverter.ConvertFromString(building.Color);
                 Brush brush = new SolidColorBrush(color);
                 but.Background = brush;
                 Grid.SetColumn(but, building.Column);
@@ -85,6 +88,18 @@ namespace GraphicEditor.ViewModel
             if (MainWindow.TypeOfUser == TypeOfUser.Superintendent || MainWindow.TypeOfUser == TypeOfUser.NoUser)
             {
                 new AddBuilding(but).ShowDialog();
+            }
+            else
+            {
+                new Warning().ShowDialog();
+            }
+        }
+
+        private void DeleteBuilding(Button but)
+        {
+            if (MainWindow.TypeOfUser == TypeOfUser.Superintendent || MainWindow.TypeOfUser == TypeOfUser.NoUser)
+            {
+                new DeleteBuilding(but).ShowDialog();
             }
             else
             {
