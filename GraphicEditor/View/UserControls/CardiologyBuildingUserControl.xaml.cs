@@ -1,5 +1,6 @@
 ﻿using GraphicEditor.View.Windows;
 using GraphicEditor.ViewModel;
+using HealthClinicBackend.Backend.Model.Hospital;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -10,11 +11,11 @@ namespace GraphicEditor.View.UserControls
         private MainWindowViewModel _viewModel;
         public CardiologyBuildingUserControlViewModel myViewModel;
 
-        public CardiologyBuildingUserControl(MainWindowViewModel vm)
+        public CardiologyBuildingUserControl(MainWindowViewModel vm, Building building)
         {
             InitializeComponent();
             _viewModel = vm;
-            myViewModel = new CardiologyBuildingUserControlViewModel(this, vm);
+            myViewModel = new CardiologyBuildingUserControlViewModel(this, vm, building);
             this.DataContext = myViewModel;
         }
 

@@ -117,7 +117,7 @@
                         </StackPanel>
                         <Grid.InputBindings>
                             <MouseBinding MouseAction="LeftClick"
-                                      Command="{Binding NavCommand}"
+                                      Command="{Binding NavRealCommand}"
                                       CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
                             <MouseBinding MouseAction="RightClick"
                                       Command="{Binding DeleteCommand}"
@@ -175,7 +175,7 @@
                         </StackPanel>
                         <Grid.InputBindings>
                             <MouseBinding MouseAction="LeftClick"
-                                      Command="{Binding NavCommand}"
+                                      Command="{Binding NavRealCommand}"
                                       CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
                             <MouseBinding MouseAction="RightClick"
                                       Command="{Binding DeleteCommand}"
@@ -225,7 +225,7 @@
                         </StackPanel>
                         <Grid.InputBindings>
                             <MouseBinding MouseAction="LeftClick"
-                                      Command="{Binding NavCommand}"
+                                      Command="{Binding NavRealCommand}"
                                       CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
                             <MouseBinding MouseAction="RightClick"
                                       Command="{Binding DeleteCommand}"
@@ -289,7 +289,7 @@
                         </StackPanel>
                         <Grid.InputBindings>
                             <MouseBinding MouseAction="LeftClick"
-                                      Command="{Binding NavCommand}"
+                                      Command="{Binding NavRealCommand}"
                                       CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
                             <MouseBinding MouseAction="RightClick"
                                       Command="{Binding DeleteCommand}"
@@ -352,7 +352,7 @@
                                 Width="30"/>
                         <Grid.InputBindings>
                             <MouseBinding MouseAction="LeftClick"
-                                      Command="{Binding NavCommand}"
+                                      Command="{Binding NavRealCommand}"
                                       CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
                             <MouseBinding MouseAction="RightClick"
                                       Command="{Binding DeleteCommand}"
