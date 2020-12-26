@@ -24,7 +24,7 @@ namespace GraphicEditor.ViewModel
         public CardiologyFirstFloorMapUserControl _floorViewModel;
         public Grid grid;
 
-        public CardiologyBuildingUserControlViewModel(CardiologyBuildingUserControl buildingParent ,MainWindowViewModel mapParent)
+        public CardiologyBuildingUserControlViewModel(CardiologyBuildingUserControl buildingParent, MainWindowViewModel mapParent, Building building)
         {
             _mapParent = mapParent;
             _buildingParent = buildingParent;
@@ -33,7 +33,8 @@ namespace GraphicEditor.ViewModel
             FirstFloor = new CardiologyFirstFloorMapUserControl(mapParent, this);
             /* TODO add this without causing errors
            SecondFloor = new CardiologySecondFloorMapUserControlViewModel();*/
-        _floorViewModel = FirstFloor;
+            _floorViewModel = FirstFloor;
+            _building = building;
 
            List<Floor> _buildingFloors = new List<Floor>();
 
