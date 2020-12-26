@@ -69,6 +69,7 @@ namespace GraphicEditor.ViewModel
             {
                 Button but = new Button();
                 but.Style = (Style)ResourceDictionary["NewBuildingButtonStyle"];
+                but.Content = i.ToString() + " " + j.ToString();
                 Grid.SetColumn(but, i);
                 Grid.SetRow(but, j);
 

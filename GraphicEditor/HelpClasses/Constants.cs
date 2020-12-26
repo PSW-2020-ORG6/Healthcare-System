@@ -34,6 +34,16 @@ namespace GraphicEditor.HelpClasses
         public const string FIRST = "first";
         public const string SECOND = "second";
 
+        public static readonly List<string> FLOOR_NAMES = new List<string>() 
+        { "Ground floor", 
+          "First floor",
+          "Second floor",
+          "Third floor",
+          "Fourth floor",
+          "Fifth floor",
+          "Sixth floor"
+        };
+
         public const string EQUIPMENT = "Equipment";
         public const string MEDICINES = "Medicines";
         public const string BEDS = "Beds";
