@@ -65,6 +65,16 @@
             </Grid>
             <RadioButton IsChecked="{Binding IsCheckedDoctorPriority, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="doctorPriority" FontSize="20" GroupName="priority" Margin="60 40 0 0">Doctor is priority</RadioButton>
             <RadioButton IsChecked="{Binding IsCheckedTerminPriority, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="terminPriority" FontSize="20" GroupName="priority" Margin="60 10 0 0">Termin is priority</RadioButton>
+            <ComboBox x:Name="procedureTypeComboBox" 
+                      SelectedIndex="{Binding ProcedureTypeIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                      ItemsSource="{Binding ProcedureTypes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                      Margin="30 60 0 0" FontSize="20">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </StackPanel>
         <Button Command="{Binding ShowTermins}" Content="Show available termins" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="200" />
 

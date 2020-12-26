@@ -25,16 +25,19 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 .ToList();
 
             List<PhysicianSpecialization> physicianSpecializations = DbContext.PhysicianSpecialization
-                .Include(ps => ps.Physician)
-                .Include(ps=>ps.Specialization)
                 .ToList();
 
             foreach (var physician in physicians)
             {
-                var specializations = physicianSpecializations
+                var specializationsSN = physicianSpecializations
                     .Where(ps => ps.PhysicianSerialNumber.Equals(physician.SerialNumber))
-                    .Select(physicianSpecialization => physicianSpecialization.Specialization)
+                    .Select(physicianSpecialization => physicianSpecialization.SpecializationSerialNumber)
                     .ToList();
+                var specializations = new List<Specialization>();
+                foreach( string sn in specializationsSN )
+                {
+                    specializations.Add(DbContext.Specialization.Find(sn));
+                }
                 physician.Specialization = specializations;
 
 
@@ -55,9 +58,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         
         public override Physician GetById(string jmbg)
         {
-            return GetAll().Where(p => p.Id.Equals(jmbg)).ToList()[0];
+            return GetAll().Where(p => p.Id.Equals(jmbg) || p.SerialNumber.Equals(jmbg)).ToList()[0];
         }
-
 
         public List<Physician> GetByProcedureType(ProcedureType procedureType)
         {

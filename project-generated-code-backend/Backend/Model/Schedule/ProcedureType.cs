@@ -15,6 +15,7 @@ namespace HealthClinicBackend.Backend.Model.Schedule
 {
     public class ProcedureType : Entity
     {
+        public string SpecializationSerialNumber { get; set; }
         public virtual Specialization Specialization { get; set; }
         public string Name { get; set; }
         public int EstimatedTimeInMinutes { get; set; }
