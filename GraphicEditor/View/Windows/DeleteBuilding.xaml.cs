@@ -32,11 +32,6 @@ namespace GraphicEditor.View.Windows
         private void Delete_click(object sender, RoutedEventArgs e) // [Lemara98] Corrections needed
         {
             resourceDictionary.Source = new Uri("/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml", UriKind.RelativeOrAbsolute);
-            List<Floor> allDeletingFloors = floorDatabaseSql.GetByBuildingSerialNumber((string)button.Content);
-            foreach (Floor fl in allDeletingFloors)
-            {
-                floorDatabaseSql.Delete(fl.SerialNumber);
-            }
             string buildingContent = (string)button.Content;
             string[] split = buildingContent.Split(" ");
             buildingDatabaseSql.Delete(split[2]);
@@ -44,6 +39,13 @@ namespace GraphicEditor.View.Windows
             string[] info = content.Split(" ");
             string column = info[0];
             string row = info[1];
+            string buildingSerialNumber = info[2];
+            List<Floor> allDeletingFloors = floorDatabaseSql.GetByBuildingSerialNumber(buildingSerialNumber);
+            foreach (Floor fl in allDeletingFloors)
+            {
+                floorDatabaseSql.Delete(fl.SerialNumber);
+            }
+            
             button.Style = (Style)resourceDictionary["NewBuildingButtonStyle"];
             button.Content = column + " " + row;
             var color = (Color)ColorConverter.ConvertFromString("DimGray");
