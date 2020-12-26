@@ -24,6 +24,8 @@ namespace GraphicEditor.ViewModel
 
         public MyICommand<Button> AddCommand { get; private set; }
 
+        public MyICommand<Button> DeleteCommand { get; private set; }
+
         public Grid HospitalMapGrid { get; set; }
 
         public HospitalMapUserControlViewModel( MainWindowViewModel parent, Grid hospitalMapGrid)
@@ -32,6 +34,7 @@ namespace GraphicEditor.ViewModel
             HospitalMapGrid = hospitalMapGrid;
             NavCommand = new MyICommand<string>(ChooseHospital);
             AddCommand = new MyICommand<Button>(AddBuilding);
+            DeleteCommand = new MyICommand<Button>(DeleteBuilding);
 
             LoadBuildingsFromDatabase();
         }
@@ -54,6 +57,7 @@ namespace GraphicEditor.ViewModel
                 Button but = new Button();
                 but.Style = (Style) ResourceDictionary[building.Style];
                 but.Name = building.Name;
+                but.Content = building.Column.ToString() + " " + building.Row.ToString() + " " + building.SerialNumber;
                 var color = (Color) ColorConverter.ConvertFromString(building.Color);
                 Brush brush = new SolidColorBrush(color);
                 but.Background = brush;
@@ -84,6 +88,18 @@ namespace GraphicEditor.ViewModel
             if (MainWindow.TypeOfUser == TypeOfUser.Superintendent || MainWindow.TypeOfUser == TypeOfUser.NoUser)
             {
                 new AddBuilding(but).ShowDialog();
+            }
+            else
+            {
+                new Warning().ShowDialog();
+            }
+        }
+
+        private void DeleteBuilding(Button but)
+        {
+            if (MainWindow.TypeOfUser == TypeOfUser.Superintendent || MainWindow.TypeOfUser == TypeOfUser.NoUser)
+            {
+                new DeleteBuilding(but).ShowDialog();
             }
             else
             {
