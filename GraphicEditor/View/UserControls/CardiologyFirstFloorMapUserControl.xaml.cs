@@ -1,4 +1,5 @@
 ﻿using GraphicEditor.ViewModel;
+using HealthClinicBackend.Backend.Model.Hospital;
 using System.Windows.Controls;
 
 namespace GraphicEditor.View.UserControls
@@ -7,11 +8,10 @@ namespace GraphicEditor.View.UserControls
     {
         public CardiologyFirstFloorMapUserControlViewModel Viewmodel;
 
-        public CardiologyFirstFloorMapUserControl(MainWindowViewModel mapParent, 
-            CardiologyBuildingUserControlViewModel buildingParent)
+        public CardiologyFirstFloorMapUserControl(MainWindowViewModel mapParent, CardiologyBuildingUserControlViewModel buildingParent, Floor floor)
         {
             InitializeComponent();
-            Viewmodel = new CardiologyFirstFloorMapUserControlViewModel(mapParent, buildingParent, this.Grid);
+            Viewmodel = new CardiologyFirstFloorMapUserControlViewModel(mapParent, buildingParent, this.Grid, floor);
             this.DataContext = Viewmodel;
         }
     }
