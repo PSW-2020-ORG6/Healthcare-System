@@ -18,10 +18,12 @@ namespace GraphicEditor.ViewModel
     public class AppointmentViewModel : BindableBase
     {
         public List<Physician> physicians = new List<Physician>();
+        public List<ProcedureType> procedureTypes = new List<ProcedureType>();
         public List<Patient> patients = new List<Patient>();
         public List<Room> rooms = new List<Room>();
         public event PropertyChangedEventHandler PropertyChanged;
         public PhysicianDatabaseSql physicianDatabaseSql = new PhysicianDatabaseSql();
+        private ProcedureTypeDatabaseSql procedureTypeDatabaseSql = new ProcedureTypeDatabaseSql();
         public Room selectedRoom;
         public List<string> myTime = new List<string>();
         public SecretaryScheduleController secretaryScheduleController = new SecretaryScheduleController();
@@ -30,6 +32,7 @@ namespace GraphicEditor.ViewModel
         public MainWindowViewModel _viewModel;
         public int physiciansIndex;
         public int patientIndex;
+        public int procedureTypeIndex;
         public DateTime datePicker=DateTime.Now;
         public MyICommand<TextBox> FilterPhysician { get; private set; }
         public MyICommand<TextBox> FilterPatient { get; private set; }
@@ -38,7 +41,9 @@ namespace GraphicEditor.ViewModel
         public int toTimeIndex;
         public bool isCheckedDoctorPriority=true;
         public bool isCheckedTerminPriority=false;
+        public bool isSpecialAppointment = false;
         public Window window;
+        
 
         public bool IsCheckedDoctorPriority
         {
@@ -86,6 +91,16 @@ namespace GraphicEditor.ViewModel
             }
         }
 
+        public List<ProcedureType> ProcedureTypes
+        {
+            get { return procedureTypes; }
+            set
+            {
+                if (value != null)
+                    SetProperty(ref procedureTypes, value);
+            }
+        }
+
         public DateTime DatePicker
         {
             get { return datePicker; }
@@ -115,6 +130,17 @@ namespace GraphicEditor.ViewModel
                     SetProperty(ref patientIndex, value);
             }
         }
+
+        public int ProcedureTypeIndex
+        {
+            get { return procedureTypeIndex; }
+            set
+            {
+                if (value != null)
+                    SetProperty(ref procedureTypeIndex, value);
+            }
+        }
+
         public List<Patient> Patients
         {
             get { return patients; }
@@ -144,10 +170,12 @@ namespace GraphicEditor.ViewModel
         }
         public AppointmentViewModel(MainWindowViewModel _viewModel,Window window)
         {
+            //Should here be controller calls?
             Physicians = physicianDatabaseSql.GetAll();
             Patients = patientDatabaseSql.GetAll();
             Rooms = roomDatabaseSql.GetAll();
             createTimeForDropBox();
+            ProcedureTypes = procedureTypeDatabaseSql.GetAll();
             this._viewModel = _viewModel;
             this.window = window;
             FilterPhysician = new MyICommand<TextBox>(FilterPhysicianMethod);
@@ -193,7 +221,6 @@ namespace GraphicEditor.ViewModel
                 , hours2, min2, 0);
             appointmentDto.Time = new TimeInterval(dateTime1, dateTime2);
             appointmentDto.Physician = Physicians[physiciansIndex];
-            appointmentDto.ProcedureType = new ProcedureType();
             appointmentDto.Patient = Patients[patientIndex];
             appointmentDto.Active = true;
             appointmentDto.Date = new DateTime(dateTime.Value.Year, dateTime.Value.Month, dateTime.Value.Day);
@@ -202,8 +229,8 @@ namespace GraphicEditor.ViewModel
                 MessageBox.Show("You did not select patient or physician");
                 return;
             }
-            ProcedureType procType = new ProcedureType("Procedura", 30, new Specialization("Family doctor"));
-            appointmentDto.ProcedureType = procType;
+            appointmentDto.ProcedureType = procedureTypes[procedureTypeIndex];
+
             int priority = isCheckedDoctorPriority == true ? 0 : 1;
             List<AppointmentDto> appointmentDtos1 = secretaryScheduleController.GetAllAvailableAppointmentsGEA(appointmentDto, priority);
 
