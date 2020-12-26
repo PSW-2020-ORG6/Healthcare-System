@@ -55,16 +55,15 @@
                                        Text="Add new building"
                                        TextWrapping="Wrap"
                                        TextAlignment="Center"/>
-                            <Image Height="30"
-                               Source="/GraphicEditor;component/Resources/Icons/Plus-icon.png"/>
+                            <materialDesign:PackIcon Kind="PlusCircle" Width="25" Height="25" HorizontalAlignment="Center"/>
                         </StackPanel>
                         <Grid.InputBindings>
-                            <MouseBinding MouseAction="RightClick"
+                            <MouseBinding MouseAction="LeftClick"
                                       Command="{Binding AddCommand}"
                                       CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
-                            <MouseBinding MouseAction="LeftClick"
+                            <!--<MouseBinding MouseAction="RightClick"
                                       Command="{Binding NavCommand}"
-                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>-->
                         </Grid.InputBindings>
                     </Grid>
                 </ControlTemplate>
