@@ -22,6 +22,8 @@ namespace GraphicEditor.ViewModel
 
         public MyICommand<string> NavCommand { get; private set; }
 
+        public MyICommand<Button> NavRealCommand { get; private set; }
+
         public MyICommand<Button> AddCommand { get; private set; }
 
         public MyICommand<Button> DeleteCommand { get; private set; }
@@ -35,6 +37,7 @@ namespace GraphicEditor.ViewModel
             NavCommand = new MyICommand<string>(ChooseHospital);
             AddCommand = new MyICommand<Button>(AddBuilding);
             DeleteCommand = new MyICommand<Button>(DeleteBuilding);
+            NavRealCommand = new MyICommand<Button>(EnterBuilding);
 
             LoadBuildingsFromDatabase();
         }
@@ -126,6 +129,15 @@ namespace GraphicEditor.ViewModel
                 case Constants.ONCOLOGY:
                     break;
             }
+        }
+
+        private void EnterBuilding(Button button)
+        {
+            string content = (string)button.Content;
+            string[] info = content.Split(" ");
+            Building enteringBuilding = buildingController.GetById(info[2]);
+
+            _parent.CurrentUserControl = new CardiologyBuildingUserControl(_parent, enteringBuilding);
         }
     }
 }
