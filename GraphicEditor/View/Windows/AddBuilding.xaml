@@ -7,7 +7,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="AddBuilding" Height="500" Width="1000">
+        MinHeight="700"
+        MinWidth="1000"
+        ResizeMode="CanResize"
+        Title="AddBuilding" >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -21,103 +24,189 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <materialDesign:PackIcon Kind="Building" Width="60" Height="60" VerticalAlignment="Center"/>
+            <TextBlock 
+                   FontSize="50"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="Create Building"/>
+            <materialDesign:PackIcon Kind="Building" Width="60" Height="60" VerticalAlignment="Center"/>
+        </StackPanel>
+        
+        
         <TextBlock Grid.Row="1"
-                   Grid.Column="1"
-                   Grid.ColumnSpan="2"
+                   Grid.Column="0"
                    FontSize="30"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
                    Text="Building name:"/>
         <TextBox x:Name="nameTextBox"
                  Text="{Binding Path=NameText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                  Grid.Row="1"
-                 Grid.Column="3"
-                 Grid.ColumnSpan="2"/>
+                 Grid.Column="1"
+                 BorderBrush="Black"
+                 BorderThickness="2"
+                 FontSize="26" />
         <TextBlock Grid.Row="3"
-                   Grid.RowSpan="2"
-                   Grid.Column="1"
-                   Grid.ColumnSpan="2"
+                   Grid.Column="0"
                    FontSize="30"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
                    Text="Building color:"/>
         <materialDesign:ColorPicker Grid.Row="3"
-                                    Grid.RowSpan="2"
-                                    Grid.Column="3"
-                                    Grid.ColumnSpan="2"
+                                    Grid.Column="1"
                                     Color="{Binding Path=MyButtonColor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                     HorizontalAlignment="Center"
-                                    MinWidth="100"
-                                    Width="230"/>
+                                    Width="500"/>
         <TextBlock Grid.Row="5"
-                   Grid.Column="1"
-                   Grid.ColumnSpan="2"
+                   Grid.Column="0"
                    FontSize="30"
-                   Text="Building shape:" HorizontalAlignment="Left" Margin="0,60,0,60" Grid.RowSpan="3" Width="333"/>
+                   Text="Building shape:" 
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
         <ComboBox x:Name="BuildingShapesComboBox"
-                  Grid.Row="6"
-                  Grid.Column="3"
-                  Grid.ColumnSpan="2"
+                  Grid.Row="5"
+                  Grid.Column="1"
                   HorizontalAlignment="Center"
-                  Width="150"
-                  Height="50"
+                  Width="500"
+                  Height="70"
                   SelectedIndex="{Binding Shapes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ComboBoxItem IsSelected="True">
                 <StackPanel Orientation="Horizontal">
                     <Image Height="30" 
-                               Margin="0,3,0,0"
+                               Margin="0,0,10,0"
                                Source="/GraphicEditor;component/Resources/Icons/triangle.png"/>
-                    <TextBlock Text="Triangle" />
+                    <TextBlock Text="Triangle Building" 
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="30"/>
                 </StackPanel>
             </ComboBoxItem>
             <ComboBoxItem>
                 <StackPanel Orientation="Horizontal">
                     <Image Height="30" 
-                               Margin="0,3,0,0"
+                               Margin="0,0,10,0"
                                Source="/GraphicEditor;component/Resources/Icons/uBuilding.png"/>
-                    <TextBlock Text="Ubuilding" />
+                    <TextBlock Text="U Building" 
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="30"/>
                 </StackPanel>
             </ComboBoxItem>
             <ComboBoxItem>
                 <StackPanel Orientation="Horizontal">
                     <Image Height="30" 
-                               Margin="0,3,0,0"
+                               Margin="0,0,10,0"
                                Source="/GraphicEditor;component/Resources/Icons/octagon.png"/>
-                    <TextBlock Text="Octagon" />
+                    <TextBlock Text="Hexagon Building" 
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="30"/>
                 </StackPanel>
             </ComboBoxItem>
             <ComboBoxItem>
                 <StackPanel Orientation="Horizontal">
                     <Image Height="30" 
-                               Margin="0,3,0,0"
+                               Margin="0,0,10,0"
                                Source="/GraphicEditor;component/Resources/Icons/Hole.png"/>
-                    <TextBlock Text="Hole" />
+                    <TextBlock Text="Building With Hole" 
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="30"/>
                 </StackPanel>
             </ComboBoxItem>
             <ComboBoxItem>
                 <StackPanel Orientation="Horizontal">
                     <Image Height="30" 
-                               Margin="0,3,0,0"
+                               Margin="0,0,10,0"
                                Source="/GraphicEditor;component/Resources/Icons/rectangle.png"/>
-                    <TextBlock Text="Rectangle" />
+                    <TextBlock Text="Rectangle" 
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="30"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <StackPanel Orientation="Horizontal">
+                    <Image Height="30" 
+                               Margin="0,0,10,0"
+                               Source="/GraphicEditor;component/Resources/Icons/rectangle.png"/>
+                    <TextBlock Text="Default Rectangle" 
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="30"/>
                 </StackPanel>
             </ComboBoxItem>
         </ComboBox>
-        <Button Grid.Row="7"
-                Grid.RowSpan="2"
-                Grid.Column="2"
+
+        <TextBlock Grid.Row="7"
+                   Grid.Column="0"
+                   FontSize="30"
+                   Text="Number of floors:" 
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+
+        <ComboBox x:Name="BuildingFloorsComboBox"
+                  Grid.Row="7"
+                  Grid.Column="1"
+                  HorizontalAlignment="Center"
+                  Width="500"
+                  Height="70"
+                  SelectedIndex="{Binding Path=NumberOfFloors, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ComboBoxItem IsSelected="True">
+                <DockPanel>
+                    <TextBlock Text="1" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </DockPanel>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <DockPanel>
+                    <TextBlock Text="2" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </DockPanel>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <DockPanel>
+                    <TextBlock Text="3" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </DockPanel>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <DockPanel>
+                    <TextBlock Text="4" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </DockPanel>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <DockPanel>
+                    <TextBlock Text="5" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </DockPanel>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <DockPanel>
+                    <TextBlock Text="6" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </DockPanel>
+            </ComboBoxItem>
+        </ComboBox>
+
+        <Button Grid.Row="9"
+                Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Height="45"
                 HorizontalAlignment="Center"
