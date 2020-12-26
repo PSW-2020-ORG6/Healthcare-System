@@ -84,8 +84,9 @@ namespace GraphicEditor.ViewModel
             buildingDatabaseSql.Save(newBuilding);
 
             string buildingSerialNumber = newBuilding.SerialNumber;
+            Button.Content = Button.Content + " " + buildingSerialNumber;
 
-            for (int i = 0; i < NumberOfFloors; i++)
+            for (int i = 0; i <= NumberOfFloors; i++)
             {
                 Floor newFloor = new Floor() 
                 {   
