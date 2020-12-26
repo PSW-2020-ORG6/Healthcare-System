@@ -61,9 +61,6 @@
                             <MouseBinding MouseAction="LeftClick"
                                       Command="{Binding AddCommand}"
                                       CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
-                            <!--<MouseBinding MouseAction="RightClick"
-                                      Command="{Binding NavCommand}"
-                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>-->
                         </Grid.InputBindings>
                     </Grid>
                 </ControlTemplate>
@@ -77,15 +74,6 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="20" />
         <Setter Property="BorderBrush" Value="Aqua"/>
-        <!--<Button.InputBindings>
-            <MouseBinding MouseAction="RightClick"
-                                      Command="{Binding AddCommand}"
-                                      CommandParameter="{Binding ElementName=Test}"/>
-            <MouseBinding MouseAction="LeftClick"
-                                      Command="{Binding NavCommand}"
-                                    CommandParameter="emptyField"/>
-        </Button.InputBindings>-->
-
     </Style>
 
     <Style x:Key="RectangleBuildingButtonStyle"
@@ -127,6 +115,14 @@
                             <Image Height="30"
                                Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
                         </StackPanel>
+                        <Grid.InputBindings>
+                            <MouseBinding MouseAction="LeftClick"
+                                      Command="{Binding NavCommand}"
+                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                            <MouseBinding MouseAction="RightClick"
+                                      Command="{Binding DeleteCommand}"
+                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                        </Grid.InputBindings>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -177,6 +173,14 @@
                             <Image Height="30"
                                Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
                         </StackPanel>
+                        <Grid.InputBindings>
+                            <MouseBinding MouseAction="LeftClick"
+                                      Command="{Binding NavCommand}"
+                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                            <MouseBinding MouseAction="RightClick"
+                                      Command="{Binding DeleteCommand}"
+                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                        </Grid.InputBindings>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -219,6 +223,14 @@
                             <Image Height="30"
                                Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
                         </StackPanel>
+                        <Grid.InputBindings>
+                            <MouseBinding MouseAction="LeftClick"
+                                      Command="{Binding NavCommand}"
+                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                            <MouseBinding MouseAction="RightClick"
+                                      Command="{Binding DeleteCommand}"
+                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                        </Grid.InputBindings>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -275,6 +287,14 @@
                                 Margin="0,3,0,0"
                                 Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
                         </StackPanel>
+                        <Grid.InputBindings>
+                            <MouseBinding MouseAction="LeftClick"
+                                      Command="{Binding NavCommand}"
+                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                            <MouseBinding MouseAction="RightClick"
+                                      Command="{Binding DeleteCommand}"
+                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                        </Grid.InputBindings>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -330,6 +350,14 @@
                                 Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"
                                 VerticalAlignment="Center"
                                 Width="30"/>
+                        <Grid.InputBindings>
+                            <MouseBinding MouseAction="LeftClick"
+                                      Command="{Binding NavCommand}"
+                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                            <MouseBinding MouseAction="RightClick"
+                                      Command="{Binding DeleteCommand}"
+                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                        </Grid.InputBindings>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
