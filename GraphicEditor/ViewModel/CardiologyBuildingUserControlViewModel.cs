@@ -3,6 +3,7 @@ using GraphicEditor.View.UserControls;
 using GraphicEditor.View.Windows;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Util;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
@@ -13,15 +14,19 @@ namespace GraphicEditor.ViewModel
     {
         private CardiologyBuildingUserControl _buildingParent;
         private MainWindowViewModel _mapParent;
-        private List<string> _floors = new List<string>(Constants.FLOOR_MAP.Values);
-        private string _selectedFloor = Constants.FLOOR_MAP[Constants.FIRST];
+        private List<Floor> _floors = new List<Floor>();
+        private int _selectedFloorIndex;
+        private Floor _selectedFloor;
         private Building _building;
+        private string _floorName;
         public MyICommand<string> NavCommand { get; private set; }
         public MyICommand<Building> BuildingUpdateCommand { get; private set; }
         public CardiologyFirstFloorMapUserControl FirstFloor;
-        //public CardiologySecondFloorMapUserControl SecondFloor;
+        /* TODO add this without causing errors
+        public CardiologySecondFloorMapUserControl SecondFloor;*/
         public CardiologyFirstFloorMapUserControl _floorViewModel;
         public Grid grid;
+        private FloorDatabaseSql floorDatabaseSql = new FloorDatabaseSql();
 
         public CardiologyBuildingUserControlViewModel(CardiologyBuildingUserControl buildingParent, MainWindowViewModel mapParent, Building building)
         {
@@ -29,15 +34,23 @@ namespace GraphicEditor.ViewModel
             _buildingParent = buildingParent;
             NavCommand = new MyICommand<string>(ChooseFloor);
             BuildingUpdateCommand = new MyICommand<Building>(editBuilding);
-            FirstFloor = new CardiologyFirstFloorMapUserControl(mapParent, this);
+            
             /* TODO add this without causing errors
            SecondFloor = new CardiologySecondFloorMapUserControlViewModel();*/
-            _floorViewModel = FirstFloor;
+            _floors = floorDatabaseSql.GetByBuildingSerialNumber(building.SerialNumber);
+            
             _building = building;
 
            List<Floor> _buildingFloors = new List<Floor>();
-
-            _building = new Building("Cardiology", "Color Blue");
+            foreach (Floor fl in floorDatabaseSql.GetByBuildingSerialNumber(_building.SerialNumber))
+            {
+                _buildingFloors.Add(fl);
+            }
+           //_building = new Building("Cardiology", "Color Blue");
+            _selectedFloor = _buildingFloors[0];
+            _selectedFloorIndex = 0;
+            _floorName = _selectedFloor.Name;
+            _floorViewModel = new CardiologyFirstFloorMapUserControl(_mapParent, this, _selectedFloor);
         }
 
        public CardiologyFirstFloorMapUserControl FloorViewModel
@@ -53,7 +66,12 @@ namespace GraphicEditor.ViewModel
        {
            get
            {
-               return _floors;
+               List<string> floorNames = new List<string>();
+               foreach (Floor f in _floors)
+                {
+                    floorNames.Add(f.Name);
+                }
+               return floorNames;
            }
        }
 
@@ -69,21 +87,32 @@ namespace GraphicEditor.ViewModel
            }
        }
 
-       public string SelectedFloor
+       public int SelectedFloorIndex
        {
-           get { return _selectedFloor; }
+           get { return _selectedFloorIndex; }
            set
            {
                if (value != null)
                {
-                   SetProperty(ref _selectedFloor, value);
-                   String cpy = new String(_selectedFloor);
+                   SetProperty(ref _selectedFloorIndex, value);
+                   String cpy = new String(_floors[_selectedFloorIndex].Name);
                    var paramArray = cpy.Split(' ');
                    var param = paramArray[0].ToLower();
+                    _selectedFloor = _floors[_selectedFloorIndex];
+                    FloorName = _selectedFloor.Name;
                    ChooseFloor(param);
                }
            }
        }
+
+        public string FloorName
+        {
+            get { return _floorName; }
+            set
+            {
+                SetProperty(ref _floorName, value);
+            }
+        }
 
        private void ChooseFloor(string destination)
        {
@@ -92,9 +121,9 @@ namespace GraphicEditor.ViewModel
                case Constants.BACK:
                    _mapParent.CurrentUserControl = _mapParent.HospitalMap;
                    break;
-               case Constants.FIRST:
-                   FloorViewModel = FirstFloor;
-                   break;
+               default:
+                   FloorViewModel = new CardiologyFirstFloorMapUserControl(_mapParent, this, _selectedFloor);
+                    break;
                /* TODO add this without causing errors
                case Constants.SECOND:
                    FloorViewModel = SecondFloor;

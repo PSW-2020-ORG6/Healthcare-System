@@ -39,6 +39,11 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
             return _roomRepository.GetByName(name);
         }
 
+        public List<Room> GetByFloorSerialNumber(string floorSerialNumber)
+        {
+            return _roomRepository.GetByFloorSerialNumber(floorSerialNumber);
+        }
+
         public List<Room> GetAll()
         {
             return _roomRepository.GetAll();
