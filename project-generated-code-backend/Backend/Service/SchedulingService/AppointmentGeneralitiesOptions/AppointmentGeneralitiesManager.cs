@@ -60,14 +60,14 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
         /***
          * Authors Peki and Hadzi
          */
-        public List<AppointmentDto> GetAllAvailableAppointmentsGEA(AppointmentDto appointmentPreferences)
+        public List<AppointmentDto> GetAllAvailableAppointmentsGEA(AppointmentDto appointmentPreferences, ref bool noDoctors)
         {
             _appointmentPreferences = appointmentPreferences;
             List<AppointmentDto> appointments = new List<AppointmentDto>();
 
             List<TimeInterval> allTimeIntervals = GetAllTimeIntervalsGEA(); //free appointments for chosen time interval
 
-            List<Physician> allPhysicians = GetAllPhysiciansGEA();
+            List<Physician> allPhysicians = GetAllPhysiciansGEA(ref noDoctors);
             List<Room> allRooms = GetAllRoomsGEA();
 
             PhysicianAvailabilityService physicianAvailabilityService = new PhysicianAvailabilityService();
@@ -120,12 +120,24 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
             return physicians;
         }
 
-        private List<Physician> GetAllPhysiciansGEA()
+        private List<Physician> GetAllPhysiciansGEA(ref bool noDoctors)
         {
             List<Physician> physicians = new List<Physician>();
             if (_appointmentPreferences.IsPreferedPhysicianSelected())
             {
-                physicians.Add(_appointmentPreferences.Physician);
+                Physician physician = _physicianDatabaseSql.GetById(_appointmentPreferences.Physician.SerialNumber);
+                if( physician.Specialization.Contains(_appointmentPreferences.ProcedureType.Specialization))
+                {
+                    physicians.Add(_appointmentPreferences.Physician);
+                }
+                else
+                {
+                    physicians = _physicianDatabaseSql.GetByProcedureType(_appointmentPreferences.ProcedureType);
+                    if( physicians == null || physicians.Count == 0)
+                    {
+                        noDoctors = true;
+                    }
+                }
             }
             else
             {

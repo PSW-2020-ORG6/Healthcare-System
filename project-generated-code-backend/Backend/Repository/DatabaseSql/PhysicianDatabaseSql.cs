@@ -1,4 +1,5 @@
-﻿using HealthClinicBackend.Backend.Model.Schedule;
+﻿using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.DatabaseSql.RelationHelpers;
 using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class PhysicianDatabaseSql : GenericDatabaseSql<Physician>, IPhysitianRepository
     {
+        private SpecializationDatabaseSql specializationDatabaseSql = new SpecializationDatabaseSql();
         public override List<Physician> GetAll()
         {
             // Use Include method to connect object and its references from other tables
@@ -17,15 +19,19 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 .ToList();
 
             List<PhysicianSpecialization> physicianSpecializations = dbContext.PhysicianSpecialization
-                .Include(ps => ps.Physician)
                 .ToList();
 
             foreach (var physician in physicians)
             {
-                var specializations = physicianSpecializations
+                var specializationsSN = physicianSpecializations
                     .Where(ps => ps.PhysicianSerialNumber.Equals(physician.SerialNumber))
-                    .Select(physicianSpecialization => physicianSpecialization.Specialization)
+                    .Select(physicianSpecialization => physicianSpecialization.SpecializationSerialNumber)
                     .ToList();
+                var specializations = new List<Specialization>();
+                foreach( string sn in specializationsSN )
+                {
+                    specializations.Add(specializationDatabaseSql.GetById(sn));
+                }
                 physician.Specialization = specializations;
             }
 
@@ -47,6 +53,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             return GetAll().Where(p => p.Specialization.Contains(procedureType.Specialization)).ToList();
         }
 
+        public override Physician GetById(string id)
+        {
+            return GetAll().Where(p => p.SerialNumber.Equals(id)).ToList()[0];
+        }
+
         public List<Physician> GetGeneralPractitioners()
         {
             return GetAll()
@@ -55,5 +66,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     .Contains("General Practitioner"))
                 .ToList();
         }
+
     }
 }

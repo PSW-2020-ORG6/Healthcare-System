@@ -29,6 +29,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public DbSet<Patient> Patient { get; set; }
         public DbSet<Secretary> Secretary { get; set; }
         public DbSet<Equipment> Equipment { get; set; }
+        public DbSet<ProcedureEquipment> ProcedureEquipment { get; set; }
         public DbSet<Bed> Bed { get; set; }
         public DbSet<RoomType> RoomType { get; set; }
         public DbSet<Room> Room { get; set; }
@@ -130,13 +131,20 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 .WithMany();
 
             // Relation helpers are used for many-to-many relations
-            modelBuilder.Entity<PhysicianSpecialization>()
-                .HasKey("PhysicianSerialNumber", "SpecializationSerialNumber");
+            modelBuilder.Entity<PhysicianSpecialization>().HasKey(o => new { o.PhysicianSerialNumber, o.SpecializationSerialNumber });
             modelBuilder.Entity<PhysicianSpecialization>()
                 .HasOne(ps => ps.Physician)
                 .WithMany();
             modelBuilder.Entity<PhysicianSpecialization>()
                 .HasOne(ps => ps.Specialization)
+                .WithMany();
+
+            modelBuilder.Entity<ProcedureEquipment>().HasKey(o => new { o.ProcedureTypeSerialNumber, o.EquipmentSerialNumber });
+            modelBuilder.Entity<ProcedureEquipment>()
+                .HasOne(pe => pe.ProcedureType)
+                .WithMany();
+            modelBuilder.Entity<ProcedureEquipment>()
+                .HasOne(pe => pe.Equipment)
                 .WithMany();
 
             modelBuilder.Entity<DiagnosticReferral>()
@@ -245,6 +253,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             PhysicianCreation(modelBuilder);
             BedCreation(modelBuilder);
             SecretaryCreation(modelBuilder);
+            PhysicianSpecializationCreation(modelBuilder);
+            ProcedureEquipmentCreation(modelBuilder);
         }
 
         private static void SecretaryCreation(ModelBuilder modelBuilder)
@@ -709,14 +719,15 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         private static void ProcedureTypeCreation(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProcedureType>().HasData(
-                new ProcedureType
-                { SerialNumber = "300001", Name = "Operation on patient 0002", EstimatedTimeInMinutes = 50 },
-                new ProcedureType { SerialNumber = "300002", Name = "Check on patient 0002", EstimatedTimeInMinutes = 78 }
-            );
             modelBuilder.Entity<ProcedureType>().HasKey(o => o.SerialNumber);
-            modelBuilder.Entity<ProcedureType>().Ignore(o => o.Specialization);
-            modelBuilder.Entity<ProcedureType>().Ignore(o => o.RequiredEquipment);
+            modelBuilder.Entity<ProcedureType>().Ignore(o => o.Specialization); //SpecializationSerialNumber is foreign key in procedure type N:1
+            modelBuilder.Entity<ProcedureType>().Ignore(o => o.RequiredEquipment);  //new table N:N
+            modelBuilder.Entity<ProcedureType>().HasData(
+                new ProcedureType { SerialNumber = "300001", Name = "Appointment with neuropsychiatrist", EstimatedTimeInMinutes = 50, SpecializationSerialNumber = "500001" },
+                new ProcedureType { SerialNumber = "300002", Name = "Appointment with general practitioner", EstimatedTimeInMinutes = 30, SpecializationSerialNumber = "500004" },
+                new ProcedureType { SerialNumber = "300003", Name = "Operation by neurosurgeon ", EstimatedTimeInMinutes = 40, SpecializationSerialNumber = "500002" },
+                new ProcedureType { SerialNumber = "300004", Name = "Operation by kneesurgeon", EstimatedTimeInMinutes = 60, SpecializationSerialNumber = "500003" }
+            );
         }
 
         private static void ProcedureTypeEquipmentUsageCreation(ModelBuilder modelBuilder)
@@ -736,8 +747,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             modelBuilder.Entity<Specialization>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Specialization>().HasData(
-                new Specialization { SerialNumber = "500001", Name = "Neurosurgeon " },
-                new Specialization { SerialNumber = "500002", Name = "Family doctor" }
+                new Specialization { SerialNumber = "500001", Name = "Neuropsychiatrist " },
+                new Specialization { SerialNumber = "500002", Name = "Neurosurgeon " },
+                new Specialization { SerialNumber = "500003", Name = "Kneesurgeon " },
+                new Specialization { SerialNumber = "500004", Name = "General practitioner" }
             );
         }
 
@@ -843,6 +856,98 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     PatientSerialNumber = null,
                     Id = "100003",
                     RoomId = "103"
+                }
+            );
+        }
+
+        private static void PhysicianSpecializationCreation(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<PhysicianSpecialization>().HasKey(o => new { o.PhysicianSerialNumber, o.SpecializationSerialNumber });
+            modelBuilder.Entity<PhysicianSpecialization>().Property(o => o.PhysicianSerialNumber);
+            modelBuilder.Entity<PhysicianSpecialization>().Property(o => o.SpecializationSerialNumber);
+            modelBuilder.Entity<PhysicianSpecialization>().Ignore(o => o.Physician);
+            modelBuilder.Entity<PhysicianSpecialization>().Ignore(o => o.Specialization);
+            modelBuilder.Entity<PhysicianSpecialization>().HasData(
+                new PhysicianSpecialization
+                {
+                    SpecializationSerialNumber = "500001",
+                    PhysicianSerialNumber = "600001",
+                },
+                new PhysicianSpecialization
+                {
+                    SpecializationSerialNumber = "500002",
+                    PhysicianSerialNumber = "600001",
+                },
+                new PhysicianSpecialization
+                {
+                    SpecializationSerialNumber = "500001",
+                    PhysicianSerialNumber = "600002",
+                },
+                new PhysicianSpecialization
+                {
+                    SpecializationSerialNumber = "500002",
+                    PhysicianSerialNumber = "600002",
+                },
+                new PhysicianSpecialization
+                {
+                    SpecializationSerialNumber = "500003",
+                    PhysicianSerialNumber = "600002",
+                },
+                new PhysicianSpecialization
+                {
+                    SpecializationSerialNumber = "500004",
+                    PhysicianSerialNumber = "600002",
+                }
+            );
+        }
+
+        private static void ProcedureEquipmentCreation(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<ProcedureEquipment>().HasKey(o => new { o.ProcedureTypeSerialNumber, o.EquipmentSerialNumber });
+            modelBuilder.Entity<ProcedureEquipment>().Property(o => o.ProcedureTypeSerialNumber);
+            modelBuilder.Entity<ProcedureEquipment>().Property(o => o.EquipmentSerialNumber);
+            modelBuilder.Entity<ProcedureEquipment>().Ignore(o => o.ProcedureType);
+            modelBuilder.Entity<ProcedureEquipment>().Ignore(o => o.Equipment);
+            modelBuilder.Entity<ProcedureEquipment>().HasData(
+                new ProcedureEquipment
+                {
+                    ProcedureTypeSerialNumber = "300001",
+                    EquipmentSerialNumber = "78",
+                },
+                new ProcedureEquipment
+                {
+                    ProcedureTypeSerialNumber = "300001",
+                    EquipmentSerialNumber = "80",
+                },
+                new ProcedureEquipment
+                {
+                    ProcedureTypeSerialNumber = "300001",
+                    EquipmentSerialNumber = "81",
+                },
+                new ProcedureEquipment
+                {
+                    ProcedureTypeSerialNumber = "300002",
+                    EquipmentSerialNumber = "80",
+                },
+                new ProcedureEquipment
+                {
+                    ProcedureTypeSerialNumber = "300002",
+                    EquipmentSerialNumber = "83",
+                },
+                new ProcedureEquipment
+                {
+                    ProcedureTypeSerialNumber = "300002",
+                    EquipmentSerialNumber = "85",
+                },
+                new ProcedureEquipment
+                {
+                    ProcedureTypeSerialNumber = "300003",
+                    EquipmentSerialNumber = "84",
+                },
+                new ProcedureEquipment
+                {
+                    ProcedureTypeSerialNumber = "300004",
+                    EquipmentSerialNumber = "82",
                 }
             );
         }
