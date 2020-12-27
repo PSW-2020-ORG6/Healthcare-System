@@ -103,6 +103,8 @@ namespace GraphicEditor.ViewModel
             set
             {
                 if (value != null) SetProperty(ref selectedEquipment, value);
+                EquipmentRelocation equipmentRelocationWindow = new EquipmentRelocation(selectedEquipment);
+                equipmentRelocationWindow.Show();
             }
         }
 
