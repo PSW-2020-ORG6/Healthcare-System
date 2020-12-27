@@ -28,14 +28,16 @@ namespace GraphicEditor.ViewModel
         private Floor floor;
         private string buildingStyle;
 
-        public MyICommand<Room> ShowRoomCommand { get; private set; }
+        public MyICommand<Button> ShowRoomCommand { get; private set; }
+        public MyICommand<Button> DeleteCommand { get; private set; }
 
         public CardiologyFirstFloorMapUserControlViewModel(MainWindowViewModel _mapParent, CardiologyBuildingUserControlViewModel _buildingParent, Grid grid, Floor floor)
         {
             mapParent = _mapParent;
             buildingParent = _buildingParent;
             buildingStyle = _buildingParent.Building.Style;
-            ShowRoomCommand = new MyICommand<Room>(ShowRoom);
+            ShowRoomCommand = new MyICommand<Button>(ShowRoom);
+            DeleteCommand = new MyICommand<Button>(DeleteRoom);
             RoomGrid = grid;
             RoomInitialization(floor.SerialNumber);
         }
@@ -49,6 +51,8 @@ namespace GraphicEditor.ViewModel
                 Button button = new Button();
                 button.Style = (Style)ResourceDictionary[room.Style];
                 button.Content = room.Name;
+                button.Tag = room.SerialNumber;
+                Grid.SetZIndex(button, 2);
                 Grid.SetColumnSpan(button, room.ColumnSpan);
                 Grid.SetRowSpan(button, room.RowSpan);
                 Grid.SetColumn(button, room.Column);
@@ -70,17 +74,23 @@ namespace GraphicEditor.ViewModel
             RoomGrid.UpdateLayout();
         }
 
-        private void ShowRoom(Room room)
+        private void ShowRoom(Button roomButton)
         {
-            ClearHighlightOnRoom(room);
+            string[] split = roomButton.Content.ToString().Split(" ");
+
             if (MainWindow.TypeOfUser != TypeOfUser.Patient)
             {
-                new RoomInformation(room).Show();
+                new RoomInformation(roomController.GetById(split[split.Length - 1])).Show();
             }
             else
             {
                 new Warning().ShowDialog();
             }
+        }
+
+        private void DeleteRoom(Button roomButton)
+        {
+            new DeleteRoom(roomButton, RoomGrid).ShowDialog();
         }
 
         private void ClearHighlightOnRoom(Room room)

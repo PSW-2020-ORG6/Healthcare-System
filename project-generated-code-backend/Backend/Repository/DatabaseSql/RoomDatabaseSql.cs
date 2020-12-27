@@ -47,6 +47,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             DbContext.SaveChanges();
         }
 
+        public override Room GetBySerialNumber(string serialNumber)
+        {
+            return GetAll().Where(r => r.SerialNumber.Equals(serialNumber)).ToList()[0];
+        }
+
         public List<Room> GetByRoomType(RoomType roomType)
         {
             return GetAll().Where(r => r.RoomType.Equals(roomType)).ToList();

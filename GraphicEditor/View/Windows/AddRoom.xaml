@@ -1,0 +1,165 @@
+﻿<Window x:Class="GraphicEditor.View.Windows.AddRoom"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GraphicEditor.View.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        MinHeight="700"
+        MinWidth="1000"
+        ResizeMode="CanResize"
+        Title="Add New Room" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- #Styles -->
+                <ResourceDictionary Source="/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="AliceBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <materialDesign:PackIcon Kind="HospitalMarker" Width="60" Height="60" VerticalAlignment="Center"/>
+            <TextBlock 
+                   FontSize="50"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="Create Room"/>
+            <materialDesign:PackIcon Kind="HospitalMarker" Width="60" Height="60" VerticalAlignment="Center"/>
+        </StackPanel>
+
+
+        <TextBlock x:Name="nameLabel"
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   FontSize="30"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="Room name with number:"/>
+        <TextBox x:Name="nameTextBox"
+                 Grid.Row="1"
+                 Grid.Column="1"
+                 BorderBrush="Black"
+                 BorderThickness="2"
+                 FontSize="26" />
+        <TextBlock Grid.Row="3"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   FontSize="30"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="Room doors:"/>
+        
+        <CheckBox x:Name="topDoorButton"
+                  Style="{StaticResource MaterialDesignAccentCheckBox}"
+                  IsThreeState="False"
+                  Grid.Row="5"
+                  Grid.Column="0"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Content="Top Door">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="3" ScaleY="3" />
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+        <CheckBox x:Name="rightDoorButton"
+                  Style="{StaticResource MaterialDesignAccentCheckBox}"
+                  IsThreeState="False"
+                  Grid.Row="5"
+                  Grid.Column="1"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Content="Right Door">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="3" ScaleY="3" />
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+        <CheckBox x:Name="bottomDoorButton"
+                  Style="{StaticResource MaterialDesignAccentCheckBox}"
+                  IsThreeState="False"
+                  Grid.Row="7"
+                  Grid.Column="0"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Content="Bottom Door">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="3" ScaleY="3" />
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+        <CheckBox x:Name="leftDoorButton"
+                  Style="{StaticResource MaterialDesignAccentCheckBox}"
+                  IsThreeState="False"
+                  Grid.Row="7"
+                  Grid.Column="1"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Content="Left Door">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="3" ScaleY="3" />
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+
+        <TextBlock x:Name="roomTypeLabel"
+                   Grid.Row="9"
+                   Grid.Column="0"
+                   FontSize="30"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="Room Type:"/>
+
+        <ComboBox x:Name="roomTypecomboBox"
+                  Grid.Row="9"
+                  Grid.Column="1"
+                  Width="500"
+                  Height="50"
+                  ItemsSource="{Binding Path=RoomTypes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  SelectedIndex="{Binding Path=SelectedRoomTypeIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Name}"
+                               Style="{StaticResource MaterialDesignHeadline5TextBlock}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Button Grid.Row="11"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Height="45"
+                HorizontalAlignment="Center"
+                Content="Add building"
+                Click="Button_Click"
+                Width="130"/>
+    </Grid>
+</Window>
