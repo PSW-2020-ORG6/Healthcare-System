@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="../jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="../js/CreateTender.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/registerHospital.css">
+    <link rel="stylesheet" type="text/css" href="../css/actionsAndBenefits.css">
+    <link rel="stylesheet" type="text/css" href="../css/modal.css">
+</head>
+<body class="background" style="padding:200px 500px 200px 500px;">
+
+    <div id="table" class="centered">
+        <table width="600">
+            <thead>
+                <tr class="success">
+                    <th>Tender name</th>
+                    <th>Medicine name</th>
+                    <th>Quantity</th>
+                    <th>Finish date</th>
+                    <th>Make offer</th>
+                </tr>
+            </thead>
+            <tbody id="tenderTable">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="modal-make-offer" class="modal">
+        <div class="modal-content" style="text-align: center;">
+            <span class="close">&times;</span>
+            <table class="centered">
+                <tr>
+                    <th height="50">Company name:</th>
+                    <th height="50"><input class="textbox" type="text"  id="txtCompanyName" placeholder="Company name..." ></th>
+                </tr>
+                <tr>
+                    <th height="50">Email:</th>
+                    <th height="50"><input class="textbox" type="text" id="txtEmail" placeholder="Email..."></th>
+                </tr>
+                <tr>
+                    <th height="50">Price:</th>
+                    <th height="50"><input class="textbox" type="number" id="txtPrice" placeholder="Price..."></th>
+                </tr>
+            </table>
+            <br>
+            <button id="btnSendOffer" class="btn btn-primary" style="background-color:coral">Send offer</button>
+            <br>
+        </div>
+    </div>
+</body>
+</html>
