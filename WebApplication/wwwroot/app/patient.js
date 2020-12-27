@@ -3,18 +3,10 @@
 		return {
 			patientDTO: null,
 			idPatient: "96736fd7-3018-4f3f-a14b-35610a1c8959",
-			approvedFeedbacks: null,
-			noapprovedFeedbacks: null,
 			activeAppointments: null,
 			canceledAppointments: null,
 			patients: null,
 			doctorsList: null,
-			feedback: {
-				text: "",
-				approved: false,
-				date: new Date().now,
-				patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959"
-			},
 			appointment: null			
 		}
 	},
@@ -119,15 +111,13 @@
                 <div class="col-sm">
                 </div>
                 <div class="col-sm">
-                  <h3>
-			        <button id="LeaveComment" type="button" class="btn btn-info btn-lg margin form-control" data-toggle="modal" data-target="#CommentModal"></button>
-			        </h3><br/> 
+                  <br/> 
                 </div>
                 <div class="col-sm">
                 </div>
                 <div class="col-sm">
                   <h3>
-			        <button id="UserExperiences" type="button" class="btn btn-info btn-lg margin form-control" data-toggle="modal" data-target="#FeedbacksModal"></button>
+			        <button id="UserExperiences" type="button" class="btn btn-info btn-lg margin form-control" data-toggle="modal" v-on:click="FeedbackShow()"></button>
 			        </h3><br/> 
                 </div>
                 <div class="col-sm">
@@ -368,76 +358,6 @@
 	
 	<!--END registration info modal-->
 
-	<!-- Leave Comment -->
-		<div>
-			<div class="modal fade" tabindex="-1" role="dialog" id="CommentModal">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header" id="feedbackModalHeader">
-							<h5 class="modal-title">Leave a comment</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body" id="feedbackModalBody">
-							<label>Enter your comment here:</label>
-							<textarea class="form-control" v-model="feedback.text" rows="4" cols="50"></textarea>
-							<br/><br/>
-							<input type="checkbox" id="anonimous">	
-							<label> Anonimous</label><br>
-						</div>
-						<div class="modal-footer" id="feedbackModalFooter">
-							<button type="button" class="btn btn-info btn-lg " v-on:click="AddNewFeedback(feedback)">Send</button>
-							<button type="button" class="btn btn-info btn-lg " data-dismiss="modal">Cancel</button>
-						</div>
-					</div>
-				</div>
-			</div>  
-		</div>
-<!--END Leave Comment -->
-
-<!--User feedbacks -->
-		<div>
-			<div class="modal fade" tabindex="-1" role="dialog" id="FeedbacksModal">
-				<div class="modal-dialog  modal-xl" role="document">
-					<div class="modal-content">
-						<div class="modal-header" id="feedbackModalHeader">
-							<h5 class="modal-title">User experiences</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body" id="feedbackModalBody">
-								<div class="tab-content" >
-											<div class="row" >
-												<table class="table table-bordered tableBorder" style="width:500px;height:400px" Align = "center" id="UserExp">
-													<tbody>
-														<tr v-for="a in approvedFeedbacks" class="xx">
-															<template v-for="p in patients">
-															<td v-if="parseInt(a.patientId) != -1 && parseInt(p.id) == parseInt(a.patientId)">{{p.name}} {{p.surname}}
-															&nbsp&nbsp&nbsp&nbsp {{DateSplit(a.date)}}</br></br>
-															{{a.text}}</td>
-															</template>
-															<td v-if="parseInt(a.patientId) == -1">Anonimous
-															<!--<template v-if="parseInt(a.patientId) == -1">Anonimous</template>-->
-												&nbsp&nbsp&nbsp&nbsp {{DateSplit(a.date)}}</br></br>
-											{{a.text}}</td>
-                                        </tr>
-									</tbody>
-								</table>	
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer" id="feedbackModalFooter">
-							<button type="button" class="btn btn-info btn-lg " data-dismiss="modal">Cancel</button>
-						</div>
-					</div>
-				</div>
-			</div>  
-		</div>
-<!--END User comments -->
-
 	</div>
 
 	`,
@@ -485,7 +405,9 @@
 				.catch(error => {
 					alert(error)
 				})
-
-		}
+		},
+		FeedbackShow: function () {
+			this.$router.push('feedbackPatient');
+        }
 	}
 });

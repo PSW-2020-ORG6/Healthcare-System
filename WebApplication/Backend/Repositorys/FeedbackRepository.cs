@@ -139,8 +139,8 @@ namespace WebApplication.Backend.Repositorys
         {
             connection.Open();
             string[] dateString = DateTime.Now.ToString().Split(" ");
-            string[] partsOfDate = dateString[0].Split(".");
-            string sqlDml = "INSERT INTO feedback (text,approved,date,patientid,serialnumber)  VALUES('" + feedback.Text + "','" + 0 + "','" + partsOfDate[2] + "-" + partsOfDate[1] + "-" + partsOfDate[0] + "T" + dateString[1]
+            string[] partsOfDate = dateString[0].Split("/");
+            string sqlDml = "INSERT INTO feedback (text,approved,date,patientid,serialnumber)  VALUES('" + feedback.Text + "','" + 0 + "','" + partsOfDate[2] + "-" + partsOfDate[0] + "-" + partsOfDate[1] + "T" + dateString[1]
                    + "','" + feedback.PatientId + " ','" + feedback.SerialNumber + "')";
 
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);
