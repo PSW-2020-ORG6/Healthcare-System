@@ -1,4 +1,5 @@
-﻿using GraphicEditor.View.UserControls;
+﻿using GraphicEditor.HelpClasses;
+using GraphicEditor.View.UserControls;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
 using System;
@@ -43,7 +44,7 @@ namespace GraphicEditor.View.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if ((bool)!topDoorButton.IsChecked && (bool)!bottomDoorButton.IsChecked && (bool)!rightDoorButton.IsChecked && (bool)!leftDoorButton.IsChecked )
+            if ((bool)!topDoorButton.IsChecked && (bool)!bottomDoorButton.IsChecked && (bool)!rightDoorButton.IsChecked && (bool)!leftDoorButton.IsChecked)
             {
                 topDoorButton.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
                 bottomDoorButton.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
@@ -59,7 +60,7 @@ namespace GraphicEditor.View.Windows
 
             if (nameTextBox.Text.Equals(""))
             {
-                nameLabel.Foreground  = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+                nameLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
                 return;
             }
 
@@ -68,7 +69,7 @@ namespace GraphicEditor.View.Windows
             string[] split = nameTextBox.Text.Split(" ");
             string number = split[split.Length - 1];
             int k;
-            
+
             if (!Int32.TryParse(number, System.Globalization.NumberStyles.Integer, null, out k))
             {
                 nameLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
@@ -83,6 +84,7 @@ namespace GraphicEditor.View.Windows
             int columnSpan = view.SelectedCellsColumnSpan;
             int rowSpan = view.SelectedCellsRowSpan;
 
+            RoomButton newRoomButton = new RoomButton(view.Grid);
             Room newRoom = new Room()
             {
                 FloorSerialNumber = floor.SerialNumber,
@@ -93,17 +95,16 @@ namespace GraphicEditor.View.Windows
                 Row = row,
                 ColumnSpan = columnSpan,
                 RowSpan = rowSpan,
-                Name = nameTextBox.Text
+                Name = nameTextBox.Text,
+                Beds = new List<Bed>(),
+                Equipment = new List<Equipment>(),
+                Medinices = new List<Medicine>()
             };
 
-            roomController.NewRoom(newRoom);
+            newRoomButton.Content = nameTextBox.Text;
+            newRoomButton.Tag = newRoom.SerialNumber;
+            SetVisibilities(newRoomButton, newRoom);
 
-            Button newRoomButton = new Button()
-            {
-                Style = (Style)resourceDictionary["RoomButtonStyle"],
-                Content = nameTextBox.Text,
-                Tag = newRoom.SerialNumber 
-            };
             Grid.SetColumn(newRoomButton, column);
             Grid.SetRow(newRoomButton, row);
             Grid.SetColumnSpan(newRoomButton, columnSpan);
@@ -112,8 +113,54 @@ namespace GraphicEditor.View.Windows
             view.Grid.Children.Add(newRoomButton);
             view.Grid.UpdateLayout();
 
+            roomController.NewRoom(newRoom);
+
             roomSpace.Visibility = Visibility.Collapsed;
             this.Close();
+        }
+
+        private void SetVisibilities(RoomButton newRoomButton, Room newRoom)
+        {
+            if ((bool)topDoorButton.IsChecked)
+            {
+                newRoomButton.TopDoor = Visibility.Visible;
+                newRoom.TopDoorVisible = (int)Visibility.Visible;
+            }
+            else
+            {
+                newRoomButton.TopDoor = Visibility.Collapsed;
+                newRoom.TopDoorVisible = (int)Visibility.Collapsed;
+            }
+            if ((bool)rightDoorButton.IsChecked)
+            {
+                newRoomButton.RightDoor = Visibility.Visible;
+                newRoom.RightDoorVisible = (int)Visibility.Visible;
+            }
+            else
+            {
+                newRoomButton.RightDoor = Visibility.Collapsed;
+                newRoom.RightDoorVisible = (int)Visibility.Collapsed;
+            }
+            if ((bool)bottomDoorButton.IsChecked)
+            {
+                newRoomButton.BottomDoor = Visibility.Visible;
+                newRoom.BottomDoorVisible = (int)Visibility.Visible;
+            }
+            else
+            {
+                newRoomButton.BottomDoor = Visibility.Collapsed;
+                newRoom.BottomDoorVisible = (int)Visibility.Collapsed;
+            }
+            if ((bool)leftDoorButton.IsChecked)
+            {
+                newRoomButton.LeftDoor = Visibility.Visible;
+                newRoom.LeftDoorVisible = (int)Visibility.Visible;
+            }
+            else
+            {
+                newRoomButton.LeftDoor = Visibility.Collapsed;
+                newRoom.LeftDoorVisible = (int)Visibility.Collapsed;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
+﻿using GraphicEditor.HelpClasses;
+using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
 using System;
 using System.Collections.Generic;
@@ -19,10 +20,10 @@ namespace GraphicEditor.View.Windows
     /// </summary>
     public partial class DeleteRoom : Window
     {
-        private Button roomButton;
+        private RoomButton roomButton;
         private Grid grid;
         private RoomController roomController = new RoomController();
-        public DeleteRoom(Button _roomButton, Grid _grid)
+        public DeleteRoom(RoomButton _roomButton, Grid _grid)
         {
             InitializeComponent();
             roomButton = _roomButton;
