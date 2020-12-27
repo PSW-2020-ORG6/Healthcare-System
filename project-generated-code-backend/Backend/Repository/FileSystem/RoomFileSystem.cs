@@ -61,5 +61,9 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
             return JsonConvert.DeserializeObject<Room>(objectStringFormat);
         }
 
+        public Room GetBySerialNumber(string serialNumber)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
