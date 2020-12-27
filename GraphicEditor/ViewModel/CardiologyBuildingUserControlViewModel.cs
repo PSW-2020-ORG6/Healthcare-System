@@ -149,16 +149,13 @@ namespace GraphicEditor.ViewModel
                 bool overlapping = false;
                 foreach (Room room in roomController.GetByFloorSerialNumber(_selectedFloor.SerialNumber))
                 {
-                    if ((Grid.GetColumn(FloorViewModel.selectedGridCells) >= room.Column &&
-                        Grid.GetColumn(FloorViewModel.selectedGridCells) <= room.Column + room.ColumnSpan -1) &&
-                        (Grid.GetRow(FloorViewModel.selectedGridCells) >= room.Row &&
-                        Grid.GetRow(FloorViewModel.selectedGridCells) <= room.Row + room.RowSpan -1))
+                    if (isOverlapping(room))
                     {
                         overlapping = true;
                         break;
                     }
-                } 
-                
+                }
+
                 if (overlapping)
                 {
                     new WarningRoomOverlapping().ShowDialog();
@@ -171,6 +168,42 @@ namespace GraphicEditor.ViewModel
             {
                 new Warning().ShowDialog();
             }
+        }
+
+        private bool isOverlapping(Room room)
+        {
+            Border space = FloorViewModel.selectedGridCells;
+            (int, int) topLeftCornerSpace = (Grid.GetColumn(space), Grid.GetRow(space));
+            (int, int) topRightCornerSpace = (Grid.GetColumn(space) + Grid.GetColumnSpan(space) - 1, Grid.GetRow(space));
+            (int, int) bottomLeftCornerSpace = (Grid.GetColumn(space), Grid.GetRow(space) + Grid.GetRowSpan(space) - 1);
+            (int, int) bottomRightCornerSpace = (Grid.GetColumn(space) + Grid.GetColumnSpan(space) - 1, Grid.GetRow(space) + Grid.GetRowSpan(space) - 1);
+
+            (int, int) topLeftCornerRoom = (room.Column, room.Row - 1);
+            (int, int) topRightCornerRoom = (room.Column + room.ColumnSpan - 1, room.Row);
+            (int, int) bottomLeftCornerRoom = (room.Column, room.Row + room.RowSpan - 1);
+            (int, int) bottomRightCornerRoom = (room.Column + room.ColumnSpan - 1, room.Row + room.RowSpan - 1);
+
+            // TopLeftCorner
+
+            bool tl = topLeftCornerSpace.Item1 >= topLeftCornerRoom.Item1 && topLeftCornerSpace.Item1 <= topRightCornerRoom.Item1 &&
+                       topLeftCornerSpace.Item2 >= topLeftCornerRoom.Item2 && topLeftCornerSpace.Item2 <= bottomLeftCornerRoom.Item2;
+
+            // TopRightCorner
+
+            bool tr = topRightCornerSpace.Item1 >= topLeftCornerRoom.Item1 && topRightCornerSpace.Item1 <= topRightCornerRoom.Item1 &&
+                       topRightCornerSpace.Item2 >= topRightCornerRoom.Item2 && topRightCornerSpace.Item2 <= bottomRightCornerRoom.Item2;
+
+            // BottomLeftCorner
+
+            bool bl = bottomLeftCornerSpace.Item1 >= bottomLeftCornerRoom.Item1 && bottomLeftCornerSpace.Item1 <= bottomRightCornerRoom.Item1 &&
+                       bottomLeftCornerSpace.Item2 >= topLeftCornerRoom.Item2 && bottomLeftCornerSpace.Item2 <= bottomLeftCornerRoom.Item2;
+
+            // BottomRightCorner
+
+            bool br = bottomRightCornerSpace.Item1 >= bottomLeftCornerRoom.Item1 && bottomRightCornerSpace.Item1 <= bottomRightCornerRoom.Item1 &&
+                       bottomRightCornerSpace.Item2 >= topRightCornerRoom.Item2 && bottomRightCornerSpace.Item2 <= bottomRightCornerRoom.Item2;
+
+            return tl || tr || bl || br;
         }
 
         private void editBuilding(Building _building)

@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:local="clr-namespace:GraphicEditor.HelpClasses">
 
     <ResourceDictionary.MergedDictionaries>
         <!-- #Styles -->
@@ -378,7 +379,7 @@
 
     <Style x:Key="RoomButtonStyle"
            BasedOn="{StaticResource {x:Type Button}}"
-           TargetType="Button">
+           TargetType="local:RoomButton">
         <Setter Property="Background" Value="#FF237793"/>
         <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="BorderThickness" Value="3"/>
@@ -388,30 +389,31 @@
         <Setter Property="Width" Value="Auto"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="Button">
+                <ControlTemplate TargetType="local:RoomButton">
                     <Border Background="#FF237793"
                             BorderBrush="Black"
-                            BorderThickness="3">
+                            BorderThickness="3"
+                            ToolTip="{TemplateBinding Content}">
                         <DockPanel>
                             <Path DockPanel.Dock="Top"
-                                  Visibility="Collapsed"
+                                  Visibility="{Binding Path=TopDoor}"
                                   Style="{StaticResource DoorBottomPath}">
                                 <Path.RenderTransform>
                                     <RotateTransform Angle="-180" CenterX="15" CenterY="15"/>
                                 </Path.RenderTransform>
                             </Path>
                             <Path DockPanel.Dock="Right"
-                                  Visibility="Collapsed"
+                                  Visibility="{Binding RightDoor}"
                                   Style="{StaticResource DoorBottomPath}">
                                 <Path.RenderTransform>
                                     <RotateTransform Angle="-90" CenterX="15" CenterY="15"/>
                                 </Path.RenderTransform>
                             </Path>
                             <Path DockPanel.Dock="Bottom"
-                                  Visibility="Collapsed"
+                                  Visibility="{Binding BottomDoor}"
                                   Style="{StaticResource DoorBottomPath}"/>
                             <Path DockPanel.Dock="Left"
-                                  Visibility="Collapsed"
+                                  Visibility="{Binding LeftDoor}"
                                   Style="{StaticResource DoorBottomPath}">
                                 <Path.RenderTransform>
                                     <RotateTransform Angle="90" CenterX="15" CenterY="15"/>
