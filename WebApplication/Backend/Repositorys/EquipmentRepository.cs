@@ -12,7 +12,7 @@ namespace WebApplication.Backend.Repositorys
 
         public EquipmentRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
         }
 
         private List<Equipment> GetEquipments(String query)
