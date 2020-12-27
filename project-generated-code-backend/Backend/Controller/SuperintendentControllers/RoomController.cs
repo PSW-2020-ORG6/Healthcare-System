@@ -19,6 +19,11 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
             return roomService.GetById(id);
         }
 
+        public Room GetBySerialNumber(String serialNumber)
+        {
+            return roomService.GetBySerialNumber(serialNumber);
+        }
+
         public List<Room> GetByName(string name)
         {
             return roomService.GetByName(name);

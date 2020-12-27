@@ -2,6 +2,7 @@
 using GraphicEditor.ViewModel;
 using HealthClinicBackend.Backend.Model.Hospital;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Controls;
 
 namespace GraphicEditor.View.UserControls

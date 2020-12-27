@@ -10,7 +10,7 @@
         MinHeight="700"
         MinWidth="1000"
         ResizeMode="CanResize"
-        Title="AddBuilding" >
+        Title="Add New Building" >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -44,13 +44,13 @@
                     Orientation="Horizontal"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
-            <materialDesign:PackIcon Kind="Building" Width="60" Height="60" VerticalAlignment="Center"/>
+            <materialDesign:PackIcon Kind="HospitalBuilding" Width="60" Height="60" VerticalAlignment="Center"/>
             <TextBlock 
                    FontSize="50"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Text="Create Building"/>
-            <materialDesign:PackIcon Kind="Building" Width="60" Height="60" VerticalAlignment="Center"/>
+            <materialDesign:PackIcon Kind="HospitalBuilding" Width="60" Height="60" VerticalAlignment="Center"/>
         </StackPanel>
         
         

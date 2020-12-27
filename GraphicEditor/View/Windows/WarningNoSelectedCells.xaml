@@ -1,4 +1,4 @@
-﻿<Window x:Class="GraphicEditor.View.Windows.DeleteBuilding"
+﻿<Window x:Class="GraphicEditor.View.Windows.WarningNoSelectedCells"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,7 +11,7 @@
         BorderBrush="Black"
         BorderThickness="3"
         ResizeMode="NoResize"
-        Title="BedUpdate" Height="250" Width="700">
+        Title="BedUpdate" Height="230" Width="600">
     <Border >
         <Grid>
             <!-- Top side -->
@@ -29,30 +29,22 @@
                     <materialDesign:PackIcon Kind="WarningOutline" 
                                              Width="70" 
                                              Height="70" />
+                    <TextBlock  Text="{Binding Path=BedInfo.Name}"
+                                HorizontalAlignment="Center"
+                                Margin="0,3"
+                                Style="{StaticResource MaterialDesignHeadline4TextBlock}" />
                 </DockPanel>
-                <TextBlock  Text="You are about to delete entire building!"
+                <TextBlock  Text="Place for room has not been defined!"
                             HorizontalAlignment="Center"
                             Margin="0,3"
                             Style="{StaticResource MaterialDesignHeadline4TextBlock}" />
-                <TextBlock  Text="All data related to the building will be lost!"
+                <TextBlock  Text="Click and drag to select cells on floor."
                             HorizontalAlignment="Center"
                             Margin="0,3"
                             Style="{StaticResource MaterialDesignHeadline4TextBlock}" />
-                <Separator Style="{StaticResource MaterialDesignDarkSeparator}" 
-                           Height="3"
-                           Margin="10"/>
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-                    <Button Width="100"
-                            Margin="5"
-                            Content="DELETE" 
-                            Click="Delete_click"/>
-                    <Button Width="100"
-                            Margin="5"
-                            Content="Cancel" 
-                            Click="Cancel_click"/>
-                </StackPanel>
+                <Button Width="100"
+                        Content="OK" 
+                        Click="Button_Click"/>
             </StackPanel>
         </Grid>
     </Border>
