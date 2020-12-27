@@ -4,9 +4,67 @@
     <script src="../jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="../js/CreateTender.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/registerHospital.css">
 </head>
 <body class="background" style="padding:200px 500px 200px 500px;">
+    <div id="table">
+        <table class="table-borderless">
+            <thead>
+                <tr>
+                    <th class="text-info" colspan="2">
+                        Create Tender
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-info">
+                        <label>Tender name:</label>
+                    </td>
+                    <td>
+                        <input class="textbox" type="text" id="txtTenderName"
+                               placeholder="Tender name..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-info">
+                        <label>Medicine name:</label>
+                    </td>
+                    <td>
+                        <input class="textbox" type="text" id="txtMedicineName"
+                               placeholder="Medicine name..." />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="text-info">
+                        <label>Quantity:</label>
+                    </td>
+                    <td>
+                        <input class="textbox" type="number" id="txtQuantity"
+                               placeholder="Quantity..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-info">
+                        <label>Finish date:</label>
+                    </td>
+                    <td>
+                        <input class="textbox" type="date" id="txtFinishDate"
+                               placeholder="Finish date..." />
+                    </td>
+                </tr>
+
+                <tr style="color:coral">
+                    <td style="padding-top: 25px" colspan="2">
+                        <input style="background-color:coral;" id="btnPublishTender" type="button" class="btn btn-primary" value="Publish tender">
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
 
 </body>
 </html>
