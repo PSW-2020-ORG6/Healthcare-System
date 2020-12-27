@@ -9,6 +9,7 @@ const Statistics = { template: '<statistics></statistics>' }
 const Search = { template: '<search></search>' }
 const Appointments = { template: '<appointments></appointments>' }
 const Appointment = { template: '<appointment></appointment>' }
+const FeedbackPatient = { template: '<feedbackPatient></feedbackPatient>' }
 
 
 var temp = new Vue({
@@ -49,6 +50,9 @@ var temp = new Vue({
 		},
 		appointment: function () {
 			router.push("appointment")
+		},
+		appointment: function () {
+			router.push("feedbackPatient")
 		}
 	}
 });
@@ -110,6 +114,11 @@ const router = new VueRouter({
 			path: '/appointment',
 			name: 'appointment',
 			component: Appointment,
+		},
+		{
+			path: '/feedbackPatient',
+			name: 'feedbackPatient',
+			component: FeedbackPatient,
 		},
 	]
 });

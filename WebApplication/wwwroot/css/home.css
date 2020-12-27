@@ -8,18 +8,18 @@
     font-weight: 100;
     font-family: 'Impact';
 }
-
 #navbarDropdown {
     background-color: lightblue;
 }
 #clinicLogoTxt {
-    padding-left: 500px;
+    padding-left: 280px;
     font-size: 36px;
     font-weight: 100;
     font-family: Impact;
 }
 #clinicLogoPic {
     padding-bottom: 10px;
+    padding-right: 50px;
 }
 .btn {
     background-color: lightblue;

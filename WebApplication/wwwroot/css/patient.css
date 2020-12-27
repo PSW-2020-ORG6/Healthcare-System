@@ -13,7 +13,10 @@
     background-position: center;
     opacity: 0.8;
 }
-
+#FeedbackPatient {
+    background-image: url("../pictures/feedback.jpg");
+    background-repeat:repeat;
+}
 #AppointmentsShow {
     background-image: url("../pictures/AppointmentsResized.png");
     height: 150px;
@@ -95,15 +98,17 @@ label {
     background-color: lightblue;
 }
 .tableBorder {
-    border:hidden;
-    border-width:medium;
+    border: hidden;
+    border-width: medium;
     border-collapse: separate;
     border-spacing: 0 15px;
-    font-family:Impact;
+    font-family: Impact;
+    background-image: linear-gradient(to right, lightblue,white);
 }
 
 .xx {
-    border-width:thick;
+    border-width: thick;
+    background-image: linear-gradient(to right, lightblue,white);
 }
 
 .carousel-control-prev-icon, .carousel-control-next-icon {
