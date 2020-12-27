@@ -23,21 +23,37 @@
     <div id="temp">
         <nav class="navbar navbar-expand-lg navbar-custom " id="navigationBar">
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <button type="button" class="btn btn-info btn-lg navbar-brand" v-on:click="home">Home</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="btn btn-info btn-lg navbar-brand" v-on:click="patient">Patient</button>
+                <ul class="navbar-nav mr-auto">                
+                    <li class="nav-item dropdown">
+                        <button type="button" class="btn btn-info btn-lg nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Patient menu</button>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" v-on:click="patient">Home</a>
+                            <a class="dropdown-item" href="#">My account</a>
+                            <a class="dropdown-item" href="#">Feedbacks</a>
+                            <a class="dropdown-item" href="#">Appointments</a>
+                            <a class="dropdown-item" href="#">Survay</a>
+                            <a class="dropdown-item" href="#">Search</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Log out</a>
+                        </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <button type="button" class="btn btn-info btn-lg navbar-brand" v-on:click="admin">Admin</button>
+                        <button type="button" class="btn btn-info btn-lg nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin menu</button>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" v-on:click="admin">Home</a>
+                            <a class="dropdown-item" href="#">Statistics</a>
+                            <a class="dropdown-item" href="#">Feedbacks</a>
+                            <a class="dropdown-item" href="#">Appointments</a>
+                            <a class="dropdown-item" href="#">Search</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Log out</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <h1 class="navbar-brand" id="clinicLogoTxt">Health Clinic</h1>
                         <img src="pictures/logInverted.png" id="clinicLogoPic">
                     </li>
-                    <li class="nav-item dropdown" id="content">
+                    <li class="nav-item" id="content">
                         <button type="button" class="btn1 btn btn-info btn-lg navbar-brand" id="registration" v-on:click="registration">Registration</button>
                     </li>
                 </ul>

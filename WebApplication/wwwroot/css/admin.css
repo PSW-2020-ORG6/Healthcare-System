@@ -1,7 +1,6 @@
 ﻿#AdminMain {
     background-image: url("../pictures/AdminBackground.jpg");
     background-repeat: no-repeat;
-    overflow-y: scroll;
     height: 768px;
 }
 

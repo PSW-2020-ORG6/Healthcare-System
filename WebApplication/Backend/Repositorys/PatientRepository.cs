@@ -19,7 +19,7 @@ namespace WebApplication.Backend.Repositorys
         private AddressRepository addressRepository = new AddressRepository();
         public PatientRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root;Convert Zero Datetime=true;");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
         }
         ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017 and Aleksa Repovic RA52/2017
         /// <summary>
@@ -88,7 +88,7 @@ namespace WebApplication.Backend.Repositorys
         {
             if (id != null)
             {
-                Patient patient = GetPatients("Select * from patient where Id like '" + "96736fd7-3018-4f3f-a14b-35610a1c8959" + "'")[0];
+                Patient patient = GetPatients("Select * from patient where Id like '" + "0002" + "'")[0];
                 return patient;
             }
             return null;

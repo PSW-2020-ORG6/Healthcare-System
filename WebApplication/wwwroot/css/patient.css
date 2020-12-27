@@ -1,8 +1,7 @@
 ﻿#Patient {
     background-image: url("../pictures/PatientBackgroundV10.jpg");
     background-repeat: no-repeat;
-    overflow-y: scroll;
-    height: 768px;
+    height: 1068px;
 }
 
 #MyInformations {
@@ -113,8 +112,17 @@ label {
     filter: invert(1);
 }
 
-.carousel-item {
-    background-color: lightblue;
-    background-image: linear-gradient(to right,lightblue, white, lightblue);
-    opacity: 0.9;
+.carousel-item:nth-child(3n+1) {
+    background-image:url("/pictures/adv2.jpg");
+    opacity: 0.8;
+}
+
+.carousel-item:nth-child(3n+2) {
+    background-image: url("/pictures/medicine.jpg");
+    opacity: 0.8;
+}
+
+.carousel-item:nth-child(3n) {
+    background-image: url("/pictures/adv7.jpg");
+    opacity: 0.8;
 }
