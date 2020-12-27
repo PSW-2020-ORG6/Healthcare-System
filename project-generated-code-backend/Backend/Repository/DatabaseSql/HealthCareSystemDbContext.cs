@@ -311,7 +311,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     Column = 0,
                     RowSpan = 3,
                     ColumnSpan = 5,
-                    Style = "RoomButtonStyle"
+                    Style = "RoomButtonStyle",
+                    BottomDoorVisible = 0,
+                    RightDoorVisible = 0,
+                    LeftDoorVisible = 2,
+                    TopDoorVisible = 2
                 },
                 new Room
                 {
@@ -324,7 +328,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     Column = 10,
                     RowSpan = 2,
                     ColumnSpan = 4,
-                    Style = "RoomButtonStyle"
+                    Style = "RoomButtonStyle",
+                    BottomDoorVisible = 0,
+                    RightDoorVisible = 2,
+                    LeftDoorVisible = 2,
+                    TopDoorVisible = 2
                 },
                 new Room
                 {
@@ -337,7 +345,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     Column = 5,
                     RowSpan = 2,
                     ColumnSpan = 3,
-                    Style = "RoomButtonStyle"
+                    Style = "RoomButtonStyle",
+                    BottomDoorVisible = 0,
+                    RightDoorVisible = 2,
+                    LeftDoorVisible = 2,
+                    TopDoorVisible = 2
                 },
                 new Room
                 {
@@ -350,7 +362,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     Column = 14,
                     RowSpan = 3,
                     ColumnSpan = 5,
-                    Style = "RoomButtonStyle"
+                    Style = "RoomButtonStyle",
+                    BottomDoorVisible = 0,
+                    LeftDoorVisible = 0,
+                    RightDoorVisible = 2,
+                    TopDoorVisible = 2
                 },
                 new Room
                 {
@@ -363,7 +379,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     Column = 9,
                     RowSpan = 2,
                     ColumnSpan = 5,
-                    Style = "RoomButtonStyle"
+                    Style = "RoomButtonStyle",
+                    BottomDoorVisible = 2,
+                    TopDoorVisible = 0,
+                    LeftDoorVisible = 0,
+                    RightDoorVisible = 0
                 }
             );
         }

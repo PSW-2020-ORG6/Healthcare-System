@@ -176,6 +176,10 @@ namespace GraphicEditor.ViewModel
             medicineVisibility = Visibility.Hidden;
             bedVisibility = Visibility.Hidden;
 
+            if (beds == null) beds = new List<Bed>();
+            if (medicines == null) medicines = new List<Medicine>();
+            if (equipment == null) equipment = new List<Equipment>();
+
             if (beds.Count != 0)
                 selectedBed = beds[0];
 
