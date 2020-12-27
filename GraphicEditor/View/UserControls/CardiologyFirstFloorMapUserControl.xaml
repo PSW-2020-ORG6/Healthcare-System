@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:GraphicEditor.HelpClasses"
              mc:Ignorable="d" Width="900" Height="600">
 
     <UserControl.Resources>
@@ -61,7 +62,7 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            
+
             <!--FloorPattern-->
             <Image Grid.Column="0"
                    Grid.Row="0"
@@ -69,8 +70,8 @@
                    Grid.RowSpan="12"
                    Panel.ZIndex="1"
                    Style="{StaticResource FloorImage}"
-                   Source="/GraphicEditor;component/Resources/Images/floor.jpg"  /> 
-            
+                   Source="/GraphicEditor;component/Resources/Images/floor.jpg"  />
+
             <!-- Selection Canvas -->
             <Canvas Grid.ColumnSpan="30"
                     Grid.RowSpan="30"

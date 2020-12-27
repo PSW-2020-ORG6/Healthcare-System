@@ -140,40 +140,6 @@
                        HorizontalAlignment="Center"
                        Source="/GraphicEditor;component/Resources/Images/MapPattern2-2.png" 
                        VerticalAlignment="Center" />
-
-                <!--Cardiology button-->
-                <Button x:Name="CardiologyButton"
-                        Grid.Column="3"
-                        Grid.Row="1"
-                        Background="Orange" 
-                        CommandParameter="cardiology"
-                        Style="{StaticResource ResourceKey=DefaultRectangleBuildingButtonStyle}">
-                    <StackPanel>
-                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
-                                   TextWrapping="Wrap">
-                                Cardiology
-                        </TextBlock>
-                        <Image Height="30" 
-                               Margin="0,3,0,0"
-                               Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
-                    </StackPanel>
-                </Button>
-
-                <!--Test button-->
-                <!--<Button x:Name="Test"
-                        Grid.Column="5"
-                        Grid.Row="5"
-                        Content="Empty field"
-                        Style="{StaticResource ResourceKey=NewBuildingButtonStyle}">
-                    <Button.InputBindings>
-                        <MouseBinding MouseAction="RightClick"
-                                      Command="{Binding AddCommand}"
-                                      CommandParameter="{Binding ElementName=Test}"/>
-                        <MouseBinding MouseAction="LeftClick"
-                                      Command="{Binding NavCommand}"
-                                    CommandParameter="emptyField"/>
-                    </Button.InputBindings>
-                </Button>-->
             </Grid>
         </Grid>
     </Border>

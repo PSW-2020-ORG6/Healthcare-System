@@ -28,16 +28,11 @@ namespace GraphicEditor.ViewModel
         private Floor floor;
         private string buildingStyle;
 
-        public MyICommand<Button> ShowRoomCommand { get; private set; }
-        public MyICommand<Button> DeleteCommand { get; private set; }
-
         public CardiologyFirstFloorMapUserControlViewModel(MainWindowViewModel _mapParent, CardiologyBuildingUserControlViewModel _buildingParent, Grid grid, Floor floor)
         {
             mapParent = _mapParent;
             buildingParent = _buildingParent;
             buildingStyle = _buildingParent.Building.Style;
-            ShowRoomCommand = new MyICommand<Button>(ShowRoom);
-            DeleteCommand = new MyICommand<Button>(DeleteRoom);
             RoomGrid = grid;
             RoomInitialization(floor.SerialNumber);
         }
@@ -48,17 +43,19 @@ namespace GraphicEditor.ViewModel
             List<Room> floorRooms = roomController.GetByFloorSerialNumber(floorSerialNumber);
             foreach (Room room in floorRooms)
             {
-                Button button = new Button();
+                RoomButton button = new RoomButton(RoomGrid);
                 button.Style = (Style)ResourceDictionary[room.Style];
                 button.Content = room.Name;
+                button.TopDoor = (Visibility)room.TopDoorVisible;
+                button.RightDoor = (Visibility)room.RightDoorVisible;
+                button.BottomDoor = (Visibility)room.BottomDoorVisible;
+                button.LeftDoor = (Visibility)room.LeftDoorVisible;
                 button.Tag = room.SerialNumber;
                 Grid.SetZIndex(button, 2);
                 Grid.SetColumnSpan(button, room.ColumnSpan);
                 Grid.SetRowSpan(button, room.RowSpan);
                 Grid.SetColumn(button, room.Column);
                 Grid.SetRow(button, room.Row);
-                button.Command = ShowRoomCommand;
-                button.CommandParameter = room;
                 room.Beds = bedController.GetByRoomSerialNumber(room.SerialNumber);
                 foreach (Bed bed in room.Beds)
                 {
@@ -74,29 +71,5 @@ namespace GraphicEditor.ViewModel
             RoomGrid.UpdateLayout();
         }
 
-        private void ShowRoom(Button roomButton)
-        {
-            string[] split = roomButton.Content.ToString().Split(" ");
-
-            if (MainWindow.TypeOfUser != TypeOfUser.Patient)
-            {
-                new RoomInformation(roomController.GetById(split[split.Length - 1])).Show();
-            }
-            else
-            {
-                new Warning().ShowDialog();
-            }
-        }
-
-        private void DeleteRoom(Button roomButton)
-        {
-            new DeleteRoom(roomButton, RoomGrid).ShowDialog();
-        }
-
-        private void ClearHighlightOnRoom(Room room)
-        {
-            Button button = connections[room.SerialNumber];
-            button.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-        }
     }
 }

@@ -26,6 +26,10 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public int Column { get; set; }
         public int RowSpan { get; set; }
         public int ColumnSpan { get; set; }
+        public int TopDoorVisible { get; set; }
+        public int RightDoorVisible { get; set; }
+        public int LeftDoorVisible { get; set; }
+        public int BottomDoorVisible { get; set; }
 
         public string Style { get; set; }
 

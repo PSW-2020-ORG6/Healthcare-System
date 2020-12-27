@@ -52,7 +52,6 @@ namespace GraphicEditor.ViewModel
                     if ((i == 7 && j == 3) || (i == 1 && j == 7)) continue;
                     coordinates.Add((i, j));
                 }
-            coordinates.Remove((3, 1)); // Delete later, this position is taken by hardcoded Cardiology building!
 
             ResourceDictionary.Source = new Uri("/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml", UriKind.RelativeOrAbsolute);
             foreach (Building building in buildingController.GetAll())
