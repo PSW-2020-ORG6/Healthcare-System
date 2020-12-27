@@ -27,6 +27,11 @@
     opacity: 0.8;
 }
 
+#Account {
+    background-image: url("../pictures/AdminBackground.jpg");
+    padding-left: 10%;
+    padding-right: 10%;
+}
 #SurveyShow {
     background-image: url("../pictures/TakeSurveyResized.png");
     height: 150px;

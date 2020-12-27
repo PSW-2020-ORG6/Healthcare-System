@@ -28,11 +28,11 @@
                         <button type="button" class="btn btn-info btn-lg nav-link navbar-brand dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Patient menu</button>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" v-on:click="patient">Home</a>
-                            <a class="dropdown-item" href="#">My account</a>
-                            <a class="dropdown-item" href="#">Feedbacks</a>
-                            <a class="dropdown-item" href="#">Appointments</a>
-                            <a class="dropdown-item" href="#">Survay</a>
-                            <a class="dropdown-item" href="#">Search</a>
+                            <a class="dropdown-item" v-on:click="account">My account</a>
+                            <a class="dropdown-item" v-on:click="feedbackPatient">Feedbacks</a>
+                            <a class="dropdown-item" v-on:click="appointment">Appointments</a>
+                            <a class="dropdown-item" v-on:click="survey">Survay</a>
+                            <a class="dropdown-item" v-on:click="search">Search</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Log out</a>
                         </div>
@@ -41,10 +41,10 @@
                         <button type="button" class="btn btn-info btn-lg nav-link navbar-brand dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin menu</button>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" v-on:click="admin">Home</a>
-                            <a class="dropdown-item" href="#">Statistics</a>
+                            <a class="dropdown-item" v-on:click="statistics">Statistics</a>
                             <a class="dropdown-item" href="#">Feedbacks</a>
                             <a class="dropdown-item" href="#">Appointments</a>
-                            <a class="dropdown-item" href="#">Search</a>
+                            <a class="dropdown-item" v-on:click="search">Search</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Log out</a>
                         </div>
@@ -84,6 +84,7 @@
     <script src="app/survey.js"></script>
     <script src="app/statistics.js"></script>
     <script src="app/feedbackPatient.js"></script>
+    <script src="app/accountInfo.js"></script>
     <script src="app/router.js"></script>
 
 
