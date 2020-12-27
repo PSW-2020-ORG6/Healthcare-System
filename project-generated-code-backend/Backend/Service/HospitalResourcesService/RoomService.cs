@@ -28,6 +28,11 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
             return _roomRepository.GetById(id);
         }
 
+        public Room GetBySerialNumber(String serialNumber)
+        {
+            return _roomRepository.GetBySerialNumber(serialNumber);
+        }
+
         public List<Room> GetByName(string name)
         {
             return _roomRepository.GetByName(name);

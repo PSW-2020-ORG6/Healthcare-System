@@ -2,6 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
+    <ResourceDictionary.MergedDictionaries>
+        <!-- #Styles -->
+        <ResourceDictionary Source="/GraphicEditor;component/Resources/Styles/RectangleStyles.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <Style x:Key="DefaultRectangleBuildingButtonStyle"
            BasedOn="{StaticResource {x:Type Button}}"
            TargetType="Button">
@@ -377,10 +382,57 @@
         <Setter Property="Background" Value="#FF237793"/>
         <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="BorderThickness" Value="3"/>
-        <Setter Property="Command" Value="{Binding NavCommand}"/>
+        <!--<Setter Property="Command" Value="{Binding NavCommand}"/>-->
         <Setter Property="materialDesign:RippleAssist.Feedback" Value="Transparent"/>
         <Setter Property="Height" Value="Auto"/>
         <Setter Property="Width" Value="Auto"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="#FF237793"
+                            BorderBrush="Black"
+                            BorderThickness="3">
+                        <DockPanel>
+                            <Path DockPanel.Dock="Top"
+                                  Visibility="Collapsed"
+                                  Style="{StaticResource DoorBottomPath}">
+                                <Path.RenderTransform>
+                                    <RotateTransform Angle="-180" CenterX="15" CenterY="15"/>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path DockPanel.Dock="Right"
+                                  Visibility="Collapsed"
+                                  Style="{StaticResource DoorBottomPath}">
+                                <Path.RenderTransform>
+                                    <RotateTransform Angle="-90" CenterX="15" CenterY="15"/>
+                                </Path.RenderTransform>
+                            </Path>
+                            <Path DockPanel.Dock="Bottom"
+                                  Visibility="Collapsed"
+                                  Style="{StaticResource DoorBottomPath}"/>
+                            <Path DockPanel.Dock="Left"
+                                  Visibility="Collapsed"
+                                  Style="{StaticResource DoorBottomPath}">
+                                <Path.RenderTransform>
+                                    <RotateTransform Angle="90" CenterX="15" CenterY="15"/>
+                                </Path.RenderTransform>
+                            </Path>
+                            <TextBlock Text="{TemplateBinding Content}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </DockPanel>
+                        <Border.InputBindings>
+                            <MouseBinding MouseAction="LeftClick"
+                                      Command="{Binding ShowRoomCommand}"
+                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                            <MouseBinding MouseAction="RightClick"
+                                      Command="{Binding DeleteCommand}"
+                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                        </Border.InputBindings>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>
