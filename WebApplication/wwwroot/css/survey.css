@@ -1,7 +1,6 @@
 ﻿
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 body {
-    margin: 1em;
     text-align: center;
     -webkit-tap-highlight-color: black;
 }
@@ -19,7 +18,6 @@ body {
 #appointments {
     background-image: url("../pictures/PatientBackgroundV10.jpg");
     background-repeat: no-repeat;
-    overflow-y: scroll;
     height: 768px;
 }
 
@@ -113,6 +111,6 @@ p {
 
 .buttonBottom {
     width : 300px;
-    height : 200 px;
+    height : 200px;
     font-size : 24px;
 }

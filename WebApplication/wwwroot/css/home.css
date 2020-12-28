@@ -63,3 +63,10 @@ th {
 .noborder {
     border: none;
 }
+footer {
+    background-color: lightblue;
+    color: white;
+    border: thick;
+    font-family: 'Impact';
+    font-weight: 100;
+}
