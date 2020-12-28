@@ -38,5 +38,10 @@ namespace WebApplication.Backend.DTO
         {
             return dateTime1.Hour == dateTime2.Hour && dateTime1.Minute == dateTime2.Minute;
         }
+
+        public bool IsDateIntervalValid(DateTime dateStart, DateTime dateEnd)
+        {
+            return dateStart <= DateTime.Now && dateEnd >= DateTime.Now;
+        } 
     }
 }

@@ -6,6 +6,7 @@ using HealthClinicBackend.Backend.Dto;
 using System;
 using IntegrationAdapters.Repositories;
 using IntegrationAdapters.Models;
+using WebApplication.Backend.DTO;
 
 namespace WebApplication.Backend.Services
 {
@@ -21,6 +22,10 @@ namespace WebApplication.Backend.Services
         {
             this.patientRepository = new PatientRepository();
             this.actionsAndBenefitsRepository = new ActionsAndBenefitsRepository();
+        }
+        public PatientService(IActionsAndBenefitsRepository actionsAndBenefitsRepository)
+        {
+            this.actionsAndBenefitsRepository = actionsAndBenefitsRepository;
         }
         /// <summary>
         ///calls method for get all patients in patients table
@@ -54,9 +59,16 @@ namespace WebApplication.Backend.Services
             return patientRepository.BlockMaliciousPatient(patientId);
         }
 
-        public List<ActionAndBenefitMessage> GetHospitalSubscribedPharmacies()
+        public List<ActionAndBenefitMessage> GetAdvertisements()
         {
-            return actionsAndBenefitsRepository.GetAllPublishedActionsAndBenefitsMessages();
+            TimeIntervalDTO t = new TimeIntervalDTO();
+            List<ActionAndBenefitMessage> actionAndBenefitMessages = new List<ActionAndBenefitMessage>();
+            foreach(ActionAndBenefitMessage a in actionsAndBenefitsRepository.GetAllPublishedActionsAndBenefitsMessages())
+            {
+                if(t.IsDateIntervalValid(a.DateFrom, a.DateTo))
+                    actionAndBenefitMessages.Add(a);
+            }
+            return actionAndBenefitMessages;
         }
     }
 }

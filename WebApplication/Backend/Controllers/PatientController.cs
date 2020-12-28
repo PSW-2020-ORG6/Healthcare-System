@@ -62,7 +62,7 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("getActionsAndBenefits")]
         public IEnumerable<ActionAndBenefitMessage> GetActionsAndBenefits()
         {
-            return patientService.GetHospitalSubscribedPharmacies();
+            return patientService.GetAdvertisements();
         }
 
     }
