@@ -7,7 +7,7 @@
 	},
 	beforeMount() {
 		axios
-			.get('http://localhost:49900/patient/getPatientById', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
+			.get('/patient/getPatientById', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
 			.then(response => {
 				this.patientDTO = response.data
 			})

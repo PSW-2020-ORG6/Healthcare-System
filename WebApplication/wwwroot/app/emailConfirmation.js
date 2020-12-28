@@ -17,12 +17,12 @@
 			var id = queryString.split("?");
 			var id1 = id[1].split("=");
 			axios
-				.put("http://localhost:49900/registration/confirmationEmail/" + id1[1])
+				.put("/registration/confirmationEmail/" + id1[1])
 				.then(response => {
 				})
 
 				.catch(error => {
-					alert("Greska");
+					alert(error);
 				})
 		},
 		SuccessfulRegistration: function () {
