@@ -16,6 +16,7 @@ namespace IntegrationAdapters
         public DbSet<Medicine> Medicine { get; set; }
         public DbSet<MedicineSpecification> MedicineSpecification { get; set; }
         public DbSet<Tender> Tender { get; set; }
+        public DbSet<Offer> Offer { get; set; }
 
         public IAHealthCareSystemDbContext(DbContextOptions<IAHealthCareSystemDbContext> options) : base(options)
         {

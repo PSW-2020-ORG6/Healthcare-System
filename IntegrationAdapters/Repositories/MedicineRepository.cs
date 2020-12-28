@@ -10,7 +10,7 @@ namespace IntegrationAdapters.Repositories
     public class MedicineRepository : IMedicineRepository
     {
         public DbContextOptions<IAHealthCareSystemDbContext> options = new DbContextOptionsBuilder<IAHealthCareSystemDbContext>()
-               .UseMySql(connectionString: "server=localhost;port=3306;database=newmydb;user=root;password=root").UseLazyLoadingProxies()
+               .UseNpgsql(connectionString: "server=localhost;port=5432;database=newmydb;User ID=postgres;password=super").UseLazyLoadingProxies()
                .Options;
         public readonly IAHealthCareSystemDbContext dbContext;
 

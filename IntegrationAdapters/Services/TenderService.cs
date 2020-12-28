@@ -30,5 +30,21 @@ namespace IntegrationAdapters.Services
         {
             return tenderRepository.GetAllTenders();
         }
+        public Tender GetTenderByName(string name) {
+            foreach(Tender t in GetAllTenders()){
+                if (t.TenderName.Equals(name))
+                    return t;
+            }
+            return null;
+        }
+        public bool AddOffer(Offer offer)
+        {
+            return tenderRepository.AddOffer(offer);
+        }
+
+        public List<Offer> GetAllOffers()
+        {
+            return tenderRepository.GetAllOffers();
+        }
     }
 }

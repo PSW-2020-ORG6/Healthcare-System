@@ -10,7 +10,7 @@ namespace IntegrationAdapters.Repositories
     public class TenderRepository : ITenderRepository
     {
         public DbContextOptions<IAHealthCareSystemDbContext> options = new DbContextOptionsBuilder<IAHealthCareSystemDbContext>()
-               .UseMySql(connectionString: "server=localhost;port=3306;database=newmydb;user=root;password=root").UseLazyLoadingProxies()
+               .UseNpgsql(connectionString: "server=localhost;port=5432;database=newmydb;User ID=postgres;password=super").UseLazyLoadingProxies()
                .Options;
         public readonly IAHealthCareSystemDbContext dbContext;
 
@@ -21,15 +21,26 @@ namespace IntegrationAdapters.Repositories
 
         public bool AddTender(Tender tender)
         {
-                dbContext.Add<Tender>(tender);
-                dbContext.SaveChanges();
-                return true;
-            
+            dbContext.Add<Tender>(tender);
+            dbContext.SaveChanges();
+            return true;
+
         }
 
         public List<Tender> GetAllTenders()
         {
             return dbContext.Tender.ToList();
+        }
+        public List<Offer> GetAllOffers()
+        {
+            return dbContext.Offer.ToList();
+        }
+        public bool AddOffer(Offer offer)
+        {
+            dbContext.Add<Offer>(offer);
+            dbContext.SaveChanges();
+            return true;
+
         }
     }
 }
