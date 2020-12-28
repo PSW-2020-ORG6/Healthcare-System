@@ -132,6 +132,14 @@ $(document).ready(function () {
             modalMedicines.style.display = "none";
         }
     }
+    spanMedicine.onclick = function () {
+        modalMedicines.style.display = "none";
+    }
+    window.onclick = function (event) {
+        if (event.target == modalMedicines) {
+            modalMedicines.style.display = "none";
+        }
+    }
 
     $('#tenderTable').on('click', 'input:button[name=offerButton]', function (event) {
         tenderName = this.id;
