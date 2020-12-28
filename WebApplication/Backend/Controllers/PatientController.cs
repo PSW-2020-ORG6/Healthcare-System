@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
 using WebApplication.Backend.Services;
 using HealthClinicBackend.Backend.Dto;
+using IntegrationAdapters.Models;
+using System;
 
 namespace WebApplication.Backend.Controllers
 {
@@ -55,6 +57,12 @@ namespace WebApplication.Backend.Controllers
         public bool BlockMaliciousPatient(PatientDto patient)
         {
             return patientService.BlockMaliciousPatient(patient.Id);
+        }
+
+        [HttpGet("getActionsAndBenefits")]
+        public IEnumerable<ActionAndBenefitMessage> GetActionsAndBenefits()
+        {
+            return patientService.GetHospitalSubscribedPharmacies();
         }
 
     }
