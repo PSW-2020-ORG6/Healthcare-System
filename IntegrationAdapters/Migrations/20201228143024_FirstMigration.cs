@@ -1,10 +1,10 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace IntegrationAdapters.Migrations
 {
-    public partial class fm : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -69,6 +69,20 @@ namespace IntegrationAdapters.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Offer",
+                columns: table => new
+                {
+                    CompanyEmail = table.Column<string>(nullable: false),
+                    CompanyName = table.Column<string>(nullable: true),
+                    UnitPrice = table.Column<int>(nullable: false),
+                    TenderName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Offer", x => x.CompanyEmail);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Reports",
                 columns: table => new
                 {
@@ -99,7 +113,7 @@ namespace IntegrationAdapters.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     MedicineName = table.Column<string>(nullable: true),
                     Amount = table.Column<int>(nullable: false),
                     MedicineReportId = table.Column<string>(nullable: true)
@@ -137,6 +151,9 @@ namespace IntegrationAdapters.Migrations
 
             migrationBuilder.DropTable(
                 name: "MedicineSpecification");
+
+            migrationBuilder.DropTable(
+                name: "Offer");
 
             migrationBuilder.DropTable(
                 name: "Tender");

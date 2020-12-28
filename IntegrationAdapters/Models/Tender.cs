@@ -13,9 +13,11 @@ namespace IntegrationAdapters.Models
         public string MedicineName { get; set; }
         public int Quantity { get; set; }
         public DateTime FinishDate { get; set; }
+       // public virtual List<Offer> offers { get; set; }
 
         public Tender()
         {
+            //offers = new List<Offer>();
         }
         public Tender(string tenderName, string medicineName, int quantity, DateTime finishDate)
         {
@@ -23,6 +25,7 @@ namespace IntegrationAdapters.Models
             MedicineName = medicineName;
             Quantity = quantity;
             FinishDate = finishDate;
+           // offers = new List<Offer>();
         }
     }
 }

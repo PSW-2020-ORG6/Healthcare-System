@@ -29,5 +29,27 @@ namespace IntegrationAdapters.Controllers
         {
             return tenderService.GetAllTenders();
         }
+        [HttpGet("getAllOffers")]
+        public IEnumerable<Offer> GetAllOffers()
+        {
+            return tenderService.GetAllOffers();
+        }
+        [HttpGet("getTenderById/{name}")]
+        public Tender GetTender(string name)
+        {
+            return tenderService.GetTenderByName(name);
+        }
+        [HttpPost("addOffer")]
+        public IActionResult AddOffer(Offer offer)
+        {
+            if (tenderService.AddOffer(offer))
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
 }

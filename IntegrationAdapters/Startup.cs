@@ -33,16 +33,7 @@ namespace IntegrationAdapters
             services.AddControllers();
 
             services.AddDbContext<IAHealthCareSystemDbContext>(options =>
-            {
-                var connectionString = CreateConnectionStringFromEnvironment();
-                Console.WriteLine(connectionString);
-
-                options.UseNpgsql(
-                    connectionString,
-                    x => x.MigrationsAssembly("Backend").EnableRetryOnFailure(5,
-                        new TimeSpan(0, 0, 0, 30), new List<string>())
-                );
-            });
+                   options.UseNpgsql(ConfigurationExtensions.GetConnectionString(Configuration, "HealthCareSystemDbContextConnectionString")).UseLazyLoadingProxies());
         }
         private Server server;
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
