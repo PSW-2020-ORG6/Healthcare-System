@@ -10,7 +10,7 @@ namespace IntegrationAdapters.Repositories
     public class ActionsAndBenefitsRepository : IActionsAndBenefitsRepository
     {
         public DbContextOptions<IAHealthCareSystemDbContext> options = new DbContextOptionsBuilder<IAHealthCareSystemDbContext>()
-                .UseMySql(connectionString: "server=localhost;port=3306;database=newmydb;user=root;password=root").UseLazyLoadingProxies()
+                .UseMySql(connectionString: "server=localhost;port=3306;database=mydb;user=root;password=root").UseLazyLoadingProxies()
                 .Options;
         public readonly IAHealthCareSystemDbContext dbContext;
 

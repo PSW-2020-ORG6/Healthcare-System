@@ -13,7 +13,7 @@ namespace WebApplication.Backend.Repositorys
 
         public SpecializationRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
         }
 
         private List<Specialization> GetSpecializations(String query)

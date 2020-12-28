@@ -19,7 +19,7 @@ namespace WebApplication.Backend.Repositorys
         private AddressRepository addressRepository = new AddressRepository();
         public PatientRepository()
         {
-            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=Tanjaa;password=TanjaaD");
+            connection = new MySqlConnection("server=localhost;port=3306;database=mydb;user=root;password=root");
         }
         ///Tanja Drcelic RA124/2017 and Aleksandra Milijevic RA 22/2017 and Aleksa Repovic RA52/2017
         /// <summary>

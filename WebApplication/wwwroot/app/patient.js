@@ -7,7 +7,8 @@
 			canceledAppointments: null,
 			patients: null,
 			doctorsList: null,
-			appointment: null			
+			appointment: null,
+			actionsAndBenefits:null
 		}
 	},
 	beforeMount() {
@@ -55,6 +56,14 @@
 			.catch(error => {
 				alert(error)
 			})
+		axios
+			.get('/patient/getActionsAndBenefits')
+			.then(response => {
+				this.actionsAndBenefits = response.data
+			})
+			.catch(error => {
+				alert(error)
+			})
 	},
 	template: `
 	<div id="Patient">
@@ -64,23 +73,14 @@
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active" style="height:330px;">
-            </br>
-            <h3> Vitamin D3 1000 IU</h3></br>
-            Vitamin D3 1000 IU doprinosi normalnoj funkciji imunog sistema,</br> koštano-mišićnog sistema, smanjenju gubitka koštane mase kod žena u post-menopauzalnom periodu.</br>
-            Podrška imunom sistemu, kao i kod stanja kao što su osteopenija, osteoporoza, autoimuna, kardiovaskularna i maligna oboljenja.
+            </br></br></br></br></br>
+            <h1> Our health is in our hands!</h1></br>
         </br></br>
         </div>
-        <div class="carousel-item" v-for="it in [0,1]" style="height:330px;">
+        <div class="carousel-item" v-for="ac in actionsAndBenefits" style="height:330px;">
             </br>
-            <h3>Oligovit Complex Galenika</h3></br>
-            Oligovit dražeje se primenjuju:</br>
-        - Kao dodatak ishrani u stanjima neadekvatne ishrane (u toku dijete, gladovanja)</br>
-        - Kao dopuna u vitaminima i mineralima u toku trudnoće i dojenja</br>
-        - Kod premorenosti posle teškog fizičkog napora</br>
-        - U stanjima oporavka posle: bolesti praćenih visokim temperaturama, hirurških zahvata</br>
-        - Kod zaostajanja u rastenju, nedostatka apetita, gubitka u telesnoj masi</br>
-        - Kod deficita nastalog zbog gastrointestinalnih i hepatobilijarnih bolesti</br>
-        - Kod patoloških stanja (hipertireoidizam, stres itd.) u kojima su povećane potrebe za vitaminima i mineralima.
+			 <h2>{{ac.pharmacyName}}</h2></br>
+			 <h3 class="cc">{{ac.text}}</h3>
         </br></br>
         </div>
       </div>
