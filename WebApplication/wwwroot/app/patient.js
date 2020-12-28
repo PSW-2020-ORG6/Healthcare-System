@@ -12,7 +12,7 @@
 	},
 	beforeMount() {
 		axios
-			.get('http://localhost:49900/patient/getPatientById', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
+			.get('/patient/getPatientById', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
 			.then(response => {
 				this.patientDTO = response.data
 			})
@@ -21,7 +21,7 @@
 			})
 
 		axios
-			.get('http://localhost:49900/feedback/approved')
+			.get('/feedback/approved')
 			.then(response => {
 				this.approvedFeedbacks = response.data
 			})
@@ -29,7 +29,7 @@
 				alert(error.response.data)
 			})
 		axios
-			.get('http://localhost:49900/patient/all')
+			.get('/patient/all')
 			.then(response => {
 				this.patients = response.data
 			})
@@ -38,22 +38,22 @@
 			})
 
 		axios
-			.get('http://localhost:49900/appointment/allAppointmentsByPatientIdActive', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
+			.get('/appointment/allAppointmentsByPatientIdActive', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
 			.then(response => {
 				this.activeAppointments = response.data
 			})
 
 			.catch(error => {
-				alert("greska kod activeAppoiuntments")
+				alert(error)
 			})
 
 		axios
-			.get('http://localhost:49900/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
+			.get('/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
 			.then(response => {
 				this.canceledAppointments = response.data
 			})
 			.catch(error => {
-				alert("greska kod canceledAppointments")
+				alert(error)
 			})
 	},
 	template: `
@@ -94,13 +94,11 @@
       </a>
     </div></br>
         <br></br>
+        <br></br>
+        <br></br>
         <!--ICONS ROW 1-->
             <div>
               <div class="row">
-                <div class="col-sm">
-                </div>
-                <div class="col-sm">
-                </div>
                 <div class="col-sm">
                 </div>
                 <div class="col-sm">
@@ -111,31 +109,9 @@
                 <div class="col-sm">
                 </div>
                 <div class="col-sm">
-                  <br/> 
-                </div>
-                <div class="col-sm">
-                </div>
-                <div class="col-sm">
                   <h3>
-			        <button id="UserExperiences" type="button" class="btn btn-info btn-lg margin form-control" data-toggle="modal" v-on:click="FeedbackShow()"></button>
+			        <button id="UserExperiences" type="button" class="btn btn-info btn-lg margin form-control" v-on:click="FeedbackShow()"></button>
 			        </h3><br/> 
-                </div>
-                <div class="col-sm">
-                </div>
-                <div class="col-sm">
-                </div>
-                <div class="col-sm">
-                </div>  
-                <div class="col-sm">
-                </div>
-              </div>
-<br></br>
-<br></br>
-	<!--ICONS ROW 2-->
-			<div class="row">
-                <div class="col-sm">
-                </div>
-                <div class="col-sm">
                 </div>
                 <div class="col-sm">
                 </div>
@@ -159,16 +135,12 @@
 			        </h3><br/> 
                 </div>
                 <div class="col-sm">
-                </div>
-                <div class="col-sm">
-                </div>
-                <div class="col-sm">
                 </div>  
                 <div class="col-sm">
                 </div>
               </div>
-            </div>
-</br>
+<br></br>
+<br></br>
 
 	</div>
 
@@ -181,7 +153,7 @@
 				this.feedback.id = "-1"
 			if (feedback.text.localeCompare(null) || feedback.text.localeCompare("")) {
 				axios
-					.post("http://localhost:49900/feedback/add", feedback)
+					.post("/feedback/add", feedback)
 					.then(response => {
 						this.feedback.text = null;
 						$('#feedbackModal').modal('hide')
@@ -205,7 +177,7 @@
 		},
 		SurveyShow: function () {
 			axios
-				.get('http://localhost:49900/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient } })
+				.get('/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient } })
 				.then(response => {
 					this.doctorsList = response.data
 					if (this.doctorsList.value != null || this.doctorsList != "") {

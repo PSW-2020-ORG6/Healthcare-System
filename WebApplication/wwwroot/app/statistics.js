@@ -568,7 +568,7 @@
 
 
         axios
-            .get('http://localhost:49900/feedback/approved')
+            .get('/feedback/approved')
             .then(response => {
                 this.approvedFeedbacks = response.data
             })
@@ -577,7 +577,7 @@
             })
 
         axios
-            .get('http://localhost:49900/feedback/disapproved')
+            .get('/feedback/disapproved')
             .then(response => {
                 this.disapprovedFeedbacks = response.data
             })
@@ -585,7 +585,7 @@
                 alert(error)
             })
         axios
-            .get('http://localhost:49900/patient/all')
+            .get('/patient/all')
             .then(response => {
                 this.patients = response.data
             })
@@ -594,7 +594,7 @@
             })
 
         axios
-            .get('http://localhost:49900/appointment/physicians')
+            .get('/appointment/physicians')
             .then(response => {
                 this.doctorsList = response.data
             })
@@ -610,7 +610,7 @@
     mounted() {
 
         axios
-            .get('http://localhost:49900/survey/getStatistiEachQuestion')
+            .get('/survey/getStatistiEachQuestion')
             .then(response => {
                 this.statisticEachQuestion = response.data;
 
@@ -737,7 +737,7 @@
             })
 
         axios
-            .get('http://localhost:49900/survey/getStatistiEachTopic')
+            .get('/survey/getStatistiEachTopic')
             .then(response => {
                 this.statisticEachTopic = response.data;
 
@@ -777,7 +777,7 @@
     beforeMount() {
 
         axios
-            .get('http://localhost:49900/appointment/physicians')
+            .get('/appointment/physicians')
             .then(response => {
                 this.doctorsList = response.data
             })
@@ -3135,7 +3135,7 @@
     methods: {
         getStatisticsForDoctor: function () {
             axios          
-                .get('http://localhost:49900/survey/getStatisticForDoctor', { params: { ID: this.selectedDoctor.fullName } })
+                .get('/survey/getStatisticForDoctor', { params: { ID: this.selectedDoctor.fullName } })
                 .then(response => {
 
                     this.statisticDoctor = response.data;

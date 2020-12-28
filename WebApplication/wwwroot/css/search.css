@@ -1,4 +1,3 @@
-@import url('file:///C:\Users\Administrator\Desktop\Novo\Healthcare-System\WebApplication\wwwroot\css\search.css');
 .circleadd {
     background-color: black;
     border: none;
@@ -11,7 +10,6 @@
 #search {
     background-image: url("../pictures/PatientBackgroundV10.jpg");
     background-repeat: no-repeat;
-    overflow-y: scroll;
     height: 768px;
 }
 

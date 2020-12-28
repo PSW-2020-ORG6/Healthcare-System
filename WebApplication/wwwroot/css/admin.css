@@ -223,3 +223,9 @@ div .circle-img {
     width:100px;
     filter: invert(1);
 }
+
+#feedbackAdmin {
+    background-image: url("../pictures/feedback.jpg");
+    background-repeat: repeat;
+    height: 768px;
+}

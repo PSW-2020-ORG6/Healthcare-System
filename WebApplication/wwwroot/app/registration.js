@@ -38,7 +38,7 @@
 	},
 	mounted() {
 		axios
-			.get('http://localhost:49900/registration/allPhysitians')
+			.get('/registration/allPhysitians')
 			.then(response => {
 				this.doctorsList = response.data
 			})
@@ -333,7 +333,7 @@
 				&& patientDTO.maritalStatus != null && patientDTO.contact != null && patientDTO.email != null && patientDTO.password != null
 				&& patientDTO.gender != null && patientDTO.healthInsuranceNumber != null) {
 				axios
-					.post("http://localhost:49900/registration/registerPatient", patientDTO)
+					.post("/registration/registerPatient", patientDTO)
 					.then(response => {
 						alert("Mail has been sent.");
 					})

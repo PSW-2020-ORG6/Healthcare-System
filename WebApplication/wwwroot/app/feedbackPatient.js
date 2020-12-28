@@ -14,7 +14,7 @@
 	},
 	beforeMount() {
 		axios
-			.get('http://localhost:49900/feedback/approved')
+			.get('/feedback/approved')
 			.then(response => {
 				this.approvedFeedbacks = response.data
 			})
@@ -22,7 +22,7 @@
 				alert(error.response.data)
 			})
 		axios
-			.get('http://localhost:49900/patient/all')
+			.get('/patient/all')
 			.then(response => {
 				this.patients = response.data
 			})
@@ -95,7 +95,7 @@
 				this.feedback.id = "-1"
 			if (feedback.text.localeCompare(null) || feedback.text.localeCompare("")) {
 				axios
-					.post("http://localhost:49900/feedback/add", feedback)
+					.post("/feedback/add", feedback)
 					.then(response => {
 						this.feedback.text = null;
 						$('#feedbackModal').modal('hide')
@@ -119,7 +119,7 @@
 		},
 		SurveyShow: function () {
 			axios
-				.get('http://localhost:49900/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient } })
+				.get('/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient } })
 				.then(response => {
 					this.doctorsList = response.data
 					if (this.doctorsList.value != null || this.doctorsList != "") {
