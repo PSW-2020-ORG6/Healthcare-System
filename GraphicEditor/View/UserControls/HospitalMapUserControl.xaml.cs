@@ -47,5 +47,16 @@ namespace GraphicEditor.View.UserControls
             Appointment appointment = new Appointment(_viewModel);
             appointment.Show();
         }
+
+        private void EmergencyAppointment(object sender, RoutedEventArgs e)
+        {
+            if (MainWindow.TypeOfUser != TypeOfUser.Secretary)
+            {
+                new Warning().ShowDialog();
+                return;
+            }
+            EmergencyAppointment appointment = new EmergencyAppointment(_viewModel);
+            appointment.Show();
+        }
     }
 }
