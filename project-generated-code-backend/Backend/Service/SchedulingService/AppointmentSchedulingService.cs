@@ -144,32 +144,5 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
 
             return null;
         }
-
-        public List<AppointmentDto> MakeAppointment(AppointmentDto appointmentDto, int priority)
-        {
-            List<AppointmentDto> appointments = GetAvailableAppointments(appointmentDto);
-            if (appointments == null || appointments.Count != 0)
-            {
-                return appointments;
-            }
-            if (priority == 0) //prioritet je doktor
-            {
-                appointmentDto.Date.AddDays(1);
-                MakeAppointment(appointmentDto, priority);
-            }
-            else
-            {
-                foreach(Physician physician in _physicianDatabaseSql.GetAll()){
-                    appointmentDto.Physician = physician;
-                    appointments = GetAvailableAppointments(appointmentDto);
-                    if (appointments != null || appointments.Count != 0)
-                    {
-                        return appointments;
-                    }
-                }
-            }
-
-            return null;
-        }
     }
 }
