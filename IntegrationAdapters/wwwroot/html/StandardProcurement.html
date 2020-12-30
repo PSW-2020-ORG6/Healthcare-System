@@ -7,8 +7,8 @@
     <script src="../js/CreateTender.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/registerHospital.css">
 </head>
-<body class="background" style="padding:200px 500px 200px 500px;">
-    <div id="table">
+<body class="background" >
+    <div id="table" style="margin-top:100px; margin-left:200px;">
         <table class="table-borderless">
             <thead>
                 <tr>
@@ -44,6 +44,12 @@
                     <td>
                         <input class="textbox" type="number" id="txtQuantity"
                                placeholder="Quantity..." />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input style="background-color:lightgreen;" id="btnAddMedicine" type="button" class="btn btn-primary" value="Add item">
                     </td>
                 </tr>
                 <tr>
@@ -87,6 +93,18 @@
             <br>
         </div>
         </div>
+    <div id="tableMedicine" style="margin-top:-400px; margin-left:600px;">
+        <table width="600">
+            <thead>
+                <tr class="success">
+                    <th>Medicine name</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody id="medicineTable">
+            </tbody>
+        </table>
+    </div>
 
 </body>
 </html>

@@ -1,4 +1,5 @@
 ﻿using IntegrationAdapters.Models;
+using IntegrationAdapters.Models.DTO;
 using IntegrationAdapters.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -50,6 +51,23 @@ namespace IntegrationAdapters.Controllers
             {
                 return BadRequest();
             }
+        }
+        [HttpPost("addMedicine")]
+        public IActionResult AddMedicine(MedicineDTO medicine)
+        {
+            if (tenderService.AddMedicine(medicine))
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet("getAllMedicines/{tenderName}")]
+        public IEnumerable<MedicineDTO> GetAllMedicines(string tenderName)
+        {
+            return tenderService.GetAllMedicines(tenderName);
         }
     }
 }

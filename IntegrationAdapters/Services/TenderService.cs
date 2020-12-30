@@ -1,4 +1,5 @@
 ﻿using IntegrationAdapters.Models;
+using IntegrationAdapters.Models.DTO;
 using IntegrationAdapters.Repositories;
 using System;
 using System.Collections.Generic;
@@ -46,5 +47,23 @@ namespace IntegrationAdapters.Services
         {
             return tenderRepository.GetAllOffers();
         }
+        public bool AddMedicine(MedicineDTO medicineDTO)
+        {
+            return tenderRepository.AddMedicine(medicineDTO);
+        }
+
+        public List<MedicineDTO> GetAllMedicines(string tenderName)
+        {
+            List<MedicineDTO> result = new List<MedicineDTO>();
+            foreach(MedicineDTO m in tenderRepository.GetAllMedicines())
+            {
+                if (m.TenderName.Equals(tenderName))
+                {
+                    result.Add(m);
+                }
+            }
+            return result;
+        }
+
     }
 }

@@ -16,9 +16,8 @@
             <thead>
                 <tr class="success">
                     <th>Tender name</th>
-                    <th>Medicine name</th>
-                    <th>Quantity</th>
                     <th>Finish date</th>
+                    <th>Medicines</th>
                     <th>Make offer</th>
                 </tr>
             </thead>
@@ -33,7 +32,7 @@
             <table class="centered">
                 <tr>
                     <th height="50">Company name:</th>
-                    <th height="50"><input class="textbox" type="text"  id="txtCompanyName" placeholder="Company name..." ></th>
+                    <th height="50"><input class="textbox" type="text" id="txtCompanyName" placeholder="Company name..."></th>
                 </tr>
                 <tr>
                     <th height="50">Email:</th>
@@ -48,6 +47,22 @@
             <button id="btnSendOffer" class="btn btn-primary" style="background-color:coral">Send offer</button>
             <br>
         </div>
+    </div>
+
+    <div id="modal-medicines" class="modal">
+        <div class="modal-content" style="text-align: center;">
+            <span class="closeMedicine">&times;</span>
+            <table class="centered">
+                <thead>
+                    <tr class="success">
+                        <th>Medicine name</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody id="modalMedicineTable">
+                </tbody>
+            </table>
+    </div>
     </div>
 </body>
 </html>
