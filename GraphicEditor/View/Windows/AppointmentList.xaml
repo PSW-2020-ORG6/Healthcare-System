@@ -6,24 +6,43 @@
         xmlns:local="clr-namespace:GraphicEditor.View.Windows"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="AppointmentList" Height="600" Width="800">
+        Title="AppointmentList" Height="650" Width="800">
     <StackPanel>
-        
         <TextBlock HorizontalAlignment="Center"  Text="Appointments" FontSize="48"/>
-        <ListBox Height="450" VerticalAlignment="Center" x:Name="appointmentListBox" SelectedIndex="{Binding AppointmentIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding ListOfAppointments, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+        <ListBox Margin="20" Height="450" VerticalAlignment="Center" x:Name="appointmentListBox" SelectedIndex="{Binding AppointmentIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding ListOfAppointments, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="BorderBrush" Value="#FF851B8E" />
+                    <Setter Property="Background" Value="#FF964196"/>
+                    <Setter Property="Foreground" Value="Black" />
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="Patient:"/>
-                        <TextBlock Text="{Binding Path=Patient}" />
-                        <TextBlock Text="Physician:"/>
-                        <TextBlock Text="{Binding Path=Physician}" />
-                        <TextBlock Text="{Binding Path=Physician.Specialization[0].Name}"/>
-                        <TextBlock Text="Room:"/>
-                        <TextBlock Text="{Binding Path=Room}" />
-                        <TextBlock Text="Date:"/>
-                        <TextBlock Text="{Binding Path=Time.Start}" />
-                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Margin="0 0 10 0" Grid.Row="0" Grid.Column="0" Text="Patient:"/>
+                        <TextBlock Margin="0 0 10 0" Grid.Row="1" Grid.Column="0" Text="{Binding Path=Patient}" />
+                        <TextBlock Margin="0 0 10 0" Grid.Row="0" Grid.Column="1" Text="Physician:"/>
+                        <StackPanel Margin="0 0 10 0" Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                            <TextBlock  Text="{Binding Path=Physician}" />
+                            <TextBlock Text="{Binding Path=Physician.Specialization[0].Name}"/>
+                        </StackPanel>
+                        <TextBlock Margin="0 0 10 0" Grid.Row="0" Grid.Column="2" Text="Room:"/>
+                        <TextBlock Margin="0 0 10 0" Grid.Row="1" Grid.Column="2" Text="{Binding Path=Room}" />
+                        <TextBlock Margin="0 0 10 0" Grid.Row="0" Grid.Column="3" Text="Date:"/>
+                        <TextBlock Margin="0 0 10 0" Grid.Row="1" Grid.Column="3" Text="{Binding Path=Time.Start}" />
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
