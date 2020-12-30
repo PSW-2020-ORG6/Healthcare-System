@@ -1,4 +1,5 @@
 ﻿using IntegrationAdapters.Models;
+using IntegrationAdapters.Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,7 @@ namespace IntegrationAdapters.Repositories
         public List<Tender> GetAllTenders();
         public List<Offer> GetAllOffers();
         public bool AddOffer(Offer offer);
+        public bool AddMedicine(MedicineDTO medicineDTO);
+        public List<MedicineDTO> GetAllMedicines();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using IntegrationAdapters.Models;
+using IntegrationAdapters.Models.DTO;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,16 @@ namespace IntegrationAdapters.Repositories
             dbContext.Add<Offer>(offer);
             dbContext.SaveChanges();
             return true;
-
+        }
+        public bool AddMedicine(MedicineDTO medicineDTO)
+        {
+            dbContext.Add<MedicineDTO>(medicineDTO);
+            dbContext.SaveChanges();
+            return true;
+        }
+        public List<MedicineDTO> GetAllMedicines()
+        {
+            return dbContext.MedicineDTOs.ToList();
         }
     }
 }

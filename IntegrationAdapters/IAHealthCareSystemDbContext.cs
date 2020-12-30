@@ -1,4 +1,5 @@
 ﻿using IntegrationAdapters.Models;
+using IntegrationAdapters.Models.DTO;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace IntegrationAdapters
         public DbSet<MedicineSpecification> MedicineSpecification { get; set; }
         public DbSet<Tender> Tender { get; set; }
         public DbSet<Offer> Offer { get; set; }
+        public DbSet<MedicineDTO> MedicineDTOs { get; set; }
 
         public IAHealthCareSystemDbContext(DbContextOptions<IAHealthCareSystemDbContext> options) : base(options)
         {
