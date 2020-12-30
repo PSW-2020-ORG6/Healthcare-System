@@ -19,11 +19,19 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0">
             <TextBlock HorizontalAlignment="Center" Text="Pick room that you want to relocate equipment to:" FontSize="18"/>
-            <ListBox Height="290" x:Name="MyListBox" SelectedIndex="{Binding RoomIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding Rooms, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ListBox Margin="20 20 20 0"  Height="290" x:Name="MyListBox" SelectedIndex="{Binding RoomIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding Rooms, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="BorderThickness" Value="1" />
+                        <Setter Property="BorderBrush" Value="#FF851B8E" />
+                        <Setter Property="Background" Value="#FF964196"/>
+                        <Setter Property="Foreground" Value="Black" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding Path=SerialNumber}" />
+                        <StackPanel  HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding Path=SerialNumber}"/>
                             <TextBlock Text="{Binding Path=Name}" />
                         </StackPanel>
                     </DataTemplate>
