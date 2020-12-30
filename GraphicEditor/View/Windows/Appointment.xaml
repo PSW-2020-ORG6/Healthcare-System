@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GraphicEditor.View.UserControls"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="Appointment" Height="800" Width="800">
@@ -53,7 +54,7 @@
         <StackPanel Grid.Row="0" Grid.Column="1">
             <Grid>
                 <TextBlock Margin="60 20 0 0"  FontSize="20">Pick date:</TextBlock>
-                <DatePicker x:Name="Date" Margin="0 20 10 0"  Width="100" SelectedDate="{Binding DatePicker, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DatePicker>
+                <DatePicker DisplayDateStart="{x:Static sys:DateTime.Today}" x:Name="Date" Margin="0 20 10 0"  Width="100" SelectedDate="{Binding DatePicker, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DatePicker>
             </Grid>
             <Grid>
                 <TextBlock Margin="60 20 0 0" FontSize="20">Time from:</TextBlock>

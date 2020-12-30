@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         WindowStartupLocation="CenterScreen"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:GraphicEditor.View.Windows"
         mc:Ignorable="d"
         Title="EquipmentRelocation" Height="450" Width="800">
@@ -32,9 +33,13 @@
         <StackPanel Grid.Column="1">
             <StackPanel HorizontalAlignment="Center">
                 <TextBlock Margin="0 20 0 0"  FontSize="20">Pick date:</TextBlock>
-                <DatePicker  x:Name="Date"   Width="100" SelectedDate="{Binding DatePicker, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DatePicker>
-                <TextBlock Margin="0 20 0 0"  FontSize="20">Time :</TextBlock>
-                <ComboBox SelectedIndex="{Binding TimeIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  Width="100" x:Name="ComboBox" ItemsSource="{Binding MyTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <DatePicker DisplayDateStart="{x:Static sys:DateTime.Today}" x:Name="Date"   Width="100" SelectedDate="{Binding DatePicker, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DatePicker>
+                <TextBlock Margin="0 20 0 0"  FontSize="20">Time from:</TextBlock>
+                <ComboBox SelectedIndex="{Binding TimeIndexFrom, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  Width="100" ItemsSource="{Binding MyTimeFrom, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <TextBlock Margin="0 20 0 0"  FontSize="20">Time to:</TextBlock>
+                <ComboBox SelectedIndex="{Binding TimeIndexTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="100" ItemsSource="{Binding MyTimeTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Margin="0 20 0 0" FontSize="20">Quantity:</TextBlock>
+                <ComboBox SelectedIndex="{Binding QuantityIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="100" ItemsSource="{Binding QuantityList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </StackPanel>
         <Button Command="{Binding Relocate}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Relocate" FontSize="20"/>

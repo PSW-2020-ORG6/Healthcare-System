@@ -30,7 +30,18 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public override void Save(Equipment newEntity)
         {
-            dbContext.Equipment.Add(newEntity);
+            bool entered = false;
+            foreach(Equipment equipment in dbContext.Equipment)
+            {
+                if (equipment.Name.ToLower().Equals(newEntity.Name.ToLower()) && equipment.RoomSerialNumber.Equals(newEntity.RoomSerialNumber))
+                {
+                    entered = true;
+                    equipment.Quantity += newEntity.Quantity;
+                    dbContext.Equipment.Update(equipment);
+                }
+            }
+            if(!entered)
+                dbContext.Equipment.Add(newEntity);
             dbContext.SaveChanges();
         }
 

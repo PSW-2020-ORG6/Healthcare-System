@@ -21,7 +21,7 @@ namespace GraphicEditor.View.Windows
     {
         public EquipmentRelocation(Equipment equipment)
         {
-            this.DataContext = new EquipmentRelocationViewModel(equipment);
+            this.DataContext = new EquipmentRelocationViewModel(equipment, this);
             InitializeComponent();
         }
     }
