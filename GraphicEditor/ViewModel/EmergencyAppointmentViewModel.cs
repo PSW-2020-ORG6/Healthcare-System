@@ -5,7 +5,6 @@ using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
-using Model.Accounts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -109,7 +108,7 @@ namespace GraphicEditor.ViewModel
             List<Patient> patientsPom = new List<Patient>();
             foreach (Patient p in patientDatabaseSql.GetAll())
             {
-                if (p.FullName.ToLower().Contains(textBox.Text.ToLower()))
+                if ((p.Name + " " + p.Surname).ToLower().Contains(textBox.Text.ToLower()))
                 {
                     patientsPom.Add(p);
                 }

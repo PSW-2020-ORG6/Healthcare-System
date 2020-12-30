@@ -24,6 +24,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public DbSet<Patient> Patient { get; set; }
         public DbSet<Secretary> Secretary { get; set; }
         public DbSet<Equipment> Equipment { get; set; }
+        public DbSet<EquipmentRelocation> EquipmentRelocations { get; set; }
         public DbSet<ProcedureEquipment> ProcedureEquipment { get; set; }
         public DbSet<Bed> Bed { get; set; }
         public DbSet<RoomType> RoomType { get; set; }
@@ -220,8 +221,26 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             SecretaryCreation(modelBuilder);
             PhysicianSpecializationCreation(modelBuilder);
             ProcedureEquipmentCreation(modelBuilder);
+            EquipmentRelocationsCreation(modelBuilder);
         }
 
+        private static void EquipmentRelocationsCreation(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<EquipmentRelocation>().Ignore(e => e.equipment);
+            modelBuilder.Entity<EquipmentRelocation>()
+                .HasKey(r => r.SerialNumber);
+            modelBuilder.Entity<EquipmentRelocation>().HasData(
+               new EquipmentRelocation
+               {
+                   roomToRelocateToSerialNumber = "105",
+                   equipmentSerialNumber = "78",
+                   startTime = new DateTime(2021, 1, 20,9,30,0),
+                   endTime= new DateTime(2021,1,20,10,0,0),
+                   SerialNumber = "ER1",
+                   quantity = 1
+               }
+                );
+        }
         private static void SecretaryCreation(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Secretary>()
@@ -233,10 +252,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     Surname = "Markovic",
                     SerialNumber = "123a",
                     AddressSerialNumber = "200001",
-                    Id="111",
-                    Password="123"
+                    Id = "111",
+                    Password = "123"
                 }
-                ) ;
+                );
         }
 
         private static void FeedbackCreation(ModelBuilder modelBuilder)
@@ -715,7 +734,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Appointment>().Ignore(o => o.Physician);
             modelBuilder.Entity<Appointment>().Ignore(o => o.Date);
             modelBuilder.Entity<Appointment>().HasData(
-                new Appointment { SerialNumber = "200001", PatientSerialNumber="0002", PhysicianSerialNumber="600001", Urgency = true, RoomSerialNumber="101" },
+                new Appointment { SerialNumber = "200001", PatientSerialNumber = "0002", PhysicianSerialNumber = "600001", Urgency = true, RoomSerialNumber = "101" },
                 new Appointment { SerialNumber = "200002", PatientSerialNumber = "0002", PhysicianSerialNumber = "600001", Urgency = false, RoomSerialNumber = "102" }
             );
         }
