@@ -204,7 +204,7 @@ namespace GraphicEditor.ViewModel
             int min = Int32.Parse(s[1]);
             int hours2 = Int32.Parse(s2[0]);
             int min2 = Int32.Parse(s2[1]);
-            if (hours > hours2 || (hours == hours2 && min > min2))
+            if (hours > hours2 || (hours == hours2 && min >= min2))
             {
                 MessageBox.Show("Time FROM must be less then TO !!!");
                 return;
