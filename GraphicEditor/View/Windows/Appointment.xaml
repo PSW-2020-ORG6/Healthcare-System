@@ -24,9 +24,14 @@
                 <Button HorizontalAlignment="Right" Margin="22" Command="{Binding FilterPhysician}" CommandParameter="{Binding ElementName=PhysicianTextBox}">Search</Button>
             </Grid>
             <ListBox Height="290" x:Name="MyListBox" SelectedIndex="{Binding PhysiciansIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding Physicians, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                <ListBox.InputBindings>
-                    
-                </ListBox.InputBindings>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="BorderThickness" Value="1" />
+                        <Setter Property="BorderBrush" Value="#FF851B8E" />
+                        <Setter Property="Background" Value="#FF964196"/>
+                        <Setter Property="Foreground" Value="Black" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -42,6 +47,14 @@
                 <Button HorizontalAlignment="Right" Margin="22" Command="{Binding FilterPatient}" CommandParameter="{Binding ElementName=PatientTextBox}">Search</Button>
             </Grid>
             <ListBox Height="250" x:Name="MyListBoxPatient" SelectedIndex="{Binding PatientIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding Patients, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="BorderThickness" Value="1" />
+                        <Setter Property="BorderBrush" Value="#FF851B8E" />
+                        <Setter Property="Background" Value="#FF964196"/>
+                        <Setter Property="Foreground" Value="Black" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
