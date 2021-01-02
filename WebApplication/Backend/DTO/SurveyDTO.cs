@@ -70,29 +70,6 @@ namespace WebApplication.Backend.DTO
         {
             id = survey.Id;
             doctorName = survey.DoctorName;
-            Question1 = survey.Question1;
-            Question2 = survey.Question2;
-            Question3 = survey.Question3;
-            Question4 = survey.Question4;
-            Question5 = survey.Question5;
-            Question6 = survey.Question6;
-            Question7 = survey.Question7;
-            Question8 = survey.Question8;
-            Question9 = survey.Question9;
-            Question10 = survey.Question10;
-            Question11 = survey.Question11;
-            Question12 = survey.Question12;
-            Question13 = survey.Question13;
-            Question14 = survey.Question14;
-            Question15 = survey.Question15;
-            Question16 = survey.Question16;
-            Question17 = survey.Question17;
-            Question18 = survey.Question18;
-            Question19 = survey.Question19;
-            Question20 = survey.Question20;
-            Question21 = survey.Question21;
-            Question22 = survey.Question22;
-            Question23 = survey.Question23;
             ReportDate = survey.ReportDate;
         }
 
