@@ -211,69 +211,8 @@ namespace WebApplication.Backend.Model
         }
 
         private static void SurveyCreation(ModelBuilder modelBuilder)
-        {/*
+        {
             modelBuilder.Entity<Survey>().HasKey(o => o.SerialNumber);
-            modelBuilder.Entity<Survey>().HasData(
-                new Survey
-                {
-                    Id = "001",
-                    DoctorName = "Pera Peric",
-                    Question1 = "5",
-                    Question2 = "5",
-                    Question3 = "5",
-                    Question4 = "5",
-                    Question5 = "4",
-                    Question6 = "3",
-                    Question7 = "5",
-                    Question8 = "5",
-                    Question9 = "1",
-                    Question10 = "5",
-                    Question11 = "2",
-                    Question12 = "5",
-                    Question13 = "5",
-                    Question14 = "5",
-                    Question15 = "5",
-                    Question16 = "5",
-                    Question17 = "5",
-                    Question18 = "5",
-                    Question19 = "5",
-                    Question20 = "5",
-                    Question21 = "3",
-                    Question22 = "2",
-                    Question23 = "4"
-                }
-            );
-            modelBuilder.Entity<Survey>().HasData(
-                new Survey
-                {
-                    Id = "005",
-                    DoctorName = "Mika Mikic",
-                    Question1 = "5",
-                    Question2 = "5",
-                    Question3 = "5",
-                    Question4 = "5",
-                    Question5 = "4",
-                    Question6 = "3",
-                    Question7 = "5",
-                    Question8 = "5",
-                    Question9 = "1",
-                    Question10 = "5",
-                    Question11 = "2",
-                    Question12 = "5",
-                    Question13 = "5",
-                    Question14 = "5",
-                    Question15 = "5",
-                    Question16 = "5",
-                    Question17 = "5",
-                    Question18 = "5",
-                    Question19 = "5",
-                    Question20 = "5",
-                    Question21 = "3",
-                    Question22 = "2",
-                    Question23 = "4"
-                }
-            );
-            */
         }
 
         private static void QuestionCreation(ModelBuilder modelBuilder)
