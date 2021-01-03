@@ -1,4 +1,5 @@
 ﻿using HealthClinicBackend.Backend.Model.Util;
+using HealthClinicBackend.Backend.Util;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,6 +19,13 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         {
             Name = name;
             BuildingSerialNumber = buildingSerialNumber;
+        }
+
+        public Floor(Building building, int nameNumber) : base()
+        {
+            Name = Constants.FloorNames[nameNumber];
+            BuildingSerialNumber = building.SerialNumber;
+            Rooms = new List<Room>();
         }
     }
 }

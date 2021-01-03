@@ -47,8 +47,12 @@
                     <Button Click="ShowRoomSearch"
                             Margin="10"
                             Height="40" 
-                            Width="160" >
+                            Width="200" >
                         <DockPanel Width="auto">
+                            <materialDesign:PackIcon Kind="Search" 
+                                             Height="25" 
+                                             Width="25"
+                                             VerticalAlignment="Center"/>
                             <TextBlock HorizontalAlignment="Center" 
                                                        VerticalAlignment="Center">
                                             Search Rooms
@@ -58,8 +62,12 @@
                     <Button Click="ShowEquipmentSearch"
                                 Margin="10"
                                 Height="40" 
-                                Width="160" >
+                                Width="200" >
                         <DockPanel Width="auto">
+                            <materialDesign:PackIcon Kind="Search" 
+                                             Height="25" 
+                                             Width="25"
+                                             VerticalAlignment="Center"/>
                             <TextBlock HorizontalAlignment="Center" 
                                     VerticalAlignment="Center">
                                                 Search Equipment
@@ -69,8 +77,12 @@
                     <Button Click="ShowMedicineSearch"
                         Margin="10"
                         Height="40" 
-                        Width="160" >
+                        Width="200" >
                         <DockPanel Width="auto">
+                            <materialDesign:PackIcon Kind="Search" 
+                                             Height="25" 
+                                             Width="25"
+                                             VerticalAlignment="Center"/>
                             <TextBlock HorizontalAlignment="Center" 
                                            VerticalAlignment="Center">
                                 Search Medicine
@@ -80,8 +92,12 @@
                     <Button Click="MakeAppointment"
                                 Margin="10"
                                 Height="40" 
-                                Width="160" >
+                                Width="200" >
                         <DockPanel Width="auto">
+                            <materialDesign:PackIcon Kind="Search" 
+                                             Height="25" 
+                                             Width="25"
+                                             VerticalAlignment="Center"/>
                             <TextBlock HorizontalAlignment="Center" 
                                     VerticalAlignment="Center">
                                                 Make Appointment

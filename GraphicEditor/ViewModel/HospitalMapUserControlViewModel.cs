@@ -20,6 +20,8 @@ namespace GraphicEditor.ViewModel
         private MainWindowViewModel _parent;
         private BuildingController buildingController = new BuildingController();
 
+        public static Dictionary<string, Button> buildingButtons = new Dictionary<string, Button>();
+
         public MyICommand<string> NavCommand { get; private set; }
 
         public MyICommand<Button> NavRealCommand { get; private set; }
@@ -58,8 +60,10 @@ namespace GraphicEditor.ViewModel
             {
                 Button but = new Button();
                 but.Style = (Style)ResourceDictionary[building.Style];
-                but.Name = building.Name;
-                but.Content = building.Column.ToString() + " " + building.Row.ToString() + " " + building.SerialNumber;
+                but.Content = building.Name;
+                but.Tag = building.Column.ToString() + " " + building.Row.ToString() + " " + building.SerialNumber;
+                //but.Name = building.Name;
+                //but.Content = building.Column.ToString() + " " + building.Row.ToString() + " " + building.SerialNumber;
                 var color = (Color)ColorConverter.ConvertFromString(building.Color);
                 Brush brush = new SolidColorBrush(color);
                 but.Background = brush;
@@ -69,13 +73,14 @@ namespace GraphicEditor.ViewModel
 
                 HospitalMapGrid.Children.Add(but);
                 HospitalMapGrid.UpdateLayout();
+                buildingButtons[building.SerialNumber] = but;
             }
 
             foreach ((int i , int j)  in coordinates)
             {
                 Button but = new Button();
                 but.Style = (Style)ResourceDictionary["NewBuildingButtonStyle"];
-                but.Content = i.ToString() + " " + j.ToString();
+                but.Tag = i.ToString() + " " + j.ToString();
                 Grid.SetColumn(but, i);
                 Grid.SetRow(but, j);
 
@@ -132,7 +137,7 @@ namespace GraphicEditor.ViewModel
 
         private void EnterBuilding(Button button)
         {
-            string content = (string)button.Content;
+            string content = (string)button.Tag;
             string[] info = content.Split(" ");
             Building enteringBuilding = buildingController.GetById(info[2]);
 
