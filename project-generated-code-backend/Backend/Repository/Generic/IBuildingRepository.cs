@@ -6,5 +6,6 @@ namespace HealthClinicBackend.Backend.Repository.Generic
     public interface IBuildingRepository : IGenericRepository<Building>
     {
         List<Building> GetByName(string name);
+        Building GetBySerialNumber(string serialNumber);
     }
 }

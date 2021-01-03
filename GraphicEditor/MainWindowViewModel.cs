@@ -15,14 +15,15 @@ namespace GraphicEditor
         public HospitalMapUserControl HospitalMap;
         public LoginUserControl LoginPage;
         private UserControl currentViewModel;
+        public MainWindow mainWindow;
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(MainWindow _mainWindow)
         {
             NavCommand = new MyICommand<string>(OnNav);
-            
             LoginPage = new LoginUserControl(this);
             HospitalMap = new HospitalMapUserControl(this);
-            //CardiologyBuilding = new CardiologyBuildingUserControl(this, new Building());
+
+            mainWindow = _mainWindow;
             CurrentUserControl = LoginPage;
         }
 

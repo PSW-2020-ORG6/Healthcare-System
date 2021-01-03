@@ -35,6 +35,11 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
             return _buildingRepository.GetByName(name);
         }
 
+        public Building GetBySerialNumber(string serialNumber)
+        {
+            return _buildingRepository.GetBySerialNumber(serialNumber);
+        }
+
         public void EditBuilding(Building building)
         {
             _buildingRepository.Update(building);

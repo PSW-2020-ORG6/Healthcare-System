@@ -50,5 +50,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             return GetAll().Where(b => b.Name.ToLower().Contains(name.ToLower())).ToList();
         }
+
+        public override Building GetBySerialNumber(string serialNumber)
+        {
+            return GetAll().Where(b => b.SerialNumber.Contains(serialNumber)).ToList()[0];
+        }
     }
 }

@@ -28,5 +28,10 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
         {
             throw new System.NotImplementedException();
         }
+
+        public Floor GetBySerialNumber(string serialNumber)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
