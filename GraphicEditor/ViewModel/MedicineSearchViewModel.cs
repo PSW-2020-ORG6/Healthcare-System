@@ -1,4 +1,5 @@
 ﻿using GraphicEditor.HelpClasses;
+using GraphicEditor.View.UserControls;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
 using System;
@@ -89,20 +90,35 @@ namespace GraphicEditor.ViewModel
 
         private void FindMedicine()
         {
+            //Medicine localMedicine = FoundMedicines[SelectedMedicineIndex];
+            //parentViewModel.CurrentUserControl = parentViewModel.CardiologyBuilding;
+            //CardiologyFirstFloorMapUserControlViewModel floorViewModel = parentViewModel.CardiologyBuilding.myViewModel.FirstFloor.Viewmodel;
+            //HighlightRoom(localMedicine, floorViewModel);
+
             Medicine localMedicine = FoundMedicines[SelectedMedicineIndex];
-            parentViewModel.CurrentUserControl = parentViewModel.CardiologyBuilding;
-            CardiologyFirstFloorMapUserControlViewModel floorViewModel = parentViewModel.CardiologyBuilding.myViewModel.FirstFloor.Viewmodel;
-            HighlightRoom(localMedicine, floorViewModel);
+            if (localMedicine != null)
+            {
+                Room room = roomController.GetBySerialNumber(localMedicine.RoomSerialNumber);
+                Floor floor = floorController.GetBySerialNumber(localMedicine.RoomSerialNumber);
+                Building building = buildingController.GetBySerialNumber(room.FloorSerialNumber);
+                CardiologyBuildingUserControl buildingUserControl = new CardiologyBuildingUserControl(parentViewModel, building);
+                CardiologyFirstFloorMapUserControl floorUserControl = new CardiologyFirstFloorMapUserControl(parentViewModel, buildingUserControl.myViewModel, floor);
+                buildingUserControl.myViewModel.FloorViewModel = floorUserControl;
+                parentViewModel.CurrentUserControl = buildingUserControl;
+                HighlightRoom(localMedicine, floorUserControl.Viewmodel);
+            }
         }
 
         private void HighlightRoom(Medicine localMedicine, CardiologyFirstFloorMapUserControlViewModel floorViewModel)
         {
-            Button button = floorViewModel.connections[localMedicine.RoomSerialNumber];
-            button.BorderBrush = new SolidColorBrush(Color.FromRgb(150, 0, 255));
+            if (floorViewModel.connections.Count == 0) return;
+            RoomButton roomButton = floorViewModel.connections[localMedicine.RoomSerialNumber];
+            roomButton.Background = new SolidColorBrush(Color.FromRgb(42, 157, 244));
+            parentViewModel.mainWindow.Focus();
 
             CommonUtil.Run(() =>
             {
-                button.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+                roomButton.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
             }, TimeSpan.FromMilliseconds(5000));
         }
     }

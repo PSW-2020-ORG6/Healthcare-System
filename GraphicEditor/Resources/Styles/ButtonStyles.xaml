@@ -390,39 +390,51 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:RoomButton">
-                    <Border Background="#FF237793"
+                    <Border Background="{TemplateBinding Background}"
                             BorderBrush="Black"
                             BorderThickness="3"
                             ToolTip="{TemplateBinding Content}">
-                        <DockPanel>
-                            <Path DockPanel.Dock="Top"
+                        <Grid>
+                            <Path 
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Top"
                                   Visibility="{Binding Path=TopDoor}"
-                                  Style="{StaticResource DoorBottomPath}">
+                                  Style="{StaticResource DoorBottomPath}"
+                                  Panel.ZIndex="1">
                                 <Path.RenderTransform>
                                     <RotateTransform Angle="-180" CenterX="15" CenterY="15"/>
                                 </Path.RenderTransform>
                             </Path>
-                            <Path DockPanel.Dock="Right"
+                            <Path HorizontalAlignment="Right"
+                                  VerticalAlignment="Center"
                                   Visibility="{Binding RightDoor}"
-                                  Style="{StaticResource DoorBottomPath}">
+                                  Style="{StaticResource DoorBottomPath}"
+                                  Panel.ZIndex="1">
                                 <Path.RenderTransform>
                                     <RotateTransform Angle="-90" CenterX="15" CenterY="15"/>
                                 </Path.RenderTransform>
                             </Path>
-                            <Path DockPanel.Dock="Bottom"
+                            <Path HorizontalAlignment="Center"
+                                  VerticalAlignment="Bottom"
                                   Visibility="{Binding BottomDoor}"
-                                  Style="{StaticResource DoorBottomPath}"/>
-                            <Path DockPanel.Dock="Left"
+                                  Style="{StaticResource DoorBottomPath}"
+                                  Panel.ZIndex="1" />
+                            <Path HorizontalAlignment="Left"
+                                  VerticalAlignment="Center"
                                   Visibility="{Binding LeftDoor}"
-                                  Style="{StaticResource DoorBottomPath}">
+                                  Style="{StaticResource DoorBottomPath}"
+                                  Panel.ZIndex="1">
                                 <Path.RenderTransform>
                                     <RotateTransform Angle="90" CenterX="15" CenterY="15"/>
                                 </Path.RenderTransform>
                             </Path>
                             <TextBlock Text="{TemplateBinding Content}"
+                                       TextWrapping="Wrap"
                                        HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
-                        </DockPanel>
+                                       VerticalAlignment="Center"
+                                       Panel.ZIndex="10" />
+                        </Grid>
+                        
                         <Border.InputBindings>
                             <MouseBinding MouseAction="LeftClick"
                                       Command="{Binding ShowRoomCommand}"

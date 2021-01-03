@@ -18,6 +18,11 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
             return buildingService.GetById(id);
         }
 
+        public Building GetBySerialNumber(string serialNumber)
+        {
+            return buildingService.GetBySerialNumber(serialNumber);
+        }
+
         public List<Building> GetByName(string name)
         {
             return buildingService.GetByName(name);

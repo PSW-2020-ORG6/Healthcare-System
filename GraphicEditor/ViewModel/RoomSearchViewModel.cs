@@ -1,4 +1,5 @@
 ﻿using GraphicEditor.HelpClasses;
+using GraphicEditor.View.UserControls;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
 using System;
@@ -88,19 +89,27 @@ namespace GraphicEditor.ViewModel
         private void FindRoom()
         {
             Room room = FoundRooms[SelectedRoomIndex];
-            parentViewModel.CurrentUserControl = parentViewModel.CardiologyBuilding;
-            CardiologyFirstFloorMapUserControlViewModel floorViewModel = parentViewModel.CardiologyBuilding.myViewModel.FirstFloor.Viewmodel;
-            HighlightRoom(room, floorViewModel);
+            if (room != null)
+            {
+                Floor floor = floorController.GetBySerialNumber(room.FloorSerialNumber);
+                Building building = buildingController.GetBySerialNumber(floor.BuildingSerialNumber);
+                CardiologyBuildingUserControl buildingUserControl = new CardiologyBuildingUserControl(parentViewModel, building);
+                CardiologyFirstFloorMapUserControl floorUserControl = new CardiologyFirstFloorMapUserControl(parentViewModel, buildingUserControl.myViewModel, floor);
+                buildingUserControl.myViewModel.FloorViewModel = floorUserControl;
+                parentViewModel.CurrentUserControl = buildingUserControl;
+                HighlightRoom(room, floorUserControl.Viewmodel);
+            }
         }
 
         private void HighlightRoom(Room room, CardiologyFirstFloorMapUserControlViewModel floorViewModel)
         {
-            Button button = floorViewModel.connections[room.SerialNumber];
-            button.BorderBrush = new SolidColorBrush(Color.FromRgb(150, 0, 255));
-
+            if (floorViewModel.connections.Count == 0) return;
+            RoomButton roomButton = floorViewModel.connections[room.SerialNumber];
+            roomButton.Background = new SolidColorBrush(Color.FromRgb(42, 157, 244));
+            parentViewModel.mainWindow.Focus();
             CommonUtil.Run(() =>
             {
-                button.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+                roomButton.Background = new SolidColorBrush(Color.FromRgb(35, 119, 147));
             }, TimeSpan.FromMilliseconds(5000));
         }
     }

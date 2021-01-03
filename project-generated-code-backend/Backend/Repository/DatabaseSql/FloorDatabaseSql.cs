@@ -18,6 +18,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             return dbContext.Floor.Find(id);
         }
 
+
         public override void Save(Floor newEntity)
         {
             dbContext.Floor.Add(newEntity);
@@ -41,6 +42,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public List<Floor> GetByName(string name)
         {
             return GetAll().Where(f => f.Name.ToLower().Contains(name.ToLower())).ToList();
+        }
+
+        public override Floor GetBySerialNumber(string serialNumber)
+        {
+            return GetAll().Where(f => f.SerialNumber.Equals(serialNumber)).ToList()[0];
         }
 
         public List<Floor> GetByBuildingSerialNumber(string buildingSerialNumber)

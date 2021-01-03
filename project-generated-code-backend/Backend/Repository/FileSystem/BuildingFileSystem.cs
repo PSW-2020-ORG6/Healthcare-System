@@ -22,5 +22,10 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
         {
             throw new System.NotImplementedException();
         }
+
+        public Building GetBySerialNumber(string serialNumber)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
