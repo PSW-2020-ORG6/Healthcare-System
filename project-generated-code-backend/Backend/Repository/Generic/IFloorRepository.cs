@@ -7,5 +7,6 @@ namespace HealthClinicBackend.Backend.Repository.Generic
     {
         List<Floor> GetByName(string name);
         List<Floor> GetByBuildingSerialNumber(string buildingSerialNumber);
+        Floor GetBySerialNumber(string serialNumber);
     }
 }

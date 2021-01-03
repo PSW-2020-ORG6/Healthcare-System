@@ -34,17 +34,18 @@
                   VerticalAlignment="Center"
                  Height="1000">
                 <!--Legend image-->
-                <Image Height="500"
-                       Margin="0 0 0 150"
-                       HorizontalAlignment="Center"
-                       Source="/GraphicEditor;component/Resources/Images/legendPattern.png"
-                       VerticalAlignment="Center"/>
+                
                 <StackPanel 
-                    Margin="0 600 0 0"
-                    VerticalAlignment="Bottom" 
+                    VerticalAlignment="Top" 
                     HorizontalAlignment="Center">
+
+                    <Image Height="250"
+                       HorizontalAlignment="Center"
+                       Source="/GraphicEditor;component/Resources/Images/legendPattern2.png"
+                       VerticalAlignment="Center"/>
+
                     <Button Click="ShowRoomSearch"
-                            Margin="20"
+                            Margin="10"
                             Height="40" 
                             Width="160" >
                         <DockPanel Width="auto">
@@ -55,7 +56,7 @@
                         </DockPanel>
                     </Button>
                     <Button Click="ShowEquipmentSearch"
-                                Margin="20"
+                                Margin="10"
                                 Height="40" 
                                 Width="160" >
                         <DockPanel Width="auto">
@@ -66,9 +67,9 @@
                         </DockPanel>
                     </Button>
                     <Button Click="ShowMedicineSearch"
-                        Margin="20"
+                        Margin="10"
                         Height="40" 
-                        Width="150" >
+                        Width="160" >
                         <DockPanel Width="auto">
                             <TextBlock HorizontalAlignment="Center" 
                                            VerticalAlignment="Center">
@@ -77,13 +78,13 @@
                         </DockPanel>
                     </Button>
                     <Button Click="MakeAppointment"
-                                Margin="20"
+                                Margin="10"
                                 Height="40" 
                                 Width="160" >
                         <DockPanel Width="auto">
                             <TextBlock HorizontalAlignment="Center" 
                                     VerticalAlignment="Center">
-                                                Make appointment
+                                                Make Appointment
                             </TextBlock>
                         </DockPanel>
                     </Button>

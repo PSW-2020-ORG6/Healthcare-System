@@ -15,7 +15,7 @@ namespace GraphicEditor.ViewModel
     public class CardiologyFirstFloorMapUserControlViewModel : BindableBase
     {
         public ResourceDictionary ResourceDictionary = new ResourceDictionary();
-        public Dictionary<string, Button> connections = new Dictionary<string, Button>();
+        public Dictionary<string, RoomButton> connections = new Dictionary<string, RoomButton>();
         MainWindowViewModel mapParent;
         CardiologyBuildingUserControlViewModel buildingParent;
         Grid RoomGrid;
@@ -27,6 +27,8 @@ namespace GraphicEditor.ViewModel
         private PatientController patientController = new PatientController();
         private Floor floor;
         private string buildingStyle;
+        private MainWindowViewModel parentViewModel;
+        private CardiologyBuildingUserControlViewModel myViewModel;
 
         public CardiologyFirstFloorMapUserControlViewModel(MainWindowViewModel _mapParent, CardiologyBuildingUserControlViewModel _buildingParent, Grid grid, Floor floor)
         {
