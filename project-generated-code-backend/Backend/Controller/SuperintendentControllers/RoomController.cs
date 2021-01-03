@@ -26,7 +26,7 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 
         public Room GetBySerialNumber(String serialNumber)
         {
-            return roomService.GetBySerialNumber(serialNumber);
+            return _roomService.GetBySerialNumber(serialNumber);
         }
 
         public List<Room> GetByName(string name)
@@ -36,7 +36,7 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 
         public List<Room> GetByFloorSerialNumber(string floorSerialNumber)
         {
-            return roomService.GetByFloorSerialNumber(floorSerialNumber);
+            return _roomService.GetByFloorSerialNumber(floorSerialNumber);
         }
 
         public List<Room> GetAll()
