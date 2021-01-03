@@ -20,6 +20,21 @@ function drawModalMedicineTable(data) {
     }
     $('#modalMedicineTable').html(table);
 }
+var x = 0;
+var tenderName = '';
+function drawMedicineForOfferTable(data) {
+    let table = '';
+    x = 0;
+    for (i in data) {
+        table += `<tr id="` + data[i].id  + `">
+			<td style="color:coral" id="` + x + `">`+ data[i].medicineName + `</td>
+            <td ><input class="textbox" type="text" placeholder="Quantity offer..." id="Q` + x + `" ></td>
+            <td ><input class="textbox" type="text"  placeholder="Price offer..." id="P` + x + `"></td>
+			</tr>`;
+            x++;
+    }
+    $('#table-make-offer').html(table);
+}
 function drawTable(data) {
     let table = '';
     for (i in data) {
@@ -45,27 +60,6 @@ function drawTable(data) {
         })
 
     });
-    $("input:button[name=offerButton]").click(function () {
-            Id = this.id
-                $("#btnSendOffer").click(function () {
-                    var CompanyName = $("#txtCompanyName").val();
-                    var CompanyEmail = $("#txtEmail").val();
-                    var UnitPrice = parseInt($("#txtPrice").val());
-                    $.post({
-                        url: '../tender/addOffer',
-                        data: JSON.stringify({ CompanyName: CompanyName, CompanyEmail: CompanyEmail, UnitPrice: UnitPrice, TenderName: Id }),
-                        contentType: 'application/json',
-                        success: function () {
-                            alert("Succesfully added offer")
-                        },
-                        error: function (message) {
-                            alert("Failed to add offer")
-                        }
-                    });
-                });
-
-    });
-   
 }
 
 $(document).ready(function () {
@@ -115,21 +109,21 @@ $(document).ready(function () {
    
     var modal = document.getElementById('modal-make-offer');
     var modalMedicines = document.getElementById('modal-medicines')
-    var span = document.getElementsByClassName("close")[0];
     var spanMedicine = document.getElementsByClassName("closeMedicine")[0];
+    var span = document.getElementsByClassName("close")[0];
     span.onclick = function () {
         modal.style.display = "none";
     }
-    spanMedicine.onclick = function () {
-        modalMedicines.style.display = "none";
-    }
+   
    
     window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
     }
-
+    spanMedicine.onclick = function () {
+        modalMedicines.style.display = "none";
+    }
     window.onclick = function (event) {
         if (event.target == modalMedicines) {
             modalMedicines.style.display = "none";
@@ -137,6 +131,17 @@ $(document).ready(function () {
     }
 
     $('#tenderTable').on('click', 'input:button[name=offerButton]', function (event) {
+        tenderName = this.id;
+        $.get({
+            url: '../tender/getAllMedicines/' + this.id,
+            contentType: 'application/json',
+            success: function (data) {
+                drawMedicineForOfferTable(data);
+            },
+            error: function (message) {
+                alert("Failed")
+            }
+        })
         modal.style.display = "block";
     })
 
@@ -154,4 +159,32 @@ $(document).ready(function () {
             alert("Failed")
         }
     });
+   
+    $('#buttonSendOffer').click(function () {
+        var CompanyName = $('#txtCompanyName').val();
+        var CompanyEmail = $('#txtEmail').val();
+        var TenderName = tenderName;
+        for (i = 0; i < x; i++) {
+            if ($('#Q' + i).val() == '' || $('#P' + i).val()=='' ) {
+                continue;
+            }
+            var Quantity = parseInt($('#Q' + i).val());
+            var Price = parseInt($('#P' + i).val());
+            var MedicineName = document.getElementById(i).innerText;
+            var Id = Math.floor(Math.random() * 100).toString();       
+            $.post({
+                url: '../tender/addOffer',
+                data: JSON.stringify({ Id: Id, CompanyEmail: CompanyEmail, CompanyName: CompanyName, TenderName: TenderName, MedicineName: MedicineName, Quantity: Quantity, Price: Price }),
+                contentType: 'application/json',
+                success: function () {
+                    modal.style.display = "none";
+                    alert("Succesfully added offer")
+                },
+                error: function (message) {
+                    alert("Failed to add offer")
+                }
+            });
+        }
+    }   
+    )
 });

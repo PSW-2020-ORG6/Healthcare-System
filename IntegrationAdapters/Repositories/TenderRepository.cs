@@ -32,16 +32,7 @@ namespace IntegrationAdapters.Repositories
         {
             return dbContext.Tender.ToList();
         }
-        public List<Offer> GetAllOffers()
-        {
-            return dbContext.Offer.ToList();
-        }
-        public bool AddOffer(Offer offer)
-        {
-            dbContext.Add<Offer>(offer);
-            dbContext.SaveChanges();
-            return true;
-        }
+      
         public bool AddMedicine(MedicineDTO medicineDTO)
         {
             dbContext.Add<MedicineDTO>(medicineDTO);
@@ -51,6 +42,33 @@ namespace IntegrationAdapters.Repositories
         public List<MedicineDTO> GetAllMedicines()
         {
             return dbContext.MedicineDTOs.ToList();
+        }
+
+        public bool AddOffer(TenderOffer offer)
+        {
+            dbContext.Add<TenderOffer>(offer);
+            dbContext.SaveChanges();
+            return true;
+        }
+
+        public List<TenderOffer> GetAllOffers()
+        {
+            return dbContext.TenderOffer.ToList();
+        }
+
+        List<TenderOffer> ITenderRepository.GetAllOffersByEmailAndTender(string emailAndTender)
+        {
+            string[] emailAndTenderId = emailAndTender.Split(';');
+            string Email = emailAndTenderId[0];
+            string TenderName = emailAndTenderId[1];
+            List<TenderOffer> foundOffers = new List<TenderOffer>();
+            List<TenderOffer> allTenderOffers = GetAllOffers();
+            foreach (TenderOffer offer in allTenderOffers)
+            {
+                if (offer.CompanyEmail.Equals(Email) && offer.TenderName.Equals(TenderName))
+                    foundOffers.Add(offer);
+            }
+            return foundOffers;
         }
     }
 }

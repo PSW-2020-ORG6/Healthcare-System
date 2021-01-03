@@ -31,19 +31,20 @@ namespace IntegrationAdapters.Services
         {
             return tenderRepository.GetAllTenders();
         }
-        public Tender GetTenderByName(string name) {
+        public Tender GetTenderByName(string name) 
+        {
             foreach(Tender t in GetAllTenders()){
                 if (t.TenderName.Equals(name))
                     return t;
             }
             return null;
         }
-        public bool AddOffer(Offer offer)
+        public bool AddOffer(TenderOffer offer)
         {
             return tenderRepository.AddOffer(offer);
         }
 
-        public List<Offer> GetAllOffers()
+        public List<TenderOffer> GetAllOffers()
         {
             return tenderRepository.GetAllOffers();
         }
@@ -63,6 +64,10 @@ namespace IntegrationAdapters.Services
                 }
             }
             return result;
+        }
+        public List<TenderOffer> GetAllOffersByEmailAndTender(String emailAndTender)
+        {
+            return tenderRepository.GetAllOffersByEmailAndTender(emailAndTender);
         }
 
     }
