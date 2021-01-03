@@ -11,11 +11,17 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
     {
         private readonly IRoomRepository _roomRepository;
         private readonly IRoomTypeRepository _roomTypeRepository;
+        private readonly IBedRepository _bedRepository;
+        private readonly IMedicineRepository _medicineRepository;
+        private readonly IEquipmentRepository _equipmentRepository;
 
         public RoomService()
         {
             _roomTypeRepository = new RoomTypeDatabaseSql();
             _roomRepository = new RoomDatabaseSql();
+            _bedRepository = new BedDatabaseSql();
+            _medicineRepository = new MedicineDatabaseSql();
+            _equipmentRepository = new EquipmentDatabaseSql();
         }
 
         public RoomService(IRoomRepository roomRepository)
@@ -50,6 +56,12 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 
         public void EditRoom(Room room)
         {
+            foreach (Bed bed in _bedRepository.GetByRoomSerialNumber(room.SerialNumber))
+                _bedRepository.Update(bed);
+            foreach (Equipment equipment in _equipmentRepository.GetByRoomSerialNumber(room.SerialNumber))
+                _equipmentRepository.Update(equipment);
+            foreach (Medicine medicine in _medicineRepository.GetByRoomSerialNumber(room.SerialNumber))
+                _medicineRepository.Update(medicine);
             _roomRepository.Update(room);
         }
 
@@ -60,6 +72,12 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 
         public void DeleteRoom(Room room)
         {
+            foreach (Bed bed in _bedRepository.GetByRoomSerialNumber(room.SerialNumber))
+                _bedRepository.Delete(bed.SerialNumber);
+            foreach (Equipment equipment in _equipmentRepository.GetByRoomSerialNumber(room.SerialNumber))
+                _equipmentRepository.Delete(equipment.SerialNumber);
+            foreach (Medicine medicine in _medicineRepository.GetByRoomSerialNumber(room.SerialNumber))
+                _medicineRepository.Delete(medicine.SerialNumber);
             _roomRepository.Delete(room.SerialNumber);
         }
 

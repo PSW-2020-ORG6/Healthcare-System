@@ -51,7 +51,7 @@
                         <DockPanel Width="auto">
                             <TextBlock HorizontalAlignment="Center" 
                                                        VerticalAlignment="Center">
-                                            Search rooms
+                                            Search Rooms
                             </TextBlock>
                         </DockPanel>
                     </Button>

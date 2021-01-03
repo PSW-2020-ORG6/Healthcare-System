@@ -8,10 +8,14 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
     public class FloorService
     {
         private readonly IFloorRepository _floorRepository;
+        private readonly IRoomRepository _roomRepository;
+        
 
         public FloorService()
         {
             _floorRepository = new FloorDatabaseSql();
+            _roomRepository = new RoomDatabaseSql();
+            
         }
 
         public FloorService(IFloorRepository floorRepository)
@@ -41,6 +45,8 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 
         public void EditFloor(Floor floor)
         {
+            foreach (Room room in _roomRepository.GetByFloorSerialNumber(floor.SerialNumber))
+                _roomRepository.Update(room);
             _floorRepository.Update(floor);
         }
 
@@ -51,6 +57,8 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 
         public void DeleteFloor(Floor floor)
         {
+            foreach (Room room in _roomRepository.GetByFloorSerialNumber(floor.SerialNumber))
+                _floorRepository.Delete(room.SerialNumber);
             _floorRepository.Delete(floor.SerialNumber);
         }
     }
