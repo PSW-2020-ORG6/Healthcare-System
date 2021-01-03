@@ -27,24 +27,26 @@
     </div>
 
     <div id="modal-make-offer" class="modal">
-        <div class="modal-content" style="text-align: center;">
+        <div class="modal-content" style="text-align: center;width: 46%;">
             <span class="close">&times;</span>
             <table class="centered">
                 <tr>
                     <th height="50">Company name:</th>
-                    <th height="50"><input class="textbox" type="text" id="txtCompanyName" placeholder="Company name..."></th>
+                    <th colspan="3" height="50"><input class="textbox" type="text" id="txtCompanyName" placeholder="Company name..."></th>
                 </tr>
                 <tr>
                     <th height="50">Email:</th>
-                    <th height="50"><input class="textbox" type="text" id="txtEmail" placeholder="Email..."></th>
+                    <th colspan="3" height="50"><input class="textbox" type="text" id="txtEmail" placeholder="Email..."></th>
                 </tr>
-                <tr>
-                    <th height="50">Price:</th>
-                    <th height="50"><input class="textbox" type="number" id="txtPrice" placeholder="Price..."></th>
+                <tr class="success">
+                    <th>Medicine name</th>
+                    <th>Quantity</th>
+                    <th colspan="2">Price</th>
                 </tr>
+                <tbody id="table-make-offer">
+                </tbody>
             </table>
-            <br>
-            <button id="btnSendOffer" class="btn btn-primary" style="background-color:coral">Send offer</button>
+            <button class="btn btn-primary" style="background-color:coral"  id="buttonSendOffer">Send offer</button>
             <br>
         </div>
     </div>

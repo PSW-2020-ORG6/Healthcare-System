@@ -31,7 +31,7 @@ namespace IntegrationAdapters.Controllers
             return tenderService.GetAllTenders();
         }
         [HttpGet("getAllOffers")]
-        public IEnumerable<Offer> GetAllOffers()
+        public IEnumerable<TenderOffer> GetAllOffers()
         {
             return tenderService.GetAllOffers();
         }
@@ -41,7 +41,7 @@ namespace IntegrationAdapters.Controllers
             return tenderService.GetTenderByName(name);
         }
         [HttpPost("addOffer")]
-        public IActionResult AddOffer(Offer offer)
+        public IActionResult AddOffer(TenderOffer offer)
         {
             if (tenderService.AddOffer(offer))
             {
@@ -68,6 +68,12 @@ namespace IntegrationAdapters.Controllers
         public IEnumerable<MedicineDTO> GetAllMedicines(string tenderName)
         {
             return tenderService.GetAllMedicines(tenderName);
+        }
+
+        [HttpGet("getAllOffersByEmailAndTender/{emailAndTender}")]
+        public IEnumerable<TenderOffer> GetAllOffersByEmailAndTender(string emailAndTender)
+        {
+            return tenderService.GetAllOffersByEmailAndTender(emailAndTender);
         }
     }
 }

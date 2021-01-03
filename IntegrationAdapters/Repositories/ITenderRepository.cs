@@ -11,9 +11,10 @@ namespace IntegrationAdapters.Repositories
     {
         public bool AddTender(Tender tender);
         public List<Tender> GetAllTenders();
-        public List<Offer> GetAllOffers();
-        public bool AddOffer(Offer offer);
+        public List<TenderOffer> GetAllOffers();
+        public bool AddOffer(TenderOffer offer);
         public bool AddMedicine(MedicineDTO medicineDTO);
         public List<MedicineDTO> GetAllMedicines();
+        public List<TenderOffer> GetAllOffersByEmailAndTender(String emailAndTender);
     }
 }
