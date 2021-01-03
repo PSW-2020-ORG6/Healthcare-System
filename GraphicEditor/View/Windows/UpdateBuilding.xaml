@@ -1,0 +1,170 @@
+﻿<Window x:Class="GraphicEditor.View.Windows.UpdateBuilding"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GraphicEditor.View.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        MinHeight="700"
+        MinWidth="1000"
+        ResizeMode="NoResize"
+        BorderBrush="Black"
+        BorderThickness="2"
+        WindowStyle="None"
+        Title="Update Building" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- #Styles -->
+                <ResourceDictionary Source="/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="AliceBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <materialDesign:PackIcon Kind="HospitalBoxOutline" Width="60" Height="60" VerticalAlignment="Center"/>
+            <TextBlock 
+                   FontSize="50"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="Update Building"/>
+            <materialDesign:PackIcon Kind="HospitalBoxOutline" Width="60" Height="60" VerticalAlignment="Center"/>
+        </StackPanel>
+
+
+        <TextBlock Grid.Row="1"
+                   Grid.Column="0"
+                   FontSize="30"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="Building name:"/>
+        <TextBox x:Name="nameTextBox"
+                 Text="{Binding Path=BuildingInfo.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                 Grid.Row="1"
+                 Grid.Column="1"
+                 BorderBrush="Black"
+                 BorderThickness="2"
+                 FontSize="26" />
+        <TextBlock Grid.Row="3"
+                   Grid.Column="0"
+                   FontSize="30"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="Building color:"/>
+        <materialDesign:ColorPicker Grid.Row="3"
+                                    Grid.Column="1"
+                                    Color="{Binding Path=BuildingColor.Color, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    HorizontalAlignment="Center"
+                                    Width="500"/>
+
+        <TextBlock Grid.Row="5"
+                   Grid.Column="0"
+                   FontSize="30"
+                   Text="Number of floors:" 
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    Width="500"
+                    Height="70" >
+            <TextBlock Text="{Binding Path=FloorNumbers, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Margin="10"
+                       Style="{StaticResource MaterialDesignHeadline3TextBlock}"/>
+            <Button   
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="40, 0"
+                    Height="40"
+                    Command="{Binding AddFloorCommand}"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}">
+                <DockPanel>
+                    <materialDesign:PackIcon Kind="Add"
+                                             Width="30"
+                                             Height="30"/>
+                    <TextBlock Text="Add Floor"
+                               Style="{StaticResource MaterialDesignHeadline5TextBlock}"/>
+                </DockPanel>
+            </Button>
+            <Button 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="10"
+                    Height="40"
+                    Command="{Binding DeleteFloorCommand}"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}">
+                <DockPanel>
+                    <materialDesign:PackIcon Kind="DeleteOutline"
+                                             Width="30"
+                                             Height="30"/>
+                    <TextBlock Text="Delete Floor"
+                               Style="{StaticResource MaterialDesignHeadline5TextBlock}"/>
+                </DockPanel>
+            </Button>
+        </StackPanel>
+        
+
+        <!-- Bottom side -->
+        <DockPanel  Grid.Column="0"
+                        Grid.Row="7"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Center">
+            <Button HorizontalAlignment="Center"
+                    Margin="10"
+                    Height="60"
+                    Style="{StaticResource MaterialDesignRaisedButton}" 
+                    Command="{Binding Path=ConfirmUpdatesCommand}" 
+                    Click="Button_Click">
+                <DockPanel>
+                    <materialDesign:PackIcon Kind="Update"
+                                             Width="50"
+                                             Height="50"/>
+                    <TextBlock Text="Confirm Updates"
+                               Style="{StaticResource MaterialDesignHeadline4TextBlock}"/>
+                </DockPanel>
+            </Button>
+            <Button HorizontalAlignment="Center"
+                    Margin="10"
+                    Height="60"
+                    Command="{Binding Path=CancelUpdatesCommand}"
+                    Style="{StaticResource MaterialDesignRaisedButton}" 
+                    Click="Button_Click" >
+                <DockPanel>
+                    <materialDesign:PackIcon Kind="Cancel"
+                                             Width="50"
+                                             Height="50"/>
+                    <TextBlock Text="Cancel Updates"
+                               Style="{StaticResource MaterialDesignHeadline4TextBlock}"/>
+                </DockPanel>
+            </Button>
+        </DockPanel>
+    </Grid>
+</Window>
+
