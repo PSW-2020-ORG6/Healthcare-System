@@ -27,5 +27,16 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             Name = _name;
             Color = _color;
         }
+
+        public Building(Building building): base(building.SerialNumber)
+        {
+            Name = building.Name;
+            Color = building.Color;
+            Row = building.Row;
+            Column = building.Column;
+            Style = building.Style;
+            if (building.Floors != null) Floors = new List<Floor>(building.Floors);
+            else Floors = new List<Floor>();
+        }
     }
 }

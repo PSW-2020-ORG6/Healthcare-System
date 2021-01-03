@@ -114,7 +114,7 @@
                         Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" />
             <TextBox    Grid.Column="1"
                         Grid.Row="5"
-                        Text="{Binding Path=BuildingInfo.Shape, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Text="{Binding Path=BuildingInfo.Style, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         HorizontalAlignment="Center"
                         Margin="0,10"
                         Width="350"

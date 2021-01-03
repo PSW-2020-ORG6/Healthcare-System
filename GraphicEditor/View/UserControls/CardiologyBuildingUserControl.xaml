@@ -43,7 +43,7 @@
                 </Button>
             <ListBox Grid.Row="1"
                      Cursor="Hand" 
-                     ItemsSource="{Binding Path=Floors}" 
+                     ItemsSource="{Binding Path=Floors, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
                      SelectedIndex="{Binding Path=SelectedFloorIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                      Style="{StaticResource MaterialDesignToolVerticalToggleListBox}"
                      Margin="5,5,5,5"/>

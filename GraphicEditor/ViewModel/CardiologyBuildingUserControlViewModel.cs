@@ -32,6 +32,7 @@ namespace GraphicEditor.ViewModel
         public CardiologySecondFloorMapUserControl SecondFloor;*/
         public CardiologyFirstFloorMapUserControl _floorViewModel;
         public Grid grid;
+        private BuildingController buildingController = new BuildingController();
         private FloorDatabaseSql floorDatabaseSql = new FloorDatabaseSql();
         private RoomController roomController = new RoomController();
 
@@ -49,7 +50,7 @@ namespace GraphicEditor.ViewModel
             /* TODO add this without causing errors
            SecondFloor = new CardiologySecondFloorMapUserControlViewModel();*/
             _floors = floorDatabaseSql.GetByBuildingSerialNumber(building.SerialNumber);
-            
+            _floors = _floors.OrderBy(f => Constants.FLOOR_NAMES.FindIndex(m => m.Equals(f.Name))).ToList();
             _building = building;
 
            List<Floor> _buildingFloors = new List<Floor>();
@@ -103,7 +104,15 @@ namespace GraphicEditor.ViewModel
            get { return _selectedFloorIndex; }
            set
            {
-                SetProperty(ref _selectedFloorIndex, value);
+                if (value > 0)
+                {
+                    SetProperty(ref _selectedFloorIndex, value);
+                } 
+                else
+                {
+                    SetProperty(ref _selectedFloorIndex, 0);
+                }
+                
                 String cpy = new String(_floors[_selectedFloorIndex].Name);
                 var paramArray = cpy.Split(' ');
                 var param = paramArray[0].ToLower();
@@ -210,8 +219,12 @@ namespace GraphicEditor.ViewModel
         {
             if (MainWindow.TypeOfUser == TypeOfUser.Superintendent || MainWindow.TypeOfUser == TypeOfUser.NoUser)
             {
-                BuildingUpdate r = new BuildingUpdate(_building, this);
-                r.ShowDialog();
+                UpdateBuilding updateBuilding = new UpdateBuilding(_building);
+                updateBuilding.ShowDialog();
+                Building = buildingController.GetBySerialNumber(_building.SerialNumber);
+                _floors = floorDatabaseSql.GetByBuildingSerialNumber(_building.SerialNumber);
+                _floors = _floors.OrderBy(f => Constants.FLOOR_NAMES.FindIndex(m => m.Equals(f.Name))).ToList();
+                OnPropertyChanged("Floors");
             }
             else
             {
@@ -224,6 +237,15 @@ namespace GraphicEditor.ViewModel
             Building.Name = building.Name;
             Building.Color = building.Color;
             OnPropertyChanged("Building");
+        }
+
+        private int sortFloorList(Floor x, Floor y)
+        {
+            int X = Constants.FLOOR_NAMES.FindIndex(n => n.Equals(x.Name));
+            int Y = Constants.FLOOR_NAMES.FindIndex(n => n.Equals(y.Name));
+
+            if (X <= Y) return X;
+            else return Y;
         }
     }
 }

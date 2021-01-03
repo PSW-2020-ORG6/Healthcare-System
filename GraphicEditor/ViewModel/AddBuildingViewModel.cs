@@ -66,9 +66,9 @@ namespace GraphicEditor.ViewModel
         {
             Button.Style = (Style)myResourceDictionary[buildingButtonStyle];
             Button.Background = new SolidColorBrush(MyButtonColor); 
-            Button.Name = NameText;
+            Button.Content = NameText;
 
-            string content = (string)Button.Content;
+            string content = (string)Button.Tag;
             string[] split = content.Split(" ");
 
             // [Lemara98] This needs to be corrected because I didn't find appropriate controller for buildings !!!
@@ -82,9 +82,10 @@ namespace GraphicEditor.ViewModel
             };
 
             buildingDatabaseSql.Save(newBuilding);
+            HospitalMapUserControlViewModel.buildingButtons[newBuilding.SerialNumber] = Button;
 
             string buildingSerialNumber = newBuilding.SerialNumber;
-            Button.Content = Button.Content + " " + buildingSerialNumber;
+            Button.Tag = (string)Button.Tag + " " + buildingSerialNumber;
 
             for (int i = 0; i <= NumberOfFloors; i++)
             {
