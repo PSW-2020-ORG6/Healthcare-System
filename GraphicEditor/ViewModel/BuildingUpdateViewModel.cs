@@ -34,6 +34,8 @@ namespace GraphicEditor.ViewModel
 
             NavCommandExit = new MyICommand(exitInfo);
             NavCommandUpdate = new MyICommand(updateBuildingInfo);
+
+            
         }
 
         public void updateBuildingInfo()

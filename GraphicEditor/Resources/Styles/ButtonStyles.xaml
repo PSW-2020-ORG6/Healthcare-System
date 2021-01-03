@@ -117,7 +117,8 @@
                                     VerticalAlignment="Center">
                             <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                                        Foreground="White"
-                                       Text="{TemplateBinding Name}"/>
+                                       Text="{TemplateBinding Content}"
+                                       TextWrapping="Wrap"/>
                             <Image Height="30"
                                Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
                         </StackPanel>
@@ -175,7 +176,8 @@
                                     Margin="0,10,10,0">
                             <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                                        Foreground="White"
-                                       Text="{TemplateBinding Name}"/>
+                                       Text="{TemplateBinding Content}"
+                                       TextWrapping="Wrap"/>
                             <Image Height="30"
                                Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
                         </StackPanel>
@@ -225,7 +227,8 @@
                                    HorizontalAlignment="Center"
                                    Margin="0,-8,0,0" 
                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                                   Text="{TemplateBinding Name}"/>
+                                   Text="{TemplateBinding Content}"
+                                   TextWrapping="Wrap"/>
                             <Image Height="30"
                                Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
                         </StackPanel>
@@ -288,7 +291,7 @@
                             <TextBlock 
                                    Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
                                    TextWrapping="Wrap"
-                                   Text="{TemplateBinding Name}"/>
+                                   Text="{TemplateBinding Content}"/>
                             <Image  Height="30"
                                 Margin="0,3,0,0"
                                 Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
@@ -349,7 +352,7 @@
                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                                    VerticalAlignment="Top"
                                    TextWrapping="Wrap"
-                                   Text="{TemplateBinding Name}"/>
+                                   Text="{TemplateBinding Content}"/>
                         <Image  Height="30"
                                 HorizontalAlignment="Left" 
                                 Margin="10"

@@ -1,4 +1,5 @@
-﻿using HealthClinicBackend.Backend.Model.Hospital;
+﻿using GraphicEditor.ViewModel;
+using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using System;
 using System.Collections.Generic;
@@ -32,14 +33,12 @@ namespace GraphicEditor.View.Windows
         private void Delete_click(object sender, RoutedEventArgs e) // [Lemara98] Corrections needed
         {
             resourceDictionary.Source = new Uri("/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml", UriKind.RelativeOrAbsolute);
-            string buildingContent = (string)button.Content;
+            string buildingContent = (string)button.Tag;
             string[] split = buildingContent.Split(" ");
             buildingDatabaseSql.Delete(split[2]);
-            string content = (string)button.Content;
-            string[] info = content.Split(" ");
-            string column = info[0];
-            string row = info[1];
-            string buildingSerialNumber = info[2];
+            string column = split[0];
+            string row = split[1];
+            string buildingSerialNumber = split[2];
             List<Floor> allDeletingFloors = floorDatabaseSql.GetByBuildingSerialNumber(buildingSerialNumber);
             foreach (Floor fl in allDeletingFloors)
             {
@@ -47,10 +46,13 @@ namespace GraphicEditor.View.Windows
             }
             
             button.Style = (Style)resourceDictionary["NewBuildingButtonStyle"];
-            button.Content = column + " " + row;
+            button.Tag = column + " " + row;
             var color = (Color)ColorConverter.ConvertFromString("DimGray");
             Brush brush = new SolidColorBrush(color);
             button.Background = brush;
+
+            HospitalMapUserControlViewModel.buildingButtons.Remove(buildingSerialNumber);
+
             this.Close();
         }
 
