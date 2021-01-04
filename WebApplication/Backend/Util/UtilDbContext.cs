@@ -448,9 +448,18 @@ namespace WebApplication.Backend.Model
         private static void TimeIntervalCreation(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TimeInterval>().HasKey(o => o.Id);
+            modelBuilder.Entity<TimeInterval>()
+               .Property(ti => ti.Start)
+               .HasField("_start");
+            modelBuilder.Entity<TimeInterval>()
+               .Property(ti => ti.End)
+               .HasField("_end");
+            modelBuilder.Entity<TimeInterval>()
+               .Property(ti => ti.Id)
+               .HasField("_id");
             modelBuilder.Entity<TimeInterval>().HasData(
-                new TimeInterval {Start = DateTime.Now, End = DateTime.Now, Id = "600001"},
-                new TimeInterval {Start = DateTime.Now, End = DateTime.Now, Id = "600002"}
+                new TimeInterval { _start = DateTime.Now, _end = DateTime.Now, _id = "600001"},
+                new TimeInterval { _start = DateTime.Now, _end = DateTime.Now, _id = "600002"}
             );
         }
 

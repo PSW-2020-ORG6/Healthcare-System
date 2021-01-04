@@ -64,11 +64,11 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
                         {
                             firstTime = false;
                         }
-                        appointmentPreferences.Time.Start = new DateTime(appointmentPreferences.Time.Start.Year,
+                        appointmentPreferences.Time._start = new DateTime(appointmentPreferences.Time.Start.Year,
                                                                         appointmentPreferences.Time.Start.Month,
                                                                         appointmentPreferences.Time.Start.Day,
                                                                         0, 0, 0);
-                        appointmentPreferences.Time.End = new DateTime(appointmentPreferences.Time.Start.Year,
+                        appointmentPreferences.Time._end = new DateTime(appointmentPreferences.Time.Start.Year,
                                                                         appointmentPreferences.Time.Start.Month,
                                                                         appointmentPreferences.Time.Start.Day,
                                                                         23, 59, 59);
