@@ -23,11 +23,11 @@ namespace GraphicEditor.View.Windows
     {
         private Border roomSpace;
         private Floor floor;
-        private CardiologyFirstFloorMapUserControl view;
+        private FloorUserControl view;
         private RoomTypeController roomTypesController = new RoomTypeController();
         private RoomController roomController = new RoomController();
 
-        public AddRoom(Floor floor1, Border space, CardiologyFirstFloorMapUserControl view1)
+        public AddRoom(Floor floor1, Border space, FloorUserControl view1)
         {
             InitializeComponent();
             this.DataContext = this;

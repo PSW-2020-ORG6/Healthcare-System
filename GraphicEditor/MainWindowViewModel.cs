@@ -11,7 +11,7 @@ namespace GraphicEditor
         public MyICommand<string> NavCommand { get; private set; }
         /* TODO add this without causing errors
         private MapContentUserControlViewModel _mapContent = new MapContentUserControlViewModel();*/
-        public CardiologyBuildingUserControl CardiologyBuilding;
+        public BuildingUserControl CardiologyBuilding;
         public HospitalMapUserControl HospitalMap;
         public LoginUserControl LoginPage;
         private UserControl currentViewModel;

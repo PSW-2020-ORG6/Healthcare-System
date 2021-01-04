@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GraphicEditor.View.UserControls.CardiologyBuildingUserControl"
+﻿<UserControl x:Class="GraphicEditor.View.UserControls.BuildingUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
