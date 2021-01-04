@@ -61,7 +61,7 @@ namespace HealthClinicBackend.Backend.Dto
             this.Physician = new Physician { SerialNumber = physicianId };
             string[] parts = date.Split("-");
             this.Date = new DateTime(Int32.Parse(parts[0]), Int32.Parse(parts[1]), Int32.Parse(parts[2]), 0, 0, 0);
-            this.Time = new TimeInterval { Start = timeIntervalStart };
+            this.Time = new TimeInterval { _start = timeIntervalStart };
             this.Active = true;
         }
     }

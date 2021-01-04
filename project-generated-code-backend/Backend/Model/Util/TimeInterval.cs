@@ -7,9 +7,12 @@ namespace HealthClinicBackend.Backend.Model.Util
     [Owned]
     public class TimeInterval
     {
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
-        public string Id { get; set; }
+        public string _id;
+        public DateTime _start;
+        public DateTime _end;
+        public DateTime Start => _start;
+        public DateTime End => _end;
+        public string Id => _id;
         public string Time => Start.ToString("HH:mm") + " - " + End.ToString("HH:mm");
 
         public TimeInterval()
@@ -20,8 +23,8 @@ namespace HealthClinicBackend.Backend.Model.Util
         public TimeInterval(DateTime start, DateTime end)
         {
             Validate(start, end);
-            Start = start;
-            End = end;
+            _start = start;
+            _end = end;
         }
 
         public TimeInterval(string start, string end)
@@ -29,8 +32,8 @@ namespace HealthClinicBackend.Backend.Model.Util
             Validate(start, end);
             try
             {
-                Start = Convert.ToDateTime(start);
-                End = Convert.ToDateTime(end);
+                _start = Convert.ToDateTime(start);
+                _end = Convert.ToDateTime(end);
             }
             catch
             {
