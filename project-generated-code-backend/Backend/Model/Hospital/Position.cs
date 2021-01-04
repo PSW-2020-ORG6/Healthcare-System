@@ -12,9 +12,10 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public int RowSpan { get; set; }
         public int ColumnSpan { get; set; }
 
-        public Position() : base()
+        public Position()
         {
         }
+
 
         public Position(string serialNumber, int row, int column, int rowSpan, int columnSpan) : base(serialNumber)
         {
