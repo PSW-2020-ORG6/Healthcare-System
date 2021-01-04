@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\IntegrationAdapters\IntegrationAdapters.csproj" />
     <ProjectReference Include="..\project-generated-code-backend\HealthClinicBackend.csproj" />
   </ItemGroup>
 

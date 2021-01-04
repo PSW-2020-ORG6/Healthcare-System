@@ -23,7 +23,6 @@
 			<Project>{68bf1c57-c1a8-4eb8-9fa1-e91bf72f6a72}</Project>
 			<Name>HealthClinicBackend</Name>
 		</ProjectReference>
-		<ProjectReference Include="..\WebApplication\WebApplication.csproj" />
 	</ItemGroup>
 	
 	<ItemGroup>

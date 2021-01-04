@@ -1,23 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using HealthClinicBackend.Backend.Model.Util;
 
-namespace IntegrationAdapters.Models
+namespace HealthClinicBackend.Backend.Model.PharmacySupport
 {
-    public class ActionAndBenefitMessage
+    public class ActionAndBenefitMessage : Entity
     {
-        [Key]
         public Guid ActionID { get; set; }
         public string PharmacyName { get; set; }
         public string Text { get; set; }
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
 
-        public ActionAndBenefitMessage() { }
-     
-        public ActionAndBenefitMessage(Guid id,string pharmacyName, string text, DateTime dateFrom, DateTime dateTo)
+        public ActionAndBenefitMessage()
+        {
+        }
+
+        public ActionAndBenefitMessage(Guid id, string pharmacyName, string text, DateTime dateFrom, DateTime dateTo)
         {
             ActionID = id;
             PharmacyName = pharmacyName;

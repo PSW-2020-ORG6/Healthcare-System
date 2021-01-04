@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
 using WebApplication.Backend.Services;
 using HealthClinicBackend.Backend.Dto;
-using IntegrationAdapters.Models;
 using System;
+using HealthClinicBackend.Backend.Model.PharmacySupport;
 
 namespace WebApplication.Backend.Controllers
 {
