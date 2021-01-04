@@ -16,10 +16,40 @@
         <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="BorderThickness" Value="3"/>
         <Setter Property="Foreground" Value="White" />
-        <Setter Property="Margin" Value="20" />
         <Setter Property="Width" Value="150" />
         <Setter Property="Height" Value="120" />
         <Setter Property="materialDesign:RippleAssist.Feedback" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Button BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Foreground="{TemplateBinding Foreground}"
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
+                            materialDesign:RippleAssist.Feedback="Transparent">
+                            <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                       Foreground="White"
+                                       Text="{TemplateBinding Content}"
+                                       TextWrapping="Wrap"/>
+                                <Image Height="30"
+                                       Source="/GraphicEditor;component/Resources/Images/hospitalLogo.png"/>
+                            </StackPanel>
+                            <Button.InputBindings>
+                                <MouseBinding MouseAction="LeftClick"
+                                          Command="{Binding NavRealCommand}"
+                                          CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button, AncestorLevel=2}}"/>
+                                <MouseBinding MouseAction="RightClick"
+                                          Command="{Binding DeleteCommand}"
+                                          CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button, AncestorLevel=2}}"/>
+                            </Button.InputBindings>
+                        </Button>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="NewBuildingButtonStyle"
