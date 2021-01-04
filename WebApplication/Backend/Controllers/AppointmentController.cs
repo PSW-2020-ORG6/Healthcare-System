@@ -12,57 +12,59 @@ namespace WebApplication.Backend.Controllers
     [ApiController]
     public class AppointmentController : ControllerBase
     {
-        private readonly AppointmentService appointmentService;
-        private readonly DateFromStringConverter dateFromStringConverter;
-        private readonly AppointmentDto appointmentDTO;
-        public AppointmentController()
+        private readonly AppointmentService _appointmentService;
+        private readonly DateFromStringConverter _dateFromStringConverter;
+        private readonly AppointmentDto _appointmentDto;
+
+        public AppointmentController(AppointmentService appointmentService)
         {
-            this.appointmentService = new AppointmentService();
-            this.dateFromStringConverter = new DateFromStringConverter();
-            this.appointmentDTO = new AppointmentDto();
+            _appointmentService = appointmentService;
+            _dateFromStringConverter = new DateFromStringConverter();
+            _appointmentDto = new AppointmentDto();
         }
 
         [HttpGet("allAppointmentsByPatientId")]
-        public List<AppointmentDTO> GellAllAppointmentsByPatientId(String patientId)
+        public List<AppointmentDTO> GetAllAppointmentsByPatientId(String patientId)
         {
-            return appointmentService.GetAllAppointmentsByPatientId(patientId);
+            return _appointmentService.GetAllAppointmentsByPatientId(patientId);
         }
 
         [HttpGet("physicians")]
-        public List<PhysicianDTO> GetAllPhysitians()
+        public List<PhysicianDTO> GetAllPhysicians()
         {
-            return appointmentService.GetAllPhysicians();
+            return _appointmentService.GetAllPhysicians();
         }
 
         [HttpGet("specializations")]
         public List<SpecializationDTO> GetAllSpecializations()
         {
-            return appointmentService.GetAllSpecializations();
+            return _appointmentService.GetAllSpecializations();
         }
 
         [HttpGet("allAppointments")]
-        public List<AppointmentDTO> GellAllAppointments()
+        public List<AppointmentDTO> GetAllAppointments()
         {
-            return appointmentService.GetAllAppointments();
+            return _appointmentService.GetAllAppointments();
         }
 
         [HttpGet("allAppointmentsByPatientIdActive")]
-        public List<AppointmentDTO> GellAllAppointmentsByPatientIdActive(String patientId)
+        public List<AppointmentDTO> GetAllAppointmentsByPatientIdActive(String patientId)
         {
-            return appointmentService.GetAllAppointmentsByPatientIdActive(patientId);
+            return _appointmentService.GetAllAppointmentsByPatientIdActive(patientId);
         }
 
         [HttpGet("allAppointmentsByPatientIdCanceled")]
-        public List<AppointmentDTO> GellAllAppointmentsByPatientIdCanceled(String patientId)
+        public List<AppointmentDTO> GetAllAppointmentsByPatientIdCanceled(String patientId)
         {
-            return appointmentService.GetAllAppointmentsByPatientIdCanceled(patientId);
+            return _appointmentService.GetAllAppointmentsByPatientIdCanceled(patientId);
         }
 
         [HttpGet("appointments")]
-        public List<TimeIntervalDTO> GetAllAvailableAppointments(string physicianId, string specializationName, string date)
+        public List<TimeIntervalDTO> GetAllAvailableAppointments(string physicianId, string specializationName,
+            string date)
         {
-            if (dateFromStringConverter.IsPreferredTimeValid(date))
-                return appointmentService.GetAllAvailableAppointments(physicianId, specializationName, date);
+            if (_dateFromStringConverter.IsPreferredTimeValid(date))
+                return _appointmentService.GetAllAvailableAppointments(physicianId, specializationName, date);
             else
                 return null;
         }
@@ -70,9 +72,9 @@ namespace WebApplication.Backend.Controllers
         [HttpPost("makeAppointment/{physicianId}/{timeIntervalStart}/{date}")]
         public IActionResult MakeAppointment(string physicianId, DateTime timeIntervalStart, string date)
         {
-            if (physicianId != null && timeIntervalStart != null && appointmentDTO.IsDataValid(date))
+            if (physicianId != null && timeIntervalStart != null && _appointmentDto.IsDataValid(date))
             {
-                if (appointmentService.AddAppointment(new Appointment(physicianId, date, timeIntervalStart)))
+                if (_appointmentService.AddAppointment(new Appointment(physicianId, date, timeIntervalStart)))
                     return Ok();
                 else
                     return BadRequest();
@@ -84,7 +86,7 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("allAppointmentsByPatientIdPast")]
         public List<AppointmentDTO> GellAllAppointmentsByPatientIdPast(String patientId)
         {
-            return appointmentService.GetAllAppointmentsByPatientIdPast(patientId);
+            return _appointmentService.GetAllAppointmentsByPatientIdPast(patientId);
         }
 
 
@@ -92,41 +94,48 @@ namespace WebApplication.Backend.Controllers
         public List<AppointmentDTO> GetAllAppointmentsWithDoneSurvey()
         {
             AppointmentDTO appointment = new AppointmentDTO();
-            return appointment.ConvertListToAppointmentDTO(appointmentService.GetAllAppointmentsWithDoneSurvey());
+            return appointment.ConvertListToAppointmentDTO(_appointmentService.GetAllAppointmentsWithDoneSurvey());
         }
 
         [HttpGet("allAppointmentsWithoutSurvey")]
-        public List<AppointmentDTO> allAppointmentsWithoutSurvey()
+        public List<AppointmentDTO> GetAllAppointmentsWithoutSurvey()
         {
-            return appointmentService.GetAllAppointmentsWithoutDoneSurvey();
+            return _appointmentService.GetAllAppointmentsWithoutDoneSurvey();
         }
 
         [HttpGet("isSurveyDoneByPatientIdAppointmentDatePhysicianName")]
-        public bool isSurveyDoneByPatientIdAppointmentDatePhysicianName([FromQuery] String patientId, [FromQuery] String appointmentDate, [FromQuery] String physicianName)
+        public bool IsSurveyDoneByPatientIdAppointmentDatePhysicianName([FromQuery] String patientId,
+            [FromQuery] String appointmentDate, [FromQuery] String physicianName)
         {
-            return appointmentService.isSurveyDoneByPatientIdAppointmentDatePhysicianName(patientId, appointmentDate, physicianName);
+            return _appointmentService.isSurveyDoneByPatientIdAppointmentDatePhysicianName(patientId, appointmentDate,
+                physicianName);
         }
 
         [HttpPut("setSurveyDoneOnAppointment")]
-        public void setSurveyDoneOnAppointment(AppointmentDTO appointmentDto)
+        public void SetSurveyDoneOnAppointment(AppointmentDTO appointmentDto)
         {
-            appointmentService.setSurveyDoneOnAppointment(appointmentDto);
+            _appointmentService.setSurveyDoneOnAppointment(appointmentDto);
         }
 
         [HttpGet("appointmentsWithReccomendation")]
-        public List<AppointmentWithRecommendationDTO> GetAllAvailableAppointmentsWithRecomendation(string physicianId, string specializationName, string dates)
+        public List<AppointmentWithRecommendationDTO> GetAllAvailableAppointmentsWithRecommendation(string physicianId,
+            string specializationName, string dates)
         {
-            if (dateFromStringConverter.IsPreferredTimeIntervalValid(dates))
-                return appointmentService.AppointmentRecomendation(physicianId, specializationName, dateFromStringConverter.DateGeneration(dates));
+            if (_dateFromStringConverter.IsPreferredTimeIntervalValid(dates))
+                return _appointmentService.AppointmentRecomendation(physicianId, specializationName,
+                    _dateFromStringConverter.DateGeneration(dates));
             else
                 return null;
         }
 
         [HttpGet("appointmentsWithPhysicianPriority")]
-        public List<AppointmentWithRecommendationDTO> GetAllAvailableAppointmentsWithPhysicianPriority(string physicianId, string specializationName, string dates)
+        public List<AppointmentWithRecommendationDTO> GetAllAvailableAppointmentsWithPhysicianPriority(
+            string physicianId, string specializationName, string dates)
         {
-            if (dateFromStringConverter.IsPreferredTimeIntervalValid(dates))
-                return appointmentService.AppointmentRecomendationWithPhysicianPriority(physicianId, specializationName, dateFromStringConverter.DateGeneration(dates));
+            if (_dateFromStringConverter.IsPreferredTimeIntervalValid(dates))
+                return _appointmentService.AppointmentRecomendationWithPhysicianPriority(physicianId,
+                    specializationName,
+                    _dateFromStringConverter.DateGeneration(dates));
             else
                 return null;
         }
@@ -134,19 +143,19 @@ namespace WebApplication.Backend.Controllers
         [HttpPut("cancelAppointment")]
         public bool CancelAppointment(AppointmentDTO appointment)
         {
-            return appointmentService.CancelAppointment(appointment.SerialNumber);
+            return _appointmentService.CancelAppointment(appointment.SerialNumber);
         }
 
         [HttpGet("IsUserMalicious")]
         public bool IsUserMalicious(string patientId)
         {
-            return appointmentService.IsUserMalicious(patientId);
+            return _appointmentService.IsUserMalicious(patientId);
         }
 
         [HttpPut("SetUserToMalicious")]
         public bool SetUserToMalicious(AppointmentDTO appointment)
         {
-            return appointmentService.SetUserToMalicious(appointment.PatientDTO.Id);
+            return _appointmentService.SetUserToMalicious(appointment.PatientDTO.Id);
         }
     }
 }

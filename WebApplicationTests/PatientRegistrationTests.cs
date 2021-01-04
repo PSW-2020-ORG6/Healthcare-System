@@ -66,11 +66,15 @@ namespace WebApplicationTests
         [Fact]
         public void Sending_Mail()
         {
-            var mockMailService = new Mock<IMailService>();
-            mockMailService.Setup(a => a.SendEmail(patient));
-            var controller = new RegistrationController(mockMailService.Object);
+            var registrationService = new Mock<RegistrationService>();
+            var mailService = new Mock<IMailService>();
+            mailService.Setup(a => a.SendEmail(patient));
+
+            var controller = new RegistrationController(registrationService.Object, mailService.Object);
+
             controller.SendMail(patient);
-            mockMailService.Verify(m => m.SendEmail(patient));
+
+            mailService.Verify(m => m.SendEmail(patient));
         }
     }
 }
