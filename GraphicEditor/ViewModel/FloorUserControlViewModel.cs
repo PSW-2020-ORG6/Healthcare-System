@@ -96,14 +96,14 @@ namespace GraphicEditor.ViewModel
                 //Grid.SetRowSpan(button, room.RowSpan);
                 //Grid.SetColumn(button, room.Column);
                 //Grid.SetRow(button, room.Row);
-                room.Beds = bedController.GetByRoomSerialNumber(room.SerialNumber);
+                //room.Beds = bedController.GetByRoomSerialNumber(room.SerialNumber);
                 foreach (Bed bed in room.Beds)
                 {
                     if (bed.PatientSerialNumber != null) bed.Patient = patientController.GetById(bed.PatientSerialNumber);
                 }
-                room.RoomType = roomTypeController.GetById(room.RoomTypeSerialNumber);
-                room.Equipment = equipmentController.GetByRoomSerialNumber(room.SerialNumber);
-                room.Medinices = medicineController.GetByRoomSerialNumber(room.SerialNumber);
+                //room.RoomType = roomTypeController.GetById(room.RoomTypeSerialNumber);
+                //room.Equipment = equipmentController.GetByRoomSerialNumber(room.SerialNumber);
+                //room.Medinices = medicineController.GetByRoomSerialNumber(room.SerialNumber);
 
                 RoomGrid.Children.Add(button);
                 connections.Add(room.SerialNumber, button);

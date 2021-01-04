@@ -362,17 +362,35 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Room>().Ignore(o => o.Beds);
             modelBuilder.Entity<Room>().Ignore(o => o.Medinices);
 
+            modelBuilder.Entity<Room>()
+               .Property(r => r.Name)
+               .HasField("_name");
+            modelBuilder.Entity<Room>()
+               .Property(r => r.Id)
+               .HasField("_id");
+            modelBuilder.Entity<Room>()
+               .Property(r => r.FloorSerialNumber)
+               .HasField("_floorSerialNumber");
+            modelBuilder.Entity<Room>()
+               .Property(r => r.RoomTypeSerialNumber)
+               .HasField("_roomTypeSerialNumber"); 
+            modelBuilder.Entity<Room>()
+                .Property(r => r.PositionSerialNumber)
+                .HasField("_positionSerialNumber");
+            modelBuilder.Entity<Room>()
+               .Property(r => r.Style)
+               .HasField("_style");
+
             modelBuilder.Entity<Room>().HasData(
                 new Room
                 {
                     SerialNumber = "101",
-                    Name = "Examination room 101",
-                    Id = 101,
-                    FloorSerialNumber = "1001",
-                    RoomTypeSerialNumber = "10000003",
-                   
-                    PositionSerialNumber = "70001",
-                    Style = "RoomButtonStyle",
+                    _name = "Examination room 101",
+                    _id = 101,
+                    _floorSerialNumber = "1001",
+                    _roomTypeSerialNumber = "10000003",
+                    _positionSerialNumber = "70001",
+                    _style = "RoomButtonStyle",
                     BottomDoorVisible = 0,
                     RightDoorVisible = 0,
                     LeftDoorVisible = 2,
@@ -381,12 +399,12 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 new Room
                 {
                     SerialNumber = "102",
-                    Name = "Examination room 102",
-                    Id = 102,
-                    FloorSerialNumber = "1001",
-                    RoomTypeSerialNumber = "10000003",
-                    PositionSerialNumber = "70002",
-                    Style = "RoomButtonStyle",
+                    _name = "Examination room 102",
+                    _id = 102,
+                    _floorSerialNumber = "1001",
+                    _roomTypeSerialNumber = "10000003",
+                    _positionSerialNumber = "70002",
+                    _style = "RoomButtonStyle",
                     BottomDoorVisible = 0,
                     RightDoorVisible = 2,
                     LeftDoorVisible = 2,
@@ -395,12 +413,12 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 new Room
                 {
                     SerialNumber = "103",
-                    Name = "Store room 103",
-                    Id = 103,
-                    FloorSerialNumber = "1001",
-                    RoomTypeSerialNumber = "10000002",
-                    PositionSerialNumber = "70003",
-                    Style = "RoomButtonStyle",
+                    _name = "Store room 103",
+                    _id = 103,
+                    _floorSerialNumber = "1001",
+                    _roomTypeSerialNumber = "10000002",
+                    _positionSerialNumber = "70003",
+                    _style = "RoomButtonStyle",
                     BottomDoorVisible = 0,
                     RightDoorVisible = 2,
                     LeftDoorVisible = 2,
@@ -409,12 +427,12 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 new Room
                 {
                     SerialNumber = "104",
-                    Name = "Examination room 104",
-                    Id = 104,
-                    FloorSerialNumber = "1001",
-                    RoomTypeSerialNumber = "10000003",
-                    PositionSerialNumber = "70004",
-                    Style = "RoomButtonStyle",
+                    _name = "Examination room 104",
+                    _id = 104,
+                    _floorSerialNumber = "1001",
+                    _roomTypeSerialNumber = "10000003",
+                    _positionSerialNumber = "70004",
+                    _style = "RoomButtonStyle",
                     BottomDoorVisible = 0,
                     LeftDoorVisible = 0,
                     RightDoorVisible = 2,
@@ -423,12 +441,12 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 new Room
                 {
                     SerialNumber = "105",
-                    Name = "Store room 105",
-                    Id = 105,
-                    FloorSerialNumber = "1001",
-                    RoomTypeSerialNumber = "10000002",
-                    PositionSerialNumber = "70005",
-                    Style = "RoomButtonStyle",
+                    _name = "Store room 105",
+                    _id = 105,
+                    _floorSerialNumber = "1001",
+                    _roomTypeSerialNumber = "10000002",
+                    _positionSerialNumber = "70005",
+                    _style = "RoomButtonStyle",
                     BottomDoorVisible = 2,
                     TopDoorVisible = 0,
                     LeftDoorVisible = 0,
@@ -586,24 +604,41 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             modelBuilder.Entity<Building>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Building>().Ignore(o => o.Floors);
+
+            modelBuilder.Entity<Building>()
+               .Property(b => b.Name)
+               .HasField("_name");
+            modelBuilder.Entity<Building>()
+                .Property(b => b.Color)
+                .HasField("_color");
+            modelBuilder.Entity<Building>()
+                .Property(b => b.Row)
+                .HasField("_row");
+            modelBuilder.Entity<Building>()
+                .Property(b => b.Column)
+                .HasField("_column");
+            modelBuilder.Entity<Building>()
+                .Property(b => b.Style)
+                .HasField("_style");
+
             modelBuilder.Entity<Building>().HasData(
                 new Building
                 {
                     SerialNumber = "10001",
-                    Name = "Cardiology",
-                    Color = "Orange",
-                    Row = 5,
-                    Column = 1,
-                    Style = "TriangleBuildingButtonStyle"
+                    _name = "Cardiology",
+                    _color = "Orange",
+                    _row = 5,
+                    _column = 1,
+                    _style = "TriangleBuildingButtonStyle"
                 },
                 new Building
                 {
                     SerialNumber = "10002",
-                    Name = "Orthopedy",
-                    Color = "Red",
-                    Row = 5,
-                    Column = 3,
-                    Style = "UBuildingButtonStyle"
+                    _name = "Orthopedy",
+                    _color = "Red",
+                    _row = 5,
+                    _column = 3,
+                    _style = "UBuildingButtonStyle"
                 }
             );
         }
@@ -612,10 +647,18 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             modelBuilder.Entity<Floor>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Floor>().Ignore(o => o.Rooms);
+
+            modelBuilder.Entity<Floor>()
+               .Property(f => f.Name)
+               .HasField("_name");
+            modelBuilder.Entity<Floor>()
+               .Property(f => f.BuildingSerialNumber)
+               .HasField("_buildingSerialNumber");
+
             modelBuilder.Entity<Floor>().HasData(
-                new Floor { SerialNumber = "1001", Name = "Floor1", BuildingSerialNumber = "10001" },
-                new Floor { SerialNumber = "1002", Name = "Floor2", BuildingSerialNumber = "10001" },
-                new Floor { SerialNumber = "1003", Name = "Floor1", BuildingSerialNumber = "10002" }
+                new Floor { SerialNumber = "1001", _name = "Floor1", _buildingSerialNumber = "10001" },
+                new Floor { SerialNumber = "1002", _name = "Floor2", _buildingSerialNumber = "10001" },
+                new Floor { SerialNumber = "1003", _name = "Floor1", _buildingSerialNumber = "10002" }
             );
         }
 
@@ -819,6 +862,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             modelBuilder.Entity<Bed>().Property(o => o.Quantity).HasDefaultValue(1);
             modelBuilder.Entity<Bed>().Ignore(o => o.IsOccupied);
+
             modelBuilder.Entity<Bed>().HasData(
                 new Bed
                 {

@@ -87,18 +87,18 @@ namespace GraphicEditor.View.Windows
             RoomButton newRoomButton = new RoomButton(view.Grid);
             Room newRoom = new Room()
             {
-                FloorSerialNumber = floor.SerialNumber,
-                RoomTypeSerialNumber = RoomTypes[SelectedRoomTypeIndex].SerialNumber,
-                Id = Int32.Parse(number),
-                Style = "RoomButtonStyle",
+                _floorSerialNumber = floor.SerialNumber,
+                _roomTypeSerialNumber = RoomTypes[SelectedRoomTypeIndex].SerialNumber,
+                _id = Int32.Parse(number),
+                _style = "RoomButtonStyle",
                 //Column = column,
                 //Row = row,
                 //ColumnSpan = columnSpan,
                 //RowSpan = rowSpan,
-                Name = nameTextBox.Text,
-                Beds = new List<Bed>(),
-                Equipment = new List<Equipment>(),
-                Medinices = new List<Medicine>()
+                _name = nameTextBox.Text,
+                _beds = new List<Bed>(),
+                _equipment = new List<Equipment>(),
+                _medinices = new List<Medicine>()
             };
 
             newRoomButton.Content = nameTextBox.Text;

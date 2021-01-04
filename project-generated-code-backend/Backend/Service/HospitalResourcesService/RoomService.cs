@@ -71,9 +71,9 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 
         private void FillComplexedProperties(Room room)
         {
-            room.Equipment = _equipmentRepository.GetByRoomSerialNumber(room.SerialNumber);
-            room.Medinices = _medicineRepository.GetByRoomSerialNumber(room.SerialNumber);
-            room.Beds = _bedRepository.GetByRoomSerialNumber(room.SerialNumber);
+            //room.Equipment = _equipmentRepository.GetByRoomSerialNumber(room.SerialNumber);
+            //room.Medinices = _medicineRepository.GetByRoomSerialNumber(room.SerialNumber);
+            //room.Beds = _bedRepository.GetByRoomSerialNumber(room.SerialNumber);
             // Add beds later
         }
 
