@@ -5,10 +5,14 @@ namespace HealthClinicBackend.Backend.Model.Hospital
 {
     public class Position : Entity
     {
-        public int Row { get; set; }
-        public int Column { get; set; }
-        public int RowSpan { get; set; }
-        public int ColumnSpan { get; set; }
+        public int _row;
+        public int _column;
+        public int _rowSpan;
+        public int _columnSpan;
+        public int Row => _row;
+        public int Column => _column;
+        public int RowSpan => _rowSpan;
+        public int ColumnSpan => _columnSpan;
 
         public Position()
         {
@@ -18,10 +22,18 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public Position(string serialNumber, int row, int column, int rowSpan, int columnSpan) : base(serialNumber)
         {
             Validate(row, column, rowSpan, columnSpan);
-            Row = row;
-            Column = column;
-            RowSpan = rowSpan;
-            ColumnSpan = columnSpan;
+            _row = row;
+            _column = column;
+            _rowSpan = rowSpan;
+            _columnSpan = columnSpan;
+        }
+
+        public Position(int row, int column, int rowSpan, int columnSpan)
+        {
+            _row = row;
+            _column = column;
+            _rowSpan = rowSpan;
+            _columnSpan = columnSpan;
         }
 
         public override bool Equals(object obj)
@@ -45,7 +57,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
                  + " - " + Column.ToString() + " - " + ColumnSpan.ToString();
         }
 
-        public void ExpandField(Position oldPosition, int height, int width)
+        public Position ExpandField(Position oldPosition, int height, int width)
         {
             int rowSpan = oldPosition.RowSpan + height;
             int columnSpan = oldPosition.ColumnSpan + width;
@@ -53,11 +65,13 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             ValidateElementOfField(rowSpan);
             ValidateElementOfField(columnSpan);
 
-            oldPosition.RowSpan = rowSpan;
-            oldPosition.ColumnSpan = columnSpan;
+            return new Position(
+                oldPosition.Row,
+                oldPosition.Column,
+                rowSpan, columnSpan);
         }
 
-        public void ReduceField(Position oldPosition, int height, int width)
+        public Position ReduceField(Position oldPosition, int height, int width)
         {
             int rowSpan = oldPosition.RowSpan - height;
             int columnSpan = oldPosition.ColumnSpan - width;
@@ -65,16 +79,20 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             ValidateElementOfField(rowSpan);
             ValidateElementOfField(columnSpan);
 
-            oldPosition.RowSpan = rowSpan;
-            oldPosition.ColumnSpan = columnSpan;
+            return new Position(
+              oldPosition.Row,
+              oldPosition.Column,
+              rowSpan, columnSpan);
         }
 
-        public void MoveField(Position oldPosition, int row, int column)
+        public Position MoveField(Position oldPosition, int row, int column)
         {
             ValidateElementOfField(row);
             ValidateElementOfField(column);
-            oldPosition.Row = row;
-            oldPosition.Column = column;
+            return new Position(
+                row, column,
+                oldPosition.RowSpan,
+                oldPosition.ColumnSpan);
         }
 
         private void Validate(int row, int column, int rowSpan, int columnSpan)

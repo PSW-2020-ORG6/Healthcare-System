@@ -31,21 +31,10 @@ namespace WebApplicationTests
         public CreateAppointmentTests(WebApplicationFactory<Startup> factory)
         {
             webFactory = factory;
-            timeIntervals.Add(new TimeInterval
-            {
-                Id = "1234", Start = new DateTime(2020, 12, 11, 08, 00, 00),
-                End = new DateTime(2020, 12, 11, 08, 20, 00)
-            });
-            timeIntervals.Add(new TimeInterval
-            {
-                Id = "1235", Start = new DateTime(2020, 12, 11, 08, 20, 00),
-                End = new DateTime(2020, 12, 11, 08, 40, 00)
-            });
-            timeIntervals.Add(new TimeInterval
-            {
-                Id = "1235", Start = new DateTime(2020, 12, 11, 08, 40, 00),
-                End = new DateTime(2020, 12, 11, 09, 00, 00)
-            });
+            timeIntervals.Add(new TimeInterval(new DateTime(2020, 12, 11, 08, 00, 00), new DateTime(2020, 12, 11, 08, 20, 00)));
+            timeIntervals.Add(new TimeInterval(new DateTime(2020, 12, 11, 08, 20, 00), new DateTime(2020, 12, 11, 08, 40, 00)));
+            timeIntervals.Add(new TimeInterval(new DateTime(2020, 12, 11, 08, 40, 00), new DateTime(2020, 12, 11, 09, 00, 00)));
+
             appointements.Add(new Appointment(new Room("101", 101, new RoomType("Examination room 101")),
                 new Physician("Gojko", "Simic", "600001"), new Patient("5", "Jelena", "Tanjic"),
                 new TimeInterval(new DateTime(2021, 12, 5, 08, 00, 00), new DateTime(2021, 12, 5, 08, 00, 00)),
