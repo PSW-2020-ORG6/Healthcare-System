@@ -1,8 +1,3 @@
-// File:    TimeInterval.cs
-// Author:  Luka Doric
-// Created: Friday, May 15, 2020 23:46:22
-// Purpose: Definition of Class TimeInterval
-
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
@@ -30,6 +25,7 @@ namespace HealthClinicBackend.Backend.Model.Util
 
         public TimeInterval(string start, string end)
         {
+            Validate(start, end);
             try
             {
                 Start = Convert.ToDateTime(start);
@@ -37,7 +33,7 @@ namespace HealthClinicBackend.Backend.Model.Util
             }
             catch
             {
-                // ignored
+                throw new Exception("Date and time couldn't be converted.");
             }
         }
 
@@ -96,6 +92,32 @@ namespace HealthClinicBackend.Backend.Model.Util
         public bool TimeOfDayEquals(TimeInterval other)
         {
             return Start.TimeOfDay.Equals(other.Start.TimeOfDay) && End.TimeOfDay.Equals(other.End.TimeOfDay);
+        }
+
+        private void Validate(string start, string end)
+        {
+            ValidateStart(start);
+            ValidateEnd(end);
+        }
+
+        private void ValidateStart(string start)
+        {
+            if (string.IsNullOrEmpty(start)) throw new Exception("Start is required!");
+            else if (start.Length != 19) throw new Exception("Start is not correct length.");
+            else if (IsDateTime(start)) throw new Exception("Start is not set as datetime.");
+        }
+
+        private void ValidateEnd(string end)
+        {
+            if (string.IsNullOrEmpty(end)) throw new Exception("End is required!");
+            else if (end.Length != 19) throw new Exception("End is not correct length.");
+            else if (IsDateTime(end)) throw new Exception("End is not set as datetime.");
+        }
+
+        private bool IsDateTime(string txtDate)
+        {
+            DateTime tempDate;
+            return DateTime.TryParse(txtDate, out tempDate);
         }
     }
 }
