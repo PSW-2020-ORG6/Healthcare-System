@@ -102,6 +102,11 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
             throw new NotImplementedException();
         }
 
+        public List<DateTime> GetByPatientIdCanceledDates(string patientId)
+        {
+            throw new NotImplementedException();
+        }
+
         public override Appointment Instantiate(string objectStringFormat)
         {
             return JsonConvert.DeserializeObject<Appointment>(objectStringFormat);

@@ -48,6 +48,11 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
             throw new System.NotImplementedException();
         }
 
+        public List<Physician> GetBySpecializationName(string name)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public override Physician Instantiate(string objectStringFormat)
         {
             return JsonConvert.DeserializeObject<Physician>(objectStringFormat);

@@ -3,57 +3,64 @@ using System.Collections.Generic;
 using System.Linq;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Schedule;
-using HealthClinicBackend.Backend.Model.Util;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using HealthClinicBackend.Backend.Repository.Generic;
 using WebApplication.Backend.DTO;
-using WebApplication.Backend.Repositorys;
-using WebApplication.Backend.Repositorys.Interfaces;
 
 namespace WebApplication.Backend.Services
 {
     public class AppointmentService : IAppointmentService
     {
-        private ISpecializationRepository specializationRepository;
-        private ITimeIntervalRepository timeIntervalRepository = new TimeIntervalRepository();
-        private IAppointmentRepository appointmentRepository = new AppointmentRepository();
-        private IPhysicianRepository physicianRepository = new PhysicianRepository();
+        private readonly ISpecializationRepository _specializationRepository;
+        private readonly IAppointmentRepository _appointmentRepository;
+        private readonly IPhysicianRepository _physicianRepository;
+        private readonly IPatientRepository _patientRepository;
+
         private PhysicianDTO physitianDTO = new PhysicianDTO();
         private TimeIntervalDTO timeIntervalDTO = new TimeIntervalDTO();
         private SpecializationDTO specializationDTO = new SpecializationDTO();
         private AppointmentDTO appointmentDTO = new AppointmentDTO();
-        private AppointmentWithRecommendationDTO appointmentWithRecommendationDTO = new AppointmentWithRecommendationDTO();
+
+        private AppointmentWithRecommendationDTO appointmentWithRecommendationDTO =
+            new AppointmentWithRecommendationDTO();
+
         private DateFromStringConverter dateTimeDTO = new DateFromStringConverter();
-  
+
         public AppointmentService()
         {
-            this.specializationRepository = new SpecializationRepository();
+            _specializationRepository = new SpecializationDatabaseSql();
+            _appointmentRepository = new AppointmentDatabaseSql();
+            _physicianRepository = new PhysicianDatabaseSql();
+            _patientRepository = new PatientDatabaseSql();
         }
-        public AppointmentService(ISpecializationRepository specializationRepository)
+
+        public AppointmentService(ISpecializationRepository specializationRepository,
+            IAppointmentRepository appointmentRepository, IPhysicianRepository physicianRepository,
+            IPatientRepository patientRepository)
         {
-            this.specializationRepository = specializationRepository;
+            _specializationRepository = specializationRepository;
+            _appointmentRepository = appointmentRepository;
+            _physicianRepository = physicianRepository;
+            _patientRepository = patientRepository;
         }
-        public AppointmentService(IAppointmentRepository appointmentRepository)
-        {
-            this.appointmentRepository = appointmentRepository;
-        }
-        public AppointmentService(IAppointmentRepository appointmentRepository, ITimeIntervalRepository timeIntervalRepository)
-        {
-            this.appointmentRepository = appointmentRepository;
-            this.timeIntervalRepository = timeIntervalRepository;
-        }
+
         public List<PhysicianDTO> GetAllPhysicians()
         {
-            return physitianDTO.ConvertListToPhysicianDTO(physicianRepository.GetAllPhysicians());
+            return physitianDTO.ConvertListToPhysicianDTO(_physicianRepository.GetAll());
         }
 
         public List<SpecializationDTO> GetAllSpecializations()
         {
-            return specializationDTO.ConvertListToSpecializationDTO(specializationRepository.GetAllSpecializations());
+            return specializationDTO.ConvertListToSpecializationDTO(_specializationRepository.GetAll());
         }
 
-        public List<TimeIntervalDTO> GetAllAvailableAppointments(string physicianId, string specializationName, string date)
+        public List<TimeIntervalDTO> GetAllAvailableAppointments(string physicianId, string specializationName,
+            string date)
         {
-            Physician physician = physicianRepository.GetPhysicianBySerialNumber(physicianId);
-            List<Appointment> appointments = appointmentRepository.GetAppointmentsByDate(date);
+            Physician physician = _physicianRepository.GetById(physicianId);
+            //TODO: parse date
+            var dateParsed = DateTime.Now;
+            List<Appointment> appointments = _appointmentRepository.GetAppointmentsByDate(dateParsed);
             return GetAvailableAppointments(appointments, physician, specializationName);
         }
 
@@ -67,28 +74,33 @@ namespace WebApplication.Backend.Services
         ///<param name="physician"> Physician type object
         ///<param name="specializationName"> String type object
         ///</param>>
-        private List<TimeIntervalDTO> GetAvailableAppointments(List<Appointment> appointments, Physician physician, string specializationName)
+        private List<TimeIntervalDTO> GetAvailableAppointments(List<Appointment> appointments, Physician physician,
+            string specializationName)
         {
             List<TimeIntervalDTO> result = new List<TimeIntervalDTO>();
             DateTime time = physician.WorkSchedule.Start;
-            while (time < physician.WorkSchedule.End) 
+            while (time < physician.WorkSchedule.End)
             {
                 bool existance = false;
                 if (appointments.Any())
                 {
                     foreach (Appointment appointment in appointments)
                     {
-                        if (CompareTimeIntervals(time, appointment.TimeInterval.Start) && appointment.Physician.SerialNumber == physician.SerialNumber && appointment.ProcedureType.Specialization.Name == specializationName && appointment.Active)
+                        if (CompareTimeIntervals(time, appointment.TimeInterval.Start) &&
+                            appointment.Physician.SerialNumber == physician.SerialNumber &&
+                            appointment.ProcedureType.Specialization.Name == specializationName && appointment.Active)
                         {
                             existance = true;
                             break;
                         }
                     }
                 }
+
                 if (!existance)
                     result.Add(new TimeIntervalDTO(time));
                 time = time.Add(new TimeSpan(0, 20, 0));
             }
+
             return result;
         }
 
@@ -107,22 +119,27 @@ namespace WebApplication.Backend.Services
         ///<param name="specializationName"> String type object
         ///<param name="dates"> String array type object
         ///</param>>
-        public List<AppointmentWithRecommendationDTO> AppointmentRecomendationWithPhysicianPriority(string physicianId, string specializationName, string[] dates)
+        public List<AppointmentWithRecommendationDTO> AppointmentRecomendationWithPhysicianPriority(string physicianId,
+            string specializationName, string[] dates)
         {
             List<AppointmentWithRecommendationDTO> availableAppointments = new List<AppointmentWithRecommendationDTO>();
             foreach (string date in dates)
             {
                 List<TimeIntervalDTO> appointments = GetAllAvailableAppointments(physicianId, specializationName, date);
-                if(appointments.Count > 0)
-                    availableAppointments.Add(new AppointmentWithRecommendationDTO(date, physicianId, appointments, ""));
+                if (appointments.Count > 0)
+                    availableAppointments.Add(
+                        new AppointmentWithRecommendationDTO(date, physicianId, appointments, ""));
             }
+
             if (!availableAppointments.Any())
             {
                 foreach (string date in AdditionalDates(dates))
                 {
-                    availableAppointments.Add(new AppointmentWithRecommendationDTO(date, physicianId, GetAllAvailableAppointments(physicianId, specializationName, date), ""));
+                    availableAppointments.Add(new AppointmentWithRecommendationDTO(date, physicianId,
+                        GetAllAvailableAppointments(physicianId, specializationName, date), ""));
                 }
             }
+
             return availableAppointments;
         }
 
@@ -138,7 +155,7 @@ namespace WebApplication.Backend.Services
         ///</param>>
         private List<String> AdditionalDates(string[] dates)
         {
-           List<string> newDates = new List<string>();
+            List<string> newDates = new List<string>();
             DateTime dateTimeFrom = dateTimeDTO.CreateDateTime(dates[0]);
             DateTime dateTimeTo = dateTimeDTO.CreateDateTime(dates[dates.Length - 1]);
             while (newDates.Count < 3)
@@ -146,22 +163,25 @@ namespace WebApplication.Backend.Services
                 dateTimeTo = dateTimeTo.AddDays(1);
                 newDates.Add(DateConversion(dateTimeTo));
             }
+
             while (newDates.Count < 6 && dateTimeDTO.IsPreferredTimeValid(DateConversion(dateTimeFrom)))
             {
                 dateTimeFrom = dateTimeFrom.AddDays(-1);
                 newDates.Add(DateConversion(dateTimeFrom));
             }
+
             return newDates;
         }
 
         private string DateConversion(DateTime date)
         {
-             return date.ToString("yyyy-MM-dd");
+            return date.ToString("yyyy-MM-dd");
         }
 
         public bool AddAppointment(Appointment appointment)
         {
-            return appointmentRepository.AddAppointment(appointment);
+            _appointmentRepository.Save(appointment);
+            return true;
         }
 
         /// <summary>
@@ -173,7 +193,8 @@ namespace WebApplication.Backend.Services
         ///</returns>
         public List<AppointmentDTO> GetAllAppointmentsByPatientId(string patientId)
         {
-            return appointmentDTO.ConvertListToAppointmentDTO(appointmentRepository.GetAllAppointmentByPatientId(patientId));
+            return appointmentDTO.ConvertListToAppointmentDTO(
+                _appointmentRepository.GetByPatientId(patientId));
         }
 
         /// <summary>
@@ -184,7 +205,7 @@ namespace WebApplication.Backend.Services
         ///</returns>
         public List<AppointmentDTO> GetAllAppointments()
         {
-            return appointmentDTO.ConvertListToAppointmentDTO(appointmentRepository.GetAllAppointments());
+            return appointmentDTO.ConvertListToAppointmentDTO(_appointmentRepository.GetAll());
         }
 
         /// <summary>
@@ -196,7 +217,7 @@ namespace WebApplication.Backend.Services
         ///</returns>
         internal List<AppointmentDTO> GetAllAppointmentsByPatientIdActive(string patientId)
         {
-            List<Appointment> allAppointments = appointmentRepository.GetAllAppointmentsByPatientIdActive(patientId);
+            List<Appointment> allAppointments = _appointmentRepository.GetByPatientIdActive(patientId);
             DateTime dateNow = DateTime.Now;
             List<Appointment> appotintmentsInFuture = new List<Appointment>();
             foreach (Appointment appointment in allAppointments)
@@ -206,6 +227,7 @@ namespace WebApplication.Backend.Services
                     appotintmentsInFuture.Add(appointment);
                 }
             }
+
             return appointmentDTO.ConvertListToAppointmentDTO(appotintmentsInFuture);
         }
 
@@ -218,7 +240,7 @@ namespace WebApplication.Backend.Services
         ///</returns>
         internal List<AppointmentDTO> GetAllAppointmentsByPatientIdCanceled(string patientId)
         {
-            return appointmentDTO.ConvertListToAppointmentDTO(appointmentRepository.GetAllAppointmentsByPatientIdCanceled(patientId));
+            return appointmentDTO.ConvertListToAppointmentDTO(_appointmentRepository.GetByPatientIdCanceled(patientId));
         }
 
         /// <summary>
@@ -230,17 +252,18 @@ namespace WebApplication.Backend.Services
         ///</returns>
         public List<AppointmentDTO> GetAllAppointmentsByPatientIdPast(string patientId)
         {
-            List<Appointment> allAppointments =appointmentRepository.GetAllAppointmentsByPatientIdPast(patientId);
+            List<Appointment> allAppointments = _appointmentRepository.GetByPatientId(patientId);
             DateTime dateNow = DateTime.Now;
-            List<Appointment> appotintmentsInPast = new List<Appointment>();
+            List<Appointment> appointments = new List<Appointment>();
             foreach (Appointment appointment in allAppointments)
             {
                 if (appointment.Date < dateNow)
                 {
-                    appotintmentsInPast.Add(appointment);
+                    appointments.Add(appointment);
                 }
             }
-            return appointmentDTO.ConvertListToAppointmentDTO(appotintmentsInPast);
+
+            return appointmentDTO.ConvertListToAppointmentDTO(appointments);
         }
 
         /// <summary>
@@ -252,15 +275,20 @@ namespace WebApplication.Backend.Services
         ///<returns>
         ///bool value
         ///</returns>
-        internal bool isSurveyDoneByPatientIdAppointmentDatePhysicianName(string patientId, string appointmentDate, string physicianName)
+        internal bool isSurveyDoneByPatientIdAppointmentDatePhysicianName(string patientId, string appointmentDate,
+            string physicianName)
         {
-            List<Physician> physitianResult = physicianRepository.GetPhysiciansByFullName(physicianName);
+            List<Physician> physitianResult = _physicianRepository.GetByName(physicianName);
             List<String> physicianId = new List<string>();
             foreach (Physician physician in physitianResult)
             {
                 physicianId.Add(physician.Id);
             }
-            return appointmentRepository.IsSurveyDoneByPatientIdAppointmentDatePhysicianName(patientId, appointmentDate, physitianResult[0].Id);
+
+            throw new NotImplementedException();
+            // TODO: move this to some service
+            // return appointmentRepository.IsSurveyDoneByPatientIdAppointmentDatePhysicianName(patientId, appointmentDate,
+            //     physitianResult[0].Id);
         }
 
         /// <summary>
@@ -276,13 +304,16 @@ namespace WebApplication.Backend.Services
             else
                 dateD = dateVar[2] + "-" + dateVar[1] + "-" + dateVar[0];
 
-            List<Physician> physitianResult = physicianRepository.GetPhysiciansByFullName(appointmentDto.PhysicianDTO.FullName);
+            List<Physician> physitianResult =
+                _physicianRepository.GetByName(appointmentDto.PhysicianDTO.FullName);
             List<String> physicianId = new List<string>();
             foreach (Physician physician in physitianResult)
             {
                 physicianId.Add(physician.Id);
             }
-            appointmentRepository.SetSurveyDoneOnAppointment(appointmentDto.PatientDTO.Id,dateD, physicianId[0]);
+
+            // TODO: refactor in service and call Update
+            // appointmentRepository.SetSurveyDoneOnAppointment(appointmentDto.PatientDTO.Id, dateD, physicianId[0]);
         }
 
         /// <summary>
@@ -293,7 +324,9 @@ namespace WebApplication.Backend.Services
         ///</returns>
         internal List<AppointmentDTO> GetAllAppointmentsWithoutDoneSurvey()
         {
-            List<Appointment> allAppointments = appointmentRepository.GetAllAppointmentsWithoutSurvey();
+            // TODO: implement logic in current model or create some query
+            // List<Appointment> allAppointments = appointmentRepository.GetAllAppointmentsWithoutSurvey();
+            List<Appointment> allAppointments = new List<Appointment>();
             DateTime dateNow = DateTime.Now;
             List<Appointment> appotintmentsInPastWitohutSurvey = new List<Appointment>();
             foreach (Appointment appointment in allAppointments)
@@ -303,6 +336,7 @@ namespace WebApplication.Backend.Services
                     appotintmentsInPastWitohutSurvey.Add(appointment);
                 }
             }
+
             return appointmentDTO.ConvertListToAppointmentDTO(appotintmentsInPastWitohutSurvey);
         }
 
@@ -314,13 +348,14 @@ namespace WebApplication.Backend.Services
         ///</returns>
         public List<Appointment> GetAllAppointmentsWithDoneSurvey()
         {
-            return appointmentRepository.GetAllAppointmentsWithSurvey();
+            // TODO: refactor
+            // return appointmentRepository.GetAllAppointmentsWithSurvey();
+            return new List<Appointment>();
         }
 
         public bool IsUserMalicious(string patientId)
         {
-
-            List<DateTime> dates = appointmentRepository.GetCancelingDates(patientId);
+            List<DateTime> dates = _appointmentRepository.GetByPatientIdCanceledDates(patientId);
 
             DateTime date = DateTime.Now;
 
@@ -344,13 +379,20 @@ namespace WebApplication.Backend.Services
 
         public bool CancelAppointment(string appointmentSerialNumber)
         {
-            return appointmentRepository.CancelAppointment(appointmentSerialNumber);
-
+            var appointment = _appointmentRepository.GetById(appointmentSerialNumber);
+            if (!appointment.Active) return false;
+            appointment.Active = false;
+            _appointmentRepository.Update(appointment);
+            return true;
         }
 
         public bool SetUserToMalicious(string patientId)
         {
-            return appointmentRepository.SetUserToMalicious(patientId);
+            var patient = _patientRepository.GetById(patientId) ?? _patientRepository.GetByJmbg(patientId);
+            if (patient.IsMalicious) return false;
+            patient.IsMalicious = true;
+            _patientRepository.Update(patient);
+            return true;
         }
 
         /// <summary>
@@ -363,26 +405,34 @@ namespace WebApplication.Backend.Services
         ///<param name="specializationName"> String type object
         ///<param name="dates"> String array type object
         ///</param>>
-        public List<AppointmentWithRecommendationDTO> AppointmentRecomendation(string physicianId, string specializationName, string[] dates)
+        public List<AppointmentWithRecommendationDTO> AppointmentRecomendation(string physicianId,
+            string specializationName, string[] dates)
         {
-           List<AppointmentWithRecommendationDTO> availableAppointments = new List<AppointmentWithRecommendationDTO>();
+            List<AppointmentWithRecommendationDTO> availableAppointments = new List<AppointmentWithRecommendationDTO>();
             foreach (string date in dates)
             {
                 List<TimeIntervalDTO> appointments = GetAllAvailableAppointments(physicianId, specializationName, date);
                 if (appointments.Count > 0)
-                    availableAppointments.Add(new AppointmentWithRecommendationDTO(date, physicianId, appointments, ""));
+                    availableAppointments.Add(
+                        new AppointmentWithRecommendationDTO(date, physicianId, appointments, ""));
             }
+
             if (!availableAppointments.Any())
             {
-                List<Physician> physicians = physicianRepository.GetPhysicianBySpecialization(specializationName, physicianId);
-                foreach(Physician physician in physicians)
+                // TODO: I don't know what the physician id was for
+                // List<Physician> physicians = _physicianRepository.GetPhysicianBySpecialization(specializationName, physicianId);
+                List<Physician> physicians = _physicianRepository.GetBySpecializationName(specializationName);
+                foreach (Physician physician in physicians)
                 {
                     foreach (string date in dates)
                     {
-                        availableAppointments.Add(new AppointmentWithRecommendationDTO(date, physician.Id, GetAllAvailableAppointments(physician.Id, specializationName, date), physician.Name + " " + physician.Surname));
+                        availableAppointments.Add(new AppointmentWithRecommendationDTO(date, physician.Id,
+                            GetAllAvailableAppointments(physician.Id, specializationName, date),
+                            physician.Name + " " + physician.Surname));
                     }
                 }
             }
+
             return availableAppointments;
         }
     }

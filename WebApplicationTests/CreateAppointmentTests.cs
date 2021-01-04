@@ -8,10 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using HealthClinicBackend.Backend.Repository.Generic;
 using WebApplication;
-using WebApplication.Backend.Controllers;
 using WebApplication.Backend.DTO;
-using WebApplication.Backend.Repositorys.Interfaces;
 using WebApplication.Backend.Services;
 using Xunit;
 
@@ -22,45 +21,75 @@ namespace WebApplicationTests
         List<Specialization> specializations = new List<Specialization>();
         List<TimeInterval> timeIntervals = new List<TimeInterval>();
         List<Appointment> appointements = new List<Appointment>();
-        List<AppointmentWithRecommendationDTO> appointmentWithRecommendationDTO = new List<AppointmentWithRecommendationDTO>();
+
+        List<AppointmentWithRecommendationDTO> appointmentWithRecommendationDTO =
+            new List<AppointmentWithRecommendationDTO>();
+
         TimeIntervalDTO timeIntervalDTO = new TimeIntervalDTO();
         private readonly WebApplicationFactory<Startup> webFactory;
 
         public CreateAppointmentTests(WebApplicationFactory<Startup> factory)
         {
             webFactory = factory;
-            timeIntervals.Add(new TimeInterval { Id = "1234", Start = new DateTime(2020, 12, 11, 08, 00, 00), End = new DateTime(2020, 12, 11, 08, 20, 00) });
-            timeIntervals.Add(new TimeInterval { Id = "1235", Start = new DateTime(2020, 12, 11, 08, 20, 00), End = new DateTime(2020, 12, 11, 08, 40, 00) });
-            timeIntervals.Add(new TimeInterval { Id = "1235", Start = new DateTime(2020, 12, 11, 08, 40, 00), End = new DateTime(2020, 12, 11, 09, 00, 00) });
-            appointements.Add(new Appointment(new Room("101", 101, new RoomType("Examination room 101")), new Physician("Gojko", "Simic", "600001"), new Patient("5", "Jelena", "Tanjic"), new TimeInterval(new DateTime(2021, 12, 5, 08, 00, 00), new DateTime(2021, 12, 5, 08, 00, 00)), new ProcedureType("Operation on patient 0002", 50, new Specialization("Neurosurgeon")), new DateTime(2021, 12, 05, 08, 20, 00)));
-            appointements.Add(new Appointment(new Room("102", 101, new RoomType("Examination room 102")), new Physician("Jana", "Jovic", "600002"), new Patient("5", "Jelena", "Tanjic"), new TimeInterval(new DateTime(2021, 12, 5, 08, 20, 00), new DateTime(2021, 12, 5, 08, 40, 00)), new ProcedureType("Operation on patient 0003", 60, new Specialization("Family doctor")), new DateTime(2021, 12, 05, 08, 20, 00)));
-            appointmentWithRecommendationDTO.Add(new AppointmentWithRecommendationDTO("2021-12-22", "6001", timeIntervalDTO.ConvertListToTimeIntervalDTO(timeIntervals), "Gojko Simic"));
+            timeIntervals.Add(new TimeInterval
+            {
+                Id = "1234", Start = new DateTime(2020, 12, 11, 08, 00, 00),
+                End = new DateTime(2020, 12, 11, 08, 20, 00)
+            });
+            timeIntervals.Add(new TimeInterval
+            {
+                Id = "1235", Start = new DateTime(2020, 12, 11, 08, 20, 00),
+                End = new DateTime(2020, 12, 11, 08, 40, 00)
+            });
+            timeIntervals.Add(new TimeInterval
+            {
+                Id = "1235", Start = new DateTime(2020, 12, 11, 08, 40, 00),
+                End = new DateTime(2020, 12, 11, 09, 00, 00)
+            });
+            appointements.Add(new Appointment(new Room("101", 101, new RoomType("Examination room 101")),
+                new Physician("Gojko", "Simic", "600001"), new Patient("5", "Jelena", "Tanjic"),
+                new TimeInterval(new DateTime(2021, 12, 5, 08, 00, 00), new DateTime(2021, 12, 5, 08, 00, 00)),
+                new ProcedureType("Operation on patient 0002", 50, new Specialization("Neurosurgeon")),
+                new DateTime(2021, 12, 05, 08, 20, 00)));
+            appointements.Add(new Appointment(new Room("102", 101, new RoomType("Examination room 102")),
+                new Physician("Jana", "Jovic", "600002"), new Patient("5", "Jelena", "Tanjic"),
+                new TimeInterval(new DateTime(2021, 12, 5, 08, 20, 00), new DateTime(2021, 12, 5, 08, 40, 00)),
+                new ProcedureType("Operation on patient 0003", 60, new Specialization("Family doctor")),
+                new DateTime(2021, 12, 05, 08, 20, 00)));
+            appointmentWithRecommendationDTO.Add(new AppointmentWithRecommendationDTO("2021-12-22", "6001",
+                timeIntervalDTO.ConvertListToTimeIntervalDTO(timeIntervals), "Gojko Simic"));
         }
 
         public static IEnumerable<object[]> AppointmentDate =>
             new List<object[]>
             {
-                    new object[] { "60001","surgeon","2020-12-25" ,HttpStatusCode.OK },
-                    new object[] { null,null,null,HttpStatusCode.BadRequest }
+                new object[] {"60001", "surgeon", "2020-12-25", HttpStatusCode.OK},
+                new object[] {null, null, null, HttpStatusCode.BadRequest}
             };
 
         public static IEnumerable<object[]> Specialization =>
             new List<object[]>
             {
-                        new object[] { "60001" ,HttpStatusCode.OK },
-                        new object[] { null,HttpStatusCode.BadRequest }
+                new object[] {"60001", HttpStatusCode.OK},
+                new object[] {null, HttpStatusCode.BadRequest}
             };
 
         [Fact]
         public void Find_specializations()
         {
-            var stubRepositorty = new Mock<ISpecializationRepository>();
-            specializations.Add(new Specialization { Name = "Neurologija" });
-            specializations.Add(new Specialization { Name = "Oftalmologija" });
-            stubRepositorty.Setup(m => m.GetAllSpecializations()).Returns(specializations);
-            AppointmentService appointmentService = new AppointmentService(stubRepositorty.Object);
+            var specializationRepository = new Mock<ISpecializationRepository>();
+            var appointmentRepository = new Mock<IAppointmentRepository>();
+            var physicianRepository = new Mock<IPhysicianRepository>();
+            var patientRepository = new Mock<IPatientRepository>();
 
-            List<SpecializationDTO> searchEntityDTOs = appointmentService.GetAllSpecializations();
+            specializations.Add(new Specialization {Name = "Neurologija"});
+            specializations.Add(new Specialization {Name = "Oftalmologija"});
+            specializationRepository.Setup(m => m.GetAll()).Returns(specializations);
+
+            AppointmentService service = new AppointmentService(specializationRepository.Object,
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+
+            List<SpecializationDTO> searchEntityDTOs = service.GetAllSpecializations();
 
             Assert.NotNull(searchEntityDTOs);
         }
@@ -68,40 +97,60 @@ namespace WebApplicationTests
         [Fact]
         public void Find_TimeIntervals()
         {
-            var stubRepositortyApointment = new Mock<IAppointmentRepository>();
-            var stubRepositortyTimeInterval = new Mock<ITimeIntervalRepository>();
-            stubRepositortyApointment.Setup(m => m.GetAppointmentsByDate("20-12-05")).Returns(appointements);
-            stubRepositortyTimeInterval.Setup(m => m.GetAllTimeIntervals()).Returns(timeIntervals);
-            AppointmentService appointmentService = new AppointmentService(stubRepositortyApointment.Object, stubRepositortyTimeInterval.Object);
+            // TODO: check this test, I think it needs more stubs
+            var specializationRepository = new Mock<ISpecializationRepository>();
+            var appointmentRepository = new Mock<IAppointmentRepository>();
+            var physicianRepository = new Mock<IPhysicianRepository>();
+            var patientRepository = new Mock<IPatientRepository>();
 
-            List<TimeIntervalDTO> timeiIntervals = appointmentService.GetAllAvailableAppointments("600001", "Neurologija", "20-12-05");
+            appointmentRepository.Setup(m => m.GetAppointmentsByDate(It.IsAny<DateTime>())).Returns(appointements);
 
-            Assert.NotNull(timeiIntervals);
+            AppointmentService service = new AppointmentService(specializationRepository.Object,
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+
+            List<TimeIntervalDTO> timeIntervals =
+                service.GetAllAvailableAppointments("600001", "Neurologija", "20-12-05");
+
+            Assert.NotNull(timeIntervals);
         }
 
         [Fact]
         public void Create_Appointment()
         {
-            var stubRepository = new Mock<IAppointmentRepository>();
-            Appointment appointment = new Appointment(new Room("101", 101, new RoomType("Examination room 101")), new Physician("Gojko", "Simic", "600001"), new Patient("5", "Jelena", "Tanjic"), new TimeInterval(new DateTime(2020, 12, 5, 08, 00, 00), new DateTime(2020, 12, 5, 08, 00, 00)), new ProcedureType("Operation on patient 0002", 50, new Specialization("Neurosurgeon")), new DateTime(2020, 12, 05, 08, 20, 00));
-            stubRepository.Setup(m => m.AddAppointment(appointment)).Returns(true);
-            AppointmentService service = new AppointmentService(stubRepository.Object);
+            var specializationRepository = new Mock<ISpecializationRepository>();
+            var appointmentRepository = new Mock<IAppointmentRepository>();
+            var physicianRepository = new Mock<IPhysicianRepository>();
+            var patientRepository = new Mock<IPatientRepository>();
 
+            AppointmentService service = new AppointmentService(specializationRepository.Object,
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+
+            Appointment appointment = new Appointment(new Room("101", 101, new RoomType("Examination room 101")),
+                new Physician("Gojko", "Simic", "600001"), new Patient("5", "Jelena", "Tanjic"),
+                new TimeInterval(new DateTime(2020, 12, 5, 08, 00, 00), new DateTime(2020, 12, 5, 08, 00, 00)),
+                new ProcedureType("Operation on patient 0002", 50, new Specialization("Neurosurgeon")),
+                new DateTime(2020, 12, 05, 08, 20, 00));
             bool appointmentAdded = service.AddAppointment(appointment);
 
             Assert.True(appointmentAdded);
+            appointmentRepository.Verify(mock => mock.Update(appointment));
         }
 
         [Fact]
         public void Create_Appointment_With_Recommendation()
         {
-            var stubRepositortyApointment = new Mock<IAppointmentRepository>();
-            var stubRepositortyTimeInterval = new Mock<ITimeIntervalRepository>();
-            stubRepositortyApointment.Setup(m => m.GetAppointmentsByDate("20-12-05")).Returns(appointements);
-            stubRepositortyTimeInterval.Setup(m => m.GetAllTimeIntervals()).Returns(timeIntervals);
-            AppointmentService appointmentService = new AppointmentService(stubRepositortyApointment.Object, stubRepositortyTimeInterval.Object);
+            var specializationRepository = new Mock<ISpecializationRepository>();
+            var appointmentRepository = new Mock<IAppointmentRepository>();
+            var physicianRepository = new Mock<IPhysicianRepository>();
+            var patientRepository = new Mock<IPatientRepository>();
 
-            List<TimeIntervalDTO> timeiIntervals = appointmentService.GetAllAvailableAppointments("600001", "Neurologija", "20-12-05");
+            appointmentRepository.Setup(m => m.GetAppointmentsByDate(It.IsAny<DateTime>())).Returns(appointements);
+
+            AppointmentService service = new AppointmentService(specializationRepository.Object,
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+
+            List<TimeIntervalDTO> timeiIntervals =
+                service.GetAllAvailableAppointments("600001", "Neurologija", "20-12-05");
 
             Assert.NotNull(timeiIntervals);
         }
@@ -109,11 +158,18 @@ namespace WebApplicationTests
         [Fact]
         public void Get_all_appointment()
         {
-            var mockAppointmentRepository = new Mock<IAppointmentRepository>();
-            mockAppointmentRepository.Setup(a => a.GetAppointmentsByDate("2021-12-5")).Returns(appointements);
-            
-            var service = new AppointmentService(mockAppointmentRepository.Object);
-            List<TimeIntervalDTO> result = service.GetAllAvailableAppointments("600001", "ophthalmologist", "2021-12-5");
+            var specializationRepository = new Mock<ISpecializationRepository>();
+            var appointmentRepository = new Mock<IAppointmentRepository>();
+            var physicianRepository = new Mock<IPhysicianRepository>();
+            var patientRepository = new Mock<IPatientRepository>();
+
+            appointmentRepository.Setup(m => m.GetAppointmentsByDate(It.IsAny<DateTime>())).Returns(appointements);
+
+            AppointmentService service = new AppointmentService(specializationRepository.Object,
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+
+            List<TimeIntervalDTO> result =
+                service.GetAllAvailableAppointments("600001", "ophthalmologist", "2021-12-5");
 
             Assert.NotNull(result);
         }
@@ -121,12 +177,18 @@ namespace WebApplicationTests
         [Fact]
         public void Get_all_appointment_date()
         {
-            var mockAppointmentRepository = new Mock<IAppointmentRepository>();
-            mockAppointmentRepository.Setup(a => a.GetAppointmentsByDate("2021-12-5")).Returns(appointements);
-            mockAppointmentRepository.Setup(a => a.GetAppointmentsByDate("2021-12-23")).Returns(appointements);
+            var specializationRepository = new Mock<ISpecializationRepository>();
+            var appointmentRepository = new Mock<IAppointmentRepository>();
+            var physicianRepository = new Mock<IPhysicianRepository>();
+            var patientRepository = new Mock<IPatientRepository>();
 
-            var service = new AppointmentService(mockAppointmentRepository.Object);
-            List<AppointmentWithRecommendationDTO> result = service.AppointmentRecomendation("600001", "ophthalmologist", new string[2] { "2021-12-5", "2021-12-23" });
+            appointmentRepository.Setup(a => a.GetAppointmentsByDate(It.IsAny<DateTime>())).Returns(appointements);
+
+            AppointmentService service = new AppointmentService(specializationRepository.Object,
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+
+            var result = service.AppointmentRecomendation("600001", "ophthalmologist",
+                new string[2] {"2021-12-5", "2021-12-23"});
 
             Assert.NotNull(result);
         }
@@ -134,12 +196,18 @@ namespace WebApplicationTests
         [Fact]
         public void Get_all_appointment_physician()
         {
-            var mockAppointmentRepository = new Mock<IAppointmentRepository>();
-            mockAppointmentRepository.Setup(a => a.GetAppointmentsByDate("2021-12-5")).Returns(appointements);
-            mockAppointmentRepository.Setup(a => a.GetAppointmentsByDate("2021-12-23")).Returns(appointements);
+            var specializationRepository = new Mock<ISpecializationRepository>();
+            var appointmentRepository = new Mock<IAppointmentRepository>();
+            var physicianRepository = new Mock<IPhysicianRepository>();
+            var patientRepository = new Mock<IPatientRepository>();
 
-            var service = new AppointmentService(mockAppointmentRepository.Object);
-            List<AppointmentWithRecommendationDTO> result = service.AppointmentRecomendationWithPhysicianPriority("600001", "ophthalmologist", new string[2] { "2021-12-5", "2021-12-23" });
+            appointmentRepository.Setup(a => a.GetAppointmentsByDate(It.IsAny<DateTime>())).Returns(appointements);
+
+            AppointmentService service = new AppointmentService(specializationRepository.Object,
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+
+            var result = service.AppointmentRecomendation("600001", "ophthalmologist",
+                new string[2] {"2021-12-5", "2021-12-23"});
 
             Assert.NotNull(result);
         }
@@ -150,39 +218,47 @@ namespace WebApplicationTests
         {
             HttpClient client = webFactory.CreateClient();
 
-            HttpResponseMessage responseMessage = await client.GetAsync("/#/appointment/specializations/" + specialization);
+            HttpResponseMessage responseMessage =
+                await client.GetAsync("/#/appointment/specializations/" + specialization);
 
             responseMessage.StatusCode.CompareTo(exceptedStatusCode);
         }
 
         [Theory]
         [MemberData(nameof(AppointmentDate))]
-        public async void Get_available_appointment(string id, string spec, string date, HttpStatusCode exceptedStatusCode)
+        public async void Get_available_appointment(string id, string spec, string date,
+            HttpStatusCode exceptedStatusCode)
         {
             HttpClient client = webFactory.CreateClient();
 
-            HttpResponseMessage responseMessage = await client.GetAsync("/#/appointment/GetAllAvailableAppointments/" + id + "/" + spec + "/" + date);
+            HttpResponseMessage responseMessage =
+                await client.GetAsync("/#/appointment/GetAllAvailableAppointments/" + id + "/" + spec + "/" + date);
 
             responseMessage.StatusCode.CompareTo(exceptedStatusCode);
         }
 
         [Theory]
         [MemberData(nameof(AppointmentDate))]
-        public async void Get_available_appointment_with_recommandation_physician(string id, string spec, string date, HttpStatusCode exceptedStatusCode)
+        public async void Get_available_appointment_with_recommandation_physician(string id, string spec, string date,
+            HttpStatusCode exceptedStatusCode)
         {
             HttpClient client = webFactory.CreateClient();
 
-            HttpResponseMessage responseMessage = await client.GetAsync("/#/appointment/appointmentsWithPhysicianPriority/" + id + "/" + spec + "/" + date);
+            HttpResponseMessage responseMessage =
+                await client.GetAsync(
+                    "/#/appointment/appointmentsWithPhysicianPriority/" + id + "/" + spec + "/" + date);
 
             responseMessage.StatusCode.CompareTo(exceptedStatusCode);
         }
 
         [Theory]
         [MemberData(nameof(AppointmentDate))]
-        public async void Get_available_appointment_with_recommandation_date(string id, string spec, string date, HttpStatusCode exceptedStatusCode)
+        public async void Get_available_appointment_with_recommandation_date(string id, string spec, string date,
+            HttpStatusCode exceptedStatusCode)
         {
             HttpClient client = webFactory.CreateClient();
-            HttpResponseMessage responseMessage = await client.GetAsync("/#/appointment/appointmentsWithReccomendation/" + id + "/" + spec + "/" + date);
+            HttpResponseMessage responseMessage =
+                await client.GetAsync("/#/appointment/appointmentsWithReccomendation/" + id + "/" + spec + "/" + date);
             responseMessage.StatusCode.CompareTo(exceptedStatusCode);
         }
     }

@@ -26,5 +26,6 @@ namespace HealthClinicBackend.Backend.Repository.Generic
         List<Appointment> GetByPatientId(string patientId);
         List<Appointment> GetByPatientIdActive(string patientId);
         List<Appointment> GetByPatientIdCanceled(string patientId);
+        List<DateTime> GetByPatientIdCanceledDates(string patientId);
     }
 }
