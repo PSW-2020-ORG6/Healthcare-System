@@ -140,7 +140,7 @@
                     <Image Height="30" 
                                Margin="0,0,10,0"
                                Source="/GraphicEditor;component/Resources/Icons/rectangle.png"/>
-                    <TextBlock Text="Rectangle" 
+                    <TextBlock Text="Square" 
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                FontSize="30"/>
@@ -151,7 +151,7 @@
                     <Image Height="30" 
                                Margin="0,0,10,0"
                                Source="/GraphicEditor;component/Resources/Icons/rectangle.png"/>
-                    <TextBlock Text="Default Rectangle" 
+                    <TextBlock Text="Rectangle" 
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                FontSize="30"/>
