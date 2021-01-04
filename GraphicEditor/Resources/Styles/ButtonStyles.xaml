@@ -8,7 +8,7 @@
         <ResourceDictionary Source="/GraphicEditor;component/Resources/Styles/RectangleStyles.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="DefaultRectangleBuildingButtonStyle"
+    <Style x:Key="RectangleBuildingButtonStyle"
            BasedOn="{StaticResource {x:Type Button}}"
            TargetType="Button">
         <!--<Setter Property="Content" Value="{DataTemplateKey DataType=Name}" />-->
@@ -112,7 +112,7 @@
         <Setter Property="BorderBrush" Value="Aqua"/>
     </Style>
 
-    <Style x:Key="RectangleBuildingButtonStyle"
+    <Style x:Key="SquareBuildingButtonStyle"
            TargetType="Button">
         <Setter Property="Template">
             <Setter.Value>
@@ -281,7 +281,7 @@
         <Setter Property="Margin" Value="20" />
     </Style>
 
-    <Style x:Key="OctagonBuildingButtonStyle"
+    <Style x:Key="HexagonBuildingButtonStyle"
            TargetType="Button" >
         <Setter Property="Template">
             <Setter.Value>
@@ -355,7 +355,7 @@
         <Setter Property="Margin" Value="20" />
     </Style>
 
-    <Style x:Key="DermatologyBuildingButtonStyle" 
+    <Style x:Key="HoleBuildingButtonStyle" 
            BasedOn="{StaticResource {x:Type Button}}"
            TargetType="Button">
         <Setter Property="Template">
