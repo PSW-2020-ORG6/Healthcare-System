@@ -3,14 +3,13 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Interface AppointmentRepository
 
-using Model.Accounts;
 using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
 
-namespace Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.Generic
 {
     public interface IAppointmentRepository : IGenericRepository<Appointment>
     {
@@ -21,5 +20,11 @@ namespace Backend.Repository
         List<Appointment> GetAppointmentsByPhysician(Physician physician);
 
         List<Appointment> GetAppointmentsByRoom(Room room);
+        List<Appointment> GetByRoomSerialNumber(string roomSerialNumber);
+        List<Appointment> GetByPhysicianSerialNumber(string physicianSerialNumber);
+        List<Appointment> GetByPatientSerialNumber(string patientSerialNumber);
+        List<Appointment> GetByPatientId(string patientId);
+        List<Appointment> GetByPatientIdActive(string patientId);
+        List<Appointment> GetByPatientIdCanceled(string patientId);
     }
 }

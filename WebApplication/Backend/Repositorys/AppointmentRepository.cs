@@ -7,7 +7,6 @@ using WebApplication.Backend.Util;
 using HealthClinicBackend.Backend.Dto;
 using NPOI.SS.Formula.Functions;
 using HealthClinicBackend.Backend.Model.Util;
-using Model.Accounts;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Util;
 

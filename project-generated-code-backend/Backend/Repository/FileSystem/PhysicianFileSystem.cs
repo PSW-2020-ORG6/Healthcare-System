@@ -3,14 +3,15 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class PhysitianFileSystem
 
-using Model.Accounts;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Schedule;
+using HealthClinicBackend.Backend.Repository.Generic;
+using Newtonsoft.Json;
 
-namespace Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.FileSystem
 {
-    public class PhysicianFileSystem : GenericFileSystem<Physician>, IPhysitianRepository
+    public class PhysicianFileSystem : GenericFileSystem<Physician>, IPhysicianRepository
     {
         public PhysicianFileSystem()
         {
@@ -19,7 +20,17 @@ namespace Backend.Repository
 
         }
 
-        public List<Physician> GetPhysitiansByProcedureType(ProcedureType procedureType)
+        public List<Physician> GetByName(string name)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Physician GetByJmbg(string jmbg)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public List<Physician> GetByProcedureType(ProcedureType procedureType)
         {
             List<Physician> physitians = new List<Physician>();
             foreach (Physician physitian in GetAll())

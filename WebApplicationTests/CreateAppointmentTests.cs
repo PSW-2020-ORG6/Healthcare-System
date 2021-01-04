@@ -3,7 +3,6 @@ using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Model.Accounts;
 using Moq;
 using System;
 using System.Collections.Generic;

@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using HealthClinicBackend.Backend.Model.Accounts;
-using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql.RelationHelpers
 {

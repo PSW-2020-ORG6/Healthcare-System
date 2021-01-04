@@ -1,14 +1,14 @@
 ﻿using System.Linq;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
 {
     public class HospitalLogInService
     {
         private readonly IPatientRepository _patientRepository;
-        private readonly IPhysitianRepository _physicianRepository;
+        private readonly IPhysicianRepository _physicianRepository;
         private readonly ISecretaryRepository _secretaryRepository;
 
         public HospitalLogInService()

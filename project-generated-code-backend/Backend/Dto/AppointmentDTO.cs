@@ -9,7 +9,6 @@ using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
-using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Dto
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Model.MedicalExam;
+using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
@@ -9,7 +9,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
     {
         public override List<DiagnosticType> GetAll()
         {
-            return dbContext.DiagnosticType.ToList();
+            return DbContext.DiagnosticType.ToList();
         }
     }
 }

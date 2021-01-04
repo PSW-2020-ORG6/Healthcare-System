@@ -4,16 +4,14 @@
 // Purpose: Definition of Class Physitian
 
 #nullable enable
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Util;
-using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
-namespace Model.Accounts
+namespace HealthClinicBackend.Backend.Model.Accounts
 {
     public class Physician : Account
     {

@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
-using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
@@ -12,11 +11,23 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public override List<Patient> GetAll()
         {
             // Use Include method to connect object and its references from other tables
-            return dbContext.Patient
+            return DbContext.Patient
                 .Include(p => p.Address)
                 .Include(p => p.Address.City)
                 .Include(p => p.ChosenPhysician)
                 .ToList();
+        }
+
+        public override void Save(Patient newEntity)
+        {
+            DbContext.Patient.Add(newEntity);
+            DbContext.SaveChanges();
+        }
+
+        public override void Update(Patient updateEntity)
+        {
+            DbContext.Patient.Update(updateEntity);
+            DbContext.SaveChanges();
         }
 
         public List<Patient> GetPatientsByPhysitian(Physician physician)
@@ -26,12 +37,12 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public bool IsPatientIdValid(string id)
         {
-            throw new System.NotImplementedException();
+            return !GetAll().Any(p => p.Id.Equals(id));
         }
 
-        public bool ConfirmEmailUpdate()
+        public Patient GetByJmbg(string jmbg)
         {
-            throw new System.NotImplementedException();
+            return GetAll().Where(p => p.Id.Equals(jmbg)).ToList()[0];
         }
     }
 }

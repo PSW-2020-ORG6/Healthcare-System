@@ -4,9 +4,10 @@
 // Purpose: Definition of Class ApprovedMedicineFileSystem
 
 using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Newtonsoft.Json;
 
-namespace Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.FileSystem
 {
     public class ApprovedMedicineFileSystem : GenericFileSystem<Medicine>, IApprovedMedicineRepository
     {

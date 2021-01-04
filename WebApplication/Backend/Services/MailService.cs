@@ -3,7 +3,6 @@ using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using Model.Accounts;
 using WebApplication.Backend.Model;
 
 namespace WebApplication.Backend.Services

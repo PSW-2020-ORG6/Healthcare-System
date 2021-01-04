@@ -1,7 +1,6 @@
-﻿using Backend.Repository;
-using HealthClinicBackend.Backend.Model.Accounts;
+﻿using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
-using Model.Accounts;
+using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {

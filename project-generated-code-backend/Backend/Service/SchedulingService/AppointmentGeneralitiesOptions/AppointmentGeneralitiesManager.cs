@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
-using Model.Accounts;
+using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 {
     class AppointmentGeneralitiesManager
     {
         private AppointmentDto _appointmentPreferences;
-        private readonly IPhysitianRepository _physicianRepository;
+        private readonly IPhysicianRepository _physicianRepository;
         private readonly IRoomRepository _roomRepository;
 
         public AppointmentGeneralitiesManager()
@@ -73,7 +73,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
             }
             else
             {
-                physicians = _physicianRepository.GetPhysitiansByProcedureType(_appointmentPreferences.ProcedureType);
+                physicians = _physicianRepository.GetByProcedureType(_appointmentPreferences.ProcedureType);
             }
 
             return physicians;
@@ -81,7 +81,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
 
         private List<Room> GetAllRooms()
         {
-            return _roomRepository.GetRoomsByProcedureType(_appointmentPreferences.ProcedureType);
+            return _roomRepository.GetByProcedureType(_appointmentPreferences.ProcedureType);
         }
 
         private List<TimeInterval> GetAllTimeIntervals()

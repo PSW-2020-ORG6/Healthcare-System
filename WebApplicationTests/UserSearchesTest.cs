@@ -1,5 +1,4 @@
-﻿using Model.Accounts;
-using Moq;
+﻿using Moq;
 using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;

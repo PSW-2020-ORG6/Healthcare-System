@@ -1,8 +1,9 @@
-﻿using Backend.Repository;
+﻿using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Util;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Newtonsoft.Json;
 
-namespace HCI_SIMS_PROJEKAT.Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.FileSystem
 {
     public class AddressFileSystem : GenericFileSystem<Address>, IAddressRepository
     {
@@ -14,6 +15,11 @@ namespace HCI_SIMS_PROJEKAT.Backend.Repository
         public override Address Instantiate(string objectStringFormat)
         {
             return JsonConvert.DeserializeObject<Address>(objectStringFormat);
+        }
+
+        public List<Address> GetAddressesByStreet(string street)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

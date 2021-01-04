@@ -7,8 +7,6 @@ using HealthClinicBackend.Backend.Model.Survey;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql.RelationHelpers;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {

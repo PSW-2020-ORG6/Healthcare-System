@@ -1,6 +1,5 @@
 ﻿using HealthClinicBackend.Backend.Dto;
 using Microsoft.AspNetCore.Mvc;
-using Model.Accounts;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
 using WebApplication.Backend.Services;

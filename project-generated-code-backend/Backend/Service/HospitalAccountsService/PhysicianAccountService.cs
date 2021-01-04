@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Backend.Repository;
+using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
-using Model.Accounts;
+using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
 {
     public class PhysicianAccountService
     {
-        private readonly IPhysitianRepository _physicianRepository;
+        private readonly IPhysicianRepository _physicianRepository;
 
         public PhysicianAccountService()
         {

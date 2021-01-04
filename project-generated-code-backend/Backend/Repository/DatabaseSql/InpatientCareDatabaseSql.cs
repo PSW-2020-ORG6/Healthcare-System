@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.MedicalExam;
-using Model.Accounts;
+using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class InpatientCareDatabaseSql: GenericDatabaseSql<InpatientCare>, IInpatientCareRepository
+    public class InpatientCareDatabaseSql : GenericDatabaseSql<InpatientCare>, IInpatientCareRepository
     {
         public List<InpatientCare> GetInpatientCaresForPatient(Patient patient)
         {

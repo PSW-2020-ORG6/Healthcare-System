@@ -6,9 +6,9 @@
 using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Service.SchedulingService;
-using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {

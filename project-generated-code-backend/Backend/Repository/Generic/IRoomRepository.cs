@@ -7,11 +7,13 @@ using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
 
-namespace Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.Generic
 {
     public interface IRoomRepository : IGenericRepository<Room>
     {
-        List<Room> GetRoomsByProcedureType(ProcedureType procedureType);
-        List<Room> GetRoomsByRoomType(RoomType roomType);
+        List<Room> GetByProcedureType(ProcedureType procedureType);
+        List<Room> GetByRoomType(RoomType roomType);
+        List<Room> GetByName(string name);
+        List<Room> GetByFloorSerialNumber(string floorSerialNumber);
     }
 }

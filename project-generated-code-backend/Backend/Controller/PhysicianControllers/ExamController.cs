@@ -8,7 +8,6 @@ using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.MedicalExam;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Service.PatientCareService;
-using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {

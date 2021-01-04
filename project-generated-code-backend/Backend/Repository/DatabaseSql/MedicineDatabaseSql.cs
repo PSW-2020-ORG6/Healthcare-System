@@ -11,7 +11,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public override List<Medicine> GetAll()
         {
             // Use Include method to connect object and its references from other tables
-            return dbContext.Medicine
+            return DbContext.Medicine
                 .Include(m => m.MedicineManufacturer)
                 .Include(m => m.MedicineType)
                 .ToList();
@@ -29,27 +29,32 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public override Medicine GetById(string id)
         {
-            return dbContext.Medicine.Find(id);
+            return DbContext.Medicine.Find(id);
         }
 
         public override void Save(Medicine newEntity)
         {
-            dbContext.Medicine.Add(newEntity);
-            dbContext.SaveChanges();
+            DbContext.Medicine.Add(newEntity);
+            DbContext.SaveChanges();
         }
 
         public override void Update(Medicine updateEntity)
         {
-            dbContext.Medicine.Update(updateEntity);
-            dbContext.SaveChanges();
+            DbContext.Medicine.Update(updateEntity);
+            DbContext.SaveChanges();
         }
 
         public override void Delete(string id)
         {
             var medicine = GetById(id);
             if (medicine == null) return;
-            dbContext.Medicine.Remove(medicine);
-            dbContext.SaveChanges();
+            DbContext.Medicine.Remove(medicine);
+            DbContext.SaveChanges();
+        }
+
+        public List<Medicine> GetByName(string name)
+        {
+            return GetAll().Where(m => m.CopyrightName.Equals(name) || m.CopyrightName.Equals(name)).ToList();
         }
     }
 }
