@@ -93,15 +93,15 @@ namespace GraphicEditor.ViewModel
             {
                 Floor floor = floorController.GetBySerialNumber(room.FloorSerialNumber);
                 Building building = buildingController.GetBySerialNumber(floor.BuildingSerialNumber);
-                CardiologyBuildingUserControl buildingUserControl = new CardiologyBuildingUserControl(parentViewModel, building);
-                CardiologyFirstFloorMapUserControl floorUserControl = new CardiologyFirstFloorMapUserControl(parentViewModel, buildingUserControl.myViewModel, floor);
+                BuildingUserControl buildingUserControl = new BuildingUserControl(parentViewModel, building);
+                FloorUserControl floorUserControl = new FloorUserControl(parentViewModel, buildingUserControl.myViewModel, floor);
                 buildingUserControl.myViewModel.FloorViewModel = floorUserControl;
                 parentViewModel.CurrentUserControl = buildingUserControl;
                 HighlightRoom(room, floorUserControl.Viewmodel);
             }
         }
 
-        private void HighlightRoom(Room room, CardiologyFirstFloorMapUserControlViewModel floorViewModel)
+        private void HighlightRoom(Room room, FloorUserControlViewModel floorViewModel)
         {
             if (floorViewModel.connections.Count == 0) return;
             RoomButton roomButton = floorViewModel.connections[room.SerialNumber];

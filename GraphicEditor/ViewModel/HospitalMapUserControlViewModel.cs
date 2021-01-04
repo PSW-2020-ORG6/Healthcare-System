@@ -141,7 +141,7 @@ namespace GraphicEditor.ViewModel
             string[] info = content.Split(" ");
             Building enteringBuilding = buildingController.GetById(info[2]);
 
-            _parent.CurrentUserControl = new CardiologyBuildingUserControl(_parent, enteringBuilding);
+            _parent.CurrentUserControl = new BuildingUserControl(_parent, enteringBuilding);
         }
     }
 }

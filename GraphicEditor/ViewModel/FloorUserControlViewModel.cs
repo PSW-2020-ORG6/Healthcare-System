@@ -12,12 +12,12 @@ using System.Windows.Media;
 
 namespace GraphicEditor.ViewModel
 {
-    public class CardiologyFirstFloorMapUserControlViewModel : BindableBase
+    public class FloorUserControlViewModel : BindableBase
     {
         public ResourceDictionary ResourceDictionary = new ResourceDictionary();
         public Dictionary<string, RoomButton> connections = new Dictionary<string, RoomButton>();
         MainWindowViewModel mapParent;
-        CardiologyBuildingUserControlViewModel buildingParent;
+        BuildingUserControlViewModel buildingParent;
         Grid RoomGrid;
         private RoomController roomController = new RoomController();
         private RoomTypeController roomTypeController = new RoomTypeController();
@@ -28,9 +28,9 @@ namespace GraphicEditor.ViewModel
         private Floor floor;
         private string buildingStyle;
         private MainWindowViewModel parentViewModel;
-        private CardiologyBuildingUserControlViewModel myViewModel;
+        private BuildingUserControlViewModel myViewModel;
 
-        public CardiologyFirstFloorMapUserControlViewModel(MainWindowViewModel _mapParent, CardiologyBuildingUserControlViewModel _buildingParent, Grid grid, Floor floor)
+        public FloorUserControlViewModel(MainWindowViewModel _mapParent, BuildingUserControlViewModel _buildingParent, Grid grid, Floor floor)
         {
             mapParent = _mapParent;
             buildingParent = _buildingParent;

@@ -101,15 +101,15 @@ namespace GraphicEditor.ViewModel
                 Room room = roomController.GetBySerialNumber(localMedicine.RoomSerialNumber);
                 Floor floor = floorController.GetBySerialNumber(localMedicine.RoomSerialNumber);
                 Building building = buildingController.GetBySerialNumber(room.FloorSerialNumber);
-                CardiologyBuildingUserControl buildingUserControl = new CardiologyBuildingUserControl(parentViewModel, building);
-                CardiologyFirstFloorMapUserControl floorUserControl = new CardiologyFirstFloorMapUserControl(parentViewModel, buildingUserControl.myViewModel, floor);
+                BuildingUserControl buildingUserControl = new BuildingUserControl(parentViewModel, building);
+                FloorUserControl floorUserControl = new FloorUserControl(parentViewModel, buildingUserControl.myViewModel, floor);
                 buildingUserControl.myViewModel.FloorViewModel = floorUserControl;
                 parentViewModel.CurrentUserControl = buildingUserControl;
                 HighlightRoom(localMedicine, floorUserControl.Viewmodel);
             }
         }
 
-        private void HighlightRoom(Medicine localMedicine, CardiologyFirstFloorMapUserControlViewModel floorViewModel)
+        private void HighlightRoom(Medicine localMedicine, FloorUserControlViewModel floorViewModel)
         {
             if (floorViewModel.connections.Count == 0) return;
             RoomButton roomButton = floorViewModel.connections[localMedicine.RoomSerialNumber];
