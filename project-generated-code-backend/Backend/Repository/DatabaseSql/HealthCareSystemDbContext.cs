@@ -2,6 +2,7 @@
 using HealthClinicBackend.Backend.Model.Blog;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.MedicalExam;
+using HealthClinicBackend.Backend.Model.PharmacySupport;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Survey;
 using HealthClinicBackend.Backend.Model.Util;
@@ -56,15 +57,17 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public DbSet<Question> Question { get; set; }
         public DbSet<Survey> Survey { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
+        
+        public DbSet<ActionAndBenefitMessage> ActionAndBenefitMessage { get; set; }
 
         public HealthCareSystemDbContext(DbContextOptions<HealthCareSystemDbContext> options) : base(options)
         {
         }
 
-         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-         { 
-             optionsBuilder.UseNpgsql(CONNECTION_STRING);
-         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql(CONNECTION_STRING);
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -109,7 +112,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Physician>().HasOne(p => p.Address).WithMany();
             modelBuilder.Entity<Patient>().HasOne(p => p.Address).WithMany();
             modelBuilder.Entity<Secretary>().HasOne(s => s.Address).WithMany();
-            
+
             modelBuilder.Entity<Appointment>()
                 .HasOne(a => a.Patient)
                 .WithMany();
@@ -193,6 +196,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<ReportFollowUp>()
                 .HasOne(x => x.FollowUp)
                 .WithOne();
+
+            // Pharmacy support
+            modelBuilder.Entity<ActionAndBenefitMessage>()
+                .HasAlternateKey(abm => abm.ActionID);
         }
     }
 }

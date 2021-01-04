@@ -3,10 +3,9 @@ using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Dto;
 using System;
 using System.Linq;
+using HealthClinicBackend.Backend.Model.PharmacySupport;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
-using IntegrationAdapters.Repositories;
-using IntegrationAdapters.Models;
 using WebApplication.Backend.DTO;
 
 namespace WebApplication.Backend.Services
@@ -17,18 +16,18 @@ namespace WebApplication.Backend.Services
     public class PatientService
     {
         private readonly IPatientRepository _patientRepository;
+        private readonly IActionAndBenefitMessageRepository _actionsAndBenefitsRepository;
+
         private PatientDto patientDTO = new PatientDto();
-        private readonly IActionsAndBenefitsRepository _actionsAndBenefitsRepository;
 
         public PatientService()
         {
             _patientRepository = new PatientDatabaseSql();
-            // TODO: move this to backend
-            _actionsAndBenefitsRepository = new ActionsAndBenefitsRepository();
+            _actionsAndBenefitsRepository = new ActionAndBenefitMessageDatabaseSql();
         }
 
         public PatientService(IPatientRepository patientRepository,
-            IActionsAndBenefitsRepository actionsAndBenefitsRepository)
+            IActionAndBenefitMessageRepository actionsAndBenefitsRepository)
         {
             _patientRepository = patientRepository;
             _actionsAndBenefitsRepository = actionsAndBenefitsRepository;
@@ -76,7 +75,7 @@ namespace WebApplication.Backend.Services
             TimeIntervalDTO t = new TimeIntervalDTO();
             List<ActionAndBenefitMessage> actionAndBenefitMessages = new List<ActionAndBenefitMessage>();
             foreach (ActionAndBenefitMessage a in
-                _actionsAndBenefitsRepository.GetAllPublishedActionsAndBenefitsMessages())
+                _actionsAndBenefitsRepository.GetAll())
             {
                 if (t.IsDateIntervalValid(a.DateFrom, a.DateTo))
                     actionAndBenefitMessages.Add(a);
