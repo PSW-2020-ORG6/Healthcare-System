@@ -1,7 +1,10 @@
 ﻿using HealthClinicBackend.Backend.Dto;
 using System.Collections.Generic;
+using System.Linq;
 using HealthClinicBackend.Backend.Model.Accounts;
-using WebApplication.Backend.Repositorys;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using HealthClinicBackend.Backend.Repository.Generic;
+using HealthClinicBackend.Backend.Util;
 
 namespace WebApplication.Backend.Services
 {
@@ -10,16 +13,19 @@ namespace WebApplication.Backend.Services
     /// </summary>
     public class RegistrationService
     {
-        private IRegistrationRepository registrationRepository = new RegistrationRepository();
-        private PhysicianRepository physitianRepository = new PhysicianRepository();
+        private readonly IPatientRepository _patientRepository;
+        private readonly IPhysicianRepository _physicianRepository;
+
         public RegistrationService()
         {
-            this.registrationRepository = new RegistrationRepository();
+            _patientRepository = new PatientDatabaseSql();
+            _physicianRepository = new PhysicianDatabaseSql();
         }
 
-        public RegistrationService(IRegistrationRepository registrationRepository)
+        public RegistrationService(IPatientRepository patientRepository, IPhysicianRepository physicianRepository)
         {
-            this.registrationRepository = registrationRepository;
+            _patientRepository = patientRepository;
+            _physicianRepository = physicianRepository;
         }
 
         /// <summary>
@@ -32,25 +38,29 @@ namespace WebApplication.Backend.Services
         ///</param>>
         public bool RegisterPatient(Patient patient)
         {
-            if (registrationRepository.IsPatientIdValid(patient.Id))
-            {
-                return registrationRepository.AddPatient(patient);
-            }
-            else
-            {
-                return false;
-            }
+            if (!_patientRepository.IsPatientIdValid(patient.Id)) return false;
+            _patientRepository.Save(patient);
+            return true;
         }
 
         public bool ConfirmEmailUpdate(string id)
         {
-            return registrationRepository.ConfirmEmailUpdate(id);
+            var patient = _patientRepository.GetByJmbg(id) ?? _patientRepository.GetById(id);
+            if (patient.EmailConfirmed) return false;
+            patient.EmailConfirmed = true;
+            _patientRepository.Update(patient);
+            return true;
         }
 
         public List<FamilyDoctorDto> GetAllPhysicians()
         {
-            return registrationRepository.GetAllGeneralPracticePhysicians();
+            return _physicianRepository.GetGeneralPractitioners().Select(p => new FamilyDoctorDto()
+            {
+                SerialNumber = p.SerialNumber,
+                Name = p.Name,
+                Surname = p.Surname,
+                Specialization = Constants.GeneralPractice.Name
+            }).ToList();
         }
-
     }
 }

@@ -2,8 +2,8 @@
 using System;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Util;
+using HealthClinicBackend.Backend.Repository.Generic;
 using WebApplication.Backend.Controllers;
-using WebApplication.Backend.Repositorys;
 using WebApplication.Backend.Services;
 using Xunit;
 
@@ -11,44 +11,56 @@ namespace WebApplicationTests
 {
     public class PatientRegistrationTests
     {
-        private Patient patient = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com", new Address { Street = "Glavna 3" }, "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin", "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image", false);
+        private Patient patient = new Patient("2", "Ana", "Anic", "1234", DateTime.Now, "0643342345", "ana@gmail.com",
+            new Address {Street = "Glavna 3"}, "Jovan", "Beograd", "Savski venac", "Srbija", "Srpsko", "Srbin",
+            "Doktor", "Ruma", "Ruma", "Srbija", "employed", "merried", "223345677", "", "", "female", "ana123", "image",
+            false);
 
         [Fact]
-        public void Patient_not_succesfully_registrate()
+        public void Patient_not_successfully_registered()
         {
-            var stubRepository = new Mock<IRegistrationRepository>();
-            stubRepository.Setup(m => m.IsPatientIdValid(patient.Id)).Returns(false);
-            stubRepository.Setup(m => m.AddPatient(patient)).Returns(false);
-            RegistrationService service = new RegistrationService(stubRepository.Object);
+            var patientRepository = new Mock<IPatientRepository>();
+            var physicianRepository = new Mock<IPhysicianRepository>();
+
+            patientRepository.Setup(m => m.IsPatientIdValid(patient.Id)).Returns(false);
+            RegistrationService service = new RegistrationService(patientRepository.Object, physicianRepository.Object);
 
             bool addedPatient = service.RegisterPatient(patient);
 
             Assert.False(addedPatient);
+            patientRepository.Verify(mock => mock.Save(It.IsAny<Patient>()), Times.Never);
         }
 
         [Fact]
-        public void Patient_succesfully_registrate()
+        public void Patient_successfully_registered()
         {
-            var stubRepository = new Mock<IRegistrationRepository>();
-            stubRepository.Setup(m => m.IsPatientIdValid(patient.Id)).Returns(true);
-            stubRepository.Setup(m => m.AddPatient(patient)).Returns(true);
-            RegistrationService service = new RegistrationService(stubRepository.Object);
+            var patientRepository = new Mock<IPatientRepository>();
+            var physicianRepository = new Mock<IPhysicianRepository>();
+
+            patientRepository.Setup(m => m.IsPatientIdValid(patient.Id)).Returns(true);
+            RegistrationService service = new RegistrationService(patientRepository.Object, physicianRepository.Object);
 
             bool addedPatient = service.RegisterPatient(patient);
 
             Assert.True(addedPatient);
+            patientRepository.Verify(mock => mock.Save(It.IsAny<Patient>()), Times.Once);
         }
 
         [Fact]
         public void Confirm_registration()
         {
-            var mockRepository = new Mock<IRegistrationRepository>();
-            mockRepository.Setup(m => m.ConfirmEmailUpdate(patient.Id)).Returns(true);
-            RegistrationService service = new RegistrationService(mockRepository.Object);
+            var patientRepository = new Mock<IPatientRepository>();
+            var physicianRepository = new Mock<IPhysicianRepository>();
 
+            patientRepository.Setup(m => m.GetByJmbg(It.IsAny<string>()))
+                .Returns(new Patient {SerialNumber = "123", Id = "123", EmailConfirmed = false});
+
+            RegistrationService service = new RegistrationService(patientRepository.Object, physicianRepository.Object);
             bool patientUpdated = service.ConfirmEmailUpdate(patient.Id);
 
             Assert.True(patientUpdated);
+            patientRepository.Verify(m => m.Update(new Patient()
+                {SerialNumber = "123", Id = "123", EmailConfirmed = true}));
         }
 
         [Fact]

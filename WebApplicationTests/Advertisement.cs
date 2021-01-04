@@ -4,6 +4,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using HealthClinicBackend.Backend.Repository.Generic;
 using WebApplication.Backend.Services;
 using Xunit;
 
@@ -16,10 +17,18 @@ namespace WebApplicationTests
         [Fact]
         public void Advertisements()
         {
-            var stubRepository = new Mock<IActionsAndBenefitsRepository>();
-            actionAndBenefitMessages.Add(new ActionAndBenefitMessage { DateFrom = new DateTime(2020, 12, 5), DateTo = new DateTime(2021, 12, 5), Text = "Health", PharmacyName="Health" });
-            stubRepository.Setup(m => m.GetAllPublishedActionsAndBenefitsMessages()).Returns(actionAndBenefitMessages);
-            PatientService service = new PatientService(stubRepository.Object);
+            var patientRepository = new Mock<IPatientRepository>();
+            var actionsAndBenefitsRepository = new Mock<IActionsAndBenefitsRepository>();
+
+            actionAndBenefitMessages.Add(new ActionAndBenefitMessage
+            {
+                DateFrom = new DateTime(2020, 12, 5), DateTo = new DateTime(2021, 12, 5), Text = "Health",
+                PharmacyName = "Health"
+            });
+            actionsAndBenefitsRepository.Setup(m => m.GetAllPublishedActionsAndBenefitsMessages())
+                .Returns(actionAndBenefitMessages);
+
+            PatientService service = new PatientService(patientRepository.Object, actionsAndBenefitsRepository.Object);
 
             List<ActionAndBenefitMessage> list = service.GetAdvertisements();
 
@@ -29,10 +38,18 @@ namespace WebApplicationTests
         [Fact]
         public void No_advertisements()
         {
-            var stubRepository = new Mock<IActionsAndBenefitsRepository>();
-            actionAndBenefitMessages.Add(new ActionAndBenefitMessage { DateFrom = new DateTime(2020, 12, 5), DateTo = new DateTime(2020, 12, 9), Text = "Health", PharmacyName = "Health" });
-            stubRepository.Setup(m => m.GetAllPublishedActionsAndBenefitsMessages()).Returns(actionAndBenefitMessages);
-            PatientService service = new PatientService(stubRepository.Object);
+            var patientRepository = new Mock<IPatientRepository>();
+            var actionsAndBenefitsRepository = new Mock<IActionsAndBenefitsRepository>();
+
+            actionAndBenefitMessages.Add(new ActionAndBenefitMessage
+            {
+                DateFrom = new DateTime(2020, 12, 5), DateTo = new DateTime(2020, 12, 9), Text = "Health",
+                PharmacyName = "Health"
+            });
+            actionsAndBenefitsRepository.Setup(m => m.GetAllPublishedActionsAndBenefitsMessages())
+                .Returns(actionAndBenefitMessages);
+
+            PatientService service = new PatientService(patientRepository.Object, actionsAndBenefitsRepository.Object);
 
             List<ActionAndBenefitMessage> list = service.GetAdvertisements();
 
