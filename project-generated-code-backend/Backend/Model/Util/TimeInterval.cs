@@ -19,6 +19,7 @@ namespace HealthClinicBackend.Backend.Model.Util
         [JsonConstructor]
         public TimeInterval(DateTime start, DateTime end)
         {
+            Validate(start, end);
             Start = start;
             End = end;
         }
@@ -94,24 +95,44 @@ namespace HealthClinicBackend.Backend.Model.Util
             return Start.TimeOfDay.Equals(other.Start.TimeOfDay) && End.TimeOfDay.Equals(other.End.TimeOfDay);
         }
 
+        private void Validate(DateTime start, DateTime end)
+        {
+            ValidateDateTime(start);
+            ValidateDateTime(end);
+        }
+
         private void Validate(string start, string end)
         {
-            ValidateStart(start);
-            ValidateEnd(end);
+            ValidateDateTime(start);
+            ValidateDateTime(end);
         }
 
-        private void ValidateStart(string start)
+        private void ValidateDateTime(DateTime dateTime)
         {
-            if (string.IsNullOrEmpty(start)) throw new Exception("Start is required!");
-            else if (start.Length != 19) throw new Exception("Start is not correct length.");
-            else if (IsDateTime(start)) throw new Exception("Start is not set as datetime.");
+            if (dateTime == null) throw new Exception("Date time is required!");
+            ValidateDate(dateTime);
+            ValidateTime(dateTime);
         }
 
-        private void ValidateEnd(string end)
+        private void ValidateDate(DateTime dateTime)
         {
-            if (string.IsNullOrEmpty(end)) throw new Exception("End is required!");
-            else if (end.Length != 19) throw new Exception("End is not correct length.");
-            else if (IsDateTime(end)) throw new Exception("End is not set as datetime.");
+            if (dateTime.Date.Day < 1 || dateTime.Date.Day > 31) throw new Exception("Day is not correct.");
+            else if (dateTime.Date.Month < 1 || dateTime.Date.Month > 12) throw new Exception("Month is not correct.");
+            else if (dateTime.Date.Year < 1 || dateTime.Date.Day > 2100) throw new Exception("Year is not correct.");
+        }
+
+        private void ValidateTime(DateTime dateTime)
+        {
+            if (dateTime.Hour < 0 || dateTime.Hour > 23) throw new Exception("Hour is not correct.");
+            else if (dateTime.Minute < 0 || dateTime.Minute > 59) throw new Exception("Minute is not correct.");
+            else if (dateTime.Second < 0 || dateTime.Second > 59) throw new Exception("Second is not correct.");
+        }
+
+        private void ValidateDateTime(string dateTime)
+        {
+            if (string.IsNullOrEmpty(dateTime)) throw new Exception("Date time is required!");
+            else if (dateTime.Length != 19) throw new Exception("Date time is not correct length.");
+            else if (IsDateTime(dateTime)) throw new Exception("Date time is not set correct.");
         }
 
         private bool IsDateTime(string txtDate)

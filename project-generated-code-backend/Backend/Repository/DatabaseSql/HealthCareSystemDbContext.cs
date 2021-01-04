@@ -63,7 +63,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public DbSet<MedicinePharmacy> MedicinePharmacy { get; set; }
         public DbSet<MedicineSpecification> MedicineSpecification { get; set; }
         public DbSet<EquipmentRelocation> EquipmentRelocations { get; set; }
-
+        public DbSet<Position> Position { get; set; }
 
         public HealthCareSystemDbContext(DbContextOptions<HealthCareSystemDbContext> options) : base(options)
         {
@@ -257,6 +257,57 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             PhysicianSpecializationCreation(modelBuilder);
             ProcedureEquipmentCreation(modelBuilder);
             EquipmentRelocationsCreation(modelBuilder);
+            PositionCreation(modelBuilder);
+        }
+
+        private static void PositionCreation(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Position>().HasKey(p => p.SerialNumber);
+            modelBuilder.Entity<Position>().Property(p => p.ColumnSpan).HasDefaultValue(1);
+            modelBuilder.Entity<Position>().Property(p => p.RowSpan).HasDefaultValue(1);
+
+            modelBuilder.Entity<Position>().HasData(
+                new Position
+                {
+                    SerialNumber = "70001",
+                    Row = 0,
+                    Column = 0,
+                    RowSpan = 3,
+                    ColumnSpan = 5
+                },
+                new Position
+                {
+                    SerialNumber = "70002",
+                    Row = 0,
+                    Column = 10,
+                    RowSpan = 2,
+                    ColumnSpan = 4
+                },
+                new Position
+                {
+                    SerialNumber = "70003",
+                    Row = 0,
+                    Column = 5,
+                    RowSpan = 2,
+                    ColumnSpan = 3
+                },
+                new Position
+                {
+                    SerialNumber = "70004",
+                    Row = 0,
+                    Column = 14,
+                    RowSpan = 3,
+                    ColumnSpan = 5
+                },
+                new Position
+                {
+                    SerialNumber = "70005",
+                    Row = 10,
+                    Column = 9,
+                    RowSpan = 2,
+                    ColumnSpan = 5
+                }
+            );
         }
 
         private static void EquipmentRelocationsCreation(ModelBuilder modelBuilder)
@@ -323,8 +374,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Room>().Ignore(o => o.Equipment);
             modelBuilder.Entity<Room>().Ignore(o => o.Beds);
             modelBuilder.Entity<Room>().Ignore(o => o.Medinices);
-            modelBuilder.Entity<Room>().Property(o => o.ColumnSpan).HasDefaultValue(1);
-            modelBuilder.Entity<Room>().Property(o => o.RowSpan).HasDefaultValue(1);
 
             modelBuilder.Entity<Room>().HasData(
                 new Room
@@ -334,10 +383,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     Id = 101,
                     FloorSerialNumber = "1001",
                     RoomTypeSerialNumber = "10000003",
-                    Row = 0,
-                    Column = 0,
-                    RowSpan = 3,
-                    ColumnSpan = 5,
+                   
+                    PositionSerialNumber = "70001",
                     Style = "RoomButtonStyle",
                     BottomDoorVisible = 0,
                     RightDoorVisible = 0,
@@ -351,10 +398,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     Id = 102,
                     FloorSerialNumber = "1001",
                     RoomTypeSerialNumber = "10000003",
-                    Row = 0,
-                    Column = 10,
-                    RowSpan = 2,
-                    ColumnSpan = 4,
+                    PositionSerialNumber = "70002",
                     Style = "RoomButtonStyle",
                     BottomDoorVisible = 0,
                     RightDoorVisible = 2,
@@ -368,10 +412,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     Id = 103,
                     FloorSerialNumber = "1001",
                     RoomTypeSerialNumber = "10000002",
-                    Row = 0,
-                    Column = 5,
-                    RowSpan = 2,
-                    ColumnSpan = 3,
+                    PositionSerialNumber = "70003",
                     Style = "RoomButtonStyle",
                     BottomDoorVisible = 0,
                     RightDoorVisible = 2,
@@ -385,10 +426,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     Id = 104,
                     FloorSerialNumber = "1001",
                     RoomTypeSerialNumber = "10000003",
-                    Row = 0,
-                    Column = 14,
-                    RowSpan = 3,
-                    ColumnSpan = 5,
+                    PositionSerialNumber = "70004",
                     Style = "RoomButtonStyle",
                     BottomDoorVisible = 0,
                     LeftDoorVisible = 0,
@@ -402,10 +440,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     Id = 105,
                     FloorSerialNumber = "1001",
                     RoomTypeSerialNumber = "10000002",
-                    Row = 10,
-                    Column = 9,
-                    RowSpan = 2,
-                    ColumnSpan = 5,
+                    PositionSerialNumber = "70005",
                     Style = "RoomButtonStyle",
                     BottomDoorVisible = 2,
                     TopDoorVisible = 0,
