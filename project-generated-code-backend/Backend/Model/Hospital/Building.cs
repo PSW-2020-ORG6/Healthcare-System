@@ -1,42 +1,115 @@
 ﻿using HealthClinicBackend.Backend.Model.Util;
+using System;
 using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Model.Hospital
 {
     public class Building : Entity
     {
-        public string Name { get; set; }
-        public string Color { get; set; }
-        public int Row { get; set; }
-        public int Column { get; set; }
-        public string Style { get; set; }
-        public List<Floor> Floors { get; set; }
+        public string _name;
+        public string _color;
+        public int _row;
+        public int _column;
+        public string _style;
+        public List<Floor> _floors;
+
+        public string Name => _name;
+        public string Color => _color;
+        public int Row => _row;
+        public int Column => _column;
+        public string Style => _style;
+        public List<Floor> Floors => _floors;
 
         public Building() : base()
         {
         }
 
-        public Building(string _name, string _color) : base()
+        public Building(string name, string color) : base()
         {
-            Name = _name;
-            Color = _color;
+            Validate(name, color);
+            _name = name;
+            _color = color;
         }
 
-        public Building(string _serialNumber, string _name, string _color) : base(_serialNumber)
+        public Building(string serialNumber, string name, string color) : base(serialNumber)
         {
-            Name = _name;
-            Color = _color;
+            Validate(name, color);
+            _name = name;
+            _color = color;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Building building &&
+                   SerialNumber == building.SerialNumber &&
+                   _row == building._row &&
+                   Name == building.Name &&
+                   Color == building.Color &&
+                   Row == building.Row &&
+                   Column == building.Column &&
+                   Style == building.Style &&
+                   EqualityComparer<List<Floor>>.Default.Equals(Floors, building.Floors);
+        }
+
+        public static bool operator ==(Building firstBuilding, Building secondBuilding)
+        {
+            if (firstBuilding is null)
+                return secondBuilding is null;
+
+            return firstBuilding.Equals(secondBuilding);
+        }
+
+        public static bool operator !=(Building firstBuilding, Building secondBuilding)
+        {
+            if (firstBuilding is null)
+            {
+                throw new ArgumentNullException(nameof(firstBuilding));
+            }
+
+            if (secondBuilding is null)
+            {
+                throw new ArgumentNullException(nameof(secondBuilding));
+            }
+
+            return !(firstBuilding == secondBuilding);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(SerialNumber, Name, Color, Row, Column, Style, Floors);
+        }
+
+        public override string ToString()
+        {
+            var text = SerialNumber + " - " + Name + " - " + Color + " - "
+                + Row + " - " + Column + " - " + Style + " - Floors:";
+            foreach(Floor f in Floors)
+                text += "   " + f.Name;
+            return text;
+        }
+
+        private void Validate(string name, string color)
+        {
+            ValidateElementOfBuilding(name);
+            ValidateElementOfBuilding(color);
+        }
+
+        private void ValidateElementOfBuilding(string elementOfBuilding)
+        {
+            if (string.IsNullOrEmpty(elementOfBuilding)) throw new Exception("The element of the building is required!");
+            else if (elementOfBuilding.Length < 3) throw new Exception("The element of the building is too short.");
+            else if (elementOfBuilding.Length > 20) throw new Exception("The element of the building is too long.");
         }
 
         public Building(Building building): base(building.SerialNumber)
         {
-            Name = building.Name;
-            Color = building.Color;
-            Row = building.Row;
-            Column = building.Column;
-            Style = building.Style;
-            if (building.Floors != null) Floors = new List<Floor>(building.Floors);
-            else Floors = new List<Floor>();
+            _name = building.Name;
+            _color = building.Color;
+            _row = building.Row;
+            _column = building.Column;
+            _style = building.Style;
+            if (building.Floors != null) _floors = new List<Floor>(building.Floors);
+            else _floors = new List<Floor>();
         }
     }
 }

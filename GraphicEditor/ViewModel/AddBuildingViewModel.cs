@@ -74,11 +74,11 @@ namespace GraphicEditor.ViewModel
             // [Lemara98] This needs to be corrected because I didn't find appropriate controller for buildings !!!
             Building newBuilding = new Building()
             {
-                Name = NameText,
-                Color = MyButtonColor.ToString(),
-                Column = Int32.Parse(split[0]),
-                Row = Int32.Parse(split[1]),
-                Style = buildingButtonStyle
+                _name = NameText,
+                _color = MyButtonColor.ToString(),
+                _column = Int32.Parse(split[0]),
+                _row = Int32.Parse(split[1]),
+                _style = buildingButtonStyle
             };
 
             buildingDatabaseSql.Save(newBuilding);
@@ -91,8 +91,8 @@ namespace GraphicEditor.ViewModel
             {
                 Floor newFloor = new Floor() 
                 {   
-                    BuildingSerialNumber = buildingSerialNumber,
-                    Name = Constants.FLOOR_NAMES[i]
+                    _buildingSerialNumber = buildingSerialNumber,
+                    _name = Constants.FLOOR_NAMES[i]
                 };
 
                 floorDatabaseSql.Save(newFloor);

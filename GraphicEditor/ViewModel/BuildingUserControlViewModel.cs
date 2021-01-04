@@ -235,8 +235,8 @@ namespace GraphicEditor.ViewModel
 
         public void onConfirmUpdate(Building building)
         {
-            Building.Name = building.Name;
-            Building.Color = building.Color;
+            //Building.Name = building.Name;
+            //Building.Color = building.Color;
             OnPropertyChanged("Building");
         }
 
