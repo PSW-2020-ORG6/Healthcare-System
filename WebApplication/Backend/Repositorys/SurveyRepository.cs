@@ -52,7 +52,7 @@ namespace WebApplication.Backend.Repositorys
                             "','" + surveyText.Questions[15] + "','" + surveyText.Questions[16] + "','" +
                             surveyText.Questions[17] + "','" + surveyText.Questions[18] + "','" + surveyText.Questions[19]
                             + "','" + surveyText.Questions[20] + "','" + surveyText.Questions[21] + "','" +
-                            surveyText.Questions[22] + "','" + surveyText.Id + "','" + surveyText.DoctorName + "','" +
+                            surveyText.Questions[22] + "','" + surveyText.PatientId + "','" + surveyText.DoctorName + "','" +
                             surveyText.SerialNumber + "','" + dateSurvey + "')";
 
             MySqlCommand sqlCommand = new MySqlCommand(sqlDml, connection);

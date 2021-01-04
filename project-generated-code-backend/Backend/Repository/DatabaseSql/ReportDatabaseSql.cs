@@ -46,7 +46,9 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public List<Report> GetByPatient(Patient patient)
         {
-            return GetAll().Where(x => x.PatientId.Equals(patient.SerialNumber)).ToList();
+            return GetAll()
+                .Where(x => x.PatientId.Equals(patient.SerialNumber) || x.PatientId.Equals(patient.Id))
+                .ToList();
         }
 
         public List<Report> GetByPatientId(string id)
