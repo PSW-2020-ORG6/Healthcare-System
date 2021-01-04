@@ -70,5 +70,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             throw new NotImplementedException();
         }
+
+        public List<DateTime> GetByPatientIdCanceledDates(string patientId)
+        {
+            return GetByPatientIdCanceled(patientId).Select(a => a.TimeInterval.Start).ToList();
+        }
     }
 }

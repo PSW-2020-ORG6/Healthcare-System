@@ -37,7 +37,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public List<Physician> GetByName(string name)
         {
-            return GetAll().Where(p => p.Name.Equals(name)).ToList();
+            return GetAll().Where(p => (p.Name + " " + p.Surname).Equals(name)).ToList();
         }
 
         public Physician GetByJmbg(string jmbg)
@@ -56,6 +56,14 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 .Where(p => p.Specialization
                     .Select(s => s.Name)
                     .Contains("General Practitioner"))
+                .ToList();
+        }
+
+        public List<Physician> GetBySpecializationName(string name)
+        {
+            return GetAll()
+                .Where(p => p.Specialization
+                    .Any(s => s.Name.ToLower().Equals(name.ToLower())))
                 .ToList();
         }
     }

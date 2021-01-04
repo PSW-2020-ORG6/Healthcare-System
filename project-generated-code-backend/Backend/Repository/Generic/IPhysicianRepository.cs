@@ -15,5 +15,6 @@ namespace HealthClinicBackend.Backend.Repository.Generic
         Physician GetByJmbg(string jmbg);
         List<Physician> GetByProcedureType(ProcedureType procedureType);
         List<Physician> GetGeneralPractitioners();
+        List<Physician> GetBySpecializationName(string name);
     }
 }
