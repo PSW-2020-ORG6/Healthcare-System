@@ -240,46 +240,59 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Position>().Property(p => p.ColumnSpan).HasDefaultValue(1);
             modelBuilder.Entity<Position>().Property(p => p.RowSpan).HasDefaultValue(1);
 
+            modelBuilder.Entity<Position>()
+                .Property(p => p.Row)
+                .HasField("_row");
+            modelBuilder.Entity<Position>()
+                .Property(p => p.Column)
+                .HasField("_column");
+            modelBuilder.Entity<Position>()
+                .Property(p => p.RowSpan)
+                .HasField("_rowSpan");
+            modelBuilder.Entity<Position>()
+                .Property(p => p.ColumnSpan)
+                .HasField("_columnSpan");
+
             modelBuilder.Entity<Position>().HasData(
                 new Position
                 {
                     SerialNumber = "70001",
-                    Row = 0,
-                    Column = 0,
-                    RowSpan = 3,
-                    ColumnSpan = 5
+                    _row = 0,
+                    _column = 0,
+                    _rowSpan = 3,
+                    _columnSpan = 5
                 },
                 new Position
                 {
                     SerialNumber = "70002",
-                    Row = 0,
-                    Column = 10,
-                    RowSpan = 2,
-                    ColumnSpan = 4
+                    _row = 0,
+                    _column = 10,
+                    _rowSpan = 2,
+                    _columnSpan = 4
                 },
                 new Position
                 {
                     SerialNumber = "70003",
-                    Row = 0,
-                    Column = 5,
-                    RowSpan = 2,
-                    ColumnSpan = 3
+                    _row = 0,
+                    _column = 5,
+                    _rowSpan = 2,
+                    _columnSpan = 3
                 },
                 new Position
                 {
                     SerialNumber = "70004",
-                    Row = 0,
-                    Column = 14,
-                    RowSpan = 3,
-                    ColumnSpan = 5
+                    _row = 0,
+                    _column = 14,
+                    _rowSpan = 3,
+                    _columnSpan = 5
                 },
                 new Position
                 {
                     SerialNumber = "70005",
-                    Row = 10,
-                    Column = 9,
-                    RowSpan = 2,
-                    ColumnSpan = 5
+                    _row = 10,
+                    _column = 9,
+                    _rowSpan = 2,
+                    _columnSpan = 5
                 }
             );
         }
@@ -294,8 +307,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                {
                    roomToRelocateToSerialNumber = "105",
                    equipmentSerialNumber = "78",
-                   startTime = new DateTime(2021, 1, 20,9,30,0),
-                   endTime= new DateTime(2021,1,20,10,0,0),
+                   startTime = new DateTime(2021, 1, 20, 9, 30, 0),
+                   endTime = new DateTime(2021, 1, 20, 10, 0, 0),
                    SerialNumber = "ER1",
                    quantity = 1
                }
