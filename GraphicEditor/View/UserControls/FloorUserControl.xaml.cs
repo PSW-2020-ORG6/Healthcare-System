@@ -7,9 +7,9 @@ using System.Windows.Input;
 
 namespace GraphicEditor.View.UserControls
 {
-    public partial class CardiologyFirstFloorMapUserControl : UserControl
+    public partial class FloorUserControl : UserControl
     {
-        public CardiologyFirstFloorMapUserControlViewModel Viewmodel;
+        public FloorUserControlViewModel Viewmodel;
         private bool mouseDown = false; // Set to 'true' when mouse is held down.
         private Point mouseDownPos; // The point where the mouse button was clicked down.
         private (int, int) firstGridCell;
@@ -19,10 +19,10 @@ namespace GraphicEditor.View.UserControls
         public int SelectedCellsColumnSpan;
         public int SelectedCellsRowSpan;
 
-        public CardiologyFirstFloorMapUserControl(MainWindowViewModel mapParent, CardiologyBuildingUserControlViewModel buildingParent, Floor floor)
+        public FloorUserControl(MainWindowViewModel mapParent, BuildingUserControlViewModel buildingParent, Floor floor)
         {
             InitializeComponent();
-            Viewmodel = new CardiologyFirstFloorMapUserControlViewModel(mapParent, buildingParent, this.Grid, floor);
+            Viewmodel = new FloorUserControlViewModel(mapParent, buildingParent, this.Grid, floor);
             this.DataContext = Viewmodel;
         }
 

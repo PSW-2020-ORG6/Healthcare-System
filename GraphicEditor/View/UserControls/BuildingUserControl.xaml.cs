@@ -7,16 +7,16 @@ using System.Windows.Controls;
 
 namespace GraphicEditor.View.UserControls
 {
-    public partial class CardiologyBuildingUserControl : UserControl
+    public partial class BuildingUserControl : UserControl
     {
         private MainWindowViewModel _viewModel;
-        public CardiologyBuildingUserControlViewModel myViewModel;
+        public BuildingUserControlViewModel myViewModel;
 
-        public CardiologyBuildingUserControl(MainWindowViewModel vm, Building building)
+        public BuildingUserControl(MainWindowViewModel vm, Building building)
         {
             InitializeComponent();
             _viewModel = vm;
-            myViewModel = new CardiologyBuildingUserControlViewModel(this, vm, building);
+            myViewModel = new BuildingUserControlViewModel(this, vm, building);
             this.DataContext = myViewModel;
         }
 

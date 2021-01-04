@@ -14,9 +14,9 @@ using System.Windows.Controls.Primitives;
 
 namespace GraphicEditor.ViewModel
 {
-    public class CardiologyBuildingUserControlViewModel : BindableBase, DialogAnswerListener<Building>
+    public class BuildingUserControlViewModel : BindableBase, DialogAnswerListener<Building>
     {
-        private CardiologyBuildingUserControl _buildingParent;
+        private BuildingUserControl _buildingParent;
         private MainWindowViewModel _mapParent;
         private List<Floor> _floors = new List<Floor>();
         private int _selectedFloorIndex;
@@ -27,10 +27,10 @@ namespace GraphicEditor.ViewModel
         public MyICommand<Building> BuildingUpdateCommand { get; private set; }
 
         public MyICommand<Floor> AddFloorCommand { get; private set; }
-        public CardiologyFirstFloorMapUserControl FirstFloor;
+        public FloorUserControl FirstFloor;
         /* TODO add this without causing errors
         public CardiologySecondFloorMapUserControl SecondFloor;*/
-        public CardiologyFirstFloorMapUserControl _floorViewModel;
+        public FloorUserControl _floorViewModel;
         public Grid grid;
         private BuildingController buildingController = new BuildingController();
         private FloorDatabaseSql floorDatabaseSql = new FloorDatabaseSql();
@@ -39,7 +39,7 @@ namespace GraphicEditor.ViewModel
         // [Lemara98] Selector Class
         private Selector selector;
 
-        public CardiologyBuildingUserControlViewModel(CardiologyBuildingUserControl buildingParent, MainWindowViewModel mapParent, Building building)
+        public BuildingUserControlViewModel(BuildingUserControl buildingParent, MainWindowViewModel mapParent, Building building)
         {
             _mapParent = mapParent;
             _buildingParent = buildingParent;
@@ -62,10 +62,10 @@ namespace GraphicEditor.ViewModel
             _selectedFloor = _buildingFloors[0];
             _selectedFloorIndex = 0;
             _floorName = _selectedFloor.Name;
-            _floorViewModel = new CardiologyFirstFloorMapUserControl(_mapParent, this, _selectedFloor);
+            _floorViewModel = new FloorUserControl(_mapParent, this, _selectedFloor);
         }
 
-       public CardiologyFirstFloorMapUserControl FloorViewModel
+       public FloorUserControl FloorViewModel
        {
            get { return _floorViewModel; }
            set
@@ -139,7 +139,7 @@ namespace GraphicEditor.ViewModel
                     _mapParent.CurrentUserControl = _mapParent.HospitalMap;
                     break;
                 default:
-                    FloorViewModel = new CardiologyFirstFloorMapUserControl(_mapParent, this, _selectedFloor);
+                    FloorViewModel = new FloorUserControl(_mapParent, this, _selectedFloor);
                     break;
             }
         }
