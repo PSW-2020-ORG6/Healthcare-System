@@ -1,8 +1,3 @@
-// File:    Room.cs
-// Author:  Luka Doric
-// Created: Friday, May 15, 2020 23:46:22
-// Purpose: Definition of Class Room
-
 using HealthClinicBackend.Backend.Model.Util;
 using Newtonsoft.Json;
 using System;
@@ -18,14 +13,11 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public int Id { get; set; }
         [ForeignKey("Floor")] public string FloorSerialNumber { get; set; }
         [ForeignKey("RoomType")] public string RoomTypeSerialNumber { get; set; }
+        [ForeignKey("Position")] public string PositionSerialNumber { get; set; }
         public virtual RoomType RoomType { get; set; }
         public virtual List<Equipment> Equipment { get; set; }
         public virtual List<Bed> Beds { get; set; }
         public virtual List<Medicine> Medinices { get; set; }
-        public int Row { get; set; }
-        public int Column { get; set; }
-        public int RowSpan { get; set; }
-        public int ColumnSpan { get; set; }
         public int TopDoorVisible { get; set; }
         public int RightDoorVisible { get; set; }
         public int LeftDoorVisible { get; set; }
@@ -47,17 +39,25 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         }
 
         public Room(string serialNumber, string name, int id, string floorSerialNumber, string roomTypeSerialNumber,
-            int row, int column, int rowSpan, int columnSpan, string style)
+            string positionSerialNumber, string style)
           : base(serialNumber)
         {
             Name = name;
             Id = id;
             FloorSerialNumber = floorSerialNumber;
             RoomTypeSerialNumber = roomTypeSerialNumber;
-            Row = row;
-            Column = column;
-            RowSpan = rowSpan;
-            ColumnSpan = columnSpan;
+            PositionSerialNumber = positionSerialNumber;
+            Style = style;
+        }
+
+        public Room(string serialNumber, string name, int id, string floorSerialNumber,
+            string roomTypeSerialNumber, string style)
+          : base(serialNumber)
+        {
+            Name = name;
+            Id = id;
+            FloorSerialNumber = floorSerialNumber;
+            RoomTypeSerialNumber = roomTypeSerialNumber;
             Style = style;
         }
 
