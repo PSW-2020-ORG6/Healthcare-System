@@ -14,7 +14,7 @@ namespace GraphicEditorTests
 
         public RoomSearchesTests()
         {
-            room = new Room("101", "Examination room 101", 101, "1001", "10000001", 2, 3, 3, 1, "RoomButtonStyle");
+            room = new Room("101", "Examination room 101", 101, "1001", "10000001", "70001", "RoomButtonStyle");
             rooms = new List<Room>
             {
                 room

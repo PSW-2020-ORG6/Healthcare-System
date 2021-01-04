@@ -92,10 +92,10 @@ namespace GraphicEditor.ViewModel
                 button.LeftDoor = (Visibility)room.LeftDoorVisible;
                 button.Tag = room.SerialNumber;
                 Grid.SetZIndex(button, 2);
-                Grid.SetColumnSpan(button, room.ColumnSpan);
-                Grid.SetRowSpan(button, room.RowSpan);
-                Grid.SetColumn(button, room.Column);
-                Grid.SetRow(button, room.Row);
+                //Grid.SetColumnSpan(button, room.ColumnSpan);
+                //Grid.SetRowSpan(button, room.RowSpan);
+                //Grid.SetColumn(button, room.Column);
+                //Grid.SetRow(button, room.Row);
                 room.Beds = bedController.GetByRoomSerialNumber(room.SerialNumber);
                 foreach (Bed bed in room.Beds)
                 {

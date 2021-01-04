@@ -187,32 +187,33 @@ namespace GraphicEditor.ViewModel
             (int, int) bottomLeftCornerSpace = (Grid.GetColumn(space), Grid.GetRow(space) + Grid.GetRowSpan(space) - 1);
             (int, int) bottomRightCornerSpace = (Grid.GetColumn(space) + Grid.GetColumnSpan(space) - 1, Grid.GetRow(space) + Grid.GetRowSpan(space) - 1);
 
-            (int, int) topLeftCornerRoom = (room.Column, room.Row - 1);
-            (int, int) topRightCornerRoom = (room.Column + room.ColumnSpan - 1, room.Row);
-            (int, int) bottomLeftCornerRoom = (room.Column, room.Row + room.RowSpan - 1);
-            (int, int) bottomRightCornerRoom = (room.Column + room.ColumnSpan - 1, room.Row + room.RowSpan - 1);
+            //(int, int) topLeftCornerRoom = (room.Column, room.Row - 1);
+            //(int, int) topRightCornerRoom = (room.Column + room.ColumnSpan - 1, room.Row);
+            //(int, int) bottomLeftCornerRoom = (room.Column, room.Row + room.RowSpan - 1);
+            //(int, int) bottomRightCornerRoom = (room.Column + room.ColumnSpan - 1, room.Row + room.RowSpan - 1);
 
             // TopLeftCorner
 
-            bool tl = topLeftCornerSpace.Item1 >= topLeftCornerRoom.Item1 && topLeftCornerSpace.Item1 <= topRightCornerRoom.Item1 &&
-                       topLeftCornerSpace.Item2 >= topLeftCornerRoom.Item2 && topLeftCornerSpace.Item2 <= bottomLeftCornerRoom.Item2;
+            //bool tl = topLeftCornerSpace.Item1 >= topLeftCornerRoom.Item1 && topLeftCornerSpace.Item1 <= topRightCornerRoom.Item1 &&
+            //           topLeftCornerSpace.Item2 >= topLeftCornerRoom.Item2 && topLeftCornerSpace.Item2 <= bottomLeftCornerRoom.Item2;
 
             // TopRightCorner
 
-            bool tr = topRightCornerSpace.Item1 >= topLeftCornerRoom.Item1 && topRightCornerSpace.Item1 <= topRightCornerRoom.Item1 &&
-                       topRightCornerSpace.Item2 >= topRightCornerRoom.Item2 && topRightCornerSpace.Item2 <= bottomRightCornerRoom.Item2;
+            //bool tr = topRightCornerSpace.Item1 >= topLeftCornerRoom.Item1 && topRightCornerSpace.Item1 <= topRightCornerRoom.Item1 &&
+            //           topRightCornerSpace.Item2 >= topRightCornerRoom.Item2 && topRightCornerSpace.Item2 <= bottomRightCornerRoom.Item2;
 
             // BottomLeftCorner
 
-            bool bl = bottomLeftCornerSpace.Item1 >= bottomLeftCornerRoom.Item1 && bottomLeftCornerSpace.Item1 <= bottomRightCornerRoom.Item1 &&
-                       bottomLeftCornerSpace.Item2 >= topLeftCornerRoom.Item2 && bottomLeftCornerSpace.Item2 <= bottomLeftCornerRoom.Item2;
+            //bool bl = bottomLeftCornerSpace.Item1 >= bottomLeftCornerRoom.Item1 && bottomLeftCornerSpace.Item1 <= bottomRightCornerRoom.Item1 &&
+            //           bottomLeftCornerSpace.Item2 >= topLeftCornerRoom.Item2 && bottomLeftCornerSpace.Item2 <= bottomLeftCornerRoom.Item2;
 
             // BottomRightCorner
 
-            bool br = bottomRightCornerSpace.Item1 >= bottomLeftCornerRoom.Item1 && bottomRightCornerSpace.Item1 <= bottomRightCornerRoom.Item1 &&
-                       bottomRightCornerSpace.Item2 >= topRightCornerRoom.Item2 && bottomRightCornerSpace.Item2 <= bottomRightCornerRoom.Item2;
+            //bool br = bottomRightCornerSpace.Item1 >= bottomLeftCornerRoom.Item1 && bottomRightCornerSpace.Item1 <= bottomRightCornerRoom.Item1 &&
+            //           bottomRightCornerSpace.Item2 >= topRightCornerRoom.Item2 && bottomRightCornerSpace.Item2 <= bottomRightCornerRoom.Item2;
 
-            return tl || tr || bl || br;
+            //return tl || tr || bl || br;
+            return true;
         }
 
         private void editBuilding(Building _building)
