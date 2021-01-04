@@ -15,11 +15,13 @@ namespace WebApplication.Backend.Controllers
     [ApiController]
     public class PatientController : ControllerBase
     {
-        private readonly PatientService patientService;
-        public PatientController()
+        private readonly PatientService _patientService;
+
+        public PatientController(PatientService patientService)
         {
-            this.patientService = new PatientService();
+            _patientService = patientService;
         }
+
         ///Tanja Drcelic RA124/2017
         /// <summary>
         ///calls method for get all patients from patients table
@@ -30,7 +32,7 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("all")]
         public List<Patient> GetAllFeedbacks()
         {
-            return patientService.GetAllPatients();
+            return _patientService.GetAllPatients();
         }
 
         ///Aleksa Repović RA52/2017
@@ -43,26 +45,25 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("getPatientById")]
         public PatientDto GetPatientById(string patientId)
         {
-            return patientService.GetPatientById(patientId);
+            return _patientService.GetPatientById(patientId);
         }
 
         [HttpGet("getMaliciousPatients")]
         public List<Patient> GetMaliciousPatients()
         {
-            return patientService.GetMaliciousPatients();
+            return _patientService.GetMaliciousPatients();
         }
 
         [HttpPut("blockMaliciousPatient")]
         public bool BlockMaliciousPatient(PatientDto patient)
         {
-            return patientService.BlockMaliciousPatient(patient.Id);
+            return _patientService.BlockMaliciousPatient(patient.Id);
         }
 
         [HttpGet("getActionsAndBenefits")]
         public IEnumerable<ActionAndBenefitMessage> GetActionsAndBenefits()
         {
-            return patientService.GetAdvertisements();
+            return _patientService.GetAdvertisements();
         }
-
     }
 }

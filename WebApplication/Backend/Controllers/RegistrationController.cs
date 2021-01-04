@@ -10,13 +10,13 @@ namespace WebApplication.Backend.Controllers
     [ApiController]
     public class RegistrationController : ControllerBase
     {
-        public RegistrationService registrationService;
-        private IMailService mailService;
+        private readonly RegistrationService _registrationService;
+        private readonly IMailService _mailService;
 
-        public RegistrationController(IMailService mailService)
+        public RegistrationController(RegistrationService registrationService, IMailService mailService)
         {
-            registrationService = new RegistrationService();
-            this.mailService = mailService;
+            _registrationService = registrationService;
+            _mailService = mailService;
         }
 
         ///Aleksandra Milijevic RA 22/2017
@@ -31,7 +31,7 @@ namespace WebApplication.Backend.Controllers
         {
             if (patientDTO.AreRegistrationFieldsValid())
             {
-                if (registrationService.RegisterPatient(new Patient(patientDTO)))
+                if (_registrationService.RegisterPatient(new Patient(patientDTO)))
                 {
                     SendMail(new Patient(patientDTO));
                     return Ok();
@@ -49,7 +49,7 @@ namespace WebApplication.Backend.Controllers
 
         public void SendMail(Patient patient)
         {
-            mailService.SendEmail(patient);
+            _mailService.SendEmail(patient);
         }
 
         ///Aleksandra Milijevic RA 22/2017
@@ -64,7 +64,7 @@ namespace WebApplication.Backend.Controllers
         {
             string patientId = IdDecryption(id);
 
-            if (registrationService.ConfirmEmailUpdate(patientId))
+            if (_registrationService.ConfirmEmailUpdate(patientId))
             {
                 return Ok();
             }
@@ -92,7 +92,7 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("allPhysitians")]
         public List<FamilyDoctorDto> GetAllFeedbacks()
         {
-            return registrationService.GetAllPhysicians();
+            return _registrationService.GetAllPhysicians();
         }
     }
 }
