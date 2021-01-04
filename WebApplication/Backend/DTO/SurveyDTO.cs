@@ -68,7 +68,7 @@ namespace WebApplication.Backend.DTO
         public SurveyDTO() { }
         public SurveyDTO(Survey survey)
         {
-            id = survey.Id;
+            id = survey.PatientId;
             doctorName = survey.DoctorName;
             ReportDate = survey.ReportDate;
         }

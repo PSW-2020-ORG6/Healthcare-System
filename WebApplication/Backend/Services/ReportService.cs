@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.MedicalExam;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using HealthClinicBackend.Backend.Repository.Generic;
 using WebApplication.Backend.DTO;
-using WebApplication.Backend.Repositorys;
 
 namespace WebApplication.Backend.Services
 {
     public class ReportService
     {
-        private IReportRepository iReportRepository;
+        private IReportRepository _reportRepository;
 
         public ReportService()
         {
-            this.iReportRepository = new ReportRepository();
+            _reportRepository = new ReportDatabaseSql();
         }
 
-        public ReportService(IReportRepository iReportRepository)
+        public ReportService(IReportRepository reportRepository)
         {
-            this.iReportRepository = iReportRepository;
+            _reportRepository = reportRepository;
         }
 
         /// <summary>
@@ -31,25 +32,37 @@ namespace WebApplication.Backend.Services
         ///</returns>
         public List<SearchEntityDTO> GetSearchedReport(string searchedReport, string dateTimes)
         {
-            try
-            {
-                string[] search = searchedReport.Split(";");
-                List<Report> firstSearchedList = iReportRepository.GetReportsByProperty(Property(search[0].Split(",")[2]), search[0].Split(",")[1], dateTimes, false);
-                for (int i = 1; i < search.Length; i++)
-                {
-                    if (search[i].Split(",")[0].Equals("AND"))
-                        firstSearchedList = OperationAND(firstSearchedList, iReportRepository.GetReportsByProperty(Property(search[i].Split(",")[2]), search[i].Split(",")[1], dateTimes, false));
-                    else if (search[i].Split(",")[0].Equals("OR"))
-                        firstSearchedList = OperationOR(firstSearchedList, iReportRepository.GetReportsByProperty(Property(search[i].Split(",")[2]), search[i].Split(",")[1], dateTimes, false));
-                    else
-                        firstSearchedList = OperationAND(firstSearchedList, iReportRepository.GetReportsByProperty(Property(search[i].Split(",")[2]), search[i].Split(",")[1], dateTimes, true));
-                }
-                return ConverToDTO(firstSearchedList);
-            }
-            catch (Exception e)
-            {
-                return ConverToDTO(iReportRepository.GetReportsByProperty(Property(searchedReport.Split(",")[2]), searchedReport.Split(",")[1], dateTimes, false));
-            }
+            // TODO: refactor to use actual properties and not names
+            return new List<SearchEntityDTO>();
+            // try
+            // {
+            //     string[] search = searchedReport.Split(";");
+            //     List<Report> firstSearchedList =
+            //         _reportRepository.GetReportsByProperty(Property(search[0].Split(",")[2]), search[0].Split(",")[1],
+            //             dateTimes, false);
+            //     for (int i = 1; i < search.Length; i++)
+            //     {
+            //         if (search[i].Split(",")[0].Equals("AND"))
+            //             firstSearchedList = OperationAND(firstSearchedList,
+            //                 _reportRepository.GetReportsByProperty(Property(search[i].Split(",")[2]),
+            //                     search[i].Split(",")[1], dateTimes, false));
+            //         else if (search[i].Split(",")[0].Equals("OR"))
+            //             firstSearchedList = OperationOR(firstSearchedList,
+            //                 _reportRepository.GetReportsByProperty(Property(search[i].Split(",")[2]),
+            //                     search[i].Split(",")[1], dateTimes, false));
+            //         else
+            //             firstSearchedList = OperationAND(firstSearchedList,
+            //                 _reportRepository.GetReportsByProperty(Property(search[i].Split(",")[2]),
+            //                     search[i].Split(",")[1], dateTimes, true));
+            //     }
+            //
+            //     return ConverToDTO(firstSearchedList);
+            // }
+            // catch (Exception e)
+            // {
+            //     return ConverToDTO(_reportRepository.GetReportsByProperty(Property(searchedReport.Split(",")[2]),
+            //         searchedReport.Split(",")[1], dateTimes, false));
+            // }
         }
 
         private SearchProperty Property(string property)
@@ -74,9 +87,12 @@ namespace WebApplication.Backend.Services
             foreach (Report report in reports)
             {
                 string text = "";
-                text += "Patient: " + report.Patient.Name + " " + report.Patient.Surname + ";Doctor: " + report.ProcedureType.Specialization + " " + report.Physician.Name + " " + report.Physician.Surname + "; Procedure Type: " + report.ProcedureType.Name;
+                text += "Patient: " + report.Patient.Name + " " + report.Patient.Surname + ";Doctor: " +
+                        report.ProcedureType.Specialization + " " + report.Physician.Name + " " +
+                        report.Physician.Surname + "; Procedure Type: " + report.ProcedureType.Name;
                 searchEntityDTOs.Add(new SearchEntityDTO("Report", text, report.Date.ToString("dddd, MMMM dd yyyy")));
             }
+
             return searchEntityDTOs;
         }
 
@@ -106,6 +122,7 @@ namespace WebApplication.Backend.Services
                     }
                 }
             }
+
             return returnList;
         }
 
@@ -116,6 +133,7 @@ namespace WebApplication.Backend.Services
                 if (rReturnList.SerialNumber.Equals(serialNumber))
                     return false;
             }
+
             return true;
         }
 
@@ -136,6 +154,7 @@ namespace WebApplication.Backend.Services
                 if (NotInResult(returnList, rsecond.SerialNumber))
                     returnList.Add(rsecond);
             }
+
             return returnList;
         }
     }

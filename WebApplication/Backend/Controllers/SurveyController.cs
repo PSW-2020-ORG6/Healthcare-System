@@ -27,36 +27,36 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("getDoctors")]
         public List<String> GetAllDoctorsFromReporstByPatientId(String patientId)
         {
-            return surveyService.GetAllDoctorsFromReporstByPatientId(patientId);
+            return surveyService.GetAllDoctorsFromReportsByPatientId(patientId);
         }
         [HttpGet("getDoctorsFromSurvey")]
         public List<String> GetAllDoctorsFromReporstByPatientIdForSurvey(String patientId)
         {
-            return surveyService.GetAllDoctorsFromReporstByPatientIdFromSurvey(patientId);
+            return surveyService.GetAllDoctorsFromReportsByPatientIdFromSurvey(patientId);
         }
         [HttpGet("getDoctorsForSurveyList")]
         public List<String> GetAllDoctorsFromReporstByPatientIdForSurveyList(String patientId)
         {
-            return surveyService.GetAllDoctorsFromReporstByPatientIdForSurveyList(patientId);
+            return surveyService.GetAllDoctorsFromReportsByPatientIdForSurveyList(patientId);
         }
 
         [HttpGet("getStatistiEachQuestion")]
         public List<StatisticAuxilaryClass> getStatisticsEachQuestion()
         {
-            return surveyService.getStatisticsEachQuestion();
+            return surveyService.GetStatisticsEachQuestion();
         }
 
         [HttpGet("getStatistiEachTopic")]
         public List<StatisticAuxilaryClass> getStatisticsEachTopic()
         {
-            return surveyService.getStatisticsEachTopic();
+            return surveyService.GetStatisticsEachTopic();
 
         }
 
         [HttpGet("getStatisticForDoctor")]
         public List<StatisticAuxilaryClass> getStatisticsForDoctor(string ID)
         {
-            return surveyService.getStatisticsForDoctor(ID);
+            return surveyService.GetStatisticsForDoctor(ID);
 
         }
     }
