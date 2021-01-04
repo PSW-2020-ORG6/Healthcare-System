@@ -47,16 +47,16 @@ namespace GraphicEditor.ViewModel
                     SettingButtonLook("UBuildingButtonStyle");
                     break;
                 case 2:
-                    SettingButtonLook("OctagonBuildingButtonStyle");
+                    SettingButtonLook("HexagonBuildingButtonStyle");
                     break;
                 case 3:
-                    SettingButtonLook("DermatologyBuildingButtonStyle");
+                    SettingButtonLook("HoleBuildingButtonStyle");
                     break;
                 case 4:
-                    SettingButtonLook("RectangleBuildingButtonStyle");
+                    SettingButtonLook("SquareBuildingButtonStyle");
                     break;
                 case 5:
-                    SettingButtonLook("DefaultRectangleBuildingButtonStyle");
+                    SettingButtonLook("RectangleBuildingButtonStyle");
                     break;
             }
             Window.Close();
