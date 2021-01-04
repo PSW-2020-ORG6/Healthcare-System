@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
-using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
@@ -14,7 +13,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
     {
         public override List<Appointment> GetAll()
         {
-            return dbContext.Appointment
+            return DbContext.Appointment
                 .Include(a => a.Patient)
                 .Include(a => a.Physician)
                 .Include(a => a.Room)
@@ -40,6 +39,36 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public List<Appointment> GetAppointmentsByRoom(Room room)
         {
             return GetAll().Where(appointment => appointment.Room.Equals(room)).ToList();
+        }
+
+        public List<Appointment> GetByRoomSerialNumber(string roomSerialNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Appointment> GetByPhysicianSerialNumber(string physicianSerialNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Appointment> GetByPatientSerialNumber(string patientSerialNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Appointment> GetByPatientId(string patientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Appointment> GetByPatientIdActive(string patientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Appointment> GetByPatientIdCanceled(string patientId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

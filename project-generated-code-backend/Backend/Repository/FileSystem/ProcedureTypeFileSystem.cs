@@ -1,8 +1,8 @@
-﻿using Backend.Repository;
-using HealthClinicBackend.Backend.Model.Schedule;
+﻿using HealthClinicBackend.Backend.Model.Schedule;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Newtonsoft.Json;
 
-namespace HCI_SIMS_PROJEKAT.Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.FileSystem
 {
     public class ProcedureTypeFileSystem : GenericFileSystem<ProcedureType>, IProcedureTypeRepository
     {

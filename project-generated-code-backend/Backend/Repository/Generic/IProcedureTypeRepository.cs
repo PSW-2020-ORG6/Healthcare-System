@@ -1,7 +1,6 @@
-﻿using Backend.Repository;
-using HealthClinicBackend.Backend.Model.Schedule;
+﻿using HealthClinicBackend.Backend.Model.Schedule;
 
-namespace HCI_SIMS_PROJEKAT.Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.Generic
 {
     public interface IProcedureTypeRepository : IGenericRepository<ProcedureType>
     {

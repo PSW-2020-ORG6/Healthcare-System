@@ -5,7 +5,7 @@
 
 using System;
 using System.Collections.Generic;
-using Model.Accounts;
+using HealthClinicBackend.Backend.Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Model.Blog
 {

@@ -1,6 +1,6 @@
 ﻿using HealthClinicBackend.Backend.Model.MedicalExam;
 
-namespace Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.Generic
 {
     public interface IDiagnosticTypeRepository : IGenericRepository<DiagnosticType>
     {

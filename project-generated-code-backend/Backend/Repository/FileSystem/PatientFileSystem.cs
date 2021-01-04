@@ -3,13 +3,13 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class PatientFileSystem
 
-using Model.Accounts;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Repository.Generic;
+using Newtonsoft.Json;
 
-namespace Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.FileSystem
 {
     public class PatientFileSystem : GenericFileSystem<Patient>, IPatientRepository
     {
@@ -17,6 +17,7 @@ namespace Backend.Repository
         {
             path = @"./../../data/patients.txt";
         }
+
         public List<Patient> GetPatientsByPhysitian(Physician physician)
         {
             throw new NotImplementedException();
@@ -27,8 +28,7 @@ namespace Backend.Repository
             throw new NotImplementedException();
         }
 
-
-        public bool ConfirmEmailUpdate()
+        public Patient GetByJmbg(string jmbg)
         {
             throw new NotImplementedException();
         }

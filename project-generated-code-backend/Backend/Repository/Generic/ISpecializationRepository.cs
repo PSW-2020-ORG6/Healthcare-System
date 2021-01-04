@@ -1,10 +1,10 @@
-﻿using Backend.Repository;
+﻿using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
-using Model.Accounts;
 
-namespace HCI_SIMS_PROJEKAT.Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.Generic
 {
     public interface ISpecializationRepository : IGenericRepository<Specialization>
     {
+        List<Specialization> GetByName(string name);
     }
 }

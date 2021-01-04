@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Model.Accounts;
 using System;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Blog;

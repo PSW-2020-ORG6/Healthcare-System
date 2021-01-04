@@ -6,7 +6,6 @@
 using System;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Util;
-using Model.Accounts;
 using Newtonsoft.Json;
 
 namespace HealthClinicBackend.Backend.Model.MedicalExam

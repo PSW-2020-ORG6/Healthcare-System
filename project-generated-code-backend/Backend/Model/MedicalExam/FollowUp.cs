@@ -5,7 +5,7 @@
 
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using Model.Accounts;
+using HealthClinicBackend.Backend.Model.Accounts;
 using Newtonsoft.Json;
 
 namespace HealthClinicBackend.Backend.Model.MedicalExam

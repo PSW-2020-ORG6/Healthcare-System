@@ -10,7 +10,6 @@ using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Service.HospitalAccountsService;
 using HealthClinicBackend.Backend.Service.HospitalResourcesService;
-using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Controller.SecretaryControllers
 {

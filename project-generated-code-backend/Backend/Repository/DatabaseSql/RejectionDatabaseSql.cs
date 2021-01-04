@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
@@ -9,32 +9,32 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
     {
         public override List<Rejection> GetAll()
         {
-            return dbContext.Rejection.ToList();
+            return DbContext.Rejection.ToList();
         }
 
         public override void Save(Rejection newEntity)
         {
-            dbContext.Rejection.Add(newEntity);
-            dbContext.SaveChanges();
+            DbContext.Rejection.Add(newEntity);
+            DbContext.SaveChanges();
         }
 
         public override void Delete(string id)
         {
-            var rejection = dbContext.Rejection.Find(id);
+            var rejection = DbContext.Rejection.Find(id);
             if (rejection == null) return;
-            dbContext.Rejection.Remove(rejection);
-            dbContext.SaveChanges();
+            DbContext.Rejection.Remove(rejection);
+            DbContext.SaveChanges();
         }
 
         public override void Update(Rejection updateEntity)
         {
-            dbContext.Rejection.Update(updateEntity);
-            dbContext.SaveChanges();
+            DbContext.Rejection.Update(updateEntity);
+            DbContext.SaveChanges();
         }
 
         public override Rejection GetById(string id)
         {
-            return dbContext.Rejection.Find(id);
+            return DbContext.Rejection.Find(id);
         }
     }
 }

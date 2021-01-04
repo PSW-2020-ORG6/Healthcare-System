@@ -5,7 +5,6 @@
 
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Util;
-using Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies
 {

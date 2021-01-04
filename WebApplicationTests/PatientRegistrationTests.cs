@@ -1,5 +1,4 @@
-﻿using Model.Accounts;
-using Moq;
+﻿using Moq;
 using System;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Util;

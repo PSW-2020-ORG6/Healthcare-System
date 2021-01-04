@@ -17,27 +17,27 @@ namespace HealthClinicBackend.Backend.Model.Blog
 
         public DateTime Date { get; set; }
 
-        public Boolean Approved { get; set; }
+        public bool Approved { get; set; }
 
         public Feedback() : base()
         {
         }
 
-        public Feedback(String text, String patientId, DateTime date, Boolean app) : base()
+        public Feedback(string text, string patientId, DateTime date, bool approved) : base()
         {
             PatientId = patientId;
             Text = text;
             Date = date;
-            Approved = app;
+            Approved = approved;
         }
 
-        public Feedback(String serialNumber, String text, String patientId, DateTime date, Boolean app) : base(
+        public Feedback(string serialNumber, string text, string patientId, DateTime date, bool approved) : base(
             serialNumber)
         {
             PatientId = patientId;
             Text = text;
             Date = date;
-            Approved = app;
+            Approved = approved;
         }
 
         public Feedback(FeedbackDto feedbackDto) : base()

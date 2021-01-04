@@ -1,9 +1,10 @@
-﻿using Backend.Repository;
+﻿using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Util;
 
-namespace HCI_SIMS_PROJEKAT.Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.Generic
 {
     public interface IAddressRepository : IGenericRepository<Address>
     {
+        List<Address> GetAddressesByStreet(string street);
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Model.Util;
+using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
-using Npgsql;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
@@ -11,14 +10,14 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         private const string CONNECTION_STRING =
             "User ID =postgres;Password=super;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
 
-        public readonly HealthCareSystemDbContext dbContext;
+        public readonly HealthCareSystemDbContext DbContext;
 
         protected GenericDatabaseSql()
         {
             var options = new DbContextOptionsBuilder<HealthCareSystemDbContext>()
                 .UseNpgsql(CONNECTION_STRING)
                 .Options;
-            dbContext = new HealthCareSystemDbContext(options);
+            DbContext = new HealthCareSystemDbContext(options);
         }
 
         public virtual List<T> GetAll()

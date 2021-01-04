@@ -1,9 +1,10 @@
-﻿using Backend.Repository;
+﻿using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Hospital;
 
-namespace health_clinic_class_diagram.Backend.Repository
+namespace HealthClinicBackend.Backend.Repository.Generic
 {
     public interface IBuildingRepository : IGenericRepository<Building>
     {
+        List<Building> GetByName(string name);
     }
 }

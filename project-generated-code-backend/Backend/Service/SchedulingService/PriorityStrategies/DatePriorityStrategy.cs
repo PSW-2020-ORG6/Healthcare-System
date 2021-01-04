@@ -5,9 +5,9 @@
 
 using System;
 using System.Collections.Generic;
-using Backend.Repository;
 using HealthClinicBackend.Backend.Dto;
-using Model.Accounts;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Repository.FileSystem;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.PriorityStrategies
 {

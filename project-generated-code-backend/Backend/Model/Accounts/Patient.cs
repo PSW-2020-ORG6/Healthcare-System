@@ -7,7 +7,6 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Util;
-using Model.Accounts;
 using Newtonsoft.Json;
 
 namespace HealthClinicBackend.Backend.Model.Accounts
@@ -32,6 +31,8 @@ namespace HealthClinicBackend.Backend.Model.Accounts
         public string Gender { get; set; }
         public string Image { get; set; }
         public bool Guest { get; set; }
+        public bool IsMalicious { get; set; }
+        public bool IsBlocked { get; set; }
         public bool EmailConfirmed { get; set; }
         [ForeignKey("Physician")] public string PhysicianSerialNumber { get; set; }
         public String ChosenPhysician { get; set; }

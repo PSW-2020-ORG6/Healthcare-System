@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.MedicalExam;
 using HealthClinicBackend.Backend.Model.Survey;
-using Model.Accounts;
 using WebApplication.Backend.Repositorys;
 using WebApplication.Backend.Util;
 
