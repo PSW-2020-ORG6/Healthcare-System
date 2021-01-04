@@ -71,76 +71,78 @@ namespace WebApplication.Backend.Model
             modelBuilder.Entity<Room>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Room>().Ignore(o => o.RoomType);
             modelBuilder.Entity<Room>().Ignore(o => o.Equipment);
+            modelBuilder.Entity<Room>().Ignore(o => o.Beds);
+            modelBuilder.Entity<Room>().Ignore(o => o.Medinices);
+
+            modelBuilder.Entity<Room>()
+               .Property(r => r.Name)
+               .HasField("_name");
+            modelBuilder.Entity<Room>()
+               .Property(r => r.Id)
+               .HasField("_id");
+            modelBuilder.Entity<Room>()
+               .Property(r => r.FloorSerialNumber)
+               .HasField("_floorSerialNumber");
+            modelBuilder.Entity<Room>()
+               .Property(r => r.RoomTypeSerialNumber)
+               .HasField("_roomTypeSerialNumber");
+            modelBuilder.Entity<Room>()
+                .Property(r => r.PositionSerialNumber)
+                .HasField("_positionSerialNumber");
+            modelBuilder.Entity<Room>()
+               .Property(r => r.Style)
+               .HasField("_style");
+
             modelBuilder.Entity<Room>().HasData(
                 new Room
                 {
-                    SerialNumber = "101", Name = "Examination room 101", Id = 101, FloorSerialNumber = "1001",
-                    RoomTypeSerialNumber = "10000003", Style = "RoomButtonStyle"
+                    SerialNumber = "101",
+                    _name = "Examination room 101",
+                    _id = 101,
+                    _floorSerialNumber = "1001",
+                    _roomTypeSerialNumber = "10000003",
+                    _positionSerialNumber = "70001",
+                    _style = "RoomButtonStyle"
                 },
                 new Room
                 {
-                    SerialNumber = "102", Name = "Examination room 102", Id = 102, FloorSerialNumber = "1001",
-                    RoomTypeSerialNumber = "10000003", Style = "RoomButtonStyle"
+                    SerialNumber = "102",
+                    _name = "Examination room 102",
+                    _id = 102,
+                    _floorSerialNumber = "1001",
+                    _roomTypeSerialNumber = "10000003",
+                    _positionSerialNumber = "70002",
+                    _style = "RoomButtonStyle"
                 },
                 new Room
                 {
-                    SerialNumber = "103", Name = "Store room 103", Id = 103, FloorSerialNumber = "1001",
-                    RoomTypeSerialNumber = "10000002", Style = "RoomButtonStyle"
+                    SerialNumber = "103",
+                    _name = "Store room 103",
+                    _id = 103,
+                    _floorSerialNumber = "1001",
+                    _roomTypeSerialNumber = "10000002",
+                    _positionSerialNumber = "70003",
+                    _style = "RoomButtonStyle"
                 },
                 new Room
                 {
-                    SerialNumber = "104", Name = "Examination room 104", Id = 104, FloorSerialNumber = "1001",
-                    RoomTypeSerialNumber = "10000003", Style = "RoomButtonStyle"
+                    SerialNumber = "104",
+                    _name = "Examination room 104",
+                    _id = 104,
+                    _floorSerialNumber = "1001",
+                    _roomTypeSerialNumber = "10000003",
+                    _positionSerialNumber = "70004",
+                    _style = "RoomButtonStyle"
                 },
                 new Room
                 {
-                    SerialNumber = "105", Name = "Store room 105", Id = 105, FloorSerialNumber = "1001",
-                    RoomTypeSerialNumber = "10000002", Style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "106", Name = "Operation room 106", Id = 106, FloorSerialNumber = "1002",
-                    RoomTypeSerialNumber = "10000001", Style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "107", Name = "Operation room 107", Id = 107, FloorSerialNumber = "1002",
-                    RoomTypeSerialNumber = "10000001", Style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "108", Name = "Store room 108", Id = 108, FloorSerialNumber = "1002",
-                    RoomTypeSerialNumber = "10000002", Style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "109", Name = "Examination room 109", Id = 109, FloorSerialNumber = "1003",
-                    RoomTypeSerialNumber = "10000003", Style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "110", Name = "Operation room 110", Id = 110, FloorSerialNumber = "1003",
-                    RoomTypeSerialNumber = "10000001", Style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "111", Name = "Examination room 111", Id = 111, FloorSerialNumber = "1003",
-                    RoomTypeSerialNumber = "10000003", Style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "112", Name = "Store room 112", Id = 112, FloorSerialNumber = "1003",
-                    RoomTypeSerialNumber = "10000002", Style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "113", Name = "Examination room 113", Id = 113, FloorSerialNumber = "1003",
-                    RoomTypeSerialNumber = "10000003", Style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "114", Name = "Examination room 114", Id = 114, FloorSerialNumber = "1003",
-                    RoomTypeSerialNumber = "10000003", Style = "RoomButtonStyle"
+                    SerialNumber = "105",
+                    _name = "Store room 105",
+                    _id = 105,
+                    _floorSerialNumber = "1001",
+                    _roomTypeSerialNumber = "10000002",
+                    _positionSerialNumber = "70005",
+                    _style = "RoomButtonStyle"
                 }
             );
         }
@@ -319,16 +321,41 @@ namespace WebApplication.Backend.Model
         {
             modelBuilder.Entity<Building>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Building>().Ignore(o => o.Floors);
+
+            modelBuilder.Entity<Building>()
+               .Property(b => b.Name)
+               .HasField("_name");
+            modelBuilder.Entity<Building>()
+                .Property(b => b.Color)
+                .HasField("_color");
+            modelBuilder.Entity<Building>()
+                .Property(b => b.Row)
+                .HasField("_row");
+            modelBuilder.Entity<Building>()
+                .Property(b => b.Column)
+                .HasField("_column");
+            modelBuilder.Entity<Building>()
+                .Property(b => b.Style)
+                .HasField("_style");
+
             modelBuilder.Entity<Building>().HasData(
                 new Building
                 {
-                    SerialNumber = "10001", Name = "Cardiology", Color = "Orange", Row = 5, Column = 1,
-                    Style = "TriangleBuildingButtonStyle"
+                    SerialNumber = "10001",
+                    _name = "Cardiology",
+                    _color = "Orange",
+                    _row = 5,
+                    _column = 1,
+                    _style = "TriangleBuildingButtonStyle"
                 },
                 new Building
                 {
-                    SerialNumber = "10002", Name = "Orthopedy", Color = "Red", Row = 5, Column = 3,
-                    Style = "UBuildingButtonStyle"
+                    SerialNumber = "10002",
+                    _name = "Orthopedy",
+                    _color = "Red",
+                    _row = 5,
+                    _column = 3,
+                    _style = "UBuildingButtonStyle"
                 }
             );
         }
@@ -337,10 +364,18 @@ namespace WebApplication.Backend.Model
         {
             modelBuilder.Entity<Floor>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Floor>().Ignore(o => o.Rooms);
+
+            modelBuilder.Entity<Floor>()
+               .Property(f => f.Name)
+               .HasField("_name");
+            modelBuilder.Entity<Floor>()
+               .Property(f => f.BuildingSerialNumber)
+               .HasField("_buildingSerialNumber");
+
             modelBuilder.Entity<Floor>().HasData(
-                new Floor {SerialNumber = "1001", Name = "Floor1", BuildingSerialNumber = "10001"},
-                new Floor {SerialNumber = "1002", Name = "Floor2", BuildingSerialNumber = "10001"},
-                new Floor {SerialNumber = "1003", Name = "Floor1", BuildingSerialNumber = "10002"}
+                new Floor { SerialNumber = "1001", _name = "Floor1", _buildingSerialNumber = "10001" },
+                new Floor { SerialNumber = "1002", _name = "Floor2", _buildingSerialNumber = "10001" },
+                new Floor { SerialNumber = "1003", _name = "Floor1", _buildingSerialNumber = "10002" }
             );
         }
 
@@ -514,6 +549,9 @@ namespace WebApplication.Backend.Model
 
         private static void BedCreation(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Bed>().Property(o => o.Quantity).HasDefaultValue(1);
+            modelBuilder.Entity<Bed>().Ignore(o => o.IsOccupied);
+
             modelBuilder.Entity<Bed>().HasData(
                 new Bed
                 {
