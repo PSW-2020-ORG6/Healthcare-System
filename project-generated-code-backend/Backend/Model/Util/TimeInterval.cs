@@ -10,6 +10,7 @@ namespace HealthClinicBackend.Backend.Model.Util
         public string _id;
         public DateTime _start;
         public DateTime _end;
+
         public DateTime Start => _start;
         public DateTime End => _end;
         public string Id => _id;
@@ -52,9 +53,32 @@ namespace HealthClinicBackend.Backend.Model.Util
             return Start.Equals(other.Start) && End.Equals(other.End);
         }
 
+        public static bool operator ==(TimeInterval firstTimeInterval, TimeInterval secondTimeInterval)
+        {
+            if (firstTimeInterval is null)
+                return secondTimeInterval is null;
+
+            return firstTimeInterval.Equals(secondTimeInterval);
+        }
+
+        public static bool operator !=(TimeInterval firstTimeInterval, TimeInterval secondTimeInterval)
+        {
+            if (firstTimeInterval is null)
+            {
+                throw new ArgumentNullException(nameof(firstTimeInterval));
+            }
+
+            if (secondTimeInterval is null)
+            {
+                throw new ArgumentNullException(nameof(secondTimeInterval));
+            }
+
+            return !(firstTimeInterval == secondTimeInterval);
+        }
+
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return HashCode.Combine(Start, End, Id, Time);
         }
 
         public override string ToString()
