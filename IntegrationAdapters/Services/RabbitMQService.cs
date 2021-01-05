@@ -1,15 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using HealthClinicBackend.Backend.Model.PharmacySupport;
 using IntegrationAdapters.Models;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
@@ -22,7 +18,12 @@ namespace IntegrationAdapters.Services
         
         public override Task StartAsync(CancellationToken cancellationToken)
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
+            var factory = new ConnectionFactory
+            {
+                HostName = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "localhost",
+                UserName = Environment.GetEnvironmentVariable("RABBITMQ_USERNAME") ?? "guest",
+                Password = Environment.GetEnvironmentVariable("RABBITMQ_PASSWORD") ?? "guest",
+            };
             connection = factory.CreateConnection();
             channel = connection.CreateModel();
             channel.QueueDeclare(queue: "hello",

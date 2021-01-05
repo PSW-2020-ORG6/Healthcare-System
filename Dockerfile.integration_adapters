@@ -1,0 +1,17 @@
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+WORKDIR /app
+ 
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS publish
+WORKDIR /src
+COPY . .
+RUN dotnet publish "IntegrationAdapters/IntegrationAdapters.csproj" -c Release -o /app/publish 
+
+ 
+FROM base AS final
+RUN useradd -u 1234 nonrootuser
+USER nonrootuser
+WORKDIR /app
+COPY --from=publish /app/publish .
+EXPOSE 8080
+ENV PORT 8080
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet IntegrationAdapters.dll
