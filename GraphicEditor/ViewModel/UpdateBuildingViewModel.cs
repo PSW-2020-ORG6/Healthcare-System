@@ -20,6 +20,7 @@ namespace GraphicEditor.ViewModel
         private Building oldBuilding;
         private SolidColorBrush buildingColor;
         private List<Floor> newFloorList = new List<Floor>();
+        private int numberOfFloors;
 
         private BuildingController buildingController = new BuildingController();
         private FloorController floorController = new FloorController();
@@ -44,7 +45,11 @@ namespace GraphicEditor.ViewModel
 
         public int FloorNumbers
         {
-            get => building.Floors.Count + newFloorList.Count;
+            get => numberOfFloors;
+            set
+            {
+                SetProperty(ref numberOfFloors, value);
+            }
         }
 
         public UpdateBuildingViewModel(Building _building)
@@ -56,33 +61,20 @@ namespace GraphicEditor.ViewModel
             oldBuilding = _building;
             buildingColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString(_building.Color));
             building = new Building(_building);
+            
             oldBuilding.Floors = new List<Floor>(floorController.GetByBuildingSerialNumber(oldBuilding.SerialNumber));
+            numberOfFloors = oldBuilding.Floors.Count;
             building.Floors = floorController.GetByBuildingSerialNumber(building.SerialNumber);
         }
 
         private void AddFloor()
         {
-            if (building.Floors.Count + newFloorList.Count < 7)
-            {
-                Floor floor = new Floor(building, building.Floors.Count + newFloorList.Count);
-                newFloorList.Add(floor);
-                OnPropertyChanged("FloorNumbers");
-            }
-            
+            if (FloorNumbers < 7) ++FloorNumbers;
         }
 
         private void DeleteFloor()
         {
-            if (newFloorList.Count != 0)
-            {
-                newFloorList.RemoveAt(newFloorList.Count - 1);
-                OnPropertyChanged("FloorNumbers");
-            }
-            else if (building.Floors.Count != 1)
-            {
-                building.Floors.RemoveAt(building.Floors.Count - 1);
-                OnPropertyChanged("FloorNumbers");
-            }
+            if (FloorNumbers != 1) --FloorNumbers;
         }
 
         private void ConfirmUpdates()
@@ -99,24 +91,25 @@ namespace GraphicEditor.ViewModel
         private void UpdateBuilding()
         {
             building.Color = BuildingColor.Color.ToString();
-            if (newFloorList.Count != 0)
+            
+            if (FloorNumbers > oldBuilding.Floors.Count)
             {
-                building.Floors.AddRange(newFloorList);
-                foreach (Floor f in newFloorList) floorController.NewFloor(f);
+                for (int i = oldBuilding.Floors.Count; i < FloorNumbers; ++i)
+                {
+                    floorController.NewFloor(new Floor(building, i));
+                }
             }
-            else if (building.Floors.Count != oldBuilding.Floors.Count)
+            else if (FloorNumbers < oldBuilding.Floors.Count)
             {
-                for (int i = oldBuilding.Floors.Count - 1; i > building.Floors.Count - 1; --i)
+                for (int i = oldBuilding.Floors.Count - 1; i > FloorNumbers - 1; --i)
                 {
                     floorController.DeleteFloor(oldBuilding.Floors[i]);
                 }
-                    
             }
 
             oldBuilding.Name = building.Name;
             oldBuilding.Color = building.Color;
             oldBuilding.Floors = building.Floors;
-            
 
             Button buildingButton = HospitalMapUserControlViewModel.buildingButtons[oldBuilding.SerialNumber];
             buildingButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(oldBuilding.Color));

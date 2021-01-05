@@ -148,8 +148,6 @@
                        HorizontalAlignment="Center"/>
 
         <ContentControl     x:Name="ContentPresenter"
-                            BorderBrush="Black"
-                            BorderThickness="1"
                             Content="{Binding Path=FloorViewModel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
     </DockPanel>
 </UserControl>
