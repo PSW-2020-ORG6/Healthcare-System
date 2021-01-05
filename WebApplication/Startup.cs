@@ -97,8 +97,8 @@ namespace WebApplication
             string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "healthcare-system-db";
 
             // Change this if user and password are different
-            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "user";
-            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "password";
+            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "postgres";
+            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "super";
 
             return $"userid={user};server={server};port={port};database={database};password={password};";
         }

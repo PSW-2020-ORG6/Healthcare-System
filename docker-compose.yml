@@ -4,9 +4,9 @@ services:
   postgres:
     image: postgres:13.1
     environment:
-      POSTGRES_PASSWORD: "password"
-      POSTGRES_USER: "user"
-      POSTGRES_DB: "healthcare-system-db"
+      DATABASE_PASSWORD: "password"
+      DATABASE_USERNAME: "user"
+      DATABASE_SCHEMA: "healthcare-system-db"
     ports: 
       - "5432:5432"
     networks: 
@@ -42,6 +42,9 @@ services:
       RABBITMQ_USERNAME: guest
       RABBITMQ_PASSOWRD: guest
       DATABASE_HOST: "postgres"
+      DATABASE_PASSWORD: "password"
+      DATABASE_USERNAME: "user"
+      DATABASE_SCHEMA: "healthcare-system-db"
       DataBaseConnectionSettings:RetryCount: 100
       DataBaseConnectionSettings:RetryWaitInSeconds: 30
     depends_on:
@@ -65,6 +68,9 @@ services:
       RABBITMQ_USERNAME: guest
       RABBITMQ_PASSOWRD: guest
       DATABASE_HOST: "postgres"
+      DATABASE_PASSWORD: "password"
+      DATABASE_USERNAME: "user"
+      DATABASE_SCHEMA: "healthcare-system-db"
       DataBaseConnectionSettings:RetryCount: 100
       DataBaseConnectionSettings:RetryWaitInSeconds: 30
     volumes:
