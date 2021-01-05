@@ -19,6 +19,7 @@ namespace GraphicEditor.ViewModel
         MainWindowViewModel mapParent;
         BuildingUserControlViewModel buildingParent;
         Grid RoomGrid;
+        private GeometryGroup floorType;
         private RoomController roomController = new RoomController();
         private RoomTypeController roomTypeController = new RoomTypeController();
         private BedController bedController = new BedController();
@@ -36,7 +37,44 @@ namespace GraphicEditor.ViewModel
             buildingParent = _buildingParent;
             buildingStyle = _buildingParent.Building.Style;
             RoomGrid = grid;
+            FindFloorType();
             RoomInitialization(floor.SerialNumber);
+        }
+
+        private void FindFloorType()
+        {
+            ResourceDictionary.Source = new Uri("/GraphicEditor;component/Resources/Styles/FloorClips.xaml", UriKind.RelativeOrAbsolute);
+            switch (buildingParent.Building.Style)
+            {
+                case "RectangleBuildingButtonStyle":
+                    floorType = (GeometryGroup)ResourceDictionary["RectangleFloor"];
+                    break;
+                case "SquareBuildingButtonStyle":
+                    floorType = (GeometryGroup)ResourceDictionary["SquareFloor"];
+                    break;
+                case "TriangleBuildingButtonStyle":
+                    floorType = (GeometryGroup)ResourceDictionary["TriangleFloor"];
+                    break;
+                case "UBuildingButtonStyle":
+                    floorType = (GeometryGroup)ResourceDictionary["UFloor"];
+                    break;
+                case "HexagonBuildingButtonStyle":
+                    floorType = (GeometryGroup)ResourceDictionary["HexagonFloor"];
+                    break;
+                case "HoleBuildingButtonStyle":
+                    floorType = (GeometryGroup)ResourceDictionary["HoleFloor"];
+                    break;
+
+            }
+        }
+
+        public GeometryGroup FloorType
+        {
+            get => floorType;
+            //set
+            //{
+            //    SetProperty(ref floorType, value);
+            //}
         }
 
         public void RoomInitialization(string floorSerialNumber)
