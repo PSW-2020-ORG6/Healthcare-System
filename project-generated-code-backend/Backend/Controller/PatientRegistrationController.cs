@@ -13,9 +13,9 @@ namespace HealthClinicBackend.Backend.Controller
     {
         private readonly PatientRegistrationService _patientRegistrationService;
 
-        public PatientRegistrationController()
+        public PatientRegistrationController(PatientRegistrationService patientRegistrationService)
         {
-            _patientRegistrationService = new PatientRegistrationService();
+            _patientRegistrationService = patientRegistrationService;
         }
 
         public void RegisterPatient(PatientDto patientDto)

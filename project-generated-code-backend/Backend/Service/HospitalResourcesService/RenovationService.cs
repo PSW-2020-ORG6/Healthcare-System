@@ -6,7 +6,6 @@
 using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Hospital;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
@@ -15,9 +14,9 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
     {
         private readonly IRenovationRepository _renovationRepository;
 
-        public RenovationService()
+        public RenovationService(IRenovationRepository renovationRepository)
         {
-            _renovationRepository = new RenovationDatabaseSql();
+            _renovationRepository = renovationRepository;
         }
 
         public Renovation GetById(String id)

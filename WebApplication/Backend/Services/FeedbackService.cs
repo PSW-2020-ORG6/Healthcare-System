@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Blog;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace WebApplication.Backend.Services
@@ -14,11 +13,6 @@ namespace WebApplication.Backend.Services
         // private FeedbackRepository feedbackRepository;
         private readonly IFeedbackRepository _feedbackRepository;
         private FeedbackDto feedbackDTO = new FeedbackDto();
-
-        public FeedbackService()
-        {
-            _feedbackRepository = new FeedbackDatabaseSql();
-        }
 
         public FeedbackService(IFeedbackRepository feedbackRepository)
         {

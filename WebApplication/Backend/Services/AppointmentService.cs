@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Schedule;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 using WebApplication.Backend.DTO;
 
@@ -17,22 +16,14 @@ namespace WebApplication.Backend.Services
         private readonly IPatientRepository _patientRepository;
 
         private PhysicianDTO physitianDTO = new PhysicianDTO();
-        private TimeIntervalDTO timeIntervalDTO = new TimeIntervalDTO();
         private SpecializationDTO specializationDTO = new SpecializationDTO();
         private AppointmentDTO appointmentDTO = new AppointmentDTO();
+        private TimeIntervalDTO timeIntervalDTO = new TimeIntervalDTO();
 
         private AppointmentWithRecommendationDTO appointmentWithRecommendationDTO =
             new AppointmentWithRecommendationDTO();
 
         private DateFromStringConverter dateTimeDTO = new DateFromStringConverter();
-
-        public AppointmentService()
-        {
-            _specializationRepository = new SpecializationDatabaseSql();
-            _appointmentRepository = new AppointmentDatabaseSql();
-            _physicianRepository = new PhysicianDatabaseSql();
-            _patientRepository = new PatientDatabaseSql();
-        }
 
         public AppointmentService(ISpecializationRepository specializationRepository,
             IAppointmentRepository appointmentRepository, IPhysicianRepository physicianRepository,

@@ -2,7 +2,6 @@
 using System.Linq;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Util;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
@@ -11,9 +10,9 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
     {
         private readonly IPhysicianRepository _physicianRepository;
 
-        public PhysicianAccountService()
+        public PhysicianAccountService(IPhysicianRepository physicianRepository)
         {
-            _physicianRepository = new PhysicianDatabaseSql();
+            _physicianRepository = physicianRepository;
         }
 
         internal List<TimeInterval> GetAllVacations(Physician physicianDto)
@@ -38,7 +37,7 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
             _physicianRepository.Delete(physician.SerialNumber);
         }
 
-        public List<Physician> GetAllPhysitians()
+        public List<Physician> GetAllPhysicians()
         {
             return _physicianRepository.GetAll();
         }

@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Schedule;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
-using HealthClinicBackend.Backend.Repository.FileSystem;
 using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
@@ -12,32 +10,34 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
         private readonly IPatientRepository _patientRepository;
         private readonly IAppointmentRepository _appointmentRepository;
 
-        public PatientAccountsService()
+        public PatientAccountsService(IPatientRepository patientRepository,
+            IAppointmentRepository appointmentRepository)
         {
-            _patientRepository = new PatientDatabaseSql();
-            // TODO: 
-            _appointmentRepository = new AppointmentFileSystem();
+            _patientRepository = patientRepository;
+            _appointmentRepository = appointmentRepository;
         }
 
-        public List<Patient> getAllPatients()
+        public List<Patient> GetAllPatients()
         {
             return _patientRepository.GetAll();
         }
-        public List<Patient> getPatientsForPhysitian(Physician physician)
+
+        public List<Patient> GetPatientsForPhysician(Physician physician)
         {
             List<Patient> allPatients = _patientRepository.GetAll();
             List<Patient> patients = new List<Patient>();
             foreach (Patient patient in allPatients)
             {
-                if (IsPatientScheduledForPhysitian(patient, physician))
+                if (IsPatientScheduledForPhysician(patient, physician))
                 {
                     patients.Add(patient);
                 }
             }
+
             return patients;
         }
 
-        private bool IsPatientScheduledForPhysitian(Patient patient, Physician physician)
+        private bool IsPatientScheduledForPhysician(Patient patient, Physician physician)
         {
             List<Appointment> patientAppointments = _appointmentRepository.GetAppointmentsByPatient(patient);
             foreach (Appointment appointment in patientAppointments)
@@ -47,6 +47,7 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
                     return true;
                 }
             }
+
             return false;
         }
     }

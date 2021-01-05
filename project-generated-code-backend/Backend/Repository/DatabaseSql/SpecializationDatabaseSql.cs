@@ -7,6 +7,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class SpecializationDatabaseSql : GenericDatabaseSql<Specialization>, ISpecializationRepository
     {
+        public SpecializationDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
+        {
+        }
+
         public override List<Specialization> GetAll()
         {
             return DbContext.Specialization.ToList();

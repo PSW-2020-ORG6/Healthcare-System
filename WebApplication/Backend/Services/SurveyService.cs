@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using HealthClinicBackend.Backend.Model.Survey;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 using WebApplication.Backend.Util;
 
@@ -13,13 +12,6 @@ namespace WebApplication.Backend.Services
         private readonly ISurveyRepository _surveyRepository;
         private readonly IAppointmentRepository _appointmentRepository;
         private readonly IReportRepository _reportRepository;
-
-        public SurveyService()
-        {
-            _surveyRepository = new SurveyDatabaseSql();
-            _appointmentRepository = new AppointmentDatabaseSql();
-            _reportRepository = new ReportDatabaseSql();
-        }
 
         public SurveyService(ISurveyRepository surveyRepository, IAppointmentRepository appointmentRepository,
             IReportRepository reportRepository)

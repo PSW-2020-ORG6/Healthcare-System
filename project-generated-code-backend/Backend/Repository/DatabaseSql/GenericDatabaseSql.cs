@@ -10,7 +10,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         private const string CONNECTION_STRING =
             "User ID =postgres;Password=super;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
 
-        public readonly HealthCareSystemDbContext DbContext;
+        protected readonly HealthCareSystemDbContext DbContext;
 
         protected GenericDatabaseSql()
         {
@@ -18,6 +18,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 .UseNpgsql(CONNECTION_STRING)
                 .Options;
             DbContext = new HealthCareSystemDbContext(options);
+        }
+
+        protected GenericDatabaseSql(HealthCareSystemDbContext context)
+        {
+            DbContext = context;
         }
 
         public virtual List<T> GetAll()

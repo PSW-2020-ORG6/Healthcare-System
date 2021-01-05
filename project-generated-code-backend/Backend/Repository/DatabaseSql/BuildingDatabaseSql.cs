@@ -8,6 +8,14 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class BuildingDatabaseSql : GenericDatabaseSql<Building>, IBuildingRepository
     {
+        public BuildingDatabaseSql() : base()
+        {
+        }
+
+        public BuildingDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
+        {
+        }
+
         public override List<Building> GetAll()
         {
             return DbContext.Building

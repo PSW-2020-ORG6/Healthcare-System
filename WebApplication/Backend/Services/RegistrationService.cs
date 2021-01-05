@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using HealthClinicBackend.Backend.Model.Accounts;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 using HealthClinicBackend.Backend.Util;
 
@@ -15,12 +14,6 @@ namespace WebApplication.Backend.Services
     {
         private readonly IPatientRepository _patientRepository;
         private readonly IPhysicianRepository _physicianRepository;
-
-        public RegistrationService()
-        {
-            _patientRepository = new PatientDatabaseSql();
-            _physicianRepository = new PhysicianDatabaseSql();
-        }
 
         public RegistrationService(IPatientRepository patientRepository, IPhysicianRepository physicianRepository)
         {

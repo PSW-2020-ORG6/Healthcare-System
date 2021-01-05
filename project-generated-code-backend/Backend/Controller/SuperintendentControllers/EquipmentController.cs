@@ -12,6 +12,13 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 {
     public class EquipmentController
     {
+        private readonly EquipmentService _equipmentService;
+
+        public EquipmentController(EquipmentService equipmentService)
+        {
+            _equipmentService = equipmentService;
+        }
+
         public Equipment GetById()
         {
             throw new NotImplementedException();
@@ -19,7 +26,7 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 
         public List<Equipment> GetAll()
         {
-            return equipmentService.GetAll();
+            return _equipmentService.GetAll();
         }
 
         public void EditEquipment(Equipment equipment)
@@ -29,20 +36,12 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 
         public void NewEquipment(Equipment equipment)
         {
-            equipmentService.NewEquipment(equipment);
+            _equipmentService.NewEquipment(equipment);
         }
 
         public void DeleteEquipment(Equipment equipment)
         {
             throw new NotImplementedException();
         }
-
-        public EquipmentService equipmentService;
-
-        public EquipmentController()
-        {
-            equipmentService = new EquipmentService();
-        }
-
     }
 }

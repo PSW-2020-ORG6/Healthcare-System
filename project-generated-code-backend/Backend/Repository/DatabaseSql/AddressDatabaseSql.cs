@@ -7,6 +7,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class AddressDatabaseSql : GenericDatabaseSql<Address>, IAddressRepository
     {
+        public AddressDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
+        {
+        }
+
         public override List<Address> GetAll()
         {
             return DbContext.Address.ToList();

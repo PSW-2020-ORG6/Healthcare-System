@@ -10,9 +10,9 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
     {
         private readonly IBuildingRepository _buildingRepository;
 
-        public BuildingService()
+        public BuildingService(IBuildingRepository buildingRepository)
         {
-            _buildingRepository = new BuildingDatabaseSql();
+            _buildingRepository = buildingRepository;
         }
 
         public Building GetById()

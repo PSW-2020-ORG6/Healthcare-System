@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.MedicalExam;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.PatientCareService
 {
-    class ReportService
+    public class ReportService
     {
         private readonly IReportRepository _reportRepository;
 
-        public ReportService()
+        public ReportService(IReportRepository reportRepository)
         {
-            _reportRepository = new ReportDatabaseSql();
+            _reportRepository = reportRepository;
         }
 
         public List<Report> GetReportsByPatient(Patient patient)

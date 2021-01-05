@@ -18,6 +18,14 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
             _secretaryRepository = new SecretaryDatabaseSql();
         }
 
+        public HospitalLogInService(IPatientRepository patientRepository, IPhysicianRepository physicianRepository,
+            ISecretaryRepository secretaryRepository)
+        {
+            _patientRepository = patientRepository;
+            _physicianRepository = physicianRepository;
+            _secretaryRepository = secretaryRepository;
+        }
+
         /// <summary>
         /// Return TypeOfUser based on jmbg-userName and password
         /// </summary>

@@ -8,6 +8,14 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class PatientDatabaseSql : GenericDatabaseSql<Patient>, IPatientRepository
     {
+        public PatientDatabaseSql() : base()
+        {
+        }
+
+        public PatientDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
+        {
+        }
+
         public override List<Patient> GetAll()
         {
             // Use Include method to connect object and its references from other tables

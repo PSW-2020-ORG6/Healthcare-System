@@ -15,9 +15,9 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
     {
         private readonly IEquipmentRepository _equipmentRepository;
 
-        public EquipmentService()
+        public EquipmentService(IEquipmentRepository equipmentRepository)
         {
-            _equipmentRepository = new EquipmentDatabaseSql();
+            _equipmentRepository = equipmentRepository;
         }
 
         public Equipment GetById()

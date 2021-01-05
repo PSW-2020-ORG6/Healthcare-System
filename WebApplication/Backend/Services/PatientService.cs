@@ -4,7 +4,6 @@ using HealthClinicBackend.Backend.Dto;
 using System;
 using System.Linq;
 using HealthClinicBackend.Backend.Model.PharmacySupport;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 using WebApplication.Backend.DTO;
 
@@ -19,12 +18,6 @@ namespace WebApplication.Backend.Services
         private readonly IActionAndBenefitMessageRepository _actionsAndBenefitsRepository;
 
         private PatientDto patientDTO = new PatientDto();
-
-        public PatientService()
-        {
-            _patientRepository = new PatientDatabaseSql();
-            _actionsAndBenefitsRepository = new ActionAndBenefitMessageDatabaseSql();
-        }
 
         public PatientService(IPatientRepository patientRepository,
             IActionAndBenefitMessageRepository actionsAndBenefitsRepository)
