@@ -467,7 +467,7 @@
                                        VerticalAlignment="Center"
                                        Panel.ZIndex="10" />
                         </Grid>
-                        
+
                         <Border.InputBindings>
                             <MouseBinding MouseAction="LeftClick"
                                       Command="{Binding ShowRoomCommand}"
