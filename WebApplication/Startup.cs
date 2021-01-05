@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
-using HealthClinicBackend.Backend.Repository.DatabaseSql.Util;
 using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,19 +28,13 @@ namespace WebApplication
         {
             services.AddControllers();
 
-            IConfiguration conf = Configuration.GetSection("DataBaseConnectionSettings");
-            DataBaseConnectionSettings dataBaseConnectionSettings = conf.Get<DataBaseConnectionSettings>();
-
-            // Check if connection string is valid
-            Console.WriteLine($"Connection string: {dataBaseConnectionSettings.ConnectionString}");
-
             services.AddDbContext<HealthCareSystemDbContext>(options =>
             {
-                options.UseNpgsql(dataBaseConnectionSettings.ConnectionString,
-                    x => x.MigrationsAssembly("WebApplication")
-                        .EnableRetryOnFailure(dataBaseConnectionSettings.RetryCount,
-                            new TimeSpan(0, 0, 0, dataBaseConnectionSettings.RetryWaitInSeconds),
-                            new List<string>()));
+                options.UseNpgsql(
+                    CreateConnectionStringFromEnvironment(),
+                    x => x.MigrationsAssembly("Backend").EnableRetryOnFailure(5,
+                        new TimeSpan(0, 0, 0, 30), new List<string>())
+                );
             });
 
             // Inject repositories
@@ -95,6 +88,19 @@ namespace WebApplication
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
             app.UseDefaultFiles();
             app.UseStaticFiles();
+        }
+
+        private string CreateConnectionStringFromEnvironment()
+        {
+            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
+            string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "5432";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "healthcare-system-db";
+
+            // Change this if user and password are different
+            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "user";
+            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "password";
+
+            return $"userid={user};server={server};port={port};database={database};password={password};";
         }
     }
 }

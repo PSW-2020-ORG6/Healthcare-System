@@ -1,0 +1,83 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:13.1
+    environment:
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_USER: "user"
+      POSTGRES_DB: "healthcare-system-db"
+    ports: 
+      - "5432:5432"
+    networks: 
+      - network
+    volumes:
+      - sql-scripts:/docker-entrypoint-initdb.d/
+      - data:/var/lib/postgresql/data
+    
+
+
+  rabbit:
+    image: rabbitmq:management-alpine
+    container_name: rabbitmq
+    ports:
+      - 15672:15672
+    networks:
+      - network
+  
+  integration-adapter:
+    image: integration-adapter
+    container_name: integration-adapter
+    build:
+      context: .
+      dockerfile: Dockerfile.integration_adapters
+    restart: on-failure
+    ports:
+      - 8080:8080
+    networks: 
+      - network
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      RABBITMQ_HOST: rabbit
+      RABBITMQ_USERNAME: guest
+      RABBITMQ_PASSOWRD: guest
+      DATABASE_HOST: "postgres"
+      DataBaseConnectionSettings:RetryCount: 100
+      DataBaseConnectionSettings:RetryWaitInSeconds: 30
+    depends_on:
+      - rabbit
+      - postgres
+  
+  web-application:
+    image: web-application
+    container_name: web-application
+    build:
+      context: .
+      dockerfile: Dockerfile.web_application
+    restart: on-failure
+    ports:
+      - 5000:8080
+    networks: 
+      - network
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      RABBITMQ_HOST: rabbit
+      RABBITMQ_USERNAME: guest
+      RABBITMQ_PASSOWRD: guest
+      DATABASE_HOST: "postgres"
+      DataBaseConnectionSettings:RetryCount: 100
+      DataBaseConnectionSettings:RetryWaitInSeconds: 30
+    volumes:
+      - sql-scripts:/app/sql
+    depends_on:
+      - rabbit
+      - postgres
+
+volumes:
+  sql-scripts:
+  data:
+
+networks:
+  network:
+    name: network
+    driver: bridge
