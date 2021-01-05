@@ -5,8 +5,12 @@ using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class DiagnosticTypeDatabaseSql: GenericDatabaseSql<DiagnosticType>, IDiagnosticTypeRepository
+    public class DiagnosticTypeDatabaseSql : GenericDatabaseSql<DiagnosticType>, IDiagnosticTypeRepository
     {
+        public DiagnosticTypeDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
+        {
+        }
+
         public override List<DiagnosticType> GetAll()
         {
             return DbContext.DiagnosticType.ToList();

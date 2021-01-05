@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using HealthClinicBackend.Backend.Model.Hospital;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
@@ -17,10 +16,10 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
         private readonly IRoomRepository _roomRepository;
         private readonly IRoomTypeRepository _roomTypeRepository;
 
-        public RoomService()
+        public RoomService(IRoomRepository roomRepository, IRoomTypeRepository roomTypeRepository)
         {
-            _roomTypeRepository = new RoomTypeDatabaseSql();
-            _roomRepository = new RoomDatabaseSql();
+            _roomRepository = roomRepository;
+            _roomTypeRepository = roomTypeRepository;
         }
 
         public Room GetById(String id)

@@ -12,6 +12,11 @@ namespace HealthClinicBackend.Backend.Controller
             _hospitalLogInService = new HospitalLogInService();
         }
 
+        public HospitalLogInController(HospitalLogInService hospitalLogInService)
+        {
+            _hospitalLogInService = hospitalLogInService;
+        }
+
         public TypeOfUser GetUserType(string jmbg, string password)
         {
             return _hospitalLogInService.GetUserType(jmbg, password);

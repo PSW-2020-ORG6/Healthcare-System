@@ -9,6 +9,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class ReportDatabaseSql : GenericDatabaseSql<Report>, IReportRepository
     {
+        public ReportDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
+        {
+        }
+
         public override List<Report> GetAll()
         {
             var reports = DbContext.Report.ToList();

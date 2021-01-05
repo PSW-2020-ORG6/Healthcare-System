@@ -20,22 +20,23 @@ namespace HealthClinicBackend.Backend.Controller.SecretaryControllers
         private readonly PhysicianAccountService _physicianService;
         private readonly PatientAccountsService _patientAccountsService;
 
-        public SecretaryHospitalController()
+        public SecretaryHospitalController(HospitalService hospitalService, RoomService roomService,
+            PhysicianAccountService physicianAccountService, PatientAccountsService patientAccountsService)
         {
-            _hospitalService = new HospitalService();
-            _roomService = new RoomService();
-            _physicianService = new PhysicianAccountService();
-            _patientAccountsService = new PatientAccountsService();
+            _hospitalService = hospitalService;
+            _roomService = roomService;
+            _physicianService = physicianAccountService;
+            _patientAccountsService = patientAccountsService;
         }
 
         public List<Patient> GetAllPatients()
         {
-            return _patientAccountsService.getAllPatients();
+            return _patientAccountsService.GetAllPatients();
         }
 
         public List<Physician> GetAllPhysicians()
         {
-            return _physicianService.GetAllPhysitians();
+            return _physicianService.GetAllPhysicians();
         }
 
         public List<Room> GetAllRooms()

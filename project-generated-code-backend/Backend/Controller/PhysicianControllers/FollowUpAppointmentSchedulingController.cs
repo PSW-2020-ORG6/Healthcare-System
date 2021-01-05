@@ -13,10 +13,10 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
     {
         private readonly AppointmentSchedulingService _appointmentSchedulingService;
 
-        public FollowUpAppointmentSchedulingController()
+        public FollowUpAppointmentSchedulingController(AppointmentSchedulingService appointmentSchedulingService)
         {
-            _appointmentSchedulingService =
-                new AppointmentSchedulingService(new PhysicianFollowUpSchedulingStrategy());
+            _appointmentSchedulingService = appointmentSchedulingService;
+            _appointmentSchedulingService.SchedulingStrategyContext = new PhysicianFollowUpSchedulingStrategy();
         }
 
         public AppointmentDto GetRecommendedAppointment(AppointmentDto appointmentDto)

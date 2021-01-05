@@ -7,6 +7,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class FeedbackDatabaseSql : GenericDatabaseSql<Feedback>, IFeedbackRepository
     {
+        public FeedbackDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
+        {
+        }
+
         public override List<Feedback> GetAll()
         {
             return DbContext.Feedback.ToList();

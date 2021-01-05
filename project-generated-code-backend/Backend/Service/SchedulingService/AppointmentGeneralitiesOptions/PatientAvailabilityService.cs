@@ -2,7 +2,6 @@
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
@@ -11,15 +10,16 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
     {
         private readonly IAppointmentRepository _appointmentRepository;
 
-        public PatientAvailabilityService()
+        public PatientAvailabilityService(IAppointmentRepository appointmentRepository)
         {
-            _appointmentRepository = new AppointmentDatabaseSql();
+            _appointmentRepository = appointmentRepository;
         }
 
         public bool IsPatientAvailable(Patient patient, TimeInterval timeInterval)
         {
             return !IsPatientScheduled(patient, timeInterval);
         }
+
         private bool IsPatientScheduled(Patient patient, TimeInterval timeInterval)
         {
             List<Appointment> appointments = _appointmentRepository.GetAppointmentsByPatient(patient);
@@ -30,6 +30,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
                     return true;
                 }
             }
+
             return false;
         }
     }

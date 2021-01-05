@@ -8,6 +8,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
     public class ActionAndBenefitMessageDatabaseSql : GenericDatabaseSql<ActionAndBenefitMessage>,
         IActionAndBenefitMessageRepository
     {
+        public ActionAndBenefitMessageDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
+        {
+        }
+
         public override List<ActionAndBenefitMessage> GetAll()
         {
             return DbContext.ActionAndBenefitMessage.ToList();

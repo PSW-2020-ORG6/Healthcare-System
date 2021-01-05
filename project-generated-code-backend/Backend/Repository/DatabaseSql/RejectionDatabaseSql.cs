@@ -5,8 +5,12 @@ using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class RejectionDatabaseSql: GenericDatabaseSql<Rejection>, IRejectionRepository
+    public class RejectionDatabaseSql : GenericDatabaseSql<Rejection>, IRejectionRepository
     {
+        public RejectionDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
+        {
+        }
+
         public override List<Rejection> GetAll()
         {
             return DbContext.Rejection.ToList();

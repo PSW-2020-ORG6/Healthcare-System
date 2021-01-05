@@ -9,14 +9,14 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
     {
         private readonly PhysicianAccountService _physiciansService;
 
-        public SuperintendentPhysiciansController()
+        public SuperintendentPhysiciansController(PhysicianAccountService physicianAccountService)
         {
-            _physiciansService = new PhysicianAccountService();
+            _physiciansService = physicianAccountService;
         }
 
         public List<Physician> GetAllPhysicians()
         {
-            return _physiciansService.GetAllPhysitians();
+            return _physiciansService.GetAllPhysicians();
         }
 
         public void NewPhysician(Physician physician)

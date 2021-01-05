@@ -15,11 +15,12 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
         private readonly IRenovationRepository _renovationRepository;
         private readonly IBedReservationRepository _bedReservationRepository;
 
-        public RoomAvailabilityService()
+        public RoomAvailabilityService(IAppointmentRepository appointmentRepository,
+            IRenovationRepository renovationRepository, IBedReservationRepository bedReservationRepository)
         {
-            _appointmentRepository = new AppointmentDatabaseSql(); 
-            _renovationRepository = new RenovationDatabaseSql();
-            _bedReservationRepository = new BedReservationDatabaseSql();
+            _appointmentRepository = appointmentRepository;
+            _renovationRepository = renovationRepository;
+            _bedReservationRepository = bedReservationRepository;
         }
 
         public bool IsRoomAvailableAtAnyTime(Room room, List<TimeInterval> timeIntervals)
@@ -31,8 +32,10 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
                     return true;
                 }
             }
+
             return false;
         }
+
         public bool IsAnyRoomAvailable(List<Room> rooms, TimeInterval timeInterval)
         {
             foreach (Room room in rooms)
@@ -42,8 +45,10 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
                     return true;
                 }
             }
+
             return false;
         }
+
         public bool IsRoomAvailable(Room room, TimeInterval timeInterval)
         {
             return !IsRoomScheduled(room, timeInterval) && !IsRoomInRenovation(room, timeInterval);
@@ -53,17 +58,19 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
         {
             return HasAvailableBed(room) && !IsRoomInRenovation(room, new TimeInterval(DateTime.Now, DateTime.Now));
         }
+
         public List<Bed> GetAvailableBeds(Room room)
         {
             List<Bed> beds = new List<Bed>();
             foreach (Bed bed in room.Beds)
             {
                 beds.Add(bed);
-                if(!IsBedReserved(bed))
+                if (!IsBedReserved(bed))
                 {
                     beds.Add(bed);
                 }
             }
+
             return beds;
         }
 
@@ -71,11 +78,13 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
         {
             return room.Beds.Any(bed => !IsBedReserved(bed));
         }
+
         private bool IsBedReserved(Bed bed)
         {
             var bedReservations = _bedReservationRepository.GetAll();
             return bedReservations.All(bedReservation => !bedReservation.Bed.Equals(bed));
         }
+
         private bool IsRoomInRenovation(Room room, TimeInterval timeInterval)
         {
             List<Renovation> renovations = _renovationRepository.GetRenovationsByRoom(room);
@@ -86,6 +95,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -99,6 +109,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
                     return true;
                 }
             }
+
             return false;
         }
     }

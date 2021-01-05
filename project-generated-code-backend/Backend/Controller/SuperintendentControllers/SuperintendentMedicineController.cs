@@ -6,63 +6,66 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 {
     public class SuperintendentMedicineController
     {
-        private SuperintendentMedicineService superintendentMedicineService;
-        public SuperintendentMedicineController()
+        private readonly SuperintendentMedicineService _superintendentMedicineService;
+
+        public SuperintendentMedicineController(SuperintendentMedicineService superintendentMedicineService)
         {
-            superintendentMedicineService = new SuperintendentMedicineService();
+            _superintendentMedicineService = superintendentMedicineService;
         }
+
         public List<Medicine> GetAllApproved()
         {
-            return superintendentMedicineService.GetAllApproved();
+            return _superintendentMedicineService.GetAllApproved();
         }
 
         public List<Rejection> GetAllRejected()
         {
-            return superintendentMedicineService.GetAllRejected();
+            return _superintendentMedicineService.GetAllRejected();
         }
 
         public List<Medicine> GetAllWaiting()
         {
-            return superintendentMedicineService.GetAllWaiting();
+            return _superintendentMedicineService.GetAllWaiting();
         }
 
         public void DeleteWaitingMedicine(Medicine medicine)
         {
-            superintendentMedicineService.DeleteWaitingMedicine(medicine);
+            _superintendentMedicineService.DeleteWaitingMedicine(medicine);
         }
 
         public void NewWaitingMedicine(Medicine medicine)
         {
-            superintendentMedicineService.NewWaitingMedicine(medicine);
+            _superintendentMedicineService.NewWaitingMedicine(medicine);
         }
 
         public void EditWaitingMedicine(Medicine medicineDto)
         {
-            superintendentMedicineService.EditWaitingMedicine(medicineDto);
+            _superintendentMedicineService.EditWaitingMedicine(medicineDto);
         }
 
         public void DeleteRejection(Rejection rejection)
         {
-            superintendentMedicineService.DeleteRejection(rejection);
+            _superintendentMedicineService.DeleteRejection(rejection);
         }
 
         public void NewRejection(Rejection rejection)
         {
-            superintendentMedicineService.NewRejection(rejection);
+            _superintendentMedicineService.NewRejection(rejection);
         }
 
         public void EditRejection(Rejection rejection)
         {
-            superintendentMedicineService.EditRejection(rejection);
+            _superintendentMedicineService.EditRejection(rejection);
         }
 
         public void DeleteApprovedMedicine(Medicine medicine)
         {
-            superintendentMedicineService.DeleteApprovedMedicine(medicine);
+            _superintendentMedicineService.DeleteApprovedMedicine(medicine);
         }
+
         public void NewApprovedMedicine(Medicine medicine)
         {
-            superintendentMedicineService.NewApprovedMedicine(medicine);
+            _superintendentMedicineService.NewApprovedMedicine(medicine);
         }
     }
 }

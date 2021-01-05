@@ -16,9 +16,9 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
     {
         private readonly IAppointmentRepository _appointmentRepository;
 
-        public AppointmentService()
+        public AppointmentService(IAppointmentRepository appointmentRepository)
         {
-            _appointmentRepository = new AppointmentDatabaseSql();
+            _appointmentRepository = appointmentRepository;
         }
 
         public void EditAppointment(Appointment appointment)

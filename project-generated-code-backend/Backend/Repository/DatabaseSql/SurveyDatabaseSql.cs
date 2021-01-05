@@ -7,6 +7,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class SurveyDatabaseSql : GenericDatabaseSql<Survey>, ISurveyRepository
     {
+        public SurveyDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
+        {
+        }
+
         public override List<Survey> GetAll()
         {
             return DbContext.Survey.ToList();

@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Hospital;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.MedicineService
 {
-    class SuperintendentMedicineService
+    public class SuperintendentMedicineService
     {
         private readonly IMedicineRepository _medicineRepository;
         private readonly IRejectionRepository _rejectionRepository;
 
 
-        public SuperintendentMedicineService()
+        public SuperintendentMedicineService(IMedicineRepository medicineRepository,
+            IRejectionRepository rejectionRepository)
         {
-            _rejectionRepository = new RejectionDatabaseSql();
-            _medicineRepository = new MedicineDatabaseSql();
+            _medicineRepository = medicineRepository;
+            _rejectionRepository = rejectionRepository;
         }
 
         public List<Medicine> GetAllApproved()

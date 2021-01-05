@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Hospital;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
@@ -10,9 +9,9 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
     {
         private readonly IFloorRepository _floorRepository;
 
-        public FloorService()
+        public FloorService(IFloorRepository floorRepository)
         {
-            _floorRepository = new FloorDatabaseSql();
+            _floorRepository = floorRepository;
         }
 
         public Floor GetById()

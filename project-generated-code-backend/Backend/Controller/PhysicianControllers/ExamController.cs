@@ -14,37 +14,34 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
     public class ExamController
     {
         private Physician _loggedPhysician;
-        private Patient selectedPatient;
-        private Report currentReport;
+        private Patient _selectedPatient;
+        private Report _currentReport;
 
-        private ReportService reportService;
+        private readonly ReportService _reportService;
 
-        public ExamController(Appointment appointment)
+        public ExamController(Appointment appointment, ReportService reportService)
         {
-            //TODO
-            //this._loggedPhysician = appointment.Physician;
-            //this.SelectedPatient = appointment.Patient;
-            //ProcedureType procedure = appointment.ProcedureType;
+            _reportService = reportService;
 
-            reportService = new ReportService();
-
-            String patientConditions = this.GetPatientConditions();
-            this.CurrentReport = new Report(DateTime.Today, "", selectedPatient, _loggedPhysician, patientConditions);
+            _loggedPhysician = appointment.Physician;
+            SelectedPatient = appointment.Patient;
+            String patientConditions = GetPatientConditions();
+            CurrentReport = new Report(DateTime.Today, "", _selectedPatient, _loggedPhysician, patientConditions);
         }
 
         public void SaveReport()
         {
-            reportService.NewReport(currentReport);
+            _reportService.NewReport(_currentReport);
         }
 
         public void AddDocument(AdditionalDocument additionalDocument)
         {
-            currentReport.AddAdditionalDocument(additionalDocument);
+            _currentReport.AddAdditionalDocument(additionalDocument);
         }
 
         private String GetPatientConditions()
         {
-            Report lastReport = reportService.GetLastReportByPatient(selectedPatient);
+            Report lastReport = _reportService.GetLastReportByPatient(_selectedPatient);
 
             if (lastReport != null)
             {
@@ -54,8 +51,16 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
             return "";
         }
 
-        public Report CurrentReport { get => currentReport; set => currentReport = value; }
-        public Patient SelectedPatient { get => selectedPatient; set => selectedPatient = value; }
+        public Report CurrentReport
+        {
+            get => _currentReport;
+            set => _currentReport = value;
+        }
 
+        public Patient SelectedPatient
+        {
+            get => _selectedPatient;
+            set => _selectedPatient = value;
+        }
     }
 }

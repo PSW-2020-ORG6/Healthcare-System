@@ -7,6 +7,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class InpatientCareDatabaseSql : GenericDatabaseSql<InpatientCare>, IInpatientCareRepository
     {
+        public InpatientCareDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
+        {
+        }
+
         public List<InpatientCare> GetInpatientCaresForPatient(Patient patient)
         {
             throw new System.NotImplementedException();

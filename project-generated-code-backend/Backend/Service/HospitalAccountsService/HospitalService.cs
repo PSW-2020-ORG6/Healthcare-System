@@ -7,24 +7,22 @@ using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.MedicalExam;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
 {
-    //TODO: REFAKTORISATI samo geteri za country, procedure type, room type... (stvari koje idu u CB)
-    // Dodati PhysitianAccountsService i SecretaryAccountsService 
     public class HospitalService
     {
         private readonly ICountryRepository _countryRepository;
         private readonly IProcedureTypeRepository _procedureTypeRepository;
         private readonly IDiagnosticTypeRepository _diagnosticTypeRepository;
 
-        public HospitalService()
+        public HospitalService(ICountryRepository countryRepository, IProcedureTypeRepository procedureTypeRepository,
+            IDiagnosticTypeRepository diagnosticTypeRepository)
         {
-            _countryRepository = new CountryDatabaseSql();
-            _procedureTypeRepository = new ProcedureTypeDatabaseSql();
-            _diagnosticTypeRepository = new DiagnosticTypeDatabaseSql();
+            _countryRepository = countryRepository;
+            _procedureTypeRepository = procedureTypeRepository;
+            _diagnosticTypeRepository = diagnosticTypeRepository;
         }
 
         internal List<ProcedureType> GetAllProcedureTypes()

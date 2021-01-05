@@ -9,8 +9,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class AppointmentDatabaseSql : GenericDatabaseSql<Appointment>,IAppointmentRepository
+    public class AppointmentDatabaseSql : GenericDatabaseSql<Appointment>, IAppointmentRepository
     {
+        public AppointmentDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
+        {
+        }
+
         public override List<Appointment> GetAll()
         {
             return DbContext.Appointment

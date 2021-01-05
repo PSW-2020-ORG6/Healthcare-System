@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.MedicalExam;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 using WebApplication.Backend.DTO;
 
@@ -9,16 +8,11 @@ namespace WebApplication.Backend.Services
 {
     public class PrescriptionService
     {
-        private IPrescriptionRepository prescriptionRepository;
-
-        public PrescriptionService()
-        {
-            prescriptionRepository = new PrescriptionDatabaseSql();
-        }
+        private IPrescriptionRepository _prescriptionRepository;
 
         public PrescriptionService(IPrescriptionRepository prescriptionRepository)
         {
-            this.prescriptionRepository = prescriptionRepository;
+            this._prescriptionRepository = prescriptionRepository;
         }
 
         /// <summary>

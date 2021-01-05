@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Accounts;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
@@ -17,12 +16,11 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
     {
         private readonly IPatientRepository _patientRepository;
 
-        public PatientRegistrationService()
+        public PatientRegistrationService(IPatientRepository patientRepository)
         {
-            _patientRepository = new PatientDatabaseSql();
+            _patientRepository = patientRepository;
         }
 
-        
         private bool IsJmbgValid(string jmbg)
         {
             List<Patient> patients = _patientRepository.GetAll();

@@ -12,6 +12,13 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 {
     public class RenovationController
     {
+        private readonly RenovationService _renovationService;
+
+        public RenovationController(RenovationService renovationService)
+        {
+            _renovationService = renovationService;
+        }
+
         public Renovation GetById(String id)
         {
             throw new NotImplementedException();
@@ -19,34 +26,27 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 
         public List<Renovation> GetAll()
         {
-            return renovationService.GetAll();
+            return _renovationService.GetAll();
         }
 
         public void EditRenovation(Renovation renovation)
         {
-            renovationService.EditRenovation(renovation);
+            _renovationService.EditRenovation(renovation);
         }
 
         public void DeleteRenovation(Renovation renovation)
         {
-            renovationService.DeleteRenovation(renovation);
+            _renovationService.DeleteRenovation(renovation);
         }
 
         public void NewRenovation(Renovation renovation)
         {
-            renovationService.NewRenovation(renovation);
-        }
-
-        public RenovationService renovationService;
-
-        public RenovationController()
-        {
-            this.renovationService = new RenovationService();
+            _renovationService.NewRenovation(renovation);
         }
 
         public void DeleteRenovationsWithRoom(Room room)
         {
-            renovationService.DeleteRenovationsWithRoom(room);
+            _renovationService.DeleteRenovationsWithRoom(room);
         }
     }
 }

@@ -14,13 +14,11 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {
     public class PhysicianScheduleController
     {
-        private Physician _loggedPhysician;
         private readonly PhysicianScheduleService _physicianScheduleService;
 
-        public PhysicianScheduleController(Physician loggedPhysician)
+        public PhysicianScheduleController(PhysicianScheduleService physicianScheduleService)
         {
-            _loggedPhysician = loggedPhysician;
-            _physicianScheduleService = new PhysicianScheduleService(loggedPhysician);
+            _physicianScheduleService = physicianScheduleService;
         }
 
         public List<Appointment> GetAppointmentsByDate(DateTime date)

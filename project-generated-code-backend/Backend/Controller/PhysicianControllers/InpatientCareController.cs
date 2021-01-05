@@ -17,10 +17,10 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
         private Physician _loggedPhysician;
         private InpatientCareService inpatientCareService;
 
-        public InpatientCareController(Physician loggedPhysician)
+        public InpatientCareController(Physician loggedPhysician, InpatientCareService inpatientCareService)
         {
             this._loggedPhysician = loggedPhysician;
-            this.inpatientCareService = new InpatientCareService(loggedPhysician);
+            this.inpatientCareService = inpatientCareService;
         }
 
         public void StartInpatientCare(BedReservationDto bedReservationDTO)
@@ -37,6 +37,7 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
         {
             return inpatientCareService.GetActiveBedReservation(patient);
         }
+
         public List<InpatientCare> getPreviousInpatientCares(Patient patient)
         {
             return inpatientCareService.GetAllInpatientCares(patient);
@@ -46,10 +47,10 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
         {
             return inpatientCareService.GetAvailableRooms();
         }
+
         public List<Bed> GetAvailableBeds(Room room)
         {
             return inpatientCareService.GetAvailableBeds(room);
         }
-
     }
 }

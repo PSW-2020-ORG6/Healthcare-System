@@ -2,7 +2,6 @@
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
@@ -11,9 +10,9 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
     {
         private readonly IAppointmentRepository _appointmentRepository;
 
-        public PhysicianAvailabilityService()
+        public PhysicianAvailabilityService(IAppointmentRepository appointmentRepository)
         {
-            _appointmentRepository = new AppointmentDatabaseSql();
+            _appointmentRepository = appointmentRepository;
         }
 
         public bool IsPhysicianAvailableAtAnyTime(Physician physician, List<TimeInterval> timeIntervals)
@@ -25,8 +24,10 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
                     return true;
                 }
             }
+
             return false;
         }
+
         public bool IsAnyPhysicianAvailable(List<Physician> physicians, TimeInterval timeInterval)
         {
             foreach (Physician physician in physicians)
@@ -36,8 +37,10 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
                     return true;
                 }
             }
+
             return false;
         }
+
         public bool IsPhysicianAvailable(Physician physician, TimeInterval timeInterval)
         {
             bool isTheirShift = physician.IsTheirShift(timeInterval);
@@ -45,6 +48,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
             bool isNotScheduled = !IsPhysicianScheduled(physician, timeInterval);
             return isTheirShift && isNotOnVacation && isNotScheduled;
         }
+
         public bool canGoOnVacation(Physician physician, TimeInterval timeInterval)
         {
             bool isNotOnVacation = !physician.IsOnVacation(timeInterval);
@@ -62,6 +66,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
                     return true;
                 }
             }
+
             return false;
         }
     }

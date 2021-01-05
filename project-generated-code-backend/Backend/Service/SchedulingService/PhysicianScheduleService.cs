@@ -19,10 +19,10 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         private readonly Physician _loggedPhysician;
         private readonly IAppointmentRepository _appointmentRepository;
 
-        public PhysicianScheduleService(Physician loggedPhysician)
+        public PhysicianScheduleService(Physician loggedPhysician, IAppointmentRepository appointmentRepository)
         {
             _loggedPhysician = loggedPhysician;
-            _appointmentRepository = new AppointmentDatabaseSql();
+            _appointmentRepository = appointmentRepository;
         }
 
         public void NewAppointment(AppointmentDto appointmentDto)

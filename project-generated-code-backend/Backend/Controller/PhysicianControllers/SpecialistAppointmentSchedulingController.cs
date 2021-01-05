@@ -12,17 +12,17 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {
     public class SpecialistAppointmentSchedulingController
     {
-        private AppointmentSchedulingService appointmentSchedulingService;
+        private readonly AppointmentSchedulingService _appointmentSchedulingService;
 
-        public SpecialistAppointmentSchedulingController()
+        public SpecialistAppointmentSchedulingController(AppointmentSchedulingService appointmentSchedulingService)
         {
-            this.appointmentSchedulingService = new AppointmentSchedulingService(new PhysicianSpecialistSchedulingStrategy());
+            _appointmentSchedulingService = appointmentSchedulingService;
+            _appointmentSchedulingService.SchedulingStrategyContext = new PhysicianSpecialistSchedulingStrategy();
         }
 
         public List<AppointmentDto> GetAllAvailableAppointments(AppointmentDto appointmentDTO)
         {
-            return appointmentSchedulingService.GetAvailableAppointments(appointmentDTO);
+            return _appointmentSchedulingService.GetAvailableAppointments(appointmentDTO);
         }
-
     }
 }
