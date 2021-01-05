@@ -6,13 +6,13 @@ using System.Runtime.InteropServices;
 // set of fields. Change these attribute values to modify the information
 // associated with an assembly.
 //
-[assembly: AssemblyTitle("health_clinic_class_diagram")]
+[assembly: AssemblyTitle("HealthClinicBackend")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+[assembly: AssemblyCulture("neutral")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
