@@ -38,7 +38,7 @@ namespace WebApplication
             services.AddDbContext<HealthCareSystemDbContext>(options =>
             {
                 options.UseNpgsql(dataBaseConnectionSettings.ConnectionString,
-                    x => x.MigrationsAssembly("Backend")
+                    x => x.MigrationsAssembly("WebApplication")
                         .EnableRetryOnFailure(dataBaseConnectionSettings.RetryCount,
                             new TimeSpan(0, 0, 0, dataBaseConnectionSettings.RetryWaitInSeconds),
                             new List<string>()));

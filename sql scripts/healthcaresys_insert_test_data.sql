@@ -1,3 +1,7 @@
+INSERT INTO public."ActionAndBenefitMessage"(
+	"SerialNumber", "ActionID", "PharmacyName", "Text", "DateFrom", "DateTo")
+	VALUES ('1', '4B900A74-E2D9-4837-B9A4-9E828752716E', 'Benu', 'Natural wealth supplements 20% off', '1-1-2021', '2-2-2021');
+	
 INSERT INTO public."MedicineManufacturer"(
 	"SerialNumber", "Name")
 	VALUES ('1', 'Hemofarm'), ('2', 'Galenika');
@@ -7,8 +11,8 @@ INSERT INTO public."MedicineType"(
 	VALUES ('1', 'Antibiotik'), ('2', 'Analgetik');
 	
 INSERT INTO public."Medicine"(
-	"SerialNumber", "CopyrightName", "GenericName", "MedicineManufacturerSerialNumber", "MedicineTypeSerialNumber")
-	VALUES ('1', 'Panklav', 'Panklav', '1', '1'), ('2', 'Amikacin', 'Amikacin', '2', '1');
+	"SerialNumber", "CopyrightName", "GenericName", "MedicineManufacturerSerialNumber", "MedicineTypeSerialNumber", "IsApproved")
+	VALUES ('1', 'Panklav', 'Panklav', '1', '1', 'true'), ('2', 'Amikacin', 'Amikacin', '2', '1', 'false');
 	
 INSERT INTO public."Rejection"(
 	"SerialNumber", "Reason", "MedicineSerialNumber")
@@ -41,10 +45,10 @@ INSERT INTO public."PhysicianSpecialization"(
 	VALUES ('1', '1'),('1', '2'), ('2', '2'), ('3', '3');
 
 INSERT INTO public."Patient"(
-	"SerialNumber", "Name", "Surname", "Id", "DateOfBirth", "Contact", "Email", "AddressSerialNumber", "Password", "ParentName", "PlaceOfBirth", "MunicipalityOfBirth", "StateOfBirth", "PlaceOfResidence", "MunicipalityOfResidence", "StateOfResidence", "Citizenship", "Nationality", "Profession", "EmploymentStatus", "MaritalStatus", "HealthInsuranceNumber", "FamilyDiseases", "PersonalDiseases", "Gender", "Image", "Guest", "EmailConfirmed", "PhysicianSerialNumber")
-	VALUES ('1', 'Maddy', 'Barr', '111', '12-12-1970', '111111', 'maddybarr@mail.com', '1', '123456', 'Jenn', 'Derbyshire', 'Derbyshire', 'Derbyshire', 'Hertfordshire', 'Hertfordshire', 'Hertfordshire', 'english', 'english', 'life coach', 'self-employed', 'single', '1111111', 'cholesterol', 'asthma', 'female', null, 'true', 'true', '2'),
-	('2', 'Harland', 'Dickman', '222', '12-12-1970', '222222', 'dick@mail.com', '1', '123456', 'Katelin', 'Derbyshire', 'Derbyshire', 'Derbyshire', 'Hertfordshire', 'Hertfordshire', 'Hertfordshire', 'english', 'english', 'Space Lawyer', 'unemployed', 'single', '22222', 'none', 'cholesterol', 'male', null, 'true', 'true', '2'),
-	('3', 'Erika', 'Caulfield', '333', '12-12-1970', '333333', 'caulfield@mail.com', '1', '123456', 'Tracie', 'Derbyshire', 'Derbyshire', 'Derbyshire', 'Hertfordshire', 'Hertfordshire', 'Hertfordshire', 'english', 'english', 'Penguinologist', 'employed', 'single', '3333', 'hair cancer', 'none', 'female', null, 'true', 'true', '2');
+	"SerialNumber", "Name", "Surname", "Id", "DateOfBirth", "Contact", "Email", "AddressSerialNumber", "Password", "ParentName", "PlaceOfBirth", "MunicipalityOfBirth", "StateOfBirth", "PlaceOfResidence", "MunicipalityOfResidence", "StateOfResidence", "Citizenship", "Nationality", "Profession", "EmploymentStatus", "MaritalStatus", "HealthInsuranceNumber", "FamilyDiseases", "PersonalDiseases", "Gender", "Image", "Guest", "EmailConfirmed", "PhysicianSerialNumber", "IsMalicious", "IsBlocked")
+	VALUES ('1', 'Maddy', 'Barr', '111', '12-12-1970', '111111', 'maddybarr@mail.com', '1', '123456', 'Jenn', 'Derbyshire', 'Derbyshire', 'Derbyshire', 'Hertfordshire', 'Hertfordshire', 'Hertfordshire', 'english', 'english', 'life coach', 'self-employed', 'single', '1111111', 'cholesterol', 'asthma', 'female', null, 'true', 'true', '2', 'true', 'false'),
+	('2', 'Harland', 'Dickman', '222', '12-12-1970', '222222', 'dick@mail.com', '1', '123456', 'Katelin', 'Derbyshire', 'Derbyshire', 'Derbyshire', 'Hertfordshire', 'Hertfordshire', 'Hertfordshire', 'english', 'english', 'Space Lawyer', 'unemployed', 'single', '22222', 'none', 'cholesterol', 'male', null, 'true', 'true', '2', 'false', 'false'),
+	('3', 'Erika', 'Caulfield', '333', '12-12-1970', '333333', 'caulfield@mail.com', '1', '123456', 'Tracie', 'Derbyshire', 'Derbyshire', 'Derbyshire', 'Hertfordshire', 'Hertfordshire', 'Hertfordshire', 'english', 'english', 'Penguinologist', 'employed', 'single', '3333', 'hair cancer', 'none', 'female', null, 'true', 'true', '2', 'true', 'true');
 
 INSERT INTO public."Building"(
 	"SerialNumber", "Name", "Color", "Row", "Column", "Style")
@@ -89,12 +93,12 @@ INSERT INTO public."ProcedureType"(
 	('5', '1', 'COVID exam', '30');
 
 INSERT INTO public."Appointment"(
-	"SerialNumber", "RoomSerialNumber", "PhysicianSerialNumber", "PatientSerialNumber", "TimeInterval_Start", "TimeInterval_End", "TimeInterval_Id", "ProcedureTypeSerialnumber", "Urgency", "Date", "Active")
-	VALUES ('1', '1', '1', '1', '12-12-2020 12:00', '12-12-2020 14:00', '1', '1', true, '12-12-2020', 'true'),
-	('2', '3', '2', '2', '12-12-2020 12:00', '12-12-2020 13:00', '2', '1', true, '12-12-2020', 'true'),
-	('3', '4', '2', '3', '12-12-2020 10:30', '12-12-2020 12:30', '3', '1', false, '12-12-2020', 'true'),
-	('4', '2', '3', '2', '12-12-2020 10:00', '12-12-2020 10:30', '4', '1', false, '12-12-2020', 'true'),
-	('5', '1', '1', '1', '12-12-2020 10:00', '12-12-2020 10:30', '5', '1', true, '12-12-2020', 'true');
+	"SerialNumber", "RoomSerialNumber", "PhysicianSerialNumber", "PatientSerialNumber", "TimeInterval_Start", "TimeInterval_End", "TimeInterval_Id", "ProcedureTypeSerialnumber", "Urgency", "Date", "Active", "IsSurveyDone")
+	VALUES ('1', '1', '1', '1', '12-12-2020 12:00', '12-12-2020 14:00', '1', '1', true, '12-12-2020', 'true', 'true'),
+	('2', '3', '2', '2', '12-12-2020 12:00', '12-12-2020 13:00', '2', '1', true, '12-12-2020', 'true', 'false'),
+	('3', '4', '2', '3', '12-12-2020 10:30', '12-12-2020 12:30', '3', '1', false, '12-12-2020', 'true', 'true'),
+	('4', '2', '3', '2', '12-12-2020 10:00', '12-12-2020 10:30', '4', '1', false, '12-12-2020', 'true', 'false'),
+	('5', '1', '1', '1', '12-12-2020 10:00', '12-12-2020 10:30', '5', '1', true, '12-12-2020', 'true', 'false');
 	
 INSERT INTO public."Prescription"(
 	"SerialNumber", "Date", "Notes")
@@ -110,8 +114,8 @@ INSERT INTO public."Question"(
 	VALUES ('1', 'How satisfied are you with our hospitality?', '1');
 	
 INSERT INTO public."Survey"(
-	"SerialNumber", "Id", "DoctorName", "Question1", "Question2", "Question3", "Question4", "Question5", "Question6", "Question7", "Question8", "Question9", "Question10", "Question11", "Question12", "Question13", "Question14", "Question15", "Question16", "Question17", "Question18", "Question19", "Question20", "Question22", "Question21", "Question23")
-	VALUES ('1', '1', '1', '1', 'Meredith Gray', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+	"SerialNumber", "PatientId", "ReportDate", "DoctorName")
+	VALUES ('1', '1', '12-12-2020', 'Meredith Gray');
 
 INSERT INTO public."Feedback"(
 	"SerialNumber", "PatientId", "Text", "Date", "Approved")
