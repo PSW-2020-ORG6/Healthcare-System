@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Blog;
 using WebApplication.Backend.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplication.Backend.Controllers
 {
@@ -27,6 +28,8 @@ namespace WebApplication.Backend.Controllers
         ///<returns>
         ///list of feedbacks
         ///</returns>
+        ///      
+        [Authorize]
         [HttpGet("all")]
         public List<FeedbackDto> GetAllFeedbacks()
         {
@@ -40,6 +43,8 @@ namespace WebApplication.Backend.Controllers
         ///<returns>
         ///information about sucess in string format
         ///</returns>
+        ///
+        [Authorize]
         [HttpPost("add")]
         public IActionResult AddNewFeedbacк(FeedbackDto feedbackDTO)
         {
@@ -59,6 +64,7 @@ namespace WebApplication.Backend.Controllers
         ///<returns>
         ///list of approved feedbacks
         ///</returns>
+        [Authorize]
         [HttpGet("approved")]
         public List<FeedbackDto> GetApprovedFeedbacks()
         {
@@ -72,6 +78,7 @@ namespace WebApplication.Backend.Controllers
         ///<returns>
         ///list of not approved feedbacks
         ///</returns>
+        [Authorize]
         [HttpGet("disapproved")]
         public List<FeedbackDto> GetDisapprovedFeedbacks()
         {
@@ -85,6 +92,8 @@ namespace WebApplication.Backend.Controllers
         ///<returns>
         ///list of not approved feedbacks
         ///</returns>
+        [Authorize]
+
         [HttpPut("approve")]
         public IActionResult ApproveFeedback(FeedbackDto feedbackDTO)
         {

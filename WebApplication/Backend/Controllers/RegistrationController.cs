@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
 using WebApplication.Backend.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplication.Backend.Controllers
 {
@@ -26,6 +27,7 @@ namespace WebApplication.Backend.Controllers
         ///<returns>
         ///information about sucess in string format
         ///</returns>
+        [Authorize]
         [HttpPost("registerPatient")]
         public IActionResult RegisterPatient(PatientDto patientDTO)
         {
@@ -59,6 +61,7 @@ namespace WebApplication.Backend.Controllers
         ///<returns>
         ///information about sucess in IActionResult format
         ///</returns>
+        [Authorize]
         [HttpPut("confirmationEmail/{id}")]
         public IActionResult Confirmation(string id)
         {
@@ -88,7 +91,7 @@ namespace WebApplication.Backend.Controllers
             long id = (long.Parse(patientId) - 23 * 33) + 6789;
             return id.ToString();
         }
-
+        [Authorize]
         [HttpGet("allPhysitians")]
         public List<FamilyDoctorDto> GetAllFeedbacks()
         {

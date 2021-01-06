@@ -22,7 +22,11 @@
             .catch(error => {
             })
         axios
-            .get('/patient/getMaliciousPatients')
+            .get('/patient/getMaliciousPatients', {
+                headers: {
+                    'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                }
+            })
             .then(response => {
                 this.maliciousPatients = response.data
             })
@@ -145,7 +149,11 @@
     methods: {
         getStatisticsEachQuestion: function () {
             axios
-                .get('/survey/getStatistiEachQuestion')
+                .get('/survey/getStatistiEachQuestion', {
+                    headers: {
+                        'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                    }
+                })
                 .then(response => {
                     this.statisticEachQuestion = response.data;
                 })
@@ -153,10 +161,18 @@
         },
         BlockMaliciousPatient: function (MaliciousPatient) {
             axios
-                .put('/patient/blockMaliciousPatient', MaliciousPatient)
+                .put('/patient/blockMaliciousPatient', MaliciousPatient, {
+                    headers: {
+                        'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                    }
+                })
                 .then(response => {
                     axios
-                        .get('/patient/getMaliciousPatients')
+                        .get('/patient/getMaliciousPatients', {
+                            headers: {
+                                'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                            }
+                        })
                         .then(response => {
                             this.maliciousPatients = response.data
                         })

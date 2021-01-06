@@ -30,6 +30,8 @@ namespace WebApplication.Backend.Controllers
         ///<returns>
         ///list of patients
         ///</returns>
+      
+        [Authorize]
         [HttpGet("all")]
         public List<Patient> GetAllFeedbacks()
         {
@@ -49,19 +51,19 @@ namespace WebApplication.Backend.Controllers
         {
             return _patientService.GetPatientById(patientId);
         }
-
+        [Authorize]
         [HttpGet("getMaliciousPatients")]
         public List<Patient> GetMaliciousPatients()
         {
             return _patientService.GetMaliciousPatients();
         }
-
+        [Authorize]
         [HttpPut("blockMaliciousPatient")]
         public bool BlockMaliciousPatient(PatientDto patient)
         {
             return _patientService.BlockMaliciousPatient(patient.Id);
         }
-
+        [Authorize]
         [HttpGet("getActionsAndBenefits")]
         public IEnumerable<ActionAndBenefitMessage> GetActionsAndBenefits()
         {

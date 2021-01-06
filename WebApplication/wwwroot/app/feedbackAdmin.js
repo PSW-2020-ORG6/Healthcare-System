@@ -8,7 +8,11 @@
     },
     beforeMount() {
         axios
-            .get('/feedback/approved')
+            .get('/feedback/approved', {
+                headers: {
+                    'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                }
+            })
             .then(response => {
                 this.approvedFeedbacks = response.data
             })
@@ -17,7 +21,11 @@
             })
 
         axios
-            .get('/feedback/disapproved')
+            .get('/feedback/disapproved', {
+                headers: {
+                    'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                }
+            })
             .then(response => {
                 this.disapprovedFeedbacks = response.data
             })
@@ -25,7 +33,11 @@
                 alert(error)
             })
         axios
-            .get('/patient/all')
+            .get('/patient/all', {
+                headers: {
+                    'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                }
+            })
             .then(response => {
                 this.patients = response.data
             })
@@ -115,7 +127,11 @@
         },
         Approve: function (feedback) {
             axios
-                .put('/feedback/approve', feedback)
+                .put('/feedback/approve', feedback, {
+                    headers: {
+                        'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                    }
+                })
                 .then(response => {
                     this.Refresh();
                 })
@@ -125,7 +141,11 @@
         },
         Disapprove: function (feedback) {
             axios
-                .put('/feedback/approve', feedback)
+                .put('/feedback/approve', feedback, {
+                    headers: {
+                        'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                    }
+                })
                 .then(response => {
                     this.Refresh();
                 })
@@ -135,7 +155,11 @@
         },
         Refresh: function () {
             axios
-                .get('/feedback/approved')
+                .get('/feedback/approved', {
+                    headers: {
+                        'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                    }
+                })
                 .then(response => {
                     this.approvedFeedbacks = response.data
                 })
@@ -143,7 +167,11 @@
                     alert(error)
                 })
             axios
-                .get('/feedback/disapproved')
+                .get('/feedback/disapproved', {
+                    headers: {
+                        'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                    }
+                })
                 .then(response => {
                     this.disapprovedFeedbacks = response.data
                 })
