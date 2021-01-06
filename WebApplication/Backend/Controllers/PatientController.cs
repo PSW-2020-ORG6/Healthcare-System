@@ -5,6 +5,7 @@ using WebApplication.Backend.Services;
 using HealthClinicBackend.Backend.Dto;
 using System;
 using HealthClinicBackend.Backend.Model.PharmacySupport;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplication.Backend.Controllers
 {
@@ -42,6 +43,7 @@ namespace WebApplication.Backend.Controllers
         ///<returns>
         ///single instance of Patient object
         ///</returns
+        [Authorize]
         [HttpGet("getPatientById")]
         public PatientDto GetPatientById(string patientId)
         {

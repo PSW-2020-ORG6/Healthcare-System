@@ -54,6 +54,16 @@ namespace HealthClinicBackend.Backend.Model.Accounts
             Guest = isGuest;
             Password = password;
         }
+        public Patient(string name, string surname, string id, DateTime dateOfBirth, string contact, string email,
+           Address address, string parentName, string gender, string password, bool isGuest = false,bool isAdmin=false)
+           : base(name, surname, id, dateOfBirth, contact, email, address, password)
+        {
+            ParentName = parentName;
+            Gender = gender;
+            Guest = isGuest;
+            Password = password;
+            IsAdmin = isAdmin;
+        }
 
         [JsonConstructor]
         public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth,
@@ -95,6 +105,47 @@ namespace HealthClinicBackend.Backend.Model.Accounts
             PersonalDiseases = personalDiseases;
             Image = image;
         }
+        public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth,
+         string contact, string email, Address address, string parentName, string placeOfBirth,
+         string municipalityOfBirth, string stateOfBirth, String citizenship, string nationality, string profession,
+         string placeOfResidence, string municipalityOfResidence, string stateOfResidence, string employmentStatus,
+         string maritalStatus, string healthInsuranceNumber, string familyDiseases, string personalDiseases,
+         string gender, string password, string image, bool isGuest = false,bool isAdmin=false)
+         : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address, password)
+        {
+            ParentName = parentName;
+            Gender = gender;
+            Guest = isGuest;
+            Password = password;
+            PlaceOfBirth = placeOfBirth;
+            MunicipalityOfBirth = municipalityOfBirth;
+            StateOfBirth = stateOfBirth;
+            Citizenship = citizenship;
+            Nationality = nationality;
+            Profession = profession;
+            PlaceOfResidence = placeOfResidence;
+            MunicipalityOfResidence = municipalityOfResidence;
+            StateOfResidence = stateOfResidence;
+            EmploymentStatus = employmentStatus;
+            MaritalStatus = maritalStatus;
+            HealthInsuranceNumber = healthInsuranceNumber;
+            FamilyDiseases = familyDiseases;
+            PersonalDiseases = personalDiseases;
+            Image = image;
+            IsAdmin = isAdmin;
+        }
+        [JsonConstructor]
+        public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth,
+       string contact, string email, Address address, string parentName, string gender, string password, bool isAdmin = false,
+       bool isGuest = false)
+       : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address, password, isAdmin)
+        {
+            ParentName = parentName;
+            Gender = gender;
+            Guest = isGuest;
+            Password = password;
+        }
+
 
         public Patient(PatientDto patientDto) : base(patientDto.Name, patientDto.Surname, patientDto.Id,
             patientDto.DateOfBirth, patientDto.Contact, patientDto.Email,

@@ -11,6 +11,17 @@
     },
     beforeMount() {
         axios
+            .get('/login/getUserId', {
+                headers: {
+                    'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                }
+            })
+            .then(response => {
+                this.idPatient = response.data
+            })
+            .catch(error => {
+            })
+        axios
             .get('/patient/getMaliciousPatients')
             .then(response => {
                 this.maliciousPatients = response.data
@@ -20,7 +31,11 @@
             })
 
         axios
-            .get('/survey/getDoctors', { params: { patientId: "001" } })
+            .get('/survey/getDoctors', { params: { patientId: this.idPatient } }, {
+                headers: {
+                    'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                }
+            })
             .then(response => {
                 this.doctorsList = response.data;
 

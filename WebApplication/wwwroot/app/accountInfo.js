@@ -2,12 +2,26 @@
 	data: function () {
 		return {
 			patientDTO: null,
-			idPatient: "96736fd7-3018-4f3f-a14b-35610a1c8959"
+			idPatient: ""
 		}
 	},
 	beforeMount() {
 		axios
-			.get('/patient/getPatientById', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
+			.get('/login/getUserId', {
+				: {
+					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+				}
+			})
+			.then(response => {
+				this.idPatient = response.data
+			})
+			.catch(error => {
+			}),
+		axios
+	.get('/patient/getPatientById', { params: { patientId: this.idPatient } }, {
+		headers: {
+			'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+		})
 			.then(response => {
 				this.patientDTO = response.data
 			})

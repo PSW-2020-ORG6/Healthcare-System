@@ -47,32 +47,32 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public List<Appointment> GetByRoomSerialNumber(string roomSerialNumber)
         {
-            throw new NotImplementedException();
+            return GetAll().Where(appointment => appointment.Room.SerialNumber.Equals(roomSerialNumber)).ToList();
         }
 
         public List<Appointment> GetByPhysicianSerialNumber(string physicianSerialNumber)
         {
-            throw new NotImplementedException();
+            return GetAll().Where(appointment => appointment.Physician.SerialNumber.Equals(physicianSerialNumber)).ToList();
         }
 
         public List<Appointment> GetByPatientSerialNumber(string patientSerialNumber)
         {
-            throw new NotImplementedException();
+            return GetAll().Where(appointment => appointment.Patient.SerialNumber.Equals(patientSerialNumber)).ToList();
         }
 
         public List<Appointment> GetByPatientId(string patientId)
         {
-            throw new NotImplementedException();
+            return GetAll().Where(appointment => appointment.Patient.Id.Equals(patientId)).ToList();
         }
 
         public List<Appointment> GetByPatientIdActive(string patientId)
         {
-            throw new NotImplementedException();
+            return GetAll().Where(appointment => appointment.Patient.Id.Equals(patientId) && appointment.Active == true).ToList();
         }
 
         public List<Appointment> GetByPatientIdCanceled(string patientId)
         {
-            throw new NotImplementedException();
+            return GetAll().Where(appointment => appointment.Patient.Id.Equals(patientId) && appointment.Active==false).ToList();
         }
 
         public List<DateTime> GetByPatientIdCanceledDates(string patientId)

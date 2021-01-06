@@ -9,7 +9,7 @@ using HealthClinicBackend.Backend.Model.Util;
 
 namespace HealthClinicBackend.Backend.Model.Accounts
 {
-    public abstract class Account : Entity
+    public class Account : Entity
     {
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -20,6 +20,8 @@ namespace HealthClinicBackend.Backend.Model.Accounts
         [ForeignKey("Address")] public string AddressSerialNumber { get; set; }
         public virtual Address Address { get; set; }
         public String Password { get; set; }
+        public bool IsAdmin { get; set; }
+
         public Account(String serialNumber, string name, string surname, string id, DateTime dateOfBirth,
             string contact, string email, Address address, String password) : base(serialNumber)
         {
@@ -32,6 +34,20 @@ namespace HealthClinicBackend.Backend.Model.Accounts
             Address = address;
             Password = password;
         }
+        public Account(String serialNumber, string name, string surname, string id, DateTime dateOfBirth,
+         string contact, string email, Address address, String password, bool isAdmin) : base(serialNumber)
+        {
+            Name = name;
+            Surname = surname;
+            Id = id;
+            DateOfBirth = dateOfBirth;
+            Contact = contact;
+            Email = email;
+            Address = address;
+            Password = password;
+            IsAdmin = isAdmin;
+        }
+
 
         public Account(string name, string surname, string id, DateTime dateOfBirth,
             string contact, string email, Address address, String password) : base()

@@ -5,6 +5,7 @@ using HealthClinicBackend.Backend.Model.Schedule;
 using WebApplication.Backend.Services;
 using HealthClinicBackend.Backend.Dto;
 using WebApplication.Backend.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplication.Backend.Controllers
 {
@@ -46,13 +47,15 @@ namespace WebApplication.Backend.Controllers
         {
             return _appointmentService.GetAllAppointments();
         }
-
+        
+        [Authorize]
         [HttpGet("allAppointmentsByPatientIdActive")]
         public List<AppointmentDTO> GetAllAppointmentsByPatientIdActive(String patientId)
         {
             return _appointmentService.GetAllAppointmentsByPatientIdActive(patientId);
         }
 
+        [Authorize]
         [HttpGet("allAppointmentsByPatientIdCanceled")]
         public List<AppointmentDTO> GetAllAppointmentsByPatientIdCanceled(String patientId)
         {

@@ -2,7 +2,7 @@
 	data: function () {
 		return {
 			patientDTO: null,
-			idPatient: "96736fd7-3018-4f3f-a14b-35610a1c8959",
+			idPatient: null,
 			activeAppointments: null,
 			canceledAppointments: null,
 			patients: null,
@@ -13,12 +13,27 @@
 	},
 	beforeMount() {
 		axios
-			.get('/patient/getPatientById', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
+			.get('/login/getUserId', {
+				headers: {
+					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+				}
+			})
+			.then(response => {
+				this.idPatient = response.data
+			})
+			.catch(error => {
+			})
+		axios
+			.get('/patient/getPatientById', { params: { patientId: this.idPatient } }, {
+				headers: {
+					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+				}
+			})
 			.then(response => {
 				this.patientDTO = response.data
 			})
 			.catch(error => {
-				alert("Please add patient with id number : 96736fd7-3018-4f3f-a14b-35610a1c8959")
+				alert(localStorage.getItem('token'))
 			})
 
 		axios
@@ -39,8 +54,11 @@
 			})
 
 		axios
-			.get('/appointment/allAppointmentsByPatientIdActive', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
-			.then(response => {
+			.get('/appointment/allAppointmentsByPatientIdActive', { params: { patientId: this.idPatient } }, {
+				headers: {
+					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+				}
+			}).then(response => {
 				this.activeAppointments = response.data
 			})
 
@@ -49,8 +67,11 @@
 			})
 
 		axios
-			.get('/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959" } })
-			.then(response => {
+			.get('/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: this.idPatient } }, {
+				headers: {
+					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+				}
+			}).then(response => {
 				this.canceledAppointments = response.data
 			})
 			.catch(error => {
