@@ -6,5 +6,7 @@ namespace HealthClinicBackend.Backend.Repository.Generic
     public interface IAddressRepository : IGenericRepository<Address>
     {
         List<Address> GetAddressesByStreet(string street);
+
+        
     }
 }

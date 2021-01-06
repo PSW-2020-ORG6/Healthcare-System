@@ -37,5 +37,25 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
         {
             return JsonConvert.DeserializeObject<Patient>(objectStringFormat);
         }
+
+        public Patient GetPatientByUserNameAndPassword(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Patient> GetAllPatients()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Patient GetPatientById(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Patient GetPatientBySerialNumber(string serialNumber)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

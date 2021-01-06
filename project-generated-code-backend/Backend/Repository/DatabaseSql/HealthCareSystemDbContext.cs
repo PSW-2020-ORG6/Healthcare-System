@@ -17,27 +17,24 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
   //          "User ID =postgres;Password=super;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
 
         public DbSet<Address> Address { get; set; }
+        public DbSet<Admin> Admin { get; set; }
         public DbSet<City> City { get; set; }
         public DbSet<Country> Country { get; set; }
-
         public DbSet<Specialization> Specialization { get; set; }
         public DbSet<Physician> Physician { get; set; }
         public DbSet<PhysicianSpecialization> PhysicianSpecialization { get; set; }
         public DbSet<Patient> Patient { get; set; }
         public DbSet<Secretary> Secretary { get; set; }
-
         public DbSet<Equipment> Equipment { get; set; }
         public DbSet<Bed> Bed { get; set; }
         public DbSet<RoomType> RoomType { get; set; }
         public DbSet<Room> Room { get; set; }
         public DbSet<Floor> Floor { get; set; }
         public DbSet<Building> Building { get; set; }
-
         public DbSet<MedicineManufacturer> MedicineManufacturer { get; set; }
         public DbSet<MedicineType> MedicineType { get; set; }
         public DbSet<Medicine> Medicine { get; set; }
         public DbSet<Rejection> Rejection { get; set; }
-
         public DbSet<DiagnosticType> DiagnosticType { get; set; }
         public DbSet<DiagnosticReferral> DiagnosticReferral { get; set; }
         public DbSet<FollowUp> FollowUp { get; set; }
@@ -50,16 +47,12 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public DbSet<ReportFollowUp> ReportFollowUp { get; set; }
         public DbSet<ReportSpecialistReferral> ReportSpecialistReferral { get; set; }
         public DbSet<Report> Report { get; set; }
-
         public DbSet<ProcedureType> ProcedureType { get; set; }
         public DbSet<Appointment> Appointment { get; set; }
-
         public DbSet<Question> Question { get; set; }
         public DbSet<Survey> Survey { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
-        
         public DbSet<ActionAndBenefitMessage> ActionAndBenefitMessage { get; set; }
-
         public HealthCareSystemDbContext(DbContextOptions<HealthCareSystemDbContext> options) : base(options)
         {
         }
@@ -144,6 +137,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 .HasKey(x => x.SerialNumber);
             modelBuilder.Entity<Prescription>()
                 .HasKey(x => x.SerialNumber);
+            modelBuilder.Entity<Admin>()
+              .HasKey(x => x.Email);
 
             modelBuilder.Entity<DiagnosticReferral>()
                 .HasOne(dr => dr.DiagnosticType)
