@@ -89,17 +89,15 @@
 				return
 			}
 			else {
-				this.Login()
-				this.GetUserType(this.token)
+				this.Login();
+				this.GetUserType(this.token);
 
 			}
 		},
-		//Ova metoda ne radi nista ovde je samo u svrhe testiranja
 		GetUserType: function (token) {
 			axios.get('http://localhost:49900/login/GetUserType', {
 				headers: {
-					'Authorization': 'Bearer' + " " + token
-
+					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
 				}
 			})
 				.then(response => {
@@ -123,7 +121,18 @@
 					this.token = response.data.token
 					this.GetUserType(this.token)
 					localStorage.setItem('token', this.token);
-
+					axios
+						.get('/login/getUserId', {
+							headers: {
+								'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+							}
+						})
+						.then(response => {
+							this.idPatient = response.data
+							localStorage.setItem('userId', this.idPatient)
+						})
+						.catch(error => {
+						})
 
 				})
 				.catch(error => {

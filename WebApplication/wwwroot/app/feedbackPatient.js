@@ -54,7 +54,7 @@
 	<div id="FeedbackPatient">
 		<div class="container">
             <br/><h3 class="text">Feedbacks</h3><br/><br/>
-			        <button type="button" class="btn btn-info btn-lg form-control" style="width:200px;margin-right:800px" data-toggle="modal" data-target="#CommentModal">Leave feedback</butto>
+			        <button type="button" class="btn btn-info btn-lg form-control" style="width:200px;margin-right:800px" data-toggle="modal" data-target="#CommentModal">Leave feedback</button>
 		</div>
 
 	<!-- Leave Comment -->
@@ -110,7 +110,7 @@
 	methods: {
 		AddNewFeedback: function (feedback) {
 			if (!document.getElementById("anonimous").checked)
-				this.feedback.patientId = this.idPatient
+				this.feedback.patientId = patientId
 			else
 				this.feedback.id = "-1"
 			if (feedback.text.localeCompare(null) || feedback.text.localeCompare("")) {

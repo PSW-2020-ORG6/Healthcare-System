@@ -92,7 +92,7 @@ namespace WebApplication.Backend.Controllers
         ///<returns>
         ///list of not approved feedbacks
         ///</returns>
-        [Authorize]
+         [Authorize]
 
         [HttpPut("approve")]
         public IActionResult ApproveFeedback(FeedbackDto feedbackDTO)

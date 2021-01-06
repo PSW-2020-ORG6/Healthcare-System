@@ -45,8 +45,7 @@ namespace WebApplication.Backend.Services
         ///</returns
         internal PatientDto GetPatientById(string patientId)
         {
-            return patientDTO.ConvertToPatientDTO(_patientRepository.GetById(patientId) ??
-                                                  _patientRepository.GetByJmbg(patientId));
+            return patientDTO.ConvertToPatientDTO(_patientRepository.GetById(patientId));
         }
 
         internal List<Patient> GetMaliciousPatients()

@@ -6,31 +6,20 @@
 		}
 	},
 	beforeMount() {
+		alert(localStorage.getItem('userId'))
 		axios
-			.get('/login/getUserId', {
+			.get('http://localhost:49900/patient/getPatientById', { params: { patientId: localStorage.getItem('userId') } , 
 				headers: {
 					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
 				}
-			})
-			.then(response => {
-				this.idPatient = response.data
-			})
-			.catch(error => {
-			}),
-		axios
-			.get('/patient/getPatientById', { params: { patientId: this.idPatient } }, {
-				headers: {
-					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
-					}
-				})
-			.then(response => {
+			}).then(response => {
 				this.patientDTO = response.data
 			})
 			.catch(error => {
-				alert("Please add patient with id number : 96736fd7-3018-4f3f-a14b-35610a1c8959")
+				alert(error)
 			})
-	
-	},
+	}
+		,
 	template: `
 	<div id="Account"></br>
 

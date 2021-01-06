@@ -29,6 +29,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
             List<PhysicianSpecialization> physicianSpecializations = DbContext.PhysicianSpecialization
                 .Include(ps => ps.Physician)
+                .Include(ps=>ps.Specialization)
                 .ToList();
 
             foreach (var physician in physicians)
@@ -38,6 +39,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     .Select(physicianSpecialization => physicianSpecialization.Specialization)
                     .ToList();
                 physician.Specialization = specializations;
+
+
             }
 
             return physicians;

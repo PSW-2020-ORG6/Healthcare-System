@@ -434,7 +434,11 @@ Vue.component("search", {
                 var prescriptionSimpleSearch = this.PrescriptionSimpleSearch()
                 var reportSimpleSearch = this.ReportSimpleSearch()
                 axios
-                    .get('/user/advancedSearch', { params: { prescriptionSearch: prescriptionSimpleSearch, reportSearch: reportSimpleSearch, date: date } })
+                    .get('http://localhost:49900/user/advancedSearch', { params: { prescriptionSearch: prescriptionSimpleSearch, reportSearch: reportSimpleSearch, date: date }, 
+                        headers: {
+                            'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                        }
+                    })
                     .then(response => {
                         this.search = response.data
                     })

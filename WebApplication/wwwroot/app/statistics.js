@@ -3155,7 +3155,7 @@
     methods: {
         getStatisticsForDoctor: function () {
             axios          
-                .get('/survey/getStatisticForDoctor', { params: { ID: this.selectedDoctor.fullName } }, {
+                .get('/survey/getStatisticForDoctor', { params: { ID: this.selectedDoctor.fullName } , 
                     headers: {
                         'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                     }
