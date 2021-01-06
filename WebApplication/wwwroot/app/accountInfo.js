@@ -8,7 +8,7 @@
 	beforeMount() {
 		axios
 			.get('/login/getUserId', {
-				: {
+				headers: {
 					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
 				}
 			})
@@ -18,10 +18,11 @@
 			.catch(error => {
 			}),
 		axios
-	.get('/patient/getPatientById', { params: { patientId: this.idPatient } }, {
-		headers: {
-			'Authorization': 'Bearer' + " " + localStorage.getItem('token')
-		})
+			.get('/patient/getPatientById', { params: { patientId: this.idPatient } }, {
+				headers: {
+					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+					}
+				})
 			.then(response => {
 				this.patientDTO = response.data
 			})

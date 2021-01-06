@@ -568,16 +568,24 @@
 
 
         axios
-            .get('/feedback/approved')
+            .get('/feedback/approved', {
+                headers: {
+                    'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                }
+            })
             .then(response => {
                 this.approvedFeedbacks = response.data
             })
             .catch(error => {
                 alert(error)
-            })
+            }),
 
         axios
-            .get('/feedback/disapproved')
+            .get('/feedback/disapproved', {
+                headers: {
+                    'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                }
+            })
             .then(response => {
                 this.disapprovedFeedbacks = response.data
             })
@@ -585,7 +593,11 @@
                 alert(error)
             })
         axios
-            .get('/patient/all')
+            .get('/patient/all', {
+                headers: {
+                    'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                }
+            })
             .then(response => {
                 this.patients = response.data
             })
@@ -594,7 +606,11 @@
             })
 
         axios
-            .get('/appointment/physicians')
+            .get('/appointment/physicians', {
+                headers: {
+                    'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                }
+            })
             .then(response => {
                 this.doctorsList = response.data
             })
@@ -610,7 +626,11 @@
     mounted() {
 
         axios
-            .get('/survey/getStatistiEachQuestion')
+            .get('/survey/getStatistiEachQuestion', {
+                headers: {
+                    'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                }
+            })
             .then(response => {
                 this.statisticEachQuestion = response.data;
 
@@ -3135,7 +3155,11 @@
     methods: {
         getStatisticsForDoctor: function () {
             axios          
-                .get('/survey/getStatisticForDoctor', { params: { ID: this.selectedDoctor.fullName } })
+                .get('/survey/getStatisticForDoctor', { params: { ID: this.selectedDoctor.fullName } }, {
+                    headers: {
+                        'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                    }
+                })
                 .then(response => {
 
                     this.statisticDoctor = response.data;

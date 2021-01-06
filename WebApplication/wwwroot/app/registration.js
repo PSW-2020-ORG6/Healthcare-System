@@ -38,7 +38,11 @@
 	},
 	mounted() {
 		axios
-			.get('/registration/allPhysitians')
+			.get('/registration/allPhysitians', {
+				headers: {
+					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+				}
+			})
 			.then(response => {
 				this.doctorsList = response.data
 			})

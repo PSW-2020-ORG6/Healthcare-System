@@ -1,20 +1,36 @@
 ﻿Vue.component("feedbackPatient", {
 	data: function () {
 		return {
-			idPatient: "96736fd7-3018-4f3f-a14b-35610a1c8959",
+			idPatient: null,
 			approvedFeedbacks: null,
 			patients: null,
 			feedback: {
 				text: "",
 				approved: false,
 				date: new Date().now,
-				patientId: "96736fd7-3018-4f3f-a14b-35610a1c8959"
+				patientId: null
 			},
 		}
 	},
 	beforeMount() {
 		axios
-			.get('/feedback/approved')
+			.get('/login/getUserId', {
+				headers: {
+					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+				}
+			})
+			.then(response => {
+				this.idPatient = response.data
+				this.patientId = response.data
+			})
+			.catch(error => {
+			}),
+		axios
+			.get('/feedback/approved', {
+				headers: {
+					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+				}
+			})
 			.then(response => {
 				this.approvedFeedbacks = response.data
 			})
@@ -22,7 +38,11 @@
 				alert(error.response.data)
 			})
 		axios
-			.get('/patient/all')
+			.get('/patient/all', {
+				headers: {
+					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+				}
+			})
 			.then(response => {
 				this.patients = response.data
 			})
@@ -90,7 +110,7 @@
 	methods: {
 		AddNewFeedback: function (feedback) {
 			if (!document.getElementById("anonimous").checked)
-				this.feedback.patientId = "0003"
+				this.feedback.patientId = this.idPatient
 			else
 				this.feedback.id = "-1"
 			if (feedback.text.localeCompare(null) || feedback.text.localeCompare("")) {
@@ -119,7 +139,11 @@
 		},
 		SurveyShow: function () {
 			axios
-				.get('/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient } })
+				.get('/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient } }, {
+					headers: {
+						'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+					}
+				})
 				.then(response => {
 					this.doctorsList = response.data
 					if (this.doctorsList.value != null || this.doctorsList != "") {

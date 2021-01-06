@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using WebApplication.Backend.DTO;
 using WebApplication.Backend.Services;
@@ -21,7 +22,7 @@ namespace WebApplication.Backend.Controllers
             _prescriptionService = prescriptionService;
             _reportService = reportService;
         }
-
+        [Authorize]
         [HttpGet("advancedSearch")]
         public List<SearchEntityDTO> GetAllFeedbacks([FromQuery] string prescriptionSearch,
             [FromQuery] string reportSearch, [FromQuery] string date)

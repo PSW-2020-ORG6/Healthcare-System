@@ -26,6 +26,7 @@ namespace WebApplication.Backend.Controllers
             this.configuration = configuration;
             _userService = userService;
         }
+
         [HttpGet("login")]
        
         public IActionResult Login(string email, string password)
