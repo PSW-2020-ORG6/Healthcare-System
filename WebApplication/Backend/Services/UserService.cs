@@ -52,7 +52,7 @@ namespace WebApplication.Backend.Services
         }
         public string GetUserId(List<Claim>claims)
         {
-            return claims[2].ToString();
+            return claims[2].Value.ToString();
         }
     }
 }

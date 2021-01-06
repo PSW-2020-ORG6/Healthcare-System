@@ -12,6 +12,8 @@
 		}
 	},
 	beforeMount() {
+		alert(localStorage.getItem('userId'))
+
 		axios
 			.get('/login/getUserId', {
 				headers: {
@@ -24,7 +26,8 @@
 			.catch(error => {
 			})
 		axios
-			.get('/patient/getPatientById', { params: { patientId: this.idPatient } }, {
+			.get('/patient/getPatientById', {
+				params: { patientId: localStorage.getItem('userId') } , 
 				headers: {
 					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
 				}
@@ -62,7 +65,7 @@
 			})
 
 		axios
-			.get('/appointment/allAppointmentsByPatientIdActive', { params: { patientId: this.idPatient } }, {
+			.get('/appointment/allAppointmentsByPatientIdActive', { params: { patientId:localStorage.getItem('userId') } , 
 				headers: {
 					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
 				}
@@ -75,7 +78,7 @@
 			})
 
 		axios
-			.get('/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: this.idPatient } }, {
+			.get('/appointment/allAppointmentsByPatientIdCanceled', {params: { patientId:localStorage.getItem('userId') } , 
 				headers: {
 					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
 				}
@@ -211,7 +214,7 @@
 		},
 		SurveyShow: function () {
 			axios
-				.get('/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient } }, {
+				.get('/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient } , 
 					headers: {
 						'Authorization': 'Bearer' + " " + localStorage.getItem('token')
 					}

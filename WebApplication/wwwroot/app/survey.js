@@ -16,7 +16,7 @@ Vue.component("survey", {
     },
     beforeMount() {
         axios
-            .get('/survey/getDoctorsForSurveyList', { params: { patientId: this.surveyText.id } }, {
+            .get('/survey/getDoctorsForSurveyList', { params: { patientId: this.surveyText.id }, 
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -432,7 +432,7 @@ Vue.component("appointments", {
             })
 
         axios
-            .get('/appointment/allAppointmentsByPatientIdActive', { params: { patientId: this.idPatient } }, {
+            .get('/appointment/allAppointmentsByPatientIdActive', { params: { patientId: this.idPatient } , 
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -446,7 +446,7 @@ Vue.component("appointments", {
             })
 
         axios
-            .get('/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: this.idPatient } }, {
+            .get('/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: this.idPatient } , 
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -460,7 +460,7 @@ Vue.component("appointments", {
             })
 
         axios
-            .get('/appointment/allAppointmentsByPatientIdPast', { params: { patientId: this.idPatient } }, {
+            .get('/appointment/allAppointmentsByPatientIdPast', { params: { patientId: this.idPatient } , 
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -473,7 +473,7 @@ Vue.component("appointments", {
                 alert(error)
             })
         axios
-            .get('/appointment/allAppointmentsWithSurvey', { params: { patientId: this.idPatient } }, {
+            .get('/appointment/allAppointmentsWithSurvey', { params: { patientId: this.idPatient } , 
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -486,7 +486,7 @@ Vue.component("appointments", {
                 alert(error)
             })
         axios
-            .get('/appointment/allAppointmentsWithoutSurvey', { params: { patientId: this.idPatient } }, {
+            .get('/appointment/allAppointmentsWithoutSurvey', { params: { patientId: this.idPatient } , 
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -501,7 +501,7 @@ Vue.component("appointments", {
 
 
         axios
-            .get('/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient } }, {
+            .get('/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient } , 
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -843,7 +843,7 @@ Vue.component("appointments", {
             var doctorName = doctorName
             dateDate = dateD[0] + "-" + dateD[1] + "-" + dateD[2] + " 00:00:00"
             axios
-                .get("/appointment/isSurveyDoneByPatientIdAppointmentDatePhysicianName", { params: { patientId: this.patientId, appointmentDate: dateDate, physicianName: doctorName } }, {
+                .get("/appointment/isSurveyDoneByPatientIdAppointmentDatePhysicianName", { params: { patientId: this.patientId, appointmentDate: dateDate, physicianName: doctorName } , 
                     headers: {
                         'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                     }
@@ -927,7 +927,7 @@ Vue.component("appointments", {
                 })
                 .then(response => {
                     axios
-                        .get('/appointment/IsUserMalicious', { params: { patientId: this.patientId } }, {
+                        .get('/appointment/IsUserMalicious', { params: { patientId: this.patientId } , 
                             headers: {
                                 'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                             }
@@ -955,7 +955,7 @@ Vue.component("appointments", {
 
                         })
                     axios
-                        .get('/appointment/allAppointmentsByPatientIdActive', { params: { patientId: this.patientId } }, {
+                        .get('/appointment/allAppointmentsByPatientIdActive', { params: { patientId: this.patientId } , 
                             headers: {
                                 'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                             }
@@ -970,7 +970,7 @@ Vue.component("appointments", {
                         })
 
                     axios
-                        .get('/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: this.patientId } }, {
+                        .get('/appointment/allAppointmentsByPatientIdCanceled', { params: { patientId: this.patientId } , 
                             headers: {
                                 'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                             }
@@ -997,7 +997,7 @@ Vue.component("appointments", {
 
         GetTimeIntervals: function () {
             axios
-                .get('/appointment/appointments', { params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, date: this.date } }, {
+                .get('/appointment/appointments', { params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, date: this.date } , 
                     headers: {
                         'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                     }
@@ -1120,7 +1120,7 @@ Vue.component("appointments", {
                 if (document.getElementById("cbd").checked == true) {
                     var dates = this.CreateDates()
                     axios
-                        .get('/appointment/appointmentsWithReccomendation', { params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, dates: dates } }, {
+                        .get('/appointment/appointmentsWithReccomendation', { params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, dates: dates } , 
                             headers: {
                                 'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                             }
@@ -1131,7 +1131,7 @@ Vue.component("appointments", {
                 } else {
                     var dates = this.CreateDates()
                     axios
-                        .get('/appointment/appointmentsWithPhysicianPriority', { params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, dates: dates } }, {
+                        .get('/appointment/appointmentsWithPhysicianPriority', { params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, dates: dates } , 
                             headers: {
                                 'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                             }
@@ -1183,8 +1183,8 @@ Vue.component("appointments", {
                     .get('/appointment/appointments', {
                         params: {
                             physicianId: "600001", specializationName: "General practitioner", date: document.getElementById("myDate").value
-                        }
-                    }, {
+                        
+                    }, 
                         headers: {
                             'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                         }

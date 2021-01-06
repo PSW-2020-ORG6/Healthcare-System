@@ -35,7 +35,7 @@
             })
 
         axios
-            .get('/survey/getDoctors', { params: { patientId: this.idPatient } }, {
+            .get('/survey/getDoctors', { params: { patientId: this.idPatient } , 
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }

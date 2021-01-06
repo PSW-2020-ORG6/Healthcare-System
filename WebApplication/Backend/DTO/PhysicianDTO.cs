@@ -21,7 +21,9 @@ namespace WebApplication.Backend.DTO
             SpecializationDTO specializationDTO = new SpecializationDTO();
             Id = physician.Id;
             FullName = physician.Name + " " + physician.Surname;
-            Specializations = specializationDTO.ConvertListToSpecializationDTO(physician.Specialization);
+            List<Specialization> specializations = physician.Specialization;
+            
+            Specializations = specializationDTO.ConvertListToSpecializationDTO(specializations);
         }
 
         public List<PhysicianDTO> ConvertListToPhysicianDTO(List<Physician> physicians)
