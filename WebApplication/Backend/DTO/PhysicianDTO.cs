@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using HealthClinicBackend.Backend.Repository.DatabaseSql.RelationHelpers;
 
 namespace WebApplication.Backend.DTO
 {
@@ -11,7 +13,6 @@ namespace WebApplication.Backend.DTO
         public string FullName { get; set; }
         public string Id { get; set; }
         public List<SpecializationDTO> Specializations { get; set; }
-
         public PhysicianDTO()
         {
         }

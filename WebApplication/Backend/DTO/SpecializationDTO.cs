@@ -13,9 +13,9 @@ namespace WebApplication.Backend.DTO
         public List<SpecializationDTO> ConvertListToSpecializationDTO(List<Specialization> specializations)
         {
             List<SpecializationDTO> specializationsDTO = new List<SpecializationDTO>();
-            foreach (Specialization specialization in specializations)
-                if (!SpecializationExist(specialization.Name, specializationsDTO))
-                    specializationsDTO.Add(new SpecializationDTO { Name = specialization.Name });
+            //foreach (Specialization specialization in specializations)
+            //    if (!SpecializationExist(specialization.Name, specializationsDTO))
+            //        specializationsDTO.Add(new SpecializationDTO { Name = specialization.Name });
             return specializationsDTO;
         }
         private bool SpecializationExist(string name, List<SpecializationDTO> specializationsDTO)

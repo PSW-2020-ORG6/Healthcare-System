@@ -14,6 +14,8 @@ namespace WebApplication.Backend.Services
         private readonly IAppointmentRepository _appointmentRepository;
         private readonly IPhysicianRepository _physicianRepository;
         private readonly IPatientRepository _patientRepository;
+        private readonly IAddressRepository _addressRepository;
+
 
         private PhysicianDTO physitianDTO = new PhysicianDTO();
         private SpecializationDTO specializationDTO = new SpecializationDTO();
@@ -27,12 +29,13 @@ namespace WebApplication.Backend.Services
 
         public AppointmentService(ISpecializationRepository specializationRepository,
             IAppointmentRepository appointmentRepository, IPhysicianRepository physicianRepository,
-            IPatientRepository patientRepository)
+            IPatientRepository patientRepository, IAddressRepository addressRepository)
         {
             _specializationRepository = specializationRepository;
             _appointmentRepository = appointmentRepository;
             _physicianRepository = physicianRepository;
             _patientRepository = patientRepository;
+            _addressRepository = addressRepository;
         }
 
         public List<PhysicianDTO> GetAllPhysicians()
@@ -48,10 +51,15 @@ namespace WebApplication.Backend.Services
         public List<TimeIntervalDTO> GetAllAvailableAppointments(string physicianId, string specializationName,
             string date)
         {
+            
             Physician physician = _physicianRepository.GetById(physicianId);
             //TODO: parse date
             var dateParsed = DateTime.Now;
             List<Appointment> appointments = _appointmentRepository.GetAppointmentsByDate(dateParsed);
+            foreach(Appointment a in appointments)
+            {
+                a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
+            }
             return GetAvailableAppointments(appointments, physician, specializationName);
         }
 
@@ -184,8 +192,12 @@ namespace WebApplication.Backend.Services
         ///</returns>
         public List<AppointmentDTO> GetAllAppointmentsByPatientId(string patientId)
         {
-            return appointmentDTO.ConvertListToAppointmentDTO(
-                _appointmentRepository.GetByPatientId(patientId));
+            List<Appointment> appointments = _appointmentRepository.GetByPatientId(patientId);
+            foreach (Appointment a in appointments)
+            {
+                a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
+            }
+           return appointmentDTO.ConvertListToAppointmentDTO(appointments);
         }
 
         /// <summary>
@@ -196,7 +208,12 @@ namespace WebApplication.Backend.Services
         ///</returns>
         public List<AppointmentDTO> GetAllAppointments()
         {
-            return appointmentDTO.ConvertListToAppointmentDTO(_appointmentRepository.GetAll());
+            List<Appointment> appointments = _appointmentRepository.GetAll();
+            foreach (Appointment a in appointments)
+            {
+                a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
+            }
+            return appointmentDTO.ConvertListToAppointmentDTO(appointments);
         }
 
         /// <summary>
@@ -218,8 +235,12 @@ namespace WebApplication.Backend.Services
                     appotintmentsInFuture.Add(appointment);
                 }
             }
-
+            foreach (Appointment a in appotintmentsInFuture)
+            {
+                a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
+            }
             return appointmentDTO.ConvertListToAppointmentDTO(appotintmentsInFuture);
+
         }
 
         /// <summary>
@@ -231,7 +252,12 @@ namespace WebApplication.Backend.Services
         ///</returns>
         internal List<AppointmentDTO> GetAllAppointmentsByPatientIdCanceled(string patientId)
         {
-            return appointmentDTO.ConvertListToAppointmentDTO(_appointmentRepository.GetByPatientIdCanceled(patientId));
+            List<Appointment> appointments = _appointmentRepository.GetByPatientIdCanceled(patientId);
+            foreach (Appointment a in appointments)
+            {
+                a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
+            }
+            return appointmentDTO.ConvertListToAppointmentDTO(appointments);
         }
 
         /// <summary>
@@ -252,6 +278,10 @@ namespace WebApplication.Backend.Services
                 {
                     appointments.Add(appointment);
                 }
+            }
+            foreach (Appointment a in appointments)
+            {
+                a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
             }
 
             return appointmentDTO.ConvertListToAppointmentDTO(appointments);
@@ -326,6 +356,10 @@ namespace WebApplication.Backend.Services
                 {
                     appotintmentsInPastWitohutSurvey.Add(appointment);
                 }
+            }
+            foreach (Appointment a in appotintmentsInPastWitohutSurvey)
+            {
+                a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
             }
 
             return appointmentDTO.ConvertListToAppointmentDTO(appotintmentsInPastWitohutSurvey);

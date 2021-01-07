@@ -9,6 +9,7 @@ namespace WebApplication.Backend.DTO
 {
     public class AppointmentDTO
     {
+
         public RoomDTO RoomDTO {get;set;}
         public TimeIntervalDTO TimeIntervalDTO { get; set; }
         public PhysicianDTO PhysicianDTO { get; set; }

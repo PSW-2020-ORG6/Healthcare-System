@@ -75,6 +75,8 @@ namespace WebApplication
             services.AddScoped<ISpecializationRepository, SpecializationDatabaseSql>();
             services.AddScoped<ISurveyRepository, SurveyDatabaseSql>();
             services.AddScoped<Backend.Repositorys.Interfaces.IAdminRepository, AdminDatabaseSql>();
+            services.AddScoped<IAddressRepository, AddressDatabaseSql>();
+
 
 
             // Inject services

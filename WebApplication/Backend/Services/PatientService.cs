@@ -16,14 +16,17 @@ namespace WebApplication.Backend.Services
     {
         private readonly IPatientRepository _patientRepository;
         private readonly IActionAndBenefitMessageRepository _actionsAndBenefitsRepository;
+        private readonly IAddressRepository _addressRepository;
+
 
         private PatientDto patientDTO = new PatientDto();
 
         public PatientService(IPatientRepository patientRepository,
-            IActionAndBenefitMessageRepository actionsAndBenefitsRepository)
+            IActionAndBenefitMessageRepository actionsAndBenefitsRepository, IAddressRepository addressRepository)
         {
             _patientRepository = patientRepository;
             _actionsAndBenefitsRepository = actionsAndBenefitsRepository;
+            _addressRepository = addressRepository;
         }
 
         /// <summary>
@@ -34,7 +37,13 @@ namespace WebApplication.Backend.Services
         ///</returns>
         internal List<Patient> GetAllPatients()
         {
-            return _patientRepository.GetAll();
+            List<Patient>patients =_patientRepository.GetAll();
+            foreach(Patient patient in patients)
+            {
+                AddAddressToPatient(patient);
+            }
+            return patients;
+            
         }
 
         /// <summary>
@@ -45,9 +54,15 @@ namespace WebApplication.Backend.Services
         ///</returns
         internal PatientDto GetPatientById(string patientId)
         {
-            return patientDTO.ConvertToPatientDTO(_patientRepository.GetById(patientId));
+            Patient patient = _patientRepository.GetById(patientId);
+            patient = AddAddressToPatient(patient);
+            return patientDTO.ConvertToPatientDTO(patient);
         }
-
+        internal Patient AddAddressToPatient(Patient patient)
+        {
+            patient.Address = _addressRepository.GetById(patient.AddressSerialNumber);
+            return patient;
+        }
         internal List<Patient> GetMaliciousPatients()
         {
             return _patientRepository.GetAll().Where(p => p.IsMalicious).ToList();

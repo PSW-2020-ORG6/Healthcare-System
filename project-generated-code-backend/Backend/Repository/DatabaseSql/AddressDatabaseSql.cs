@@ -25,5 +25,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             return GetAll().Where(a => a.Street.Equals(street)).ToList();
         }
+        
     }
 }

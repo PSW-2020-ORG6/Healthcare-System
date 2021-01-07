@@ -18,6 +18,7 @@ namespace WebApplicationTests
         {
             var patientRepository = new Mock<IPatientRepository>();
             var actionsAndBenefitsRepository = new Mock<IActionAndBenefitMessageRepository>();
+            var addressRepository = new Mock<IAddressRepository>();
 
             actionAndBenefitMessages.Add(new ActionAndBenefitMessage
             {
@@ -26,7 +27,7 @@ namespace WebApplicationTests
             });
             actionsAndBenefitsRepository.Setup(m => m.GetAll()).Returns(actionAndBenefitMessages);
 
-            PatientService service = new PatientService(patientRepository.Object, actionsAndBenefitsRepository.Object);
+            PatientService service = new PatientService(patientRepository.Object, actionsAndBenefitsRepository.Object,addressRepository.Object);
 
             List<ActionAndBenefitMessage> list = service.GetAdvertisements();
 
@@ -38,6 +39,8 @@ namespace WebApplicationTests
         {
             var patientRepository = new Mock<IPatientRepository>();
             var actionsAndBenefitsRepository = new Mock<IActionAndBenefitMessageRepository>();
+            var addressRepository = new Mock<IAddressRepository>();
+
 
             actionAndBenefitMessages.Add(new ActionAndBenefitMessage
             {
@@ -47,7 +50,7 @@ namespace WebApplicationTests
             actionsAndBenefitsRepository.Setup(m => m.GetAll())
                 .Returns(actionAndBenefitMessages);
 
-            PatientService service = new PatientService(patientRepository.Object, actionsAndBenefitsRepository.Object);
+            PatientService service = new PatientService(patientRepository.Object, actionsAndBenefitsRepository.Object,addressRepository.Object);
 
             List<ActionAndBenefitMessage> list = service.GetAdvertisements();
 
