@@ -16,12 +16,14 @@ namespace WebApplication
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Env = environment;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Env { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -30,8 +32,11 @@ namespace WebApplication
 
             services.AddDbContext<HealthCareSystemDbContext>(options =>
             {
+                var connectionString = CreateConnectionStringFromEnvironment();
+                Console.WriteLine(connectionString);
+
                 options.UseNpgsql(
-                    CreateConnectionStringFromEnvironment(),
+                    connectionString,
                     x => x.MigrationsAssembly("Backend").EnableRetryOnFailure(5,
                         new TimeSpan(0, 0, 0, 30), new List<string>())
                 );
@@ -92,13 +97,23 @@ namespace WebApplication
 
         private string CreateConnectionStringFromEnvironment()
         {
-            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
-            string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "5432";
-            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "healthcare-system-db";
+            // Change these values for local connection
+            var serverDefault = "localhost";
+            var portDefault = 5432;
+            var userDefault = "postgres";
+            var passwordDefault = "super";
+            var schema = "healthcare-system-db";
 
-            // Change this if user and password are different
-            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "postgres";
-            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "super";
+            // Do not change this
+            var herokuPostgresURL = Configuration.GetValue<string>("DATABASE_URL") ?? $"{serverDefault}://{userDefault}:{passwordDefault}@{serverDefault}:{portDefault}/{schema}";
+
+            var databaseUri = new Uri(herokuPostgresURL);
+            var userInfo = databaseUri.UserInfo.Split(':');
+            var server = databaseUri.Host;
+            var port = databaseUri.Port.ToString();
+            var user = userInfo[0];
+            var password = userInfo[1];
+            var database = databaseUri.LocalPath.TrimStart('/');
 
             return $"userid={user};server={server};port={port};database={database};password={password};";
         }

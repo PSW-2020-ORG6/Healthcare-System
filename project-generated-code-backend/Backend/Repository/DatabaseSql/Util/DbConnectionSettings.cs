@@ -1,6 +1,8 @@
-﻿namespace HealthClinicBackend.Backend.Repository.DatabaseSql.Util
+﻿using System;
+
+namespace HealthClinicBackend.Backend.Repository.DatabaseSql.Util
 {
-    public class DataBaseConnectionSettings
+    public class DbConnectionSettings
     {
         public string Host { get; set; }
         public string Port { get; set; }
@@ -10,11 +12,12 @@
         public int RetryCount { get; set; }
         public int RetryWaitInSeconds { get; set; }
 
-        public DataBaseConnectionSettings()
+        public DbConnectionSettings()
         {
         }
 
         public string ConnectionString =>
             $"userid={User};password={Password};server={Host};port={Port};database={Database}";
+
     }
 }
