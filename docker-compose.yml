@@ -66,9 +66,6 @@ services:
       - network
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      RABBITMQ_HOST: rabbit
-      RABBITMQ_USERNAME: guest
-      RABBITMQ_PASSOWRD: guest
       DATABASE_HOST: "postgres"
       DATABASE_PORT: "5432"
       DATABASE_USERNAME: "user"
@@ -80,7 +77,6 @@ services:
     volumes:
       - sql-scripts:/app/sql
     depends_on:
-      - rabbit
       - postgres
 
 volumes:

@@ -115,7 +115,7 @@ namespace WebApplication
             var password = userInfo[1];
             var database = databaseUri.LocalPath.TrimStart('/');
 
-            return $"userid={user};server={server};port={port};database={database};password={password};";
+            return $"userid={user};server={server};port={port};database={database};password={password};Pooling=true;sslmode=Prefer;TrustServerCertificate=True;";
         }
     }
 }
