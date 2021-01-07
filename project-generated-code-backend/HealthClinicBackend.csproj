@@ -30,4 +30,8 @@
 	  <None Remove="HealthClinicBackendTests\**" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="Backend\Model\Util\TimeInterval.cs~RF75a01bc4.TMP" />
+	</ItemGroup>
+
 </Project>
