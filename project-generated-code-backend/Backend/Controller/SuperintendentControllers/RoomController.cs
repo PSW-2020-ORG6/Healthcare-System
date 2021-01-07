@@ -39,6 +39,11 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
             return _roomService.GetByFloorSerialNumber(floorSerialNumber);
         }
 
+        public Room GetByPositionSerialNumber(string positionSerialNumber)
+        {
+            return _roomService.GetByPositionSerialNumber(positionSerialNumber);
+        }
+
         public List<Room> GetAll()
         {
             return _roomService.GetAll();

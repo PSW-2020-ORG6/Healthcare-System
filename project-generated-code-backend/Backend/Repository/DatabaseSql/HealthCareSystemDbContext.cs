@@ -61,10 +61,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
         }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseNpgsql(CONNECTION_STRING);
-        //}
+        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        // { 
+        //     optionsBuilder.UseNpgsql(CONNECTION_STRING);
+        // }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -346,16 +346,29 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                .Property(r => r.Style)
                .HasField("_style");
 
-            //Room room1 = new Room("101", "Examination room 101", 101, "1001",
-            //    "10000003", "70001", "RoomButtonStyle", 0, 0, 2, 2);
-            //Room room2 = new Room("102", "Examination room 102", 102, "1001",
-            //    "10000003", "70002", "RoomButtonStyle", 0, 2, 2, 2);
-            //Room room3 = new Room("103", "Store room 103", 103, "1001",
-            //    "10000002", "70003", "RoomButtonStyle", 0, 2, 2, 2);
-            //Room room4 = new Room("104", "Examination room 104", 104, "1001",
-            //    "10000003", "70004", "RoomButtonStyle", 0, 0, 2, 2);
-            //Room room5 = new Room("105", "Store room 105", 105, "1001",
-            //    "10000002", "70005", "RoomButtonStyle", 2, 0, 0, 0);
+            modelBuilder.Entity<Room>()
+               .Property(r => r.BottomDoorVisible)
+               .HasField("_bottomDoorVisible");
+            modelBuilder.Entity<Room>()
+               .Property(r => r.RightDoorVisible)
+               .HasField("_rightDoorVisible");
+            modelBuilder.Entity<Room>()
+                .Property(r => r.LeftDoorVisible)
+                .HasField("_leftDoorVisible");
+            modelBuilder.Entity<Room>()
+               .Property(r => r.TopDoorVisible)
+               .HasField("_topDoorVisible");
+
+            Room room1 = new Room("101", "Examination room 101", 101, "1001",
+                "10000003", "70001", "RoomButtonStyle", 0, 0, 2, 2);
+            Room room2 = new Room("102", "Examination room 102", 102, "1001",
+                "10000003", "70002", "RoomButtonStyle", 0, 2, 2, 2);
+            Room room3 = new Room("103", "Store room 103", 103, "1001",
+                "10000002", "70003", "RoomButtonStyle", 0, 2, 2, 2);
+            Room room4 = new Room("104", "Examination room 104", 104, "1001",
+                "10000003", "70004", "RoomButtonStyle", 0, 0, 2, 2);
+            Room room5 = new Room("105", "Store room 105", 105, "1001",
+                "10000002", "70005", "RoomButtonStyle", 2, 0, 0, 0);
 
             //modelBuilder.Entity<Room>().HasData(room1, room2, room3, room4, room5);
         }
