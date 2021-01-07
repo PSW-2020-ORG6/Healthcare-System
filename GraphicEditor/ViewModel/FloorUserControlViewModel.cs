@@ -1,9 +1,7 @@
 ﻿using GraphicEditor.HelpClasses;
-using GraphicEditor.View.Windows;
 using HealthClinicBackend.Backend.Controller.PatientControllers;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
-using HealthClinicBackend.Backend.Model.Util;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -30,6 +28,7 @@ namespace GraphicEditor.ViewModel
         private string buildingStyle;
         private MainWindowViewModel parentViewModel;
         private BuildingUserControlViewModel myViewModel;
+        private PositionController positionController = new PositionController();
 
         public FloorUserControlViewModel(MainWindowViewModel _mapParent, BuildingUserControlViewModel _buildingParent, Grid grid, Floor floor)
         {
@@ -92,18 +91,19 @@ namespace GraphicEditor.ViewModel
                 button.LeftDoor = (Visibility)room.LeftDoorVisible;
                 button.Tag = room.SerialNumber;
                 Grid.SetZIndex(button, 2);
-                Grid.SetColumnSpan(button, room.ColumnSpan);
-                Grid.SetRowSpan(button, room.RowSpan);
-                Grid.SetColumn(button, room.Column);
-                Grid.SetRow(button, room.Row);
+                Position position = positionController.GetById(room.PositionSerialNumber);
+                Grid.SetColumnSpan(button, position.ColumnSpan);
+                Grid.SetRowSpan(button, position.RowSpan);
+                Grid.SetColumn(button, position.Column);
+                Grid.SetRow(button, position.Row);
+                Room r = new Room(room.Name, room.Id, room.FloorSerialNumber, room.RoomTypeSerialNumber,
+                    room.PositionSerialNumber, room.Style, equipmentController.GetByRoomSerialNumber(room.SerialNumber),
+                    medicineController.GetByRoomSerialNumber(room.SerialNumber), roomTypeController.GetById(room.RoomTypeSerialNumber));
                 room.Beds = bedController.GetByRoomSerialNumber(room.SerialNumber);
                 foreach (Bed bed in room.Beds)
                 {
                     if (bed.PatientSerialNumber != null) bed.Patient = patientController.GetById(bed.PatientSerialNumber);
                 }
-                room.RoomType = roomTypeController.GetById(room.RoomTypeSerialNumber);
-                room.Equipment = equipmentController.GetByRoomSerialNumber(room.SerialNumber);
-                room.Medinices = medicineController.GetByRoomSerialNumber(room.SerialNumber);
 
                 RoomGrid.Children.Add(button);
                 connections.Add(room.SerialNumber, button);

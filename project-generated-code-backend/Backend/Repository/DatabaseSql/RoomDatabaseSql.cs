@@ -1,7 +1,6 @@
 ﻿using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.Generic;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -57,6 +56,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public List<Room> GetByFloorSerialNumber(string floorSerialNumber)
         {
             return GetAll().Where(r => r.FloorSerialNumber.Equals(floorSerialNumber)).ToList();
+        }
+
+        public Room GetByPositionSerialNumber(string positionSerialNumber)
+        {
+            return GetAll().Where(r => r.PositionSerialNumber.Equals(positionSerialNumber)).ToList()[0];
         }
 
         public List<Room> GetByProcedureType(ProcedureType procedureType)

@@ -72,14 +72,8 @@ namespace GraphicEditor.ViewModel
             string[] split = content.Split(" ");
 
             // [Lemara98] This needs to be corrected because I didn't find appropriate controller for buildings !!!
-            Building newBuilding = new Building()
-            {
-                Name = NameText,
-                Color = MyButtonColor.ToString(),
-                Column = Int32.Parse(split[0]),
-                Row = Int32.Parse(split[1]),
-                Style = buildingButtonStyle
-            };
+            Building newBuilding = new Building(NameText, MyButtonColor.ToString(), Int32.Parse(split[1]),
+                Int32.Parse(split[0]), buildingButtonStyle);
 
             buildingDatabaseSql.Save(newBuilding);
             HospitalMapUserControlViewModel.buildingButtons[newBuilding.SerialNumber] = Button;
@@ -89,11 +83,7 @@ namespace GraphicEditor.ViewModel
 
             for (int i = 0; i <= NumberOfFloors; i++)
             {
-                Floor newFloor = new Floor() 
-                {   
-                    BuildingSerialNumber = buildingSerialNumber,
-                    Name = Constants.FLOOR_NAMES[i]
-                };
+                Floor newFloor = new Floor(Constants.FLOOR_NAMES[i], buildingSerialNumber);
 
                 floorDatabaseSql.Save(newFloor);
             }

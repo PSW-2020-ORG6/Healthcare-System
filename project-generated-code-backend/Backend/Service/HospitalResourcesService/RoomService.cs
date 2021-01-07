@@ -51,6 +51,11 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
             return _roomRepository.GetByFloorSerialNumber(floorSerialNumber);
         }
 
+        public Room GetByPositionSerialNumber(string positionSerialNumber)
+        {
+            return _roomRepository.GetByPositionSerialNumber(positionSerialNumber);
+        }
+
         public List<Room> GetAll()
         {
             List<Room> rooms = new List<Room>();
@@ -64,8 +69,9 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 
         private void FillComplexedProperties(Room room)
         {
+
             room.Equipment = _equipmentRepository.GetByRoomSerialNumber(room.SerialNumber);
-            room.Medinices = _medicineRepository.GetByRoomSerialNumber(room.SerialNumber);
+            room.Medicines = _medicineRepository.GetByRoomSerialNumber(room.SerialNumber);
             room.Beds = _bedRepository.GetByRoomSerialNumber(room.SerialNumber);
             // Add beds later
         }
