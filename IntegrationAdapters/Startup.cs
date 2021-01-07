@@ -18,30 +18,30 @@ namespace IntegrationAdapters
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Env = environment;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Env { get; }
 
-   
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
 
-            IConfiguration conf = Configuration.GetSection("DataBaseConnectionSettings");
-            DataBaseConnectionSettings dataBaseConnectionSettings = new DataBaseConnectionSettings();
-
-            services.AddControllers();
-
             services.AddDbContext<IAHealthCareSystemDbContext>(options =>
             {
+                var connectionString = CreateConnectionStringFromEnvironment();
+                Console.WriteLine(connectionString);
+
                 options.UseNpgsql(
-                    dataBaseConnectionSettings.ConnectionString,
-                    x => x.MigrationsAssembly("Backend").EnableRetryOnFailure(
-                        dataBaseConnectionSettings.RetryCount, new TimeSpan(0, 0, 0, dataBaseConnectionSettings.RetryWaitInSeconds), new List<string>())
-                    ).UseLazyLoadingProxies();
+                    connectionString,
+                    x => x.MigrationsAssembly("Backend").EnableRetryOnFailure(5,
+                        new TimeSpan(0, 0, 0, 30), new List<string>())
+                );
             });
         }
         private Server server;
@@ -74,13 +74,25 @@ namespace IntegrationAdapters
 
         private string CreateConnectionStringFromEnvironment()
         {
-            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
-            string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "5432";
-            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "healthcare-system-db";
-            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
-            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
+            // Change these values for local connection
+            var serverDefault = "localhost";
+            var portDefault = 5432;
+            var userDefault = "postgres";
+            var passwordDefault = "super";
+            var schema = "healthcare-system-db";
 
-            return $"User ID =postgres;server={server};port={port};database={database};user={user};password={password};Integrated Security=true;Pooling=true;";
+            // Do not change this
+            var herokuPostgresURL = Configuration.GetValue<string>("DATABASE_URL") ?? $"{serverDefault}://{userDefault}:{passwordDefault}@{serverDefault}:{portDefault}/{schema}";
+
+            var databaseUri = new Uri(herokuPostgresURL);
+            var userInfo = databaseUri.UserInfo.Split(':');
+            var server = databaseUri.Host;
+            var port = databaseUri.Port.ToString();
+            var user = userInfo[0];
+            var password = userInfo[1];
+            var database = databaseUri.LocalPath.TrimStart('/');
+
+            return $"userid={user};server={server};port={port};database={database};password={password};";
         }
 
         private void OnShutdown()

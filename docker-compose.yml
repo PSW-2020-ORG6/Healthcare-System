@@ -4,9 +4,9 @@ services:
   postgres:
     image: postgres:13.1
     environment:
-      DATABASE_PASSWORD: "password"
-      DATABASE_USERNAME: "user"
-      DATABASE_SCHEMA: "healthcare-system-db"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_USER: "user"
+      POSTGRES_DB: "healthcare-system-db"
     ports: 
       - "5432:5432"
     networks: 
@@ -42,11 +42,13 @@ services:
       RABBITMQ_USERNAME: guest
       RABBITMQ_PASSOWRD: guest
       DATABASE_HOST: "postgres"
-      DATABASE_PASSWORD: "password"
+      DATABASE_PORT: "5432"
       DATABASE_USERNAME: "user"
+      DATABASE_PASSWORD: "password"
       DATABASE_SCHEMA: "healthcare-system-db"
-      DataBaseConnectionSettings:RetryCount: 100
-      DataBaseConnectionSettings:RetryWaitInSeconds: 30
+      DATABASE_RETRYCOUNT: 100
+      DATABASE_RETRYWAITINSECONDS: 30
+      DATABASE_URL: "postgres://user:password@postgres:5432/healthcare-system-db"
     depends_on:
       - rabbit
       - postgres
@@ -68,11 +70,13 @@ services:
       RABBITMQ_USERNAME: guest
       RABBITMQ_PASSOWRD: guest
       DATABASE_HOST: "postgres"
-      DATABASE_PASSWORD: "password"
+      DATABASE_PORT: "5432"
       DATABASE_USERNAME: "user"
+      DATABASE_PASSWORD: "password"
       DATABASE_SCHEMA: "healthcare-system-db"
-      DataBaseConnectionSettings:RetryCount: 100
-      DataBaseConnectionSettings:RetryWaitInSeconds: 30
+      DATABASE_RETRYCOUNT: 100
+      DATABASE_RETRYWAITINSECONDS: 30
+      DATABASE_URL: "postgres://user:password@postgres:5432/healthcare-system-db"
     volumes:
       - sql-scripts:/app/sql
     depends_on:
