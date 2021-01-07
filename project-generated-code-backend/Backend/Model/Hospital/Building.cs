@@ -6,47 +6,51 @@ namespace HealthClinicBackend.Backend.Model.Hospital
 {
     public class Building : Entity
     {
-        public string _name;
+        private string _name;
         public string Name
         {
             get { return _name; }
-            private set { _name = value; }
+            set { _name = value; }  // this should be private
         }
 
-        public string _color;
+        private string _color;
         public string Color
         {
             get { return _color; }
-            private set { _color = value; }
+            set { _color = value; }  // this should be private
         }
 
-        public int _row;
+        private int _row;
         public int Row
         {
             get { return _row; }
             private set { _row = value; }
         }
 
-        public int _column;
+        private int _column;
         public int Column
         {
             get { return _column; }
             private set { _column = value; }
         }
 
-        public string _style;
+        private string _style;
         public string Style
         {
             get { return _style; }
-            private set { _style = value; }
+            set { _style = value; }  // this should be private
         }
 
 
-        public List<Floor> _floors;
+        private List<Floor> _floors;
+        private int v1;
+        private int v2;
+        private string v3;
+
         public List<Floor> Floors
         {
             get { return _floors; }
-            private set { _floors = value; }
+            set { _floors = value; }  // this should be private
         }
 
         public Building() : base()
@@ -55,16 +59,40 @@ namespace HealthClinicBackend.Backend.Model.Hospital
 
         public Building(string name, string color) : base()
         {
-            Validate(name, color);
+            ValidateElementOfBuilding(name);
+            ValidateElementOfBuilding(color);
+
             _name = name;
             _color = color;
+            _floors = new List<Floor>();
         }
 
         public Building(string serialNumber, string name, string color) : base(serialNumber)
         {
-            Validate(name, color);
+            ValidateSerialNbr(serialNumber);
+            ValidateElementOfBuilding(name);
+            ValidateElementOfBuilding(color);
+
             _name = name;
             _color = color;
+            _floors = new List<Floor>();
+        }
+
+        public Building(string serialNumber, string name, string color, int row, int column, string style) : this(serialNumber, name, color)
+        {
+            ValidateSerialNbr(serialNumber);
+            ValidateElementOfBuilding(name);
+            ValidateElementOfBuilding(color);
+            ValidateFieldElement(row);
+            ValidateFieldElement(column);
+            ValidateElementOfBuilding(style);
+
+            _name = name;
+            _color = color;
+            _row = row;
+            _column = column;
+            _style = style;
+            _floors = new List<Floor>();
         }
 
         public override bool Equals(object obj)
@@ -117,17 +145,24 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             return text;
         }
 
-        private void Validate(string name, string color)
-        {
-            ValidateElementOfBuilding(name);
-            ValidateElementOfBuilding(color);
-        }
-
         private void ValidateElementOfBuilding(string elementOfBuilding)
         {
             if (string.IsNullOrEmpty(elementOfBuilding)) throw new Exception("The element of the building is required!");
             else if (elementOfBuilding.Length < 3) throw new Exception("The element of the building is too short.");
-            else if (elementOfBuilding.Length > 20) throw new Exception("The element of the building is too long.");
+            else if (elementOfBuilding.Length > 30) throw new Exception("The element of the building is too long.");
+        }
+
+        private void ValidateSerialNbr(string serialNumber)
+        {
+            if (string.IsNullOrEmpty(serialNumber)) throw new Exception("Serial number is required!");
+            else if (serialNumber.Length < 3) throw new Exception("Serial number is too short.");
+            else if (serialNumber.Length > 30) throw new Exception("Serial number is too long.");
+        }
+
+        private void ValidateFieldElement(int fieldElement)
+        {
+            if (fieldElement > 1000) throw new Exception("The field element is too big of a size.");
+            else if (fieldElement < 0) throw new Exception("The field element can't be negative.");
         }
 
         public Building(Building building): base(building.SerialNumber)

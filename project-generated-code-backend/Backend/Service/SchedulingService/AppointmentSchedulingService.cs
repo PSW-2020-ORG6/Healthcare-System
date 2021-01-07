@@ -5,6 +5,7 @@
 
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 using HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions;
@@ -62,8 +63,8 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             bool noDoctors = false;
             do
             {
-                appointments = _appointmentGeneralitiesManager.GetAllAvailableAppointmentsGEA(appointmentPreferences, ref noDoctors );
-                if( noDoctors )
+                appointments = _appointmentGeneralitiesManager.GetAllAvailableAppointmentsGEA(appointmentPreferences, ref noDoctors);
+                if (noDoctors)
                 {
                     break;
                 }
@@ -71,7 +72,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
                 {
                     if (priority == 0) //doctor is priority
                     {
-                        if(!firstTime)
+                        if (!firstTime)
                         {
                             appointmentPreferences.Date.AddDays(1);
                             appointmentPreferences.Time.Start.Date.AddDays(1);
@@ -81,18 +82,20 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
                         {
                             firstTime = false;
                         }
-                        appointmentPreferences.Time._start = new DateTime(appointmentPreferences.Time.Start.Year,
-                                                                        appointmentPreferences.Time.Start.Month,
-                                                                        appointmentPreferences.Time.Start.Day,
-                                                                        0, 0, 0);
-                        appointmentPreferences.Time._end = new DateTime(appointmentPreferences.Time.Start.Year,
-                                                                        appointmentPreferences.Time.Start.Month,
-                                                                        appointmentPreferences.Time.Start.Day,
-                                                                        23, 59, 59);
+                        DateTime start = new DateTime(appointmentPreferences.Time.Start.Year,
+                                                    appointmentPreferences.Time.Start.Month,
+                                                    appointmentPreferences.Time.Start.Day,
+                                                    0, 0, 0);
+                        DateTime end = new DateTime(appointmentPreferences.Time.Start.Year,
+                                                    appointmentPreferences.Time.Start.Month,
+                                                    appointmentPreferences.Time.Start.Day,
+                                                    23, 59, 59);
+                        TimeInterval timeInterval = new TimeInterval(start, end);
+                        appointmentPreferences.Time = timeInterval;
                     }
                     else
                     {
-                        if( physicianIndex < physicians.Count )
+                        if (physicianIndex < physicians.Count)
                         {
                             appointmentPreferences.Physician = physicians[physicianIndex];
                             physicianIndex++;
@@ -103,8 +106,8 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
                         }
                     }
                 }
-            } while (appointments.Count == 0 );
-            
+            } while (appointments.Count == 0);
+
             return appointments;
         }
 

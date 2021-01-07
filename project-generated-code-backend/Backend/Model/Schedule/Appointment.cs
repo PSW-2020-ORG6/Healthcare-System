@@ -130,7 +130,7 @@ namespace HealthClinicBackend.Backend.Model.Schedule
             this.Physician = new Physician { SerialNumber = physicianId };
             string[] parts = date.Split("-");
             this.Date = new DateTime(Int32.Parse(parts[0]), Int32.Parse(parts[1]), Int32.Parse(parts[2]), 0, 0, 0);
-            this.TimeInterval = new TimeInterval { _start = timeIntervalStart };
+            this.TimeInterval = new TimeInterval(timeIntervalStart);
             this.Active = true;
         }
 

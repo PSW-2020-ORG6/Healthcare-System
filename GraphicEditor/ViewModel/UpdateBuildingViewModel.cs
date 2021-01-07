@@ -62,9 +62,9 @@ namespace GraphicEditor.ViewModel
             buildingColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString(_building.Color));
             building = new Building(_building);
             
-            oldBuilding._floors = new List<Floor>(floorController.GetByBuildingSerialNumber(oldBuilding.SerialNumber));
+            oldBuilding.Floors = new List<Floor>(floorController.GetByBuildingSerialNumber(oldBuilding.SerialNumber));
             numberOfFloors = oldBuilding.Floors.Count;
-            building._floors = floorController.GetByBuildingSerialNumber(building.SerialNumber);
+            building.Floors = floorController.GetByBuildingSerialNumber(building.SerialNumber);
         }
 
         private void AddFloor()
@@ -90,7 +90,7 @@ namespace GraphicEditor.ViewModel
 
         private void UpdateBuilding()
         {
-            building._color = BuildingColor.Color.ToString();
+            building.Color = BuildingColor.Color.ToString();
             
             if (FloorNumbers > oldBuilding.Floors.Count)
             {
@@ -107,9 +107,9 @@ namespace GraphicEditor.ViewModel
                 }
             }
 
-            oldBuilding._name = building.Name;
-            oldBuilding._color = building.Color;
-            oldBuilding._floors = building.Floors;
+            oldBuilding.Name = building.Name;
+            oldBuilding.Color = building.Color;
+            oldBuilding.Floors = building.Floors;
 
             Button buildingButton = HospitalMapUserControlViewModel.buildingButtons[oldBuilding.SerialNumber];
             buildingButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(oldBuilding.Color));

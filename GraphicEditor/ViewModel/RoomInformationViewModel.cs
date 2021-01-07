@@ -1,5 +1,6 @@
 ﻿using GraphicEditor.HelpClasses;
 using GraphicEditor.View.Windows;
+using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
 using System.Collections.Generic;
 using System.Windows;
@@ -144,7 +145,7 @@ namespace GraphicEditor.ViewModel
                 setproperty(ref roomname, value);
             }
         }*/
-        
+
         public Room Room
         {
             get => room;
@@ -153,6 +154,10 @@ namespace GraphicEditor.ViewModel
                 SetProperty(ref room, value);
             }
         }
+
+        private BedController bedController = new BedController();
+        private EquipmentController equipmentController = new EquipmentController();
+        private SuperintendentMedicineController medicineController = new SuperintendentMedicineController();
 
         public RoomInformationViewModel(RoomInformation _window, Room _room)
         {
@@ -164,9 +169,9 @@ namespace GraphicEditor.ViewModel
             window = _window;
             roomName = _room.Name;
             room = _room;
-            equipment = _room.Equipment;
-            medicines = _room.Medinices;
-            beds = _room.Beds;
+            equipment = equipmentController.GetByRoomSerialNumber(room.SerialNumber);
+            medicines = medicineController.GetByRoomSerialNumber(room.SerialNumber);
+            beds = bedController.GetByRoomSerialNumber(room.SerialNumber);
 
             selectedCategory = categories[0];
             window.equipmentListBox.Visibility = Visibility.Visible;
@@ -180,13 +185,13 @@ namespace GraphicEditor.ViewModel
             if (medicines == null) medicines = new List<Medicine>();
             if (equipment == null) equipment = new List<Equipment>();
 
-            if (beds.Count != 0)
+            if (beds != null & beds.Count != 0)
                 selectedBed = beds[0];
 
-            if (medicines.Count != 0)
+            if (medicines != null & medicines.Count != 0)
                 selectedMedicine = medicines[0];
 
-            if (equipment.Count != 0)
+            if (equipment != null & equipment.Count != 0)
                 selectedEquipment = equipment[0];
         }
 
