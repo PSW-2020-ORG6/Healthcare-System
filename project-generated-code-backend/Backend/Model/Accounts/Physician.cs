@@ -21,12 +21,12 @@ namespace HealthClinicBackend.Backend.Model.Accounts
         public virtual TimeInterval WorkSchedule { get; set; }
         public virtual List<TimeInterval> VacationTime { get; set; }
         [NotMapped] public virtual List<Specialization> Specialization { get; set; }
-        
+        /*
         public String AllSpecializations
         {
             get { return Specialization.Aggregate("", (current, s) => current + (s + ", ")); }
         }
-        
+        */
         public Physician() : base()
         {
         }

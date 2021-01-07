@@ -110,15 +110,19 @@
 	methods: {
 		AddNewFeedback: function (feedback) {
 			if (!document.getElementById("anonimous").checked)
-				this.feedback.patientId = patientId
+				this.feedback.patientId = localStorage.getItem('userId')
 			else
 				this.feedback.id = "-1"
 			if (feedback.text.localeCompare(null) || feedback.text.localeCompare("")) {
 				axios
-					.post("/feedback/add", feedback)
+					.post("/feedback/add", feedback, {
+						headers: {
+							'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+						}
+					})
 					.then(response => {
 						this.feedback.text = null;
-						$('#feedbackModal').modal('hide')
+						$('#CommentModal').modal('hide')
 					})
 					.catch(error => {
 						alert("You need to enter a comment first.");
@@ -139,7 +143,7 @@
 		},
 		SurveyShow: function () {
 			axios
-				.get('/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient } }, {
+				.get('/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient } , 
 					headers: {
 						'Authorization': 'Bearer' + " " + localStorage.getItem('token')
 					}
