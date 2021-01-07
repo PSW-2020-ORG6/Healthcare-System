@@ -13,6 +13,11 @@ const FeedbackPatient = { template: '<feedbackPatient></feedbackPatient>' }
 const Account = { template: '<account></account>' }
 const FeedbackAdmin = { template: '<feedbackAdmin></feedbackAdmin>' }
 const Login = { template: '<login></login>' }
+const PageHeader = { template: '<pageHeader></pageHeader>' }
+const AdminHeader = { template: '<headerAdmin></headerAdmin>' }
+const PatientHeader = { template: '<headerPatient></headerPatient>' }
+
+
 
 
 var temp = new Vue({
@@ -65,6 +70,15 @@ var temp = new Vue({
 		},
 		login: function () {
 			router.push("login")
+		},
+		pageHeader: function () {
+			router.push("pageHeader")
+		},
+		headerAdmin: function () {
+			router.push("headerAdmin")
+		},
+		headerPatient: function () {
+			router.push("headerPatient")
 		}
 	}
 });
@@ -75,77 +89,121 @@ const router = new VueRouter({
 		{
 			path: '/home',
 			name: 'home',
-			component: Home,
+			components: {
+				pageHeader: PageHeader,
+				content: Home
+			}
 		},
 		{
 			path: '/patient',
 			name: 'patient',
-			component: Patient,
+			components: {
+				pageHeader: PatientHeader,
+				content: Patient
+			}
 		},
 		{
 			path: '/admin',
 			name: 'admin',
-			component: Admin,
+			components: {
+				pageHeader: AdminHeader,
+				content: Admin
+			}
 		},
 		{
 			path: '/registration',
 			name: 'registration',
-			component: Registration,
+			components: {
+				pageHeader: PageHeader,
+				content: Registration
+			}
 		},
 		{
 			path: '/emailConfirmation',
 			name: 'emailConfirmation',
-			component: EmailConfirmation,
+			components: {
+				pageHeader: PatientHeader,
+				content: EmailConfirmation
+			}
 		},
 		{
 			path: '/successfulRegistration',
 			name: 'successfulRegistration',
-			component: SuccessfulRegistration,
+			components: {
+				pageHeader: PatientHeader,
+				content: SuccessfulRegistration
+			}
 		},
 		{
 			path: '/survey',
 			name: 'survey',
-			component: Survey,
+			components: {
+				pageHeader: PatientHeader,
+				content: Survey
+			}
 		},	
 		{
 			path: '/statistics',
 			name: 'statistics',
-			component: Statistics,
+			components: {
+				pageHeader: AdminHeader,
+				content: Statistics
+			}
 		},	
 		{
 			path: '/search',
 			name: 'search',
-			component: Search,
+			components: {
+				pageHeader: PatientHeader,
+				content: Search
+			}
 		},
 		{
 			path: '/appointments',
 			name: 'appointments',
-			component: Appointments,
+			components: {
+				pageHeader: PatientHeader,
+				content: Appointments
+			}
 		},
 		{
 			path: '/appointment',
 			name: 'appointment',
-			component: Appointment,
+			components: {
+				pageHeader: PatientHeader,
+				content: Appointment
+			}
 		},
 		{
 			path: '/feedbackPatient',
 			name: 'feedbackPatient',
-			component: FeedbackPatient,
+			components: {
+				pageHeader: PatientHeader,
+				content: FeedbackPatient
+			}
 		},
 		{
 			path: '/account',
 			name: 'account',
-			component: Account,
+			components: {
+				pageHeader: PatientHeader,
+				content: Account
+			}
 		},
 		{
 			path: '/feedbackAdmin',
 			name: 'feedbackAdmin',
-			component: FeedbackAdmin,
+			components: {
+				pageHeader: AdminHeader,
+				content: FeedbackAdmin
+			}
 		},
 		{
 			path: '/',
-			name: 'login',
-			component: Login,
+			components: {
+				pageHeader: PageHeader,
+				content: Login
+			}
 		},
 	]
 });
@@ -154,4 +212,5 @@ var app = new Vue({
 	,
 	el: '#routerMode'
 });
+
 

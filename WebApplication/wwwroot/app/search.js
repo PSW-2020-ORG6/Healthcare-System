@@ -306,7 +306,6 @@ Vue.component("search", {
                         this.search = response.data
                     })
                     .catch(error => {
-                        alert(error)
                     })
             }
         },
@@ -443,7 +442,6 @@ Vue.component("search", {
                         this.search = response.data
                     })
                     .catch(error => {
-                        alert(error)
                     })
             }
         },

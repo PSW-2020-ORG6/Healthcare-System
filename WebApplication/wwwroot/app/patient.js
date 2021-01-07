@@ -12,81 +12,6 @@
 		}
 	},
 	beforeMount() {
-
-		//axios
-		//	.get('/login/getUserId', {
-		//		headers: {
-		//			'Authorization': 'Bearer' + " " + localStorage.getItem('token')
-		//		}
-		//	})
-		//	.then(response => {
-		//		this.idPatient = response.data
-		//	})
-		//	.catch(error => {
-		//	})
-		//axios
-		//	.get('/patient/getPatientById', {
-		//		params: { patientId: localStorage.getItem('userId') } , 
-		//		headers: {
-		//			'Authorization': 'Bearer' + " " + localStorage.getItem('token')
-		//		}
-		//	})
-		//	.then(response => {
-		//		this.patientDTO = response.data
-		//	})
-		//	.catch(error => {
-		//		alert(localStorage.getItem('token'))
-		//	})
-
-		//axios
-		//	.get('/feedback/approved', {
-		//		headers: {
-		//			'Authorization': 'Bearer' + " " + localStorage.getItem('token')
-		//		}
-		//	})
-		//	.then(response => {
-		//		this.approvedFeedbacks = response.data
-		//	})
-		//	.catch(error => {
-		//		alert(error.response.data)
-		//	})
-		//axios
-		//	.get('/patient/all', {
-		//		headers: {
-		//			'Authorization': 'Bearer' + " " + localStorage.getItem('token')
-		//		}
-		//	})
-		//	.then(response => {
-		//		this.patients = response.data
-		//	})
-		//	.catch(error => {
-		//		alert(error.response.data)
-		//	})
-
-		//axios
-		//	.get('/appointment/allAppointmentsByPatientIdActive', { params: { patientId:localStorage.getItem('userId') } , 
-		//		headers: {
-		//			'Authorization': 'Bearer' + " " + localStorage.getItem('token')
-		//		}
-		//	}).then(response => {
-		//		this.activeAppointments = response.data
-		//	})
-
-		//	.catch(error => {
-		//		alert(error)
-		//	})
-
-		//axios
-		//	.get('/appointment/allAppointmentsByPatientIdCanceled', {params: { patientId:localStorage.getItem('userId') } , 
-		//		headers: {
-		//			'Authorization': 'Bearer' + " " + localStorage.getItem('token')
-		//		}
-		//	}).then(response => {
-		//		this.canceledAppointments = response.data
-		//	})
-		//	.catch(error => {
-		//		alert(error)
-		//	})
 		axios
 			.get('/patient/getActionsAndBenefits', {
 				headers: {
@@ -97,7 +22,6 @@
 				this.actionsAndBenefits = response.data
 			})
 			.catch(error => {
-				alert(error)
 			})
 	},
 	template: `
@@ -227,7 +151,6 @@
 					}
 				})
 				.catch(error => {
-					alert(error)
 				})
 		},
 		FeedbackShow: function () {

@@ -7,6 +7,10 @@
 			token: null
 		}
 	},
+	beforeMount() {
+		localStorage.setItem('isLogged', false);
+
+	},
 	template: `
 	<div id="Login">
 		 <div class="loginbox">
@@ -80,21 +84,18 @@
 
 			if (document.getElementById("userNameId").value === '') {
 				$('#myModal').modal('show');
-				//this.document.getElementById("submitId").disabled = true;
 				return
 			}
 			else if (document.getElementById("passwordId").value === '') {
 				$('#myModal1').modal('show');
-				//	this.document.getElementById("submitId").disabled = true;
 				return
 			}
 			else {
 				this.Login();
-				this.GetUserType(this.token);
 
 			}
 		},
-		GetUserType: function (token) {
+		GetUserType: function () {
 			axios.get('http://localhost:49900/login/GetUserType', {
 				headers: {
 					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
@@ -106,9 +107,14 @@
 		},
 		Redirect: function (UserType) {
 			if (UserType == "PATIENT") {
+				localStorage.setItem('isAdmin', false)
+				localStorage.setItem('isPatient', true)
 				this.$router.push('patient');
 			}
 			else {
+				localStorage.setItem('isAdmin', true)
+				localStorage.setItem('isPatient', false)
+
 				this.$router.push('admin');
 			}
 		},
@@ -119,8 +125,9 @@
 				.get('http://localhost:49900/login/login', { params: { email: username, password: password } })
 				.then(response => {
 					this.token = response.data.token
-					this.GetUserType(this.token)
 					localStorage.setItem('token', this.token);
+					localStorage.setItem('isLogged', true);
+					this.GetUserType()
 					axios
 						.get('/login/getUserId', {
 							headers: {
@@ -136,7 +143,6 @@
 
 				})
 				.catch(error => {
-					alert("greska kod logina")
 				})
 
 		}

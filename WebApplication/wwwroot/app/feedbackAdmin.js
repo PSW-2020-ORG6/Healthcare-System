@@ -17,7 +17,6 @@
                 this.approvedFeedbacks = response.data
             })
             .catch(error => {
-                alert(error)
             })
 
         axios
@@ -30,7 +29,6 @@
                 this.disapprovedFeedbacks = response.data
             })
             .catch(error => {
-                alert(error)
             })
         axios
             .get('/patient/all', {
@@ -42,7 +40,6 @@
                 this.patients = response.data
             })
             .catch(error => {
-                alert(error)
             })
     },
     template: `
@@ -136,7 +133,6 @@
                     this.Refresh();
                 })
                 .catch(error => {
-                    alert(error)
                 })
         },
         Disapprove: function (feedback) {
@@ -150,7 +146,6 @@
                     this.Refresh();
                 })
                 .catch(error => {
-                    alert(error)
                 })
         },
         Refresh: function () {
@@ -164,7 +159,6 @@
                     this.approvedFeedbacks = response.data
                 })
                 .catch(error => {
-                    alert(error)
                 })
             axios
                 .get('/feedback/disapproved', {
@@ -176,7 +170,6 @@
                     this.disapprovedFeedbacks = response.data
                 })
                 .catch(error => {
-                    alert(error)
                 })
         }
     }
