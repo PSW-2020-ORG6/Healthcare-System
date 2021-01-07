@@ -9,12 +9,26 @@ namespace HealthClinicBackend.Backend.Model.Hospital
     public class Floor : Entity
     {
         public string _name;
-        public string _buildingSerialNumber;
-        public List<Room> _rooms;
+        public string Name
+        {
+            get { return _name; }
+            private set { _name = value; }
+        }
 
-        public string Name => _name;
-        [ForeignKey("Building")] public string BuildingSerialNumber => _buildingSerialNumber;
-        public List<Room> Rooms => _rooms;
+        public string _buildingSerialNumber;
+        [ForeignKey("Building")]
+        public string BuildingSerialNumber
+        {
+            get { return _buildingSerialNumber; }
+            private set { _buildingSerialNumber = value; }
+        }
+
+        public List<Room> _rooms;
+        public List<Room> Rooms
+        {
+            get { return _rooms; }
+            private set { _rooms = value; }
+        }
 
         public Floor() : base()
         {
@@ -68,8 +82,8 @@ namespace HealthClinicBackend.Backend.Model.Hospital
 
         public override string ToString()
         {
-            var text =  SerialNumber + " - " + Name + " - " + BuildingSerialNumber + " - Rooms: ";
-            foreach(Room r in Rooms)
+            var text = SerialNumber + " - " + Name + " - " + BuildingSerialNumber + " - Rooms: ";
+            foreach (Room r in Rooms)
                 text += "   " + r.Name;
             return text;
         }
