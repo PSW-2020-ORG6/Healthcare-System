@@ -577,7 +577,6 @@
                 this.approvedFeedbacks = response.data
             })
             .catch(error => {
-                alert(error)
             }),
 
         axios
@@ -590,7 +589,6 @@
                 this.disapprovedFeedbacks = response.data
             })
             .catch(error => {
-                alert(error)
             })
         axios
             .get('/patient/all', {
@@ -602,7 +600,6 @@
                 this.patients = response.data
             })
             .catch(error => {
-                alert(error)
             })
 
         axios
@@ -615,7 +612,6 @@
                 this.doctorsList = response.data
             })
             .catch(error => {
-                alert(error)
             })
 
 

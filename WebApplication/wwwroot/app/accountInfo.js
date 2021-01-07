@@ -6,7 +6,6 @@
 		}
 	},
 	beforeMount() {
-		alert(localStorage.getItem('userId'))
 		axios
 			.get('http://localhost:49900/patient/getPatientById', { params: { patientId: localStorage.getItem('userId') } , 
 				headers: {
@@ -16,7 +15,6 @@
 				this.patientDTO = response.data
 			})
 			.catch(error => {
-				alert(error)
 			})
 	}
 		,

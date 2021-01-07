@@ -35,7 +35,6 @@
 				this.approvedFeedbacks = response.data
 			})
 			.catch(error => {
-				alert(error.response.data)
 			})
 		axios
 			.get('/patient/all', {
@@ -47,7 +46,6 @@
 				this.patients = response.data
 			})
 			.catch(error => {
-				alert(error.response.data)
 			})
 	},
 	template: `
@@ -125,7 +123,8 @@
 						$('#CommentModal').modal('hide')
 					})
 					.catch(error => {
-						alert("You need to enter a comment first.");
+
+						("You need to enter a comment first.");
 					})
 			}
 			else
@@ -157,7 +156,6 @@
 					}
 				})
 				.catch(error => {
-					alert(error)
 				})
 
 		}

@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <title>Health Clinic</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -20,52 +21,15 @@
     <link rel="icon" href="pictures/log.png" type="image/x-icon">
 </head>
 <body>
-
-    <div id="temp">
-        <nav class="navbar navbar-expand-lg navbar-custom " id="navigationBar">
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">
-                        <button type="button" class="btn btn-info btn-lg nav-link navbar-brand dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Patient menu</button>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" v-on:click="patient">Home</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" v-on:click="account">My account</a>
-                            <a class="dropdown-item" v-on:click="feedbackPatient">Feedbacks</a>
-                            <a class="dropdown-item" v-on:click="appointments">Appointments</a>
-                            <a class="dropdown-item" v-on:click="survey">Survay</a>
-                            <a class="dropdown-item" v-on:click="search">Search</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Log out</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <button type="button" class="btn btn-info btn-lg nav-link navbar-brand dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin menu</button>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" v-on:click="admin">Home</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" v-on:click="statistics">Statistics</a>
-                            <a class="dropdown-item" v-on:click="feedbackAdmin">Feedbacks</a>
-                            <a class="dropdown-item" href="#">Malicious users</a>
-                            <a class="dropdown-item" v-on:click="search">Search</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Log out</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <h1 class="navbar-brand" id="clinicLogoTxt">Health Clinic</h1>
-                        <img src="pictures/logInverted.png" id="clinicLogoPic">
-                    </li>
-                    <li class="nav-item" id="content">
-                        <button type="button" class="btn1 btn btn-info btn-lg navbar-brand" id="registration" v-on:click="registration">Registration</button>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+    <script>
+        localStorage.setItem("isAdmin", false);
+        localStorage.setItem("isPatient", true);
+        localStorage.setItem("isLogged", true);
+    </script>
 
     <div id="routerMode">
-        <router-view></router-view>
+        <router-view name="pageHeader"></router-view>
+        <router-view name="content"></router-view>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -85,15 +49,20 @@
     <script src="app/successfulRegistration.js"></script>
     <script src="app/search.js"></script>
     <script src="app/survey.js"></script>
+    <script src="app/header.js"></script>
     <script src="app/statistics.js"></script>
     <script src="app/feedbackPatient.js"></script>
     <script src="app/accountInfo.js"></script>
     <script src="app/feedbackAdmin.js"></script>
+    <script src="app/headerAdmin.js"></script>
+    <script src="app/headerPatient.js"></script>
     <script src="app/login.js"></script>
     <script src="app/router.js"></script>
 
+
+
     <footer>
-        <a>Copyright © 2020 HEALTH CLINIC</a>
+        <a>Copyright Â© 2020 HEALTH CLINIC</a>
     </footer>
 </body>
 

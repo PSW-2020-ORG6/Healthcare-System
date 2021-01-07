@@ -28,7 +28,6 @@ namespace WebApplication.Backend.Controllers
         }
 
         [HttpGet("login")]
-       
         public IActionResult Login(string email, string password)
         {
             Account login = new Account();
@@ -36,51 +35,17 @@ namespace WebApplication.Backend.Controllers
             login.Password = password;
 
             IActionResult response = Unauthorized();
-            var user = AuthenticateUser(login);
+            var user = _userService.AuthenticateUser(login);
 
             if (user != null)
             {
-                var tokenString = GenerateJSONWebToken(user);
+                var tokenString = _userService.GenerateJSONWebToken(user);
                 response = Ok(new { token = tokenString });
             }
 
             return response;
         }
-        
-        private Account AuthenticateUser(Account login)
-        {
-
-            Account user = _userService.LogIn(login.Email, login.Password);
-            return user;
-        }
-
-        private string GenerateJSONWebToken(Account userInfo)
-        {
-
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-
-            var claims = new[]
-            {
-            new Claim(JwtRegisteredClaimNames.Email,userInfo.Email),
-            new Claim(JwtRegisteredClaimNames.Typ,userInfo.IsAdmin.ToString()),
-            new Claim(JwtRegisteredClaimNames.Sub,userInfo.Id.ToString()),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
-
-            var token = new JwtSecurityToken
-                (
-                    issuer: configuration["Jwt:Issuer"],
-                    audience: configuration["Jwt:Issuer"],
-                    claims,
-                    expires: DateTime.Now.AddMinutes(120),
-                    signingCredentials: credentials);
-
-            var encodeToken = new JwtSecurityTokenHandler().WriteToken(token);
-            return encodeToken;
-        }
-
+       
         [Authorize]
         [HttpGet("GetUserType")]
         public string GetUserType()

@@ -22,7 +22,6 @@
 				})
 
 				.catch(error => {
-					alert(error);
 				})
 		},
 		SuccessfulRegistration: function () {

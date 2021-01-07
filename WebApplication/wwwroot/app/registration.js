@@ -47,7 +47,6 @@
 				this.doctorsList = response.data
 			})
 			.catch(error => {
-				alert(error)
 			})
 	},
 	template: `

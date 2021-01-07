@@ -25,7 +25,6 @@ Vue.component("survey", {
                 this.doctorsList = response.data
             })
             .catch(error => {
-                alert(error)
             })
     },
     template: `
@@ -443,7 +442,6 @@ Vue.component("appointments", {
             })
 
             .catch(error => {
-                alert(error.value)
             })
 
         axios
@@ -458,7 +456,6 @@ Vue.component("appointments", {
 
             })
             .catch(error => {
-                alert(error.value)
             })
 
         axios
@@ -473,7 +470,6 @@ Vue.component("appointments", {
 
             })
             .catch(error => {
-                alert(error)
             })
         axios
             .get('/appointment/allAppointmentsWithSurvey', {
@@ -487,7 +483,6 @@ Vue.component("appointments", {
 
             })
             .catch(error => {
-                alert(error)
             })
         axios
             .get('/appointment/allAppointmentsWithoutSurvey', {
@@ -501,7 +496,6 @@ Vue.component("appointments", {
 
             })
             .catch(error => {
-                alert(error)
             })
 
 
@@ -516,7 +510,6 @@ Vue.component("appointments", {
                 this.doctorsList = response.data
             })
             .catch(error => {
-                alert(error)
             })
         axios
             .get('/appointment/physicians', {
@@ -857,16 +850,13 @@ Vue.component("appointments", {
                 .then(response => {
 
                     if (response.data == true) {
-                        alert("usao u true")
                         return false
                     } else {
-                        alert("usao u false")
 
                         return true
                     }
                 })
                 .catch(error => {
-                    alert(error.value);
                 })
         },
         SetSurveyDone: function (appointmentDto) {
@@ -880,7 +870,6 @@ Vue.component("appointments", {
                 .then(response => {
                 })
                 .catch(error => {
-                    alert(error.value);
                 })
 
         },
@@ -951,13 +940,11 @@ Vue.component("appointments", {
                                     })
 
                                     .catch(error => {
-                                        alert("greska kod activeAppoiuntments")
 
                                     })
                             }
                         })
                         .catch(error => {
-                            alert("greska kod malicious check")
 
                         })
                     axios
@@ -971,7 +958,6 @@ Vue.component("appointments", {
                         })
 
                         .catch(error => {
-                            alert("greska kod activeAppoiuntments")
 
                         })
 
@@ -986,7 +972,6 @@ Vue.component("appointments", {
 
                         })
                         .catch(error => {
-                            alert("greska kod canceledAppointments")
                         })
                 })
         },

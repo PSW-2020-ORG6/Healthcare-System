@@ -31,7 +31,6 @@
                 this.maliciousPatients = response.data
             })
             .catch(error => {
-                alert(error)
             })
 
         axios
@@ -46,7 +45,6 @@
 
             })
             .catch(error => {
-                alert(error)
             })
 
     },
@@ -177,11 +175,9 @@
                             this.maliciousPatients = response.data
                         })
                         .catch(error => {
-                            alert(error)
                         })
                 })
                 .catch(error => {
-                    alert(error)
                 })
         },
         StatisticsShow: function () {
