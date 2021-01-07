@@ -6,14 +6,32 @@ namespace HealthClinicBackend.Backend.Model.Hospital
     public class Position : Entity
     {
         public int _row;
-        public int _column;
-        public int _rowSpan;
-        public int _columnSpan;
+        public int Row
+        {
+            get { return _row; }
+            private set { _row = value; }
+        }
 
-        public int Row => _row;
-        public int Column => _column;
-        public int RowSpan => _rowSpan;
-        public int ColumnSpan => _columnSpan;
+        public int _column;
+        public int Column
+        {
+            get { return _column; }
+            private set { _column = value; }
+        }
+
+        public int _rowSpan;
+        public int RowSpan
+        {
+            get { return _rowSpan; }
+            private set { _rowSpan = value; }
+        }
+
+        public int _columnSpan;
+        public int ColumnSpan
+        {
+            get { return _columnSpan; }
+            private set { _columnSpan = value; }
+        }
 
         public Position()
         {

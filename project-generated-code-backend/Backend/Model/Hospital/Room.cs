@@ -10,26 +10,77 @@ namespace HealthClinicBackend.Backend.Model.Hospital
     public class Room : Entity
     {
         public string _name;
-        public int _id;
-        public string _floorSerialNumber;
-        public string _roomTypeSerialNumber;
-        public string _positionSerialNumber;
-        public RoomType _roomType;
-        public List<Equipment> _equipment;
-        public List<Bed> _beds;
-        public List<Medicine> _medinices;
-        public string _style;
+        public string Name
+        {
+            get { return _name; }
+            private set { _name = value; }
+        }
 
-        public string Name => _name;
-        public int Id => _id;
-        [ForeignKey("Floor")] public string FloorSerialNumber => _floorSerialNumber;
-        [ForeignKey("RoomType")] public string RoomTypeSerialNumber => _roomTypeSerialNumber;
-        [ForeignKey("Position")] public string PositionSerialNumber => _positionSerialNumber;
-        public virtual RoomType RoomType => _roomType;
-        public virtual List<Equipment> Equipment => _equipment;
-        public virtual List<Bed> Beds => _beds;
-        public virtual List<Medicine> Medinices => _medinices;
-        public string Style => _style;
+        public int _id;
+        public int Id
+        {
+            get { return _id; }
+            private set { _id = value; }
+        }
+
+        public string _floorSerialNumber;
+        [ForeignKey("Floor")]
+        public string FloorSerialNumber
+        {
+            get { return _floorSerialNumber; }
+            private set { _floorSerialNumber = value; }
+        }
+
+        public string _roomTypeSerialNumber;
+        [ForeignKey("RoomType")]
+        public string RoomTypeSerialNumber
+        {
+            get { return _roomTypeSerialNumber; }
+            private set { _roomTypeSerialNumber = value; }
+        }
+
+        public string _positionSerialNumber;
+        [ForeignKey("Position")]
+        public string PositionSerialNumber
+        {
+            get { return _positionSerialNumber; }
+            private set { _positionSerialNumber = value; }
+        }
+
+        public RoomType _roomType;
+        public virtual RoomType RoomType
+        {
+            get { return _roomType; }
+            private set { _roomType = value; }
+        }
+
+        public List<Equipment> _equipment;
+        public virtual List<Equipment> Equipment
+        {
+            get { return _equipment; }
+            private set { _equipment = value; }
+        }
+
+        public List<Bed> _beds;
+        public virtual List<Bed> Beds
+        {
+            get { return _beds; }
+            private set { _beds = value; }
+        }
+
+        public List<Medicine> _medinices;
+        public virtual List<Medicine> Medinices
+        {
+            get { return _medinices; }
+            private set { _medinices = value; }
+        }
+
+        public string _style;
+        public string Style
+        {
+            get { return _style; }
+            private set { _style = value; }
+        }
 
         public int TopDoorVisible { get; set; }
         public int RightDoorVisible { get; set; }
