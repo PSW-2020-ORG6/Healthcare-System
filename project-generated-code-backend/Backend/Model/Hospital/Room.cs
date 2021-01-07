@@ -58,21 +58,21 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public virtual List<Equipment> Equipment
         {
             get { return _equipment; }
-            private set { _equipment = value; }
+            set { _equipment = value; } // this should be private
         }
 
         private List<Bed> _beds;
         public virtual List<Bed> Beds
         {
             get { return _beds; }
-            private set { _beds = value; }
+            set { _beds = value; } // this should be private
         }
 
         private List<Medicine> _medicines;
         public virtual List<Medicine> Medicines
         {
             get { return _medicines; }
-            private set { _medicines = value; }
+            set { _medicines = value; } // this should be private
         }
 
         private string _style;
@@ -82,10 +82,33 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             private set { _style = value; }
         }
 
-        public int TopDoorVisible { get; set; }
-        public int RightDoorVisible { get; set; }
-        public int LeftDoorVisible { get; set; }
-        public int BottomDoorVisible { get; set; }
+        private int _bottomDoorVisible;
+        public int BottomDoorVisible
+        {
+            get { return _bottomDoorVisible; }
+            set { _bottomDoorVisible = value; } // this should be private
+        }
+
+        private int _rightDoorVisible;
+        public int RightDoorVisible
+        {
+            get { return _rightDoorVisible; }
+            set { _rightDoorVisible = value; } // this should be private
+        }
+
+        private int _leftDoorVisible;
+        public int LeftDoorVisible
+        {
+            get { return _leftDoorVisible; }
+            set { _leftDoorVisible = value; } // this should be private
+        }
+
+        private int _topDoorVisible;
+        public int TopDoorVisible
+        {
+            get { return _topDoorVisible; }
+            set { _topDoorVisible = value; } // this should be private
+        }
 
         public Room() : base()
         {
@@ -139,6 +162,35 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             _style = style;
         }
 
+        public Room(string serialNumber, string name, int id, string floorSerialNumber,
+           string roomTypeSerialNumber, string positionSerialNumber, string style, int bottomDoorVisible,
+           int rightDoorVisible, int leftDoorVisible, int topDoorVisible)
+         : base(serialNumber)
+        {
+            ValidateSerialNbr(serialNumber);
+            ValidateElementOfRoom(name);
+            ValidateId(id);
+            ValidateSerialNbr(floorSerialNumber);
+            ValidateSerialNbr(roomTypeSerialNumber);
+            ValidateSerialNbr(positionSerialNumber);
+            ValidateElementOfRoom(style);
+            ValidateDoor(bottomDoorVisible);
+            ValidateDoor(rightDoorVisible);
+            ValidateDoor(leftDoorVisible);
+            ValidateDoor(topDoorVisible);
+
+            _name = name;
+            _id = id;
+            _floorSerialNumber = floorSerialNumber;
+            _roomTypeSerialNumber = roomTypeSerialNumber;
+            _positionSerialNumber = positionSerialNumber;
+            _style = style;
+            _bottomDoorVisible = bottomDoorVisible;
+            _rightDoorVisible = rightDoorVisible;
+            _leftDoorVisible = leftDoorVisible;
+            _topDoorVisible = topDoorVisible;
+        }
+
         public Room(int id, RoomType roomType) : base()
         {
             ValidateId(id);
@@ -153,6 +205,50 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             _roomType = roomType;
             _equipment = equipment;
             _medicines = medicines;
+        }
+
+        public Room(string name, int id, string floorSerialNumber,
+           string roomTypeSerialNumber, string positionSerialNumber, string style)
+        {
+            ValidateElementOfRoom(name);
+            ValidateId(id);
+            ValidateSerialNbr(floorSerialNumber);
+            ValidateSerialNbr(roomTypeSerialNumber);
+            ValidateSerialNbr(positionSerialNumber);
+            ValidateElementOfRoom(style);
+
+            _name = name;
+            _id = id;
+            _floorSerialNumber = floorSerialNumber;
+            _roomTypeSerialNumber = roomTypeSerialNumber;
+            _positionSerialNumber = positionSerialNumber;
+            _style = style;
+            _beds = new List<Bed>();
+            _equipment = new List<Equipment>();
+            _medicines = new List<Medicine>();
+        }
+
+        public Room(string name, int id, string floorSerialNumber,
+           string roomTypeSerialNumber, string positionSerialNumber, string style,
+           List<Equipment> equipment, List<Medicine> medicines, RoomType roomType)
+        {
+            ValidateElementOfRoom(name);
+            ValidateId(id);
+            ValidateSerialNbr(floorSerialNumber);
+            ValidateSerialNbr(roomTypeSerialNumber);
+            ValidateSerialNbr(positionSerialNumber);
+            ValidateElementOfRoom(style);
+
+            _name = name;
+            _id = id;
+            _floorSerialNumber = floorSerialNumber;
+            _roomTypeSerialNumber = roomTypeSerialNumber;
+            _positionSerialNumber = positionSerialNumber;
+            _style = style;
+            _beds = new List<Bed>();
+            _equipment = equipment;
+            _medicines = medicines;
+            _roomType = roomType;
         }
 
         public override bool Equals(object obj)
@@ -258,6 +354,12 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             if (string.IsNullOrEmpty(elementOfRoom)) throw new Exception("The element of the room is required!");
             else if (elementOfRoom.Length < 3) throw new Exception("The element of the room is too short.");
             else if (elementOfRoom.Length > 30) throw new Exception("The element of the room is too long.");
+        }
+
+        private void ValidateDoor(int door)
+        {
+            if (door > 4) throw new Exception("There doesn't exist this type of door.");
+            else if (door < 0) throw new Exception("There doesn't exist this type of door.");
         }
     }
 }

@@ -81,25 +81,13 @@ namespace GraphicEditor.View.Windows
 
             int column = view.SelectedCellsColumn;
             int row = view.SelectedCellsRow;
-            int columnSpan = view.SelectedCellsColumnSpan;
             int rowSpan = view.SelectedCellsRowSpan;
+            int columnSpan = view.SelectedCellsColumnSpan;
+            Position position = new Position(row, column, rowSpan, columnSpan);
 
             RoomButton newRoomButton = new RoomButton(view.Grid);
-            Room newRoom = new Room()
-            {
-                //_floorSerialNumber = floor.SerialNumber,
-                //_roomTypeSerialNumber = RoomTypes[SelectedRoomTypeIndex].SerialNumber,
-                //_id = Int32.Parse(number),
-                //_style = "RoomButtonStyle",
-                //Column = column,
-                //Row = row,
-                //ColumnSpan = columnSpan,
-                //RowSpan = rowSpan,
-                //_name = nameTextBox.Text,
-                //_beds = new List<Bed>(),
-                //_equipment = new List<Equipment>(),
-                //_medinices = new List<Medicine>()
-            };
+            Room newRoom = new Room(nameTextBox.Text, Int32.Parse(number), floor.SerialNumber,
+                RoomTypes[SelectedRoomTypeIndex].SerialNumber, position.SerialNumber, "RoomButtonStyle");
 
             newRoomButton.Content = nameTextBox.Text;
             newRoomButton.Tag = newRoom.SerialNumber;

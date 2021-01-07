@@ -35,6 +35,7 @@ namespace GraphicEditor.ViewModel
         private BuildingController buildingController = new BuildingController();
         private FloorDatabaseSql floorDatabaseSql = new FloorDatabaseSql();
         private RoomController roomController = new RoomController();
+        private PositionController positionController = new PositionController();
 
         // [Lemara98] Selector Class
         private Selector selector;
@@ -46,81 +47,81 @@ namespace GraphicEditor.ViewModel
             NavCommand = new MyICommand<string>(ChooseFloor);
             BuildingUpdateCommand = new MyICommand<Building>(editBuilding);
             AddFloorCommand = new MyICommand<Floor>(addRoom);
-            
+
             /* TODO add this without causing errors
            SecondFloor = new CardiologySecondFloorMapUserControlViewModel();*/
             _floors = floorDatabaseSql.GetByBuildingSerialNumber(building.SerialNumber);
             _floors = _floors.OrderBy(f => Constants.FLOOR_NAMES.FindIndex(m => m.Equals(f.Name))).ToList();
             _building = building;
 
-           List<Floor> _buildingFloors = new List<Floor>();
+            List<Floor> _buildingFloors = new List<Floor>();
             foreach (Floor fl in floorDatabaseSql.GetByBuildingSerialNumber(_building.SerialNumber))
             {
                 _buildingFloors.Add(fl);
             }
-           //_building = new Building("Cardiology", "Color Blue");
+            //_building = new Building("Cardiology", "Color Blue");
             _selectedFloor = _buildingFloors[0];
             _selectedFloorIndex = 0;
             _floorName = _selectedFloor.Name;
             _floorViewModel = new FloorUserControl(_mapParent, this, _selectedFloor);
         }
 
-       public FloorUserControl FloorViewModel
-       {
-           get { return _floorViewModel; }
-           set
-           {
-               SetProperty(ref _floorViewModel, value);
-           }
-       }
+        public FloorUserControl FloorViewModel
+        {
+            get { return _floorViewModel; }
+            set
+            {
+                SetProperty(ref _floorViewModel, value);
+            }
+        }
 
-       public List<string> Floors
-       {
-           get
-           {
-               List<string> floorNames = new List<string>();
-               foreach (Floor f in _floors)
+        public List<string> Floors
+        {
+            get
+            {
+                List<string> floorNames = new List<string>();
+                foreach (Floor f in _floors)
                 {
                     floorNames.Add(f.Name);
                 }
-               return floorNames;
-           }
-       }
+                return floorNames;
+            }
+        }
 
-       public Building Building
-       {
-           get
-           {
-               return _building;
-           }
-           set
-           {
-               SetProperty(ref _building, value);
-           }
-       }
+        public Building Building
+        {
+            get
+            {
+                return _building;
+            }
+            set
+            {
+                SetProperty(ref _building, value);
+            }
+        }
 
-       public int SelectedFloorIndex
-       {
-           get { return _selectedFloorIndex; }
-           set
-           {
+        public int SelectedFloorIndex
+        {
+            get { return _selectedFloorIndex; }
+            set
+            {
                 if (value > 0)
                 {
                     SetProperty(ref _selectedFloorIndex, value);
-                } 
+                }
                 else
                 {
                     SetProperty(ref _selectedFloorIndex, 0);
                 }
-                
+
                 String cpy = new String(_floors[_selectedFloorIndex].Name);
                 var paramArray = cpy.Split(' ');
                 var param = paramArray[0].ToLower();
                 _selectedFloor = _floors[_selectedFloorIndex];
                 FloorName = _selectedFloor.Name;
                 ChooseFloor(param);
-           }
-       }
+            }
+        }
 
         public string FloorName
         {
@@ -186,21 +187,21 @@ namespace GraphicEditor.ViewModel
             (int, int) topRightCornerSpace = (Grid.GetColumn(space) + Grid.GetColumnSpan(space) - 1, Grid.GetRow(space));
             (int, int) bottomLeftCornerSpace = (Grid.GetColumn(space), Grid.GetRow(space) + Grid.GetRowSpan(space) - 1);
             (int, int) bottomRightCornerSpace = (Grid.GetColumn(space) + Grid.GetColumnSpan(space) - 1, Grid.GetRow(space) + Grid.GetRowSpan(space) - 1);
-
-            //(int, int) topLeftCornerRoom = (room.Column, room.Row - 1);
-            //(int, int) topRightCornerRoom = (room.Column + room.ColumnSpan - 1, room.Row);
-            //(int, int) bottomLeftCornerRoom = (room.Column, room.Row + room.RowSpan - 1);
-            //(int, int) bottomRightCornerRoom = (room.Column + room.ColumnSpan - 1, room.Row + room.RowSpan - 1);
+            Position position = positionController.GetById(room.PositionSerialNumber);
+            (int, int) topLeftCornerRoom = (position.Column, position.Row - 1);
+            (int, int) topRightCornerRoom = (position.Column + position.ColumnSpan - 1, position.Row);
+            (int, int) bottomLeftCornerRoom = (position.Column, position.Row + position.RowSpan - 1);
+            (int, int) bottomRightCornerRoom = (position.Column + position.ColumnSpan - 1, position.Row + position.RowSpan - 1);
 
             // TopLeftCorner
 
-            //bool tl = topLeftCornerSpace.Item1 >= topLeftCornerRoom.Item1 && topLeftCornerSpace.Item1 <= topRightCornerRoom.Item1 &&
-            //           topLeftCornerSpace.Item2 >= topLeftCornerRoom.Item2 && topLeftCornerSpace.Item2 <= bottomLeftCornerRoom.Item2;
+            bool tl = topLeftCornerSpace.Item1 >= topLeftCornerRoom.Item1 && topLeftCornerSpace.Item1 <= topRightCornerRoom.Item1 &&
+                       topLeftCornerSpace.Item2 >= topLeftCornerRoom.Item2 && topLeftCornerSpace.Item2 <= bottomLeftCornerRoom.Item2;
 
             // TopRightCorner
 
-            //bool tr = topRightCornerSpace.Item1 >= topLeftCornerRoom.Item1 && topRightCornerSpace.Item1 <= topRightCornerRoom.Item1 &&
-            //           topRightCornerSpace.Item2 >= topRightCornerRoom.Item2 && topRightCornerSpace.Item2 <= bottomRightCornerRoom.Item2;
+            bool tr = topRightCornerSpace.Item1 >= topLeftCornerRoom.Item1 && topRightCornerSpace.Item1 <= topRightCornerRoom.Item1 &&
+                       topRightCornerSpace.Item2 >= topRightCornerRoom.Item2 && topRightCornerSpace.Item2 <= bottomRightCornerRoom.Item2;
 
             // BottomLeftCorner
 
