@@ -23,7 +23,6 @@ namespace WebApplication.Backend.Model
             QuestionCreation(modelBuilder);
             ReportCreation(modelBuilder);
             FeedbackCreation(modelBuilder);
-            BuildingCreation(modelBuilder);
             EquipmentCreation(modelBuilder);
             RoomCreation(modelBuilder);
             MedicineTypeCreation(modelBuilder);
@@ -32,7 +31,6 @@ namespace WebApplication.Backend.Model
             ProcedureTypeEquipmentUsageCreation(modelBuilder);
             SpecializationCreation(modelBuilder);
             SurveyCreation(modelBuilder);
-            FloorCreation(modelBuilder);
             RoomTypeCreation(modelBuilder);
             MedicineManufacturerCreation(modelBuilder);
             MedicineCreation(modelBuilder);
@@ -72,7 +70,7 @@ namespace WebApplication.Backend.Model
             modelBuilder.Entity<Room>().Ignore(o => o.RoomType);
             modelBuilder.Entity<Room>().Ignore(o => o.Equipment);
             modelBuilder.Entity<Room>().Ignore(o => o.Beds);
-            modelBuilder.Entity<Room>().Ignore(o => o.Medinices);
+            modelBuilder.Entity<Room>().Ignore(o => o.Medicines);
 
             modelBuilder.Entity<Room>()
                .Property(r => r.Name)
@@ -93,58 +91,13 @@ namespace WebApplication.Backend.Model
                .Property(r => r.Style)
                .HasField("_style");
 
-            modelBuilder.Entity<Room>().HasData(
-                new Room
-                {
-                    SerialNumber = "101",
-                    _name = "Examination room 101",
-                    _id = 101,
-                    _floorSerialNumber = "1001",
-                    _roomTypeSerialNumber = "10000003",
-                    _positionSerialNumber = "70001",
-                    _style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "102",
-                    _name = "Examination room 102",
-                    _id = 102,
-                    _floorSerialNumber = "1001",
-                    _roomTypeSerialNumber = "10000003",
-                    _positionSerialNumber = "70002",
-                    _style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "103",
-                    _name = "Store room 103",
-                    _id = 103,
-                    _floorSerialNumber = "1001",
-                    _roomTypeSerialNumber = "10000002",
-                    _positionSerialNumber = "70003",
-                    _style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "104",
-                    _name = "Examination room 104",
-                    _id = 104,
-                    _floorSerialNumber = "1001",
-                    _roomTypeSerialNumber = "10000003",
-                    _positionSerialNumber = "70004",
-                    _style = "RoomButtonStyle"
-                },
-                new Room
-                {
-                    SerialNumber = "105",
-                    _name = "Store room 105",
-                    _id = 105,
-                    _floorSerialNumber = "1001",
-                    _roomTypeSerialNumber = "10000002",
-                    _positionSerialNumber = "70005",
-                    _style = "RoomButtonStyle"
-                }
-            );
+            Room room1 = new Room("101", "Examination room 101", 101, "1001", "10000003", "70001", "RoomButtonStyle");
+            Room room2 = new Room("102", "Examination room 102", 102, "1001", "10000003", "70002", "RoomButtonStyle");
+            Room room3 = new Room("103", "Store room 103", 103, "1001", "10000002", "70003", "RoomButtonStyle");
+            Room room4 = new Room("104", "Examination room 104", 104, "1001", "10000003", "70004", "RoomButtonStyle");
+            Room room5 = new Room("105", "Store room 105", 105, "1001", "10000002", "70005", "RoomButtonStyle");
+
+            modelBuilder.Entity<Room>().HasData(room1, room2, room3, room4, room5);
         }
 
         private static void MedicineManufacturerCreation(ModelBuilder modelBuilder)
@@ -317,68 +270,6 @@ namespace WebApplication.Backend.Model
             );
         }
 
-        private static void BuildingCreation(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Building>().HasKey(o => o.SerialNumber);
-            modelBuilder.Entity<Building>().Ignore(o => o.Floors);
-
-            modelBuilder.Entity<Building>()
-               .Property(b => b.Name)
-               .HasField("_name");
-            modelBuilder.Entity<Building>()
-                .Property(b => b.Color)
-                .HasField("_color");
-            modelBuilder.Entity<Building>()
-                .Property(b => b.Row)
-                .HasField("_row");
-            modelBuilder.Entity<Building>()
-                .Property(b => b.Column)
-                .HasField("_column");
-            modelBuilder.Entity<Building>()
-                .Property(b => b.Style)
-                .HasField("_style");
-
-            modelBuilder.Entity<Building>().HasData(
-                new Building
-                {
-                    SerialNumber = "10001",
-                    _name = "Cardiology",
-                    _color = "Orange",
-                    _row = 5,
-                    _column = 1,
-                    _style = "TriangleBuildingButtonStyle"
-                },
-                new Building
-                {
-                    SerialNumber = "10002",
-                    _name = "Orthopedy",
-                    _color = "Red",
-                    _row = 5,
-                    _column = 3,
-                    _style = "UBuildingButtonStyle"
-                }
-            );
-        }
-
-        private static void FloorCreation(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Floor>().HasKey(o => o.SerialNumber);
-            modelBuilder.Entity<Floor>().Ignore(o => o.Rooms);
-
-            modelBuilder.Entity<Floor>()
-               .Property(f => f.Name)
-               .HasField("_name");
-            modelBuilder.Entity<Floor>()
-               .Property(f => f.BuildingSerialNumber)
-               .HasField("_buildingSerialNumber");
-
-            modelBuilder.Entity<Floor>().HasData(
-                new Floor { SerialNumber = "1001", _name = "Floor1", _buildingSerialNumber = "10001" },
-                new Floor { SerialNumber = "1002", _name = "Floor2", _buildingSerialNumber = "10001" },
-                new Floor { SerialNumber = "1003", _name = "Floor1", _buildingSerialNumber = "10002" }
-            );
-        }
-
         private static void EquipmentCreation(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Equipment>().HasKey(o => o.Id);
@@ -492,10 +383,10 @@ namespace WebApplication.Backend.Model
             modelBuilder.Entity<TimeInterval>()
                .Property(ti => ti.Id)
                .HasField("_id");
-            modelBuilder.Entity<TimeInterval>().HasData(
-                new TimeInterval { _start = DateTime.Now, _end = DateTime.Now, _id = "600001"},
-                new TimeInterval { _start = DateTime.Now, _end = DateTime.Now, _id = "600002"}
-            );
+            DateTime start = DateTime.Now;
+            DateTime end = DateTime.Now;
+            TimeInterval timeInterval = new TimeInterval(start, end);
+            modelBuilder.Entity<TimeInterval>().HasData(timeInterval);
         }
 
         private static void SpecializationCreation(ModelBuilder modelBuilder)

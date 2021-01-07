@@ -9,21 +9,21 @@ namespace HealthClinicBackend.Backend.Model.Hospital
 {
     public class Room : Entity
     {
-        public string _name;
+        private string _name;
         public string Name
         {
             get { return _name; }
             private set { _name = value; }
         }
 
-        public int _id;
+        private int _id;
         public int Id
         {
             get { return _id; }
-            private set { _id = value; }
+            set { _id = value; } // this should be private
         }
 
-        public string _floorSerialNumber;
+        private string _floorSerialNumber;
         [ForeignKey("Floor")]
         public string FloorSerialNumber
         {
@@ -31,7 +31,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             private set { _floorSerialNumber = value; }
         }
 
-        public string _roomTypeSerialNumber;
+        private string _roomTypeSerialNumber;
         [ForeignKey("RoomType")]
         public string RoomTypeSerialNumber
         {
@@ -39,7 +39,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             private set { _roomTypeSerialNumber = value; }
         }
 
-        public string _positionSerialNumber;
+        private string _positionSerialNumber;
         [ForeignKey("Position")]
         public string PositionSerialNumber
         {
@@ -47,35 +47,35 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             private set { _positionSerialNumber = value; }
         }
 
-        public RoomType _roomType;
+        private RoomType _roomType;
         public virtual RoomType RoomType
         {
             get { return _roomType; }
             private set { _roomType = value; }
         }
 
-        public List<Equipment> _equipment;
+        private List<Equipment> _equipment;
         public virtual List<Equipment> Equipment
         {
             get { return _equipment; }
             private set { _equipment = value; }
         }
 
-        public List<Bed> _beds;
+        private List<Bed> _beds;
         public virtual List<Bed> Beds
         {
             get { return _beds; }
             private set { _beds = value; }
         }
 
-        public List<Medicine> _medinices;
-        public virtual List<Medicine> Medinices
+        private List<Medicine> _medicines;
+        public virtual List<Medicine> Medicines
         {
-            get { return _medinices; }
-            private set { _medinices = value; }
+            get { return _medicines; }
+            private set { _medicines = value; }
         }
 
-        public string _style;
+        private string _style;
         public string Style
         {
             get { return _style; }
@@ -96,16 +96,13 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         {
             ValidateSerialNbr(serialNumber);
             ValidateId(id);
-            ValidateRoomType(roomType);
 
             _id = id;
             _roomType = roomType;
-            _equipment = new List<Equipment>();
-            _beds = new List<Bed>();
         }
 
-        public Room(string serialNumber, string name, int id, string floorSerialNumber, string roomTypeSerialNumber,
-            string positionSerialNumber, string style)
+        public Room(string serialNumber, string name, int id, string floorSerialNumber,
+            string roomTypeSerialNumber, string positionSerialNumber, string style)
           : base(serialNumber)
         {
             ValidateSerialNbr(serialNumber);
@@ -145,12 +142,17 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public Room(int id, RoomType roomType) : base()
         {
             ValidateId(id);
-            ValidateRoomType(roomType);
 
             _id = id;
             _roomType = roomType;
-            _equipment = new List<Equipment>();
-            _beds = new List<Bed>();
+        }
+
+        public Room(List<Bed> beds, RoomType roomType, List<Equipment> equipment, List<Medicine> medicines)
+        {
+            _beds = beds;
+            _roomType = roomType;
+            _equipment = equipment;
+            _medicines = medicines;
         }
 
         public override bool Equals(object obj)
@@ -199,7 +201,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             hash.Add(RoomType);
             hash.Add(Equipment);
             hash.Add(Beds);
-            hash.Add(Medinices);
+            hash.Add(Medicines);
             hash.Add(Style);
             return hash.ToHashCode();
         }
@@ -243,7 +245,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         {
             if (string.IsNullOrEmpty(serialNumber)) throw new Exception("Serial number is required!");
             else if (serialNumber.Length < 3) throw new Exception("Serial number is too short.");
-            else if (serialNumber.Length > 20) throw new Exception("Serial number is too long.");
+            else if (serialNumber.Length > 30) throw new Exception("Serial number is too long.");
         }
 
         private void ValidateId(int id)
@@ -255,14 +257,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         {
             if (string.IsNullOrEmpty(elementOfRoom)) throw new Exception("The element of the room is required!");
             else if (elementOfRoom.Length < 3) throw new Exception("The element of the room is too short.");
-            else if (elementOfRoom.Length > 20) throw new Exception("The element of the room is too long.");
-        }
-
-        private void ValidateRoomType(RoomType roomType)
-        {
-            if (roomType.Name is null) throw new Exception("The name of the room type is required!");
-            else if (roomType.Name.Length < 3) throw new Exception("The name of the room type is too short.");
-            else if (roomType.Name.Length > 20) throw new Exception("The name of the room type is too long.");
+            else if (elementOfRoom.Length > 30) throw new Exception("The element of the room is too long.");
         }
     }
 }
