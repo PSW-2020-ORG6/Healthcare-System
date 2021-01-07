@@ -369,6 +369,19 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                .Property(r => r.Style)
                .HasField("_style");
 
+            modelBuilder.Entity<Room>()
+               .Property(r => r.BottomDoorVisible)
+               .HasField("_bottomDoorVisible");
+            modelBuilder.Entity<Room>()
+               .Property(r => r.RightDoorVisible)
+               .HasField("_rightDoorVisible");
+            modelBuilder.Entity<Room>()
+                .Property(r => r.LeftDoorVisible)
+                .HasField("_leftDoorVisible");
+            modelBuilder.Entity<Room>()
+               .Property(r => r.TopDoorVisible)
+               .HasField("_topDoorVisible");
+
             Room room1 = new Room("101", "Examination room 101", 101, "1001",
                 "10000003", "70001", "RoomButtonStyle", 0, 0, 2, 2);
             Room room2 = new Room("102", "Examination room 102", 102, "1001",

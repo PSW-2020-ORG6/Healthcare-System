@@ -1,8 +1,3 @@
-// File:    RoomFileSystem.cs
-// Author:  Luka Doric
-// Created: Sunday, June 7, 2020 4:19:02 PM
-// Purpose: Definition of Class RoomFileSystem
-
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.Generic;
@@ -17,7 +12,6 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
         {
             //path = @"./../../../../project-generated-code-backend/data/rooms.txt";
             path = @"./../../data/rooms.txt";
-
         }
 
         public List<Room> GetByProcedureType(ProcedureType procedureType)
@@ -62,6 +56,11 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
         }
 
         public Room GetBySerialNumber(string serialNumber)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Room GetByPositionSerialNumber(string positionSerialNumber)
         {
             throw new System.NotImplementedException();
         }

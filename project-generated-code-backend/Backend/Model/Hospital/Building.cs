@@ -78,6 +78,22 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             _floors = new List<Floor>();
         }
 
+        public Building(string name, string color, int row, int column, string style) : this(name, color)
+        {
+            ValidateElementOfBuilding(name);
+            ValidateElementOfBuilding(color);
+            ValidateFieldElement(row);
+            ValidateFieldElement(column);
+            ValidateElementOfBuilding(style);
+
+            _name = name;
+            _color = color;
+            _row = row;
+            _column = column;
+            _style = style;
+            _floors = new List<Floor>();
+        }
+
         public Building(string serialNumber, string name, string color, int row, int column, string style) : this(serialNumber, name, color)
         {
             ValidateSerialNbr(serialNumber);
@@ -165,7 +181,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             else if (fieldElement < 0) throw new Exception("The field element can't be negative.");
         }
 
-        public Building(Building building): base(building.SerialNumber)
+        public Building(Building building) : base(building.SerialNumber)
         {
             Name = building.Name;
             Color = building.Color;

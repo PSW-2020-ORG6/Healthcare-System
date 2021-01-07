@@ -11,5 +11,6 @@ namespace HealthClinicBackend.Backend.Repository.Generic
         List<Room> GetByFloorSerialNumber(string floorSerialNumber);
         List<Room> GetByProcedureType(ProcedureType procedureType);
         Room GetBySerialNumber(string serialNumber);
+        Room GetByPositionSerialNumber(string positionSerialNumber);
     }
 }

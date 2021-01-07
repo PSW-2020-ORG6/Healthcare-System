@@ -1,6 +1,6 @@
 ﻿using HealthClinicBackend.Backend.Model.Util;
-using System;
 using HealthClinicBackend.Backend.Util;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -34,9 +34,21 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         {
         }
 
+        public Floor(string name, string buildingSerialNumber) : base()
+        {
+            ValidateElementOfFloor(name);
+            ValidateElementOfFloor(buildingSerialNumber);
+
+            _name = name;
+            _buildingSerialNumber = buildingSerialNumber;
+            _rooms = new List<Room>();
+        }
+
         public Floor(string serialNumber, string name, string buildingSerialNumber) : base(serialNumber)
         {
-            Validate(serialNumber, name, buildingSerialNumber);
+            ValidateElementOfFloor(serialNumber);
+            ValidateElementOfFloor(name);
+            ValidateElementOfFloor(buildingSerialNumber);
 
             _name = name;
             _buildingSerialNumber = buildingSerialNumber;
