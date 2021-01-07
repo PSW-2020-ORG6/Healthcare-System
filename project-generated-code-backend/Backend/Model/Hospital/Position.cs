@@ -5,28 +5,28 @@ namespace HealthClinicBackend.Backend.Model.Hospital
 {
     public class Position : Entity
     {
-        public int _row;
+        private int _row;
         public int Row
         {
             get { return _row; }
             private set { _row = value; }
         }
 
-        public int _column;
+        private int _column;
         public int Column
         {
             get { return _column; }
             private set { _column = value; }
         }
 
-        public int _rowSpan;
+        private int _rowSpan;
         public int RowSpan
         {
             get { return _rowSpan; }
             private set { _rowSpan = value; }
         }
 
-        public int _columnSpan;
+        private int _columnSpan;
         public int ColumnSpan
         {
             get { return _columnSpan; }
@@ -39,7 +39,8 @@ namespace HealthClinicBackend.Backend.Model.Hospital
 
         public Position(int row, int column, int rowSpan, int columnSpan)
         {
-            Validate(row, column, rowSpan, columnSpan);
+            ValidateField(row, column, rowSpan, columnSpan);
+
             _row = row;
             _column = column;
             _rowSpan = rowSpan;
@@ -48,7 +49,9 @@ namespace HealthClinicBackend.Backend.Model.Hospital
 
         public Position(string serialNumber, int row, int column, int rowSpan, int columnSpan) : base(serialNumber)
         {
-            Validate(row, column, rowSpan, columnSpan);
+            ValidateSerialNbr(serialNumber);
+            ValidateField(row, column, rowSpan, columnSpan);
+
             _row = row;
             _column = column;
             _rowSpan = rowSpan;
@@ -117,7 +120,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             return new Position(row, column, oldPosition.RowSpan, oldPosition.ColumnSpan);
         }
 
-        private void Validate(int row, int column, int rowSpan, int columnSpan)
+        private void ValidateField(int row, int column, int rowSpan, int columnSpan)
         {
             ValidateElementOfField(row);
             ValidateElementOfField(column);
@@ -127,9 +130,15 @@ namespace HealthClinicBackend.Backend.Model.Hospital
 
         private void ValidateElementOfField(int elementOfField)
         {
-            if (elementOfField == 0) throw new Exception("The field is required!");
-            else if (elementOfField < 0) throw new Exception("The field can't be negative.");
-            else if (elementOfField > 1000) throw new Exception("The field is too big of a size.");
+            if (elementOfField > 1000) throw new Exception("The field element is too big of a size.");
+            else if (elementOfField < 0) throw new Exception("The field element can't be negative.");
+        }
+
+        private void ValidateSerialNbr(string serialNumber)
+        {
+            if (string.IsNullOrEmpty(serialNumber)) throw new Exception("Serial number is required!");
+            else if (serialNumber.Length < 3) throw new Exception("Serial number is too short.");
+            else if (serialNumber.Length > 30) throw new Exception("Serial number is too long.");
         }
     }
 }

@@ -8,14 +8,14 @@ namespace HealthClinicBackend.Backend.Model.Hospital
 {
     public class Floor : Entity
     {
-        public string _name;
+        private string _name;
         public string Name
         {
             get { return _name; }
             private set { _name = value; }
         }
 
-        public string _buildingSerialNumber;
+        private string _buildingSerialNumber;
         [ForeignKey("Building")]
         public string BuildingSerialNumber
         {
@@ -23,7 +23,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             private set { _buildingSerialNumber = value; }
         }
 
-        public List<Room> _rooms;
+        private List<Room> _rooms;
         public List<Room> Rooms
         {
             get { return _rooms; }
@@ -36,11 +36,11 @@ namespace HealthClinicBackend.Backend.Model.Hospital
 
         public Floor(string serialNumber, string name, string buildingSerialNumber) : base(serialNumber)
         {
-            ValidateElementOfFloor(name);
-            ValidateElementOfFloor(serialNumber);
+            Validate(serialNumber, name, buildingSerialNumber);
 
             _name = name;
             _buildingSerialNumber = buildingSerialNumber;
+            _rooms = new List<Room>();
         }
 
         public override bool Equals(object obj)
@@ -88,11 +88,18 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             return text;
         }
 
+        private void Validate(string serialNumber, string name, string buildingSerialNumber)
+        {
+            ValidateElementOfFloor(serialNumber);
+            ValidateElementOfFloor(name);
+            ValidateElementOfFloor(buildingSerialNumber);
+        }
+
         private void ValidateElementOfFloor(string elementOfFloor)
         {
             if (string.IsNullOrEmpty(elementOfFloor)) throw new Exception("All elements of the floor are required!");
             else if (elementOfFloor.Length < 3) throw new Exception("Element of the floor is too short.");
-            else if (elementOfFloor.Length > 20) throw new Exception("Element of the floor is too long.");
+            else if (elementOfFloor.Length > 30) throw new Exception("Element of the floor is too long.");
         }
 
         public Floor(Building building, int nameNumber) : base()

@@ -7,28 +7,33 @@ namespace HealthClinicBackend.Backend.Model.Util
     [Owned]
     public class TimeInterval
     {
-        public DateTime _start;
+        private DateTime _start;
         public DateTime Start
         {
             get { return _start; }
             private set { _start = value; }
         }
 
-        public DateTime _end;
+        private DateTime _end;
         public DateTime End
         {
             get { return _end; }
             private set { _end = value; }
         }
 
-        public string _id;
+        private string _id;
         public string Id
         {
             get { return _id; }
             private set { _id = value; }
         }
 
-        public string Time => Start.ToString("HH:mm") + " - " + End.ToString("HH:mm");
+        private string Time => Start.ToString("HH:mm") + " - " + End.ToString("HH:mm");
+
+        private readonly DateTime timeIntervalStart;
+        private readonly string v;
+        private readonly DateTime dateTime1;
+        private readonly DateTime dateTime2;
 
         public TimeInterval()
         {
@@ -37,14 +42,16 @@ namespace HealthClinicBackend.Backend.Model.Util
         [JsonConstructor]
         public TimeInterval(DateTime start, DateTime end)
         {
-            Validate(start, end);
+            ValidateTimeInterval(start, end);
+
             _start = start;
             _end = end;
         }
 
         public TimeInterval(string start, string end)
         {
-            Validate(start, end);
+            ValidateTimeInterval(start, end);
+
             try
             {
                 _start = Convert.ToDateTime(start);
@@ -54,6 +61,21 @@ namespace HealthClinicBackend.Backend.Model.Util
             {
                 throw new Exception("Date and time couldn't be converted.");
             }
+        }
+
+        public TimeInterval(DateTime timeIntervalStart)
+        {
+            ValidateDateTime(timeIntervalStart);
+            this.timeIntervalStart = timeIntervalStart;
+        }
+
+        public TimeInterval(string id, DateTime dateTime1, DateTime dateTime2)
+        {
+            ValidateId(id);
+            ValidateTimeInterval(dateTime1, dateTime2);
+            _id = id;
+            this.dateTime1 = dateTime1;
+            this.dateTime2 = dateTime2;
         }
 
         public override bool Equals(object obj)
@@ -136,13 +158,13 @@ namespace HealthClinicBackend.Backend.Model.Util
             return Start.TimeOfDay.Equals(other.Start.TimeOfDay) && End.TimeOfDay.Equals(other.End.TimeOfDay);
         }
 
-        private void Validate(DateTime start, DateTime end)
+        private void ValidateTimeInterval(DateTime start, DateTime end)
         {
             ValidateDateTime(start);
             ValidateDateTime(end);
         }
 
-        private void Validate(string start, string end)
+        private void ValidateTimeInterval(string start, string end)
         {
             ValidateDateTime(start);
             ValidateDateTime(end);
@@ -180,6 +202,13 @@ namespace HealthClinicBackend.Backend.Model.Util
         {
             DateTime tempDate;
             return DateTime.TryParse(txtDate, out tempDate);
+        }
+
+        private void ValidateId(string id)
+        {
+            if (string.IsNullOrEmpty(id)) throw new Exception("Id is required!");
+            else if (id.Length < 3) throw new Exception("Id is too short.");
+            else if (id.Length > 30) throw new Exception("Id is too long.");
         }
     }
 }
