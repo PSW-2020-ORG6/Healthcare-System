@@ -7,18 +7,47 @@ namespace HealthClinicBackend.Backend.Model.Hospital
     public class Building : Entity
     {
         public string _name;
-        public string _color;
-        public int _row;
-        public int _column;
-        public string _style;
-        public List<Floor> _floors;
+        public string Name
+        {
+            get { return _name; }
+            private set { _name = value; }
+        }
 
-        public string Name => _name;
-        public string Color => _color;
-        public int Row => _row;
-        public int Column => _column;
-        public string Style => _style;
-        public List<Floor> Floors => _floors;
+        public string _color;
+        public string Color
+        {
+            get { return _color; }
+            private set { _color = value; }
+        }
+
+        public int _row;
+        public int Row
+        {
+            get { return _row; }
+            private set { _row = value; }
+        }
+
+        public int _column;
+        public int Column
+        {
+            get { return _column; }
+            private set { _column = value; }
+        }
+
+        public string _style;
+        public string Style
+        {
+            get { return _style; }
+            private set { _style = value; }
+        }
+
+
+        public List<Floor> _floors;
+        public List<Floor> Floors
+        {
+            get { return _floors; }
+            private set { _floors = value; }
+        }
 
         public Building() : base()
         {
@@ -83,7 +112,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         {
             var text = SerialNumber + " - " + Name + " - " + Color + " - "
                 + Row + " - " + Column + " - " + Style + " - Floors:";
-            foreach(Floor f in Floors)
+            foreach (Floor f in Floors)
                 text += "   " + f.Name;
             return text;
         }
