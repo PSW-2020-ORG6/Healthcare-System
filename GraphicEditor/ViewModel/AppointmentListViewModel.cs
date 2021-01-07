@@ -67,7 +67,7 @@ namespace GraphicEditor.ViewModel
         {
             AppointmentDto appointmentDto = listOfAppointments[AppointmentIndex];
             parentViewModel.CurrentUserControl = parentViewModel.CardiologyBuilding;
-            CardiologyFirstFloorMapUserControlViewModel floorViewModel = parentViewModel.CardiologyBuilding.myViewModel.FirstFloor.Viewmodel;
+            FloorUserControlViewModel floorViewModel = parentViewModel.CardiologyBuilding.myViewModel.FirstFloor.Viewmodel;
             Button button = floorViewModel.connections[appointmentDto.Room.SerialNumber];
             button.BorderBrush = new SolidColorBrush(Color.FromRgb(150, 0, 255));
 
