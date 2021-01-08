@@ -1,6 +1,5 @@
 ﻿using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.Generic;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -48,7 +47,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     DbContext.Equipment.Update(equipment);
                 }
             }
-            if(!entered)
+            if (!entered)
                 DbContext.Equipment.Add(newEntity);
             DbContext.SaveChanges();
         }

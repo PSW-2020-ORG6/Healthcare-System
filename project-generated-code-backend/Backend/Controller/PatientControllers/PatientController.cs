@@ -1,9 +1,7 @@
 ﻿using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Service.HospitalAccountsService;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace HealthClinicBackend.Backend.Controller.PatientControllers
 {
@@ -11,7 +9,7 @@ namespace HealthClinicBackend.Backend.Controller.PatientControllers
     {
         public PatientAccountsService patientAccountsService;
         public PatientRegistrationService patientRegistrationService;
-        
+
         public PatientController()
         {
             patientAccountsService = new PatientAccountsService();

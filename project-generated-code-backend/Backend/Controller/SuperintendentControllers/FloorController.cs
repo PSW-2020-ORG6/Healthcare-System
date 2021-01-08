@@ -1,8 +1,6 @@
 ﻿using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Service.HospitalResourcesService;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 {

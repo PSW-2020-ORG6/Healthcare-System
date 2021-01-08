@@ -8,7 +8,7 @@ namespace GraphicEditor.View.Windows
         public RoomSearch(MainWindowViewModel vm)
         {
             InitializeComponent();
-            this.DataContext = new RoomSearchViewModel(vm);  
+            this.DataContext = new RoomSearchViewModel(vm);
         }
     }
 }

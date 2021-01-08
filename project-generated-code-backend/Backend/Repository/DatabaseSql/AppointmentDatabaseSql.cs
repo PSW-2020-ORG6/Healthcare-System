@@ -5,7 +5,9 @@ using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.Generic;
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
@@ -113,7 +115,9 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public List<Appointment> GetByPatientIdCanceled(string patientId)
         {
-            return GetAll().Where(appointment => appointment.PatientSerialNumber.Equals(patientId) && appointment.Active==false).ToList();
+            return GetAll().Where(appointment => (appointment.Patient.Id.Equals(patientId) ||
+                                       appointment.Patient.SerialNumber.Equals(patientId)) &&
+                                      !appointment.Active).ToList();
         }
 
         public List<DateTime> GetByPatientIdCanceledDates(string patientId)

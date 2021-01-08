@@ -1,14 +1,11 @@
-﻿using HealthClinicBackend.Backend.Model.Hospital;
-using HealthClinicBackend.Backend.Model.Schedule;
+﻿using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.Generic;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
-    public class EquipmentRelocationDatabaseSql: GenericDatabaseSql<EquipmentRelocation>, IEquipmentRelocationDatabaseSql
+    public class EquipmentRelocationDatabaseSql : GenericDatabaseSql<EquipmentRelocation>, IEquipmentRelocationDatabaseSql
     {
         public override List<EquipmentRelocation> GetAll()
         {

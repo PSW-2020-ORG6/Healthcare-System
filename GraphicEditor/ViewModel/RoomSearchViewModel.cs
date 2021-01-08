@@ -4,7 +4,6 @@ using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
 using System;
 using System.Collections.Generic;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace GraphicEditor.ViewModel

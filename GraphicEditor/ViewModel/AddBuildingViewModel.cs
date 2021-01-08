@@ -27,7 +27,7 @@ namespace GraphicEditor.ViewModel
         public Button Button { get; set; }
 
         public int NumberOfFloors { get; set; }
-        
+
         public AddBuildingViewModel(Window window, Button but)
         {
             Window = window;
@@ -65,7 +65,7 @@ namespace GraphicEditor.ViewModel
         private void SettingButtonLook(string buildingButtonStyle)
         {
             Button.Style = (Style)myResourceDictionary[buildingButtonStyle];
-            Button.Background = new SolidColorBrush(MyButtonColor); 
+            Button.Background = new SolidColorBrush(MyButtonColor);
             Button.Content = NameText;
 
             string content = (string)Button.Tag;
