@@ -87,7 +87,7 @@ namespace GraphicEditor.View.Windows
 
             RoomButton newRoomButton = new RoomButton(view.Grid);
             Room newRoom = new Room(nameTextBox.Text, Int32.Parse(number), floor.SerialNumber,
-                RoomTypes[SelectedRoomTypeIndex].SerialNumber, position.SerialNumber, "RoomButtonStyle");
+                RoomTypes[SelectedRoomTypeIndex].SerialNumber, position, "RoomButtonStyle");
 
             newRoomButton.Content = nameTextBox.Text;
             newRoomButton.Tag = newRoom.SerialNumber;

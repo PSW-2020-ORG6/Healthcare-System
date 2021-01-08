@@ -58,9 +58,9 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
             return _roomRepository.GetByFloorSerialNumber(floorSerialNumber);
         }
 
-        public Room GetByPositionSerialNumber(string positionSerialNumber)
+        public Room GetByPosition(Position position)
         {
-            return _roomRepository.GetByPositionSerialNumber(positionSerialNumber);
+            return _roomRepository.GetByPosition(position);
         }
 
         public List<Room> GetAll()
