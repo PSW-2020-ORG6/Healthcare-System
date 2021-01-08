@@ -35,7 +35,6 @@ namespace GraphicEditor.ViewModel
         private BuildingController buildingController = new BuildingController();
         private FloorDatabaseSql floorDatabaseSql = new FloorDatabaseSql();
         private RoomController roomController = new RoomController();
-        private PositionController positionController = new PositionController();
 
         // [Lemara98] Selector Class
         private Selector selector;
@@ -187,7 +186,7 @@ namespace GraphicEditor.ViewModel
             (int, int) topRightCornerSpace = (Grid.GetColumn(space) + Grid.GetColumnSpan(space) - 1, Grid.GetRow(space));
             (int, int) bottomLeftCornerSpace = (Grid.GetColumn(space), Grid.GetRow(space) + Grid.GetRowSpan(space) - 1);
             (int, int) bottomRightCornerSpace = (Grid.GetColumn(space) + Grid.GetColumnSpan(space) - 1, Grid.GetRow(space) + Grid.GetRowSpan(space) - 1);
-            Position position = positionController.GetById(room.PositionSerialNumber);
+            Position position = room.Position;
             (int, int) topLeftCornerRoom = (position.Column, position.Row - 1);
             (int, int) topRightCornerRoom = (position.Column + position.ColumnSpan - 1, position.Row);
             (int, int) bottomLeftCornerRoom = (position.Column, position.Row + position.RowSpan - 1);

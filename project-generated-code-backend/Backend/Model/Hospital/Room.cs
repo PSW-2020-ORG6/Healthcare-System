@@ -20,7 +20,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public int Id
         {
             get { return _id; }
-            set { _id = value; } // this should be private
+            set { _id = value; }
         }
 
         private string _floorSerialNumber;
@@ -39,12 +39,11 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             private set { _roomTypeSerialNumber = value; }
         }
 
-        private string _positionSerialNumber;
-        [ForeignKey("Position")]
-        public string PositionSerialNumber
+        private Position _position;
+        public Position Position
         {
-            get { return _positionSerialNumber; }
-            private set { _positionSerialNumber = value; }
+            get { return _position; }
+            private set { _position = value; }
         }
 
         private RoomType _roomType;
@@ -58,21 +57,21 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public virtual List<Equipment> Equipment
         {
             get { return _equipment; }
-            set { _equipment = value; } // this should be private
+            set { _equipment = value; }
         }
 
         private List<Bed> _beds;
         public virtual List<Bed> Beds
         {
             get { return _beds; }
-            set { _beds = value; } // this should be private
+            set { _beds = value; }
         }
 
         private List<Medicine> _medicines;
         public virtual List<Medicine> Medicines
         {
             get { return _medicines; }
-            set { _medicines = value; } // this should be private
+            set { _medicines = value; }
         }
 
         private string _style;
@@ -86,28 +85,28 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public int BottomDoorVisible
         {
             get { return _bottomDoorVisible; }
-            set { _bottomDoorVisible = value; } // this should be private
+            set { _bottomDoorVisible = value; }
         }
 
         private int _rightDoorVisible;
         public int RightDoorVisible
         {
             get { return _rightDoorVisible; }
-            set { _rightDoorVisible = value; } // this should be private
+            set { _rightDoorVisible = value; }
         }
 
         private int _leftDoorVisible;
         public int LeftDoorVisible
         {
             get { return _leftDoorVisible; }
-            set { _leftDoorVisible = value; } // this should be private
+            set { _leftDoorVisible = value; }
         }
 
         private int _topDoorVisible;
         public int TopDoorVisible
         {
             get { return _topDoorVisible; }
-            set { _topDoorVisible = value; } // this should be private
+            set { _topDoorVisible = value; }
         }
 
         public Room() : base()
@@ -125,7 +124,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         }
 
         public Room(string serialNumber, string name, int id, string floorSerialNumber,
-            string roomTypeSerialNumber, string positionSerialNumber, string style)
+            string roomTypeSerialNumber, Position position, string style)
           : base(serialNumber)
         {
             ValidateSerialNbr(serialNumber);
@@ -133,14 +132,13 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             ValidateId(id);
             ValidateSerialNbr(floorSerialNumber);
             ValidateSerialNbr(roomTypeSerialNumber);
-            ValidateSerialNbr(positionSerialNumber);
             ValidateElementOfRoom(style);
 
             _name = name;
             _id = id;
             _floorSerialNumber = floorSerialNumber;
             _roomTypeSerialNumber = roomTypeSerialNumber;
-            _positionSerialNumber = positionSerialNumber;
+            _position = position;
             _style = style;
         }
 
@@ -163,7 +161,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         }
 
         public Room(string serialNumber, string name, int id, string floorSerialNumber,
-           string roomTypeSerialNumber, string positionSerialNumber, string style, int bottomDoorVisible,
+           string roomTypeSerialNumber, string style, int bottomDoorVisible,
            int rightDoorVisible, int leftDoorVisible, int topDoorVisible)
          : base(serialNumber)
         {
@@ -172,7 +170,6 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             ValidateId(id);
             ValidateSerialNbr(floorSerialNumber);
             ValidateSerialNbr(roomTypeSerialNumber);
-            ValidateSerialNbr(positionSerialNumber);
             ValidateElementOfRoom(style);
             ValidateDoor(bottomDoorVisible);
             ValidateDoor(rightDoorVisible);
@@ -183,7 +180,34 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             _id = id;
             _floorSerialNumber = floorSerialNumber;
             _roomTypeSerialNumber = roomTypeSerialNumber;
-            _positionSerialNumber = positionSerialNumber;
+            _style = style;
+            _bottomDoorVisible = bottomDoorVisible;
+            _rightDoorVisible = rightDoorVisible;
+            _leftDoorVisible = leftDoorVisible;
+            _topDoorVisible = topDoorVisible;
+        }
+
+        public Room(string serialNumber, string name, int id, string floorSerialNumber,
+           string roomTypeSerialNumber, Position position, string style, int bottomDoorVisible,
+           int rightDoorVisible, int leftDoorVisible, int topDoorVisible)
+         : base(serialNumber)
+        {
+            ValidateSerialNbr(serialNumber);
+            ValidateElementOfRoom(name);
+            ValidateId(id);
+            ValidateSerialNbr(floorSerialNumber);
+            ValidateSerialNbr(roomTypeSerialNumber);
+            ValidateElementOfRoom(style);
+            ValidateDoor(bottomDoorVisible);
+            ValidateDoor(rightDoorVisible);
+            ValidateDoor(leftDoorVisible);
+            ValidateDoor(topDoorVisible);
+
+            _name = name;
+            _id = id;
+            _floorSerialNumber = floorSerialNumber;
+            _roomTypeSerialNumber = roomTypeSerialNumber;
+            _position = position;
             _style = style;
             _bottomDoorVisible = bottomDoorVisible;
             _rightDoorVisible = rightDoorVisible;
@@ -208,20 +232,19 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         }
 
         public Room(string name, int id, string floorSerialNumber,
-           string roomTypeSerialNumber, string positionSerialNumber, string style)
+           string roomTypeSerialNumber, Position position, string style)
         {
             ValidateElementOfRoom(name);
             ValidateId(id);
             ValidateSerialNbr(floorSerialNumber);
             ValidateSerialNbr(roomTypeSerialNumber);
-            ValidateSerialNbr(positionSerialNumber);
             ValidateElementOfRoom(style);
 
             _name = name;
             _id = id;
             _floorSerialNumber = floorSerialNumber;
             _roomTypeSerialNumber = roomTypeSerialNumber;
-            _positionSerialNumber = positionSerialNumber;
+            _position = position;
             _style = style;
             _beds = new List<Bed>();
             _equipment = new List<Equipment>();
@@ -229,21 +252,20 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         }
 
         public Room(string name, int id, string floorSerialNumber,
-           string roomTypeSerialNumber, string positionSerialNumber, string style,
+           string roomTypeSerialNumber, Position position, string style,
            List<Equipment> equipment, List<Medicine> medicines, RoomType roomType)
         {
             ValidateElementOfRoom(name);
             ValidateId(id);
             ValidateSerialNbr(floorSerialNumber);
             ValidateSerialNbr(roomTypeSerialNumber);
-            ValidateSerialNbr(positionSerialNumber);
             ValidateElementOfRoom(style);
 
             _name = name;
             _id = id;
             _floorSerialNumber = floorSerialNumber;
             _roomTypeSerialNumber = roomTypeSerialNumber;
-            _positionSerialNumber = positionSerialNumber;
+            _position = position;
             _style = style;
             _beds = new List<Bed>();
             _equipment = equipment;
@@ -293,7 +315,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             hash.Add(Id);
             hash.Add(FloorSerialNumber);
             hash.Add(RoomTypeSerialNumber);
-            hash.Add(PositionSerialNumber);
+            hash.Add(Position);
             hash.Add(RoomType);
             hash.Add(Equipment);
             hash.Add(Beds);
@@ -305,7 +327,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public override string ToString()
         {
             return SerialNumber + " - " + Name + " - " + Id + " - " + FloorSerialNumber
-                + " - " + RoomTypeSerialNumber + " - " + PositionSerialNumber;
+                + " - " + RoomTypeSerialNumber + " - " + Position;
         }
 
         public bool ContainsAllEquipment(List<Equipment> requiredEquipment)
