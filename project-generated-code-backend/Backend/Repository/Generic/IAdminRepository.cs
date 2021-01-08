@@ -10,7 +10,6 @@ namespace WebApplication.Backend.Repositorys.Interfaces
 {
     public interface IAdminRepository :IGenericRepository<Admin>
     {
-        //5555555555555555555555555555555555555555
         Admin GetAdminByUserNameAndPassword(string email, string password);
     }
 }
