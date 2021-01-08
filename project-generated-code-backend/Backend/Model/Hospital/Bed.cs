@@ -1,5 +1,4 @@
 using HealthClinicBackend.Backend.Model.Accounts;
-using HealthClinicBackend.Backend.Model.Util;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;

@@ -28,7 +28,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     .Select(physicianSpecialization => physicianSpecialization.SpecializationSerialNumber)
                     .ToList();
                 var specializations = new List<Specialization>();
-                foreach( string sn in specializationsSN )
+                foreach (string sn in specializationsSN)
                 {
                     specializations.Add(specializationDatabaseSql.GetById(sn));
                 }

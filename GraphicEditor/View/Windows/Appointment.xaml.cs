@@ -1,19 +1,5 @@
-﻿using GraphicEditor.View.Windows;
-using GraphicEditor.ViewModel;
-using HealthClinicBackend.Backend.Controller.SecretaryControllers;
-using HealthClinicBackend.Backend.Dto;
-using HealthClinicBackend.Backend.Model.Accounts;
-using HealthClinicBackend.Backend.Model.Hospital;
-using HealthClinicBackend.Backend.Model.Schedule;
-using HealthClinicBackend.Backend.Model.Util;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
-using Model.Accounts;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using GraphicEditor.ViewModel;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace GraphicEditor.View.UserControls
 {
@@ -24,7 +10,7 @@ namespace GraphicEditor.View.UserControls
     {
         public Appointment(MainWindowViewModel _viewModel)
         {
-            this.DataContext = new AppointmentViewModel(_viewModel,this);
+            this.DataContext = new AppointmentViewModel(_viewModel, this);
             InitializeComponent();
         }
     }

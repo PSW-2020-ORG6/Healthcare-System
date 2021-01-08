@@ -1,14 +1,7 @@
-﻿using GraphicEditor.HelpClasses;
-using GraphicEditor.ViewModel;
-using HealthClinicBackend.Backend.Controller.SecretaryControllers;
+﻿using GraphicEditor.ViewModel;
 using HealthClinicBackend.Backend.Dto;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace GraphicEditor.View.Windows
 {

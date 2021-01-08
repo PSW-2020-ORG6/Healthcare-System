@@ -1,7 +1,6 @@
 using HealthClinicBackend.Backend.Model.Util;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Model.Hospital
 {

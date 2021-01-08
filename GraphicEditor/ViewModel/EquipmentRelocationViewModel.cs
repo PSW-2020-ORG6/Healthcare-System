@@ -1,10 +1,7 @@
 ﻿using GraphicEditor.HelpClasses;
-using GraphicEditor.View.Windows;
 using HealthClinicBackend.Backend.Controller;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
-using HealthClinicBackend.Backend.Model.Schedule;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -124,7 +121,7 @@ namespace GraphicEditor.ViewModel
             }
             MyTimeTo.AddRange(myTimeFrom);
         }
-        public EquipmentRelocationViewModel(Equipment equipment,Window window)
+        public EquipmentRelocationViewModel(Equipment equipment, Window window)
         {
             Equipment = equipment;
             Rooms.AddRange(roomController.GetAll());

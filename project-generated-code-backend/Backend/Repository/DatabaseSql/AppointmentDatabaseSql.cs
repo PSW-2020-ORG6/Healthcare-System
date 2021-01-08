@@ -2,7 +2,6 @@
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.Generic;
-using Microsoft.EntityFrameworkCore;
 using Model.Accounts;
 using System;
 using System.Collections.Generic;

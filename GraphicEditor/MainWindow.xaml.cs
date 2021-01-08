@@ -2,7 +2,6 @@
 using HealthClinicBackend.Backend.Controller;
 using HealthClinicBackend.Backend.Model.Util;
 using System;
-using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -50,7 +49,7 @@ namespace GraphicEditor
             dispatcherTimer.Start();
         }
 
-        
+
         private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (this.IsActive && this.IsEnabled)
