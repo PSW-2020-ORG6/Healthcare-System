@@ -326,7 +326,7 @@ Vue.component("survey", {
                           </div>
                         </div>
                       </div>
-
+        
               <button type="button" class="btn btn-info btn-lg buttonBottom " data-dismiss="modal" v-on:click="PatientShow()" >Cancel</button>
         </div>
     </div>
@@ -757,41 +757,8 @@ Vue.component("appointments", {
 			</div>
 			<br></br>
 
-		<p>Past Appointments</p>
-			<div>
-				<div class="tab-content">
-    				<div id="profil" class="container tab-pane active"><br>
-    					<div class="container">
-							<div class="row">
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>Date</th>
-											<th>Time</th>
-											<th>Physitian</th>
-											<th>Room</th>
-											<th>Procedure</th>
-											<th>Urgency</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr v-for="appointmentDto in pastAppointments">
-											<td>{{DateSplit(appointmentDto.date)}}</td>
-											<td>{{TimeSplit(appointmentDto.timeIntervalDTO.start)}}</td>
-											<td>{{appointmentDto.physicianDTO.fullName}}</td>
-											<td>{{appointmentDto.roomDTO.name}}</td>
-											<td>{{appointmentDto.procedureTypeDTO.name}}</td>
-											<td>{{appointmentDto.urgency}}</td>				
-                                         </tr>
-									</tbody>
-								</table>
-							</div>
-						</div>		
-					</div>
-				</div>
-			</div><br></br>
 
-        <p>Avaliable surveys</p>
+<p>Avaliable surveys</p>
 			<div>
 				<div class="tab-content">
     				<div id="profil" class="container tab-pane active"><br>
@@ -827,6 +794,44 @@ Vue.component("appointments", {
 				</div>
 			</div>
 
+
+
+		<p>Past Appointments</p>
+			<div>
+				<div class="tab-content">
+    				<div id="profil" class="container tab-pane active"><br>
+    					<div class="container">
+							<div class="row">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>Date</th>
+											<th>Time</th>
+											<th>Physitian</th>
+											<th>Room</th>
+											<th>Procedure</th>
+											<th>Urgency</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="appointmentDto in pastAppointments">
+											<td>{{DateSplit(appointmentDto.date)}}</td>
+											<td>{{TimeSplit(appointmentDto.timeIntervalDTO.start)}}</td>
+											<td>{{appointmentDto.physicianDTO.fullName}}</td>
+											<td>{{appointmentDto.roomDTO.name}}</td>
+											<td>{{appointmentDto.procedureTypeDTO.name}}</td>
+											<td>{{appointmentDto.urgency}}</td>				
+                                         </tr>
+									</tbody>
+								</table>
+							</div>
+						</div>		
+					</div>
+				</div>
+			</div><br></br>
+
+        
+       
 
 
 

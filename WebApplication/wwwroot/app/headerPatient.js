@@ -19,10 +19,9 @@
                             <a class="dropdown-item" v-on:click="AccountShow()">My account</a>
                             <a class="dropdown-item" v-on:click="FeedbackPatientShow()">Feedbacks</a>
                             <a class="dropdown-item" v-on:click="AppointmentsShow()">Appointments</a>
-                            <a class="dropdown-item" v-on:click="AppointmentsShow()">Survay</a>
                             <a class="dropdown-item" v-on:click="SearchShow()">Search</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Log out</a>
+                            <a class="dropdown-item" v-on:click="Logout()">Log out</a>
                         </div>     
                     </li>
                     <li class="nav-item">
@@ -47,7 +46,7 @@
             this.$router.push('feedbackAdmin');
         },
         AppointmentsShow: function () {
-            this.$router.push('survey');
+            this.$router.push('appointments');
         },
         SearchShow: function () {
             this.$router.push('search');
@@ -63,6 +62,11 @@
         },
         RegistrationShow: function () {
             this.$router.push('registration');
+        },
+        Logout: function () {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            this.$router.push('login');
         }
     }
 

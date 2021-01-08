@@ -17,6 +17,7 @@ body {
 
 #appointments {
     background-image: url("../pictures/PatientBackgroundV10.jpg");
+    overflow-y: scroll;
     background-repeat: no-repeat;
     height: 768px;
 }

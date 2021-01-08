@@ -22,7 +22,7 @@
                             <a class="dropdown-item" href="#">Malicious users</a>
                             <a class="dropdown-item" v-on:click="SearchShow()">Search</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Log out</a>
+                            <a class="dropdown-item" v-on:click="Logout()">Log out</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -64,6 +64,11 @@
         },
         RegistrationShow: function () {
             this.$router.push('registration');
+        },
+        Logout: function () {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            this.$router.push('login');
         }
     }
 
