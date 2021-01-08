@@ -59,6 +59,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
 
         /***
          * Authors Peki and Hadzi
+         * Returns all available appointments, regarding needed equipment, available room and available patient for one day.
          */
         public List<AppointmentDto> GetAllAvailableAppointmentsGEA(AppointmentDto appointmentPreferences, ref bool noDoctors)
         {
