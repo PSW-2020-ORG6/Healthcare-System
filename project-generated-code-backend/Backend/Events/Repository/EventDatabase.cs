@@ -2,7 +2,7 @@
 
 namespace HealthClinicBackend.Backend.Events.Repository
 {
-    abstract class EventDatabase<T> : IEventRepository<T> where T : Event
+    public abstract class EventDatabase<T> : IEventRepository<T> where T : Event
     {
         protected readonly EventDbContext DbContext;
 

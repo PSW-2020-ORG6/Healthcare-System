@@ -2,7 +2,7 @@
 
 namespace HealthClinicBackend.Backend.Events.Repository
 {
-    class PatientRegisteredEventDatabase : EventDatabase<PatientRegisteredEvent>, IPatientRegisteredEventRepository
+    public class PatientRegisteredEventDatabase : EventDatabase<PatientRegisteredEvent>, IPatientRegisteredEventRepository
     {
         public PatientRegisteredEventDatabase(EventDbContext dbContext) : base(dbContext)
         {
