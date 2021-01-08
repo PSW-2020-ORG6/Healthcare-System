@@ -81,13 +81,15 @@ namespace WebApplicationTests
             var appointmentRepository = new Mock<IAppointmentRepository>();
             var physicianRepository = new Mock<IPhysicianRepository>();
             var patientRepository = new Mock<IPatientRepository>();
+            var addressRepository = new Mock<IAddressRepository>();
+
 
             specializations.Add(new Specialization {Name = "Neurologija"});
             specializations.Add(new Specialization {Name = "Oftalmologija"});
             specializationRepository.Setup(m => m.GetAll()).Returns(specializations);
 
             AppointmentService service = new AppointmentService(specializationRepository.Object,
-                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object,addressRepository.Object);
 
             List<SpecializationDTO> searchEntityDTOs = service.GetAllSpecializations();
 
@@ -102,11 +104,13 @@ namespace WebApplicationTests
             var appointmentRepository = new Mock<IAppointmentRepository>();
             var physicianRepository = new Mock<IPhysicianRepository>();
             var patientRepository = new Mock<IPatientRepository>();
+            var addressRepository = new Mock<IAddressRepository>();
+
 
             appointmentRepository.Setup(m => m.GetAppointmentsByDate(It.IsAny<DateTime>())).Returns(appointements);
 
             AppointmentService service = new AppointmentService(specializationRepository.Object,
-                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object,addressRepository.Object);
 
             List<TimeIntervalDTO> timeIntervals =
                 service.GetAllAvailableAppointments("600001", "Neurologija", "20-12-05");
@@ -121,9 +125,11 @@ namespace WebApplicationTests
             var appointmentRepository = new Mock<IAppointmentRepository>();
             var physicianRepository = new Mock<IPhysicianRepository>();
             var patientRepository = new Mock<IPatientRepository>();
+            var addressRepository = new Mock<IAddressRepository>();
+
 
             AppointmentService service = new AppointmentService(specializationRepository.Object,
-                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object,addressRepository.Object);
 
             Appointment appointment = new Appointment(new Room("101", 101, new RoomType("Examination room 101")),
                 new Physician("Gojko", "Simic", "600001"), new Patient("5", "Jelena", "Tanjic"),
@@ -143,11 +149,13 @@ namespace WebApplicationTests
             var appointmentRepository = new Mock<IAppointmentRepository>();
             var physicianRepository = new Mock<IPhysicianRepository>();
             var patientRepository = new Mock<IPatientRepository>();
+            var addressRepository = new Mock<IAddressRepository>();
+
 
             appointmentRepository.Setup(m => m.GetAppointmentsByDate(It.IsAny<DateTime>())).Returns(appointements);
 
             AppointmentService service = new AppointmentService(specializationRepository.Object,
-                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object, addressRepository.Object);
 
             List<TimeIntervalDTO> timeiIntervals =
                 service.GetAllAvailableAppointments("600001", "Neurologija", "20-12-05");
@@ -162,11 +170,13 @@ namespace WebApplicationTests
             var appointmentRepository = new Mock<IAppointmentRepository>();
             var physicianRepository = new Mock<IPhysicianRepository>();
             var patientRepository = new Mock<IPatientRepository>();
+            var addressRepository = new Mock<IAddressRepository>();
+
 
             appointmentRepository.Setup(m => m.GetAppointmentsByDate(It.IsAny<DateTime>())).Returns(appointements);
 
             AppointmentService service = new AppointmentService(specializationRepository.Object,
-                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object,addressRepository.Object);
 
             List<TimeIntervalDTO> result =
                 service.GetAllAvailableAppointments("600001", "ophthalmologist", "2021-12-5");
@@ -181,11 +191,13 @@ namespace WebApplicationTests
             var appointmentRepository = new Mock<IAppointmentRepository>();
             var physicianRepository = new Mock<IPhysicianRepository>();
             var patientRepository = new Mock<IPatientRepository>();
+            var addressRepository = new Mock<IAddressRepository>();
+
 
             appointmentRepository.Setup(a => a.GetAppointmentsByDate(It.IsAny<DateTime>())).Returns(appointements);
 
             AppointmentService service = new AppointmentService(specializationRepository.Object,
-                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object,addressRepository.Object);
 
             var result = service.AppointmentRecomendation("600001", "ophthalmologist",
                 new string[2] {"2021-12-5", "2021-12-23"});
@@ -200,11 +212,13 @@ namespace WebApplicationTests
             var appointmentRepository = new Mock<IAppointmentRepository>();
             var physicianRepository = new Mock<IPhysicianRepository>();
             var patientRepository = new Mock<IPatientRepository>();
+            var addressRepository = new Mock<IAddressRepository>();
+
 
             appointmentRepository.Setup(a => a.GetAppointmentsByDate(It.IsAny<DateTime>())).Returns(appointements);
 
             AppointmentService service = new AppointmentService(specializationRepository.Object,
-                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object,addressRepository.Object);
 
             var result = service.AppointmentRecomendation("600001", "ophthalmologist",
                 new string[2] {"2021-12-5", "2021-12-23"});
