@@ -1,6 +1,5 @@
 ﻿using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.Generic;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,7 +30,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public override void Save(Equipment newEntity)
         {
             bool entered = false;
-            foreach(Equipment equipment in dbContext.Equipment)
+            foreach (Equipment equipment in dbContext.Equipment)
             {
                 if (equipment.Name.ToLower().Equals(newEntity.Name.ToLower()) && equipment.RoomSerialNumber.Equals(newEntity.RoomSerialNumber))
                 {
@@ -40,7 +39,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     dbContext.Equipment.Update(equipment);
                 }
             }
-            if(!entered)
+            if (!entered)
                 dbContext.Equipment.Add(newEntity);
             dbContext.SaveChanges();
         }

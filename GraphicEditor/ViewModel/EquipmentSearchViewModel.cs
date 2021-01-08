@@ -4,7 +4,6 @@ using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
 using System;
 using System.Collections.Generic;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace GraphicEditor.ViewModel
@@ -104,7 +103,7 @@ namespace GraphicEditor.ViewModel
             {
                 Floor floor = floorController.GetBySerialNumber(equipment.FloorSerialNumber);
                 Building building = buildingController.GetBySerialNumber(floor.BuildingSerialNumber);
-                BuildingUserControl buildingUserControl = new BuildingUserControl(parentViewModel, building); 
+                BuildingUserControl buildingUserControl = new BuildingUserControl(parentViewModel, building);
                 FloorUserControl floorUserControl = new FloorUserControl(parentViewModel, buildingUserControl.myViewModel, floor);
                 buildingUserControl.myViewModel.FloorViewModel = floorUserControl;
                 parentViewModel.CurrentUserControl = buildingUserControl;

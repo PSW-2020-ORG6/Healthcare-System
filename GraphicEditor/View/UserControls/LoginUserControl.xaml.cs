@@ -1,5 +1,4 @@
 ﻿using GraphicEditor.ViewModel;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace GraphicEditor.View.UserControls

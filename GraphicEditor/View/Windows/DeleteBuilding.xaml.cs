@@ -3,15 +3,9 @@ using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace GraphicEditor.View.Windows
 {
@@ -44,7 +38,7 @@ namespace GraphicEditor.View.Windows
             {
                 floorDatabaseSql.Delete(fl.SerialNumber);
             }
-            
+
             button.Style = (Style)resourceDictionary["NewBuildingButtonStyle"];
             button.Tag = column + " " + row;
             var color = (Color)ColorConverter.ConvertFromString("DimGray");

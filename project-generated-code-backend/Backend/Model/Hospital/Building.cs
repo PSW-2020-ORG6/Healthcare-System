@@ -17,7 +17,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public string Color
         {
             get { return _color; }
-            set { _color = value; } 
+            set { _color = value; }
         }
 
         private int _row;
@@ -38,7 +38,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public string Style
         {
             get { return _style; }
-            set { _style = value; } 
+            set { _style = value; }
         }
 
 
@@ -46,7 +46,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public List<Floor> Floors
         {
             get { return _floors; }
-            set { _floors = value; }  
+            set { _floors = value; }
         }
 
         public Building() : base()

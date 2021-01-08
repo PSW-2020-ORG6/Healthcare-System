@@ -1,14 +1,12 @@
 ﻿using GraphicEditor.HelpClasses;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace GraphicEditor.ViewModel
 {
-    public class EquipmentViewModel: BindableBase
+    public class EquipmentViewModel : BindableBase
     {
         List<Equipment> listOfEquipments = new List<Equipment>();
         private EquipmentDatabaseSql equipmentDatabaseSql = new EquipmentDatabaseSql();

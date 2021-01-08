@@ -347,7 +347,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Room>()
                .Property(r => r.TopDoorVisible)
                .HasField("_topDoorVisible");
-            
+
             modelBuilder.Entity<Room>().OwnsOne(r => r.Position).HasData(
                new
                {

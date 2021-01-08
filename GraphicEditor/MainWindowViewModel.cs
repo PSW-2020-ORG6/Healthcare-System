@@ -1,7 +1,5 @@
 ﻿using GraphicEditor.HelpClasses;
 using GraphicEditor.View.UserControls;
-using GraphicEditor.ViewModel;
-using HealthClinicBackend.Backend.Model.Hospital;
 using System.Windows.Controls;
 
 namespace GraphicEditor
