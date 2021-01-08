@@ -1,9 +1,7 @@
 ﻿using System;
-using HealthClinicBackend.Backend.Events.Dto;
-using HealthClinicBackend.Backend.Events.Model;
-using HealthClinicBackend.Backend.Events.Repository;
+using HealthClinicBackend.Backend.Events.EventLogging;
 
-namespace HealthClinicBackend.Backend.Events.Service
+namespace HealthClinicBackend.Backend.Events.PatientRegisteredEventLogging
 {
     public class LogPatientRegisteredEventService : ILogEventService<PatientRegisteredEventParams>
     {

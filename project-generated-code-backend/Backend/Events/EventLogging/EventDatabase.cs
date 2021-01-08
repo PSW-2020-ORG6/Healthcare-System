@@ -1,8 +1,6 @@
-﻿using HealthClinicBackend.Backend.Events.Model;
-
-namespace HealthClinicBackend.Backend.Events.Repository
+﻿namespace HealthClinicBackend.Backend.Events.EventLogging
 {
-    public abstract class EventDatabase<T> : IEventRepository<T> where T : Event
+    public abstract class EventDatabase<T> : IEventRepository<T> where T : EventLogging.Event
     {
         protected readonly EventDbContext DbContext;
 

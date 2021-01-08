@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using HealthClinicBackend.Backend.Events.Model;
+﻿using HealthClinicBackend.Backend.Events.PatientRegisteredEventLogging;
 using Microsoft.EntityFrameworkCore;
 
-namespace HealthClinicBackend.Backend.Events.Repository
+namespace HealthClinicBackend.Backend.Events.EventLogging
 {
     public class EventDbContext : DbContext
     {

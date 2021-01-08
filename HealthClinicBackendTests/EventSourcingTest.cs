@@ -1,6 +1,6 @@
-﻿using HealthClinicBackend.Backend.Events.Dto;
-using HealthClinicBackend.Backend.Events.Repository;
-using HealthClinicBackend.Backend.Events.Service;
+﻿using System;
+using HealthClinicBackend.Backend.Events.EventLogging;
+using HealthClinicBackend.Backend.Events.PatientRegisteredEventLogging;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
@@ -12,6 +12,8 @@ namespace HealthClinicBackendTests
             .UseNpgsql("userid=postgres;server=localhost;port=5432;database=healthcare-system-events;password=super;")
             .Options;
 
+        private readonly Random _random = new Random();
+
         [Fact]
         public void Log_patient_registered_event()
         {
@@ -21,7 +23,7 @@ namespace HealthClinicBackendTests
             var service = new LogPatientRegisteredEventService(repository);
 
             // WHEN
-            service.LogEvent(new PatientRegisteredEventParams {PatientAge = 20});
+            service.LogEvent(new PatientRegisteredEventParams {PatientAge = _random.Next(100)});
 
             // THEN
             Assert.True(true);
