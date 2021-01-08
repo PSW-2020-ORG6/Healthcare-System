@@ -53,7 +53,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
         private bool IsTheNextDay(DateTime date, DateTime today)
         {
             DateTime tomorrow = today.AddDays(1);
-            return tomorrow.Equals(date.Date);
+            return tomorrow.Date.Equals(date.Date);
         }
     }
 }

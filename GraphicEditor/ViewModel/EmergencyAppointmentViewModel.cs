@@ -4,6 +4,7 @@ using HealthClinicBackend.Backend.Controller.SecretaryControllers;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Schedule;
+using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace GraphicEditor.ViewModel
         public int patientIndex;
         public int procedureTypeIndex;
         public MyICommand<TextBox> FilterPatient { get; private set; }
-        public MyICommand<object> ShowTermins { get; private set; }
+        public MyICommand<object> ScheduleAppointment { get; private set; }
 
         public Window window;
 
@@ -80,10 +81,10 @@ namespace GraphicEditor.ViewModel
             this._viewModel = _viewModel;
             this.window = window;
             FilterPatient = new MyICommand<TextBox>(FilterPatientMethod);
-            ShowTermins = new MyICommand<object>(DisplayPossibleAppointments);
+            ScheduleAppointment = new MyICommand<object>(EmergencyScheduleResult);
         }
 
-        private void DisplayPossibleAppointments(Object obj)
+        private void EmergencyScheduleResult(Object obj)
         {
             AppointmentDto appointmentDto = new AppointmentDto();
 
@@ -95,11 +96,23 @@ namespace GraphicEditor.ViewModel
                 return;
             }
             appointmentDto.ProcedureType = procedureTypes[procedureTypeIndex];
+            appointmentDto.Date = DateTime.Now;
+            DateTime endTime = DateTime.Now;
+            endTime = endTime.AddHours(2.0);    // one hour is emergency interval to find available appointment
+            appointmentDto.Time = new TimeInterval(DateTime.Now, endTime);
 
-            List<AppointmentDto> appointmentDtos1 = secretaryScheduleController.GetAllEmergencyAppointmentsGEA(appointmentDto);
+            AppointmentDto scheduledAppointment = secretaryScheduleController.GetEmergencyAppointmentGEA(appointmentDto);
 
-            AppointmentList win = new AppointmentList(appointmentDtos1, window, _viewModel);
-            win.Show();
+            if ( scheduledAppointment != null)
+            {
+                EmergencyScheduleResult emergencyScheduleResult = new EmergencyScheduleResult(scheduledAppointment, window);
+                emergencyScheduleResult.Show();
+            }
+            else
+            {
+                //analysis
+            }
+
         }
 
         private void FilterPatientMethod(TextBox textBox)

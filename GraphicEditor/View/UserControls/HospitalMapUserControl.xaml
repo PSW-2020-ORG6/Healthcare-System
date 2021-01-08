@@ -107,7 +107,7 @@
                     <Button Click="EmergencyAppointment"
                                 Margin="20"
                                 Height="40" 
-                                Width="160" >
+                                Width="200" >
                         <DockPanel Width="auto">
                             <TextBlock HorizontalAlignment="Center" 
                                     VerticalAlignment="Center">
