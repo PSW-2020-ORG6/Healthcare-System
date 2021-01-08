@@ -84,8 +84,10 @@ namespace WebApplication.Backend.Services
             foreach (ActionAndBenefitMessage a in
                 _actionsAndBenefitsRepository.GetAll())
             {
+                
                 if (t.IsDateIntervalValid(a.DateFrom, a.DateTo))
                     actionAndBenefitMessages.Add(a);
+                
             }
 
             return actionAndBenefitMessages;

@@ -60,15 +60,7 @@ namespace WebApplication.Backend.Controllers
             return _userService.GetUserId((HttpContext.User.Identity as ClaimsIdentity).Claims.ToList());
         }
 
-        //U svrhe testiranja
-        [Authorize]
-        [HttpGet("GetValue")]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            return new string[] {
-                "Value1","Value2","Value3"
-            };
-        }
+        
     }
 }
 

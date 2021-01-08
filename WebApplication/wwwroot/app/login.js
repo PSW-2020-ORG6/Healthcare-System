@@ -122,7 +122,7 @@
 			username = document.getElementById("userNameId").value
 			password = document.getElementById("passwordId").value
 			axios
-				.get('http://localhost:49900/login/login', { params: { email: username, password: password } })
+				.get('/login/login', { params: { email: username, password: password } })
 				.then(response => {
 					this.token = response.data.token
 					localStorage.setItem('token', this.token);
