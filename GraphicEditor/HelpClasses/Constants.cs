@@ -34,8 +34,8 @@ namespace GraphicEditor.HelpClasses
         public const string FIRST = "first";
         public const string SECOND = "second";
 
-        public static readonly List<string> FLOOR_NAMES = new List<string>() 
-        { "Ground floor", 
+        public static readonly List<string> FLOOR_NAMES = new List<string>()
+        { "Ground floor",
           "First floor",
           "Second floor",
           "Third floor",

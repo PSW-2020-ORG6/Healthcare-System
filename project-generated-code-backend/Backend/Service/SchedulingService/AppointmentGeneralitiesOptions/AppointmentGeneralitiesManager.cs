@@ -127,14 +127,14 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
             if (_appointmentPreferences.IsPreferedPhysicianSelected())
             {
                 Physician physician = _physicianRepository.GetById(_appointmentPreferences.Physician.SerialNumber);
-                if( physician.Specialization.Contains(_appointmentPreferences.ProcedureType.Specialization))
+                if (physician.Specialization.Contains(_appointmentPreferences.ProcedureType.Specialization))
                 {
                     physicians.Add(_appointmentPreferences.Physician);
                 }
                 else
                 {
                     physicians = _physicianRepository.GetByProcedureType(_appointmentPreferences.ProcedureType);
-                    if( physicians == null || physicians.Count == 0)
+                    if (physicians == null || physicians.Count == 0)
                     {
                         noDoctors = true;
                     }
@@ -168,9 +168,9 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
                 _appointmentPreferences.RestrictedHours);
             List<TimeInterval> timeIntervals = new List<TimeInterval>();
             List<TimeInterval> generatedTimeIntervals = generator.GenerateTimeIntervalsForDay(_appointmentPreferences.Date);
-            foreach( TimeInterval timeInterval in generatedTimeIntervals )
+            foreach (TimeInterval timeInterval in generatedTimeIntervals)
             {
-                if( timeInterval.Start >= _appointmentPreferences.Time.Start && timeInterval.End <=_appointmentPreferences.Time.End )
+                if (timeInterval.Start >= _appointmentPreferences.Time.Start && timeInterval.End <= _appointmentPreferences.Time.End)
                 {
                     timeIntervals.Add(timeInterval);
                 }

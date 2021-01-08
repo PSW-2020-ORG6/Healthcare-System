@@ -33,17 +33,17 @@ namespace GraphicEditor.ViewModel
         public int physiciansIndex;
         public int patientIndex;
         public int procedureTypeIndex;
-        public DateTime datePicker=DateTime.Now;
+        public DateTime datePicker = DateTime.Now;
         public MyICommand<TextBox> FilterPhysician { get; private set; }
         public MyICommand<TextBox> FilterPatient { get; private set; }
         public MyICommand<object> ShowTermins { get; private set; }
         public int fromTimeIndex;
         public int toTimeIndex;
-        public bool isCheckedDoctorPriority=true;
-        public bool isCheckedTerminPriority=false;
+        public bool isCheckedDoctorPriority = true;
+        public bool isCheckedTerminPriority = false;
         public bool isSpecialAppointment = false;
         public Window window;
-        
+
 
         public bool IsCheckedDoctorPriority
         {
@@ -168,7 +168,7 @@ namespace GraphicEditor.ViewModel
                     SetProperty(ref myTime, value);
             }
         }
-        public AppointmentViewModel(MainWindowViewModel _viewModel,Window window)
+        public AppointmentViewModel(MainWindowViewModel _viewModel, Window window)
         {
             //Should here be controller calls?
             Physicians = physicianDatabaseSql.GetAll();
@@ -185,8 +185,8 @@ namespace GraphicEditor.ViewModel
 
         private void DisplayPossibleAppointments(Object obj)
         {
-           AppointmentDto appointmentDto = new AppointmentDto();
-            
+            AppointmentDto appointmentDto = new AppointmentDto();
+
             string[] s = myTime[fromTimeIndex].Split(":");
             string[] s2 = myTime[toTimeIndex].Split(":");
             if (s.Length != 2 || s2.Length != 2)

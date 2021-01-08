@@ -10,13 +10,13 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
     {
         private readonly IFloorRepository _floorRepository;
         private readonly IRoomRepository _roomRepository;
-        
+
 
         public FloorService()
         {
             _floorRepository = new FloorDatabaseSql();
             _roomRepository = new RoomDatabaseSql();
-            
+
         }
 
         public FloorService(IFloorRepository floorRepository)

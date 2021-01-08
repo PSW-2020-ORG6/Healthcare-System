@@ -4,10 +4,8 @@ using GraphicEditor.View.Windows;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Util;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -32,7 +30,7 @@ namespace GraphicEditor.ViewModel
 
         public Grid HospitalMapGrid { get; set; }
 
-        public HospitalMapUserControlViewModel( MainWindowViewModel parent, Grid hospitalMapGrid)
+        public HospitalMapUserControlViewModel(MainWindowViewModel parent, Grid hospitalMapGrid)
         {
             _parent = parent;
             HospitalMapGrid = hospitalMapGrid;
@@ -76,7 +74,7 @@ namespace GraphicEditor.ViewModel
                 buildingButtons[building.SerialNumber] = but;
             }
 
-            foreach ((int i , int j)  in coordinates)
+            foreach ((int i, int j) in coordinates)
             {
                 Button but = new Button();
                 but.Style = (Style)ResourceDictionary["NewBuildingButtonStyle"];

@@ -49,7 +49,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         }
         private bool IsItTimeToMoveEquipment(EquipmentRelocation equipmentRelocation)
         {
-            if (equipmentRelocation.startTime <= DateTime.Now && equipmentRelocation.endTime>= DateTime.Now)
+            if (equipmentRelocation.startTime <= DateTime.Now && equipmentRelocation.endTime >= DateTime.Now)
             {
                 return true;
             }
@@ -65,7 +65,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
                 EquipmentDatabaseSql.Update(equipment);
                 EquipmentRelocationDatabaseSql.Delete(equipmentRelocation.SerialNumber);
             }
-            else if(equipmentRelocation.quantity < equipment.Quantity)
+            else if (equipmentRelocation.quantity < equipment.Quantity)
             {
                 CreateNewEquipment(equipmentRelocation);
                 ChangeQuantityOfOldEquipment(equipmentRelocation);

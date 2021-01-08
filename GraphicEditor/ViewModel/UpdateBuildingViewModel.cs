@@ -1,15 +1,13 @@
 ﻿using GraphicEditor.HelpClasses;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace GraphicEditor.ViewModel
 {
-    public class UpdateBuildingViewModel: BindableBase
+    public class UpdateBuildingViewModel : BindableBase
     {
         public MyICommand AddFloorCommand { get; set; }
         public MyICommand DeleteFloorCommand { get; set; }
@@ -61,7 +59,7 @@ namespace GraphicEditor.ViewModel
             oldBuilding = _building;
             buildingColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString(_building.Color));
             building = new Building(_building);
-            
+
             oldBuilding.Floors = new List<Floor>(floorController.GetByBuildingSerialNumber(oldBuilding.SerialNumber));
             numberOfFloors = oldBuilding.Floors.Count;
             building.Floors = floorController.GetByBuildingSerialNumber(building.SerialNumber);
@@ -91,7 +89,7 @@ namespace GraphicEditor.ViewModel
         private void UpdateBuilding()
         {
             building.Color = BuildingColor.Color.ToString();
-            
+
             if (FloorNumbers > oldBuilding.Floors.Count)
             {
                 for (int i = oldBuilding.Floors.Count; i < FloorNumbers; ++i)
