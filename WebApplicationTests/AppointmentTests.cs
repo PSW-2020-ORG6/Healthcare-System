@@ -98,7 +98,7 @@ namespace WebApplicationTests
             Active = true,
             Date = new DateTime(1975, 11, 11)
         };
-
+        
         [Fact]
         public void Find_Appointments_By_PatientId_Success()
         {
@@ -107,13 +107,14 @@ namespace WebApplicationTests
             var appointmentRepository = new Mock<IAppointmentRepository>();
             var physicianRepository = new Mock<IPhysicianRepository>();
             var patientRepository = new Mock<IPatientRepository>();
+            var addressRepository = new Mock<IAddressRepository>();
 
             appointments.Add(appointment);
             appointments.Add(appointment1);
             appointmentRepository.Setup(m => m.GetByPatientId(patientIdTrue)).Returns(appointments);
 
             AppointmentService service = new AppointmentService(specializationRepository.Object,
-                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object, addressRepository.Object);
 
             // WHEN
             appointmentsDto = service.GetAllAppointmentsByPatientId(patientIdTrue);
@@ -130,10 +131,12 @@ namespace WebApplicationTests
             var appointmentRepository = new Mock<IAppointmentRepository>();
             var physicianRepository = new Mock<IPhysicianRepository>();
             var patientRepository = new Mock<IPatientRepository>();
+            var addressRepository = new Mock<IAddressRepository>();
+
 
             appointmentRepository.Setup(m => m.GetByPatientId(patientIdFalse)).Returns(appointments);
             AppointmentService service = new AppointmentService(specializationRepository.Object,
-                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object, addressRepository.Object);
 
             appointmentsDto = service.GetAllAppointmentsByPatientId(patientIdFalse);
 
@@ -147,9 +150,11 @@ namespace WebApplicationTests
             var appointmentRepository = new Mock<IAppointmentRepository>();
             var physicianRepository = new Mock<IPhysicianRepository>();
             var patientRepository = new Mock<IPatientRepository>();
+            var addressRepository = new Mock<IAddressRepository>();
+
 
             AppointmentService service = new AppointmentService(specializationRepository.Object,
-                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object, addressRepository.Object);
 
             returnValue = service.CancelAppointment(appointmentSerialTrue);
 
@@ -158,7 +163,7 @@ namespace WebApplicationTests
             // TODO: add more specific parameter than any
             appointmentRepository.Verify(mock => mock.Update(It.IsAny<Appointment>()));
         }
-
+        
         // [Fact]
         // public void Appointment_canceling_failure()
         // {
@@ -171,7 +176,7 @@ namespace WebApplicationTests
         //
         //     Assert.False(returnValue);
         // }
-
+        
         [Fact]
         public void User_is_malicious()
         {
@@ -179,17 +184,19 @@ namespace WebApplicationTests
             var appointmentRepository = new Mock<IAppointmentRepository>();
             var physicianRepository = new Mock<IPhysicianRepository>();
             var patientRepository = new Mock<IPatientRepository>();
+            var addressRepository = new Mock<IAddressRepository>();
+
 
             appointmentRepository.Setup(m => m.GetByPatientIdCanceledDates("0002")).Returns(dates);
 
             AppointmentService service = new AppointmentService(specializationRepository.Object,
-                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object, addressRepository.Object);
 
             returnValue = service.IsUserMalicious("0002");
 
             Assert.True(returnValue);
         }
-
+        
         [Fact]
         public void User_is_not_malicious()
         {
@@ -197,15 +204,18 @@ namespace WebApplicationTests
             var appointmentRepository = new Mock<IAppointmentRepository>();
             var physicianRepository = new Mock<IPhysicianRepository>();
             var patientRepository = new Mock<IPatientRepository>();
+            var addressRepository = new Mock<IAddressRepository>();
+
 
             appointmentRepository.Setup(m => m.GetByPatientIdCanceledDates("0002")).Returns(new List<DateTime>());
 
             AppointmentService service = new AppointmentService(specializationRepository.Object,
-                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object);
+                appointmentRepository.Object, physicianRepository.Object, patientRepository.Object, addressRepository.Object);
 
             returnValue = service.IsUserMalicious(patientIdFalse);
 
             Assert.False(returnValue);
         }
+        
     }
 }
