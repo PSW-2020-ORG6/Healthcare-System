@@ -45,13 +45,12 @@ namespace WebApplication.Backend.Controllers
 
             return response;
         }
-       
+        
         [Authorize]
         [HttpGet("GetUserType")]
         public string GetUserType()
         {
             return _userService.GetUserType((HttpContext.User.Identity as ClaimsIdentity).Claims.ToList());
-
         }
 
         [Authorize]

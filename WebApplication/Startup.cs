@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using WebApplication.Backend.Controllers;
 using WebApplication.Backend.Model;
+using WebApplication.Backend.Repositorys.Interfaces;
 using WebApplication.Backend.Services;
 
 namespace WebApplication
@@ -56,7 +57,7 @@ namespace WebApplication
                 Console.WriteLine(connectionString);
 
                 options.UseNpgsql(
-                    CreateConnectionStringFromEnvironment(),
+                    connectionString,
                     x => x.MigrationsAssembly("WebApplication").EnableRetryOnFailure(5,
                         new TimeSpan(0, 0, 0, 30), new List<string>())
                 );
@@ -74,7 +75,7 @@ namespace WebApplication
             services.AddScoped<IReportRepository, ReportDatabaseSql>();
             services.AddScoped<ISpecializationRepository, SpecializationDatabaseSql>();
             services.AddScoped<ISurveyRepository, SurveyDatabaseSql>();
-            services.AddScoped<Backend.Repositorys.Interfaces.IAdminRepository, AdminDatabaseSql>();
+            services.AddScoped<IAdminRepository, AdminDatabaseSql>();
             services.AddScoped<IAddressRepository, AddressDatabaseSql>();
 
 
@@ -134,7 +135,7 @@ namespace WebApplication
             var serverDefault = "localhost";
             var portDefault = 5432;
             var userDefault = "postgres";
-            var passwordDefault = "super";
+            var passwordDefault = "root";
             var schema = "healthcare-system-db";
 
             // Do not change this
@@ -147,10 +148,7 @@ namespace WebApplication
             var user = userInfo[0];
             var password = userInfo[1];
             var database = databaseUri.LocalPath.TrimStart('/');
-            // Change this if user and password are different
-            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "postgres";
-            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
-
+            
             return $"userid={user};server={server};port={port};database={database};password={password};Pooling=true;sslmode=Prefer;TrustServerCertificate=True;";
         }
 

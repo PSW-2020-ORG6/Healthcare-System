@@ -199,6 +199,14 @@ const router = new VueRouter({
 			}
 		},
 		{
+			path: '/login',
+			name: 'login',
+			components: {
+				pageHeader: PageHeader,
+				content: Login
+			}
+		},
+		{
 			path: '/',
 			components: {
 				pageHeader: PageHeader,
