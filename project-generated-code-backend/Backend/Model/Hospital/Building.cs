@@ -10,14 +10,14 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public string Name
         {
             get { return _name; }
-            set { _name = value; }  // this should be private
+            set { _name = value; }
         }
 
         private string _color;
         public string Color
         {
             get { return _color; }
-            set { _color = value; }  // this should be private
+            set { _color = value; } 
         }
 
         private int _row;
@@ -38,19 +38,15 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         public string Style
         {
             get { return _style; }
-            set { _style = value; }  // this should be private
+            set { _style = value; } 
         }
 
 
         private List<Floor> _floors;
-        private int v1;
-        private int v2;
-        private string v3;
-
         public List<Floor> Floors
         {
             get { return _floors; }
-            set { _floors = value; }  // this should be private
+            set { _floors = value; }  
         }
 
         public Building() : base()
