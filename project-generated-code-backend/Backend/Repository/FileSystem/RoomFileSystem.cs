@@ -60,7 +60,7 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
             throw new System.NotImplementedException();
         }
 
-        public Room GetByPositionSerialNumber(string positionSerialNumber)
+        public Room GetByPosition(Position position)
         {
             throw new System.NotImplementedException();
         }

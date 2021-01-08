@@ -58,9 +58,9 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             return GetAll().Where(r => r.FloorSerialNumber.Equals(floorSerialNumber)).ToList();
         }
 
-        public Room GetByPositionSerialNumber(string positionSerialNumber)
+        public Room GetByPosition(Position position)
         {
-            return GetAll().Where(r => r.PositionSerialNumber.Equals(positionSerialNumber)).ToList()[0];
+            return GetAll().Where(r => r.Position.Equals(position)).ToList()[0];
         }
 
         public List<Room> GetByProcedureType(ProcedureType procedureType)

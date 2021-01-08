@@ -1,9 +1,8 @@
-﻿using HealthClinicBackend.Backend.Model.Util;
-using System;
+﻿using System;
 
 namespace HealthClinicBackend.Backend.Model.Hospital
 {
-    public class Position : Entity
+    public class Position
     {
         private int _row;
         public int Row
@@ -47,21 +46,9 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             _columnSpan = columnSpan;
         }
 
-        public Position(string serialNumber, int row, int column, int rowSpan, int columnSpan) : base(serialNumber)
-        {
-            ValidateSerialNbr(serialNumber);
-            ValidateField(row, column, rowSpan, columnSpan);
-
-            _row = row;
-            _column = column;
-            _rowSpan = rowSpan;
-            _columnSpan = columnSpan;
-        }
-
         public override bool Equals(object obj)
         {
             return obj is Position position &&
-                   SerialNumber == position.SerialNumber &&
                    Row == position.Row &&
                    Column == position.Column &&
                    RowSpan == position.RowSpan &&
@@ -93,7 +80,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(SerialNumber, Row, Column, RowSpan, ColumnSpan);
+            return HashCode.Combine(Row, Column, RowSpan, ColumnSpan);
         }
 
         public override string ToString()
@@ -124,8 +111,8 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         {
             ValidateElementOfField(row);
             ValidateElementOfField(column);
-            ValidateElementOfField(rowSpan);
-            ValidateElementOfField(columnSpan);
+            ValidateSpanOfField(rowSpan);
+            ValidateSpanOfField(columnSpan);
         }
 
         private void ValidateElementOfField(int elementOfField)
@@ -134,11 +121,10 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             else if (elementOfField < 0) throw new Exception("The field element can't be negative.");
         }
 
-        private void ValidateSerialNbr(string serialNumber)
+        private void ValidateSpanOfField(int spanOfField)
         {
-            if (string.IsNullOrEmpty(serialNumber)) throw new Exception("Serial number is required!");
-            else if (serialNumber.Length < 3) throw new Exception("Serial number is too short.");
-            else if (serialNumber.Length > 30) throw new Exception("Serial number is too long.");
+            if (spanOfField > 1000) throw new Exception("The span of the field is too big of a size.");
+            else if (spanOfField < 1) throw new Exception("The span of the field can't be that small.");
         }
     }
 }

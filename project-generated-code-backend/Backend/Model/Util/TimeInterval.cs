@@ -30,11 +30,6 @@ namespace HealthClinicBackend.Backend.Model.Util
 
         private string Time => Start.ToString("HH:mm") + " - " + End.ToString("HH:mm");
 
-        private readonly DateTime timeIntervalStart;
-        private readonly string v;
-        private readonly DateTime dateTime1;
-        private readonly DateTime dateTime2;
-
         public TimeInterval()
         {
         }
@@ -63,19 +58,19 @@ namespace HealthClinicBackend.Backend.Model.Util
             }
         }
 
-        public TimeInterval(DateTime timeIntervalStart)
+        public TimeInterval(DateTime start)
         {
-            ValidateDateTime(timeIntervalStart);
-            this.timeIntervalStart = timeIntervalStart;
+            ValidateDateTime(start);
+            _start = start;
         }
 
-        public TimeInterval(string id, DateTime dateTime1, DateTime dateTime2)
+        public TimeInterval(string id, DateTime start, DateTime end)
         {
             ValidateId(id);
-            ValidateTimeInterval(dateTime1, dateTime2);
+            ValidateTimeInterval(start, end);
             _id = id;
-            this.dateTime1 = dateTime1;
-            this.dateTime2 = dateTime2;
+            _start = start;
+            _end = end;
         }
 
         public override bool Equals(object obj)
@@ -200,8 +195,7 @@ namespace HealthClinicBackend.Backend.Model.Util
 
         private bool IsDateTime(string txtDate)
         {
-            DateTime tempDate;
-            return DateTime.TryParse(txtDate, out tempDate);
+            return DateTime.TryParse(txtDate, out DateTime tempDate);
         }
 
         private void ValidateId(string id)

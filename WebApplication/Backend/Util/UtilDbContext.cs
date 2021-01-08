@@ -85,17 +85,74 @@ namespace WebApplication.Backend.Model
                .Property(r => r.RoomTypeSerialNumber)
                .HasField("_roomTypeSerialNumber");
             modelBuilder.Entity<Room>()
-                .Property(r => r.PositionSerialNumber)
-                .HasField("_positionSerialNumber");
-            modelBuilder.Entity<Room>()
                .Property(r => r.Style)
                .HasField("_style");
+            modelBuilder.Entity<Room>()
+               .Property(r => r.BottomDoorVisible)
+               .HasField("_bottomDoorVisible");
+            modelBuilder.Entity<Room>()
+               .Property(r => r.RightDoorVisible)
+               .HasField("_rightDoorVisible");
+            modelBuilder.Entity<Room>()
+                .Property(r => r.LeftDoorVisible)
+                .HasField("_leftDoorVisible");
+            modelBuilder.Entity<Room>()
+               .Property(r => r.TopDoorVisible)
+               .HasField("_topDoorVisible");
 
-            Room room1 = new Room("101", "Examination room 101", 101, "1001", "10000003", "70001", "RoomButtonStyle");
-            Room room2 = new Room("102", "Examination room 102", 102, "1001", "10000003", "70002", "RoomButtonStyle");
-            Room room3 = new Room("103", "Store room 103", 103, "1001", "10000002", "70003", "RoomButtonStyle");
-            Room room4 = new Room("104", "Examination room 104", 104, "1001", "10000003", "70004", "RoomButtonStyle");
-            Room room5 = new Room("105", "Store room 105", 105, "1001", "10000002", "70005", "RoomButtonStyle");
+            modelBuilder.Entity<Room>().OwnsOne(r => r.Position).HasData(
+               new
+               {
+                   RoomSerialNumber = "101",
+                   Row = 0,
+                   Column = 0,
+                   RowSpan = 3,
+                   ColumnSpan = 5
+               },
+               new
+               {
+                   RoomSerialNumber = "102",
+                   Row = 0,
+                   Column = 10,
+                   RowSpan = 2,
+                   ColumnSpan = 4
+               },
+                new
+                {
+                    RoomSerialNumber = "103",
+                    Row = 0,
+                    Column = 5,
+                    RowSpan = 2,
+                    ColumnSpan = 3
+                },
+               new
+               {
+                   RoomSerialNumber = "104",
+                   Row = 0,
+                   Column = 14,
+                   RowSpan = 3,
+                   ColumnSpan = 5
+               },
+               new
+               {
+                   RoomSerialNumber = "105",
+                   Row = 10,
+                   Column = 9,
+                   RowSpan = 2,
+                   ColumnSpan = 5
+               }
+            );
+
+            Room room1 = new Room("101", "Examination room 101", 101, "1001",
+                "10000003", "RoomButtonStyle", 0, 0, 2, 2);
+            Room room2 = new Room("102", "Examination room 102", 102, "1001",
+                "10000003", "RoomButtonStyle", 0, 2, 2, 2);
+            Room room3 = new Room("103", "Store room 103", 103, "1001",
+                "10000002", "RoomButtonStyle", 0, 2, 2, 2);
+            Room room4 = new Room("104", "Examination room 104", 104, "1001",
+                "10000003", "RoomButtonStyle", 0, 0, 2, 2);
+            Room room5 = new Room("105", "Store room 105", 105, "1001",
+                "10000002", "RoomButtonStyle", 2, 0, 0, 0);
 
             modelBuilder.Entity<Room>().HasData(room1, room2, room3, room4, room5);
         }
