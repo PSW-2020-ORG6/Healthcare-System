@@ -111,6 +111,39 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             return appointments;
         }
 
+        public AppointmentDto GetEmergencyAppointmentGEA(AppointmentDto appointmentPreferences)
+        {
+            bool noDoctorsSpecialized = false;
+            List<AppointmentDto> appointments = _appointmentGeneralitiesManager.GetAllAvailableAppointmentsGEA(appointmentPreferences, ref noDoctorsSpecialized);
+            if(appointments != null && appointments.Count != 0)
+            {
+                List<AppointmentDto> validAppointements = new List<AppointmentDto>();
+                foreach(AppointmentDto appointment in appointments)
+                {
+                    if (appointment.Time.Start <= appointmentPreferences.Time.End)
+                    {
+                        validAppointements.Add(appointment);
+                    }
+                }
+                if(validAppointements.Count != 0)
+                {
+                    AppointmentDto mostRecentAppointment = validAppointements[0];
+                    DateTime minTime = validAppointements[0].Time.Start;
+                    foreach (AppointmentDto appointment in validAppointements)
+                    {
+                        if (appointment.Time.Start < minTime)
+                        {
+                            mostRecentAppointment = appointment;
+                            minTime = appointment.Time.Start;
+                        }
+                    }
+                    return mostRecentAppointment;
+                }
+            }
+
+            return null;
+        }
+
 
         public AppointmentDto FindNearestAppointment(AppointmentDto appointmentPreferences)
         {

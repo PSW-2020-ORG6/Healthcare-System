@@ -49,6 +49,6 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
         </StackPanel>
-        <Button Command="{Binding ShowTermins}" Content="Show available termins" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="200" />
+        <Button Command="{Binding ScheduleAppointment}" Content="Schedule emergency appointment" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="200" />
     </Grid>
 </Window>
