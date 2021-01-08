@@ -5,8 +5,8 @@ using System.Text;
 
 namespace HealthClinicBackend.Backend.Events.Repository
 {
-    interface IEventRepository
+    public interface IEventRepository<in T> where T : Event
     {
-        void LogEvent(Event @event);
+        void LogEvent(T @event);
     }
 }
