@@ -12,6 +12,7 @@
     beforeMount() {
         axios
             .get('/login/getUserId', {
+                params: { token: localStorage.getItem('token') }, 
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -23,6 +24,7 @@
             })
         axios
             .get('/patient/getMaliciousPatients', {
+                params: { token: localStorage.getItem('token') }, 
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -160,6 +162,7 @@
         BlockMaliciousPatient: function (MaliciousPatient) {
             axios
                 .put('/patient/blockMaliciousPatient', MaliciousPatient, {
+                    params: { token: localStorage.getItem('token') }, 
                     headers: {
                         'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                     }
@@ -167,6 +170,7 @@
                 .then(response => {
                     axios
                         .get('/patient/getMaliciousPatients', {
+                            params: { token: localStorage.getItem('token') }, 
                             headers: {
                                 'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                             }

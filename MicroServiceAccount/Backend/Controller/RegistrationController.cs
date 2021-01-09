@@ -1,17 +1,14 @@
-﻿using MicroServiceAccount.Backend.Dto;
-//using HealthClinicBackend.Backend.Dto;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using MicroServiceAccount.Backend.Model;
-//using HealthClinicBackend.Backend.Model.Accounts;
 using MicroServiceAccount.Backend.Service;
 using Microsoft.AspNetCore.Authorization;
 using MicroServiceAccount.Backend.Services.Interfaces;
 using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Dto;
 
 namespace MicroServiceAccount.Backend.Controllers
 {
-    [Route("registration")]
+    [Route("registrationMicroservice")]
     [ApiController]
     public class RegistrationController : ControllerBase
     {
@@ -24,41 +21,37 @@ namespace MicroServiceAccount.Backend.Controllers
             _mailService = mailService;
         }
 
-        ///Aleksandra Milijevic RA 22/2017
         /// <summary>
         ///calls method for adding new patient in patient table
         ///</summary>
         ///<returns>
         ///information about sucess in string format
         ///</returns>
-        //[Authorize]
-        //[HttpPost("registerPatient")]
-        //public IActionResult RegisterPatient(PatientDto patientDTO)
-        //{
-        //    if (patientDTO.AreRegistrationFieldsValid())
-        //    {
-        //        if (_registrationService.RegisterPatient(new Patient(patientDTO)))
-        //        {
-        //            SendMail(new Patient(patientDTO));
-        //            return Ok();
-        //        }
-        //        else
-        //        {
-        //            return BadRequest();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return BadRequest();
-        //    }
-        //}
+        [HttpPost("registerPatient")]
+        public IActionResult RegisterPatient(PatientDto patientDTO)
+        {
+            if (patientDTO.AreRegistrationFieldsValid())
+            {
+                if (_registrationService.RegisterPatient(new Patient(patientDTO)))
+                {
+                    SendMail(new Patient(patientDTO));
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
 
         public void SendMail(Patient patient)
         {
             _mailService.SendEmail(patient);
         }
-
-        ///Aleksandra Milijevic RA 22/2017
         /// <summary>
         ///calls method for updating field emailConfirmed in patient table
         ///</summary>
@@ -80,8 +73,6 @@ namespace MicroServiceAccount.Backend.Controllers
                 return BadRequest();
             }
         }
-
-        ///Aleksandra Milijevic RA 22/2017
         /// <summary>
         ///id decryption
         ///</summary>
@@ -95,7 +86,7 @@ namespace MicroServiceAccount.Backend.Controllers
             long id = (long.Parse(patientId) - 23 * 33) + 6789;
             return id.ToString();
         }
-        [Authorize]
+
         [HttpGet("allPhysitians")]
         public List<FamilyDoctorDto> GetAllPhysicians()
         {

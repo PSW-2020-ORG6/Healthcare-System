@@ -38,6 +38,7 @@
 			})
 		axios
 			.get('/patient/all', {
+				params: { token: localStorage.getItem('token') }, 
 				headers: {
 					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
 				}

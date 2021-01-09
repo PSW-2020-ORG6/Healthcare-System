@@ -14,6 +14,7 @@
 	beforeMount() {
 		axios
 			.get('/patient/getActionsAndBenefits', {
+				params: { token: localStorage.getItem('token') },
 				headers: {
 					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
 				}

@@ -66,17 +66,7 @@ namespace HealthClinicBackend.Backend.Model.Accounts
             IsAdmin = isAdmin;
         }
 
-        [JsonConstructor]
-        public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth,
-            string contact, string email, Address address, string parentName, string gender, string password,
-            bool isGuest = false)
-            : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address, password)
-        {
-            ParentName = parentName;
-            Gender = gender;
-            Guest = isGuest;
-            Password = password;
-        }
+      
 
         public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth,
             string contact, string email, Address address, string parentName, string placeOfBirth,
@@ -135,11 +125,21 @@ namespace HealthClinicBackend.Backend.Model.Accounts
             Image = image;
             IsAdmin = isAdmin;
         }
-        [JsonConstructor]
         public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth,
        string contact, string email, Address address, string parentName, string gender, string password, bool isAdmin = false,
        bool isGuest = false)
        : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address, password, isAdmin)
+        {
+            ParentName = parentName;
+            Gender = gender;
+            Guest = isGuest;
+            Password = password;
+        }
+        [JsonConstructor]
+        public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth,
+          string contact, string email, Address address, string parentName, string gender, string password,
+          bool isGuest = false)
+          : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address, password)
         {
             ParentName = parentName;
             Gender = gender;
