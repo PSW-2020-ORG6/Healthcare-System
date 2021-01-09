@@ -23,7 +23,16 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public override List<Appointment> GetAll()
         {
-            return DbContext.Appointment.ToList();
+            List<Appointment> appointments = DbContext.Appointment.ToList(); //this gets only staticly added appointments? Do we need to write sql query?
+
+            List<ProcedureType> procedureTypes = DbContext.ProcedureType.ToList();
+
+            foreach( var appointment in appointments )
+            {
+                appointment.ProcedureType = procedureTypes.Where(pt => pt.SerialNumber.Equals(appointment.ProcedureTypeSerialnumber)).ToList()[0];
+            }
+
+            return appointments;
         }
 
         public override Appointment GetById(string id)

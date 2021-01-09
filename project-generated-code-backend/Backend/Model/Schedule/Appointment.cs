@@ -118,6 +118,7 @@ namespace HealthClinicBackend.Backend.Model.Schedule
             Patient = appointmentDTO.Patient;
             TimeInterval = appointmentDTO.Time;
             ProcedureType = appointmentDTO.ProcedureType;
+            ProcedureTypeSerialnumber = appointmentDTO.ProcedureType.SerialNumber;
             Urgency = appointmentDTO.Urgency;
             Date = appointmentDTO.Date;
             RoomSerialNumber = Room.SerialNumber;

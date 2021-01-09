@@ -362,8 +362,8 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         private void ValidateSerialNbr(string serialNumber)
         {
             if (string.IsNullOrEmpty(serialNumber)) throw new Exception("Serial number is required!");
-            else if (serialNumber.Length < 3) throw new Exception("Serial number is too short.");
-            else if (serialNumber.Length > 30) throw new Exception("Serial number is too long.");
+            //else if (serialNumber.Length < 3) throw new Exception("Serial number is too short.");
+            //else if (serialNumber.Length > 30) throw new Exception("Serial number is too long.");
         }
 
         private void ValidateId(int id)
