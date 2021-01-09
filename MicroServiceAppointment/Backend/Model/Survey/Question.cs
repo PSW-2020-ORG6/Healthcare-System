@@ -1,4 +1,5 @@
-﻿using MicroServiceAccount.Backend.Model.Util;
+﻿using HealthClinicBackend.Backend.Model.Util;
+using MicroServiceAccount.Backend.Model.Util;
 
 namespace MicroServiceAppointment.Backend.Model.Survey
 {

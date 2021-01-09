@@ -24,7 +24,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public override void Update(Feedback updateEntity)
         {
-            DbContext.Feedback.Add(updateEntity);
+            DbContext.Feedback.Update(updateEntity);
             DbContext.SaveChanges();
         }
 
@@ -36,6 +36,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public List<Feedback> GetDisapproved()
         {
             return GetAll().Where(f => !f.Approved).ToList();
+        }
+
+        public Feedback GetById(string id)
+        {
+            return GetAll().Where(f => f.SerialNumber.Equals(id)).ToList()[0];
         }
     }
 }

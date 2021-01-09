@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Blog;
+using HealthClinicBackend.Backend.Repository.Generic;
 //using HealthClinicBackend.Backend.Repository.Generic;
-using MicroServiceFeedback.Backend.Dto;
-using MicroServiceFeedback.Backend.Model;
 
 namespace WebApplication.Backend.Service
 {
@@ -11,14 +12,14 @@ namespace WebApplication.Backend.Service
     /// </summary>
     public class FeedbackService
     {
-        // private FeedbackRepository feedbackRepository;
-        //private readonly IFeedbackRepository _feedbackRepository;
+
+        private readonly IFeedbackRepository _feedbackRepository;
         private FeedbackDto feedbackDTO = new FeedbackDto();
 
-        //public FeedbackService(IFeedbackRepository feedbackRepository)
-        //{
-        //    _feedbackRepository = feedbackRepository;
-        //}
+        public FeedbackService(IFeedbackRepository feedbackRepository)
+        {
+            _feedbackRepository = feedbackRepository;
+        }
 
         /// <summary>
         ///calls method for get all feedback in feedback table
@@ -28,9 +29,7 @@ namespace WebApplication.Backend.Service
         ///</returns>
         internal List<FeedbackDto> GetAllFeedbacks()
         {
-            //return feedbackDTO.ConvertListToFeedbackDTO(_feedbackRepository.GetAll());
-            throw new NotImplementedException();
-
+            return feedbackDTO.ConvertListToFeedbackDTO(_feedbackRepository.GetAll());
         }
 
         /// <summary>
@@ -41,9 +40,7 @@ namespace WebApplication.Backend.Service
         ///</returns>
         internal List<FeedbackDto> GetApprovedFeedbacks()
         {
-            //return feedbackDTO.ConvertListToFeedbackDTO(_feedbackRepository.GetApproved());
-            throw new NotImplementedException();
-
+            return feedbackDTO.ConvertListToFeedbackDTO(_feedbackRepository.GetApproved());
         }
 
         /// <summary>
@@ -54,9 +51,7 @@ namespace WebApplication.Backend.Service
         ///</returns>
         internal List<FeedbackDto> GetDisapprovedFeedbacks()
         {
-            //return feedbackDTO.ConvertListToFeedbackDTO(_feedbackRepository.GetDisapproved());
-            throw new NotImplementedException();
-
+            return feedbackDTO.ConvertListToFeedbackDTO(_feedbackRepository.GetDisapproved());
         }
 
         /// <summary>
@@ -69,12 +64,9 @@ namespace WebApplication.Backend.Service
         ///</param>>
         public void ApproveFeedback(FeedbackDto feedback)
         {
-            //// TODO: check if the approval logic is okay
-            //var fb = _feedbackRepository.GetById(feedback.SerialNumber);
-            //fb.Approved = true;
-            //_feedbackRepository.Update(fb);
-            throw new NotImplementedException();
-
+            var fb = _feedbackRepository.GetById(feedback.SerialNumber);
+            fb.Approved = true;
+            _feedbackRepository.Update(fb);
         }
 
         /// <summary>
@@ -87,10 +79,8 @@ namespace WebApplication.Backend.Service
         ///</param>>
         public bool AddNewFeedback(Feedback feedback)
         {
-            //_feedbackRepository.Save(feedback);
-            //return true;
-            throw new NotImplementedException();
-
+            _feedbackRepository.Save(feedback);
+            return true;
         }
     }
 }

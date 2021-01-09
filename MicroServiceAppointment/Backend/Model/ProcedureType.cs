@@ -10,6 +10,8 @@ using MicroServiceAccount.Backend.Model;
 using MicroServiceAppointment.Backend.Model.Hospital;
 using MicroServiceAccount.Backend.Model.Util;
 using Newtonsoft.Json;
+using HealthClinicBackend.Backend.Model.Util;
+using HealthClinicBackend.Backend.Model.Accounts;
 
 namespace MicroServiceAppointment.Backend.Model
 {

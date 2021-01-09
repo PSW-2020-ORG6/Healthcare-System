@@ -1,4 +1,5 @@
-﻿using MicroServiceAccount.Backend.Model.Util;
+﻿using HealthClinicBackend.Backend.Model.Util;
+using MicroServiceAccount.Backend.Model.Util;
 using MicroServiceAppointment.Backend.Model;
 using System;
 using System.Collections.Generic;

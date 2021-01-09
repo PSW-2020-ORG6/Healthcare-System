@@ -4,6 +4,7 @@
 // Purpose: Definition of Class RoomType
 
 using System;
+using HealthClinicBackend.Backend.Model.Util;
 using MicroServiceAccount.Backend.Model.Util;
 using Newtonsoft.Json;
 
