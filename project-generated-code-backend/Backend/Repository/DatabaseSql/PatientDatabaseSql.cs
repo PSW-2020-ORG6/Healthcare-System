@@ -18,9 +18,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public override List<Patient> GetAll()
         {
-            // Use Include method to connect object and its references from other tables
-            return dbContext.Patient
-                .ToList();
+            return DbContext.Patient.ToList();
         }
 
         public override void Save(Patient newEntity)

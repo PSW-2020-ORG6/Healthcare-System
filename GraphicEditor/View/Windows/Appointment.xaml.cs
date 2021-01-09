@@ -5,7 +5,6 @@ using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
-using Model.Accounts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -105,7 +104,7 @@ namespace GraphicEditor.View.UserControls
             Physicians.Clear();
             foreach (Physician p in physicianDatabaseSql.GetAll())
             {
-                if (p.FullName.ToLower().Contains(PhysicianTextBox.Text.ToLower()))
+                if ((p.Name + " " + p.Surname).ToLower().Contains(PhysicianTextBox.Text.ToLower()))
                 {
                     Physicians.Add(p);
                     OnPropertyChanged();
@@ -190,7 +189,7 @@ namespace GraphicEditor.View.UserControls
             Patients.Clear();
             foreach (Patient p in patientDatabaseSql.GetAll())
             {
-                if (p.FullName.ToLower().Contains(PatientTextBox.Text.ToLower()))
+                if ((p.Name + " " + p.Surname).ToLower().Contains(PatientTextBox.Text.ToLower()))
                 {
                     Patients.Add(p);
                     OnPropertyChanged();

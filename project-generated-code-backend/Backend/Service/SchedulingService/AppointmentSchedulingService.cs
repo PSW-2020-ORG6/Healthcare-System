@@ -4,6 +4,7 @@
 // Purpose: Definition of Class AppointmentSchedulingService
 
 using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
@@ -21,8 +22,16 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         public SchedulingStrategy SchedulingStrategyContext;
         private readonly AppointmentDatabaseSql _appointmentDatabaseSql;
         private readonly PhysicianDatabaseSql _physicianDatabaseSql;
+
         private readonly SchedulingStrategy _schedulingStrategyContext;
         private readonly AppointmentGeneralitiesManager _appointmentGeneralitiesManager;
+
+        public AppointmentSchedulingService()
+        {
+            SchedulingStrategyContext = new PatientSchedulingStrategy();
+            _appointmentGeneralitiesManager = new AppointmentGeneralitiesManager(new PhysicianDatabaseSql(), new RoomDatabaseSql(),
+                new AppointmentDatabaseSql(), new RenovationDatabaseSql(), new BedReservationDatabaseSql());
+        }
 
         public AppointmentSchedulingService(IPhysicianRepository physicianRepository,
             IRoomRepository roomRepository,

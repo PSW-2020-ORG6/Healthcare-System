@@ -6,6 +6,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class BedReservationDatabaseSql : GenericDatabaseSql<BedReservation>, IBedReservationRepository
     {
+        public BedReservationDatabaseSql() : base()
+        {
+        }
+
         public BedReservationDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
         {
         }
