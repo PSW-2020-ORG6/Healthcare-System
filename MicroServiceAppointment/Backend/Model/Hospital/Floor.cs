@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using HealthClinicBackend.Backend.Model.Util;
 using MicroServiceAccount.Backend.Model.Util;
 
 namespace MicroServiceAppointment.Backend.Model.Hospital

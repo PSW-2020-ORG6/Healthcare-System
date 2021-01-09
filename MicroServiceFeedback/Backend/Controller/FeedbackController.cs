@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
-using MicroServiceFeedback.Backend.Dto;
 using MicroServiceFeedback.Backend.Model;
 using WebApplication.Backend.Service;
+using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Blog;
 
 namespace WebApplication.Backend.Controllers
 {

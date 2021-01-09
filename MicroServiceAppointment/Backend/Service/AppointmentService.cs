@@ -4,7 +4,6 @@ using System.Linq;
 using MicroServiceAppointment.Backend.Model;
 using HealthClinicBackend.Backend.Repository.Generic;
 using MicroServiceAppointment.Backend.Dto;
-using MicroServiceAccount.Backend.Model;
 //using HealthClinicBackend.Backend.Model.Accounts;
 using MicroServiceAccount.Backend.Dto;
 //using HealthClinicBackend.Backend.Dto;

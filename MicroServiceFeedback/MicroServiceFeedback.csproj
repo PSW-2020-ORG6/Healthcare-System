@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Backend\DTO\" />
+    <Folder Include="Backend\Model\" />
     <Folder Include="Backend\Repository\" />
   </ItemGroup>
 

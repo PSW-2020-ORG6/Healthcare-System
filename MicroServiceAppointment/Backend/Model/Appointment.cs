@@ -5,10 +5,10 @@
 
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Util;
 using MicroServiceAppointment.Backend.Dto;
-using MicroServiceAccount.Backend.Model.Util;
 using MicroServiceAppointment.Backend.Model.Hospital;
-using MicroServiceAccount.Backend.Model;
 using Newtonsoft.Json;
 
 namespace MicroServiceAppointment.Backend.Model

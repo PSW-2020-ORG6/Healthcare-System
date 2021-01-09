@@ -26,7 +26,7 @@ var temp = new Vue({
 		isHidden: false
 	},
 	methods: {
-		admin : function () {
+		admin: function () {
 			router.push("admin")
 		},
 		patient: function () {
@@ -94,12 +94,21 @@ const router = new VueRouter({
 				content: Home
 			}
 		},
+
 		{
 			path: '/patient',
 			name: 'patient',
 			components: {
 				pageHeader: PatientHeader,
 				content: Patient
+			},
+			beforeEnter: (to, from, next) => {
+				if (localStorage.getItem('isAdmin') == "false" && localStorage.getItem('isLogged') == "true" && localStorage.getItem('isPatient') == "true") {
+					next();
+				}
+				else {
+					next(false);
+				}
 			}
 		},
 		{
@@ -108,6 +117,14 @@ const router = new VueRouter({
 			components: {
 				pageHeader: AdminHeader,
 				content: Admin
+			},
+			beforeEnter: (to, from, next) => {
+				if (localStorage.getItem('isAdmin') == "true" && localStorage.getItem('isLogged') == "true" && localStorage.getItem('isPatient') == "false") {
+					next();
+				}
+				else {
+					next(false);
+				}
 			}
 		},
 		{
@@ -116,6 +133,14 @@ const router = new VueRouter({
 			components: {
 				pageHeader: PageHeader,
 				content: Registration
+			},
+			beforeEnter: (to, from, next) => {
+				if (localStorage.getItem('isAdmin') == "false" && localStorage.getItem('isLogged') == "false" && localStorage.getItem('isPatient') == "false") {
+					next();
+				}
+				else {
+					next(false);
+				}
 			}
 		},
 		{
@@ -124,6 +149,14 @@ const router = new VueRouter({
 			components: {
 				pageHeader: PatientHeader,
 				content: EmailConfirmation
+			},
+			beforeEnter: (to, from, next) => {
+				if (localStorage.getItem('isAdmin') == "false" && localStorage.getItem('isLogged') == "true" && localStorage.getItem('isPatient') == "true") {
+					next();
+				}
+				else {
+					next(false);
+				}
 			}
 		},
 		{
@@ -132,6 +165,14 @@ const router = new VueRouter({
 			components: {
 				pageHeader: PatientHeader,
 				content: SuccessfulRegistration
+			},
+			beforeEnter: (to, from, next) => {
+				if (localStorage.getItem('isAdmin') == "false" && localStorage.getItem('isLogged') == "false" && localStorage.getItem('isPatient') == "false") {
+					next();
+				}
+				else {
+					next(false);
+				}
 			}
 		},
 		{
@@ -140,22 +181,46 @@ const router = new VueRouter({
 			components: {
 				pageHeader: PatientHeader,
 				content: Survey
+			},
+			beforeEnter: (to, from, next) => {
+				if (localStorage.getItem('isAdmin') == "false" && localStorage.getItem('isLogged') == "true" && localStorage.getItem('isPatient') == "true") {
+					next();
+				}
+				else {
+					next(false);
+				}
 			}
-		},	
+		},
 		{
 			path: '/statistics',
 			name: 'statistics',
 			components: {
 				pageHeader: AdminHeader,
 				content: Statistics
+			},
+			beforeEnter: (to, from, next) => {
+				if (localStorage.getItem('isAdmin') == "true" && localStorage.getItem('isLogged') == "true" && localStorage.getItem('isPatient') == "false") {
+					next();
+				}
+				else {
+					next(false);
+				}
 			}
-		},	
+		},
 		{
 			path: '/search',
 			name: 'search',
 			components: {
 				pageHeader: PatientHeader,
 				content: Search
+			},
+			beforeEnter: (to, from, next) => {
+				if (localStorage.getItem('isLogged') == "true") {
+					next();
+				}
+				else {
+					next(false);
+				}
 			}
 		},
 		{
@@ -164,14 +229,14 @@ const router = new VueRouter({
 			components: {
 				pageHeader: PatientHeader,
 				content: Appointments
-			}
-		},
-		{
-			path: '/appointment',
-			name: 'appointment',
-			components: {
-				pageHeader: PatientHeader,
-				content: Appointment
+			},
+			beforeEnter: (to, from, next) => {
+				if (localStorage.getItem('isAdmin') == "false" && localStorage.getItem('isLogged') == "true" && localStorage.getItem('isPatient') == "true") {
+					next();
+				}
+				else {
+					next(false);
+				}
 			}
 		},
 		{
@@ -180,6 +245,14 @@ const router = new VueRouter({
 			components: {
 				pageHeader: PatientHeader,
 				content: FeedbackPatient
+			},
+			beforeEnter: (to, from, next) => {
+				if (localStorage.getItem('isAdmin') == "false" && localStorage.getItem('isLogged') == "true" && localStorage.getItem('isPatient') == "true") {
+					next();
+				}
+				else {
+					next(false);
+				}
 			}
 		},
 		{
@@ -188,6 +261,14 @@ const router = new VueRouter({
 			components: {
 				pageHeader: PatientHeader,
 				content: Account
+			},
+			beforeEnter: (to, from, next) => {
+				if (localStorage.getItem('isAdmin') == "false" && localStorage.getItem('isLogged') == "true" && localStorage.getItem('isPatient') == "true") {
+					next();
+				}
+				else {
+					next(false);
+				}
 			}
 		},
 		{
@@ -196,6 +277,14 @@ const router = new VueRouter({
 			components: {
 				pageHeader: AdminHeader,
 				content: FeedbackAdmin
+			},
+			beforeEnter: (to, from, next) => {
+				if (localStorage.getItem('isAdmin') == "true" && localStorage.getItem('isLogged') == "true" && localStorage.getItem('isPatient') == "false") {
+					next();
+				}
+				else {
+					next(false);
+				}
 			}
 		},
 		{
@@ -204,7 +293,14 @@ const router = new VueRouter({
 			components: {
 				pageHeader: PageHeader,
 				content: Login
-			}
+			},
+			beforeEnter: (to, from, next) => {
+				if (localStorage.getItem('isAdmin') == "false" && localStorage.getItem('isLogged') == "false" && localStorage.getItem('isPatient') == "false") {
+					next();
+				}
+				else {
+					next(false);
+				}
 		},
 		{
 			path: '/',
@@ -216,7 +312,7 @@ const router = new VueRouter({
 	]
 });
 var app = new Vue({
-		router
+	router
 	,
 	el: '#routerMode'
 });
