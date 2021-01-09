@@ -1,4 +1,5 @@
-﻿using MicroServiceAccount.Backend.Model;
+﻿using HealthClinicBackend.Backend.Model.Accounts;
+using MicroServiceAccount.Backend.Model;
 //using HealthClinicBackend.Backend.Model.Accounts
 
 namespace MicroServiceAccount.Backend.Services.Interfaces

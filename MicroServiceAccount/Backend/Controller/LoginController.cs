@@ -5,8 +5,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using MicroServiceAccount.Backend.Model;
-//using HealthClinicBackend.Backend.Model.Accounts;
+//using MicroServiceAccount.Backend.Model;
+using HealthClinicBackend.Backend.Model.Accounts;
 using MicroServiceAccount.Backend.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -28,33 +28,33 @@ namespace MicroServiceAccount.Backend.Controllers
             _userService = userService;
         }
 
-        [HttpGet("login")]
-        public IActionResult Login(string email, string password)
+        [HttpGet("login/{email}/{password}")]
+        public string Login(string email, string password)
         {
             Account login = new Account();
             login.Email = email;
             login.Password = password;
 
-            IActionResult response = Unauthorized();
+            string response=null;
             var user = _userService.AuthenticateUser(login);
 
             if (user != null)
             {
                 var tokenString = _userService.GenerateJSONWebToken(user);
-                response = Ok(new { token = tokenString });
+                response = tokenString;
             }
 
             return response;
         }
         
-        //[Authorize]
+        [Authorize]
         [HttpGet("GetUserType")]
         public string GetUserType()
         {
             return _userService.GetUserType((HttpContext.User.Identity as ClaimsIdentity).Claims.ToList());
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet("GetUserId")]
         public string GetUserId()
         {

@@ -7,6 +7,7 @@ using MicroServiceAccount.Backend.Model;
 //using HealthClinicBackend.Backend.Repository.Generic;
 using MicroServiceAccount.Backend.Util;
 using System;
+using HealthClinicBackend.Backend.Model.Accounts;
 
 namespace MicroServiceAccount.Backend.Service
 {

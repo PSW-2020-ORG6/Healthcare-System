@@ -122,14 +122,14 @@
 			username = document.getElementById("userNameId").value
 			password = document.getElementById("passwordId").value
 			axios
-				.get('/login/login', { params: { email: username, password: password } })
+				.get('/login/login/', { params: { email: username, password: password } })
 				.then(response => {
 					this.token = response.data.token
 					localStorage.setItem('token', this.token);
 					localStorage.setItem('isLogged', true);
 					this.GetUserType()
 					axios
-						.get('/login/getUserId', {
+						.get('/login/GetUserId', {
 							headers: {
 								'Authorization': 'Bearer' + " " + localStorage.getItem('token')
 							}

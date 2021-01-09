@@ -7,6 +7,7 @@ using MicroServiceAccount.Backend.Model;
 using MicroServiceAccount.Backend.Dto;
 //using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.PharmacySupport;
+using HealthClinicBackend.Backend.Model.Accounts;
 
 namespace MicroServiceAccount.Backend.Service
 {

@@ -7,6 +7,7 @@ using MicroServiceAccount.Backend.Model;
 using MicroServiceAccount.Backend.Service;
 using Microsoft.AspNetCore.Authorization;
 using MicroServiceAccount.Backend.Services.Interfaces;
+using HealthClinicBackend.Backend.Model.Accounts;
 
 namespace MicroServiceAccount.Backend.Controllers
 {
@@ -30,27 +31,27 @@ namespace MicroServiceAccount.Backend.Controllers
         ///<returns>
         ///information about sucess in string format
         ///</returns>
-        [Authorize]
-        [HttpPost("registerPatient")]
-        public IActionResult RegisterPatient(PatientDto patientDTO)
-        {
-            if (patientDTO.AreRegistrationFieldsValid())
-            {
-                if (_registrationService.RegisterPatient(new Patient(patientDTO)))
-                {
-                    SendMail(new Patient(patientDTO));
-                    return Ok();
-                }
-                else
-                {
-                    return BadRequest();
-                }
-            }
-            else
-            {
-                return BadRequest();
-            }
-        }
+        //[Authorize]
+        //[HttpPost("registerPatient")]
+        //public IActionResult RegisterPatient(PatientDto patientDTO)
+        //{
+        //    if (patientDTO.AreRegistrationFieldsValid())
+        //    {
+        //        if (_registrationService.RegisterPatient(new Patient(patientDTO)))
+        //        {
+        //            SendMail(new Patient(patientDTO));
+        //            return Ok();
+        //        }
+        //        else
+        //        {
+        //            return BadRequest();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return BadRequest();
+        //    }
+        //}
 
         public void SendMail(Patient patient)
         {

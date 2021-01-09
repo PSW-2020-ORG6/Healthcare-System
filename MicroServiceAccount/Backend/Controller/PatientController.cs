@@ -8,6 +8,7 @@ using System;
 using Microsoft.AspNetCore.Authorization;
 using MicroServiceAccount.Backend.Service;
 using HealthClinicBackend.Backend.Model.PharmacySupport;
+using HealthClinicBackend.Backend.Model.Accounts;
 
 namespace MicroServiceAccount.Backend.Controllers
 {
