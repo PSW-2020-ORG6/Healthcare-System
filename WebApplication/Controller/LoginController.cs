@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
-//using HealthClinicBackend.Backend.Model.Accounts;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 
 namespace MicroServiceAccount.Backend.Controllers
 {
@@ -26,35 +14,32 @@ namespace MicroServiceAccount.Backend.Controllers
         [HttpGet("login")]
         public async Task<IActionResult> Login(string email, string password)
         {
-            
-            HttpResponseMessage response = await client.GetAsync("http://localhost:57053/login/login/" +email+"/"+ password );
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57053/loginMicroservice/login/" + email +"/"+ password );
             response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-
-            IActionResult iarr = Ok(new { token = responseBody });
-
-            return iarr;
+            var responseBody = await response.Content.ReadAsStringAsync();
+            if (responseBody != null)
+                return Ok(new { token = responseBody });
+            return Unauthorized();
         }
         
-        [Authorize]
         [HttpGet("GetUserType")]
         public async Task<string> GetUserType(string token)
         {
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            HttpResponseMessage response = await client.GetAsync("http://localhost:57053/login/GetUserType/");
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57053/loginMicroservice/GetUserType");
             response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            return responseBody;
+            var result= await response.Content.ReadAsStringAsync();
+            return result;
         }
 
-        [Authorize]
         [HttpGet("GetUserId")]
-        public async Task<string> GetUserId()
+        public async Task<string> GetUserId(string token)
         {
-            HttpResponseMessage response = await client.GetAsync("http://localhost:57053/login/GetUserId");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57053/loginMicroservice/GetUserId");
             response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            return responseBody;
+            var result = await response.Content.ReadAsStringAsync();
+            return result;
         }
     }
 }

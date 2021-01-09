@@ -70,7 +70,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             return GetAll()
                 .Where(p => p.Specialization
                     .Select(s => s.Name)
-                    .Contains("General Practitioner"))
+                    .Contains("General practitioner"))
                 .ToList();
         }
 
