@@ -31,7 +31,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Backend\Model\Util\TimeInterval.cs~RF75a01bc4.TMP" />
+	  <Folder Include="Backend\Model\Accounts\" />
+	  <Folder Include="Backend\Model\Util\" />
 	</ItemGroup>
 
 </Project>

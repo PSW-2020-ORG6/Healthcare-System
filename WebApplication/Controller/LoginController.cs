@@ -22,17 +22,20 @@ namespace MicroServiceAccount.Backend.Controllers
     {
         static readonly HttpClient client = new HttpClient();
 
-        [HttpGet("login/{email}/{password}")]
+        [HttpGet("login")]
         public async Task<IActionResult> Login(string email, string password)
         {
-            HttpResponseMessage response = await client.GetAsync("http://localhost:57053/login/login/" + email + "/" +password );
-            response.EnsureSuccessStatusCode();
+            
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57053/login/login/" +email+"/"+ password );
+             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
-            IActionResult result = JsonConvert.DeserializeObject<IActionResult>(responseBody);
-            return result;
+
+            IActionResult iarr = Ok(new { token = responseBody });
+
+            return iarr;
         }
         
-        //[Authorize]
+        [Authorize]
         [HttpGet("GetUserType")]
         public async Task<string> GetUserType()
         {
@@ -42,7 +45,7 @@ namespace MicroServiceAccount.Backend.Controllers
             return responseBody;
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet("GetUserId")]
         public async Task<string> GetUserId()
         {
@@ -51,20 +54,6 @@ namespace MicroServiceAccount.Backend.Controllers
             string responseBody = await response.Content.ReadAsStringAsync();
             return responseBody;
         }
-
-        ////U svrhe testiranja
-        //[Authorize]
-        //[HttpGet("GetValue")]
-        //public async Task<ActionResult<IEnumerable<string>>> Get()
-        //{
-        //    HttpResponseMessage response = await client.GetAsync("http://localhost:57053/login/GetUserId");
-        //    response.EnsureSuccessStatusCode();
-        //    string responseBody = await response.Content.ReadAsStringAsync();
-        //    return responseBody;
-        //    return new string[] {
-        //        "Value1","Value2","Value3"
-        //    };
-        //}
     }
 }
 

@@ -12,39 +12,40 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using HealthClinicBackend.Backend.Repository.DatabaseSql.Util;
+using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace MicroServiceAccount.Backend.Service
 {
     public class UserService
     {
-        //private readonly IAdminRepository _adminRepository;
-        //private IPatientRepository _patientRepository;
+        private readonly IAdminRepository _adminRepository;
+        private IPatientRepository _patientRepository;
         private IConfiguration configuration;
 
 
-        //public UserService(IAdminRepository adminRepository,IPatientRepository patientRepository, IConfiguration configuration)
-        //{
-        //    _adminRepository = adminRepository;
-        //    _patientRepository=patientRepository;
-        //    this.configuration = configuration;
+        public UserService(IAdminRepository adminRepository, IPatientRepository patientRepository, IConfiguration configuration)
+        {
+            _adminRepository = adminRepository;
+            _patientRepository = patientRepository;
+            this.configuration = configuration;
 
-        //}
+        }
 
 
 
         public Account LogIn(string email, string password)
         {
 
-            //Admin admin = _adminRepository.GetAdminByUserNameAndPassword(email,password);
-            //Patient patient = _patientRepository.GetPatientByUserNameAndPassword(email,password);
+            Admin admin = _adminRepository.GetAdminByUserNameAndPassword(email, password);
+            Patient patient = _patientRepository.GetPatientByUserNameAndPassword(email, password);
 
-            //if (admin == null && patient == null)
-            //    return null;
-            //else if (patient != null)
-            //    return patient;
-            //else
-            //    return admin;
-            throw new NotImplementedException();
+            if (admin == null && patient == null)
+                return null;
+            else if (patient != null)
+                return patient;
+            else
+                return admin;
 
 
         }

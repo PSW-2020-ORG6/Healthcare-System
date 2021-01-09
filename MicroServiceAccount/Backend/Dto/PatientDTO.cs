@@ -4,6 +4,7 @@
 // Purpose: Definition of Class PatientDTO
 
 using System;
+using HealthClinicBackend.Backend.Model.Accounts;
 using MicroServiceAccount.Backend.Model;
 using MicroServiceAccount.Backend.Model.Util;
 
