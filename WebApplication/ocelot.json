@@ -1,0 +1,20 @@
+﻿{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/login/login",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 57053
+        }
+      ],
+      "UpstreamPathTemplate": "/login/login",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      } 
+    }
+  ]
+}
