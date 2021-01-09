@@ -38,13 +38,15 @@ function drawMedicineForOfferTable(data) {
 function drawTable(data) {
     let table = '';
     for (i in data) {
-        var finishdate = data[i].finishDate.split('T');
-        table += `<tr id="` + data[i].tenderName + `">
+        if (data[i].isActive == true) {
+            var finishdate = data[i].finishDate.split('T');
+            table += `<tr id="` + data[i].tenderName + `">
 		    <td>`+ data[i].tenderName + `</td>
 			<td>`+ finishdate[0] + `</td>
-            <td ><input name="medicinesButton" id="`+ data[i].tenderName +`"  type = 'button' style = "background-color:coral" class="btn btn-primary" value="Medicines" ></input ></td >
-			<td ><input name="offerButton" id="`+ data[i].tenderName +`"  type = 'button' style = "background-color:coral" class="btn btn-primary" value="Make offer" ></input ></td >
+            <td ><input name="medicinesButton" id="`+ data[i].tenderName + `"  type = 'button' style = "background-color:coral" class="btn btn-primary" value="Medicines" ></input ></td >
+			<td ><input name="offerButton" id="`+ data[i].tenderName + `"  type = 'button' style = "background-color:coral" class="btn btn-primary" value="Make offer" ></input ></td >
 			</tr>`;
+        }
     }
     $('#tenderTable').html(table);
     $("input:button[name=medicinesButton]").click(function () {
@@ -93,9 +95,10 @@ $(document).ready(function () {
     $("#btnPublishTender").click(function () {
         var TenderName = $("#txtTenderName").val();
         var FinishDate = $("#txtFinishDate").val();
+        var IsActive = true;
         $.post({
             url: '../tender/createTender',
-            data: JSON.stringify({ TenderName: TenderName, FinishDate: FinishDate }),
+            data: JSON.stringify({ TenderName: TenderName, FinishDate: FinishDate, IsActive: IsActive }),
             contentType: 'application/json',
             success: function () {
                 alert("Succesfully published tender");

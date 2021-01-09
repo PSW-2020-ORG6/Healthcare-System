@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IntegrationAdapters.Repositories
 {
-    interface ITenderRepository
+    public interface ITenderRepository
     {
         public bool AddTender(Tender tender);
         public List<Tender> GetAllTenders();
@@ -15,6 +15,9 @@ namespace IntegrationAdapters.Repositories
         public bool AddOffer(TenderOffer offer);
         public bool AddMedicine(MedicineDTO medicineDTO);
         public List<MedicineDTO> GetAllMedicines();
-        public List<TenderOffer> GetAllOffersByEmailAndTender(String emailAndTender);
+        public List<TenderOffer> GetAllOffersByEmailAndTender(string emailAndTender);
+        public void SaveChanges();
+      
+        public void ClearAll(string tenderName);
     }
 }

@@ -44,6 +44,22 @@ namespace IntegrationAdapters.Services
             return true;
         }
 
+        public bool AddMedicineFromTender(string medicineName, int quantity)
+        {
+            Medicine med = GetMedicineByName(medicineName);
+            if (med != null)
+            {
+                med.Quantity += quantity;
+                medicineRepository.SaveChanges();
+            }
+            else
+            {
+                medicineRepository.AddMedicine(new Medicine(Guid.NewGuid().ToString("N"),medicineName,null,quantity));
+
+            }
+            return true;
+        }
+
 
         public Medicine GetByID(string ID)
         {

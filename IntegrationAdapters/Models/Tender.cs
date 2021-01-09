@@ -12,14 +12,16 @@ namespace IntegrationAdapters.Models
         [Key]
         public string TenderName { get; set; }
         public DateTime FinishDate { get; set; }
+        public bool IsActive { get; set; }
 
         public Tender()
         {
         }
-        public Tender(string tenderName,  DateTime finishDate)
+        public Tender(string tenderName,  DateTime finishDate, bool isActive)
         {
             TenderName = tenderName;
             FinishDate = finishDate;
+            IsActive = isActive;
         }
     }
 }
