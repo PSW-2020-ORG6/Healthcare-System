@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace MicroServiceAccount.Backend.Controllers
         {
             
             HttpResponseMessage response = await client.GetAsync("http://localhost:57053/login/login/" +email+"/"+ password );
-             response.EnsureSuccessStatusCode();
+            response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
 
             IActionResult iarr = Ok(new { token = responseBody });
@@ -37,9 +38,10 @@ namespace MicroServiceAccount.Backend.Controllers
         
         [Authorize]
         [HttpGet("GetUserType")]
-        public async Task<string> GetUserType()
+        public async Task<string> GetUserType(string token)
         {
-            HttpResponseMessage response = await client.GetAsync("http://localhost:57053/login/GetUserType");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57053/login/GetUserType/");
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
             return responseBody;
