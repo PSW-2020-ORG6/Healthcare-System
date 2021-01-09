@@ -4,6 +4,7 @@
 // Purpose: Definition of Class AppointmentSchedulingService
 
 using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions;
@@ -93,6 +94,9 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             return appointments;
         }
 
+        /*
+         * author: Aleksandar Hadzibabic
+         */
         public AppointmentDto GetEmergencyAppointmentGEA(AppointmentDto appointmentPreferences)
         {
             bool noDoctorsSpecialized = false;
@@ -124,6 +128,22 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             }
 
             return null;
+        }
+
+
+        /*
+         * author: Aleksandar Hadzibabic
+         */
+        public Dictionary<Appointment, AppointmentDto> ApointmentAnalysisGEA(AppointmentDto appointmentPreferences)
+        {
+            Dictionary<Appointment, AppointmentDto> rellocationPrefferencies = new Dictionary<Appointment, AppointmentDto>();
+            List<Appointment> appointments = _appointmentDatabaseSql.GetAll();
+            foreach( Appointment ap in appointments )
+            {
+                AppointmentDto nearestAppointment = _appointmentGeneralitiesManager.FindNearestAvailableAppointment(ap);
+                rellocationPrefferencies.Add(ap, nearestAppointment);
+            }
+            return rellocationPrefferencies;
         }
 
 

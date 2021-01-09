@@ -849,24 +849,9 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             );
             modelBuilder.Entity<Appointment>().Ignore(o => o.ProcedureType);
             modelBuilder.Entity<Appointment>().Ignore(o => o.Physician);
-            modelBuilder.Entity<Appointment>().Ignore(o => o.Date);
             modelBuilder.Entity<Appointment>().HasData(
-                new Appointment
-                {
-                    SerialNumber = "200001",
-                    PatientSerialNumber = "0002",
-                    PhysicianSerialNumber = "600001",
-                    Urgency = true,
-                    RoomSerialNumber = "101"
-                },
-                new Appointment
-                {
-                    SerialNumber = "200002",
-                    PatientSerialNumber = "0002",
-                    PhysicianSerialNumber = "600001",
-                    Urgency = false,
-                    RoomSerialNumber = "102"
-                }
+                new Appointment { SerialNumber = "200001", PatientSerialNumber = "0002", PhysicianSerialNumber = "600001", ProcedureTypeSerialnumber="300001", Date=DateTime.Now, Urgency = true, RoomSerialNumber = "101" },
+                new Appointment { SerialNumber = "200002", PatientSerialNumber = "0002", PhysicianSerialNumber = "600001", ProcedureTypeSerialnumber = "300002", Date = DateTime.Now, Urgency = false, RoomSerialNumber = "102" }
             );
         }
 
