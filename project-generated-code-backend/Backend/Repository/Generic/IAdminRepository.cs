@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication.Backend.Repositorys.Interfaces
+namespace HealthClinicBackend.Backend.Repository.Generic
 {
     public interface IAdminRepository :IGenericRepository<Admin>
     {

@@ -96,7 +96,7 @@
 			}
 		},
 		GetUserType: function () {
-			axios.get('http://localhost:49900/login/GetUserType', {
+			axios.get('/login/GetUserType', {
 				headers: {
 					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
 				}
