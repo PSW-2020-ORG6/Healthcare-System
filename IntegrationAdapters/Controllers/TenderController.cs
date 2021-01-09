@@ -14,10 +14,12 @@ namespace IntegrationAdapters.Controllers
     public class TenderController : ControllerBase
     {
         private readonly TenderService tenderService;
+        private readonly MedicineService medicineService;
 
         public TenderController()
         {
             this.tenderService = new TenderService();
+            this.medicineService = new MedicineService();
         }
         [HttpPost("createTender")]
         public IActionResult AddTender(Tender tender)
@@ -75,5 +77,38 @@ namespace IntegrationAdapters.Controllers
         {
             return tenderService.GetAllOffersByEmailAndTender(emailAndTender);
         }
+
+        [HttpGet("acceptOffer/{id}")]
+        public IActionResult AcceptOffer(string id)
+        {
+            string result = id.Substring(6);
+            string companyEmail = result.Split(";")[0];
+            string tenderName = result.Split(";")[1];
+            List<string> emails = new List<string>();
+            foreach (TenderOffer t in tenderService.GetAllOffers())
+            {
+                if (emails.Contains(t.CompanyEmail))
+                {
+                    continue;
+                }
+                else
+                {
+                    tenderService.SendNotification(t, companyEmail, tenderName);
+                }
+                emails.Add(t.CompanyEmail);
+            }
+            return Ok();
+        }
+
+
+        [HttpGet("clearAll/{id}")]
+        public IActionResult ClearAll(string id)
+        {
+            string result = id.Substring(6);
+            string tenderName = result.Split(";")[1];
+            tenderService.ClearAll(tenderName);
+            return Ok();
+        }
+
     }
 }

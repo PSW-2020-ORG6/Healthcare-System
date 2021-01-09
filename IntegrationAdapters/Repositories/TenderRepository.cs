@@ -56,7 +56,7 @@ namespace IntegrationAdapters.Repositories
             return dbContext.TenderOffer.ToList();
         }
 
-        List<TenderOffer> ITenderRepository.GetAllOffersByEmailAndTender(string emailAndTender)
+        public List<TenderOffer> GetAllOffersByEmailAndTender(string emailAndTender)
         {
             string[] emailAndTenderId = emailAndTender.Split(';');
             string Email = emailAndTenderId[0];
@@ -70,5 +70,23 @@ namespace IntegrationAdapters.Repositories
             }
             return foundOffers;
         }
+
+        public void ClearAll(string tenderName)
+        {
+            foreach (TenderOffer t in GetAllOffers())
+            {
+                if (t.TenderName.Equals(tenderName))
+                {
+                    dbContext.Remove(t);
+                    dbContext.SaveChanges();
+                }
+            }
+        }
+
+        public void SaveChanges()
+        {
+            dbContext.SaveChanges();
+        }
+
     }
 }

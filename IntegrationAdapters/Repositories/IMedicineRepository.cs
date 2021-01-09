@@ -16,6 +16,6 @@ namespace IntegrationAdapters.Repositories
         public MedicineSpecification GetById(string id);
         public List<MedicineSpecification> GetAllSpecifications();
         public bool DoesMedicineExist(Medicine medicine);
-	public void AddMedicine(Medicine medicine);    
+	    public void AddMedicine(Medicine medicine);    
 }
 }

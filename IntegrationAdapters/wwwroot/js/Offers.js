@@ -12,14 +12,40 @@
 			<td>`+ data[i].companyName + `</td>
             <td>`+ data[i].companyEmail + `</td>
 			<td><input name="offerButton" id="` + data[i].companyEmail + ";" + data[i].tenderName + `"  type = 'button' class="btn btn-primary" style="background-color:coral"  value="Offer" ></input >
-            <td><input name="accept" id="accept"  type = 'button' style = "background-color:lightgreen" class="btn btn-primary" value="Accept offer" ></input >
-                <input name="refuse" id="refuse"  type = 'button' style = "background-color:pink" class="btn btn-primary" value="Refuse offer" ></input ></br></td >
+            <td><input name="accept" id="accept` + data[i].companyEmail + ";" + data[i].tenderName + `" type = 'button' style = "background-color:lightgreen" class="btn btn-primary" value="Accept offer" ></input >
+              </td >
 			</tr>`;
             pomArrayEmail.push(data[i].companyEmail);
             pomArrayTender.push(data[i].tenderName);
         }
     }
     $('#offersTable').html(table);
+
+    $("input:button[name=accept]").click(function () {
+        id = this.id
+        $.get({
+            url: '../tender/acceptOffer/' + this.id,
+            contentType: 'application/json',
+            success: function (data) {
+                alert("Success sent email!")
+                $.get({
+                    url: '../tender/clearAll/' + id,
+                    contentType: 'application/json',
+                    success: function () {
+                        location.href = "Offers.html";
+
+                    },
+                    error: function (message) {
+                        alert("Failed")
+                    }
+                });
+            },
+            error: function (message) {
+                alert("Failed")
+            }
+        })
+
+    });
 }
 
 function drawSpecificOfferTable(data) {
