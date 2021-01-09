@@ -67,6 +67,11 @@ namespace HealthClinicBackend.Backend.Controller.SecretaryControllers
             return _appointmentSchedulingService.GetEmergencyAppointmentGEA(appointmentDto);
         }
 
+        public Dictionary<Appointment, AppointmentDto> AppointmentAnasysisGEA(AppointmentDto appointmentDto)
+        {
+            return _appointmentSchedulingService.ApointmentAnalysisGEA(appointmentDto);
+        }
+
         public AppointmentDto GetRecommendedAppointment(AppointmentDto appointmentDto)
         {
             throw new NotImplementedException();

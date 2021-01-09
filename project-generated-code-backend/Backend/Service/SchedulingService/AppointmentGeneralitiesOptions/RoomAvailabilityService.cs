@@ -15,6 +15,13 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
         private readonly IRenovationRepository _renovationRepository;
         private readonly IBedReservationRepository _bedReservationRepository;
 
+        public RoomAvailabilityService()
+        {
+            _appointmentRepository = new AppointmentDatabaseSql();
+            _renovationRepository = new RenovationDatabaseSql();
+            _bedReservationRepository = new BedReservationDatabaseSql();
+        }
+
         public RoomAvailabilityService(IAppointmentRepository appointmentRepository,
             IRenovationRepository renovationRepository, IBedReservationRepository bedReservationRepository)
         {

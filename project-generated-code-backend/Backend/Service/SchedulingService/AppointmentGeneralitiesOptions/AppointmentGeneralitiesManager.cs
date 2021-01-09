@@ -2,7 +2,9 @@
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
@@ -95,6 +97,45 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
             return appointments;
         }
 
+        public AppointmentDto FindNearestAvailableAppointment( Appointment appointment)
+        {
+            bool noDoctors = false;
+            AppointmentDto appointmentPreferences = new AppointmentDto();
+            appointmentPreferences.Physician = appointment.Physician;
+            appointmentPreferences.ProcedureType = appointment.ProcedureType;
+            appointmentPreferences.Date = appointment.Date;
+            appointmentPreferences.Time = new TimeInterval(appointment.TimeInterval.Start, appointment.TimeInterval.End);
+            _appointmentPreferences = appointmentPreferences;
+
+            List<TimeInterval> allTimeIntervals = GetEmergencyTimeIntervalsGEA(); //free appointments for chosen time interval
+
+            List<Physician> allPhysicians = GetAllPhysiciansGEA(ref noDoctors);
+            List<Room> allRooms = GetAllRoomsGEA();
+
+            PhysicianAvailabilityService physicianAvailabilityService = new PhysicianAvailabilityService(new AppointmentDatabaseSql());
+            RoomAvailabilityService roomAvailabilityService = new RoomAvailabilityService();
+
+            foreach (TimeInterval timeInterval in allTimeIntervals)
+            {
+                if (timeInterval.Start < _appointmentPreferences.Time.Start)
+                    continue;
+                foreach (Physician physician in allPhysicians)
+                {
+                    if (physicianAvailabilityService.IsPhysicianAvailable(physician, timeInterval))
+                    {
+                        foreach (Room room in allRooms)
+                        {
+                            if (roomAvailabilityService.IsRoomAvailable(room, timeInterval))
+                            {
+                                return CreateAppointment(physician, room, timeInterval);
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
         private AppointmentDto CreateAppointment(Physician physician, Room room, TimeInterval timeInterval)
         {
             AppointmentDto appointment = new AppointmentDto();
@@ -171,6 +212,22 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
             foreach (TimeInterval timeInterval in generatedTimeIntervals)
             {
                 if (timeInterval.Start >= _appointmentPreferences.Time.Start && timeInterval.End <= _appointmentPreferences.Time.End)
+                {
+                    timeIntervals.Add(timeInterval);
+                }
+            }
+            return timeIntervals;
+        }
+
+        private List<TimeInterval> GetEmergencyTimeIntervalsGEA()
+        {
+            TimeIntervalGenerator generator = new TimeIntervalGenerator(_appointmentPreferences.ProcedureType,
+                _appointmentPreferences.RestrictedHours);
+            List<TimeInterval> timeIntervals = new List<TimeInterval>();
+            List<TimeInterval> generatedTimeIntervals = generator.GenerateTimeIntervalsForDay(_appointmentPreferences.Date);
+            foreach (TimeInterval timeInterval in generatedTimeIntervals)
+            {
+                if (timeInterval.Start >= _appointmentPreferences.Time.Start)
                 {
                     timeIntervals.Add(timeInterval);
                 }
