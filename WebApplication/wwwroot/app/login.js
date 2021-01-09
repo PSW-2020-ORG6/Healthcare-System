@@ -127,9 +127,10 @@
 					this.token = response.data.token
 					localStorage.setItem('token', this.token);
 					localStorage.setItem('isLogged', true);
-					this.GetUserType()
+					//this.GetUserType()
 					axios
-						.get('/login/GetUserId', {
+						.get('/login/GetUserType', {
+							params: { token: localStorage.getItem('token') },
 							headers: {
 								'Authorization': 'Bearer' + " " + localStorage.getItem('token')
 							}
