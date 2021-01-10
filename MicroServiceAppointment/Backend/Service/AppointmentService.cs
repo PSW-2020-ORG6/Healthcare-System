@@ -19,8 +19,6 @@ namespace MicroServiceAppointment.Backend.Service
     {
         private readonly ISpecializationRepository _specializationRepository;
         private readonly IAppointmentRepository _appointmentRepository;
-        private readonly IPhysicianRepository _physicianRepository;
-        private readonly IPatientRepository _patientRepository;
         private readonly IAddressRepository _addressRepository;
 
 
@@ -39,26 +37,11 @@ namespace MicroServiceAppointment.Backend.Service
 
        
         public AppointmentService(ISpecializationRepository specializationRepository,
-            IAppointmentRepository appointmentRepository, IPhysicianRepository physicianRepository,
-            IPatientRepository patientRepository, IAddressRepository addressRepository)
+            IAppointmentRepository appointmentRepository,IAddressRepository addressRepository)
         {
             _specializationRepository = specializationRepository;
             _appointmentRepository = appointmentRepository;
-            _physicianRepository = physicianRepository;
-            _patientRepository = patientRepository;
             _addressRepository = addressRepository;
-        }
-
-        public List<PhysicianDTO> GetAllPhysicians()
-        {
-            //return physitianDTO.ConvertListToPhysicianDTO(_physicianRepository.GetAll());
-            throw new NotImplementedException();
-        }
-
-        public List<SpecializationDTO> GetAllSpecializations()
-        {
-            //return specializationDTO.ConvertListToSpecializationDTO(_specializationRepository.GetAll());
-            throw new NotImplementedException();
         }
 
         public List<TimeIntervalDTO> GetAllAvailableAppointments(string physicianId, string specializationName,
@@ -227,7 +210,10 @@ namespace MicroServiceAppointment.Backend.Service
             List<Appointment> appointments = _appointmentRepository.GetAll();
             foreach (Appointment a in appointments)
             {
-                a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
+                AppointmentDto appointmentDTO = new AppointmentDto(a);
+                appointmentDTO.PhysicianDTO = HttpRequest.GetPhysiciantByIdAsync(a.PhysicianSerialNumber).Result;
+                appointmentDTO.PatientDTO = HttpRequest.GetPatientByIdAsync(a.PatientSerialNumber).Result;
+                appointmentsDto.Add(appointmentDTO);
             }
             return appointmentDTO.ConvertListToAppointmentDTO(appointments);
         }
@@ -242,18 +228,17 @@ namespace MicroServiceAppointment.Backend.Service
         internal List<AppointmentDto> GetAllAppointmentsByPatientIdActive(string patientId)
         {
             List<Appointment> allAppointments = _appointmentRepository.GetByPatientIdActive(patientId);
-            DateTime dateNow = DateTime.Now;
             List<Appointment> appotintmentsInFuture = new List<Appointment>();
             foreach (Appointment appointment in allAppointments)
             {
-                if (appointment.Date > dateNow)
+                if (appointment.Date > DateTime.Now)
                     appotintmentsInFuture.Add(appointment);
             }
             foreach (Appointment a in appotintmentsInFuture)
             {
                 a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
             }
-            return appointmentDTO.ConvertListToAppointmentDTO(appotintmentsInFuture);
+            return GetAppointmentDtos(appotintmentsInFuture);
         }
 
         /// <summary>
@@ -281,11 +266,10 @@ namespace MicroServiceAppointment.Backend.Service
         public List<AppointmentDto> GetAllAppointmentsByPatientIdPast(string patientId)
         {
             List<Appointment> allAppointments = _appointmentRepository.GetByPatientId(patientId);
-            DateTime dateNow = DateTime.Now;
             List<Appointment> appointments = new List<Appointment>();
             foreach (Appointment appointment in allAppointments)
             {
-                if (appointment.Date < dateNow)
+                if (appointment.Date < DateTime.Now)
                 {
                     appointments.Add(appointment);
                 }
@@ -295,7 +279,7 @@ namespace MicroServiceAppointment.Backend.Service
                 a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
             }
 
-            return appointmentDTO.ConvertListToAppointmentDTO(appointments);
+            return GetAppointmentDtos(appointments);
         }
 
         /// <summary>
@@ -310,12 +294,12 @@ namespace MicroServiceAppointment.Backend.Service
         internal bool isSurveyDoneByPatientIdAppointmentDatePhysicianName(string patientId, string appointmentDate,
             string physicianName)
         {
-            List<Physician> physitianResult = _physicianRepository.GetByName(physicianName);
-            List<String> physicianId = new List<string>();
-            foreach (Physician physician in physitianResult)
-            {
-                physicianId.Add(physician.Id);
-            }
+            ////List<Physician> physitianResult = _physicianRepository.GetByName(physicianName);
+            //List<String> physicianId = new List<string>();
+            //foreach (Physician physician in physitianResult)
+            //{
+            //    physicianId.Add(physician.Id);
+            //}
 
             throw new NotImplementedException();
             // TODO: move this to some service
@@ -437,15 +421,6 @@ namespace MicroServiceAppointment.Backend.Service
             if (!appointment.Active) return false;
             appointment.Active = false;
             _appointmentRepository.Update(appointment);
-            return true;
-        }
-
-        public bool SetUserToMalicious(string patientId)
-        {
-            var patient = _patientRepository.GetById(patientId) ?? _patientRepository.GetByJmbg(patientId);
-            if (patient.IsMalicious) return false;
-            patient.IsMalicious = true;
-            _patientRepository.Update(patient);
             return true;
         }
 

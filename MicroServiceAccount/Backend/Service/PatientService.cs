@@ -66,6 +66,15 @@ namespace MicroServiceAccount.Backend.Service
             return patient;
         }
 
+        internal bool SetMalicousPatientById(string patientId)
+        {
+            Patient patient = _patientRepository.GetById(patientId);
+            if (patient.IsMalicious) return false;
+            patient.IsMalicious = true;
+            _patientRepository.Update(patient);
+            return true;
+        }
+
         internal List<Patient> GetMaliciousPatients()
         {
             return _patientRepository.GetAll().Where(p => p.IsMalicious).ToList();

@@ -936,7 +936,7 @@ Vue.component("appointments", {
                             this.isMalicious = response.data
                             if (this.isMalicious == true) {
                                 axios
-                                    .put('/appointment/SetUserToMalicious', appointment, {
+                                    .put('patient/SetUserToMalicious', appointment.patientId, {
                                         headers: {
                                             'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                                         }
