@@ -28,8 +28,8 @@ namespace MicroServiceAccount.Backend.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             HttpResponseMessage response = await client.GetAsync("http://localhost:57053/loginMicroservice/GetUserType");
             response.EnsureSuccessStatusCode();
-            var result= await response.Content.ReadAsStringAsync();
-            return result;
+            return await response.Content.ReadAsStringAsync();
+
         }
 
         [HttpGet("GetUserId")]
@@ -38,8 +38,7 @@ namespace MicroServiceAccount.Backend.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             HttpResponseMessage response = await client.GetAsync("http://localhost:57053/loginMicroservice/GetUserId");
             response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadAsStringAsync();
-            return result;
+            return await response.Content.ReadAsStringAsync();
         }
     }
 }

@@ -58,18 +58,17 @@ namespace MicroServiceAccount.Backend.Service
             patient = AddAddressToPatient(patient);
             return patientDTO.ConvertToPatientDTO(patient);
             throw new NotImplementedException();
-
         }
+
         internal Patient AddAddressToPatient(Patient patient)
         {
             patient.Address = _addressRepository.GetById(patient.AddressSerialNumber);
             return patient;
-
         }
+
         internal List<Patient> GetMaliciousPatients()
         {
             return _patientRepository.GetAll().Where(p => p.IsMalicious).ToList();
-
         }
 
         internal bool BlockMaliciousPatient(string patientId)
@@ -91,7 +90,6 @@ namespace MicroServiceAccount.Backend.Service
                 if (t.IsDateIntervalValid(a.DateFrom, a.DateTo))
                     actionAndBenefitMessages.Add(a);
             }
-
             return actionAndBenefitMessages;
         }
     }

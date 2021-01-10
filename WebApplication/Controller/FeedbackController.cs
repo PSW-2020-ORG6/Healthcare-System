@@ -6,83 +6,69 @@ using System.Net.Http.Headers;
 using HealthClinicBackend.Backend.Dto;
 using System.Collections.Generic;
 using System.Text;
-using System.Security.Claims;
-using System.Linq;
-using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace WebApplication.Backend.Controllers
 {
     /// <summary>
     /// This class does connection with service
     /// </summary>
-    [Route("feedbackMicroservice")]
+    [Route("feedback")]
     [ApiController]
     public class FeedbackController : ControllerBase
     {
 
         static readonly HttpClient client = new HttpClient();
 
-
         [HttpGet("approved")]
         public async Task<List<FeedbackDto>> GetApprovedFeedbacks(string token)
         {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0], Request.Headers["Authorization"].ToString().Split(" ")[1]);
-            HttpResponseMessage response = await client.GetAsync("http://localhost:57057/feedback/approved/");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                        ,Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57057/feedbackMicroservice/approved/");
             response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            List<FeedbackDto> returnValue = JsonConvert.DeserializeObject<List<FeedbackDto>>(responseBody);
-
-            return returnValue;
+            return JsonConvert.DeserializeObject<List<FeedbackDto>>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpGet("disapproved")]
         public async Task<List<FeedbackDto>> GetDissaporvedFeedbacks()
         {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0], Request.Headers["Authorization"].ToString().Split(" ")[1]);
-            HttpResponseMessage response = await client.GetAsync("http://localhost:57057/feedback/disapproved/");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                        ,Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57057/feedbackMicroservice/disapproved/");
             response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            List<FeedbackDto> returnValue = JsonConvert.DeserializeObject<List<FeedbackDto>>(responseBody);
-
-            return returnValue;
+            return JsonConvert.DeserializeObject<List<FeedbackDto>>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpPut("approve")]
         public async Task<List<FeedbackDto>> ApproveFeedback(FeedbackDto feedbackDTO)
         {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0], Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                        ,Request.Headers["Authorization"].ToString().Split(" ")[1]);
             var parameter = new StringContent(JsonConvert.SerializeObject(feedbackDTO,Formatting.Indented),Encoding.UTF8,"application/json");
-            HttpResponseMessage response = await client.PutAsync("http://localhost:57057/feedback/approve/",parameter);
+            HttpResponseMessage response = await client.PutAsync("http://localhost:57057/feedbackMicroservice/approve/", parameter);
             response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            List<FeedbackDto> returnValue = JsonConvert.DeserializeObject<List<FeedbackDto>>(responseBody);
-
-            return returnValue;
+            return JsonConvert.DeserializeObject<List<FeedbackDto>>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpPost("add")]
         public async Task<List<FeedbackDto>> AddNewFeedbacк(FeedbackDto feedbackDTO)
         {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0], Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                        ,Request.Headers["Authorization"].ToString().Split(" ")[1]);
             var parameter = new StringContent(JsonConvert.SerializeObject(feedbackDTO, Formatting.Indented), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("http://localhost:57057/feedback/add/",parameter) ;
+            HttpResponseMessage response = await client.PostAsync("http://localhost:57057/feedbackMicroservice/add/", parameter) ;
             response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            List<FeedbackDto> returnValue = JsonConvert.DeserializeObject<List<FeedbackDto>>(responseBody);
-
-            return returnValue;
+            return JsonConvert.DeserializeObject<List<FeedbackDto>>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpGet("all")]
         public async Task<List<FeedbackDto>> GetAllFeedbacks()
         {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0], Request.Headers["Authorization"].ToString().Split(" ")[1]);
-            HttpResponseMessage response = await client.GetAsync("http://localhost:57057/feedback/all/");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                        ,Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57057/feedbackMicroservice/all/");
             response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            List<FeedbackDto> returnValue = JsonConvert.DeserializeObject<List<FeedbackDto>>(responseBody);
-
-            return returnValue;
+            return JsonConvert.DeserializeObject<List<FeedbackDto>>(await response.Content.ReadAsStringAsync());
         }
 
     }

@@ -23,8 +23,7 @@ namespace MicroServiceAccount.Backend.Controllers
             var content = new StringContent(JsonConvert.SerializeObject(patientDTO, Formatting.Indented), Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PostAsync("http://localhost:57053/registrationMicroservice/registerPatient",content);
             response.EnsureSuccessStatusCode();
-            var responseBody = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<IActionResult>(responseBody);
+            return JsonConvert.DeserializeObject<IActionResult>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpPut("confirmationEmail/{id}")]
@@ -33,8 +32,7 @@ namespace MicroServiceAccount.Backend.Controllers
             var content = new StringContent(JsonConvert.SerializeObject(id, Formatting.Indented), Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PutAsync("http://localhost:57053/registrationMicroservice/confirmationEmail", content);
             response.EnsureSuccessStatusCode();
-            var responseBody = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<IActionResult>(responseBody);
+            return JsonConvert.DeserializeObject<IActionResult>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpGet("allPhysitians")]
@@ -42,8 +40,7 @@ namespace MicroServiceAccount.Backend.Controllers
         {
             HttpResponseMessage response = await client.GetAsync("http://localhost:57053/registrationMicroservice/allPhysitians");
             response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<List<FamilyDoctorDto>>(result);
+            return JsonConvert.DeserializeObject<List<FamilyDoctorDto>>(await response.Content.ReadAsStringAsync());
         }
     }
 }

@@ -40,7 +40,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 }
                 physician.Specialization = specializations;
             }
-
             return physicians;
         }
 

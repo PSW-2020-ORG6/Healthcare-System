@@ -23,20 +23,15 @@ namespace MicroServiceAccount.Backend.Service
         private IPatientRepository _patientRepository;
         private IConfiguration configuration;
 
-
         public UserService(IAdminRepository adminRepository, IPatientRepository patientRepository, IConfiguration configuration)
         {
             _adminRepository = adminRepository;
             _patientRepository = patientRepository;
             this.configuration = configuration;
-
         }
-
-
 
         public Account LogIn(string email, string password)
         {
-
             Admin admin = _adminRepository.GetAdminByUserNameAndPassword(email, password);
             Patient patient = _patientRepository.GetPatientByUserNameAndPassword(email, password);
 
@@ -46,20 +41,13 @@ namespace MicroServiceAccount.Backend.Service
                 return patient;
             else
                 return admin;
-
-
         }
         public string GetUserType(List<Claim> claims)
         {
-
-            if (claims[1].Value == "False")
-            {
-                return "PATIENT";
-            }
+            if (claims[1].Value == "False")           
+                return "PATIENT";           
             else
-            {
                 return "ADMIN";
-            }
         }
         public string GetUserId(List<Claim>claims)
         {
@@ -67,17 +55,13 @@ namespace MicroServiceAccount.Backend.Service
         }
         public Account AuthenticateUser(Account login)
         {
-
-            Account user = LogIn(login.Email, login.Password);
-            return user;
+            return LogIn(login.Email, login.Password);
         }
 
         public string GenerateJSONWebToken(Account userInfo)
         {
-
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
 
             var claims = new[]
             {
@@ -93,10 +77,9 @@ namespace MicroServiceAccount.Backend.Service
                     audience: configuration["Jwt:Issuer"],
                     claims,
                     expires: DateTime.Now.AddMinutes(120),
-                    signingCredentials: credentials);
-
-            var encodeToken = new JwtSecurityTokenHandler().WriteToken(token);
-            return encodeToken;
+                    signingCredentials: credentials
+                );
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

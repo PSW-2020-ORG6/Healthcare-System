@@ -64,18 +64,23 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             List<Patient> patients = GetAll().Where(p => p.Email.Equals(email) && p.Password.Equals(password)).ToList();
             if (patients.Count == 0)
-            {
                 return null;
-            }
             else
-            {
                 return patients[0];
-            }
         }
 
         public List<Patient> GetAllPatients()
         {
             return GetAll();
+        }
+
+        public override Patient GetById(string id)
+        {
+            List<Patient> patients = GetAll().Where(p => p.Id.Equals(id)).ToList();
+            if (patients.Count == 0)
+                return null;
+            else
+                return patients[0];
         }
 
         public Patient GetPatientBySerialNumber(string serialNumber)

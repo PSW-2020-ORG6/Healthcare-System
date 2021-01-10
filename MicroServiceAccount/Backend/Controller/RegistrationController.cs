@@ -37,15 +37,8 @@ namespace MicroServiceAccount.Backend.Controllers
                     SendMail(new Patient(patientDTO));
                     return Ok();
                 }
-                else
-                {
-                    return BadRequest();
-                }
-            }
-            else
-            {
-                return BadRequest();
-            }
+            }           
+            return BadRequest();
         }
 
         public void SendMail(Patient patient)
@@ -63,15 +56,10 @@ namespace MicroServiceAccount.Backend.Controllers
         public IActionResult Confirmation(string id)
         {
             string patientId = IdDecryption(id);
-
             if (_registrationService.ConfirmEmailUpdate(patientId))
-            {
                 return Ok();
-            }
             else
-            {
                 return BadRequest();
-            }
         }
         /// <summary>
         ///id decryption
@@ -83,8 +71,7 @@ namespace MicroServiceAccount.Backend.Controllers
         ///</param>>
         private string IdDecryption(string patientId)
         {
-            long id = (long.Parse(patientId) - 23 * 33) + 6789;
-            return id.ToString();
+            return ((long.Parse(patientId) - 23 * 33) + 6789).ToString();
         }
 
         [HttpGet("allPhysitians")]
