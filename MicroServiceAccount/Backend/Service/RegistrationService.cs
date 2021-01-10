@@ -1,15 +1,10 @@
 ﻿using MicroServiceAccount.Backend.Dto;
-//using HealthClinicBackend.Backend.Dto;
 using System.Collections.Generic;
 using System.Linq;
 using MicroServiceAccount.Backend.Model;
-//using HealthClinicBackend.Backend.Model.Accounts;
-//using HealthClinicBackend.Backend.Repository.Generic;
 using MicroServiceAccount.Backend.Util;
 using System;
-using HealthClinicBackend.Backend.Model.Accounts;
-using HealthClinicBackend.Backend.Repository.Generic;
-using HealthClinicBackend.Backend.Dto;
+using MicroServiceAccount.Backend.Repository.Generic;
 
 namespace MicroServiceAccount.Backend.Service
 {

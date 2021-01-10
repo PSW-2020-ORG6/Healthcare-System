@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MicroServiceAccount\MicroServiceAccount.csproj" />
+    <ProjectReference Include="..\project-generated-code-backend\HealthClinicBackend.csproj" />
   </ItemGroup>
 
 

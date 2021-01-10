@@ -2,15 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using HealthClinicBackend.Backend.Repository;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
-using HealthClinicBackend.Backend.Repository.Generic;
-using MicroServiceAccount.Backend.Controllers;
-using MicroServiceAccount.Backend.Model.Util;
-using MicroServiceAccount.Backend.Service;
-using MicroServiceAccount.Backend.Services;
-using MicroServiceAccount.Backend.Services.Interfaces;
+using MicroServiceFeedback.Backend.Controllers;
+using MicroServiceFeedback.Backend.Repository.DatabaseSql;
+using MicroServiceFeedback.Backend.Repository.Generic;
+using MicroServiceFeedback.Backend.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,8 +16,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using WebApplication.Backend.Controllers;
-using WebApplication.Backend.Service;
+//using Microsoft.IdentityModel.Tokens;
+//using WebApplication.Backend.Service;
 
 namespace MicroServiceFeedback
 {
@@ -59,7 +54,7 @@ namespace MicroServiceFeedback
                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                    };
                });
-            services.AddDbContext<HealthCareSystemDbContext>(options =>
+            services.AddDbContext<MsFeedbackDbContext>(options =>
             {
                 var connectionString = CreateConnectionStringFromEnvironment();
                 Console.WriteLine(connectionString);
@@ -102,7 +97,7 @@ namespace MicroServiceFeedback
             }
 
             using (var scope = app.ApplicationServices.CreateScope())
-            using (var context = scope.ServiceProvider.GetService<HealthCareSystemDbContext>())
+            using (var context = scope.ServiceProvider.GetService<MsFeedbackDbContext>())
             {
                 context.Database.EnsureCreated();
             }
@@ -122,7 +117,7 @@ namespace MicroServiceFeedback
             var portDefault = 5432;
 
             var userDefault = "postgres";
-            var passwordDefault = "root";
+            var passwordDefault = "super";
             var schema = "healthcare-system-db";
 
             // Do not change this

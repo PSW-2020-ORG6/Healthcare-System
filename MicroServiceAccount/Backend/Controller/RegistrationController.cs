@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using MicroServiceAccount.Backend.Service;
 using Microsoft.AspNetCore.Authorization;
 using MicroServiceAccount.Backend.Services.Interfaces;
-using HealthClinicBackend.Backend.Model.Accounts;
-using HealthClinicBackend.Backend.Dto;
+using MicroServiceAccount.Backend.Model;
+using MicroServiceAccount.Backend.Dto;
 
 namespace MicroServiceAccount.Backend.Controllers
 {

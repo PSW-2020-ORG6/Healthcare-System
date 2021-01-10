@@ -20,36 +20,40 @@ namespace MicroServiceAccount.Backend.Controllers
         static readonly HttpClient client = new HttpClient();
 
         [HttpGet("all")]
-        public async Task<List<Patient>> GetAllPatients(String token)
+        public async Task<List<Patient>> GetAllPatients()
         {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                        , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             HttpResponseMessage response = await client.GetAsync("http://localhost:57053/patientMicroservice/allPatients");
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<Patient>>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpGet("getPatientById")]
-        public async Task<PatientDto> GetPatientById(string patientId,string token)
+        public async Task<PatientDto> GetPatientById(string patientId)
         {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                        , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             HttpResponseMessage response = await client.GetAsync("http://localhost:57053/patientMicroservice/getPatientById/" + patientId);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<PatientDto>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpGet("getMaliciousPatients")]
-        public async Task<List<Patient>> GetMaliciousPatients(string token)
+        public async Task<List<Patient>> GetMaliciousPatients()
         {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                        , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             HttpResponseMessage response = await client.GetAsync("http://localhost:57053/patientMicroservice/getMaliciousPatients");
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<Patient>>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpPut("blockMaliciousPatient")]
-        public async Task<bool> BlockMaliciousPatient(PatientDto patient,String token)
+        public async Task<bool> BlockMaliciousPatient(PatientDto patient)
         {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                        , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             var content = new StringContent(JsonConvert.SerializeObject(patient, Formatting.Indented),Encoding.UTF8,"application/json");
             HttpResponseMessage response = await client.PutAsync("http://localhost:57053/patientMicroservice/blockMaliciousPatient" ,content);
             response.EnsureSuccessStatusCode();
@@ -57,9 +61,10 @@ namespace MicroServiceAccount.Backend.Controllers
         }
 
         [HttpGet("getActionsAndBenefits")]
-        public async Task<List<ActionAndBenefitMessage>> GetActionsAndBenefits(string token)
+        public async Task<List<ActionAndBenefitMessage>> GetActionsAndBenefits()
         {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                        , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             HttpResponseMessage response = await client.GetAsync("http://localhost:57053/patientMicroservice/getActionsAndBenefits");
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<ActionAndBenefitMessage>>(await response.Content.ReadAsStringAsync());

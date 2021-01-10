@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using HealthClinicBackend.Backend.Dto;
-using MicroServiceAppointment.Backend.Dto;
-using MicroServiceAccount.Backend.Dto;
+//using MicroServiceAppointment.Backend.Dto;
+//using MicroServiceAccount.Backend.Dto;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
@@ -26,7 +26,7 @@ namespace WebApplication.Backend.Controllers
                                                                                                     , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentMicroservice/allAppointmentsByPatientId/" + patientId);
             response.EnsureSuccessStatusCode();
-            return JsonConvert.DeserializeObject<List<AppointmentDto>>(await response.Content.ReadAsStringAsync());
+            return JsonConvert.DeserializeObject<List<HealthClinicBackend.Backend.Dto.AppointmentDto>>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpGet("allAppointments")]

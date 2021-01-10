@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HealthClinicBackend.Backend.Repository;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
-using HealthClinicBackend.Backend.Repository.Generic;
+using MicroServiceAccount.Backend.Repository.DatabaseSql;
+using MicroServiceAccount.Backend.Repository.Generic;
 using MicroServiceAccount.Backend.Controllers;
 using MicroServiceAccount.Backend.Model.Util;
 using MicroServiceAccount.Backend.Service;
@@ -21,6 +20,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using MicroServiceAccount.Backend.Repository;
 
 namespace MicroServiceAccount
 {
@@ -57,7 +57,7 @@ namespace MicroServiceAccount
                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                    };
                });
-            services.AddDbContext<HealthCareSystemDbContext>(options =>
+            services.AddDbContext<MsAccountDbContext>(options =>
             {
                 var connectionString = CreateConnectionStringFromEnvironment();
                 Console.WriteLine(connectionString);
@@ -112,7 +112,7 @@ namespace MicroServiceAccount
             }
 
             using (var scope = app.ApplicationServices.CreateScope())
-            using (var context = scope.ServiceProvider.GetService<HealthCareSystemDbContext>())
+            using (var context = scope.ServiceProvider.GetService<MsAccountDbContext>())
             {
                 context.Database.EnsureCreated();
             }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MicroServiceAccount.Backend.Dto
+namespace HealthClinicBackend.Backend.Dto
 {
     public class PhysicianDTO
     {

@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MicroServiceAccount.Backend.Model;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using HealthClinicBackend.Backend.Model.Accounts;
 
-namespace HealthClinicBackend.Backend.Repository.DatabaseSql.RelationHelpers
+namespace MicroServiceAccount.Backend.Repository.DatabaseSql.RelationHelpers
 {
     public class PhysicianSpecialization
     {

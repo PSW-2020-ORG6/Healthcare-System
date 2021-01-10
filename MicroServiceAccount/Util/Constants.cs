@@ -1,6 +1,4 @@
-﻿using HealthClinicBackend.Backend.Model.Accounts;
-using MicroServiceAccount.Backend.Model;
-//using HealthClinicBackend.Backend.Model.Schedule;
+﻿using MicroServiceAccount.Backend.Model;
 
 namespace MicroServiceAccount.Backend.Util
 {

@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using MicroServiceAccount.Backend.Service;
-using HealthClinicBackend.Backend.Model.PharmacySupport;
-using HealthClinicBackend.Backend.Model.Accounts;
-using HealthClinicBackend.Backend.Dto;
+using MicroServiceAccount.Backend.Model;
 using MicroServiceAccount.Backend.Dto;
 
 namespace MicroServiceAccount.Backend.Controllers

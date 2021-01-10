@@ -1,8 +1,9 @@
-﻿//using HealthClinicBackend.Backend.Model.Util;
+﻿
+using MicroServiceAccount.Backend.Model.Util;
 
-//namespace HealthClinicBackend.Backend.Repository.Generic
-//{
-//    public interface ICountryRepository : IGenericRepository<Country>
-//    {
-//    }
-//}
+namespace MicroServiceAccount.Backend.Repository.Generic
+{
+    public interface ICountryRepository : IGenericMsAccountRepository<Country>
+    {
+    }
+}

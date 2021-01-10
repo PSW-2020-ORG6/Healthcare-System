@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Security.Claims;
-using HealthClinicBackend.Backend.Model.Accounts;
+using MicroServiceAccount.Backend.Model;
 using MicroServiceAccount.Backend.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
