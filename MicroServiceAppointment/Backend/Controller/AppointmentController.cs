@@ -33,20 +33,6 @@ namespace MicroServiceAppointment.Backend.Controllers
         }
 
         [Authorize]
-        [HttpGet("physicians")]
-        public List<PhysicianDTO> GetAllPhysicians()
-        {
-            return _appointmentService.GetAllPhysicians();
-        }
-
-        [Authorize]
-        [HttpGet("specializations")]
-        public List<SpecializationDTO> GetAllSpecializations()
-        {
-            return _appointmentService.GetAllSpecializations();
-        }
-
-        [Authorize]
         [HttpGet("allAppointments")]
         public List<AppointmentDto> GetAllAppointments()
         {
@@ -168,13 +154,6 @@ namespace MicroServiceAppointment.Backend.Controllers
         public bool IsUserMalicious(string patientId)
         {
             return _appointmentService.IsUserMalicious(patientId);
-        }
-
-        [Authorize]
-        [HttpPut("SetUserToMalicious")]
-        public bool SetUserToMalicious(AppointmentDto appointment)
-        {
-            return _appointmentService.SetUserToMalicious(appointment.PatientDTO.Id);
         }
     }
 }

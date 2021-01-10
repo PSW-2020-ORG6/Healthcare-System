@@ -45,6 +45,7 @@ namespace HealthClinicBackend.Backend.Dto
             IsGuest = patient.Guest;
             EmailConfirmed = patient.EmailConfirmed;
             ChosenDoctor = patient.ChosenPhysician;
+            IsMalicious = patient.IsMalicious;
         }
 
 
@@ -104,6 +105,7 @@ namespace HealthClinicBackend.Backend.Dto
         public bool EmailConfirmed { get; set; }
 
         public string ChosenDoctor { get; set; }
+        public bool IsMalicious { get; set; }
 
         public bool AreRegistrationFieldsValid()
         {

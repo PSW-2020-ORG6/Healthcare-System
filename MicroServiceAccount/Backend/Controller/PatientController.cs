@@ -66,5 +66,12 @@ namespace MicroServiceAccount.Backend.Controllers
         {
             return _patientService.GetAdvertisements();
         }
+
+        [Authorize]
+        [HttpPut("SetUserToMalicious")]
+        public bool SetUserToMalicious([FromBody]string patientId)
+        {
+            return _patientService.SetMalicousPatientById(patientId);
+        }
     }
 }

@@ -164,11 +164,5 @@ namespace WebApplication.Backend.Controllers
         {
             throw new NotImplementedException();
         }
-
-        [HttpPut("SetUserToMalicious")]
-        public bool SetUserToMalicious(AppointmentDto appointment)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
