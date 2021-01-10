@@ -310,6 +310,16 @@ const router = new VueRouter({
 				content: Login
 			}
 		},
+		{
+			path: '*',
+			components: {
+				pageHeader: PageHeader,
+				content: Login
+			},
+			beforeEnter: (to, from, next) => {
+				next(false);
+			}
+		},
 	]
 });
 var app = new Vue({
@@ -317,6 +327,3 @@ var app = new Vue({
 	,
 	el: '#routerMode'
 });
-
-
-

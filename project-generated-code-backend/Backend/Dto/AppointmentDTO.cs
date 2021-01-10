@@ -1,40 +1,63 @@
-// File:    AppointmentDTO.cs
-// Author:  Luka Doric
-// Created: Sunday, June 7, 2020 4:19:02 PM
-// Purpose: Definition of Class AppointmentDTO
-
+﻿using MicroServiceAccount.Backend.Dto;
+using MicroServiceAppointment.Backend.Model;
+using MicroServiceAccount.Backend.Model;
 using System;
 using System.Collections.Generic;
-using HealthClinicBackend.Backend.Model.Accounts;
-using HealthClinicBackend.Backend.Model.Hospital;
-using HealthClinicBackend.Backend.Model.Schedule;
-using HealthClinicBackend.Backend.Model.Util;
+using System.Linq;
+using System.Threading.Tasks;
+using HealthClinicBackend.Backend.Dto;
 
-namespace HealthClinicBackend.Backend.Dto
+namespace MicroServiceAppointment.Backend.Dto
 {
     public class AppointmentDto
     {
-        public String SerialNumber { get; set; }
-        public ProcedureType ProcedureType { get; set; }
-        public TimeInterval Time { get; set; }
-        public Physician Physician { get; set; }
-        public Patient Patient { get; set; }
-        public Room Room { get; set; }
+        public RoomDTO RoomDTO {get;set;}
+        public TimeIntervalDTO TimeIntervalDTO { get; set; }
+        public PhysicianDTO PhysicianDTO { get; set; }
+        public ProcedureTypeDTO ProcedureTypeDTO { get; set; }
         public bool Urgency { get; set; }
-        public bool Active { get; set; }
         public DateTime Date { get; set; }
-        public int RestrictedHours { get; set; }
+        public bool Active { get; set; }
         public bool IsSurveyDone { get; set; }
-        public TimeInterval TimeInterval { get; set; }
+        public string SerialNumber { get; set; }
+        public PatientDto PatientDTO { get; set; }
+
+        public AppointmentDto() 
+        {
+        }
+
+        public AppointmentDto(Appointment appointment)
+        {
+            RoomDTO = new RoomDTO(appointment.Room);
+            TimeIntervalDTO = new TimeIntervalDTO(appointment.TimeInterval);
+            PhysicianDTO = new PhysicianDTO(appointment.Physician);
+            ProcedureTypeDTO = new ProcedureTypeDTO(appointment.ProcedureType);
+            Urgency = appointment.Urgency;
+            Active = appointment.Active;
+            IsSurveyDone = appointment.IsSurveyDone;
+            Date = appointment.Date;
+            SerialNumber = appointment.SerialNumber;
+            PatientDTO = new PatientDto(appointment.Patient);
+        }
+
+        public List<AppointmentDto> ConvertListToAppointmentDTO(List<Appointment> appointments)
+        {
+            List<AppointmentDto> appointmentsDTO = new List<AppointmentDto>();
+            if(appointments == null)
+                return appointmentsDTO;
+            foreach (Appointment appointment in appointments)
+                appointmentsDTO.Add(new AppointmentDto(appointment));
+            return appointmentsDTO;
+        }
 
         public bool IsPreferedPhysicianSelected()
         {
-            return (Physician != null);
+            return (PhysicianDTO != null);
         }
 
         public bool IsPreferredTimeSelected()
         {
-            return (Time != null);
+            return (TimeIntervalDTO != null);
         }
 
         public bool IsPreferredDateSelected()
@@ -45,11 +68,7 @@ namespace HealthClinicBackend.Backend.Dto
 
         public bool IsPreferedRoomSelected()
         {
-            return (Room != null);
-        }
-
-        public AppointmentDto()
-        {
+            return (RoomDTO != null);
         }
 
         public bool IsDataValid(string date)
@@ -59,13 +78,13 @@ namespace HealthClinicBackend.Backend.Dto
             return date != null && dateTime > DateTime.Today.AddDays(2);
         }
 
-        public AppointmentDto(string physicianId, string date, DateTime timeIntervalStart)
+       /* public AppointmentDTO(string physicianId, string date, DateTime timeIntervalStart)
         {
-            this.Physician = new Physician { SerialNumber = physicianId };
+            this.PhysicianDTO = new Physician { SerialNumber = physicianId };
             string[] parts = date.Split("-");
             this.Date = new DateTime(Int32.Parse(parts[0]), Int32.Parse(parts[1]), Int32.Parse(parts[2]), 0, 0, 0);
             this.Time = new TimeInterval(timeIntervalStart);
             this.Active = true;
-        }
+        }*/
     }
 }
