@@ -126,6 +126,16 @@ namespace HealthClinicBackend.Backend.Model.Schedule
             PhysicianSerialNumber = Physician.SerialNumber;
             PatientSerialNumber = Patient.SerialNumber;
         }
+        //public Appointment(AppointmentDto appointmentDTO) : base()
+        //{
+        //    Room = new Room(appointmentDTO.RoomDTO);
+        //    Physician =new Physician(appointmentDTO.PhysicianDTO);
+        //    Patient = appointmentDTO.Patient;
+        //    TimeInterval = appointmentDTO.Time;
+        //    ProcedureType = appointmentDTO.ProcedureType;
+        //    Urgency = appointmentDTO.Urgency;
+        //    Date = appointmentDTO.Date;
+        //}
 
         public Appointment(string physicianId, string date, DateTime timeIntervalStart)
         {

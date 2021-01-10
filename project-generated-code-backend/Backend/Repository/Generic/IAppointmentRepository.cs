@@ -25,5 +25,9 @@ namespace HealthClinicBackend.Backend.Repository.Generic
         List<Appointment> GetByPatientIdActive(string patientId);
         List<Appointment> GetByPatientIdCanceled(string patientId);
         List<DateTime> GetByPatientIdCanceledDates(string patientId);
+        List<Appointment> GetByPatientIdWithoutSurvey(string patientId);
+        List<Appointment> GetByPatientIdWithSurvey(string patientId);
+        List<Appointment> IsSurveyDoneByPatientIdAppointmentDatePhysicianNameAppointments(string patientId, string appointmentDate, string id);
+        void Update(Appointment appointment);
     }
 }

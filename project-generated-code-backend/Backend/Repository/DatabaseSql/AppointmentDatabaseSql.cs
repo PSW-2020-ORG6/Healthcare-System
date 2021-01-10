@@ -52,7 +52,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             return GetAll().Where(appointment => appointment.Date.Equals(date)).ToList();
         }
-
+        public Appointment GetById(string id)
+        {
+            return GetAll().Where(p => p.SerialNumber.Equals(id)).ToList()[0];
+        }
         public List<Appointment> GetAppointmentsByPatient(Patient patient)
         {
             return GetAll().Where(appointment => appointment.PatientSerialNumber.Equals(patient)).ToList();
@@ -103,10 +106,28 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             throw new NotImplementedException();
         }
-
+        public List<Appointment> GetByPatientIdWithSurvey(string patientId)
+        {
+            return GetAll().Where(appointment => appointment.PatientSerialNumber.Equals(patientId) && appointment.IsSurveyDone == true).ToList();
+        }
+        public List<Appointment> GetByPatientIdWithoutSurvey(string patientId)
+        {
+            return GetAll().Where(appointment => appointment.PatientSerialNumber.Equals(patientId) && appointment.IsSurveyDone == false).ToList();
+        }
         public List<DateTime> GetByPatientIdCanceledDates(string patientId)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Appointment> IsSurveyDoneByPatientIdAppointmentDatePhysicianNameAppointments(string patientId, string appointmentDate, string id)
+        {
+            return GetAll().Where(appointment => appointment.PatientSerialNumber.Equals(patientId) && appointment.Date.ToString().Equals(appointmentDate) && appointment.PhysicianSerialNumber.Equals(id)).ToList();
+        }
+
+        public void Update(Appointment appointment)
+        {
+            DbContext.Appointment.Update(appointment);
+            DbContext.SaveChanges();
         }
     }
 }
