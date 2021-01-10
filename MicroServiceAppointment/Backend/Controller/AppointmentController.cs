@@ -10,7 +10,7 @@ using HealthClinicBackend.Backend.Model.Schedule;
 
 namespace MicroServiceAppointment.Backend.Controllers
 {
-    [Route("appointment")]
+    [Route("appointmentMicroservice")]
     [ApiController]
     public class AppointmentController : ControllerBase
     {
@@ -26,7 +26,7 @@ namespace MicroServiceAppointment.Backend.Controllers
         }
 
         [Authorize]
-        [HttpGet("allAppointmentsByPatientId")]
+        [HttpGet("allAppointmentsByPatientId/{patientId}")]
         public List<AppointmentDto> GetAllAppointmentsByPatientId(String patientId)
         {
             return _appointmentService.GetAllAppointmentsByPatientId(patientId);

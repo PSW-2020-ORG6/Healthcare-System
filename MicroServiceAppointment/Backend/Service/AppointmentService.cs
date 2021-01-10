@@ -9,6 +9,9 @@ using MicroServiceAccount.Backend.Dto;
 using MicroServiceAppointment.Backend.Util;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Accounts;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace MicroServiceAppointment.Backend.Service
 {
@@ -26,11 +29,15 @@ namespace MicroServiceAppointment.Backend.Service
         private AppointmentDto appointmentDTO = new AppointmentDto();
         private TimeIntervalDTO timeIntervalDTO = new TimeIntervalDTO();
 
+        static readonly HttpClient client = new HttpClient();
+
+
         private AppointmentWithRecommendationDTO appointmentWithRecommendationDTO =
             new AppointmentWithRecommendationDTO();
 
         private DateFromStringConverter dateTimeDTO = new DateFromStringConverter();
 
+       
         public AppointmentService(ISpecializationRepository specializationRepository,
             IAppointmentRepository appointmentRepository, IPhysicianRepository physicianRepository,
             IPatientRepository patientRepository, IAddressRepository addressRepository)
@@ -200,13 +207,13 @@ namespace MicroServiceAppointment.Backend.Service
         ///</returns>
         public List<AppointmentDto> GetAllAppointmentsByPatientId(string patientId)
         {
-            // List<Appointment> appointments = _appointmentRepository.GetByPatientId(patientId);
-            // foreach (Appointment a in appointments)
-            // {
-            //     a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
-            // }
-            //return appointmentDTO.ConvertListToAppointmentDTO(appointments);
-            throw new NotImplementedException();
+            
+            List<Appointment> appointments = _appointmentRepository.GetByPatientId(patientId);
+            foreach (Appointment a in appointments)
+            {
+                //a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
+            }
+            return appointmentDTO.ConvertListToAppointmentDTO(appointments);
         }
 
         /// <summary>
@@ -217,13 +224,12 @@ namespace MicroServiceAppointment.Backend.Service
         ///</returns>
         public List<AppointmentDto> GetAllAppointments()
         {
-            //List<Appointment> appointments = _appointmentRepository.GetAll();
-            //foreach (Appointment a in appointments)
-            //{
-            //    a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
-            //}
-            //return appointmentDTO.ConvertListToAppointmentDTO(appointments);
-            throw new NotImplementedException();
+            List<Appointment> appointments = _appointmentRepository.GetAll();
+            foreach (Appointment a in appointments)
+            {
+                a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
+            }
+            return appointmentDTO.ConvertListToAppointmentDTO(appointments);
         }
 
         /// <summary>
@@ -235,23 +241,19 @@ namespace MicroServiceAppointment.Backend.Service
         ///</returns>
         internal List<AppointmentDto> GetAllAppointmentsByPatientIdActive(string patientId)
         {
-            //List<Appointment> allAppointments = _appointmentRepository.GetByPatientIdActive(patientId);
-            //DateTime dateNow = DateTime.Now;
-            //List<Appointment> appotintmentsInFuture = new List<Appointment>();
-            //foreach (Appointment appointment in allAppointments)
-            //{
-            //    if (appointment.Date > dateNow)
-            //    {
-            //        appotintmentsInFuture.Add(appointment);
-            //    }
-            //}
-            //foreach (Appointment a in appotintmentsInFuture)
-            //{
-            //    a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
-            //}
-            //return appointmentDTO.ConvertListToAppointmentDTO(appotintmentsInFuture);
-            throw new NotImplementedException();
-
+            List<Appointment> allAppointments = _appointmentRepository.GetByPatientIdActive(patientId);
+            DateTime dateNow = DateTime.Now;
+            List<Appointment> appotintmentsInFuture = new List<Appointment>();
+            foreach (Appointment appointment in allAppointments)
+            {
+                if (appointment.Date > dateNow)
+                    appotintmentsInFuture.Add(appointment);
+            }
+            foreach (Appointment a in appotintmentsInFuture)
+            {
+                a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
+            }
+            return appointmentDTO.ConvertListToAppointmentDTO(appotintmentsInFuture);
         }
 
         /// <summary>
@@ -263,13 +265,10 @@ namespace MicroServiceAppointment.Backend.Service
         ///</returns>
         internal List<AppointmentDto> GetAllAppointmentsByPatientIdCanceled(string patientId)
         {
-            //List<Appointment> appointments = _appointmentRepository.GetByPatientIdCanceled(patientId);
-            //foreach (Appointment a in appointments)
-            //{
-            //    a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
-            //}
-            //return appointmentDTO.ConvertListToAppointmentDTO(appointments);
-            throw new NotImplementedException();
+            List<Appointment> appointments = _appointmentRepository.GetByPatientIdCanceled(patientId);
+            foreach (Appointment a in appointments)
+                a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
+            return appointmentDTO.ConvertListToAppointmentDTO(appointments);
         }
 
         /// <summary>
@@ -281,23 +280,22 @@ namespace MicroServiceAppointment.Backend.Service
         ///</returns>
         public List<AppointmentDto> GetAllAppointmentsByPatientIdPast(string patientId)
         {
-            //List<Appointment> allAppointments = _appointmentRepository.GetByPatientId(patientId);
-            //DateTime dateNow = DateTime.Now;
-            //List<Appointment> appointments = new List<Appointment>();
-            //foreach (Appointment appointment in allAppointments)
-            //{
-            //    if (appointment.Date < dateNow)
-            //    {
-            //        appointments.Add(appointment);
-            //    }
-            //}
-            //foreach (Appointment a in appointments)
-            //{
-            //    a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
-            //}
+            List<Appointment> allAppointments = _appointmentRepository.GetByPatientId(patientId);
+            DateTime dateNow = DateTime.Now;
+            List<Appointment> appointments = new List<Appointment>();
+            foreach (Appointment appointment in allAppointments)
+            {
+                if (appointment.Date < dateNow)
+                {
+                    appointments.Add(appointment);
+                }
+            }
+            foreach (Appointment a in appointments)
+            {
+                a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
+            }
 
-            //return appointmentDTO.ConvertListToAppointmentDTO(appointments);
-            throw new NotImplementedException();
+            return appointmentDTO.ConvertListToAppointmentDTO(appointments);
         }
 
         /// <summary>
@@ -312,18 +310,17 @@ namespace MicroServiceAppointment.Backend.Service
         internal bool isSurveyDoneByPatientIdAppointmentDatePhysicianName(string patientId, string appointmentDate,
             string physicianName)
         {
-            //List<Physician> physitianResult = _physicianRepository.GetByName(physicianName);
-            //List<String> physicianId = new List<string>();
-            //foreach (Physician physician in physitianResult)
-            //{
-            //    physicianId.Add(physician.Id);
-            //}
+            List<Physician> physitianResult = _physicianRepository.GetByName(physicianName);
+            List<String> physicianId = new List<string>();
+            foreach (Physician physician in physitianResult)
+            {
+                physicianId.Add(physician.Id);
+            }
 
-            //throw new NotImplementedException();
-            //// TODO: move this to some service
-            //// return appointmentRepository.IsSurveyDoneByPatientIdAppointmentDatePhysicianName(patientId, appointmentDate,
-            ////     physitianResult[0].Id);
             throw new NotImplementedException();
+            // TODO: move this to some service
+            // return appointmentRepository.IsSurveyDoneByPatientIdAppointmentDatePhysicianName(patientId, appointmentDate,
+            //     physitianResult[0].Id);
         }
 
         /// <summary>
