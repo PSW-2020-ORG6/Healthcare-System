@@ -97,7 +97,6 @@
 		},
 		GetUserType: function () {
 			axios.get('/login/GetUserType', {
-				params: { token: localStorage.getItem('token') },
 				headers: {
 					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
 				}
@@ -130,8 +129,8 @@
 					localStorage.setItem('isLogged', true);
 					this.GetUserType()
 					axios
-						.get('/login/GetUserId', {
-							params: { token: localStorage.getItem('token') },
+						.get('/login/GetUserId',
+							{
 							headers: {
 								'Authorization': 'Bearer' + " " + localStorage.getItem('token')
 							}

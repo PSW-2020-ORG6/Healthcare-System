@@ -31,30 +31,32 @@ namespace MicroServiceAppointment.Backend.Controllers
         {
             return _appointmentService.GetAllAppointmentsByPatientId(patientId);
         }
-
+        //radi
         [Authorize]
         [HttpGet("allAppointments")]
         public List<AppointmentDto> GetAllAppointments()
         {
+            
             return _appointmentService.GetAllAppointments();
         }
-
+        //radi
         [Authorize]
         [HttpGet("allAppointmentsByPatientIdActive/{patientId}")]
         public List<AppointmentDto> GetAllAppointmentsByPatientIdActive(String patientId)
         {
+            
             return _appointmentService.GetAllAppointmentsByPatientIdActive(patientId);
         }
-
+        //radi
         [Authorize]
         [HttpGet("allAppointmentsByPatientIdCanceled/{patientId}")]
         public List<AppointmentDto> GetAllAppointmentsByPatientIdCanceled(String patientId)
         {
             return _appointmentService.GetAllAppointmentsByPatientIdCanceled(patientId);
         }
-
+        //radi
         [Authorize]
-        [HttpGet("appointments")]
+        [HttpGet("avaliableTimeIntervals/{physicianId}/{specializationName}/{date}")]
         public List<TimeIntervalDTO> GetAllAvailableAppointments(string physicianId, string specializationName,
             string date)
         {
@@ -64,73 +66,83 @@ namespace MicroServiceAppointment.Backend.Controllers
                 return null;
         }
 
-        //[Authorize]
-        //[HttpPost("makeAppointment/{physicianId}/{timeIntervalStart}/{date}")]
-        //public IActionResult MakeAppointment(string physicianId, DateTime timeIntervalStart, string date)
-        //{
-        //    if (physicianId != null && timeIntervalStart != null && _appointmentDto.IsDataValid(date))
-        //    {
-        //        if (_appointmentService.AddAppointment(new Appointment(physicianId, date, timeIntervalStart)))
-        //            return Ok();
-        //        else
-        //            return BadRequest();
-        //    }
-        //    else
-        //        return BadRequest();
-        //}
+        [Authorize]
+        [HttpPost("makeAppointment}")]
+        public IActionResult MakeAppointment(AppointmentSchedulingDTO appointmentSchedulingDTO )
+        {/*
+            if (appointmentSchedulingDTO!= null && appointmentSchedulingDTO.IsDataValid(appointmentSchedulingDTO.Date))
+            {
+                if (_appointmentService.AddAppointment(new Appointment(physicianId, date, timeIntervalStart)))
+                    return Ok();
+                else
+                    return BadRequest();
+            }
+            else
+                return BadRequest();
+            */
+            throw new NotImplementedException();
+        }
 
+        //radi
         [Authorize]
         [HttpGet("allAppointmentsByPatientIdPast/{patientId}")]
         public List<AppointmentDto> GellAllAppointmentsByPatientIdPast(String patientId)
         {
+            
             return _appointmentService.GetAllAppointmentsByPatientIdPast(patientId);
         }
-
+        //radi
         [Authorize]
-        [HttpGet("allAppointmentsWithSurvey")]
-        public List<AppointmentDto> GetAllAppointmentsWithDoneSurvey()
+        [HttpGet("allAppointmentsWithSurvey/{patientId}")]
+        public List<AppointmentDto> GetAllAppointmentsWithDoneSurvey(String patientId)
         {
-            AppointmentDto appointment = new AppointmentDto();
-            return appointment.ConvertListToAppointmentDTO(_appointmentService.GetAllAppointmentsWithDoneSurvey());
+            HttpRequest.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            return _appointmentService.GetAllAppointmentsWithDoneSurvey(patientId);
         }
-
+        //radi
         [Authorize]
-        [HttpGet("allAppointmentsWithoutSurvey")]
-        public List<AppointmentDto> GetAllAppointmentsWithoutSurvey()
+        [HttpGet("allAppointmentsWithoutSurvey/{patientId}")]
+        public List<AppointmentDto> GetAllAppointmentsWithoutSurvey(String patientId)
         {
-            return _appointmentService.GetAllAppointmentsWithoutDoneSurvey();
+            HttpRequest.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            return _appointmentService.GetAllAppointmentsWithoutDoneSurvey(patientId);
         }
-
+        //radi
         [Authorize]
         [HttpGet("isSurveyDoneByPatientIdAppointmentDatePhysicianName/{patientId}/{appointmentDate}/{physicianName}")]
-        public bool IsSurveyDoneByPatientIdAppointmentDatePhysicianName([FromQuery] String patientId,
-            [FromQuery] String appointmentDate, [FromQuery] String physicianName)
+        public bool IsSurveyDoneByPatientIdAppointmentDatePhysicianName( String patientId,
+            String appointmentDate, String physicianName)
         {
-            return _appointmentService.isSurveyDoneByPatientIdAppointmentDatePhysicianName(patientId, appointmentDate,
-                physicianName);
+            HttpRequest.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            return _appointmentService.isSurveyDoneByPatientIdAppointmentDatePhysicianName(patientId,appointmentDate,physicianName);
         }
-
+        //testirati na frontu
         [Authorize]
-        [HttpPut("setSurveyDoneOnAppointment")]
-        public void SetSurveyDoneOnAppointment(AppointmentDto appointmentDto)
+        [HttpPut("update")]
+        public void SetSurveyDoneOnAppointment(Appointment appointmentDto)
         {
-            _appointmentService.setSurveyDoneOnAppointment(appointmentDto);
+            _appointmentService.Update(appointmentDto);
         }
-
+        
         [Authorize]
-        [HttpGet("appointmentsWithReccomendation")]
+        [HttpGet("appointmentsWithReccomendation/{physicianId}/{specializationName}/{dates}")]
         public List<AppointmentWithRecommendationDTO> GetAllAvailableAppointmentsWithRecommendation(string physicianId,
             string specializationName, string dates)
         {
+            HttpRequest.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             if (_dateFromStringConverter.IsPreferredTimeIntervalValid(dates))
                 return _appointmentService.AppointmentRecomendation(physicianId, specializationName,
                     _dateFromStringConverter.DateGeneration(dates));
             else
                 return null;
         }
-
+        
         [Authorize]
-        [HttpGet("appointmentsWithPhysicianPriority")]
+        [HttpGet("appointmentsWithPhysicianPriority/{physicianId}/{specializationName}/{dates}")]
         public List<AppointmentWithRecommendationDTO> GetAllAvailableAppointmentsWithPhysicianPriority(
             string physicianId, string specializationName, string dates)
         {

@@ -23,20 +23,20 @@ namespace MicroServiceAccount.Backend.Controllers
         }
         
         [HttpGet("GetUserType")]
-        public async Task<string> GetUserType(string token)
+        public async Task<string> GetUserType()
         {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            HttpResponseMessage response = await client.GetAsync("http://localhost:57053/loginMicroservice/GetUserType");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                    , Request.Headers["Authorization"].ToString().Split(" ")[1]); HttpResponseMessage response = await client.GetAsync("http://localhost:57053/loginMicroservice/GetUserType");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
 
         }
 
         [HttpGet("GetUserId")]
-        public async Task<string> GetUserId(string token)
+        public async Task<string> GetUserId()
         {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            HttpResponseMessage response = await client.GetAsync("http://localhost:57053/loginMicroservice/GetUserId");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                    , Request.Headers["Authorization"].ToString().Split(" ")[1]); HttpResponseMessage response = await client.GetAsync("http://localhost:57053/loginMicroservice/GetUserId");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }

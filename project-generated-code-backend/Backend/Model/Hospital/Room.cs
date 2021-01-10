@@ -310,6 +310,10 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         {
             return requiredEquipment.All(e => Equipment.Contains(e));
         }
+        public Room(RoomDTO room)
+        {
+            Name = room.Name;
+        }
 
         public void AddEquipment(Equipment newEquipment)
         {
@@ -359,5 +363,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             if (door > 4) throw new Exception("There doesn't exist this type of door.");
             else if (door < 0) throw new Exception("There doesn't exist this type of door.");
         }
+
+       
     }
 }

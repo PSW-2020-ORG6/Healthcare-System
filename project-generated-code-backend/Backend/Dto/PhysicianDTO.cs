@@ -25,6 +25,7 @@ namespace MicroServiceAccount.Backend.Dto
             Specializations = specializationDTO.ConvertListToSpecializationDTO(physician.Specialization);
         }
 
+
         public List<PhysicianDTO> ConvertListToPhysicianDTO(List<Physician> physicians)
         {
             List<PhysicianDTO> physiciansDTO = new List<PhysicianDTO>();

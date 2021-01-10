@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using HealthClinicBackend.Backend.Model.Util;
+using MicroServiceAccount.Backend.Dto;
 using Newtonsoft.Json;
 
 namespace HealthClinicBackend.Backend.Model.Accounts
@@ -59,7 +60,14 @@ namespace HealthClinicBackend.Backend.Model.Accounts
             this.Specialization = new List<Specialization>();
             Specialization.Add(specialization);
         }
-
+        //public Physician(PhysicianDTO physician)
+        //{
+        //    Specialization specialization = new Specialization();
+        //    Id = physician.Id;
+        //    Name = physician.FullName.Split(" ")[0];
+        //    Surname = physician.FullName.Split(" ")[1];
+        //    Specializations = physician.Specializations;
+        //}
         public void AddSpecialization(Specialization newSpecialization)
         {
             if (newSpecialization == null)

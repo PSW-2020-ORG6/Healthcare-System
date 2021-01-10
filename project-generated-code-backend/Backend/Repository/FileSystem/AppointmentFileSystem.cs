@@ -117,5 +117,20 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
         {
             return JsonConvert.DeserializeObject<Appointment>(objectStringFormat);
         }
+
+        public List<Appointment> GetByPatientIdWithoutSurvey(string patientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Appointment> GetByPatientIdWithSurvey(string patientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Appointment> IsSurveyDoneByPatientIdAppointmentDatePhysicianNameAppointments(string patientId, string appointmentDate, string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

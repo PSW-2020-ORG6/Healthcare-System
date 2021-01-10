@@ -11,6 +11,6 @@ namespace MicroServiceAppointment.Backend.Service
     {
         public List<TimeIntervalDTO> GetAllAvailableAppointments(string physicianId, string specializationName, string date);
         public List<AppointmentWithRecommendationDTO> AppointmentRecomendationWithPhysicianPriority(string physicianId, string specializationName, string[] dates);
-        public List<AppointmentWithRecommendationDTO> AppointmentRecomendation(string physicianId, string specializationName, string[] dates);
+     //   public List<AppointmentWithRecommendationDTO> AppointmentRecomendation(string physicianId, string specializationName, string[] dates);
     }
 }
