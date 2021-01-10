@@ -5,6 +5,10 @@ using Microsoft.AspNetCore.Authorization;
 using HealthClinicBackend.Backend.Dto;
 using MicroServiceAppointment.Backend.Dto;
 using MicroServiceAccount.Backend.Dto;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
 
 namespace WebApplication.Backend.Controllers
     {
@@ -12,11 +16,16 @@ namespace WebApplication.Backend.Controllers
     [ApiController]
     public class AppointmentController : ControllerBase
     {
+        static readonly HttpClient client = new HttpClient();
 
         [HttpGet("allAppointmentsByPatientId")]
-        public List<AppointmentDto> GetAllAppointmentsByPatientId(String patientId)
+        public async Task<List<AppointmentDto>>  GetAllAppointmentsByPatientId(String patientId)
         {
-            throw new NotImplementedException();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                    , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentMicroservice/allAppointmentsByPatientId/" + patientId);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<List<AppointmentDto>>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpGet("physicians")]
