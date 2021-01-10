@@ -78,20 +78,20 @@ namespace MicroServiceAppointment.Backend.Controllers
                 return null;
         }
 
-        [Authorize]
-        [HttpPost("makeAppointment/{physicianId}/{timeIntervalStart}/{date}")]
-        public IActionResult MakeAppointment(string physicianId, DateTime timeIntervalStart, string date)
-        {
-            if (physicianId != null && timeIntervalStart != null && _appointmentDto.IsDataValid(date))
-            {
-                if (_appointmentService.AddAppointment(new Appointment(physicianId, date, timeIntervalStart)))
-                    return Ok();
-                else
-                    return BadRequest();
-            }
-            else
-                return BadRequest();
-        }
+        //[Authorize]
+        //[HttpPost("makeAppointment/{physicianId}/{timeIntervalStart}/{date}")]
+        //public IActionResult MakeAppointment(string physicianId, DateTime timeIntervalStart, string date)
+        //{
+        //    if (physicianId != null && timeIntervalStart != null && _appointmentDto.IsDataValid(date))
+        //    {
+        //        if (_appointmentService.AddAppointment(new Appointment(physicianId, date, timeIntervalStart)))
+        //            return Ok();
+        //        else
+        //            return BadRequest();
+        //    }
+        //    else
+        //        return BadRequest();
+        //}
 
         [Authorize]
         [HttpGet("allAppointmentsByPatientIdPast")]
