@@ -129,7 +129,14 @@ namespace IntegrationAdapters.Services
                 }
             }
         }
-        
+        public TenderOffer GetOfferById(string id)
+        {
+            return tenderRepository.GetOfferById(id);
+        }
+        public bool IsOfferExisting(TenderOffer tenderOffer)
+        {
+            return tenderRepository.IsOfferExisting(tenderOffer);
+        }
 
     }
 }
