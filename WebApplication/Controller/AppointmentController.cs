@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace WebApplication.Backend.Controllers
     {
@@ -41,21 +42,33 @@ namespace WebApplication.Backend.Controllers
         }
 
         [HttpGet("allAppointments")]
-        public List<AppointmentDto> GetAllAppointments()
+        public async Task<List<AppointmentDto>> GetAllAppointments()
         {
-            throw new NotImplementedException();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                     , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentMicroservice/allAppointments");
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<List<AppointmentDto>>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpGet("allAppointmentsByPatientIdActive")]
-        public List<AppointmentDto> GetAllAppointmentsByPatientIdActive(String patientId)
+        public async Task<List<AppointmentDto>> GetAllAppointmentsByPatientIdActive(String patientId)
         {
-            throw new NotImplementedException();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentMicroservice/allAppointmentsByPatientIdActive/"+patientId);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<List<AppointmentDto>>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpGet("allAppointmentsByPatientIdCanceled")]
-        public List<AppointmentDto> GetAllAppointmentsByPatientIdCanceled(String patientId)
+        public async Task<List<AppointmentDto>> GetAllAppointmentsByPatientIdCanceled(String patientId)
         {
-            throw new NotImplementedException();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentMicroservice/allAppointmentsByPatientIdCanceled/" + patientId);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<List<AppointmentDto>>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpGet("appointments")]
@@ -73,35 +86,55 @@ namespace WebApplication.Backend.Controllers
         }
 
         [HttpGet("allAppointmentsByPatientIdPast")]
-        public List<AppointmentDto> GellAllAppointmentsByPatientIdPast(String patientId)
+        public async Task<List<AppointmentDto>> GellAllAppointmentsByPatientIdPast(String patientId)
         {
-            throw new NotImplementedException();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                                  , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentMicroservice/allAppointmentsByPatientIdPast/" + patientId);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<List<AppointmentDto>>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpGet("allAppointmentsWithSurvey")]
-        public List<AppointmentDto> GetAllAppointmentsWithDoneSurvey()
+        public async Task<List<AppointmentDto>> GetAllAppointmentsWithDoneSurvey()
         {
-            throw new NotImplementedException();
-
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                                   , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentMicroservice/allAppointmentsWithSurvey");
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<List<AppointmentDto>>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpGet("allAppointmentsWithoutSurvey")]
-        public List<AppointmentDto> GetAllAppointmentsWithoutSurvey()
+        public async Task<List<AppointmentDto>> GetAllAppointmentsWithoutSurvey()
         {
-            throw new NotImplementedException();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                                   , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentMicroservice/allAppointmentsWithoutSurvey");
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<List<AppointmentDto>>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpGet("isSurveyDoneByPatientIdAppointmentDatePhysicianName")]
-        public bool IsSurveyDoneByPatientIdAppointmentDatePhysicianName([FromQuery] String patientId,
+        public async Task<bool> IsSurveyDoneByPatientIdAppointmentDatePhysicianName([FromQuery] String patientId,
             [FromQuery] String appointmentDate, [FromQuery] String physicianName)
         {
-            throw new NotImplementedException();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                                   , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentMicroservice/isSurveyDoneByPatientIdAppointmentDatePhysicianName/" + patientId+"/"+appointmentDate+"/"+physicianName);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
         }
-
+        //nije teestirano
         [HttpPut("setSurveyDoneOnAppointment")]
-        public void SetSurveyDoneOnAppointment(AppointmentDto appointmentDto)
+        public async void SetSurveyDoneOnAppointment(AppointmentDto appointmentDto)
         {
-            throw new NotImplementedException();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                                  , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            var content = new StringContent(JsonConvert.SerializeObject(appointmentDto, Formatting.Indented), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PutAsync("http://localhost:57056/appointmentMicroservice/setSurveyDoneOnAppointment", content);
+            response.EnsureSuccessStatusCode();
         }
 
         [HttpGet("appointmentsWithReccomendation")]

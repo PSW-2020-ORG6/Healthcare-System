@@ -1,67 +1,81 @@
-﻿//using Microsoft.AspNetCore.Mvc;
-//using System;
-//using System.Collections.Generic;
-//using Microsoft.AspNetCore.Authorization;
-//using MicroServiceAppointment.Backend.Util;
-//using MicroServiceAppointment.Backend.Service;
-//using MicroServiceAppointment.Backend.Model.Survey;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using HealthClinicBackend.Backend.Model.Survey;
+using System.Net.Http.Headers;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Text;
+using MicroServiceAppointment.Backend.Util;
 
-//namespace MicroServiceAppointment.Backend.Controllers
-//{
-//    [Route("survey")]
-//    [ApiController]
-//    public class SurveyController : ControllerBase
-//    {
-//        private readonly SurveyService _surveyService;
+namespace MicroServiceAppointment.Backend.Controllers
+{
+    [Route("survey")]
+    [ApiController]
+    public class SurveyController : ControllerBase
+    {
+        static readonly HttpClient client = new HttpClient();
 
-//        public SurveyController(SurveyService surveyService)
-//        {
-//            _surveyService = surveyService;
-//        }
-//        [Authorize]
-//        [HttpPost("add")]
-//        public IActionResult AddNewSurvey(Survey surveyText)
-//        {
-//            _surveyService.AddNewSurvey(surveyText);
-//            return Ok();
-//        }
+        [HttpPost("add")]
+        public async Task<IActionResult> AddNewSurvey(Survey surveyText)
+        {
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                           , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            var parameter = new StringContent(JsonConvert.SerializeObject(surveyText, Formatting.Indented), Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync("http://localhost:57057/survey/add/", parameter);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<IActionResult>(await response.Content.ReadAsStringAsync());
+        }
 
-//        [Authorize]
-//        [HttpGet("getDoctors")]
-//        public List<String> GetAllDoctorsFromReportsByPatientId(String patientId)
-//        {
-//            return _surveyService.GetAllDoctorsFromReportsByPatientId(patientId);
-//        }
-//        [Authorize]
-//        [HttpGet("getDoctorsFromSurvey")]
-//        public List<String> GetAllDoctorsFromReportsByPatientIdForSurvey(String patientId)
-//        {
-//            return _surveyService.GetAllDoctorsFromReportsByPatientIdFromSurvey(patientId);
-//        }
+        [Authorize]
+        [HttpGet("getDoctors")]
+        public List<String> GetAllDoctorsFromReportsByPatientId(String patientId)
+        {
+            throw new NotImplementedException();
+        }
+        //[Authorize]
+        //[HttpGet("getDoctorsFromSurvey")]
+        //public List<String> GetAllDoctorsFromReportsByPatientIdForSurvey(String patientId)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-//        [Authorize]
-//        [HttpGet("getDoctorsForSurveyList")]
-//        public List<String> GetAllDoctorsFromReportsByPatientIdForSurveyList(String patientId)
-//        {
-//            return _surveyService.GetAllDoctorsFromReportsByPatientIdForSurveyList(patientId);
-//        }
-//        [Authorize]
-//        [HttpGet("getStatistiEachQuestion")]
-//        public List<StatisticAuxilaryClass> GetStatisticsEachQuestion()
-//        {
-//            return _surveyService.GetStatisticsEachQuestion();
-//        }
-//        [Authorize]
-//        [HttpGet("getStatistiEachTopic")]
-//        public List<StatisticAuxilaryClass> GetStatisticsEachTopic()
-//        {
-//            return _surveyService.GetStatisticsEachTopic();
-//        }
-//        [Authorize]
-//        [HttpGet("getStatisticForDoctor")]
-//        public List<StatisticAuxilaryClass> GetStatisticsForDoctor(string id)
-//        {
-//            return _surveyService.GetStatisticsForDoctor(id);
-//        }
-//    }
-//}
+        //[Authorize]
+        //[HttpGet("getDoctorsForSurveyList")]
+        //public List<String> GetAllDoctorsFromReportsByPatientIdForSurveyList(String patientId)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        [HttpGet("getStatistiEachQuestion")]
+        public async Task<List<StatisticAuxilaryClass>> GetStatisticsEachQuestion()
+        {
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                        , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/survey/getStatistiEachQuestion");
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<List<StatisticAuxilaryClass>>(await response.Content.ReadAsStringAsync());
+        }
+        [HttpGet("getStatistiEachTopic")]
+        public async Task<List<StatisticAuxilaryClass>> GetStatisticsEachTopic()
+        {
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                        , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/survey/getStatistiEachTopic");
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<List<StatisticAuxilaryClass>>(await response.Content.ReadAsStringAsync());
+        }
+        [HttpGet("getStatisticForDoctor")]
+        public async Task<List<StatisticAuxilaryClass>> GetStatisticsForDoctor(string id)
+        {
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                        , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/survey/getStatisticForDoctor/" + id);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<List<StatisticAuxilaryClass>>(await response.Content.ReadAsStringAsync());
+
+        }
+    }
+}
