@@ -301,6 +301,7 @@ const router = new VueRouter({
 				else {
 					next(false);
 				}
+			}
 		},
 		{
 			path: '/',
@@ -316,5 +317,6 @@ var app = new Vue({
 	,
 	el: '#routerMode'
 });
+
 
 
