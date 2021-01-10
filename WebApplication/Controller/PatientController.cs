@@ -24,8 +24,7 @@ namespace MicroServiceAccount.Backend.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             HttpResponseMessage response = await client.GetAsync("http://localhost:57053/patientMicroservice/allPatients");
             response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<List<Patient>>(result);
+            return JsonConvert.DeserializeObject<List<Patient>>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpGet("getPatientById")]
@@ -34,8 +33,7 @@ namespace MicroServiceAccount.Backend.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             HttpResponseMessage response = await client.GetAsync("http://localhost:57053/patientMicroservice/getPatientById/" + patientId);
             response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<PatientDto>(result);
+            return JsonConvert.DeserializeObject<PatientDto>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpGet("getMaliciousPatients")]
@@ -44,8 +42,7 @@ namespace MicroServiceAccount.Backend.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             HttpResponseMessage response = await client.GetAsync("http://localhost:57053/patientMicroservice/getMaliciousPatients");
             response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<List<Patient>>(result);
+            return JsonConvert.DeserializeObject<List<Patient>>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpPut("blockMaliciousPatient")]
@@ -55,8 +52,7 @@ namespace MicroServiceAccount.Backend.Controllers
             var content = new StringContent(JsonConvert.SerializeObject(patient, Formatting.Indented),Encoding.UTF8,"application/json");
             HttpResponseMessage response = await client.PutAsync("http://localhost:57053/patientMicroservice/blockMaliciousPatient" ,content);
             response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<bool>(result);
+            return JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
         }
 
         [HttpGet("getActionsAndBenefits")]
@@ -65,8 +61,7 @@ namespace MicroServiceAccount.Backend.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             HttpResponseMessage response = await client.GetAsync("http://localhost:57053/patientMicroservice/getActionsAndBenefits");
             response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<List<ActionAndBenefitMessage>>(result);
+            return JsonConvert.DeserializeObject<List<ActionAndBenefitMessage>>(await response.Content.ReadAsStringAsync());
         }
     }
 }

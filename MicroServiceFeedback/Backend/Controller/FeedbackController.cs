@@ -10,7 +10,7 @@ namespace WebApplication.Backend.Controllers
     /// <summary>
     /// This class does connection with service
     /// </summary>
-    [Route("feedback")]
+    [Route("feedbackMicroservice")]
     [ApiController]
     public class FeedbackController : ControllerBase
     {
@@ -21,7 +21,6 @@ namespace WebApplication.Backend.Controllers
             _feedbackService = feedbackService;
         }
 
-        ///Tanja Drcelic RA124/2017
         /// <summary>
         ///calls method for get all feedbacks from feedback table
         ///</summary>
@@ -36,7 +35,6 @@ namespace WebApplication.Backend.Controllers
             return _feedbackService.GetAllFeedbacks();
         }
 
-        ///Repovic Aleksa RA-52-2017
         /// <summary>
         ///calls method for adding new feedback in feedback table
         ///</summary>
@@ -53,11 +51,9 @@ namespace WebApplication.Backend.Controllers
                 _feedbackService.AddNewFeedback(new Feedback(feedbackDTO));
                 return Ok();
             }
-
             return BadRequest();
         }
 
-        ///Aleksandra Milijevic RA 22/2017
         /// <summary>
         ///calls method for get approved feedbacks from feedback table
         ///</summary>
@@ -71,7 +67,6 @@ namespace WebApplication.Backend.Controllers
             return _feedbackService.GetApprovedFeedbacks();
         }
 
-        ///Tanja Drcelic RA124/2017
         /// <summary>
         ///calls method for get disapproved feedbacks from feedback table
         ///</summary>
@@ -85,7 +80,6 @@ namespace WebApplication.Backend.Controllers
             return _feedbackService.GetDisapprovedFeedbacks();
         }
 
-        ///Marija Vucetic 
         /// <summary>
         ///calls method for set na value of attribute Approved
         ///</summary>
@@ -102,7 +96,6 @@ namespace WebApplication.Backend.Controllers
                 _feedbackService.ApproveFeedback(feedbackDTO);
                 return Ok();
             }
-
             return BadRequest();
         }
     }

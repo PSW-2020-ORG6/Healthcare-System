@@ -54,8 +54,7 @@ namespace MicroServiceAccount.Backend.Service
         ///</param>>
         private string IdEncryption(string patientId)
         {
-            long id = long.Parse(patientId) - 6789 + 23 * 33;
-            return id.ToString();
+            return (long.Parse(patientId) - 6789 + 23 * 33).ToString();          
         }
     }
 }
