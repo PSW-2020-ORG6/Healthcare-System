@@ -1,8 +1,11 @@
-﻿using HealthClinicBackend.Backend.Model.Util;
+﻿using MicroServiceAccount.Backend.Model.Util;
+using MicroServiceAppointment.Backend.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace MicroServiceAccount.Backend.Dto
+namespace MicroServiceAppointment.Backend.Dto
 {
     public class TimeIntervalDTO
     {

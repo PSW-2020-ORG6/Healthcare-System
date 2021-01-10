@@ -116,7 +116,7 @@
 				localStorage.setItem('isAdmin', true)
 				localStorage.setItem('isPatient', false)
 
-				this.$router.push('admin');
+				this.$router.push('feedbackAdmin');
 			}
 		},
 		Login: function () {
