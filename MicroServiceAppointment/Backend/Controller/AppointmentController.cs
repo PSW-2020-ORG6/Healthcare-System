@@ -54,14 +54,14 @@ namespace MicroServiceAppointment.Backend.Controllers
         }
 
         [Authorize]
-        [HttpGet("allAppointmentsByPatientIdActive")]
+        [HttpGet("allAppointmentsByPatientIdActive/{patientId}")]
         public List<AppointmentDto> GetAllAppointmentsByPatientIdActive(String patientId)
         {
             return _appointmentService.GetAllAppointmentsByPatientIdActive(patientId);
         }
 
         [Authorize]
-        [HttpGet("allAppointmentsByPatientIdCanceled")]
+        [HttpGet("allAppointmentsByPatientIdCanceled/{patientId}")]
         public List<AppointmentDto> GetAllAppointmentsByPatientIdCanceled(String patientId)
         {
             return _appointmentService.GetAllAppointmentsByPatientIdCanceled(patientId);
@@ -94,7 +94,7 @@ namespace MicroServiceAppointment.Backend.Controllers
         //}
 
         [Authorize]
-        [HttpGet("allAppointmentsByPatientIdPast")]
+        [HttpGet("allAppointmentsByPatientIdPast/{patientId}")]
         public List<AppointmentDto> GellAllAppointmentsByPatientIdPast(String patientId)
         {
             return _appointmentService.GetAllAppointmentsByPatientIdPast(patientId);
@@ -116,7 +116,7 @@ namespace MicroServiceAppointment.Backend.Controllers
         }
 
         [Authorize]
-        [HttpGet("isSurveyDoneByPatientIdAppointmentDatePhysicianName")]
+        [HttpGet("isSurveyDoneByPatientIdAppointmentDatePhysicianName/{patientId}/{appointmentDate}/{physicianName}")]
         public bool IsSurveyDoneByPatientIdAppointmentDatePhysicianName([FromQuery] String patientId,
             [FromQuery] String appointmentDate, [FromQuery] String physicianName)
         {

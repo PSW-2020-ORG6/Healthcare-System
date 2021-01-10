@@ -319,8 +319,8 @@ namespace MicroServiceAppointment.Backend.Service
 
             throw new NotImplementedException();
             // TODO: move this to some service
-            // return appointmentRepository.IsSurveyDoneByPatientIdAppointmentDatePhysicianName(patientId, appointmentDate,
-            //     physitianResult[0].Id);
+             //return appointmentRepository.IsSurveyDoneByPatientIdAppointmentDatePhysicianName(patientId, appointmentDate,
+               //  physitianResult[0].Id);
         }
 
         /// <summary>
@@ -357,8 +357,36 @@ namespace MicroServiceAppointment.Backend.Service
         ///</returns>
         internal List<AppointmentDto> GetAllAppointmentsWithoutDoneSurvey()
         {
-            //// TODO: implement logic in current model or create some query
+            ////// TODO: implement logic in current model or create some query
             //// List<Appointment> allAppointments = appointmentRepository.GetAllAppointmentsWithoutSurvey();
+            //List<AppointmentDto> allAppointments =GetAllAppointments();
+            //DateTime dateNow = DateTime.Now;
+            //List<AppointmentDto> appotintmentsInPastWitohutSurvey = new List<AppointmentDto>();
+            //foreach (AppointmentDto appointment in allAppointments)
+            //{
+            //    if (appointment.Date < dateNow)
+            //    {
+            //        appotintmentsInPastWitohutSurvey.Add(appointment);
+            //    }
+            //}
+            //foreach (AppointmentDto a in appotintmentsInPastWitohutSurvey)
+            //{
+            //   // a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
+            //}
+
+            //return appointmentDTO.ConvertListToAppointmentDTO((Appointment)appotintmentsInPastWitohutSurvey);
+            return null;
+        }
+
+        /// <summary>
+        ///method for getting all appointments with survey done
+        ///</summary>
+        ///<returns>
+        ///list of appointments
+        ///</returns>
+        public List<Appointment> GetAllAppointmentsWithDoneSurvey()
+        {
+            //// TODO: refactor
             //List<Appointment> allAppointments = new List<Appointment>();
             //DateTime dateNow = DateTime.Now;
             //List<Appointment> appotintmentsInPastWitohutSurvey = new List<Appointment>();
@@ -375,18 +403,6 @@ namespace MicroServiceAppointment.Backend.Service
             //}
 
             //return appointmentDTO.ConvertListToAppointmentDTO(appotintmentsInPastWitohutSurvey);
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        ///method for getting all appointments with survey done
-        ///</summary>
-        ///<returns>
-        ///list of appointments
-        ///</returns>
-        public List<Appointment> GetAllAppointmentsWithDoneSurvey()
-        {
-            // TODO: refactor
             // return appointmentRepository.GetAllAppointmentsWithSurvey();
             return new List<Appointment>();
         }

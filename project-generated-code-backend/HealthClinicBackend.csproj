@@ -32,7 +32,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Backend\Model\Accounts\" />
-	  <Folder Include="Backend\Model\Util\" />
 	</ItemGroup>
 
 </Project>
