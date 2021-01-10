@@ -5,6 +5,7 @@ using MicroServiceAccount.Backend.Service;
 using HealthClinicBackend.Backend.Model.PharmacySupport;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Dto;
+using MicroServiceAccount.Backend.Dto;
 
 namespace MicroServiceAccount.Backend.Controllers
 {
@@ -16,10 +17,12 @@ namespace MicroServiceAccount.Backend.Controllers
     public class PatientController : ControllerBase
     {
         private readonly PatientService _patientService;
+        private readonly PhysicianService _physicianService;
 
-        public PatientController(PatientService patientService)
+        public PatientController(PatientService patientService,PhysicianService physicianService)
         {
             _patientService = patientService;
+            _physicianService = physicianService;
         }
 
         /// <summary>

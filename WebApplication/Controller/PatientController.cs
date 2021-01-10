@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
+using MicroServiceAccount.Backend.Dto;
 
 namespace MicroServiceAccount.Backend.Controllers
 {

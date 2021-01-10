@@ -88,12 +88,14 @@ namespace MicroServiceAppointment
             services.AddScoped<AppointmentService, AppointmentService>();
             services.AddScoped<SurveyService, SurveyService>();
             services.AddScoped<UserService, UserService>();
+            services.AddScoped<PhysicianService, PhysicianService>();
 
 
             // Inject Controllers
             services.AddScoped<AppointmentController, AppointmentController>();
             services.AddScoped<SurveyController, SurveyController>();
             services.AddScoped<LoginController, LoginController>();
+            services.AddScoped<PhysicianController, PhysicianController>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
