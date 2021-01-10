@@ -11,7 +11,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrate
     public class SuggestedAppointmentSchedulingStrategy : SchedulingStrategy
     {
         private const int DISALLOW_SCHEDULING_HOURS = 24;
-        public AppointmentDto PrepareAppointment(AppointmentDto appointment)
+        public ADTO PrepareAppointment(ADTO appointment)
         {
             throw new NotImplementedException();
         }

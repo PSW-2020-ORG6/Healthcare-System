@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 //using HealthClinicBackend.Backend.Repository.Generic;
 using MicroServiceAppointment.Backend.Util;
-using MicroServiceAppointment.Backend.Model.Survey;
+using HealthClinicBackend.Backend.Model.Survey;
 
 namespace MicroServiceAppointment.Backend.Service
 {

@@ -1,4 +1,4 @@
-﻿using MicroServiceAppointment.Backend.Model.Hospital;
+﻿using HealthClinicBackend.Backend.Model.Hospital;
 using System;
 using System.Collections.Generic;
 using System.Linq;

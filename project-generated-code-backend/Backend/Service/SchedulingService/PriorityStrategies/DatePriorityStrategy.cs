@@ -14,18 +14,18 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.PriorityStrategi
     public class DatePriorityStrategy : PriorityStrategy
     {
 
-        public List<AppointmentDto> FindSuggestedAppointments(SuggestedAppointmentDto suggestedAppointmentDTO)
+        public List<ADTO> FindSuggestedAppointments(SuggestedAppointmentDto suggestedAppointmentDTO)
         {
             PhysicianFileSystem pfs = new PhysicianFileSystem();
             List<Physician> physitians = pfs.GetAll();
-            List<AppointmentDto> appointmentDTOs = new List<AppointmentDto>();
+            List<ADTO> appointmentDTOs = new List<ADTO>();
             foreach (Physician physitian in physitians)
             {
                 DateTime currentDate = suggestedAppointmentDTO.DateStart;
 
                 while (!currentDate.Equals(suggestedAppointmentDTO.DateEnd))
                 {
-                    AppointmentDto appointment = new AppointmentDto();
+                    ADTO appointment = new ADTO();
                     appointment.Date = currentDate;
                     appointment.Physician = physitian;
                     appointment.Patient = suggestedAppointmentDTO.Patient;

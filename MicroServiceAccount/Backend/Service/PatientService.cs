@@ -6,6 +6,7 @@ using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Repository.Generic;
 using System.Linq;
 using HealthClinicBackend.Backend.Dto;
+using MicroServiceAppointment.Backend.Dto;
 
 namespace MicroServiceAccount.Backend.Service
 {

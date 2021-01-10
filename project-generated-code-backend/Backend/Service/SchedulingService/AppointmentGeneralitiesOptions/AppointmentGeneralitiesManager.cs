@@ -6,12 +6,13 @@ using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
+using MicroServiceAppointment.Backend.Dto;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 {
     class AppointmentGeneralitiesManager
     {
-        private AppointmentDto _appointmentPreferences;
+        private ADTO _appointmentPreferences;
         private readonly IPhysicianRepository _physicianRepository;
         private readonly IRoomRepository _roomRepository;
         private readonly PhysicianAvailabilityService _physicianAvailabilityService;
@@ -30,10 +31,10 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
                 new RoomAvailabilityService(appointmentRepository, renovationRepository, bedReservationRepository);
         }
 
-        public List<AppointmentDto> GetAllAvailableAppointments(AppointmentDto appointmentPreferences)
+        public List<ADTO> GetAllAvailableAppointments(ADTO appointmentPreferences)
         {
             _appointmentPreferences = appointmentPreferences;
-            List<AppointmentDto> appointments = new List<AppointmentDto>();
+            List<ADTO> appointments = new List<ADTO>();
 
             List<TimeInterval> allTimeIntervals = GetAllTimeIntervals();
 
@@ -50,7 +51,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
                         {
                             if (_roomAvailabilityService.IsRoomAvailable(room, timeInterval))
                             {
-                                AppointmentDto appointmentDto = CreateAppointment(physician, room, timeInterval);
+                                ADTO appointmentDto = CreateAppointment(physician, room, timeInterval);
                                 appointments.Add(appointmentDto);
                             }
                         }
@@ -141,9 +142,9 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
             return null;
         }
 
-        private AppointmentDto CreateAppointment(Physician physician, Room room, TimeInterval timeInterval)
+        private ADTO CreateAppointment(Physician physician, Room room, TimeInterval timeInterval)
         {
-            AppointmentDto appointment = new AppointmentDto();
+            ADTO appointment = new ADTO();
             appointment.ProcedureType = _appointmentPreferences.ProcedureType;
             appointment.Patient = _appointmentPreferences.Patient;
             appointment.Time = timeInterval;

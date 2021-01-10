@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Text;
 using HealthClinicBackend.Backend.Model.PharmacySupport;
 using HealthClinicBackend.Backend.Repository.Generic;
-using WebApplication.Backend.Services;
 using Xunit;
+using MicroServiceAccount.Backend.Service;
 
 namespace WebApplicationTests
 {

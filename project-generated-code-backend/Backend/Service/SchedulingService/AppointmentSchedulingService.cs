@@ -53,9 +53,9 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             _physicianRepository = physicianRepository;
         }
 
-        public List<AppointmentDto> GetAvailableAppointments(AppointmentDto appointmentPreferences)
+        public List<ADTO> GetAvailableAppointments(ADTO appointmentPreferences)
         {
-            AppointmentDto preparedAppointmentPreferences =
+            ADTO preparedAppointmentPreferences =
                 SchedulingStrategyContext.PrepareAppointment(appointmentPreferences);
             return _appointmentGeneralitiesManager.GetAllAvailableAppointments(preparedAppointmentPreferences);
         }
@@ -171,24 +171,24 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
 
         public AppointmentDto FindNearestAppointment(AppointmentDto appointmentPreferences)
         {
-            AppointmentDto preparedAppointmentPreferences =
+            ADTO preparedAppointmentPreferences =
                 SchedulingStrategyContext.PrepareAppointment(appointmentPreferences);
             throw new NotImplementedException();
         }
 
-        public AppointmentDto GetSuggestedAppointment(SuggestedAppointmentDto suggestedAppointmentDto)
+        public ADTO GetSuggestedAppointment(SuggestedAppointmentDto suggestedAppointmentDto)
         {
             DateTime currentDate = suggestedAppointmentDto.DateStart;
 
             while (!currentDate.Equals(suggestedAppointmentDto.DateEnd))
             {
-                AppointmentDto appointment = new AppointmentDto
+                ADTO appointment = new ADTO
                 {
                     Date = currentDate,
                     Physician = suggestedAppointmentDto.Physician,
                     Patient = suggestedAppointmentDto.Patient
                 };
-                List<AppointmentDto> suggestedAppointmentDtos = GetAvailableAppointments(appointment);
+                List<ADTO> suggestedAppointmentDtos = GetAvailableAppointments(appointment);
                 if (suggestedAppointmentDtos.Count != 0)
                 {
                     return suggestedAppointmentDtos[0];
@@ -200,7 +200,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             if (suggestedAppointmentDto.Prior)
             {
                 DatePriorityStrategy datePriorityStrategy = new DatePriorityStrategy();
-                List<AppointmentDto> suggestedAppointmentDtosDate =
+                List<ADTO> suggestedAppointmentDtosDate =
                     datePriorityStrategy.FindSuggestedAppointments(suggestedAppointmentDto);
                 return (from appointmentDto in suggestedAppointmentDtosDate
                     select GetAvailableAppointments(appointmentDto)
@@ -211,11 +211,11 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             else
             {
                 PhysitianPriorityStrategy physicianPriorityStrategy = new PhysitianPriorityStrategy();
-                List<AppointmentDto> suggestedAppointmentDtosPhysician =
+                List<ADTO> suggestedAppointmentDtosPhysician =
                     physicianPriorityStrategy.FindSuggestedAppointments(suggestedAppointmentDto);
-                foreach (AppointmentDto appointmentDto in suggestedAppointmentDtosPhysician)
+                foreach (ADTO appointmentDto in suggestedAppointmentDtosPhysician)
                 {
-                    List<AppointmentDto> suggestedAppointmentDtos = GetAvailableAppointments(appointmentDto);
+                    List<ADTO> suggestedAppointmentDtos = GetAvailableAppointments(appointmentDto);
                     if (suggestedAppointmentDtos.Count != 0)
                     {
                         return suggestedAppointmentDtos[0];
