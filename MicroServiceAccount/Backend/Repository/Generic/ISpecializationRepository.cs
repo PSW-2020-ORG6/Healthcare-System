@@ -1,10 +1,10 @@
-﻿//using System.Collections.Generic;
-//using HealthClinicBackend.Backend.Model.Accounts;
+﻿using MicroServiceAccount.Backend.Model;
+using System.Collections.Generic;
 
-//namespace HealthClinicBackend.Backend.Repository.Generic
-//{
-//    public interface ISpecializationRepository : IGenericRepository<Specialization>
-//    {
-//        List<Specialization> GetByName(string name);
-//    }
-//}
+namespace MicroServiceAccount.Backend.Repository.Generic
+{
+    public interface ISpecializationRepository : IGenericMsAccountRepository<Specialization>
+    {
+        List<Specialization> GetByName(string name);
+    }
+}

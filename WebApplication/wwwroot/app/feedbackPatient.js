@@ -109,9 +109,9 @@
 	methods: {
 		AddNewFeedback: function (feedback) {
 			if (!document.getElementById("anonimous").checked)
-				this.feedback.patientId = localStorage.getItem('userId')
+				feedback.patientId = localStorage.getItem('userId')
 			else
-				this.feedback.id = "-1"
+				feedback.patientId = "-1"
 			if (feedback.text.localeCompare(null) || feedback.text.localeCompare("")) {
 				axios
 					.post("/feedback/add", feedback, {

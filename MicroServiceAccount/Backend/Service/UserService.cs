@@ -1,4 +1,5 @@
 ﻿using MicroServiceAccount.Backend.Model;
+using MicroServiceAccount.Backend.Repository.Generic;
 //using HealthClinicBackend.Backend.Model.Accounts;
 //using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.AspNetCore.Http;
@@ -11,9 +12,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using HealthClinicBackend.Backend.Repository.DatabaseSql.Util;
-using HealthClinicBackend.Backend.Model.Accounts;
-using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace MicroServiceAccount.Backend.Service
 {

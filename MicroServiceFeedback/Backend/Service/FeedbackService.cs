@@ -1,11 +1,10 @@
-﻿using System;
+﻿using MicroServiceFeedback.Backend.Dto;
+using MicroServiceFeedback.Backend.Model;
+using MicroServiceFeedback.Backend.Repository.Generic;
+using System;
 using System.Collections.Generic;
-using HealthClinicBackend.Backend.Dto;
-using HealthClinicBackend.Backend.Model.Blog;
-using HealthClinicBackend.Backend.Repository.Generic;
-//using HealthClinicBackend.Backend.Repository.Generic;
 
-namespace WebApplication.Backend.Service
+namespace MicroServiceFeedback.Backend.Service
 {
     /// <summary>
     /// This class does connection with repository
@@ -62,10 +61,13 @@ namespace WebApplication.Backend.Service
         ///</returns>
         ///<param name="feedback"> Feedback type object
         ///</param>>
-        public void ApproveFeedback(FeedbackDto feedback)
+        public void ChangeStatusFeedback(FeedbackDto feedback)
         {
             var fb = _feedbackRepository.GetById(feedback.SerialNumber);
-            fb.Approved = true;
+            if (!fb.Approved)
+                fb.Approved = true;
+            else
+                fb.Approved = false;
             _feedbackRepository.Update(fb);
         }
 

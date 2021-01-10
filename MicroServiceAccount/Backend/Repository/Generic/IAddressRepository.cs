@@ -1,12 +1,12 @@
-﻿//using System.Collections.Generic;
-//using HealthClinicBackend.Backend.Model.Util;
+﻿using MicroServiceAccount.Backend.Model.Util;
+using System.Collections.Generic;
 
-//namespace HealthClinicBackend.Backend.Repository.Generic
-//{
-//    public interface IAddressRepository : IGenericRepository<Address>
-//    {
-//        List<Address> GetAddressesByStreet(string street);
-//        Address GetById(string id);
-//        List<Address> GetAll();
-//    }
-//}
+namespace MicroServiceAccount.Backend.Repository.Generic
+{
+    public interface IAddressRepository : IGenericMsAccountRepository<Address>
+    {
+        List<Address> GetAddressesByStreet(string street);
+        Address GetById(string id);
+        List<Address> GetAll();
+    }
+}

@@ -66,8 +66,11 @@
             this.$router.push('registration');
         },
         Logout: function () {
-            localStorage.removeItem('token');
-            localStorage.removeItem('userId');
+            localStorage.setItem('token', null);
+            localStorage.setItem('userId', null);
+            localStorage.setItem('isAdmin', false);
+            localStorage.setItem('isPatient', false);
+            localStorage.setItem('isLogged', false);
             this.$router.push('login');
         }
     }

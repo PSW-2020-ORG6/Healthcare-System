@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
-using WebApplication.Backend.Service;
-using HealthClinicBackend.Backend.Dto;
-using HealthClinicBackend.Backend.Model.Blog;
+using MicroServiceFeedback.Backend.Dto;
+using MicroServiceFeedback.Backend.Model;
+using MicroServiceFeedback.Backend.Service;
 
-namespace WebApplication.Backend.Controllers
+namespace MicroServiceFeedback.Backend.Controllers
 {
     /// <summary>
     /// This class does connection with service
@@ -89,11 +89,11 @@ namespace WebApplication.Backend.Controllers
          [Authorize]
 
         [HttpPut("approve")]
-        public IActionResult ApproveFeedback(FeedbackDto feedbackDTO)
+        public IActionResult ChangeStatusFeedback(FeedbackDto feedbackDTO)
         {
             if (feedbackDTO.IsApprovalValid() && feedbackDTO.IsCorrectText())
             {
-                _feedbackService.ApproveFeedback(feedbackDTO);
+                _feedbackService.ChangeStatusFeedback(feedbackDTO);
                 return Ok();
             }
             return BadRequest();

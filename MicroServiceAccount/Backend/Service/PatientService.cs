@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using System;
 using MicroServiceAccount.Backend.Dto;
-using HealthClinicBackend.Backend.Model.PharmacySupport;
-using HealthClinicBackend.Backend.Model.Accounts;
-using HealthClinicBackend.Backend.Repository.Generic;
 using System.Linq;
-using HealthClinicBackend.Backend.Dto;
-using MicroServiceAppointment.Backend.Dto;
+using MicroServiceAccount.Backend.Repository.Generic;
+using MicroServiceAccount.Backend.Model;
 
 namespace MicroServiceAccount.Backend.Service
 {
@@ -77,7 +74,7 @@ namespace MicroServiceAccount.Backend.Service
 
         internal List<Patient> GetMaliciousPatients()
         {
-            return _patientRepository.GetAll().Where(p => p.IsMalicious).ToList();
+            return _patientRepository.GetAll().Where(p => p.IsMalicious && !p.IsBlocked).ToList();
         }
 
         internal bool BlockMaliciousPatient(string patientId)

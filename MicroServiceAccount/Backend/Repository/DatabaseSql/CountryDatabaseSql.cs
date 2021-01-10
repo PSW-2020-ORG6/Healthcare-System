@@ -1,19 +1,20 @@
-﻿//using System.Collections.Generic;
-//using System.Linq;
-//using HealthClinicBackend.Backend.Model.Util;
-//using HealthClinicBackend.Backend.Repository.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
+using MicroServiceAccount.Backend.Repository.Generic;
+using MicroServiceAccount.Backend.Repository.DatabaseSql;
+using MicroServiceAccount.Backend.Model.Util;
 
-//namespace HealthClinicBackend.Backend.Repository.DatabaseSql
-//{
-//    public class CountryDatabaseSql : GenericDatabaseSql<Country>, ICountryRepository
-//    {
-//        public CountryDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
-//        {
-//        }
+namespace MicroServiceAccount.Backend.Repository.DatabaseSql
+{
+    public class CountryDatabaseSql : GenericMsAccountDatabaseSql<Country>, ICountryRepository
+    {
+        public CountryDatabaseSql(MsAccountDbContext dbContext) : base(dbContext)
+        {
+        }
 
-//        public override List<Country> GetAll()
-//        {
-//            return DbContext.Country.ToList();
-//        }
-//    }
-//}
+        public override List<Country> GetAll()
+        {
+            return DbContext.Country.ToList();
+        }
+    }
+}

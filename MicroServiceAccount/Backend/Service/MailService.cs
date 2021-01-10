@@ -1,12 +1,10 @@
 ﻿using MicroServiceAccount.Backend.Model;
-//using HealthClinicBackend.Backend.Model.Accounts;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using MicroServiceAccount.Backend.Model.Util;
 using MicroServiceAccount.Backend.Services.Interfaces;
-using HealthClinicBackend.Backend.Model.Accounts;
 
 namespace MicroServiceAccount.Backend.Service
 {

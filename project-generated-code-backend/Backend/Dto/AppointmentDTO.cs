@@ -1,4 +1,4 @@
-﻿using MicroServiceAccount.Backend.Dto;
+﻿//using MicroServiceAccount.Backend.Dto;
 using MicroServiceAccount.Backend.Model;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Schedule;
 
-namespace MicroServiceAppointment.Backend.Dto
+namespace HealthClinicBackend.Backend.Dto
 {
     public class AppointmentDto
     {

@@ -40,7 +40,7 @@ namespace WebApplication.Backend.Controllers
         }
 
         [HttpPut("approve")]
-        public async Task<List<FeedbackDto>> ApproveFeedback(FeedbackDto feedbackDTO)
+        public async Task<List<FeedbackDto>> ChangeStatusFeedback(FeedbackDto feedbackDTO)
         {
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
                                                                                         ,Request.Headers["Authorization"].ToString().Split(" ")[1]);
