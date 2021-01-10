@@ -85,6 +85,7 @@ namespace MicroServiceAccount
             services.AddScoped<PatientService, PatientService>();
             services.AddScoped<RegistrationService, RegistrationService>();
             services.AddScoped<UserService, UserService>();
+            services.AddScoped<PhysicianService, PhysicianService>();
 
             //// Configure Mail Service
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
@@ -94,6 +95,7 @@ namespace MicroServiceAccount
             services.AddScoped<RegistrationController, RegistrationController>();
             services.AddScoped<LoginController, LoginController>();
             services.AddScoped<PatientController, PatientController>();
+            services.AddScoped<PhysicianController, PhysicianController>();
 
 
 
