@@ -11,6 +11,7 @@ using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
+using MicroServiceAppointment.Backend.Dto;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService
 {
@@ -25,7 +26,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             _appointmentRepository = appointmentRepository;
         }
 
-        public void NewAppointment(AppointmentDto appointmentDto)
+        public void NewAppointment(ADTO appointmentDto)
         {
             var appointment = new Appointment(appointmentDto);
             _appointmentRepository.Save(appointment);

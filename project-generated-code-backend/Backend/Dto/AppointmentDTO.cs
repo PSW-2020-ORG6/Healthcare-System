@@ -1,11 +1,11 @@
 ﻿using MicroServiceAccount.Backend.Dto;
-using MicroServiceAppointment.Backend.Model;
 using MicroServiceAccount.Backend.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.Schedule;
 
 namespace MicroServiceAppointment.Backend.Dto
 {
@@ -71,20 +71,5 @@ namespace MicroServiceAppointment.Backend.Dto
             return (RoomDTO != null);
         }
 
-        public bool IsDataValid(string date)
-        {
-            string[] parts = date.Split("-");
-            DateTime dateTime = new DateTime(Int32.Parse(parts[0]), Int32.Parse(parts[1]), Int32.Parse(parts[2]), 0, 0, 0);
-            return date != null && dateTime > DateTime.Today.AddDays(2);
-        }
-
-       /* public AppointmentDTO(string physicianId, string date, DateTime timeIntervalStart)
-        {
-            this.PhysicianDTO = new Physician { SerialNumber = physicianId };
-            string[] parts = date.Split("-");
-            this.Date = new DateTime(Int32.Parse(parts[0]), Int32.Parse(parts[1]), Int32.Parse(parts[2]), 0, 0, 0);
-            this.Time = new TimeInterval(timeIntervalStart);
-            this.Active = true;
-        }*/
     }
 }

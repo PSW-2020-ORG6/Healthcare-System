@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MicroServiceAppointment.Backend.Model;
 using HealthClinicBackend.Backend.Repository.Generic;
 using MicroServiceAppointment.Backend.Dto;
 //using HealthClinicBackend.Backend.Model.Accounts;
 using MicroServiceAccount.Backend.Dto;
 //using HealthClinicBackend.Backend.Dto;
 using MicroServiceAppointment.Backend.Util;
+using HealthClinicBackend.Backend.Model.Schedule;
+using HealthClinicBackend.Backend.Model.Accounts;
 
 namespace MicroServiceAppointment.Backend.Service
 {

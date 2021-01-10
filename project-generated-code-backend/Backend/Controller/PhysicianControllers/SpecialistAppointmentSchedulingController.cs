@@ -20,7 +20,7 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
             _appointmentSchedulingService.SchedulingStrategyContext = new PhysicianSpecialistSchedulingStrategy();
         }
 
-        public List<AppointmentDto> GetAllAvailableAppointments(AppointmentDto appointmentDTO)
+        public List<ADTO> GetAllAvailableAppointments(ADTO appointmentDTO)
         {
             return _appointmentSchedulingService.GetAvailableAppointments(appointmentDTO);
         }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using MicroServiceAppointment.Backend.Util;
 using MicroServiceAppointment.Backend.Service;
-using MicroServiceAppointment.Backend.Model.Survey;
+using HealthClinicBackend.Backend.Model.Survey;
 
 namespace MicroServiceAppointment.Backend.Controllers
 {

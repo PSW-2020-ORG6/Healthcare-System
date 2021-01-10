@@ -47,12 +47,12 @@ namespace HealthClinicBackend.Backend.Controller.SecretaryControllers
             return _appointmentService.GetAppointmentsByDate(date);
         }
 
-        public void NewAppointment(AppointmentDto appointmentDto)
+        public void NewAppointment(ADTO appointmentDto)
         {
             _appointmentService.NewAppointment(appointmentDto);
         }
 
-        public List<AppointmentDto> GetAllAvailableAppointments(AppointmentDto appointmentDto)
+        public List<ADTO> GetAllAvailableAppointments(ADTO appointmentDto)
         {
             return _appointmentSchedulingService.GetAvailableAppointments(appointmentDto);
         }

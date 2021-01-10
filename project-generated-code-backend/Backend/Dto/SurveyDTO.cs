@@ -1,4 +1,4 @@
-﻿using MicroServiceAppointment.Backend.Model.Survey;
+﻿using HealthClinicBackend.Backend.Model.Survey;
 using System;
 using System.Collections.Generic;
 using System.Linq;

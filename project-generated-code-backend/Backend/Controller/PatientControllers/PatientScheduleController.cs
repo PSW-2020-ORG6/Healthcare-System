@@ -40,7 +40,7 @@ namespace HealthClinicBackend.Backend.Controller.PatientControllers
             return _appointmentService.GetAppointmentsByDate(date);
         }
 
-        public void NewAppointment(global::HealthClinicBackend.Backend.Dto.AppointmentDto appointmentDto)
+        public void NewAppointment(ADTO appointmentDto)
         {
             _appointmentService.NewAppointment(appointmentDto);
         }

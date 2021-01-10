@@ -4,6 +4,7 @@
 // Purpose: Definition of Class PhysitianFollowUpSchedulingStrategy
 
 using HealthClinicBackend.Backend.Dto;
+using MicroServiceAppointment.Backend.Dto;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies
 {
@@ -11,7 +12,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrate
     {
         private const int DISALLOW_SCHEDULING_HOURS = 24;
 
-        public AppointmentDto PrepareAppointment(AppointmentDto appointment)
+        public ADTO PrepareAppointment(ADTO appointment)
         {
             appointment.RestrictedHours = DISALLOW_SCHEDULING_HOURS;
             return appointment;

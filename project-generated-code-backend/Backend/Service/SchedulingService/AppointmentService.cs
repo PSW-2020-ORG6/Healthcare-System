@@ -87,7 +87,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             return _appointmentRepository.GetAppointmentsByDate(date);
         }
 
-        public void NewAppointment(AppointmentDto appointmentDto)
+        public void NewAppointment(ADTO appointmentDto)
         {
             _appointmentRepository.Save(new Appointment(appointmentDto));
         }

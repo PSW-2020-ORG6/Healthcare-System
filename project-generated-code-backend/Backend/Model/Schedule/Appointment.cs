@@ -7,6 +7,7 @@ using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Util;
+using MicroServiceAppointment.Backend.Dto;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -111,7 +112,7 @@ namespace HealthClinicBackend.Backend.Model.Schedule
             Active = active;
         }
 
-        public Appointment(AppointmentDto appointmentDTO) : base()
+        public Appointment(ADTO appointmentDTO) : base()
         {
             Room = appointmentDTO.Room;
             Physician = appointmentDTO.Physician;
