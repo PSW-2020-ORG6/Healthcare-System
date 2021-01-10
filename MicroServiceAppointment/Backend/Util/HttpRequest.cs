@@ -9,6 +9,19 @@ namespace MicroServiceAppointment.Backend.Util
 {
     public class HttpRequest
     {
-        private static readonly HttpClient Client = new HttpClient();
+        public static readonly HttpClient client = new HttpClient();
+
+        public static async Task<PatientDto> GetPatientByIdAsync(string patientId)
+        {
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57053/patientMicroservice/getPatientById/" + patientId);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<PatientDto>(await response.Content.ReadAsStringAsync());
+        }
+        public static async Task<PhysicianDTO> GetPhysiciantByIdAsync(string physicianId)
+        {
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57053/physicianMicroservice/getPhysicianById/" + physicianId);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<PhysicianDTO>(await response.Content.ReadAsStringAsync());
+        }
     }
 }

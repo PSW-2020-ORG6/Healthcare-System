@@ -24,7 +24,7 @@ namespace MicroServiceAppointment.Backend.Controllers
             _dateFromStringConverter = new DateFromStringConverter();
             _appointmentDto = new AppointmentDto();
         }
-
+        //radi 
         [Authorize]
         [HttpGet("allAppointmentsByPatientId/{patientId}")]
         public List<AppointmentDto> GetAllAppointmentsByPatientId(String patientId)

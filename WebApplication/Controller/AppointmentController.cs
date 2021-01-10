@@ -160,9 +160,13 @@ namespace WebApplication.Backend.Controllers
         }
 
         [HttpGet("IsUserMalicious")]
-        public bool IsUserMalicious(string patientId)
+        public async Task<bool> IsUserMalicious(string patientId)
         {
-            throw new NotImplementedException();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                                      , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentMicroservice/IsUserMalicious/"+patientId);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
         }
     }
 }
