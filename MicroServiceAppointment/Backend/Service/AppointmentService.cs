@@ -25,7 +25,6 @@ namespace MicroServiceAppointment.Backend.Service
 
         static readonly HttpClient client = new HttpClient();
 
-
         private AppointmentWithRecommendationDTO appointmentWithRecommendationDTO =
             new AppointmentWithRecommendationDTO();
 
@@ -289,23 +288,7 @@ namespace MicroServiceAppointment.Backend.Service
         ///method for setting value of isSurveyDone on true in database
         ///</summary>
         internal void Update(Appointment appointmentDto)
-        {
-            //String dateD;
-            //String[] dateVar = appointmentDto.Date.ToString().Split(" ")[0].Split(".");
-            //if (dateVar[1].Length == 1)
-            //     dateD = dateVar[2] + "-" + "0" + dateVar[1] + "-" + dateVar[0];
-            //else
-            //     dateD = dateVar[2] + "-" + dateVar[1] + "-" + dateVar[0];
-
-            //List<Physician> physitianResult =
-            //    _physicianRepository.GetByName(appointmentDto.PhysicianDTO.FullName);
-            //List<String> physicianId = new List<string>();
-            
-            //foreach (Physician physician in physitianResult)
-            //{
-            //    physicianId.Add(physician.Id);
-            //}
-            
+        {   
             _appointmentRepository.Update(appointmentDto);
         }
 
@@ -349,24 +332,12 @@ namespace MicroServiceAppointment.Backend.Service
         {
             List<DateTime> dates = _appointmentRepository.GetByPatientIdCanceledDates(patientId);
 
-            DateTime date = DateTime.Now;
-
             dates.Sort((date1, date2) => date2.CompareTo(date1));
-
-            if (dates.Count >= 2)
-            {
-                System.TimeSpan difference = dates[1].Subtract(date);
-                if (Math.Abs(difference.Days) <= 30)
-                    return true;
-                else
-                {
-                    return false;
-                }
-            }
+            TimeSpan difference = dates[1].Subtract(DateTime.Now);
+            if (dates.Count >= 2 && Math.Abs(difference.Days) <= 30)
+                return true;
             else
-            {
                 return false;
-            }
         }
 
         public bool CancelAppointment(string appointmentSerialNumber)

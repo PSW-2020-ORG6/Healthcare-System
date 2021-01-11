@@ -9,7 +9,6 @@ using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Service.SchedulingService;
-using MicroServiceAppointment.Backend.Dto;
 
 namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {
@@ -27,7 +26,7 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
             return _physicianScheduleService.GetAppointmentsByDate(date);
         }
 
-        public void NewAppointment(ADTO appointment)
+        public void NewAppointment(AppointmentDTO appointment)
         {
             _physicianScheduleService.NewAppointment(appointment);
         }

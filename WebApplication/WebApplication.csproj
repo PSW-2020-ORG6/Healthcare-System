@@ -27,8 +27,8 @@
   <ItemGroup>
     <ProjectReference Include="..\MicroServiceAccount\MicroServiceAccount.csproj" />
     <ProjectReference Include="..\MicroServiceAppointment\MicroServiceAppointment.csproj" />
+    <ProjectReference Include="..\MicroServiceFeedback\MicroServiceFeedback.csproj" />
     <ProjectReference Include="..\MicroServiceSearch\MicroServiceSearch.csproj" />
-    <ProjectReference Include="..\project-generated-code-backend\HealthClinicBackend.csproj" />
   </ItemGroup>
 
   <ItemGroup>

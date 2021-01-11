@@ -4,13 +4,12 @@
 // Purpose: Definition of Interface SchedulingStrategy
 
 using HealthClinicBackend.Backend.Dto;
-using MicroServiceAppointment.Backend.Dto;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies
 {
     public interface SchedulingStrategy
     {
-        ADTO PrepareAppointment(ADTO appointment);
+        AppointmentDTO PrepareAppointment(AppointmentDTO appointment);
 
     }
 }

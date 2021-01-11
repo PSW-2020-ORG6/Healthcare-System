@@ -5,14 +5,13 @@
 
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Util;
-using MicroServiceAppointment.Backend.Dto;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies
 {
     public class PatientSchedulingStrategy : SchedulingStrategy
     {
         private const int DISALLOW_SCHEDULING_HOURS = 24;
-        public ADTO PrepareAppointment(ADTO appointment)
+        public AppointmentDTO PrepareAppointment(AppointmentDTO appointment)
         {
             appointment.RestrictedHours = DISALLOW_SCHEDULING_HOURS;
             appointment.ProcedureType = Constants.GeneralPracticeExam;
