@@ -85,9 +85,10 @@ namespace GraphicEditor.ViewModel
             _reportOfSearch = new List<string>();
             foreach (Equipment result in _resultOfSearch)
             {
-                Floor floor = floorController.GetById(result.FloorSerialNumber);
-                Building building = buildingController.GetById(floor.BuildingSerialNumber);
                 Room room = roomController.GetById(result.RoomSerialNumber);
+                Floor floor = floorController.GetById(room.FloorSerialNumber);
+                Building building = buildingController.GetById(floor.BuildingSerialNumber);
+                
                 string fullLocation = building.Name + ", " + floor.Name + ", " + room.Name + ", "
                                         + result.Name + " in quantity: " + result.Quantity;
                 _reportOfSearch.Add(fullLocation);
@@ -101,7 +102,8 @@ namespace GraphicEditor.ViewModel
             Equipment equipment = FoundEquipment[SelectedEquipmentIndex];
             if (equipment != null)
             {
-                Floor floor = floorController.GetBySerialNumber(equipment.FloorSerialNumber);
+                Room room = roomController.GetBySerialNumber(equipment.RoomSerialNumber);
+                Floor floor = floorController.GetBySerialNumber(room.FloorSerialNumber);
                 Building building = buildingController.GetBySerialNumber(floor.BuildingSerialNumber);
                 BuildingUserControl buildingUserControl = new BuildingUserControl(parentViewModel, building);
                 FloorUserControl floorUserControl = new FloorUserControl(parentViewModel, buildingUserControl.myViewModel, floor);
