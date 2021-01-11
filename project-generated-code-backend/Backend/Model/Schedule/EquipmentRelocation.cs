@@ -7,8 +7,8 @@ namespace HealthClinicBackend.Backend.Model.Schedule
     public class EquipmentRelocation : Entity
     {
         public virtual Equipment equipment { get; set; }
-        public DateTime startTime { get; set; }
-        public DateTime endTime { get; set; }
+
+        public TimeInterval TimeInterval { get; set; }
         public string roomToRelocateToSerialNumber { get; set; }
         public string equipmentSerialNumber { get; set; }
         public uint quantity { get; set; }
@@ -17,8 +17,7 @@ namespace HealthClinicBackend.Backend.Model.Schedule
         public EquipmentRelocation(DateTime startTime, DateTime endTime, Equipment equipment, string roomSerialNumToRelocateTo, uint quantity) : base()
         {
             this.quantity = quantity;
-            this.startTime = startTime;
-            this.endTime = endTime;
+            this.TimeInterval = new TimeInterval(startTime, endTime);
             this.roomToRelocateToSerialNumber = roomSerialNumToRelocateTo;
             this.equipment = equipment;
             this.equipmentSerialNumber = equipment.SerialNumber;

@@ -19,6 +19,11 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
             return appointmentService.GetById(id);
         }
 
+        public List<Appointment> GetByRoomSerialNumber(string roomSerialNumber)
+        {
+            return appointmentService.GetByRoomSerialNumber(roomSerialNumber);
+        }
+
         public List<Appointment> GetAll()
         {
             return appointmentService.GetAll();

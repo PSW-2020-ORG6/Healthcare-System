@@ -1,5 +1,6 @@
 ﻿using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
+using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 using System;
@@ -49,7 +50,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         }
         private bool IsItTimeToMoveEquipment(EquipmentRelocation equipmentRelocation)
         {
-            if (equipmentRelocation.startTime <= DateTime.Now && equipmentRelocation.endTime >= DateTime.Now)
+            if (equipmentRelocation.TimeInterval.IsOverLapping(new TimeInterval(DateTime.Now, DateTime.Now)))
             {
                 return true;
             }

@@ -2,6 +2,8 @@
 using GraphicEditor.View.Windows;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Schedule;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -28,6 +30,8 @@ namespace GraphicEditor.ViewModel
         private Visibility medicineVisibility;
 
         public MyICommand<Bed> NavCommandBedUpdate { get; private set; }
+
+        public MyICommand EquipmentRelocationCommand { get; private set; }
 
         public MyICommand<Room> NavCommandRoomUpdate { get; private set; }
 
@@ -104,7 +108,7 @@ namespace GraphicEditor.ViewModel
             set
             {
                 if (value != null) SetProperty(ref selectedEquipment, value);
-                EquipmentRelocation equipmentRelocationWindow = new EquipmentRelocation(selectedEquipment);
+                EquipmentRelocationWindow equipmentRelocationWindow = new EquipmentRelocationWindow(selectedEquipment);
                 equipmentRelocationWindow.Show();
             }
         }
@@ -165,6 +169,7 @@ namespace GraphicEditor.ViewModel
             NavCommandBedUpdate = new MyICommand<Bed>(updateBedInfo);
             NavCommandRoomUpdate = new MyICommand<Room>(updateRoomInfo);
             ChangeCaterogyCommand = new MyICommand(ChangeCaterogy);
+            EquipmentRelocationCommand = new MyICommand(EnterEquipmentRelocationWindow);
 
             window = _window;
             roomName = _room.Name;
@@ -193,6 +198,12 @@ namespace GraphicEditor.ViewModel
 
             if (equipment != null & equipment.Count != 0)
                 selectedEquipment = equipment[0];
+        }
+
+        private void EnterEquipmentRelocationWindow()
+        {
+            EquipmentRelocationWindow equipmentRelocationWindow = new EquipmentRelocationWindow(selectedEquipment);
+            equipmentRelocationWindow.Show();
         }
 
         void ChangeCaterogy()

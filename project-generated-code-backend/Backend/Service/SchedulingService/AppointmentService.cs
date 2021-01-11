@@ -26,6 +26,11 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             return _appointmentRepository.GetById(id);
         }
 
+        public List<Appointment> GetByRoomSerialNumber(string roomSerialNumber)
+        {
+            return _appointmentRepository.GetByRoomSerialNumber(roomSerialNumber);
+        }
+
         public List<Appointment> GetByPhysicianSerialNumber(string physicianSerialNumber)
         {
             return _appointmentRepository.GetByPhysicianSerialNumber(physicianSerialNumber);
