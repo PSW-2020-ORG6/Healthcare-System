@@ -77,8 +77,6 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         {
             //Equipment equipmentNew = new Equipment(equipmentRelocation.equipment);
             Equipment equipmentNew = new Equipment();
-            equipmentNew.BuildingSerialNumber = equipmentRelocation.equipment.BuildingSerialNumber;
-            equipmentNew.FloorSerialNumber = equipmentRelocation.equipment.FloorSerialNumber;
             equipmentNew.Name = equipmentRelocation.equipment.Name;
             equipmentNew.RoomSerialNumber = equipmentRelocation.roomToRelocateToSerialNumber;
             equipmentNew.Quantity = (int)equipmentRelocation.quantity;

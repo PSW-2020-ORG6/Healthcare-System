@@ -270,55 +270,59 @@ namespace WebApplication.Backend.Model
         {
             modelBuilder.Entity<Equipment>().HasKey(o => o.Id);
             modelBuilder.Entity<Equipment>().HasData(
+                 new Equipment
+                 {
+                     SerialNumber = "78",
+                     RoomId = "104",
+                     Name = "Table",
+                     Id = "16",
+                     RoomSerialNumber = "104",
+                     Quantity = 6
+                 },
                 new Equipment
                 {
-                    SerialNumber = "73", RoomId = "101", Name = "Bed", Id = "11", BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1001", RoomSerialNumber = "101"
+                    SerialNumber = "80",
+                    RoomId = "101",
+                    Name = "Table",
+                    Id = "18",
+                    RoomSerialNumber = "101",
+                    Quantity = 3
                 },
                 new Equipment
                 {
-                    SerialNumber = "74", RoomId = "102", Name = "Bed", Id = "12", BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1001", RoomSerialNumber = "101"
+                    SerialNumber = "81",
+                    RoomId = "102",
+                    Name = "Syringe",
+                    Id = "19",
+                    RoomSerialNumber = "102",
+                    Quantity = 100
                 },
                 new Equipment
                 {
-                    SerialNumber = "75", RoomId = "103", Name = "Bed", Id = "13", BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1001", RoomSerialNumber = "101"
+                    SerialNumber = "83",
+                    RoomId = "104",
+                    Name = "Mask",
+                    Id = "21",
+                    RoomSerialNumber = "104",
+                    Quantity = 30
                 },
                 new Equipment
                 {
-                    SerialNumber = "76", RoomId = "101", Name = "Bed", Id = "14", BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1001", RoomSerialNumber = "101"
+                    SerialNumber = "84",
+                    RoomId = "101",
+                    Name = "Stethoscope",
+                    Id = "22",
+                    RoomSerialNumber = "101",
+                    Quantity = 10
                 },
                 new Equipment
                 {
-                    SerialNumber = "77", RoomId = "102", Name = "Bed", Id = "15", BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1002", RoomSerialNumber = "106"
-                },
-                new Equipment
-                {
-                    SerialNumber = "78", RoomId = "104", Name = "Table", Id = "16", BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1002", RoomSerialNumber = "106"
-                },
-                new Equipment
-                {
-                    SerialNumber = "79", RoomId = "111", Name = "Table", Id = "17", BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1002", RoomSerialNumber = "107"
-                },
-                new Equipment
-                {
-                    SerialNumber = "80", RoomId = "111", Name = "Table", Id = "18", BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1002", RoomSerialNumber = "107"
-                },
-                new Equipment
-                {
-                    SerialNumber = "81", RoomId = "112", Name = "Bed", Id = "19", BuildingSerialNumber = "10002",
-                    FloorSerialNumber = "1003", RoomSerialNumber = "114"
-                },
-                new Equipment
-                {
-                    SerialNumber = "82", RoomId = "112", Name = "Bed", Id = "20", BuildingSerialNumber = "10002",
-                    FloorSerialNumber = "1003", RoomSerialNumber = "114"
+                    SerialNumber = "85",
+                    RoomId = "105",
+                    Name = "Gloves",
+                    Id = "23",
+                    RoomSerialNumber = "105",
+                    Quantity = 30
                 }
             );
         }
@@ -438,8 +442,8 @@ namespace WebApplication.Backend.Model
                 new Bed
                 {
                     SerialNumber = "100001",
-                    BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1001",
+                    //BuildingSerialNumber = "10001",
+                    //FloorSerialNumber = "1001",
                     RoomSerialNumber = "101",
                     Name = "Bed 1",
                     PatientSerialNumber = "0002",
@@ -449,8 +453,8 @@ namespace WebApplication.Backend.Model
                 new Bed
                 {
                     SerialNumber = "100002",
-                    BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1001",
+                    //BuildingSerialNumber = "10001",
+                    //FloorSerialNumber = "1001",
                     RoomSerialNumber = "101",
                     Name = "Bed 2",
                     PatientSerialNumber = "0003",
@@ -460,8 +464,8 @@ namespace WebApplication.Backend.Model
                 new Bed
                 {
                     SerialNumber = "100003",
-                    BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1001",
+                    //BuildingSerialNumber = "10001",
+                    //FloorSerialNumber = "1001",
                     RoomSerialNumber = "102",
                     Name = "Bed 3",
                     PatientSerialNumber = null,

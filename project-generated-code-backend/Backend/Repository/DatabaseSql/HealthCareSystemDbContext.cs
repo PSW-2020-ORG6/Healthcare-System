@@ -585,8 +585,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     RoomId = "104",
                     Name = "Table",
                     Id = "16",
-                    BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1002",
                     RoomSerialNumber = "104",
                     Quantity = 6
                 },
@@ -596,8 +594,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     RoomId = "101",
                     Name = "Table",
                     Id = "18",
-                    BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1002",
                     RoomSerialNumber = "101",
                     Quantity = 3
                 },
@@ -607,8 +603,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     RoomId = "102",
                     Name = "Syringe",
                     Id = "19",
-                    BuildingSerialNumber = "10002",
-                    FloorSerialNumber = "1003",
                     RoomSerialNumber = "102",
                     Quantity = 100
                 },
@@ -618,8 +612,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     RoomId = "104",
                     Name = "Mask",
                     Id = "21",
-                    BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1002",
                     RoomSerialNumber = "104",
                     Quantity = 30
                 },
@@ -629,8 +621,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     RoomId = "101",
                     Name = "Stethoscope",
                     Id = "22",
-                    BuildingSerialNumber = "10002",
-                    FloorSerialNumber = "1003",
                     RoomSerialNumber = "101",
                     Quantity = 10
                 },
@@ -640,8 +630,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     RoomId = "105",
                     Name = "Gloves",
                     Id = "23",
-                    BuildingSerialNumber = "10002",
-                    FloorSerialNumber = "1003",
                     RoomSerialNumber = "105",
                     Quantity = 30
                 }
@@ -777,8 +765,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 new Bed
                 {
                     SerialNumber = "100001",
-                    BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1001",
+                    //BuildingSerialNumber = "10001",
+                    //FloorSerialNumber = "1001",
                     RoomSerialNumber = "101",
                     Name = "Bed 1",
                     PatientSerialNumber = "0002",
@@ -788,8 +776,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 new Bed
                 {
                     SerialNumber = "100002",
-                    BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1001",
+                    //BuildingSerialNumber = "10001",
+                    //FloorSerialNumber = "1001",
                     RoomSerialNumber = "101",
                     Name = "Bed 2",
                     PatientSerialNumber = "0003",
@@ -799,8 +787,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 new Bed
                 {
                     SerialNumber = "100003",
-                    BuildingSerialNumber = "10001",
-                    FloorSerialNumber = "1001",
+                    //BuildingSerialNumber = "10001",
+                    //FloorSerialNumber = "1001",
                     RoomSerialNumber = "102",
                     Name = "Bed 3",
                     PatientSerialNumber = null,
