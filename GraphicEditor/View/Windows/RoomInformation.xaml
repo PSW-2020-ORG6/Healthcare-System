@@ -61,10 +61,14 @@
                     Style="{StaticResource MaterialDesignToolVerticalToggleListBox}"
                     Cursor="Hand">
             <ListBox.ItemTemplate>
-                <DataTemplate>
+            <DataTemplate>
                     <TextBlock Text="{Binding Path=Name,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            <!--<ListBox.InputBindings>
+                <MouseBinding MouseAction="RightClick"
+                              Command="{Binding Path=DataContext.EquipmentRelocationCommand}"/>
+            </ListBox.InputBindings>-->
         </ListBox>
 
         <ListBox    x:Name="medicineListBox"

@@ -7,11 +7,11 @@ namespace GraphicEditor.View.Windows
     /// <summary>
     /// Interaction logic for EquipmentRelocation.xaml
     /// </summary>
-    public partial class EquipmentRelocation : Window
+    public partial class EquipmentRelocationWindow : Window
     {
-        public EquipmentRelocation(Equipment equipment)
+        public EquipmentRelocationWindow(Equipment equipment)
         {
-            this.DataContext = new EquipmentRelocationViewModel(equipment, this);
+            this.DataContext = new EquipmentRelocationWindowViewModel(equipment, this);
             InitializeComponent();
         }
     }

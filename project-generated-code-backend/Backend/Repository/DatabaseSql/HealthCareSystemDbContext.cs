@@ -238,17 +238,24 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<EquipmentRelocation>().Ignore(e => e.equipment);
             modelBuilder.Entity<EquipmentRelocation>()
                 .HasKey(r => r.SerialNumber);
+            modelBuilder.Entity<EquipmentRelocation>().OwnsOne(o => o.TimeInterval).HasData(
+                new
+                {
+                    EquipmentRelocationSerialNumber = "ER1",
+                    Start = new DateTime(2021, 1, 20, 9, 30, 0),
+                    End = new DateTime(2021, 1, 20, 10, 0, 0)
+                }
+            );
+
             modelBuilder.Entity<EquipmentRelocation>().HasData(
                new EquipmentRelocation
                {
                    roomToRelocateToSerialNumber = "105",
                    equipmentSerialNumber = "78",
-                   startTime = new DateTime(2021, 1, 20, 9, 30, 0),
-                   endTime = new DateTime(2021, 1, 20, 10, 0, 0),
                    SerialNumber = "ER1",
                    quantity = 1
                }
-                );
+            );
         }
         private static void SecretaryCreation(ModelBuilder modelBuilder)
         {
