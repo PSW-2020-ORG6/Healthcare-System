@@ -33,5 +33,25 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             return GetAll().Where(b => b.Name.ToLower().Contains(name.ToLower())).ToList();
         }
+
+        public override void Delete(string id)
+        {
+            var bed = GetById(id);
+            if (bed == null) return;
+            DbContext.Bed.Remove(bed);
+            DbContext.SaveChanges();
+        }
+
+        public override void Save(Bed newEntity)
+        {
+            DbContext.Bed.Add(newEntity);
+            DbContext.SaveChanges();
+        }
+
+        public override void Update(Bed updateEntity)
+        {
+            DbContext.Bed.Update(updateEntity);
+            DbContext.SaveChanges();
+        }
     }
 }

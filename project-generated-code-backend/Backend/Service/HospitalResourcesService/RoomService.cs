@@ -101,13 +101,14 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 
         public void DeleteRoom(Room room)
         {
+            foreach (Medicine medicine in _medicineRepository.GetByRoomSerialNumber(room.SerialNumber))
+                _medicineRepository.Delete(medicine.SerialNumber);
             foreach (Bed bed in _bedRepository.GetByRoomSerialNumber(room.SerialNumber))
                 _bedRepository.Delete(bed.SerialNumber);
             foreach (Equipment equipment in _equipmentRepository.GetByRoomSerialNumber(room.SerialNumber))
                 _equipmentRepository.Delete(equipment.SerialNumber);
-            foreach (Medicine medicine in _medicineRepository.GetByRoomSerialNumber(room.SerialNumber))
-                _medicineRepository.Delete(medicine.SerialNumber);
             _roomRepository.Delete(room.SerialNumber);
+
         }
 
         public void AddEquipment(Equipment equipment, Room room)
