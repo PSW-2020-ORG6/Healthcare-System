@@ -283,30 +283,6 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             return Id.Equals(other.Id);
         }
 
-
-        public static bool operator ==(Room firstRoom, Room secondRoom)
-        {
-            if (firstRoom is null)
-                return secondRoom is null;
-
-            return firstRoom.Equals(secondRoom);
-        }
-
-        public static bool operator !=(Room firstRoom, Room secondRoom)
-        {
-            if (firstRoom is null)
-            {
-                throw new ArgumentNullException(nameof(firstRoom));
-            }
-
-            if (secondRoom is null)
-            {
-                throw new ArgumentNullException(nameof(secondRoom));
-            }
-
-            return !(firstRoom == secondRoom);
-        }
-
         public override int GetHashCode()
         {
             HashCode hash = new HashCode();

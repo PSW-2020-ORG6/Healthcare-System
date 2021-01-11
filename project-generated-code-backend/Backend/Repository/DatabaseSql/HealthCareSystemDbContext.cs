@@ -330,10 +330,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                new
                {
                    RoomSerialNumber = "101",
-                   Row = 0,
-                   Column = 0,
+                   Row = 6,
+                   Column = 14,
                    RowSpan = 3,
-                   ColumnSpan = 5
+                   ColumnSpan = 4
                },
                new
                {
@@ -362,10 +362,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                new
                {
                    RoomSerialNumber = "105",
-                   Row = 10,
-                   Column = 9,
-                   RowSpan = 2,
-                   ColumnSpan = 5
+                   Row = 12,
+                   Column = 17,
+                   RowSpan = 1,
+                   ColumnSpan = 1
                }
             );
 
@@ -376,7 +376,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             Room room3 = new Room("103", "Store room 103", 103, "1001",
                 "10000002", "RoomButtonStyle", 0, 2, 2, 2);
             Room room4 = new Room("104", "Examination room 104", 104, "1001",
-                "10000003", "RoomButtonStyle", 0, 0, 2, 2);
+                "10000003", "RoomButtonStyle", 0, 2, 2, 2);
             Room room5 = new Room("105", "Store room 105", 105, "1001",
                 "10000002", "RoomButtonStyle", 2, 0, 0, 0);
 
@@ -567,15 +567,15 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                .Property(f => f.BuildingSerialNumber)
                .HasField("_buildingSerialNumber");
 
-            Floor floor1 = new Floor("1001", "Floor1", "10001");
-            Floor floor2 = new Floor("1002", "Floor2", "10001");
-            Floor floor3 = new Floor("1003", "Floor1", "10002");
+            Floor floor1 = new Floor("1001", "Ground floor", "10001");
+            Floor floor2 = new Floor("1002", "First floor", "10001");
+            Floor floor3 = new Floor("1003", "Ground floor", "10002");
             modelBuilder.Entity<Floor>().HasData(floor1, floor2, floor3);
         }
 
         private static void EquipmentCreation(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Equipment>().HasKey(o => o.Id);
+            modelBuilder.Entity<Equipment>().HasKey(o => o.SerialNumber);
             modelBuilder.Entity<Equipment>().Property(o => o.Quantity).HasDefaultValue(1);
             modelBuilder.Entity<Equipment>().HasData(
                 //new Equipment

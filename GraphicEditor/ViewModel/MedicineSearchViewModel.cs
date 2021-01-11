@@ -98,8 +98,8 @@ namespace GraphicEditor.ViewModel
             if (localMedicine != null)
             {
                 Room room = roomController.GetBySerialNumber(localMedicine.RoomSerialNumber);
-                Floor floor = floorController.GetBySerialNumber(localMedicine.RoomSerialNumber);
-                Building building = buildingController.GetBySerialNumber(room.FloorSerialNumber);
+                Floor floor = floorController.GetBySerialNumber(room.FloorSerialNumber);
+                Building building = buildingController.GetBySerialNumber(floor.BuildingSerialNumber);
                 BuildingUserControl buildingUserControl = new BuildingUserControl(parentViewModel, building);
                 FloorUserControl floorUserControl = new FloorUserControl(parentViewModel, buildingUserControl.myViewModel, floor);
                 buildingUserControl.myViewModel.FloorViewModel = floorUserControl;
@@ -117,7 +117,7 @@ namespace GraphicEditor.ViewModel
 
             CommonUtil.Run(() =>
             {
-                roomButton.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+                roomButton.Background = new SolidColorBrush(Color.FromRgb(0, 0, 0));
             }, TimeSpan.FromMilliseconds(5000));
         }
     }
