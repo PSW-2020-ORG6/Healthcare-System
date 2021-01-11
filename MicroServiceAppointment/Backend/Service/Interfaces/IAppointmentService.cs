@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MicroServiceAppointment.Backend.Dto;
+using HealthClinicBackend.Backend.Dto;
+//using MicroServiceAppointment.Backend.Dto;
 //using HealthClinicBackend.Backend.Dto;
 
 namespace MicroServiceAppointment.Backend.Service

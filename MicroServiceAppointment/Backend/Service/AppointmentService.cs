@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using HealthClinicBackend.Backend.Repository.Generic;
-using MicroServiceAppointment.Backend.Dto;
+//using MicroServiceAppointment.Backend.Dto;
 //using HealthClinicBackend.Backend.Model.Accounts;
-using MicroServiceAccount.Backend.Dto;
+//using MicroServiceAccount.Backend.Dto;
 //using HealthClinicBackend.Backend.Dto;
-using MicroServiceAppointment.Backend.Util;
+//using MicroServiceAppointment.Backend.Util;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Accounts;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Org.BouncyCastle.Asn1.Ocsp;
+using HealthClinicBackend.Backend.Dto;
+using MicroServiceAppointment.Backend.Util;
 
 namespace MicroServiceAppointment.Backend.Service
 {
