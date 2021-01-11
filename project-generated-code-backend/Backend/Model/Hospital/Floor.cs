@@ -111,7 +111,7 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         {
             if (string.IsNullOrEmpty(elementOfFloor)) throw new Exception("All elements of the floor are required!");
             else if (elementOfFloor.Length < 3) throw new Exception("Element of the floor is too short.");
-            else if (elementOfFloor.Length > 30) throw new Exception("Element of the floor is too long.");
+            else if (elementOfFloor.Length > 50) throw new Exception("Element of the floor is too long.");
         }
 
         public Floor(Building building, int nameNumber) : base()
