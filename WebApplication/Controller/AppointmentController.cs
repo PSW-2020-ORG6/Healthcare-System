@@ -72,8 +72,7 @@ namespace WebApplication.Backend.Controllers
 
         [HttpPost("makeAppointment")]
         public async Task<IActionResult> MakeAppointment(AppointmentDto appointmentSchedulingDTO)
-        {
-            /*
+        {   /*
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
                                                                                         , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             var parameter1 = new StringContent(JsonConvert.SerializeObject(appointmentSchedulingDTO, Formatting.Indented), Encoding.UTF8, "application/json");
