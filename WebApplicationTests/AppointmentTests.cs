@@ -1,11 +1,18 @@
-﻿//using Moq;
+﻿//using MicroServiceAccount.Backend.Model;
+//using MicroServiceAccount.Backend.Model.Util;
+//using MicroServiceAccount.Backend.Repository.Generic;
+//using MicroServiceAppointment.Backend.Model;
+//using MicroServiceAppointment.Backend.Model.Hospital;
+//using MicroServiceAppointment.Backend.Repository.Generic;
+//using MicroServiceAppointment.Backend.Service;
+//using Moq;
 //using System;
 //using System.Collections.Generic;
-//using HealthClinicBackend.Backend.Model.Accounts;
-//using HealthClinicBackend.Backend.Model.Hospital;
-//using HealthClinicBackend.Backend.Model.Schedule;
-//using HealthClinicBackend.Backend.Model.Util;
-//using HealthClinicBackend.Backend.Repository.Generic;
+////using HealthClinicBackend.Backend.Model.Accounts;
+////using HealthClinicBackend.Backend.Model.Hospital;
+////using HealthClinicBackend.Backend.Model.Schedule;
+////using HealthClinicBackend.Backend.Model.Util;
+////using HealthClinicBackend.Backend.Repository.Generic;
 //using Xunit;
 
 
@@ -97,7 +104,7 @@
 //            Active = true,
 //            Date = new DateTime(1975, 11, 11)
 //        };
-        
+
 //        [Fact]
 //        public void Find_Appointments_By_PatientId_Success()
 //        {
@@ -162,7 +169,7 @@
 //            // TODO: add more specific parameter than any
 //            appointmentRepository.Verify(mock => mock.Update(It.IsAny<Appointment>()));
 //        }
-        
+
 //        // [Fact]
 //        // public void Appointment_canceling_failure()
 //        // {
@@ -175,7 +182,7 @@
 //        //
 //        //     Assert.False(returnValue);
 //        // }
-        
+
 //        [Fact]
 //        public void User_is_malicious()
 //        {
@@ -195,7 +202,7 @@
 
 //            Assert.True(returnValue);
 //        }
-        
+
 //        [Fact]
 //        public void User_is_not_malicious()
 //        {
@@ -215,6 +222,6 @@
 
 //            Assert.False(returnValue);
 //        }
-        
+
 //    }
 //}

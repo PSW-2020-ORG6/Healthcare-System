@@ -13,7 +13,7 @@ namespace MicroServiceAccount.Backend.Controllers
 {
     [Route("registration")]
     [ApiController]
-    public class RegistrationController : ControllerBase
+    public class RegistrationControllers : ControllerBase
     {
         static readonly HttpClient client = new HttpClient();
 
