@@ -1,24 +1,20 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using HealthClinicBackend.Backend.Repository;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
-using HealthClinicBackend.Backend.Repository.Generic;
 using MicroServiceAccount.Backend.Controllers;
+using MicroServiceAccount.Backend.Repository;
+using MicroServiceAccount.Backend.Repository.DatabaseSql;
+using MicroServiceAccount.Backend.Repository.Generic;
 using MicroServiceAccount.Backend.Service;
 using MicroServiceAppointment.Backend.Controllers;
 using MicroServiceAppointment.Backend.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace MicroServiceAppointment
@@ -56,7 +52,7 @@ namespace MicroServiceAppointment
                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                    };
                });
-            services.AddDbContext<HealthCareSystemDbContext>(options =>
+            services.AddDbContext<MsAccountDbContext>(options =>
             {
                 var connectionString = CreateConnectionStringFromEnvironment();
                 Console.WriteLine(connectionString);
@@ -71,18 +67,9 @@ namespace MicroServiceAppointment
 
 
             // Inject repositories
-            services.AddScoped<IActionAndBenefitMessageRepository, ActionAndBenefitMessageDatabaseSql>();
-            services.AddScoped<IAppointmentRepository, AppointmentDatabaseSql>();
-            services.AddScoped<IPrescriptionRepository, PrescriptionDatabaseSql>();
-            services.AddScoped<IReportRepository, ReportDatabaseSql>();
-            services.AddScoped<ISpecializationRepository, SpecializationDatabaseSql>();
-            services.AddScoped<ISurveyRepository, SurveyDatabaseSql>();
-            services.AddScoped<IAdminRepository, AdminDatabaseSql>();
-            services.AddScoped<IAddressRepository, AddressDatabaseSql>();
+            services.AddScoped<IAppointmentRepository, Appointment>();
             services.AddScoped<IPhysicianRepository, PhysicianDatabaseSql>();
             services.AddScoped<IPatientRepository, PatientDatabaseSql>();
-
-
 
             // Inject services
             services.AddScoped<AppointmentService, AppointmentService>();
@@ -107,7 +94,7 @@ namespace MicroServiceAppointment
             }
 
             using (var scope = app.ApplicationServices.CreateScope())
-            using (var context = scope.ServiceProvider.GetService<HealthCareSystemDbContext>())
+            using (var context = scope.ServiceProvider.GetService<MsAccountDbContext>())
             {
                 context.Database.EnsureCreated();
             }

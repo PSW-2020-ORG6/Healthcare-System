@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 using MicroServiceAppointment.Backend.Service;
-using MicroServiceAppointment.Backend.Dto;
+//using MicroServiceAppointment.Backend.Dto;
 using Microsoft.AspNetCore.Authorization;
-using MicroServiceAppointment.Backend.Util;
-using MicroServiceAccount.Backend.Dto;
+//using MicroServiceAppointment.Backend.Util;
+//using MicroServiceAccount.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Schedule;
 
 namespace MicroServiceAppointment.Backend.Controllers

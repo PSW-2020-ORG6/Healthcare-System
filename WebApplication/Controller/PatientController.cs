@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System;
-using HealthClinicBackend.Backend.Model.PharmacySupport;
-using HealthClinicBackend.Backend.Model.Accounts;
+//using HealthClinicBackend.Backend.Model.PharmacySupport;
+//using HealthClinicBackend.Backend.Model.Accounts;
 using System.Threading.Tasks;
-using HealthClinicBackend.Backend.Dto;
+//using HealthClinicBackend.Backend.Dto;
 using System.Net.Http.Headers;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
 using MicroServiceAccount.Backend.Dto;
+using MicroServiceAccount.Backend.Model;
 
 namespace MicroServiceAccount.Backend.Controllers
 {
