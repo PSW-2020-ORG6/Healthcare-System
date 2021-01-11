@@ -12,9 +12,6 @@ using HealthClinicBackend.Backend.Repository.Generic;
 using HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions;
 using HealthClinicBackend.Backend.Service.SchedulingService.PriorityStrategies;
 using HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService
 {
@@ -53,9 +50,9 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             _physicianRepository = physicianRepository;
         }
 
-        public List<ADTO> GetAvailableAppointments(ADTO appointmentPreferences)
+        public List<AppointmentDTO> GetAvailableAppointments(AppointmentDTO appointmentPreferences)
         {
-            ADTO preparedAppointmentPreferences =
+            AppointmentDTO preparedAppointmentPreferences =
                 SchedulingStrategyContext.PrepareAppointment(appointmentPreferences);
             return _appointmentGeneralitiesManager.GetAllAvailableAppointments(preparedAppointmentPreferences);
         }
@@ -168,27 +165,26 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             return rellocationPrefferencies;
         }
 
-
-        public AppointmentDto FindNearestAppointment(AppointmentDto appointmentPreferences)
+        public AppointmentDTO FindNearestAppointment(AppointmentDTO appointmentPreferences)
         {
-            ADTO preparedAppointmentPreferences =
+            AppointmentDTO preparedAppointmentPreferences =
                 SchedulingStrategyContext.PrepareAppointment(appointmentPreferences);
             throw new NotImplementedException();
         }
 
-        public ADTO GetSuggestedAppointment(SuggestedAppointmentDto suggestedAppointmentDto)
+        public AppointmentDTO GetSuggestedAppointment(SuggestedAppointmentDto suggestedAppointmentDto)
         {
             DateTime currentDate = suggestedAppointmentDto.DateStart;
 
             while (!currentDate.Equals(suggestedAppointmentDto.DateEnd))
             {
-                ADTO appointment = new ADTO
+                AppointmentDTO appointment = new AppointmentDTO
                 {
                     Date = currentDate,
                     Physician = suggestedAppointmentDto.Physician,
                     Patient = suggestedAppointmentDto.Patient
                 };
-                List<ADTO> suggestedAppointmentDtos = GetAvailableAppointments(appointment);
+                List<AppointmentDTO> suggestedAppointmentDtos = GetAvailableAppointments(appointment);
                 if (suggestedAppointmentDtos.Count != 0)
                 {
                     return suggestedAppointmentDtos[0];
@@ -200,7 +196,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             if (suggestedAppointmentDto.Prior)
             {
                 DatePriorityStrategy datePriorityStrategy = new DatePriorityStrategy();
-                List<ADTO> suggestedAppointmentDtosDate =
+                List<AppointmentDTO> suggestedAppointmentDtosDate =
                     datePriorityStrategy.FindSuggestedAppointments(suggestedAppointmentDto);
                 return (from appointmentDto in suggestedAppointmentDtosDate
                     select GetAvailableAppointments(appointmentDto)
@@ -211,11 +207,11 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             else
             {
                 PhysitianPriorityStrategy physicianPriorityStrategy = new PhysitianPriorityStrategy();
-                List<ADTO> suggestedAppointmentDtosPhysician =
+                List<AppointmentDTO> suggestedAppointmentDtosPhysician =
                     physicianPriorityStrategy.FindSuggestedAppointments(suggestedAppointmentDto);
-                foreach (ADTO appointmentDto in suggestedAppointmentDtosPhysician)
+                foreach (AppointmentDTO appointmentDto in suggestedAppointmentDtosPhysician)
                 {
-                    List<ADTO> suggestedAppointmentDtos = GetAvailableAppointments(appointmentDto);
+                    List<AppointmentDTO> suggestedAppointmentDtos = GetAvailableAppointments(appointmentDto);
                     if (suggestedAppointmentDtos.Count != 0)
                     {
                         return suggestedAppointmentDtos[0];

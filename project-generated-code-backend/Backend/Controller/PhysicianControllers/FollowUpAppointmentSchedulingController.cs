@@ -6,7 +6,6 @@
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Service.SchedulingService;
 using HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies;
-using MicroServiceAppointment.Backend.Dto;
 
 namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {
@@ -20,7 +19,7 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
             _appointmentSchedulingService.SchedulingStrategyContext = new PhysicianFollowUpSchedulingStrategy();
         }
 
-        public ADTO GetRecommendedAppointment(ADTO appointmentDto)
+        public AppointmentDTO GetRecommendedAppointment(AppointmentDTO appointmentDto)
         {
             return _appointmentSchedulingService.FindNearestAppointment(appointmentDto);
         }

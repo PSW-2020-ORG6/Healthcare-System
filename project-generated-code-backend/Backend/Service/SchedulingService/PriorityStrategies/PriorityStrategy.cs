@@ -10,7 +10,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.PriorityStrategi
 {
     public interface PriorityStrategy
     {
-        List<ADTO> FindSuggestedAppointments(SuggestedAppointmentDto suggestedAppointmentDTO);
+        List<AppointmentDTO> FindSuggestedAppointments(SuggestedAppointmentDto suggestedAppointmentDTO);
 
     }
 }

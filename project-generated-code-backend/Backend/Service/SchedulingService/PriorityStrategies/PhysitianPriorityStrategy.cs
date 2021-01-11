@@ -11,13 +11,13 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.PriorityStrategi
 {
     public class PhysitianPriorityStrategy : PriorityStrategy
     {
-        public List<ADTO> FindSuggestedAppointments(SuggestedAppointmentDto suggestedAppointmentDTO)
+        public List<AppointmentDTO> FindSuggestedAppointments(SuggestedAppointmentDto suggestedAppointmentDTO)
         {
             DateTime currentDate = suggestedAppointmentDTO.DateStart.AddDays(-3);
-            List<ADTO> appointmentDTOs = new List<ADTO>();
+            List<AppointmentDTO> appointmentDTOs = new List<AppointmentDTO>();
             while (!currentDate.Equals(suggestedAppointmentDTO.DateEnd.AddDays(3)))
             {
-                ADTO appointment = new ADTO();
+                AppointmentDTO appointment = new AppointmentDTO();
                 if (currentDate.CompareTo(DateTime.Today) < 0)
                 {
                     continue;

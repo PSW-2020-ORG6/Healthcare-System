@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using HealthClinicBackend.Backend.Dto;
 
 namespace HealthClinicBackend.Backend.Model.Hospital
 {
@@ -310,10 +311,10 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         {
             return requiredEquipment.All(e => Equipment.Contains(e));
         }
-        public Room(RoomDTO room)
-        {
-            Name = room.Name;
-        }
+        //public Room(RoomDTO room)
+        //{
+        //    Name = room.Name;
+        //}
 
         public void AddEquipment(Equipment newEquipment)
         {

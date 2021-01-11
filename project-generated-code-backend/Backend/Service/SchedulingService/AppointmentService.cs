@@ -2,9 +2,6 @@ using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService
 {
@@ -87,7 +84,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             return _appointmentRepository.GetAppointmentsByDate(date);
         }
 
-        public void NewAppointment(ADTO appointmentDto)
+        public void NewAppointment(AppointmentDTO appointmentDto)
         {
             _appointmentRepository.Save(new Appointment(appointmentDto));
         }
