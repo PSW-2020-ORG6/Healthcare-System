@@ -1,7 +1,4 @@
-﻿using HealthClinicBackend.Backend.Dto;
-//using MicroServiceAccount.Backend.Dto;
-using MicroServiceAppointment.Backend.Dto;
-//using HealthClinicBackend.Backend.Dto;
+﻿using MicroServiceAppointment.Backend.Dto;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -16,17 +13,17 @@ namespace MicroServiceAppointment.Backend.Util
     {
         public static readonly HttpClient client = new HttpClient();
 
-        public static async Task<PatientDto> GetPatientByIdAsync(string patientId)
+        public static async Task<PatientsDTO> GetPatientByIdAsync(string patientId)
         {
             HttpResponseMessage response = await client.GetAsync("http://localhost:57053/patientMicroservice/getPatientById/" + patientId);
             response.EnsureSuccessStatusCode();
-            return JsonConvert.DeserializeObject<PatientDto>(await response.Content.ReadAsStringAsync());
+            return JsonConvert.DeserializeObject<PatientsDTO>(await response.Content.ReadAsStringAsync());
         }
-        public static async Task<PhysicianDTO> GetPhysiciantByIdAsync(string physicianId)
+        public static async Task<PhysiciansDTO> GetPhysiciantByIdAsync(string physicianId)
         {
             HttpResponseMessage response = await client.GetAsync("http://localhost:57053/physicianMicroservice/getPhysicianById/" + physicianId);
             response.EnsureSuccessStatusCode();
-            return JsonConvert.DeserializeObject<PhysicianDTO>(await response.Content.ReadAsStringAsync());
+            return JsonConvert.DeserializeObject<PhysiciansDTO>(await response.Content.ReadAsStringAsync());
         }
     }
 }

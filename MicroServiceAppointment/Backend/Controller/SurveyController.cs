@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using MicroServiceAppointment.Backend.Util;
 using MicroServiceAppointment.Backend.Service;
-using HealthClinicBackend.Backend.Model.Survey;
+using MicroServiceAppointment.Backend.Model.Survey;
 
 namespace MicroServiceAppointment.Backend.Controllers
 {
-    [Route("survey")]
+    [Route("surveyMicroservice")]
     [ApiController]
     public class SurveyController : ControllerBase
     {
@@ -26,21 +26,22 @@ namespace MicroServiceAppointment.Backend.Controllers
             return Ok();
         }
 
-        [Authorize]
-        [HttpGet("getDoctors")]
-        public List<String> GetAllDoctorsFromReportsByPatientId(String patientId)
-        {
-            return _surveyService.GetAllDoctorsFromReportsByPatientId(patientId);
-        }
-        [Authorize]
-        [HttpGet("getDoctorsFromSurvey")]
+        //[Authorize]
+        //[HttpGet("getDoctors/{patientId}")]
+        //public List<String> GetAllDoctorsFromReportsByPatientId(String patientId)
+        //{
+        //    return _surveyService.GetAllDoctorsFromReportsByPatientId(patientId);
+        //}
+        //[Authorize]
+        [HttpGet("getDoctorsFromSurvey/{patientId}")]
         public List<String> GetAllDoctorsFromReportsByPatientIdForSurvey(String patientId)
         {
-            return _surveyService.GetAllDoctorsFromReportsByPatientIdFromSurvey(patientId);
+            //return _surveyService.GetAllDoctorsFromReportsByPatientIdFromSurvey(patientId);
+            throw new NotImplementedException();
         }
 
         [Authorize]
-        [HttpGet("getDoctorsForSurveyList")]
+        [HttpGet("getDoctorsForSurveyList/{patientId}")]
         public List<String> GetAllDoctorsFromReportsByPatientIdForSurveyList(String patientId)
         {
             return _surveyService.GetAllDoctorsFromReportsByPatientIdForSurveyList(patientId);

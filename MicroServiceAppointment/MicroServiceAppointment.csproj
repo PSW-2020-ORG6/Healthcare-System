@@ -5,16 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Backend\Repository\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MicroServiceAccount\MicroServiceAccount.csproj" />
-    <ProjectReference Include="..\project-generated-code-backend\HealthClinicBackend.csproj" />
   </ItemGroup>
 
 

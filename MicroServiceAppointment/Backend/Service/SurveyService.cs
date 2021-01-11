@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-//using HealthClinicBackend.Backend.Repository.Generic;
+using MicroServiceAppointment.Backend.Model.Survey;
+using MicroServiceAppointment.Backend.Repository.Generic;
 using MicroServiceAppointment.Backend.Util;
-using HealthClinicBackend.Backend.Model.Survey;
-using HealthClinicBackend.Backend.Repository.Generic;
 
 namespace MicroServiceAppointment.Backend.Service
 {
@@ -12,14 +11,11 @@ namespace MicroServiceAppointment.Backend.Service
     {
         private readonly ISurveyRepository _surveyRepository;
         private readonly IAppointmentRepository _appointmentRepository;
-        private readonly IReportRepository _reportRepository;
 
-        public SurveyService(ISurveyRepository surveyRepository, IAppointmentRepository appointmentRepository,
-            IReportRepository reportRepository)
+        public SurveyService(ISurveyRepository surveyRepository, IAppointmentRepository appointmentRepository)
         {
             _surveyRepository = surveyRepository;
             _appointmentRepository = appointmentRepository;
-            _reportRepository = reportRepository;
         }
 
         /// <summary>
@@ -30,10 +26,8 @@ namespace MicroServiceAppointment.Backend.Service
         ///</returns>
         public bool AddNewSurvey(Survey surveyText)
         {
-            //_surveyRepository.Save(surveyText);
-            //return true;
-            throw new NotImplementedException();
-
+            _surveyRepository.Save(surveyText);
+            return true;
         }
 
         /// <summary>
@@ -43,12 +37,11 @@ namespace MicroServiceAppointment.Backend.Service
         ///<returns>
         ///list of doctor's full name (string)
         ///</returns>
-        internal List<string> GetAllDoctorsFromReportsByPatientIdFromSurvey(string patientId)
-        {
-            //return _surveyRepository.GetDoctorNamesByPatientId(patientId);
-            throw new NotImplementedException();
+        //internal List<string> GetAllDoctorsFromReportsByPatientIdFromSurvey(string patientId)
+        //{
+        //    return _surveyRepository.GetDoctorNamesByPatientId(patientId);
 
-        }
+        //}
 
         /// <summary>
         ///method for getting avaliable doctors as survey subject
@@ -60,37 +53,31 @@ namespace MicroServiceAppointment.Backend.Service
         ///</returns>
         internal List<string> GetAllDoctorsFromReportsByPatientIdForSurveyList(string patientId)
         {
-            //List<String> resultListFromSurvey =
-            //    _surveyRepository.GetDoctorNamesByPatientId(patientId);
-            //List<String> resultListFromReports = _surveyRepository.GetDoctorNamesByPatientId(patientId);
-            //List<String> resultList = new List<String>();
+            List<String> resultListFromSurvey =
+                _surveyRepository.GetDoctorNamesByPatientId(patientId);
+            List<String> resultList = new List<String>();
 
-            //List<String> resultListPastAppointments =
-            //    _appointmentRepository.GetByPatientId(patientId)
-            //        .Where(a => !a.IsSurveyDone)
-            //        .Select(a => a.Physician.Name + " " + a.Physician.Surname).ToList();
-
-            //foreach (String physicianFromRepors in resultListFromReports)
-            //{
-            //    resultList.Add(physicianFromRepors);
-            //}
-
-            //foreach (String physicianFromPastAppointmentst in resultListPastAppointments)
-            //{
-            //    resultList.Add(physicianFromPastAppointmentst);
-            //}
+            List<String> resultListPastAppointments =
+                _appointmentRepository.GetByPatientId(patientId)
+                    .Where(a => !a.IsSurveyDone)
+                    .Select(a => a.Physician.Name + " " + a.Physician.Surname).ToList();
 
 
-            //foreach (String physicianFromSurvey in resultListFromSurvey)
-            //{
-            //    if (resultList.Contains(physicianFromSurvey))
-            //    {
-            //        resultList.Remove(physicianFromSurvey);
-            //    }
-            //}
+            foreach (String physicianFromPastAppointmentst in resultListPastAppointments)
+            {
+                resultList.Add(physicianFromPastAppointmentst);
+            }
 
-            //return resultList;
-            throw new NotImplementedException();
+
+            foreach (String physicianFromSurvey in resultListFromSurvey)
+            {
+                if (resultList.Contains(physicianFromSurvey))
+                {
+                    resultList.Remove(physicianFromSurvey);
+                }
+            }
+
+            return resultList;
 
         }
 
@@ -102,13 +89,11 @@ namespace MicroServiceAppointment.Backend.Service
         ///</returns>
         ///<param name="patientId"> String patient id
         ///</param>
-        internal List<string> GetAllDoctorsFromReportsByPatientId(string patientId)
-        {
-            //var reports = _reportRepository.GetByPatientId(patientId);
-            //return reports.Select(r => r.Physician.Name + " " + r.Physician.Surname).ToList();
-            throw new NotImplementedException();
-
-        }
+        //internal List<string> GetAllDoctorsFromReportsByPatientId(string patientId)
+        //{
+        //    var reports = _reportRepository.GetByPatientId(patientId);
+        //    return reports.Select(r => r.Physician.Name + " " + r.Physician.Surname).ToList();
+        //}
 
         /// <summary>
         ///calculates statistics for each survey question not related do doctor

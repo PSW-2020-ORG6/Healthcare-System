@@ -2,11 +2,11 @@
 using System;
 using System.Collections.Generic;
 using MicroServiceAppointment.Backend.Service;
-//using MicroServiceAppointment.Backend.Dto;
 using Microsoft.AspNetCore.Authorization;
-//using MicroServiceAppointment.Backend.Util;
-//using MicroServiceAccount.Backend.Dto;
-using HealthClinicBackend.Backend.Model.Schedule;
+using System.Net.Http.Headers;
+using MicroServiceAppointment.Backend.Util;
+using MicroServiceAppointment.Backend.Dto;
+using MicroServiceAppointment.Backend.Model;
 
 namespace MicroServiceAppointment.Backend.Controllers
 {
@@ -57,7 +57,7 @@ namespace MicroServiceAppointment.Backend.Controllers
         //radi
         [Authorize]
         [HttpGet("avaliableTimeIntervals/{physicianId}/{specializationName}/{date}")]
-        public List<TimeIntervalDTO> GetAllAvailableAppointments(string physicianId, string specializationName,
+        public List<TimeIntervalsDTO> GetAllAvailableAppointments(string physicianId, string specializationName,
             string date)
         {
             if (_dateFromStringConverter.IsPreferredTimeValid(date))
