@@ -13,14 +13,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class AppointmentDatabaseSql : GenericDatabaseSql<Appointment>, IAppointmentRepository
     {
-        public AppointmentDatabaseSql() : base()
-        {
-        }
-
-        public AppointmentDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
-        {
-        }
-
+        private ProcedureTypeDatabaseSql procedureTypeDatabaseSql = new ProcedureTypeDatabaseSql();
+        private PatientDatabaseSql patientDatabaseSql = new PatientDatabaseSql();
+        private PhysicianDatabaseSql physicianDatabaseSql = new PhysicianDatabaseSql();
+        private RoomDatabaseSql roomDatabaseSql = new RoomDatabaseSql();
         public override List<Appointment> GetAll()
         {
             List<Appointment> appointments = DbContext.Appointment.ToList(); //this gets only staticly added appointments? Do we need to write sql query?
@@ -30,7 +26,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             foreach( var appointment in appointments )
             {
                 appointment.ProcedureType = procedureTypes.Where(pt => pt.SerialNumber.Equals(appointment.ProcedureTypeSerialnumber)).ToList()[0];
+                appointment.Patient = patientDatabaseSql.GetById(appointment.PatientSerialNumber);
+                appointment.Physician = physicianDatabaseSql.GetById(appointment.PhysicianSerialNumber);
+                appointment.Room = roomDatabaseSql.GetById(appointment.RoomSerialNumber);
             }
+
 
             return appointments;
         }

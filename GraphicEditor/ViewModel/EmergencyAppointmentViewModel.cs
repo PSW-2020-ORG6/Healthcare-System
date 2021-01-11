@@ -104,11 +104,16 @@ namespace GraphicEditor.ViewModel
 
             if ( scheduledAppointment != null)
             {
+                secretaryScheduleController.NewAppointment(scheduledAppointment);
                 EmergencyScheduleResult emergencyScheduleResult = new EmergencyScheduleResult(scheduledAppointment, window);
                 emergencyScheduleResult.Show();
             }
             else
             {
+                Dictionary<Appointment, AppointmentDto> prefferedChoices = secretaryScheduleController.AppointmentAnasysisGEA(appointmentDto);
+                AppointmentRellocation ar = new AppointmentRellocation(prefferedChoices);
+                ar.Show();
+
                 //analysis
             }
 
