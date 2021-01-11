@@ -67,7 +67,7 @@ namespace MicroServiceAppointment.Backend.Controllers
         }
 
         [Authorize]
-        [HttpPost("makeAppointment}")]
+        [HttpPost("makeAppointment")]
         public IActionResult MakeAppointment(AppointmentSchedulingDTO appointmentSchedulingDTO )
         {/*
             if (appointmentSchedulingDTO!= null && appointmentSchedulingDTO.IsDataValid(appointmentSchedulingDTO.Date))

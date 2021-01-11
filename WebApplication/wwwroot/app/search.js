@@ -4,13 +4,13 @@ Vue.component("search", {
             yes: false,
             rowAdvanced: 0,
             rowSimple: 0,
-            advancedSearches: [false,false,false],
-            simpleSearches: [false,false,false],
+            advancedSearches: [false, false, false],
+            simpleSearches: [false, false, false],
             search: null
         }
     },
     template:
-    `
+        `
     <div id="search">
         <div class= "container">
             <br/><h3 class="text">Search - prescription and report</h3><br/>
@@ -296,16 +296,35 @@ Vue.component("search", {
             this.rowSimple -= 1
         },
         AdvancedSearch: function () {
-            var date = "'" + document.getElementById("dateAdvancedFrom").value + "' and '" + document.getElementById("dateAdvancedTo").value + "'"
+            let dateFrom = document.getElementById("dateAdvancedFrom").value
+            let dateTo = document.getElementById("dateAdvancedTo").value
             if (this.ValidateAdvancedSearch()) {
                 var prescriptionSearch = this.PrescriptionAdvancedSearch()
                 var reportSearch = this.ReportAdvancedSearch()
                 axios
-                    .get('/user/advancedSearch', { params: { prescriptionSearch: prescriptionSearch, reportSearch: reportSearch, date: date } })
+                    .get('/search/prescriptionsSearch', { params: { prescriptionSearch: prescriptionSearch, dateFrom: dateFrom, dateTo: dateTo },
+                        headers: {
+                            'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                        }
+                     })
                     .then(response => {
                         this.search = response.data
                     })
                     .catch(error => {
+                        alert(error)
+                    })
+                axios
+                    .get('/search/reportsSearch', {
+                        params: { reportSearch: reportSearch, dateFrom: dateFrom, dateTo: dateTo },
+                        headers: {
+                            'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                        }
+                     })
+                    .then(response => {
+                        this.search.concat(response.data)
+                    })
+                    .catch(error => {
+                        alert(error)
                     })
             }
         },
@@ -321,9 +340,9 @@ Vue.component("search", {
             }
             if (this.advancedSearches[1] && (document.getElementById("selectAdvanced32").value == 'Medicine name' || document.getElementById("selectAdvanced32").value == 'Medicine type' || document.getElementById("selectAdvanced32").value == 'All')) {
                 if (advanced == '')
-                        advanced += "," + document.getElementById("textAdvanced3").value + "," + document.getElementById("selectAdvanced32").value
+                    advanced += "," + document.getElementById("textAdvanced3").value + "," + document.getElementById("selectAdvanced32").value
                 else
-                        advanced += ";" + document.getElementById("selectAdvanced31").value + "," + document.getElementById("textAdvanced3").value + "," + document.getElementById("selectAdvanced32").value
+                    advanced += ";" + document.getElementById("selectAdvanced31").value + "," + document.getElementById("textAdvanced3").value + "," + document.getElementById("selectAdvanced32").value
             }
             if (this.advancedSearches[2] && (document.getElementById("selectAdvanced42").value == 'Medicine name' || document.getElementById("selectAdvanced42").value == 'Medicine type' || document.getElementById("selectAdvanced42").value == 'All')) {
                 if (advanced == '')
@@ -361,7 +380,7 @@ Vue.component("search", {
             if (document.getElementById("textAdvanced1").value == "")
                 alert("All fields must be filled!")
             else if (this.advancedSearches[0] && document.getElementById("textAdvanced2").value == "")
-                 alert("All fields must be filled!")
+                alert("All fields must be filled!")
             else if (this.advancedSearches[1] && document.getElementById("textAdvanced3").value == "")
                 alert("All fields must be filled!")
             else if (this.advancedSearches[2] && document.getElementById("textAdvanced4").value == "")
@@ -376,9 +395,9 @@ Vue.component("search", {
             else if (this.simpleSearches[0] && document.getElementById("textSimple2").value == "")
                 alert("All fields must be filled!")
             else if (this.simpleSearches[1] && document.getElementById("textSimple3").value == "")
-                 alert("All fields must be filled!")
+                alert("All fields must be filled!")
             else if (this.simpleSearches[2] && document.getElementById("textSimple4").value == "")
-                 alert("All fields must be filled!")
+                alert("All fields must be filled!")
             else
                 return true
             return false
@@ -428,20 +447,36 @@ Vue.component("search", {
             this.search = sorted
         },
         SearchSimple: function () {
-            var date = "'" + document.getElementById("dateSimpleFrom").value + "' and '" + document.getElementById("dateSimpleTo").value + "'"
+            let dateFrom = document.getElementById("dateSimpleFrom").value
+            let dateTo = document.getElementById("dateSimpleTo").value
             if (this.ValidateSimpleSearch()) {
                 var prescriptionSimpleSearch = this.PrescriptionSimpleSearch()
                 var reportSimpleSearch = this.ReportSimpleSearch()
                 axios
-                    .get('http://localhost:49900/user/advancedSearch', { params: { prescriptionSearch: prescriptionSimpleSearch, reportSearch: reportSimpleSearch, date: date }, 
+                    .get('/search/prescriptionsSearch', {
+                        params: { prescriptionSearch: prescriptionSimpleSearch, dateFrom: dateFrom, dateTo: dateTo },
+                        headers: {
+                            'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                        }
+                        })
+                    .then(response => {
+                        this.search = response.data
+                    })
+                    .catch(error => {
+                        alert(error)
+                    })
+                axios
+                    .get('/search/reportsSearch', {
+                        params: { reportSearch: reportSimpleSearch, dateFrom: dateFrom, dateTo: dateTo } ,
                         headers: {
                             'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                         }
                     })
                     .then(response => {
-                        this.search = response.data
+                        this.search.concat(response.data)
                     })
                     .catch(error => {
+                        alert(error)
                     })
             }
         },
@@ -459,7 +494,7 @@ Vue.component("search", {
                 if (simple == '')
                     simple += "," + document.getElementById("textSimple3").value + "," + document.getElementById("selectSimple3").value
                 else
-                        simple += ";" + "AND" + "," + document.getElementById("textSimple3").value + "," + document.getElementById("selectSimple3").value
+                    simple += ";" + "AND" + "," + document.getElementById("textSimple3").value + "," + document.getElementById("selectSimple3").value
             }
             if (this.simpleSearches[2] && (document.getElementById("selectSimple4").value == 'Medicine name' || document.getElementById("selectSimple4").value == 'Medicine type' || document.getElementById("selectSimple4").value == 'All')) {
                 if (simple == '')

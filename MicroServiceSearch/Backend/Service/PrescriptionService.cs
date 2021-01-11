@@ -1,19 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-//using HealthClinicBackend.Backend.Repository.Generic;
-using MicroServiceSearch.Backend.Model;
-using WebApplication.Backend.DTO;
+using HealthClinicBackend.Backend.Model.MedicalExam;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using HealthClinicBackend.Backend.Repository.Generic;
+using MicroServiceSearch.Backend.DTO;
 
-namespace MicroServiceSearch.Backend.Service
+namespace MicroServiceSearch.Backend.Services
 {
     public class PrescriptionService
     {
-        //private IPrescriptionRepository _prescriptionRepository;
+        private IPrescriptionRepository _prescriptionRepository=new PrescriptionDatabaseSql();
+        private SearchEntityDTO searchEntityDTO = new SearchEntityDTO();
 
-        //public PrescriptionService(IPrescriptionRepository prescriptionRepository)
-        //{
-        //    this._prescriptionRepository = prescriptionRepository;
-        //}
+        public PrescriptionService(IPrescriptionRepository prescriptionRepository)
+        {
+            this._prescriptionRepository = prescriptionRepository;
+        }
+
+        public PrescriptionService()
+        {
+        }
 
         /// <summary>
         ///Get prescriptions by search
@@ -24,43 +30,47 @@ namespace MicroServiceSearch.Backend.Service
         ///<returns>
         ///list of prescription DTO objects
         ///</returns>
-        public List<SearchEntityDTO> GetSearchedPrescription(string searchedPersription, string dateTimes)
+        public List<SearchEntityDTO> GetSearchedPrescription(string searchedPersription, DateTime[] dateTimes)
         {
-            // TODO: refactor to search by property not by property name
-            return new List<SearchEntityDTO>();
-            // try
-            // {
-            //     string[] search = searchedPersription.Split(";");
-            //     string[] s = search[0].Split(",");
-            //     List<Prescription> firstSearchedList =
-            //         prescriptionRepository.GetPrescriptionsByProperty(Propeerty(search[0].Split(",")[2]),
-            //             search[0].Split(",")[1], dateTimes, false);
-            //
-            //     for (int i = 1; i < search.Length; i++)
-            //     {
-            //         if (search[i].Split(",")[0].Equals("AND"))
-            //             firstSearchedList = OperationAND(firstSearchedList,
-            //                 prescriptionRepository.GetPrescriptionsByProperty(Propeerty(search[i].Split(",")[2]),
-            //                     search[i].Split(",")[1], dateTimes, false));
-            //         else if (search[i].Split(",")[0].Equals("OR"))
-            //             firstSearchedList = OperationOR(firstSearchedList,
-            //                 prescriptionRepository.GetPrescriptionsByProperty(Propeerty(search[i].Split(",")[2]),
-            //                     search[i].Split(",")[1], dateTimes, false));
-            //         else
-            //             firstSearchedList = OperationAND(firstSearchedList,
-            //                 prescriptionRepository.GetPrescriptionsByProperty(Propeerty(search[i].Split(",")[2]),
-            //                     search[i].Split(",")[1], dateTimes, true));
-            //     }
-            //
-            //     return ConverToDTO(firstSearchedList);
-            // }
-            // catch (Exception e)
-            // {
-            //     return ConverToDTO(prescriptionRepository.GetPrescriptionsByProperty(
-            //         Propeerty(searchedPersription.Split(",")[2]), searchedPersription.Split(",")[1], dateTimes, false));
-            // }
+            try
+            {
+                string[] search = searchedPersription.Split(";");
+                string[] s = search[0].Split(",");
+                List<Prescription> firstSearchedList = GetPrescriptionsByProperty(Propeerty(search[0].Split(",")[2]), search[0].Split(",")[1], dateTimes, false);
+
+                for (int i = 1; i < search.Length; i++)
+                {
+                    if (search[i].Split(",")[0].Equals("AND"))
+                        firstSearchedList = OperationAND(firstSearchedList, GetPrescriptionsByProperty(Propeerty(search[i].Split(",")[2]), search[i].Split(",")[1], dateTimes, false));
+                    else if (search[i].Split(",")[0].Equals("OR"))
+                        firstSearchedList = OperationOR(firstSearchedList, GetPrescriptionsByProperty(Propeerty(search[i].Split(",")[2]), search[i].Split(",")[1], dateTimes, false));
+                    else
+                        firstSearchedList = OperationAND(firstSearchedList, GetPrescriptionsByProperty(Propeerty(search[i].Split(",")[2]), search[i].Split(",")[1], dateTimes, true));
+                }
+                return searchEntityDTO.ConverPrescriptionToDTO(firstSearchedList);
+            }
+            catch (Exception e)
+            {
+                return searchEntityDTO.ConverPrescriptionToDTO(GetPrescriptionsByProperty(Propeerty(searchedPersription.Split(",")[2]), searchedPersription.Split(",")[1], dateTimes, false));
+            }
         }
 
+        private List<Prescription> GetPrescriptionsByProperty(SearchProperty property, string value, DateTime[] dateTimes, bool not)
+        {
+            List<Prescription> prescriptions = _prescriptionRepository.GetPrescriptionsBetweenDates(dateTimes);
+            if (!not && property.Equals(SearchProperty.All))
+                return GetPrescriptionsByAllProperties(value, prescriptions);
+            else if (not && property.Equals(SearchProperty.All))
+                return GetPrescriptionsByAllPropertiesNegation(value, prescriptions);
+            else if (!not && property.Equals(SearchProperty.MedicineName))
+                return GetPrescriptionsByMedicineName(value, prescriptions);
+            else if (not && property.Equals(SearchProperty.MedicineName))
+                return GetPrescriptionsByMedicineNameNegation(value, prescriptions);
+            else if (!not && property.Equals(SearchProperty.MedicineType))
+                return GetPrescriptionsByMedicineType(value, prescriptions);
+            else
+                return GetPrescriptionsByMedicineTypeNegation(value, prescriptions);
+        }
 
         private SearchProperty Propeerty(string property)
         {
@@ -72,17 +82,7 @@ namespace MicroServiceSearch.Backend.Service
                 return SearchProperty.MedicineType;
         }
 
-        /// <summary>
-        ///Get searched prescriptions by AND operation
-        ///</summary>
-        ///<param name="firstSearchedList"> first list for operation
-        ///<param name="secondSearchedList"> second list for operation
-        ///</param>
-        ///<returns>
-        ///list of prescriptions
-        ///</returns>
-        private List<Prescription> OperationAND(List<Prescription> firstSearchedList,
-            List<Prescription> secondSearchedList)
+        private List<Prescription> OperationAND(List<Prescription> firstSearchedList, List<Prescription> secondSearchedList)
         {
             List<Prescription> returnList = new List<Prescription>();
             foreach (Prescription pfirst in firstSearchedList)
@@ -99,61 +99,97 @@ namespace MicroServiceSearch.Backend.Service
                     }
                 }
             }
-
             return returnList;
         }
 
         private bool NotInResult(List<Prescription> returnList, string serialNumber)
         {
             foreach (Prescription pReturnList in returnList)
-            {
                 if (pReturnList.SerialNumber.Equals(serialNumber))
                     return false;
-            }
-
             return true;
         }
 
-        /// <summary>
-        ///Get searched prescriptions by OR operation
-        ///</summary>
-        ///<param name="firstSearchedList"> first list for operation
-        ///<param name="secondSearchedList"> second list for operation
-        ///</param>
-        ///<returns>
-        ///list of prescriptions
-        ///</returns>
-        private List<Prescription> OperationOR(List<Prescription> firstSearchedList,
-            List<Prescription> secondSearchedList)
+        private List<Prescription> OperationOR(List<Prescription> firstSearchedList, List<Prescription> secondSearchedList)
         {
             List<Prescription> returnList = firstSearchedList;
-
             foreach (Prescription psecond in secondSearchedList)
-            {
                 if (NotInResult(returnList, psecond.SerialNumber))
                     returnList.Add(psecond);
-            }
-
             return returnList;
         }
 
-        private List<SearchEntityDTO> ConverToDTO(List<Prescription> prescriptions)
+        private List<Prescription> GetPrescriptionsByAllProperties(string value, List<Prescription> prescriptions)
         {
-            if (prescriptions == null || prescriptions.Count == 0)
-                return null;
-            List<SearchEntityDTO> searchEntityDTOs = new List<SearchEntityDTO>();
+            List<Prescription> resultList = new List<Prescription>();
             foreach (Prescription prescription in prescriptions)
-            {
-                string text = "";
                 foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
-                    text += "Medicine: " + medicineDosage.Medicine.GenericName + " - " +
-                            medicineDosage.Medicine.MedicineType.Type + " - " + medicineDosage.Amount + " - " +
-                            medicineDosage.Note + ";\n";
-                searchEntityDTOs.Add(new SearchEntityDTO("Prescriprion", text,
-                    prescription.Date.ToString("dddd, MMMM dd yyyy")));
-            }
+                    if (medicineDosage.MedicineNameContains(value))
+                    {
+                        resultList.Add(prescription);
+                        break;
+                    }
+            return resultList;
+        }
 
-            return searchEntityDTOs;
+        private List<Prescription> GetPrescriptionsByAllPropertiesNegation(string value, List<Prescription> prescriptions)
+        {
+            List<Prescription> resultList = new List<Prescription>();
+            foreach (Prescription prescription in prescriptions)
+                foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
+                    if (!medicineDosage.MedicineNameContains(value) && !medicineDosage.MedicineTypeContains(value))
+                        resultList.Add(prescription);
+            return resultList;
+        }
+
+
+        private List<Prescription> GetPrescriptionsByMedicineName(string value, List<Prescription> prescriptions)
+        {
+            List<Prescription> resultList = new List<Prescription>();
+            foreach (Prescription prescription in prescriptions)
+                foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
+                    if (medicineDosage.MedicineNameContains(value))
+                        resultList.Add(prescription);
+            return resultList;
+        }
+
+        private List<Prescription> GetPrescriptionsByMedicineNameNegation(string value, List<Prescription> prescriptions)
+        {
+            List<Prescription> resultList = new List<Prescription>();
+            foreach (Prescription prescription in prescriptions)
+                foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
+                    if (!medicineDosage.MedicineNameContains(value))
+                    {
+                        resultList.Add(prescription);
+                        break;
+                    }
+            return resultList;
+        }
+
+        private List<Prescription> GetPrescriptionsByMedicineType(string value, List<Prescription> prescriptions)
+        {
+            List<Prescription> resultList = new List<Prescription>();
+            foreach (Prescription prescription in prescriptions)
+                foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
+                    if (medicineDosage.Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper()))
+                    {
+                        resultList.Add(prescription);
+                        break;
+                    }
+            return resultList;
+        }
+
+        private List<Prescription> GetPrescriptionsByMedicineTypeNegation(string value, List<Prescription> prescriptions)
+        {
+            List<Prescription> resultList = new List<Prescription>();
+            foreach (Prescription prescription in prescriptions)
+                foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
+                    if (!medicineDosage.MedicineTypeContains(value))
+                    {
+                        resultList.Add(prescription);
+                        break;
+                    }
+            return resultList;
         }
     }
 }

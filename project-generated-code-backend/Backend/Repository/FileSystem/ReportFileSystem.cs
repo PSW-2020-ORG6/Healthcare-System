@@ -3,6 +3,8 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class ReportFileSystem
 
+using System;
+using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.MedicalExam;
 using HealthClinicBackend.Backend.Repository.Generic;
@@ -34,6 +36,11 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
         public List<Report> GetByPatientId(string id)
         {
             throw new System.NotImplementedException();
+        }
+
+        public List<Report> GetReportsBetweenDates(DateTime[] datetimes)
+        {
+            throw new NotImplementedException();
         }
 
         public override Report Instantiate(string objectStringFormat)

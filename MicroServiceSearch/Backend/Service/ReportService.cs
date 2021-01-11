@@ -1,18 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.MedicalExam;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
-using MicroServiceSearch.Backend.Model;
-using WebApplication.Backend.DTO;
+using MicroServiceAppointment.Backend.Util;
+using MicroServiceSearch.Backend.DTO;
 
-namespace MicroServiceSearch.Backend.Service
+namespace MicroServiceSearch.Backend.Services
 {
     public class ReportService
     {
-        private IReportRepository _reportRepository;
+        private IReportRepository _reportRepository=new ReportDatabaseSql();
+        private SearchEntityDTO searchEntityDTO = new SearchEntityDTO();
 
         public ReportService(IReportRepository reportRepository)
         {
             _reportRepository = reportRepository;
+        }
+
+        public ReportService()
+        {
         }
 
         /// <summary>
@@ -24,39 +32,64 @@ namespace MicroServiceSearch.Backend.Service
         ///<returns>
         ///list of reports DTO objects
         ///</returns>
-        public List<SearchEntityDTO> GetSearchedReport(string searchedReport, string dateTimes)
+        public List<SearchEntityDTO> GetSearchedReport(string searchedReport, DateTime[] dateTimes)
         {
-            // TODO: refactor to use actual properties and not names
-            return new List<SearchEntityDTO>();
-            // try
-            // {
-            //     string[] search = searchedReport.Split(";");
-            //     List<Report> firstSearchedList =
-            //         _reportRepository.GetReportsByProperty(Property(search[0].Split(",")[2]), search[0].Split(",")[1],
-            //             dateTimes, false);
-            //     for (int i = 1; i < search.Length; i++)
-            //     {
-            //         if (search[i].Split(",")[0].Equals("AND"))
-            //             firstSearchedList = OperationAND(firstSearchedList,
-            //                 _reportRepository.GetReportsByProperty(Property(search[i].Split(",")[2]),
-            //                     search[i].Split(",")[1], dateTimes, false));
-            //         else if (search[i].Split(",")[0].Equals("OR"))
-            //             firstSearchedList = OperationOR(firstSearchedList,
-            //                 _reportRepository.GetReportsByProperty(Property(search[i].Split(",")[2]),
-            //                     search[i].Split(",")[1], dateTimes, false));
-            //         else
-            //             firstSearchedList = OperationAND(firstSearchedList,
-            //                 _reportRepository.GetReportsByProperty(Property(search[i].Split(",")[2]),
-            //                     search[i].Split(",")[1], dateTimes, true));
-            //     }
-            //
-            //     return ConverToDTO(firstSearchedList);
-            // }
-            // catch (Exception e)
-            // {
-            //     return ConverToDTO(_reportRepository.GetReportsByProperty(Property(searchedReport.Split(",")[2]),
-            //         searchedReport.Split(",")[1], dateTimes, false));
-            // }
+            try
+            {
+                string[] search = searchedReport.Split(";");
+                List<ReportDto> firstSearchedList = GetReportsByProperty(Property(search[0].Split(",")[2]), search[0].Split(",")[1], dateTimes, false);
+                for (int i = 1; i < search.Length; i++)
+                {
+                    if (search[i].Split(",")[0].Equals("AND"))
+                        firstSearchedList = OperationAND(firstSearchedList, GetReportsByProperty(Property(search[i].Split(",")[2]), search[i].Split(",")[1], dateTimes, false));
+                    else if (search[i].Split(",")[0].Equals("OR"))
+                        firstSearchedList = OperationOR(firstSearchedList, GetReportsByProperty(Property(search[i].Split(",")[2]), search[i].Split(",")[1], dateTimes, false));
+                    else
+                        firstSearchedList = OperationAND(firstSearchedList, GetReportsByProperty(Property(search[i].Split(",")[2]), search[i].Split(",")[1], dateTimes, true));
+                }
+                return searchEntityDTO.ConverToDTO(firstSearchedList);
+            }
+            catch (Exception e)
+            {
+                return searchEntityDTO.ConverToDTO(GetReportsByProperty(Property(searchedReport.Split(",")[2]), searchedReport.Split(",")[1], dateTimes, false));
+            }
+        }
+
+        private List<ReportDto> GetReportsByProperty(SearchProperty property, string value, DateTime[] dateTimes, bool not)
+        {
+            List<ReportDto> reports = GetAppointmentDtos(_reportRepository.GetReportsBetweenDates(dateTimes));
+            if (!not && property.Equals(SearchProperty.All))
+                return GetReportssByAllProperties(value, reports);
+            else if (not && property.Equals(SearchProperty.All))
+                return GetRepportsByAllPropertiesNegation(value, reports);
+            else if (!not && property.Equals(SearchProperty.Patient))
+                return GetPrescriptionsByPatient(value, reports);
+            else if (not && property.Equals(SearchProperty.Patient))
+                return GetPrescriptionsByPatientNegation(value, reports);
+            else if (!not && property.Equals(SearchProperty.Doctor))
+                return GetPrescriptionsByPhysition(value, reports);
+            else if (not && property.Equals(SearchProperty.Doctor))
+                return GetPrescriptionsByPhysitionNegation(value, reports);
+            else if (!not && property.Equals(SearchProperty.Specialist))
+                return GetPrescriptionsBySpecialization(value, reports);
+            else if (not && property.Equals(SearchProperty.Specialist))
+                return GetPrescriptionsBySpecializationNegation(value, reports);
+            else if (!not && property.Equals(SearchProperty.ProcedureType))
+                return GetPrescriptionsByProedureType(value, reports);
+            else
+                return GetPrescriptionsByProedureTypeNegation(value, reports);
+        }
+        private List<ReportDto> GetAppointmentDtos(List<Report> reports)
+        {
+            List<ReportDto> reportDtos = new List<ReportDto>();
+            foreach (Report r in reports)
+            {
+                var physician = HttpRequest.GetPhysiciantByIdAsync(r.PhysicianSerialNumber).Result;
+                var patient = HttpRequest.GetPatientByIdAsync(r.PatientSerialNumber).Result;
+                string patientFullName = patient.Name + " " + patient.Surname;
+                reportDtos.Add(new ReportDto(r.Date, patientFullName, physician.FullName));
+            }
+            return reportDtos;
         }
 
         private SearchProperty Property(string property)
@@ -73,42 +106,16 @@ namespace MicroServiceSearch.Backend.Service
                 return SearchProperty.ProcedureType;
         }
 
-        private List<SearchEntityDTO> ConverToDTO(List<Report> reports)
+        private List<ReportDto> OperationAND(List<ReportDto> firstSearchedList, List<ReportDto> secondSearchedList)
         {
-            if (reports == null || reports.Count == 0)
-                return null;
-            List<SearchEntityDTO> searchEntityDTOs = new List<SearchEntityDTO>();
-            foreach (Report report in reports)
+            List<ReportDto> returnList = new List<ReportDto>();
+            foreach (ReportDto rfirst in firstSearchedList)
             {
-                string text = "";
-                text += "Patient: " + report.Patient.Name + " " + report.Patient.Surname + ";Doctor: " +
-                        report.ProcedureType.Specialization + " " + report.Physician.Name + " " +
-                        report.Physician.Surname + "; Procedure Type: " + report.ProcedureType.Name;
-                searchEntityDTOs.Add(new SearchEntityDTO("Report", text, report.Date.ToString("dddd, MMMM dd yyyy")));
-            }
-
-            return searchEntityDTOs;
-        }
-
-        /// <summary>
-        ///Get searched reports by AND operation
-        ///</summary>
-        ///<param name="firstSearchedList"> first list for operation
-        ///<param name="secondSearchedList"> second list for operation
-        ///</param>
-        ///<returns>
-        ///list of reports
-        ///</returns>
-        private List<Report> OperationAND(List<Report> firstSearchedList, List<Report> secondSearchedList)
-        {
-            List<Report> returnList = new List<Report>();
-            foreach (Report rfirst in firstSearchedList)
-            {
-                foreach (Report rsecond in secondSearchedList)
+                foreach (ReportDto rsecond in secondSearchedList)
                 {
-                    if (rfirst.SerialNumber.Equals(rsecond.SerialNumber))
+                    if (rfirst.EqualsReport(rsecond))
                     {
-                        if (NotInResult(returnList, rfirst.SerialNumber))
+                        if (!rfirst.NotInResult(returnList))
                         {
                             returnList.Add(rfirst);
                             break;
@@ -116,40 +123,104 @@ namespace MicroServiceSearch.Backend.Service
                     }
                 }
             }
-
             return returnList;
         }
 
-        private bool NotInResult(List<Report> returnList, string serialNumber)
+        private List<ReportDto> OperationOR(List<ReportDto> firstSearchedList, List<ReportDto> secondSearchedList)
         {
-            foreach (Report rReturnList in returnList)
-            {
-                if (rReturnList.SerialNumber.Equals(serialNumber))
-                    return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        ///Get searched reports by OR operation
-        ///</summary>
-        ///<param name="firstSearchedList"> first list for operation
-        ///<param name="secondSearchedList"> second list for operation
-        ///</param>
-        ///<returns>
-        ///list of reports
-        ///</returns>
-        private List<Report> OperationOR(List<Report> firstSearchedList, List<Report> secondSearchedList)
-        {
-            List<Report> returnList = firstSearchedList;
-            foreach (Report rsecond in secondSearchedList)
-            {
-                if (NotInResult(returnList, rsecond.SerialNumber))
+            List<ReportDto> returnList = firstSearchedList;
+            foreach (ReportDto rsecond in secondSearchedList)
+                if (!rsecond.NotInResult(firstSearchedList))
                     returnList.Add(rsecond);
-            }
-
             return returnList;
+        }
+
+        private List<ReportDto> GetPrescriptionsBySpecializationNegation(string value, List<ReportDto> reports)
+        {
+            List<ReportDto> resultList = new List<ReportDto>();
+            foreach (ReportDto report in reports)
+                if (!report.SpecializationContains(value))
+                    resultList.Add(report);
+            return resultList;
+        }
+
+        private List<ReportDto> GetPrescriptionsByProedureTypeNegation(string value, List<ReportDto> reports)
+        {
+            List<ReportDto> resultList = new List<ReportDto>();
+            foreach (ReportDto report in reports)
+                if (!report.ProcedureTypeContains(value))
+                    resultList.Add(report);
+            return resultList;
+        }
+        private List<ReportDto> GetPrescriptionsByProedureType(string value, List<ReportDto> reports)
+        {
+            List<ReportDto> resultList = new List<ReportDto>();
+            foreach (ReportDto report in reports)
+                if (report.ProcedureTypeContains(value))
+                    resultList.Add(report);
+            return resultList;
+        }
+
+        private List<ReportDto> GetPrescriptionsBySpecialization(string value, List<ReportDto> reports)
+        {
+            List<ReportDto> resultList = new List<ReportDto>();
+            foreach (ReportDto report in reports)
+                if (report.SpecializationContains(value))
+                    resultList.Add(report);
+            return resultList;
+        }
+
+        private List<ReportDto> GetPrescriptionsByPhysitionNegation(string value, List<ReportDto> reports)
+        {
+            List<ReportDto> resultList = new List<ReportDto>();
+            foreach (ReportDto report in reports)
+                if (!report.PhysicianContains(value))
+                    resultList.Add(report);
+            return resultList;
+        }
+
+        private List<ReportDto> GetPrescriptionsByPhysition(string value, List<ReportDto> reports)
+        {
+            List<ReportDto> resultList = new List<ReportDto>();
+            foreach (ReportDto report in reports)
+                if (report.PhysicianContains(value))
+                    resultList.Add(report);
+            return resultList;
+        }
+
+        private List<ReportDto> GetPrescriptionsByPatientNegation(string value, List<ReportDto> reports)
+        {
+            List<ReportDto> resultList = new List<ReportDto>();
+            foreach (ReportDto report in reports)
+                if (!report.Patient.ToUpper().Contains(value.ToUpper()))
+                    resultList.Add(report);
+            return resultList;
+        }
+
+        private List<ReportDto> GetPrescriptionsByPatient(string value, List<ReportDto> reports)
+        {
+            List<ReportDto> resultList = new List<ReportDto>();
+            foreach (ReportDto report in reports)
+                if (report.PatientContains(value))
+                    resultList.Add(report);
+            return resultList;
+        }
+        private List<ReportDto> GetReportssByAllProperties(string value, List<ReportDto> reports)
+        {
+            List<ReportDto> resultList = new List<ReportDto>();
+            foreach (ReportDto report in reports)
+                if (report.AllContains(value))
+                    resultList.Add(report);
+            return resultList;
+        }
+
+        private List<ReportDto> GetRepportsByAllPropertiesNegation(string value, List<ReportDto> reports)
+        {
+            List<ReportDto> resultList = new List<ReportDto>();
+            foreach (ReportDto report in reports)
+                if (!report.AllContains(value))
+                    resultList.Add(report);
+            return resultList;
         }
     }
 }
