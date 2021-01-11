@@ -14,9 +14,7 @@ namespace MicroServiceAppointment.Backend.Service
     public class AppointmentService : IAppointmentService
     {
         private readonly IPhysicianRepository _physicianRepository;
-        //private readonly ISpecializationRepository _specializationRepository;
         private readonly IAppointmentRepository _appointmentRepository;
-        //private readonly IAddressRepository _addressRepository;
 
         private PhysiciansDTO physitianDTO = new PhysiciansDTO();
         private SpecializationsDTO specializationDTO = new SpecializationsDTO();
@@ -34,12 +32,10 @@ namespace MicroServiceAppointment.Backend.Service
         private DateFromStringConverter dateTimeDTO = new DateFromStringConverter();
 
 
-        public AppointmentService(/*ISpecializationRepository specializationRepository,*/
-            IAppointmentRepository appointmentRepository/*,IAddressRepository addressRepository*/, IPhysicianRepository physicianRepository)
+        public AppointmentService(IAppointmentRepository appointmentRepository,
+            IPhysicianRepository physicianRepository)
         {
-            //_specializationRepository = specializationRepository;
             _appointmentRepository = appointmentRepository;
-            //_addressRepository = addressRepository;
             _physicianRepository = physicianRepository;
         }
 

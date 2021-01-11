@@ -100,5 +100,11 @@ namespace MicroServiceAppointment.Backend.Repository.DatabaseSql
             DbContext.Appointment.Update(appointment);
             DbContext.SaveChanges();
         }
+        public List<Appointment> GetDoneSurveyByPatentId(string patientId)
+        {
+            return GetByPatientId(patientId)
+                   .Where(a => !a.IsSurveyDone)
+                   .ToList();
+        }
     }
 }

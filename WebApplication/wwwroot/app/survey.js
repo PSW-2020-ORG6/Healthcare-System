@@ -516,7 +516,7 @@ Vue.component("appointments", {
             .catch(error => {
             })
         axios
-            .get('/appointment/physicians', {
+            .get('/account/allPhysicians', {
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -525,7 +525,7 @@ Vue.component("appointments", {
                 this.physicians = response.data
             })
         axios
-            .get('/appointment/specializations', {
+            .get('/account/allSpecializations', {
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -1001,7 +1001,7 @@ Vue.component("appointments", {
 
         GetTimeIntervals: function () {
             axios
-                .get('/appointment/appointments', { params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, date: this.date } , 
+                .get('/appointment/avaliableTimeIntervals', { params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, date: this.date } , 
                     headers: {
                         'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                     }
