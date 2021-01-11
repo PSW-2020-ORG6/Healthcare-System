@@ -1,5 +1,5 @@
-﻿using HealthClinicBackend.Backend.Dto;
-using HealthClinicBackend.Backend.Model.MedicalExam;
+﻿using MicroServiceSearch.Backend.Dto;
+using MicroServiceSearch.Backend.Model;
 using System;
 using System.Collections.Generic;
 namespace MicroServiceSearch.Backend.DTO

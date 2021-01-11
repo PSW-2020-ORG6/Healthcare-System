@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using HealthClinicBackend.Backend.Model.MedicalExam;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
-using HealthClinicBackend.Backend.Repository.Generic;
 using MicroServiceSearch.Backend.DTO;
+using MicroServiceSearch.Backend.Model;
+using MicroServiceSearch.Backend.Repository.DatabaseSql;
+using MicroServiceSearch.Backend.Repository.Generic;
 
 namespace MicroServiceSearch.Backend.Services
 {

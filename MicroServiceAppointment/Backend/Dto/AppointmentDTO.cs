@@ -26,14 +26,14 @@ namespace MicroServiceAppointment.Backend.Dto
         {
             RoomDTO = new RoomDTO(appointment.Room);
             TimeIntervalDTO = new TimeIntervalsDTO(appointment.TimeInterval);
-            PhysicianDTO = new PhysiciansDTO(appointment.Physician);
+            PhysicianDTO = new PhysiciansDTO();
             ProcedureTypeDTO = new ProcedureTypeDTO(appointment.ProcedureType);
             Urgency = appointment.Urgency;
             Active = appointment.Active;
             IsSurveyDone = appointment.IsSurveyDone;
             Date = appointment.Date;
             SerialNumber = appointment.SerialNumber;
-            PatientsDTO = new PatientsDTO(appointment.Patient);
+            PatientsDTO = new PatientsDTO();
         }
 
         public List<AppointmentDto> ConvertListToAppointmentDTO(List<Appointment> appointments)

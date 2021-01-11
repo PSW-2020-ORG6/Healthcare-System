@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthClinicBackend.Backend.Repository;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
-using HealthClinicBackend.Backend.Repository.Generic;
 using MicroServiceAccount.Backend.Controllers;
 using MicroServiceAccount.Backend.Model.Util;
 using MicroServiceAccount.Backend.Service;
 using MicroServiceAccount.Backend.Services;
 using MicroServiceAccount.Backend.Services.Interfaces;
 using MicroServiceSearch.Backend.Controllers;
+using MicroServiceSearch.Backend.Repository.DatabaseSql;
+using MicroServiceSearch.Backend.Repository.Generic;
 using MicroServiceSearch.Backend.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -59,7 +59,7 @@ namespace MicroServiceSearch
                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                    };
                });
-            services.AddDbContext<HealthCareSystemDbContext>(options =>
+            services.AddDbContext<MsSearchDbContext>(options =>
             {
                 var connectionString = CreateConnectionStringFromEnvironment();
                 Console.WriteLine(connectionString);
@@ -103,7 +103,7 @@ namespace MicroServiceSearch
             }
 
             using (var scope = app.ApplicationServices.CreateScope())
-            using (var context = scope.ServiceProvider.GetService<HealthCareSystemDbContext>())
+            using (var context = scope.ServiceProvider.GetService<MsSearchDbContext>())
             {
                 context.Database.EnsureCreated();
             }

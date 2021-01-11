@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MicroServiceAppointment.Backend.Model;
 using MicroServiceAppointment.Backend.Model.Survey;
 using MicroServiceAppointment.Backend.Repository.Generic;
 using MicroServiceAppointment.Backend.Util;
@@ -56,18 +57,17 @@ namespace MicroServiceAppointment.Backend.Service
             List<String> resultListFromSurvey =
                 _surveyRepository.GetDoctorNamesByPatientId(patientId);
             List<String> resultList = new List<String>();
+            List<String> resultListPastAppointments = new List<String>();
 
-            List<String> resultListPastAppointments =
-                _appointmentRepository.GetByPatientId(patientId)
-                    .Where(a => !a.IsSurveyDone)
-                    .Select(a => a.Physician.Name + " " + a.Physician.Surname).ToList();
-
+            foreach (Appointment a in _appointmentRepository.GetDoneSurveyByPatentId(patientId))
+            {
+                resultListPastAppointments.Add(HttpRequest.GetPhysiciantByIdAsync(a.PhysicianSerialNumber).Result.FullName);
+            }
 
             foreach (String physicianFromPastAppointmentst in resultListPastAppointments)
             {
                 resultList.Add(physicianFromPastAppointmentst);
             }
-
 
             foreach (String physicianFromSurvey in resultListFromSurvey)
             {

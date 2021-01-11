@@ -1,9 +1,8 @@
-﻿using HealthClinicBackend.Backend.Model.MedicalExam;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HealthClinicBackend.Backend.Dto
+namespace MicroServiceSearch.Backend.Dto
 {
     public class ReportDto
     {
