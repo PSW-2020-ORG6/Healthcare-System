@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_PASSWORD: "password"
       POSTGRES_USER: "user"
-      POSTGRES_DB: "healthcare-system-db-test"
+      POSTGRES_DB: "healthcare-system-db-prod"
     ports: 
       - "5432:5432"
     networks: 
