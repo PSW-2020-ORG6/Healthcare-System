@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.MedicalExam;
@@ -9,6 +10,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class ReportDatabaseSql : GenericDatabaseSql<Report>, IReportRepository
     {
+        public ReportDatabaseSql()
+        {
+        }
+
         public ReportDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
         {
         }
@@ -58,6 +63,12 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public List<Report> GetByPatientId(string id)
         {
             return GetAll().Where(r => r.PatientId.Equals(id)).ToList();
+        }
+
+
+        public List<Report> GetReportsBetweenDates(DateTime[] datetimes)
+        {
+            return GetAll().Where(t => t.Date > datetimes[0] && t.Date < datetimes[1]).ToList();
         }
     }
 }

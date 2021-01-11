@@ -19,9 +19,12 @@ namespace HealthClinicBackend.Backend.Model.MedicalExam
         [NotMapped] public virtual List<AdditionalDocument> AdditionalDocument { get; set; }
         public DateTime Date { get; set; }
         public string Findings { get; set; }
+        [ForeignKey("Patient")] public string PatientSerialNumber { get; set; }
         public virtual Patient Patient { get; set; }
+        [ForeignKey("Physician")] public string PhysicianSerialNumber { get; set; }
         public virtual Physician Physician { get; set; }
         public string PatientConditions { get; set; }
+        [ForeignKey("ProcedureType")] public string ProcedureTypeSerialNumber { get; set; }
         public virtual ProcedureType ProcedureType { get; set; }
         public String PatientName { get; set; }
         public String PhysitianName { get; set; }

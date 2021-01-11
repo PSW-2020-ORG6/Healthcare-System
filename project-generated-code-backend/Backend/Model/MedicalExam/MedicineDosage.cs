@@ -58,5 +58,15 @@ namespace HealthClinicBackend.Backend.Model.MedicalExam
         {
             return "medicine: " + Medicine + "\namount: " + Amount + "\nnote: " + Note;
         }
+
+        public bool MedicineNameContains(string value)
+        {
+            return Medicine.GenericName.ToUpper().Contains(value.ToUpper()) || Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper());
+        }
+
+        public bool MedicineTypeContains(string value)
+        {
+            return Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper());
+        }
     }
 }

@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
-namespace WebApplication.Backend.DTO
+﻿using HealthClinicBackend.Backend.Dto;
+using HealthClinicBackend.Backend.Model.MedicalExam;
+using System;
+using System.Collections.Generic;
+namespace MicroServiceSearch.Backend.DTO
 {
     public class SearchEntityDTO
     {
@@ -36,26 +39,46 @@ namespace WebApplication.Backend.DTO
 
         public bool IsSearchFormatValid(string search)
         {
-            if (search == null || search.Split(";").Length < 0 || search.Split(",").Length < 3 || search.Split(";").Length > 4)
-                return false;
-            foreach (string searchString in search.Split(";"))
-            {
-                if (searchString.Split(",").Length < 0 || searchString.Split(",").Length > 3)
-                    return false;
-            }
-            return true;
+            return search != null || search.Split("-").Length < 3 || search.Split("-").Length > 4;
         }
 
-        public bool IsDateFormat(string date)
+        public bool IsDateFormat(string dateFrom, string dateTo)
         {
-            if (date != null)
-                return date.Split("and")[0].Split("-").Length == 3 || date.Split("and")[1].Split("-").Length == 3;
-            return false;
+            return IsSearchFormatValid(dateFrom) && IsSearchFormatValid(dateTo);
         }
 
         public bool IsNull(List<SearchEntityDTO> searchEntityDTOs)
         {
             return searchEntityDTOs == null;
+        }
+
+        public List<SearchEntityDTO> ConverToDTO(List<ReportDto> reports)
+        {
+            if (reports == null || reports.Count == 0)
+                return null;
+            List<SearchEntityDTO> searchEntityDTOs = new List<SearchEntityDTO>();
+            foreach (ReportDto report in reports)
+            {
+                string text = "";
+                text += "Patient: " + report.Patient + ";Doctor: " + report.Specialization + " " + report.Physician + "; Procedure Type: " + report.ProcedureType;
+                searchEntityDTOs.Add(new SearchEntityDTO("Report", text, report.Date));
+            }
+            return searchEntityDTOs;
+        }
+
+        public List<SearchEntityDTO> ConverPrescriptionToDTO(List<Prescription> prescriptions)
+        {
+            if (prescriptions == null || prescriptions.Count == 0)
+                return null;
+            List<SearchEntityDTO> searchEntityDTOs = new List<SearchEntityDTO>();
+            foreach (Prescription prescription in prescriptions)
+            {
+                string text = "";
+                foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
+                    text += "Medicine: " + medicineDosage.Medicine.GenericName + " - " + medicineDosage.Medicine.MedicineType.Type + " - " + medicineDosage.Amount + " - " + medicineDosage.Note + ";\n";
+                searchEntityDTOs.Add(new SearchEntityDTO("Prescriprion", text, prescription.Date.ToString("dddd, MMMM dd yyyy")));
+            }
+            return searchEntityDTOs;
         }
     }
 }
