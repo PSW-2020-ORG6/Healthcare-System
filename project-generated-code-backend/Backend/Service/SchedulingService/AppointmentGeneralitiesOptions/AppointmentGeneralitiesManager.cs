@@ -87,6 +87,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
                             if (_roomAvailabilityService.IsRoomAvailable(room, timeInterval))
                             {
                                 AppointmentDto appointmentDto = CreateAppointment(physician, room, timeInterval);
+                                appointmentDto.Date = appointmentPreferences.Date;
                                 appointments.Add(appointmentDto);
                             }
                         }
@@ -101,6 +102,8 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
         {
             bool noDoctors = false;
             AppointmentDto appointmentPreferences = new AppointmentDto();
+            appointmentPreferences.Patient = appointment.Patient;
+            appointmentPreferences.Room = appointment.Room;
             appointmentPreferences.Physician = appointment.Physician;
             appointmentPreferences.ProcedureType = appointment.ProcedureType;
             appointmentPreferences.Date = appointment.Date;
@@ -127,7 +130,9 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
                         {
                             if (roomAvailabilityService.IsRoomAvailable(room, timeInterval))
                             {
-                                return CreateAppointment(physician, room, timeInterval);
+                                AppointmentDto dto = CreateAppointment(physician, room, timeInterval);
+                                dto.Date = appointmentPreferences.Date;
+                                return dto;
                             }
                         }
                     }
