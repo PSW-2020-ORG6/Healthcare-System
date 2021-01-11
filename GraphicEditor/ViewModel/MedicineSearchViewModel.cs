@@ -117,7 +117,7 @@ namespace GraphicEditor.ViewModel
 
             CommonUtil.Run(() =>
             {
-                roomButton.Background = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+                roomButton.Background = new SolidColorBrush(Color.FromRgb(35, 119, 147));
             }, TimeSpan.FromMilliseconds(5000));
         }
     }

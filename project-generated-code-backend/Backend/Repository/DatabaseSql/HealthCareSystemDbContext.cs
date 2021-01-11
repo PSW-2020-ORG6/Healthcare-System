@@ -14,8 +14,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class HealthCareSystemDbContext : DbContext
     {
-   //     private const string CONNECTION_STRING =
-  //          "User ID =postgres;Password=super;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
+        //private const string CONNECTION_STRING =
+        //    "User ID =postgres;Password=root;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
 
         public DbSet<Address> Address { get; set; }
         public DbSet<Admin> Admin { get; set; }
@@ -61,10 +61,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
         }
 
-        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        // { 
-        //     optionsBuilder.UseNpgsql(CONNECTION_STRING);
-        // }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseNpgsql(CONNECTION_STRING);
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -387,7 +387,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             Room room5 = new Room("105", "Store room 105", 105, "1001",
                 "10000002", "RoomButtonStyle", 2, 0, 0, 0);
 
-            //modelBuilder.Entity<Room>().HasData(room1, room2, room3, room4, room5);
+            modelBuilder.Entity<Room>().HasData(room1, room2, room3, room4, room5);
         }
 
         private static void MedicineManufacturerCreation(ModelBuilder modelBuilder)
