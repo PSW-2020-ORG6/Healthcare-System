@@ -1,24 +1,19 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using MicroServiceAccount.Backend.Repository.DatabaseSql;
 using MicroServiceAccount.Backend.Repository.Generic;
 using MicroServiceAccount.Backend.Controllers;
 using MicroServiceAccount.Backend.Model.Util;
 using MicroServiceAccount.Backend.Service;
-using MicroServiceAccount.Backend.Services;
 using MicroServiceAccount.Backend.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using MicroServiceAccount.Backend.Repository;
 
@@ -132,7 +127,7 @@ namespace MicroServiceAccount
             var portDefault = 5432;
 
             var userDefault = "postgres";
-            var passwordDefault = "root";
+            var passwordDefault = "super";
             var schema = "healthcare-system-db";
 
             // Do not change this

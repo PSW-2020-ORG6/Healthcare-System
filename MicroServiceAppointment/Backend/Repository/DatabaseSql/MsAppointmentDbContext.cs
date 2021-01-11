@@ -1,25 +1,39 @@
 ﻿using MicroServiceAccount.Backend.Model;
 using MicroServiceAccount.Backend.Model.Util;
 using MicroServiceAccount.Backend.Repository.DatabaseSql.RelationHelpers;
+using MicroServiceAppointment.Backend.Model;
+using MicroServiceAppointment.Backend.Model.Hospital;
+using MicroServiceAppointment.Backend.Model.Survey;
 using Microsoft.EntityFrameworkCore;
 
-namespace MicroServiceAccount.Backend.Repository.DatabaseSql
+namespace MicroServiceAppointment.Backend.Repository.DatabaseSql
 {
-    public class MsAccountDbContext : DbContext
+    public class MsAppointmentDbContext : DbContext
     {
-        //     private const string CONNECTION_STRING =
-        //          "User ID =postgres;Password=super;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
+   //     private const string CONNECTION_STRING =
+  //          "User ID =postgres;Password=super;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
 
-        public DbSet<Address> Address { get; set; }
-        public DbSet<Admin> Admin { get; set; }
-        public DbSet<City> City { get; set; }
-        public DbSet<Country> Country { get; set; }
+        //public DbSet<Address> Address { get; set; }
+        //public DbSet<Admin> Admin { get; set; }
+        //public DbSet<City> City { get; set; }
+        //public DbSet<Country> Country { get; set; }
         public DbSet<Specialization> Specialization { get; set; }
         public DbSet<Physician> Physician { get; set; }
-        public DbSet<PhysicianSpecialization> PhysicianSpecialization { get; set; }
-        public DbSet<Patient> Patient { get; set; }
-
-
+        //public DbSet<PhysicianSpecialization> PhysicianSpecialization { get; set; }
+        //public DbSet<Patient> Patient { get; set; }
+        //public DbSet<Secretary> Secretary { get; set; }
+        public DbSet<Equipment> Equipment { get; set; }
+        public DbSet<Bed> Bed { get; set; }
+        public DbSet<RoomType> RoomType { get; set; }
+        public DbSet<Room> Room { get; set; }
+        public DbSet<Floor> Floor { get; set; }
+        public DbSet<Building> Building { get; set; }
+        //public DbSet<MedicineManufacturer> MedicineManufacturer { get; set; }
+        //public DbSet<MedicineType> MedicineType { get; set; }
+        //public DbSet<Medicine> Medicine { get; set; }
+        //public DbSet<Rejection> Rejection { get; set; }
+        //public DbSet<DiagnosticType> DiagnosticType { get; set; }
+        //public DbSet<DiagnosticReferral> DiagnosticReferral { get; set; }
         //public DbSet<FollowUp> FollowUp { get; set; }
         //public DbSet<SpecialistReferral> SpecialistReferral { get; set; }
         //public DbSet<MedicineDosage> MedicineDosage { get; set; }
@@ -30,17 +44,13 @@ namespace MicroServiceAccount.Backend.Repository.DatabaseSql
         //public DbSet<ReportFollowUp> ReportFollowUp { get; set; }
         //public DbSet<ReportSpecialistReferral> ReportSpecialistReferral { get; set; }
         //public DbSet<Report> Report { get; set; }
-        //public DbSet<ProcedureType> ProcedureType { get; set; }
-        //public DbSet<Appointment> Appointment { get; set; }
-        //public DbSet<Question> Question { get; set; }
-        //public DbSet<Survey> Survey { get; set; }
+        public DbSet<ProcedureType> ProcedureType { get; set; }
+        public DbSet<Appointment> Appointment { get; set; }
+        public DbSet<Question> Question { get; set; }
+        public DbSet<Survey> Survey { get; set; }
         //public DbSet<Feedback> Feedback { get; set; }
-        public DbSet<ActionAndBenefitMessage> ActionAndBenefitMessage { get; set; }
-        public MsAccountDbContext(DbContextOptions<MsAccountDbContext> options) : base(options)
-        {
-        }
-
-        public MsAccountDbContext()
+        //public DbSet<ActionAndBenefitMessage> ActionAndBenefitMessage { get; set; }
+        public MsAppointmentDbContext(DbContextOptions<MsAppointmentDbContext> options) : base(options)
         {
         }
 
@@ -64,47 +74,47 @@ namespace MicroServiceAccount.Backend.Repository.DatabaseSql
             //    .WithOne()
             //    .OnDelete(DeleteBehavior.Cascade);
 
-            //modelBuilder.Entity<Building>()
-            //    .HasMany(b => b.Floors) // Building has many references to Floors
-            //    .WithOne(f => f.Building) // Floors have one reference to Building
-            //    .OnDelete(DeleteBehavior.Cascade); // On deleting one building all the referenced floors are deleted
+            modelBuilder.Entity<Building>()
+                .HasMany(b => b.Floors) // Building has many references to Floors
+                .WithOne(f => f.Building) // Floors have one reference to Building
+                .OnDelete(DeleteBehavior.Cascade); // On deleting one building all the referenced floors are deleted
 
-            //modelBuilder.Entity<Floor>()
-            //    .HasMany(f => f.Rooms) // Floor has many Rooms
-            //    .WithOne(r => r.Floor) // Room has one Floor
-            //    .OnDelete(DeleteBehavior.Cascade); // When Floor is deleted, so are all the referenced Rooms
+            modelBuilder.Entity<Floor>()
+                .HasMany(f => f.Rooms) // Floor has many Rooms
+                .WithOne(r => r.Floor) // Room has one Floor
+                .OnDelete(DeleteBehavior.Cascade); // When Floor is deleted, so are all the referenced Rooms
 
-            //modelBuilder.Entity<Room>()
-            //    .HasMany(r => r.Equipment) // Room has many Equipments
-            //    .WithOne(); // Equipment 'has' one Room but doesn't reference it
+            modelBuilder.Entity<Room>()
+                .HasMany(r => r.Equipment) // Room has many Equipments
+                .WithOne(); // Equipment 'has' one Room but doesn't reference it
 
-            //modelBuilder.Entity<Room>()
-            //    .HasMany(r => r.Beds) // Room has many Beds
-            //    .WithOne(); // Bed 'has' one Room but doesn't reference it
+            modelBuilder.Entity<Room>()
+                .HasMany(r => r.Beds) // Room has many Beds
+                .WithOne(); // Bed 'has' one Room but doesn't reference it
 
-            //modelBuilder.Entity<Room>()
-            //    .HasOne(r => r.RoomType) // Room has RoomType
-            //    .WithMany(); // RoomType can have many Rooms but doesn't reference them
+            modelBuilder.Entity<Room>()
+                .HasOne(r => r.RoomType) // Room has RoomType
+                .WithMany(); // RoomType can have many Rooms but doesn't reference them
 
-            modelBuilder.Entity<City>().HasOne(c => c.Country).WithMany();
-            modelBuilder.Entity<Address>().HasOne(a => a.City).WithMany();
+            //modelBuilder.Entity<City>().HasOne(c => c.Country).WithMany();
+            //modelBuilder.Entity<Address>().HasOne(a => a.City).WithMany();
 
             modelBuilder.Entity<Physician>().HasOne(p => p.Address).WithMany();
             modelBuilder.Entity<Patient>().HasOne(p => p.Address).WithMany();
             //modelBuilder.Entity<Secretary>().HasOne(s => s.Address).WithMany();
 
-            //modelBuilder.Entity<Appointment>()
-            //    .HasOne(a => a.Patient)
-            //    .WithMany();
-            //modelBuilder.Entity<Appointment>()
-            //    .HasOne(a => a.ProcedureType)
-            //    .WithMany();
-            //modelBuilder.Entity<Appointment>()
-            //    .HasOne(a => a.Physician)
-            //    .WithMany();
-            //modelBuilder.Entity<Appointment>()
-            //    .HasOne(a => a.Room)
-            //    .WithMany();
+            modelBuilder.Entity<Appointment>()
+                .HasOne(a => a.Patient)
+                .WithMany();
+            modelBuilder.Entity<Appointment>()
+                .HasOne(a => a.ProcedureType)
+                .WithMany();
+            modelBuilder.Entity<Appointment>()
+                .HasOne(a => a.Physician)
+                .WithMany();
+            modelBuilder.Entity<Appointment>()
+                .HasOne(a => a.Room)
+                .WithMany();
 
             // Relation helpers are used for many-to-many relations
             modelBuilder.Entity<PhysicianSpecialization>()
@@ -124,8 +134,8 @@ namespace MicroServiceAccount.Backend.Repository.DatabaseSql
             //    .HasKey(x => x.SerialNumber);
             //modelBuilder.Entity<Prescription>()
             //    .HasKey(x => x.SerialNumber);
-            modelBuilder.Entity<Admin>()
-              .HasKey(x => x.Email);
+            //modelBuilder.Entity<Admin>()
+            //  .HasKey(x => x.Email);
 
             //modelBuilder.Entity<DiagnosticReferral>()
             //    .HasOne(dr => dr.DiagnosticType)
@@ -179,9 +189,9 @@ namespace MicroServiceAccount.Backend.Repository.DatabaseSql
             //    .HasOne(x => x.FollowUp)
             //    .WithOne();
 
-            // Pharmacy support
-            modelBuilder.Entity<ActionAndBenefitMessage>()
-                .HasAlternateKey(abm => abm.ActionID);
+            //// Pharmacy support
+            //modelBuilder.Entity<ActionAndBenefitMessage>()
+            //    .HasAlternateKey(abm => abm.ActionID);
         }
     }
 }

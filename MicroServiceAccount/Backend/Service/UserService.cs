@@ -1,7 +1,5 @@
 ﻿using MicroServiceAccount.Backend.Model;
 using MicroServiceAccount.Backend.Repository.Generic;
-//using HealthClinicBackend.Backend.Model.Accounts;
-//using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;

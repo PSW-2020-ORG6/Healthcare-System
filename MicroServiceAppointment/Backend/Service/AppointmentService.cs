@@ -1,35 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HealthClinicBackend.Backend.Repository.Generic;
-//using MicroServiceAppointment.Backend.Dto;
-//using HealthClinicBackend.Backend.Model.Accounts;
-//using MicroServiceAccount.Backend.Dto;
-//using HealthClinicBackend.Backend.Dto;
-//using MicroServiceAppointment.Backend.Util;
-using HealthClinicBackend.Backend.Model.Schedule;
-using HealthClinicBackend.Backend.Model.Accounts;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using Org.BouncyCastle.Asn1.Ocsp;
-using HealthClinicBackend.Backend.Dto;
 using MicroServiceAppointment.Backend.Util;
+using MicroServiceAccount.Backend.Repository.Generic;
+using MicroServiceAppointment.Backend.Repository.Generic;
+using MicroServiceAccount.Backend.Model;
+using MicroServiceAppointment.Backend.Model;
+using MicroServiceAppointment.Backend.Dto;
 
 namespace MicroServiceAppointment.Backend.Service
 {
     public class AppointmentService : IAppointmentService
     {
-        private readonly ISpecializationRepository _specializationRepository;
-        private readonly IAppointmentRepository _appointmentRepository;
-        private readonly IAddressRepository _addressRepository;
         private readonly IPhysicianRepository _physicianRepository;
+        //private readonly ISpecializationRepository _specializationRepository;
+        private readonly IAppointmentRepository _appointmentRepository;
+        //private readonly IAddressRepository _addressRepository;
 
-
-
-        private PhysicianDTO physitianDTO = new PhysicianDTO();
-        private SpecializationDTO specializationDTO = new SpecializationDTO();
+        private PhysiciansDTO physitianDTO = new PhysiciansDTO();
+        private SpecializationsDTO specializationDTO = new SpecializationsDTO();
         private AppointmentDto appointmentDTO = new AppointmentDto();
-        private TimeIntervalDTO timeIntervalDTO = new TimeIntervalDTO();
+        private TimeIntervalsDTO timeIntervalDTO = new TimeIntervalsDTO();
 
         private DateFromStringConverter dateFromStringConverter = new DateFromStringConverter();
 
@@ -41,17 +33,17 @@ namespace MicroServiceAppointment.Backend.Service
 
         private DateFromStringConverter dateTimeDTO = new DateFromStringConverter();
 
-       
-        public AppointmentService(ISpecializationRepository specializationRepository,
-            IAppointmentRepository appointmentRepository,IAddressRepository addressRepository, IPhysicianRepository physicianRepository)
+
+        public AppointmentService(/*ISpecializationRepository specializationRepository,*/
+            IAppointmentRepository appointmentRepository/*,IAddressRepository addressRepository*/, IPhysicianRepository physicianRepository)
         {
-            _specializationRepository = specializationRepository;
+            //_specializationRepository = specializationRepository;
             _appointmentRepository = appointmentRepository;
-            _addressRepository = addressRepository;
+            //_addressRepository = addressRepository;
             _physicianRepository = physicianRepository;
         }
 
-        public List<TimeIntervalDTO> GetAllAvailableAppointments(string physicianId, string specializationName,
+        public List<TimeIntervalsDTO> GetAllAvailableAppointments(string physicianId, string specializationName,
             string date)
         {
             Physician physician = _physicianRepository.GetById(physicianId);
@@ -70,10 +62,10 @@ namespace MicroServiceAppointment.Backend.Service
         ///<param name="physician"> Physician type object
         ///<param name="specializationName"> String type object
         ///</param>>
-        private List<TimeIntervalDTO> GetAvailableAppointments(List<Appointment> appointments, Physician physician,
+        private List<TimeIntervalsDTO> GetAvailableAppointments(List<Appointment> appointments, Physician physician,
             string specializationName)
         {
-            List<TimeIntervalDTO> result = new List<TimeIntervalDTO>();
+            List<TimeIntervalsDTO> result = new List<TimeIntervalsDTO>();
             DateTime time = physician.WorkSchedule.Start;
             while (time < physician.WorkSchedule.End)
             {
@@ -93,7 +85,7 @@ namespace MicroServiceAppointment.Backend.Service
                 }
 
                 if (!existance)
-                    result.Add(new TimeIntervalDTO(time));
+                    result.Add(new TimeIntervalsDTO(time));
                 time = time.Add(new TimeSpan(0, 20, 0));
             }
 
@@ -121,7 +113,7 @@ namespace MicroServiceAppointment.Backend.Service
             List<AppointmentWithRecommendationDTO> availableAppointments = new List<AppointmentWithRecommendationDTO>();
             foreach (string date in dates)
             {
-                List<TimeIntervalDTO> appointments = GetAllAvailableAppointments(physicianId, specializationName, date);
+                List<TimeIntervalsDTO> appointments = GetAllAvailableAppointments(physicianId, specializationName, date);
                 if (appointments.Count > 0)
                     availableAppointments.Add(
                         new AppointmentWithRecommendationDTO(date, physicianId, appointments, ""));
@@ -212,7 +204,7 @@ namespace MicroServiceAppointment.Backend.Service
             {
                 AppointmentDto appointmentDTO = new AppointmentDto(a);
                 appointmentDTO.PhysicianDTO = HttpRequest.GetPhysiciantByIdAsync(a.PhysicianSerialNumber).Result;
-                appointmentDTO.PatientDTO = HttpRequest.GetPatientByIdAsync(a.PatientSerialNumber).Result;
+                appointmentDTO.PatientsDTO = HttpRequest.GetPatientByIdAsync(a.PatientSerialNumber).Result;
                 appointmentsDto.Add(appointmentDTO);
             }
             return appointmentDTO.ConvertListToAppointmentDTO(appointments);
@@ -407,7 +399,7 @@ namespace MicroServiceAppointment.Backend.Service
             List<AppointmentWithRecommendationDTO> availableAppointments = new List<AppointmentWithRecommendationDTO>();
             foreach (string date in dates)
             {
-                List<TimeIntervalDTO> appointments = GetAllAvailableAppointments(physicianId, specializationName, date);
+                List<TimeIntervalsDTO> appointments = GetAllAvailableAppointments(physicianId, specializationName, date);
                 if (appointments.Count > 0)
                     availableAppointments.Add(
                         new AppointmentWithRecommendationDTO(date, physicianId, appointments, ""));

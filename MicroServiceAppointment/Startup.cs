@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using MicroServiceAccount.Backend.Controllers;
-using MicroServiceAccount.Backend.Repository;
 using MicroServiceAccount.Backend.Repository.DatabaseSql;
 using MicroServiceAccount.Backend.Repository.Generic;
-using MicroServiceAccount.Backend.Service;
 using MicroServiceAppointment.Backend.Controllers;
+using MicroServiceAppointment.Backend.Repository.DatabaseSql;
+using MicroServiceAppointment.Backend.Repository.Generic;
 using MicroServiceAppointment.Backend.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -21,6 +20,7 @@ namespace MicroServiceAppointment
 {
     public class Startup
     {
+        //private MsAccountDbContext m = new MsAccountDbContext();
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
@@ -52,7 +52,7 @@ namespace MicroServiceAppointment
                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                    };
                });
-            services.AddDbContext<MsAccountDbContext>(options =>
+            services.AddDbContext<MsAppointmentDbContext>(options =>
             {
                 var connectionString = CreateConnectionStringFromEnvironment();
                 Console.WriteLine(connectionString);
@@ -67,22 +67,32 @@ namespace MicroServiceAppointment
 
 
             // Inject repositories
-            services.AddScoped<IAppointmentRepository, Appointment>();
+            services.AddScoped<IAppointmentRepository, AppointmentDatabaseSql>();
+            services.AddScoped<IRoomRepository, RoomDatabaseSql>();
+            services.AddScoped<IRoomTypeRepository, RoomTypeDatabaseSql>();
+            services.AddScoped<IEquipmentRepository, EquipmentDatabaseSql>();
+            services.AddScoped<IFloorRepository, FloorDatabaseSql>();
+            services.AddScoped<IBedRepository, BedDatabaseSql>();
+            services.AddScoped<IBuildingRepository, BuildingDatabaseSql>();
+            services.AddScoped<IProcedureTypeRepository, ProcedureTypeDatabaseSql>();
+            services.AddScoped<ISurveyRepository, SurveyDatabaseSql>();
             services.AddScoped<IPhysicianRepository, PhysicianDatabaseSql>();
-            services.AddScoped<IPatientRepository, PatientDatabaseSql>();
+            //services.AddScoped<ISpecializationRepository, SpecializationDatabaseSql>();
+            //services.AddTransient<ISpecializationRepository, SpecializationDatabaseSql>();
+            //services.AddScoped<IPatientRepository, PatientDatabaseSql>();
 
             // Inject services
             services.AddScoped<AppointmentService, AppointmentService>();
             services.AddScoped<SurveyService, SurveyService>();
-            services.AddScoped<UserService, UserService>();
-            services.AddScoped<PhysicianService, PhysicianService>();
+            //services.AddScoped<UserService, UserService>();
+            //services.AddScoped<PhysicianService, PhysicianService>();
 
 
             // Inject Controllers
             services.AddScoped<AppointmentController, AppointmentController>();
             services.AddScoped<SurveyController, SurveyController>();
-            services.AddScoped<LoginController, LoginController>();
-            services.AddScoped<PhysicianController, PhysicianController>();
+            //services.AddScoped<LoginController, LoginController>();
+            //services.AddScoped<PhysicianController, PhysicianController>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -94,7 +104,7 @@ namespace MicroServiceAppointment
             }
 
             using (var scope = app.ApplicationServices.CreateScope())
-            using (var context = scope.ServiceProvider.GetService<MsAccountDbContext>())
+            using (var context = scope.ServiceProvider.GetService<MsAppointmentDbContext>())
             {
                 context.Database.EnsureCreated();
             }
@@ -114,7 +124,7 @@ namespace MicroServiceAppointment
             var portDefault = 5432;
 
             var userDefault = "postgres";
-            var passwordDefault = "root";
+            var passwordDefault = "super";
             var schema = "healthcare-system-db";
 
             // Do not change this
