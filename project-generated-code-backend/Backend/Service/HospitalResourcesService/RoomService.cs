@@ -21,6 +21,8 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
             _roomTypeRepository = new RoomTypeDatabaseSql();
             _medicineRepository = new MedicineDatabaseSql();
             _equipmentRepository = new EquipmentDatabaseSql();
+            _bedRepository = new BedDatabaseSql();
+
         }
 
         public RoomService(IRoomRepository roomRepository, IRoomTypeRepository roomTypeRepository, IMedicineRepository medicineRepository, IEquipmentRepository equipmentRepository)
