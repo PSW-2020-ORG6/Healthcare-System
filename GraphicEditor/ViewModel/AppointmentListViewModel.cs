@@ -73,7 +73,7 @@ namespace GraphicEditor.ViewModel
 
             CommonUtil.Run(() =>
             {
-                button.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+                button.BorderBrush = new SolidColorBrush(Color.FromRgb(35, 119, 147));
             }, TimeSpan.FromMilliseconds(5000));
         }
     }
