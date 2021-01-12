@@ -108,8 +108,8 @@ namespace GraphicEditor.ViewModel
             set
             {
                 if (value != null) SetProperty(ref selectedEquipment, value);
-                EquipmentRelocationWindow equipmentRelocationWindow = new EquipmentRelocationWindow(selectedEquipment);
-                equipmentRelocationWindow.Show();
+                //EquipmentRelocationWindow equipmentRelocationWindow = new EquipmentRelocationWindow(selectedEquipment);
+                //equipmentRelocationWindow.Show();
             }
         }
 
@@ -200,7 +200,7 @@ namespace GraphicEditor.ViewModel
                 selectedEquipment = equipment[0];
         }
 
-        private void EnterEquipmentRelocationWindow()
+        void EnterEquipmentRelocationWindow()
         {
             EquipmentRelocationWindow equipmentRelocationWindow = new EquipmentRelocationWindow(selectedEquipment);
             equipmentRelocationWindow.Show();

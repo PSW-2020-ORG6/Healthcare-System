@@ -26,8 +26,10 @@
             <ListBox Height="250" x:Name="MyListBoxPatient" SelectedIndex="{Binding PatientIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding Patients, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Path=FullName}" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Name}" />
+                            <TextBlock Text=" " />
+                            <TextBlock Text="{Binding Path=Surname}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

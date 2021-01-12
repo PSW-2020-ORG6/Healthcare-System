@@ -35,7 +35,7 @@
             </ListBox>
         </StackPanel>
         <DockPanel Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-            <Button Command="{Binding DataContext.Relocate}" Margin="10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Relocate" FontSize="20"/>
+            <Button Command="{Binding Relocate}" Margin="10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Relocate" FontSize="20"/>
         </DockPanel>
     </Grid>
 </Window>
