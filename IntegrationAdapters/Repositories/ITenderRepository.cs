@@ -16,6 +16,8 @@ namespace IntegrationAdapters.Repositories
         public bool AddMedicine(MedicineDTO medicineDTO);
         public List<MedicineDTO> GetAllMedicines();
         public List<TenderOffer> GetAllOffersByEmailAndTender(string emailAndTender);
+        public bool IsOfferExisting(TenderOffer tenderOffer);
+        public TenderOffer GetOfferById(string id);
         public void SaveChanges();
       
         public void ClearAll(string tenderName);

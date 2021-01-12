@@ -70,7 +70,25 @@ namespace IntegrationAdapters.Repositories
             }
             return foundOffers;
         }
-
+        public bool IsOfferExisting(TenderOffer tenderOffer)
+        {
+            List<TenderOffer> tenderOffers = dbContext.TenderOffer.ToList();
+            foreach (TenderOffer tenderoffer in tenderOffers)
+            {
+                if (tenderoffer.Id.Equals(tenderOffer.Id)) return true;
+            }
+            return false;
+        }
+        public TenderOffer GetOfferById(string id)
+        {
+            List<TenderOffer> tenderOffers = dbContext.TenderOffer.ToList();
+            foreach (TenderOffer tenderoffer in tenderOffers)
+            {
+                if (tenderoffer.Id.Equals(id))
+                    return tenderoffer;
+            }
+            return null;
+        }
         public void ClearAll(string tenderName)
         {
             foreach (TenderOffer t in GetAllOffers())

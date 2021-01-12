@@ -15,6 +15,47 @@ namespace IntegrationAdaptersTests
     {
         public Mock<IMedicineRepository> mock;
         public Mock<ITenderRepository> mockTender;
+        public TenderOffer tenderOffer1 = new TenderOffer("40", "knezevicljiljana12@gmail.com", "Fakultet thenickih nauka", "tender02", "Aspirin", 100, 20);
+        public TenderOffer tenderOffer2 = new TenderOffer("2", "mili@gmail.com", "Benu apoteka", "tender02", "Brufen", 70, 120);
+
+
+        [Fact]
+        public void Find_existing_offer()
+        {
+            mockTender = new Mock<ITenderRepository>();
+            mockTender.Setup(expression: t => t.GetOfferById(It.IsAny<String>())).Returns(new TenderOffer { Id = "40", CompanyEmail = "knezevicljiljana12@gmail.com", CompanyName = "Fakultet thenickih nauka", TenderName = "tender02", Quantity = 100, Price = 20 });
+            TenderService service = new TenderService(mockTender.Object);
+            TenderOffer tenderOffer = service.GetOfferById("40");
+
+            Assert.NotNull(tenderOffer);
+        }
+        [Fact]
+        public void Find_not_existing_offer()
+        {
+            mockTender = new Mock<ITenderRepository>();
+            mockTender.Setup(expression: t => t.GetAllOffers()).Returns(new List<TenderOffer> { tenderOffer1 });
+            TenderService service = new TenderService(mockTender.Object);
+            TenderOffer tenderOffer = service.GetOfferById("34");
+
+            Assert.Null(tenderOffer);
+        }
+        [Fact]
+        public void Is_offer_not_already_send()
+        {
+            TenderService service = new TenderService();
+            bool result = service.IsOfferExisting(tenderOffer2);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void Is_offer_already_send()
+        {
+            TenderService service = new TenderService();
+            bool result = service.IsOfferExisting(tenderOffer1);
+
+            Assert.True(result);
+        }
         [Fact]
         public void Does_medicine_exist()
         {
