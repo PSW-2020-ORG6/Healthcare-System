@@ -14,16 +14,9 @@ namespace HealthClinicBackend.Backend.Repository.Generic
     public interface IAppointmentRepository : IGenericRepository<Appointment>
     {
         List<Appointment> GetAppointmentsByDate(DateTime date);
-        List<Appointment> GetAppointmentsByPatient(Patient patient);
-        List<Appointment> GetAppointmentsByPhysician(Physician physician);
-        List<Appointment> GetAppointmentsByRoom(Room room);
         List<Appointment> GetByRoomSerialNumber(string roomSerialNumber);
         List<Appointment> GetByPhysicianSerialNumber(string physicianSerialNumber);
         List<Appointment> GetByPatientSerialNumber(string patientSerialNumber);
-        List<Appointment> GetByPatientId(string patientId);
-        List<Appointment> GetByPatientIdActive(string patientId);
-        List<Appointment> GetByPatientIdCanceled(string patientId);
-        List<DateTime> GetByPatientIdCanceledDates(string patientId);
         Appointment GetBySerialNumber(string serialNumber);
     }
 }

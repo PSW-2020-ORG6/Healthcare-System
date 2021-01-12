@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
             <TextBlock HorizontalAlignment="Center" Text="Pick appointment that you want to relocate equipment to:" FontSize="18"/>
-            <ListBox Margin="20 20 20 0"  Height="550" x:Name="MyListBox" ItemsSource="{Binding Path=EquipmentRelocations, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            <ListBox Margin="20 20 20 0"  Height="530" x:Name="MyListBox" ItemsSource="{Binding Path=EquipmentRelocations, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                      Style="{StaticResource MaterialDesignListBox}" BorderBrush="Black" BorderThickness="1" SelectedItem="{Binding Path=SelectedER, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

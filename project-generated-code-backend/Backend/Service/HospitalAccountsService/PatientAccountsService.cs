@@ -53,10 +53,10 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
 
         private bool IsPatientScheduledForPhysician(Patient patient, Physician physician)
         {
-            List<Appointment> patientAppointments = _appointmentRepository.GetAppointmentsByPatient(patient);
+            List<Appointment> patientAppointments = _appointmentRepository.GetByPatientSerialNumber(patient.SerialNumber);
             foreach (Appointment appointment in patientAppointments)
             {
-                if (appointment.Physician.Equals(physician))
+                if (appointment.PhysicianSerialNumber.Equals(physician.SerialNumber))
                 {
                     return true;
                 }

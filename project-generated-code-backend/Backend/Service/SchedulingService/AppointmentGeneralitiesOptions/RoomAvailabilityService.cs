@@ -108,7 +108,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
 
         private bool IsRoomScheduled(Room room, TimeInterval timeInterval)
         {
-            List<Appointment> appointments = _appointmentRepository.GetAppointmentsByRoom(room);
+            List<Appointment> appointments = _appointmentRepository.GetByRoomSerialNumber(room.SerialNumber);
             foreach (Appointment appointment in appointments)
             {
                 if (timeInterval.IsOverLapping(appointment.TimeInterval))
