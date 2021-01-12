@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:GraphicEditor.View.UserControls"
         mc:Ignorable="d"       
         Title="RoomInformation" 
@@ -61,14 +62,13 @@
                     Style="{StaticResource MaterialDesignToolVerticalToggleListBox}"
                     Cursor="Hand">
             <ListBox.ItemTemplate>
-            <DataTemplate>
-                    <TextBlock Text="{Binding Path=Name,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal"
+                                ToolTip="Press right button on mouse to relocate this equipment">
+                        <TextBlock Text="{Binding Path=Name,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                    </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-            <!--<ListBox.InputBindings>
-                <MouseBinding MouseAction="RightClick"
-                              Command="{Binding Path=DataContext.EquipmentRelocationCommand}"/>
-            </ListBox.InputBindings>-->
         </ListBox>
 
         <ListBox    x:Name="medicineListBox"
@@ -217,7 +217,7 @@
             <TextBlock  Grid.Column="0"
                         Grid.Row="2"
                         Visibility="{Binding Path=EquipmentVisibility, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                        Text="Equpment name: "
+                        Text="Equipment name: "
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Margin="0,10"
@@ -438,64 +438,85 @@
 
 
             <!-- Bottom side -->
-            <DockPanel  Grid.Column="0"
+            <StackPanel Grid.Column="0"
                         Grid.Row="10"
-                        Grid.ColumnSpan="2"
-                        HorizontalAlignment="Left">
+                        Grid.ColumnSpan="2">
+                <DockPanel HorizontalAlignment="Left">
 
-                <Button HorizontalAlignment="Center"
+                    <Button HorizontalAlignment="Center"
                         Margin="10"
                         Style="{StaticResource MaterialDesignRaisedButton}" 
                         Command="{Binding Path=NavCommandBedUpdate}"
                         CommandParameter="{Binding Path=BedInfo}">
-                    <DockPanel>
-                        <materialDesign:PackIcon Kind="NotebookEditOutline"
+                        <DockPanel>
+                            <materialDesign:PackIcon Kind="NotebookEditOutline"
                                                  Width="25"
                                                  Height="25"/>
-                        <TextBlock Text="Edit information of : "
+                            <TextBlock Text="Edit information of : "
                                    HorizontalAlignment="Center" 
                                    VerticalAlignment="Center"
                                    TextWrapping="Wrap"/>
-                        <TextBlock Text="{Binding Path=BedInfo.Name}" 
+                            <TextBlock Text="{Binding Path=BedInfo.Name}" 
                                    HorizontalAlignment="Center" 
                                    VerticalAlignment="Center"/>
-                    </DockPanel>
-                </Button>
+                        </DockPanel>
+                    </Button>
 
-                <Button Command="{Binding Path=NavCommandRoomUpdate}"
+                    <Button Command="{Binding Path=NavCommandRoomUpdate}"
                         CommandParameter="{Binding Path=Room}" 
                         Margin="5,5,5,5">
-                    <DockPanel Width="auto">
-                        <materialDesign:PackIcon Kind="Edit" 
+                        <DockPanel Width="auto">
+                            <materialDesign:PackIcon Kind="Edit" 
                                                  Height="25" 
                                                  Width="25"
                                                  VerticalAlignment="Center"/>
-                        <TextBlock HorizontalAlignment="Center" 
+                            <TextBlock HorizontalAlignment="Center" 
                                VerticalAlignment="Center"
                                TextWrapping="Wrap">
                         Edit room information
-                        </TextBlock>
-                    </DockPanel>
-                </Button>
+                            </TextBlock>
+                        </DockPanel>
+                    </Button>
 
-                <Button 
+                    <Button 
                         HorizontalAlignment="Center"
                         Margin="10"
                         Command="{Binding Path=NavCommandExit}"
                         Style="{StaticResource MaterialDesignRaisedButton}" >
-                    <DockPanel Width="auto">
-                        <materialDesign:PackIcon Kind="EmergencyExit" 
+                        <DockPanel Width="auto">
+                            <materialDesign:PackIcon Kind="EmergencyExit" 
                                              Height="25" 
                                              Width="25"
                                              VerticalAlignment="Center"/>
-                        <TextBlock HorizontalAlignment="Center" 
+                            <TextBlock HorizontalAlignment="Center" 
                                VerticalAlignment="Center"
                                TextWrapping="Wrap">
                         Exit
-                        </TextBlock>
-                    </DockPanel>
-                </Button>
-            </DockPanel>
+                            </TextBlock>
+                        </DockPanel>
+                    </Button>
+                </DockPanel>
+                <DockPanel>
+                    <Button 
+                        HorizontalAlignment="Center"
+                        Margin="10"
+                        Command="{Binding Path=EquipmentRelocationCommand}"
+                        Style="{StaticResource MaterialDesignRaisedButton}" >
+                        <DockPanel Width="auto">
+                            <materialDesign:PackIcon Kind="Send" 
+                                             Height="25" 
+                                             Width="25"
+                                             VerticalAlignment="Center"/>
+                            <TextBlock HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap">
+                        Relocate selected equipment
+                            </TextBlock>
+                        </DockPanel>
+                    </Button>
+                </DockPanel>
+            </StackPanel>
+            
         </Grid>
     </Grid>
 </Window>
