@@ -204,16 +204,15 @@ namespace GraphicEditor.ViewModel
 
             // BottomLeftCorner
 
-            //bool bl = bottomLeftCornerSpace.Item1 >= bottomLeftCornerRoom.Item1 && bottomLeftCornerSpace.Item1 <= bottomRightCornerRoom.Item1 &&
-            //           bottomLeftCornerSpace.Item2 >= topLeftCornerRoom.Item2 && bottomLeftCornerSpace.Item2 <= bottomLeftCornerRoom.Item2;
+            bool bl = bottomLeftCornerSpace.Item1 >= bottomLeftCornerRoom.Item1 && bottomLeftCornerSpace.Item1 <= bottomRightCornerRoom.Item1 &&
+                       bottomLeftCornerSpace.Item2 >= topLeftCornerRoom.Item2 && bottomLeftCornerSpace.Item2 <= bottomLeftCornerRoom.Item2;
 
             // BottomRightCorner
 
-            //bool br = bottomRightCornerSpace.Item1 >= bottomLeftCornerRoom.Item1 && bottomRightCornerSpace.Item1 <= bottomRightCornerRoom.Item1 &&
-            //           bottomRightCornerSpace.Item2 >= topRightCornerRoom.Item2 && bottomRightCornerSpace.Item2 <= bottomRightCornerRoom.Item2;
+            bool br = bottomRightCornerSpace.Item1 >= bottomLeftCornerRoom.Item1 && bottomRightCornerSpace.Item1 <= bottomRightCornerRoom.Item1 &&
+                       bottomRightCornerSpace.Item2 >= topRightCornerRoom.Item2 && bottomRightCornerSpace.Item2 <= bottomRightCornerRoom.Item2;
 
-            //return tl || tr || bl || br;
-            return true;
+            return tl || tr || bl || br;
         }
 
         private void editBuilding(Building _building)
