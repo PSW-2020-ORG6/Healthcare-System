@@ -221,10 +221,11 @@ namespace GraphicEditor.ViewModel
                 }
 
                 List<EquipmentRelocation> listFinalER = new List<EquipmentRelocation>();
+                List<EquipmentRelocation> listInitialERCopy = new List<EquipmentRelocation>(listInitialER);
 
                 List<Appointment> roomAppointments = AppointmentController.GetByRoomSerialNumber(equipmentRelocation.roomToRelocateToSerialNumber);
 
-                foreach (EquipmentRelocation er in listInitialER)
+                foreach (EquipmentRelocation er in listInitialERCopy)
                 {
                     foreach (EquipmentRelocation er2 in EquipmentRelocationController.GetAll())
                     {
@@ -249,7 +250,7 @@ namespace GraphicEditor.ViewModel
                     }
                 }
 
-                new EquipmentRelocationSuggestions(listFinalER).Show();
+                new EquipmentRelocationSuggestions(listFinalER).ShowDialog();
             }
             Window.Close();
         }

@@ -1,4 +1,5 @@
 ﻿using GraphicEditor.HelpClasses;
+using GraphicEditor.ViewModel;
 using HealthClinicBackend.Backend.Controller;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using System;
@@ -21,27 +22,13 @@ namespace GraphicEditor.View.Windows
     /// </summary>
     public partial class EquipmentRelocationSuggestions : Window
     {
-        public List<EquipmentRelocation> EquipmentRelocations { get; set; }
-        public MyICommand Relocate { get; private set; }
         
-        public EquipmentRelocation SelectedER { get; set; }
-
-        private EquipmentRelocationController EquipmentRelocationController = new EquipmentRelocationController();
         public EquipmentRelocationSuggestions(List<EquipmentRelocation> er)
         {
-            this.DataContext = this;
+            this.DataContext = new EquipmentRelocationSuggestionsViewModel(this, er);
             InitializeComponent();
-            EquipmentRelocations = er;
-            Relocate = new MyICommand(RelocateFunction);
         }
 
-        private void RelocateFunction()
-        {
-            if (SelectedER != null)
-            {
-                EquipmentRelocationController.AddEquipmentRelocation(SelectedER);
-                this.Close();
-            }
-        }
+        
     }
 }

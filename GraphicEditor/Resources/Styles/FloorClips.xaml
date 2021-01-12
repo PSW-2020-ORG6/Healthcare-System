@@ -81,7 +81,7 @@
                             <PolyLineSegment>
                                 <PolyLineSegment.Points>
                                     <Point X="675" Y="0" />
-                                    <Point X="850" Y="300"/>
+                                    <Point X="825" Y="300"/>
                                     <Point X="675" Y="600" />
                                     <Point X="225" Y="600" />
                                     <Point X="75" Y="300" />
