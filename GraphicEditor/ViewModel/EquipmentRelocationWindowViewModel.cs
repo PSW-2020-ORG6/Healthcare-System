@@ -194,8 +194,9 @@ namespace GraphicEditor.ViewModel
                 List<EquipmentRelocation> listInitialER = new List<EquipmentRelocation>();
                 for(int i = 1; i < 6; ++i)
                 {
-                    DateTime startTime = equipmentRelocation.TimeInterval.Start.Subtract(TimeSpan.FromMinutes(30 * (i + 1)));
-                    DateTime endTime = equipmentRelocation.TimeInterval.End.Subtract(TimeSpan.FromMinutes(30 * (i + 1)));
+                    TimeSpan ts = equipmentRelocation.TimeInterval.End - equipmentRelocation.TimeInterval.Start;
+                    DateTime startTime = equipmentRelocation.TimeInterval.Start.Subtract(TimeSpan.FromMinutes(ts.TotalMinutes * (i + 1)));
+                    DateTime endTime = equipmentRelocation.TimeInterval.End.Subtract(TimeSpan.FromMinutes(ts.TotalMinutes * (i + 1)));
                     EquipmentRelocation suggestedBeforeER = new EquipmentRelocation
                     {
                         TimeInterval = new TimeInterval(startTime, endTime),
@@ -205,8 +206,8 @@ namespace GraphicEditor.ViewModel
                         equipment = equipmentRelocation.equipment
                     };
 
-                    startTime = equipmentRelocation.TimeInterval.Start.AddMinutes(30 * (i + 1));
-                    endTime = equipmentRelocation.TimeInterval.End.AddMinutes(30 * (i + 1));
+                    startTime = equipmentRelocation.TimeInterval.Start.AddMinutes(ts.TotalMinutes * (i + 1));
+                    endTime = equipmentRelocation.TimeInterval.End.AddMinutes(ts.TotalMinutes * (i + 1));
                     EquipmentRelocation suggestedAfterER = new EquipmentRelocation
                     {
                         TimeInterval = new TimeInterval(startTime, endTime),
@@ -242,7 +243,7 @@ namespace GraphicEditor.ViewModel
                     listFinalER.Add(er);
                     foreach (Appointment app in roomAppointments)
                     {
-                        if (!(er.TimeInterval.IsOverLapping(app.TimeInterval)))
+                        if (er.TimeInterval.IsOverLapping(app.TimeInterval))
                         {
                             listFinalER.Remove(er);
                             break;
