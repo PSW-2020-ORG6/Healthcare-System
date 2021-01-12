@@ -13,7 +13,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         private readonly IAppointmentRepository _appointmentRepository;
         private readonly IProcedureTypeRepository _procedureTypeRepository = new ProcedureTypeDatabaseSql();
         private readonly IPatientRepository _patientRepository = new PatientDatabaseSql();
-        private readonly IPhysitianRepository _physicianRepository = new PhysicianDatabaseSql();
+        private readonly IPhysicianRepository _physicianRepository = new PhysicianDatabaseSql();
         private readonly IRoomRepository _roomRepository = new RoomDatabaseSql();
         private List<ProcedureType> _procedureTypes;
 
