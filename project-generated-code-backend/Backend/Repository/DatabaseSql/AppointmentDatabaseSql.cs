@@ -13,26 +13,9 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class AppointmentDatabaseSql : GenericDatabaseSql<Appointment>, IAppointmentRepository
     {
-        private ProcedureTypeDatabaseSql procedureTypeDatabaseSql = new ProcedureTypeDatabaseSql();
-        private PatientDatabaseSql patientDatabaseSql = new PatientDatabaseSql();
-        private PhysicianDatabaseSql physicianDatabaseSql = new PhysicianDatabaseSql();
-        private RoomDatabaseSql roomDatabaseSql = new RoomDatabaseSql();
         public override List<Appointment> GetAll()
         {
-            List<Appointment> appointments = DbContext.Appointment.ToList(); //this gets only staticly added appointments? Do we need to write sql query?
-
-            List<ProcedureType> procedureTypes = DbContext.ProcedureType.ToList();
-
-            foreach( var appointment in appointments )
-            {
-                appointment.ProcedureType = procedureTypes.Where(pt => pt.SerialNumber.Equals(appointment.ProcedureTypeSerialnumber)).ToList()[0];
-                appointment.Patient = patientDatabaseSql.GetById(appointment.PatientSerialNumber);
-                appointment.Physician = physicianDatabaseSql.GetById(appointment.PhysicianSerialNumber);
-                appointment.Room = roomDatabaseSql.GetById(appointment.RoomSerialNumber);
-            }
-
-
-            return appointments;
+            return DbContext.Appointment.ToList();
         }
 
         public override Appointment GetById(string id)
@@ -72,7 +55,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public List<Appointment> GetAppointmentsByPatient(Patient patient)
         {
-            return GetAll().Where(appointment => appointment.Patient.Equals(patient)).ToList();
+            return GetAll().Where(appointment => appointment.PatientSerialNumber.Equals(patient)).ToList();
         }
 
         public List<Appointment> GetAppointmentsByPhysician(Physician physician)
@@ -88,50 +71,22 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public List<Appointment> GetByRoomSerialNumber(string roomSerialNumber)
         {
             return GetAll()
-                .Where(appointment => appointment.Room.SerialNumber.Equals(roomSerialNumber))
+                .Where(appointment => appointment.RoomSerialNumber.Equals(roomSerialNumber))
                 .ToList();
         }
 
         public List<Appointment> GetByPhysicianSerialNumber(string physicianSerialNumber)
         {
             return GetAll()
-                .Where(appointment => appointment.Physician.SerialNumber.Equals(physicianSerialNumber))
+                .Where(appointment => appointment.PhysicianSerialNumber.Equals(physicianSerialNumber))
                 .ToList();
         }
 
         public List<Appointment> GetByPatientSerialNumber(string patientSerialNumber)
         {
             return GetAll()
-                .Where(appointment => appointment.Patient.SerialNumber.Equals(patientSerialNumber))
+                .Where(appointment => appointment.PatientSerialNumber.Equals(patientSerialNumber))
                 .ToList();
-        }
-
-        public List<Appointment> GetByPatientId(string patientId)
-        {
-            return GetAll()
-                .Where(appointment => appointment.Patient.Id.Equals(patientId))
-                .ToList();
-        }
-
-        public List<Appointment> GetByPatientIdActive(string patientId)
-        {
-            return GetAll()
-                .Where(appointment => (appointment.Patient.Id.Equals(patientId) ||
-                                       appointment.Patient.SerialNumber.Equals(patientId)) &&
-                                      appointment.Active)
-                .ToList();
-        }
-
-        public List<Appointment> GetByPatientIdCanceled(string patientId)
-        {
-            return GetAll().Where(appointment => (appointment.Patient.Id.Equals(patientId) ||
-                                       appointment.Patient.SerialNumber.Equals(patientId)) &&
-                                      !appointment.Active).ToList();
-        }
-
-        public List<DateTime> GetByPatientIdCanceledDates(string patientId)
-        {
-            return GetByPatientIdCanceled(patientId).Select(a => a.TimeInterval.Start).ToList();
         }
     }
 }

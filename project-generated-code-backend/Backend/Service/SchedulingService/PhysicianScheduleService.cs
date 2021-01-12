@@ -33,26 +33,26 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
 
         public List<Appointment> GetAppointmentsByDate(DateTime date)
         {
-            return _appointmentRepository.GetAppointmentsByPhysician(_loggedPhysician)
+            return _appointmentRepository.GetByPhysicianSerialNumber(_loggedPhysician.SerialNumber)
                 .Where(appointment => date.Equals(appointment.Date)).ToList();
         }
 
         public Appointment GetTodaysAppointmentForPatient(Patient patient)
         {
-            List<Appointment> appointments = _appointmentRepository.GetAppointmentsByPhysician(_loggedPhysician);
+            List<Appointment> appointments = _appointmentRepository.GetByPhysicianSerialNumber(_loggedPhysician.SerialNumber);
             return appointments.FirstOrDefault(appointment =>
                 appointment.Date.Equals(DateTime.Today) && appointment.Patient.Equals(patient));
         }
 
         public Appointment GetPreviousAppointmentForPatient(Patient patient)
         {
-            List<Appointment> appointments = _appointmentRepository.GetAppointmentsByPatient(patient);
+            List<Appointment> appointments = _appointmentRepository.GetByPatientSerialNumber(patient.SerialNumber);
             return SortAppointmentsDescending(appointments).FirstOrDefault(appointment => IsInPast(appointment));
         }
 
         public Appointment GetNextAppointmentForPatient(Patient patient)
         {
-            List<Appointment> appointments = _appointmentRepository.GetAppointmentsByPatient(patient);
+            List<Appointment> appointments = _appointmentRepository.GetByPatientSerialNumber(patient.SerialNumber);
             return SortAppointmentsAscending(appointments).FirstOrDefault(IsInFuture);
         }
 

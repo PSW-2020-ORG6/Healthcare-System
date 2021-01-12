@@ -58,7 +58,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
 
         private bool IsPhysicianScheduled(Physician physician, TimeInterval timeInterval)
         {
-            List<Appointment> appointments = _appointmentRepository.GetAppointmentsByPhysician(physician);
+            List<Appointment> appointments = _appointmentRepository.GetByPhysicianSerialNumber(physician.SerialNumber);
             foreach (Appointment appointment in appointments)
             {
                 if (timeInterval.IsOverLapping(appointment.TimeInterval))

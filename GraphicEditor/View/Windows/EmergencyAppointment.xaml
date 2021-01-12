@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GraphicEditor.View.Windows"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="EmergencyAppointment" Height="800" Width="800">
+        Title="EmergencyAppointment" Height="400" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

@@ -4,16 +4,24 @@ using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService
 {
     public class AppointmentService
     {
         private readonly IAppointmentRepository _appointmentRepository;
+        private readonly IProcedureTypeRepository _procedureTypeRepository = new ProcedureTypeDatabaseSql();
+        private readonly IPatientRepository _patientRepository = new PatientDatabaseSql();
+        private readonly IPhysitianRepository _physicianRepository = new PhysicianDatabaseSql();
+        private readonly IRoomRepository _roomRepository = new RoomDatabaseSql();
+        private List<ProcedureType> _procedureTypes;
 
         public AppointmentService()
         {
             _appointmentRepository = new AppointmentDatabaseSql();
+
+            _procedureTypes = _procedureTypeRepository.GetAll();
         }
 
         public AppointmentService(IAppointmentRepository appointmentRepository)
@@ -23,22 +31,45 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
 
         public Appointment GetById(string id)
         {
-            return _appointmentRepository.GetById(id);
+            Appointment appointment = _appointmentRepository.GetById(id);
+            FillComplexInfo(appointment);
+            return appointment;
         }
 
         public List<Appointment> GetByRoomSerialNumber(string roomSerialNumber)
         {
-            return _appointmentRepository.GetByRoomSerialNumber(roomSerialNumber);
+            List<Appointment> appointments = _appointmentRepository.GetByRoomSerialNumber(roomSerialNumber);
+
+            foreach (var appointment in appointments)
+            {
+                FillComplexInfo(appointment);
+            }
+
+            return appointments;
         }
 
         public List<Appointment> GetByPhysicianSerialNumber(string physicianSerialNumber)
         {
-            return _appointmentRepository.GetByPhysicianSerialNumber(physicianSerialNumber);
+            List<Appointment> appointments = _appointmentRepository.GetByPhysicianSerialNumber(physicianSerialNumber);
+
+            foreach (var appointment in appointments)
+            {
+                FillComplexInfo(appointment);
+            }
+
+            return appointments;
         }
 
         public List<Appointment> GetAll()
         {
-            return _appointmentRepository.GetAll();
+            List<Appointment> appointments = _appointmentRepository.GetAll();
+
+            foreach (var appointment in appointments)
+            {
+                FillComplexInfo(appointment);
+            }
+
+            return appointments;
         }
 
         public void EditAppointment(Appointment appointment)
@@ -59,6 +90,14 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         public void NewAppointment(AppointmentDto appointmentDto)
         {
             _appointmentRepository.Save(new Appointment(appointmentDto));
+        }
+
+        private void FillComplexInfo(Appointment appointment)
+        {
+            appointment.ProcedureType = _procedureTypes.Where(pt => pt.SerialNumber.Equals(appointment.ProcedureTypeSerialnumber)).ToList()[0];
+            appointment.Patient = _patientRepository.GetById(appointment.PatientSerialNumber);
+            appointment.Physician = _physicianRepository.GetById(appointment.PhysicianSerialNumber);
+            appointment.Room = _roomRepository.GetById(appointment.RoomSerialNumber);
         }
     }
 }

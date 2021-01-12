@@ -105,12 +105,18 @@
                         </DockPanel>
                     </Button>
                     <Button Click="EmergencyAppointment"
-                                Margin="20"
-                                Height="40" 
+                                Margin="10"
+                                Height="45" 
                                 Width="200" >
                         <DockPanel Width="auto">
+                            <materialDesign:PackIcon Kind="CarEmergencyBrake" 
+                                             Height="25" 
+                                             Width="25"
+                                             Margin="5"
+                                             VerticalAlignment="Center"/>
                             <TextBlock HorizontalAlignment="Center" 
-                                    VerticalAlignment="Center">
+                                    VerticalAlignment="Center"
+                                    TextWrapping="Wrap">
                                                 Emergency Appointment
                             </TextBlock>
                         </DockPanel>
