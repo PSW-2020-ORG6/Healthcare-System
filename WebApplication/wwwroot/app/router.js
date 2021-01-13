@@ -16,6 +16,8 @@ const Login = { template: '<login></login>' }
 const PageHeader = { template: '<pageHeader></pageHeader>' }
 const AdminHeader = { template: '<headerAdmin></headerAdmin>' }
 const PatientHeader = { template: '<headerPatient></headerPatient>' }
+const Landing = { template: '<landing></landing>' }
+const Feedback = { template: '<feedback></feedback>' }
 
 
 
@@ -79,6 +81,12 @@ var temp = new Vue({
 		},
 		headerPatient: function () {
 			router.push("headerPatient")
+		},
+		landing: function () {
+			router.push("landing")
+		},
+		feedback: function () {
+			router.push("feedback")
 		}
 	}
 });
@@ -304,17 +312,49 @@ const router = new VueRouter({
 			}
 		},
 		{
+			path: '/landing',
+			name: 'landing',
+			components: {
+				pageHeader: PageHeader,
+				content: Landing
+			},
+			beforeEnter: (to, from, next) => {
+				if (localStorage.getItem('isAdmin') == "false" && localStorage.getItem('isLogged') == "false" && localStorage.getItem('isPatient') == "false") {
+					next();
+				}
+				else {
+					next(false);
+				}
+			}
+		},
+		{
+			path: '/feedback',
+			name: 'feedback',
+			components: {
+				pageHeader: PageHeader,
+				content: Feedback
+			},
+			beforeEnter: (to, from, next) => {
+				if (localStorage.getItem('isAdmin') == "false" && localStorage.getItem('isLogged') == "false" && localStorage.getItem('isPatient') == "false") {
+					next();
+				}
+				else {
+					next(false);
+				}
+			}
+		},
+		{
 			path: '/',
 			components: {
 				pageHeader: PageHeader,
-				content: Login
+				content: Landing
 			}
 		},
 		{
 			path: '*',
 			components: {
 				pageHeader: PageHeader,
-				content: Login
+				content: Landing
 			},
 			beforeEnter: (to, from, next) => {
 				next(false);

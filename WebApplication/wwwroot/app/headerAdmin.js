@@ -28,8 +28,7 @@
                     <li class="nav-item">
                         <h1 class="navbar-brand" id="clinicLogoTxt">Health Clinic</h1>
                         <img src="pictures/logInverted.png" id="clinicLogoPic">
-                    </li>
-                   
+                    </li>           
                 </ul>
             </div>
         </nav>

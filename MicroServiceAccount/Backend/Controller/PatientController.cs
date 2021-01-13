@@ -29,8 +29,6 @@ namespace MicroServiceAccount.Backend.Controllers
         ///<returns>
         ///list of patients
         ///</returns>
-
-        [Authorize]
         [HttpGet("allPatients")]
         public List<Patient> GetAllPatients()
         {

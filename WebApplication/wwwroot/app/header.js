@@ -18,6 +18,11 @@
         <nav class="navbar navbar-expand-lg navbar-custom " id="navigationBar">
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
+                    <li  class="nav-item">
+                        <div>
+                        <button type="button" class="btn btn-info btn-lg navbar-brand" v-on:click="FeedbackShow()">What our patients think of us?</button>
+                        </div>
+                    </li>
                     <li class="nav-item dropdown">
                         <div v-if="isLogged==true &&isAdmin==false && isPatient==true">
                         <button type="button" class="btn btn-info btn-lg nav-link navbar-brand dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Patient menu</button>
@@ -53,6 +58,9 @@
                     <li class="nav-item" id="content">
                         <button type="button" class="btn1 btn btn-info btn-lg navbar-brand" id="registration" v-on:click="RegistrationShow()">Registration</button>
                     </li>
+                    <li class="nav-item" id="content">
+                        <button type="button" class="btn0 btn btn-info btn-lg navbar-brand" id="login" v-on:click="LoginShow()">Login</button>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -87,8 +95,12 @@
         },
         RegistrationShow: function () {
             this.$router.push('registration');
+        },
+        FeedbackShow: function () {
+            this.$router.push('feedback');
+        },
+        LoginShow: function () {
+            this.$router.push('Login');
         }
     }
-
-
 });
