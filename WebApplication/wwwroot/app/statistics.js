@@ -603,7 +603,7 @@
             })
 
         axios
-            .get('/appointment/physicians', {
+            .get('/account/allPhysicians', {
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -753,7 +753,11 @@
             })
 
         axios
-            .get('/survey/getStatistiEachTopic')
+            .get('/survey/getStatistiEachTopic', {
+                headers: {
+                    'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                }
+            })
             .then(response => {
                 this.statisticEachTopic = response.data;
 
@@ -3059,78 +3063,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                        </div>
-                                        <div class="col-sm">
-                                                     <div class="container-fluid px-1 py-5 mx-auto" >
-                                                                               <div class="row justify-content-center">
-                                                                                     <div class="col-xl-8 col-lg-9 col-md-10 col-12 text-center mb-5">
-                                                                                            <div class="card">
-                                                                                              <div class="cirle-img"> <img id="ratingImage" src="https://png.pngtree.com/thumb_back/fw800/background/20200821/pngtree-simple-light-blue-background-image_396574.jpg">
-                                                                                                    <div class="rating-on-img">
-                                                                                                        <h2 class="head-rate">{{this.statisticEachQuestion[18].averageRating}}</h2>
-                                                                                                        <h3 class="subhead-rate">out of 5</h3>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="heading0 mb-3 text-center">
-                                                                                                    <h2>QUESTION 23</h2>
-                                                                                                </div>
-                                                                                                <div class="rating-bar0 justify-content-center">
-                                                                                                    <table class="text-left mx-auto">
-                                                                                                        <tr>
-                                                                                                            <td class="rating-label">5</td>
-                                                                                                            <td class="rating-bar">
-                                                                                                                <div class="bar-container">
-                                                                                                                    <div class="bar-5"  v-bind:style="[widthLabel5Topic6Q23]"></div>
-                                                                                                                </div>
-                                                                                                            </td>
-                                                                                                            <td>{{this.statisticEachQuestion[18].fives}}</td>
-                                                                                                        </tr>
-                                                                                                        <tr>
-                                                                                                            <td class="rating-label">4</td>
-                                                                                                            <td class="rating-bar">
-                                                                                                                <div class="bar-container">
-                                                                                                                    <div class="bar-4"  v-bind:style="[widthLabel4Topic6Q23]"></div>
-                                                                                                                </div>
-                                                                                                            </td>
-                                                                                                            <td>{{this.statisticEachQuestion[18].fours}}</td>
-                                                                                                        </tr>
-                                                                                                        <tr>
-                                                                                                            <td class="rating-label">3</td>
-                                                                                                            <td class="rating-bar">
-                                                                                                                <div class="bar-container">
-                                                                                                                    <div class="bar-3"  v-bind:style="[widthLabel3Topic6Q23]"></div>
-                                                                                                                </div>
-                                                                                                            </td>
-                                                                                                            <td>{{this.statisticEachQuestion[18].threes}}</td>
-                                                                                                        </tr>
-                                                                                                        <tr>
-                                                                                                            <td class="rating-label">2</td>
-                                                                                                            <td class="rating-bar">
-                                                                                                                <div class="bar-container">
-                                                                                                                    <div class="bar-2" v-bind:style="[widthLabel2Topic6Q23]"></div>
-                                                                                                                </div>
-                                                                                                            </td>
-                                                                                                            <td>{{this.statisticEachQuestion[18].twos}}</td>
-                                                                                                        </tr>
-                                                                                                        <tr>
-                                                                                                            <td class="rating-label">1</td>
-                                                                                                            <td class="rating-bar">
-                                                                                                                <div class="bar-container">
-                                                                                                                    <div class="bar-1" v-bind:style="[widthLabel1Topic6Q23]"></div>
-                                                                                                                </div>
-                                                                                                            </td>
-                                                                                                            <td>{{this.statisticEachQuestion[7].ones}}</td>
-                                                                                                        </tr>
-                                                                                                    </table>
-                                                                                                </div>
-                                                                                                <div>  </div>
-                                                                                                <div class="review-head"> <a href="#">
-                                                                                                      <br></br>
-                                                                                                    </a> </div>
-                                                                                   </div>
-                                                                             </div>
-                                                                       </div>
-                                                             </div>
                                         </div>
                                       </div>
         

@@ -113,44 +113,11 @@ namespace MicroServiceAppointment.Backend.Service
 
             foreach (Survey s in surveys)
             {
-                statistics[0].AverageRating += Double.Parse(s.Questions[4]);
-                statistics[0].increment(Int32.Parse(s.Questions[4]));
-                statistics[1].AverageRating += Double.Parse(s.Questions[5]);
-                statistics[1].increment(Int32.Parse(s.Questions[5]));
-                statistics[2].AverageRating += Double.Parse(s.Questions[6]);
-                statistics[2].increment(Int32.Parse(s.Questions[6]));
-                statistics[3].AverageRating += Double.Parse(s.Questions[7]);
-                statistics[3].increment(Int32.Parse(s.Questions[7]));
-                statistics[4].AverageRating += Double.Parse(s.Questions[8]);
-                statistics[4].increment(Int32.Parse(s.Questions[8]));
-                statistics[5].AverageRating += Double.Parse(s.Questions[9]);
-                statistics[5].increment(Int32.Parse(s.Questions[9]));
-                statistics[6].AverageRating += Double.Parse(s.Questions[10]);
-                statistics[6].increment(Int32.Parse(s.Questions[10]));
-                statistics[7].AverageRating += Double.Parse(s.Questions[11]);
-                statistics[7].increment(Int32.Parse(s.Questions[11]));
-                statistics[8].AverageRating += Double.Parse(s.Questions[12]);
-                statistics[8].increment(Int32.Parse(s.Questions[12]));
-                statistics[9].AverageRating += Double.Parse(s.Questions[13]);
-                statistics[9].increment(Int32.Parse(s.Questions[13]));
-                statistics[10].AverageRating += Double.Parse(s.Questions[14]);
-                statistics[10].increment(Int32.Parse(s.Questions[14]));
-                statistics[11].AverageRating += Double.Parse(s.Questions[15]);
-                statistics[11].increment(Int32.Parse(s.Questions[15]));
-                statistics[12].AverageRating += Double.Parse(s.Questions[16]);
-                statistics[12].increment(Int32.Parse(s.Questions[16]));
-                statistics[13].AverageRating += Double.Parse(s.Questions[17]);
-                statistics[13].increment(Int32.Parse(s.Questions[17]));
-                statistics[14].AverageRating += Double.Parse(s.Questions[18]);
-                statistics[14].increment(Int32.Parse(s.Questions[18]));
-                statistics[15].AverageRating += Double.Parse(s.Questions[19]);
-                statistics[15].increment(Int32.Parse(s.Questions[19]));
-                statistics[16].AverageRating += Double.Parse(s.Questions[20]);
-                statistics[16].increment(Int32.Parse(s.Questions[20]));
-                statistics[17].AverageRating += Double.Parse(s.Questions[21]);
-                statistics[17].increment(Int32.Parse(s.Questions[21]));
-                statistics[18].AverageRating += Double.Parse(s.Questions[22]);
-                statistics[18].increment(Int32.Parse(s.Questions[22]));
+                for (int i = 0; i < 18; i++) {
+                    statistics[i].AverageRating += Double.Parse(s.Questions[4 + i]);
+                    statistics[i].increment(Int32.Parse(s.Questions[4 + i]));
+                }
+
             }
 
             for (int i = 0; i < 19; i++)
@@ -202,22 +169,19 @@ namespace MicroServiceAppointment.Backend.Service
 
             foreach (Survey s in surveys)
             {
-                statistics[0].AverageRating += Double.Parse(s.Questions[0]);
-                statistics[0].increment(Int32.Parse(s.Questions[0]));
-                statistics[1].AverageRating += Double.Parse(s.Questions[1]);
-                statistics[1].increment(Int32.Parse(s.Questions[1]));
-                statistics[2].AverageRating += Double.Parse(s.Questions[2]);
-                statistics[2].increment(Int32.Parse(s.Questions[2]));
-                statistics[3].AverageRating += Double.Parse(s.Questions[3]);
-                statistics[3].increment(Int32.Parse(s.Questions[3]));
+                for (int i = 0; i < 4; i++) {
+                    statistics[i].AverageRating += Double.Parse(s.Questions[i]);
+                    statistics[i].increment(Int32.Parse(s.Questions[i]));
+
+                }
+                for (int i = 0; i < 4; i++)
+                {
+                    statistics[4].increment(Int32.Parse(s.Questions[i]));
+
+                }
                 statistics[4].AverageRating += (Double.Parse(s.Questions[3]) + Double.Parse(s.Questions[2]) +
                                                 Double.Parse(s.Questions[1]) + Double.Parse(s.Questions[0]));
-                statistics[4].increment(Int32.Parse(s.Questions[3]));
-                statistics[4].increment(Int32.Parse(s.Questions[2]));
-                statistics[4].increment(Int32.Parse(s.Questions[1]));
-                statistics[4].increment(Int32.Parse(s.Questions[0]));
             }
-
             for (int i = 0; i < 5; i++)
             {
                 statistics[i].generatePercents();
@@ -227,9 +191,7 @@ namespace MicroServiceAppointment.Backend.Service
                 else
                     statistics[i].AverageRating = statistics[i].AverageRating / surveys.Count;
             }
-
             return Round2Decimals(statistics);
-
         }
 
         /// <summary>
@@ -250,51 +212,37 @@ namespace MicroServiceAppointment.Backend.Service
 
             foreach (Survey s in surveys)
             {
-                statistics[0].AverageRating += Double.Parse(s.Questions[4]);
-                statistics[0].increment(Int32.Parse(s.Questions[4]));
-                statistics[0].AverageRating += Double.Parse(s.Questions[5]);
-                statistics[0].increment(Int32.Parse(s.Questions[5]));
-                statistics[0].AverageRating += Double.Parse(s.Questions[6]);
-                statistics[0].increment(Int32.Parse(s.Questions[6]));
-                statistics[0].AverageRating += Double.Parse(s.Questions[7]);
-                statistics[0].increment(Int32.Parse(s.Questions[7]));
-                statistics[0].AverageRating += Double.Parse(s.Questions[8]);
-                statistics[0].increment(Int32.Parse(s.Questions[8]));
-                statistics[1].AverageRating += Double.Parse(s.Questions[9]);
-                statistics[1].increment(Int32.Parse(s.Questions[9]));
-                statistics[1].AverageRating += Double.Parse(s.Questions[10]);
-                statistics[1].increment(Int32.Parse(s.Questions[10]));
-                statistics[1].AverageRating += Double.Parse(s.Questions[11]);
-                statistics[1].increment(Int32.Parse(s.Questions[11]));
-                statistics[1].AverageRating += Double.Parse(s.Questions[12]);
-                statistics[1].increment(Int32.Parse(s.Questions[12]));
-                statistics[2].AverageRating += Double.Parse(s.Questions[13]);
-                statistics[2].increment(Int32.Parse(s.Questions[13]));
-                statistics[2].AverageRating += Double.Parse(s.Questions[14]);
-                statistics[2].increment(Int32.Parse(s.Questions[14]));
-                statistics[2].AverageRating += Double.Parse(s.Questions[15]);
-                statistics[2].increment(Int32.Parse(s.Questions[15]));
-                statistics[2].AverageRating += Double.Parse(s.Questions[16]);
-                statistics[2].increment(Int32.Parse(s.Questions[16]));
-                statistics[2].AverageRating += Double.Parse(s.Questions[17]);
-                statistics[2].increment(Int32.Parse(s.Questions[17]));
-                statistics[3].AverageRating += Double.Parse(s.Questions[18]);
-                statistics[3].increment(Int32.Parse(s.Questions[18]));
-                statistics[3].AverageRating += Double.Parse(s.Questions[19]);
-                statistics[3].increment(Int32.Parse(s.Questions[19]));
-                statistics[4].AverageRating += Double.Parse(s.Questions[20]);
-                statistics[4].increment(Int32.Parse(s.Questions[20]));
-                statistics[4].AverageRating += Double.Parse(s.Questions[21]);
-                statistics[4].increment(Int32.Parse(s.Questions[21]));
-                statistics[4].AverageRating += Double.Parse(s.Questions[22]);
-                statistics[4].increment(Int32.Parse(s.Questions[22]));
+                for (int i = 4; i <= 8; i++)
+                {
+                    statistics[0].AverageRating += Double.Parse(s.Questions[i]);
+                    statistics[0].increment(Int32.Parse(s.Questions[i]));
+                }
+                for (int i = 9; i <= 12; i++)
+                {
+                    statistics[1].AverageRating += Double.Parse(s.Questions[i]);
+                    statistics[1].increment(Int32.Parse(s.Questions[i]));
+                }
+                for (int i = 13; i <= 17; i++)
+                {
+                    statistics[2].AverageRating += Double.Parse(s.Questions[i]);
+                    statistics[2].increment(Int32.Parse(s.Questions[i]));
+                }
+                for (int i = 18; i <= 19; i++)
+                {
+                    statistics[3].AverageRating += Double.Parse(s.Questions[i]);
+                    statistics[3].increment(Int32.Parse(s.Questions[i]));
+                }
+                for (int i = 20; i <= 22; i++)
+                {
+                    statistics[4].AverageRating += Double.Parse(s.Questions[i]);
+                    statistics[4].increment(Int32.Parse(s.Questions[i]));
+                }
             }
 
-            statistics[0].generatePercents();
-            statistics[1].generatePercents();
-            statistics[2].generatePercents();
-            statistics[3].generatePercents();
-            statistics[4].generatePercents();
+            for (int i = 0;  i <= 4; i++) {
+                statistics[i].generatePercents();
+            }
+            
             statistics[0].AverageRating = statistics[0].AverageRating / surveys.Count / 5;
             statistics[1].AverageRating = statistics[1].AverageRating / surveys.Count / 4;
             statistics[2].AverageRating = statistics[2].AverageRating / surveys.Count / 5;
