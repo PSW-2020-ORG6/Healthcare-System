@@ -60,7 +60,6 @@ namespace MicroServiceFeedback.Backend.Controllers
         ///<returns>
         ///list of approved feedbacks
         ///</returns>
-        [Authorize]
         [HttpGet("approved")]
         public List<FeedbackDto> GetApprovedFeedbacks()
         {

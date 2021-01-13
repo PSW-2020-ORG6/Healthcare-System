@@ -28,7 +28,12 @@
     font-weight: 100;
 }
 .btn1 {
-    margin-left: 200%;
+    align-content:end;
+    margin-left:140%;
+}
+.btn0 {
+    align-content: end;
+    margin-left: 240%;
 }
 .margin{
     margin-left: 70%;
@@ -60,6 +65,10 @@ th {
     font-family: 'Impact';
     font-weight: 100;
 }
+.text2 {
+    font-family: 'Impact';
+    font-size: 38px;
+}
 .noborder {
     border: none;
 }
@@ -69,4 +78,12 @@ footer {
     border: thick;
     font-family: 'Impact';
     font-weight: 100;
+}
+
+#Landing {
+    background-image: url("../pictures/website-landing-page-hospital.jpg");
+    background-repeat: no-repeat;
+    overflow-y: scroll;
+    background-size: cover;
+    height: 888px;
 }

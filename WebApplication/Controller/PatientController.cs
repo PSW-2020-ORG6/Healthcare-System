@@ -23,8 +23,6 @@ namespace MicroServiceAccount.Backend.Controllers
         [HttpGet("all")]
         public async Task<List<Patient>> GetAllPatients()
         {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
-                                                                                        , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             HttpResponseMessage response = await client.GetAsync("http://localhost:57053/patientMicroservice/allPatients");
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<Patient>>(await response.Content.ReadAsStringAsync());

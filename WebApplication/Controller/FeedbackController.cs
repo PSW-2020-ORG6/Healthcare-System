@@ -22,8 +22,6 @@ namespace WebApplication.Backend.Controllers
         [HttpGet("approved")]
         public async Task<List<FeedbackDto>> GetApprovedFeedbacks(string token)
         {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
-                                                                                        ,Request.Headers["Authorization"].ToString().Split(" ")[1]);
             HttpResponseMessage response = await client.GetAsync("http://localhost:57057/feedbackMicroservice/approved/");
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<FeedbackDto>>(await response.Content.ReadAsStringAsync());
