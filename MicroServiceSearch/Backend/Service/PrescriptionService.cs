@@ -138,7 +138,10 @@ namespace MicroServiceSearch.Backend.Services
             foreach (Prescription prescription in prescriptions)
                 foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
                     if (!medicineDosage.MedicineNameContains(value) && !medicineDosage.MedicineTypeContains(value))
+                    {
                         resultList.Add(prescription);
+                        break;
+                    }
             return resultList;
         }
 
@@ -149,7 +152,10 @@ namespace MicroServiceSearch.Backend.Services
             foreach (Prescription prescription in prescriptions)
                 foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
                     if (medicineDosage.MedicineNameContains(value))
+                    {
                         resultList.Add(prescription);
+                        break;
+                    }
             return resultList;
         }
 
