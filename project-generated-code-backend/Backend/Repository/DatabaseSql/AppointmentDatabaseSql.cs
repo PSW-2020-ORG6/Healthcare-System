@@ -88,5 +88,25 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 .Where(appointment => appointment.PatientSerialNumber.Equals(patientSerialNumber))
                 .ToList();
         }
+
+        public List<Appointment> GetByPatientId(string patientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Appointment> GetByPatientIdActive(string patientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Appointment> GetByPatientIdCanceled(string patientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<DateTime> GetByPatientIdCanceledDates(string patientId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
