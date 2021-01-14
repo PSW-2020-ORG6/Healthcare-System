@@ -37,5 +37,103 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
                     .ToList();
             return prescriptions;
         }
+
+
+        public List<Prescription> GetPrescriptionsBetweenDatesByMedicineName(DateTime[] dateTimes, string medicineName)
+        {
+            var prescriptions = GetPrescriptionsBetweenDates(dateTimes);
+            var retVal =new  List<Prescription>();
+            foreach (var prescription in prescriptions)
+                foreach (var medicineDosages in prescription.MedicineDosage)
+                    if (medicineDosages.Medicine.GenericName.ToUpper().Contains(medicineName.ToUpper()))
+                    {
+                        retVal.Add(prescription);
+                        break;
+                    }
+            return retVal;
+        }
+
+        public List<Prescription> GetPrescriptionsBetweenDatesByMedicineType(DateTime[] dateTimes, string medicineType)
+        {
+            var prescriptions = GetPrescriptionsBetweenDates(dateTimes);
+            var retVal = new List<Prescription>();
+            foreach (var prescription in prescriptions)
+                foreach (var medicineDosages in prescription.MedicineDosage)
+                    if (medicineDosages.Medicine.MedicineType.Type.ToUpper().Contains(medicineType.ToUpper()))
+                    {
+                        retVal.Add(prescription);
+                        break;
+                    }
+            return retVal;
+        }
+
+
+        public List<Prescription> GetPrescriptionsBetweenDatesByMedicineTypeNegation(DateTime[] dateTimes, string medicineType)
+        {
+            var prescriptions = GetPrescriptionsBetweenDates(dateTimes);
+            var retVal = new List<Prescription>();
+            var find = false;
+            foreach (var prescription in prescriptions)
+            {
+                foreach (var medicineDosages in prescription.MedicineDosage)
+                    if (medicineDosages.Medicine.MedicineType.Type.ToUpper().Contains(medicineType.ToUpper()))
+                    {
+                        find = true;
+                        break;
+                    }
+                if(find)retVal.Add(prescription);
+                find = true;
+            }
+                return retVal;
+        }
+        public List<Prescription> GetPrescriptionsBetweenDatesByMedicineNameNegation(DateTime[] dateTimes, string medicineName)
+        {
+            var prescriptions = GetPrescriptionsBetweenDates(dateTimes);
+            var retVal = new List<Prescription>();
+            var find = false;
+            foreach (var prescription in prescriptions)
+            {
+                foreach (var medicineDosages in prescription.MedicineDosage)
+                    if (medicineDosages.Medicine.GenericName.ToUpper().Contains(medicineName.ToUpper()))
+                    {
+                        find = true;
+                        break;
+                    }
+                if (find) retVal.Add(prescription);
+                find = true;
+            }
+            return retVal;
+        }
+        public List<Prescription> GetPrescriptionsBetweenDatesByAll(DateTime[] dateTimes, string value)
+        {
+            var prescriptions = GetPrescriptionsBetweenDates(dateTimes);
+            var retVal = new List<Prescription>();
+            foreach (var prescription in prescriptions)
+                foreach (var medicineDosages in prescription.MedicineDosage)
+                    if (medicineDosages.Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper()) || medicineDosages.Medicine.GenericName.ToUpper().Contains(value.ToUpper()))
+                    {
+                        retVal.Add(prescription);
+                        break;
+                    }
+            return retVal;
+        }
+        public List<Prescription> GetPrescriptionsBetweenDatesByAllNegation(DateTime[] dateTimes, string value)
+        {
+            var prescriptions = GetPrescriptionsBetweenDates(dateTimes);
+            var retVal = new List<Prescription>();
+            var find = false;
+            foreach (var prescription in prescriptions)
+            {
+                foreach (var medicineDosages in prescription.MedicineDosage)
+                    if (medicineDosages.Medicine.GenericName.ToUpper().Contains(value.ToUpper()) || medicineDosages.Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper()))
+                    {
+                        find = true;
+                        break;
+                    }
+                if (find) retVal.Add(prescription);
+                find = true;
+            }
+            return retVal;
+        }
     }
 }
