@@ -18,5 +18,12 @@ namespace HealthClinicBackend.Backend.Repository.Generic
         List<Appointment> GetByPhysicianSerialNumber(string physicianSerialNumber);
         List<Appointment> GetByPatientSerialNumber(string patientSerialNumber);
         Appointment GetBySerialNumber(string serialNumber);
+        List<Appointment> GetAppointmentsByPatient(Patient patient);
+        List<Appointment> GetAppointmentsByPhysician(Physician physician);
+        List<Appointment> GetAppointmentsByRoom(Room room);
+        List<Appointment> GetByPatientId(string patientId);
+        List<Appointment> GetByPatientIdActive(string patientId);
+        List<Appointment> GetByPatientIdCanceled(string patientId);
+        List<DateTime> GetByPatientIdCanceledDates(string patientId);
     }
 }
