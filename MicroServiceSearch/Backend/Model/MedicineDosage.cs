@@ -13,6 +13,7 @@ namespace MicroServiceSearch.Backend.Model
     public class MedicineDosage : Entity
     {
         [ForeignKey("Medicine")] public string MedicineSerialNumber { get; set; }
+        [ForeignKey("Prescription")] public string PrescriptionSerialNumber { get; set; }
         public virtual Medicine Medicine { get; set; }
         public double Amount { get; set; }
         public string Note { get; set; }

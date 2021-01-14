@@ -26,10 +26,16 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
 
         public List<Prescription> GetPrescriptionsBetweenDates(DateTime[] datetimes)
         {
-            return DbContext.Prescription
+           var prescriptions= GetAll()
                 .Where(t => t.Date > datetimes[0] && t.Date < datetimes[1])
-                .Include(p => p.MedicineDosage)
                 .ToList();
+            foreach (var prescription in prescriptions)
+                foreach (var medicineDosages in prescription.MedicineDosage)
+                    DbContext.Medicine
+                    .Where(m => m.SerialNumber == medicineDosages.MedicineSerialNumber)
+                    .Include(m => m.MedicineType)
+                    .ToList();
+            return prescriptions;
         }
     }
 }
