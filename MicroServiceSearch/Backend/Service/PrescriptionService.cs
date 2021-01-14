@@ -57,19 +57,18 @@ namespace MicroServiceSearch.Backend.Services
 
         private List<Prescription> GetPrescriptionsByProperty(SearchProperty property, string value, DateTime[] dateTimes, bool not)
         {
-            List<Prescription> prescriptions = _prescriptionRepository.GetPrescriptionsBetweenDates(dateTimes);
             if (!not && property.Equals(SearchProperty.All))
-                return GetPrescriptionsByAllProperties(value, prescriptions);
+                return _prescriptionRepository.GetPrescriptionsBetweenDatesByAll(dateTimes, value);
             else if (not && property.Equals(SearchProperty.All))
-                return GetPrescriptionsByAllPropertiesNegation(value, prescriptions);
+                return _prescriptionRepository.GetPrescriptionsBetweenDatesByAllNegation(dateTimes, value);
             else if (!not && property.Equals(SearchProperty.MedicineName))
-                return GetPrescriptionsByMedicineName(value, prescriptions);
+                return _prescriptionRepository.GetPrescriptionsBetweenDatesByMedicineName(dateTimes, value);
             else if (not && property.Equals(SearchProperty.MedicineName))
-                return GetPrescriptionsByMedicineNameNegation(value, prescriptions);
+                return _prescriptionRepository.GetPrescriptionsBetweenDatesByMedicineNameNegation(dateTimes, value);
             else if (!not && property.Equals(SearchProperty.MedicineType))
-                return GetPrescriptionsByMedicineType(value, prescriptions);
+                return _prescriptionRepository.GetPrescriptionsBetweenDatesByMedicineType(dateTimes, value);
             else
-                return GetPrescriptionsByMedicineTypeNegation(value, prescriptions);
+                return _prescriptionRepository.GetPrescriptionsBetweenDatesByMedicineTypeNegation(dateTimes, value);
         }
 
         private SearchProperty Propeerty(string property)
@@ -119,83 +118,5 @@ namespace MicroServiceSearch.Backend.Services
             return returnList;
         }
 
-        private List<Prescription> GetPrescriptionsByAllProperties(string value, List<Prescription> prescriptions)
-        {
-            List<Prescription> resultList = new List<Prescription>();
-            foreach (Prescription prescription in prescriptions)
-                foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
-                    if (medicineDosage.MedicineNameContains(value))
-                    {
-                        resultList.Add(prescription);
-                        break;
-                    }
-            return resultList;
-        }
-
-        private List<Prescription> GetPrescriptionsByAllPropertiesNegation(string value, List<Prescription> prescriptions)
-        {
-            List<Prescription> resultList = new List<Prescription>();
-            foreach (Prescription prescription in prescriptions)
-                foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
-                    if (!medicineDosage.MedicineNameContains(value) && !medicineDosage.MedicineTypeContains(value))
-                    {
-                        resultList.Add(prescription);
-                        break;
-                    }
-            return resultList;
-        }
-
-
-        private List<Prescription> GetPrescriptionsByMedicineName(string value, List<Prescription> prescriptions)
-        {
-            List<Prescription> resultList = new List<Prescription>();
-            foreach (Prescription prescription in prescriptions)
-                foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
-                    if (medicineDosage.MedicineNameContains(value))
-                    {
-                        resultList.Add(prescription);
-                        break;
-                    }
-            return resultList;
-        }
-
-        private List<Prescription> GetPrescriptionsByMedicineNameNegation(string value, List<Prescription> prescriptions)
-        {
-            List<Prescription> resultList = new List<Prescription>();
-            foreach (Prescription prescription in prescriptions)
-                foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
-                    if (!medicineDosage.MedicineNameContains(value))
-                    {
-                        resultList.Add(prescription);
-                        break;
-                    }
-            return resultList;
-        }
-
-        private List<Prescription> GetPrescriptionsByMedicineType(string value, List<Prescription> prescriptions)
-        {
-            List<Prescription> resultList = new List<Prescription>();
-            foreach (Prescription prescription in prescriptions)
-                foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
-                    if (medicineDosage.Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper()))
-                    {
-                        resultList.Add(prescription);
-                        break;
-                    }
-            return resultList;
-        }
-
-        private List<Prescription> GetPrescriptionsByMedicineTypeNegation(string value, List<Prescription> prescriptions)
-        {
-            List<Prescription> resultList = new List<Prescription>();
-            foreach (Prescription prescription in prescriptions)
-                foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
-                    if (!medicineDosage.MedicineTypeContains(value))
-                    {
-                        resultList.Add(prescription);
-                        break;
-                    }
-            return resultList;
-        }
     }
 }
