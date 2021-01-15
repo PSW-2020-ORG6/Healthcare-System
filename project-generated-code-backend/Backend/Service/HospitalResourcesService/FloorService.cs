@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using HealthClinicBackend.Backend.Model.Hospital;
+﻿using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
+using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 {
@@ -63,8 +62,9 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 
         public void DeleteFloor(Floor floor)
         {
-            foreach (Room room in _roomRepository.GetByFloorSerialNumber(floor.SerialNumber))
-                _floorRepository.Delete(room.SerialNumber);
+            if (_roomRepository != null)
+                foreach (Room room in _roomRepository.GetByFloorSerialNumber(floor.SerialNumber))
+                    _floorRepository.Delete(room.SerialNumber);
             _floorRepository.Delete(floor.SerialNumber);
         }
     }

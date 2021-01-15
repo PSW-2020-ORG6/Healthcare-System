@@ -14,7 +14,8 @@ namespace HealthClinicBackend.Backend.Model.Schedule
         public uint quantity { get; set; }
         public EquipmentRelocation() : base() { }
 
-        public EquipmentRelocation(DateTime startTime, DateTime endTime, Equipment equipment, string roomSerialNumToRelocateTo, uint quantity) : base()
+        public EquipmentRelocation(DateTime startTime, DateTime endTime, Equipment equipment,
+            string roomSerialNumToRelocateTo, uint quantity) : base()
         {
             this.quantity = quantity;
             this.TimeInterval = new TimeInterval(startTime, endTime);

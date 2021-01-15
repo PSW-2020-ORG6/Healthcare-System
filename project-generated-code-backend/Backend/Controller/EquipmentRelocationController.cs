@@ -12,18 +12,27 @@ namespace HealthClinicBackend.Backend.Controller
         {
             EquipmentRelocationService = new EquipmentRelocationService();
         }
+
         public List<EquipmentRelocation> GetAll()
         {
             return EquipmentRelocationService.GetAll();
         }
+
         public EquipmentRelocation GetBySerialNumber(string serialNumber)
         {
             return EquipmentRelocationService.GetBySerialNumber(serialNumber);
         }
+
+        public void DeleteEquipmentRelocation(EquipmentRelocation equipmentRelocation)
+        {
+            EquipmentRelocationService.DeleteEquipmentRelocation(equipmentRelocation);
+        }
+
         public void RelocateEquipmentIfItIsTime()
         {
             EquipmentRelocationService.RelocateEquipmentIfItIsTime();
         }
+
         public void AddEquipmentRelocation(EquipmentRelocation equipmentRelocation)
         {
             EquipmentRelocationService.AddEquipmentRelocation(equipmentRelocation);
