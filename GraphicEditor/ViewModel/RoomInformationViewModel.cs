@@ -159,6 +159,7 @@ namespace GraphicEditor.ViewModel
             }
         }
 
+        private AppointmentController appointmentController = new AppointmentController();
         private BedController bedController = new BedController();
         private EquipmentController equipmentController = new EquipmentController();
         private SuperintendentMedicineController medicineController = new SuperintendentMedicineController();
@@ -209,7 +210,7 @@ namespace GraphicEditor.ViewModel
 
         void SchedulesWindow()
         {
-            SchedulesWindow schedulesWindow = new SchedulesWindow();
+            SchedulesWindow schedulesWindow = new SchedulesWindow(appointmentController.GetAll());
             schedulesWindow.Show();
         }
 
