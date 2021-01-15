@@ -6,6 +6,7 @@
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Service.SchedulingService;
 using HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies;
+using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {
@@ -19,7 +20,7 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
             _appointmentSchedulingService.SchedulingStrategyContext = new PhysicianSpecialistSchedulingStrategy();
         }
 
-        public List<AppointmentDTO> GetAllAvailableAppointments(AppointmentDTO appointmentDTO)
+        public List<AppointmentDto> GetAllAvailableAppointments(AppointmentDto appointmentDTO)
         {
             return _appointmentSchedulingService.GetAvailableAppointments(appointmentDTO);
         }

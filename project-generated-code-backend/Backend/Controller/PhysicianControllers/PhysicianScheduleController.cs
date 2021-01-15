@@ -26,7 +26,7 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
             return _physicianScheduleService.GetAppointmentsByDate(date);
         }
 
-        public void NewAppointment(AppointmentDTO appointment)
+        public void NewAppointment(AppointmentDto appointment)
         {
             _physicianScheduleService.NewAppointment(appointment);
         }

@@ -22,7 +22,7 @@ namespace MicroServiceSearch.Backend.Controllers
 
         public SearchController()
         {
-            //this.reportService = new ReportService();
+            this.reportService = new ReportService();
         }
 
         [Authorize]

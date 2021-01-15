@@ -9,7 +9,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrate
 {
     public interface SchedulingStrategy
     {
-        AppointmentDTO PrepareAppointment(AppointmentDTO appointment);
+        AppointmentDto PrepareAppointment(AppointmentDto appointment);
 
     }
 }

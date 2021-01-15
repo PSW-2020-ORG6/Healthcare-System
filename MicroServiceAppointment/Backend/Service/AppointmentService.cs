@@ -196,7 +196,12 @@ namespace MicroServiceAppointment.Backend.Service
         ///</returns>
         public List<AppointmentDto> GetAllAppointments()
         {
-            List<Appointment> appointments = _appointmentRepository.GetAll();
+            return GetAppointmentDtos(_appointmentRepository.GetAll());
+        }
+
+        private List<AppointmentDto> GetAppointmentDtos(List<Appointment> appointments)
+        {
+            List<AppointmentDto> appointmentsDto = new List<AppointmentDto>();
             foreach (Appointment a in appointments)
             {
                 AppointmentDto appointmentDTO = new AppointmentDto(a);
@@ -204,10 +209,10 @@ namespace MicroServiceAppointment.Backend.Service
                 appointmentDTO.PatientsDTO = HttpRequest.GetPatientByIdAsync(a.PatientSerialNumber).Result;
                 appointmentsDto.Add(appointmentDTO);
             }
-            return appointmentDTO.ConvertListToAppointmentDTO(appointments);
+            return appointmentsDto;
         }
 
-        internal ProcedureTypeDTO GetProcedureType(string procedureTypeId)
+            internal ProcedureTypeDTO GetProcedureType(string procedureTypeId)
         {
             var procedureType=_procedureTypeRepository.GetById(procedureTypeId);
             procedureType.Specialization = new Specialization();

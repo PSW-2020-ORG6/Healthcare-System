@@ -23,11 +23,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             return DbContext.Patient.ToList();
         }
 
-        public override Patient GetById(string id)
-        {
-            return DbContext.Patient.Find(id);
-        }
-
         public List<Patient> GetByName(string name)
         {
             return GetAll().Where(p => p.Name.ToLower().Contains(name.ToLower())).ToList();

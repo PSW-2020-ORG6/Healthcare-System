@@ -18,20 +18,9 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             return DbContext.Appointment.ToList();
         }
 
-        public override Appointment GetById(string id)
-        {
-            return DbContext.Appointment.Find(id);
-        }
-
         public override void Save(Appointment newEntity)
         {
             DbContext.Appointment.Add(newEntity);
-            DbContext.SaveChanges();
-        }
-
-        public override void Update(Appointment updateEntity)
-        {
-            DbContext.Appointment.Update(updateEntity);
             DbContext.SaveChanges();
         }
 

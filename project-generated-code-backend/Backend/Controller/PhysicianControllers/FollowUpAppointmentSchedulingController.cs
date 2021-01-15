@@ -19,7 +19,7 @@ namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
             _appointmentSchedulingService.SchedulingStrategyContext = new PhysicianFollowUpSchedulingStrategy();
         }
 
-        public AppointmentDTO GetRecommendedAppointment(AppointmentDTO appointmentDto)
+        public AppointmentDto GetRecommendedAppointment(AppointmentDto appointmentDto)
         {
             return _appointmentSchedulingService.FindNearestAppointment(appointmentDto);
         }
