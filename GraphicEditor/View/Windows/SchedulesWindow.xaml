@@ -6,17 +6,25 @@
         xmlns:local="clr-namespace:GraphicEditor.View.Windows"
         mc:Ignorable="d"
         Title="SchedulesWindow" 
-        Height="900"
+        Height="1000"
         Width="950"
         WindowStartupLocation="CenterScreen">
     <Grid Background="AliceBlue">
         <ListView x:Name="appointmentsListView" 
-                  ItemsSource="{Binding Appointments}"
+                  ItemsSource="{Binding AllAppointments}"
                   HorizontalAlignment="Left" 
                   Height="220" 
                   Margin="50,116,0,0" 
                   VerticalAlignment="Top"
                   Width="861">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" 
+                            Value="Center" />
+                    <Setter Property="VerticalContentAlignment" 
+                            Value="Center" />
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Room"
@@ -26,7 +34,7 @@
                             <DataTemplate>
                                 <TextBlock>
                                     <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}{0} {1} {2}">
+                                        <MultiBinding StringFormat="{}{0} {1}, {2}">
                                             <Binding Path="Physician.Name" />
                                             <Binding Path="Physician.Surname" />
                                             <Binding Path="Physician.Specialization[0].Name" />
@@ -51,10 +59,10 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Start"
-                                    DisplayMemberBinding="{Binding Path=TimeInterval.Start}" >
+                                    DisplayMemberBinding="{Binding TimeInterval.Start}" >
                     </GridViewColumn>
                     <GridViewColumn Header="End"
-                                    DisplayMemberBinding="{Binding Path=TimeInterval.End}" />
+                                    DisplayMemberBinding="{Binding TimeInterval.End}" />
                     <GridViewColumn Header="Urgency"
                                     DisplayMemberBinding="{Binding Urgency}" />
                 </GridView>
@@ -62,9 +70,9 @@
         </ListView>
 
         <TextBlock HorizontalAlignment="Left" 
-                   Height="61"
+                   Height="60"
                    FontSize="30"
-                   Margin="434,48,0,0"
+                   Margin="364,38,0,0"
                    Text="Appointments" 
                    TextWrapping="Wrap"
                    VerticalAlignment="Top"
@@ -72,18 +80,72 @@
         <TextBlock HorizontalAlignment="Left" 
             Height="61"
             FontSize="30"
-            Margin="377,356,0,0"
+            Margin="307,359,0,0"
             Text="Equipment relocations" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             Width="308"/>
         <TextBlock HorizontalAlignment="Left" 
-            Height="61"
+            Height="60"
             FontSize="30"
-            Margin="434,674,0,0"
+            Margin="364,674,0,0"
             Text="Renovations" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             Width="169"/>
+        <ListView x:Name="equipmentRelocationsListView" 
+            ItemsSource="{Binding AllEquipmentRelocations}"
+            HorizontalAlignment="Left" 
+            Height="220" 
+            Margin="50,442,0,0" 
+            VerticalAlignment="Top"
+            Width="861">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" 
+                            Value="Center" />
+                    <Setter Property="VerticalContentAlignment" 
+                            Value="Center" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Equipment"
+                        DisplayMemberBinding="{Binding equipment.Name}" />
+                    <GridViewColumn Header="From"
+                        DisplayMemberBinding="{Binding equipment.Room.Name}" />
+                    <GridViewColumn Header="To"
+                        DisplayMemberBinding="{Binding roomToRelocateTo.Name}" />
+                    <GridViewColumn Header="Quantity"
+                        DisplayMemberBinding="{Binding quantity}" />
+                    <GridViewColumn Header="Start"
+                                    DisplayMemberBinding="{Binding TimeInterval.Start}" >
+                    </GridViewColumn>
+                    <GridViewColumn Header="End"
+                                    DisplayMemberBinding="{Binding TimeInterval.End}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="renovationsListView" 
+            ItemsSource="{Binding AllRenovations}"
+            HorizontalAlignment="Center" 
+            Height="220" 
+            Margin="0,734,0,0" 
+            VerticalAlignment="Top"
+            Width="862">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" 
+                            Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" 
+                            Value="Center" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="TODO"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

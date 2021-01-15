@@ -1,5 +1,6 @@
 ﻿using GraphicEditor.HelpClasses;
 using GraphicEditor.View.Windows;
+using HealthClinicBackend.Backend.Controller;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
 using System.Collections.Generic;
@@ -162,6 +163,7 @@ namespace GraphicEditor.ViewModel
         private AppointmentController appointmentController = new AppointmentController();
         private BedController bedController = new BedController();
         private EquipmentController equipmentController = new EquipmentController();
+        private EquipmentRelocationController equipmentRelocationController = new EquipmentRelocationController();
         private SuperintendentMedicineController medicineController = new SuperintendentMedicineController();
 
         public RoomInformationViewModel(RoomInformation _window, Room _room)
@@ -210,7 +212,8 @@ namespace GraphicEditor.ViewModel
 
         void SchedulesWindow()
         {
-            SchedulesWindow schedulesWindow = new SchedulesWindow(appointmentController.GetAll());
+            SchedulesWindow schedulesWindow = new SchedulesWindow(appointmentController.GetAll(),
+                                                            equipmentRelocationController.GetAll());
             schedulesWindow.Show();
         }
 
