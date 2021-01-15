@@ -12,7 +12,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <!-- #Styles -->
                 <ResourceDictionary Source="/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml" />
-                
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -34,10 +34,10 @@
                   VerticalAlignment="Center"
                  Height="1000">
                 <!--Legend image-->
-                
+
                 <StackPanel 
                     VerticalAlignment="Top" 
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center" Height="699">
 
                     <Image Height="250"
                        HorizontalAlignment="Center"
@@ -118,6 +118,23 @@
                                     VerticalAlignment="Center"
                                     TextWrapping="Wrap">
                                                 Emergency Appointment
+                            </TextBlock>
+                        </DockPanel>
+                    </Button>
+                    <Button  Click="SchedulesClick"
+                                Margin="10"
+                                Height="45" 
+                                Width="200" >
+                        <DockPanel Width="auto">
+                            <materialDesign:PackIcon Kind="AboutVariant" 
+                                             Height="25" 
+                                             Width="25"
+                                             Margin="5"
+                                             VerticalAlignment="Center"/>
+                            <TextBlock HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center"
+                                    TextWrapping="Wrap">
+                                                Schedules
                             </TextBlock>
                         </DockPanel>
                     </Button>

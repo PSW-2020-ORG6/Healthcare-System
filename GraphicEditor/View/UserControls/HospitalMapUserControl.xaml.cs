@@ -1,5 +1,7 @@
 ﻿using GraphicEditor.View.Windows;
 using GraphicEditor.ViewModel;
+using HealthClinicBackend.Backend.Controller;
+using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Util;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,6 +10,8 @@ namespace GraphicEditor.View.UserControls
 {
     public partial class HospitalMapUserControl : UserControl
     {
+        private AppointmentController appointmentController = new AppointmentController();
+        private EquipmentRelocationController equipmentRelocationController = new EquipmentRelocationController();
         private MainWindowViewModel _viewModel;
 
         public HospitalMapUserControl(MainWindowViewModel vm)
@@ -55,6 +59,13 @@ namespace GraphicEditor.View.UserControls
             }
             EmergencyAppointment appointment = new EmergencyAppointment(_viewModel);
             appointment.Show();
+        }
+
+        private void SchedulesClick(object sender, RoutedEventArgs e)
+        {
+            SchedulesWindow schedulesWindow = new SchedulesWindow(appointmentController.GetAll(),
+                                                            equipmentRelocationController.GetAll());
+            schedulesWindow.Show();
         }
     }
 }

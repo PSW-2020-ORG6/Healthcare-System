@@ -520,7 +520,7 @@
                         Command="{Binding Path=SchedulesCommand}"
                         Style="{StaticResource MaterialDesignRaisedButton}" >
                         <DockPanel Width="auto">
-                            <materialDesign:PackIcon Kind="Send" 
+                            <materialDesign:PackIcon Kind="AboutVariant" 
                                              Height="25" 
                                              Width="25"
                                              VerticalAlignment="Center"/>

@@ -1,18 +1,9 @@
 ﻿using HealthClinicBackend.Backend.Controller.SecretaryControllers;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Schedule;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace GraphicEditor.View.Windows
 {
@@ -33,7 +24,7 @@ namespace GraphicEditor.View.Windows
 
         private void Rellocate_Click(object sender, RoutedEventArgs e)
         {
-            KeyValuePair<Appointment, AppointmentDto> pair = (KeyValuePair < Appointment, AppointmentDto>)optionsListBox.SelectedItem;
+            KeyValuePair<Appointment, AppointmentDto> pair = (KeyValuePair<Appointment, AppointmentDto>)optionsListBox.SelectedItem;
             secretaryScheduleController.DeleteAppointment(pair.Key);
             secretaryScheduleController.NewAppointment(pair.Value);
             this.Close();
