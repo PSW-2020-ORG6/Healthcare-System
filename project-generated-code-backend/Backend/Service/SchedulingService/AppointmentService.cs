@@ -94,7 +94,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
 
         private void FillComplexInfo(Appointment appointment)
         {
-            appointment.ProcedureType = _procedureTypes.Where(pt => pt.SerialNumber.Equals(appointment.ProcedureTypeSerialnumber)).ToList()[0];
+            appointment.ProcedureType = _procedureTypeRepository.GetById(appointment.ProcedureTypeSerialnumber);
             appointment.Patient = _patientRepository.GetById(appointment.PatientSerialNumber);
             appointment.Physician = _physicianRepository.GetById(appointment.PhysicianSerialNumber);
             appointment.Room = _roomRepository.GetById(appointment.RoomSerialNumber);
