@@ -63,6 +63,11 @@ namespace GraphicEditor.View.UserControls
 
         private void SchedulesClick(object sender, RoutedEventArgs e)
         {
+            if (MainWindow.TypeOfUser == TypeOfUser.NoUser || MainWindow.TypeOfUser == TypeOfUser.Patient)
+            {
+                new Warning().ShowDialog();
+                return;
+            }
             SchedulesWindow schedulesWindow = new SchedulesWindow(appointmentController.GetAll(),
                                                             equipmentRelocationController.GetAll());
             schedulesWindow.Show();

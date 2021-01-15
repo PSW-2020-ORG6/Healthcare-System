@@ -3,6 +3,7 @@ using GraphicEditor.ViewModel;
 using HealthClinicBackend.Backend.Controller;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Util;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -43,6 +44,11 @@ namespace GraphicEditor.View.UserControls
 
         private void SchedulesClick(object sender, RoutedEventArgs e)
         {
+            if (MainWindow.TypeOfUser == TypeOfUser.NoUser || MainWindow.TypeOfUser == TypeOfUser.Patient)
+            {
+                new Warning().ShowDialog();
+                return;
+            }
             SchedulesWindow schedulesWindow = new SchedulesWindow(appointmentController.GetAll(),
                                                             equipmentRelocationController.GetAll());
             schedulesWindow.Show();

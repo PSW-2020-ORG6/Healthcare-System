@@ -4,6 +4,7 @@ using HealthClinicBackend.Backend.Controller;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
+using HealthClinicBackend.Backend.Model.Util;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -272,6 +273,11 @@ namespace GraphicEditor.ViewModel
 
         private void SchedulesWindow()
         {
+            if (MainWindow.TypeOfUser == TypeOfUser.NoUser || MainWindow.TypeOfUser == TypeOfUser.Patient)
+            {
+                new Warning().ShowDialog();
+                return;
+            }
             RoomSchedulesWindow roomSchedulesWindow = new RoomSchedulesWindow(
                 appointmentController.GetByRoomSerialNumber(room.SerialNumber), GetEquipmentRelocationsForRoom());
             roomSchedulesWindow.Show();
