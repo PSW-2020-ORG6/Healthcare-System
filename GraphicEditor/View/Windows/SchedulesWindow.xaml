@@ -5,8 +5,85 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GraphicEditor.View.Windows"
         mc:Ignorable="d"
-        Title="SchedulesWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="SchedulesWindow" 
+        Height="900"
+        Width="950"
+        WindowStartupLocation="CenterScreen">
+    <Grid Background="AliceBlue">
+        <ListView x:Name="appointmentsListView" 
+                  ItemsSource="{Binding Appointments}"
+                  HorizontalAlignment="Left" 
+                  Height="220" 
+                  Margin="50,116,0,0" 
+                  VerticalAlignment="Top"
+                  Width="861">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Room"
+                                    DisplayMemberBinding="{Binding Room.Name}" />
+                    <GridViewColumn Header="Physician" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1} {2}">
+                                            <Binding Path="Physician.Name" />
+                                            <Binding Path="Physician.Surname" />
+                                            <Binding Path="Physician.Specialization[0].Name" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Patient" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="Patient.Name" />
+                                            <Binding Path="Patient.Surname" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Start"
+                                    DisplayMemberBinding="{Binding Path=TimeInterval.Start}" >
+                    </GridViewColumn>
+                    <GridViewColumn Header="End"
+                                    DisplayMemberBinding="{Binding Path=TimeInterval.End}" />
+                    <GridViewColumn Header="Urgency"
+                                    DisplayMemberBinding="{Binding Urgency}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <TextBlock HorizontalAlignment="Left" 
+                   Height="61"
+                   FontSize="30"
+                   Margin="434,48,0,0"
+                   Text="Appointments" 
+                   TextWrapping="Wrap"
+                   VerticalAlignment="Top"
+                   Width="194"/>
+        <TextBlock HorizontalAlignment="Left" 
+            Height="61"
+            FontSize="30"
+            Margin="377,356,0,0"
+            Text="Equipment relocations" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="308"/>
+        <TextBlock HorizontalAlignment="Left" 
+            Height="61"
+            FontSize="30"
+            Margin="434,674,0,0"
+            Text="Renovations" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="169"/>
     </Grid>
 </Window>
