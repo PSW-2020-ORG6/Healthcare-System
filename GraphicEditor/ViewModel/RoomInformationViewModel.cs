@@ -3,6 +3,7 @@ using GraphicEditor.View.Windows;
 using HealthClinicBackend.Backend.Controller;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Schedule;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -210,13 +211,6 @@ namespace GraphicEditor.ViewModel
             equipmentRelocationWindow.Show();
         }
 
-        void SchedulesWindow()
-        {
-            SchedulesWindow schedulesWindow = new SchedulesWindow(appointmentController.GetAll(),
-                                                            equipmentRelocationController.GetAll());
-            schedulesWindow.Show();
-        }
-
         void ChangeCaterogy()
         {
             switch (selectedCategory)
@@ -274,6 +268,22 @@ namespace GraphicEditor.ViewModel
             /* TODO add this without causing errors
             RoomName = room.SerialNumber;
             OnPropertyChanged("RoomName");*/
+        }
+
+        private void SchedulesWindow()
+        {
+            RoomSchedulesWindow roomSchedulesWindow = new RoomSchedulesWindow(
+                appointmentController.GetByRoomSerialNumber(room.SerialNumber), GetEquipmentRelocationsForRoom());
+            roomSchedulesWindow.Show();
+        }
+
+        private List<EquipmentRelocation> GetEquipmentRelocationsForRoom()
+        {
+            List<EquipmentRelocation> equipmentRelocations = new List<EquipmentRelocation>();
+            foreach (EquipmentRelocation er in equipmentRelocationController.GetAll())
+                if (er.equipment.RoomSerialNumber == room.SerialNumber || er.roomToRelocateToSerialNumber == room.SerialNumber)
+                    equipmentRelocations.Add(er);
+            return equipmentRelocations;
         }
     }
 }
