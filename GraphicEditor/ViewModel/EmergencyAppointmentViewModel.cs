@@ -102,7 +102,7 @@ namespace GraphicEditor.ViewModel
 
             AppointmentDto scheduledAppointment = secretaryScheduleController.GetEmergencyAppointmentGEA(appointmentDto);
 
-            if ( scheduledAppointment != null)
+            if (scheduledAppointment != null)
             {
                 secretaryScheduleController.NewAppointment(scheduledAppointment);
                 EmergencyScheduleResult emergencyScheduleResult = new EmergencyScheduleResult(scheduledAppointment, window);

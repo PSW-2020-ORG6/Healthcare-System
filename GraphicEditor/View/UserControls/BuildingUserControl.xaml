@@ -133,6 +133,22 @@
                         </TextBlock>
                     </DockPanel>
                 </Button>
+                <Button Grid.Row="6"
+                    Click="SchedulesClick"
+                    Height="50"
+                    Margin="5,5,5,5">
+                    <DockPanel Width="auto">
+                        <materialDesign:PackIcon Kind="AboutVariant" 
+                                             Height="25" 
+                                             Width="25"
+                                             VerticalAlignment="Center"/>
+                        <TextBlock HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap">
+                        Schedules
+                        </TextBlock>
+                    </DockPanel>
+                </Button>
             </StackPanel>
             
         </Grid>

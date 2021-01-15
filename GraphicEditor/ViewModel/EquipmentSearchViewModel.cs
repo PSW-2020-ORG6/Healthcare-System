@@ -88,7 +88,7 @@ namespace GraphicEditor.ViewModel
                 Room room = roomController.GetById(result.RoomSerialNumber);
                 Floor floor = floorController.GetById(room.FloorSerialNumber);
                 Building building = buildingController.GetById(floor.BuildingSerialNumber);
-                
+
                 string fullLocation = building.Name + ", " + floor.Name + ", " + room.Name + ", "
                                         + result.Name + " in quantity: " + result.Quantity;
                 _reportOfSearch.Add(fullLocation);

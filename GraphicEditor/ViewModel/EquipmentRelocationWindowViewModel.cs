@@ -168,9 +168,9 @@ namespace GraphicEditor.ViewModel
             equipmentRelocation.equipment = EquipmentController.GetById(equipmentRelocation.equipmentSerialNumber);
 
             Boolean overlapping = false;
-            foreach(Appointment app in AppointmentController.GetByRoomSerialNumber(equipmentRelocation.roomToRelocateToSerialNumber))
+            foreach (Appointment app in AppointmentController.GetByRoomSerialNumber(equipmentRelocation.roomToRelocateToSerialNumber))
             {
-                if(equipmentRelocation.TimeInterval.IsOverLapping(app.TimeInterval))
+                if (equipmentRelocation.TimeInterval.IsOverLapping(app.TimeInterval))
                 {
                     overlapping = true;
                     break;
@@ -186,13 +186,13 @@ namespace GraphicEditor.ViewModel
                     }
                 }
             }
-            
+
 
             if (!overlapping) EquipmentRelocationController.AddEquipmentRelocation(equipmentRelocation);
             else
             {
                 List<EquipmentRelocation> listInitialER = new List<EquipmentRelocation>();
-                for(int i = 1; i < 6; ++i)
+                for (int i = 1; i < 6; ++i)
                 {
                     TimeSpan ts = equipmentRelocation.TimeInterval.End - equipmentRelocation.TimeInterval.Start;
                     DateTime startTime = equipmentRelocation.TimeInterval.Start.Subtract(TimeSpan.FromMinutes(ts.TotalMinutes * (i + 1)));

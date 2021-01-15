@@ -1,9 +1,7 @@
 ﻿using GraphicEditor.HelpClasses;
 using HealthClinicBackend.Backend.Controller;
 using HealthClinicBackend.Backend.Model.Schedule;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 
 namespace GraphicEditor.ViewModel
