@@ -11,7 +11,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrate
     {
         private const int DISALLOW_SCHEDULING_HOURS = 24;
 
-        public AppointmentDTO PrepareAppointment(AppointmentDTO appointment)
+        public AppointmentDto PrepareAppointment(AppointmentDto appointment)
         {
             appointment.RestrictedHours = DISALLOW_SCHEDULING_HOURS;
             return appointment;

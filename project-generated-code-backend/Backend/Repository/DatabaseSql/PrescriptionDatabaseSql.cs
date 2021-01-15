@@ -1,6 +1,7 @@
 ﻿using HealthClinicBackend.Backend.Model.MedicalExam;
 using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 

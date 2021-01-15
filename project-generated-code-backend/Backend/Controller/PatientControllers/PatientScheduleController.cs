@@ -40,18 +40,18 @@ namespace HealthClinicBackend.Backend.Controller.PatientControllers
             return _appointmentService.GetAppointmentsByDate(date);
         }
 
-        public void NewAppointment(AppointmentDTO appointmentDto)
+        public void NewAppointment(AppointmentDto appointmentDto)
         {
             _appointmentService.NewAppointment(appointmentDto);
         }
 
-        public AppointmentDTO GetSuggestedAppointment(String physitiansId,
+        public AppointmentDto GetSuggestedAppointment(String physitiansId,
             List<DateTime> dates, int prior)
         {
             throw new NotImplementedException();
         }
 
-        public List<AppointmentDTO> GetAllAvailableAppointments(AppointmentDTO appointmentDto)
+        public List<AppointmentDto> GetAllAvailableAppointments(AppointmentDto appointmentDto)
         {
             return _appointmentSchedulingService.GetAvailableAppointments(appointmentDto);
         }

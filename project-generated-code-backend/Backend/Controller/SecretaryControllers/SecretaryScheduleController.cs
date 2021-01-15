@@ -7,6 +7,8 @@ using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Service.SchedulingService;
 using HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies;
+using System;
+using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Controller.SecretaryControllers
 {
@@ -45,12 +47,12 @@ namespace HealthClinicBackend.Backend.Controller.SecretaryControllers
             return _appointmentService.GetAppointmentsByDate(date);
         }
 
-        public void NewAppointment(AppointmentDTO appointmentDto)
+        public void NewAppointment(AppointmentDto appointmentDto)
         {
             _appointmentService.NewAppointment(appointmentDto);
         }
 
-        public List<AppointmentDTO> GetAllAvailableAppointments(AppointmentDTO appointmentDto)
+        public List<AppointmentDto> GetAllAvailableAppointments(AppointmentDto appointmentDto)
         {
             return _appointmentSchedulingService.GetAvailableAppointments(appointmentDto);
         }

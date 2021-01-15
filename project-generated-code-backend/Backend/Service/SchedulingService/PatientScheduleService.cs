@@ -28,7 +28,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             throw new NotImplementedException();
         }
 
-        public void NewAppointment(AppointmentDTO appointmentDto)
+        public void NewAppointment(AppointmentDto appointmentDto)
         {
             throw new NotImplementedException();
         }

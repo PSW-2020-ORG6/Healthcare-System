@@ -4,13 +4,14 @@
 // Purpose: Definition of Class SuggestedAppointmentSchedulingStrategy
 
 using HealthClinicBackend.Backend.Dto;
+using System;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies
 {
     public class SuggestedAppointmentSchedulingStrategy : SchedulingStrategy
     {
         private const int DISALLOW_SCHEDULING_HOURS = 24;
-        public AppointmentDTO PrepareAppointment(AppointmentDTO appointment)
+        public AppointmentDto PrepareAppointment(AppointmentDto appointment)
         {
             throw new NotImplementedException();
         }

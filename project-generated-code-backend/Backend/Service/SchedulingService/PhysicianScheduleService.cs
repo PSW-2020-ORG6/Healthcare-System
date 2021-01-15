@@ -25,7 +25,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             _appointmentRepository = appointmentRepository;
         }
 
-        public void NewAppointment(AppointmentDTO appointmentDto)
+        public void NewAppointment(AppointmentDto appointmentDto)
         {
             var appointment = new Appointment(appointmentDto);
             _appointmentRepository.Save(appointment);
