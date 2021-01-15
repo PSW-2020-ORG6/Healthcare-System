@@ -47,7 +47,6 @@ namespace GraphicEditorTests
         [Fact]
         public void SearchAllRooms_RoomsFound_ReturnRooms()
         {
-            //TODO because of FillComplexedProperties in RoomService, this is returning NullException
             var stubRoomRepository = new Mock<IRoomRepository>();
             stubRoomRepository.Setup(r => r.GetAll()).Returns(rooms);
 

@@ -22,7 +22,6 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
             _medicineRepository = new MedicineDatabaseSql();
             _equipmentRepository = new EquipmentDatabaseSql();
             _bedRepository = new BedDatabaseSql();
-
         }
 
         public RoomService(IRoomRepository roomRepository, IRoomTypeRepository roomTypeRepository, IMedicineRepository medicineRepository, IEquipmentRepository equipmentRepository)
@@ -74,15 +73,6 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
                 rooms.Add(room);
             }
             return rooms;
-        }
-
-        private void FillComplexedProperties(Room room)
-        {
-
-            room.Equipment = _equipmentRepository.GetByRoomSerialNumber(room.SerialNumber);
-            room.Medicines = _medicineRepository.GetByRoomSerialNumber(room.SerialNumber);
-            room.Beds = _bedRepository.GetByRoomSerialNumber(room.SerialNumber);
-            // Add beds later
         }
 
         public void EditRoom(Room room)
@@ -166,6 +156,37 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
         public List<Equipment> GetAllEquipment(Room room)
         {
             return _roomRepository.GetById(room.SerialNumber).Equipment;
+        }
+
+        private void FillComplexedProperties(Room room)
+        {
+            FillMedicine(room);
+            FillBed(room);
+            FillEquipment(room);
+        }
+
+        private void FillMedicine(Room room)
+        {
+            if (_medicineRepository != null)
+                room.Medicines = _medicineRepository.GetByRoomSerialNumber(room.SerialNumber);
+            else
+                room.Medicines = new List<Medicine>();
+        }
+
+        private void FillBed(Room room)
+        {
+            if (_bedRepository != null)
+                room.Beds = _bedRepository.GetByRoomSerialNumber(room.SerialNumber);
+            else
+                room.Beds = new List<Bed>();
+        }
+
+        private void FillEquipment(Room room)
+        {
+            if (_equipmentRepository != null)
+                room.Equipment = _equipmentRepository.GetByRoomSerialNumber(room.SerialNumber);
+            else
+                room.Equipment = new List<Equipment>();
         }
     }
 }
