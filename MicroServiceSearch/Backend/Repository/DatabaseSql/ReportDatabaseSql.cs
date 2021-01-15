@@ -70,5 +70,12 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
         {
             return GetAll().Where(t => t.Date > datetimes[0] && t.Date < datetimes[1]).ToList();
         }
+
+        public Report GetReportByAppointment(DateTime date, string patientSerialNumber, string physicianSerialNumber)
+        {
+            return GetAll()
+                .Where(r => r.Date.Equals(date) && r.Patient.Equals(patientSerialNumber) && r.PhysicianSerialNumber.Equals(physicianSerialNumber))
+                .ToList()[0];
+        }
     }
 }

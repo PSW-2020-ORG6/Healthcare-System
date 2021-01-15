@@ -10,11 +10,13 @@ using MicroServiceAccount.Backend.Model;
 using MicroServiceAppointment.Backend.Model.Hospital;
 using MicroServiceAccount.Backend.Model.Util;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MicroServiceAppointment.Backend.Model
 {
     public class ProcedureType : Entity
     {
+        [ForeignKey("Specialization")] public string SpecializationSerialNumber { get; set; }
         public virtual Specialization Specialization { get; set; }
         public string Name { get; set; }
         public int EstimatedTimeInMinutes { get; set; }

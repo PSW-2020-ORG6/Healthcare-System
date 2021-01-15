@@ -308,10 +308,12 @@ Vue.component("search", {
                         }
                      })
                     .then(response => {
-                        this.search = response.data
+                        if (this.search == null)
+                            this.search = response.data
+                        else
+                            this.search.concat(response.data)
                     })
                     .catch(error => {
-                        alert(error)
                     })
                 axios
                     .get('/search/reportsSearch', {
@@ -321,10 +323,12 @@ Vue.component("search", {
                         }
                      })
                     .then(response => {
-                        this.search.concat(response.data)
+                        if (this.search == null)
+                            this.search = response.data
+                        else
+                            this.search.concat(response.data)
                     })
                     .catch(error => {
-                        alert(error)
                     })
             }
         },
@@ -460,10 +464,12 @@ Vue.component("search", {
                         }
                         })
                     .then(response => {
-                        this.search = response.data
+                        if (this.search == null)
+                            this.search = response.data
+                        else
+                            this.search.concat(response.data)
                     })
                     .catch(error => {
-                        alert(error)
                     })
                 axios
                     .get('/search/reportsSearch', {
@@ -473,10 +479,12 @@ Vue.component("search", {
                         }
                     })
                     .then(response => {
-                        this.search.concat(response.data)
+                        if (this.search == null)
+                            this.search = response.data
+                        else
+                            this.search.concat(response.data)
                     })
                     .catch(error => {
-                        alert(error)
                     })
             }
         },

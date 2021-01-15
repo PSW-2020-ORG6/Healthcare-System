@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using MicroServiceAppointment.Backend.Util;
+using MicroServiceSearch.Backend.Util;
 using MicroServiceSearch.Backend.Dto;
 using MicroServiceSearch.Backend.DTO;
 using MicroServiceSearch.Backend.Model;
@@ -84,10 +84,15 @@ namespace MicroServiceSearch.Backend.Services
             List<ReportDto> reportDtos = new List<ReportDto>();
             foreach (Report r in reports)
             {
-                var physician = HttpRequest.GetPhysiciantByIdAsync(r.PhysicianSerialNumber).Result;
-                var patient = HttpRequest.GetPatientByIdAsync(r.PatientSerialNumber).Result;
-                string patientFullName = patient.Name + " " + patient.Surname;
-                reportDtos.Add(new ReportDto(r.Date, patientFullName, physician.FullName));
+                ReportDto reportDto = new ReportDto(r);
+                reportDto.Physician = HttpRequest.GetPhysiciantByIdAsync(r.PhysicianSerialNumber).Result.FullName;
+                var patient = HttpRequest.GetPatientByIdAsync(r.PatientId).Result;
+                reportDto.Patient = patient.Name + " " + patient.Surname;
+                var procedureType = HttpRequest.GetProcedureTypeByIdAsync(r.ProcedureTypeSerialNumber).Result;
+                reportDto.ProcedureType = procedureType.Name;
+                reportDto.Specialization = procedureType.Specialization;
+                var p = HttpRequest.GetProcedureTypeByIdAsync(r.ProcedureTypeSerialNumber).Result;
+                reportDtos.Add(reportDto);
             }
             return reportDtos;
         }

@@ -167,5 +167,14 @@ namespace MicroServiceAppointment.Backend.Controllers
         {
             return _appointmentService.IsUserMalicious(patientId);
         }
+
+        [Authorize]
+        [HttpGet("getProcedureTypeById/{procedureTypeId}")]
+        public ProcedureTypeDTO GetProcedureType(string procedureTypeId)
+        {
+            HttpRequest.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                  , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            return _appointmentService.GetProcedureType(procedureTypeId);
+        }
     }
 }

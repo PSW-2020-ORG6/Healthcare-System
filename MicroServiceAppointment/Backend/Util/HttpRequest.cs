@@ -1,4 +1,5 @@
-﻿using MicroServiceAppointment.Backend.Dto;
+﻿using MicroServiceAccount.Backend.Model;
+using MicroServiceAppointment.Backend.Dto;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,13 @@ namespace MicroServiceAppointment.Backend.Util
             HttpResponseMessage response = await client.GetAsync("http://localhost:57053/physicianMicroservice/getPhysicianById/" + physicianId);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<PhysiciansDTO>(await response.Content.ReadAsStringAsync());
+        }
+
+        internal static async Task<SpecializationsDTO> GetSpecializationByIdAsync(string specializationSerialNumber)
+        {
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57053/physicianMicroservice/getSpecializationById/" + specializationSerialNumber);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<SpecializationsDTO>(await response.Content.ReadAsStringAsync());
         }
     }
 }

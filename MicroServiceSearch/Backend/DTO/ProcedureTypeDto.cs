@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MicroServiceAppointment.Backend.Dto
+namespace MicroServiceSearch.Backend.Dto
 {
     public class ProcedureTypeDTO
     {

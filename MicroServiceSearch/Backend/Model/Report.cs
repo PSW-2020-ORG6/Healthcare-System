@@ -19,7 +19,6 @@ namespace MicroServiceSearch.Backend.Model
         [NotMapped] public virtual List<AdditionalDocument> AdditionalDocument { get; set; }
         public DateTime Date { get; set; }
         public string Findings { get; set; }
-        [ForeignKey("Patient")] public string PatientSerialNumber { get; set; }
         public virtual Patient Patient { get; set; }
         [ForeignKey("Physician")] public string PhysicianSerialNumber { get; set; }
         public virtual Physician Physician { get; set; }

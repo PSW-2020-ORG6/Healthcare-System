@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using MicroServiceSearch.Backend.DTO;
 using MicroServiceSearch.Backend.Services;
+using MicroServiceSearch.Backend.Util;
+using System.Net.Http.Headers;
 
 namespace MicroServiceSearch.Backend.Controllers
 {
@@ -42,6 +44,8 @@ namespace MicroServiceSearch.Backend.Controllers
         {
             if (searchEntityDTO.IsDateFormat(dateFrom, dateTo) && searchEntityDTO.IsSearchFormatValid(reportSearch))
             {
+                HttpRequest.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                      , Request.Headers["Authorization"].ToString().Split(" ")[1]);
                 List<SearchEntityDTO> reports = reportService.GetSearchedReport(reportSearch,
                                                 new DateTime[] { Convert.ToDateTime(dateFrom), Convert.ToDateTime(dateTo) });
                 if (!searchEntityDTO.IsNull(reports))

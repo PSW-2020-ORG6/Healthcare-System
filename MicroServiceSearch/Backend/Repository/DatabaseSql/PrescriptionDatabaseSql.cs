@@ -135,5 +135,12 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
             }
             return retVal;
         }
+
+        public Prescription GetPrescriptionsByAppointment(DateTime date,string patientSerialNumber,string physicianSerialNumber)
+        {
+            var reports= DbContext.Report
+                .Where(r => r.Date.Equals(date) && r.PatientId.Equals(patientSerialNumber) && r.PhysicianSerialNumber.Equals(physicianSerialNumber));
+            return null;
+        }
     }
 }
