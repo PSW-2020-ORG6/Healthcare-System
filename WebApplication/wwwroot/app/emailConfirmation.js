@@ -7,7 +7,7 @@
 	template: `
 	<div class="confirmEmail">
 		<h5>Please complete your registration by clicking this button</h5>
-		<button v-on:click="Confirm(); SuccessfulRegistration();">Confirm</button>
+		<button class="conf" v-on:click="Confirm(); SuccessfulRegistration();">Confirm</button>
 		
 	</div>
 	`,
