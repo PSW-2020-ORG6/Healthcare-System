@@ -42,6 +42,13 @@ namespace MicroServiceAccount.Backend.Service
             return new PhysicianDTO(_physicianRepository.GetById(physicianId));
         }
 
+        internal SpecializationDTO GetSpecializationById(string specializationId)
+        {
+            var specialization = new SpecializationDTO();
+                specialization.Name=_specializationRepository.GetById(specializationId).Name;
+            return specialization;
+        }
+
         /// <summary>
         ///calls method for get all specialization in specialization table
         ///</summary>

@@ -15,6 +15,7 @@ namespace MicroServiceAppointment.Backend.Service
     {
         private readonly IPhysicianRepository _physicianRepository;
         private readonly IAppointmentRepository _appointmentRepository;
+        private readonly IProcedureTypeRepository _procedureTypeRepository;
 
         private PhysiciansDTO physitianDTO = new PhysiciansDTO();
         private SpecializationsDTO specializationDTO = new SpecializationsDTO();
@@ -32,10 +33,11 @@ namespace MicroServiceAppointment.Backend.Service
 
 
         public AppointmentService(IAppointmentRepository appointmentRepository,
-            IPhysicianRepository physicianRepository)
+            IPhysicianRepository physicianRepository,IProcedureTypeRepository procedureTypeRepository)
         {
             _appointmentRepository = appointmentRepository;
             _physicianRepository = physicianRepository;
+            _procedureTypeRepository = procedureTypeRepository;
         }
 
         public List<TimeIntervalsDTO> GetAllAvailableAppointments(string physicianId, string specializationName,
@@ -203,6 +205,14 @@ namespace MicroServiceAppointment.Backend.Service
                 appointmentsDto.Add(appointmentDTO);
             }
             return appointmentDTO.ConvertListToAppointmentDTO(appointments);
+        }
+
+        internal ProcedureTypeDTO GetProcedureType(string procedureTypeId)
+        {
+            var procedureType=_procedureTypeRepository.GetById(procedureTypeId);
+            procedureType.Specialization = new Specialization();
+            procedureType.Specialization.Name= HttpRequest.GetSpecializationByIdAsync(procedureType.SpecializationSerialNumber).Result.Name;
+            return new ProcedureTypeDTO(procedureType);
         }
 
         /// <summary>

@@ -37,5 +37,12 @@ namespace MicroServiceAccount.Backend.Controllers
         {
             return _physicianService.GetAllSpecialization();
         }
+
+        [Authorize]
+        [HttpGet("getSpecializationById/{specializationId}")]
+        public SpecializationDTO GetSpecializationById(string specializationId)
+        {
+            return _physicianService.GetSpecializationById(specializationId);
+        }
     }
 }

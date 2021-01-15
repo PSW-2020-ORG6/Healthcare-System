@@ -1,4 +1,5 @@
 ﻿using MicroServiceAccount.Backend.Dto;
+using MicroServiceSearch.Backend.Dto;
 using MicroServiceSearch.Backend.DTO;
 using Newtonsoft.Json;
 using System;
@@ -22,9 +23,15 @@ namespace MicroServiceSearch.Backend.Util
         }
         public static async Task<PhysicianDTO> GetPhysiciantByIdAsync(string physicianId)
         {
-            HttpResponseMessage response = await client.GetAsync("http://localhost:57053/patientMicroservice/getPhysicianById/" + physicianId);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57053/physicianMicroservice/getPhysicianById/" + physicianId);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<PhysicianDTO>(await response.Content.ReadAsStringAsync());
+        }
+        public static async Task<ProcedureTypeDTO> GetProcedureTypeByIdAsync(string procedureTypeId)
+        {
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentMicroservice/getProcedureTypeById/" + procedureTypeId);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<ProcedureTypeDTO>(await response.Content.ReadAsStringAsync());
         }
     }
 }

@@ -151,44 +151,47 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
                 .WithMany();
 
             // Relation helpers are used for many-to-many relations
-        //    modelBuilder.Entity<PrescriptionMedicineDosage>()
-        //        .HasOne(pmd => pmd.Prescription)
-        //        .WithMany();
-        //    modelBuilder.Entity<PrescriptionMedicineDosage>()
-        //        .HasOne(pmd => pmd.MedicineDosage)
-        //        .WithMany();
+            //    modelBuilder.Entity<PrescriptionMedicineDosage>()
+            //        .HasOne(pmd => pmd.Prescription)
+            //        .WithMany();
+            //    modelBuilder.Entity<PrescriptionMedicineDosage>()
+            //        .HasOne(pmd => pmd.MedicineDosage)
+            //        .WithMany();
 
-        //    modelBuilder.Entity<ReportPrescription>()
-        //        .HasOne(rp => rp.Report)
-        //        .WithMany();
-        //    modelBuilder.Entity<ReportPrescription>()
-        //        .HasOne(rp => rp.Prescription)
-        //        .WithOne();
+            modelBuilder.Entity<ReportPrescription>()
+                .HasOne(rp => rp.Report)
+                .WithMany();
+            modelBuilder.Entity<Report>()
+                .HasOne(rp => rp.ProcedureType)
+                .WithMany();
+            modelBuilder.Entity<ReportPrescription>()
+                .HasOne(rp => rp.Prescription)
+                .WithOne();
 
-        //    modelBuilder.Entity<ReportDiagnosticReferral>()
-        //        .HasOne(x => x.Report)
-        //        .WithMany();
-        //    modelBuilder.Entity<ReportDiagnosticReferral>()
-        //        .HasOne(x => x.DiagnosticReferral)
-        //        .WithOne();
+            //    modelBuilder.Entity<ReportDiagnosticReferral>()
+            //        .HasOne(x => x.Report)
+            //        .WithMany();
+            //    modelBuilder.Entity<ReportDiagnosticReferral>()
+            //        .HasOne(x => x.DiagnosticReferral)
+            //        .WithOne();
 
-        //    modelBuilder.Entity<ReportSpecialistReferral>()
-        //        .HasOne(x => x.Report)
-        //        .WithMany();
-        //    modelBuilder.Entity<ReportSpecialistReferral>()
-        //        .HasOne(x => x.SpecialistReferral)
-        //        .WithOne();
+            //    modelBuilder.Entity<ReportSpecialistReferral>()
+            //        .HasOne(x => x.Report)
+            //        .WithMany();
+            //    modelBuilder.Entity<ReportSpecialistReferral>()
+            //        .HasOne(x => x.SpecialistReferral)
+            //        .WithOne();
 
-        //    modelBuilder.Entity<ReportFollowUp>()
-        //        .HasOne(x => x.Report)
-        //        .WithMany();
-        //    modelBuilder.Entity<ReportFollowUp>()
-        //        .HasOne(x => x.FollowUp)
-        //        .WithOne();
+            //    modelBuilder.Entity<ReportFollowUp>()
+            //        .HasOne(x => x.Report)
+            //        .WithMany();
+            //    modelBuilder.Entity<ReportFollowUp>()
+            //        .HasOne(x => x.FollowUp)
+            //        .WithOne();
 
-        //    // Pharmacy support
-        //    modelBuilder.Entity<ActionAndBenefitMessage>()
-        //        .HasAlternateKey(abm => abm.ActionID);
+            //    // Pharmacy support
+            //    modelBuilder.Entity<ActionAndBenefitMessage>()
+            //        .HasAlternateKey(abm => abm.ActionID);
         }
     }
 }

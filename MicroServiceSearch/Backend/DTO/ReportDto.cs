@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MicroServiceSearch.Backend.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,12 +12,12 @@ namespace MicroServiceSearch.Backend.Dto
         public string Physician { get; set; }
         public string Specialization { get; set; }
         public string Date { get; set; }
+        public string Findings { get; set; }
 
-        public ReportDto(DateTime date,string patient,string physician)
+        public ReportDto(Report report)
         {
-            Date = date.ToString("dddd, MMMM dd yyyy");
-            Patient = patient;
-            Physician = physician;
+            Date = report.Date.ToString("dddd, MMMM dd yyyy");
+            Findings = report.Findings;
         }
 
         public bool EqualsReport(ReportDto rsecond)
