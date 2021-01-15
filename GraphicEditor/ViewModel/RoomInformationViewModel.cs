@@ -2,8 +2,6 @@
 using GraphicEditor.View.Windows;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
-using HealthClinicBackend.Backend.Model.Schedule;
-using System;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -32,6 +30,8 @@ namespace GraphicEditor.ViewModel
         public MyICommand<Bed> NavCommandBedUpdate { get; private set; }
 
         public MyICommand EquipmentRelocationCommand { get; private set; }
+
+        public MyICommand SchedulesCommand { get; private set; }
 
         public MyICommand<Room> NavCommandRoomUpdate { get; private set; }
 
@@ -170,6 +170,7 @@ namespace GraphicEditor.ViewModel
             NavCommandRoomUpdate = new MyICommand<Room>(updateRoomInfo);
             ChangeCaterogyCommand = new MyICommand(ChangeCaterogy);
             EquipmentRelocationCommand = new MyICommand(EnterEquipmentRelocationWindow);
+            SchedulesCommand = new MyICommand(SchedulesWindow);
 
             window = _window;
             roomName = _room.Name;
@@ -204,6 +205,12 @@ namespace GraphicEditor.ViewModel
         {
             EquipmentRelocationWindow equipmentRelocationWindow = new EquipmentRelocationWindow(selectedEquipment);
             equipmentRelocationWindow.Show();
+        }
+
+        void SchedulesWindow()
+        {
+            SchedulesWindow schedulesWindow = new SchedulesWindow();
+            schedulesWindow.Show();
         }
 
         void ChangeCaterogy()
