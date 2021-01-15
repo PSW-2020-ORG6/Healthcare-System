@@ -19,6 +19,12 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             RoomRepository = new RoomDatabaseSql();
             EquipmentDatabaseSql = new EquipmentDatabaseSql();
         }
+
+        public EquipmentRelocationService(IEquipmentRelocationDatabaseSql equipmentRelocation)
+        {
+            EquipmentRelocationDatabaseSql = equipmentRelocation;
+        }
+
         public void AddEquipmentRelocation(EquipmentRelocation equipmentRelocation)
         {
             EquipmentRelocationDatabaseSql.Save(equipmentRelocation);

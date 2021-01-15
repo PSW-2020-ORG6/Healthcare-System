@@ -7,9 +7,9 @@ namespace HealthClinicBackend.Backend.Model.Schedule
     public class EquipmentRelocation : Entity
     {
         public virtual Equipment equipment { get; set; }
-
         public TimeInterval TimeInterval { get; set; }
         public string roomToRelocateToSerialNumber { get; set; }
+        public Room roomToRelocateTo { get; set; }
         public string equipmentSerialNumber { get; set; }
         public uint quantity { get; set; }
         public EquipmentRelocation() : base() { }
@@ -22,6 +22,5 @@ namespace HealthClinicBackend.Backend.Model.Schedule
             this.equipment = equipment;
             this.equipmentSerialNumber = equipment.SerialNumber;
         }
-
     }
 }

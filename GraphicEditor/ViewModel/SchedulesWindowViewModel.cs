@@ -8,13 +8,44 @@ namespace GraphicEditor.ViewModel
 {
     public class SchedulesWindowViewModel : BindableBase
     {
-        private AppointmentController appointmentController = new AppointmentController();
-        private SchedulesWindow _window;
+        public List<Appointment> allAppointments = new List<Appointment>();
+        public RoomController roomController = new RoomController();
+        private readonly SchedulesWindow window;
+        private List<EquipmentRelocation> allEquipmentRelocations = new List<EquipmentRelocation>();
 
-        public SchedulesWindowViewModel(List<Appointment> appointments, SchedulesWindow window)
+        public List<Appointment> AllAppointments
         {
-            appointments = appointmentController.GetAll();
-            _window = window;
+            get { return allAppointments; }
+            set
+            {
+                if (value != null)
+                    SetProperty(ref allAppointments, value);
+            }
+        }
+
+        public List<EquipmentRelocation> AllEquipmentRelocations
+        {
+            get { return allEquipmentRelocations; }
+            set
+            {
+                if (value != null)
+                    SetProperty(ref allEquipmentRelocations, value);
+            }
+        }
+
+        public SchedulesWindowViewModel(List<Appointment> appointments,
+            List<EquipmentRelocation> equipmentRelocations, SchedulesWindow window)
+        {
+            AllAppointments = appointments;
+            AllEquipmentRelocations = equipmentRelocations;
+
+            foreach (EquipmentRelocation equipmentRelocation in AllEquipmentRelocations)
+            {
+                equipmentRelocation.equipment.Room = roomController.GetBySerialNumber(equipmentRelocation.equipment.RoomSerialNumber);
+                equipmentRelocation.roomToRelocateTo = roomController.GetBySerialNumber(equipmentRelocation.roomToRelocateToSerialNumber);
+            }
+
+            this.window = window;
         }
     }
 }

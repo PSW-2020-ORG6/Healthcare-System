@@ -7,11 +7,10 @@ namespace GraphicEditor.View.Windows
 {
     public partial class SchedulesWindow : Window
     {
-        public SchedulesWindow(List<Appointment> appointments)
+        public SchedulesWindow(List<Appointment> appointments, List<EquipmentRelocation> equipmentRelocations)
         {
-            this.DataContext = new SchedulesWindowViewModel(appointments, this);
+            this.DataContext = new SchedulesWindowViewModel(appointments, equipmentRelocations, this);
             InitializeComponent();
-            appointmentsListView.ItemsSource = appointments;
         }
     }
 }
