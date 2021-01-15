@@ -51,9 +51,9 @@ namespace MicroServiceAccount.Backend.Controllers
         ///<returns>
         ///information about sucess in IActionResult format
         ///</returns>
-        [Authorize]
-        [HttpPut("confirmationEmail/{id}")]
-        public IActionResult Confirmation(string id)
+ 
+        [HttpPut("confirmationEmail")]
+        public IActionResult Confirmation([FromBody] string id)
         {
             string patientId = IdDecryption(id);
             if (_registrationService.ConfirmEmailUpdate(patientId))

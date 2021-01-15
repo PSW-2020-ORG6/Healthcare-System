@@ -328,7 +328,6 @@
 			};
 		},
 		AddPatient: function (patientDTO) {
-			alert(this.patientDTO.chosenDoctor)
 			if (patientDTO.name != null && patientDTO.surname != null && patientDTO.parentName != null && patientDTO.id != null
 				&& patientDTO.dateOfBirth != null && patientDTO.placeOfBirth != null && patientDTO.municipalityOfBirth != null && patientDTO.stateOfBirth != null
 				&& patientDTO.nationality != null && patientDTO.citizenship != null && patientDTO.address != null && patientDTO.placeOfResidence != null
