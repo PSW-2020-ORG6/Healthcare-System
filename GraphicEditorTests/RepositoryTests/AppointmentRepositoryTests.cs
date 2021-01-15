@@ -10,7 +10,6 @@ namespace GraphicEditorTests.RepositoryTests
 
         public AppointmentRepositoryTests()
         {
-            // Arrange
             _appointmentRepository = new AppointmentDatabaseSql();
         }
 

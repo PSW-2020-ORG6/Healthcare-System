@@ -93,14 +93,10 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 
         public void DeleteRoom(Room room)
         {
-            foreach (Medicine medicine in _medicineRepository.GetByRoomSerialNumber(room.SerialNumber))
-                _medicineRepository.Delete(medicine.SerialNumber);
-            foreach (Bed bed in _bedRepository.GetByRoomSerialNumber(room.SerialNumber))
-                _bedRepository.Delete(bed.SerialNumber);
-            foreach (Equipment equipment in _equipmentRepository.GetByRoomSerialNumber(room.SerialNumber))
-                _equipmentRepository.Delete(equipment.SerialNumber);
+            DeleteMedicineFromRoom(room);
+            DeleteBedFromRoom(room);
+            DeleteEquipmentFromRoom(room);
             _roomRepository.Delete(room.SerialNumber);
-
         }
 
         public void AddEquipment(Equipment equipment, Room room)
@@ -187,6 +183,27 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
                 room.Equipment = _equipmentRepository.GetByRoomSerialNumber(room.SerialNumber);
             else
                 room.Equipment = new List<Equipment>();
+        }
+
+        private void DeleteEquipmentFromRoom(Room room)
+        {
+            if (_equipmentRepository != null)
+                foreach (Equipment equipment in _equipmentRepository.GetByRoomSerialNumber(room.SerialNumber))
+                    _equipmentRepository.Delete(equipment.SerialNumber);
+        }
+
+        private void DeleteBedFromRoom(Room room)
+        {
+            if (_bedRepository != null)
+                foreach (Bed bed in _bedRepository.GetByRoomSerialNumber(room.SerialNumber))
+                    _bedRepository.Delete(bed.SerialNumber);
+        }
+
+        private void DeleteMedicineFromRoom(Room room)
+        {
+            if (_medicineRepository != null)
+                foreach (Medicine medicine in _medicineRepository.GetByRoomSerialNumber(room.SerialNumber))
+                    _medicineRepository.Delete(medicine.SerialNumber);
         }
     }
 }

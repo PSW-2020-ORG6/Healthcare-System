@@ -55,8 +55,9 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
 
         public void DeleteBuilding(Building building)
         {
-            foreach (Floor floor in _floorRepository.GetByBuildingSerialNumber(building.SerialNumber))
-                _floorRepository.Delete(floor.SerialNumber);
+            if (_floorRepository != null)
+                foreach (Floor floor in _floorRepository.GetByBuildingSerialNumber(building.SerialNumber))
+                    _floorRepository.Delete(floor.SerialNumber);
             _buildingRepository.Delete(building.SerialNumber);
         }
     }

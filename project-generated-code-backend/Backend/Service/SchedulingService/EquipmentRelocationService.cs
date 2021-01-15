@@ -29,6 +29,12 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         {
             EquipmentRelocationDatabaseSql.Save(equipmentRelocation);
         }
+
+        public void DeleteEquipmentRelocation(EquipmentRelocation equipmentRelocation)
+        {
+            EquipmentRelocationDatabaseSql.Delete(equipmentRelocation.SerialNumber);
+        }
+
         public List<EquipmentRelocation> GetAll()
         {
             List<EquipmentRelocation> equipmentRelocations = EquipmentRelocationDatabaseSql.GetAll();
@@ -38,12 +44,14 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             }
             return equipmentRelocations;
         }
+
         public EquipmentRelocation GetBySerialNumber(string serialNumber)
         {
             EquipmentRelocation equipmentRelocation = EquipmentRelocationDatabaseSql.GetBySerialNumber(serialNumber);
             AddMissingProperties(equipmentRelocation);
             return equipmentRelocation;
         }
+
         public void RelocateEquipmentIfItIsTime()
         {
             foreach (EquipmentRelocation equipmentRelocation in GetAll())
@@ -54,6 +62,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
                 }
             }
         }
+
         private bool IsItTimeToMoveEquipment(EquipmentRelocation equipmentRelocation)
         {
             if (equipmentRelocation.TimeInterval.IsOverLapping(new TimeInterval(DateTime.Now, DateTime.Now)))
@@ -62,6 +71,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             }
             return false;
         }
+
         private void RelocateEquipment(EquipmentRelocation equipmentRelocation)
         {
             //EquipmentDatabaseSql.GetBySerialNumber(equipmentRelocation.SerialNumber);
@@ -101,7 +111,8 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
 
         private void AddMissingProperties(EquipmentRelocation equipmentRelocation)
         {
-            equipmentRelocation.equipment = EquipmentDatabaseSql.GetBySerialNumber(equipmentRelocation.equipmentSerialNumber);
+            if (EquipmentDatabaseSql != null)
+                equipmentRelocation.equipment = EquipmentDatabaseSql.GetBySerialNumber(equipmentRelocation.equipmentSerialNumber);
         }
     }
 }
