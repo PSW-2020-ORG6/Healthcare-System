@@ -498,7 +498,7 @@
                 </DockPanel>
                 <DockPanel>
                     <Button 
-                        HorizontalAlignment="Center"
+                        HorizontalAlignment="Left"
                         Margin="10"
                         Command="{Binding Path=EquipmentRelocationCommand}"
                         Style="{StaticResource MaterialDesignRaisedButton}" >
@@ -511,6 +511,23 @@
                                VerticalAlignment="Center"
                                TextWrapping="Wrap">
                         Relocate selected equipment
+                            </TextBlock>
+                        </DockPanel>
+                    </Button>
+                    <Button 
+                        HorizontalAlignment="Left"
+                        Margin="10"
+                        Command="{Binding Path=SchedulesCommand}"
+                        Style="{StaticResource MaterialDesignRaisedButton}" >
+                        <DockPanel Width="auto">
+                            <materialDesign:PackIcon Kind="Send" 
+                                             Height="25" 
+                                             Width="25"
+                                             VerticalAlignment="Center"/>
+                            <TextBlock HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap">
+                         Schedules
                             </TextBlock>
                         </DockPanel>
                     </Button>
