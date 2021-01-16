@@ -12,6 +12,7 @@ namespace GraphicEditor.ViewModel
         public RoomController roomController = new RoomController();
         private readonly RoomSchedulesWindow window;
         private List<EquipmentRelocation> allEquipmentRelocations = new List<EquipmentRelocation>();
+        private AppointmentController appointmentController = new AppointmentController();
         private EquipmentRelocationController equipmentRelocationController = new EquipmentRelocationController();
 
         public List<Appointment> AllAppointments
@@ -34,8 +35,9 @@ namespace GraphicEditor.ViewModel
             }
         }
 
+        public Appointment SelectedAppointment { get; set; }
         public EquipmentRelocation SelectedEquipmentRelocation { get; set; }
-
+        public MyICommand CancelOfAppointment { get; private set; }
         public MyICommand CancelOfRelocation { get; private set; }
 
         public RoomSchedulesWindowViewModel(List<Appointment> appointments,
@@ -50,8 +52,18 @@ namespace GraphicEditor.ViewModel
                 equipmentRelocation.roomToRelocateTo = roomController.GetBySerialNumber(equipmentRelocation.roomToRelocateToSerialNumber);
             }
 
+            CancelOfAppointment = new MyICommand(CancelAppointment);
             CancelOfRelocation = new MyICommand(CancelEquipmentRelocation);
             this.window = window;
+        }
+
+        private void CancelAppointment()
+        {
+            if (SelectedAppointment != null)
+            {
+                appointmentController.DeleteAppointment(SelectedAppointment);
+                window.Close();
+            }
         }
 
         private void CancelEquipmentRelocation()
