@@ -28,6 +28,8 @@ namespace MicroServiceAppointment.Backend.Service
         public bool AddNewSurvey(Survey surveyText)
         {
             _surveyRepository.Save(surveyText);
+            var appointmentDtos = HttpRequest.GetAllAppointmentsByPatientIdDateAndDoctor(surveyText.PatientId, surveyText.ReportDate.ToString(), surveyText.DoctorName).Result;
+            HttpRequest.UpdateAppointment(appointmentDtos[0]);
             return true;
         }
 
@@ -61,7 +63,9 @@ namespace MicroServiceAppointment.Backend.Service
 
             foreach (Appointment a in _appointmentRepository.GetDoneSurveyByPatentId(patientId))
             {
-                resultListPastAppointments.Add(HttpRequest.GetPhysiciantByIdAsync(a.PhysicianSerialNumber).Result.FullName);
+                resultListPastAppointments.Add(HttpRequest.GetPhysiciantByIdAsync(a.PhysicianSerialNumber).Result.FullName + "-" + a.Date.ToString().Split(" ")[0]);
+                if (a.Date > DateTime.Now)
+                    resultListPastAppointments.Remove(HttpRequest.GetPhysiciantByIdAsync(a.PhysicianSerialNumber).Result.FullName + "-" + a.Date.ToString().Split(" ")[0]);
             }
 
             foreach (String physicianFromPastAppointmentst in resultListPastAppointments)

@@ -25,6 +25,11 @@ namespace MicroServiceAccount.Backend.Service
             _patientRepository = patientRepository;
             this.configuration = configuration;
         }
+        public UserService(IAdminRepository adminRepository, IPatientRepository patientRepository)
+        {
+            _adminRepository = adminRepository;
+            _patientRepository = patientRepository;
+        }
 
         public Account LogIn(string email, string password)
         {

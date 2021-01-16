@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using MicroServiceAppointment.Backend.Util;
 using MicroServiceAppointment.Backend.Service;
 using MicroServiceAppointment.Backend.Model.Survey;
+using System.Net.Http.Headers;
 
 namespace MicroServiceAppointment.Backend.Controllers
 {
@@ -44,6 +45,8 @@ namespace MicroServiceAppointment.Backend.Controllers
         [HttpGet("getDoctorsForSurveyList/{patientId}")]
         public List<String> GetAllDoctorsFromReportsByPatientIdForSurveyList(String patientId)
         {
+            HttpRequest.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                         , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             return _surveyService.GetAllDoctorsFromReportsByPatientIdForSurveyList(patientId);
         }
         [Authorize]

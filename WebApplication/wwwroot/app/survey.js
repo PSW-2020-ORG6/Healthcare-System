@@ -7,7 +7,7 @@ Vue.component("survey", {
             dName: doctorNameAppointment,
             selectedDoctor: {},
             surveyText: {
-                id: null,
+                PatientId: localStorage.getItem('userId'),
                 questions: [],
                 DoctorName: null,
                 reportDate: null,
@@ -15,8 +15,10 @@ Vue.component("survey", {
         }
     },
     beforeMount() {
+
         axios
-            .get('/survey/getDoctorsForSurveyList', { params: { patientId: this.surveyText.id }, 
+            .get('/survey/getDoctorsForSurveyList', {
+                params: { patientId: localStorage.getItem('userId') },
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -351,8 +353,6 @@ Vue.component("survey", {
                 !document.getElementById("star4RatingOne").checked) {
 
                 $('#myModal1').modal('show');
-
-
                 return
             }
             selectedValue = $('#doctorSelect').val()
@@ -366,20 +366,30 @@ Vue.component("survey", {
 
             var parts = textSptlit.split("-")
             var doctorName = parts[0]
+
+
             var dDate = parts[1].split(".")
-            dDateVar = dDate[2] + "," + dDate[1] + "," + dDate[0]
-            var dateSurvey = new Date("'" + dDateVar + "'")
-
-
-            this.surveyText.DoctorName = doctorName
-            this.surveyText.reportDate = dateSurvey;
+            dDateVar = dDate[2] + "-" + dDate[1] + "-" + dDate[0]
+            this.surveyText.DoctorName = doctorName;
+            this.surveyText.reportDate = new Date(dDate[2], dDate[1], dDate[0], 0)
+            var DateReportPom = new Date(dDateVar)
+            this.surveyText.reportDate = DateReportPom.toJSON()
+            alert(DateReportPom.toJSON())
 
 
             axios
-                .post('/survey/add', surveyText)
-                .then(response => {
+                .post("/survey/add", surveyText, {
+                    headers: {
+                        'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                    }
                 })
-            $('#myModal5').modal('show');
+                .then(response => {
+                    $('#myModal5').modal('show')
+
+                })
+                .catch(error => {
+
+                })
         }
     }
 });
@@ -390,7 +400,7 @@ Vue.component("appointments", {
             appointmentSchedulingDTO: {
                 physicianId: "",
                 pimeIntervalStart: "",
-                pate:""
+                pate: ""
             },
             appointmentDto: null,
             isSurveyDone: null,
@@ -436,7 +446,7 @@ Vue.component("appointments", {
             })
         axios
             .get('/appointment/allAppointmentsByPatientIdActive', {
-                params: { patientId: localStorage.getItem('userId') }, 
+                params: { patientId: localStorage.getItem('userId') },
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -450,7 +460,7 @@ Vue.component("appointments", {
 
         axios
             .get('/appointment/allAppointmentsByPatientIdCanceled', {
-                params: { patientId: localStorage.getItem('userId') } , 
+                params: { patientId: localStorage.getItem('userId') },
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -464,7 +474,7 @@ Vue.component("appointments", {
 
         axios
             .get('/appointment/allAppointmentsByPatientIdPast', {
-                params: { patientId: localStorage.getItem('userId') } , 
+                params: { patientId: localStorage.getItem('userId') },
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -477,7 +487,7 @@ Vue.component("appointments", {
             })
         axios
             .get('/appointment/allAppointmentsWithSurvey', {
-                params: { patientId: localStorage.getItem('userId')} , 
+                params: { patientId: localStorage.getItem('userId') },
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -490,7 +500,7 @@ Vue.component("appointments", {
             })
         axios
             .get('/appointment/allAppointmentsWithoutSurvey', {
-                params: { patientId: localStorage.getItem('userId') } , 
+                params: { patientId: localStorage.getItem('userId') },
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -502,10 +512,9 @@ Vue.component("appointments", {
             .catch(error => {
             })
 
-
         axios
             .get('/survey/getDoctorsForSurveyList', {
-                params: { patientId: localStorage.getItem('userId') } , 
+                params: { patientId: localStorage.getItem('userId') },
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -815,6 +824,8 @@ Vue.component("appointments", {
 											<th>Room</th>
 											<th>Procedure</th>
 											<th>Urgency</th>
+											<th>Report</th>
+											<th>Prescription</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -824,7 +835,9 @@ Vue.component("appointments", {
 											<td>{{appointmentDto.physicianDTO.fullName}}</td>
 											<td>{{appointmentDto.roomDTO.name}}</td>
 											<td>{{appointmentDto.procedureTypeDTO.name}}</td>
-											<td>{{appointmentDto.urgency}}</td>				
+											<td>{{appointmentDto.urgency}}</td>		
+											<td><button  type="button" id="reportButton" class="btn btn-info btn-lg"  v-on:click="ReportModalShow()">Report</button></td>
+											<td><button  type="button" id="prescriptionButton" class="btn btn-info btn-lg" v-on:click="PrescriptionModalShow()">Prescription</button></td>
                                          </tr>
 									</tbody>
 								</table>
@@ -836,7 +849,39 @@ Vue.component("appointments", {
 
         
        
+                    <div class="modal fade" id="myModalReport" role="dialog">
+                        <div class="modal-dialog">
+		                      <!-- Modal content-->
+			                  <div class="modal-content">
+					                <div class="modal-header">
+								          <button type="button" class="close" data-dismiss="modal">&times;</button>
+									</div>
+							  <div class="modal-body">
+                              <p>Report</p>
+							 </div>
+							 <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal" >Ok</button>
+                             </div>
+                          </div>
+                        </div>
+					</div>
 
+                <div class="modal fade" id="myModalPrescription" role="dialog">
+                        <div class="modal-dialog">
+		                      <!-- Modal content-->
+			                  <div class="modal-content">
+					                <div class="modal-header">
+								          <button type="button" class="close" data-dismiss="modal">&times;</button>
+									</div>
+							  <div class="modal-body">
+                              <p>Prescription</p>
+							 </div>
+							 <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal" >Ok</button>
+                             </div>
+                          </div>
+                        </div>
+					</div>
 
 
 
@@ -852,7 +897,7 @@ Vue.component("appointments", {
             dateDate = dateD[0] + "-" + dateD[1] + "-" + dateD[2] + " 00:00:00"
             axios
                 .get("/appointment/isSurveyDoneByPatientIdAppointmentDatePhysicianName", {
-                    params: { patientId: localStorage.getItem('token'), appointmentDate: dateDate, physicianName: doctorName } , 
+                    params: { patientId: localStorage.getItem('token'), appointmentDate: dateDate, physicianName: doctorName },
                     headers: {
                         'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                     }
@@ -890,7 +935,7 @@ Vue.component("appointments", {
         },
         AddNewFeedback: function (feedback) {
             if (!document.getElementById("anonimous").checked)
-                this.feedback.patientId =localStorage.getItem('userId')
+                this.feedback.patientId = localStorage.getItem('userId')
             if (feedback.text.localeCompare(null) || feedback.text.localeCompare("")) {
                 axios
                     .post("/feedback/add", feedback, {
@@ -933,7 +978,7 @@ Vue.component("appointments", {
                 .then(response => {
                     axios
                         .get('/appointment/IsUserMalicious', {
-                            params: { patientId: localStorage.getItem('userId') }, 
+                            params: { patientId: localStorage.getItem('userId') },
                             headers: {
                                 'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                             }
@@ -960,7 +1005,7 @@ Vue.component("appointments", {
                         })
                     axios
                         .get('/appointment/allAppointmentsByPatientIdActive', {
-                            params: { patientId: localStorage.getItem('userId') }, 
+                            params: { patientId: localStorage.getItem('userId') },
                             headers: {
                                 'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                             }
@@ -1001,7 +1046,8 @@ Vue.component("appointments", {
 
         GetTimeIntervals: function () {
             axios
-                .get('/appointment/avaliableTimeIntervals', { params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, date: this.date } , 
+                .get('/appointment/avaliableTimeIntervals', {
+                    params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, date: this.date },
                     headers: {
                         'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                     }
@@ -1066,7 +1112,7 @@ Vue.component("appointments", {
                 return true
             }
             return false
-        }, 
+        },
         MakeAppointment: function () {
             if (this.timeInterval != null) {
                 this.appointmentSchedulingDTO.physicianId = this.chosenPhysician.id
@@ -1128,7 +1174,8 @@ Vue.component("appointments", {
                 if (document.getElementById("cbd").checked == true) {
                     var dates = this.CreateDates()
                     axios
-                        .get('/appointment/appointmentsWithReccomendation', { params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, dates: dates } , 
+                        .get('/appointment/appointmentsWithReccomendation', {
+                            params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, dates: dates },
                             headers: {
                                 'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                             }
@@ -1139,7 +1186,8 @@ Vue.component("appointments", {
                 } else {
                     var dates = this.CreateDates()
                     axios
-                        .get('/appointment/appointmentsWithPhysicianPriority', { params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, dates: dates } , 
+                        .get('/appointment/appointmentsWithPhysicianPriority', {
+                            params: { physicianId: this.choosenPhysician.id, specializationName: this.choosenSpecialization, dates: dates },
                             headers: {
                                 'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                             }
@@ -1191,8 +1239,8 @@ Vue.component("appointments", {
                     .get('/appointment/appointments', {
                         params: {
                             physicianId: "600001", specializationName: "General practitioner", date: document.getElementById("myDate").value
-                        
-                    }, 
+
+                        },
                         headers: {
                             'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                         }
@@ -1212,6 +1260,14 @@ Vue.component("appointments", {
                 .then(response => {
                     this.Refresh()
                 })
+        },
+        ReportModalShow: function () {
+            $('#myModalReport').modal('show');
+
+        },
+        PrescriptionModalShow: function () {
+            $('#myModalPrescription').modal('show');
+
         }
     }
 });

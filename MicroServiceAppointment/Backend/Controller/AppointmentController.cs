@@ -26,9 +26,12 @@ namespace MicroServiceAppointment.Backend.Controllers
         }
         //radi 
         [Authorize]
+        [Authorize]
         [HttpGet("allAppointmentsByPatientId/{patientId}")]
         public List<AppointmentDto> GetAllAppointmentsByPatientId(String patientId)
         {
+            HttpRequest.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                   , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             return _appointmentService.GetAllAppointmentsByPatientId(patientId);
         }
         //radi
@@ -122,11 +125,11 @@ namespace MicroServiceAppointment.Backend.Controllers
         //testirati na frontu
         [Authorize]
         [HttpPut("update")]
-        public void SetSurveyDoneOnAppointment(Appointment appointmentDto)
+        public void SetSurveyDoneOnAppointment(AppointmentDto appointmentDto)
         {
             _appointmentService.Update(appointmentDto);
         }
-        
+
         [Authorize]
         [HttpGet("appointmentsWithReccomendation/{physicianId}/{specializationName}/{dates}")]
         public List<AppointmentWithRecommendationDTO> GetAllAvailableAppointmentsWithRecommendation(string physicianId,
@@ -175,6 +178,15 @@ namespace MicroServiceAppointment.Backend.Controllers
             HttpRequest.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
                                                                                                   , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             return _appointmentService.GetProcedureType(procedureTypeId);
+        }
+        [Authorize]
+        [HttpGet("getAllAppointmentsByPatientIdDateAndDoctor/{patientId}/{date}/{doctorName}")]
+        public List<AppointmentDto> GetAllAppointmentsByPatientIdDateAndDoctor(String patientId, String date, string doctorName)
+        {
+            HttpRequest.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                   , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            List<AppointmentDto> appointments = _appointmentService.GetAllAppointmentsByPatientIdDateAndDoctor(patientId, date, doctorName);
+            return appointments;
         }
     }
 }

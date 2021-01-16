@@ -16,6 +16,8 @@ namespace MicroServiceAppointment.Backend.Service
         private readonly IPhysicianRepository _physicianRepository;
         private readonly IAppointmentRepository _appointmentRepository;
         private readonly IProcedureTypeRepository _procedureTypeRepository;
+        private readonly ISpecializationRepository _specializationRepository;
+
 
         private PhysiciansDTO physitianDTO = new PhysiciansDTO();
         private SpecializationsDTO specializationDTO = new SpecializationsDTO();
@@ -39,6 +41,20 @@ namespace MicroServiceAppointment.Backend.Service
             _physicianRepository = physicianRepository;
             _procedureTypeRepository = procedureTypeRepository;
         }
+
+        public AppointmentService(IAppointmentRepository appointmentRepository)
+        {
+            _appointmentRepository = appointmentRepository;
+        }
+        public AppointmentService(IAppointmentRepository appointmentRepository,
+            IPhysicianRepository physicianRepository, IProcedureTypeRepository procedureTypeRepository,ISpecializationRepository specializationRepository)
+        {
+            _specializationRepository = specializationRepository;
+            _appointmentRepository = appointmentRepository;
+            _physicianRepository = physicianRepository;
+            _procedureTypeRepository = procedureTypeRepository;
+        }
+
 
         public List<TimeIntervalsDTO> GetAllAvailableAppointments(string physicianId, string specializationName,
             string date)
@@ -179,13 +195,7 @@ namespace MicroServiceAppointment.Backend.Service
         ///</returns>
         public List<AppointmentDto> GetAllAppointmentsByPatientId(string patientId)
         {
-            
-            List<Appointment> appointments = _appointmentRepository.GetByPatientId(patientId);
-            foreach (Appointment a in appointments)
-            {
-                //a.Patient.Address = _addressRepository.GetById(a.Patient.AddressSerialNumber);
-            }
-            return appointmentDTO.ConvertListToAppointmentDTO(appointments);
+            return GetAppointmentDtos(_appointmentRepository.GetByPatientId(patientId));
         }
 
         /// <summary>
@@ -212,7 +222,21 @@ namespace MicroServiceAppointment.Backend.Service
             return appointmentsDto;
         }
 
-            internal ProcedureTypeDTO GetProcedureType(string procedureTypeId)
+        internal List<AppointmentDto> GetAllAppointmentsByPatientIdDateAndDoctor(string patientId, string date, string doctorName)
+        {
+            List<PhysiciansDTO> physician = HttpRequest.GetPhysycianByName(doctorName).Result;
+
+            List<Appointment> appointments = _appointmentRepository.GetAllAppointmentsByPatientIdDateAndDoctor(patientId, dateFromStringConverter.CreateDateTime1(date.Split(" ")[0]), physician[0].Id);
+            List<Appointment> resultAppointments = new List<Appointment>();
+            foreach (Appointment a in appointments)
+            {
+                if (DateTime.Now > a.Date)
+                    resultAppointments.Add(a);
+            }
+            return GetAppointmentDtos(resultAppointments);
+
+        }
+        internal ProcedureTypeDTO GetProcedureType(string procedureTypeId)
         {
             var procedureType=_procedureTypeRepository.GetById(procedureTypeId);
             procedureType.Specialization = new Specialization();
@@ -302,9 +326,11 @@ namespace MicroServiceAppointment.Backend.Service
         /// <summary>
         ///method for setting value of isSurveyDone on true in database
         ///</summary>
-        internal void Update(Appointment appointmentDto)
-        {   
-            _appointmentRepository.Update(appointmentDto);
+        internal void Update(AppointmentDto appointmentDto)
+        {
+            var appointment = _appointmentRepository.GetById(appointmentDto.SerialNumber);
+            appointment.IsSurveyDone = true;
+            _appointmentRepository.Update(appointment);
         }
 
         /// <summary>

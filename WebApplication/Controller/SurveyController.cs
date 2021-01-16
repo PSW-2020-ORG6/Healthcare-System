@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.Text;
 using MicroServiceAppointment.Backend.Util;
 using MicroServiceAppointment.Backend.Model.Survey;
+using MicroServiceAppointment.Backend.Dto;
 
 namespace WebApplication.Backend.Controllers
 {
@@ -19,14 +20,14 @@ namespace WebApplication.Backend.Controllers
         static readonly HttpClient client = new HttpClient();
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddNewSurvey(Survey surveyText)
+        public async Task<IActionResult> AddNewSurvey(SurveyDto surveyText)
         {
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
                                                                                            , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             var parameter = new StringContent(JsonConvert.SerializeObject(surveyText, Formatting.Indented), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("http://localhost:57057/surveyMicroservice/add/", parameter);
+            HttpResponseMessage response = await client.PostAsync("http://localhost:57056/surveyMicroservice/add/", parameter);
             response.EnsureSuccessStatusCode();
-            return JsonConvert.DeserializeObject<IActionResult>(await response.Content.ReadAsStringAsync());
+            return Ok();
         }
 
         [HttpGet("getDoctors")]

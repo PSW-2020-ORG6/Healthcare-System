@@ -180,5 +180,16 @@ namespace WebApplication.Backend.Controllers
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
         }
+        [HttpGet("getAllAppointmentsByPatientIdDateAndDoctor")]
+        public async Task<List<AppointmentDto>> GetAllAppointmentsByPatientIdDateAndDoctor(
+           string patientId, string date, string doctorName)
+        {
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                                               , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentMicroservice/allAppointmentsByPatientIdDateAndDoctor/" + patientId + "/" + date + "/" + doctorName);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<List<AppointmentDto>>(await response.Content.ReadAsStringAsync());
+
+        }
     }
 }
