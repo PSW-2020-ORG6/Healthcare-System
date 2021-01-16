@@ -38,6 +38,5 @@ namespace MicroServiceAccount.Backend.Model
         {
 
         }
-
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MicroServiceAppointment.Backend.Dto;
 using MicroServiceAppointment.Backend.Util;
+using MicroServiceAppointment.Backend.Model.Survey;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
