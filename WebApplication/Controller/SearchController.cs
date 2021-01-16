@@ -40,5 +40,16 @@ namespace WebApplication.Backend.Controllers
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<SearchEntityDTO>>(await response.Content.ReadAsStringAsync());
         }
+
+        [HttpGet("getReportByAppointment")]
+        public async Task<List<string>> GetReportByAppointment(string date, string patientSerialNumber, string physicianSerialNumber)
+        {
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                            , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57060/searchMicroservices/getReportByAppointment/"
+                                                                + date + "/" + patientSerialNumber + "/" + physicianSerialNumber);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<List<string>>(await response.Content.ReadAsStringAsync());
+        }
     }
 }

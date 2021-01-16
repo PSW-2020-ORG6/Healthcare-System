@@ -24,6 +24,16 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
                 .ToList();
         }
 
+        public override Prescription GetById(string id)
+        {
+            var prescription= GetAll().Where(p=>p.SerialNumber.Equals(id)).ToList()[0];
+            foreach (var medicineDosages in prescription.MedicineDosage)
+                DbContext.Medicine
+                .Where(m => m.SerialNumber == medicineDosages.MedicineSerialNumber)
+                .Include(m => m.MedicineType)
+                .ToList();
+            return prescription;
+        }
         public List<Prescription> GetPrescriptionsBetweenDates(DateTime[] datetimes)
         {
            var prescriptions= GetAll()
@@ -134,13 +144,6 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
                 find = true;
             }
             return retVal;
-        }
-
-        public Prescription GetPrescriptionsByAppointment(DateTime date,string patientSerialNumber,string physicianSerialNumber)
-        {
-            var reports= DbContext.Report
-                .Where(r => r.Date.Equals(date) && r.PatientId.Equals(patientSerialNumber) && r.PhysicianSerialNumber.Equals(physicianSerialNumber));
-            return null;
         }
     }
 }

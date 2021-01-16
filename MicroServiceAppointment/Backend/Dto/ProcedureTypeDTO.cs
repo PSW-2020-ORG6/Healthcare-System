@@ -13,7 +13,7 @@ namespace MicroServiceAppointment.Backend.Dto
         public ProcedureTypeDTO() { }
         public ProcedureTypeDTO(ProcedureType procedureType)
         {
-            Specialization = procedureType.Specialization.Name;
+            //Specialization = procedureType.Specialization.Name;
             Name = procedureType.Name;
         }
     }

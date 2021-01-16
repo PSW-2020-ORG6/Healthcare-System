@@ -48,6 +48,7 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
                     .Where(x => x.ReportSerialNumber.Equals(report.SerialNumber))
                     .Select(x => x.Prescription);
                 report.AdditionalDocument.AddRange(prescriptions);
+           
             }
 
             return reports;
@@ -74,7 +75,7 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
         public Report GetReportByAppointment(DateTime date, string patientSerialNumber, string physicianSerialNumber)
         {
             return GetAll()
-                .Where(r => r.Date.Equals(date) && r.Patient.Equals(patientSerialNumber) && r.PhysicianSerialNumber.Equals(physicianSerialNumber))
+                .Where(r => r.Date.Equals(date) && r.PatientId.Equals(patientSerialNumber) && r.PhysicianSerialNumber.Equals(physicianSerialNumber))
                 .ToList()[0];
         }
     }

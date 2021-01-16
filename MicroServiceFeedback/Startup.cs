@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using MicroServiceFeedback.Backend.Controllers;
 using MicroServiceFeedback.Backend.Repository.DatabaseSql;
@@ -14,10 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-//using Microsoft.IdentityModel.Tokens;
-//using WebApplication.Backend.Service;
 
 namespace MicroServiceFeedback
 {
@@ -67,25 +63,14 @@ namespace MicroServiceFeedback
             });
             services.AddMvc();
 
-
             // Inject repositories
             services.AddScoped<IFeedbackRepository, FeedbackDatabaseSql>();
-
-
-
 
             // Inject services
             services.AddScoped<FeedbackService, FeedbackService>();
 
-
             // Inject Controllers
             services.AddScoped<FeedbackController, FeedbackController>();
-
-
-
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -20,7 +20,7 @@ namespace MicroServiceAppointment
 {
     public class Startup
     {
-        //private MsAccountDbContext m = new MsAccountDbContext();
+        private MsAccountDbContext m = new MsAccountDbContext();
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
@@ -77,22 +77,15 @@ namespace MicroServiceAppointment
             services.AddScoped<IProcedureTypeRepository, ProcedureTypeDatabaseSql>();
             services.AddScoped<ISurveyRepository, SurveyDatabaseSql>();
             services.AddScoped<IPhysicianRepository, PhysicianDatabaseSql>();
-            //services.AddScoped<ISpecializationRepository, SpecializationDatabaseSql>();
-            //services.AddTransient<ISpecializationRepository, SpecializationDatabaseSql>();
-            //services.AddScoped<IPatientRepository, PatientDatabaseSql>();
 
             // Inject services
             services.AddScoped<AppointmentService, AppointmentService>();
             services.AddScoped<SurveyService, SurveyService>();
-            //services.AddScoped<UserService, UserService>();
-            //services.AddScoped<PhysicianService, PhysicianService>();
 
 
             // Inject Controllers
             services.AddScoped<AppointmentController, AppointmentController>();
             services.AddScoped<SurveyController, SurveyController>();
-            //services.AddScoped<LoginController, LoginController>();
-            //services.AddScoped<PhysicianController, PhysicianController>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -142,44 +135,4 @@ namespace MicroServiceAppointment
         }
     }
 }
-
-//using Microsoft.AspNetCore.Builder;
-//using Microsoft.AspNetCore.Hosting;
-//using Microsoft.EntityFrameworkCore;
-//using Microsoft.Extensions.Configuration;
-//using Microsoft.Extensions.DependencyInjection;
-//using Microsoft.Extensions.Hosting;
-
-//namespace MicroServiceAppointment
-//{
-//    public class Startup
-//    {
-//        public Startup(IConfiguration configuration)
-//        {
-//            Configuration = configuration;
-//        }
-//        public IConfiguration Configuration { get; }
-//        // This method gets called by the runtime. Use this method to add services to the container.
-//        public void ConfigureServices(IServiceCollection services)
-//        {
-//            services.AddControllers();
-//        }
-//        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-//        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-//        {
-//            if (env.IsDevelopment())
-//            {
-//                app.UseDeveloperExceptionPage();
-//            }
-//            app.UseRouting();
-//            app.UseAuthorization();
-//            app.UseEndpoints(endpoints =>
-//            {
-//                endpoints.MapControllers();
-//            });
-//            app.UseDefaultFiles();
-//            app.UseStaticFiles();
-//        }
-//    }
-//}
 

@@ -53,5 +53,14 @@ namespace MicroServiceSearch.Backend.Controllers
             }
             return null;
         }
+
+        [Authorize]
+        [HttpGet("getReportByAppointment/{date}/{patientSerialNumber}/{physicianSerialNumber}")]
+        public List<string> GetReportByAppointment(string date, string patientSerialNumber, string physicianSerialNumber)
+        {
+            HttpRequest.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                      , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            return reportService.GetReportByAppointment(Convert.ToDateTime(date), patientSerialNumber, physicianSerialNumber);
+        }
     }
 }
