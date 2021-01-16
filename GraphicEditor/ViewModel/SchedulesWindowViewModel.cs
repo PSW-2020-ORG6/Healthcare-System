@@ -1,5 +1,6 @@
 ﻿using GraphicEditor.HelpClasses;
 using GraphicEditor.View.Windows;
+using HealthClinicBackend.Backend.Controller;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Schedule;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace GraphicEditor.ViewModel
         public RoomController roomController = new RoomController();
         private readonly SchedulesWindow window;
         private List<EquipmentRelocation> allEquipmentRelocations = new List<EquipmentRelocation>();
+        private EquipmentRelocationController equipmentRelocationController = new EquipmentRelocationController();
 
         public List<Appointment> AllAppointments
         {
@@ -33,6 +35,10 @@ namespace GraphicEditor.ViewModel
             }
         }
 
+        public EquipmentRelocation SelectedEquipmentRelocation { get; set; }
+
+        public MyICommand CancelOfRelocation { get; private set; }
+
         public SchedulesWindowViewModel(List<Appointment> appointments,
             List<EquipmentRelocation> equipmentRelocations, SchedulesWindow window)
         {
@@ -45,7 +51,17 @@ namespace GraphicEditor.ViewModel
                 equipmentRelocation.roomToRelocateTo = roomController.GetBySerialNumber(equipmentRelocation.roomToRelocateToSerialNumber);
             }
 
+            CancelOfRelocation = new MyICommand(CancelEquipmentRelocation);
             this.window = window;
+        }
+
+        private void CancelEquipmentRelocation()
+        {
+            if (SelectedEquipmentRelocation != null)
+            {
+                equipmentRelocationController.DeleteEquipmentRelocation(SelectedEquipmentRelocation);
+                window.Close();
+            }
         }
     }
 }
