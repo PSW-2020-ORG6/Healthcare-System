@@ -33,5 +33,34 @@ namespace MicroServiceAppointment.Backend.Util
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<SpecializationsDTO>(await response.Content.ReadAsStringAsync());
         }
+        public static async Task<List<PhysiciansDTO>> GetPhysycianByName(string physicianName)
+        {
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57053/physicianMicroservice/getPhysicianByName/" + physicianName);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<List<PhysiciansDTO>>(await response.Content.ReadAsStringAsync());
+        }
+        public static async Task<AppointmentDto> GetAppointmentByPatientId(string patientId)
+        {
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentMicroservice/allAppointmentsByPatientId/" + patientId);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<AppointmentDto>(await response.Content.ReadAsStringAsync());
+        }
+
+        public static async Task<AppointmentDto> UpdateAppointment(AppointmentDto appointmentDTO)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(appointmentDTO, Formatting.Indented), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PutAsync("http://localhost:57056/appointmentMicroservice/update/", content);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<AppointmentDto>(await response.Content.ReadAsStringAsync());
+        }
+    
+        public static async Task<List<AppointmentDto>> GetAllAppointmentsByPatientIdDateAndDoctor(string patientId, string reportDate, string physicianName)
+        {
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentMicroservice/getAllAppointmentsByPatientIdDateAndDoctor/" + patientId + "/" + reportDate + "/" + physicianName);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<List<AppointmentDto>>(await response.Content.ReadAsStringAsync());
+        }
+
     }
 }

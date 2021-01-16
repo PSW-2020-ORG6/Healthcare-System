@@ -30,7 +30,10 @@ namespace MicroServiceAccount.Backend.Service
         {
             return physitianDTO.ConvertListToPhysicianDTO(_physicianRepository.GetAll());
         }
-
+        public List<PhysicianDTO> GetPhysicianByName(string name)
+        {
+            return physitianDTO.ConvertListToPhysicianDTO(_physicianRepository.GetByName(name));
+        }
         /// <summary>
         ///Get patient from physicians table by ID
         ///</summary>

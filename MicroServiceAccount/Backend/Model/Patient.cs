@@ -40,7 +40,14 @@ namespace MicroServiceAccount.Backend.Model
         public Patient() : base()
         {
         }
+        public Patient(string id, string email, string password, bool isAdmin)
+        {
+            Id = id;
+            Email = email;
+            Password = password;
+            IsAdmin = isAdmin;
 
+        }
         public Patient(string serialNumber, string name, string surname) : base(serialNumber, name, surname)
         {
         }

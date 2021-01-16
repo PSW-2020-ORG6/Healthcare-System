@@ -32,5 +32,6 @@ namespace MicroServiceAppointment.Backend.Repository.Generic
         List<Appointment> IsSurveyDoneByPatientIdAppointmentDatePhysicianNameAppointments(string patientId, string appointmentDate, string id);
         void Update(Appointment appointment);
         List<Appointment> GetDoneSurveyByPatentId(string patientId);
+        List<Appointment> GetAllAppointmentsByPatientIdDateAndDoctor(string patientId, DateTime date, string doctorName);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MicroServiceAppointment.Backend.Model;
+using MicroServiceAppointment.Backend.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace MicroServiceAppointment.Backend.Dto
         public ProcedureTypeDTO() { }
         public ProcedureTypeDTO(ProcedureType procedureType)
         {
-            //Specialization = procedureType.Specialization.Name;
+            Specialization = HttpRequest.GetSpecializationByIdAsync(procedureType.SpecializationSerialNumber).Result.Name;
             Name = procedureType.Name;
         }
     }

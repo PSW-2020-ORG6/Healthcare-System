@@ -106,5 +106,10 @@ namespace MicroServiceAppointment.Backend.Repository.DatabaseSql
                    .Where(a => !a.IsSurveyDone)
                    .ToList();
         }
+
+        public List<Appointment> GetAllAppointmentsByPatientIdDateAndDoctor(string patientId, DateTime date, string doctorName)
+        {
+            return GetAll().Where(appointment => appointment.PatientSerialNumber.Equals(patientId) && appointment.PhysicianSerialNumber.Equals(doctorName)).ToList();
+        }
     }
 }

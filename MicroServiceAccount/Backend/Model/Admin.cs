@@ -16,7 +16,13 @@ namespace MicroServiceAccount.Backend.Model
         {
 
         }
-
+        public Admin(String serialNumber, string email, string password, bool isAdmin)
+        {
+            SerialNumber = serialNumber;
+            Email = email;
+            Password = password;
+            IsAdmin = isAdmin;
+        }
         [JsonConstructor]
         public Admin(string serialNumber, string name, string surname, string id, DateTime dateOfBirth, string contact, string email,
             Address address, string password)

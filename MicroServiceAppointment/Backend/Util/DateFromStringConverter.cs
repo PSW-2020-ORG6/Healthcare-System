@@ -22,6 +22,11 @@ namespace MicroServiceAppointment.Backend.Util
             string[] dates = date.Split("-");
             return new DateTime(Convert.ToInt32(dates[0]), Convert.ToInt32(dates[1]), Convert.ToInt32(dates[2]));
         }
+        public DateTime CreateDateTime1(string date)
+        {
+            string[] dates = date.Split(".");
+            return new DateTime(Convert.ToInt32(dates[2]), Convert.ToInt32(dates[1]), Convert.ToInt32(dates[0]));
+        }
         public bool IsPreferredTimeValid(string date)
         {
             return DateTime.Parse(date) > DateTime.Today.AddDays(2);
