@@ -12,10 +12,11 @@
         WindowStartupLocation="CenterScreen">
     <Grid Background="AliceBlue">
         <ListView x:Name="appointmentsListView" 
-                  ItemsSource="{Binding AllAppointments}"
+                  ItemsSource="{Binding AllAppointments, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   HorizontalAlignment="Left" 
                   Height="150" 
                   Margin="50,70,0,0" 
+                  SelectedItem="{Binding Path=SelectedAppointment, UpdateSourceTrigger=PropertyChanged}"
                   VerticalAlignment="Top"
                   Width="861">
             <ListView.ItemContainerStyle>
@@ -95,10 +96,11 @@
             VerticalAlignment="Top"
             Width="170"/>
         <ListView x:Name="equipmentRelocationsListView" 
-            ItemsSource="{Binding AllEquipmentRelocations}"
+            ItemsSource="{Binding AllEquipmentRelocations, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             HorizontalAlignment="Left" 
             Height="150" 
             Margin="50,323,0,0" 
+            SelectedItem="{Binding Path=SelectedEquipmentRelocation, UpdateSourceTrigger=PropertyChanged}"
             VerticalAlignment="Top"
             Width="861">
             <ListView.ItemContainerStyle>
@@ -128,10 +130,11 @@
             </ListView.View>
         </ListView>
         <ListView x:Name="renovationsListView" 
-            ItemsSource="{Binding AllRenovations}"
+            ItemsSource="{Binding AllRenovations, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             HorizontalAlignment="Left" 
             Height="150" 
             Margin="50,571,0,0" 
+            SelectedItem="{Binding Path=SelectedRenovation, UpdateSourceTrigger=PropertyChanged}"
             VerticalAlignment="Top"
             Width="861">
             <ListView.ItemContainerStyle>
@@ -149,6 +152,7 @@
             </ListView.View>
         </ListView>
         <Button x:Name="CancelAppointment" 
+            Command="{Binding CancelOfAppointment}"
             HorizontalAlignment="Left" 
             Height="46" 
             Margin="950,145,0,0" 
@@ -167,7 +171,8 @@
                 </TextBlock>
             </DockPanel>
         </Button>
-        <Button x:Name="CancelEquipmentRelocation" 
+        <Button x:Name="CancelEquipmentRelocation"
+            Command="{Binding CancelOfRelocation}"
             HorizontalAlignment="Left" 
             Height="46" 
             Margin="950,398,0,0" 
@@ -186,7 +191,8 @@
                 </TextBlock>
             </DockPanel>
         </Button>
-        <Button x:Name="CancelRenovation" 
+        <Button x:Name="CancelRenovation"
+            Command="{Binding CancelOfRenovation}"
             HorizontalAlignment="Left" 
             Height="46" 
             Margin="950,646,0,0" 
