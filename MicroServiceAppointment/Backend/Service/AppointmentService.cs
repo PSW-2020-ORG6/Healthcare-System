@@ -16,7 +16,6 @@ namespace MicroServiceAppointment.Backend.Service
         private readonly IPhysicianRepository _physicianRepository;
         private readonly IAppointmentRepository _appointmentRepository;
         private readonly IProcedureTypeRepository _procedureTypeRepository;
-        private readonly ISpecializationRepository _specializationRepository;
         private readonly IMedicineRepository _medicineRepository;
 
 
@@ -39,10 +38,10 @@ namespace MicroServiceAppointment.Backend.Service
             IPhysicianRepository physicianRepository,IProcedureTypeRepository procedureTypeRepository,
             IMedicineRepository medicineRepository)
         {
+            _medicineRepository = medicineRepository;
             _appointmentRepository = appointmentRepository;
             _physicianRepository = physicianRepository;
             _procedureTypeRepository = procedureTypeRepository;
-            _medicineRepository = medicineRepository;
         }
 
         public AppointmentService(IAppointmentRepository appointmentRepository)
@@ -50,14 +49,12 @@ namespace MicroServiceAppointment.Backend.Service
             _appointmentRepository = appointmentRepository;
         }
         public AppointmentService(IAppointmentRepository appointmentRepository,
-            IPhysicianRepository physicianRepository, IProcedureTypeRepository procedureTypeRepository,ISpecializationRepository specializationRepository)
+            IPhysicianRepository physicianRepository, IProcedureTypeRepository procedureTypeRepository)
         {
-            _specializationRepository = specializationRepository;
             _appointmentRepository = appointmentRepository;
             _physicianRepository = physicianRepository;
             _procedureTypeRepository = procedureTypeRepository;
         }
-
 
         public List<TimeIntervalsDTO> GetAllAvailableAppointments(string physicianId, string specializationName,
             string date)

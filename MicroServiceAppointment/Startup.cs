@@ -118,7 +118,7 @@ namespace MicroServiceAppointment
             var portDefault = 5432;
 
             var userDefault = "postgres";
-            var passwordDefault = "super";
+            var passwordDefault = "root";
             var schema = "healthcare-system-db";
 
             // Do not change this
