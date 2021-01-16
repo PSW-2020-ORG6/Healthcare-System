@@ -12,11 +12,13 @@ namespace MicroServiceSearch.Backend.Services
     public class ReportService
     {
         private IReportRepository _reportRepository=new ReportDatabaseSql();
+        private IPrescriptionRepository _prescriptionRepository = new PrescriptionDatabaseSql();
         private SearchEntityDTO searchEntityDTO = new SearchEntityDTO();
 
-        public ReportService(IReportRepository reportRepository)
+        public ReportService(IReportRepository reportRepository, IPrescriptionRepository prescriptionRepository)
         {
             _reportRepository = reportRepository;
+            _prescriptionRepository = prescriptionRepository;
         }
 
         public ReportService()
@@ -226,6 +228,24 @@ namespace MicroServiceSearch.Backend.Services
                 if (!report.AllContains(value))
                     resultList.Add(report);
             return resultList;
+        }
+
+        public List<string> GetReportByAppointment(DateTime date, string patientSerialNumber, string physicianSerialNumber)
+        {
+            var report = _reportRepository.GetReportByAppointment(date, patientSerialNumber, physicianSerialNumber);
+            var procedureType = HttpRequest.GetProcedureTypeByIdAsync(report.ProcedureTypeSerialNumber).Result;
+            List<string> appointmentReports = new List<string>();
+            appointmentReports.Add("ProcedureType: " + procedureType.Name + " " + procedureType.Specialization + ";" +
+                            "Findings: " + report.Findings);
+            var prescription = (Prescription)report.AdditionalDocument[0];
+            prescription = _prescriptionRepository.GetById(prescription.SerialNumber);
+            var text = "";
+            foreach(MedicineDosage medicineDosage in prescription.MedicineDosage)
+            {
+                text += "Medicine: " + medicineDosage.Medicine.GenericName + " - " + medicineDosage.Medicine.MedicineType.Type + " - " + medicineDosage.Amount + " - " + medicineDosage.Note + ";.";
+            }
+            appointmentReports.Add(text);
+            return appointmentReports;
         }
     }
 }

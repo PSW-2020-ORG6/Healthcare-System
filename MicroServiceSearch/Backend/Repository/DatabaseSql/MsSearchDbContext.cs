@@ -35,7 +35,7 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
         public DbSet<SpecialistReferral> SpecialistReferral { get; set; }
         public DbSet<MedicineDosage> MedicineDosage { get; set; }
         public DbSet<Prescription> Prescription { get; set; }
-        //public DbSet<PrescriptionMedicineDosage> PrescriptionMedicineDosage { get; set; }
+        public DbSet<PrescriptionMedicineDosage> PrescriptionMedicineDosage { get; set; }
         public DbSet<ReportPrescription> ReportPrescription { get; set; }
         public DbSet<ReportDiagnosticReferral> ReportDiagnosticReferral { get; set; }
         public DbSet<ReportFollowUp> ReportFollowUp { get; set; }
@@ -129,8 +129,8 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
             //    .HasKey(x => x.SerialNumber);
             //modelBuilder.Entity<FollowUp>()
             //    .HasKey(x => x.SerialNumber);
-            //modelBuilder.Entity<Prescription>()
-            //    .HasKey(x => x.SerialNumber);
+            modelBuilder.Entity<Prescription>()
+                .HasKey(x => x.SerialNumber);
             //modelBuilder.Entity<Admin>()
             //  .HasKey(x => x.Email);
 
@@ -151,12 +151,12 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
                 .WithMany();
 
             // Relation helpers are used for many-to-many relations
-            //    modelBuilder.Entity<PrescriptionMedicineDosage>()
-            //        .HasOne(pmd => pmd.Prescription)
-            //        .WithMany();
-            //    modelBuilder.Entity<PrescriptionMedicineDosage>()
-            //        .HasOne(pmd => pmd.MedicineDosage)
-            //        .WithMany();
+            modelBuilder.Entity<PrescriptionMedicineDosage>()
+                .HasOne(pmd => pmd.Prescription)
+                .WithMany();
+            modelBuilder.Entity<PrescriptionMedicineDosage>()
+                .HasOne(pmd => pmd.MedicineDosage)
+                .WithMany();
 
             modelBuilder.Entity<ReportPrescription>()
                 .HasOne(rp => rp.Report)

@@ -6,7 +6,7 @@ Vue.component("search", {
             rowSimple: 0,
             advancedSearches: [false, false, false],
             simpleSearches: [false, false, false],
-            search: null
+            search: []
         }
     },
     template:

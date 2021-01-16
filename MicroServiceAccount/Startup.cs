@@ -92,10 +92,6 @@ namespace MicroServiceAccount
             services.AddScoped<PatientController, PatientController>();
             services.AddScoped<PhysicianController, PhysicianController>();
 
-
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

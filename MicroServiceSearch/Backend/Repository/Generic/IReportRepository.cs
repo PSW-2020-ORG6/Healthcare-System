@@ -16,5 +16,6 @@ namespace MicroServiceSearch.Backend.Repository.Generic
         List<Report> GetByPatient(Patient patient);
         List<Report> GetByPatientId(string id);
         List<Report> GetReportsBetweenDates(DateTime[] datetimes);
+        Report GetReportByAppointment(DateTime date, string patientSerialNumber, string physicianSerialNumber);
     }
 }
