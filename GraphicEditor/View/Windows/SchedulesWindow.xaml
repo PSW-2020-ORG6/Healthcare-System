@@ -3,18 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:GraphicEditor.View.Windows"
         mc:Ignorable="d"
         Title="Schedules" 
-        Height="1000"
-        Width="950"
+        Height="800"
+        Width="1200"
         WindowStartupLocation="CenterScreen">
     <Grid Background="AliceBlue">
         <ListView x:Name="appointmentsListView" 
                   ItemsSource="{Binding AllAppointments}"
                   HorizontalAlignment="Left" 
-                  Height="220" 
-                  Margin="50,116,0,0" 
+                  Height="150" 
+                  Margin="50,70,0,0" 
                   VerticalAlignment="Top"
                   Width="861">
             <ListView.ItemContainerStyle>
@@ -72,15 +73,15 @@
         <TextBlock HorizontalAlignment="Left" 
                    Height="60"
                    FontSize="30"
-                   Margin="364,38,0,0"
+                   Margin="364,10,0,0"
                    Text="Appointments" 
                    TextWrapping="Wrap"
                    VerticalAlignment="Top"
                    Width="194"/>
         <TextBlock HorizontalAlignment="Left" 
-            Height="61"
+            Height="62"
             FontSize="30"
-            Margin="307,359,0,0"
+            Margin="307,261,0,0"
             Text="Equipment relocations" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
@@ -88,16 +89,16 @@
         <TextBlock HorizontalAlignment="Left" 
             Height="60"
             FontSize="30"
-            Margin="364,674,0,0"
+            Margin="376,506,0,0"
             Text="Renovations" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
-            Width="169"/>
+            Width="170"/>
         <ListView x:Name="equipmentRelocationsListView" 
             ItemsSource="{Binding AllEquipmentRelocations}"
             HorizontalAlignment="Left" 
-            Height="220" 
-            Margin="50,442,0,0" 
+            Height="150" 
+            Margin="50,323,0,0" 
             VerticalAlignment="Top"
             Width="861">
             <ListView.ItemContainerStyle>
@@ -128,11 +129,11 @@
         </ListView>
         <ListView x:Name="renovationsListView" 
             ItemsSource="{Binding AllRenovations}"
-            HorizontalAlignment="Center" 
-            Height="220" 
-            Margin="0,734,0,0" 
+            HorizontalAlignment="Left" 
+            Height="150" 
+            Margin="50,571,0,0" 
             VerticalAlignment="Top"
-            Width="862">
+            Width="861">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" 
@@ -147,5 +148,62 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button x:Name="CancelAppointment" 
+            HorizontalAlignment="Left" 
+            Height="46" 
+            Margin="950,145,0,0" 
+            VerticalAlignment="Top" 
+            Width="200"
+            Style="{StaticResource MaterialDesignRaisedButton}" >
+            <DockPanel Width="auto">
+                <materialDesign:PackIcon Kind="Cancel" 
+                                                 Height="25" 
+                                                 HorizontalAlignment="Left"
+                                                 Width="25"
+                                                 VerticalAlignment="Center"/>
+                <TextBlock HorizontalAlignment="Right" 
+                                       VerticalAlignment="Center">
+                                Cancel appointment
+                </TextBlock>
+            </DockPanel>
+        </Button>
+        <Button x:Name="CancelEquipmentRelocation" 
+            HorizontalAlignment="Left" 
+            Height="46" 
+            Margin="950,398,0,0" 
+            VerticalAlignment="Top" 
+            Width="200"
+            Style="{StaticResource MaterialDesignRaisedButton}" >
+            <DockPanel Width="auto">
+                <materialDesign:PackIcon Kind="Cancel" 
+                                                 Height="25" 
+                                                 HorizontalAlignment="Left"
+                                                 Width="25"
+                                                 VerticalAlignment="Center"/>
+                <TextBlock HorizontalAlignment="Right" 
+                                       VerticalAlignment="Center">
+                                Cancel relocation
+                </TextBlock>
+            </DockPanel>
+        </Button>
+        <Button x:Name="CancelRenovation" 
+            HorizontalAlignment="Left" 
+            Height="46" 
+            Margin="950,646,0,0" 
+            VerticalAlignment="Top" 
+            Width="200" 
+            Style="{StaticResource MaterialDesignRaisedButton}" >
+            <DockPanel Width="auto">
+                <materialDesign:PackIcon Kind="Cancel" 
+                                                 Height="25" 
+                                                 HorizontalAlignment="Left"
+                                                 Width="25"
+                                                 VerticalAlignment="Center"/>
+                <TextBlock HorizontalAlignment="Right" 
+                                       VerticalAlignment="Center">
+                                Cancel renovation
+                </TextBlock>
+            </DockPanel>
+        </Button>
     </Grid>
 </Window>
