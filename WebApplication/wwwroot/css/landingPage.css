@@ -1,0 +1,19 @@
+﻿#Landing {
+    background-image: url("../pictures/LANDING2.jpg");
+    background-repeat: no-repeat;
+    overflow-y: hidden;
+    overflow-x: auto;
+    background-size: cover;
+    height: auto !important; /* real browsers */
+    min-height: 1080px; /* real browsers */
+    width: auto;
+    color: white;
+    font-family: impact;
+}
+
+#slideLandingPage {
+    font-family: Impact;
+    font-size : 24px;
+    background-color : lightblue;
+    background-image : none;
+}

@@ -117,8 +117,8 @@ label {
 }
 
 .carousel-control-prev-icon, .carousel-control-next-icon {
-    height: 100px;
-    width: 100px;
+    height: 60px;
+    width: 40px;
     filter: invert(1);
 }
 
