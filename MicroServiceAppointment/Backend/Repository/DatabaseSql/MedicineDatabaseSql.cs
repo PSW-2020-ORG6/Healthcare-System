@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MicroServiceAppointment.Backend.Model;
-using MicroServiceSearch.Backend.Repository.Generic;
+using MicroServiceAppointment.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace MicroServiceSearch.Backend.Repository.DatabaseSql
+namespace MicroServiceAppointment.Backend.Repository.DatabaseSql
 {
-    public class MedicineDatabaseSql : GenericMsSearchDatabaseSql<Medicine>, IMedicineRepository
+    public class MedicineDatabaseSql : GenericMsAppointmentDatabaseSql<Medicine>, IMedicineRepository
     {
         public MedicineDatabaseSql() : base()
         {
         }
 
-        public MedicineDatabaseSql(MsSearchDbContext dbContext) : base(dbContext)
+        public MedicineDatabaseSql(MsAppointmentDbContext dbContext) : base(dbContext)
         {
         }
 
@@ -37,7 +37,7 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
 
         public override Medicine GetById(string id)
         {
-            return DbContext.Medicine.Find(id);
+            return GetAll().Where(m=>m.SerialNumber.Equals(id)).ToList()[0];
         }
 
         public override void Save(Medicine newEntity)

@@ -77,6 +77,7 @@ namespace MicroServiceAppointment
             services.AddScoped<IProcedureTypeRepository, ProcedureTypeDatabaseSql>();
             services.AddScoped<ISurveyRepository, SurveyDatabaseSql>();
             services.AddScoped<IPhysicianRepository, PhysicianDatabaseSql>();
+            services.AddScoped<IMedicineRepository, MedicineDatabaseSql>();
 
             // Inject services
             services.AddScoped<AppointmentService, AppointmentService>();

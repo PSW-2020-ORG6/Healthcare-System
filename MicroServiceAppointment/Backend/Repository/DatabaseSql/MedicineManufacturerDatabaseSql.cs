@@ -1,14 +1,14 @@
 ﻿using MicroServiceAppointment.Backend.Model;
-using MicroServiceSearch.Backend.Repository.Generic;
+using MicroServiceAppointment.Backend.Repository.Generic;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MicroServiceSearch.Backend.Repository.DatabaseSql
+namespace MicroServiceAppointment.Backend.Repository.DatabaseSql
 {
-    public class MedicineManufacturerDatabaseSql : GenericMsSearchDatabaseSql<MedicineManufacturer>,
+    public class MedicineManufacturerDatabaseSql : GenericMsAppointmentDatabaseSql<MedicineManufacturer>,
         IMedicineManufacturerRepository
     {
-        public MedicineManufacturerDatabaseSql(MsSearchDbContext dbContext) : base(dbContext)
+        public MedicineManufacturerDatabaseSql(MsAppointmentDbContext dbContext) : base(dbContext)
         {
         }
 

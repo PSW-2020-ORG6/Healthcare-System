@@ -1,5 +1,6 @@
 ﻿using MicroServiceSearch.Backend.Dto;
 using MicroServiceSearch.Backend.Model;
+using MicroServiceSearch.Backend.Util;
 using System;
 using System.Collections.Generic;
 namespace MicroServiceSearch.Backend.DTO
@@ -75,8 +76,11 @@ namespace MicroServiceSearch.Backend.DTO
             {
                 string text = "";
                 foreach (MedicineDosage medicineDosage in prescription.MedicineDosage)
-                    text += "Medicine: " + medicineDosage.Medicine.GenericName + " - " + medicineDosage.Medicine.MedicineType.Type + " - " + medicineDosage.Amount + " - " + medicineDosage.Note + ";\n";
-                searchEntityDTOs.Add(new SearchEntityDTO("Prescriprion", text, prescription.Date.ToString("dddd, MMMM dd yyyy")));
+                {
+                    var medicine = HttpRequest.GetMedicineByIdAsync(medicineDosage.MedicineSerialNumber).Result;
+                    text += "Medicine: " + medicine.Name + " - " + medicine.MedicineType + " - " + medicineDosage.Amount + " - " + medicineDosage.Note + ";\n";
+                    searchEntityDTOs.Add(new SearchEntityDTO("Prescriprion", text, prescription.Date.ToString("dddd, MMMM dd yyyy")));
+                }
             }
             return searchEntityDTOs;
         }

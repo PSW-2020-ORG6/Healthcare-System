@@ -24,6 +24,9 @@ namespace MicroServiceAppointment.Backend.Repository.DatabaseSql
         public DbSet<Appointment> Appointment { get; set; }
         public DbSet<Question> Question { get; set; }
         public DbSet<Survey> Survey { get; set; }
+        public DbSet<MedicineManufacturer> MedicineManufacturer { get; set; }
+        public DbSet<MedicineType> MedicineType { get; set; }
+        public DbSet<Medicine> Medicine { get; set; }
 
         public MsAppointmentDbContext(DbContextOptions<MsAppointmentDbContext> options) : base(options)
         {
@@ -88,6 +91,15 @@ namespace MicroServiceAppointment.Backend.Repository.DatabaseSql
 
             RoomCreation(modelBuilder);
             RoomTypeCreation(modelBuilder);
+
+
+            modelBuilder.Entity<Medicine>()
+                .HasOne(m => m.MedicineManufacturer) // Medicine has one Medicine Manufacturer
+                .WithMany(); // Medicine Manufacturer has many Medicine but doesn't reference them
+
+            modelBuilder.Entity<Medicine>()
+                .HasOne(m => m.MedicineType)
+                .WithMany();
 
         }
 

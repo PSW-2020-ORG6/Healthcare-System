@@ -28,9 +28,6 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
         //public DbSet<Floor> Floor { get; set; }
         //public DbSet<Building> Building { get; set; }
         public DbSet<Position> Position { get; set; }
-        public DbSet<MedicineManufacturer> MedicineManufacturer { get; set; }
-        public DbSet<MedicineType> MedicineType { get; set; }
-        public DbSet<Medicine> Medicine { get; set; }
         //public DbSet<Rejection> Rejection { get; set; }
         //public DbSet<DiagnosticType> DiagnosticType { get; set; }
         public DbSet<DiagnosticReferral> DiagnosticReferral { get; set; }
@@ -62,13 +59,6 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.Entity<Position>().HasNoKey();
-            modelBuilder.Entity<Medicine>()
-                .HasOne(m => m.MedicineManufacturer) // Medicine has one Medicine Manufacturer
-                .WithMany(); // Medicine Manufacturer has many Medicine but doesn't reference them
-
-            modelBuilder.Entity<Medicine>()
-                .HasOne(m => m.MedicineType)
-                .WithMany();
 
             //modelBuilder.Entity<Rejection>()
             //    .HasOne(r => r.Medicine)

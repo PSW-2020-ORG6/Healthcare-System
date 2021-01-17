@@ -429,7 +429,9 @@ Vue.component("appointments", {
             informations: null,
             display1: false,
             myDate: null,
-            idPatient: null
+            idPatient: null,
+            prescription: "",
+            report:""
         }
     },
     beforeMount() {
@@ -836,8 +838,8 @@ Vue.component("appointments", {
 											<td>{{appointmentDto.roomDTO.name}}</td>
 											<td>{{appointmentDto.procedureTypeDTO.name}}</td>
 											<td>{{appointmentDto.urgency}}</td>		
-											<td><button  type="button" id="reportButton" class="btn btn-info btn-lg"  v-on:click="ReportModalShow()">Report</button></td>
-											<td><button  type="button" id="prescriptionButton" class="btn btn-info btn-lg" v-on:click="PrescriptionModalShow()">Prescription</button></td>
+											<td><button  type="button" id="reportButton" class="btn btn-info btn-lg"  v-on:click="ReportModalShow(appointmentDto)">Report</button></td>
+											<td><button  type="button" id="prescriptionButton" class="btn btn-info btn-lg" v-on:click="PrescriptionModalShow(appointmentDto)">Prescription</button></td>
                                          </tr>
 									</tbody>
 								</table>
@@ -857,7 +859,11 @@ Vue.component("appointments", {
 								          <button type="button" class="close" data-dismiss="modal">&times;</button>
 									</div>
 							  <div class="modal-body">
-                              <p>Report</p>
+                              <p>Report</br>
+                               <div v-for="r in this.report">
+                                 {{r}}<br>
+                               </div>
+                                </p>
 							 </div>
 							 <div class="modal-footer">
                               <button type="button" class="btn btn-default" data-dismiss="modal" >Ok</button>
@@ -874,7 +880,11 @@ Vue.component("appointments", {
 								          <button type="button" class="close" data-dismiss="modal">&times;</button>
 									</div>
 							  <div class="modal-body">
-                              <p>Prescription</p>
+                              <p>Prescription</br>
+                               <div v-for="p in this.prescription">
+                                 {{p}}<br>
+                               </div>
+                                </p>
 							 </div>
 							 <div class="modal-footer">
                               <button type="button" class="btn btn-default" data-dismiss="modal" >Ok</button>
@@ -1263,13 +1273,42 @@ Vue.component("appointments", {
                     this.Refresh()
                 })
         },
-        ReportModalShow: function () {
+        ReportModalShow: function (appointmentDto) {
+            var appdate = appointmentDto.date.split('T')[0]
+            var physicianId = appointmentDto.physicianDTO.id
+            axios
+                .get('/search/getReportByAppointment/', {
+                    params: {
+                        date: appdate, patientSerialNumber: this.idPatient, physicianSerialNumber: physicianId
+                    },
+                    headers: {
+                        'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                    }
+                })
+                .then(response => {
+                    this.report = response.data[0].split(";")
+                    this.prescription = response.data[1].split(";")
+                })
             $('#myModalReport').modal('show');
 
         },
-        PrescriptionModalShow: function () {
+        PrescriptionModalShow: function (appointmentDto) {
+            var appdate = appointmentDto.date.split('T')[0]
+            var physicianId = appointmentDto.physicianDTO.id
+            axios
+                .get('/search/getReportByAppointment/', {
+                    params: {
+                        date: appdate, patientSerialNumber: this.idPatient, physicianSerialNumber: physicianId
+                    },
+                    headers: {
+                        'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                    }
+                })
+                .then(response => {
+                    this.report = response.data[0].split(";")
+                    this.prescription = response.data[1].split(";")
+                })
             $('#myModalPrescription').modal('show');
-
         }
     }
 });

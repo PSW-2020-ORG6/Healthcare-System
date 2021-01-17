@@ -242,7 +242,8 @@ namespace MicroServiceSearch.Backend.Services
             var text = "";
             foreach(MedicineDosage medicineDosage in prescription.MedicineDosage)
             {
-                text += "Medicine: " + medicineDosage.Medicine.GenericName + " - " + medicineDosage.Medicine.MedicineType.Type + " - " + medicineDosage.Amount + " - " + medicineDosage.Note + ";.";
+                var medicine = HttpRequest.GetMedicineByIdAsync(medicineDosage.SerialNumber).Result;
+                text += "Medicine: " + medicine.Name + " - " + medicine.MedicineType + " - " + medicineDosage.Amount + " - " + medicineDosage.Note + ";";
             }
             appointmentReports.Add(text);
             return appointmentReports;

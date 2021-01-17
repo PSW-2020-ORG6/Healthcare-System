@@ -33,5 +33,12 @@ namespace MicroServiceSearch.Backend.Util
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<ProcedureTypeDTO>(await response.Content.ReadAsStringAsync());
         }
+
+        public static async Task<MedicineDTO> GetMedicineByIdAsync(string medicineId)
+        {
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentMicroservice/getMedicineById/" + medicineId);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<MedicineDTO>(await response.Content.ReadAsStringAsync());
+        }
     }
 }
