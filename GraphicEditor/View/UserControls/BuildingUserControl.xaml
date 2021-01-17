@@ -118,7 +118,7 @@
                     </DockPanel>
                 </Button>
                 <Button Grid.Row="5"
-                    Command="{Binding Path=AddFloorCommand}"
+                    Command="{Binding Path=AddRoomCommand}"
                     Height="50"
                     Margin="5,5,5,5">
                     <DockPanel Width="auto">
@@ -146,6 +146,23 @@
                                VerticalAlignment="Center"
                                TextWrapping="Wrap">
                         Schedules
+                        </TextBlock>
+                    </DockPanel>
+                </Button>
+                <Button Grid.Row="6"
+                    Command="{Binding Path=RenovateRoomCommand}"
+                    Height="50"
+                    Margin="5,5,5,5">
+                    <DockPanel Width="auto">
+                        <materialDesign:PackIcon Kind="Restore" 
+                                             Height="25" 
+                                             Width="25"
+                                             VerticalAlignment="Center"/>
+                        <TextBlock HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center">
+                        Renovate Selected Rooms
                         </TextBlock>
                     </DockPanel>
                 </Button>

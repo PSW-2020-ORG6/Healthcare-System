@@ -26,18 +26,16 @@ namespace GraphicEditor.ViewModel
         public MyICommand<string> NavCommand { get; private set; }
         public MyICommand<Building> BuildingUpdateCommand { get; private set; }
 
-        public MyICommand<Floor> AddFloorCommand { get; private set; }
+        public MyICommand<Floor> AddRoomCommand { get; private set; }
+
+        public MyICommand<Floor> RenovateRoomCommand { get; private set; }
+
         public FloorUserControl FirstFloor;
-        /* TODO add this without causing errors
-        public CardiologySecondFloorMapUserControl SecondFloor;*/
         public FloorUserControl _floorViewModel;
         public Grid grid;
         private BuildingController buildingController = new BuildingController();
         private FloorDatabaseSql floorDatabaseSql = new FloorDatabaseSql();
         private RoomController roomController = new RoomController();
-
-        // [Lemara98] Selector Class
-        private Selector selector;
 
         public BuildingUserControlViewModel(BuildingUserControl buildingParent, MainWindowViewModel mapParent, Building building)
         {
@@ -45,7 +43,8 @@ namespace GraphicEditor.ViewModel
             _buildingParent = buildingParent;
             NavCommand = new MyICommand<string>(ChooseFloor);
             BuildingUpdateCommand = new MyICommand<Building>(editBuilding);
-            AddFloorCommand = new MyICommand<Floor>(addRoom);
+            AddRoomCommand = new MyICommand<Floor>(addRoom);
+            RenovateRoomCommand = new MyICommand<Floor>(RenovateRoom);
 
             /* TODO add this without causing errors
            SecondFloor = new CardiologySecondFloorMapUserControlViewModel();*/
@@ -144,7 +143,6 @@ namespace GraphicEditor.ViewModel
             }
         }
 
-
         private void addRoom(Floor floor)
         {
             if (MainWindow.TypeOfUser == TypeOfUser.Superintendent || MainWindow.TypeOfUser == TypeOfUser.NoUser)
@@ -158,7 +156,7 @@ namespace GraphicEditor.ViewModel
                 bool overlapping = false;
                 foreach (Room room in roomController.GetByFloorSerialNumber(_selectedFloor.SerialNumber))
                 {
-                    if (isOverlapping(room))
+                    if (IsOverlapping(room))
                     {
                         overlapping = true;
                         break;
@@ -179,40 +177,192 @@ namespace GraphicEditor.ViewModel
             }
         }
 
-        private bool isOverlapping(Room room)
+        private void RenovateRoom(Floor floor)
+        {
+            //if (MainWindow.TypeOfUser == TypeOfUser.Superintendent || MainWindow.TypeOfUser == TypeOfUser.NoUser)
+            //{
+
+            //}
+            //else
+            //{
+            //    new Warning().ShowDialog();
+            //}
+
+            if (FloorViewModel.selectedGridCells.Visibility != Visibility.Visible)
+            {
+                new WarningNoSelectedCells().ShowDialog();
+                return;
+            }
+
+            List<Room> selectedRooms = new List<Room>();
+            foreach (Room room in roomController.GetByFloorSerialNumber(_selectedFloor.SerialNumber))
+            {
+                if (IsOverlapping(room))
+                {
+                    selectedRooms.Add(room);
+                }
+            }
+
+            if (selectedRooms.Count == 0)
+            {
+                new WarningNoRoomSelected().ShowDialog();
+                return;
+            }
+
+            if(IsAllInTouch(selectedRooms))
+            {
+                new ComplexRoomRenovation().ShowDialog();
+            }
+            else
+            {
+                new WarningRoomsNotTouching().ShowDialog();
+                return;
+            }
+            
+        }
+
+        private bool IsAllInTouch(List<Room> selectedRooms)
+        {
+            if (selectedRooms.Count == 0) return false;
+
+            // Joined room Position
+
+            Room firstRoom = selectedRooms[0];
+            Position position = firstRoom.Position;
+            (int, int) topLeftRoom1 = (position.Column, position.Row);
+            (int, int) bottomRightRoom1 = (position.Column + position.ColumnSpan - 1, position.Row + position.RowSpan - 1);
+
+            List<Room> newList = new List<Room>(selectedRooms);
+            newList.Remove(firstRoom);
+            
+            return recursiveAllInTouchFunction(topLeftRoom1, bottomRightRoom1, newList);
+        }
+
+        private bool recursiveAllInTouchFunction((int, int) topLeftRoom1, (int, int) bottomRightRoom1, List<Room> selectedRooms)
+        {
+            if (selectedRooms.Count == 0) return true;
+
+            foreach (Room roomFromList2 in selectedRooms)
+            {
+                Position position = roomFromList2.Position;
+                (int, int) topLeftRoom2 = (position.Column, position.Row);
+                (int, int) bottomRightRoom2 = (position.Column + position.ColumnSpan - 1, position.Row + position.RowSpan - 1);
+                bool contact = isBorderHavingContact(topLeftRoom1, bottomRightRoom1, topLeftRoom2, bottomRightRoom2);
+                if (contact)
+                {
+                    topLeftRoom1 = (Math.Min(topLeftRoom1.Item1, topLeftRoom2.Item1), Math.Min(topLeftRoom1.Item2, topLeftRoom2.Item2));
+                    bottomRightRoom1 = (Math.Min(bottomRightRoom1.Item1, bottomRightRoom2.Item1), Math.Min(bottomRightRoom1.Item2, bottomRightRoom2.Item2));
+                    List<Room> newList = new List<Room>(selectedRooms);
+                    newList.Remove(roomFromList2);
+
+                    return recursiveAllInTouchFunction(topLeftRoom1, bottomRightRoom1, newList);
+                }
+            }
+            return false;
+        }
+
+        private bool isBorderHavingContact((int, int) topLeftRoom1, (int, int) bottomRightRoom1, (int, int) topLeftRoom2, (int, int) bottomRightRoom2)
+        {
+            List<(int, int)> roomCorners1 = new List<(int, int)>();
+
+            for (int i = topLeftRoom1.Item1; i <= bottomRightRoom1.Item1; ++i)
+                for (int j = topLeftRoom1.Item2; j <= bottomRightRoom1.Item2; ++j)
+                    roomCorners1.Add((i, j));
+
+            List<(int, int)> roomCorners2 = new List<(int, int)>();
+
+            for (int i = topLeftRoom2.Item1; i <= bottomRightRoom2.Item1; ++i)
+                for (int j = topLeftRoom2.Item2; j <= bottomRightRoom2.Item2; ++j)
+                    roomCorners2.Add((i, j));
+
+            (int, int) diff;
+            foreach ((int, int) corner1 in roomCorners1)
+            {
+                foreach ((int, int) corner2 in roomCorners2)
+                {
+                    diff = (Math.Abs(corner1.Item1 - corner2.Item1), Math.Abs(corner1.Item2 - corner2.Item2));
+                    if (diff == (0, 1) || diff == (1, 0)) return true;
+                }
+            }
+            return false;
+
+            ////// Top border
+
+            //bool tb = (Math.Abs(topLeftRoom1.Item2 - bottomLeftRoom2.Item2) == 1 && topLeftRoom1.Item1 >= bottomLeftRoom2.Item1 && topLeftRoom1.Item1 <= bottomRightRoom2.Item1) ||
+            //            (Math.Abs(topRightRoom1.Item2 - bottomLeftRoom2.Item2) == 1 && topRightRoom1.Item1 >= bottomLeftRoom2.Item1 && topRightRoom1.Item1 <= bottomRightRoom2.Item1);
+
+            ////// Right border
+
+            //bool rb = (Math.Abs(topRightRoom1.Item1 - topLeftRoom2.Item1) == 1 && topRightRoom1.Item2 >= topLeftRoom2.Item2 && topRightRoom1.Item2 <= bottomLeftRoom2.Item2) ||
+            //            (Math.Abs(bottomRightRoom1.Item1 - bottomLeftRoom2.Item1) == 1 && bottomRightRoom1.Item2 >= topLeftRoom2.Item2 && bottomRightRoom1.Item2 <= bottomLeftRoom2.Item2);
+
+            ////// Bottom border
+
+            //bool bb = (Math.Abs(bottomLeftRoom1.Item2 - topLeftRoom2.Item2) == 1 && bottomLeftRoom1.Item1 >= topLeftRoom2.Item1 && bottomLeftRoom1.Item1 <= topRightRoom2.Item1) ||
+            //            (Math.Abs(bottomRightRoom1.Item2 - topLeftRoom2.Item2) == 1 && bottomRightRoom1.Item1 >= topLeftRoom2.Item1 && bottomRightRoom1.Item1 <= topRightRoom2.Item1);
+
+            ////// Left border
+
+            //bool lb = (Math.Abs(topLeftRoom1.Item1 - topRightRoom2.Item1) == 1 && topLeftRoom1.Item2 >= topRightRoom2.Item2 && topLeftRoom1.Item2 <= bottomRightRoom2.Item2) ||
+            //            (Math.Abs(bottomLeftRoom1.Item1 - bottomRightRoom2.Item1) == 1 && bottomLeftRoom1.Item2 >= topRightRoom2.Item2 && bottomLeftRoom1.Item2 <= bottomRightRoom2.Item2);
+
+            //bool contact = tb || rb || bb || lb;
+            //return contact;
+        }
+
+        private bool IsOverlapping(Room room)
         {
             Border space = FloorViewModel.selectedGridCells;
             (int, int) topLeftCornerSpace = (Grid.GetColumn(space), Grid.GetRow(space));
-            (int, int) topRightCornerSpace = (Grid.GetColumn(space) + Grid.GetColumnSpan(space) - 1, Grid.GetRow(space));
-            (int, int) bottomLeftCornerSpace = (Grid.GetColumn(space), Grid.GetRow(space) + Grid.GetRowSpan(space) - 1);
             (int, int) bottomRightCornerSpace = (Grid.GetColumn(space) + Grid.GetColumnSpan(space) - 1, Grid.GetRow(space) + Grid.GetRowSpan(space) - 1);
             Position position = room.Position;
-            (int, int) topLeftCornerRoom = (position.Column, position.Row - 1);
-            (int, int) topRightCornerRoom = (position.Column + position.ColumnSpan - 1, position.Row);
-            (int, int) bottomLeftCornerRoom = (position.Column, position.Row + position.RowSpan - 1);
+            (int, int) topLeftCornerRoom = (position.Column, position.Row);
             (int, int) bottomRightCornerRoom = (position.Column + position.ColumnSpan - 1, position.Row + position.RowSpan - 1);
 
+
+
+            //// TopLeftCorner
+
+            //bool tl = topLeftCornerSpace.Item1 >= topLeftCornerRoom.Item1 && topLeftCornerSpace.Item1 <= topRightCornerRoom.Item1 &&
+            //           topLeftCornerSpace.Item2 >= topLeftCornerRoom.Item2 && topLeftCornerSpace.Item2 <= bottomLeftCornerRoom.Item2;
+
+            //// TopRightCorner
+
+            //bool tr = topRightCornerSpace.Item1 >= topLeftCornerRoom.Item1 && topRightCornerSpace.Item1 <= topRightCornerRoom.Item1 &&
+            //           topRightCornerSpace.Item2 >= topRightCornerRoom.Item2 && topRightCornerSpace.Item2 <= bottomRightCornerRoom.Item2;
+
+            //// BottomLeftCorner
+
+            //bool bl = bottomLeftCornerSpace.Item1 >= bottomLeftCornerRoom.Item1 && bottomLeftCornerSpace.Item1 <= bottomRightCornerRoom.Item1 &&
+            //           bottomLeftCornerSpace.Item2 >= topLeftCornerRoom.Item2 && bottomLeftCornerSpace.Item2 <= bottomLeftCornerRoom.Item2;
+
+            //// BottomRightCorner
+
+            //bool br = bottomRightCornerSpace.Item1 >= bottomLeftCornerRoom.Item1 && bottomRightCornerSpace.Item1 <= bottomRightCornerRoom.Item1 &&
+            //           bottomRightCornerSpace.Item2 >= topRightCornerRoom.Item2 && bottomRightCornerSpace.Item2 <= bottomRightCornerRoom.Item2;
+
             // TopLeftCorner
+            bool inside = false;
+            List<(int, int)> roomCorners = new List<(int, int)>();
 
-            bool tl = topLeftCornerSpace.Item1 >= topLeftCornerRoom.Item1 && topLeftCornerSpace.Item1 <= topRightCornerRoom.Item1 &&
-                       topLeftCornerSpace.Item2 >= topLeftCornerRoom.Item2 && topLeftCornerSpace.Item2 <= bottomLeftCornerRoom.Item2;
+            for (int i = topLeftCornerRoom.Item1; i <= bottomRightCornerRoom.Item1; ++i)
+                for (int j = topLeftCornerRoom.Item2; j <= bottomRightCornerRoom.Item2; ++j)
+                    roomCorners.Add((i, j));
 
-            // TopRightCorner
+            foreach((int, int) corner in roomCorners)
+            {
+                if (corner.Item1 >= topLeftCornerSpace.Item1 &&
+                   corner.Item2 >= topLeftCornerSpace.Item2 &&
+                   corner.Item1 <= bottomRightCornerSpace.Item1 &&
+                   corner.Item2 <= bottomRightCornerSpace.Item2)
+                {
+                    inside = true;
+                    break;
+                }
+                    
+            }
 
-            bool tr = topRightCornerSpace.Item1 >= topLeftCornerRoom.Item1 && topRightCornerSpace.Item1 <= topRightCornerRoom.Item1 &&
-                       topRightCornerSpace.Item2 >= topRightCornerRoom.Item2 && topRightCornerSpace.Item2 <= bottomRightCornerRoom.Item2;
-
-            // BottomLeftCorner
-
-            bool bl = bottomLeftCornerSpace.Item1 >= bottomLeftCornerRoom.Item1 && bottomLeftCornerSpace.Item1 <= bottomRightCornerRoom.Item1 &&
-                       bottomLeftCornerSpace.Item2 >= topLeftCornerRoom.Item2 && bottomLeftCornerSpace.Item2 <= bottomLeftCornerRoom.Item2;
-
-            // BottomRightCorner
-
-            bool br = bottomRightCornerSpace.Item1 >= bottomLeftCornerRoom.Item1 && bottomRightCornerSpace.Item1 <= bottomRightCornerRoom.Item1 &&
-                       bottomRightCornerSpace.Item2 >= topRightCornerRoom.Item2 && bottomRightCornerSpace.Item2 <= bottomRightCornerRoom.Item2;
-
-            return tl || tr || bl || br;
+            return inside;
         }
 
         private void editBuilding(Building _building)

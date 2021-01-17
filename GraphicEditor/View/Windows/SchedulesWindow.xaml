@@ -6,19 +6,22 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:GraphicEditor.View.Windows"
         mc:Ignorable="d"
-        Title="Schedules" 
-        Height="800"
-        Width="1200"
+        Title="Schedules"
+        MinHeight="700"
+        MinWidth="950"
         WindowStartupLocation="CenterScreen">
-    <Grid Background="AliceBlue">
+    <StackPanel Background="AliceBlue">
+        <TextBlock HorizontalAlignment="Center"
+                   Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                   Margin="10"
+                   Text="Appointments" 
+                   TextWrapping="Wrap"
+                   VerticalAlignment="Center"/>
         <ListView x:Name="appointmentsListView" 
-                  ItemsSource="{Binding AllAppointments, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                  HorizontalAlignment="Left" 
-                  Height="150" 
-                  Margin="50,70,0,0" 
-                  SelectedItem="{Binding Path=SelectedAppointment, UpdateSourceTrigger=PropertyChanged}"
-                  VerticalAlignment="Top"
-                  Width="861">
+                  ItemsSource="{Binding AllAppointments}"
+                  HorizontalAlignment="Center"  
+                  Margin="10" 
+                  VerticalAlignment="Center">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" 
@@ -71,38 +74,16 @@
             </ListView.View>
         </ListView>
 
-        <TextBlock HorizontalAlignment="Left" 
-                   Height="60"
-                   FontSize="30"
-                   Margin="364,10,0,0"
-                   Text="Appointments" 
-                   TextWrapping="Wrap"
-                   VerticalAlignment="Top"
-                   Width="194"/>
-        <TextBlock HorizontalAlignment="Left" 
-            Height="62"
-            FontSize="30"
-            Margin="307,261,0,0"
-            Text="Equipment relocations" 
-            TextWrapping="Wrap"
-            VerticalAlignment="Top"
-            Width="308"/>
-        <TextBlock HorizontalAlignment="Left" 
-            Height="60"
-            FontSize="30"
-            Margin="376,506,0,0"
-            Text="Renovations" 
-            TextWrapping="Wrap"
-            VerticalAlignment="Top"
-            Width="170"/>
+        <TextBlock HorizontalAlignment="Center" 
+                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                    Text="Equipment relocations" 
+                   Margin="10"
+                    TextWrapping="Wrap"
+                    VerticalAlignment="Center"/>
         <ListView x:Name="equipmentRelocationsListView" 
-            ItemsSource="{Binding AllEquipmentRelocations, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            HorizontalAlignment="Left" 
-            Height="150" 
-            Margin="50,323,0,0" 
-            SelectedItem="{Binding Path=SelectedEquipmentRelocation, UpdateSourceTrigger=PropertyChanged}"
-            VerticalAlignment="Top"
-            Width="861">
+            ItemsSource="{Binding AllEquipmentRelocations}"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" 
@@ -129,12 +110,18 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
+        <TextBlock HorizontalAlignment="Center" 
+                   Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                   Text="Renovations" 
+                   Margin="10"
+                   TextWrapping="Wrap"
+                   VerticalAlignment="Center"/>
+        
         <ListView x:Name="renovationsListView" 
-            ItemsSource="{Binding AllRenovations, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            HorizontalAlignment="Left" 
-            Height="150" 
-            Margin="50,571,0,0" 
-            SelectedItem="{Binding Path=SelectedRenovation, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding AllRenovations}"
+            HorizontalAlignment="Center" 
+            Height="220" 
             VerticalAlignment="Top"
             Width="861">
             <ListView.ItemContainerStyle>

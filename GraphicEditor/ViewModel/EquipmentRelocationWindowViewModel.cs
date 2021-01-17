@@ -195,8 +195,8 @@ namespace GraphicEditor.ViewModel
                 for (int i = 1; i < 6; ++i)
                 {
                     TimeSpan ts = equipmentRelocation.TimeInterval.End - equipmentRelocation.TimeInterval.Start;
-                    DateTime startTime = equipmentRelocation.TimeInterval.Start.Subtract(TimeSpan.FromMinutes(ts.TotalMinutes * (i + 1)));
-                    DateTime endTime = equipmentRelocation.TimeInterval.End.Subtract(TimeSpan.FromMinutes(ts.TotalMinutes * (i + 1)));
+                    DateTime startTime = equipmentRelocation.TimeInterval.Start.Subtract(TimeSpan.FromMinutes(ts.TotalMinutes * i));
+                    DateTime endTime = equipmentRelocation.TimeInterval.End.Subtract(TimeSpan.FromMinutes(ts.TotalMinutes * i));
                     EquipmentRelocation suggestedBeforeER = new EquipmentRelocation
                     {
                         TimeInterval = new TimeInterval(startTime, endTime),
