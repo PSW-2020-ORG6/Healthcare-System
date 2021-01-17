@@ -1,9 +1,13 @@
 ﻿#Login {
     background-image: url("../pictures/medical-care.jpg");
     background-repeat: no-repeat;
-    overflow-y: scroll;
+    overflow-y: hidden;
+    overflow-x: auto;
     background-size: cover;
-    height: 768px;
+    height: auto;
+    width: auto;
+    color: white;
+    font-family: impact;
 }
 
 body {

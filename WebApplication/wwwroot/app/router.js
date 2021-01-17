@@ -18,6 +18,7 @@ const AdminHeader = { template: '<headerAdmin></headerAdmin>' }
 const PatientHeader = { template: '<headerPatient></headerPatient>' }
 const Landing = { template: '<landing></landing>' }
 const Feedback = { template: '<feedback></feedback>' }
+const Charts = { template: '<charts></charts>' }
 
 
 
@@ -84,6 +85,9 @@ var temp = new Vue({
 		},
 		landing: function () {
 			router.push("landing")
+		},
+		charts: function () {
+			router.push("charts")
 		},
 		feedback: function () {
 			router.push("feedback")
@@ -348,6 +352,14 @@ const router = new VueRouter({
 			components: {
 				pageHeader: PageHeader,
 				content: Landing
+			}
+		},
+		{
+			path: '/charts',
+			name: 'charts',
+			components: {
+				pageHeader: AdminHeader,
+				content: Charts
 			}
 		},
 		{
