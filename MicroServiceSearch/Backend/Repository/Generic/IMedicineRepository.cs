@@ -1,4 +1,4 @@
-﻿using MicroServiceSearch.Backend.Model;
+﻿using MicroServiceAppointment.Backend.Model;
 using System.Collections.Generic;
 
 namespace MicroServiceSearch.Backend.Repository.Generic

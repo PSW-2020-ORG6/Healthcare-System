@@ -1,50 +1,52 @@
-﻿using MicroServiceSearch;
-using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Microsoft.AspNetCore.Mvc.Testing;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using WebApplication;
 using Xunit;
 
-namespace WebApplicationTests
+namespace UserSearchTest
 {
-    public class UserSearchesTest : IClassFixture<WebApplicationFactory<Startup>>
+    public class UserSearchTests : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> webFactory;
-        public UserSearchesTest(WebApplicationFactory<Startup> factory)
+
+        public UserSearchTests(WebApplicationFactory<Startup> factory)
         {
             webFactory = factory;
         }
-        public static IEnumerable<object[]> UserSearches =>
+
+        public static IEnumerable<object[]> Search =>
             new List<object[]>
             {
-                        new object[] {" ,a,All", "2020-12-06", "2020-12-16", HttpStatusCode.OK},
-                        new object[] {null, null, null, HttpStatusCode.BadRequest}
+                new object[] {" a,All", "2020-12-25", "2020-12-25", HttpStatusCode.OK},
+                new object[] {null, null, null, HttpStatusCode.BadRequest}
             };
 
         [Theory]
-        [MemberData(nameof(UserSearches))]
-        public async void Get_prescription_search(string date, string patientId, string physicianId,
-                    HttpStatusCode exceptedStatusCode)
+        [MemberData(nameof(Search))]
+        public async void Get_prescriptions_search(string search, string dateTo, string dateFrom,
+            HttpStatusCode exceptedStatusCode)
         {
-            //HttpClient client = webFactory.CreateClient();
-            //HttpResponseMessage responseMessage =
-            //    await client.GetAsync("http://localhost:49900/search/prescriptionSearch/" + date + "/"
-            //                          + patientId + "/" + physicianId);
+            HttpClient client = webFactory.CreateClient();
 
-            //responseMessage.StatusCode.CompareTo(exceptedStatusCode);
+            HttpResponseMessage responseMessage =
+                await client.GetAsync("/#/search/prescriptionsSearch/" + search + "/" + dateTo + "/" + dateFrom);
+
+            responseMessage.StatusCode.CompareTo(exceptedStatusCode);
         }
 
         [Theory]
-        [MemberData(nameof(UserSearches))]
-        public async void Get_report_search(string date, string patientId, string physicianId,
+        [MemberData(nameof(Search))]
+        public async void Get_reports_search(string search, string dateTo, string dateFrom,
             HttpStatusCode exceptedStatusCode)
         {
-            //HttpClient client = webFactory.CreateClient();
-            //HttpResponseMessage responseMessage =
-            //    await client.GetAsync("http://localhost:49900/search/reportSearch/" + date + "/"
-            //                          + patientId + "/" + physicianId);
+            HttpClient client = webFactory.CreateClient();
 
-            //responseMessage.StatusCode.CompareTo(exceptedStatusCode);
+            HttpResponseMessage responseMessage =
+                await client.GetAsync("/#/search/reportsSearch/" + search + "/" + dateTo + "/" + dateFrom);
+
+            responseMessage.StatusCode.CompareTo(exceptedStatusCode);
         }
     }
 }

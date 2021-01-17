@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-//using HealthClinicBackend.Backend.Model.PharmacySupport;
-//using HealthClinicBackend.Backend.Repository.Generic;
 using Xunit;
 using MicroServiceAccount.Backend.Service;
 using MicroServiceAccount.Backend.Model;

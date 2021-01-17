@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using MicroServiceAccount.Backend.Model.Util;
 using MicroServiceAppointment.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -48,6 +49,11 @@ namespace MicroServiceAppointment.Backend.Repository.DatabaseSql
         public virtual T GetById(string id)
         {
             throw new System.NotImplementedException();
+        }
+
+        public virtual T GetBySerialNumber(string serialNumber)
+        {
+            return GetAll().Where(t => t.SerialNumber.Equals(serialNumber)).ToList()[0];
         }
 
         public virtual T Instantiate(string objectStringFormat)

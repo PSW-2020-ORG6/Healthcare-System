@@ -70,17 +70,16 @@ namespace WebApplication.Backend.Controllers
         }
 
         [HttpPost("makeAppointment")]
-        public async Task<IActionResult> MakeAppointment(AppointmentDto appointmentSchedulingDTO)
-        {   /*
+        public async Task<IActionResult> MakeAppointment(AppointmentSchedulingDTO appointmentSchedulingDTO)
+        {   
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
                                                                                         , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             var parameter1 = new StringContent(JsonConvert.SerializeObject(appointmentSchedulingDTO, Formatting.Indented), Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await client.PostAsync("http://localhost:57057/feedbackMicroservice/add/",parameter1);
+            HttpResponseMessage response = await client.PostAsync("http://localhost:57056/appointmentMicroservice/makeAppointment/", parameter1);
             response.EnsureSuccessStatusCode();
-            return JsonConvert.DeserializeObject<IActionResult>(await response.Content.ReadAsStringAsync());
-            */
-            throw new NotImplementedException();
+            var result = JsonConvert.DeserializeObject<IActionResult>(await response.Content.ReadAsStringAsync());
+            return result;
         }
 
         [HttpGet("allAppointmentsByPatientIdPast")]

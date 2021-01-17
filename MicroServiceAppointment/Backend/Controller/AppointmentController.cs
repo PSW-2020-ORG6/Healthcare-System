@@ -71,19 +71,20 @@ namespace MicroServiceAppointment.Backend.Controllers
 
         [Authorize]
         [HttpPost("makeAppointment")]
-        public IActionResult MakeAppointment(AppointmentSchedulingDTO appointmentSchedulingDTO )
-        {/*
+        public IActionResult MakeAppointment(AppointmentSchedulingDTO appointmentSchedulingDTO)
+        {
             if (appointmentSchedulingDTO!= null && appointmentSchedulingDTO.IsDataValid(appointmentSchedulingDTO.Date))
             {
-                if (_appointmentService.AddAppointment(new Appointment(physicianId, date, timeIntervalStart)))
+                var dtStart = DateTime.ParseExact(appointmentSchedulingDTO.TimeIntervalStart, "s", null);
+                var dtEnd = DateTime.ParseExact(appointmentSchedulingDTO.TimeIntervalEnd, "s", null);
+                if (_appointmentService.AddAppointment(new Appointment(appointmentSchedulingDTO.PhysicianId,
+                    appointmentSchedulingDTO.Date, dtStart, appointmentSchedulingDTO.PatientId, dtEnd)))
                     return Ok();
                 else
                     return BadRequest();
             }
             else
                 return BadRequest();
-            */
-            throw new NotImplementedException();
         }
 
         //radi

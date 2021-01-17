@@ -94,6 +94,11 @@ namespace MicroServiceAppointment.Backend.Repository.DatabaseSql
         {
             return GetAll().Where(appointment => appointment.PatientSerialNumber.Equals(patientId) && appointment.Date.ToString().Equals(appointmentDate) && appointment.PhysicianSerialNumber.Equals(id)).ToList();
         }
+        public override void Save(Appointment newEntity)
+        {
+            DbContext.Appointment.Add(newEntity);
+            DbContext.SaveChanges();
+        }
 
         public void Update(Appointment appointment)
         {

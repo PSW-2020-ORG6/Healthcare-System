@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using MicroServiceAppointment.Backend.Model;
+﻿using MicroServiceAppointment.Backend.Model;
 using MicroServiceAppointment.Backend.Model.Hospital;
 using MicroServiceAppointment.Backend.Repository.Generic;
-using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MicroServiceAppointment.Backend.Repository.DatabaseSql
 {
@@ -19,22 +18,37 @@ namespace MicroServiceAppointment.Backend.Repository.DatabaseSql
 
         public override List<Room> GetAll()
         {
-            return DbContext.Room
-                .Include(r => r.Floor)
-                .Include(r => r.RoomType)
-                .Include(r => r.Equipment)
-                .Include(r => r.Beds)
-                .ToList();
+            return DbContext.Room.ToList();
         }
 
         public override Room GetById(string id)
         {
-            return GetAll().Where(r => r.SerialNumber.Equals(id)).ToList()[0];
+            return DbContext.Room.Find(id);
         }
 
-        public List<Room> GetByProcedureType(ProcedureType procedureType)
+        public override void Save(Room newEntity)
         {
-            throw new System.NotImplementedException();
+            DbContext.Room.Add(newEntity);
+            DbContext.SaveChanges();
+        }
+
+        public override void Update(Room updateEntity)
+        {
+            DbContext.Room.Update(updateEntity);
+            DbContext.SaveChanges();
+        }
+
+        public override void Delete(string id)
+        {
+            var room = GetById(id);
+            if (room == null) return;
+            DbContext.Room.Remove(room);
+            DbContext.SaveChanges();
+        }
+
+        public override Room GetBySerialNumber(string serialNumber)
+        {
+            return GetAll().Where(r => r.SerialNumber.Equals(serialNumber)).ToList()[0];
         }
 
         public List<Room> GetByRoomType(RoomType roomType)
@@ -44,12 +58,22 @@ namespace MicroServiceAppointment.Backend.Repository.DatabaseSql
 
         public List<Room> GetByName(string name)
         {
-            return GetAll().Where(r => r.Name.Equals(name)).ToList();
+            return GetAll().Where(r => r.Name.ToLower().Contains(name.ToLower())).ToList();
         }
 
         public List<Room> GetByFloorSerialNumber(string floorSerialNumber)
         {
             return GetAll().Where(r => r.FloorSerialNumber.Equals(floorSerialNumber)).ToList();
+        }
+
+        public Room GetByPosition(Position position)
+        {
+            return GetAll().Where(r => r.Position.Equals(position)).ToList()[0];
+        }
+
+        public List<Room> GetByProcedureType(ProcedureType procedureType)
+        {
+            return GetAll(); //TO DO
         }
     }
 }

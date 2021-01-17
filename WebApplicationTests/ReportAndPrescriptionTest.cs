@@ -1,4 +1,4 @@
-﻿using MicroServiceSearch;
+﻿using WebApplication;
 using Microsoft.AspNetCore.Mvc.Testing;
 using System.Collections.Generic;
 using System.Net;
@@ -26,12 +26,12 @@ namespace WebApplicationTests
         public async void Get_report_and_prescritpion(string date, string patientId, string physicianId,
                     HttpStatusCode exceptedStatusCode)
         {
-            //HttpClient client = webFactory.CreateClient();
-            //HttpResponseMessage responseMessage =
-            //    await client.GetAsync("http://localhost:49900/search/getReportByAppointment/" + date + "/" 
-            //                          + patientId + "/" + physicianId);
+            HttpClient client = webFactory.CreateClient();
+            HttpResponseMessage responseMessage =
+                await client.GetAsync("#/search/getReportByAppointment/" + date + "/"
+                                      + patientId + "/" + physicianId);
 
-            //responseMessage.StatusCode.CompareTo(exceptedStatusCode);
+            responseMessage.StatusCode.CompareTo(exceptedStatusCode);
         }
     }
 }

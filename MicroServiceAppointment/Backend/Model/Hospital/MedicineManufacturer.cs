@@ -7,7 +7,7 @@ using System;
 using MicroServiceAccount.Backend.Model.Util;
 using Newtonsoft.Json;
 
-namespace MicroServiceSearch.Backend.Model
+namespace MicroServiceAppointment.Backend.Model
 {
     public class MedicineManufacturer : Entity
     {

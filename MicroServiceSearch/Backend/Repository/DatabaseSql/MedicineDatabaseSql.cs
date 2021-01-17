@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using MicroServiceSearch.Backend.Model;
+using MicroServiceAppointment.Backend.Model;
 using MicroServiceSearch.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
 

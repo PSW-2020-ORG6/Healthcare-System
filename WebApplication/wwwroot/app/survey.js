@@ -1115,9 +1115,11 @@ Vue.component("appointments", {
         },
         MakeAppointment: function () {
             if (this.timeInterval != null) {
-                this.appointmentSchedulingDTO.physicianId = this.chosenPhysician.id
+                this.appointmentSchedulingDTO.physicianId = this.choosenPhysician.id
                 this.appointmentSchedulingDTO.timeIntervalStart = this.timeInterval.start
+                this.appointmentSchedulingDTO.timeIntervalEnd = this.timeInterval.end
                 this.appointmentSchedulingDTO.date = this.date
+                this.appointmentSchedulingDTO.patientId = localStorage.getItem('userId')
                 axios
                     .post('/appointment/makeAppointment', this.appointmentSchedulingDTO, {
                         headers: {

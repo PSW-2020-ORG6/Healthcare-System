@@ -159,7 +159,7 @@ const router = new VueRouter({
 				content: EmailConfirmation
 			},
 			beforeEnter: (to, from, next) => {
-				if (/*localStorage.getItem('isAdmin') == "false" &&*/ localStorage.getItem('isLogged') == "false" /*&& localStorage.getItem('isPatient') == "true"*/) {
+				if (localStorage.getItem('isLogged') == "false") {
 					next();
 				}
 				else {
