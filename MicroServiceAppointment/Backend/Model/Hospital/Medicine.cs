@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using MicroServiceAccount.Backend.Model.Util;
 using Newtonsoft.Json;
 
-namespace MicroServiceSearch.Backend.Model
+namespace MicroServiceAppointment.Backend.Model
 {
     public class Medicine : Entity
     {

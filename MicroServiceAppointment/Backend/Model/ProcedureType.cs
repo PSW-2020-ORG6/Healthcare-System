@@ -11,6 +11,7 @@ using MicroServiceAppointment.Backend.Model.Hospital;
 using MicroServiceAccount.Backend.Model.Util;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations.Schema;
+using MicroServiceAppointment.Backend.Dto;
 
 namespace MicroServiceAppointment.Backend.Model
 {
@@ -42,6 +43,11 @@ namespace MicroServiceAppointment.Backend.Model
             Specialization = specialization;
             EstimatedTimeInMinutes = estimatedTimeInMinutes;
             RequiredEquipment = new List<Equipment>();
+        }
+
+        public ProcedureType(ProcedureTypeDTO procedureTypeDTO)
+        {
+            this.Specialization = new Specialization(procedureTypeDTO.Specialization);
         }
 
         public override bool Equals(object obj)

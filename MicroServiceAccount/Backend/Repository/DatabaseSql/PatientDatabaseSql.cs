@@ -22,7 +22,7 @@ namespace MicroServiceAccount.Backend.Repository.DatabaseSql
             // Use Include method to connect object and its references from other tables
             return DbContext.Patient
                 .Include(p => p.Address)
-                //.ThenInclude(p => p.City)
+                .ThenInclude(p => p.City)
                 //.Include(p => p.ChosenPhysician)
                 .ToList();
         }

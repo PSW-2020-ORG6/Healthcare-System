@@ -72,18 +72,6 @@ namespace MicroServiceAccount.Backend.Model
             IsAdmin = isAdmin;
         }
 
-        //[JsonConstructor]
-        //public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth,
-        //    string contact, string email, Address address, string parentName, string gender, string password,
-        //    bool isGuest = false)
-        //    : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address, password)
-        //{
-        //    ParentName = parentName;
-        //    Gender = gender;
-        //    Guest = isGuest;
-        //    Password = password;
-        //}
-
         public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth,
             string contact, string email, Address address, string parentName, string placeOfBirth,
             string municipalityOfBirth, string stateOfBirth, String citizenship, string nationality, string profession,

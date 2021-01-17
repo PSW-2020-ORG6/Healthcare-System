@@ -1,21 +1,34 @@
-// File:    TimeInterval.cs
-// Author:  Luka Doric
-// Created: Friday, May 15, 2020 23:46:22
-// Purpose: Definition of Class TimeInterval
-
-using System;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System;
 
 namespace MicroServiceAccount.Backend.Model.Util
 {
     [Owned]
     public class TimeInterval
     {
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
-        public string Id { get; set; }
-        public string Time => Start.ToString("HH:mm") + " - " + End.ToString("HH:mm");
+        private DateTime _start;
+        public DateTime Start
+        {
+            get { return _start; }
+            private set { _start = value; }
+        }
+
+        private DateTime _end;
+        public DateTime End
+        {
+            get { return _end; }
+            private set { _end = value; }
+        }
+
+        private string _id;
+        public string Id
+        {
+            get { return _id; }
+            private set { _id = value; }
+        }
+
+        private string Time => Start.ToString("HH:mm") + " - " + End.ToString("HH:mm");
 
         public TimeInterval()
         {
@@ -24,21 +37,40 @@ namespace MicroServiceAccount.Backend.Model.Util
         [JsonConstructor]
         public TimeInterval(DateTime start, DateTime end)
         {
-            Start = start;
-            End = end;
+            ValidateTimeInterval(start, end);
+
+            _start = start;
+            _end = end;
         }
 
         public TimeInterval(string start, string end)
         {
+            ValidateTimeInterval(start, end);
+
             try
             {
-                Start = Convert.ToDateTime(start);
-                End = Convert.ToDateTime(end);
+                _start = Convert.ToDateTime(start);
+                _end = Convert.ToDateTime(end);
             }
             catch
             {
-                // ignored
+                throw new Exception("Date and time couldn't be converted.");
             }
+        }
+
+        public TimeInterval(DateTime start)
+        {
+            ValidateDateTime(start);
+            _start = start;
+        }
+
+        public TimeInterval(string id, DateTime start, DateTime end)
+        {
+            ValidateId(id);
+            ValidateTimeInterval(start, end);
+            _id = id;
+            _start = start;
+            _end = end;
         }
 
         public override bool Equals(object obj)
@@ -52,9 +84,32 @@ namespace MicroServiceAccount.Backend.Model.Util
             return Start.Equals(other.Start) && End.Equals(other.End);
         }
 
+        public static bool operator ==(TimeInterval firstTimeInterval, TimeInterval secondTimeInterval)
+        {
+            if (firstTimeInterval is null)
+                return secondTimeInterval is null;
+
+            return firstTimeInterval.Equals(secondTimeInterval);
+        }
+
+        public static bool operator !=(TimeInterval firstTimeInterval, TimeInterval secondTimeInterval)
+        {
+            if (firstTimeInterval is null)
+            {
+                throw new ArgumentNullException(nameof(firstTimeInterval));
+            }
+
+            if (secondTimeInterval is null)
+            {
+                throw new ArgumentNullException(nameof(secondTimeInterval));
+            }
+
+            return !(firstTimeInterval == secondTimeInterval);
+        }
+
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return HashCode.Combine(Start, End, Id, Time);
         }
 
         public override string ToString()
@@ -96,6 +151,58 @@ namespace MicroServiceAccount.Backend.Model.Util
         public bool TimeOfDayEquals(TimeInterval other)
         {
             return Start.TimeOfDay.Equals(other.Start.TimeOfDay) && End.TimeOfDay.Equals(other.End.TimeOfDay);
+        }
+
+        private void ValidateTimeInterval(DateTime start, DateTime end)
+        {
+            ValidateDateTime(start);
+            ValidateDateTime(end);
+        }
+
+        private void ValidateTimeInterval(string start, string end)
+        {
+            ValidateDateTime(start);
+            ValidateDateTime(end);
+        }
+
+        private void ValidateDateTime(DateTime dateTime)
+        {
+            if (dateTime == null) throw new Exception("Date time is required!");
+            ValidateDate(dateTime);
+            ValidateTime(dateTime);
+        }
+
+        private void ValidateDate(DateTime dateTime)
+        {
+            if (dateTime.Date.Day < 1 || dateTime.Date.Day > 31) throw new Exception("Day is not correct.");
+            else if (dateTime.Date.Month < 1 || dateTime.Date.Month > 12) throw new Exception("Month is not correct.");
+            else if (dateTime.Date.Year < 1 || dateTime.Date.Day > 2100) throw new Exception("Year is not correct.");
+        }
+
+        private void ValidateTime(DateTime dateTime)
+        {
+            if (dateTime.Hour < 0 || dateTime.Hour > 23) throw new Exception("Hour is not correct.");
+            else if (dateTime.Minute < 0 || dateTime.Minute > 59) throw new Exception("Minute is not correct.");
+            else if (dateTime.Second < 0 || dateTime.Second > 59) throw new Exception("Second is not correct.");
+        }
+
+        private void ValidateDateTime(string dateTime)
+        {
+            if (string.IsNullOrEmpty(dateTime)) throw new Exception("Date time is required!");
+            else if (dateTime.Length != 19) throw new Exception("Date time is not correct length.");
+            else if (IsDateTime(dateTime)) throw new Exception("Date time is not set correct.");
+        }
+
+        private bool IsDateTime(string txtDate)
+        {
+            return DateTime.TryParse(txtDate, out DateTime tempDate);
+        }
+
+        private void ValidateId(string id)
+        {
+            if (string.IsNullOrEmpty(id)) throw new Exception("Id is required!");
+            else if (id.Length < 3) throw new Exception("Id is too short.");
+            else if (id.Length > 30) throw new Exception("Id is too long.");
         }
     }
 }

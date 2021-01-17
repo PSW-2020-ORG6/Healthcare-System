@@ -797,7 +797,7 @@
     beforeMount() {
 
         axios
-            .get('/appointment/physicians')
+            .get('/account/allPhysicians')
             .then(response => {
                 this.doctorsList = response.data
             })

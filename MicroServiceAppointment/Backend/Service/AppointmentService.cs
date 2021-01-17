@@ -87,8 +87,10 @@ namespace MicroServiceAppointment.Backend.Service
                 {
                     foreach (Appointment appointment in appointments)
                     {
+                        appointment.ProcedureType = _procedureTypeRepository.GetById(appointment.ProcedureTypeSerialnumber);
+                        appointment.ProcedureType.Specialization = new Specialization(HttpRequest.GetSpecializationByIdAsync(appointment.ProcedureType.SpecializationSerialNumber).Result.Name);
                         if (CompareTimeIntervals(time, appointment.TimeInterval.Start) &&
-                            appointment.Physician.SerialNumber == physician.SerialNumber &&
+                            appointment.PhysicianSerialNumber == physician.SerialNumber &&
                             appointment.ProcedureType.Specialization.Name == specializationName && appointment.Active)
                         {
                             existance = true;
@@ -181,9 +183,10 @@ namespace MicroServiceAppointment.Backend.Service
 
         public bool AddAppointment(Appointment appointment)
         {
-            //_appointmentRepository.Save(appointment);
-            //return true;
-            throw new NotImplementedException();
+            appointment.RoomSerialNumber = "101";
+            appointment.ProcedureTypeSerialnumber = "300004";
+            _appointmentRepository.Save(appointment);
+            return true;
         }
 
         /// <summary>

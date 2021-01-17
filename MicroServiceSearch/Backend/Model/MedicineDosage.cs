@@ -6,6 +6,7 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using MicroServiceAccount.Backend.Model.Util;
+using MicroServiceAppointment.Backend.Model;
 using Newtonsoft.Json;
 
 namespace MicroServiceSearch.Backend.Model

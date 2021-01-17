@@ -1,5 +1,5 @@
 ﻿
-using MicroServiceSearch.Backend.Model;
+using MicroServiceAppointment.Backend.Model;
 
 namespace MicroServiceSearch.Backend.Repository.Generic
 {

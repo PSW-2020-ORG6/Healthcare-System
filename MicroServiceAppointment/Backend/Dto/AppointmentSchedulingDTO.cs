@@ -8,16 +8,20 @@ namespace MicroServiceAppointment.Backend.Dto
     {
         public string Date { get; set; }
         public string TimeIntervalStart { get; set; }
+        public string TimeIntervalEnd { get; set; }
         public string PhysicianId { get; set; }
+        public string PatientId { get; set; }
 
         public AppointmentSchedulingDTO()
         {
         }
-        public AppointmentSchedulingDTO(string date, string physicianId, string timeIntervalStart)
+        public AppointmentSchedulingDTO(string date, string physicianId, string timeIntervalStart, string patientId, string timeIntervalEnd)
         {
             this.Date = date;
-            this.TimeIntervalStart= timeIntervalStart;
+            this.TimeIntervalStart = timeIntervalStart;
+            this.TimeIntervalEnd = timeIntervalEnd;
             this.PhysicianId = physicianId;
+            this.PatientId = patientId;
         }
 
         public bool IsDataValid(string date)

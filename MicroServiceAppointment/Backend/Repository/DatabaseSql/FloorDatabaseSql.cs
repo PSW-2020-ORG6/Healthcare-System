@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using MicroServiceAppointment.Backend.Model.Hospital;
+﻿using MicroServiceAppointment.Backend.Model.Hospital;
 using MicroServiceAppointment.Backend.Repository.Generic;
-using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MicroServiceAppointment.Backend.Repository.DatabaseSql
 {
@@ -18,15 +17,43 @@ namespace MicroServiceAppointment.Backend.Repository.DatabaseSql
 
         public override List<Floor> GetAll()
         {
-            return DbContext.Floor
-                .Include(f => f.Building)
-                .Include(f => f.Rooms)
-                .ToList();
+            return DbContext.Floor.ToList();
+        }
+
+        public override Floor GetById(string id)
+        {
+            return DbContext.Floor.Find(id);
+        }
+
+
+        public override void Save(Floor newEntity)
+        {
+            DbContext.Floor.Add(newEntity);
+            DbContext.SaveChanges();
+        }
+
+        public override void Update(Floor updateEntity)
+        {
+            DbContext.Floor.Update(updateEntity);
+            DbContext.SaveChanges();
+        }
+
+        public override void Delete(string id)
+        {
+            var floor = GetById(id);
+            if (floor == null) return;
+            DbContext.Floor.Remove(floor);
+            DbContext.SaveChanges();
         }
 
         public List<Floor> GetByName(string name)
         {
-            return GetAll().Where(f => f.Name.Equals(name)).ToList();
+            return GetAll().Where(f => f.Name.ToLower().Contains(name.ToLower())).ToList();
+        }
+
+        public override Floor GetBySerialNumber(string serialNumber)
+        {
+            return GetAll().Where(f => f.SerialNumber.Equals(serialNumber)).ToList()[0];
         }
 
         public List<Floor> GetByBuildingSerialNumber(string buildingSerialNumber)

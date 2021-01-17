@@ -103,24 +103,14 @@ namespace MicroServiceAppointment.Backend.Model
             Active = active;
         }
 
-        public Appointment(AppointmentDto appointmentDTO) : base()
+        public Appointment(string physicianId, string date, DateTime timeIntervalStart, string patientId, DateTime timeIntervalEnd)
         {
-        //    Room = appointmentDTO.RoomDTO;
-        //    Physician = appointmentDTO.PhysicianDTO;
-        //    Patient = appointmentDTO.Patient;
-        //    TimeInterval = appointmentDTO.Time;
-        //    ProcedureType = appointmentDTO.ProcedureType;
-        //    Urgency = appointmentDTO.Urgency;
-        //    Date = appointmentDTO.Date;
-        }
-
-        public Appointment(string physicianId, string date, DateTime timeIntervalStart)
-        {
-            this.Physician = new Physician { SerialNumber = physicianId };
+            this.PhysicianSerialNumber = physicianId;
             string[] parts = date.Split("-");
             this.Date = new DateTime(Int32.Parse(parts[0]), Int32.Parse(parts[1]), Int32.Parse(parts[2]), 0, 0, 0);
-            this.TimeInterval = new TimeInterval { Start = timeIntervalStart };
+            this.TimeInterval = new TimeInterval(timeIntervalStart, timeIntervalEnd);
             this.Active = true;
+            this.PatientSerialNumber = patientId;
         }
 
         public override bool Equals(object obj)
