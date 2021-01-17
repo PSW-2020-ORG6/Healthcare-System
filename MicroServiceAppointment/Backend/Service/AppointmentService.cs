@@ -17,6 +17,7 @@ namespace MicroServiceAppointment.Backend.Service
         private readonly IAppointmentRepository _appointmentRepository;
         private readonly IProcedureTypeRepository _procedureTypeRepository;
         private readonly ISpecializationRepository _specializationRepository;
+        private readonly IMedicineRepository _medicineRepository;
 
 
         private PhysiciansDTO physitianDTO = new PhysiciansDTO();
@@ -35,11 +36,13 @@ namespace MicroServiceAppointment.Backend.Service
 
 
         public AppointmentService(IAppointmentRepository appointmentRepository,
-            IPhysicianRepository physicianRepository,IProcedureTypeRepository procedureTypeRepository)
+            IPhysicianRepository physicianRepository,IProcedureTypeRepository procedureTypeRepository,
+            IMedicineRepository medicineRepository)
         {
             _appointmentRepository = appointmentRepository;
             _physicianRepository = physicianRepository;
             _procedureTypeRepository = procedureTypeRepository;
+            _medicineRepository = medicineRepository;
         }
 
         public AppointmentService(IAppointmentRepository appointmentRepository)
@@ -247,6 +250,11 @@ namespace MicroServiceAppointment.Backend.Service
             return new ProcedureTypeDTO(procedureType);
         }
 
+
+        internal MedicineDTO GetMedicine(string medicineId)
+        {
+            return new MedicineDTO(_medicineRepository.GetById(medicineId));
+        }
         /// <summary>
         ///method for getting patient's scheduled appointments 
         ///</summary>

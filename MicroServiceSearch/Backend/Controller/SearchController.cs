@@ -31,6 +31,8 @@ namespace MicroServiceSearch.Backend.Controllers
         {
             if (searchEntityDTO.IsDateFormat(dateFrom, dateTo) && searchEntityDTO.IsSearchFormatValid(prescriptionSearch))
             {
+                HttpRequest.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                     , Request.Headers["Authorization"].ToString().Split(" ")[1]);
                 List<SearchEntityDTO> prescriptions = prescriptionService.GetSearchedPrescription(prescriptionSearch,
                                             new DateTime[] { Convert.ToDateTime(dateFrom), Convert.ToDateTime(dateTo) });
                 if (!searchEntityDTO.IsNull(prescriptions))

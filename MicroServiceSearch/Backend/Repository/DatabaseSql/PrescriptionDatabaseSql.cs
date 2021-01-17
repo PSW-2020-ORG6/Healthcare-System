@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MicroServiceSearch.Backend.Model;
 using MicroServiceSearch.Backend.Repository.Generic;
+using MicroServiceSearch.Backend.Util;
 using Microsoft.EntityFrameworkCore;
 
 namespace MicroServiceSearch.Backend.Repository.DatabaseSql
@@ -26,26 +27,13 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
 
         public override Prescription GetById(string id)
         {
-            var prescription= GetAll().Where(p=>p.SerialNumber.Equals(id)).ToList()[0];
-            foreach (var medicineDosages in prescription.MedicineDosage)
-                DbContext.Medicine
-                .Where(m => m.SerialNumber == medicineDosages.MedicineSerialNumber)
-                .Include(m => m.MedicineType)
-                .ToList();
-            return prescription;
+            return GetAll().Where(p=>p.SerialNumber.Equals(id)).ToList()[0];
         }
         public List<Prescription> GetPrescriptionsBetweenDates(DateTime[] datetimes)
         {
-           var prescriptions= GetAll()
+          return GetAll()
                 .Where(t => t.Date > datetimes[0] && t.Date < datetimes[1])
                 .ToList();
-            foreach (var prescription in prescriptions)
-                foreach (var medicineDosages in prescription.MedicineDosage)
-                    DbContext.Medicine
-                    .Where(m => m.SerialNumber == medicineDosages.MedicineSerialNumber)
-                    .Include(m => m.MedicineType)
-                    .ToList();
-            return prescriptions;
         }
 
 
@@ -54,12 +42,15 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
             var prescriptions = GetPrescriptionsBetweenDates(dateTimes);
             var retVal =new  List<Prescription>();
             foreach (var prescription in prescriptions)
-                foreach (var medicineDosages in prescription.MedicineDosage)
-                    if (medicineDosages.Medicine.GenericName.ToUpper().Contains(medicineName.ToUpper()))
+                foreach (var medicineDosage in prescription.MedicineDosage)
+                {
+                    var medicine = HttpRequest.GetMedicineByIdAsync(medicineDosage.MedicineSerialNumber).Result;
+                    if (medicine.Name.ToUpper().Contains(medicineName.ToUpper()))
                     {
                         retVal.Add(prescription);
                         break;
                     }
+                }
             return retVal;
         }
 
@@ -68,12 +59,15 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
             var prescriptions = GetPrescriptionsBetweenDates(dateTimes);
             var retVal = new List<Prescription>();
             foreach (var prescription in prescriptions)
-                foreach (var medicineDosages in prescription.MedicineDosage)
-                    if (medicineDosages.Medicine.MedicineType.Type.ToUpper().Contains(medicineType.ToUpper()))
+                foreach (var medicineDosage in prescription.MedicineDosage)
+                {
+                    var medicine = HttpRequest.GetMedicineByIdAsync(medicineDosage.MedicineSerialNumber).Result;
+                    if (medicine.MedicineType.ToUpper().Contains(medicineType.ToUpper()))
                     {
                         retVal.Add(prescription);
                         break;
                     }
+                }
             return retVal;
         }
 
@@ -85,12 +79,15 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
             var find = false;
             foreach (var prescription in prescriptions)
             {
-                foreach (var medicineDosages in prescription.MedicineDosage)
-                    if (medicineDosages.Medicine.MedicineType.Type.ToUpper().Contains(medicineType.ToUpper()))
+                foreach (var medicineDosage in prescription.MedicineDosage)
+                {
+                    var medicine = HttpRequest.GetMedicineByIdAsync(medicineDosage.MedicineSerialNumber).Result;
+                    if (medicine.MedicineType.ToUpper().Contains(medicineType.ToUpper()))
                     {
                         find = true;
                         break;
                     }
+                }
                 if(find)retVal.Add(prescription);
                 find = true;
             }
@@ -103,12 +100,15 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
             var find = false;
             foreach (var prescription in prescriptions)
             {
-                foreach (var medicineDosages in prescription.MedicineDosage)
-                    if (medicineDosages.Medicine.GenericName.ToUpper().Contains(medicineName.ToUpper()))
+                foreach (var medicineDosage in prescription.MedicineDosage)
+                {
+                    var medicine = HttpRequest.GetMedicineByIdAsync(medicineDosage.MedicineSerialNumber).Result;
+                    if (medicine.Name.ToUpper().Contains(medicineName.ToUpper()))
                     {
                         find = true;
                         break;
                     }
+                }
                 if (find) retVal.Add(prescription);
                 find = true;
             }
@@ -119,12 +119,15 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
             var prescriptions = GetPrescriptionsBetweenDates(dateTimes);
             var retVal = new List<Prescription>();
             foreach (var prescription in prescriptions)
-                foreach (var medicineDosages in prescription.MedicineDosage)
-                    if (medicineDosages.Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper()) || medicineDosages.Medicine.GenericName.ToUpper().Contains(value.ToUpper()))
+                foreach (var medicineDosage in prescription.MedicineDosage)
+                {
+                    var medicine = HttpRequest.GetMedicineByIdAsync(medicineDosage.MedicineSerialNumber).Result;
+                    if (medicine.MedicineType.ToUpper().Contains(value.ToUpper()) || medicine.Name.ToUpper().Contains(value.ToUpper()))
                     {
                         retVal.Add(prescription);
                         break;
                     }
+                }
             return retVal;
         }
         public List<Prescription> GetPrescriptionsBetweenDatesByAllNegation(DateTime[] dateTimes, string value)
@@ -134,8 +137,8 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
             var find = false;
             foreach (var prescription in prescriptions)
             {
-                foreach (var medicineDosages in prescription.MedicineDosage)
-                    if (medicineDosages.Medicine.GenericName.ToUpper().Contains(value.ToUpper()) || medicineDosages.Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper()))
+                foreach (var medicineDosage in prescription.MedicineDosage)
+                    if (medicineDosage.Medicine.GenericName.ToUpper().Contains(value.ToUpper()) || medicineDosage.Medicine.MedicineType.Type.ToUpper().Contains(value.ToUpper()))
                     {
                         find = true;
                         break;

@@ -180,6 +180,16 @@ namespace MicroServiceAppointment.Backend.Controllers
                                                                                                   , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             return _appointmentService.GetProcedureType(procedureTypeId);
         }
+
+        [Authorize]
+        [HttpGet("getMedicineById/{medicineId}")]
+        public MedicineDTO GetMedicine(string medicineId)
+        {
+            HttpRequest.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                  , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            return _appointmentService.GetMedicine(medicineId);
+        }
+
         [Authorize]
         [HttpGet("getAllAppointmentsByPatientIdDateAndDoctor/{patientId}/{date}/{doctorName}")]
         public List<AppointmentDto> GetAllAppointmentsByPatientIdDateAndDoctor(String patientId, String date, string doctorName)
