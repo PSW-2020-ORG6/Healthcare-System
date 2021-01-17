@@ -19,9 +19,6 @@
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li  class="nav-item">
-                        <div>
-                        <button type="button" class="btn btn-info btn-lg navbar-brand" v-on:click="FeedbackShow()">What our patients think of us?</button>
-                        </div>
                     </li>
                     <li class="nav-item dropdown">
                         <div v-if="isLogged==true &&isAdmin==false && isPatient==true">
