@@ -1,5 +1,8 @@
 ﻿using GraphicEditor.HelpClasses;
 using GraphicEditor.View.UserControls;
+using System.Globalization;
+using System.Threading;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace GraphicEditor
@@ -23,6 +26,19 @@ namespace GraphicEditor
 
             mainWindow = _mainWindow;
             CurrentUserControl = LoginPage;
+
+            CultureInfo newCulture = new CultureInfo("sr-Cyrl-CS");
+
+            CultureInfo.DefaultThreadCurrentCulture = newCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = newCulture;
+
+            Thread.CurrentThread.CurrentCulture = newCulture;
+            Thread.CurrentThread.CurrentUICulture = newCulture;
+
+            FrameworkElement.LanguageProperty.OverrideMetadata(
+                typeof(FrameworkElement),
+                new FrameworkPropertyMetadata(
+                    System.Windows.Markup.XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
         }
 
         public UserControl CurrentUserControl

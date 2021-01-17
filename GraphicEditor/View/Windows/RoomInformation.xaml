@@ -10,7 +10,7 @@
         Title="RoomInformation" 
         Icon="/GraphicEditor;component/Resources/Icons/bed.png"
         WindowStartupLocation="CenterScreen"
-        MinHeight="700"
+        MinHeight="720"
         MinWidth="1100">
     <Grid Background="AliceBlue">
 
