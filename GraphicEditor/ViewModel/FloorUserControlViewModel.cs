@@ -91,7 +91,6 @@ namespace GraphicEditor.ViewModel
             ResourceDictionary.Source = new Uri("/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml", UriKind.RelativeOrAbsolute);
             List<Room> floorRooms = roomController.GetByFloorSerialNumber(floorSerialNumber);
             RoomButton button1;
-
             foreach (Room room in floorRooms)
             {
                 if (connections.ContainsKey(room.SerialNumber) && room.IsBeingRenovated && room.RoomRenovationSerialNumber != null)
@@ -99,11 +98,9 @@ namespace GraphicEditor.ViewModel
                     button1 = connections[room.SerialNumber];
                     connections.Remove(room.SerialNumber);
                     RoomGrid.Children.Remove(button1);
-                    RoomGrid.UpdateLayout();
                     button1.Background = new SolidColorBrush(Color.FromRgb(252, 56, 56));
                     connections.Add(room.SerialNumber, button1);
                     RoomGrid.Children.Add(button1);
-                    RoomGrid.UpdateLayout();
                     continue;
                 }
                 if (!connections.ContainsKey(room.SerialNumber) && 
@@ -139,8 +136,25 @@ namespace GraphicEditor.ViewModel
 
                 RoomGrid.Children.Add(button);
                 connections.Add(room.SerialNumber, button);
-                RoomGrid.UpdateLayout();
+                
             }
+
+            if (floorRooms.Count < connections.Count)
+                foreach(string roomSerialNumber in connections.Keys)
+                {
+                    try
+                    {
+                        Room room = roomController.GetById(roomSerialNumber);
+                        if (room == null) throw new Exception();
+                    }
+                    catch
+                    {
+                        RoomButton rb = connections[roomSerialNumber];
+                        RoomGrid.Children.Remove(rb);
+                        connections.Remove(roomSerialNumber);
+                    }
+                }
+            RoomGrid.UpdateLayout();
         }
 
         private void TimeManaged()
