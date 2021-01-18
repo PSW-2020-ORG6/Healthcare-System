@@ -432,6 +432,7 @@ Vue.component("appointments", {
             idPatient: null,
             prescription: "",
             report: "",
+            PatientAppointmentEvent: {},
             previousStep1: 0,
             previousStep2: 0,
             previousStep3: 0,
@@ -1062,11 +1063,12 @@ Vue.component("appointments", {
                         this.firstChoosenSpecialization = this.choosenSpecialization
                     this.GetTimeIntervals()
                 }
-                if (this.id == 4)
-                    if (this.firstChoosenPhysician == "")
-                        this.firstChoosenPhysician = this.choosenPhysician.fullName
                 this.id += 1
                 this.Steps()
+            }
+            if (this.id == 4) {
+                if (this.firstChoosenPhysician == "")
+                    this.firstChoosenPhysician = this.choosenPhysician.fullName
             }
         },
         EventTime: function () {
@@ -1171,8 +1173,21 @@ Vue.component("appointments", {
                     .catch(error => {
                         alert("Error")
                     })
-                this.isScheduled = true
-                //OVDE CE BITI KOD ZA EVENT
+                this.PatientAppointmentEvent.isAppointmentScheduled = true
+                this.PatientAppointmentEvent.choosenPhysician = this.firstChoosenPhysician
+                this.PatientAppointmentEvent.choosenSpecialization = this.firstChoosenSpecialization
+                this.PatientAppointmentEvent.transitionsFromTwoToOneStep = this.previousStep1
+                this.PatientAppointmentEvent.transitionsFromThreeToTwoStep = this.previousStep2
+                this.PatientAppointmentEvent.transitionsFromFourToThreeStep = this.previousStep3
+                this.PatientAppointmentEvent.schedulingDuration = this.time
+                axios
+                    .post('/event/addEvent', this.PatientAppointmentEvent, {
+                        headers: {
+                            'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                        }
+                    })
+                    .then(response => {
+                    })
                 this.firstChoosenPhysician = ""
                 this.firstChoosenSpecialization = ""
                 this.previousStep1 = 0
