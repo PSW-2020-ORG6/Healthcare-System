@@ -431,7 +431,14 @@ Vue.component("appointments", {
             myDate: null,
             idPatient: null,
             prescription: "",
-            report:""
+            report: "",
+            previousStep1: 0,
+            previousStep2: 0,
+            previousStep3: 0,
+            firstChoosenSpecialization: "",
+            firstChoosenPhysician: "",
+            isScheduled: false,
+            time: "00:00"
         }
     },
     beforeMount() {
@@ -544,12 +551,15 @@ Vue.component("appointments", {
             .then(response => {
                 this.specializations = response.data
             })
+    }, beforeDestroy() {
+        if (this.time != "00:00")
+                //kod za event
     },
     template: `
 	<div id="appointments">
         </br>
             <div class="row create" >
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAppointment">Create new appointment</button>&nbsp&nbsp&nbsp&nbsp
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAppointment" v-on:click="Event()">Create new appointment</button>&nbsp&nbsp&nbsp&nbsp
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAppointmentRecommendation">Create new appointment with recommendation</button>&nbsp&nbsp&nbsp&nbsp
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAppointmentMyChoosenDoctor">Create new appointment with my choosen doctor</button>
             </div>
@@ -1047,13 +1057,21 @@ Vue.component("appointments", {
             if (this.Validation()) {
                 if (this.id == 2)
                     this.SpecialistForChoose()
-                if (this.id == 3)
+                if (this.id == 3) {
+                    this.firstChoosenSpecialization = this.choosenSpecialization
                     this.GetTimeIntervals()
+                }
+                else {
+                    this.firstChoosenPhysician = this.choosenPhysician
+                }
                 this.id += 1
                 this.Steps()
             }
         },
-
+        Event: function () {
+            if (this.time != "00:00")
+                //kod za event
+        },
         GetTimeIntervals: function () {
             axios
                 .get('/appointment/avaliableTimeIntervals', {
@@ -1067,8 +1085,18 @@ Vue.component("appointments", {
                 })
         },
         PreviousStep: function () {
+            this.Event()
+            alert(this.previousStep2)
             this.id -= 1
             this.Steps()
+        },
+        Event: function () {
+            if (this.id == 1)
+                this.previousStep1 += 1
+            else if (this.id == 2)
+                this.previousStep2 += 1
+            else
+                this.previousStep3 += 1
         },
         Steps: function () {
             if (this.id == 1) {
@@ -1146,7 +1174,15 @@ Vue.component("appointments", {
             }
         },
         MakeAppointment2: function () {
-            if (this.informations != null)
+            if (this.informations != null) {
+                this.isScheduled = true
+                //OVDE CE BITI KOD ZA EVENT
+                this.firstChoosenPhysician = ""
+                this.firstChoosenSpecialization = ""
+                this.previousStep1 = 0
+                this.previousStep2 = 0
+                this.previousStep3 = 0
+                this.time = "00:00"
                 axios
                     .post('/appointment/makeAppointment/' + this.informations[0].physicianId + '/' + this.informations[1].start + '/' + this.informations[0].date, {
                         headers: {
@@ -1160,6 +1196,7 @@ Vue.component("appointments", {
                     .catch(error => {
                         alert("Error")
                     })
+            }
         },
         Refresh: function () {
             location.reload();
