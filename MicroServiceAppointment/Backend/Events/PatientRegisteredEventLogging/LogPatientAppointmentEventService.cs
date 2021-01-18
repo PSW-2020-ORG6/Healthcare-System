@@ -15,11 +15,13 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
 
         public void LogEvent(PatientAppointmentEventParams eventParams)
         {
-            //var patientRegisteredEvent = new PatientRegisteredEvent
-            //{ TimeStamp = DateTime.Now, PatientAge = eventParams.PatientAge };
+            var patientAppointmentEvent = new PatientAppointmentEvent
+            { TimeStamp = DateTime.Now, TransitionsFromTwoToOneStep = eventParams.TransitionsFromTwoToOneStep, 
+                TransitionsFromThreeToTwoStep = eventParams.TransitionsFromThreeToTwoStep, TransitionsFromFourToThreeStep = eventParams.TransitionsFromFourToThreeStep,
+                IsAppointmentScheduled = eventParams.IsAppointmentScheduled, ChoosenPhysician = eventParams.ChoosenPhysician, 
+                ChoosenSpecialization = eventParams.ChoosenSpecialization, SchedulingDuration = eventParams.SchedulingDuration};
 
-            //_patientAppointmentEventRepository.LogEvent(PatientAppointmentEvent);
-            throw new NotImplementedException();
+            _patientAppointmentEventRepository.LogEvent(patientAppointmentEvent);
         }
     }
 }
