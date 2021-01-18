@@ -26,7 +26,6 @@ namespace MicroServiceAppointment.Backend.Controllers
         }
         //radi 
         [Authorize]
-        [Authorize]
         [HttpGet("allAppointmentsByPatientId/{patientId}")]
         public List<AppointmentDto> GetAllAppointmentsByPatientId(String patientId)
         {

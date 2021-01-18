@@ -1153,6 +1153,15 @@ Vue.component("appointments", {
         },
         MakeAppointment: function () {
             if (this.timeInterval != null) {
+                this.isScheduled = true
+                //OVDE CE BITI KOD ZA EVENT
+                this.firstChoosenPhysician = ""
+                this.firstChoosenSpecialization = ""
+                this.previousStep1 = 0
+                this.previousStep2 = 0
+                this.previousStep3 = 0
+                this.time = "00:00"
+
                 this.appointmentSchedulingDTO.physicianId = this.choosenPhysician.id
                 this.appointmentSchedulingDTO.timeIntervalStart = this.timeInterval.start
                 this.appointmentSchedulingDTO.timeIntervalEnd = this.timeInterval.end
@@ -1175,14 +1184,6 @@ Vue.component("appointments", {
         },
         MakeAppointment2: function () {
             if (this.informations != null) {
-                this.isScheduled = true
-                //OVDE CE BITI KOD ZA EVENT
-                this.firstChoosenPhysician = ""
-                this.firstChoosenSpecialization = ""
-                this.previousStep1 = 0
-                this.previousStep2 = 0
-                this.previousStep3 = 0
-                this.time = "00:00"
                 axios
                     .post('/appointment/makeAppointment/' + this.informations[0].physicianId + '/' + this.informations[1].start + '/' + this.informations[0].date, {
                         headers: {
