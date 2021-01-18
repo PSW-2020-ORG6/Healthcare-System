@@ -15,8 +15,6 @@ services:
       - sql-scripts:/docker-entrypoint-initdb.d/
       - data:/var/lib/postgresql/data
     
-
-
   rabbit:
     image: rabbitmq:management-alpine
     container_name: rabbitmq
@@ -52,13 +50,13 @@ services:
     depends_on:
       - rabbit
       - postgres
-  
-  web-application:
-    image: web-application
-    container_name: web-application
+      
+  web-app-account:
+    image: web-app-account
+    container_name: web-app-account
     build:
       context: .
-      dockerfile: Dockerfile.web_application
+      dockerfile: Dockerfile.web_app_account
     restart: on-failure
     ports:
       - 5000:8080
@@ -66,11 +64,69 @@ services:
       - network
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      DATABASE_HOST: "postgres"
-      DATABASE_PORT: "5432"
-      DATABASE_USERNAME: "user"
-      DATABASE_PASSWORD: "password"
-      DATABASE_SCHEMA: "healthcare-system-db"
+      DATABASE_RETRYCOUNT: 100
+      DATABASE_RETRYWAITINSECONDS: 30
+      DATABASE_URL: "postgres://user:password@postgres:5432/healthcare-system-db"
+    volumes:
+      - sql-scripts:/app/sql
+    depends_on:
+      - postgres
+      
+  web-app-appointment:
+    image: web-app-appointment
+    container_name: web-app-appointment
+    build:
+      context: .
+      dockerfile: Dockerfile.web_app_appointment
+    restart: on-failure
+    ports:
+      - 5001:8080
+    networks: 
+      - network
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      DATABASE_RETRYCOUNT: 100
+      DATABASE_RETRYWAITINSECONDS: 30
+      DATABASE_URL: "postgres://user:password@postgres:5432/healthcare-system-db"
+    volumes:
+      - sql-scripts:/app/sql
+    depends_on:
+      - postgres
+      
+  web-app-feedback:
+    image: web-app-feedback
+    container_name: web-app-feedback
+    build:
+      context: .
+      dockerfile: Dockerfile.web_app_feedback
+    restart: on-failure
+    ports:
+      - 5002:8080
+    networks: 
+      - network
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      DATABASE_RETRYCOUNT: 100
+      DATABASE_RETRYWAITINSECONDS: 30
+      DATABASE_URL: "postgres://user:password@postgres:5432/healthcare-system-db"
+    volumes:
+      - sql-scripts:/app/sql
+    depends_on:
+      - postgres
+      
+  web-app-search:
+    image: web-app-search
+    container_name: web-app-search
+    build:
+      context: .
+      dockerfile: Dockerfile.web_app_search
+    restart: on-failure
+    ports:
+      - 5003:8080
+    networks: 
+      - network
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
       DATABASE_RETRYCOUNT: 100
       DATABASE_RETRYWAITINSECONDS: 30
       DATABASE_URL: "postgres://user:password@postgres:5432/healthcare-system-db"
