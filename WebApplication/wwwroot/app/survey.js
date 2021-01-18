@@ -552,25 +552,25 @@ Vue.component("appointments", {
                 this.specializations = response.data
             })
     }, beforeDestroy() {
-        if (this.time != "00:00")
+        if (this.time != "00:00") { }
                 //kod za event
     },
     template: `
 	<div id="appointments">
         </br>
             <div class="row create" >
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAppointment" v-on:click="Event()">Create new appointment</button>&nbsp&nbsp&nbsp&nbsp
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAppointment" v-on:click="EventTime()">Create new appointment</button>&nbsp&nbsp&nbsp&nbsp
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAppointmentRecommendation">Create new appointment with recommendation</button>&nbsp&nbsp&nbsp&nbsp
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAppointmentMyChoosenDoctor">Create new appointment with my choosen doctor</button>
             </div>
             </br>
             <div class="modal fade" id="createAppointment" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
-                     <div class="modal-content steps" style="width: 600px;height:500px">
+                     <div class="modal-content steps">
                     <div class="container" align="center">
                         <br/><h4 class="text">Create new appointment</h4><br/>
                         <ul class="nav" role="tablist">
-                            <li class="nav-item" style="margin:0 0 0 25px">
+                            <li class="nav-item">
                                 <button disabled id="step1" class="circleStep circleStepDone">1</button>
                                 <h3 class="text">Step 1</h3><br/>
                             </li><h6>______</h6>
@@ -594,7 +594,7 @@ Vue.component("appointments", {
                                     <label>Choose date:</label></br>
                                     <input id="date" type="date" v-model ="date"></input>
                                     </br></br></br></br>
-                                    <button class="btn btnNext" v-on:click="NextStep()">Next</button>
+                                    <button class="btn btnNext" v-on:click="NextStep()">Next</button></br></br>
                                  </div>
     	                        <div id="step2" class="container tab-pane active" v-if="id==2"></br>
                                     <label>Choose  specialization:</label></br>
@@ -604,7 +604,7 @@ Vue.component("appointments", {
                                     </select>
                                     </br></br></br></br>
                                     <button class="btn btnPrev" v-on:click="PreviousStep()">Previous</button>
-                                    <button class="btn btnNext" v-on:click="NextStep()">Next</button>
+                                    <button class="btn btnNext" v-on:click="NextStep()">Next</button></br></br>
                                  </div>
     	                        <div id="step3" class="container tab-pane active" v-if="id==3"></br>
                                     <label>Choose physician:</label></br>
@@ -614,7 +614,7 @@ Vue.component("appointments", {
                                     </select>
                                     </br></br></br></br>
                                     <button class="btn btnPrev" v-on:click="PreviousStep()">Previous</button>
-                                    <button class="btn btnNext" v-on:click="NextStep()">Next</button>
+                                    <button class="btn btnNext" v-on:click="NextStep()">Next</button></br></br>
                                 </div>
                                 <div id="step4" class="container tab-pane active" v-if="id==4"></br>                                 
                                     <label>Choose  time:</label></br>
@@ -623,8 +623,8 @@ Vue.component("appointments", {
                                     </select>
                                     </br></br></br></br>
                                     <button class="btn btnPrev" v-on:click="PreviousStep()">Previous</button>
-                                    <button class="btn btnNext" v-on:click="MakeAppointment()">Submit</button>
-                                </div></br>
+                                    <button class="btn btnNext" v-on:click="MakeAppointment()">Submit</button></br></br>
+                                </div>
                            </div>
                         </div>
                     </div>
@@ -1058,18 +1058,19 @@ Vue.component("appointments", {
                 if (this.id == 2)
                     this.SpecialistForChoose()
                 if (this.id == 3) {
-                    this.firstChoosenSpecialization = this.choosenSpecialization
+                    if (this.firstChoosenSpecialization=="")
+                        this.firstChoosenSpecialization = this.choosenSpecialization
                     this.GetTimeIntervals()
                 }
-                else {
-                    this.firstChoosenPhysician = this.choosenPhysician
-                }
+                if (this.id == 4)
+                    if (this.firstChoosenPhysician == "")
+                        this.firstChoosenPhysician = this.choosenPhysician.fullName
                 this.id += 1
                 this.Steps()
             }
         },
-        Event: function () {
-            if (this.time != "00:00")
+        EventTime: function () {
+            if (this.time != "00:00") { }
                 //kod za event
         },
         GetTimeIntervals: function () {
@@ -1086,16 +1087,15 @@ Vue.component("appointments", {
         },
         PreviousStep: function () {
             this.Event()
-            alert(this.previousStep2)
             this.id -= 1
             this.Steps()
         },
         Event: function () {
-            if (this.id == 1)
-                this.previousStep1 += 1
-            else if (this.id == 2)
+            if (this.id == 2)
+                this.previousStep1 +=1
+            else if (this.id == 3)
                 this.previousStep2 += 1
-            else
+            else if(this.id==4)
                 this.previousStep3 += 1
         },
         Steps: function () {
@@ -1153,15 +1153,6 @@ Vue.component("appointments", {
         },
         MakeAppointment: function () {
             if (this.timeInterval != null) {
-                this.isScheduled = true
-                //OVDE CE BITI KOD ZA EVENT
-                this.firstChoosenPhysician = ""
-                this.firstChoosenSpecialization = ""
-                this.previousStep1 = 0
-                this.previousStep2 = 0
-                this.previousStep3 = 0
-                this.time = "00:00"
-
                 this.appointmentSchedulingDTO.physicianId = this.choosenPhysician.id
                 this.appointmentSchedulingDTO.timeIntervalStart = this.timeInterval.start
                 this.appointmentSchedulingDTO.timeIntervalEnd = this.timeInterval.end
@@ -1180,6 +1171,14 @@ Vue.component("appointments", {
                     .catch(error => {
                         alert("Error")
                     })
+                this.isScheduled = true
+                //OVDE CE BITI KOD ZA EVENT
+                this.firstChoosenPhysician = ""
+                this.firstChoosenSpecialization = ""
+                this.previousStep1 = 0
+                this.previousStep2 = 0
+                this.previousStep3 = 0
+                this.time = "00:00"
             }
         },
         MakeAppointment2: function () {

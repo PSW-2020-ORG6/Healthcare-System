@@ -11,12 +11,12 @@
 }
 
 .circleStep {
-    width: 30px;
+    width: 25px;
     border: none;
     color: white;
     text-decoration: none;
     display: inline-block;
-    font-size: 20px;
+    font-size: 18px;
     border-radius: 60%
 }
 
