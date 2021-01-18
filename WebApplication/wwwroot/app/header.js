@@ -15,53 +15,27 @@
     template: `
 	<div>
 		<div id="temp">
-        <nav class="navbar navbar-expand-lg navbar-custom " id="navigationBar">
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+
+            <nav class="navbar navbar-expand-lg"> 
+              <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
-                    <li  class="nav-item">
-                    </li>
-                    <li class="nav-item dropdown">
-                        <div v-if="isLogged==true &&isAdmin==false && isPatient==true">
-                        <button type="button" class="btn btn-info btn-lg nav-link navbar-brand dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Patient menu</button>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" v-on:click="PatientShow()">Home</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" v-on:click="AccountShow()">My account</a>
-                            <a class="dropdown-item" v-on:click="FeedbackPatientShow()">Feedbacks</a>
-                            <a class="dropdown-item" v-on:click="AppointmentsShow()">Appointments</a>
-                            <a class="dropdown-item" v-on:click="SearchShow()">Search</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Log out</a>
-                        </div>
-                        </div>     
-                        <div v-else-if="isLogged==true && isAdmin==true && isPatient==false">
-                        <button type="button" class="btn btn-info btn-lg nav-link navbar-brand dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Admin menu</button>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" v-on:click="AdminShow()">Home</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" v-on:click="StatisticsShow()">Statistics</a>
-                            <a class="dropdown-item" v-on:click="FeedbacksAdminShow()">Feedbacks</a>
-                            <a class="dropdown-item" href="#">Malicious users</a>
-                            <a class="dropdown-item" v-on:click="SearchShow()">Search</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Log out</a>
-                        </div>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <h1 class="navbar-brand" id="clinicLogoTxt">Health Clinic</h1>
-                        <img src="pictures/logInverted.png" id="clinicLogoPic">
-                    </li>
-                    <li class="nav-item" id="content">
-                        <button type="button" class="btn1 btn btn-info btn-lg navbar-brand" id="registration" v-on:click="RegistrationShow()">Registration</button>
-                    </li>
-                    <li class="nav-item" id="content">
-                        <button type="button" class="btn0 btn btn-info btn-lg navbar-brand" id="login" v-on:click="LoginShow()">Login</button>
-                    </li>
+                    <li id="clinicLogo">
+                        <a id="">Health Clinic <img src="pictures/logInverted.png"></a>
+                     </li>
                 </ul>
-            </div>
-        </nav>
-    </div>
+                <span class="navbar-text">
+                   <ul class="navbar-nav mr-auto">
+                      <li class="nav-item">
+                    <a class="nav-link navItem " href="#" v-on:click="LoginShow()">Login</a>
+                      </li>
+                      <li class="nav-item">
+                    <a class="nav-link navItem " href="#" v-on:click="RegistrationShow()">Registration</a>
+                      </li>
+                </ul>
+                </span>
+              </div>
+            </nav>
+
 	</div>
 
 	`,

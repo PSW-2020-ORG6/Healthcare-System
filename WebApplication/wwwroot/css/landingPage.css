@@ -1,19 +1,29 @@
 ﻿#Landing {
-    background-image: url("../pictures/LANDING2.jpg");
+    background-image: url("../pictures/medical-care.jpg");
     background-repeat: no-repeat;
     overflow-y: hidden;
-    overflow-x: auto;
+    overflow-x: hidden;
     background-size: cover;
-    height: auto !important; /* real browsers */
-    min-height: 1080px; /* real browsers */
-    width: auto;
+    height: auto !important;
+    min-height: 1000px;
     color: white;
     font-family: impact;
 }
 
 #slideLandingPage {
     font-family: Impact;
-    font-size : 24px;
-    background-color : lightblue;
-    background-image : none;
+    font-size: 24px;
+    background-color: lightblue;
+    background-image: none;
+}
+
+#clinicLogoPicLP {
+    margin-left: 1%;
+    margin-top: 0.5%;
+    position: absolute;
+}
+
+#clinicLogoPicLP {
+    padding-bottom: 10px;
+    position: absolute;
 }
