@@ -79,7 +79,7 @@ namespace GraphicEditor.View.Windows
             int columnSpan = view.SelectedCellsColumnSpan;
             Position position = new Position(row, column, rowSpan, columnSpan);
 
-            RoomButton newRoomButton = new RoomButton(view.Grid);
+            RoomButton newRoomButton = new RoomButton(view.Grid, view.connections);
             Room newRoom = new Room(nameTextBox.Text, Int32.Parse(number), floor.SerialNumber,
                 RoomTypes[SelectedRoomTypeIndex].SerialNumber, position, "RoomButtonStyle");
 
@@ -94,6 +94,8 @@ namespace GraphicEditor.View.Windows
             Grid.SetZIndex(newRoomButton, 2);
             view.Grid.Children.Add(newRoomButton);
             view.Grid.UpdateLayout();
+
+            view.connections.Add(newRoom.SerialNumber, newRoomButton);
 
             roomController.NewRoom(newRoom);
 

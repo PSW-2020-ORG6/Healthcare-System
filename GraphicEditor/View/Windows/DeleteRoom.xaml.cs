@@ -32,6 +32,7 @@ namespace GraphicEditor.View.Windows
             Room room = roomController.GetBySerialNumber(roomSerialNumber);
             roomController.DeleteRoom(room);
             grid.Children.Remove(roomButton);
+            roomButton.connections.Remove(roomSerialNumber);
             grid.UpdateLayout();
             this.Close();
         }

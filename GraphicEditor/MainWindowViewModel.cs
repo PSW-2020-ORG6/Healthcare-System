@@ -27,7 +27,7 @@ namespace GraphicEditor
             mainWindow = _mainWindow;
             CurrentUserControl = LoginPage;
 
-            CultureInfo newCulture = new CultureInfo("sr-Cyrl-CS");
+            CultureInfo newCulture = new CultureInfo("en-029");
 
             CultureInfo.DefaultThreadCurrentCulture = newCulture;
             CultureInfo.DefaultThreadCurrentUICulture = newCulture;

@@ -74,7 +74,7 @@
                     <Label x:Name="LiveTimeLabel" Content="%TIME%" FontWeight="Bold" Foreground="Black" Height="23" Width="82" Background="#FFDEEFFF"/>
                 </StatusBarItem>
                 <StatusBarItem Grid.Column="2" Background="#FFDEEFFF">
-                    <TextBlock x:Name="ModifiedDate" FontWeight="Bold" Foreground="Black"  Height="14" Width="82" Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat=dd/MMM/yyyy}"/>
+                    <TextBlock x:Name="ModifiedDate" FontWeight="Bold" Foreground="Black"  Height="14" Width="82" Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat=dd/MM/yyyy}"/>
                 </StatusBarItem>
             </StatusBar>
         </DockPanel>

@@ -1,9 +1,13 @@
-﻿using GraphicEditor.ViewModel;
+﻿using GraphicEditor.HelpClasses;
+using GraphicEditor.ViewModel;
+using HealthClinicBackend.Backend.Controller;
 using HealthClinicBackend.Backend.Model.Hospital;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace GraphicEditor.View.UserControls
 {
@@ -18,12 +22,16 @@ namespace GraphicEditor.View.UserControls
         public int SelectedCellsRow;
         public int SelectedCellsColumnSpan;
         public int SelectedCellsRowSpan;
+        public Dictionary<string, RoomButton> connections = new Dictionary<string, RoomButton>();
+        private RoomRenovationController roomRenovationController = new RoomRenovationController();
 
         public FloorUserControl(MainWindowViewModel mapParent, BuildingUserControlViewModel buildingParent, Floor floor)
         {
             InitializeComponent();
-            Viewmodel = new FloorUserControlViewModel(mapParent, buildingParent, this.Grid, floor);
+            Viewmodel = new FloorUserControlViewModel(mapParent, buildingParent, this.Grid, floor, ref connections);
             this.DataContext = Viewmodel;
+
+            TimeManaged();
         }
 
         private void Grid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -161,6 +169,19 @@ namespace GraphicEditor.View.UserControls
             {
                 Grid.ShowGridLines = false;
             }
+        }
+        private void TimeManaged()
+        {
+            DispatcherTimer LiveTime = new DispatcherTimer();
+            LiveTime.Interval = TimeSpan.FromSeconds(1);
+            LiveTime.Tick += ExecuteRefresh;
+            LiveTime.Start();
+        }
+
+        private void ExecuteRefresh(object sender, EventArgs e)
+        {
+            roomRenovationController.ExecuteRoomRenovation();
+            Viewmodel = new FloorUserControlViewModel(Viewmodel);
         }
     }
 }

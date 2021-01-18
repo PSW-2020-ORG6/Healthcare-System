@@ -4,9 +4,202 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GraphicEditor.View.Windows"
+        xmlns:tk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="ComplexRoomRenovation" Height="450" Width="800">
-    <Grid>
+        WindowStartupLocation="CenterScreen"
+        MinHeight="600"
+        MinWidth="1000"
+        ResizeMode="CanResize"
+        Title="Complex Room Renovation" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- #Styles -->
+                <ResourceDictionary Source="/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="AliceBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <materialDesign:PackIcon Kind="BuildOutline" Width="60" Height="60" VerticalAlignment="Center"/>
+            <TextBlock 
+                   FontSize="50"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="Complex Room Renovation"/>
+            <materialDesign:PackIcon Kind="BuildOutline" Width="60" Height="60" VerticalAlignment="Center"/>
+        </StackPanel>
+
+
+        <TextBlock x:Name="nameLabel"
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   FontSize="30"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="Room name with number:"/>
+        <TextBox x:Name="nameTextBox"
+                 Grid.Row="1"
+                 Grid.Column="1"
+                 BorderBrush="Black"
+                 BorderThickness="1"
+                 Width="450"
+                 Height="40"
+                 FontSize="15" />
+        <TextBlock Grid.Row="3"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   FontSize="30"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="Room doors:"/>
+
+        <CheckBox x:Name="topDoorButton"
+                  Style="{StaticResource MaterialDesignAccentCheckBox}"
+                  IsThreeState="False"
+                  Grid.Row="5"
+                  Grid.Column="0"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Content="Top Door"
+                  Cursor="Hand">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="2" ScaleY="2" />
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+        <CheckBox x:Name="rightDoorButton"
+                  Style="{StaticResource MaterialDesignAccentCheckBox}"
+                  IsThreeState="False"
+                  Grid.Row="5"
+                  Grid.Column="1"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Content="Right Door"
+                  Cursor="Hand">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="2" ScaleY="2" />
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+        <CheckBox x:Name="bottomDoorButton"
+                  Style="{StaticResource MaterialDesignAccentCheckBox}"
+                  IsThreeState="False"
+                  Grid.Row="7"
+                  Grid.Column="0"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Content="Bottom Door"
+                  Cursor="Hand">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="2" ScaleY="2" />
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+        <CheckBox x:Name="leftDoorButton"
+                  Style="{StaticResource MaterialDesignAccentCheckBox}"
+                  IsThreeState="False"
+                  Grid.Row="7"
+                  Grid.Column="1"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Content="Left Door"
+                  Cursor="Hand">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="2" ScaleY="2" />
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+
+        <TextBlock x:Name="roomTypeLabel"
+                   Grid.Row="9"
+                   Grid.Column="0"
+                   FontSize="25"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="Room Type:"/>
+
+        <ComboBox x:Name="roomTypecomboBox"
+                  Grid.Row="9"
+                  Grid.Column="1"
+                  Width="450"
+                  Height="40"
+                  BorderBrush="Black"
+                  BorderThickness="1"
+                  ItemsSource="{Binding Path=RoomTypes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  SelectedIndex="{Binding Path=SelectedRoomTypeIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Name}"
+                               Style="{StaticResource MaterialDesignHeadline5TextBlock}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <TextBlock x:Name="fromToLabel"
+                   Grid.Row="11"
+                   Grid.Column="0"
+                   FontSize="25"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   TextWrapping="Wrap"
+                   TextAlignment="Center"
+                   Text="Choose Time Interval For Renovation:"/>
+
+        <Viewbox Grid.Row="11"
+                 Grid.Column="1"
+                 Width="450"
+                 Height="200">
+            <StackPanel>
+                <tk:DateTimePicker  x:Name="timeIntervalStart"
+                                    BorderThickness="1"
+                                    BorderBrush="Black"
+                                    Value="{Binding Path=Start, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    Format="FullDateTime"/>
+                <TextBlock Height="5"/>
+                <tk:DateTimePicker  x:Name="timeIntervalEnd"
+                                    BorderThickness="1"
+                                    BorderBrush="Black"
+                                    Value="{Binding Path=End, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    Format="FullDateTime"/>
+            </StackPanel>
+        </Viewbox>
         
+
+        <Button Grid.Row="13"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Height="30"
+                HorizontalAlignment="Center"
+                Content="Schedule Renovation"
+                Click="Button_Click"
+                Width="200"/>
     </Grid>
 </Window>

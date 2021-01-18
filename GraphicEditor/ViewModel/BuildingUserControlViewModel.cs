@@ -52,13 +52,7 @@ namespace GraphicEditor.ViewModel
             _floors = _floors.OrderBy(f => Constants.FLOOR_NAMES.FindIndex(m => m.Equals(f.Name))).ToList();
             _building = building;
 
-            List<Floor> _buildingFloors = new List<Floor>();
-            foreach (Floor fl in floorDatabaseSql.GetByBuildingSerialNumber(_building.SerialNumber))
-            {
-                _buildingFloors.Add(fl);
-            }
-            //_building = new Building("Cardiology", "Color Blue");
-            _selectedFloor = _buildingFloors[0];
+            _selectedFloor = _floors[0];
             _selectedFloorIndex = 0;
             _floorName = _selectedFloor.Name;
             _floorViewModel = new FloorUserControl(_mapParent, this, _selectedFloor);
@@ -179,15 +173,6 @@ namespace GraphicEditor.ViewModel
 
         private void RenovateRoom(Floor floor)
         {
-            //if (MainWindow.TypeOfUser == TypeOfUser.Superintendent || MainWindow.TypeOfUser == TypeOfUser.NoUser)
-            //{
-
-            //}
-            //else
-            //{
-            //    new Warning().ShowDialog();
-            //}
-
             if (FloorViewModel.selectedGridCells.Visibility != Visibility.Visible)
             {
                 new WarningNoSelectedCells().ShowDialog();
@@ -209,9 +194,14 @@ namespace GraphicEditor.ViewModel
                 return;
             }
 
+            foreach(Room room in selectedRooms)
+            {
+                if (room.RoomRenovationSerialNumber != null) new WarningRenovationAlreadyScheduled().ShowDialog();
+            }
+
             if(IsAllInTouch(selectedRooms))
             {
-                new ComplexRoomRenovation().ShowDialog();
+                new ComplexRoomRenovation(_selectedFloor, FloorViewModel.selectedGridCells, FloorViewModel, selectedRooms).ShowDialog();
             }
             else
             {
@@ -251,7 +241,7 @@ namespace GraphicEditor.ViewModel
                 if (contact)
                 {
                     topLeftRoom1 = (Math.Min(topLeftRoom1.Item1, topLeftRoom2.Item1), Math.Min(topLeftRoom1.Item2, topLeftRoom2.Item2));
-                    bottomRightRoom1 = (Math.Min(bottomRightRoom1.Item1, bottomRightRoom2.Item1), Math.Min(bottomRightRoom1.Item2, bottomRightRoom2.Item2));
+                    bottomRightRoom1 = (Math.Max(bottomRightRoom1.Item1, bottomRightRoom2.Item1), Math.Max(bottomRightRoom1.Item2, bottomRightRoom2.Item2));
                     List<Room> newList = new List<Room>(selectedRooms);
                     newList.Remove(roomFromList2);
 
@@ -285,29 +275,6 @@ namespace GraphicEditor.ViewModel
                 }
             }
             return false;
-
-            ////// Top border
-
-            //bool tb = (Math.Abs(topLeftRoom1.Item2 - bottomLeftRoom2.Item2) == 1 && topLeftRoom1.Item1 >= bottomLeftRoom2.Item1 && topLeftRoom1.Item1 <= bottomRightRoom2.Item1) ||
-            //            (Math.Abs(topRightRoom1.Item2 - bottomLeftRoom2.Item2) == 1 && topRightRoom1.Item1 >= bottomLeftRoom2.Item1 && topRightRoom1.Item1 <= bottomRightRoom2.Item1);
-
-            ////// Right border
-
-            //bool rb = (Math.Abs(topRightRoom1.Item1 - topLeftRoom2.Item1) == 1 && topRightRoom1.Item2 >= topLeftRoom2.Item2 && topRightRoom1.Item2 <= bottomLeftRoom2.Item2) ||
-            //            (Math.Abs(bottomRightRoom1.Item1 - bottomLeftRoom2.Item1) == 1 && bottomRightRoom1.Item2 >= topLeftRoom2.Item2 && bottomRightRoom1.Item2 <= bottomLeftRoom2.Item2);
-
-            ////// Bottom border
-
-            //bool bb = (Math.Abs(bottomLeftRoom1.Item2 - topLeftRoom2.Item2) == 1 && bottomLeftRoom1.Item1 >= topLeftRoom2.Item1 && bottomLeftRoom1.Item1 <= topRightRoom2.Item1) ||
-            //            (Math.Abs(bottomRightRoom1.Item2 - topLeftRoom2.Item2) == 1 && bottomRightRoom1.Item1 >= topLeftRoom2.Item1 && bottomRightRoom1.Item1 <= topRightRoom2.Item1);
-
-            ////// Left border
-
-            //bool lb = (Math.Abs(topLeftRoom1.Item1 - topRightRoom2.Item1) == 1 && topLeftRoom1.Item2 >= topRightRoom2.Item2 && topLeftRoom1.Item2 <= bottomRightRoom2.Item2) ||
-            //            (Math.Abs(bottomLeftRoom1.Item1 - bottomRightRoom2.Item1) == 1 && bottomLeftRoom1.Item2 >= topRightRoom2.Item2 && bottomLeftRoom1.Item2 <= bottomRightRoom2.Item2);
-
-            //bool contact = tb || rb || bb || lb;
-            //return contact;
         }
 
         private bool IsOverlapping(Room room)
@@ -319,29 +286,6 @@ namespace GraphicEditor.ViewModel
             (int, int) topLeftCornerRoom = (position.Column, position.Row);
             (int, int) bottomRightCornerRoom = (position.Column + position.ColumnSpan - 1, position.Row + position.RowSpan - 1);
 
-
-
-            //// TopLeftCorner
-
-            //bool tl = topLeftCornerSpace.Item1 >= topLeftCornerRoom.Item1 && topLeftCornerSpace.Item1 <= topRightCornerRoom.Item1 &&
-            //           topLeftCornerSpace.Item2 >= topLeftCornerRoom.Item2 && topLeftCornerSpace.Item2 <= bottomLeftCornerRoom.Item2;
-
-            //// TopRightCorner
-
-            //bool tr = topRightCornerSpace.Item1 >= topLeftCornerRoom.Item1 && topRightCornerSpace.Item1 <= topRightCornerRoom.Item1 &&
-            //           topRightCornerSpace.Item2 >= topRightCornerRoom.Item2 && topRightCornerSpace.Item2 <= bottomRightCornerRoom.Item2;
-
-            //// BottomLeftCorner
-
-            //bool bl = bottomLeftCornerSpace.Item1 >= bottomLeftCornerRoom.Item1 && bottomLeftCornerSpace.Item1 <= bottomRightCornerRoom.Item1 &&
-            //           bottomLeftCornerSpace.Item2 >= topLeftCornerRoom.Item2 && bottomLeftCornerSpace.Item2 <= bottomLeftCornerRoom.Item2;
-
-            //// BottomRightCorner
-
-            //bool br = bottomRightCornerSpace.Item1 >= bottomLeftCornerRoom.Item1 && bottomRightCornerSpace.Item1 <= bottomRightCornerRoom.Item1 &&
-            //           bottomRightCornerSpace.Item2 >= topRightCornerRoom.Item2 && bottomRightCornerSpace.Item2 <= bottomRightCornerRoom.Item2;
-
-            // TopLeftCorner
             bool inside = false;
             List<(int, int)> roomCorners = new List<(int, int)>();
 
@@ -359,7 +303,6 @@ namespace GraphicEditor.ViewModel
                     inside = true;
                     break;
                 }
-                    
             }
 
             return inside;
@@ -384,18 +327,7 @@ namespace GraphicEditor.ViewModel
 
         public void onConfirmUpdate(Building building)
         {
-            //Building.Name = building.Name;
-            //Building.Color = building.Color;
             OnPropertyChanged("Building");
-        }
-
-        private int sortFloorList(Floor x, Floor y)
-        {
-            int X = Constants.FLOOR_NAMES.FindIndex(n => n.Equals(x.Name));
-            int Y = Constants.FLOOR_NAMES.FindIndex(n => n.Equals(y.Name));
-
-            if (X <= Y) return X;
-            else return Y;
         }
     }
 }

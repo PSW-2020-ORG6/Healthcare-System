@@ -28,6 +28,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public DbSet<Secretary> Secretary { get; set; }
         public DbSet<Equipment> Equipment { get; set; }
         public DbSet<EquipmentRelocation> EquipmentRelocations { get; set; }
+        public DbSet<RoomRenovation> RoomRenovations { get; set; }
         public DbSet<Position> Position { get; set; }
         public DbSet<ProcedureEquipment> ProcedureEquipment { get; set; }
         public DbSet<Bed> Bed { get; set; }
@@ -68,6 +69,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Medicine>()
                 .HasOne(m => m.MedicineManufacturer) // Medicine has one Medicine Manufacturer
                 .WithMany(); // Medicine Manufacturer has many Medicine but doesn't reference them
@@ -122,6 +124,14 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Appointment>()
                 .HasOne(a => a.Room)
                 .WithMany();
+
+            //modelBuilder.Entity<RoomRenovation>()
+            //    .HasOne(r => r.RenovatingRooms)
+            //    .WithMany()
+            //    .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RoomRenovation>()
+                .OwnsOne(r => r.TimeInterval);
 
             // Relation helpers are used for many-to-many relations
             modelBuilder.Entity<PhysicianSpecialization>().HasKey(o => new { o.PhysicianSerialNumber, o.SpecializationSerialNumber });
@@ -231,6 +241,14 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             PhysicianSpecializationCreation(modelBuilder);
             ProcedureEquipmentCreation(modelBuilder);
             EquipmentRelocationsCreation(modelBuilder);
+            RoomRenovation(modelBuilder);
+        }
+
+        private void RoomRenovation(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<RoomRenovation>().HasKey(r => r.SerialNumber);
+            modelBuilder.Entity<RoomRenovation>().Ignore(r => r.RenovatedRoom);
+            modelBuilder.Entity<RoomRenovation>().Ignore(r => r.RenovatingRooms);
         }
 
         private static void EquipmentRelocationsCreation(ModelBuilder modelBuilder)
@@ -238,25 +256,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<EquipmentRelocation>().HasKey(r => r.SerialNumber);
             modelBuilder.Entity<EquipmentRelocation>().Ignore(e => e.equipment);
             modelBuilder.Entity<Appointment>().Ignore(o => o.Room);
-
-            modelBuilder.Entity<EquipmentRelocation>().OwnsOne(o => o.TimeInterval).HasData(
-                new
-                {
-                    EquipmentRelocationSerialNumber = "ER1",
-                    Start = new DateTime(2021, 1, 20, 9, 30, 0),
-                    End = new DateTime(2021, 1, 20, 10, 0, 0)
-                }
-            );
-
-            modelBuilder.Entity<EquipmentRelocation>().HasData(
-               new EquipmentRelocation
-               {
-                   roomToRelocateToSerialNumber = "105",
-                   equipmentSerialNumber = "78",
-                   SerialNumber = "ER1",
-                   quantity = 1
-               }
-            );
         }
         private static void SecretaryCreation(ModelBuilder modelBuilder)
         {
@@ -305,6 +304,9 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Room>().Ignore(o => o.Equipment);
             modelBuilder.Entity<Room>().Ignore(o => o.Beds);
             modelBuilder.Entity<Room>().Ignore(o => o.Medicines);
+            modelBuilder.Entity<Room>().Property(o => o.RoomRenovationSerialNumber).HasDefaultValue(null);
+            modelBuilder.Entity<Room>().Property(o => o.IsWaitingToBeRenovated).HasDefaultValue(false);
+            modelBuilder.Entity<Room>().Property(o => o.IsBeingRenovated).HasDefaultValue(false);
 
             modelBuilder.Entity<Room>()
                .Property(r => r.Name)
@@ -333,6 +335,9 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Room>()
                .Property(r => r.TopDoorVisible)
                .HasField("_topDoorVisible");
+            modelBuilder.Entity<Room>()
+               .Property(r => r.RoomRenovationSerialNumber)
+               .HasField("_roomRenovationSerialNumber");
 
             modelBuilder.Entity<Room>().OwnsOne(r => r.Position).HasData(
                new

@@ -1,9 +1,12 @@
 ﻿using GraphicEditor.View.Windows;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
+using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Util;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace GraphicEditor.HelpClasses
 {
@@ -18,10 +21,12 @@ namespace GraphicEditor.HelpClasses
 
         private RoomController roomController = new RoomController();
         private Grid roomGrid;
+        public Dictionary<string, RoomButton> connections;
 
-        public RoomButton(Grid _roomGrid) : base()
+        public RoomButton(Grid _roomGrid, Dictionary<string, RoomButton> _connections) : base()
         {
             this.DataContext = this;
+            connections = _connections;
             TopDoor = Visibility.Collapsed;
             RightDoor = Visibility.Collapsed;
             BottomDoor = Visibility.Collapsed;
@@ -39,18 +44,27 @@ namespace GraphicEditor.HelpClasses
         {
             string serialNumber = (String)roomButton.Tag;
 
-            if (MainWindow.TypeOfUser != TypeOfUser.Patient)
-            {
-                new RoomInformation(roomController.GetBySerialNumber(serialNumber)).Show();
-            }
-            else
-            {
-                new Warning().ShowDialog();
-            }
+            Room room = roomController.GetById(serialNumber);
+
+            if (MainWindow.TypeOfUser == TypeOfUser.Patient) new Warning().ShowDialog();
+
+            if (room.IsBeingRenovated) new WarningRenovatingRoom().ShowDialog();
+
+            new RoomInformation(roomController.GetBySerialNumber(serialNumber)).Show();
         }
 
         private void DeleteRoom(RoomButton roomButton)
         {
+            string serialNumber = (String)roomButton.Tag;
+
+            Room room = roomController.GetById(serialNumber);
+
+            if (room.IsBeingRenovated)
+            {
+                new WarningRoomRenovationDeletion().ShowDialog();
+                return;
+            }
+
             new DeleteRoom(roomButton, roomGrid).ShowDialog();
         }
     }
