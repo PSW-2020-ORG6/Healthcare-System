@@ -14,7 +14,8 @@ namespace GraphicEditor
         public static TypeOfUser TypeOfUser = TypeOfUser.NoUser;
         public static double MainScreenWidth = SystemParameters.PrimaryScreenWidth * SCREEN_FACTOR;
         public static double MainScreenHeight = SystemParameters.PrimaryScreenHeight * SCREEN_FACTOR;
-        private EquipmentRelocationController EquipmentRelocationController = new EquipmentRelocationController();
+        private EquipmentRelocationController equipmentRelocationController = new EquipmentRelocationController();
+        private RoomRenovationController roomRenovationController = new RoomRenovationController();
 
         public MainWindow()
         {
@@ -39,13 +40,14 @@ namespace GraphicEditor
         }
         private void ExecuteMethod(object sender, EventArgs e)
         {
-            EquipmentRelocationController.RelocateEquipmentIfItIsTime();
+            equipmentRelocationController.RelocateEquipmentIfItIsTime();
+            roomRenovationController.ExecuteRoomRenovation();
         }
         private void TimeForEquipmentRelocation()
         {
             DispatcherTimer dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += ExecuteMethod;
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 15);
+            dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
             dispatcherTimer.Start();
         }
 
@@ -57,7 +59,6 @@ namespace GraphicEditor
                 string str = HelpProvider.GetHelpKey(this);
                 HelpProvider.ShowHelp(str, this);
             }
-
         }
 
         private void TimeManaged()

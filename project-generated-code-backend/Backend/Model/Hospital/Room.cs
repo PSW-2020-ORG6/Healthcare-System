@@ -1,4 +1,5 @@
 using HealthClinicBackend.Backend.Model.Util;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using HealthClinicBackend.Backend.Dto;
 
 namespace HealthClinicBackend.Backend.Model.Hospital
 {
+    
     public class Room : Entity
     {
         private string _name;
@@ -108,6 +110,28 @@ namespace HealthClinicBackend.Backend.Model.Hospital
         {
             get { return _topDoorVisible; }
             set { _topDoorVisible = value; }
+        }
+
+        private string _roomRenovationSerialNumber;
+        [ForeignKey("RoomRenovationSerialNumber")]
+        public string RoomRenovationSerialNumber
+        {
+            get { return _roomRenovationSerialNumber; }
+            set { _roomRenovationSerialNumber = value; }
+        }
+
+        private bool _isWaitingToBeRenovated;
+        public bool IsWaitingToBeRenovated
+        {
+            get { return _isWaitingToBeRenovated; }
+            set { _isWaitingToBeRenovated = value; }
+        }
+
+        private bool _isBeingRenovated;
+        public bool IsBeingRenovated
+        {
+            get { return _isBeingRenovated; }
+            set { _isBeingRenovated = value; }
         }
 
         public Room() : base()
