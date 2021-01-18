@@ -77,8 +77,6 @@ namespace MicroServiceSearch
             services.AddScoped<IPrescriptionRepository, PrescriptionDatabaseSql>();
             services.AddScoped<IReportRepository, ReportDatabaseSql>();
 
-
-
             // Inject services
             services.AddScoped<PrescriptionService, PrescriptionService>();
             services.AddScoped<ReportService, ReportService>();
@@ -87,11 +85,6 @@ namespace MicroServiceSearch
 
             // Inject Controllers
             services.AddScoped<SearchController, SearchController>();
-
-
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

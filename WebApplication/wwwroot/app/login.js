@@ -22,7 +22,7 @@
 						<p>Password</p>
 						<input type="password" name="" id="passwordId" placeholder="Enter Password" v-model="passwordText">
 						<input type="button" name="" id="submitId" value="Login" v-on:click="Validation()">
-						<a href="http://localhost:49900/#/registration">You don't have an account?</a>
+						<a href="/#/registration">You don't have an account?</a>
 					</form>
 		</div>
 

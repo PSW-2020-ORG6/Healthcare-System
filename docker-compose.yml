@@ -51,6 +51,29 @@ services:
       - rabbit
       - postgres
       
+  web-application:
+    image: web-application
+    container_name: web-application
+    build:
+      context: .
+      dockerfile: Dockerfile.web_application
+    restart: on-failure
+    ports:
+      - 5000:8080
+    networks: 
+      - network
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      WEB_APP_ACCOUNT_URL: "http://web-app-account"
+      WEB_APP_APPOINTMENT_URL: "http://web-app-appointment"
+      WEB_APP_FEEDBACK_URL: "http://web-app-feedback"
+      WEB_APP_SEARCH_URL: "http://web-app-search"
+    depends_on:
+      - web-app-account
+      - web-app-appointment
+      - web-app-feedback
+      - web-app-search
+      
   web-app-account:
     image: web-app-account
     container_name: web-app-account

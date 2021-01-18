@@ -7,7 +7,7 @@
 	},
 	beforeMount() {
 		axios
-			.get('http://localhost:49900/patient/getPatientById', { params: { patientId: localStorage.getItem('userId') } , 
+			.get('/patient/getPatientById', { params: { patientId: localStorage.getItem('userId') } , 
 				headers: {
 					'Authorization': 'Bearer' + " " + localStorage.getItem('token')
 				}
