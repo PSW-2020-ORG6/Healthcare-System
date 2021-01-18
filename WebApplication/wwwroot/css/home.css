@@ -1,5 +1,6 @@
-.navbar-custom {
+.navbar{
     background-color: lightblue;
+
 }
 
 .navbar-custom .navbar-brand {
@@ -11,15 +12,13 @@
 #navbarDropdown {
     background-color: lightblue;
 }
-#clinicLogoTxt {
-    margin-left: 1050px;
-    font-size: 36px;
+#clinicLogo {
+    font-size: 30px;
     font-weight: 100;
     font-family: Impact;
+    color : white;
 }
-#clinicLogoPic {
-    padding-bottom: 10px;
-}
+
 .btn {
     background-color: lightblue;
     color: white;
@@ -27,17 +26,8 @@
     font-family: 'Impact';
     font-weight: 100;
 }
-.btn1 {
-    align-content:end;
-    margin-left:140%;
-}
-.btn0 {
-    align-content: end;
-    margin-left: 240%;
-}
-.margin{
-    margin-left: 70%;
-}
+
+
 .text {
     color: #014779;
     font-size: 30px;
@@ -69,9 +59,7 @@ th {
     font-family: 'Impact';
     font-size: 38px;
 }
-.noborder {
-    border: none;
-}
+
 footer {
     background-color: lightblue;
     color: white;
@@ -80,3 +68,18 @@ footer {
     font-weight: 100;
 }
 
+.sameLineHeader {
+    display: flex;
+    width: 20%;
+}
+
+.navItem {
+    color : white;
+    font-size : 30px;
+    font-family : Impact;
+}
+
+.login {
+    position : absolute;
+    margin-left : 70%;
+}

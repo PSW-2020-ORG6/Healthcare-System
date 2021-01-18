@@ -6,6 +6,11 @@
 		}
 	},
 	beforeMount() {
+		localStorage.setItem('token', null)
+		localStorage.setItem('isLogged', false)
+		localStorage.setItem('isAdmin', false)
+		localStorage.setItem('isPatient', false)
+
 			axios
 				.get('/feedback/approved')
 				.then(response => {
@@ -27,7 +32,7 @@
 	<div id="Landing"></br>
 			<a class="text2" style="color:white;font-style:italic">
             Welcome to HealthClinic
-            <img src="pictures/logInverted.png" id="clinicLogoPic">
+            <img src="pictures/logInverted.png" id="clinicLogoPicLP">
 			<br></br>
 			Wherever the art of Medicine is loved, there is also a love of Humanity.</br> ~Hippocrates
 			</a>
