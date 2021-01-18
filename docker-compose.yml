@@ -59,7 +59,7 @@ services:
       dockerfile: Dockerfile.web_app_account
     restart: on-failure
     ports:
-      - 5000:8080
+      - 5004:8080
     networks: 
       - network
     environment:
