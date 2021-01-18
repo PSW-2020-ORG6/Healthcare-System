@@ -1,7 +1,7 @@
-﻿using HealthClinicBackend.Backend.Events.PatientRegisteredEventLogging;
+﻿using MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging;
 using Microsoft.EntityFrameworkCore;
 
-namespace HealthClinicBackend.Backend.Events.EventLogging
+namespace MicroServiceAppointment.Backend.Events.EventLogging
 {
     public class EventDbContext : DbContext
     {
@@ -20,10 +20,10 @@ namespace HealthClinicBackend.Backend.Events.EventLogging
         {
         }
 
-        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        // {
-        //     optionsBuilder.UseNpgsql(
-        //         "userid=postgres;server=localhost;port=5432;database=healthcare-system-events;password=super;");
-        // }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql(
+                "userid=postgres;server=localhost;port=5432;database=healthcare-system-events;password=super;");
+        }
     }
 }
