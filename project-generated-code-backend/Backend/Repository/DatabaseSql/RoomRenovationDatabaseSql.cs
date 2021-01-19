@@ -50,10 +50,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public override RoomRenovation GetBySerialNumber(string serialNumber)
         {
-            return GetAll().Where(f => f.SerialNumber.Equals(serialNumber)).ToList()[0];
+            return DbContext.RoomRenovations.Find(serialNumber);
         }
 
-        public List<RoomRenovation> GetByRoomRenovationTimeInterval(string roomRenovationSerialNumber)
+        public List<RoomRenovation> GetByTimeInterval(string roomRenovationSerialNumber)
         {
             throw new NotImplementedException();
         }

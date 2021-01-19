@@ -2,6 +2,7 @@
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
+using HealthClinicBackend.Backend.Repository.Generic;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,33 +11,33 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
 {
     public class RoomRenovationService
     {
-        private RoomRenovationDatabaseSql RoomRenovationRepository;
-        private RoomDatabaseSql RoomRepository;
-        private MedicineDatabaseSql MedicineRepository;
-        private EquipmentDatabaseSql EquipmentRepository;
-        private BedDatabaseSql BedRepository;
+        private IRoomRenovationRepository _roomRenovationRepository;
+        private IRoomRepository _roomRepository;
+        private IMedicineRepository _medicineRepository;
+        private IEquipmentRepository _equipmentRepository;
+        private IBedRepository _bedRepository;
         public RoomRenovationService()
         {
-            RoomRenovationRepository = new RoomRenovationDatabaseSql();
-            RoomRepository = new RoomDatabaseSql();
-            MedicineRepository = new MedicineDatabaseSql();
-            EquipmentRepository = new EquipmentDatabaseSql();
-            BedRepository = new BedDatabaseSql();
+            _roomRenovationRepository = new RoomRenovationDatabaseSql();
+            _roomRepository = new RoomDatabaseSql();
+            _medicineRepository = new MedicineDatabaseSql();
+            _equipmentRepository = new EquipmentDatabaseSql();
+            _bedRepository = new BedDatabaseSql();
         }
 
         public void AddRoomRenovation(RoomRenovation roomRenovation)
         {
-            RoomRenovationRepository.Save(roomRenovation);
+            _roomRenovationRepository.Save(roomRenovation);
         }
 
         public void DeleteRoomRenovation(RoomRenovation roomRenovation)
         {
-            RoomRenovationRepository.Delete(roomRenovation.SerialNumber);
+            _roomRenovationRepository.Delete(roomRenovation.SerialNumber);
         }
 
         public List<RoomRenovation> GetAll()
         {
-            List<RoomRenovation> roomRenovations = RoomRenovationRepository.GetAll();
+            List<RoomRenovation> roomRenovations = _roomRenovationRepository.GetAll();
             foreach (RoomRenovation roomRenovation in roomRenovations)
             {
                 AddMissingProperties(roomRenovation);
@@ -46,14 +47,14 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
 
         public RoomRenovation GetBySerialNumber(string serialNumber)
         {
-            RoomRenovation roomRenovation = RoomRenovationRepository.GetBySerialNumber(serialNumber);
+            RoomRenovation roomRenovation = _roomRenovationRepository.GetById(serialNumber);
             AddMissingProperties(roomRenovation);
             return roomRenovation;
         }
 
         public List<Room> GetRoomsByOverlappingTimeInterval()
         {
-            List<RoomRenovation> roomRenovations = RoomRenovationRepository.GetAll();
+            List<RoomRenovation> roomRenovations = _roomRenovationRepository.GetAll();
             List<Room> returnList = new List<Room>();
 
             foreach(RoomRenovation rr in roomRenovations)
@@ -88,51 +89,51 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
 
         private void StartRenovating(RoomRenovation roomRenovation)
         {
-            foreach (Room room in RoomRepository.GetByRoomRenovationSerialNumber(roomRenovation.SerialNumber))
+            foreach (Room room in _roomRepository.GetByRoomRenovationSerialNumber(roomRenovation.SerialNumber))
             {
-                foreach (Equipment equipment in EquipmentRepository.GetByRoomSerialNumber(room.SerialNumber))
+                foreach (Equipment equipment in _equipmentRepository.GetByRoomSerialNumber(room.SerialNumber))
                 {
                     equipment.RoomSerialNumber = roomRenovation.RenovatedRoomSerialNumber;
-                    EquipmentRepository.Update(equipment);
+                    _equipmentRepository.Update(equipment);
                 }
-                foreach (Medicine medicine in MedicineRepository.GetByRoomSerialNumber(room.SerialNumber))
+                foreach (Medicine medicine in _medicineRepository.GetByRoomSerialNumber(room.SerialNumber))
                 {
                     medicine.RoomSerialNumber = roomRenovation.RenovatedRoomSerialNumber;
-                    MedicineRepository.Update(medicine);
+                    _medicineRepository.Update(medicine);
                 }
-                foreach (Bed bed in BedRepository.GetByRoomSerialNumber(room.SerialNumber))
+                foreach (Bed bed in _bedRepository.GetByRoomSerialNumber(room.SerialNumber))
                 {
                     bed.RoomSerialNumber = roomRenovation.RenovatedRoomSerialNumber;
-                    BedRepository.Update(bed);
+                    _bedRepository.Update(bed);
                 }
                 room.IsWaitingToBeRenovated = false;
                 room.IsBeingRenovated = true;
-                RoomRepository.Update(room);
+                _roomRepository.Update(room);
             }
-            Room renovatedRoom = RoomRepository.GetBySerialNumber(roomRenovation.RenovatedRoomSerialNumber);
+            Room renovatedRoom = _roomRepository.GetBySerialNumber(roomRenovation.RenovatedRoomSerialNumber);
             renovatedRoom.IsWaitingToBeRenovated = false;
             renovatedRoom.IsBeingRenovated = true;
-            RoomRepository.Update(roomRenovation.RenovatedRoom);
+            _roomRepository.Update(roomRenovation.RenovatedRoom);
         }
 
         private void EndRenovating(RoomRenovation roomRenovation)
         {
-            foreach (Room room in RoomRepository.GetByRoomRenovationSerialNumber(roomRenovation.SerialNumber))
+            foreach (Room room in _roomRepository.GetByRoomRenovationSerialNumber(roomRenovation.SerialNumber))
             {
                 if (room.SerialNumber.Equals(roomRenovation.RenovatedRoomSerialNumber)) continue;
-                RoomRepository.Delete(room.SerialNumber);
+                _roomRepository.Delete(room.SerialNumber);
             }
 
-            Room newRoom = RoomRepository.GetBySerialNumber(roomRenovation.RenovatedRoomSerialNumber);
+            Room newRoom = _roomRepository.GetBySerialNumber(roomRenovation.RenovatedRoomSerialNumber);
             newRoom.IsBeingRenovated = false;
-            RoomRepository.Update(newRoom);
-            RoomRenovationRepository.Delete(roomRenovation.SerialNumber);
+            _roomRepository.Update(newRoom);
+            _roomRenovationRepository.Delete(roomRenovation.SerialNumber);
         }
 
         private void AddMissingProperties(RoomRenovation roomRenovation)
         {
-            roomRenovation.RenovatingRooms = RoomRepository.GetByRoomRenovationSerialNumber(roomRenovation.SerialNumber);
-            roomRenovation.RenovatedRoom = RoomRepository.GetBySerialNumber(roomRenovation.RenovatedRoomSerialNumber);
+            roomRenovation.RenovatingRooms = _roomRepository.GetByRoomRenovationSerialNumber(roomRenovation.SerialNumber);
+            roomRenovation.RenovatedRoom = _roomRepository.GetBySerialNumber(roomRenovation.RenovatedRoomSerialNumber);
         }
     }
 }
