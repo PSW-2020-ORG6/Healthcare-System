@@ -125,11 +125,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 .HasOne(a => a.Room)
                 .WithMany();
 
-            //modelBuilder.Entity<RoomRenovation>()
-            //    .HasOne(r => r.RenovatingRooms)
-            //    .WithMany()
-            //    .OnDelete(DeleteBehavior.Cascade);
-
             modelBuilder.Entity<RoomRenovation>()
                 .OwnsOne(r => r.TimeInterval);
 
