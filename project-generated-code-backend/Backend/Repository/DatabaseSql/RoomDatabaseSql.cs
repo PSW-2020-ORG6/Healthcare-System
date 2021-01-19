@@ -78,14 +78,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public List<Room> GetByRoomRenovationSerialNumber(string roomRenovationSerialNumber)
         {
-            List<Room> list = new List<Room>();
-            foreach(Room room in GetAll())
-            {
-                if (room.RoomRenovationSerialNumber != null)
-                    if (room.RoomRenovationSerialNumber.Equals(roomRenovationSerialNumber))
-                        list.Add(room);
-            }
-            return list;
+            return GetAll().Where(rr => rr.RoomRenovationSerialNumber.Equals(roomRenovationSerialNumber)).ToList();
         }
 
         public List<Room> GetByIsWaitingToBeRenovation()

@@ -7,6 +7,6 @@ namespace HealthClinicBackend.Backend.Repository.Generic
 {
     interface IRoomRenovationRepository : IGenericRepository<RoomRenovation>
     {
-        List<RoomRenovation> GetByRoomRenovationTimeInterval(string roomRenovationSerialNumber);
+        List<RoomRenovation> GetByTimeInterval(string roomRenovationSerialNumber);
     }
 }
