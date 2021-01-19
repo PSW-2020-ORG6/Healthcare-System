@@ -15,6 +15,7 @@
     font-size: 24px;
     background-color: lightblue;
     background-image: none;
+    opacity : 0.9;
 }
 
 #clinicLogoPicLP {
@@ -27,3 +28,5 @@
     padding-bottom: 10px;
     position: absolute;
 }
+
+

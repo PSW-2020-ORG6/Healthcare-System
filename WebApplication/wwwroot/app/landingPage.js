@@ -33,6 +33,8 @@
 			<a class="text2" style="color:white;font-style:italic">
             Welcome to HealthClinic
             <img src="pictures/logInverted.png" id="clinicLogoPicLP">
+			<br>
+			Always Caring. Always Here.
 			<br></br>
 			Wherever the art of Medicine is loved, there is also a love of Humanity.</br> ~Hippocrates
 			</a>
