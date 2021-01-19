@@ -17,9 +17,9 @@
 			 <img src="../pictures/user.png" class="avatar">
 				<h1>Login</h1>
 					<form>
-						<p>Username</p>
+						<p id="loginboxText">Username</p>
 						<input type="text" name="" id="userNameId" placeholder="Enter Username" v-model="usernameText">
-						<p>Password</p>
+						<p id="loginboxText">Password</p>
 						<input type="password" name="" id="passwordId" placeholder="Enter Password" v-model="passwordText">
 						<input type="button" name="" id="submitId" value="Login" v-on:click="Validation()">
 						<a href="/#/registration">You don't have an account?</a>

@@ -94,3 +94,7 @@ h1 {
     .loginbox a:hover {
         color: #ffc107;
     }
+
+#loginboxText {
+    color : white;
+}
