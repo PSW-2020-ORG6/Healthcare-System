@@ -112,7 +112,7 @@ namespace WebApplication.Controller
             HttpResponseMessage response =
                 await client.PostAsync(path, parameter1);
             response.EnsureSuccessStatusCode();
-            var result = JsonConvert.DeserializeObject<IActionResult>(await response.Content.ReadAsStringAsync());
+            var result = JsonConvert.DeserializeObject<List<AppointmentSchedulingDTO>>(await response.Content.ReadAsStringAsync());
             return result;
         }
 

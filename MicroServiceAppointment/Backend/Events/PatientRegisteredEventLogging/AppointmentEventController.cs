@@ -22,9 +22,9 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
 
         [Authorize]
         [HttpPost("addEvent")]
-        public IActionResult MakeAppointment(string patientAppointmentEventParams)
+        public IActionResult MakeAppointment(PatientAppointmentEventParams patientAppointmentEventParams)
         {
-           //_logPatientAppointmentEventService.LogEvent(patientAppointmentEventParams);
+           _logPatientAppointmentEventService.LogEvent(patientAppointmentEventParams);
             return Ok();
         }
     }
