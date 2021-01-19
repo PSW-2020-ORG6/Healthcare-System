@@ -19,7 +19,7 @@ services:
     image: rabbitmq:management-alpine
     container_name: rabbitmq
     ports:
-      - 15672:15672
+      - "15672:15672"
     networks:
       - network
   
@@ -31,7 +31,7 @@ services:
       dockerfile: Dockerfile.integration_adapters
     restart: on-failure
     ports:
-      - 8080:8080
+      - "8080:8080"
     networks: 
       - network
     environment:
@@ -59,7 +59,7 @@ services:
       dockerfile: Dockerfile.web_application
     restart: on-failure
     ports:
-      - 5000:8080
+      - "5000:8080"
     networks: 
       - network
     environment:
@@ -82,7 +82,7 @@ services:
       dockerfile: Dockerfile.web_app_account
     restart: on-failure
     ports:
-      - 5004:8080
+      - "5004:8080"
     networks: 
       - network
     environment:
@@ -103,7 +103,7 @@ services:
       dockerfile: Dockerfile.web_app_appointment
     restart: on-failure
     ports:
-      - 5001:8080
+      - "5001:8080"
     networks: 
       - network
     environment:
@@ -124,7 +124,7 @@ services:
       dockerfile: Dockerfile.web_app_feedback
     restart: on-failure
     ports:
-      - 5002:8080
+      - "5002:8080"
     networks: 
       - network
     environment:
@@ -145,7 +145,7 @@ services:
       dockerfile: Dockerfile.web_app_search
     restart: on-failure
     ports:
-      - 5003:8080
+      - "5003:8080"
     networks: 
       - network
     environment:

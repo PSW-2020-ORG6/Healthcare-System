@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthClinicBackend.Backend.Dto;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using WebApplication.util;
 
@@ -26,11 +27,16 @@ namespace WebApplication.Controller
             _feedBackServiceUrl = uris.FeedbackServiceUrl;
         }
 
+        // public FeedbackController(IOptions<MicroServiceUris> options)
+        // {
+        //     _feedBackServiceUrl = options.Value.FeedbackServiceUrl;
+        // }
+
         [HttpGet("approved")]
         public async Task<List<FeedbackDto>> GetApprovedFeedbacks(string token)
         {
-            var uri = GetFullUriForPath("/feedbackMicroservice/approved/");
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/feedbackMicroservice/approved/");
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<FeedbackDto>>(await response.Content.ReadAsStringAsync());
         }
@@ -42,8 +48,8 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/feedbackMicroservice/disapproved/");
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/feedbackMicroservice/disapproved/");
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<FeedbackDto>>(await response.Content.ReadAsStringAsync());
         }
@@ -57,8 +63,8 @@ namespace WebApplication.Controller
             var parameter = new StringContent(JsonConvert.SerializeObject(feedbackDTO, Formatting.Indented),
                 Encoding.UTF8, "application/json");
 
-            var uri = GetFullUriForPath("/feedbackMicroservice/approve/");
-            HttpResponseMessage response = await client.PutAsync(uri, parameter);
+            var path = GetFullPath("/feedbackMicroservice/approve/");
+            HttpResponseMessage response = await client.PutAsync(path, parameter);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<FeedbackDto>>(await response.Content.ReadAsStringAsync());
         }
@@ -72,8 +78,8 @@ namespace WebApplication.Controller
             var parameter = new StringContent(JsonConvert.SerializeObject(feedbackDTO, Formatting.Indented),
                 Encoding.UTF8, "application/json");
 
-            var uri = GetFullUriForPath("/feedbackMicroservice/add/");
-            HttpResponseMessage response = await client.PostAsync(uri, parameter);
+            var path = GetFullPath("/feedbackMicroservice/add/");
+            HttpResponseMessage response = await client.PostAsync(path, parameter);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<FeedbackDto>>(await response.Content.ReadAsStringAsync());
         }
@@ -85,15 +91,15 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/feedbackMicroservice/all/");
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/feedbackMicroservice/all/");
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<FeedbackDto>>(await response.Content.ReadAsStringAsync());
         }
 
-        private Uri GetFullUriForPath(string path)
+        private string GetFullPath(string path)
         {
-            return new Uri(_feedBackServiceUrl + path);
+            return _feedBackServiceUrl + path;
         }
     }
 }

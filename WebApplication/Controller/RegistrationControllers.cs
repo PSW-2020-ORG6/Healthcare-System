@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,8 +27,8 @@ namespace WebApplication.Controller
             var content = new StringContent(JsonConvert.SerializeObject(patientDTO, Formatting.Indented), Encoding.UTF8,
                 "application/json");
 
-            var uri = GetFullUriForPath("/registrationMicroservice/registerPatient");
-            HttpResponseMessage response = await client.PostAsync(uri, content);
+            var path = GetFullPath("/registrationMicroservice/registerPatient");
+            HttpResponseMessage response = await client.PostAsync(path, content);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<IActionResult>(await response.Content.ReadAsStringAsync());
         }
@@ -40,8 +39,8 @@ namespace WebApplication.Controller
             var content = new StringContent(JsonConvert.SerializeObject(id, Formatting.Indented), Encoding.UTF8,
                 "application/json");
 
-            var uri = GetFullUriForPath("/registrationMicroservice/confirmationEmail");
-            HttpResponseMessage response = await client.PutAsync(uri, content);
+            var path = GetFullPath("/registrationMicroservice/confirmationEmail");
+            HttpResponseMessage response = await client.PutAsync(path, content);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<IActionResult>(await response.Content.ReadAsStringAsync());
         }
@@ -49,15 +48,15 @@ namespace WebApplication.Controller
         [HttpGet("allPhysitians")]
         public async Task<List<FamilyDoctorDto>> GetAllPhysicians()
         {
-            var uri = GetFullUriForPath("/registrationMicroservice/allPhysitians");
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/registrationMicroservice/allPhysitians");
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<FamilyDoctorDto>>(await response.Content.ReadAsStringAsync());
         }
 
-        private Uri GetFullUriForPath(string path)
+        private string GetFullPath(string path)
         {
-            return new Uri(_accountServiceUrl + path);
+            return _accountServiceUrl + path;
         }
     }
 }

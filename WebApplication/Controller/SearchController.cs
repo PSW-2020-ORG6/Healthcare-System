@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using MicroServiceSearch.Backend.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using WebApplication.util;
 
@@ -25,6 +26,11 @@ namespace WebApplication.Controller
             _searchServiceUrl = uris.SearchServiceUrl;
         }
 
+        // public SearchController(IOptions<MicroServiceUris> options)
+        // {
+        //     _searchServiceUrl = options.Value.SearchServiceUrl;
+        // }
+
         [HttpGet("prescriptionsSearch")]
         public async Task<List<SearchEntityDTO>> GetAllPrescription(string prescriptionSearch, string dateFrom,
             string dateTo)
@@ -33,9 +39,9 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/searchMicroservices/prescriptionsSearch/" + prescriptionSearch + "/" +
-                                        dateFrom + "/" + dateTo);
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/searchMicroservices/prescriptionsSearch/" + prescriptionSearch + "/" +
+                                   dateFrom + "/" + dateTo);
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<SearchEntityDTO>>(await response.Content.ReadAsStringAsync());
         }
@@ -47,9 +53,9 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/searchMicroservices/reportsSearch/" + reportSearch + "/" + dateFrom + "/" +
-                                        dateTo);
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/searchMicroservices/reportsSearch/" + reportSearch + "/" + dateFrom + "/" +
+                                   dateTo);
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<SearchEntityDTO>>(await response.Content.ReadAsStringAsync());
         }
@@ -62,16 +68,16 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/searchMicroservices/getReportByAppointment/" + date + "/" +
-                                        patientSerialNumber + "/" + physicianSerialNumber);
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/searchMicroservices/getReportByAppointment/" + date + "/" +
+                                   patientSerialNumber + "/" + physicianSerialNumber);
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<string>>(await response.Content.ReadAsStringAsync());
         }
 
-        private Uri GetFullUriForPath(string path)
+        private string GetFullPath(string path)
         {
-            return new Uri(_searchServiceUrl + path);
+            return _searchServiceUrl + path;
         }
     }
 }

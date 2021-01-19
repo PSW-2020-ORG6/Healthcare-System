@@ -1,14 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using HealthClinicBackend.Backend.Repository;
-using MicroServiceAccount.Backend.Controllers;
-using MicroServiceAccount.Backend.Model.Util;
-using MicroServiceAccount.Backend.Service;
-using MicroServiceAccount.Backend.Services;
-using MicroServiceAccount.Backend.Services.Interfaces;
 using MicroServiceSearch.Backend.Controllers;
 using MicroServiceSearch.Backend.Repository.DatabaseSql;
 using MicroServiceSearch.Backend.Repository.Generic;
@@ -16,12 +8,10 @@ using MicroServiceSearch.Backend.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace MicroServiceSearch
@@ -42,23 +32,25 @@ namespace MicroServiceSearch
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials().Build());
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials()
+                        .Build());
             });
             services.AddControllers();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-               .AddJwtBearer(options =>
-               {
-                   options.TokenValidationParameters = new TokenValidationParameters
-                   {
-                       ValidateIssuer = true,
-                       ValidateAudience = true,
-                       ValidateLifetime = true,
-                       ValidateIssuerSigningKey = true,
-                       ValidIssuer = Configuration["Jwt:Issuer"],
-                       ValidAudience = Configuration["Jwt:Issuer"],
-                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-                   };
-               });
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration["Jwt:Issuer"],
+                        ValidAudience = Configuration["Jwt:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                    };
+                });
             services.AddDbContext<MsSearchDbContext>(options =>
             {
                 var connectionString = CreateConnectionStringFromEnvironment();
@@ -120,7 +112,8 @@ namespace MicroServiceSearch
             var schema = "healthcare-system-db";
 
             // Do not change this
-            var herokuPostgresURL = Configuration.GetValue<string>("DATABASE_URL") ?? $"{serverDefault}://{userDefault}:{passwordDefault}@{serverDefault}:{portDefault}/{schema}";
+            var herokuPostgresURL = Configuration.GetValue<string>("DATABASE_URL") ??
+                                    $"{serverDefault}://{userDefault}:{passwordDefault}@{serverDefault}:{portDefault}/{schema}";
 
             var databaseUri = new Uri(herokuPostgresURL);
             var userInfo = databaseUri.UserInfo.Split(':');
@@ -130,7 +123,8 @@ namespace MicroServiceSearch
             var password = userInfo[1];
             var database = databaseUri.LocalPath.TrimStart('/');
 
-            return $"userid={user};server={server};port={port};database={database};password={password};Pooling=true;sslmode=Prefer;TrustServerCertificate=True;";
+            return
+                $"userid={user};server={server};port={port};database={database};password={password};Pooling=true;sslmode=Prefer;TrustServerCertificate=True;";
         }
     }
 }
