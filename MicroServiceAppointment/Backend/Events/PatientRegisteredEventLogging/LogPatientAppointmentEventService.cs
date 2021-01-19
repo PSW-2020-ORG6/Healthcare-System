@@ -18,8 +18,7 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             var patientAppointmentEvent = new PatientAppointmentEvent
             { TimeStamp = DateTime.Now, TransitionsFromTwoToOneStep = eventParams.TransitionsFromTwoToOneStep, 
                 TransitionsFromThreeToTwoStep = eventParams.TransitionsFromThreeToTwoStep, TransitionsFromFourToThreeStep = eventParams.TransitionsFromFourToThreeStep,
-                IsAppointmentScheduled = eventParams.IsAppointmentScheduled, ChoosenPhysician = eventParams.ChoosenPhysician, 
-                ChoosenSpecialization = eventParams.ChoosenSpecialization, SchedulingDuration = eventParams.SchedulingDuration};
+                IsAppointmentScheduled = eventParams.IsAppointmentScheduled, SchedulingDuration = eventParams.SchedulingDuration};
 
             _patientAppointmentEventRepository.LogEvent(patientAppointmentEvent);
         }

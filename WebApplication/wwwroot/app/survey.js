@@ -436,8 +436,6 @@ Vue.component("appointments", {
             previousStep1: 0,
             previousStep2: 0,
             previousStep3: 0,
-            firstChoosenSpecialization: "",
-            firstChoosenPhysician: "",
             isScheduled: false,
             time: "00:00"
         }
@@ -1059,16 +1057,10 @@ Vue.component("appointments", {
                 if (this.id == 2)
                     this.SpecialistForChoose()
                 if (this.id == 3) {
-                    if (this.firstChoosenSpecialization=="")
-                        this.firstChoosenSpecialization = this.choosenSpecialization
                     this.GetTimeIntervals()
                 }
                 this.id += 1
                 this.Steps()
-            }
-            if (this.id == 4) {
-                if (this.firstChoosenPhysician == "")
-                    this.firstChoosenPhysician = this.choosenPhysician.fullName
             }
         },
         EventTime: function () {
@@ -1174,8 +1166,6 @@ Vue.component("appointments", {
                         alert("Error")
                     })
                 this.PatientAppointmentEvent.isAppointmentScheduled = true
-                this.PatientAppointmentEvent.choosenPhysician = this.firstChoosenPhysician
-                this.PatientAppointmentEvent.choosenSpecialization = this.firstChoosenSpecialization
                 this.PatientAppointmentEvent.transitionsFromTwoToOneStep = this.previousStep1
                 this.PatientAppointmentEvent.transitionsFromThreeToTwoStep = this.previousStep2
                 this.PatientAppointmentEvent.transitionsFromFourToThreeStep = this.previousStep3
@@ -1188,8 +1178,6 @@ Vue.component("appointments", {
                     })
                     .then(response => {
                     })
-                this.firstChoosenPhysician = ""
-                this.firstChoosenSpecialization = ""
                 this.previousStep1 = 0
                 this.previousStep2 = 0
                 this.previousStep3 = 0
