@@ -4,6 +4,8 @@ using System.Text;
 using MicroServiceAccount.Backend.Repository.DatabaseSql;
 using MicroServiceAccount.Backend.Repository.Generic;
 using MicroServiceAppointment.Backend.Controllers;
+using MicroServiceAppointment.Backend.Events.EventLogging;
+using MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging;
 using MicroServiceAppointment.Backend.Repository.DatabaseSql;
 using MicroServiceAppointment.Backend.Repository.Generic;
 using MicroServiceAppointment.Backend.Service;
@@ -64,7 +66,17 @@ namespace MicroServiceAppointment
                 );
             });
             services.AddMvc();
+            services.AddDbContext<EventDbContext>(options =>
+            {
+                var connectionString = CreateConnectionStringFromEnvironment();
+                Console.WriteLine(connectionString);
 
+                options.UseNpgsql(
+                    connectionString,
+                    x => x.MigrationsAssembly("WebApplication").EnableRetryOnFailure(5,
+                        new TimeSpan(0, 0, 0, 30), new List<string>())
+                );
+            });
 
             // Inject repositories
             services.AddScoped<IAppointmentRepository, AppointmentDatabaseSql>();
@@ -78,15 +90,19 @@ namespace MicroServiceAppointment
             services.AddScoped<ISurveyRepository, SurveyDatabaseSql>();
             services.AddScoped<IPhysicianRepository, PhysicianDatabaseSql>();
             services.AddScoped<IMedicineRepository, MedicineDatabaseSql>();
+            services.AddScoped<IPatientAppointmentEventRepository, PatientAppointmentEventDatabase>();
+          
 
             // Inject services
             services.AddScoped<AppointmentService, AppointmentService>();
             services.AddScoped<SurveyService, SurveyService>();
+            services.AddScoped<LogPatientAppointmentEventService, LogPatientAppointmentEventService>();
 
 
             // Inject Controllers
             services.AddScoped<AppointmentController, AppointmentController>();
             services.AddScoped<SurveyController, SurveyController>();
+            services.AddScoped<AppointmentEventController, AppointmentEventController>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

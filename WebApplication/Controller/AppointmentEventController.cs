@@ -17,15 +17,15 @@ namespace WebApplication.Controller
         static readonly HttpClient client = new HttpClient();
 
         [HttpPost("addEvent")]
-        public async Task<List<PatientAppointmentEvent>> GetAllAppointmentsByPatientId(PatientAppointmentEventParams patientAppointmentEventParams)
+        public async Task<IActionResult> GetAllAppointmentsByPatientId(PatientAppointmentEventParams patientAppointmentEventParams)
         {
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
                                                                                                     , Request.Headers["Authorization"].ToString().Split(" ")[1]);
-            var parameter = new StringContent(JsonConvert.SerializeObject("str", Formatting.Indented), Encoding.UTF8, "application/json");
+            var parameter = new StringContent(JsonConvert.SerializeObject(patientAppointmentEventParams, Formatting.Indented), Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await client.PostAsync("http://localhost:57056/appointmentEvent/addEvent", parameter);
+            HttpResponseMessage response = await client.PostAsync("http://localhost:57056/appointmentEvent/addEvent/", parameter);
             response.EnsureSuccessStatusCode();
-            return JsonConvert.DeserializeObject<List<PatientAppointmentEvent>>(await response.Content.ReadAsStringAsync());
+            return JsonConvert.DeserializeObject<IActionResult>(await response.Content.ReadAsStringAsync());
         }
     }
 }

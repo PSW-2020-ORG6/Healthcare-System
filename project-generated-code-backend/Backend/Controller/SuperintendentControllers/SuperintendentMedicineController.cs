@@ -2,7 +2,8 @@
 using HealthClinicBackend.Backend.Service.MedicineService;
 using System.Collections.Generic;
 
-namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
+namespace HealthClinicBackend.Backend.Controller.
+    intendentControllers
 {
     public class SuperintendentMedicineController
     {
