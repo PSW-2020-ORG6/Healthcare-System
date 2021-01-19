@@ -11,9 +11,5 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
         public int TransitionsFromFourToThreeStep { get; set; }
         public string SchedulingDuration { get; set; }
         public bool IsAppointmentScheduled { get; set; }
-        public string ChoosenPhysician { get; set; }
-        public string ChoosenSpecialization { get; set; }
-
-
     }
 }

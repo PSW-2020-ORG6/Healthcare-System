@@ -65,10 +65,9 @@ namespace MicroServiceAppointment
                         new TimeSpan(0, 0, 0, 30), new List<string>())
                 );
             });
-            services.AddMvc();
             services.AddDbContext<EventDbContext>(options =>
             {
-                var connectionString = CreateConnectionStringFromEnvironment();
+                var connectionString = CreateEventConnectionStringFromEnvironment();
                 Console.WriteLine(connectionString);
 
                 options.UseNpgsql(
@@ -77,6 +76,8 @@ namespace MicroServiceAppointment
                         new TimeSpan(0, 0, 0, 30), new List<string>())
                 );
             });
+            services.AddMvc();
+           
 
             // Inject repositories
             services.AddScoped<IAppointmentRepository, AppointmentDatabaseSql>();
@@ -136,6 +137,30 @@ namespace MicroServiceAppointment
             var userDefault = "postgres";
             var passwordDefault = "root";
             var schema = "healthcare-system-db";
+
+            // Do not change this
+            var herokuPostgresURL = Configuration.GetValue<string>("DATABASE_URL") ?? $"{serverDefault}://{userDefault}:{passwordDefault}@{serverDefault}:{portDefault}/{schema}";
+
+            var databaseUri = new Uri(herokuPostgresURL);
+            var userInfo = databaseUri.UserInfo.Split(':');
+            var server = databaseUri.Host;
+            var port = databaseUri.Port.ToString();
+            var user = userInfo[0];
+            var password = userInfo[1];
+            var database = databaseUri.LocalPath.TrimStart('/');
+
+            return $"userid={user};server={server};port={port};database={database};password={password};Pooling=true;sslmode=Prefer;TrustServerCertificate=True;";
+        }
+
+        private string CreateEventConnectionStringFromEnvironment()
+        {
+            // Change these values for local connection
+            var serverDefault = "localhost";
+            var portDefault = 5432;
+
+            var userDefault = "postgres";
+            var passwordDefault = "root";
+            var schema = "healthcare-system-events";
 
             // Do not change this
             var herokuPostgresURL = Configuration.GetValue<string>("DATABASE_URL") ?? $"{serverDefault}://{userDefault}:{passwordDefault}@{serverDefault}:{portDefault}/{schema}";

@@ -1,5 +1,6 @@
 ﻿using GraphicEditor.HelpClasses;
 using GraphicEditor.View.UserControls;
+using HealthClinicBackend.Backend.Controller.intendentControllers;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
 using System;
