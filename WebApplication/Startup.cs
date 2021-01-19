@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using WebApplication.util;
 
 namespace WebApplication
@@ -24,7 +24,7 @@ namespace WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.Configure<MicroServiceUris>(GetMicroServiceUrisFromEnvironment);
+            services.AddSingleton(GetMicroServiceUrisFromEnvironment());
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -58,23 +58,31 @@ namespace WebApplication
             app.UseStaticFiles();
         }
 
-        private void GetMicroServiceUrisFromEnvironment(MicroServiceUris microServiceUris)
+        private MicroServiceUris GetMicroServiceUrisFromEnvironment()
         {
-            // Change these values for local connection
+            // Change values for local connection
             var accountServiceUri = "http://localhost:57053";
             var appointmentServiceUri = "http://localhost:57056";
             var feedbackServiceUri = "http://localhost:57057";
             var searchServiceUri = "http://localhost:57060";
 
             // Do not change this
-            microServiceUris.AccountServiceUrl =
-                Configuration.GetValue<string>("WEB_APP_ACCOUNT_URL") ?? accountServiceUri;
-            microServiceUris.AppointmentServiceUrl =
-                Configuration.GetValue<string>("WEB_APP_APPOINTMENT_URL") ?? appointmentServiceUri;
-            microServiceUris.FeedbackServiceUrl =
-                Configuration.GetValue<string>("WEB_APP_FEEDBACK_URL") ?? feedbackServiceUri;
-            microServiceUris.SearchServiceUrl =
-                Configuration.GetValue<string>("WEB_APP_SEARCH_URL") ?? searchServiceUri;
+            var microServiceUris = new MicroServiceUris
+            {
+                AccountServiceUrl = Configuration.GetValue<string>("WEB_APP_ACCOUNT_URL") ?? accountServiceUri,
+                AppointmentServiceUrl =
+                    Configuration.GetValue<string>("WEB_APP_APPOINTMENT_URL") ?? appointmentServiceUri,
+                FeedbackServiceUrl = Configuration.GetValue<string>("WEB_APP_FEEDBACK_URL") ?? feedbackServiceUri,
+                SearchServiceUrl = Configuration.GetValue<string>("WEB_APP_SEARCH_URL") ?? searchServiceUri
+            };
+
+            // Used to check if correct values are being used
+            Console.WriteLine($"WEB_APP_ACCOUNT_URL: {microServiceUris.AccountServiceUrl}");
+            Console.WriteLine($"WEB_APP_APPOINTMENT_URL: {microServiceUris.AppointmentServiceUrl}");
+            Console.WriteLine($"WEB_APP_FEEDBACK_URL: {microServiceUris.FeedbackServiceUrl}");
+            Console.WriteLine($"WEB_APP_SEARCH_URL: {microServiceUris.SearchServiceUrl}");
+
+            return microServiceUris;
         }
     }
 }

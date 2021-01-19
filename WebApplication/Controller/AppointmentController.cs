@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MicroServiceAccount.Backend.Dto;
 using MicroServiceAppointment.Backend.Dto;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using WebApplication.util;
 
@@ -23,6 +24,11 @@ namespace WebApplication.Controller
         {
             _appointmentServiceUrl = uris.AppointmentServiceUrl;
         }
+        
+        // public AppointmentController(IOptions<MicroServiceUris> options)
+        // {
+        //     _appointmentServiceUrl = options.Value.AppointmentServiceUrl;
+        // }
 
         [HttpGet("allAppointmentsByPatientId")]
         public async Task<List<AppointmentDto>> GetAllAppointmentsByPatientId(String patientId)
@@ -31,8 +37,8 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/appointmentMicroservice/allAppointmentsByPatientId/" + patientId);
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/appointmentMicroservice/allAppointmentsByPatientId/" + patientId);
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<AppointmentDto>>(await response.Content.ReadAsStringAsync());
         }
@@ -44,8 +50,8 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/appointmentMicroservice/allAppointments");
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/appointmentMicroservice/allAppointments");
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<AppointmentDto>>(await response.Content.ReadAsStringAsync());
         }
@@ -57,8 +63,8 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/appointmentMicroservice/allAppointmentsByPatientIdActive/" + patientId);
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/appointmentMicroservice/allAppointmentsByPatientIdActive/" + patientId);
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<AppointmentDto>>(await response.Content.ReadAsStringAsync());
         }
@@ -70,8 +76,8 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/appointmentMicroservice/allAppointmentsByPatientIdCanceled/" + patientId);
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/appointmentMicroservice/allAppointmentsByPatientIdCanceled/" + patientId);
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<AppointmentDto>>(await response.Content.ReadAsStringAsync());
         }
@@ -85,9 +91,9 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/appointmentMicroservice/avaliableTimeIntervals/" + physicianId + "/" +
-                                        specializationName + "/" + date);
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/appointmentMicroservice/avaliableTimeIntervals/" + physicianId + "/" +
+                                   specializationName + "/" + date);
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<TimeIntervalDTO>>(await response.Content.ReadAsStringAsync());
         }
@@ -102,9 +108,9 @@ namespace WebApplication.Controller
                 new StringContent(JsonConvert.SerializeObject(appointmentSchedulingDTO, Formatting.Indented),
                     Encoding.UTF8, "application/json");
 
-            var uri = GetFullUriForPath("/appointmentMicroservice/makeAppointment/");
+            var path = GetFullPath("/appointmentMicroservice/makeAppointment/");
             HttpResponseMessage response =
-                await client.PostAsync(uri, parameter1);
+                await client.PostAsync(path, parameter1);
             response.EnsureSuccessStatusCode();
             var result = JsonConvert.DeserializeObject<IActionResult>(await response.Content.ReadAsStringAsync());
             return result;
@@ -117,8 +123,8 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/appointmentMicroservice/allAppointmentsByPatientIdPast/" + patientId);
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/appointmentMicroservice/allAppointmentsByPatientIdPast/" + patientId);
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<AppointmentDto>>(await response.Content.ReadAsStringAsync());
         }
@@ -130,8 +136,8 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/appointmentMicroservice/allAppointmentsWithSurvey/" + patientId);
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/appointmentMicroservice/allAppointmentsWithSurvey/" + patientId);
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<AppointmentDto>>(await response.Content.ReadAsStringAsync());
         }
@@ -143,8 +149,8 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/appointmentMicroservice/allAppointmentsWithoutSurvey/" + patientId);
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/appointmentMicroservice/allAppointmentsWithoutSurvey/" + patientId);
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<AppointmentDto>>(await response.Content.ReadAsStringAsync());
         }
@@ -157,10 +163,10 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath(
+            var path = GetFullPath(
                 "/appointmentMicroservice/isSurveyDoneByPatientIdAppointmentDatePhysicianName/" + patientId + "/" +
                 appointmentDate + "/" + physicianName);
-            HttpResponseMessage response = await client.GetAsync(uri);
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
         }
@@ -175,8 +181,8 @@ namespace WebApplication.Controller
             var content = new StringContent(JsonConvert.SerializeObject(appointmentDto, Formatting.Indented),
                 Encoding.UTF8, "application/json");
 
-            var uri = GetFullUriForPath("/appointmentMicroservice/update");
-            HttpResponseMessage response = await client.PutAsync(uri, content);
+            var path = GetFullPath("/appointmentMicroservice/update");
+            HttpResponseMessage response = await client.PutAsync(path, content);
             response.EnsureSuccessStatusCode();
         }
 
@@ -190,9 +196,9 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/appointmentMicroservice/appointmentsWithReccomendation/" +
-                                        physicianId + "/" + specializationName + "/" + dates);
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/appointmentMicroservice/appointmentsWithReccomendation/" +
+                                   physicianId + "/" + specializationName + "/" + dates);
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<AppointmentWithRecommendationDTO>>(
                 await response.Content.ReadAsStringAsync());
@@ -207,9 +213,9 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/appointmentMicroservice/appointmentsWithPhysicianPriority/" + physicianId +
-                                        "/" + specializationName + "/" + dates);
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/appointmentMicroservice/appointmentsWithPhysicianPriority/" + physicianId +
+                                   "/" + specializationName + "/" + dates);
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<AppointmentWithRecommendationDTO>>(
                 await response.Content.ReadAsStringAsync());
@@ -224,9 +230,9 @@ namespace WebApplication.Controller
             var content = new StringContent(JsonConvert.SerializeObject(appointment, Formatting.Indented),
                 Encoding.UTF8, "application/json");
 
-            var uri = GetFullUriForPath("/appointmentMicroservice/cancelAppointment");
+            var path = GetFullPath("/appointmentMicroservice/cancelAppointment");
             HttpResponseMessage response =
-                await client.PutAsync(uri, content);
+                await client.PutAsync(path, content);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
         }
@@ -238,8 +244,8 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/appointmentMicroservice/IsUserMalicious/" + patientId);
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/appointmentMicroservice/IsUserMalicious/" + patientId);
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
         }
@@ -252,16 +258,16 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/appointmentMicroservice/allAppointmentsByPatientIdDateAndDoctor/" +
-                                        patientId + "/" + date + "/" + doctorName);
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/appointmentMicroservice/allAppointmentsByPatientIdDateAndDoctor/" +
+                                   patientId + "/" + date + "/" + doctorName);
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<AppointmentDto>>(await response.Content.ReadAsStringAsync());
         }
 
-        private Uri GetFullUriForPath(string path)
+        private string GetFullPath(string path)
         {
-            return new Uri(_appointmentServiceUrl + path);
+            return _appointmentServiceUrl + path;
         }
     }
 }

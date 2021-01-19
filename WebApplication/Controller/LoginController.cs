@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using WebApplication.util;
 
 namespace WebApplication.Controller
@@ -19,11 +20,16 @@ namespace WebApplication.Controller
             _accountServiceUrl = uris.AccountServiceUrl;
         }
 
+        // public LoginController(IOptions<MicroServiceUris> options)
+        // {
+        //     _accountServiceUrl = options.Value.AccountServiceUrl;
+        // }
+
         [HttpGet("login")]
         public async Task<IActionResult> Login(string email, string password)
         {
-            var uri = GetFullUriForPath("/loginMicroservice/login/" + email + "/" + password);
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/loginMicroservice/login/" + email + "/" + password);
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             var responseBody = await response.Content.ReadAsStringAsync();
             if (responseBody != null)
@@ -38,8 +44,8 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/loginMicroservice/GetUserType");
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/loginMicroservice/GetUserType");
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }
@@ -51,15 +57,15 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/loginMicroservice/GetUserId");
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/loginMicroservice/GetUserId");
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }
 
-        private Uri GetFullUriForPath(string path)
+        private string GetFullPath(string path)
         {
-            return new Uri(_accountServiceUrl + path);
+            return _accountServiceUrl + path;
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MicroServiceAccount.Backend.Dto;
 using MicroServiceAccount.Backend.Model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using WebApplication.util;
 
@@ -24,11 +25,16 @@ namespace WebApplication.Controller
             _accountServiceUrl = uris.AccountServiceUrl;
         }
 
+        // public PatientController(IOptions<MicroServiceUris> options)
+        // {
+        //     _accountServiceUrl = options.Value.AccountServiceUrl;
+        // }
+
         [HttpGet("all")]
         public async Task<List<Patient>> GetAllPatients()
         {
-            var uri = GetFullUriForPath("/patientMicroservice/allPatients");
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/patientMicroservice/allPatients");
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<Patient>>(await response.Content.ReadAsStringAsync());
         }
@@ -40,8 +46,8 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/patientMicroservice/getPatientById/" + patientId);
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/patientMicroservice/getPatientById/" + patientId);
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<PatientDto>(await response.Content.ReadAsStringAsync());
         }
@@ -53,8 +59,8 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/patientMicroservice/getMaliciousPatients");
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/patientMicroservice/getMaliciousPatients");
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<Patient>>(await response.Content.ReadAsStringAsync());
         }
@@ -68,8 +74,8 @@ namespace WebApplication.Controller
             var content = new StringContent(JsonConvert.SerializeObject(patient, Formatting.Indented), Encoding.UTF8,
                 "application/json");
 
-            var uri = GetFullUriForPath("/patientMicroservice/blockMaliciousPatient");
-            HttpResponseMessage response = await client.PutAsync(uri, content);
+            var path = GetFullPath("/patientMicroservice/blockMaliciousPatient");
+            HttpResponseMessage response = await client.PutAsync(path, content);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
         }
@@ -81,8 +87,8 @@ namespace WebApplication.Controller
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var uri = GetFullUriForPath("/patientMicroservice/getActionsAndBenefits");
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var path = GetFullPath("/patientMicroservice/getActionsAndBenefits");
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<ActionAndBenefitMessage>>(
                 await response.Content.ReadAsStringAsync());
@@ -98,15 +104,15 @@ namespace WebApplication.Controller
             var content = new StringContent(JsonConvert.SerializeObject(patientId, Formatting.Indented), Encoding.UTF8,
                 "application/json");
 
-            var uri = GetFullUriForPath("/patientMicroservice/SetUserToMalicious");
-            HttpResponseMessage response = await client.PutAsync(uri, content);
+            var path = GetFullPath("/patientMicroservice/SetUserToMalicious");
+            HttpResponseMessage response = await client.PutAsync(path, content);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
         }
 
-        private Uri GetFullUriForPath(string path)
+        private string GetFullPath(string path)
         {
-            return new Uri(_accountServiceUrl + path);
+            return _accountServiceUrl + path;
         }
     }
 }
