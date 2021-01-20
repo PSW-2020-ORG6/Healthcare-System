@@ -5,7 +5,7 @@ $(document).ready(function () {
 		var MedicineName = $("#txtMedicine").val();
 		var Quantity = parseInt($("#txtQuantity").val());
 		$.get({
-			url: '../medicine/getMedicine/' + MedicineName + '/' + Quantity,
+			url: 'http://localhost:63251/medicine/getMedicine/' + MedicineName + '/' + Quantity,
 			contentType: 'application/json',
 			success: function (foundedMedicine) {
 				var foundedMedicine = foundedMedicine.split('#');
@@ -14,7 +14,7 @@ $(document).ready(function () {
 					$('#container').html(`<p><b>Pharmacy with wanted medication not found!</b></p>`)
 				} else {
 					$.post({
-						url: '../medicine/addMedicine/' + foundedMedicine[0] + '/' + foundedMedicine[1] + '/' + Quantity,
+						url: 'http://localhost:63251/medicine/addMedicine/' + foundedMedicine[0] + '/' + foundedMedicine[1] + '/' + Quantity,
 						contentType: 'application/json',
 						success: function (data) {
 							alert("Success procurement!");
@@ -37,7 +37,7 @@ $(document).ready(function () {
 	    Quantity = parseInt($("#txtQuantity").val());
 		var IsPharmacyApproved = false;
 		$.post({
-			url: '../medicine/sendMessageGrpc',
+			url: 'http://localhost:63251/medicine/sendMessageGrpc',
 			data: JSON.stringify({ MedicineName: MedicineName, Quantity: Quantity, IsPharmacyApproved: IsPharmacyApproved }),
 			contentType: "application/json",
 			success: function () {
@@ -58,14 +58,14 @@ $(document).ready(function () {
 	}
 	function getMessageGrpc() {
 		$.get({
-			url: '../medicine/getMessageGrpc',
+			url: 'http://localhost:63251/medicine/getMessageGrpc',
 			contentType: 'application/json',
 			success: function (data) {
 					if (data == '[Pharmacy not found]') {
 						$('#container').html(`<p><b>Pharmacy with wanted medication not found!</b></p>`)
 					} else {
 						$.post({
-							url: '../medicine/addMedicine/' + Math.random() + '/' + MedicineName + '/' + Quantity,
+							url: 'http://localhost:63251/medicine/addMedicine/' + Math.random() + '/' + MedicineName + '/' + Quantity,
 							contentType: 'application/json',
 							success: function (data) {
 								alert("Success procurement!");

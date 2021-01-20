@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using IntegrationAdapters;
-using IntegrationAdapters.Models;
-using IntegrationAdapters.Repositories;
-using IntegrationAdapters.Services;
+using TenderProcurement;
+using TenderProcurement.Models;
+using TenderProcurement.Repositories;
+using TenderProcurement.Services;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
+using TenderProcure = TenderProcurement.Models.Tender;
 
 namespace IntegrationAdaptersTests
 {
@@ -43,10 +44,10 @@ namespace IntegrationAdaptersTests
         public void Is_tender_active()
         {
             mockTender = new Mock<ITenderRepository>();
-            mockTender.Setup(expression: t => t.GetAllTenders()).Returns(new List<Tender> { new Tender("Tender1", new DateTime(2020, 6, 21),true) });
+            mockTender.Setup(expression: t => t.GetAllTenders()).Returns(new List<TenderProcure> { new TenderProcure("Tender1", new DateTime(2020, 6, 21),true) });
 
             TenderService service = new TenderService(mockTender.Object);
-            Tender tender = service.GetTenderByName("Tender1");
+            TenderProcure tender = service.GetTenderByName("Tender1");
 
             Assert.True(tender.IsActive);
         }
@@ -55,10 +56,10 @@ namespace IntegrationAdaptersTests
         public void Is_tender_not_active()
         {
             mockTender = new Mock<ITenderRepository>();
-            mockTender.Setup(expression: t => t.GetAllTenders()).Returns(new List<Tender> { new Tender("Tender1", new DateTime(2020, 6, 21), false) });
+            mockTender.Setup(expression: t => t.GetAllTenders()).Returns(new List<TenderProcure> { new TenderProcure("Tender1", new DateTime(2020, 6, 21), false) });
 
             TenderService service = new TenderService(mockTender.Object);
-            Tender tender = service.GetTenderByName("Tender1");
+            TenderProcure tender = service.GetTenderByName("Tender1");
 
             Assert.False(tender.IsActive);
         }
@@ -67,10 +68,10 @@ namespace IntegrationAdaptersTests
         public void Is_tender_finished()
         {
             mockTender = new Mock<ITenderRepository>();
-            mockTender.Setup(expression: t => t.GetAllTenders()).Returns(new List<Tender> { new Tender("Tender1", new DateTime(2021, 1, 8), false) });
+            mockTender.Setup(expression: t => t.GetAllTenders()).Returns(new List<TenderProcure> { new TenderProcure("Tender1", new DateTime(2021, 1, 8), false) });
 
             TenderService service = new TenderService(mockTender.Object);
-            Tender tender = service.GetTenderByName("Tender1");
+            TenderProcure tender = service.GetTenderByName("Tender1");
 
             Assert.True(tender.FinishDate < DateTime.Now);
         }
@@ -79,10 +80,10 @@ namespace IntegrationAdaptersTests
         public void Is_tender_not_finished()
         {
             mockTender = new Mock<ITenderRepository>();
-            mockTender.Setup(expression: t => t.GetAllTenders()).Returns(new List<Tender> { new Tender("Tender1", new DateTime(2021, 2, 28), false) });
+            mockTender.Setup(expression: t => t.GetAllTenders()).Returns(new List<TenderProcure> { new TenderProcure("Tender1", new DateTime(2021, 2, 28), false) });
 
             TenderService service = new TenderService(mockTender.Object);
-            Tender tender = service.GetTenderByName("Tender1");
+            TenderProcure tender = service.GetTenderByName("Tender1");
 
             Assert.True(tender.FinishDate > DateTime.Now);
         }

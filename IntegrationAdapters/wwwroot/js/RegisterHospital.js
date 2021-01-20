@@ -5,7 +5,7 @@
 		var Url = $("#txtUrl").val();
 		var Subscribed = $("#subscribe").is(":checked")
 		$.post({
-			url: '../api/registration',
+			url: 'http://localhost:63251/api/registration',
 			data: JSON.stringify({ Key: Key, PharmacyName: PharmacyName, Url: Url,Subscribed:Subscribed}),
 			contentType: 'application/json',
 			success: function () {

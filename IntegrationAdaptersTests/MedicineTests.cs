@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using IntegrationAdapters.Models;
-using IntegrationAdapters.Repositories;
-using IntegrationAdapters.Services;
+using MedicineUsage.Services;
+using MedicineUsage.Models;
+using MedicineUsage.Repositories;
 using Moq;
 using Xunit;
 

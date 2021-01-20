@@ -24,12 +24,12 @@
     $("input:button[name=accept]").click(function () {
         id = this.id
         $.get({
-            url: '../tender/acceptOffer/' + this.id,
+            url: 'http://localhost:63251/tender/acceptOffer/' + this.id,
             contentType: 'application/json',
             success: function (data) {
                 alert("Success sent email!")
                 $.get({
-                    url: '../tender/clearAll/' + id,
+                    url: 'http://localhost:63251/tender/clearAll/' + id,
                     contentType: 'application/json',
                     success: function () {
                         location.href = "Offers.html";
@@ -74,7 +74,7 @@ $(document).ready(function () {
     $('#offersTable').on('click', 'input:button[name=offerButton]', function (event) {
         emailAndTender = this.id;
         $.get({
-            url: '../tender/getAllOffersByEmailAndTender/' + emailAndTender,
+            url: 'http://localhost:63251/tender/getAllOffersByEmailAndTender/' + emailAndTender,
             contentType: 'application/json',
             success: function (data) {
                 drawSpecificOfferTable(data);
@@ -87,7 +87,7 @@ $(document).ready(function () {
     })
 
     $.get({
-        url: '../tender/getAllOffers',
+        url: 'http://localhost:63251/tender/getAllOffers',
         contentType: 'application/json',
         success: function (data) {
             drawTableOffer(data);

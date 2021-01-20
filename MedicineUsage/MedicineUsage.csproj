@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+	<ItemGroup>
+		<Compile Remove="Protos\**" />
+		<Content Remove="Protos\**" />
+		<EmbeddedResource Remove="Protos\**" />
+		<None Remove="Protos\**" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.14.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.34.0" />
+    <PackageReference Include="Grpc.AspNetCore.Server" Version="2.34.0" />
+    <PackageReference Include="Grpc.Core" Version="2.34.1" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.34.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.34.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="5.0.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.1" />
+    <PackageReference Include="SSH.NET" Version="2020.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\project-generated-code-backend\HealthClinicBackend.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="gRPCProtocol\Protos\model.proto">
+      <GrpcServices>None</GrpcServices>
+    </None>
+    <None Update="gRPCProtocol\Protos\netGrpcService.proto">
+      <GrpcServices>Server</GrpcServices>
+    </None>
+    <None Update="gRPCProtocol\Protos\springGrpcService.proto">
+      <GrpcServices>Client</GrpcServices>
+    </None>
+  </ItemGroup>
+	<ItemGroup>
+		<Protobuf Include="gRPCProtocol\Protos\model.proto" GrpcServices="None" />
+		<Protobuf Include="gRPCProtocol\Protos\netGrpcService.proto" GrpcServices="Server" />
+		<Protobuf Include="gRPCProtocol\Protos\springGrpcService.proto" GrpcServices="Client" />
+	</ItemGroup>
+
+
+</Project>

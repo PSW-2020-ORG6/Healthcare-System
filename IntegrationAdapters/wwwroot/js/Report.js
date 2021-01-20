@@ -3,7 +3,7 @@
 		var start = $("#startDate").val();
 		var end = $("#endDate").val();
 		$.post({
-			url: '../filetransfer/report',
+			url: 'http://localhost:63251/filetransfer/report',
 			data: JSON.stringify({ start: start, end: end}),
 			contentType: 'application/json',
 			success: function (data) {

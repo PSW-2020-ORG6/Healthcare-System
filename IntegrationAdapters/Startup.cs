@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.DatabaseSql.Util;
-using IntegrationAdapters.gRPCProtocol;
-using IntegrationAdapters.gRPCProtocol.Protos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +22,7 @@ namespace IntegrationAdapters
             Env = environment;
         }
 
-        public IConfiguration Configuration { get; }
+        public static IConfiguration Configuration { get; private set; }
         public IWebHostEnvironment Env { get; }
 
 
@@ -32,8 +30,6 @@ namespace IntegrationAdapters
         {
             services.AddControllers();
 
-            services.AddDbContext<IAHealthCareSystemDbContext>(options =>
-                   options.UseNpgsql(ConfigurationExtensions.GetConnectionString(Configuration, "HealthCareSystemDbContextConnectionString")).UseLazyLoadingProxies());
         }
         private Server server;
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -51,13 +47,6 @@ namespace IntegrationAdapters
             {
                 endpoints.MapControllers();
             });
-
-            server = new Server
-            {
-                Services = { NetGrpcService.BindService(new NetGrpcServiceImpl()) },
-                Ports = { new ServerPort("localhost", 4111, ServerCredentials.Insecure) }
-            };
-            server.Start();
 
             app.UseDefaultFiles();
             app.UseStaticFiles();

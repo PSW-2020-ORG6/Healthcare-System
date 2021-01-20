@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using IntegrationAdapters;
-using IntegrationAdapters.Models;
-using IntegrationAdapters.Repositories;
-using IntegrationAdapters.Services;
+using PharmacyRegistration;
+using PharmacyRegistration.Models;
+using PharmacyRegistration.Repositories;
+using PharmacyRegistration.Services;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
