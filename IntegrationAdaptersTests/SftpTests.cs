@@ -1,6 +1,6 @@
-﻿using IntegrationAdapters.Models;
-using IntegrationAdapters.Repositories;
-using IntegrationAdapters.Services;
+﻿using Report.Models;
+using Report.Repositories;
+using Report.Services;
 using Moq;
 using System;
 using System.Collections.Generic;

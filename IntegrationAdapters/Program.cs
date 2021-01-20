@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HealthClinicBackend.Backend.Model.PharmacySupport;
-using IntegrationAdapters.Adapters;
-using IntegrationAdapters.Controllers;
-using IntegrationAdapters.gRPCProtocol;
-using IntegrationAdapters.Models;
-using IntegrationAdapters.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,8 +25,7 @@ namespace IntegrationAdapters
                 .UseWindowsService()
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddHostedService<RabbitMQService>();
-                    services.AddHostedService<ClientScheduleService>();
+                    
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

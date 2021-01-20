@@ -1,0 +1,306 @@
+{
+    "Routes": [
+        {
+            "DownstreamPathTemplate": "/api/registration",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 63566
+                }
+            ],
+            "UpstreamPathTemplate": "/api/registration",
+            "UpstreamHttpMethod": [ "POST" ]
+        },
+        {
+            "DownstreamPathTemplate": "/medicine/getMedicineSpecification/{medicineName}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 63760
+                }
+            ],
+            "UpstreamPathTemplate": "/medicine/getMedicineSpecification/{medicineName}",
+            "UpstreamHttpMethod": [ "GET" ]
+        },
+        {
+            "DownstreamPathTemplate": "/medicine/prescribeMedicine",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 63760
+                }
+            ],
+            "UpstreamPathTemplate": "/medicine/prescribeMedicine",
+            "UpstreamHttpMethod": [ "POST" ]
+        },
+        {
+            "DownstreamPathTemplate": "/medicine/getSpecification/{medicineName}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 63760
+                }
+            ],
+            "UpstreamPathTemplate": "/medicine/getSpecification/{medicineName}",
+            "UpstreamHttpMethod": [ "GET" ]
+        },
+        {
+            "DownstreamPathTemplate": "/medicine/getMedicine/{medicineName}/{quantity}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 63760
+                }
+            ],
+            "UpstreamPathTemplate": "/medicine/getMedicine/{medicineName}/{quantity}",
+            "UpstreamHttpMethod": [ "GET" ]
+        },
+        {
+            "DownstreamPathTemplate": "/medicine/addMedicine/{id}/{name}/{quantity}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 63760
+                }
+            ],
+            "UpstreamPathTemplate": "/medicine/addMedicine/{id}/{name}/{quantity}",
+            "UpstreamHttpMethod": [ "POST" ]
+        },
+        {
+            "DownstreamPathTemplate": "/medicine/getPharmacies/{medicineName}/{quantity}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 63760
+                }
+            ],
+            "UpstreamPathTemplate": "/medicine/getPharmacies/{medicineName}/{quantity}",
+            "UpstreamHttpMethod": [ "GET" ]
+        },
+        {
+            "DownstreamPathTemplate": "/medicine/sendMessageGrpc",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 63760
+                }
+            ],
+            "UpstreamPathTemplate": "/medicine/sendMessageGrpc",
+            "UpstreamHttpMethod": [ "POST"]
+        },
+        {
+            "DownstreamPathTemplate": "/medicine/getMessageGrpc",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 63760
+                }
+            ],
+            "UpstreamPathTemplate": "/medicine/getMessageGrpc",
+            "UpstreamHttpMethod": [ "GET" ]
+        },
+        {
+            "DownstreamPathTemplate": "/filetransfer/report",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 64183
+                }
+            ],
+            "UpstreamPathTemplate": "/filetransfer/report",
+            "UpstreamHttpMethod": [ "POST" ]
+        },
+        {
+            "DownstreamPathTemplate": "/filetransfer/reportHttp",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 64183
+                }
+            ],
+            "UpstreamPathTemplate": "/filetransfer/reportHttp",
+            "UpstreamHttpMethod": [ "POST" ]
+        },
+        {
+            "DownstreamPathTemplate": "/filetransfer/downloadReport",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 64183
+                }
+            ],
+            "UpstreamPathTemplate": "/filetransfer/downloadReport",
+            "UpstreamHttpMethod": [ "GET" ]
+        },
+        {
+            "DownstreamPathTemplate": "/medicinereport",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 64183
+                }
+            ],
+            "UpstreamPathTemplate": "/medicinereport",
+            "UpstreamHttpMethod": [ "GET" ]
+        },
+        {
+            "DownstreamPathTemplate": "/tender/createTender",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 64306
+                }
+            ],
+            "UpstreamPathTemplate": "/tender/createTender",
+            "UpstreamHttpMethod": [ "POST" ]
+        },
+        {
+            "DownstreamPathTemplate": "/tender/getAllTenders",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 64306
+                }
+            ],
+            "UpstreamPathTemplate": "/tender/getAllTenders",
+            "UpstreamHttpMethod": [ "GET" ]
+        },
+        {
+            "DownstreamPathTemplate": "/tender/getAllOffers",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 64306
+                }
+            ],
+            "UpstreamPathTemplate": "/tender/getAllOffers",
+            "UpstreamHttpMethod": [ "GET" ]
+        },
+        {
+            "DownstreamPathTemplate": "/tender/getTenderById/{name}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 64306
+                }
+            ],
+            "UpstreamPathTemplate": "/tender/getTenderById/{name}",
+            "UpstreamHttpMethod": [ "GET" ]
+        },
+        {
+            "DownstreamPathTemplate": "/tender/addOffer",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 64306
+                }
+            ],
+            "UpstreamPathTemplate": "/tender/addOffer",
+            "UpstreamHttpMethod": [ "POST" ]
+        },
+        {
+            "DownstreamPathTemplate": "/tender/addMedicine",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 64306
+                }
+            ],
+            "UpstreamPathTemplate": "/tender/addMedicine",
+            "UpstreamHttpMethod": [ "POST" ]
+        },
+        {
+            "DownstreamPathTemplate": "/tender/getAllMedicines/{tenderName}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 64306
+                }
+            ],
+            "UpstreamPathTemplate": "/tender/getAllMedicines/{tenderName}",
+            "UpstreamHttpMethod": [ "GET" ]
+        },
+        {
+            "DownstreamPathTemplate": "/tender/getAllOffersByEmailAndTender/{emailAndTender}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 64306
+                }
+            ],
+            "UpstreamPathTemplate": "/tender/getAllOffersByEmailAndTender/{emailAndTender}",
+            "UpstreamHttpMethod": [ "GET" ]
+        },
+        {
+            "DownstreamPathTemplate": "/tender/acceptOffer/{id}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 64306
+                }
+            ],
+            "UpstreamPathTemplate": "/tender/acceptOffer/{id}",
+            "UpstreamHttpMethod": [ "GET" ]
+        },
+        {
+            "DownstreamPathTemplate": "/tender/clearAll/{id}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 64306
+                }
+            ],
+            "UpstreamPathTemplate": "/tender/clearAll/{id}",
+            "UpstreamHttpMethod": [ "GET" ]
+        },
+        {
+            "DownstreamPathTemplate": "/actionsandbenefits/getActionsAndBenefits",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 52470
+                }
+            ],
+            "UpstreamPathTemplate": "/actionsandbenefits/getActionsAndBenefits",
+            "UpstreamHttpMethod": [ "GET" ]
+        },
+        {
+            "DownstreamPathTemplate": "/actionsandbenefits/publishActionsAndBenefits/{trid}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 52470
+                }
+            ],
+            "UpstreamPathTemplate": "/actionsandbenefits/publishActionsAndBenefits/{trid}",
+            "UpstreamHttpMethod": [ "POST" ]
+        }
+
+    ]
+}
+

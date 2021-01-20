@@ -16,7 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\IntegrationAdapters\IntegrationAdapters.csproj" />
+    <ProjectReference Include="..\ActionsAndBenefits\ActionsAndBenefits.csproj" />
+    <ProjectReference Include="..\MedicineUsage\MedicineUsage.csproj" />
+    <ProjectReference Include="..\PharmacyRegistration\PharmacyRegistration.csproj" />
+    <ProjectReference Include="..\Report\Report.csproj" />
+    <ProjectReference Include="..\Tender\TenderProcurement.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,7 +3,7 @@ $(document).ready(function () {
 	$("#btnGetMedicineSpecification").click(function () {
 		var MedicineName = $("#txtMedicine").val();
 		$.get({
-			url: '../medicine/getMedicineSpecification/' + MedicineName,
+			url: 'http://localhost:63251/medicine/getMedicineSpecification/' + MedicineName,
 			contentType: 'application/json',
 			success: function (MedicineName) {
 					alert('Specification found!');
@@ -12,7 +12,7 @@ $(document).ready(function () {
 			error: function (message) {
 				alert('Waiting for check in pharmacy...');
 				$.get({
-					url: '../medicine/getSpecification/' + MedicineName,
+					url: 'http://localhost:63251/medicine/getSpecification/' + MedicineName,
 					contentType: 'application/json',
 					success: function () {
 						alert('Success found specification in pharmacy');
@@ -30,7 +30,7 @@ $(document).ready(function () {
 		var MedicineName = $("#txtMedicine").val();
 		var Quantity = parseInt($("#txtQuantity").val());
 		$.get({
-			url: '../medicine/getPharmacies/' + MedicineName + '/' + Quantity,
+			url: 'http://localhost:63251/medicine/getPharmacies/' + MedicineName + '/' + Quantity,
 			contentType: 'application/json',
 			success: function (foundedPharmacy) {
 				$('#container').html('');
@@ -64,7 +64,7 @@ $(document).ready(function () {
 		var PharmacyName = $("#txtPharmacyName").val();
 		var Note = $("#txtNote").val();
 		$.post({
-			url: '../medicine/prescribeMedicine',
+			url: 'http://localhost:63251/medicine/prescribeMedicine',
 			data: JSON.stringify({ PatientName: PatientName, PatientSurName: PatientSurName, Medicine: Medicine, Quantity: Quantity, PharmacyName: PharmacyName, Note: Note }),
 			contentType: 'application/json',
 			success: function (data) {
@@ -82,7 +82,7 @@ $(document).ready(function () {
 		var Quantity = parseInt($("#txtQuantity").val());
 		var IsPharmacyApproved = false;
 		$.post({
-			url: '../medicine/sendMessageGrpc',
+			url: 'http://localhost:63251/medicine/sendMessageGrpc',
 			data: JSON.stringify({ MedicineName: MedicineName, Quantity: Quantity, IsPharmacyApproved: IsPharmacyApproved }),
 			contentType: "application/json",
 			success: function () {
@@ -107,7 +107,7 @@ $(document).ready(function () {
 
 		$('#container').html('');
 		$.get({
-			url: '../medicine/getMessageGrpc',
+			url: 'http://localhost:63251/medicine/getMessageGrpc',
 			contentType: 'application/json',
 			success: function (data) {
 				foundedPharmacy = data;

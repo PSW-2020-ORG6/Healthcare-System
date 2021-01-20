@@ -1,6 +1,0 @@
-Medicine name: Aspirin
-Content: b
-Medicine replacement: bb
-Producer: b
-Daily taking: 0
-

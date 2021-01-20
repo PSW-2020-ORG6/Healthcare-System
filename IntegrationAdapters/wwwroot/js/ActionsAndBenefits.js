@@ -17,7 +17,7 @@
 
 $(document).ready(function () {
 		$.get({
-			url: '../actionsandbenefits/getActionsAndBenefits',
+			url: 'http://localhost:63251/actionsandbenefits/getActionsAndBenefits',
 			contentType: 'application/json',
 			success: function (data) {
 				drawTable(data);
@@ -30,7 +30,7 @@ $(document).ready(function () {
 		var trid = $(event.target).closest('tr').attr('id');
 		console.log('click')
 		$.post({
-			url: '../actionsandbenefits/publishActionsAndBenefits/'+trid, 
+			url: 'http://localhost:63251/actionsandbenefits/publishActionsAndBenefits/'+trid, 
 			contentType: 'multipart/form-data',
 			success: function () {
 				alert("Successfuly published");

@@ -51,7 +51,7 @@ function drawTable(data) {
     $('#tenderTable').html(table);
     $("input:button[name=medicinesButton]").click(function () {
         $.get({
-            url: '../tender/getAllMedicines/' + this.id,
+            url: 'http://localhost:63251/tender/getAllMedicines/' + this.id,
             contentType: 'application/json',
             success: function (data) {
                 drawModalMedicineTable(data);
@@ -71,12 +71,12 @@ $(document).ready(function () {
         var MedicineName = $("#txtMedicineName").val();
         var Quantity = parseInt($("#txtQuantity").val());
         $.post({
-            url: '../tender/addMedicine',
+            url: 'http://localhost:63251/tender/addMedicine',
             data: JSON.stringify({ Id: Id, TenderName: TenderName, MedicineName: MedicineName, Quantity: Quantity }),
             contentType: 'application/json',
             success: function () {
                 $.get({
-                    url: '../tender/getAllMedicines/' + TenderName,
+                    url: 'http://localhost:63251/tender/getAllMedicines/' + TenderName,
                     contentType: 'application/json',
                     success: function (data) {
                         drawTableMedicine(data);
@@ -97,7 +97,7 @@ $(document).ready(function () {
         var FinishDate = $("#txtFinishDate").val();
         var IsActive = true;
         $.post({
-            url: '../tender/createTender',
+            url: 'http://localhost:63251/tender/createTender',
             data: JSON.stringify({ TenderName: TenderName, FinishDate: FinishDate, IsActive: IsActive }),
             contentType: 'application/json',
             success: function () {
@@ -144,7 +144,7 @@ $(document).ready(function () {
     $('#tenderTable').on('click', 'input:button[name=offerButton]', function (event) {
         tenderName = this.id;
         $.get({
-            url: '../tender/getAllMedicines/' + this.id,
+            url: 'http://localhost:63251/tender/getAllMedicines/' + this.id,
             contentType: 'application/json',
             success: function (data) {
                 drawMedicineForOfferTable(data);
@@ -161,7 +161,7 @@ $(document).ready(function () {
     })
 
     $.get({
-        url: '../tender/getAllTenders',
+        url: 'http://localhost:63251/tender/getAllTenders',
         contentType: 'application/json',
         success: function (data) {
             drawTable(data);
@@ -184,7 +184,7 @@ $(document).ready(function () {
             var MedicineName = document.getElementById(i).innerText;
             var Id = Math.floor(Math.random() * 100).toString();       
             $.post({
-                url: '../tender/addOffer',
+                url: 'http://localhost:63251/tender/addOffer',
                 data: JSON.stringify({ Id: Id, CompanyEmail: CompanyEmail, CompanyName: CompanyName, TenderName: TenderName, MedicineName: MedicineName, Quantity: Quantity, Price: Price }),
                 contentType: 'application/json',
                 success: function () {
