@@ -12,7 +12,17 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
         {
             _patientAppointmentEventRepository = patientAppointmentEventRepository;
         }
-
+        private List<PatientAppointmentEventDto> GetPatientAppointmentEventDto(List<PatientAppointmentEvent> appointments)
+        {
+            List<PatientAppointmentEventDto> appointmentsDto = new List<PatientAppointmentEventDto>();
+            foreach (PatientAppointmentEvent a in appointments)
+            {
+                PatientAppointmentEventDto appointmentDTO = new PatientAppointmentEventDto(a);
+                appointmentsDto.Add(appointmentDTO);
+            }
+            return appointmentsDto;
+        }
+       
         public void LogEvent(PatientAppointmentEventParams eventParams)
         {
             var patientAppointmentEvent = new PatientAppointmentEvent
@@ -21,6 +31,11 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
                 IsAppointmentScheduled = eventParams.IsAppointmentScheduled, SchedulingDuration = eventParams.SchedulingDuration};
 
             _patientAppointmentEventRepository.LogEvent(patientAppointmentEvent);
+        }
+
+        public List<PatientAppointmentEventDto> GetAllAppointments()
+        {
+            return GetPatientAppointmentEventDto(_patientAppointmentEventRepository.GetAll());
         }
     }
 }

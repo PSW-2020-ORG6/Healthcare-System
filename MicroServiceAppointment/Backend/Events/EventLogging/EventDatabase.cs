@@ -8,7 +8,6 @@
         {
             DbContext = dbContext;
         }
-
         public abstract void LogEvent(T @event);
     }
 }
