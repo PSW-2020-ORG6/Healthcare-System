@@ -30,9 +30,35 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
 
         [Authorize]
         [HttpGet("all")]
-        public List<PatientAppointmentEventDto> GetAllAppointments()
+        public List<PatientAppointmentEventDto> GetAll()
         {
-            return _logPatientAppointmentEventService.GetAllAppointments();
+            return _logPatientAppointmentEventService.GetAll();
+        }
+        [Authorize]
+        [HttpGet("stetisticsForAllSteps")]
+        public List<double> GetStetisticsForAllSteps()
+        {
+            return _logPatientAppointmentEventService.GetStatisticsResultPerSteps();
+        }
+        [Authorize]
+        [HttpGet("stetisticsForDate")]
+        public List<double> GetStatisticsResultPerDate()
+        {
+            return _logPatientAppointmentEventService.GetStatisticsResultPerDate();
+        }
+      
+        [Authorize]
+        [HttpGet("stetisticsForSpecialization")]
+        public List<double> GetStatisticsResultPerSpecialization()
+        {
+            return _logPatientAppointmentEventService.GetStatisticsResultPerSpecialization();
+        }
+
+        [Authorize]
+        [HttpGet("stetisticsForDoctor")]
+        public List<double> GetStatisticsResultPerDoctor()
+        {
+            return _logPatientAppointmentEventService.GetStatisticsResultPerDoctor();
         }
     }
 }
