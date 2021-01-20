@@ -27,5 +27,15 @@ namespace WebApplication.Controller
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<IActionResult>(await response.Content.ReadAsStringAsync());
         }
+
+        [HttpGet("allEvents")]
+        public async Task<List<PatientAppointmentEventDto>> GetAllEvents()
+        {
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+                                                                                                     , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentEvent/all");
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<List<PatientAppointmentEventDto>>(await response.Content.ReadAsStringAsync());
+        }
     }
 }

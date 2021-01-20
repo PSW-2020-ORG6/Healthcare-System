@@ -7,5 +7,6 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
 {
     public interface IPatientAppointmentEventRepository : IEventRepository<PatientAppointmentEvent>
     {
+        List<PatientAppointmentEvent> GetAll();
     }
 }

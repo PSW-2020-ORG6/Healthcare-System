@@ -27,5 +27,12 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
            _logPatientAppointmentEventService.LogEvent(patientAppointmentEventParams);
             return Ok();
         }
+
+        [Authorize]
+        [HttpGet("all")]
+        public List<PatientAppointmentEventDto> GetAllAppointments()
+        {
+            return _logPatientAppointmentEventService.GetAllAppointments();
+        }
     }
 }
