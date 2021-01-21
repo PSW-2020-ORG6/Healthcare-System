@@ -166,5 +166,22 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             resultListStatistics.Add(staticticsMultipleTimesResult);
             return resultListStatistics;
         }
+
+        public string GetStatisticsMiddleTime()//prosecno vreme
+        {
+            var time = 0;
+            var number = 0;
+            foreach (PatientAppointmentEventDto patientAppointmentEvent in GetAll())
+            {
+                if (patientAppointmentEvent.IsAppointmentScheduled)
+                {
+                    time += Int32.Parse(patientAppointmentEvent.SchedulingDuration);
+                    number += 1;
+                }
+            }
+            double minutes = (time / number) / 60;
+            var middleTime = minutes.ToString().Split(".");
+            return middleTime[0] + ":" + middleTime[1];
+        }
     }
 }
