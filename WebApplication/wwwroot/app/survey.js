@@ -437,7 +437,8 @@ Vue.component("appointments", {
             previousStep2: 0,
             previousStep3: 0,
             isScheduled: false,
-            time: "00:00"
+            timeStart: null,
+            timeEnd: null
         }
     },
     beforeMount() {
@@ -551,8 +552,26 @@ Vue.component("appointments", {
                 this.specializations = response.data
             })
     }, beforeDestroy() {
-        if (this.time != "00:00") { }
-                //kod za event
+        if (this.timeStart != null) {
+            this.PatientAppointmentEvent.isAppointmentScheduled = false
+            this.PatientAppointmentEvent.transitionsFromTwoToOneStep = this.previousStep1
+            this.PatientAppointmentEvent.transitionsFromThreeToTwoStep = this.previousStep2
+            this.PatientAppointmentEvent.transitionsFromFourToThreeStep = this.previousStep3
+            this.PatientAppointmentEvent.schedulingDuration = "0"
+            axios
+                .post('/event/addEvent', this.PatientAppointmentEvent, {
+                    headers: {
+                        'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                    }
+                })
+                .then(response => {
+                })
+            this.previousStep1 = 0
+            this.previousStep2 = 0
+            this.previousStep3 = 0
+            this.timeEnd = null
+            this.timeStart = null
+        }
     },
     template: `
 	<div id="appointments">
@@ -1064,8 +1083,35 @@ Vue.component("appointments", {
             }
         },
         EventTime: function () {
-            if (this.time != "00:00") { }
-                //kod za event
+            if (this.timeStart != null)
+                this.SentEvent()
+            this.timeStart = new Date()
+        },
+        SentEvent: function () {
+            var seconds=0
+            if (this.PatientAppointmentEvent.isAppointmentScheduled) {
+                this.timeEnd = new Date()
+                var timeDiff = this.timeEnd - this.timeStart;
+                timeDiff /= 1000;
+                seconds = Math.round(timeDiff);
+            }
+            this.PatientAppointmentEvent.transitionsFromTwoToOneStep = this.previousStep1
+            this.PatientAppointmentEvent.transitionsFromThreeToTwoStep = this.previousStep2
+            this.PatientAppointmentEvent.transitionsFromFourToThreeStep = this.previousStep3
+            this.PatientAppointmentEvent.schedulingDuration = String(seconds)
+            axios
+                .post('/event/addEvent', this.PatientAppointmentEvent, {
+                    headers: {
+                        'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                    }
+                })
+                .then(response => {
+                })
+            this.previousStep1 = 0
+            this.previousStep2 = 0
+            this.previousStep3 = 0
+            this.timeEnd = null
+            this.timeStart = null
         },
         GetTimeIntervals: function () {
             axios
@@ -1166,25 +1212,14 @@ Vue.component("appointments", {
                         alert("Error")
                     })
                 this.PatientAppointmentEvent.isAppointmentScheduled = true
-                this.PatientAppointmentEvent.transitionsFromTwoToOneStep = this.previousStep1
-                this.PatientAppointmentEvent.transitionsFromThreeToTwoStep = this.previousStep2
-                this.PatientAppointmentEvent.transitionsFromFourToThreeStep = this.previousStep3
-                this.PatientAppointmentEvent.schedulingDuration = this.time
-                axios
-                    .post('/event/addEvent', this.PatientAppointmentEvent, {
-                        headers: {
-                            'Authorization': 'Bearer' + " " + localStorage.getItem('token')
-                        }
-                    })
-                    .then(response => {
-                    })
-                this.previousStep1 = 0
-                this.previousStep2 = 0
-                this.previousStep3 = 0
-                this.time = "00:00"
+                this.SentEvent()
             }
         },
         MakeAppointment2: function () {
+            if (this.timeStart != null) {
+                this.PatientAppointmentEvent.isAppointmentScheduled = false
+                this.SentEvent()
+            }
             if (this.informations != null) {
                 axios
                     .post('/appointment/makeAppointment/' + this.informations[0].physicianId + '/' + this.informations[1].start + '/' + this.informations[0].date, {
@@ -1303,6 +1338,10 @@ Vue.component("appointments", {
             }
         },
         MakeAppointment3: function () {
+            if (this.timeStart != null) {
+                this.PatientAppointmentEvent.isAppointmentScheduled = false
+                this.SentEvent()
+            }
             axios
                 .post('/appointment/makeAppointment/' + "600001" + '/' + this.timeInterval.start + '/' + this.myDate, {
                     headers: {
@@ -1314,6 +1353,8 @@ Vue.component("appointments", {
                 })
         },
         ReportModalShow: function (appointmentDto) {
+            if (this.timeStart != null)
+                this.SentEvent()
             var appdate = appointmentDto.date.split('T')[0]
             var physicianId = appointmentDto.physicianDTO.id
             axios
@@ -1333,6 +1374,8 @@ Vue.component("appointments", {
 
         },
         PrescriptionModalShow: function (appointmentDto) {
+            if (this.timeStart != null)
+                this.SentEvent()
             var appdate = appointmentDto.date.split('T')[0]
             var physicianId = appointmentDto.physicianDTO.id
             axios

@@ -108,7 +108,7 @@ namespace MicroServiceSearch
             var portDefault = 5432;
 
             var userDefault = "postgres";
-            var passwordDefault = "root";
+            var passwordDefault = "super";
             var schema = "healthcare-system-db";
 
             // Do not change this
