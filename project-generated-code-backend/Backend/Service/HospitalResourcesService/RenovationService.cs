@@ -4,6 +4,7 @@
 // Purpose: Definition of Class RenovationService
 
 using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,11 @@ namespace HealthClinicBackend.Backend.Service.HospitalResourcesService
     public class RenovationService
     {
         private readonly IRenovationRepository _renovationRepository;
+
+        public RenovationService()
+        {
+            _renovationRepository = new RenovationDatabaseSql();
+        }
 
         public RenovationService(IRenovationRepository renovationRepository)
         {

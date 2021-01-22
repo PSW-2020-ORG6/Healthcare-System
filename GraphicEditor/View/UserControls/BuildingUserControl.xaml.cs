@@ -13,6 +13,7 @@ namespace GraphicEditor.View.UserControls
     {
         private AppointmentController appointmentController = new AppointmentController();
         private EquipmentRelocationController equipmentRelocationController = new EquipmentRelocationController();
+        private RenovationController renovationController = new RenovationController();
         private MainWindowViewModel _viewModel;
         public BuildingUserControlViewModel myViewModel;
 
@@ -50,7 +51,8 @@ namespace GraphicEditor.View.UserControls
                 return;
             }
             SchedulesWindow schedulesWindow = new SchedulesWindow(appointmentController.GetAll(),
-                                                            equipmentRelocationController.GetAll());
+                                                            equipmentRelocationController.GetAll(),
+                                                            renovationController.GetAll());
             schedulesWindow.Show();
         }
     }

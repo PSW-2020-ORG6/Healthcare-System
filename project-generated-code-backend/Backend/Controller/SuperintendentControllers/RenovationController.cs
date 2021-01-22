@@ -1,8 +1,3 @@
-// File:    RenovationControler.cs
-// Author:  Luka Doric
-// Created: Sunday, June 7, 2020 4:19:02 PM
-// Purpose: Definition of Class RenovationControler
-
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Service.HospitalResourcesService;
 using System;
@@ -12,7 +7,12 @@ namespace HealthClinicBackend.Backend.Controller.SuperintendentControllers
 {
     public class RenovationController
     {
-        private readonly RenovationService _renovationService;
+        private RenovationService _renovationService;
+
+        public RenovationController()
+        {
+            _renovationService = new RenovationService();
+        }
 
         public RenovationController(RenovationService renovationService)
         {
