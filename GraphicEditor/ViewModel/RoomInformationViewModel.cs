@@ -166,6 +166,7 @@ namespace GraphicEditor.ViewModel
         private BedController bedController = new BedController();
         private EquipmentController equipmentController = new EquipmentController();
         private EquipmentRelocationController equipmentRelocationController = new EquipmentRelocationController();
+        private RenovationController renovationController = new RenovationController();
         private SuperintendentMedicineController medicineController = new SuperintendentMedicineController();
 
         public RoomInformationViewModel(RoomInformation _window, Room _room)
@@ -279,7 +280,9 @@ namespace GraphicEditor.ViewModel
                 return;
             }
             RoomSchedulesWindow roomSchedulesWindow = new RoomSchedulesWindow(
-                appointmentController.GetByRoomSerialNumber(room.SerialNumber), GetEquipmentRelocationsForRoom());
+                appointmentController.GetByRoomSerialNumber(room.SerialNumber),
+                GetEquipmentRelocationsForRoom(),
+                GetRenovationsForRoom());
             roomSchedulesWindow.Show();
         }
 
@@ -290,6 +293,15 @@ namespace GraphicEditor.ViewModel
                 if (er.equipment.RoomSerialNumber == room.SerialNumber || er.roomToRelocateToSerialNumber == room.SerialNumber)
                     equipmentRelocations.Add(er);
             return equipmentRelocations;
+        }
+
+        private List<Renovation> GetRenovationsForRoom()
+        {
+            List<Renovation> renovations = new List<Renovation>();
+            foreach (Renovation r in renovationController.GetAll())
+                if (r.Room.SerialNumber == room.SerialNumber)
+                    renovations.Add(r);
+            return renovations;
         }
     }
 }
