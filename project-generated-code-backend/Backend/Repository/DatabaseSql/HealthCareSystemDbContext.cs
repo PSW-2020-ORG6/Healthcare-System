@@ -14,8 +14,8 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
     public class HealthCareSystemDbContext : DbContext
     {
-        //private const string CONNECTION_STRING =
-        //    "User ID =postgres;Password=root;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
+        private const string CONNECTION_STRING =
+            "User ID =postgres;Password=root;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
 
         public DbSet<Address> Address { get; set; }
         public DbSet<Admin> Admin { get; set; }
@@ -62,10 +62,10 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
         }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseNpgsql(CONNECTION_STRING);
-        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql(CONNECTION_STRING);
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -244,6 +244,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<RoomRenovation>().HasKey(r => r.SerialNumber);
             modelBuilder.Entity<RoomRenovation>().Ignore(r => r.RenovatedRoom);
             modelBuilder.Entity<RoomRenovation>().Ignore(r => r.RenovatingRooms);
+            modelBuilder.Entity<RoomRenovation>().Property(r => r.Description).HasDefaultValue("");
         }
 
         private static void EquipmentRelocationsCreation(ModelBuilder modelBuilder)
