@@ -7,237 +7,213 @@
         xmlns:local="clr-namespace:GraphicEditor.View.Windows"
         mc:Ignorable="d"
         Title="Schedules"
-        MinHeight="700"
-        MinWidth="1050"
+        MinHeight="800"
+        MinWidth="1200"
         WindowStartupLocation="CenterScreen">
     <Grid Background="AliceBlue">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="250"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <ListView x:Name="appointmentsListView" 
+                  ItemsSource="{Binding AllAppointments, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  HorizontalAlignment="Left" 
+                  Height="150" 
+                  Margin="50,70,0,0" 
+                  SelectedItem="{Binding Path=SelectedAppointment, UpdateSourceTrigger=PropertyChanged}"
+                  VerticalAlignment="Top"
+                  Width="861">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="HorizontalContentAlignment" 
+                            Value="Center" />
+                    <Setter Property="VerticalContentAlignment" 
+                            Value="Center" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Room"
+                                    DisplayMemberBinding="{Binding Room.Name}" />
+                    <GridViewColumn Header="Physician" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}, {2}">
+                                            <Binding Path="Physician.Name" />
+                                            <Binding Path="Physician.Surname" />
+                                            <Binding Path="Physician.Specialization[0].Name" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Patient" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="Patient.Name" />
+                                            <Binding Path="Patient.Surname" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Start"
+                                    DisplayMemberBinding="{Binding TimeInterval.Start}" />
+                    <GridViewColumn Header="End"
+                                    DisplayMemberBinding="{Binding TimeInterval.End}" />
+                    <GridViewColumn Header="Urgency"
+                                    DisplayMemberBinding="{Binding Urgency}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
 
-        <TextBlock HorizontalAlignment="Center"
-                   Grid.Column="0"
-                   Grid.ColumnSpan="2"
-                   Grid.Row="0"
-                   Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                   Margin="10"
+        <TextBlock HorizontalAlignment="Left" 
+                   Height="60"
+                   FontSize="30"
+                   Margin="364,10,0,0"
                    Text="Appointments" 
                    TextWrapping="Wrap"
-                   VerticalAlignment="Center"/>
-        
-        <ListView x:Name="appointmentsListView" 
-                  Grid.Column="0"
-                  Grid.ColumnSpan="1"
-                  Grid.Row="1"
-                  ItemsSource="{Binding AllAppointments}"
-                  HorizontalAlignment="Center"  
-                  Margin="10" 
-                  VerticalAlignment="Top">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" 
+                   VerticalAlignment="Top"
+                   Width="194"/>
+        <TextBlock HorizontalAlignment="Left" 
+            Height="62"
+            FontSize="30"
+            Margin="307,261,0,0"
+            Text="Equipment relocations" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="308"/>
+        <TextBlock HorizontalAlignment="Left" 
+            Height="60"
+            FontSize="30"
+            Margin="376,506,0,0"
+            Text="Renovations" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="170"/>
+        <ListView x:Name="equipmentRelocationsListView" 
+            ItemsSource="{Binding AllEquipmentRelocations, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            HorizontalAlignment="Left" 
+            Height="150" 
+            Margin="50,323,0,0" 
+            SelectedItem="{Binding Path=SelectedEquipmentRelocation, UpdateSourceTrigger=PropertyChanged}"
+            VerticalAlignment="Top"
+            Width="861">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="HorizontalContentAlignment" 
                             Value="Center" />
-                        <Setter Property="VerticalContentAlignment" 
+                    <Setter Property="VerticalContentAlignment" 
                             Value="Center" />
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Room"
-                                    DisplayMemberBinding="{Binding Room.Name}" />
-                        <GridViewColumn Header="Physician" >
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock>
-                                        <TextBlock.Text>
-                                            <MultiBinding StringFormat="{}{0} {1}, {2}">
-                                                <Binding Path="Physician.Name" />
-                                                <Binding Path="Physician.Surname" />
-                                                <Binding Path="Physician.Specialization[0].Name" />
-                                            </MultiBinding>
-                                        </TextBlock.Text>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Patient" >
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock>
-                                        <TextBlock.Text>
-                                            <MultiBinding StringFormat="{}{0} {1}">
-                                                <Binding Path="Patient.Name" />
-                                                <Binding Path="Patient.Surname" />
-                                            </MultiBinding>
-                                        </TextBlock.Text>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Start"
-                                    DisplayMemberBinding="{Binding TimeInterval.Start}" >
-                        </GridViewColumn>
-                        <GridViewColumn Header="End"
-                                    DisplayMemberBinding="{Binding TimeInterval.End}" />
-                        <GridViewColumn Header="Urgency"
-                                    DisplayMemberBinding="{Binding Urgency}" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        <Button x:Name="CancelAppointment"
-                Grid.Column="2"
-                Grid.ColumnSpan="1"
-                Grid.Row="1"
-            Command="{Binding CancelOfAppointment}"
-            HorizontalAlignment="Center" 
-            Height="46" 
-            Margin="10"
-            VerticalAlignment="Center" 
-            Width="200"
-            Style="{StaticResource MaterialDesignRaisedButton}" >
-            <DockPanel Width="auto">
-                <materialDesign:PackIcon Kind="Cancel" 
-                                                 Height="25" 
-                                                 HorizontalAlignment="Left"
-                                                 Width="25"
-                                                 VerticalAlignment="Center"/>
-                <TextBlock HorizontalAlignment="Right" 
-                                       VerticalAlignment="Center">
-                                Cancel appointment
-                </TextBlock>
-            </DockPanel>
-        </Button>
-
-        <TextBlock HorizontalAlignment="Center"
-                   Grid.Column="0"
-                   Grid.ColumnSpan="2"
-                   Grid.Row="2"
-                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                    Text="Equipment relocations" 
-                   Margin="10"
-                    TextWrapping="Wrap"
-                    VerticalAlignment="Center"/>
-
-            <ListView x:Name="equipmentRelocationsListView"
-                      Grid.Column="0"
-                      Grid.ColumnSpan="1"
-                      Grid.Row="3"
-                        ItemsSource="{Binding AllEquipmentRelocations}"
-                        HorizontalAlignment="Center" 
-                        VerticalAlignment="Top">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" 
-                            Value="Center" />
-                        <Setter Property="VerticalContentAlignment" 
-                            Value="Center" />
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Equipment"
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Equipment"
                         DisplayMemberBinding="{Binding equipment.Name}" />
-                        <GridViewColumn Header="From"
+                    <GridViewColumn Header="From"
                         DisplayMemberBinding="{Binding equipment.Room.Name}" />
-                        <GridViewColumn Header="To"
+                    <GridViewColumn Header="To"
                         DisplayMemberBinding="{Binding roomToRelocateTo.Name}" />
-                        <GridViewColumn Header="Quantity"
+                    <GridViewColumn Header="Quantity"
                         DisplayMemberBinding="{Binding quantity}" />
-                        <GridViewColumn Header="Start"
-                                    DisplayMemberBinding="{Binding TimeInterval.Start}" >
-                        </GridViewColumn>
-                        <GridViewColumn Header="End"
+                    <GridViewColumn Header="Start"
+                                    DisplayMemberBinding="{Binding TimeInterval.Start}" />
+                    <GridViewColumn Header="End"
                                     DisplayMemberBinding="{Binding TimeInterval.End}" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        <Button x:Name="CancelEquipmentRelocation"
-                Grid.Column="1"
-                Grid.ColumnSpan="1"
-                Grid.Row="3"
-            Command="{Binding CancelOfRelocation}"
-            HorizontalAlignment="Center" 
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="renovationsListView" 
+            ItemsSource="{Binding AllRenovations, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            HorizontalAlignment="Left" 
+            Height="150" 
+            Margin="50,555,0,0" 
+            SelectedItem="{Binding Path=SelectedRenovation, UpdateSourceTrigger=PropertyChanged}"
+            VerticalAlignment="Top"
+            Width="861">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="HorizontalContentAlignment" 
+                            Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" 
+                            Value="Center" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Room"
+                                    DisplayMemberBinding="{Binding Room.Name}" />
+                    <GridViewColumn Header="Start"
+                                    DisplayMemberBinding="{Binding TimeInterval.Start}" />
+                    <GridViewColumn Header="End"
+                                    DisplayMemberBinding="{Binding TimeInterval.End}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="CancelAppointment"
+            Command="{Binding CancelOfAppointment}"
+            HorizontalAlignment="Left" 
             Height="46" 
-            Margin="10"
-            VerticalAlignment="Center" 
+            Margin="950,145,0,0" 
+            VerticalAlignment="Top" 
             Width="200"
             Style="{StaticResource MaterialDesignRaisedButton}" >
             <DockPanel Width="auto">
                 <materialDesign:PackIcon Kind="Cancel" 
-                                                 Height="25" 
-                                                 HorizontalAlignment="Left"
-                                                 Width="25"
-                                                 VerticalAlignment="Center"/>
+                    Height="25" 
+                    HorizontalAlignment="Left"
+                    Width="25"
+                    VerticalAlignment="Center"/>
                 <TextBlock HorizontalAlignment="Right" 
-                                       VerticalAlignment="Center">
-                                Cancel relocation
+                    VerticalAlignment="Center">
+                    <Run Text="Cancel appointment"/>
                 </TextBlock>
             </DockPanel>
         </Button>
-
-        <TextBlock HorizontalAlignment="Center"
-                   Grid.Column="0"
-                   Grid.ColumnSpan="2"
-                   Grid.Row="4"
-                   Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                   Text="Renovations" 
-                   Margin="10"
-                   TextWrapping="Wrap"
-                   VerticalAlignment="Center"/>
-
-            <ListView x:Name="renovationsListView"
-                      Grid.Column="0"
-                      Grid.ColumnSpan="1"
-                      Grid.Row="5"
-            ItemsSource="{Binding AllRenovations}"
-            HorizontalAlignment="Center" 
-            Height="220" 
-            VerticalAlignment="Top">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" 
-                            Value="Center"/>
-                        <Setter Property="VerticalContentAlignment" 
-                            Value="Center" />
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="TODO"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        <Button x:Name="CancelRenovation"
-                Grid.Column="1"
-                Grid.ColumnSpan="1"
-                Grid.Row="5"
-            Command="{Binding CancelOfRenovation}"
-            HorizontalAlignment="Center" 
-            Height="46"
-            VerticalAlignment="Center" 
-            Width="200" 
-            Margin="10"
+        <Button x:Name="CancelEquipmentRelocation" 
+            Command="{Binding CancelOfRelocation}"
+            HorizontalAlignment="Left" 
+            Height="46" 
+            Margin="950,398,0,0" 
+            VerticalAlignment="Top" 
+            Width="200"
             Style="{StaticResource MaterialDesignRaisedButton}" >
             <DockPanel Width="auto">
                 <materialDesign:PackIcon Kind="Cancel" 
-                                                 Height="25" 
-                                                 HorizontalAlignment="Left"
-                                                 Width="25"
-                                                 VerticalAlignment="Center"/>
+                    Height="25" 
+                    HorizontalAlignment="Left"
+                    Width="25"
+                    VerticalAlignment="Center"/>
                 <TextBlock HorizontalAlignment="Right" 
-                                       VerticalAlignment="Center">
-                                Cancel renovation
+                    VerticalAlignment="Center">
+                    <Run Text="Cancel relocation"/>
+                </TextBlock>
+            </DockPanel>
+        </Button>
+        <Button x:Name="CancelRenovation" 
+            Command="{Binding CancelOfRenovation}"
+            HorizontalAlignment="Left" 
+            Height="46" 
+            Margin="950,646,0,0" 
+            VerticalAlignment="Top" 
+            Width="200" 
+            Style="{StaticResource MaterialDesignRaisedButton}" >
+            <DockPanel Width="auto">
+                <materialDesign:PackIcon Kind="Cancel" 
+                    Height="25" 
+                    HorizontalAlignment="Left"
+                    Width="25"
+                    VerticalAlignment="Center"/>
+                <TextBlock HorizontalAlignment="Right" 
+                    VerticalAlignment="Center">
+                    <Run Text="Cancel renovation"/>
                 </TextBlock>
             </DockPanel>
         </Button>
     </Grid>
 </Window>
+
