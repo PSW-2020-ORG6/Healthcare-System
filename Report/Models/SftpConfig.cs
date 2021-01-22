@@ -7,9 +7,33 @@ namespace Report.Models
 {
     public class SftpConfig
     {
-        public string Host { get; set; }
-        public int Port { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        private string host { get; set; }
+        private int port { get; set; }
+        private string username { get; set; }
+        private string password { get; set; }
+
+        public string Host
+        {
+            get { return host; }
+            private set { host = value; }
+        }
+
+        public int Port
+        {
+            get { return port; }
+            private set { port = value; }
+        }
+
+        public string Username
+        {
+            get { return username; }
+            private set { username = value; }
+        }
+
+        public string Password
+        {
+            get { return password; }
+            private set { password = value; }
+        }
     }
 }

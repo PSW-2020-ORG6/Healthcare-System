@@ -24,5 +24,29 @@ namespace PharmacyRegistration.Models
             this.PharmacyName = PharmacyName;
             this.Url = Url;
         }
+
+        public bool IsPharmacyNameValid()
+        {
+            if (this.PharmacyName != "")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool IsPharmacyUrlValid()
+        {
+            if (this.Url != "")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

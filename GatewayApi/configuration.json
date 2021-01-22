@@ -109,7 +109,7 @@
             "UpstreamHttpMethod": [ "GET" ]
         },
         {
-            "DownstreamPathTemplate": "/filetransfer/report",
+            "DownstreamPathTemplate": "/filetransfer/report/{start}/{end}",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
@@ -117,7 +117,7 @@
                     "Port": 64183
                 }
             ],
-            "UpstreamPathTemplate": "/filetransfer/report",
+            "UpstreamPathTemplate": "/filetransfer/report/{start}/{end}",
             "UpstreamHttpMethod": [ "POST" ]
         },
         {

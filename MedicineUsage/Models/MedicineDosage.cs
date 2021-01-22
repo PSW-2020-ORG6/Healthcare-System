@@ -10,9 +10,27 @@ namespace MedicineUsage.Models
     public class MedicineDosage
     {
         [Key]
-        public int Id { get; set; }
-        public string MedicineName { get; set; }
-        public int Amount { get; set; }
+        private int id;
+        private string medicineName;
+        private int amount;
+
+        public int Id
+        {
+            get { return id; }
+            private set { id = value; }
+        }
+
+        public string MedicineName
+        {
+            get { return medicineName; }
+            private set { medicineName = value; }
+        }
+
+        public int Amount
+        {
+            get { return amount; }
+            private set { amount = value; }
+        }
 
         public MedicineDosage(int id, string MedicineName, int Amount)
         {
@@ -21,4 +39,5 @@ namespace MedicineUsage.Models
             this.Amount = Amount;
         }
     }
+
 }

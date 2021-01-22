@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net.Sockets;
 
 namespace Report.Services
 {
@@ -12,7 +13,7 @@ namespace Report.Services
     {
         public SftpConfig config = new SftpConfig
         {
-            Host = "192.168.0.52",
+            Host = "127.0.0.1",
             Port = 22,
             Username = "tester",
             Password = "password"
@@ -37,19 +38,21 @@ namespace Report.Services
 
             using (var client = new SftpClient(config.Host, config.Port, config.Username, config.Password))
             {
-                client.Connect();
-                if (client.IsConnected)
+                try
                 {
-                    using (var fileStream = new FileStream(fileName, FileMode.Open))
+                    client.Connect();
+                    if (client.IsConnected)
                     {
-                        client.UploadFile(fileStream, Path.GetFileName(fileName));
+                        using (var fileStream = new FileStream(fileName, FileMode.Open))
+                        {
+                            client.UploadFile(fileStream, Path.GetFileName(fileName));
+                        }
+                        return true;
                     }
-                    return true;
-                }
-                else
-                {
+                } catch(SocketException e) {
                     return false;
                 }
+                return false;
             }
         }
 

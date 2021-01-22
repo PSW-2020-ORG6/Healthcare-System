@@ -20,5 +20,28 @@ namespace Report.Models
             this.MedicineName = MedicineName;
             this.Amount = Amount;
         }
+
+        public bool IsMedicineNameValid()
+        {
+            if (this.MedicineName != "")
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
+
+        public bool IsAmountValid()
+        {
+            if (this.Amount >= 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

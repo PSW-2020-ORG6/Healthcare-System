@@ -10,7 +10,6 @@ namespace Report.Models
     public class Interval
     {
         private string start;
-
         public string Start
         {
             get { return start; }
@@ -23,8 +22,8 @@ namespace Report.Models
             private set { end = value; }
         }
 
-        [JsonConstructor]
-        public Interval(String start, String end)
+
+        public Interval(string start, string end)
         {
             this.start = start;
             this.end = end;

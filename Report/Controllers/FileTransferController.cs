@@ -33,12 +33,12 @@ namespace Report.Controllers
             this.env = env;
         }
 
-        [HttpPost("report")]
-        public IActionResult Post(Interval interval)
+        [HttpPost("report/{start}/{end}")]
+        public IActionResult ReportUsingSftp(string start, string end)
         {
             var myFile = "Report" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt";
             
-            List<MedicineReport> result = medicineReportService.GetByDateInterval(new TimeInterval(DateTime.Parse(interval.Start), DateTime.Parse(interval.End)));
+            List<MedicineReport> result = medicineReportService.GetByDateInterval(new TimeInterval(DateTime.Parse(start), DateTime.Parse(end)));
 
             sftpService.GenerateFile(result, myFile);
 

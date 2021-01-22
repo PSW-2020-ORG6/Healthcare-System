@@ -13,7 +13,7 @@
 				location.href = "../index.html";
 			},
 			error: function (message) {
-				alert("Failed registration")
+				alert("Failed registration! Pharmacy with that api key already exsists.")
 			}
 		});
 	});

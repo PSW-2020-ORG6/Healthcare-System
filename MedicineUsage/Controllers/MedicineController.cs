@@ -121,13 +121,16 @@ namespace MedicineUsage.Controllers
 
         private string GenerateResponse(string endPoint)
         {
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(endPoint);
-            HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
-            Stream receiveStream = webResponse.GetResponseStream();
-            Encoding encode = System.Text.Encoding.GetEncoding("utf-8");
-            StreamReader readStream = new StreamReader(receiveStream, encode);
-            string text = readStream.ReadToEnd();
-            return text;
+            try
+            {
+                HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(endPoint);
+                HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
+                Stream receiveStream = webResponse.GetResponseStream();
+                Encoding encode = System.Text.Encoding.GetEncoding("utf-8");
+                StreamReader readStream = new StreamReader(receiveStream, encode);
+                string text = readStream.ReadToEnd();
+                return text;
+            } catch(WebException e) { return ""; } 
         }
 
         [HttpPost("sendMessageGrpc")]

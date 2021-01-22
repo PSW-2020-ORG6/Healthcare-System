@@ -23,5 +23,29 @@ namespace TenderProcurement.Models
             FinishDate = finishDate;
             IsActive = isActive;
         }
+
+        public bool IsTenderNameValid()
+        {
+            if (this.TenderName != "")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool IsFinishedDateValid()
+        {
+            if (this.FinishDate != null && this.FinishDate >= DateTime.Now)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

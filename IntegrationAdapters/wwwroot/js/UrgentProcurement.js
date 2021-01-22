@@ -28,7 +28,7 @@ $(document).ready(function () {
 				
 			},
 			error: function (message) {
-				alert("Failed")
+				alert("Failed! Maybe there are some problems with pharmacies. Please try later...")
 			}
 		});
 	});
@@ -45,7 +45,7 @@ $(document).ready(function () {
 				getMessageGrpc();
 			},
 			error: function (message) {
-				alert("Failed ")
+				alert("Failed! Maybe there are some problems with pharmacies. Please try later... ")
 			}
 		});
 	});
@@ -78,7 +78,7 @@ $(document).ready(function () {
 					}
 			},
 			error: function (message) {
-				alert("Failed")
+				alert("Failed! Maybe there are some problems with pharmacies. Please try later...")
 			}
 		});
 	}

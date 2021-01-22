@@ -7,7 +7,6 @@ $(document).ready(function () {
 			contentType: 'application/json',
 			success: function (MedicineName) {
 					alert('Specification found!');
-
 			},
 			error: function (message) {
 				alert('Waiting for check in pharmacy...');
@@ -23,6 +22,7 @@ $(document).ready(function () {
 					}
 				});
 			}
+
 		});
 	});
 
@@ -51,7 +51,7 @@ $(document).ready(function () {
 				},
 				
 			error: function (message) {
-				alert("Failed")
+				alert("Failed! Maybe there are some problems with pharmacies. Please try later...")
 			}
 		});
 	});
@@ -72,7 +72,8 @@ $(document).ready(function () {
 				location.href = "../index.html";
 			},
 			error: function (message) {
-				alert("Failed sent")
+				alert("Failed sent. Maybe it's a problem with server. Please try later...");
+				
 			}
 		});
 	});
@@ -90,7 +91,7 @@ $(document).ready(function () {
 				getMessageGrpc();
 			},
 			error: function (message) {
-				alert("Failed ")
+				alert("Failed! Maybe there are some problems with pharmacies. Please try later...")
 			}
 		});
 	});
@@ -110,6 +111,10 @@ $(document).ready(function () {
 			url: 'http://localhost:63251/medicine/getMessageGrpc',
 			contentType: 'application/json',
 			success: function (data) {
+				if (data == undefined) {
+					alert("Failed! Maybe there are some problems with pharmacies. Please try later...")
+					return;
+				}
 				foundedPharmacy = data;
 				foundedPharmacy = foundedPharmacy.replace('[', '');
 				foundedPharmacy = foundedPharmacy.replace(']', '');
@@ -127,7 +132,7 @@ $(document).ready(function () {
 				}
 			},
 			error: function (message) {
-				alert("Failed")
+				alert("Failed! Maybe there are some problems with pharmacies. Please try later...")
 			}
 		});
 	}
