@@ -145,11 +145,16 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="TODO"/>
+                    <GridViewColumn Header="Room"
+                                    DisplayMemberBinding="{Binding Room.Name}" />
+                    <GridViewColumn Header="Start"
+                                    DisplayMemberBinding="{Binding TimeInterval.Start}" />
+                    <GridViewColumn Header="End"
+                                    DisplayMemberBinding="{Binding TimeInterval.End}" />
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="CancelAppointment" 
+        <Button x:Name="CancelAppointment"
             Command="{Binding CancelOfAppointment}"
             HorizontalAlignment="Left" 
             Height="46" 
