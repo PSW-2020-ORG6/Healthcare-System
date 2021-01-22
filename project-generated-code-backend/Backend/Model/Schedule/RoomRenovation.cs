@@ -19,6 +19,8 @@ namespace HealthClinicBackend.Backend.Model.Schedule
 
         public TimeInterval TimeInterval { get; set; }
 
+        public string Description { get; set; }
+
         public RoomRenovation() : base()
         {
             RenovatingRooms = new List<Room>();
