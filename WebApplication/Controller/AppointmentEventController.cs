@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Text;
+using MicroServiceAppointment.Backend.Dto;
 
 namespace WebApplication.Controller
 {
@@ -29,49 +30,49 @@ namespace WebApplication.Controller
         }
 
         [HttpGet("allEvents")]
-        public async Task<List<PatientAppointmentEventDto>> GetAllEvents()
+        public async Task<EventStatisticDTO> GetAllEvents()
         {
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
                                                                                                      , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentEvent/all");
             response.EnsureSuccessStatusCode();
-            return JsonConvert.DeserializeObject<List<PatientAppointmentEventDto>>(await response.Content.ReadAsStringAsync());
+            return JsonConvert.DeserializeObject<EventStatisticDTO > (await response.Content.ReadAsStringAsync());
         }
-        [HttpGet("stetisticsForAllSteps")]
-        public async Task<List<double>> GetStetisticsForAllSteps()
-        {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
-                                                                                                     , Request.Headers["Authorization"].ToString().Split(" ")[1]);
-            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentEvent/stetisticsForAllSteps");
-            response.EnsureSuccessStatusCode();
-            return JsonConvert.DeserializeObject<List<double>>(await response.Content.ReadAsStringAsync());
-        }
-        [HttpGet("stetisticsForDate")]
-        public async Task<List<double>> GetStetisticsForDate()
-        {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
-                                                                                                     , Request.Headers["Authorization"].ToString().Split(" ")[1]);
-            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentEvent/stetisticsForDate");
-            response.EnsureSuccessStatusCode();
-            return JsonConvert.DeserializeObject<List<double>>(await response.Content.ReadAsStringAsync());
-        }
-        [HttpGet("stetisticsForSpecialization")]
-        public async Task<List<double>> GetStetisticsForSpecialization()
-        {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
-                                                                                                     , Request.Headers["Authorization"].ToString().Split(" ")[1]);
-            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentEvent/stetisticsForSpecialization");
-            response.EnsureSuccessStatusCode();
-            return JsonConvert.DeserializeObject<List<double>>(await response.Content.ReadAsStringAsync());
-        }
-        [HttpGet("stetisticsForDoctor")]
-        public async Task<List<double>> GetStetisticsForDoctor()
-        {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
-                                                                                                     , Request.Headers["Authorization"].ToString().Split(" ")[1]);
-            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentEvent/stetisticsForDoctor");
-            response.EnsureSuccessStatusCode();
-            return JsonConvert.DeserializeObject<List<double>>(await response.Content.ReadAsStringAsync());
-        }
+        //[HttpGet("stetisticsForAllSteps")]
+        //public async Task<List<double>> GetStetisticsForAllSteps()
+        //{
+        //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+        //                                                                                             , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+        //    HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentEvent/stetisticsForAllSteps");
+        //    response.EnsureSuccessStatusCode();
+        //    return JsonConvert.DeserializeObject<List<double>>(await response.Content.ReadAsStringAsync());
+        //}
+        //[HttpGet("stetisticsForDate")]
+        //public async Task<List<double>> GetStetisticsForDate()
+        //{
+        //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+        //                                                                                             , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+        //    HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentEvent/stetisticsForDate");
+        //    response.EnsureSuccessStatusCode();
+        //    return JsonConvert.DeserializeObject<List<double>>(await response.Content.ReadAsStringAsync());
+        //}
+        //[HttpGet("stetisticsForSpecialization")]
+        //public async Task<List<double>> GetStetisticsForSpecialization()
+        //{
+        //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+        //                                                                                             , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+        //    HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentEvent/stetisticsForSpecialization");
+        //    response.EnsureSuccessStatusCode();
+        //    return JsonConvert.DeserializeObject<List<double>>(await response.Content.ReadAsStringAsync());
+        //}
+        //[HttpGet("stetisticsForDoctor")]
+        //public async Task<List<double>> GetStetisticsForDoctor()
+        //{
+        //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
+        //                                                                                             , Request.Headers["Authorization"].ToString().Split(" ")[1]);
+        //    HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentEvent/stetisticsForDoctor");
+        //    response.EnsureSuccessStatusCode();
+        //    return JsonConvert.DeserializeObject<List<double>>(await response.Content.ReadAsStringAsync());
+        //}
     }
 }

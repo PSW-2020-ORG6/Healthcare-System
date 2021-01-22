@@ -42,116 +42,105 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
 
         public List<double> GetStatisticsResultPerSteps()//procenat koliko se puta vracao na datum,specijalizaciju i doktora
         {
-            List<int> date = new List<int>();
-            List<int> sprecialization = new List<int>();
-            List<int> doctor = new List<int>();
-            int stepTwoToOneTotal = 0;
-            int stepThreeToTwo = 0;
-            int stepFourToThree = 0;
-
+            var first = 0;
+            var second = 0;
+            var third = 0;
             foreach (PatientAppointmentEventDto patientAppointmentEvent in GetAll())
             {
-                date.Add(patientAppointmentEvent.TransitionsFromTwoToOneStep);
-                sprecialization.Add(patientAppointmentEvent.TransitionsFromThreeToTwoStep);
-                doctor.Add(patientAppointmentEvent.TransitionsFromFourToThreeStep);
+                first += patientAppointmentEvent.TransitionsFromTwoToOneStep;
+                second += patientAppointmentEvent.TransitionsFromThreeToTwoStep;
+                third += patientAppointmentEvent.TransitionsFromFourToThreeStep;
             }
-            foreach (int i in date)
-                stepTwoToOneTotal += i;
-            foreach (int i in sprecialization)
-                stepThreeToTwo += i;
-            foreach (int i in doctor)
-                stepFourToThree += i;
-            int totalReturns = stepTwoToOneTotal + stepThreeToTwo + stepFourToThree;
             List<double> resultListStatistics = new List<double>();
-            resultListStatistics.Add((stepTwoToOneTotal * 100) / totalReturns);
-            resultListStatistics.Add((stepThreeToTwo * 100) / totalReturns);
-            resultListStatistics.Add((stepFourToThree * 100) / totalReturns);
+            double count = first + second + third;
+            resultListStatistics.Add((first * 100) / count);
+            resultListStatistics.Add((second * 100) / count);
+            resultListStatistics.Add((third * 100) / count);
             return resultListStatistics;
+        }
+
+        internal EventStatisticDTO GetStatisticResults()
+        {
+            EventStatisticDTO statisticResults = new EventStatisticDTO(GetStatisticsMiddleTime());
+            var isSheduled = GetStatisticsResultPerIsScheduled();
+            statisticResults.PercentIsAppointmentScheduled = isSheduled[0];
+            statisticResults.PercentIsNotAppointmentScheduled = isSheduled[1];
+
+            var stepOne = GetStatisticsResultPerDate();
+            statisticResults.PercentTransitionsToFirstStepOnce = stepOne[0];
+            statisticResults.PercentTransitionsToFirstStepTwice = stepOne[1];
+            statisticResults.PercentTransitionsToFirstStepMore = stepOne[2];
+
+            var stepTwo = GetStatisticsResultPerSpecialization();
+            statisticResults.PercentTransitionsToSecondStepOnce = stepTwo[0];
+            statisticResults.PercentTransitionsToSecondStepTwice = stepTwo[1];
+            statisticResults.PercentTransitionsToSecondStepMore = stepTwo[2];
+
+            var stepThree = GetStatisticsResultPerDoctor();
+            statisticResults.PercentTransitionsToThirdStepOnce = stepThree[0];
+            statisticResults.PercentTransitionsToThirdStepTwice = stepThree[1];
+            statisticResults.PercentTransitionsToThirdStepMore = stepThree[2];
+
+            var percentSteps = GetStatisticsResultPerSteps();
+            statisticResults.PercenttTransitionsToFirstStep = percentSteps[0];
+            statisticResults.PercenttTransitionsToSecondStep = percentSteps[1];
+            statisticResults.PercenttTransitionsToThirdStep = percentSteps[2];
+
+            return statisticResults;
         }
 
         public List<double> GetStatisticsResultPerDate()//procenat koliko se puta vracao na datum,jednom, dvaput i vise puta
         {
-            List<PatientAppointmentEventDto> allEvents = GetAll();
-            List<int> date = new List<int>();
-            List<int> Once = new List<int>();
-            List<int> Twice = new List<int>();
-            List<int> MultipleTimes = new List<int>();
-      
-            foreach (PatientAppointmentEventDto patientAppointmentEvent in allEvents)
+            var once = 0;
+            var twice = 0;
+            var more = 0;
+            foreach (PatientAppointmentEventDto patientAppointmentEvent in GetAll())
             {
-                date.Add(patientAppointmentEvent.TransitionsFromTwoToOneStep);
-            }
-            foreach(int i in date)
-            {
-                if (i == 1)
-                    Once.Add(i);
-                if (i == 2)
-                    Twice.Add(i);
-                else if(i!=1 && i!=2)
-                    MultipleTimes.Add(i);
+                if (patientAppointmentEvent.TransitionsFromTwoToOneStep == 1) once += 1;
+                if (patientAppointmentEvent.TransitionsFromTwoToOneStep == 2) twice += 1;
+                else more += 1;
             }
             List<double> resultListStatistics = new List<double>();
-            resultListStatistics.Add((Once.Count * 100) / date.Count);
-            resultListStatistics.Add((Twice.Count * 100) / date.Count);
-            resultListStatistics.Add((MultipleTimes.Count * 100) / date.Count);
+            double count = once + twice + more;
+            resultListStatistics.Add((once * 100) / count);
+            resultListStatistics.Add((twice * 100) / count);
+            resultListStatistics.Add((more * 100) / count);
             return resultListStatistics;
         }
         public List<double> GetStatisticsResultPerSpecialization()//procenat koliko se puta vracao na specijalizaciju,jednom, dvaput i vise puta
         {
-            List<PatientAppointmentEventDto> allEvents = GetAll();
-            List<int> specialization = new List<int>();
-            List<int> Once = new List<int>();
-            List<int> Twice = new List<int>();
-            List<int> MultipleTimes = new List<int>();
-          
-
-            foreach (PatientAppointmentEventDto patientAppointmentEvent in allEvents)
+            var once = 0;
+            var twice = 0;
+            var more = 0;
+            foreach (PatientAppointmentEventDto patientAppointmentEvent in GetAll())
             {
-                specialization.Add(patientAppointmentEvent.TransitionsFromThreeToTwoStep);
-            }
-            foreach (int i in specialization)
-            {
-                if (i == 1)
-                    Once.Add(i);
-                if (i == 2)
-                    Twice.Add(i);
-                else if (i != 1 && i != 2)
-                    MultipleTimes.Add(i);
+                if (patientAppointmentEvent.TransitionsFromThreeToTwoStep == 1) once += 1;
+                if (patientAppointmentEvent.TransitionsFromThreeToTwoStep == 2) twice += 1;
+                else more += 1;
             }
             List<double> resultListStatistics = new List<double>();
-            resultListStatistics.Add((Once.Count * 100) / specialization.Count);
-            resultListStatistics.Add((Twice.Count * 100) / specialization.Count);
-            resultListStatistics.Add((MultipleTimes.Count * 100) / specialization.Count);
+            double count = once + twice + more;
+            resultListStatistics.Add((once * 100) / count);
+            resultListStatistics.Add((twice * 100) / count);
+            resultListStatistics.Add((more * 100) / count);
             return resultListStatistics;
         }
         public List<double> GetStatisticsResultPerDoctor()//procenat koliko se puta vracao na doktora,jednom, dvaput i vise puta
         {
-            List<PatientAppointmentEventDto> allEvents = GetAll();
-            List<int> doctor = new List<int>();
-            List<int> Once = new List<int>();
-            List<int> Twice = new List<int>();
-            List<int> MultipleTimes = new List<int>();
-
-            foreach (PatientAppointmentEventDto patientAppointmentEvent in allEvents)
+            var once = 0;
+            var twice = 0;
+            var more = 0;
+            foreach (PatientAppointmentEventDto patientAppointmentEvent in GetAll())
             {
-                doctor.Add(patientAppointmentEvent.TransitionsFromFourToThreeStep);
+                if (patientAppointmentEvent.TransitionsFromFourToThreeStep == 1) once += 1;
+                if (patientAppointmentEvent.TransitionsFromFourToThreeStep == 2) twice += 1;
+                else more += 1;
             }
-            foreach (int i in doctor)
-            {
-                if (i == 1)
-                    Once.Add(i);
-                if (i == 2)
-                    Twice.Add(i);
-                else if (i != 1 && i != 2)
-                    MultipleTimes.Add(i);
-            }
-            double staticticsOnceResult = (Once.Count * 100) / doctor.Count;
-            double staticticsTwiceResult = (Twice.Count * 100) / doctor.Count;
-            double staticticsMultipleTimesResult = (MultipleTimes.Count * 100) / doctor.Count;
             List<double> resultListStatistics = new List<double>();
-            resultListStatistics.Add(staticticsOnceResult);
-            resultListStatistics.Add(staticticsTwiceResult);
-            resultListStatistics.Add(staticticsMultipleTimesResult);
+            double count = once + twice + more;
+            resultListStatistics.Add((once * 100) / count);
+            resultListStatistics.Add((twice * 100) / count);
+            resultListStatistics.Add((more * 100) / count);
             return resultListStatistics;
         }
 
@@ -167,9 +156,9 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
                     number += 1;
                 }
             }
-            double minutes = (time / number) / 60;
-            var middleTime = minutes.ToString().Split(".");
-            return middleTime[0] + ":" + middleTime[1];
+            var seconds =(int) time / number;
+            var minutes = (int)(seconds / 60);
+            return minutes.ToString() + ":" + (seconds-minutes*60).ToString();
         }
 
         public List<double> GetStatisticsResultPerIsScheduled()//procenat zakazanih i nezakazanih
