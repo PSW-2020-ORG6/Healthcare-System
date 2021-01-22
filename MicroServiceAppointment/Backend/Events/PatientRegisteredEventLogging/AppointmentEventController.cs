@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MicroServiceAppointment.Backend.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -30,9 +31,9 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
 
         [Authorize]
         [HttpGet("all")]
-        public List<PatientAppointmentEventDto> GetAll()
+        public EventStatisticDTO GetStatisticResults()
         {
-            return _logPatientAppointmentEventService.GetAll();
+            return _logPatientAppointmentEventService.GetStatisticResults();
         }
         [Authorize]
         [HttpGet("stetisticsForAllSteps")]
@@ -56,9 +57,9 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
 
         [Authorize]
         [HttpGet("stetisticsForDoctor")]
-        public List<double> GetStatisticsResultPerDoctor()
+        public EventStatisticDTO GetStatisticsResultPerDoctor()
         {
-            return _logPatientAppointmentEventService.GetStatisticsResultPerDoctor();
+            return _logPatientAppointmentEventService.GetStatisticResults();
         }
     }
 }
