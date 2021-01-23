@@ -59,7 +59,7 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             return resultListStatistics;
         }
 
-        internal EventStatisticDTO GetStatisticResults()
+        public EventStatisticDTO GetStatisticResults()
         {
             EventStatisticDTO statisticResults = new EventStatisticDTO(GetStatisticsMiddleTime());
             var isSheduled = GetStatisticsResultPerIsScheduled();
@@ -96,8 +96,8 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             var more = 0;
             foreach (PatientAppointmentEventDto patientAppointmentEvent in GetAll())
             {
-                if (patientAppointmentEvent.TransitionsFromTwoToOneStep == 1) once += 1;
-                if (patientAppointmentEvent.TransitionsFromTwoToOneStep == 2) twice += 1;
+                if (patientAppointmentEvent.TransitionsFromTwoToOneStep == 0) once += 1;
+                if (patientAppointmentEvent.TransitionsFromTwoToOneStep == 1) twice += 1;
                 else more += 1;
             }
             List<double> resultListStatistics = new List<double>();
@@ -114,8 +114,8 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             var more = 0;
             foreach (PatientAppointmentEventDto patientAppointmentEvent in GetAll())
             {
-                if (patientAppointmentEvent.TransitionsFromThreeToTwoStep == 1) once += 1;
-                if (patientAppointmentEvent.TransitionsFromThreeToTwoStep == 2) twice += 1;
+                if (patientAppointmentEvent.TransitionsFromThreeToTwoStep == 0) once += 1;
+                if (patientAppointmentEvent.TransitionsFromThreeToTwoStep == 1) twice += 1;
                 else more += 1;
             }
             List<double> resultListStatistics = new List<double>();
@@ -132,8 +132,8 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             var more = 0;
             foreach (PatientAppointmentEventDto patientAppointmentEvent in GetAll())
             {
-                if (patientAppointmentEvent.TransitionsFromFourToThreeStep == 1) once += 1;
-                if (patientAppointmentEvent.TransitionsFromFourToThreeStep == 2) twice += 1;
+                if (patientAppointmentEvent.TransitionsFromFourToThreeStep == 0) once += 1;
+                if (patientAppointmentEvent.TransitionsFromFourToThreeStep == 1) twice += 1;
                 else more += 1;
             }
             List<double> resultListStatistics = new List<double>();
