@@ -22,6 +22,7 @@ namespace GraphicEditor.ViewModel
         /* TODO add this without causing errors
         private List<Object> items = new List<Object>();
         private Object selectedItem;*/
+        private FloorController floorController = new FloorController();
         private string roomName;
         private Room room;
         private string[] categories = { "Equipment", "Medicines", "Beds" };
@@ -37,6 +38,10 @@ namespace GraphicEditor.ViewModel
         public MyICommand SchedulesCommand { get; private set; }
 
         public MyICommand<Room> NavCommandRoomUpdate { get; private set; }
+
+        public MyICommand NavCommandBasicRoomRenovation { get; private set; }
+
+        public MyICommand NavCommandSplitRoomRenovation { get; private set; }
 
         public MyICommand ChangeCaterogyCommand { get; private set; }
 
@@ -169,6 +174,8 @@ namespace GraphicEditor.ViewModel
         private RenovationController renovationController = new RenovationController();
         private SuperintendentMedicineController medicineController = new SuperintendentMedicineController();
 
+        // Floor floor1, Border space, FloorUserControl view1, Room _renovatingRoom
+
         public RoomInformationViewModel(RoomInformation _window, Room _room)
         {
             NavCommandExit = new MyICommand(exitInfo);
@@ -177,6 +184,8 @@ namespace GraphicEditor.ViewModel
             ChangeCaterogyCommand = new MyICommand(ChangeCaterogy);
             EquipmentRelocationCommand = new MyICommand(EnterEquipmentRelocationWindow);
             SchedulesCommand = new MyICommand(SchedulesWindow);
+            NavCommandBasicRoomRenovation = new MyICommand(BasicRoomRenovationCommand);
+            NavCommandSplitRoomRenovation = new MyICommand(SplitRoomRenovationCommand);
 
             window = _window;
             roomName = _room.Name;
@@ -284,6 +293,18 @@ namespace GraphicEditor.ViewModel
                 GetEquipmentRelocationsForRoom(),
                 GetRenovationsForRoom());
             roomSchedulesWindow.Show();
+        }
+
+        private void BasicRoomRenovationCommand()
+        {
+            Floor floor = floorController.GetById(room.FloorSerialNumber);
+            new BasicRoomRenovation(floor, room).ShowDialog();
+        }
+
+        private void SplitRoomRenovationCommand()
+        {
+            Floor floor = floorController.GetById(room.FloorSerialNumber);
+            new SplitRoomRenovation(floor, room).ShowDialog();
         }
 
         private List<EquipmentRelocation> GetEquipmentRelocationsForRoom()

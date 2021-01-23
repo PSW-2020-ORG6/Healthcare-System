@@ -201,7 +201,7 @@ namespace GraphicEditor.ViewModel
 
             if(IsAllInTouch(selectedRooms))
             {
-                new ComplexRoomRenovation(_selectedFloor, FloorViewModel.selectedGridCells, FloorViewModel, selectedRooms).ShowDialog();
+                new ComplexRoomRenovation(_selectedFloor, selectedRooms).ShowDialog();
             }
             else
             {

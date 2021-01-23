@@ -24,7 +24,7 @@ namespace GraphicEditor.View.Windows
     /// <summary>
     /// Interaction logic for ComplexRoomRenovation.xaml
     /// </summary>
-    public partial class ComplexRoomRenovation : Window
+    public partial class SplitRoomRenovation : Window
     {
         private Floor floor;
         private RoomTypeController roomTypesController = new RoomTypeController();
@@ -33,19 +33,19 @@ namespace GraphicEditor.View.Windows
         private SuperintendentMedicineController medicineController = new SuperintendentMedicineController();
         private BedController bedController = new BedController();
         private RoomRenovationController roomRenovationController = new RoomRenovationController();
-        private List<Room> renovatingRooms;
+        private Room renovatingRoom;
 
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
 
-        public ComplexRoomRenovation(Floor floor1, List<Room> _renovatingRooms)
+        public SplitRoomRenovation(Floor floor1, Room _renovatingRoom)
         {
             InitializeComponent();
             this.DataContext = this;
             floor = floor1;
-            renovatingRooms = _renovatingRooms;
-            Start = DateTime.Now + TimeSpan.FromSeconds(30);
-            End = DateTime.Now + TimeSpan.FromSeconds(60);
+            renovatingRoom = _renovatingRoom;
+            Start = DateTime.Now;
+            End = DateTime.Now;
             timeIntervalStart.CultureInfo = CultureInfo.DefaultThreadCurrentUICulture;
             timeIntervalEnd.CultureInfo = CultureInfo.DefaultThreadCurrentUICulture;
 
@@ -80,6 +80,14 @@ namespace GraphicEditor.View.Windows
 
             nameLabel.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
 
+            if (descriptionTextBox.Text.Equals(""))
+            {
+                descriptionLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+                return;
+            }
+
+            descriptionLabel.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+
             string[] split = nameTextBox.Text.Split(" ");
             string number = split[split.Length - 1];
             int k;
@@ -89,53 +97,10 @@ namespace GraphicEditor.View.Windows
                 nameLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
                 return;
             }
+            Position position = new Position(renovatingRoom.Position.Row, renovatingRoom.Position.Column, renovatingRoom.Position.RowSpan, renovatingRoom.Position.ColumnSpan);
 
-            ResourceDictionary resourceDictionary = new ResourceDictionary();
-            resourceDictionary.Source = new Uri("/GraphicEditor;component/Resources/Styles/ButtonStyles.xaml", UriKind.RelativeOrAbsolute);
+            Room newRoom = new Room(nameTextBox.Text, Int32.Parse(number), floor.SerialNumber, RoomTypes[SelectedRoomTypeIndex].SerialNumber, position, "RoomButtonStyle");
 
-            Room firstRoom = renovatingRooms[0];
-
-            int column = firstRoom.Position.Column;
-            int row = firstRoom.Position.Row;
-            int rowSpan = firstRoom.Position.RowSpan;
-            int columnSpan = firstRoom.Position.ColumnSpan;
-
-            (int, int) topLeftCorner = (column, row);
-            (int, int) bottomRightCorner = (column + columnSpan - 1, row + rowSpan - 1);
-
-            (int, int) topLeftCorner2;
-            (int, int) bottomRightCorner2;
-
-            string description = "Joining rooms: ";
-
-            foreach (Room room in renovatingRooms)
-            {
-                description += room.Id.ToString() + ", ";
-                if (room == renovatingRooms[0]) continue;
-                topLeftCorner2 = (room.Position.Column, room.Position.Row);
-                bottomRightCorner2 = (room.Position.Column + room.Position.ColumnSpan - 1, room.Position.Row + room.Position.RowSpan - 1);
-
-                if (topLeftCorner.Item1 >= topLeftCorner2.Item1 && topLeftCorner.Item2 >= topLeftCorner2.Item2)
-                    topLeftCorner = topLeftCorner2;
-
-                if (bottomRightCorner.Item1 <= bottomRightCorner2.Item1 && bottomRightCorner.Item2 <= bottomRightCorner2.Item2)
-                    bottomRightCorner = bottomRightCorner2;
-            }
-
-            description = description.Substring(0, description.Length - 3);
-
-            column = topLeftCorner.Item1;
-            row = topLeftCorner.Item2;
-            columnSpan = bottomRightCorner.Item1 - topLeftCorner.Item1 + 1;
-            rowSpan = bottomRightCorner.Item2 - topLeftCorner.Item2 + 1;
-
-            Position position = new Position(row, column, rowSpan, columnSpan);
-
-            // Ovo oko dugmeta prekopirati tamo isto
-
-            //RoomButton newRoomButton = new RoomButton(view.Grid);
-            Room newRoom = new Room(nameTextBox.Text, Int32.Parse(number), floor.SerialNumber,
-                RoomTypes[SelectedRoomTypeIndex].SerialNumber, position, "RoomButtonStyle");
             newRoom.IsWaitingToBeRenovated = true;
             newRoom.IsBeingRenovated = false;
             SetVisibilities(newRoom);
@@ -147,16 +112,12 @@ namespace GraphicEditor.View.Windows
                 RenovatedRoomSerialNumber = newRoom.SerialNumber,
                 RenovatedRoom = newRoom,
                 TimeInterval = timeInterval,
-                Description = description,
-                RenovatingRooms = renovatingRooms
+                Description = descriptionTextBox.Text
             };
 
-            foreach (Room room in renovatingRooms)
-            {
-                room.IsWaitingToBeRenovated = true;
-                room.RoomRenovationSerialNumber = roomRenovation.SerialNumber;
-                roomController.EditRoom(room);
-            }
+            renovatingRoom.IsWaitingToBeRenovated = true;
+            renovatingRoom.RoomRenovationSerialNumber = roomRenovation.SerialNumber;
+            roomController.EditRoom(renovatingRoom);
 
             roomController.NewRoom(newRoom);
             roomRenovationController.AddRoomRenovation(roomRenovation);

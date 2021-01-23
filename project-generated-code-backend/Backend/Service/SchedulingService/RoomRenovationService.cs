@@ -121,11 +121,12 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             foreach (Room room in _roomRepository.GetByRoomRenovationSerialNumber(roomRenovation.SerialNumber))
             {
                 if (room.SerialNumber.Equals(roomRenovation.RenovatedRoomSerialNumber)) continue;
-                _roomRepository.Delete(room.SerialNumber);
+                if (room.IsBeingRenovated) _roomRepository.Delete(room.SerialNumber);
             }
 
             Room newRoom = _roomRepository.GetBySerialNumber(roomRenovation.RenovatedRoomSerialNumber);
             newRoom.IsBeingRenovated = false;
+            newRoom.RoomRenovationSerialNumber = null;
             _roomRepository.Update(newRoom);
             _roomRenovationRepository.Delete(roomRenovation.SerialNumber);
         }
