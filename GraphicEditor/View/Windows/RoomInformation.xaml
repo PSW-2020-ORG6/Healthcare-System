@@ -11,7 +11,7 @@
         Icon="/GraphicEditor;component/Resources/Icons/bed.png"
         WindowStartupLocation="CenterScreen"
         MinHeight="720"
-        MinWidth="1100">
+        MinWidth="1400">
     <Grid Background="AliceBlue">
 
         <Grid.ColumnDefinitions>
@@ -528,6 +528,40 @@
                                VerticalAlignment="Center"
                                TextWrapping="Wrap">
                          Schedules
+                            </TextBlock>
+                        </DockPanel>
+                    </Button>
+                    <Button 
+                        HorizontalAlignment="Left"
+                        Margin="10"
+                        Command="{Binding Path=NavCommandBasicRoomRenovation}"
+                        Style="{StaticResource MaterialDesignRaisedButton}" >
+                        <DockPanel Width="auto">
+                            <materialDesign:PackIcon Kind="Broom" 
+                                             Height="25" 
+                                             Width="25"
+                                             VerticalAlignment="Center"/>
+                            <TextBlock HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap">
+                                Basic room renovation
+                            </TextBlock>
+                        </DockPanel>
+                    </Button>
+                    <Button 
+                        HorizontalAlignment="Left"
+                        Margin="10"
+                        Command="{Binding Path=NavCommandSplitRoomRenovation}"
+                        Style="{StaticResource MaterialDesignRaisedButton}" >
+                        <DockPanel Width="auto">
+                            <materialDesign:PackIcon Kind="Clip" 
+                                             Height="25" 
+                                             Width="25"
+                                             VerticalAlignment="Center"/>
+                            <TextBlock HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap">
+                                Split room renovation
                             </TextBlock>
                         </DockPanel>
                     </Button>

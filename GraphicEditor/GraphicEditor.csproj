@@ -89,5 +89,23 @@
 		<Resource Include="Resources\Icons\helpBack.png" />
 		<Resource Include="Resources\Icons\helpForward.png" />
 	</ItemGroup>
+	
+	<ItemGroup>
+	  <Compile Update="View\Windows\BasicRoomRenovation.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="View\Windows\SplitRoomRenovation.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <Page Update="View\Windows\BasicRoomRenovation.xaml">
+	    <SubType>Designer</SubType>
+	  </Page>
+	  <Page Update="View\Windows\SplitRoomRenovation.xaml">
+	    <SubType>Designer</SubType>
+	  </Page>
+	</ItemGroup>
 
 </Project>

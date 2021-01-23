@@ -6,6 +6,7 @@ namespace GraphicEditor.View.Windows
 {
     public partial class RoomInformation : Window
     {
+        // Floor floor1, Border space, FloorUserControl view1, Room _renovatingRoom
         public RoomInformation(Room room)
         {
             InitializeComponent();
