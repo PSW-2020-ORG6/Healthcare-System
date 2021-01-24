@@ -2,7 +2,6 @@
 using GraphicEditor.View.UserControls;
 using GraphicEditor.ViewModel;
 using HealthClinicBackend.Backend.Controller;
-using HealthClinicBackend.Backend.Controller.intendentControllers;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
