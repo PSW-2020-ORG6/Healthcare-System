@@ -111,12 +111,9 @@ namespace MicroServiceAppointment.Backend.Service
                         }
                     }
                 }
-
-                if (!existance)
-                    result.Add(new TimeIntervalsDTO(time));
+                if (!existance) result.Add(new TimeIntervalsDTO(time));
                 time = time.Add(new TimeSpan(0, 20, 0));
             }
-
             return result;
         }
 
@@ -185,7 +182,6 @@ namespace MicroServiceAppointment.Backend.Service
                 dateTimeFrom = dateTimeFrom.AddDays(-1);
                 newDates.Add(DateConversion(dateTimeFrom));
             }
-
             return newDates;
         }
 
@@ -237,7 +233,6 @@ namespace MicroServiceAppointment.Backend.Service
             }
             return appointmentsDto;
         }
-
         internal List<AppointmentDto> GetAllAppointmentsByPatientIdDateAndDoctor(string patientId, string date, string doctorName)
         {
             List<PhysiciansDTO> physician = HttpRequest.GetPhysycianByName(doctorName).Result;

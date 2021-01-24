@@ -64,10 +64,8 @@ namespace MicroServiceFeedback.Backend.Service
         public void ChangeStatusFeedback(FeedbackDto feedback)
         {
             var fb = _feedbackRepository.GetById(feedback.SerialNumber);
-            if (!fb.Approved)
-                fb.Approved = true;
-            else
-                fb.Approved = false;
+            if (!fb.Approved) fb.Approved = true;
+            else fb.Approved = false;
             _feedbackRepository.Update(fb);
         }
 

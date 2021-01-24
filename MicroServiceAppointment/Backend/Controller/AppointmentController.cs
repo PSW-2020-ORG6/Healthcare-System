@@ -24,7 +24,7 @@ namespace MicroServiceAppointment.Backend.Controllers
             _dateFromStringConverter = new DateFromStringConverter();
             _appointmentDto = new AppointmentDto();
         }
-        //radi 
+
         [Authorize]
         [HttpGet("allAppointmentsByPatientId/{patientId}")]
         public List<AppointmentDto> GetAllAppointmentsByPatientId(String patientId)
@@ -33,7 +33,7 @@ namespace MicroServiceAppointment.Backend.Controllers
                                                                                                    , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             return _appointmentService.GetAllAppointmentsByPatientId(patientId);
         }
-        //radi
+
         [Authorize]
         [HttpGet("allAppointments")]
         public List<AppointmentDto> GetAllAppointments()
@@ -41,7 +41,7 @@ namespace MicroServiceAppointment.Backend.Controllers
             
             return _appointmentService.GetAllAppointments();
         }
-        //radi
+
         [Authorize]
         [HttpGet("allAppointmentsByPatientIdActive/{patientId}")]
         public List<AppointmentDto> GetAllAppointmentsByPatientIdActive(String patientId)
@@ -49,14 +49,14 @@ namespace MicroServiceAppointment.Backend.Controllers
             
             return _appointmentService.GetAllAppointmentsByPatientIdActive(patientId);
         }
-        //radi
+
         [Authorize]
         [HttpGet("allAppointmentsByPatientIdCanceled/{patientId}")]
         public List<AppointmentDto> GetAllAppointmentsByPatientIdCanceled(String patientId)
         {
             return _appointmentService.GetAllAppointmentsByPatientIdCanceled(patientId);
         }
-        //radi
+
         [Authorize]
         [HttpGet("avaliableTimeIntervals/{physicianId}/{specializationName}/{date}")]
         public List<TimeIntervalsDTO> GetAllAvailableAppointments(string physicianId, string specializationName,
@@ -85,8 +85,6 @@ namespace MicroServiceAppointment.Backend.Controllers
             else
                 return BadRequest();
         }
-
-        //radi
         [Authorize]
         [HttpGet("allAppointmentsByPatientIdPast/{patientId}")]
         public List<AppointmentDto> GellAllAppointmentsByPatientIdPast(String patientId)
@@ -94,7 +92,6 @@ namespace MicroServiceAppointment.Backend.Controllers
             
             return _appointmentService.GetAllAppointmentsByPatientIdPast(patientId);
         }
-        //radi
         [Authorize]
         [HttpGet("allAppointmentsWithSurvey/{patientId}")]
         public List<AppointmentDto> GetAllAppointmentsWithDoneSurvey(String patientId)
@@ -103,7 +100,6 @@ namespace MicroServiceAppointment.Backend.Controllers
                                                                                                  , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             return _appointmentService.GetAllAppointmentsWithDoneSurvey(patientId);
         }
-        //radi
         [Authorize]
         [HttpGet("allAppointmentsWithoutSurvey/{patientId}")]
         public List<AppointmentDto> GetAllAppointmentsWithoutSurvey(String patientId)
@@ -112,7 +108,6 @@ namespace MicroServiceAppointment.Backend.Controllers
                                                                                                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             return _appointmentService.GetAllAppointmentsWithoutDoneSurvey(patientId);
         }
-        //radi
         [Authorize]
         [HttpGet("isSurveyDoneByPatientIdAppointmentDatePhysicianName/{patientId}/{appointmentDate}/{physicianName}")]
         public bool IsSurveyDoneByPatientIdAppointmentDatePhysicianName( String patientId,
@@ -122,7 +117,6 @@ namespace MicroServiceAppointment.Backend.Controllers
                                                                                                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             return _appointmentService.isSurveyDoneByPatientIdAppointmentDatePhysicianName(patientId,appointmentDate,physicianName);
         }
-        //testirati na frontu
         [Authorize]
         [HttpPut("update")]
         public void SetSurveyDoneOnAppointment(AppointmentDto appointmentDto)

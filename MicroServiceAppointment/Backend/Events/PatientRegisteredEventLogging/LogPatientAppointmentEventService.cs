@@ -39,8 +39,13 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
         {
             return GetPatientAppointmentEventDto(_patientAppointmentEventRepository.GetAll());
         }
-
-        public List<double> GetStatisticsResultPerSteps()//procenat koliko se puta vracao na datum,specijalizaciju i doktora
+        /// <summary>
+        ///calculates a statistic for repetition of steps during scheduling appointment
+        ///</summary>
+        ///<returns>
+        ///list double objects(percentage) 
+        ///</returns>
+        public List<double> GetStatisticsResultPerSteps()
         {
             var first = 0;
             var second = 0;
@@ -55,7 +60,7 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             double count = first + second + third;
             resultListStatistics.Add(Math.Round((first * 100) / count,2));
             resultListStatistics.Add(Math.Round((second * 100) / count,2));
-            resultListStatistics.Add(Math.Round((third * 100) / count,2));
+            resultListStatistics.Add(100- Math.Round((first * 100) / count, 2)- Math.Round((second * 100) / count, 2));
             return resultListStatistics;
         }
 
@@ -88,8 +93,13 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
 
             return statisticResults;
         }
-
-        public List<double> GetStatisticsResultPerDate()//procenat koliko se puta vracao na datum,jednom, dvaput i vise puta
+        /// <summary>
+        ///calculates a statistic for repetition of first step(date) during scheduling appointment
+        ///</summary>
+        ///<returns>
+        ///list double objects(percentage) 
+        ///</returns>
+        public List<double> GetStatisticsResultPerDate()
         {
             var once = 0;
             var twice = 0;
@@ -104,10 +114,16 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             double count = once + twice + more;
             resultListStatistics.Add(Math.Round((once * 100) / count,2));
             resultListStatistics.Add(Math.Round((twice * 100) / count,2));
-            resultListStatistics.Add(Math.Round((more * 100) / count,2));
+            resultListStatistics.Add(100 - Math.Round((once * 100) / count, 2) - Math.Round((twice * 100) / count, 2));
             return resultListStatistics;
         }
-        public List<double> GetStatisticsResultPerSpecialization()//procenat koliko se puta vracao na specijalizaciju,jednom, dvaput i vise puta
+        /// <summary>
+        ///calculates a statistic for repetition of seconde step(specialization) during scheduling appointment
+        ///</summary>
+        ///<returns>
+        ///list double objects(percentage) 
+        ///</returns>
+        public List<double> GetStatisticsResultPerSpecialization()
         {
             var once = 0;
             var twice = 0;
@@ -122,10 +138,16 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             double count = once + twice + more;
             resultListStatistics.Add(Math.Round((once * 100) / count,2));
             resultListStatistics.Add(Math.Round((twice * 100) / count,2));
-            resultListStatistics.Add(Math.Round((more * 100) / count,2));
+            resultListStatistics.Add(100 - Math.Round((once * 100) / count, 2) - Math.Round((twice * 100) / count, 2));
             return resultListStatistics;
         }
-        public List<double> GetStatisticsResultPerDoctor()//procenat koliko se puta vracao na doktora,jednom, dvaput i vise puta
+        /// <summary>
+        ///calculates a statistic for repetition of third step(doctor) during scheduling appointment
+        ///</summary>
+        ///<returns>
+        ///list double objects(percentage) 
+        ///</returns>
+        public List<double> GetStatisticsResultPerDoctor()
         {
             var once = 0;
             var twice = 0;
@@ -140,11 +162,16 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             double count = once + twice + more;
             resultListStatistics.Add(Math.Round((once * 100) / count,2));
             resultListStatistics.Add(Math.Round((twice * 100) / count,2));
-            resultListStatistics.Add(Math.Round((more * 100) / count,2));
+            resultListStatistics.Add(100 - Math.Round((once * 100) / count, 2) - Math.Round((twice * 100) / count, 2));
             return resultListStatistics;
         }
-
-        public string GetStatisticsMiddleTime()//prosecno vreme
+        /// <summary>
+        ///calculates a statistic for average duration of scheduling appointment
+        ///</summary>
+        ///<returns>
+        /// string object 
+        ///</returns>
+        public string GetStatisticsMiddleTime()
         {
             var time = 0;
             var number = 0;
@@ -160,8 +187,13 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             var minutes = (int)(seconds / 60);
             return minutes.ToString() + ":" + (seconds-minutes*60).ToString();
         }
-
-        public List<double> GetStatisticsResultPerIsScheduled()//procenat zakazanih i nezakazanih
+        /// <summary>
+        ///calculates a statistic for scheduling success
+        ///</summary>
+        ///<returns>
+        ///list double objects(percentage) 
+        ///</returns>
+        public List<double> GetStatisticsResultPerIsScheduled()
         {
             var isScheduled = 0;
             var allEvents = GetAll();

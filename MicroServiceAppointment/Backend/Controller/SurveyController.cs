@@ -27,20 +27,6 @@ namespace MicroServiceAppointment.Backend.Controllers
             return Ok();
         }
 
-        //[Authorize]
-        //[HttpGet("getDoctors/{patientId}")]
-        //public List<String> GetAllDoctorsFromReportsByPatientId(String patientId)
-        //{
-        //    return _surveyService.GetAllDoctorsFromReportsByPatientId(patientId);
-        //}
-        //[Authorize]
-        [HttpGet("getDoctorsFromSurvey/{patientId}")]
-        public List<String> GetAllDoctorsFromReportsByPatientIdForSurvey(String patientId)
-        {
-            //return _surveyService.GetAllDoctorsFromReportsByPatientIdFromSurvey(patientId);
-            throw new NotImplementedException();
-        }
-
         [Authorize]
         [HttpGet("getDoctorsForSurveyList/{patientId}")]
         public List<String> GetAllDoctorsFromReportsByPatientIdForSurveyList(String patientId)
@@ -49,18 +35,21 @@ namespace MicroServiceAppointment.Backend.Controllers
                                                                                                          , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             return _surveyService.GetAllDoctorsFromReportsByPatientIdForSurveyList(patientId);
         }
+
         [Authorize]
         [HttpGet("getStatistiEachQuestion")]
         public List<StatisticAuxilaryClass> GetStatisticsEachQuestion()
         {
             return _surveyService.GetStatisticsEachQuestion();
         }
+
         [Authorize]
         [HttpGet("getStatistiEachTopic")]
         public List<StatisticAuxilaryClass> GetStatisticsEachTopic()
         {
             return _surveyService.GetStatisticsEachTopic();
         }
+
         [Authorize]
         [HttpGet("getStatisticForDoctor")]
         public List<StatisticAuxilaryClass> GetStatisticsForDoctor(string id)

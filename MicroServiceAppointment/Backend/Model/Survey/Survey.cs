@@ -14,7 +14,6 @@ namespace MicroServiceAppointment.Backend.Model.Survey
         public Survey() : base()
         {
         }
-
         public Survey(string patientId, string doctorName, DateTime reportDate)
         {
             PatientId = patientId;

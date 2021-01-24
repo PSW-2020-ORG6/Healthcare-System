@@ -15,10 +15,6 @@ namespace HealthClinicBackend.Backend.Events.PatientRegisteredEventLogging
 
         public void LogEvent(PatientAppointmentEventParams eventParams)
         {
-            //var patientRegisteredEvent = new PatientRegisteredEvent
-            //{ TimeStamp = DateTime.Now, PatientAge = eventParams.PatientAge };
-
-            //_patientAppointmentEventRepository.LogEvent(PatientAppointmentEvent);
             throw new NotImplementedException();
         }
     }

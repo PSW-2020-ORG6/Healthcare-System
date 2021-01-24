@@ -34,19 +34,6 @@ namespace MicroServiceAppointment.Backend.Service
         }
 
         /// <summary>
-        ///method for getting doctor's full name from survey done by one patient 
-        ///</summary>
-        ///<param name="patientId"/> String type object
-        ///<returns>
-        ///list of doctor's full name (string)
-        ///</returns>
-        //internal List<string> GetAllDoctorsFromReportsByPatientIdFromSurvey(string patientId)
-        //{
-        //    return _surveyRepository.GetDoctorNamesByPatientId(patientId);
-
-        //}
-
-        /// <summary>
         ///method for getting avaliable doctors as survey subject
         ///the result is a combination of several methods
         ///</summary>
@@ -67,37 +54,13 @@ namespace MicroServiceAppointment.Backend.Service
                 if (a.Date > DateTime.Now)
                     resultListPastAppointments.Remove(HttpRequest.GetPhysiciantByIdAsync(a.PhysicianSerialNumber).Result.FullName + "-" + a.Date.ToString().Split(" ")[0]);
             }
-
             foreach (String physicianFromPastAppointmentst in resultListPastAppointments)
-            {
                 resultList.Add(physicianFromPastAppointmentst);
-            }
 
             foreach (String physicianFromSurvey in resultListFromSurvey)
-            {
-                if (resultList.Contains(physicianFromSurvey))
-                {
-                    resultList.Remove(physicianFromSurvey);
-                }
-            }
-
+                if (resultList.Contains(physicianFromSurvey)) resultList.Remove(physicianFromSurvey);
             return resultList;
-
         }
-
-        /// <summary>
-        ///getting all doctors from one patient's reports 
-        ///</summary>
-        ///<returns>
-        ///list of names of doctors
-        ///</returns>
-        ///<param name="patientId"> String patient id
-        ///</param>
-        //internal List<string> GetAllDoctorsFromReportsByPatientId(string patientId)
-        //{
-        //    var reports = _reportRepository.GetByPatientId(patientId);
-        //    return reports.Select(r => r.Physician.Name + " " + r.Physician.Surname).ToList();
-        //}
 
         /// <summary>
         ///calculates statistics for each survey question not related do doctor
@@ -111,28 +74,20 @@ namespace MicroServiceAppointment.Backend.Service
 
             List<StatisticAuxilaryClass> statistics = new List<StatisticAuxilaryClass>();
             for (int i = 0; i < 19; i++)
-            {
                 statistics.Add(new StatisticAuxilaryClass());
-            }
-
             foreach (Survey s in surveys)
             {
                 for (int i = 0; i < 18; i++) {
                     statistics[i].AverageRating += Double.Parse(s.Questions[4 + i]);
                     statistics[i].increment(Int32.Parse(s.Questions[4 + i]));
                 }
-
             }
-
             for (int i = 0; i < 19; i++)
             {
                 statistics[i].generatePercents();
                 statistics[i].AverageRating = statistics[i].AverageRating / surveys.Count;
             }
-
-
             return Round2Decimals(statistics);
-
         }
 
         /// <summary>
@@ -146,10 +101,7 @@ namespace MicroServiceAppointment.Backend.Service
         private List<StatisticAuxilaryClass> Round2Decimals(List<StatisticAuxilaryClass> statistics)
         {
             foreach (StatisticAuxilaryClass i in statistics)
-            {
                 i.AverageRating = Math.Round(i.AverageRating, 2);
-            }
-
             return statistics;
         }
 
@@ -167,9 +119,7 @@ namespace MicroServiceAppointment.Backend.Service
 
             List<StatisticAuxilaryClass> statistics = new List<StatisticAuxilaryClass>();
             for (int i = 0; i < 5; i++)
-            {
                 statistics.Add(new StatisticAuxilaryClass());
-            }
 
             foreach (Survey s in surveys)
             {
@@ -179,21 +129,16 @@ namespace MicroServiceAppointment.Backend.Service
 
                 }
                 for (int i = 0; i < 4; i++)
-                {
                     statistics[4].increment(Int32.Parse(s.Questions[i]));
 
-                }
                 statistics[4].AverageRating += (Double.Parse(s.Questions[3]) + Double.Parse(s.Questions[2]) +
                                                 Double.Parse(s.Questions[1]) + Double.Parse(s.Questions[0]));
             }
             for (int i = 0; i < 5; i++)
             {
                 statistics[i].generatePercents();
-
-                if (i == 4)
-                    statistics[i].AverageRating = statistics[i].AverageRating / surveys.Count / 4;
-                else
-                    statistics[i].AverageRating = statistics[i].AverageRating / surveys.Count;
+                if (i == 4) statistics[i].AverageRating = statistics[i].AverageRating / surveys.Count / 4;
+                else statistics[i].AverageRating = statistics[i].AverageRating / surveys.Count;
             }
             return Round2Decimals(statistics);
         }
@@ -242,11 +187,9 @@ namespace MicroServiceAppointment.Backend.Service
                     statistics[4].increment(Int32.Parse(s.Questions[i]));
                 }
             }
-
-            for (int i = 0;  i <= 4; i++) {
+            for (int i = 0;  i <= 4; i++) 
                 statistics[i].generatePercents();
-            }
-            
+
             statistics[0].AverageRating = statistics[0].AverageRating / surveys.Count / 5;
             statistics[1].AverageRating = statistics[1].AverageRating / surveys.Count / 4;
             statistics[2].AverageRating = statistics[2].AverageRating / surveys.Count / 5;
@@ -254,7 +197,6 @@ namespace MicroServiceAppointment.Backend.Service
             statistics[4].AverageRating = statistics[4].AverageRating / surveys.Count / 3;
 
             return Round2Decimals(statistics);
-
         }
     }
 }
