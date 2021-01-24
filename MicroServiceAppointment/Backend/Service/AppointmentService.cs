@@ -36,17 +36,6 @@ namespace MicroServiceAppointment.Backend.Service
             new AppointmentWithRecommendationDTO();
 
         private DateFromStringConverter dateTimeDTO = new DateFromStringConverter();
-
-
-        public AppointmentService(IAppointmentRepository appointmentRepository,
-            IPhysicianRepository physicianRepository,IProcedureTypeRepository procedureTypeRepository,
-            IMedicineRepository medicineRepository)
-        {
-            _medicineRepository = medicineRepository;
-            _appointmentRepository = appointmentRepository;
-            _physicianRepository = physicianRepository;
-            _procedureTypeRepository = procedureTypeRepository;
-        }
         public AppointmentService(ISpecializationRepository specializationRepository,
                 IAppointmentRepository appointmentRepository, IPhysicianRepository physicianRepository,
                 IPatientRepository patientRepository, IAddressRepository addressRepository)
@@ -57,18 +46,6 @@ namespace MicroServiceAppointment.Backend.Service
             _addressRepository = addressRepository;
             _patientRepository = patientRepository;
         }
-        public AppointmentService(IAppointmentRepository appointmentRepository)
-        {
-            _appointmentRepository = appointmentRepository;
-        }
-        public AppointmentService(IAppointmentRepository appointmentRepository,
-            IPhysicianRepository physicianRepository, IProcedureTypeRepository procedureTypeRepository)
-        {
-            _appointmentRepository = appointmentRepository;
-            _physicianRepository = physicianRepository;
-            _procedureTypeRepository = procedureTypeRepository;
-        }
-
         public List<TimeIntervalsDTO> GetAllAvailableAppointments(string physicianId, string specializationName,
             string date)
         {
