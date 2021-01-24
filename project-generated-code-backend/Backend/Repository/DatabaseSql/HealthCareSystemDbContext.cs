@@ -366,7 +366,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                    Row = 0,
                    Column = 14,
                    RowSpan = 3,
-                   ColumnSpan = 5
+                   ColumnSpan = 4
                },
                new
                {

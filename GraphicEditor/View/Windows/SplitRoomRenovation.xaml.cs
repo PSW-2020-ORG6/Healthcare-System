@@ -34,6 +34,10 @@ namespace GraphicEditor.View.Windows
         private BedController bedController = new BedController();
         private RoomRenovationController roomRenovationController = new RoomRenovationController();
         private Room renovatingRoom;
+        private TimeInterval timeInterval;
+        private List<Room> listOfNewRooms;
+        private Position position;
+        private List<bool> moveStuffToThisRoom;
 
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
@@ -46,11 +50,17 @@ namespace GraphicEditor.View.Windows
             renovatingRoom = _renovatingRoom;
             Start = DateTime.Now;
             End = DateTime.Now;
-            timeIntervalStart.CultureInfo = CultureInfo.DefaultThreadCurrentUICulture;
-            timeIntervalEnd.CultureInfo = CultureInfo.DefaultThreadCurrentUICulture;
 
             RoomTypes = roomTypesController.GetAll();
             SelectedRoomTypeIndex = 0;
+        }
+
+        public SplitRoomRenovation(Floor floor1, Room _renovatingRoom, TimeInterval timeInterval, ref List<Room> listOfRooms, Position position, List<bool> moveStuffToThisRoom) : this(floor1, _renovatingRoom)
+        {
+            this.timeInterval = timeInterval;
+            this.listOfNewRooms = listOfRooms;
+            this.position = position;
+            this.moveStuffToThisRoom = moveStuffToThisRoom;
         }
 
         public int SelectedRoomTypeIndex { get; set; }
@@ -80,14 +90,6 @@ namespace GraphicEditor.View.Windows
 
             nameLabel.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
 
-            if (descriptionTextBox.Text.Equals(""))
-            {
-                descriptionLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
-                return;
-            }
-
-            descriptionLabel.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-
             string[] split = nameTextBox.Text.Split(" ");
             string number = split[split.Length - 1];
             int k;
@@ -97,30 +99,16 @@ namespace GraphicEditor.View.Windows
                 nameLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
                 return;
             }
-            Position position = new Position(renovatingRoom.Position.Row, renovatingRoom.Position.Column, renovatingRoom.Position.RowSpan, renovatingRoom.Position.ColumnSpan);
 
             Room newRoom = new Room(nameTextBox.Text, Int32.Parse(number), floor.SerialNumber, RoomTypes[SelectedRoomTypeIndex].SerialNumber, position, "RoomButtonStyle");
-
             newRoom.IsWaitingToBeRenovated = true;
             newRoom.IsBeingRenovated = false;
             SetVisibilities(newRoom);
 
-            TimeInterval timeInterval = new TimeInterval(Start, End);
+            listOfNewRooms.Add(newRoom);
 
-            RoomRenovation roomRenovation = new RoomRenovation()
-            {
-                RenovatedRoomSerialNumber = newRoom.SerialNumber,
-                RenovatedRoom = newRoom,
-                TimeInterval = timeInterval,
-                Description = descriptionTextBox.Text
-            };
+            if ((bool)relocationCheckBox.IsChecked) moveStuffToThisRoom.Add(true);
 
-            renovatingRoom.IsWaitingToBeRenovated = true;
-            renovatingRoom.RoomRenovationSerialNumber = roomRenovation.SerialNumber;
-            roomController.EditRoom(renovatingRoom);
-
-            roomController.NewRoom(newRoom);
-            roomRenovationController.AddRoomRenovation(roomRenovation);
             this.Close();
         }
 

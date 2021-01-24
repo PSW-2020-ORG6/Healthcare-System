@@ -89,48 +89,86 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
 
         private void StartRenovating(RoomRenovation roomRenovation)
         {
-            foreach (Room room in _roomRepository.GetByRoomRenovationSerialNumber(roomRenovation.SerialNumber))
+            if(!roomRenovation.Description.Contains("Split"))
             {
-                if (room.IsBeingRenovated) continue;
+                foreach (Room room in _roomRepository.GetByRoomRenovationSerialNumber(roomRenovation.SerialNumber))
+                {
+                    if (room.IsBeingRenovated) continue;
 
-                foreach (Equipment equipment in _equipmentRepository.GetByRoomSerialNumber(room.SerialNumber))
-                {
-                    equipment.RoomSerialNumber = roomRenovation.RenovatedRoomSerialNumber;
-                    _equipmentRepository.Update(equipment);
+                    foreach (Equipment equipment in _equipmentRepository.GetByRoomSerialNumber(room.SerialNumber))
+                    {
+                        equipment.RoomSerialNumber = roomRenovation.RenovatedRoomSerialNumber;
+                        _equipmentRepository.Update(equipment);
+                    }
+                    foreach (Medicine medicine in _medicineRepository.GetByRoomSerialNumber(room.SerialNumber))
+                    {
+                        medicine.RoomSerialNumber = roomRenovation.RenovatedRoomSerialNumber;
+                        _medicineRepository.Update(medicine);
+                    }
+                    foreach (Bed bed in _bedRepository.GetByRoomSerialNumber(room.SerialNumber))
+                    {
+                        bed.RoomSerialNumber = roomRenovation.RenovatedRoomSerialNumber;
+                        _bedRepository.Update(bed);
+                    }
+                    room.IsWaitingToBeRenovated = false;
+                    room.IsBeingRenovated = true;
+                    _roomRepository.Update(room);
                 }
-                foreach (Medicine medicine in _medicineRepository.GetByRoomSerialNumber(room.SerialNumber))
-                {
-                    medicine.RoomSerialNumber = roomRenovation.RenovatedRoomSerialNumber;
-                    _medicineRepository.Update(medicine);
-                }
-                foreach (Bed bed in _bedRepository.GetByRoomSerialNumber(room.SerialNumber))
-                {
-                    bed.RoomSerialNumber = roomRenovation.RenovatedRoomSerialNumber;
-                    _bedRepository.Update(bed);
-                }
-                room.IsWaitingToBeRenovated = false;
-                room.IsBeingRenovated = true;
-                _roomRepository.Update(room);
+                Room renovatedRoom = _roomRepository.GetBySerialNumber(roomRenovation.RenovatedRoomSerialNumber);
+                if (renovatedRoom.IsBeingRenovated) return;
+                renovatedRoom.IsWaitingToBeRenovated = false;
+                renovatedRoom.IsBeingRenovated = true;
+                _roomRepository.Update(roomRenovation.RenovatedRoom);
             }
-            Room renovatedRoom = _roomRepository.GetBySerialNumber(roomRenovation.RenovatedRoomSerialNumber);
-            renovatedRoom.IsWaitingToBeRenovated = false;
-            renovatedRoom.IsBeingRenovated = true;
-            _roomRepository.Update(roomRenovation.RenovatedRoom);
+            else
+            {
+                foreach (Room room in _roomRepository.GetAll())
+                {
+                    if (!room.IsWaitingToBeRenovated) continue;
+
+                    room.IsWaitingToBeRenovated = false;
+                    room.IsBeingRenovated = true;
+                    _roomRepository.Update(room);
+                }
+                Room renovatedRoom = _roomRepository.GetBySerialNumber(roomRenovation.RenovatedRoomSerialNumber);
+                if (renovatedRoom.IsBeingRenovated) return;
+                renovatedRoom.IsWaitingToBeRenovated = false;
+                renovatedRoom.IsBeingRenovated = true;
+                _roomRepository.Update(roomRenovation.RenovatedRoom);
+            }   
         }
 
         private void EndRenovating(RoomRenovation roomRenovation)
         {
-            foreach (Room room in _roomRepository.GetByRoomRenovationSerialNumber(roomRenovation.SerialNumber))
+            if (!roomRenovation.Description.Contains("Split"))
             {
-                if (room.SerialNumber.Equals(roomRenovation.RenovatedRoomSerialNumber)) continue;
-                if (room.IsBeingRenovated) _roomRepository.Delete(room.SerialNumber);
-            }
+                foreach (Room room in _roomRepository.GetByRoomRenovationSerialNumber(roomRenovation.SerialNumber))
+                {
+                    if (room.SerialNumber.Equals(roomRenovation.RenovatedRoomSerialNumber)) continue;
+                    if (room.IsBeingRenovated) _roomRepository.Delete(room.SerialNumber);
+                }
 
-            Room newRoom = _roomRepository.GetBySerialNumber(roomRenovation.RenovatedRoomSerialNumber);
-            newRoom.IsBeingRenovated = false;
-            newRoom.RoomRenovationSerialNumber = null;
-            _roomRepository.Update(newRoom);
-            _roomRenovationRepository.Delete(roomRenovation.SerialNumber);
+                Room newRoom = _roomRepository.GetBySerialNumber(roomRenovation.RenovatedRoomSerialNumber);
+                newRoom.IsBeingRenovated = false;
+                newRoom.RoomRenovationSerialNumber = null;
+                _roomRepository.Update(newRoom);
+                _roomRenovationRepository.Delete(roomRenovation.SerialNumber);
+            }
+            else
+            {
+                foreach (Room room in _roomRepository.GetAll())
+                {
+                    if (!room.IsBeingRenovated) continue;
+                    room.IsBeingRenovated = false;
+                    room.RoomRenovationSerialNumber = null;
+                    _roomRepository.Update(room);
+
+                }
+
+                _roomRepository.Delete(roomRenovation.RenovatedRoomSerialNumber);
+                _roomRenovationRepository.Delete(roomRenovation.SerialNumber);
+            }
+                
         }
 
         private void AddMissingProperties(RoomRenovation roomRenovation)

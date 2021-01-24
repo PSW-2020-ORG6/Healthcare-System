@@ -304,7 +304,7 @@ namespace GraphicEditor.ViewModel
         private void SplitRoomRenovationCommand()
         {
             Floor floor = floorController.GetById(room.FloorSerialNumber);
-            new SplitRoomRenovation(floor, room).ShowDialog();
+            new SplitRoomRenovationForm(floor, room).ShowDialog();
         }
 
         private List<EquipmentRelocation> GetEquipmentRelocationsForRoom()
