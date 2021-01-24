@@ -14,5 +14,6 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 .Options;
             return new HealthCareSystemDbContext(options);
         }
+
     }
 }

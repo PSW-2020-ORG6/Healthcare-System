@@ -41,7 +41,8 @@ namespace GraphicEditor.ViewModel
             RoomGrid = grid;
             floorSerialNumber = floor.SerialNumber;
             RoomInitialization();
-            FindFloorType();        }
+            FindFloorType();        
+        }
 
         public FloorUserControlViewModel(FloorUserControlViewModel viewModel)
         {

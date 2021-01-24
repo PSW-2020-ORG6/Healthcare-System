@@ -1,6 +1,7 @@
 ﻿using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,14 +11,18 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
     {
         public RoomDatabaseSql() : base()
         {
+            DbContext.Set<Room>().AsNoTracking();
         }
 
         public RoomDatabaseSql(HealthCareSystemDbContext dbContext) : base(dbContext)
         {
+            DbContext.Set<Room>().AsNoTracking();
         }
 
         public override List<Room> GetAll()
         {
+            foreach(Room room in DbContext.Room.ToList())
+                DbContext.Entry(room).Reload();
             return DbContext.Room.ToList();
         }
 
@@ -30,12 +35,14 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             DbContext.Room.Add(newEntity);
             DbContext.SaveChanges();
+            DbContext.Entry(newEntity).Reload();
         }
 
         public override void Update(Room updateEntity)
         {
             DbContext.Room.Update(updateEntity);
             DbContext.SaveChanges();
+            DbContext.Entry(updateEntity).Reload();
         }
 
         public override void Delete(string id)
