@@ -34,11 +34,9 @@
             <RowDefinition Height="10"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0.6*"/>
             <RowDefinition Height="10"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="10"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.6*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -55,7 +53,7 @@
                    FontSize="50"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
-                   Text="Split Room Renovation"/>
+                   Text="Split Room Renovation - New Room"/>
             <materialDesign:PackIcon Kind="BuildOutline" Width="60" Height="60" VerticalAlignment="Center"/>
         </StackPanel>
 
@@ -139,7 +137,6 @@
             </CheckBox.LayoutTransform>
         </CheckBox>
 
-
         <TextBlock x:Name="roomTypeLabel"
                    Grid.Row="9"
                    Grid.Column="0"
@@ -165,59 +162,28 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <TextBlock x:Name="fromToLabel"
+        <TextBlock 
                    Grid.Row="11"
                    Grid.Column="0"
                    FontSize="25"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
-                   TextWrapping="Wrap"
-                   TextAlignment="Center"
-                   Text="Choose Time Interval For Renovation:"/>
+                   Text="Relocate all stuff to this room:"/>
 
-        <Viewbox Grid.Row="11"
-                 Grid.Column="1"
-                 Width="450"
-                 Height="200">
-            <StackPanel>
-                <tk:DateTimePicker  x:Name="timeIntervalStart"
-                                    BorderThickness="1"
-                                    BorderBrush="Black"
-                                    Value="{Binding Path=Start, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                    Format="FullDateTime"/>
-                <TextBlock Height="5"/>
-                <tk:DateTimePicker  x:Name="timeIntervalEnd"
-                                    BorderThickness="1"
-                                    BorderBrush="Black"
-                                    Value="{Binding Path=End, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                    Format="FullDateTime"/>
-            </StackPanel>
-        </Viewbox>
-
-        <TextBlock x:Name="descriptionLabel"
-                   Grid.Row="13"
-                   Grid.Column="0"
-                   FontSize="25"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   Text="Split room options:"/>
-
-        <TextBox x:Name="descriptionTextBox"
-                 Grid.Row="13"
-                 Grid.Column="1"
-                 BorderBrush="Black"
-                 BorderThickness="1"
-                 Width="450"
-                 Height="40"
-                 FontSize="15" />
-
+        <CheckBox x:Name="relocationCheckBox"
+                  IsThreeState="False"
+                  IsChecked="False"
+                  Grid.Row="11"
+                  Grid.Column="1"
+                  HorizontalAlignment="Center"
+                  Style="{StaticResource MaterialDesignActionDarkCheckBox}"/>
 
         <Button Grid.Row="15"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Height="30"
                 HorizontalAlignment="Center"
-                Content="Schedule Renovation"
+                Content="Confirm new room"
                 Click="Button_Click"
                 Width="200"/>
     </Grid>

@@ -11,7 +11,7 @@
         BorderBrush="Black"
         BorderThickness="3"
         ResizeMode="NoResize"
-        Title="BedUpdate" Height="270" Width="850">
+        Title="BedUpdate" Height="230" Width="850">
     <Border >
         <Grid>
 
@@ -36,7 +36,7 @@
                             HorizontalAlignment="Center"
                             Margin="0,3"
                             Style="{StaticResource MaterialDesignHeadline4TextBlock}" />
-                <TextBlock  Text="Things that this room contains will not be available while renovating."
+                <TextBlock  Text="You cannot go inside."
                             HorizontalAlignment="Center"
                             TextWrapping="Wrap"
                             TextAlignment="Center"

@@ -46,10 +46,16 @@ namespace GraphicEditor.HelpClasses
 
             Room room = roomController.GetById(serialNumber);
 
-            if (MainWindow.TypeOfUser == TypeOfUser.Patient) new Warning().ShowDialog();
-
-            if (room.IsBeingRenovated) new WarningRenovatingRoom().ShowDialog();
-
+            if (MainWindow.TypeOfUser == TypeOfUser.Patient)
+            {
+                new Warning().ShowDialog();
+                return;
+            }
+            if (room.IsBeingRenovated)
+            {
+                new WarningRenovatingRoom().ShowDialog();
+                return;
+            }
             new RoomInformation(roomController.GetBySerialNumber(serialNumber)).Show();
         }
 
