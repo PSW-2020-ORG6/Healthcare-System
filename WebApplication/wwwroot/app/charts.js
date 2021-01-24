@@ -20,7 +20,6 @@
             appointments: "conic-gradient(Cornsilk 0,Cornsilk 38%,DarkGray 0,DarkGray 100%)",
             appointmentsPercentsSUCC: 38,
             appointmentsPercentsQ: 62,
-            specializationBack: 33,
 
 
 
@@ -29,7 +28,7 @@
             dateTimeBack: 34,
 
             averageTime: 360,
-            doctorMostWanted: "Doktor Doktorević",
+            doctorMostWanted: "Doktor DoktoreviÄ‡",
             specializationMostWanted: "Cardiologist",
             eventStatisticDTO: {}
         }
@@ -46,7 +45,28 @@
             })
             .catch(error => {
             })
-            },
+        this.step21percentsFWD = this.eventStatisticDTO.PercentTransitionsToFirstStepOnce
+        this.step21percentsFSB = this.eventStatisticDTO.PercentTransitionsToFirstStepTwice
+        this.step21percentsBCK = this.eventStatisticDTO.PercentTransitionsToFirstStepMore
+
+        this.step32percentsFWD = this.eventStatisticDTO.PercentTransitionsToSecondStepOnce
+        this.step32percentsFSB = this.eventStatisticDTO.PercentTransitionsToSecondStepTwice
+        this.step32percentsBCK = this.eventStatisticDTO.PercentTransitionsToSecondStepMore
+
+        this.step43percentsFWD = this.eventStatisticDTO.PercentTransitionsToThirdStepOnce
+        this.step43percentsFSB = this.eventStatisticDTO.PercentTransitionsToThirdStepTwice
+        this.step43percentsBCK = this.eventStatisticDTO.PercentTransitionsToThirdStepMore
+
+        this.appointmentsPercentsSUCC = this.eventStatisticDTO.PercentIsAppointmentScheduled
+        this.appointmentsPercentsQ = this.eventStatisticDTO.PercentIsNotAppointmentScheduled
+
+        this.specializationBack = this.eventStatisticDTO.PercenttTransitionsToFirstStep
+        this.doctorBack = this.eventStatisticDTO.PercenttTransitionsToSecondStep
+        this.dateTimeBack = this.eventStatisticDTO.PercenttTransitionsToThirdStep
+
+        this.averageTime = this.eventStatisticDTO.SchedulingDuration
+
+    },
     template: `
 	<div id = "charts">
 
