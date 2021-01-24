@@ -53,9 +53,9 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             }
             List<double> resultListStatistics = new List<double>();
             double count = first + second + third;
-            resultListStatistics.Add((first * 100) / count);
-            resultListStatistics.Add((second * 100) / count);
-            resultListStatistics.Add((third * 100) / count);
+            resultListStatistics.Add(Math.Round((first * 100) / count,2));
+            resultListStatistics.Add(Math.Round((second * 100) / count,2));
+            resultListStatistics.Add(Math.Round((third * 100) / count,2));
             return resultListStatistics;
         }
 
@@ -67,18 +67,18 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             statisticResults.PercentIsNotAppointmentScheduled = isSheduled[1];
 
             var stepOne = GetStatisticsResultPerDate();
-            statisticResults.PercentTransitionsToFirstStepOnce = stepOne[0];
-            statisticResults.PercentTransitionsToFirstStepTwice = stepOne[1];
+            statisticResults.PercentTransitionsToFirstStepZero = stepOne[0];
+            statisticResults.PercentTransitionsToFirstStepOnce = stepOne[1];
             statisticResults.PercentTransitionsToFirstStepMore = stepOne[2];
 
             var stepTwo = GetStatisticsResultPerSpecialization();
-            statisticResults.PercentTransitionsToSecondStepOnce = stepTwo[0];
-            statisticResults.PercentTransitionsToSecondStepTwice = stepTwo[1];
+            statisticResults.PercentTransitionsToSecondStepZero = stepTwo[0];
+            statisticResults.PercentTransitionsToSecondStepOnce = stepTwo[1];
             statisticResults.PercentTransitionsToSecondStepMore = stepTwo[2];
 
             var stepThree = GetStatisticsResultPerDoctor();
-            statisticResults.PercentTransitionsToThirdStepOnce = stepThree[0];
-            statisticResults.PercentTransitionsToThirdStepTwice = stepThree[1];
+            statisticResults.PercentTransitionsToThirdStepZero = stepThree[0];
+            statisticResults.PercentTransitionsToThirdStepOnce = stepThree[1];
             statisticResults.PercentTransitionsToThirdStepMore = stepThree[2];
 
             var percentSteps = GetStatisticsResultPerSteps();
@@ -102,9 +102,9 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             }
             List<double> resultListStatistics = new List<double>();
             double count = once + twice + more;
-            resultListStatistics.Add((once * 100) / count);
-            resultListStatistics.Add((twice * 100) / count);
-            resultListStatistics.Add((more * 100) / count);
+            resultListStatistics.Add(Math.Round((once * 100) / count,2));
+            resultListStatistics.Add(Math.Round((twice * 100) / count,2));
+            resultListStatistics.Add(Math.Round((more * 100) / count,2));
             return resultListStatistics;
         }
         public List<double> GetStatisticsResultPerSpecialization()//procenat koliko se puta vracao na specijalizaciju,jednom, dvaput i vise puta
@@ -120,9 +120,9 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             }
             List<double> resultListStatistics = new List<double>();
             double count = once + twice + more;
-            resultListStatistics.Add((once * 100) / count);
-            resultListStatistics.Add((twice * 100) / count);
-            resultListStatistics.Add((more * 100) / count);
+            resultListStatistics.Add(Math.Round((once * 100) / count,2));
+            resultListStatistics.Add(Math.Round((twice * 100) / count,2));
+            resultListStatistics.Add(Math.Round((more * 100) / count,2));
             return resultListStatistics;
         }
         public List<double> GetStatisticsResultPerDoctor()//procenat koliko se puta vracao na doktora,jednom, dvaput i vise puta
@@ -138,9 +138,9 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             }
             List<double> resultListStatistics = new List<double>();
             double count = once + twice + more;
-            resultListStatistics.Add((once * 100) / count);
-            resultListStatistics.Add((twice * 100) / count);
-            resultListStatistics.Add((more * 100) / count);
+            resultListStatistics.Add(Math.Round((once * 100) / count,2));
+            resultListStatistics.Add(Math.Round((twice * 100) / count,2));
+            resultListStatistics.Add(Math.Round((more * 100) / count,2));
             return resultListStatistics;
         }
 
@@ -168,9 +168,9 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             List<double> result = new List<double>();
             foreach (PatientAppointmentEventDto patientAppointmentEvent in allEvents)
                 if (patientAppointmentEvent.IsAppointmentScheduled) isScheduled += 1;
-            double isScheduledPer = isScheduled * 100 / allEvents.Count;
+            double isScheduledPer = Math.Round((double)isScheduled * 100 / allEvents.Count,2);
             result.Add(isScheduledPer);
-            result.Add(100- isScheduledPer);
+            result.Add(100 - isScheduledPer);
             return result;
         }
     }
