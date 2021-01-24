@@ -30,10 +30,23 @@
 
             averageTime: 360,
             doctorMostWanted: "Doktor Doktorević",
-            specializationMostWanted: "Cardiologist"
-
+            specializationMostWanted: "Cardiologist",
+            eventStatisticDTO: {}
         }
     },
+    beforeMount() {
+        axios
+            .get('/event/eventStatistic', {
+                headers: {
+                    'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                }
+            })
+            .then(response => {
+                this.eventStatisticDTO = response.data
+            })
+            .catch(error => {
+            })
+            },
     template: `
 	<div id = "charts">
 
@@ -45,41 +58,41 @@
           <div class="row">
             <div class="col-sm">
                 <div class="sameLine">
-                    <h3 class="fwd head">NO RETURNS</h3><h3 class="fwdP head" id = "blackText">{{step21percentsFWD}} %</h3>
+                    <h3 class="fwd head">NO RETURNS</h3><h3 class="fwdP head" id = "blackText">{{ this.eventStatisticDTO.percentTransitionsToFirstStepZero}} %</h3>
                 </div>
                 <div class="sameLine">
-                    <h3 class="bck head">ONE RETURN</h3><h3 class="bckP head" id = "blackText">{{step21percentsFSB}} %</h3>
+                    <h3 class="bck head">ONE RETURN</h3><h3 class="bckP head" id = "blackText">{{ this.eventStatisticDTO.percentTransitionsToFirstStepOnce}} %</h3>
                 </div>
                 <div class="sameLine">
-                    <h3 class="quit head">MULTIPLE RETURNS</h3><h3 class="quitP head " id = "blackText">{{step21percentsBCK}} %</h3>
+                    <h3 class="quit head">MULTIPLE RETURNS</h3><h3 class="quitP head " id = "blackText">{{ this.eventStatisticDTO.percentTransitionsToFirstStepMore}} %</h3>
                 </div>
                 <div class="piechart" v-bind:style='{ backgroundImage: step21}'></div>
-                <div id="text1">Specialization selection</div>
+                <div id="text1">Date selection</div>
             </div>
             <div class="col-sm">
                 <div class="sameLine">
-                    <h3 class="fwd head">NO RETURNS</h3><h3 class="fwdP head" id = "blackText">{{step32percentsFWD}} %</h3>
+                    <h3 class="fwd head">NO RETURNS</h3><h3 class="fwdP head" id = "blackText">{{this.eventStatisticDTO.percentTransitionsToSecondStepZero}} %</h3>
                 </div>
                 <div class="sameLine">
-                    <h3 class="bck head">ONE RETURN</h3><h3 class="bckP head" id = "blackText">{{step32percentsFSB}} %</h3>
+                    <h3 class="bck head">ONE RETURN</h3><h3 class="bckP head" id = "blackText">{{this.eventStatisticDTO.percentTransitionsToSecondStepOnce}} %</h3>
                 </div>
                 <div class="sameLine">
-                    <h3 class="quit head">MULTIPLE RETURNS</h3><h3 class="quitP head" id = "blackText">{{step32percentsBCK}} %</h3>
+                    <h3 class="quit head">MULTIPLE RETURNS</h3><h3 class="quitP head" id = "blackText">{{this.eventStatisticDTO.percentTransitionsToSecondStepMore}} %</h3>
                 </div>               
                 <div class="piechart" v-bind:style='{ backgroundImage: step32}'></div>
-            <div id="text1">Doctor selection</div>
+            <div id="text1">Specialization selection</div>
             </div>
             <div class="col-sm">
                 <div class="sameLine">
-                    <h3 class="fwd head">NO RETURNS</h3><h3 class="fwdP head" id = "blackText">{{step43percentsFWD}} %</h3>
+                    <h3 class="fwd head">NO RETURNS</h3><h3 class="fwdP head" id = "blackText">{{this.eventStatisticDTO.percentTransitionsToThirdStepZero}} %</h3>
                 </div>
                 <div class="sameLine">
-                    <h3 class="bck head">ONE RETURN</h3><h3 class="bckP head" id = "blackText">{{step43percentsFSB}} %</h3>
+                    <h3 class="bck head">ONE RETURN</h3><h3 class="bckP head" id = "blackText">{{this.eventStatisticDTO.percentTransitionsToThirdStepOnce}} %</h3>
                 </div>
                 <div class="sameLine">
-                    <h3 class="quit head">MULTIPLE RETURNS</h3><h3 class="quitP head" id = "blackText">{{step43percentsBCK}} %</h3>
+                    <h3 class="quit head">MULTIPLE RETURNS</h3><h3 class="quitP head" id = "blackText">{{this.eventStatisticDTO.percentTransitionsToThirdStepMore}} %</h3>
                 </div>                 <div class="piechart" v-bind:style='{ backgroundImage: step42}'></div>
-                 <div id="text1">Appointment selection</div>
+                 <div id="text1">Doctor selection</div>
             </div>
           </div>
 
@@ -90,23 +103,23 @@
         <div class="row">
             <div class="col-sm">
                 <div class="sameLine">
-                    <h3 class="fwd head">SPECIALIZATION</h3><h3 class="fwdP head" id = "blackText">{{specializationBack}} %</h3>
+                    <h3 class="fwd head">DATE</h3><h3 class="fwdP head" id = "blackText">{{this.eventStatisticDTO.percenttTransitionsToFirstStep}} %</h3>
+                </div>                
+                <div class="sameLine">
+                    <h3 class="bck head">SPECIALIZATION</h3><h3 class="bckP head" id = "blackText">{{this.eventStatisticDTO.percenttTransitionsToSecondStep}} %</h3>
                 </div>
                 <div class="sameLine">
-                    <h3 class="bck head">DOCTOR</h3><h3 class="bckP head" id = "blackText">{{doctorBack}} %</h3>
-                </div>
-                <div class="sameLine">
-                    <h3 class="quit head">APPOINTMENTS</h3><h3 class="quitP head" id = "blackText">{{dateTimeBack}} %</h3>
+                    <h3 class="quit head">DOCTOR</h3><h3 class="quitP head" id = "blackText">{{this.eventStatisticDTO.percenttTransitionsToThirdStep}} %</h3>
                 </div>
                 <div class="piechart" v-bind:style='{ backgroundImage: step21}'></div>
                 <div id="text1">Return percentage per step  </div>
             </div>
             <div class="col-sm">
                 <div class="sameLine">
-                    <h3 class="fwd head">SUCCESSFUL</h3><h3 class="fwdPAP head" id = "blackText">{{appointmentsPercentsSUCC}} %</h3>
+                    <h3 class="fwd head">SUCCESSFUL</h3><h3 class="fwdPAP head" id = "blackText">{{this.eventStatisticDTO.percentIsAppointmentScheduled}} %</h3>
                 </div>
                 <div class="sameLine">
-                    <h3 class="quit head">GAVE UP</h3><h3 class="quitP head" id = "blackText">{{appointmentsPercentsQ}} %</h3>
+                    <h3 class="quit head">GAVE UP</h3><h3 class="quitP head" id = "blackText">{{this.eventStatisticDTO.percentIsNotAppointmentScheduled}} %</h3>
                 </div>  
                     <br>
                     <div class="piechart" v-bind:style='{ backgroundImage: appointments}'></div>
@@ -114,18 +127,9 @@
              </div>
              <div class="col-sm">
                      <h2 class="head">MOST WANTED</h2>
-                    <hr>
-                    <div class="sameLine">
-                         <h3 id = "blackText" class="fwd head">SPECIALIZATION:</h3><h3 id = "blackText" class="noChart head">{{specializationMostWanted}} </h3>
-                    </div>                 
-                    <hr>
-                    <div class="sameLine">
-                         <h3 class="fwd head" id = "blackText">DOCTOR:</h3><h3 id = "blackText" class="noChart head">{{doctorMostWanted}} </h3>
-                    </div>
-                    <hr>
                     <h2 class="head">AVERAGE TIME SPENT CREATING APPOINTMENT</h2>
                     <div class="sameLine">
-                         <h3 id = "blackText" class="avgTime head">{{averageTime}} sec</h3>
+                         <h3 id = "blackText" class="avgTime head">{{this.eventStatisticDTO.schedulingDuration}}</h3>
                     </div>
                  </div>
             </div>
