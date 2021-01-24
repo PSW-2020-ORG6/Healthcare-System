@@ -8,7 +8,7 @@ namespace MicroServiceSearch.Backend.Repository.DatabaseSql
     public class GenericMsSearchDatabaseSql<T> : IGenericMsSearchRepository<T> where T : Entity
     {
         private const string CONNECTION_STRING =
-            "User ID =postgres;Password=root;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
+            "User ID =postgres;Password=super;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
 
         protected readonly MsSearchDbContext DbContext;
 
