@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Text;
 using MicroServiceAppointment.Backend.Dto;
+using WebApplication.util;
 
 namespace WebApplication.Controller
 {
@@ -16,6 +17,12 @@ namespace WebApplication.Controller
     public class AppointmentEventController : ControllerBase
     {
         static readonly HttpClient client = new HttpClient();
+        private readonly string _appointmentServiceUrl;
+
+        public AppointmentEventController(MicroServiceUris uris)
+        {
+            _appointmentServiceUrl = uris.AppointmentServiceUrl;
+        }
 
         [HttpPost("addEvent")]
         public async Task<IActionResult> GetAllAppointmentsByPatientId(PatientAppointmentEventParams patientAppointmentEventParams)
@@ -23,8 +30,8 @@ namespace WebApplication.Controller
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
                                                                                                     , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             var parameter = new StringContent(JsonConvert.SerializeObject(patientAppointmentEventParams, Formatting.Indented), Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await client.PostAsync("http://localhost:57056/appointmentEvent/addEvent/", parameter);
+            var path = GetFullPath("/appointmentEvent/addEvent/");
+            HttpResponseMessage response = await client.PostAsync(path, parameter);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<IActionResult>(await response.Content.ReadAsStringAsync());
         }
@@ -34,9 +41,14 @@ namespace WebApplication.Controller
         {
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
                                                                                                      , Request.Headers["Authorization"].ToString().Split(" ")[1]);
-            HttpResponseMessage response = await client.GetAsync("http://localhost:57056/appointmentEvent/all");
+            var path = GetFullPath("/appointmentEvent/all/");
+            HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<EventStatisticDTO > (await response.Content.ReadAsStringAsync());
+        }
+        private string GetFullPath(string path)
+        {
+            return _appointmentServiceUrl + path;
         }
     }
 }

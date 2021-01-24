@@ -360,6 +360,14 @@ const router = new VueRouter({
 			components: {
 				pageHeader: AdminHeader,
 				content: Charts
+			},
+			beforeEnter: (to, from, next) => {
+				if (localStorage.getItem('isAdmin') == "true" && localStorage.getItem('isLogged') == "true" && localStorage.getItem('isPatient') == "false") {
+					next();
+				}
+				else {
+					next(false);
+				}
 			}
 		},
 		{

@@ -229,7 +229,16 @@ namespace MicroServiceSearch.Backend.Services
                     resultList.Add(report);
             return resultList;
         }
-
+        /// <summary>
+        ///Get report and prescription by appointment
+        ///</summary>
+        ///<param name="date"> date
+        ///<param name="patientSerialNumber"> examined patient
+        ///<param name="physicianSerialNumber"> physician who examined the patient 
+        ///</param>
+        ///<returns>
+        ///list string objects
+        ///</returns>
         public List<string> GetReportByAppointment(DateTime date, string patientSerialNumber, string physicianSerialNumber)
         {
             var report = _reportRepository.GetReportByAppointment(date, patientSerialNumber, physicianSerialNumber);

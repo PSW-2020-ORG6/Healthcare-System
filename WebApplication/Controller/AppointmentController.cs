@@ -24,11 +24,6 @@ namespace WebApplication.Controller
         {
             _appointmentServiceUrl = uris.AppointmentServiceUrl;
         }
-        
-        // public AppointmentController(IOptions<MicroServiceUris> options)
-        // {
-        //     _appointmentServiceUrl = options.Value.AppointmentServiceUrl;
-        // }
 
         [HttpGet("allAppointmentsByPatientId")]
         public async Task<List<AppointmentDto>> GetAllAppointmentsByPatientId(String patientId)
@@ -109,9 +104,9 @@ namespace WebApplication.Controller
                     Encoding.UTF8, "application/json");
 
             var path = GetFullPath("/appointmentMicroservice/makeAppointment/");
-            //HttpResponseMessage response =
-            //    await client.PostAsync(path, parameter1);
-            //response.EnsureSuccessStatusCode();
+            HttpResponseMessage response =
+                await client.PostAsync(path, parameter1);
+            response.EnsureSuccessStatusCode();
             return Ok();
         }
 

@@ -14,12 +14,10 @@ namespace MicroServiceAppointment.Backend.Repository.DatabaseSql
         public AppointmentDatabaseSql(MsAppointmentDbContext dbContext) : base(dbContext)
         {
         }
-
         public override List<Appointment> GetAll()
         {
             return DbContext.Appointment
                 .Include(a => a.Patient)
-              //  .Include(a => a.Physician)
                 .Include(a => a.Room)
                 .Include(a => a.ProcedureType)
                 .ToList();
@@ -37,17 +35,14 @@ namespace MicroServiceAppointment.Backend.Repository.DatabaseSql
         {
             return GetAll().Where(appointment => appointment.Patient.Equals(patient)).ToList();
         }
-
         public List<Appointment> GetAppointmentsByPhysician(Physician physician)
         {
             return GetAll().Where(appointment => appointment.Physician.Equals(physician)).ToList();
         }
-
         public List<Appointment> GetAppointmentsByRoom(Room room)
         {
             return GetAll().Where(appointment => appointment.Room.Equals(room)).ToList();
         }
-
         public List<Appointment> GetByRoomSerialNumber(string roomSerialNumber)
         {
             return GetAll().Where(appointment => appointment.Room.SerialNumber.Equals(roomSerialNumber)).ToList();
@@ -57,7 +52,6 @@ namespace MicroServiceAppointment.Backend.Repository.DatabaseSql
         {
             return GetAll().Where(appointment => appointment.Physician.SerialNumber.Equals(physicianSerialNumber)).ToList();
         }
-
         public List<Appointment> GetByPatientSerialNumber(string patientSerialNumber)
         {
             return GetAll().Where(appointment => appointment.PatientSerialNumber.Equals(patientSerialNumber)).ToList();
