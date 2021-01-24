@@ -109,11 +109,10 @@ namespace WebApplication.Controller
                     Encoding.UTF8, "application/json");
 
             var path = GetFullPath("/appointmentMicroservice/makeAppointment/");
-            HttpResponseMessage response =
-                await client.PostAsync(path, parameter1);
-            response.EnsureSuccessStatusCode();
-            var result = JsonConvert.DeserializeObject<List<AppointmentSchedulingDTO>>(await response.Content.ReadAsStringAsync());
-            return result;
+            //HttpResponseMessage response =
+            //    await client.PostAsync(path, parameter1);
+            //response.EnsureSuccessStatusCode();
+            return Ok();
         }
 
         [HttpGet("allAppointmentsByPatientIdPast")]
