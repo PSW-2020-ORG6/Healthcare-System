@@ -170,7 +170,7 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
                 if (patientAppointmentEvent.IsAppointmentScheduled) isScheduled += 1;
             double isScheduledPer = Math.Round((double)isScheduled * 100 / allEvents.Count,2);
             result.Add(isScheduledPer);
-            result.Add(100 - isScheduledPer);
+            result.Add(Math.Round(100 - isScheduledPer,2));
             return result;
         }
     }
