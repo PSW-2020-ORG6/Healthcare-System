@@ -17,6 +17,10 @@ namespace MicroServiceAppointment.Backend.Service
         private readonly IAppointmentRepository _appointmentRepository;
         private readonly IProcedureTypeRepository _procedureTypeRepository;
         private readonly IMedicineRepository _medicineRepository;
+        private readonly IPatientRepository _patientRepository;
+        private readonly ISpecializationRepository _specializationRepository;
+        private readonly IAddressRepository _addressRepository;
+
 
 
         private PhysiciansDTO physitianDTO = new PhysiciansDTO();
@@ -43,7 +47,16 @@ namespace MicroServiceAppointment.Backend.Service
             _physicianRepository = physicianRepository;
             _procedureTypeRepository = procedureTypeRepository;
         }
-
+        public AppointmentService(ISpecializationRepository specializationRepository,
+                IAppointmentRepository appointmentRepository, IPhysicianRepository physicianRepository,
+                IPatientRepository patientRepository, IAddressRepository addressRepository)
+        {
+            _appointmentRepository = appointmentRepository;
+            _physicianRepository = physicianRepository;
+            _specializationRepository = specializationRepository;
+            _addressRepository = addressRepository;
+            _patientRepository = patientRepository;
+        }
         public AppointmentService(IAppointmentRepository appointmentRepository)
         {
             _appointmentRepository = appointmentRepository;

@@ -26,11 +26,6 @@ namespace WebApplication.Controller
             _appointmentServiceUrl = uris.AppointmentServiceUrl;
         }
 
-        // public SurveyController(IOptions<MicroServiceUris> options)
-        // {
-        //     _appointmentServiceUrl = options.Value.AppointmentServiceUrl;
-        // }
-
         [HttpPost("add")]
         public async Task<IActionResult> AddNewSurvey(SurveyDto surveyText)
         {

@@ -12,7 +12,7 @@
     beforeMount() {
         axios
             .get('/login/getUserId', {
-                params: { token: localStorage.getItem('token') }, 
+                params: { token: localStorage.getItem('token') },
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -24,7 +24,7 @@
             })
         axios
             .get('/patient/getMaliciousPatients', {
-                params: { token: localStorage.getItem('token') }, 
+                params: { token: localStorage.getItem('token') },
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -36,7 +36,8 @@
             })
 
         axios
-            .get('/survey/getDoctors', { params: { patientId: this.idPatient } , 
+            .get('/survey/getDoctors', {
+                params: { patientId: this.idPatient },
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -90,6 +91,9 @@
                 <div class="col-sm">
                 </div>
                 <div class="col-sm">
+                  <h3>
+			        <button id="ShowCharts" type="button" class="btn btn-info btn-lg margin form-control" v-on:click="ChartsShow()"></button>
+			        </h3><br/> 
                 </div>  
                 <div class="col-sm">
                 </div>
@@ -162,7 +166,7 @@
         BlockMaliciousPatient: function (MaliciousPatient) {
             axios
                 .put('/patient/blockMaliciousPatient', MaliciousPatient, {
-                    params: { token: localStorage.getItem('token') }, 
+                    params: { token: localStorage.getItem('token') },
                     headers: {
                         'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                     }
@@ -170,7 +174,7 @@
                 .then(response => {
                     axios
                         .get('/patient/getMaliciousPatients', {
-                            params: { token: localStorage.getItem('token') }, 
+                            params: { token: localStorage.getItem('token') },
                             headers: {
                                 'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                             }
@@ -192,6 +196,9 @@
         },
         FeedbacksShow: function () {
             this.$router.push('feedbackAdmin');
+        },
+        ChartsShow: function () {
+            this.$router.push('charts');
         }
     }
 

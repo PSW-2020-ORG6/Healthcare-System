@@ -229,3 +229,11 @@ div .circle-img {
     background-repeat: repeat;
     height: 768px;
 }
+
+#ShowCharts {
+    background-image: url("../pictures/chartsIconResized.png");
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    opacity: 0.8;
+}
