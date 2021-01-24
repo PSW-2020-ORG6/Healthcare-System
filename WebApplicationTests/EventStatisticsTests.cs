@@ -51,8 +51,11 @@ namespace WebApplicationTests
             LogPatientAppointmentEventService patientEventService = new LogPatientAppointmentEventService(stubPatientEventRepository.Object);
 
             var statistics = patientEventService.GetStatisticResults();
+            var result = statistics.PercentTransitionsToFirstStepZero
+                + statistics.PercentTransitionsToFirstStepOnce +
+                statistics.PercentTransitionsToFirstStepMore;
 
-            Assert.True(statistics.PercentTransitionsToFirstStepOnce == (double)100 / 3);
+            Assert.True(result==100);
         }
 
         [Fact]
@@ -62,9 +65,12 @@ namespace WebApplicationTests
             stubPatientEventRepository.Setup(m => m.GetAll()).Returns(events);
             LogPatientAppointmentEventService patientEventService = new LogPatientAppointmentEventService(stubPatientEventRepository.Object);
 
-            var statistics = patientEventService.GetStatisticResults();
+            var statistics = patientEventService.GetStatisticResults(); 
+            var result = statistics.PercentTransitionsToSecondStepZero
+                + statistics.PercentTransitionsToSecondStepOnce +
+                statistics.PercentTransitionsToSecondStepMore;
 
-            Assert.True(statistics.PercentTransitionsToSecondStepOnce == (double)100/3);
+            Assert.True(result == 100);
         }
 
         [Fact]
@@ -75,8 +81,11 @@ namespace WebApplicationTests
             LogPatientAppointmentEventService patientEventService = new LogPatientAppointmentEventService(stubPatientEventRepository.Object);
 
             var statistics = patientEventService.GetStatisticResults();
+            var result = statistics.PercentTransitionsToThirdStepZero
+               + statistics.PercentTransitionsToThirdStepOnce +
+               statistics.PercentTransitionsToThirdStepMore;
 
-            Assert.True(statistics.PercentTransitionsToThirdStepOnce == (double)100 / 3);
+            Assert.True(result == 100);
         }
 
         [Fact]
@@ -100,7 +109,7 @@ namespace WebApplicationTests
 
             var statistics = patientEventService.GetStatisticResults();
 
-            Assert.True(statistics.PercenttTransitionsToSecondStep ==(double) 100/3);
+            Assert.True(statistics.PercenttTransitionsToSecondStep == Math.Round((double)100 / 3, 2));
         }
     }
 }
