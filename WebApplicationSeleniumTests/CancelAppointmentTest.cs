@@ -33,23 +33,16 @@ namespace WebApplicationSeleniumTests
 
             landingPage = new LandingPage(driver);
             landingPage.Navigate();
+            Assert.Equal(driver.Url, LandingPage.URI);
             headerPage = new HeaderPage(driver);
             headerPage.Navigate();
+            Assert.Equal(driver.Url, HeaderPage.URI);
             headerPage.ClickLogInButton();
             Thread.Sleep(100);
 
             loginPage = new LoginPage(driver);
             loginPage.Navigate();
-            loginPage.InsertUsername("email");
-            loginPage.InsertPassword("sifra");
-            loginPage.SubmitClick();
-            Thread.Sleep(5000);
-
-            homePage = new HomePage(driver);
-            homePage.ClickAppointmentButton();
-            appointmentPage = new AppointmentPage(driver);
-            Thread.Sleep(8000);
-
+            Assert.Equal(driver.Url, LoginPage.URI);
         }
 
         public void Dispose()
@@ -59,8 +52,21 @@ namespace WebApplicationSeleniumTests
         }
 
         [Fact]
-        public void Cancel_appointment()
+        public void Test_Successful_canceled_appointment()
         {
+            loginPage.InsertUsername("email");
+            loginPage.InsertPassword("sifra");
+            loginPage.SubmitClick();
+            Thread.Sleep(5000);
+
+            homePage = new HomePage(driver);
+            homePage.Navigate();
+            Assert.Equal(driver.Url, HomePage.URI);
+            homePage.ClickAppointmentButton();
+            appointmentPage = new AppointmentPage(driver);
+            appointmentPage.Navigate();
+            Assert.Equal(driver.Url, AppointmentPage.URI);
+            Thread.Sleep(8000);
 
         }
     }

@@ -8,7 +8,7 @@ namespace WebApplicationSeleniumTests.Pages
     public class LandingPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://http://localhost:49900/#/landing";
+        public const string URI = "http://localhost:49900/#/";
 
         public LandingPage(IWebDriver driver)
         {
