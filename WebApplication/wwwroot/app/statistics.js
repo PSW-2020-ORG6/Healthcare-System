@@ -622,7 +622,7 @@
     mounted() {
 
         axios
-            .get('/survey/getStatistiEachQuestion', {
+            .get('/survey/getStatisticEachQuestion', {
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }

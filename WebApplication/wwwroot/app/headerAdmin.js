@@ -1,11 +1,11 @@
 ﻿Vue.component("headerAdmin", {
     data: function () {
         return {
-          
+
         }
     },
-    
-    
+
+
     template: `
 	<div>
 		<div id="temp">
@@ -17,10 +17,11 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" v-on:click="AdminShow()">Home</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" v-on:click="StatisticsShow()">Statistics</a>
-                            <a class="dropdown-item" v-on:click="FeedbacksAdminShow()">Feedbacks</a>
+                            <a class="dropdown-item" href="#" v-on:click="StatisticsShow()">Statistics</a>
+                            <a class="dropdown-item" href="#" v-on:click="FeedbacksAdminShow()">Feedbacks</a>
                             <a class="dropdown-item" href="#">Malicious users</a>
-                            <a class="dropdown-item" v-on:click="SearchShow()">Search</a>
+                            <a class="dropdown-item" href="#" v-on:click="SearchShow()">Search</a>
+                            <a class="dropdown-item" href="#" v-on:click="ChartsShow()">Appointments stats and charts</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" v-on:click="Logout()">Log out</a>
                         </div>
@@ -64,6 +65,9 @@
         RegistrationShow: function () {
             this.$router.push('registration');
         },
+        ChartsShow: function () {
+            this.$router.push('charts');
+        },
         Logout: function () {
             localStorage.setItem('token', null);
             localStorage.setItem('userId', null);
@@ -76,3 +80,4 @@
 
 
 });
+

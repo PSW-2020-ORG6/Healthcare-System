@@ -1,326 +1,36 @@
-//using Autofac.Extras.Moq;
-//using Moq;
-//using System.Collections.Generic;
-//using HealthClinicBackend.Backend.Model.Survey;
-//using WebApplication.Backend.Services;
-//using WebApplication.Backend.Util;
-//using Xunit;
-//using System;
-//using HealthClinicBackend.Backend.Repository.Generic;
+using WebApplication;
+using Microsoft.AspNetCore.Mvc.Testing;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using Xunit;
 
-//namespace WebApplicationTests
-//{
-//    public class SurveyAndStatisticsServiceTests
-//    {
-//        Survey surveyTest = new Survey
-//            ("001", "Bozo Bozic", new DateTime(2017, 05, 17));
+namespace WebApplicationTests
+{
+    public class SurveyAndStatisticsSeviceTests : IClassFixture<WebApplicationFactory<Startup>>
+    {
+        private readonly WebApplicationFactory<Startup> webFactory;
+        public SurveyAndStatisticsSeviceTests(WebApplicationFactory<Startup> factory)
+        {
+            webFactory = factory;
+        }
+        public static IEnumerable<object[]> Survey_Text =>
+            new List<object[]>
+            {
+                        new object[] {"1,Klara Dicic,1,2,3,4,5,5,4,1,2,5,1,4,2,3,5,2,1,4,5,2,2,5,4,2020-12-12 00:00:00", HttpStatusCode.OK},
+                        new object[] {null, HttpStatusCode.BadRequest}
+            };
 
-//        [Fact]
-//        public void Adds_new_survey()
-//        {
-//            var surveyRepository = new Mock<ISurveyRepository>();
-//            var appointmentRepository = new Mock<IAppointmentRepository>();
-//            var reportRepository = new Mock<IReportRepository>();
+        [Theory]
+        [MemberData(nameof(Survey_Text))]
+        public async void Add_survey(string Survey_Text,
+                    HttpStatusCode exceptedStatusCode)
+        {
+            HttpClient client = webFactory.CreateClient();
+            HttpResponseMessage responseMessage =
+                await client.GetAsync("#/survey/add/" + Survey_Text);
 
-//            SurveyService service = new SurveyService(surveyRepository.Object, appointmentRepository.Object,
-//                reportRepository.Object);
-
-//            bool result = service.AddNewSurvey(surveyTest);
-
-//            Assert.True(result);
-//            surveyRepository.Verify(m => m.Save(surveyTest), Times.Once);
-//        }
-
-//        private bool compareStatisticAuxilaryClass(StatisticAuxilaryClass p1, StatisticAuxilaryClass p2)
-//        {
-//            if (p1.AverageRating != p2.AverageRating)
-//                return false;
-//            else if (p1.Ones != p2.Ones)
-//                return false;
-//            else if (p1.Twos != p2.Twos)
-//                return false;
-//            else if (p1.Threes != p2.Threes)
-//                return false;
-//            else if (p1.Fours != p2.Fours)
-//                return false;
-//            else if (p1.Fives != p2.Fives)
-//                return false;
-
-//            return true;
-//        }
-
-//        private List<StatisticAuxilaryClass> getSampleStatisticsEachQuestion()
-//        {
-//            List<StatisticAuxilaryClass> output = new List<StatisticAuxilaryClass>
-//            {
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                },
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                },
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                },
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                },
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                },
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                },
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                },
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                },
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                },
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                },
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                },
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                },
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                },
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                },
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                },
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                },
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                },
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                },
-//                new StatisticAuxilaryClass
-//                {
-//                    AverageRating = 1,
-//                    Ones = 2,
-//                    Twos = 0,
-//                    Threes = 0,
-//                    Fours = 0,
-//                    Fives = 0,
-//                    OnesPercent = "100%",
-//                    TwosPercent = "0%",
-//                    ThreesPercent = "0%",
-//                    FoursPercent = "0%",
-//                    FivesPercent = "0"
-//                }
-//            };
-//            return output;
-//        }
-//    }
-//}
+            responseMessage.StatusCode.CompareTo(exceptedStatusCode);
+        }
+    }
+}
