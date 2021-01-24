@@ -109,10 +109,10 @@
 	methods: {
 		AddNewFeedback: function (feedback) {
 			if (!document.getElementById("anonimous").checked)
-				feedback.patientId = localStorage.getItem('userId')
+				feedback.patientId = this.idPatient
 			else
 				feedback.patientId = "-1"
-			if (feedback.text.localeCompare(null) || feedback.text.localeCompare("")) {
+			if (feedback.text.localeCompare(null) && feedback.text.localeCompare(" ")) {
 				axios
 					.post("/feedback/add", feedback, {
 						headers: {
@@ -124,7 +124,6 @@
 						$('#CommentModal').modal('hide')
 					})
 					.catch(error => {
-
 						("You need to enter a comment first.");
 					})
 			}
