@@ -11,7 +11,7 @@ namespace WebApplicationSeleniumTests.Pages
     public class AppointmentPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://http://localhost:49900/#/appointments";
+        public const string URI = "http://localhost:49900/#/appointments";
         private ReadOnlyCollection<IWebElement> Rows => driver.FindElements(By.XPath("//table[@id='tableAppontments']/tbody/tr"));
         private IWebElement CancelButton => driver.FindElement(By.XPath("(//table[@id='tableAppontments']/tbody/tr)[last()]/td[7]/button"));
         public string Title => driver.Title;
