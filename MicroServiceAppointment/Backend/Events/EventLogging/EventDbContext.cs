@@ -5,7 +5,6 @@ namespace MicroServiceAppointment.Backend.Events.EventLogging
 {
     public class EventDbContext : DbContext
     {
-        public DbSet<PatientRegisteredEvent> PatientRegisteredEvents { get; set; }
         public DbSet<PatientAppointmentEvent> PatientAppointmentEvents { get; set; }
 
         public EventDbContext() : base()
