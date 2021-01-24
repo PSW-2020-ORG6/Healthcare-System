@@ -91,6 +91,8 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         {
             foreach (Room room in _roomRepository.GetByRoomRenovationSerialNumber(roomRenovation.SerialNumber))
             {
+                if (room.IsBeingRenovated) continue;
+
                 foreach (Equipment equipment in _equipmentRepository.GetByRoomSerialNumber(room.SerialNumber))
                 {
                     equipment.RoomSerialNumber = roomRenovation.RenovatedRoomSerialNumber;

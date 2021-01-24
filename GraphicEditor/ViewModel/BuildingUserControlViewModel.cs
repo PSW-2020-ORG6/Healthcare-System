@@ -201,7 +201,8 @@ namespace GraphicEditor.ViewModel
 
             if(IsAllInTouch(selectedRooms))
             {
-                new ComplexRoomRenovation(_selectedFloor, selectedRooms).ShowDialog();
+                if (selectedRooms.Count == 1) new BasicRoomRenovation(_selectedFloor, selectedRooms[0]).ShowDialog();
+                else new ComplexRoomRenovation(_selectedFloor, selectedRooms).ShowDialog();
             }
             else
             {
