@@ -26,7 +26,7 @@
                 <span class="navbar-text">
                    <ul class="navbar-nav mr-auto">
                       <li class="nav-item">
-                    <a class="nav-link navItem " href="#" v-on:click="LoginShow()">Login</a>
+                    <a id="loginUser" class="nav-link navItem " href="#" v-on:click="LoginShow()">Login</a>
                       </li>
                       <li class="nav-item">
                     <a class="nav-link navItem " href="#" v-on:click="RegistrationShow()">Registration</a>

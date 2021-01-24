@@ -8,7 +8,7 @@ namespace WebApplicationSeleniumTests.Pages
     public class LoginPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://http://localhost:49900/#/login";
+        public const string URI = "http://localhost:49900/#/login";
         private IWebElement Username => driver.FindElement(By.Id("userNameId"));
         private IWebElement Password => driver.FindElement(By.Id("passwordId"));
         private IWebElement SubmitButton => driver.FindElement(By.Id("submitId"));
@@ -24,7 +24,7 @@ namespace WebApplicationSeleniumTests.Pages
         }
         public void InsertPassword(string password)
         {
-            Username.SendKeys(password);
+            Password.SendKeys(password);
         }
         public void SubmitClick()
         {
