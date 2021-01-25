@@ -18,7 +18,7 @@ namespace GraphicEditor.ViewModel
         public ResourceDictionary ResourceDictionary = new ResourceDictionary();
         private MainWindowViewModel _parent;
         private BuildingController buildingController = new BuildingController();
-        private BuildingSelectionEventService buildingSelectionEventService = new BuildingSelectionEventService();
+        private BuildingSelectionEventController buildingSelectionEventController = new BuildingSelectionEventController();
 
         public static Dictionary<string, Button> buildingButtons = new Dictionary<string, Button>();
 
@@ -152,7 +152,7 @@ namespace GraphicEditor.ViewModel
                 UsernameSerialNbr = MainWindow.UserProfile.SerialNumber,
                 BuildingSerialNbr = enteringBuilding.SerialNumber
             };
-            buildingSelectionEventService.LogEvent(building);
+            buildingSelectionEventController.LogEvent(building);
         }
     }
 }

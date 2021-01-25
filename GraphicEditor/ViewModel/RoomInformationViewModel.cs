@@ -174,7 +174,7 @@ namespace GraphicEditor.ViewModel
         private EquipmentRelocationController equipmentRelocationController = new EquipmentRelocationController();
         private RoomRenovationController renovationController = new RoomRenovationController();
         private SuperintendentMedicineController medicineController = new SuperintendentMedicineController();
-        private RoomSelectionEventService roomSelectionEventService = new RoomSelectionEventService();
+        private RoomSelectionEventController roomSelectionEventController = new RoomSelectionEventController();
 
         // Floor floor1, Border space, FloorUserControl view1, Room _renovatingRoom
 
@@ -365,7 +365,7 @@ namespace GraphicEditor.ViewModel
                 FloorSerialNbr = enteringRoom.FloorSerialNumber,
                 RoomSerialNbr = enteringRoom.SerialNumber
             };
-            roomSelectionEventService.LogEvent(room);
+            roomSelectionEventController.LogEvent(room);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace GraphicEditor.ViewModel
         private string buildingStyle;
         private MainWindowViewModel parentViewModel;
         private BuildingUserControlViewModel myViewModel;
-        private FloorChangeEventService floorChangeEventService = new FloorChangeEventService();
+        private FloorChangeEventController floorChangeEventController = new FloorChangeEventController();
 
         public FloorUserControlViewModel(MainWindowViewModel _mapParent, BuildingUserControlViewModel _buildingParent, Grid grid, Floor floor, ref Dictionary<string, RoomButton> _connections)
         {
@@ -183,7 +183,7 @@ namespace GraphicEditor.ViewModel
                 BuildingSerialNbr = enteringFloor.BuildingSerialNumber,
                 FloorSerialNbr = enteringFloor.SerialNumber
             };
-            floorChangeEventService.LogEvent(floor);
+            floorChangeEventController.LogEvent(floor);
         }
     }
 }
