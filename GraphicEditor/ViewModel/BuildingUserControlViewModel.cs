@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 
 namespace GraphicEditor.ViewModel
 {
@@ -200,12 +199,12 @@ namespace GraphicEditor.ViewModel
                 return;
             }
 
-            foreach(Room room in selectedRooms)
+            foreach (Room room in selectedRooms)
             {
                 if (room.RoomRenovationSerialNumber != null) new WarningRenovationAlreadyScheduled().ShowDialog();
             }
 
-            if(IsAllInTouch(selectedRooms))
+            if (IsAllInTouch(selectedRooms))
             {
                 if (selectedRooms.Count == 1) new BasicRoomRenovation(_selectedFloor, selectedRooms[0]).ShowDialog();
                 else new ComplexRoomRenovation(_selectedFloor, selectedRooms).ShowDialog();
@@ -215,7 +214,7 @@ namespace GraphicEditor.ViewModel
                 new WarningRoomsNotTouching().ShowDialog();
                 return;
             }
-            
+
         }
 
         private bool IsAllInTouch(List<Room> selectedRooms)
@@ -231,7 +230,7 @@ namespace GraphicEditor.ViewModel
 
             List<Room> newList = new List<Room>(selectedRooms);
             newList.Remove(firstRoom);
-            
+
             return recursiveAllInTouchFunction(topLeftRoom1, bottomRightRoom1, newList);
         }
 
@@ -300,7 +299,7 @@ namespace GraphicEditor.ViewModel
                 for (int j = topLeftCornerRoom.Item2; j <= bottomRightCornerRoom.Item2; ++j)
                     roomCorners.Add((i, j));
 
-            foreach((int, int) corner in roomCorners)
+            foreach ((int, int) corner in roomCorners)
             {
                 if (corner.Item1 >= topLeftCornerSpace.Item1 &&
                    corner.Item2 >= topLeftCornerSpace.Item2 &&

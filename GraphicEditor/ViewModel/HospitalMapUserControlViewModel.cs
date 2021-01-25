@@ -2,6 +2,7 @@
 using GraphicEditor.View.UserControls;
 using GraphicEditor.View.Windows;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
+using HealthClinicBackend.Backend.Events.EventBuildingSelection;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Util;
 using System;
@@ -17,6 +18,7 @@ namespace GraphicEditor.ViewModel
         public ResourceDictionary ResourceDictionary = new ResourceDictionary();
         private MainWindowViewModel _parent;
         private BuildingController buildingController = new BuildingController();
+        private BuildingSelectionEventService buildingSelectionEventService = new BuildingSelectionEventService();
 
         public static Dictionary<string, Button> buildingButtons = new Dictionary<string, Button>();
 
@@ -140,6 +142,17 @@ namespace GraphicEditor.ViewModel
             Building enteringBuilding = buildingController.GetById(info[2]);
 
             _parent.CurrentUserControl = new BuildingUserControl(_parent, enteringBuilding);
+            CreateBuildingSelectEvent(enteringBuilding);
+        }
+
+        private void CreateBuildingSelectEvent(Building enteringBuilding)
+        {
+            BuildingSelectionEventParams building = new BuildingSelectionEventParams
+            {
+                UsernameSerialNbr = MainWindow.UserProfile.SerialNumber,
+                BuildingSerialNbr = enteringBuilding.SerialNumber
+            };
+            buildingSelectionEventService.LogEvent(building);
         }
     }
 }

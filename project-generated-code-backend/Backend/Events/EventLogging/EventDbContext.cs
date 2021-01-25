@@ -26,10 +26,10 @@ namespace HealthClinicBackend.Backend.Events.EventLogging
         {
         }
 
-        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        // {
-        //     optionsBuilder.UseNpgsql(
-        //         "userid=postgres;server=localhost;port=5432;database=healthcare-system-events;password=super;");
-        // }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql(
+                "userid=postgres;server=localhost;port=5432;database=healthcare-system-events;password=super;");
+        }
     }
 }
