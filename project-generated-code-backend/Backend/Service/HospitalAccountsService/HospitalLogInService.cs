@@ -1,6 +1,8 @@
-﻿using HealthClinicBackend.Backend.Model.Util;
+﻿using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
+using System;
 using System.Linq;
 
 namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
@@ -10,12 +12,14 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
         private readonly IPatientRepository _patientRepository;
         private readonly IPhysicianRepository _physicianRepository;
         private readonly ISecretaryRepository _secretaryRepository;
+        private readonly ISuperintendentRepository _superintendentRepository;
 
         public HospitalLogInService()
         {
             _patientRepository = new PatientDatabaseSql();
             _physicianRepository = new PhysicianDatabaseSql();
             _secretaryRepository = new SecretaryDatabaseSql();
+            _superintendentRepository = new SuperintendentDatabaseSql();
         }
 
         public HospitalLogInService(IPatientRepository patientRepository, IPhysicianRepository physicianRepository,
@@ -50,25 +54,65 @@ namespace HealthClinicBackend.Backend.Service.HospitalAccountsService
                 typeOfUser = TypeOfUser.Secretary;
             }
 
+            if (CheckIfUserIsSuperintendent(jmbg, password))
+            {
+                typeOfUser = TypeOfUser.Superintendent;
+            }
+
             return typeOfUser;
+        }
+
+        public Account GetUserProfile(string jmbg, string password)
+        {
+            if (CheckIfUserIsPatient(jmbg, password))
+            {
+                var patients = _patientRepository.GetAll();
+                return patients.Find(patient => patient.AreCredentialsValid2(jmbg, password));
+            }
+
+            if (CheckIfUserIsPhysician(jmbg, password))
+            {
+                var physicians = _physicianRepository.GetAll();
+                return physicians.Find(physician => physician.AreCredentialsValid2(jmbg, password));
+            }
+
+            if (CheckIfUserIsSecretary(jmbg, password))
+            {
+                var secretaries = _secretaryRepository.GetAll();
+                return secretaries.Find(secretary => secretary.AreCredentialsValid2(jmbg, password));
+            }
+
+            if (CheckIfUserIsSuperintendent(jmbg, password))
+            {
+                var superintendents = _superintendentRepository.GetAll();
+                return superintendents.Find(superintendent => superintendent.AreCredentialsValid2(jmbg, password));
+            }
+
+            return null;
         }
 
         private bool CheckIfUserIsPatient(string jmbg, string password)
         {
             var patients = _patientRepository.GetAll();
-            return patients.Any(patient => patient.AreCredentialsValid(jmbg, password));
+            return patients.Any(patient => patient.AreCredentialsValid2(jmbg, password));
         }
 
         private bool CheckIfUserIsPhysician(string jmbg, string password)
         {
             var physicians = _physicianRepository.GetAll();
-            return physicians.Any(physician => physician.AreCredentialsValid(jmbg, password));
+            return physicians.Any(physician => physician.AreCredentialsValid2(jmbg, password));
         }
 
         private bool CheckIfUserIsSecretary(string jmbg, string password)
         {
             var secretaries = _secretaryRepository.GetAll();
-            return secretaries.Any(secretary => secretary.AreCredentialsValid(jmbg, password));
+            return secretaries.Any(secretary => secretary.AreCredentialsValid2(jmbg, password));
+        }
+
+        private bool CheckIfUserIsSuperintendent(string jmbg, string password)
+        {
+            var superintendents = _superintendentRepository.GetAll();
+            return superintendents.Any(superintendent => superintendent.AreCredentialsValid2(jmbg, password));
         }
     }
 }

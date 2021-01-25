@@ -58,6 +58,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public DbSet<Survey> Survey { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
         public DbSet<ActionAndBenefitMessage> ActionAndBenefitMessage { get; set; }
+        public DbSet<Superintendent> Superintendent { get; set; }
         public HealthCareSystemDbContext(DbContextOptions<HealthCareSystemDbContext> options) : base(options)
         {
         }
@@ -107,6 +108,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
             modelBuilder.Entity<City>().HasOne(c => c.Country).WithMany();
             modelBuilder.Entity<Address>().HasOne(a => a.City).WithMany();
+
 
             modelBuilder.Entity<Physician>().HasOne(p => p.Address).WithMany();
             modelBuilder.Entity<Patient>().HasOne(p => p.Address).WithMany();
@@ -237,6 +239,41 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             ProcedureEquipmentCreation(modelBuilder);
             EquipmentRelocationsCreation(modelBuilder);
             RoomRenovation(modelBuilder);
+            SuperintendentCreation(modelBuilder);
+        }
+
+        private void SuperintendentCreation(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Superintendent>().HasKey(o => o.SerialNumber);
+            modelBuilder.Entity<Superintendent>().HasAlternateKey(o => o.Id);
+            modelBuilder.Entity<Superintendent>().Ignore(o => o.Address);
+            //modelBuilder.Entity<Physician>().Ignore(o => o.AllSpecializations);
+            modelBuilder.Entity<Superintendent>().HasData(
+                new Superintendent 
+                {
+                    SerialNumber = "990001",
+                    Name = "Rafailo",
+                    Surname = "Teodosijevic",
+                    Id = "990001",
+                    DateOfBirth = new DateTime(1975, 11, 11),
+                    Contact = "Teodosijevic kontakt",
+                    Email = "teodosijevic@gmail.com",
+                    Password = "teodosijevic",
+                    AddressSerialNumber = "200001"
+                },
+                new Superintendent
+                {
+                    SerialNumber = "990002",
+                    Name = "Atanasije",
+                    Surname = "Jevtic",
+                    Id = "990002",
+                    DateOfBirth = new DateTime(1985, 4, 25),
+                    Contact = "Jevtic kontakt",
+                    Email = "jevtic@gmail.com",
+                    Password = "jevtic",
+                    AddressSerialNumber = "200002"
+                }
+            );
         }
 
         private void RoomRenovation(ModelBuilder modelBuilder)
@@ -260,12 +297,24 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Secretary>().HasData(
                 new Secretary
                 {
+                    
                     Name = "Marko",
                     Surname = "Markovic",
-                    SerialNumber = "123a",
+                    SerialNumber = "89001",
+                    AddressSerialNumber = "200002",
+                    Id = "111",
+                    Email = "markovic@gmail.com",
+                    Password = "markovic"
+                },
+                new Secretary
+                {
+                    Name = "Slobodan",
+                    Surname = "Mirkovic",
+                    SerialNumber = "89002",
                     AddressSerialNumber = "200001",
                     Id = "111",
-                    Password = "123"
+                    Email = "mirkovic@gmail.com",
+                    Password = "mirkovic"
                 }
                 );
         }
@@ -464,11 +513,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     Id = "0002",
                     DateOfBirth = new DateTime(2017, 1, 18),
                     Contact = "kontakt",
-                    Password = "sifra",
+                    Password = "tanjic",
                     Address = new Address("neka adresa"),
                     ParentName = "otac",
                     Gender = "Zensko",
-                    Email = "email",
+                    Email = "tanjic@gmail.com",
                     Guest = true
                 },
                 new Patient
@@ -479,11 +528,11 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     Id = "0003",
                     DateOfBirth = new DateTime(2018, 1, 18),
                     Contact = "kontaktMica",
-                    Password = "sifraMica",
+                    Password = "milic",
                     Address = new Address("neka adresaMica"),
                     ParentName = "mama",
                     Gender = "Zensko",
-                    Email = "emailMica",
+                    Email = "milic@gmail.com",
                     Guest = true
                 }
             );
@@ -720,7 +769,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     DateOfBirth = new DateTime(1975, 11, 11),
                     Contact = "Simic kontakt",
                     Email = "simic@gmail.com",
-                    Password = "sifraSimic24dsf1",
+                    Password = "simic",
                     AddressSerialNumber = "200001"
                 },
                 new Physician
@@ -732,7 +781,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                     DateOfBirth = new DateTime(1985, 4, 25),
                     Contact = "Dicic kontakt",
                     Email = "dicic@gmail.com",
-                    Password = "sifraDicic98754",
+                    Password = "dicic",
                     AddressSerialNumber = "200002"
                 }
             );

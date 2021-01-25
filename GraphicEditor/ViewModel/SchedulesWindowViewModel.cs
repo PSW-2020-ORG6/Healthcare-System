@@ -14,7 +14,7 @@ namespace GraphicEditor.ViewModel
         private readonly SchedulesWindow window;
         private List<Appointment> allAppointments = new List<Appointment>();
         private List<EquipmentRelocation> allEquipmentRelocations = new List<EquipmentRelocation>();
-        private List<Renovation> allRenovations = new List<Renovation>();
+        private List<RoomRenovation> allRenovations = new List<RoomRenovation>();
         private AppointmentController appointmentController = new AppointmentController();
         private EquipmentRelocationController equipmentRelocationController = new EquipmentRelocationController();
         private RenovationController renovationController = new RenovationController();
@@ -39,7 +39,7 @@ namespace GraphicEditor.ViewModel
             }
         }
 
-        public List<Renovation> AllRenovations
+        public List<RoomRenovation> AllRenovations
         {
             get { return allRenovations; }
             set
@@ -57,7 +57,7 @@ namespace GraphicEditor.ViewModel
         public MyICommand CancelOfRenovation { get; private set; }
 
         public SchedulesWindowViewModel(List<Appointment> appointments,
-            List<EquipmentRelocation> equipmentRelocations, List<Renovation> renovations,
+            List<EquipmentRelocation> equipmentRelocations, List<RoomRenovation> renovations,
             SchedulesWindow window)
         {
             AllAppointments = appointments;

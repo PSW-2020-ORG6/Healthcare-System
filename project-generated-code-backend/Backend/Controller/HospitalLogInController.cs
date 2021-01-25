@@ -1,4 +1,5 @@
-﻿using HealthClinicBackend.Backend.Model.Util;
+﻿using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Service.HospitalAccountsService;
 
 namespace HealthClinicBackend.Backend.Controller
@@ -20,6 +21,11 @@ namespace HealthClinicBackend.Backend.Controller
         public TypeOfUser GetUserType(string jmbg, string password)
         {
             return _hospitalLogInService.GetUserType(jmbg, password);
+        }
+
+        public Account GetUserProfile(string jmbg, string password)
+        {
+            return _hospitalLogInService.GetUserProfile(jmbg, password);
         }
     }
 }

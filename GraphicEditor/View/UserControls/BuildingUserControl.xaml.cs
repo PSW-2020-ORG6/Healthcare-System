@@ -13,7 +13,7 @@ namespace GraphicEditor.View.UserControls
     {
         private AppointmentController appointmentController = new AppointmentController();
         private EquipmentRelocationController equipmentRelocationController = new EquipmentRelocationController();
-        private RenovationController renovationController = new RenovationController();
+        private RoomRenovationController renovationController = new RoomRenovationController();
         private MainWindowViewModel _viewModel;
         public BuildingUserControlViewModel myViewModel;
 

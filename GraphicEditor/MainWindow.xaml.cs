@@ -1,5 +1,6 @@
 ﻿using GraphicEditor.HelpClasses;
 using HealthClinicBackend.Backend.Controller;
+using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Util;
 using System;
 using System.Windows;
@@ -12,6 +13,7 @@ namespace GraphicEditor
     {
         private const double SCREEN_FACTOR = 0.93;
         public static TypeOfUser TypeOfUser = TypeOfUser.NoUser;
+        public static Account UserProfile = null;
         public static double MainScreenWidth = SystemParameters.PrimaryScreenWidth * SCREEN_FACTOR;
         public static double MainScreenHeight = SystemParameters.PrimaryScreenHeight * SCREEN_FACTOR;
         private EquipmentRelocationController equipmentRelocationController = new EquipmentRelocationController();

@@ -14,6 +14,7 @@ namespace GraphicEditor.HelpClasses
         public const string MAP = "map";
         public const string LOGIN = "login";
         public const string BUILDING = "building";
+        public const string PROFILE = "profile";
 
         // Constants used in HospitalMapUserControlViewModel
         public const string EMERGENCY = "emergency";

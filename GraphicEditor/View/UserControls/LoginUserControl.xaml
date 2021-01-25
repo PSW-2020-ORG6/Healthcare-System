@@ -3,25 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:GraphicEditor.View.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border BorderBrush="Black" BorderThickness="1">
         <StackPanel Background="AliceBlue" >
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="5">
+                <materialDesign:PackIcon Width="60" Height="60" Kind="Login" />
+                <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}"
+                           Text="Login Page"/>
+                <materialDesign:PackIcon Width="60" Height="60" Kind="Login" />
+            </StackPanel>
             <StackPanel 
                 HorizontalAlignment="Center"
                 Orientation="Horizontal">
                 <TextBlock 
                     FontSize="48" 
-                    Margin="10 100 10 10">
+                    Margin="10 50 10 10">
                     User name:
                 </TextBlock>
                 <TextBox 
-                    FontSize="48" 
-                    Margin="10 100 10 10"
+                    FontSize="40" 
+                    Margin="10 50 10 10"
                     Text="{Binding UserName,Mode=OneWayToSource}" 
                     
-                    Width="300"/>
+                    Width="500"/>
             </StackPanel>
             <StackPanel 
                 HorizontalAlignment="Center"
@@ -32,10 +41,10 @@
                     Password:
                 </TextBlock>
                 <PasswordBox 
-                    FontSize="48" 
-                    Margin="40 70 10 10"
+                    FontSize="40" 
+                    Margin="10 70 10 10"
                     Name="txtPassword"
-                    Width="300" 
+                    Width="500" 
                     />
             </StackPanel>
             <Button 
@@ -44,7 +53,7 @@
                 FontSize="48"
                 Height="70"
                 HorizontalAlignment="Center" 
-                Margin="20 120 20 20"
+                Margin="20 50 20 20"
                 Width="300" >
                 LOG IN
             </Button>

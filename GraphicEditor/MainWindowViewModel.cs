@@ -15,6 +15,7 @@ namespace GraphicEditor
         public BuildingUserControl CardiologyBuilding;
         public HospitalMapUserControl HospitalMap;
         public LoginUserControl LoginPage;
+        public ProfileUserControl ProfilePage;
         private UserControl currentViewModel;
         public MainWindow mainWindow;
 
@@ -23,6 +24,7 @@ namespace GraphicEditor
             NavCommand = new MyICommand<string>(OnNav);
             LoginPage = new LoginUserControl(this);
             HospitalMap = new HospitalMapUserControl(this);
+            ProfilePage = new ProfileUserControl(this);
 
             mainWindow = _mainWindow;
             CurrentUserControl = LoginPage;
@@ -59,6 +61,9 @@ namespace GraphicEditor
                     break;
                 case Constants.LOGIN:
                     CurrentUserControl = LoginPage;
+                    break;
+                case Constants.PROFILE:
+                    CurrentUserControl = ProfilePage;
                     break;
                 case Constants.BUILDING:
                     CurrentUserControl = CardiologyBuilding;
