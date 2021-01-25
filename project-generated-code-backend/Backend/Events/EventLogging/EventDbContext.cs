@@ -1,4 +1,6 @@
-﻿using HealthClinicBackend.Backend.Events.EventRoomSelection;
+﻿using HealthClinicBackend.Backend.Events.EventBuildingSelection;
+using HealthClinicBackend.Backend.Events.EventFloorChange;
+using HealthClinicBackend.Backend.Events.EventRoomSelection;
 using HealthClinicBackend.Backend.Events.PatientRegisteredEventLogging;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +11,8 @@ namespace HealthClinicBackend.Backend.Events.EventLogging
         public DbSet<PatientRegisteredEvent> PatientRegisteredEvents { get; set; }
         public DbSet<PatientAppointmentEvent> PatientAppointmentEvents { get; set; }
         public DbSet<RoomSelectionEvent> RoomSelectionEvents { get; set; }
+        public DbSet<FloorChangeEvent> FloorChangeEvents { get; set; }
+        public DbSet<BuildingSelectionEvent> BuildingSelectionEvents { get; set; }
 
         public EventDbContext() : base()
         {
