@@ -33,6 +33,8 @@ namespace GraphicEditor.View.Windows
         private SuperintendentMedicineController medicineController = new SuperintendentMedicineController();
         private BedController bedController = new BedController();
         private RoomRenovationController roomRenovationController = new RoomRenovationController();
+        private AppointmentController appointmentController = new AppointmentController();
+        private EquipmentRelocationController equipmentRelocationController = new EquipmentRelocationController();
         private List<Room> renovatingRooms;
 
         public DateTime Start { get; set; }
@@ -150,6 +152,36 @@ namespace GraphicEditor.View.Windows
                 Description = description,
                 RenovatingRooms = renovatingRooms
             };
+
+            bool timeSet = false;
+
+            foreach(Room room in renovatingRooms)
+            {
+                foreach (HealthClinicBackend.Backend.Model.Schedule.Appointment appointment in appointmentController.GetByRoomSerialNumber(newRoom.SerialNumber))
+                {
+                    if (appointment.TimeInterval.IsOverLapping(timeInterval))
+                    {
+                        new RoomRenovationTimeSuggestions(roomRenovation).ShowDialog();
+                        timeSet = true;
+                        break;
+                    }
+                }
+
+                if (!timeSet)
+                {
+                    foreach (EquipmentRelocation er in equipmentRelocationController.GetAll())
+                    {
+                        if (!er.roomToRelocateToSerialNumber.Equals(roomRenovation.RenovatedRoomSerialNumber)) continue;
+                        if (er.TimeInterval.IsOverLapping(timeInterval))
+                        {
+                            new RoomRenovationTimeSuggestions(roomRenovation).ShowDialog();
+                            timeSet = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            
 
             foreach (Room room in renovatingRooms)
             {

@@ -31,6 +31,8 @@ namespace GraphicEditor.View.Windows
         private EquipmentController equipmentController = new EquipmentController();
         private BedController bedController = new BedController();
         private SuperintendentMedicineController medicineController = new SuperintendentMedicineController();
+        private AppointmentController appointmentController = new AppointmentController();
+        private EquipmentRelocationController equipmentRelocationController = new EquipmentRelocationController(); 
         private TimeInterval timeInterval;
         private string description;
         private Room MoveEverythingToThisRoom;
@@ -83,9 +85,6 @@ namespace GraphicEditor.View.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            timeInterval = new TimeInterval((DateTime)timeIntervalStart.Value, (DateTime)timeIntervalEnd.Value);
-            timeIntervalStart.IsReadOnly = true;
-            timeIntervalEnd.IsReadOnly = true;
             if (newBorders.Count != 0)
             {
                 foreach(Border border in newBorders)
@@ -105,7 +104,7 @@ namespace GraphicEditor.View.Windows
 
             List<bool> moveStuffToThisRoom = new List<bool>();
             int before = newRooms.Count;
-            new SplitRoomRenovation(floor, room, timeInterval, ref newRooms, position, moveStuffToThisRoom).ShowDialog();
+            new SplitRoomRenovation(floor, room, ref newRooms, position, moveStuffToThisRoom).ShowDialog();
             int after = newRooms.Count;
             if (before < after)
             {
@@ -183,9 +182,12 @@ namespace GraphicEditor.View.Windows
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            // Suggested TimeIntervals missing - Next feature
-            if (MoveEverythingToThisRoom == null) return;
+            if (MoveEverythingToThisRoom == null)
+            {
 
+                return;
+            }
+            timeInterval = new TimeInterval((DateTime)timeIntervalStart.Value, (DateTime)timeIntervalEnd.Value);
 
             RoomRenovation roomRenovation = new RoomRenovation()
             {
@@ -194,6 +196,32 @@ namespace GraphicEditor.View.Windows
                 RenovatedRoomSerialNumber = room.SerialNumber,
                 Description = description.Substring(0, description.Length - 2)
             };
+
+            bool timeSet = false;
+
+            foreach(Appointment appointment in appointmentController.GetByRoomSerialNumber(room.SerialNumber))
+            {
+                if (appointment.TimeInterval.IsOverLapping(timeInterval))
+                {
+                    new RoomRenovationTimeSuggestions(roomRenovation).ShowDialog();
+                    timeSet = true;
+                    break;
+                }
+            }
+
+            if(!timeSet)
+            {
+                foreach (EquipmentRelocation er in equipmentRelocationController.GetAll())
+                {
+                    if (!er.roomToRelocateToSerialNumber.Equals(roomRenovation.RenovatedRoomSerialNumber)) continue;
+                    if (er.TimeInterval.IsOverLapping(timeInterval))
+                    {
+                        new RoomRenovationTimeSuggestions(roomRenovation).ShowDialog();
+                        timeSet = true;
+                        break;
+                    }
+                }
+            }
 
             roomRenovationController.AddRoomRenovation(roomRenovation);
             room.RoomRenovationSerialNumber = roomRenovation.SerialNumber;
