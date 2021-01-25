@@ -117,7 +117,7 @@ namespace MicroServiceAppointment.Backend.Service
 
             foreach (Survey s in surveys)
             {
-                for (int i = 0; i < 18; i++) {
+                for (int i = 0; i < 19; i++) {
                     statistics[i].AverageRating += Double.Parse(s.Questions[4 + i]);
                     statistics[i].increment(Int32.Parse(s.Questions[4 + i]));
                 }

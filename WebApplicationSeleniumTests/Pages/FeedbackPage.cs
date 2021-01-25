@@ -31,11 +31,6 @@ namespace WebApplicationSeleniumTests.Pages
             FeedbackTextArea.SendKeys(feedback);
         }
 
-        public void waitForCancel()
-        {
-            Thread.Sleep(1000);
-        }
-
         public void ClickCreateFeedbackButton()
         {
            CreateFeedbackButton.Click();
@@ -53,7 +48,7 @@ namespace WebApplicationSeleniumTests.Pages
 
         public void WaitForAlertDialog()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.AlertIsPresent());
         }
 
