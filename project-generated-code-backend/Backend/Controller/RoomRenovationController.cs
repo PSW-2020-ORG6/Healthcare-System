@@ -1,8 +1,6 @@
 ﻿using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Service.SchedulingService;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace HealthClinicBackend.Backend.Controller
 {

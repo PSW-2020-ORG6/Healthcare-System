@@ -1,10 +1,7 @@
 ﻿using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Util;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace HealthClinicBackend.Backend.Model.Schedule
 {

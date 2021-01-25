@@ -56,7 +56,7 @@ namespace HealthClinicBackend.Backend.Model.Accounts
             Password = password;
         }
         public Patient(string name, string surname, string id, DateTime dateOfBirth, string contact, string email,
-           Address address, string parentName, string gender, string password, bool isGuest = false,bool isAdmin=false)
+           Address address, string parentName, string gender, string password, bool isGuest = false, bool isAdmin = false)
            : base(name, surname, id, dateOfBirth, contact, email, address, password)
         {
             ParentName = parentName;
@@ -66,7 +66,7 @@ namespace HealthClinicBackend.Backend.Model.Accounts
             IsAdmin = isAdmin;
         }
 
-      
+
 
         public Patient(string serialNumber, string name, string surname, string id, DateTime dateOfBirth,
             string contact, string email, Address address, string parentName, string placeOfBirth,
@@ -101,7 +101,7 @@ namespace HealthClinicBackend.Backend.Model.Accounts
          string municipalityOfBirth, string stateOfBirth, String citizenship, string nationality, string profession,
          string placeOfResidence, string municipalityOfResidence, string stateOfResidence, string employmentStatus,
          string maritalStatus, string healthInsuranceNumber, string familyDiseases, string personalDiseases,
-         string gender, string password, string image, bool isGuest = false,bool isAdmin=false)
+         string gender, string password, string image, bool isGuest = false, bool isAdmin = false)
          : base(serialNumber, name, surname, id, dateOfBirth, contact, email, address, password)
         {
             ParentName = parentName;

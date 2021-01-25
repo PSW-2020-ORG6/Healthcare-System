@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using HealthClinicBackend.Backend.Dto;
+﻿using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
+using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions
 {
@@ -98,7 +98,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGener
             return appointments;
         }
 
-        public AppointmentDto FindNearestAvailableAppointment( Appointment appointment)
+        public AppointmentDto FindNearestAvailableAppointment(Appointment appointment)
         {
             bool noDoctors = false;
             AppointmentDto appointmentPreferences = new AppointmentDto();

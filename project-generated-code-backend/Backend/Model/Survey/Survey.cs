@@ -1,6 +1,6 @@
-﻿using System;
+﻿using HealthClinicBackend.Backend.Model.Util;
+using System;
 using System.Collections.Generic;
-using HealthClinicBackend.Backend.Model.Util;
 
 namespace HealthClinicBackend.Backend.Model.Survey
 {

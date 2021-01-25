@@ -38,7 +38,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         public override void Save(Equipment newEntity)
         {
             bool entered = false;
-            foreach(Equipment equipment in DbContext.Equipment)
+            foreach (Equipment equipment in DbContext.Equipment)
             {
                 if (equipment.Name.ToLower().Equals(newEntity.Name.ToLower()) && equipment.RoomSerialNumber.Equals(newEntity.RoomSerialNumber))
                 {

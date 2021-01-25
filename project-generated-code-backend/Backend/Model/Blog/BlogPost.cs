@@ -3,9 +3,9 @@
 // Created: Friday, May 15, 2020 23:46:22
 // Purpose: Definition of Class BlogPost
 
+using HealthClinicBackend.Backend.Model.Accounts;
 using System;
 using System.Collections.Generic;
-using HealthClinicBackend.Backend.Model.Accounts;
 
 namespace HealthClinicBackend.Backend.Model.Blog
 {

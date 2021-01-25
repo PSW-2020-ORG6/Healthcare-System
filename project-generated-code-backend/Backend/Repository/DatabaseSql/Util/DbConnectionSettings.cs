@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HealthClinicBackend.Backend.Repository.DatabaseSql.Util
+﻿namespace HealthClinicBackend.Backend.Repository.DatabaseSql.Util
 {
     public class DbConnectionSettings
     {

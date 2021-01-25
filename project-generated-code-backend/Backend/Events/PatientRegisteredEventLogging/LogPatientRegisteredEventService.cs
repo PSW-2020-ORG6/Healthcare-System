@@ -1,5 +1,5 @@
-﻿using System;
-using HealthClinicBackend.Backend.Events.EventLogging;
+﻿using HealthClinicBackend.Backend.Events.EventLogging;
+using System;
 
 namespace HealthClinicBackend.Backend.Events.PatientRegisteredEventLogging
 {
@@ -15,7 +15,7 @@ namespace HealthClinicBackend.Backend.Events.PatientRegisteredEventLogging
         public void LogEvent(PatientRegisteredEventParams eventParams)
         {
             var patientRegisteredEvent = new PatientRegisteredEvent
-                {TimeStamp = DateTime.Now, PatientAge = eventParams.PatientAge};
+            { TimeStamp = DateTime.Now, PatientAge = eventParams.PatientAge };
 
             _patientRegisteredEventRepository.LogEvent(patientRegisteredEvent);
         }

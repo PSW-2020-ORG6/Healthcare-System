@@ -30,7 +30,7 @@ namespace HealthClinicBackend.Backend.Model.Schedule
         public string DateOfCanceling { get; set; }
 
         public bool IsSurveyDone { get; set; }
-        
+
         public Appointment(Room room, Physician physician, Patient patient, TimeInterval timeInterval,
             ProcedureType procedureType, Boolean active, DateTime date) : base()
         {
@@ -43,7 +43,7 @@ namespace HealthClinicBackend.Backend.Model.Schedule
             Date = date;
         }
         public Appointment(Room room, Physician physician, Patient patient, TimeInterval timeInterval,
-            ProcedureType procedureType, Boolean active, DateTime date,Boolean isSurveyDone) : base()
+            ProcedureType procedureType, Boolean active, DateTime date, Boolean isSurveyDone) : base()
         {
             Room = room;
             Physician = physician;

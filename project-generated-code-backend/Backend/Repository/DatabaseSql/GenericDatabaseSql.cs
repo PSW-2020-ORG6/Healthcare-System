@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using HealthClinicBackend.Backend.Model.Util;
+﻿using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
@@ -11,7 +11,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         private const string CONNECTION_STRING =
             "User ID =postgres;Password=root;Server=localhost;Port=5432;Database=healthcare-system-db;Integrated Security=true;Pooling=true;";
         // private const string CONNECTION_STRING =
-            // "server=localhost;port=3306;database=newdb;user=root;password=root";
+        // "server=localhost;port=3306;database=newdb;user=root;password=root";
 
         protected readonly HealthCareSystemDbContext DbContext;
 

@@ -3,11 +3,11 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class ExamController
 
-using System;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.MedicalExam;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Service.PatientCareService;
+using System;
 
 namespace HealthClinicBackend.Backend.Controller.PhysicianControllers
 {

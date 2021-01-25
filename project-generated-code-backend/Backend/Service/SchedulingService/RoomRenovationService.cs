@@ -5,7 +5,6 @@ using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService
 {
@@ -57,7 +56,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             List<RoomRenovation> roomRenovations = _roomRenovationRepository.GetAll();
             List<Room> returnList = new List<Room>();
 
-            foreach(RoomRenovation rr in roomRenovations)
+            foreach (RoomRenovation rr in roomRenovations)
             {
                 AddMissingProperties(rr);
                 if (hasStarted(rr)) returnList.AddRange(rr.RenovatingRooms);
@@ -89,7 +88,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
 
         private void StartRenovating(RoomRenovation roomRenovation)
         {
-            if(!roomRenovation.Description.Contains("Split"))
+            if (!roomRenovation.Description.Contains("Split"))
             {
                 foreach (Room room in _roomRepository.GetByRoomRenovationSerialNumber(roomRenovation.SerialNumber))
                 {
@@ -135,7 +134,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
                 renovatedRoom.IsWaitingToBeRenovated = false;
                 renovatedRoom.IsBeingRenovated = true;
                 _roomRepository.Update(roomRenovation.RenovatedRoom);
-            }   
+            }
         }
 
         private void EndRenovating(RoomRenovation roomRenovation)
@@ -168,7 +167,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
                 _roomRepository.Delete(roomRenovation.RenovatedRoomSerialNumber);
                 _roomRenovationRepository.Delete(roomRenovation.SerialNumber);
             }
-                
+
         }
 
         private void AddMissingProperties(RoomRenovation roomRenovation)

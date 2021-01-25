@@ -3,11 +3,11 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Interface AppointmentRepository
 
-using System;
-using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
+using System;
+using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Repository.Generic
 {

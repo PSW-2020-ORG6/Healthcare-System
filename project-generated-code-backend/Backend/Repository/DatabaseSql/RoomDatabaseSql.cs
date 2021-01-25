@@ -21,7 +21,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 
         public override List<Room> GetAll()
         {
-            foreach(Room room in DbContext.Room.ToList())
+            foreach (Room room in DbContext.Room.ToList())
                 DbContext.Entry(room).Reload();
             return DbContext.Room.ToList();
         }

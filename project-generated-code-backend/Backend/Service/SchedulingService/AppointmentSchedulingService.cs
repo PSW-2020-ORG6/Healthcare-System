@@ -4,16 +4,16 @@
 // Purpose: Definition of Class AppointmentSchedulingService
 
 using HealthClinicBackend.Backend.Dto;
-using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Accounts;
+using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
 using HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions;
 using HealthClinicBackend.Backend.Service.SchedulingService.PriorityStrategies;
 using HealthClinicBackend.Backend.Service.SchedulingService.SchedulingStrategies;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace HealthClinicBackend.Backend.Service.SchedulingService
@@ -123,17 +123,17 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         {
             bool noDoctorsSpecialized = false;
             List<AppointmentDto> appointments = _appointmentGeneralitiesManager.GetAllAvailableAppointmentsGEA(appointmentPreferences, ref noDoctorsSpecialized);
-            if(appointments != null && appointments.Count != 0)
+            if (appointments != null && appointments.Count != 0)
             {
                 List<AppointmentDto> validAppointements = new List<AppointmentDto>();
-                foreach(AppointmentDto appointment in appointments)
+                foreach (AppointmentDto appointment in appointments)
                 {
                     if (appointment.Time.Start <= appointmentPreferences.Time.End)
                     {
                         validAppointements.Add(appointment);
                     }
                 }
-                if(validAppointements.Count != 0)
+                if (validAppointements.Count != 0)
                 {
                     AppointmentDto mostRecentAppointment = validAppointements[0];
                     DateTime minTime = validAppointements[0].Time.Start;
@@ -160,7 +160,7 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
         {
             Dictionary<Appointment, AppointmentDto> rellocationPrefferencies = new Dictionary<Appointment, AppointmentDto>();
             List<Appointment> appointments = _appointmentRepository.GetAll();
-            foreach( Appointment ap in appointments )
+            foreach (Appointment ap in appointments)
             {
                 AppointmentDto nearestAppointment = _appointmentGeneralitiesManager.FindNearestAvailableAppointment(ap);
                 rellocationPrefferencies.Add(ap, nearestAppointment);
@@ -202,10 +202,10 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
                 List<AppointmentDto> suggestedAppointmentDtosDate =
                     datePriorityStrategy.FindSuggestedAppointments(suggestedAppointmentDto);
                 return (from appointmentDto in suggestedAppointmentDtosDate
-                    select GetAvailableAppointments(appointmentDto)
+                        select GetAvailableAppointments(appointmentDto)
                     into suggestedAppointmentDtOs
-                    where suggestedAppointmentDtOs.Count != 0
-                    select suggestedAppointmentDtOs[0]).FirstOrDefault();
+                        where suggestedAppointmentDtOs.Count != 0
+                        select suggestedAppointmentDtOs[0]).FirstOrDefault();
             }
             else
             {
@@ -239,7 +239,8 @@ namespace HealthClinicBackend.Backend.Service.SchedulingService
             }
             else
             {
-                foreach(Physician physician in _physicianRepository.GetAll()){
+                foreach (Physician physician in _physicianRepository.GetAll())
+                {
                     appointmentDto.Physician = physician;
                     appointments = GetAvailableAppointments(appointmentDto);
                     if (appointments != null || appointments.Count != 0)

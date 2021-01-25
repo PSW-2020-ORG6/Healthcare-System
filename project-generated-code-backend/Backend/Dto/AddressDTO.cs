@@ -1,7 +1,4 @@
 ﻿using HealthClinicBackend.Backend.Model.Util;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HealthClinicBackend.Backend.Dto
 {

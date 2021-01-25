@@ -3,13 +3,13 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class SecretaryHospitalController
 
-using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Service.HospitalAccountsService;
 using HealthClinicBackend.Backend.Service.HospitalResourcesService;
+using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Controller.SecretaryControllers
 {

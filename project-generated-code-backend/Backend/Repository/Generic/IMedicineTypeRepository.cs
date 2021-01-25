@@ -2,7 +2,7 @@
 
 namespace HealthClinicBackend.Backend.Repository.Generic
 {
-    public interface IMedicineTypeRepository: IGenericRepository<MedicineType>
+    public interface IMedicineTypeRepository : IGenericRepository<MedicineType>
     {
     }
 }

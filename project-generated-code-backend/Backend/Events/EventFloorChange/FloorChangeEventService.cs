@@ -16,7 +16,12 @@ namespace HealthClinicBackend.Backend.Events.EventFloorChange
         public void LogEvent(FloorChangeEventParams eventParams)
         {
             var floorChnageEvent = new FloorChangeEvent
-            { TimeStamp = DateTime.Now };
+            {
+                TimeStamp = DateTime.Now,
+                UsernameSerialNbr = eventParams.UsernameSerialNbr,
+                BuildingSerialNbr = eventParams.BuildingSerialNbr,
+                FloorSerialNbr = eventParams.FloorSerialNbr
+            };
 
             _floorChangeEventRepository.LogEvent(floorChnageEvent);
         }
