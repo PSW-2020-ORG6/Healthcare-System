@@ -1,5 +1,6 @@
 ﻿using HealthClinicBackend.Backend.Events.EventLogging;
 using System;
+using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Events.EventRoomSelection
 {
@@ -18,6 +19,11 @@ namespace HealthClinicBackend.Backend.Events.EventRoomSelection
             { TimeStamp = DateTime.Now };
 
             _roomSelectionEventRepository.LogEvent(roomSelectionEvent);
+        }
+
+        public List<RoomSelectionEvent> GetAll()
+        {
+            return _roomSelectionEventRepository.GetAll();
         }
     }
 }
