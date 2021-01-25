@@ -90,7 +90,7 @@ namespace GraphicEditor.ViewModel
 
         private void AddBuilding(Button but)
         {
-            if (MainWindow.TypeOfUser == TypeOfUser.Superintendent || MainWindow.TypeOfUser == TypeOfUser.NoUser)
+            if (MainWindow.TypeOfUser == TypeOfUser.Superintendent)
             {
                 new AddBuilding(but).ShowDialog();
             }
@@ -102,7 +102,7 @@ namespace GraphicEditor.ViewModel
 
         private void DeleteBuilding(Button but)
         {
-            if (MainWindow.TypeOfUser == TypeOfUser.Superintendent || MainWindow.TypeOfUser == TypeOfUser.NoUser)
+            if (MainWindow.TypeOfUser == TypeOfUser.Superintendent)
             {
                 new DeleteBuilding(but).ShowDialog();
             }
@@ -120,7 +120,7 @@ namespace GraphicEditor.ViewModel
                 case Constants.EMERGENCY:
                     break;
                 case Constants.CARDIOLOGY:
-                    _parent.CurrentUserControl = _parent.CardiologyBuilding;
+                    _parent.CurrentUserControl = _parent.Building;
                     break;
                 case Constants.ORTHOPEDICS:
                     break;

@@ -94,7 +94,7 @@
                                 Height="40" 
                                 Width="200" >
                         <DockPanel Width="auto">
-                            <materialDesign:PackIcon Kind="Search" 
+                            <materialDesign:PackIcon Kind="OpenInNew" 
                                              Height="25" 
                                              Width="25"
                                              VerticalAlignment="Center"/>

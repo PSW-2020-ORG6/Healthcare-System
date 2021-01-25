@@ -27,18 +27,33 @@ namespace GraphicEditor.View.UserControls
 
         private void ShowRoomSearch(object sender, RoutedEventArgs e)
         {
+            if (MainWindow.TypeOfUser == TypeOfUser.NoUser)
+            {
+                new Warning().ShowDialog();
+                return;
+            }
             RoomSearch roomSearch = new RoomSearch(_viewModel);
             roomSearch.Show();
         }
 
         private void ShowEquipmentSearch(object sender, RoutedEventArgs e)
         {
+            if (MainWindow.TypeOfUser == TypeOfUser.NoUser)
+            {
+                new Warning().ShowDialog();
+                return;
+            }
             EquipmentSearch equipmentSearch = new EquipmentSearch(_viewModel);
             equipmentSearch.Show();
         }
 
         private void ShowMedicineSearch(object sender, RoutedEventArgs e)
         {
+            if (MainWindow.TypeOfUser == TypeOfUser.NoUser)
+            {
+                new Warning().ShowDialog();
+                return;
+            }
             MedicineSearch medicineSearch = new MedicineSearch(_viewModel);
             medicineSearch.Show();
         }

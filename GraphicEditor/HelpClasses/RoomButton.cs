@@ -42,15 +42,16 @@ namespace GraphicEditor.HelpClasses
 
         private void ShowRoom(Button roomButton)
         {
-            string serialNumber = (String)roomButton.Tag;
-
-            Room room = roomController.GetById(serialNumber);
-
-            if (MainWindow.TypeOfUser == TypeOfUser.Patient)
+            if (MainWindow.TypeOfUser != TypeOfUser.Superintendent && MainWindow.TypeOfUser != TypeOfUser.Secretary)
             {
                 new Warning().ShowDialog();
                 return;
             }
+            string serialNumber = (String)roomButton.Tag;
+
+            Room room = roomController.GetById(serialNumber);
+
+            
             if (room.IsBeingRenovated)
             {
                 new WarningRenovatingRoom().ShowDialog();
@@ -61,6 +62,11 @@ namespace GraphicEditor.HelpClasses
 
         private void DeleteRoom(RoomButton roomButton)
         {
+            if (MainWindow.TypeOfUser != TypeOfUser.Superintendent)
+            {
+                new Warning().ShowDialog();
+                return;
+            }
             string serialNumber = (String)roomButton.Tag;
 
             Room room = roomController.GetById(serialNumber);

@@ -139,7 +139,7 @@ namespace GraphicEditor.ViewModel
 
         private void addRoom(Floor floor)
         {
-            if (MainWindow.TypeOfUser == TypeOfUser.Superintendent || MainWindow.TypeOfUser == TypeOfUser.NoUser)
+            if (MainWindow.TypeOfUser == TypeOfUser.Superintendent)
             {
                 if (FloorViewModel.selectedGridCells.Visibility != Visibility.Visible)
                 {
@@ -173,6 +173,12 @@ namespace GraphicEditor.ViewModel
 
         private void RenovateRoom(Floor floor)
         {
+            if (MainWindow.TypeOfUser != TypeOfUser.Superintendent)
+            {
+                new Warning().ShowDialog();
+                return;
+            }
+
             if (FloorViewModel.selectedGridCells.Visibility != Visibility.Visible)
             {
                 new WarningNoSelectedCells().ShowDialog();
@@ -311,7 +317,7 @@ namespace GraphicEditor.ViewModel
 
         private void editBuilding(Building _building)
         {
-            if (MainWindow.TypeOfUser == TypeOfUser.Superintendent || MainWindow.TypeOfUser == TypeOfUser.NoUser)
+            if (MainWindow.TypeOfUser == TypeOfUser.Superintendent)
             {
                 UpdateBuilding updateBuilding = new UpdateBuilding(_building);
                 updateBuilding.ShowDialog();

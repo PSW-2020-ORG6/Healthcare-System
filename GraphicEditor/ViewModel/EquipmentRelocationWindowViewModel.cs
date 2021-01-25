@@ -258,8 +258,10 @@ namespace GraphicEditor.ViewModel
 
         private void RemoveRoomEquipemntIsInTo()
         {
+            if (Equipment == null) return;
             foreach (Room room in rooms)
             {
+                
                 if (room.SerialNumber.Equals(Equipment.RoomSerialNumber))
                 {
                     rooms.Remove(room);

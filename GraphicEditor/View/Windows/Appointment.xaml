@@ -3,11 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:GraphicEditor.View.UserControls"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         WindowStartupLocation="CenterScreen"
+        Background="AliceBlue"
         mc:Ignorable="d"
-        Title="Appointment" Height="800" Width="800">
+        Title="Appointment" MinHeight="800" MinWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -24,14 +26,6 @@
                 <Button HorizontalAlignment="Right" Margin="22" Command="{Binding FilterPhysician}" CommandParameter="{Binding ElementName=PhysicianTextBox}">Search</Button>
             </Grid>
             <ListBox Height="290" x:Name="MyListBox" SelectedIndex="{Binding PhysiciansIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding Physicians, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="BorderThickness" Value="1" />
-                        <Setter Property="BorderBrush" Value="#FF851B8E" />
-                        <Setter Property="Background" Value="#FF964196"/>
-                        <Setter Property="Foreground" Value="Black" />
-                    </Style>
-                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -49,14 +43,6 @@
                 <Button HorizontalAlignment="Right" Margin="22" Command="{Binding FilterPatient}" CommandParameter="{Binding ElementName=PatientTextBox}">Search</Button>
             </Grid>
             <ListBox Height="250" x:Name="MyListBoxPatient" SelectedIndex="{Binding PatientIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding Patients, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="BorderThickness" Value="1" />
-                        <Setter Property="BorderBrush" Value="#FF851B8E" />
-                        <Setter Property="Background" Value="#FF964196"/>
-                        <Setter Property="Foreground" Value="Black" />
-                    </Style>
-                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -71,11 +57,11 @@
         <StackPanel Grid.Row="0" Grid.Column="1">
             <Grid>
                 <TextBlock Margin="60 20 0 0"  FontSize="20">Pick date:</TextBlock>
-                <DatePicker DisplayDateStart="{x:Static sys:DateTime.Today}" x:Name="Date" Margin="0 20 10 0"  Width="100" SelectedDate="{Binding DatePicker, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DatePicker>
+                <DatePicker DisplayDateStart="{x:Static sys:DateTime.Today}" x:Name="Date" Margin="20"  Width="100" SelectedDate="{Binding DatePicker, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DatePicker>
             </Grid>
             <Grid>
                 <TextBlock Margin="60 20 0 0" FontSize="20">Time from:</TextBlock>
-                <ComboBox SelectedIndex="{Binding FromTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="20 20 10 0" Width="80" x:Name="ComboBox" ItemsSource="{Binding MyTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <ComboBox SelectedIndex="{Binding FromTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="20 20 10 20" Width="80" x:Name="ComboBox" ItemsSource="{Binding MyTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
             </Grid>
             <Grid>
                 <TextBlock Margin="60 20 0 0" FontSize="20">Time to:</TextBlock>

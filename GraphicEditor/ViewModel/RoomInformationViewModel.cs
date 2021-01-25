@@ -218,6 +218,14 @@ namespace GraphicEditor.ViewModel
 
         void EnterEquipmentRelocationWindow()
         {
+            if (MainWindow.TypeOfUser == TypeOfUser.Physician)
+            {
+                new Warning().ShowDialog();
+                return;
+            }
+
+            if (selectedEquipment == null) return;
+
             EquipmentRelocationWindow equipmentRelocationWindow = new EquipmentRelocationWindow(selectedEquipment);
             equipmentRelocationWindow.Show();
         }
@@ -246,6 +254,11 @@ namespace GraphicEditor.ViewModel
 
         void updateBedInfo(Bed bedInfo)
         {
+            if (MainWindow.TypeOfUser == TypeOfUser.Physician || MainWindow.TypeOfUser == TypeOfUser.Secretary)
+            {
+                new Warning().ShowDialog();
+                return;
+            }
             if (selectedBed != null)
             {
                 BedUpdate w = new BedUpdate(selectedBed, this);
@@ -255,6 +268,11 @@ namespace GraphicEditor.ViewModel
 
         void updateRoomInfo(Room room)
         {
+            if (MainWindow.TypeOfUser == TypeOfUser.Physician || MainWindow.TypeOfUser == TypeOfUser.Secretary)
+            {
+                new Warning().ShowDialog();
+                return;
+            }
             RoomUpdate r = new RoomUpdate(room, this);
             r.ShowDialog();
         }
@@ -297,12 +315,22 @@ namespace GraphicEditor.ViewModel
 
         private void BasicRoomRenovationCommand()
         {
+            if (MainWindow.TypeOfUser == TypeOfUser.Physician || MainWindow.TypeOfUser == TypeOfUser.Secretary)
+            {
+                new Warning().ShowDialog();
+                return;
+            }
             Floor floor = floorController.GetById(room.FloorSerialNumber);
             new BasicRoomRenovation(floor, room).ShowDialog();
         }
 
         private void SplitRoomRenovationCommand()
         {
+            if (MainWindow.TypeOfUser == TypeOfUser.Physician || MainWindow.TypeOfUser == TypeOfUser.Secretary)
+            {
+                new Warning().ShowDialog();
+                return;
+            }
             Floor floor = floorController.GetById(room.FloorSerialNumber);
             new SplitRoomRenovationForm(floor, room).ShowDialog();
         }
