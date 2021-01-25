@@ -48,10 +48,10 @@
                 <br/><h3 class="text">Feedbacks</h3><br/>
 	                            <ul class="nav nav-tabs" role="tablist">
     	                            <li class="nav-item">
-    		                            <a class="nav-link active .cards" data-toggle="tab" href="#approvedF">Approved</a>
+    		                            <a id="tabApprovedF" class="nav-link active .cards" data-toggle="tab" href="#approvedF">Approved</a>
     	                            </li>
     	                            <li class="nav-item">
-    		                            <a class="nav-link .cards" data-toggle="tab" href="#disapprovedF">Disapproved</a>
+    		                            <a id="tabDisapprovedF" class="nav-link .cards" data-toggle="tab" href="#disapprovedF">Disapproved</a>
     	                            </li>
                                 </ul>
                                 <div>
@@ -59,7 +59,7 @@
     	                                <div id="approvedF" class="container tab-pane active"><br>
     		                                <div class="container">
 	                                                <div class="row">
-                                                        <table class="table table-bordered">
+                                                        <table id="tableApproved" class="table table-bordered">
                                                             <thead>
                                                               <tr>
                                                                 <th>Comment</th>
@@ -84,7 +84,7 @@
 		                                <div id="disapprovedF" class="container tab-pane fade"><br>
                                             <div class="container">
                                                 <div class="row">
-                                                    <table class="table table-bordered">
+                                                    <table id="tableDisapproved" class="table table-bordered">
                                                         <thead>
                                                             <tr>
                                                                 <th>Comment</th>

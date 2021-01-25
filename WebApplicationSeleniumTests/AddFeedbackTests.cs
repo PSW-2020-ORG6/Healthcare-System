@@ -57,7 +57,7 @@ namespace WebApplicationSeleniumTests
             loginPage.InsertUsername("email");
             loginPage.InsertPassword("sifra");
             loginPage.SubmitClick();
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
 
             homePage = new HomePage(driver);
             homePage.Navigate();
@@ -74,6 +74,8 @@ namespace WebApplicationSeleniumTests
 
             feedbackPage.InsertFeedback("The staff is great as is the website!");
             feedbackPage.ClickAddFeedbackButton();
+            Thread.Sleep(200);
+
             feedbackPage.WaitForAlertDialog();
             Assert.Equal(feedbackPage.GetDialogMessage(), FeedbackPage.ValidFeedbackMessage);
             feedbackPage.ResolveAlertDialog();
@@ -85,7 +87,7 @@ namespace WebApplicationSeleniumTests
             loginPage.InsertUsername("email");
             loginPage.InsertPassword("sifra");
             loginPage.SubmitClick();
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
 
             homePage = new HomePage(driver);
             homePage.Navigate();
@@ -103,6 +105,7 @@ namespace WebApplicationSeleniumTests
             feedbackPage.InsertFeedback("The staff is great as is the website!");
             feedbackPage.CheckAnonimous();
             feedbackPage.ClickAddFeedbackButton();
+            Thread.Sleep(200);
 
             feedbackPage.WaitForAlertDialog();
             Assert.Equal(feedbackPage.GetDialogMessage(), FeedbackPage.ValidFeedbackMessage);
@@ -115,7 +118,7 @@ namespace WebApplicationSeleniumTests
             loginPage.InsertUsername("email");
             loginPage.InsertPassword("sifra");
             loginPage.SubmitClick();
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
 
             homePage = new HomePage(driver);
             homePage.Navigate();
@@ -131,6 +134,7 @@ namespace WebApplicationSeleniumTests
             Thread.Sleep(200);
 
             feedbackPage.ClickAddFeedbackButton();
+            Thread.Sleep(200);
 
             feedbackPage.WaitForAlertDialog();
             Assert.Equal(feedbackPage.GetDialogMessage(), FeedbackPage.InvalidFeedbackMessage);
@@ -143,7 +147,7 @@ namespace WebApplicationSeleniumTests
             loginPage.InsertUsername("email");
             loginPage.InsertPassword("sifra");
             loginPage.SubmitClick();
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
 
             homePage = new HomePage(driver);
             homePage.Navigate();
@@ -160,6 +164,7 @@ namespace WebApplicationSeleniumTests
 
             feedbackPage.CheckAnonimous();
             feedbackPage.ClickAddFeedbackButton();
+            Thread.Sleep(200);
 
             feedbackPage.WaitForAlertDialog();
             Assert.Equal(feedbackPage.GetDialogMessage(), FeedbackPage.InvalidFeedbackMessage);
