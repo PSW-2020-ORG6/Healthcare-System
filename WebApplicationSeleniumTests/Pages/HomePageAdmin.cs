@@ -14,7 +14,7 @@ namespace WebApplicationSeleniumTests.Pages
             public const string URI = "http://localhost:49900/#/admin";
             private IWebElement MaliciousUsersButton => driver.FindElement(By.Id("MaliciousUsers"));
             private ReadOnlyCollection<IWebElement> Rows => driver.FindElements(By.XPath("//table[@id='MaliciousTable']/tbody/tr"));  
-            private IWebElement BlockMaliciousUserButton => driver.FindElement(By.XPath("(//table[@id='tableApp']/tbody/tr)[last()]/td[2]/button"));
+            private IWebElement BlockMaliciousUserButton => driver.FindElement(By.XPath("(//table[@id='MaliciousTable']/tbody/tr)[last()]/td[2]/button"));
 
 
             public HomePageAdmin(IWebDriver driver)
