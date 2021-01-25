@@ -13,6 +13,7 @@ namespace WebApplicationSeleniumTests.Pages
         private readonly IWebDriver driver;
         public const string URI = "http://localhost:49900/#/appointments";
         private ReadOnlyCollection<IWebElement> Rows => driver.FindElements(By.XPath("//table[@id='tableApp']/tbody/tr"));
+        private ReadOnlyCollection<IWebElement> Rows1 => driver.FindElements(By.XPath("//table[@id='tableCancelApp']/tbody/tr"));
         private IWebElement CancelButton => driver.FindElement(By.XPath("(//table[@id='tableApp']/tbody/tr)[last()]/td[7]/button"));
         public string Title => driver.Title;
 
@@ -23,7 +24,7 @@ namespace WebApplicationSeleniumTests.Pages
 
         public void Cancel()
         {
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             CancelButton.Click();
         }
 
@@ -35,6 +36,11 @@ namespace WebApplicationSeleniumTests.Pages
         public int AppointmentsCount()
         {
             return Rows.Count;
+        }
+
+        public int CancelAppointmentsCount()
+        {
+            return Rows1.Count;
         }
 
         public bool CancelButtonEnabled()

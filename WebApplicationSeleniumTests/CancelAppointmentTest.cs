@@ -18,6 +18,7 @@ namespace WebApplicationSeleniumTests
         private HomePage homePage;
         private AppointmentPage appointmentPage;
         private int appointmentCount = 0;
+        private int cancelAppointmentCount = 0;
 
         public CancelAppointmentTest()
         {
@@ -70,10 +71,12 @@ namespace WebApplicationSeleniumTests
             Thread.Sleep(25000);
             appointmentPage.EnsurePageIsDisplayed();
             appointmentCount = appointmentPage.AppointmentsCount();
+            cancelAppointmentCount = appointmentPage.CancelAppointmentsCount();
             Assert.True(appointmentPage.CancelButtonDisplayed());
             appointmentPage.Cancel();
             Thread.Sleep(10000);
             Assert.Equal(appointmentCount - 1, appointmentPage.AppointmentsCount());
+            Assert.Equal(cancelAppointmentCount + 1, appointmentPage.CancelAppointmentsCount());
 
         }
     }
