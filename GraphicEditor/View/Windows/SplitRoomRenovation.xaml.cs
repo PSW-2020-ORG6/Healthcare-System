@@ -34,7 +34,6 @@ namespace GraphicEditor.View.Windows
         private BedController bedController = new BedController();
         private RoomRenovationController roomRenovationController = new RoomRenovationController();
         private Room renovatingRoom;
-        private TimeInterval timeInterval;
         private List<Room> listOfNewRooms;
         private Position position;
         private List<bool> moveStuffToThisRoom;
@@ -55,9 +54,8 @@ namespace GraphicEditor.View.Windows
             SelectedRoomTypeIndex = 0;
         }
 
-        public SplitRoomRenovation(Floor floor1, Room _renovatingRoom, TimeInterval timeInterval, ref List<Room> listOfRooms, Position position, List<bool> moveStuffToThisRoom) : this(floor1, _renovatingRoom)
+        public SplitRoomRenovation(Floor floor1, Room _renovatingRoom, ref List<Room> listOfRooms, Position position, List<bool> moveStuffToThisRoom) : this(floor1, _renovatingRoom)
         {
-            this.timeInterval = timeInterval;
             this.listOfNewRooms = listOfRooms;
             this.position = position;
             this.moveStuffToThisRoom = moveStuffToThisRoom;

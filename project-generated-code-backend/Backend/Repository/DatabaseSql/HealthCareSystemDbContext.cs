@@ -747,14 +747,14 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
                 new
                 {
                     AppointmentSerialNumber = "200001",
-                    Start = DateTime.Now,
-                    End = DateTime.Now
+                    Start = DateTime.Now + TimeSpan.FromMinutes(5),
+                    End = DateTime.Now + TimeSpan.FromMinutes(10)
                 },
                 new
                 {
                     AppointmentSerialNumber = "200002",
-                    Start = DateTime.Now,
-                    End = DateTime.Now
+                    Start = DateTime.Now + TimeSpan.FromMinutes(5),
+                    End = DateTime.Now + TimeSpan.FromMinutes(10)
                 }
             );
             modelBuilder.Entity<Appointment>().Ignore(o => o.ProcedureType);
