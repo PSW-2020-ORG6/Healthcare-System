@@ -140,9 +140,10 @@ namespace GraphicEditor.ViewModel
             string content = (string)button.Tag;
             string[] info = content.Split(" ");
             Building enteringBuilding = buildingController.GetById(info[2]);
-
             _parent.CurrentUserControl = new BuildingUserControl(_parent, enteringBuilding);
-            CreateBuildingSelectEvent(enteringBuilding);
+
+            if (MainWindow.TypeOfUser != TypeOfUser.NoUser)
+                CreateBuildingSelectEvent(enteringBuilding);
         }
 
         private void CreateBuildingSelectEvent(Building enteringBuilding)

@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace GraphicEditor.HelpClasses
 {
@@ -51,7 +50,7 @@ namespace GraphicEditor.HelpClasses
 
             Room room = roomController.GetById(serialNumber);
 
-            
+
             if (room.IsBeingRenovated)
             {
                 new WarningRenovatingRoom().ShowDialog();

@@ -5,15 +5,9 @@ using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace GraphicEditor.View.Windows
 {
@@ -32,7 +26,7 @@ namespace GraphicEditor.View.Windows
         private BedController bedController = new BedController();
         private SuperintendentMedicineController medicineController = new SuperintendentMedicineController();
         private AppointmentController appointmentController = new AppointmentController();
-        private EquipmentRelocationController equipmentRelocationController = new EquipmentRelocationController(); 
+        private EquipmentRelocationController equipmentRelocationController = new EquipmentRelocationController();
         private TimeInterval timeInterval;
         private string description;
         private Room MoveEverythingToThisRoom;
@@ -80,16 +74,16 @@ namespace GraphicEditor.View.Windows
             newBorders = new List<Border>();
             newRooms = new List<Room>();
 
-            description = "Splitting room " + room.Id.ToString() +" into rooms: ";
+            description = "Splitting room " + room.Id.ToString() + " into rooms: ";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (newBorders.Count != 0)
             {
-                foreach(Border border in newBorders)
+                foreach (Border border in newBorders)
                 {
-                    if(IsOverlapping(border))
+                    if (IsOverlapping(border))
                     {
                         new WarningRoomOverlapping().ShowDialog();
                         return;
@@ -97,9 +91,9 @@ namespace GraphicEditor.View.Windows
                 }
             }
 
-            Position position = new Position((int)RowComboBox.SelectedItem + room.Position.Row, 
-                                             (int)ColumnComboBox.SelectedItem + room.Position.Column, 
-                                             (int)RowSpanComboBox.SelectedItem, 
+            Position position = new Position((int)RowComboBox.SelectedItem + room.Position.Row,
+                                             (int)ColumnComboBox.SelectedItem + room.Position.Column,
+                                             (int)RowSpanComboBox.SelectedItem,
                                              (int)ColumnSpanComboBox.SelectedItem);
 
             List<bool> moveStuffToThisRoom = new List<bool>();
@@ -199,7 +193,7 @@ namespace GraphicEditor.View.Windows
 
             bool timeSet = false;
 
-            foreach(Appointment appointment in appointmentController.GetByRoomSerialNumber(room.SerialNumber))
+            foreach (Appointment appointment in appointmentController.GetByRoomSerialNumber(room.SerialNumber))
             {
                 if (appointment.TimeInterval.IsOverLapping(timeInterval))
                 {
@@ -209,7 +203,7 @@ namespace GraphicEditor.View.Windows
                 }
             }
 
-            if(!timeSet)
+            if (!timeSet)
             {
                 foreach (EquipmentRelocation er in equipmentRelocationController.GetAll())
                 {

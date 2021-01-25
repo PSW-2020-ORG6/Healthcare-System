@@ -261,7 +261,7 @@ namespace GraphicEditor.ViewModel
             if (Equipment == null) return;
             foreach (Room room in rooms)
             {
-                
+
                 if (room.SerialNumber.Equals(Equipment.RoomSerialNumber))
                 {
                     rooms.Remove(room);
