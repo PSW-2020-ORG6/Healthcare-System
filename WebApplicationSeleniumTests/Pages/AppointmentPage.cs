@@ -12,8 +12,8 @@ namespace WebApplicationSeleniumTests.Pages
     {
         private readonly IWebDriver driver;
         public const string URI = "http://localhost:49900/#/appointments";
-        private ReadOnlyCollection<IWebElement> Rows => driver.FindElements(By.XPath("//table[@id='tableAppontments']/tbody/tr"));
-        private IWebElement CancelButton => driver.FindElement(By.XPath("(//table[@id='tableAppontments']/tbody/tr)[last()]/td[7]/button"));
+        private ReadOnlyCollection<IWebElement> Rows => driver.FindElements(By.XPath("//table[@id='tableApp']/tbody/tr"));
+        private IWebElement CancelButton => driver.FindElement(By.XPath("(//table[@id='tableApp']/tbody/tr)[last()]/td[7]/button"));
         public string Title => driver.Title;
 
         public AppointmentPage(IWebDriver driver)
@@ -40,6 +40,11 @@ namespace WebApplicationSeleniumTests.Pages
         public bool CancelButtonEnabled()
         {
             return CancelButton.Enabled;
+        }
+
+        public bool CancelButtonDisplayed()
+        {
+            return CancelButton.Displayed;
         }
 
         public void EnsurePageIsDisplayed()

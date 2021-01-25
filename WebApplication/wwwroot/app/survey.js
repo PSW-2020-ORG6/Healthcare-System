@@ -734,7 +734,7 @@ Vue.component("appointments", {
     				<div id="profil" class="container tab-pane active"><br>
     					<div class="container">
 							<div class="row">
-								<table class="table table-bordered">
+								<table id="tableApp" class="table table-bordered">
 									<thead>
 										<tr>
 											<th>Date</th>

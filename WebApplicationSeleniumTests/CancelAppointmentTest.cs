@@ -17,17 +17,18 @@ namespace WebApplicationSeleniumTests
         private LoginPage loginPage;
         private HomePage homePage;
         private AppointmentPage appointmentPage;
+        private int appointmentCount = 0;
 
         public CancelAppointmentTest()
         {
             ChromeOptions options = new ChromeOptions();
-            options.AddArguments("start-maximized");            // open Browser in maximized mode
-            options.AddArguments("disable-infobars");           // disabling infobars
-            options.AddArguments("--disable-extensions");       // disabling extensions
-            options.AddArguments("--disable-gpu");              // applicable to windows os only
-            options.AddArguments("--disable-dev-shm-usage");    // overcome limited resource problems
-            options.AddArguments("--no-sandbox");               // Bypass OS security model
-            options.AddArguments("--disable-notifications");    // disable notifications
+            options.AddArguments("start-maximized");            
+            options.AddArguments("disable-infobars");           
+            options.AddArguments("--disable-extensions");      
+            options.AddArguments("--disable-gpu");              
+            options.AddArguments("--disable-dev-shm-usage");    
+            options.AddArguments("--no-sandbox");           
+            options.AddArguments("--disable-notifications");  
 
             driver = new ChromeDriver(options);
 
@@ -39,7 +40,7 @@ namespace WebApplicationSeleniumTests
             Assert.Equal(driver.Url, HeaderPage.URI);
             headerPage.ClickLogInButton();
             Thread.Sleep(100);
-
+            
             loginPage = new LoginPage(driver);
             loginPage.Navigate();
             Assert.Equal(driver.Url, LoginPage.URI);
@@ -66,7 +67,13 @@ namespace WebApplicationSeleniumTests
             appointmentPage = new AppointmentPage(driver);
             appointmentPage.Navigate();
             Assert.Equal(driver.Url, AppointmentPage.URI);
-            Thread.Sleep(8000);
+            Thread.Sleep(25000);
+            appointmentPage.EnsurePageIsDisplayed();
+            appointmentCount = appointmentPage.AppointmentsCount();
+            Assert.True(appointmentPage.CancelButtonDisplayed());
+            appointmentPage.Cancel();
+            Thread.Sleep(10000);
+            Assert.Equal(appointmentCount - 1, appointmentPage.AppointmentsCount());
 
         }
     }
