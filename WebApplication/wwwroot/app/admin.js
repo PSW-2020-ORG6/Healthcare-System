@@ -118,7 +118,7 @@
     	                    <div id="approved" class="container tab-pane active"><br>
     		                    <div class="container">
 	                                    <div class="row">
-                                            <table class="table table-bordered">
+                                            <table id = "MaliciousTable" class="table table-bordered">
                                                 <thead>
                                                   <tr>
                                                     <th>Patient</th>
@@ -128,7 +128,7 @@
                                                 <tbody>
                                                   <tr v-for="mp in maliciousPatients">
                                                     <td >{{mp.name}} {{mp.surname}}</td>
-                                                    <td style="text-align:center"><button class="btnban form-control" v-on:click="BlockMaliciousPatient(mp)">B L O C K</button></td>  
+                                                    <td style="text-align:center"><button id = "BlockUserButton" class="btnban form-control" v-on:click="BlockMaliciousPatient(mp)">B L O C K</button></td>  
                                                   </tr>
                                                 </tbody>
                                              </table>
