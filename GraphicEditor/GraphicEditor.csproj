@@ -107,5 +107,9 @@
 	    <SubType>Designer</SubType>
 	  </Page>
 	</ItemGroup>
+	
+	<ItemGroup>
+	  <Folder Include="Events\" />
+	</ItemGroup>
 
 </Project>
