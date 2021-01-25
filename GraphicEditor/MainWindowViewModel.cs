@@ -12,7 +12,7 @@ namespace GraphicEditor
         public MyICommand<string> NavCommand { get; private set; }
         /* TODO add this without causing errors
         private MapContentUserControlViewModel _mapContent = new MapContentUserControlViewModel();*/
-        public BuildingUserControl CardiologyBuilding;
+        public BuildingUserControl Building;
         public HospitalMapUserControl HospitalMap;
         public LoginUserControl LoginPage;
         public ProfileUserControl ProfilePage;
@@ -66,7 +66,7 @@ namespace GraphicEditor
                     CurrentUserControl = ProfilePage;
                     break;
                 case Constants.BUILDING:
-                    CurrentUserControl = CardiologyBuilding;
+                    CurrentUserControl = Building;
                     break;
             }
         }
