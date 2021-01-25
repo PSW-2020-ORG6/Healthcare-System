@@ -68,7 +68,7 @@ namespace WebApplicationSeleniumTests
             appointmentPage = new AppointmentPage(driver);
             appointmentPage.Navigate();
             Assert.Equal(driver.Url, AppointmentPage.URI);
-            Thread.Sleep(25000);
+            Thread.Sleep(45000);
             appointmentPage.EnsurePageIsDisplayed();
             appointmentCount = appointmentPage.AppointmentsCount();
             cancelAppointmentCount = appointmentPage.CancelAppointmentsCount();
