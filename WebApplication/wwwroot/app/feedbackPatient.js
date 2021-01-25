@@ -53,7 +53,7 @@
 	<div id="FeedbackPatient">
 		<div class="container">
             <br/><h3 class="text">Feedbacks</h3><br/><br/>
-			        <button type="button" class="btn btn-info btn-lg form-control" style="width:200px;margin-right:800px" data-toggle="modal" data-target="#CommentModal">Leave feedback</button>
+			        <button type="button" id="create" class="btn btn-info btn-lg form-control" style="width:200px;margin-right:800px" data-toggle="modal" data-target="#CommentModal">Leave feedback</button>
 		</div>
 
 	<!-- Leave Comment -->
@@ -69,14 +69,14 @@
 						</div>
 						<div class="modal-body" id="feedbackModalBody">
 							<label>Enter your comment here:</label>
-							<textarea class="form-control" v-model="feedback.text" rows="4" cols="50"></textarea>
+							<textarea id="feedbackText" class="form-control" v-model="feedback.text" rows="4" cols="50"></textarea>
 							<br/><br/>
 							<input type="checkbox" id="anonimous">	
 							<label> Anonimous</label><br>
 						</div>
 						<div class="modal-footer" id="feedbackModalFooter">
-							<button type="button" class="btn btn-info btn-lg " v-on:click="AddNewFeedback(feedback)">Send</button>
-							<button type="button" class="btn btn-info btn-lg " data-dismiss="modal">Cancel</button>
+							<button id="addF" type="button" class="btn btn-info btn-lg " v-on:click="AddNewFeedback(feedback)">Send</button>
+							<button id="cancelF" type="button" class="btn btn-info btn-lg " data-dismiss="modal">Cancel</button>
 						</div>
 					</div>
 				</div>
@@ -112,7 +112,7 @@
 				feedback.patientId = this.idPatient
 			else
 				feedback.patientId = "-1"
-			if (feedback.text.localeCompare(null) && feedback.text.localeCompare(" ")) {
+			if (feedback.text!=null && feedback.text!="") {
 				axios
 					.post("/feedback/add", feedback, {
 						headers: {
@@ -120,14 +120,14 @@
 						}
 					})
 					.then(response => {
+						alert("Thanks for the feedback sent!");
 						this.feedback.text = null;
 						$('#CommentModal').modal('hide')
 					})
 					.catch(error => {
 						("You need to enter a comment first.");
 					})
-			}
-			else
+			}else
 				alert("You need to enter a comment first.");
 		},
 		DateSplit: function (date) {
