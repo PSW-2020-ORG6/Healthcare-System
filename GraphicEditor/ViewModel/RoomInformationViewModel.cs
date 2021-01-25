@@ -171,7 +171,7 @@ namespace GraphicEditor.ViewModel
         private BedController bedController = new BedController();
         private EquipmentController equipmentController = new EquipmentController();
         private EquipmentRelocationController equipmentRelocationController = new EquipmentRelocationController();
-        private RenovationController renovationController = new RenovationController();
+        private RoomRenovationController renovationController = new RoomRenovationController();
         private SuperintendentMedicineController medicineController = new SuperintendentMedicineController();
 
         // Floor floor1, Border space, FloorUserControl view1, Room _renovatingRoom
@@ -316,11 +316,11 @@ namespace GraphicEditor.ViewModel
             return equipmentRelocations;
         }
 
-        private List<Renovation> GetRenovationsForRoom()
+        private List<RoomRenovation> GetRenovationsForRoom()
         {
-            List<Renovation> renovations = new List<Renovation>();
-            foreach (Renovation r in renovationController.GetAll())
-                if (r.Room.SerialNumber == room.SerialNumber)
+            List<RoomRenovation> renovations = new List<RoomRenovation>();
+            foreach (RoomRenovation r in renovationController.GetAll())
+                if (r.RenovatedRoomSerialNumber == room.SerialNumber)
                     renovations.Add(r);
             return renovations;
         }

@@ -152,6 +152,8 @@
                                     DisplayMemberBinding="{Binding TimeInterval.Start}" />
                     <GridViewColumn Header="End"
                                     DisplayMemberBinding="{Binding TimeInterval.End}" />
+                    <GridViewColumn Header="Description"
+                                    DisplayMemberBinding="{Binding Description}" />
                 </GridView>
             </ListView.View>
         </ListView>
