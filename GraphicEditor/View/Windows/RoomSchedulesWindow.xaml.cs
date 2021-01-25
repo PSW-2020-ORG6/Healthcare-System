@@ -9,7 +9,7 @@ namespace GraphicEditor.View.Windows
     public partial class RoomSchedulesWindow : Window
     {
         public RoomSchedulesWindow(List<Appointment> appointments, List<EquipmentRelocation> equipmentRelocations,
-            List<Renovation> renovations)
+            List<RoomRenovation> renovations)
         {
             this.DataContext = new RoomSchedulesWindowViewModel(appointments, equipmentRelocations, renovations, this);
             InitializeComponent();

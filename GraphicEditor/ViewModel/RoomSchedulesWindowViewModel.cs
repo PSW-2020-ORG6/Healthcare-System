@@ -13,10 +13,10 @@ namespace GraphicEditor.ViewModel
         private readonly RoomSchedulesWindow window;
         private List<Appointment> allAppointments = new List<Appointment>();
         private List<EquipmentRelocation> allEquipmentRelocations = new List<EquipmentRelocation>();
-        private List<Renovation> allRenovations = new List<Renovation>();
+        private List<RoomRenovation> allRenovations = new List<RoomRenovation>();
         private AppointmentController appointmentController = new AppointmentController();
         private EquipmentRelocationController equipmentRelocationController = new EquipmentRelocationController();
-        private RenovationController renovationController = new RenovationController();
+        private RoomRenovationController renovationController = new RoomRenovationController();
 
         public List<Appointment> AllAppointments
         {
@@ -38,7 +38,7 @@ namespace GraphicEditor.ViewModel
             }
         }
 
-        public List<Renovation> AllRenovations
+        public List<RoomRenovation> AllRenovations
         {
             get { return allRenovations; }
             set
@@ -50,13 +50,13 @@ namespace GraphicEditor.ViewModel
 
         public Appointment SelectedAppointment { get; set; }
         public EquipmentRelocation SelectedEquipmentRelocation { get; set; }
-        public Renovation SelectedRenovation { get; set; }
+        public RoomRenovation SelectedRenovation { get; set; }
         public MyICommand CancelOfAppointment { get; private set; }
         public MyICommand CancelOfRelocation { get; private set; }
         public MyICommand CancelOfRenovation { get; private set; }
 
         public RoomSchedulesWindowViewModel(List<Appointment> appointments,
-            List<EquipmentRelocation> equipmentRelocations, List<Renovation> renovations,
+            List<EquipmentRelocation> equipmentRelocations, List<RoomRenovation> renovations,
             RoomSchedulesWindow window)
         {
             AllAppointments = appointments;
@@ -97,7 +97,7 @@ namespace GraphicEditor.ViewModel
         {
             if (SelectedRenovation != null)
             {
-                renovationController.DeleteRenovation(SelectedRenovation);
+                renovationController.DeleteRoomRenovation(SelectedRenovation);
                 window.Close();
             }
         }
