@@ -72,7 +72,7 @@ namespace WebApplicationSeleniumTests
             homePageAdmin.BlockMaliciousUser();
             Assert.True(homePageAdmin.BlockMaliciousUSerButtonEnabled());
 
-            Thread.Sleep(5000);
+            Thread.Sleep(10000);
             Assert.Equal(maliciousUserCount - 1, homePageAdmin.MaliciousUserCount());
 
         }
