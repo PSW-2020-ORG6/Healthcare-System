@@ -17,6 +17,7 @@ namespace WebApplicationSeleniumTests
         private LoginPage loginPage;
         private HomePage homePage;
         private FeedbackPage feedbackPage;
+        private FeedbackAdmin feedbackAdmin;
 
         public AddFeedbackTests()
         {
@@ -67,14 +68,13 @@ namespace WebApplicationSeleniumTests
             feedbackPage = new FeedbackPage(driver);
             feedbackPage.Navigate();
             Assert.Equal(driver.Url, FeedbackPage.URI);
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
 
             feedbackPage.ClickCreateFeedbackButton();
-            Thread.Sleep(200);
+            Thread.Sleep(1000);
 
             feedbackPage.InsertFeedback("The staff is great as is the website!");
             feedbackPage.ClickAddFeedbackButton();
-            Thread.Sleep(200);
 
             feedbackPage.WaitForAlertDialog();
             Assert.Equal(feedbackPage.GetDialogMessage(), FeedbackPage.ValidFeedbackMessage);
@@ -97,15 +97,14 @@ namespace WebApplicationSeleniumTests
             feedbackPage = new FeedbackPage(driver);
             feedbackPage.Navigate();
             Assert.Equal(driver.Url, FeedbackPage.URI);
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
 
             feedbackPage.ClickCreateFeedbackButton();
-            Thread.Sleep(200);
+            Thread.Sleep(1000);
 
             feedbackPage.InsertFeedback("The staff is great as is the website!");
             feedbackPage.CheckAnonimous();
             feedbackPage.ClickAddFeedbackButton();
-            Thread.Sleep(200);
 
             feedbackPage.WaitForAlertDialog();
             Assert.Equal(feedbackPage.GetDialogMessage(), FeedbackPage.ValidFeedbackMessage);
@@ -128,13 +127,12 @@ namespace WebApplicationSeleniumTests
             feedbackPage = new FeedbackPage(driver);
             feedbackPage.Navigate();
             Assert.Equal(driver.Url, FeedbackPage.URI);
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
 
             feedbackPage.ClickCreateFeedbackButton();
-            Thread.Sleep(200);
+            Thread.Sleep(1000);
 
             feedbackPage.ClickAddFeedbackButton();
-            Thread.Sleep(200);
 
             feedbackPage.WaitForAlertDialog();
             Assert.Equal(feedbackPage.GetDialogMessage(), FeedbackPage.InvalidFeedbackMessage);
@@ -157,18 +155,67 @@ namespace WebApplicationSeleniumTests
             feedbackPage = new FeedbackPage(driver);
             feedbackPage.Navigate();
             Assert.Equal(driver.Url, FeedbackPage.URI);
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
 
             feedbackPage.ClickCreateFeedbackButton();
-            Thread.Sleep(200);
+            Thread.Sleep(1000);
 
             feedbackPage.CheckAnonimous();
             feedbackPage.ClickAddFeedbackButton();
-            Thread.Sleep(200);
 
             feedbackPage.WaitForAlertDialog();
             Assert.Equal(feedbackPage.GetDialogMessage(), FeedbackPage.InvalidFeedbackMessage);
             feedbackPage.ResolveAlertDialog();
+        }
+
+        [Fact]
+        public void Test_successful_approved_feedback()
+        {
+            loginPage.InsertUsername("a");
+            loginPage.InsertPassword("b");
+            loginPage.SubmitClick();
+            Thread.Sleep(5000);
+
+            feedbackAdmin = new FeedbackAdmin(driver);
+            feedbackAdmin.Navigate();
+            Assert.Equal(driver.Url, FeedbackAdmin.URI);
+            Thread.Sleep(1000);
+
+            feedbackAdmin.ClickTabFeedbackDisapproved();
+            int rowCountApproved = feedbackAdmin.CountRowsTableApproved();
+            int rowCountDisapproved = feedbackAdmin.CountRowsTableDisapproved();
+            Thread.Sleep(5000);
+
+            feedbackAdmin.ClickApproveFeedbackButton();
+            Thread.Sleep(800);
+
+            Assert.Equal(rowCountApproved + 1, feedbackAdmin.CountRowsTableApproved());
+            Assert.Equal(rowCountDisapproved - 1, feedbackAdmin.CountRowsTableDisapproved());
+        }
+
+        [Fact]
+        public void Test_successful_disapproved_feedback()
+        {
+            loginPage.InsertUsername("a");
+            loginPage.InsertPassword("b");
+            loginPage.SubmitClick();
+            Thread.Sleep(5000);
+
+            feedbackAdmin = new FeedbackAdmin(driver);
+            feedbackAdmin.Navigate();
+            Assert.Equal(driver.Url, FeedbackAdmin.URI);
+            Thread.Sleep(1000);
+
+            feedbackAdmin.ClickTabFeedbackApproved();
+            int rowCountApproved = feedbackAdmin.CountRowsTableApproved();
+            int rowCountDisapproved = feedbackAdmin.CountRowsTableDisapproved();
+            Thread.Sleep(5000);
+
+            feedbackAdmin.ClickDisapproveFeedbackButton();
+            Thread.Sleep(800);
+
+            Assert.Equal(rowCountApproved - 1, feedbackAdmin.CountRowsTableApproved());
+            Assert.Equal(rowCountDisapproved + 1, feedbackAdmin.CountRowsTableDisapproved());
         }
     }
 }

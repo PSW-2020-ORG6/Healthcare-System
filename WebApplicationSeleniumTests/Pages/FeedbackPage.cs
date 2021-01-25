@@ -48,7 +48,7 @@ namespace WebApplicationSeleniumTests.Pages
 
         public void WaitForAlertDialog()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.AlertIsPresent());
         }
 
