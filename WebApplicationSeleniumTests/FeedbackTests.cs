@@ -212,7 +212,7 @@ namespace WebApplicationSeleniumTests
             Thread.Sleep(5000);
 
             feedbackAdmin.ClickDisapproveFeedbackButton();
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
 
             Assert.Equal(rowCountApproved - 1, feedbackAdmin.CountRowsTableApproved());
             Assert.Equal(rowCountDisapproved + 1, feedbackAdmin.CountRowsTableDisapproved());
