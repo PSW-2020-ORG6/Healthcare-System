@@ -1,11 +1,11 @@
 ﻿using HealthClinicBackend.Backend.Events.EventLogging;
 
-namespace HealthClinicBackend.Backend.Events.EventRoomSelection
+namespace HealthClinicBackend.Backend.Events.EventFloorChange
 {
-    public class RoomSelectionEvent : Event
+    public class FloorChangeEventParams : EventParams
     {
         public string UsernameSerialNbr { get; set; }
+        public string BuildingSerialNbr { get; set; }
         public string FloorSerialNbr { get; set; }
-        public string RoomSerialNbr { get; set; }
     }
 }

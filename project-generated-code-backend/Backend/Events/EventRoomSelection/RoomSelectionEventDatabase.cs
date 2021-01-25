@@ -1,4 +1,7 @@
 ﻿using HealthClinicBackend.Backend.Events.EventLogging;
+using HealthClinicBackend.Backend.Model.Hospital;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthClinicBackend.Backend.Events.EventRoomSelection
 {
@@ -12,6 +15,13 @@ namespace HealthClinicBackend.Backend.Events.EventRoomSelection
         {
             DbContext.RoomSelectionEvents.Add(@event);
             DbContext.SaveChanges();
+        }
+
+        public List<RoomSelectionEvent> GetAll()
+        {
+            foreach (RoomSelectionEvent room in DbContext.RoomSelectionEvents.ToList())
+                DbContext.Entry(room).Reload();
+            return DbContext.RoomSelectionEvents.ToList();
         }
     }
 }
