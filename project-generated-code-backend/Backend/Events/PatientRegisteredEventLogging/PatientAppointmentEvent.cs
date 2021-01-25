@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HealthClinicBackend.Backend.Events.PatientRegisteredEventLogging
+﻿namespace HealthClinicBackend.Backend.Events.PatientRegisteredEventLogging
 {
-    public class PatientAppointmentEvent:EventLogging.Event
+    public class PatientAppointmentEvent : EventLogging.Event
     {
         public int TransitionsFromTwoToOneStep { get; set; }
         public int TransitionsFromThreeToTwoStep { get; set; }

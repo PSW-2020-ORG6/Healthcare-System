@@ -1,5 +1,4 @@
 ﻿using HealthClinicBackend.Backend.Events.EventLogging;
-using HealthClinicBackend.Backend.Model.Hospital;
 using System.Collections.Generic;
 using System.Linq;
 

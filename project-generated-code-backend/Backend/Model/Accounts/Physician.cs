@@ -4,25 +4,25 @@
 // Purpose: Definition of Class Physitian
 
 #nullable enable
+using HealthClinicBackend.Backend.Model.Util;
+//using MicroServiceAccount.Backend.Dto;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using HealthClinicBackend.Backend.Model.Util;
-//using MicroServiceAccount.Backend.Dto;
-using Newtonsoft.Json;
 
 namespace HealthClinicBackend.Backend.Model.Accounts
 {
     public class Physician : Account
     {
-        
+
         private Specialization specialization;
 
         public virtual TimeInterval WorkSchedule { get; set; }
         public virtual List<TimeInterval> VacationTime { get; set; }
         [NotMapped] public virtual List<Specialization> Specialization { get; set; }
-       
+
         public Physician() : base()
         {
         }
@@ -55,7 +55,7 @@ namespace HealthClinicBackend.Backend.Model.Accounts
         }
 
         public Physician(string name, string surname, Specialization specialization)
-            :base(name,surname)
+            : base(name, surname)
         {
             this.Specialization = new List<Specialization>();
             Specialization.Add(specialization);

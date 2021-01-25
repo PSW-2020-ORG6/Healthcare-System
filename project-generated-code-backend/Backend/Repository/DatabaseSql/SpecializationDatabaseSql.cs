@@ -20,7 +20,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             return DbContext.Specialization.Find(id);
         }
-        
+
 
         public List<Specialization> GetByName(string name)
         {

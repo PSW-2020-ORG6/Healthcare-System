@@ -1,11 +1,8 @@
 ﻿using HealthClinicBackend.Backend.Events.EventLogging;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HealthClinicBackend.Backend.Events.PatientRegisteredEventLogging
 {
-    public class PatientAppointmentEventParams: EventParams
+    public class PatientAppointmentEventParams : EventParams
     {
         public int TransitionsFromTwoToOneStep { get; set; }
         public int TransitionsFromThreeToTwoStep { get; set; }

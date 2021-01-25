@@ -249,7 +249,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Superintendent>().Ignore(o => o.Address);
             //modelBuilder.Entity<Physician>().Ignore(o => o.AllSpecializations);
             modelBuilder.Entity<Superintendent>().HasData(
-                new Superintendent 
+                new Superintendent
                 {
                     SerialNumber = "990001",
                     Name = "Rafailo",
@@ -297,7 +297,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
             modelBuilder.Entity<Secretary>().HasData(
                 new Secretary
                 {
-                    
+
                     Name = "Marko",
                     Surname = "Markovic",
                     SerialNumber = "89001",

@@ -16,7 +16,11 @@ namespace HealthClinicBackend.Backend.Events.EventBuildingSelection
         public void LogEvent(BuildingSelectionEventParams eventParams)
         {
             var buildingSelectionEvent = new BuildingSelectionEvent
-            { TimeStamp = DateTime.Now };
+            {
+                TimeStamp = DateTime.Now,
+                UsernameSerialNbr = eventParams.UsernameSerialNbr,
+                BuildingSerialNbr = eventParams.BuildingSerialNbr
+            };
 
             _buildingSelectionEventRepository.LogEvent(buildingSelectionEvent);
         }

@@ -16,7 +16,12 @@ namespace HealthClinicBackend.Backend.Events.EventRoomSelection
         public void LogEvent(RoomSelectionEventParams eventParams)
         {
             var roomSelectionEvent = new RoomSelectionEvent
-            { TimeStamp = DateTime.Now };
+            {
+                TimeStamp = DateTime.Now,
+                UsernameSerialNbr = eventParams.UsernameSerialNbr,
+                FloorSerialNbr = eventParams.FloorSerialNbr,
+                RoomSerialNbr = eventParams.RoomSerialNbr
+            };
 
             _roomSelectionEventRepository.LogEvent(roomSelectionEvent);
         }

@@ -2,7 +2,6 @@
 using HealthClinicBackend.Backend.Model.Util;
 using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
-using System;
 using System.Linq;
 
 namespace HealthClinicBackend.Backend.Service.HospitalAccountsService

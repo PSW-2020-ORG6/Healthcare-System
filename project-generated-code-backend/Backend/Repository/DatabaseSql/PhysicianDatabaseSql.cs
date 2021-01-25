@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using HealthClinicBackend.Backend.Model.Accounts;
+﻿using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Repository.DatabaseSql.RelationHelpers;
 using HealthClinicBackend.Backend.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthClinicBackend.Backend.Repository.DatabaseSql
 {
@@ -52,7 +52,7 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             return GetAll().Where(p => p.Id.Equals(jmbg)).ToList()[0];
         }
-        
+
         public override Physician GetById(string jmbg)
         {
             return GetAll().Where(p => p.Id.Equals(jmbg) || p.SerialNumber.Equals(jmbg)).ToList()[0];

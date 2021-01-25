@@ -3,15 +3,15 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class InpatientCareService
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.MedicalExam;
 using HealthClinicBackend.Backend.Repository.Generic;
 using HealthClinicBackend.Backend.Service.SchedulingService.AppointmentGeneralitiesOptions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthClinicBackend.Backend.Service.PatientCareService
 {

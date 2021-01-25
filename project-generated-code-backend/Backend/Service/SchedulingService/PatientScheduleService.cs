@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using HealthClinicBackend.Backend.Dto;
+﻿using HealthClinicBackend.Backend.Dto;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Schedule;
-using HealthClinicBackend.Backend.Repository.DatabaseSql;
 using HealthClinicBackend.Backend.Repository.Generic;
+using System;
+using System.Collections.Generic;
 namespace HealthClinicBackend.Backend.Service.SchedulingService
 {
     class PatientScheduleService

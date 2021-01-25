@@ -1,15 +1,13 @@
 using HealthClinicBackend.Backend.Model.Util;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using HealthClinicBackend.Backend.Dto;
 
 namespace HealthClinicBackend.Backend.Model.Hospital
 {
-    
+
     public class Room : Entity
     {
         private string _name;
@@ -389,6 +387,6 @@ namespace HealthClinicBackend.Backend.Model.Hospital
             else if (door < 0) throw new Exception("There doesn't exist this type of door.");
         }
 
-       
+
     }
 }

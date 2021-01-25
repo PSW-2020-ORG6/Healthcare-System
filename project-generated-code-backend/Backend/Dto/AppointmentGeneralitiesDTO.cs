@@ -3,10 +3,10 @@
 // Created: Sunday, June 7, 2020 4:19:02 PM
 // Purpose: Definition of Class AppointmentGeneralitiesDTO
 
-using System.Collections.Generic;
 using HealthClinicBackend.Backend.Model.Accounts;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Util;
+using System.Collections.Generic;
 
 namespace HealthClinicBackend.Backend.Dto
 {
