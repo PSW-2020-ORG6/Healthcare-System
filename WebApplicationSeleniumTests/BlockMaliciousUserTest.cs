@@ -63,15 +63,16 @@ namespace WebApplicationSeleniumTests
             homePageAdmin = new HomePageAdmin(driver);
             homePageAdmin.Navigate();
             Assert.Equal(driver.Url, HomePageAdmin.URI);
-            Thread.Sleep(25000);
+            Thread.Sleep(10000);
 
             homePageAdmin.ClickMaliciousUsersButton();
-            Thread.Sleep(25000);
+            Thread.Sleep(15000);
 
             maliciousUserCount = homePageAdmin.MaliciousUserCount();
+            homePageAdmin.BlockMaliciousUser();
             Assert.True(homePageAdmin.BlockMaliciousUSerButtonEnabled());
 
-            Thread.Sleep(10000);
+            Thread.Sleep(5000);
             Assert.Equal(maliciousUserCount - 1, homePageAdmin.MaliciousUserCount());
 
         }
