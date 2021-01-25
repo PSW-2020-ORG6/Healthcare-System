@@ -71,7 +71,7 @@ namespace WebApplicationSeleniumTests
             Thread.Sleep(500);
 
             feedbackPage.ClickCreateFeedbackButton();
-            Thread.Sleep(1000);
+            Thread.Sleep(1500);
 
             feedbackPage.InsertFeedback("The staff is great as is the website!");
             feedbackPage.ClickAddFeedbackButton();
@@ -100,7 +100,7 @@ namespace WebApplicationSeleniumTests
             Thread.Sleep(500);
 
             feedbackPage.ClickCreateFeedbackButton();
-            Thread.Sleep(1000);
+            Thread.Sleep(1500);
 
             feedbackPage.InsertFeedback("The staff is great as is the website!");
             feedbackPage.CheckAnonimous();
@@ -130,7 +130,7 @@ namespace WebApplicationSeleniumTests
             Thread.Sleep(500);
 
             feedbackPage.ClickCreateFeedbackButton();
-            Thread.Sleep(1000);
+            Thread.Sleep(1500);
 
             feedbackPage.ClickAddFeedbackButton();
 
@@ -158,7 +158,7 @@ namespace WebApplicationSeleniumTests
             Thread.Sleep(500);
 
             feedbackPage.ClickCreateFeedbackButton();
-            Thread.Sleep(1000);
+            Thread.Sleep(1500);
 
             feedbackPage.CheckAnonimous();
             feedbackPage.ClickAddFeedbackButton();
@@ -187,7 +187,7 @@ namespace WebApplicationSeleniumTests
             Thread.Sleep(5000);
 
             feedbackAdmin.ClickApproveFeedbackButton();
-            Thread.Sleep(800);
+            Thread.Sleep(1500);
 
             Assert.Equal(rowCountApproved + 1, feedbackAdmin.CountRowsTableApproved());
             Assert.Equal(rowCountDisapproved - 1, feedbackAdmin.CountRowsTableDisapproved());
@@ -212,7 +212,7 @@ namespace WebApplicationSeleniumTests
             Thread.Sleep(5000);
 
             feedbackAdmin.ClickDisapproveFeedbackButton();
-            Thread.Sleep(800);
+            Thread.Sleep(2000);
 
             Assert.Equal(rowCountApproved - 1, feedbackAdmin.CountRowsTableApproved());
             Assert.Equal(rowCountDisapproved + 1, feedbackAdmin.CountRowsTableDisapproved());

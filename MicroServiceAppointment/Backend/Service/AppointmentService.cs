@@ -36,6 +36,17 @@ namespace MicroServiceAppointment.Backend.Service
             new AppointmentWithRecommendationDTO();
 
         private DateFromStringConverter dateTimeDTO = new DateFromStringConverter();
+
+
+        public AppointmentService(IAppointmentRepository appointmentRepository,
+            IPhysicianRepository physicianRepository, IProcedureTypeRepository procedureTypeRepository,
+            IMedicineRepository medicineRepository)
+        {
+            _medicineRepository = medicineRepository;
+            _appointmentRepository = appointmentRepository;
+            _physicianRepository = physicianRepository;
+            _procedureTypeRepository = procedureTypeRepository;
+        }
         public AppointmentService(ISpecializationRepository specializationRepository,
                 IAppointmentRepository appointmentRepository, IPhysicianRepository physicianRepository,
                 IPatientRepository patientRepository, IAddressRepository addressRepository)
@@ -46,6 +57,18 @@ namespace MicroServiceAppointment.Backend.Service
             _addressRepository = addressRepository;
             _patientRepository = patientRepository;
         }
+        public AppointmentService(IAppointmentRepository appointmentRepository)
+        {
+            _appointmentRepository = appointmentRepository;
+        }
+        public AppointmentService(IAppointmentRepository appointmentRepository,
+            IPhysicianRepository physicianRepository, IProcedureTypeRepository procedureTypeRepository)
+        {
+            _appointmentRepository = appointmentRepository;
+            _physicianRepository = physicianRepository;
+            _procedureTypeRepository = procedureTypeRepository;
+        }
+
         public List<TimeIntervalsDTO> GetAllAvailableAppointments(string physicianId, string specializationName,
             string date)
         {
@@ -88,9 +111,12 @@ namespace MicroServiceAppointment.Backend.Service
                         }
                     }
                 }
-                if (!existance) result.Add(new TimeIntervalsDTO(time));
+
+                if (!existance)
+                    result.Add(new TimeIntervalsDTO(time));
                 time = time.Add(new TimeSpan(0, 20, 0));
             }
+
             return result;
         }
 
@@ -159,6 +185,7 @@ namespace MicroServiceAppointment.Backend.Service
                 dateTimeFrom = dateTimeFrom.AddDays(-1);
                 newDates.Add(DateConversion(dateTimeFrom));
             }
+
             return newDates;
         }
 
@@ -210,6 +237,7 @@ namespace MicroServiceAppointment.Backend.Service
             }
             return appointmentsDto;
         }
+
         internal List<AppointmentDto> GetAllAppointmentsByPatientIdDateAndDoctor(string patientId, string date, string doctorName)
         {
             List<PhysiciansDTO> physician = HttpRequest.GetPhysycianByName(doctorName).Result;
@@ -226,9 +254,9 @@ namespace MicroServiceAppointment.Backend.Service
         }
         internal ProcedureTypeDTO GetProcedureType(string procedureTypeId)
         {
-            var procedureType=_procedureTypeRepository.GetById(procedureTypeId);
+            var procedureType = _procedureTypeRepository.GetById(procedureTypeId);
             procedureType.Specialization = new Specialization();
-            procedureType.Specialization.Name= HttpRequest.GetSpecializationByIdAsync(procedureType.SpecializationSerialNumber).Result.Name;
+            procedureType.Specialization.Name = HttpRequest.GetSpecializationByIdAsync(procedureType.SpecializationSerialNumber).Result.Name;
             return new ProcedureTypeDTO(procedureType);
         }
 
@@ -308,8 +336,8 @@ namespace MicroServiceAppointment.Backend.Service
             {
                 physicianId.Add(physician.Id);
             }
-             List<Appointment>appointments= _appointmentRepository.IsSurveyDoneByPatientIdAppointmentDatePhysicianNameAppointments(patientId, appointmentDate,physitianResult[0].Id);
-            if (appointments.Count==0)
+            List<Appointment> appointments = _appointmentRepository.IsSurveyDoneByPatientIdAppointmentDatePhysicianNameAppointments(patientId, appointmentDate, physitianResult[0].Id);
+            if (appointments.Count == 0)
                 return false;
             if (appointments[0].IsSurveyDone)
                 return true;
@@ -379,7 +407,6 @@ namespace MicroServiceAppointment.Backend.Service
             var appointment = _appointmentRepository.GetById(appointmentSerialNumber);
             if (!appointment.Active) return false;
             appointment.Active = false;
-            appointment.DateOfCanceling = DateTime.Now.ToString();
             _appointmentRepository.Update(appointment);
             return true;
         }
@@ -394,7 +421,7 @@ namespace MicroServiceAppointment.Backend.Service
         ///<param name="specializationName"> String type object
         ///<param name="dates"> String array type object
         ///</param>>
-       
+
         public List<AppointmentWithRecommendationDTO> AppointmentRecomendation(string physicianId,
             string specializationName, string[] dates)
         {
@@ -424,6 +451,6 @@ namespace MicroServiceAppointment.Backend.Service
             return availableAppointments;
 
         }
-       
+
     }
 }
