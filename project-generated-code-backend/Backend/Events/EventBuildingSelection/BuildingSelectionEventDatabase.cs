@@ -7,6 +7,14 @@ namespace HealthClinicBackend.Backend.Events.EventBuildingSelection
 {
     public class BuildingSelectionEventDatabase : EventDatabase<BuildingSelectionEvent>, IBuildingSelectionEventRepository
     {
+        private static EventDbContext dbContext = new EventDbContext(new DbContextOptionsBuilder<EventDbContext>()
+            .UseNpgsql("userid=postgres;server=localhost;port=5432;database=healthcare-system-events;password=root;Integrated Security = true;pooling=true;")
+            .Options);
+
+        public BuildingSelectionEventDatabase() : base(dbContext)
+        {
+        }
+
         public BuildingSelectionEventDatabase(EventDbContext dbContext) : base(dbContext)
         {
             DbContext.Set<BuildingSelectionEvent>().AsNoTracking();

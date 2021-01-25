@@ -8,6 +8,11 @@ namespace HealthClinicBackend.Backend.Events.EventFloorChange
     {
         private readonly IFloorChangeEventRepository _floorChangeEventRepository;
 
+        public FloorChangeEventService()
+        {
+            _floorChangeEventRepository = new FloorChangeEventDatabase();
+        }
+
         public FloorChangeEventService(IFloorChangeEventRepository floorChangeEventRepository)
         {
             _floorChangeEventRepository = floorChangeEventRepository;
