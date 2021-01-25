@@ -2,6 +2,7 @@
 using GraphicEditor.View.Windows;
 using HealthClinicBackend.Backend.Controller;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
+using HealthClinicBackend.Backend.Events.EventRoomSelection;
 using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
 using HealthClinicBackend.Backend.Model.Util;
@@ -173,6 +174,7 @@ namespace GraphicEditor.ViewModel
         private EquipmentRelocationController equipmentRelocationController = new EquipmentRelocationController();
         private RoomRenovationController renovationController = new RoomRenovationController();
         private SuperintendentMedicineController medicineController = new SuperintendentMedicineController();
+        private RoomSelectionEventService roomSelectionEventService = new RoomSelectionEventService();
 
         // Floor floor1, Border space, FloorUserControl view1, Room _renovatingRoom
 
@@ -214,6 +216,8 @@ namespace GraphicEditor.ViewModel
 
             if (equipment != null & equipment.Count != 0)
                 selectedEquipment = equipment[0];
+
+            CreateRoomSelectEvent(_room);
         }
 
         void EnterEquipmentRelocationWindow()
@@ -351,6 +355,17 @@ namespace GraphicEditor.ViewModel
                 if (r.RenovatedRoomSerialNumber == room.SerialNumber)
                     renovations.Add(r);
             return renovations;
+        }
+
+        private void CreateRoomSelectEvent(Room enteringRoom)
+        {
+            RoomSelectionEventParams room = new RoomSelectionEventParams
+            {
+                UsernameSerialNbr = MainWindow.UserProfile.SerialNumber,
+                FloorSerialNbr = enteringRoom.FloorSerialNumber,
+                RoomSerialNbr = enteringRoom.SerialNumber
+            };
+            roomSelectionEventService.LogEvent(room);
         }
     }
 }

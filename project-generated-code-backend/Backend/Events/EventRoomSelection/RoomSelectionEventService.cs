@@ -8,6 +8,11 @@ namespace HealthClinicBackend.Backend.Events.EventRoomSelection
     {
         private readonly IRoomSelectionEventRepository _roomSelectionEventRepository;
 
+        public RoomSelectionEventService()
+        {
+            _roomSelectionEventRepository = new RoomSelectionEventDatabase();
+        }
+
         public RoomSelectionEventService(IRoomSelectionEventRepository roomSelectionEventRepository)
         {
             _roomSelectionEventRepository = roomSelectionEventRepository;

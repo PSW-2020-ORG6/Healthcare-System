@@ -2,6 +2,7 @@
 using HealthClinicBackend.Backend.Controller;
 using HealthClinicBackend.Backend.Controller.PatientControllers;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
+using HealthClinicBackend.Backend.Events.EventFloorChange;
 using HealthClinicBackend.Backend.Model.Hospital;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ namespace GraphicEditor.ViewModel
         private string buildingStyle;
         private MainWindowViewModel parentViewModel;
         private BuildingUserControlViewModel myViewModel;
+        private FloorChangeEventService floorChangeEventService = new FloorChangeEventService();
 
         public FloorUserControlViewModel(MainWindowViewModel _mapParent, BuildingUserControlViewModel _buildingParent, Grid grid, Floor floor, ref Dictionary<string, RoomButton> _connections)
         {
@@ -41,7 +43,8 @@ namespace GraphicEditor.ViewModel
             RoomGrid = grid;
             floorSerialNumber = floor.SerialNumber;
             RoomInitialization();
-            FindFloorType();        
+            FindFloorType();
+            CreateFloorChangeEvent(floor);
         }
 
         public FloorUserControlViewModel(FloorUserControlViewModel viewModel)
@@ -104,8 +107,8 @@ namespace GraphicEditor.ViewModel
                     RoomGrid.Children.Add(button1);
                     continue;
                 }
-                if (!connections.ContainsKey(room.SerialNumber) && 
-                        (room.IsWaitingToBeRenovated || room.IsBeingRenovated) && 
+                if (!connections.ContainsKey(room.SerialNumber) &&
+                        (room.IsWaitingToBeRenovated || room.IsBeingRenovated) &&
                         room.RoomRenovationSerialNumber == null)
                 {
                     continue;
@@ -114,7 +117,7 @@ namespace GraphicEditor.ViewModel
 
                 RoomButton button = new RoomButton(RoomGrid, connections);
                 if (room.IsBeingRenovated) button.Background = new SolidColorBrush(Color.FromRgb(252, 56, 56));
-                
+
                 button.Style = (Style)ResourceDictionary[room.Style];
                 button.Content = room.Name;
                 button.TopDoor = (Visibility)room.TopDoorVisible;
@@ -137,11 +140,11 @@ namespace GraphicEditor.ViewModel
 
                 RoomGrid.Children.Add(button);
                 connections.Add(room.SerialNumber, button);
-                
+
             }
 
             if (floorRooms.Count < connections.Count)
-                foreach(string roomSerialNumber in connections.Keys)
+                foreach (string roomSerialNumber in connections.Keys)
                 {
                     try
                     {
@@ -170,6 +173,17 @@ namespace GraphicEditor.ViewModel
         {
             roomRenovationController.ExecuteRoomRenovation();
             RoomInitialization();
+        }
+
+        private void CreateFloorChangeEvent(Floor enteringFloor)
+        {
+            FloorChangeEventParams floor = new FloorChangeEventParams
+            {
+                UsernameSerialNbr = MainWindow.UserProfile.SerialNumber,
+                BuildingSerialNbr = enteringFloor.BuildingSerialNumber,
+                FloorSerialNbr = enteringFloor.SerialNumber
+            };
+            floorChangeEventService.LogEvent(floor);
         }
     }
 }

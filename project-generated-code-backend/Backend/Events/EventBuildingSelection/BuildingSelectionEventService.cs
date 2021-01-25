@@ -8,6 +8,11 @@ namespace HealthClinicBackend.Backend.Events.EventBuildingSelection
     {
         private IBuildingSelectionEventRepository _buildingSelectionEventRepository;
 
+        public BuildingSelectionEventService()
+        {
+            _buildingSelectionEventRepository = new BuildingSelectionEventDatabase();
+        }
+
         public BuildingSelectionEventService(IBuildingSelectionEventRepository buildingSelectionEventRepository)
         {
             _buildingSelectionEventRepository = buildingSelectionEventRepository;
