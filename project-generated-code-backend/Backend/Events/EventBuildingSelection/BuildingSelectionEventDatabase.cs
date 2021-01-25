@@ -1,4 +1,5 @@
 ﻿using HealthClinicBackend.Backend.Events.EventLogging;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,6 +9,7 @@ namespace HealthClinicBackend.Backend.Events.EventBuildingSelection
     {
         public BuildingSelectionEventDatabase(EventDbContext dbContext) : base(dbContext)
         {
+            DbContext.Set<BuildingSelectionEvent>().AsNoTracking();
         }
 
         public override void LogEvent(BuildingSelectionEvent @event)

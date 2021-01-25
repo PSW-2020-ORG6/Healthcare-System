@@ -6,7 +6,7 @@ namespace HealthClinicBackend.Backend.Events.EventBuildingSelection
 {
     public class BuildingSelectionEventService : ILogEventService<BuildingSelectionEventParams>
     {
-        private readonly IBuildingSelectionEventRepository _buildingSelectionEventRepository;
+        private IBuildingSelectionEventRepository _buildingSelectionEventRepository;
 
         public BuildingSelectionEventService(IBuildingSelectionEventRepository buildingSelectionEventRepository)
         {
@@ -15,7 +15,7 @@ namespace HealthClinicBackend.Backend.Events.EventBuildingSelection
 
         public void LogEvent(BuildingSelectionEventParams eventParams)
         {
-            var buildingSelectionEvent = new BuildingSelectionEvent
+            var buildingSelectionEvent = new BuildingSelectionEvent()
             {
                 TimeStamp = DateTime.Now,
                 UsernameSerialNbr = eventParams.UsernameSerialNbr,
