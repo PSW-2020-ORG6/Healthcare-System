@@ -74,7 +74,7 @@ namespace WebApplicationSeleniumTests
             cancelAppointmentCount = appointmentPage.CancelAppointmentsCount();
             Assert.True(appointmentPage.CancelButtonDisplayed());
             appointmentPage.Cancel();
-            Thread.Sleep(10000);
+            Thread.Sleep(20000);
             Assert.Equal(appointmentCount - 1, appointmentPage.AppointmentsCount());
             Assert.Equal(cancelAppointmentCount + 1, appointmentPage.CancelAppointmentsCount());
 
