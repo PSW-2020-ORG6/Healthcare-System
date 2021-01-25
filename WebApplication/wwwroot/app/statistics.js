@@ -3,9 +3,9 @@
         return {
             statisticEachQuestion: null,
             statisticEachTopic: null,
-            selectedDoctor : "Doctor is not selected",
+            selectedDoctor: "Doctor is not selected",
             statisticDoctor: null,
-            doctorsList : null,
+            doctorsList: null,
             widthLabel1Topic2: {
                 width: '0%'
             },
@@ -579,17 +579,17 @@
             .catch(error => {
             }),
 
-        axios
-            .get('/feedback/disapproved', {
-                headers: {
-                    'Authorization': 'Bearer' + " " + localStorage.getItem('token')
-                }
-            })
-            .then(response => {
-                this.disapprovedFeedbacks = response.data
-            })
-            .catch(error => {
-            })
+            axios
+                .get('/feedback/disapproved', {
+                    headers: {
+                        'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                    }
+                })
+                .then(response => {
+                    this.disapprovedFeedbacks = response.data
+                })
+                .catch(error => {
+                })
         axios
             .get('/patient/all', {
                 headers: {
@@ -622,7 +622,7 @@
     mounted() {
 
         axios
-            .get('/survey/getStatisticEachQuestion', {
+            .get('/survey/getStatistiEachQuestion', {
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -3082,8 +3082,9 @@
 
     methods: {
         getStatisticsForDoctor: function () {
-            axios          
-                .get('/survey/getStatisticForDoctor', { params: { ID: this.selectedDoctor.fullName } , 
+            axios
+                .get('/survey/getStatisticForDoctor', {
+                    params: { ID: this.selectedDoctor.fullName },
                     headers: {
                         'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                     }

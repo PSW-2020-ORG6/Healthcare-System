@@ -392,7 +392,12 @@ namespace MicroServiceAppointment.Backend.Service
 
         public bool IsUserMalicious(string patientId)
         {
-            List<DateTime> dates = _appointmentRepository.GetByPatientIdCanceledDates(patientId);
+            List<String> dateStrings = _appointmentRepository.GetByPatientIdCanceledDates(patientId);
+            List<DateTime> dates = new List<DateTime>();
+            foreach (String date in dateStrings) {
+                String[] mmddyy = date.Split("-");
+                dates.Add(new DateTime(Int32.Parse(mmddyy[2]), Int32.Parse(mmddyy[0]), Int32.Parse(mmddyy[1])));
+            }
 
             dates.Sort((date1, date2) => date2.CompareTo(date1));
             TimeSpan difference = dates[1].Subtract(DateTime.Now);
@@ -407,7 +412,8 @@ namespace MicroServiceAppointment.Backend.Service
             var appointment = _appointmentRepository.GetById(appointmentSerialNumber);
             if (!appointment.Active) return false;
             appointment.Active = false;
-            appointment.DateOfCanceling = DateTime.Now.ToString();
+            String[] dateString = (DateTime.Now.ToString().Split(" ")[0]).Split("/");
+            appointment.DateOfCanceling = dateString[0] + "-" + dateString[1] + "-" + dateString[2];
             _appointmentRepository.Update(appointment);
             return true;
         }

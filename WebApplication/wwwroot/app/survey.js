@@ -1015,7 +1015,7 @@ Vue.component("appointments", {
                 })
                 .then(response => {
                     axios
-                        .get('/appointment/IsUserMalicious', {
+                        .get("/appointment/IsUserMalicious", {
                             params: { patientId: localStorage.getItem('userId') },
                             headers: {
                                 'Authorization': 'Bearer' + " " + localStorage.getItem('token')
@@ -1025,7 +1025,7 @@ Vue.component("appointments", {
                             this.isMalicious = response.data
                             if (this.isMalicious == true) {
                                 axios
-                                    .put('patient/SetUserToMalicious', appointment.patientId, {
+                                    .put("/patient/SetUserToMalicious", appointment.patientsDTO, {
                                         headers: {
                                             'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                                         }

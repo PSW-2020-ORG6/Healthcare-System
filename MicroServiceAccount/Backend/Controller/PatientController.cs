@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using MicroServiceAccount.Backend.Service;
 using MicroServiceAccount.Backend.Model;
 using MicroServiceAccount.Backend.Dto;
+using MicroServiceAppointment.Backend.Dto;
+
 
 namespace MicroServiceAccount.Backend.Controllers
 {
@@ -65,9 +67,9 @@ namespace MicroServiceAccount.Backend.Controllers
 
         [Authorize]
         [HttpPut("SetUserToMalicious")]
-        public bool SetUserToMalicious([FromBody]string patientId)
+        public bool SetUserToMalicious(PatientDto patient)
         {
-            return _patientService.SetMalicousPatientById(patientId);
+            return _patientService.SetMalicousPatientById(patient.Id);
         }
     }
 }
