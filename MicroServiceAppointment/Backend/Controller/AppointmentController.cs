@@ -165,7 +165,7 @@ namespace MicroServiceAppointment.Backend.Controllers
         }
 
         [Authorize]
-        [HttpGet("IsUserMalicious")]
+        [HttpGet("IsUserMalicious/{patientId}")]
         public bool IsUserMalicious(string patientId)
         {
             return _appointmentService.IsUserMalicious(patientId);

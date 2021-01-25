@@ -407,6 +407,7 @@ namespace MicroServiceAppointment.Backend.Service
             var appointment = _appointmentRepository.GetById(appointmentSerialNumber);
             if (!appointment.Active) return false;
             appointment.Active = false;
+            appointment.DateOfCanceling = DateTime.Now.ToString();
             _appointmentRepository.Update(appointment);
             return true;
         }
