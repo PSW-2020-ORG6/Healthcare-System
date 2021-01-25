@@ -60,7 +60,7 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             double count = first + second + third;
             resultListStatistics.Add(Math.Round((first * 100) / count,2));
             resultListStatistics.Add(Math.Round((second * 100) / count,2));
-            resultListStatistics.Add(100- Math.Round((first * 100) / count, 2)- Math.Round((second * 100) / count, 2));
+            resultListStatistics.Add(Math.Round(100- Math.Round((first * 100) / count, 2)- Math.Round((second * 100) / count, 2),2));
             return resultListStatistics;
         }
 
@@ -114,7 +114,7 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             double count = once + twice + more;
             resultListStatistics.Add(Math.Round((once * 100) / count,2));
             resultListStatistics.Add(Math.Round((twice * 100) / count,2));
-            resultListStatistics.Add(100 - Math.Round((once * 100) / count, 2) - Math.Round((twice * 100) / count, 2));
+            resultListStatistics.Add(Math.Round(100 - Math.Round((once * 100) / count, 2) - Math.Round((twice * 100) / count, 2),2));
             return resultListStatistics;
         }
         /// <summary>
@@ -138,7 +138,7 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             double count = once + twice + more;
             resultListStatistics.Add(Math.Round((once * 100) / count,2));
             resultListStatistics.Add(Math.Round((twice * 100) / count,2));
-            resultListStatistics.Add(100 - Math.Round((once * 100) / count, 2) - Math.Round((twice * 100) / count, 2));
+            resultListStatistics.Add(Math.Round(100 - Math.Round((once * 100) / count, 2) - Math.Round((twice * 100) / count, 2), 2));
             return resultListStatistics;
         }
         /// <summary>
@@ -162,7 +162,7 @@ namespace MicroServiceAppointment.Backend.Events.PatientRegisteredEventLogging
             double count = once + twice + more;
             resultListStatistics.Add(Math.Round((once * 100) / count,2));
             resultListStatistics.Add(Math.Round((twice * 100) / count,2));
-            resultListStatistics.Add(100 - Math.Round((once * 100) / count, 2) - Math.Round((twice * 100) / count, 2));
+            resultListStatistics.Add(Math.Round(100 - Math.Round((once * 100) / count, 2) - Math.Round((twice * 100) / count, 2), 2));
             return resultListStatistics;
         }
         /// <summary>
