@@ -19,7 +19,7 @@ namespace MicroServiceAppointment.Backend.Repository.DatabaseSql
         {
             return DbContext.Appointment
                 .Include(a => a.Patient)
-              //  .Include(a => a.Physician)
+                .Include(a => a.Physician)
                 .Include(a => a.Room)
                 .Include(a => a.ProcedureType)
                 .ToList();
