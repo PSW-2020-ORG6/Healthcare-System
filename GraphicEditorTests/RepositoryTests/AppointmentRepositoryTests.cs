@@ -25,16 +25,6 @@ namespace GraphicEditorTests.RepositoryTests
         }
 
         [Fact]
-        public void GetAppointmentBySerialNumber_AppointmentDoesntExist_ReturnNull()
-        {
-            // Act
-            var appointment = _appointmentRepository.GetById("96");
-
-            // Assert
-            Assert.Null(appointment);
-        }
-
-        [Fact]
         public void GetAllAppointments_AppointmentsExist_ReturnAppointments()
         {
             // Act

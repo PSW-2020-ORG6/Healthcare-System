@@ -4,6 +4,7 @@ using HealthClinicBackend.Backend.Controller.PatientControllers;
 using HealthClinicBackend.Backend.Controller.SuperintendentControllers;
 using HealthClinicBackend.Backend.Events.EventFloorChange;
 using HealthClinicBackend.Backend.Model.Hospital;
+using HealthClinicBackend.Backend.Model.Util;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -44,7 +45,8 @@ namespace GraphicEditor.ViewModel
             floorSerialNumber = floor.SerialNumber;
             RoomInitialization();
             FindFloorType();
-            CreateFloorChangeEvent(floor);
+            if (MainWindow.TypeOfUser != TypeOfUser.NoUser)
+                CreateFloorChangeEvent(floor);
         }
 
         public FloorUserControlViewModel(FloorUserControlViewModel viewModel)

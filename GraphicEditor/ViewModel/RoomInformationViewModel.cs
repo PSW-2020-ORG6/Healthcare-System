@@ -217,7 +217,8 @@ namespace GraphicEditor.ViewModel
             if (equipment != null & equipment.Count != 0)
                 selectedEquipment = equipment[0];
 
-            CreateRoomSelectEvent(_room);
+            if (MainWindow.TypeOfUser != TypeOfUser.NoUser)
+                CreateRoomSelectEvent(_room);
         }
 
         void EnterEquipmentRelocationWindow()

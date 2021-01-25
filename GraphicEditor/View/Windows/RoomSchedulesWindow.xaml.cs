@@ -1,5 +1,4 @@
 ﻿using GraphicEditor.ViewModel;
-using HealthClinicBackend.Backend.Model.Hospital;
 using HealthClinicBackend.Backend.Model.Schedule;
 using System.Collections.Generic;
 using System.Windows;

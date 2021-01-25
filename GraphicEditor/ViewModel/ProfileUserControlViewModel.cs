@@ -1,9 +1,5 @@
 ﻿using GraphicEditor.HelpClasses;
 using GraphicEditor.View.UserControls;
-using HealthClinicBackend.Backend.Model.Accounts;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GraphicEditor.ViewModel
 {
@@ -15,9 +11,9 @@ namespace GraphicEditor.ViewModel
         private string userName;
         private string password;
         private MainWindowViewModel parent;
-        public string Name 
-        { 
-            get => name; 
+        public string Name
+        {
+            get => name;
             set
             {
                 SetProperty(ref name, value);
