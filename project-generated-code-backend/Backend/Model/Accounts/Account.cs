@@ -111,5 +111,10 @@ namespace HealthClinicBackend.Backend.Model.Accounts
         {
             return Id.Equals(id) && Password.Equals(password);
         }
+
+        public bool AreCredentialsValid2(string email, string password)
+        {
+            return Email.Equals(email) && Password.Equals(password);
+        }
     }
 }

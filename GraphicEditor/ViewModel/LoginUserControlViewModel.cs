@@ -2,6 +2,7 @@
 using HealthClinicBackend.Backend.Controller;
 using HealthClinicBackend.Backend.Model.Util;
 using System.Windows.Controls;
+using Xceed.Wpf.Toolkit;
 
 namespace GraphicEditor.ViewModel
 {
@@ -41,9 +42,16 @@ namespace GraphicEditor.ViewModel
             MainWindow.TypeOfUser = hospitalLogInController.GetUserType(UserName, pass.Password);
             if (MainWindow.TypeOfUser != TypeOfUser.NoUser)
             {
+                MainWindow.UserProfile = hospitalLogInController.GetUserProfile(UserName, pass.Password);
+                MessageBox.Show("You have succesfully logged in. To logout go to Profile page", "LOGIN SUCCESSFUL");
                 _parent.CurrentUserControl = _parent.HospitalMap;
+                _parent.ProfilePage = new View.UserControls.ProfileUserControl(_parent);
                 UserName = "";
                 Password = "";
+            }
+            else if (MainWindow.TypeOfUser == TypeOfUser.NoUser)
+            {
+                MessageBox.Show("Enter Email and Password again", "LOGIN FAILED");
             }
         }
     }

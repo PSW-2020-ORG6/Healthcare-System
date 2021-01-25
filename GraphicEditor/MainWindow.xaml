@@ -36,6 +36,8 @@
             </Menu>
             <TextBlock />
             <Menu HorizontalAlignment="Right" >
+                <MenuItem   Cursor="Hand" HorizontalAlignment="Right" Header="Profile" BorderBrush="Black" Background="#FFA6D1F5" Command="{Binding NavCommand}"
+                          CommandParameter="profile" Height="30"/>
                 <MenuItem   Cursor="Hand" HorizontalAlignment="Right" Header="Login" BorderBrush="Black" Background="#FFA6D1F5" Command="{Binding NavCommand}"
                           CommandParameter="login" Height="30"/>
             </Menu>
