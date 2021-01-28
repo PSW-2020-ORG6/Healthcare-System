@@ -19,6 +19,7 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" v-on:click="StatisticsShow()">Statistics</a>
                             <a class="dropdown-item" href="#" v-on:click="FeedbacksAdminShow()">Feedbacks</a>
+                            <a class="dropdown-item" href="#" v-on:click="ChartsShow()">Charts</a>
                             <a class="dropdown-item" href="#" v-on:click="SearchShow()">Search</a>
                             <a class="dropdown-item" href="#" v-on:click="ChartsShow()">Appointments stats and charts</a>
                             <div class="dropdown-divider"></div>

@@ -38,18 +38,18 @@ namespace AppointmentTests
             SerialNumber = "69430"
         };
 
-        private List<DateTime> datesMalicious = new List<DateTime>()
+        private List<string> datesMalicious = new List<string>()
         {
-            new DateTime(2020, 12, 1, 10, 45, 49),
-            new DateTime(2021, 1, 20, 10, 45, 49),
-            new DateTime(2021, 1, 21, 10, 45, 49)
+            new string("1-28-2021"),
+            new string("1-28-2021"),
+            new string("1-28-2021")
         };
 
-        private List<DateTime> datesNotMalicious = new List<DateTime>()
+        private List<string> datesNotMalicious = new List<string>()
         {
-            new DateTime(2020, 12, 1, 10, 45, 49),
-            new DateTime(2020, 2, 20, 10, 45, 49),
-            new DateTime(2020, 1, 21, 10, 45, 49)
+           new string("1-28-2020"),
+            new string("1-28-2020"),
+            new string("1-28-2020")
         };
 
         List<AppointmentDto> appointmentsDto = new List<AppointmentDto>();
