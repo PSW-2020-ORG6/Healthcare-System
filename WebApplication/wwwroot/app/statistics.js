@@ -753,7 +753,7 @@
             })
 
         axios
-            .get('/survey/getStatistiEachTopic', {
+            .get('/survey/getStatisticEachTopic', {
                 headers: {
                     'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                 }
@@ -797,7 +797,7 @@
     beforeMount() {
 
         axios
-            .get('/account/allPhysicians')
+            .get("/account/allPhysicians")
             .then(response => {
                 this.doctorsList = response.data
             })
@@ -817,7 +817,7 @@
 
 
 
-        <div id="sText">
+        <div id="StatisticsBackground">
 
 
 <br></br>

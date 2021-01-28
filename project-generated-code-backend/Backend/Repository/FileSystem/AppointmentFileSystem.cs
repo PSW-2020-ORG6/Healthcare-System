@@ -132,5 +132,10 @@ namespace HealthClinicBackend.Backend.Repository.FileSystem
         {
             throw new NotImplementedException();
         }
+
+        List<String> IAppointmentRepository.GetByPatientIdCanceledDates(string patientId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

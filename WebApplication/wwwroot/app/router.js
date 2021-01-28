@@ -220,14 +220,31 @@ const router = new VueRouter({
 			}
 		},
 		{
-			path: '/search',
-			name: 'search',
+			path: '/searchAdmin',
+			name: 'searchAdmin',
+			components: {
+				pageHeader: AdminHeader,
+				content: Search
+			},
+			beforeEnter: (to, from, next) => {
+				if (localStorage.getItem('isAdmin') == "true" && localStorage.getItem('isLogged') == "true" && localStorage.getItem('isPatient') == "false") {
+					next();
+				}
+				else {
+					next(false);
+				}
+			}
+		},
+		,
+		{
+			path: '/searchPatient',
+			name: 'searchPatient',
 			components: {
 				pageHeader: PatientHeader,
 				content: Search
 			},
 			beforeEnter: (to, from, next) => {
-				if (localStorage.getItem('isLogged') == "true") {
+				if (localStorage.getItem('isAdmin') == "false" && localStorage.getItem('isLogged') == "true" && localStorage.getItem('isPatient') == "true") {
 					next();
 				}
 				else {

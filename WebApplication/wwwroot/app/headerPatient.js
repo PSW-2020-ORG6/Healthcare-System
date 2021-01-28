@@ -49,10 +49,13 @@
             this.$router.push('appointments');
         },
         SearchShow: function () {
-            this.$router.push('search');
+            this.$router.push('searchPatient');
         },
         StatisticsShow: function () {
             this.$router.push('statistics');
+        },
+        AccountShow: function () {
+            this.$router.push('account');
         },
         AdminShow: function () {
             this.$router.push('admin');

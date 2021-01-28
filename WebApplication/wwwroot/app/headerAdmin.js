@@ -19,7 +19,6 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" v-on:click="StatisticsShow()">Statistics</a>
                             <a class="dropdown-item" href="#" v-on:click="FeedbacksAdminShow()">Feedbacks</a>
-                            <a class="dropdown-item" href="#">Malicious users</a>
                             <a class="dropdown-item" href="#" v-on:click="SearchShow()">Search</a>
                             <a class="dropdown-item" href="#" v-on:click="ChartsShow()">Appointments stats and charts</a>
                             <div class="dropdown-divider"></div>
@@ -36,6 +35,7 @@
     </div>
 	</div>
 
+
 	`,
     methods: {
         AccountShow: function () {
@@ -51,7 +51,7 @@
             this.$router.push('survey');
         },
         SearchShow: function () {
-            this.$router.push('search');
+            this.$router.push('searchAdmin');
         },
         StatisticsShow: function () {
             this.$router.push('statistics');

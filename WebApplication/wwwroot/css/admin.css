@@ -1,7 +1,13 @@
 ﻿#AdminMain {
     background-image: url("../pictures/AdminBackground.jpg");
     background-repeat: no-repeat;
-    height: 768px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-size: cover;
+    height: auto !important;
+    min-height: 1000px;
+    color: white;
+    font-family: impact;
 }
 
 
@@ -13,6 +19,7 @@
 
 
 #ShowStatistics {
+    border-radius: 20px;
     background-image: url("../pictures/StatisticsV3.png");
     height: 150px;
     width: 150px;
@@ -21,6 +28,7 @@
 }
 
 #MaliciousUsers {
+    border-radius: 20px;
     background-image: url("../pictures/MaliciousUSersV2.png");
     height: 150px;
     width: 150px;
@@ -29,6 +37,7 @@
 }
 
 #FeedbacksControl {
+    border-radius: 20px;
     background-image: url("../pictures/FeedbacksV2.png");
     height: 150px;
     width: 150px;
@@ -211,11 +220,27 @@ div .circle-img {
 
 
 #sText {
-    overflow-y: scroll;
-    height: 768px;
-    background-image: url("../pictures/surveyBackground.jpg");
+    background-image: url("../pictures/chartsBACKGROUND.jpg");
     background-repeat: no-repeat;
-    background-size: auto;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-size: cover;
+    height: auto !important;
+    min-height: 1000px;
+    color: white;
+    font-family: impact;
+}
+
+#StatisticsBackground {
+    background-image: url("../pictures/feedback.jpg");
+    background-repeat: no-repeat;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-size: cover;
+    height: auto !important;
+    min-height: 1000px;
+    color: white;
+    font-family: impact;    
 }
 
 .carousel-control-prev-icon, .carousel-control-next-icon {
@@ -226,12 +251,19 @@ div .circle-img {
 
 #feedbackAdmin {
     background-image: url("../pictures/feedback.jpg");
-    background-repeat: repeat;
-    height: 768px;
+    background-repeat: no-repeat;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-size: cover;
+    height: auto !important;
+    min-height: 1000px;
+    color: white;
+    font-family: impact;
 }
 
 #ShowCharts {
     background-image: url("../pictures/chartsIconResized.png");
+    border-radius : 20px;
     height: 150px;
     width: 150px;
     background-color: white;

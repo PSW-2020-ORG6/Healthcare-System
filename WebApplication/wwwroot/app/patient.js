@@ -62,6 +62,10 @@
 					<div class="col-sm">
 					</div>
 					<div class="col-sm">
+					</div>
+					<div class="col-sm">
+					</div>
+					<div class="col-sm">
 					  <h3>
 						<button id="MyInformations" type="button" class="btn btn-info btn-lg margin form-control" data-toggle="modal" v-on:click="AccountInfoShow()"></button>
 						</h3><br/> 
@@ -88,11 +92,6 @@
 						</h3><br/> 
 					</div>
 					<div class="col-sm">
-					</div>
-					<div class="col-sm">
-					  <h3>
-						<button id="SurveyShow" type="button" class="btn btn-info btn-lg margin form-control" v-on:click="SurveyShow()"></button>
-						</h3><br/> 
 					</div>
 					<div class="col-sm">
 					</div>  
@@ -131,14 +130,14 @@
 			return dates[2] + "." + dates[1] + "." + dates[0]
 		},
 		SearchShow: function () {
-			this.$router.push('search');
+			this.$router.push('searchPatient');
 		},
 		AppointmentsShow: function () {
 			this.$router.push('appointments');
 		},
 		SurveyShow: function () {
 			axios
-				.get('/survey/getDoctorsForSurveyList', { params: { patientId: this.idPatient } , 
+				.get('/survey/getDoctorsFromSurvey', { params: { patientId: this.idPatient } , 
 					headers: {
 						'Authorization': 'Bearer' + " " + localStorage.getItem('token')
 					}

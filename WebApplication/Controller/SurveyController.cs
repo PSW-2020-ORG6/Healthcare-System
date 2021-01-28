@@ -80,28 +80,28 @@ namespace WebApplication.Controller
             return JsonConvert.DeserializeObject<List<String>>(await response.Content.ReadAsStringAsync());
         }
 
-        [HttpGet("getStatistiEachQuestion")]
+        [HttpGet("getStatisticEachQuestion")]
         public async Task<List<StatisticAuxilaryClass>> GetStatisticsEachQuestion()
         {
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var path = GetFullPath("/surveyMicroservice/getStatistiEachQuestion");
+            var path = GetFullPath("/surveyMicroservice/getStatisticEachQuestion");
             HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<StatisticAuxilaryClass>>(
                 await response.Content.ReadAsStringAsync());
         }
 
-        [HttpGet("getStatistiEachTopic")]
+        [HttpGet("getStatisticEachTopic")]
         public async Task<List<StatisticAuxilaryClass>> GetStatisticsEachTopic()
         {
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
 
-            var path = GetFullPath("/surveyMicroservice/getStatistiEachTopi");
+            var path = GetFullPath("/surveyMicroservice/getStatisticEachTopic");
             HttpResponseMessage response = await client.GetAsync(path);
             response.EnsureSuccessStatusCode();
             return JsonConvert.DeserializeObject<List<StatisticAuxilaryClass>>(

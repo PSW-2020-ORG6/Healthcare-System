@@ -37,14 +37,14 @@ namespace MicroServiceAppointment.Backend.Controllers
         }
 
         [Authorize]
-        [HttpGet("getStatistiEachQuestion")]
+        [HttpGet("getStatisticEachQuestion")]
         public List<StatisticAuxilaryClass> GetStatisticsEachQuestion()
         {
             return _surveyService.GetStatisticsEachQuestion();
         }
 
         [Authorize]
-        [HttpGet("getStatistiEachTopic")]
+        [HttpGet("getStatisticEachTopic")]
         public List<StatisticAuxilaryClass> GetStatisticsEachTopic()
         {
             return _surveyService.GetStatisticsEachTopic();

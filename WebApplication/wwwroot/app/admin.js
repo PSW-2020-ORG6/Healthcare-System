@@ -192,7 +192,7 @@
             this.$router.push('statistics');
         },
         SearchShow: function () {
-            this.$router.push('search');
+            this.$router.push('searchAdmin');
         },
         FeedbacksShow: function () {
             this.$router.push('feedbackAdmin');

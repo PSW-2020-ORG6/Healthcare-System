@@ -31,7 +31,8 @@ Vue.component("survey", {
     },
     template: `
     <div id = "entireSurvey">
-        <div id="sText">
+        <div id="StatisticsBackground">
+            <br>
            <p id="textSurvey"><i>Dear patient,<br>
                At Health Clinic,we are commited to your healthcare.We are interested in knowing what do you thing abaut our services.
                 You performance by completing this survey regarding your visit.<br>Thank you for taking time to share your expirience with us.<br><br>
@@ -331,6 +332,7 @@ Vue.component("survey", {
         
               <button type="button" class="btn btn-info btn-lg buttonBottom " data-dismiss="modal" v-on:click="PatientShow()" >Cancel</button>
         </div>
+        <br>
     </div>
 	`,
     methods: {
@@ -577,9 +579,9 @@ Vue.component("appointments", {
 	<div id="appointments">
         </br>
             <div class="row create" >
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAppointment" v-on:click="EventTime()">Create new appointment</button>&nbsp&nbsp&nbsp&nbsp
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAppointmentRecommendation">Create new appointment with recommendation</button>&nbsp&nbsp&nbsp&nbsp
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAppointmentMyChoosenDoctor">Create new appointment with my choosen doctor</button>
+                <button type="button" class="btn btn-primary" style="width:23%; height:55px;" data-toggle="modal" data-target="#createAppointment" v-on:click="EventTime()">Create new appointment</button>&nbsp&nbsp&nbsp&nbsp
+                <button type="button" class="btn btn-primary" style="width:23%; height:55px;" data-toggle="modal" data-target="#createAppointmentRecommendation">Create new appointment with recommendation</button>&nbsp&nbsp&nbsp&nbsp
+                <button type="button" class="btn btn-primary" style="width:23%; height:55px;" data-toggle="modal" data-target="#createAppointmentMyChoosenDoctor">Create new appointment with my choosen doctor</button>
             </div>
             </br>
             <div class="modal fade" id="createAppointment" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -926,6 +928,7 @@ Vue.component("appointments", {
 
 
 		</div>
+        <br>
 	</div>
 	`,
     methods: {
@@ -1025,7 +1028,7 @@ Vue.component("appointments", {
                             this.isMalicious = response.data
                             if (this.isMalicious == true) {
                                 axios
-                                    .put('patient/SetUserToMalicious', appointment.patientId, {
+                                    .put('patient/SetUserToMalicious', appointment.patientsDTO, {
                                         headers: {
                                             'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                                         }
