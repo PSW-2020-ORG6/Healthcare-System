@@ -35,7 +35,7 @@
                 </span>
               </div>
             </nav>
-
+        </div>
 	</div>
 
 	`,

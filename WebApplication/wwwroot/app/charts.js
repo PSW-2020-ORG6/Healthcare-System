@@ -159,7 +159,7 @@
                 <div class="sameLine">
                     <h3 class="quit head">GAVE UP</h3><h3 class="quitP head" id = "blackText">{{this.eventStatisticDTO.percentIsNotAppointmentScheduled}} %</h3>
                 </div>  
-                    <br>
+                    <br><br>
                     <div class="piechart" v-bind:style='{ backgroundImage: appointments}'></div>
                     <div id="text1">Appointment reservation performance</div>
              </div>
@@ -172,7 +172,7 @@
                  </div>
             </div>
        </div>
-
+        <br><br>
        <br><br>
 	</div>
 	`,

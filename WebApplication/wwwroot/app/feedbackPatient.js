@@ -51,9 +51,10 @@
 	},
 	template: `
 	<div id="FeedbackPatient">
+<br>
 		<div class="container">
             <br/><h3 class="text">Feedbacks</h3><br/><br/>
-			        <button type="button" id="create" class="btn btn-info btn-lg form-control" style="width:200px;margin-right:800px" data-toggle="modal" data-target="#CommentModal">Leave feedback</button>
+			        <button type="button" class="btn btn-info btn-lg form-control" style="width:30%;height:80px; margin-bottom:5%" data-toggle="modal" data-target="#CommentModal">Leave feedback</button>
 		</div>
 
 	<!-- Leave Comment -->

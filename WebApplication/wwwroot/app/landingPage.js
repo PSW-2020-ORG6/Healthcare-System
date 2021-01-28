@@ -55,7 +55,7 @@
 				</div>
 					<div  v-if="parseInt(a.patientId) == -1">
 							<div><i>Annonimous - {{DateSplit(a.date)}}</i></div>
-							<div  style="font-size:34px"><i>{{a.text}}<i></div>
+							<div  style="font-size:34px"><i>{{a.text}}</i></div>
 			  </div>
 		</div>
 	  </div>

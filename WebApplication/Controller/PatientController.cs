@@ -96,12 +96,12 @@ namespace WebApplication.Controller
 
 
         [HttpPut("SetUserToMalicious")]
-        public async Task<bool> SetUserToMalicious(string patientId)
+        public async Task<bool> SetUserToMalicious(PatientDto patient)
         {
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
                 Request.Headers["Authorization"].ToString().Split(" ")[0]
                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
-            var content = new StringContent(JsonConvert.SerializeObject(patientId, Formatting.Indented), Encoding.UTF8,
+            var content = new StringContent(JsonConvert.SerializeObject(patient, Formatting.Indented), Encoding.UTF8,
                 "application/json");
 
             var path = GetFullPath("/patientMicroservice/SetUserToMalicious");

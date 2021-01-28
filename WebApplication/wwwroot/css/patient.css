@@ -1,7 +1,13 @@
 ﻿#Patient {
     background-image: url("../pictures/PatientBackgroundV10.jpg");
     background-repeat: no-repeat;
-    height: 1068px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-size: cover;
+    height: auto !important;
+    min-height: 1000px;
+    color: white;
+    font-family: impact;
 }
 
 #MyInformations {
@@ -9,6 +15,7 @@
     height: 150px;
     width: 150px;
     background-color: white;
+    border-radius: 20px;
     background-repeat: no-repeat;
     background-position: center;
     opacity: 0.8;
@@ -21,6 +28,7 @@
     background-image: url("../pictures/AppointmentsResized.png");
     height: 150px;
     width: 150px;
+    border-radius: 20px;
     background-color: white;
     background-repeat: no-repeat;
     background-position: center;
@@ -29,13 +37,20 @@
 
 #Account {
     background-image: url("../pictures/AdminBackground.jpg");
-    padding-left: 10%;
-    padding-right: 10%;
+    background-repeat: no-repeat;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-size: cover;
+    height: auto !important;
+    min-height: 1000px;
+    color: white;
+    font-family: impact;
 }
 #SurveyShow {
     background-image: url("../pictures/TakeSurveyResized.png");
     height: 150px;
     width: 150px;
+    border-radius: 20px;
     background-color: white;
     background-repeat: no-repeat;
     background-position: center;
@@ -47,6 +62,7 @@
     background-image: url("../pictures/LeaveCommentResized.png");
     height: 150px;
     width: 150px;
+    border-radius: 20px;
     background-color: white;
     background-repeat: no-repeat;
     background-position: center;
@@ -63,6 +79,7 @@
     background-image: url("../pictures/SearchIconResized.png");
     height: 150px;
     width: 150px;
+    border-radius: 20px;
     background-color: white;
     background-repeat: no-repeat;
     background-position: center;
@@ -73,6 +90,7 @@
     background-image: url("../pictures/UserExperiences.png");
     height: 150px;
     width: 150px;
+    border-radius: 20px;
     background-color: white;
     background-repeat: no-repeat;
     background-position: center;

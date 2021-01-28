@@ -269,9 +269,8 @@
 			<tr>
                  <td></td>
                 <td align="left"><input type="file" accept="image/*" @change=uploadImage></td>
-
                </tr>
-                <td align="left">Image:</td>
+                <td align="left"><label>Image</label>:</td>
                 <td><img  :src = "patientDTO.image" class = "form-control inputImage" style = "display:flex" width="100" heigh="50" /></td>
                 <tr>
             </tr>
@@ -312,7 +311,7 @@
 		mailValidation: function () {
 			if (this.patientDTO.email != undefined && this.patientDTO.email.length > 0) {
 				let mailMatch = this.patientDTO.email.match("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$");
-				if (mailMatch != this.patientDTO.email) return 'Not a good form of mail';
+				if (mailMatch != this.patientDTO.email) return 'Please insert correct email form';
 			}
 			else if (this.patientDTO.email === '') return 'Mail name is a required field';
 			else return null;

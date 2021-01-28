@@ -100,9 +100,9 @@ namespace HealthClinicBackend.Backend.Repository.DatabaseSql
         {
             return GetAll().Where(appointment => appointment.PatientSerialNumber.Equals(patientId) && appointment.IsSurveyDone == false).ToList();
         }
-        public List<DateTime> GetByPatientIdCanceledDates(string patientId)
+        public List<String> GetByPatientIdCanceledDates(string patientId)
         {
-            throw new NotImplementedException();
+            return GetByPatientIdCanceled(patientId).Select(a => a.DateOfCanceling).ToList();
         }
 
         public List<Appointment> IsSurveyDoneByPatientIdAppointmentDatePhysicianNameAppointments(string patientId, string appointmentDate, string id)
