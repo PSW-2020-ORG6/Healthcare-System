@@ -887,7 +887,8 @@ Vue.component("appointments", {
 									</div>
 							  <div class="modal-body">
                               <p>Report</br>
-                               {{this.report}}
+                               {{this.report}}</p>
+                               </div>
 							 <div class="modal-footer">
                               <button type="button" class="btn btn-default" data-dismiss="modal" >Ok</button>
                              </div>
@@ -904,7 +905,8 @@ Vue.component("appointments", {
 									</div>
 							  <div class="modal-body">
                               <p>Prescription</br>
-                               {{this.prescription}}
+                               {{this.prescription}}</p>
+                               </div>
 							 <div class="modal-footer">
                               <button type="button" class="btn btn-default" data-dismiss="modal" >Ok</button>
                              </div>
