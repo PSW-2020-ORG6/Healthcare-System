@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using MicroServiceAppointment.Backend.Util;
 using MicroServiceAppointment.Backend.Dto;
 using MicroServiceAppointment.Backend.Model;
+using MicroServiceAppointment.Backend.Repository.Generic;
 
 namespace MicroServiceAppointment.Backend.Controllers
 {
@@ -31,33 +32,45 @@ namespace MicroServiceAppointment.Backend.Controllers
         {
             HttpRequest.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
                                                                                                    , Request.Headers["Authorization"].ToString().Split(" ")[1]);
-            return _appointmentService.GetAllAppointmentsByPatientId(patientId);
+            List<AppointmentDto> appointments = _appointmentService.GetAllAppointmentsByPatientId(patientId);
+            foreach (AppointmentDto appointment in appointments)
+                appointment.PhysicianDTO = HttpRequest.GetPhysiciantByIdAsync(appointment.PhysicianDTO.Id).Result;
+            return appointments;
         }
 
         [Authorize]
         [HttpGet("allAppointments")]
         public List<AppointmentDto> GetAllAppointments()
         {
-            
-            return _appointmentService.GetAllAppointments();
+
+            List<AppointmentDto> appointments = _appointmentService.GetAllAppointments();
+            foreach (AppointmentDto appointment in appointments)
+                appointment.PhysicianDTO = HttpRequest.GetPhysiciantByIdAsync(appointment.PhysicianDTO.Id).Result;
+            return appointments;
         }
 
         [Authorize]
         [HttpGet("allAppointmentsByPatientIdActive/{patientId}")]
         public List<AppointmentDto> GetAllAppointmentsByPatientIdActive(String patientId)
         {
-            
-            return _appointmentService.GetAllAppointmentsByPatientIdActive(patientId);
+
+            List<AppointmentDto> appointments = _appointmentService.GetAllAppointmentsByPatientIdActive(patientId);
+            foreach (AppointmentDto appointment in appointments)
+                appointment.PhysicianDTO = HttpRequest.GetPhysiciantByIdAsync(appointment.PhysicianDTO.Id).Result;
+            return appointments;
         }
 
         [Authorize]
         [HttpGet("allAppointmentsByPatientIdCanceled/{patientId}")]
         public List<AppointmentDto> GetAllAppointmentsByPatientIdCanceled(String patientId)
         {
-            return _appointmentService.GetAllAppointmentsByPatientIdCanceled(patientId);
+            List<AppointmentDto> appointments = _appointmentService.GetAllAppointmentsByPatientIdCanceled(patientId);
+            foreach (AppointmentDto appointment in appointments)
+                appointment.PhysicianDTO = HttpRequest.GetPhysiciantByIdAsync(appointment.PhysicianDTO.Id).Result;
+            return appointments;
         }
 
-        [Authorize]
+            [Authorize]
         [HttpGet("avaliableTimeIntervals/{physicianId}/{specializationName}/{date}")]
         public List<TimeIntervalsDTO> GetAllAvailableAppointments(string physicianId, string specializationName,
             string date)
@@ -89,8 +102,11 @@ namespace MicroServiceAppointment.Backend.Controllers
         [HttpGet("allAppointmentsByPatientIdPast/{patientId}")]
         public List<AppointmentDto> GellAllAppointmentsByPatientIdPast(String patientId)
         {
-            
-            return _appointmentService.GetAllAppointmentsByPatientIdPast(patientId);
+
+            List<AppointmentDto> appointments = _appointmentService.GetAllAppointmentsByPatientIdPast(patientId);
+            foreach (AppointmentDto appointment in appointments)
+                appointment.PhysicianDTO = HttpRequest.GetPhysiciantByIdAsync(appointment.PhysicianDTO.Id).Result;
+            return appointments;
         }
         [Authorize]
         [HttpGet("allAppointmentsWithSurvey/{patientId}")]
@@ -98,7 +114,10 @@ namespace MicroServiceAppointment.Backend.Controllers
         {
             HttpRequest.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
                                                                                                  , Request.Headers["Authorization"].ToString().Split(" ")[1]);
-            return _appointmentService.GetAllAppointmentsWithDoneSurvey(patientId);
+            List<AppointmentDto> appointments = _appointmentService.GetAllAppointmentsWithDoneSurvey(patientId);
+            foreach (AppointmentDto appointment in appointments)
+                appointment.PhysicianDTO = HttpRequest.GetPhysiciantByIdAsync(appointment.PhysicianDTO.Id).Result;
+            return appointments;
         }
         [Authorize]
         [HttpGet("allAppointmentsWithoutSurvey/{patientId}")]
@@ -106,7 +125,10 @@ namespace MicroServiceAppointment.Backend.Controllers
         {
             HttpRequest.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
                                                                                                 , Request.Headers["Authorization"].ToString().Split(" ")[1]);
-            return _appointmentService.GetAllAppointmentsWithoutDoneSurvey(patientId);
+            List<AppointmentDto> appointments = _appointmentService.GetAllAppointmentsWithoutDoneSurvey(patientId);
+            foreach (AppointmentDto appointment in appointments)
+                appointment.PhysicianDTO = HttpRequest.GetPhysiciantByIdAsync(appointment.PhysicianDTO.Id).Result;
+            return appointments;
         }
         [Authorize]
         [HttpGet("isSurveyDoneByPatientIdAppointmentDatePhysicianName/{patientId}/{appointmentDate}/{physicianName}")]
@@ -190,6 +212,8 @@ namespace MicroServiceAppointment.Backend.Controllers
             HttpRequest.client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Request.Headers["Authorization"].ToString().Split(" ")[0]
                                                                                                    , Request.Headers["Authorization"].ToString().Split(" ")[1]);
             List<AppointmentDto> appointments = _appointmentService.GetAllAppointmentsByPatientIdDateAndDoctor(patientId, date, doctorName);
+            foreach (AppointmentDto appointment in appointments)
+                appointment.PhysicianDTO = HttpRequest.GetPhysiciantByIdAsync(appointment.PhysicianDTO.Id).Result;
             return appointments;
         }
     }
