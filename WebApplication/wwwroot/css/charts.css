@@ -6,12 +6,12 @@
     background-size: cover;
     height: auto;
     width: auto;
-    color: black;
+    color: white;
     font-family: impact;
 }
 
 #blackText {
-    color : black;
+    color : white;
 }
 
 .piechart {

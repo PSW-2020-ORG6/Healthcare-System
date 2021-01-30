@@ -797,7 +797,11 @@
     beforeMount() {
 
         axios
-            .get("/account/allPhysicians")
+            .get("/account/allPhysicians", {
+                headers: {
+                    'Authorization': 'Bearer' + " " + localStorage.getItem('token')
+                }
+            })
             .then(response => {
                 this.doctorsList = response.data
             })
