@@ -107,7 +107,8 @@ namespace WebApplication.Controller
             HttpResponseMessage response =
                 await client.PostAsync(path, parameter1);
             response.EnsureSuccessStatusCode();
-            return Ok();
+            if (response.ReasonPhrase.Equals("OK")) return Ok();
+            else return BadRequest();
         }
 
         [HttpGet("allAppointmentsByPatientIdPast")]
@@ -165,7 +166,6 @@ namespace WebApplication.Controller
             return JsonConvert.DeserializeObject<bool>(await response.Content.ReadAsStringAsync());
         }
 
-        //nije teestirano
         [HttpPut("update")]
         public async void SetSurveyDoneOnAppointment(AppointmentDto appointmentDto)
         {
@@ -180,7 +180,6 @@ namespace WebApplication.Controller
             response.EnsureSuccessStatusCode();
         }
 
-        //radi
         [HttpGet("appointmentsWithReccomendation")]
         public async Task<List<AppointmentWithRecommendationDTO>> GetAllAvailableAppointmentsWithRecommendation(
             string physicianId,
@@ -198,7 +197,6 @@ namespace WebApplication.Controller
                 await response.Content.ReadAsStringAsync());
         }
 
-        //radi
         [HttpGet("appointmentsWithPhysicianPriority")]
         public async Task<List<AppointmentWithRecommendationDTO>> GetAllAvailableAppointmentsWithPhysicianPriority(
             string physicianId, string specializationName, string dates)

@@ -30,7 +30,8 @@ namespace WebApplication.Controller
             var path = GetFullPath("/registrationMicroservice/registerPatient");
             HttpResponseMessage response = await client.PostAsync(path, content);
             response.EnsureSuccessStatusCode();
-            return JsonConvert.DeserializeObject<IActionResult>(await response.Content.ReadAsStringAsync());
+            if (response.ReasonPhrase.Equals("OK")) return Ok();
+            else return BadRequest();
         }
 
         [HttpPut("confirmationEmail/{id}")]
@@ -42,7 +43,8 @@ namespace WebApplication.Controller
             var path = GetFullPath("/registrationMicroservice/confirmationEmail");
             HttpResponseMessage response = await client.PutAsync(path, content);
             response.EnsureSuccessStatusCode();
-            return JsonConvert.DeserializeObject<IActionResult>(await response.Content.ReadAsStringAsync());
+            if (response.ReasonPhrase.Equals("OK")) return Ok();
+            else return BadRequest();
         }
 
         [HttpGet("allPhysitians")]
