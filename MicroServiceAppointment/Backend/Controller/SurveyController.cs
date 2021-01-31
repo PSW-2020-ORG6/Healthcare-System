@@ -51,7 +51,7 @@ namespace MicroServiceAppointment.Backend.Controllers
         }
 
         [Authorize]
-        [HttpGet("getStatisticForDoctor")]
+        [HttpGet("getStatisticForDoctor/{id}")]
         public List<StatisticAuxilaryClass> GetStatisticsForDoctor(string id)
         {
             return _surveyService.GetStatisticsForDoctor(id);
