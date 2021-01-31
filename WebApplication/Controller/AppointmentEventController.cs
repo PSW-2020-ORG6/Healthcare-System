@@ -33,7 +33,8 @@ namespace WebApplication.Controller
             var path = GetFullPath("/appointmentEvent/addEvent/");
             HttpResponseMessage response = await client.PostAsync(path, parameter);
             response.EnsureSuccessStatusCode();
-            return JsonConvert.DeserializeObject<IActionResult>(await response.Content.ReadAsStringAsync());
+            if (response.ReasonPhrase.Equals("OK")) return Ok();
+            else return BadRequest();
         }
 
         [HttpGet("eventStatistic")]

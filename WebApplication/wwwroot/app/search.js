@@ -12,7 +12,6 @@ Vue.component("search", {
     template:
         `
     <div id="search">
-            <br>
         <div class= "container">
             <br/><h3 class="text">Search - prescription and report</h3><br/>
             <ul class="nav nav-tabs" role="tablist">
@@ -303,16 +302,19 @@ Vue.component("search", {
                 var prescriptionSearch = this.PrescriptionAdvancedSearch()
                 var reportSearch = this.ReportAdvancedSearch()
                 axios
-                    .get('/search/prescriptionsSearch', { params: { prescriptionSearch: prescriptionSearch, dateFrom: dateFrom, dateTo: dateTo },
+                    .get('/search/prescriptionsSearch', {
+                        params: { prescriptionSearch: prescriptionSearch, dateFrom: dateFrom, dateTo: dateTo },
                         headers: {
                             'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                         }
-                     })
+                    })
                     .then(response => {
-                        if (this.search == null)
-                            this.search = response.data
-                        else
-                            this.search.concat(response.data)
+                        if (response.data.length != 0) {
+                            if (this.search == [])
+                                this.search = response.data
+                            else
+                                this.search.concat(response.data)
+                        }
                     })
                     .catch(error => {
                     })
@@ -322,12 +324,14 @@ Vue.component("search", {
                         headers: {
                             'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                         }
-                     })
+                    })
                     .then(response => {
-                        if (this.search == null)
-                            this.search = response.data
-                        else
-                            this.search.concat(response.data)
+                        if (response.data.length != 0) {
+                            if (this.search == [])
+                                this.search = response.data
+                            else
+                                this.search.concat(response.data)
+                        }
                     })
                     .catch(error => {
                     })
@@ -463,27 +467,31 @@ Vue.component("search", {
                         headers: {
                             'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                         }
-                        })
+                    })
                     .then(response => {
-                        if (this.search == null)
-                            this.search = response.data
-                        else
-                            this.search.concat(response.data)
+                        if (response.data.length != 0) {
+                            if (this.search.length == 0)
+                                this.search = response.data
+                            else
+                                this.search.concat(response.data)
+                        }
                     })
                     .catch(error => {
                     })
                 axios
                     .get('/search/reportsSearch', {
-                        params: { reportSearch: reportSimpleSearch, dateFrom: dateFrom, dateTo: dateTo } ,
+                        params: { reportSearch: reportSimpleSearch, dateFrom: dateFrom, dateTo: dateTo },
                         headers: {
                             'Authorization': 'Bearer' + " " + localStorage.getItem('token')
                         }
                     })
                     .then(response => {
-                        if (this.search == null)
-                            this.search = response.data
-                        else
-                            this.search.concat(response.data)
+                        if (response.data.length != 0) {
+                            if (this.search.length == 0)
+                                this.search = response.data
+                            else
+                                this.search.concat(response.data)
+                        }
                     })
                     .catch(error => {
                     })

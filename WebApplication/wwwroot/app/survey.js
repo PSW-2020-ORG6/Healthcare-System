@@ -878,10 +878,7 @@ Vue.component("appointments", {
 					</div>
 				</div>
 			</div><br></br>
-
-        
-       
-                    <div class="modal fade" id="myModalReport" role="dialog">
+              <div class="modal fade" id="myModalReport" role="dialog">
                         <div class="modal-dialog">
 		                      <!-- Modal content-->
 			                  <div class="modal-content">
@@ -890,11 +887,8 @@ Vue.component("appointments", {
 									</div>
 							  <div class="modal-body">
                               <p>Report</br>
-                               <div v-for="r in this.report">
-                                 {{r}}<br>
+                               {{this.report}}</p>
                                </div>
-                                </p>
-							 </div>
 							 <div class="modal-footer">
                               <button type="button" class="btn btn-default" data-dismiss="modal" >Ok</button>
                              </div>
@@ -911,11 +905,8 @@ Vue.component("appointments", {
 									</div>
 							  <div class="modal-body">
                               <p>Prescription</br>
-                               <div v-for="p in this.prescription">
-                                 {{p}}<br>
+                               {{this.prescription}}</p>
                                </div>
-                                </p>
-							 </div>
 							 <div class="modal-footer">
                               <button type="button" class="btn btn-default" data-dismiss="modal" >Ok</button>
                              </div>
@@ -1370,8 +1361,8 @@ Vue.component("appointments", {
                     }
                 })
                 .then(response => {
-                    this.report = response.data[0].split(";")
-                    this.prescription = response.data[1].split(";")
+                    this.report = response.data[0]
+                    this.prescription = response.data[1]
                 })
             $('#myModalReport').modal('show');
 
@@ -1391,8 +1382,8 @@ Vue.component("appointments", {
                     }
                 })
                 .then(response => {
-                    this.report = response.data[0].split(";")
-                    this.prescription = response.data[1].split(";")
+                    this.report = response.data[0]
+                    this.prescription = response.data[1]
                 })
             $('#myModalPrescription').modal('show');
         }
